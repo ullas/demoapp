@@ -17,7 +17,7 @@ If Composer is installed globally, run
 composer create-project --prefer-dist cakephp/app [app_name]
 ```
 
-You should now be able to visit the path to where you installed the app and see
+You should now be able to visit the path to where you  can   installed the app and see
 the setup traffic lights.
 
 ## Configuration
