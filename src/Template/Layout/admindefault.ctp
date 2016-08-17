@@ -77,65 +77,14 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     height: 35px;
     background-color: #f5f5f5;
     }
-    .login-page {
-  width: 360px;
-  padding: 8% 0 0;
-  margin: auto;
-}
-.login-form {
-  z-index: 1;
-  background: #FFFFFF;
-  max-width: 360px;
-  margin: 0 auto 100px;
-  padding: 45px;
-  text-align: center;
-  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
-}
-.login-form input {
-  font-family: "Roboto", sans-serif;
-  outline: 0;
-  background: #f2f2f2;
-  width: 100%;
-  border: 0;
-  margin: 0 0 15px;
-  padding: 15px;
-  box-sizing: border-box;
-  font-size: 14px;
-}
-.login-form button {
-  font-family: "Roboto", sans-serif;
-  text-transform: uppercase;
-  outline: 0;
-  background: #4CAF50;
-  width: 100%;
-  border: 0;
-  padding: 15px;
-  color: #FFFFFF;
-  font-size: 14px;
-  -webkit-transition: all 0.3 ease;
-  transition: all 0.3 ease;
-  cursor: pointer;
-}
-.login-form button:hover,.form button:active,.form button:focus {
-  background: #43A047;
-}
-.login-form .message {
-  margin: 15px 0 0;
-  color: #b3b3b3;
-  font-size: 12px;
-}
-.login-form .message a {
-  color: #4CAF50;
-  text-decoration: none;
-}
-.login-form .register-form {
-  display: none;
-}
 .m50{
 	margin:50px;
 }
 .mt50{
 	margin-top:50px;
+}
+html,body {
+    height:100%;
 }
  </style>
 
@@ -221,7 +170,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
         
     <?= $this->Flash->render() ?>
     <div  id="page-content-wrapper">
-    	<div style="height:100%;min-height:400px;float:left;background:#e5e5e5;">
+    	<div style="position: fixed;height: 100%;float:left;background:#e5e5e5;">
     	<?= $this->element('menuelmnt', array('listValues' => array("Add", "List", "View"))); ?></div>
          <div  class="container">   
         <?= $this -> fetch('content') ?>

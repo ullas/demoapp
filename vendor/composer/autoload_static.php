@@ -7,8 +7,8 @@ namespace Composer\Autoload;
 class ComposerStaticInit963e8b595f6db135d08659f198494892
 {
     public static $files = array (
-        '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
         '34122c0574b76bf21c9a8db62b5b9cf3' => __DIR__ . '/..' . '/cakephp/chronos/src/carbon_compat.php',
+        '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
         'c720f792236cd163ece8049879166850' => __DIR__ . '/..' . '/cakephp/cakephp/src/Core/functions.php',
         'ede59e3a405fb689cd1cebb7bb1db3fb' => __DIR__ . '/..' . '/cakephp/cakephp/src/Collection/functions.php',
         '90236b492da7ca2983a2ad6e33e4152e' => __DIR__ . '/..' . '/cakephp/cakephp/src/I18n/functions.php',
@@ -55,6 +55,7 @@ class ComposerStaticInit963e8b595f6db135d08659f198494892
         ),
         'B' => 
         array (
+            'Bootstrap\\' => 10,
             'Bake\\' => 5,
         ),
         'A' => 
@@ -133,6 +134,10 @@ class ComposerStaticInit963e8b595f6db135d08659f198494892
         'Cake\\' => 
         array (
             0 => __DIR__ . '/..' . '/cakephp/cakephp/src',
+        ),
+        'Bootstrap\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/holt59/cakephp3-bootstrap-helpers/src',
         ),
         'Bake\\' => 
         array (

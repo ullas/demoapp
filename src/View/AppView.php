@@ -38,8 +38,8 @@ class AppView extends View
     public function initialize()
     {
     	
-		$temp=Configure::read('Templates');
-		$this->Form->templates($temp['shortForm']); 
+		// $temp=Configure::read('Templates');
+		// $this->Form->templates($temp['shortForm']); 
 		 
     }
 }

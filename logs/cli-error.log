@@ -19,3 +19,33 @@ Stack Trace:
 #16 {main}
 
 
+2016-08-16 08:13:44 Error: [Cake\Core\Exception\MissingPluginException] Plugin Bootstrap could not be found.
+Exception Attributes: array (
+  'plugin' => 'Bootstrap',
+)
+Stack Trace:
+#0 /Users/varunprathap/hrm/config/bootstrap.php(193): Cake\Core\Plugin::load('Bootstrap')
+#1 /Users/varunprathap/hrm/bin/cake.php(31): include('/Users/varunpra...')
+#2 {main}
+
+
+2016-08-16 09:19:40 Error: [Cake\Core\Exception\MissingPluginException] Plugin Bootstrap could not be found.
+Exception Attributes: array (
+  'plugin' => 'Bootstrap',
+)
+Stack Trace:
+#0 /Users/varunprathap/hrm/config/bootstrap.php(193): Cake\Core\Plugin::load('Bootstrap')
+#1 /Users/varunprathap/hrm/bin/cake.php(31): include('/Users/varunpra...')
+#2 {main}
+
+
+2016-08-16 09:23:38 Error: [Cake\Core\Exception\MissingPluginException] Plugin Bootstrap could not be found.
+Exception Attributes: array (
+  'plugin' => 'Bootstrap',
+)
+Stack Trace:
+#0 /Users/varunprathap/hrm/config/bootstrap.php(193): Cake\Core\Plugin::load('Bootstrap')
+#1 /Users/varunprathap/hrm/bin/cake.php(31): include('/Users/varunpra...')
+#2 {main}
+
+

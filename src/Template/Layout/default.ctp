@@ -71,7 +71,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
         height:280px;
     }
     .footer {
-    position: absolute;
+    /*position: absolute;*/
     bottom: 0;
     width: 100%;
     height: 35px;

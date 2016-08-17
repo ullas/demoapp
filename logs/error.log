@@ -29646,3 +29646,1329 @@ Stack Trace:
 #1 {main}
 
 
+2016-08-16 05:40:45 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Css could not be found.
+Exception Attributes: array (
+  'class' => 'Css',
+  'plugin' => NULL,
+  'prefix' => NULL,
+  '_ext' => NULL,
+)
+Request URL: /css/bootstrap.min.css.map
+Stack Trace:
+#0 /Users/varunprathap/hrm/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-08-16 05:43:37 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Css could not be found.
+Exception Attributes: array (
+  'class' => 'Css',
+  'plugin' => NULL,
+  'prefix' => NULL,
+  '_ext' => NULL,
+)
+Request URL: /css/bootstrap.min.css.map
+Stack Trace:
+#0 /Users/varunprathap/hrm/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-08-16 05:43:42 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Css could not be found.
+Exception Attributes: array (
+  'class' => 'Css',
+  'plugin' => NULL,
+  'prefix' => NULL,
+  '_ext' => NULL,
+)
+Request URL: /css/bootstrap.min.css.map
+Stack Trace:
+#0 /Users/varunprathap/hrm/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-08-16 06:48:18 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Css could not be found.
+Exception Attributes: array (
+  'class' => 'Css',
+  'plugin' => NULL,
+  'prefix' => NULL,
+  '_ext' => NULL,
+)
+Request URL: /css/bootstrap.min.css.map
+Stack Trace:
+#0 /Users/varunprathap/hrm/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-08-16 07:07:54 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Css could not be found.
+Exception Attributes: array (
+  'class' => 'Css',
+  'plugin' => NULL,
+  'prefix' => NULL,
+  '_ext' => NULL,
+)
+Request URL: /css/bootstrap.min.css.map
+Stack Trace:
+#0 /Users/varunprathap/hrm/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-08-16 07:22:02 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Css could not be found.
+Exception Attributes: array (
+  'class' => 'Css',
+  'plugin' => NULL,
+  'prefix' => NULL,
+  '_ext' => NULL,
+)
+Request URL: /css/bootstrap.min.css.map
+Stack Trace:
+#0 /Users/varunprathap/hrm/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-08-16 07:22:26 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Css could not be found.
+Exception Attributes: array (
+  'class' => 'Css',
+  'plugin' => NULL,
+  'prefix' => NULL,
+  '_ext' => NULL,
+)
+Request URL: /css/bootstrap.min.css.map
+Stack Trace:
+#0 /Users/varunprathap/hrm/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-08-16 07:22:43 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Css could not be found.
+Exception Attributes: array (
+  'class' => 'Css',
+  'plugin' => NULL,
+  'prefix' => NULL,
+  '_ext' => NULL,
+)
+Request URL: /css/bootstrap.min.css.map
+Stack Trace:
+#0 /Users/varunprathap/hrm/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-08-16 07:26:20 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Css could not be found.
+Exception Attributes: array (
+  'class' => 'Css',
+  'plugin' => NULL,
+  'prefix' => NULL,
+  '_ext' => NULL,
+)
+Request URL: /css/bootstrap.min.css.map
+Stack Trace:
+#0 /Users/varunprathap/hrm/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-08-16 07:28:25 Warning: Warning (2): Illegal string offset 'name' in [/Users/varunprathap/hrm/src/Template/Element/orgtreebuilderelmnt.ctp, line 34]
+Request URL: /OrgCharts
+Referer URL: http://localhost:8765/legal-entities/add
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+arrayToList - APP/Template/Element/orgtreebuilderelmnt.ctp, line 34
+arrayToList - APP/Template/Element/orgtreebuilderelmnt.ctp, line 37
+include - APP/Template/Element/orgtreebuilderelmnt.ctp, line 50
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::_renderElement() - CORE/src/View/View.php, line 1350
+Cake\View\View::element() - CORE/src/View/View.php, line 493
+include - APP/Template/OrgCharts/index.ctp, line 5
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::render() - CORE/src/View/View.php, line 588
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 617
+Cake\Routing\Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 121
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 88
+[main] - ROOT/webroot/index.php, line 36
+
+
+
+2016-08-16 07:28:25 Warning: Warning (2): Illegal string offset 'name' in [/Users/varunprathap/hrm/src/Template/Element/orgtreebuilderelmnt.ctp, line 43]
+Request URL: /OrgCharts
+Referer URL: http://localhost:8765/legal-entities/add
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+arrayToList - APP/Template/Element/orgtreebuilderelmnt.ctp, line 43
+arrayToList - APP/Template/Element/orgtreebuilderelmnt.ctp, line 37
+include - APP/Template/Element/orgtreebuilderelmnt.ctp, line 50
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::_renderElement() - CORE/src/View/View.php, line 1350
+Cake\View\View::element() - CORE/src/View/View.php, line 493
+include - APP/Template/OrgCharts/index.ctp, line 5
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::render() - CORE/src/View/View.php, line 588
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 617
+Cake\Routing\Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 121
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 88
+[main] - ROOT/webroot/index.php, line 36
+
+
+
+2016-08-16 07:28:25 Warning: Warning (2): Illegal string offset 'name' in [/Users/varunprathap/hrm/src/Template/Element/orgtreebuilderelmnt.ctp, line 34]
+Request URL: /OrgCharts
+Referer URL: http://localhost:8765/legal-entities/add
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+arrayToList - APP/Template/Element/orgtreebuilderelmnt.ctp, line 34
+arrayToList - APP/Template/Element/orgtreebuilderelmnt.ctp, line 37
+include - APP/Template/Element/orgtreebuilderelmnt.ctp, line 50
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::_renderElement() - CORE/src/View/View.php, line 1350
+Cake\View\View::element() - CORE/src/View/View.php, line 493
+include - APP/Template/OrgCharts/index.ctp, line 5
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::render() - CORE/src/View/View.php, line 588
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 617
+Cake\Routing\Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 121
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 88
+[main] - ROOT/webroot/index.php, line 36
+
+
+
+2016-08-16 07:28:25 Warning: Warning (2): Illegal string offset 'name' in [/Users/varunprathap/hrm/src/Template/Element/orgtreebuilderelmnt.ctp, line 43]
+Request URL: /OrgCharts
+Referer URL: http://localhost:8765/legal-entities/add
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+arrayToList - APP/Template/Element/orgtreebuilderelmnt.ctp, line 43
+arrayToList - APP/Template/Element/orgtreebuilderelmnt.ctp, line 37
+include - APP/Template/Element/orgtreebuilderelmnt.ctp, line 50
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::_renderElement() - CORE/src/View/View.php, line 1350
+Cake\View\View::element() - CORE/src/View/View.php, line 493
+include - APP/Template/OrgCharts/index.ctp, line 5
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::render() - CORE/src/View/View.php, line 588
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 617
+Cake\Routing\Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 121
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 88
+[main] - ROOT/webroot/index.php, line 36
+
+
+
+2016-08-16 07:28:25 Warning: Warning (2): Illegal string offset 'name' in [/Users/varunprathap/hrm/src/Template/Element/orgtreebuilderelmnt.ctp, line 34]
+Request URL: /OrgCharts
+Referer URL: http://localhost:8765/legal-entities/add
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+arrayToList - APP/Template/Element/orgtreebuilderelmnt.ctp, line 34
+arrayToList - APP/Template/Element/orgtreebuilderelmnt.ctp, line 37
+include - APP/Template/Element/orgtreebuilderelmnt.ctp, line 50
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::_renderElement() - CORE/src/View/View.php, line 1350
+Cake\View\View::element() - CORE/src/View/View.php, line 493
+include - APP/Template/OrgCharts/index.ctp, line 5
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::render() - CORE/src/View/View.php, line 588
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 617
+Cake\Routing\Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 121
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 88
+[main] - ROOT/webroot/index.php, line 36
+
+
+
+2016-08-16 07:28:25 Warning: Warning (2): Illegal string offset 'name' in [/Users/varunprathap/hrm/src/Template/Element/orgtreebuilderelmnt.ctp, line 43]
+Request URL: /OrgCharts
+Referer URL: http://localhost:8765/legal-entities/add
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+arrayToList - APP/Template/Element/orgtreebuilderelmnt.ctp, line 43
+arrayToList - APP/Template/Element/orgtreebuilderelmnt.ctp, line 37
+include - APP/Template/Element/orgtreebuilderelmnt.ctp, line 50
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::_renderElement() - CORE/src/View/View.php, line 1350
+Cake\View\View::element() - CORE/src/View/View.php, line 493
+include - APP/Template/OrgCharts/index.ctp, line 5
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::render() - CORE/src/View/View.php, line 588
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 617
+Cake\Routing\Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 121
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 88
+[main] - ROOT/webroot/index.php, line 36
+
+
+
+2016-08-16 07:28:25 Warning: Warning (2): Illegal string offset 'name' in [/Users/varunprathap/hrm/src/Template/Element/orgtreebuilderelmnt.ctp, line 34]
+Request URL: /OrgCharts
+Referer URL: http://localhost:8765/legal-entities/add
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+arrayToList - APP/Template/Element/orgtreebuilderelmnt.ctp, line 34
+arrayToList - APP/Template/Element/orgtreebuilderelmnt.ctp, line 37
+include - APP/Template/Element/orgtreebuilderelmnt.ctp, line 50
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::_renderElement() - CORE/src/View/View.php, line 1350
+Cake\View\View::element() - CORE/src/View/View.php, line 493
+include - APP/Template/OrgCharts/index.ctp, line 5
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::render() - CORE/src/View/View.php, line 588
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 617
+Cake\Routing\Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 121
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 88
+[main] - ROOT/webroot/index.php, line 36
+
+
+
+2016-08-16 07:28:25 Warning: Warning (2): Illegal string offset 'name' in [/Users/varunprathap/hrm/src/Template/Element/orgtreebuilderelmnt.ctp, line 43]
+Request URL: /OrgCharts
+Referer URL: http://localhost:8765/legal-entities/add
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+arrayToList - APP/Template/Element/orgtreebuilderelmnt.ctp, line 43
+arrayToList - APP/Template/Element/orgtreebuilderelmnt.ctp, line 37
+include - APP/Template/Element/orgtreebuilderelmnt.ctp, line 50
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::_renderElement() - CORE/src/View/View.php, line 1350
+Cake\View\View::element() - CORE/src/View/View.php, line 493
+include - APP/Template/OrgCharts/index.ctp, line 5
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::render() - CORE/src/View/View.php, line 588
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 617
+Cake\Routing\Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 121
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 88
+[main] - ROOT/webroot/index.php, line 36
+
+
+
+2016-08-16 07:28:25 Warning: Warning (2): Illegal string offset 'name' in [/Users/varunprathap/hrm/src/Template/Element/orgtreebuilderelmnt.ctp, line 34]
+Request URL: /OrgCharts
+Referer URL: http://localhost:8765/legal-entities/add
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+arrayToList - APP/Template/Element/orgtreebuilderelmnt.ctp, line 34
+arrayToList - APP/Template/Element/orgtreebuilderelmnt.ctp, line 37
+include - APP/Template/Element/orgtreebuilderelmnt.ctp, line 50
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::_renderElement() - CORE/src/View/View.php, line 1350
+Cake\View\View::element() - CORE/src/View/View.php, line 493
+include - APP/Template/OrgCharts/index.ctp, line 5
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::render() - CORE/src/View/View.php, line 588
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 617
+Cake\Routing\Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 121
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 88
+[main] - ROOT/webroot/index.php, line 36
+
+
+
+2016-08-16 07:28:25 Warning: Warning (2): Illegal string offset 'name' in [/Users/varunprathap/hrm/src/Template/Element/orgtreebuilderelmnt.ctp, line 43]
+Request URL: /OrgCharts
+Referer URL: http://localhost:8765/legal-entities/add
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+arrayToList - APP/Template/Element/orgtreebuilderelmnt.ctp, line 43
+arrayToList - APP/Template/Element/orgtreebuilderelmnt.ctp, line 37
+include - APP/Template/Element/orgtreebuilderelmnt.ctp, line 50
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::_renderElement() - CORE/src/View/View.php, line 1350
+Cake\View\View::element() - CORE/src/View/View.php, line 493
+include - APP/Template/OrgCharts/index.ctp, line 5
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::render() - CORE/src/View/View.php, line 588
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 617
+Cake\Routing\Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 121
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 88
+[main] - ROOT/webroot/index.php, line 36
+
+
+
+2016-08-16 07:28:25 Warning: Warning (2): Illegal string offset 'name' in [/Users/varunprathap/hrm/src/Template/Element/orgtreebuilderelmnt.ctp, line 34]
+Request URL: /OrgCharts
+Referer URL: http://localhost:8765/legal-entities/add
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+arrayToList - APP/Template/Element/orgtreebuilderelmnt.ctp, line 34
+arrayToList - APP/Template/Element/orgtreebuilderelmnt.ctp, line 37
+include - APP/Template/Element/orgtreebuilderelmnt.ctp, line 50
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::_renderElement() - CORE/src/View/View.php, line 1350
+Cake\View\View::element() - CORE/src/View/View.php, line 493
+include - APP/Template/OrgCharts/index.ctp, line 5
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::render() - CORE/src/View/View.php, line 588
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 617
+Cake\Routing\Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 121
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 88
+[main] - ROOT/webroot/index.php, line 36
+
+
+
+2016-08-16 07:28:25 Warning: Warning (2): Illegal string offset 'name' in [/Users/varunprathap/hrm/src/Template/Element/orgtreebuilderelmnt.ctp, line 43]
+Request URL: /OrgCharts
+Referer URL: http://localhost:8765/legal-entities/add
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+arrayToList - APP/Template/Element/orgtreebuilderelmnt.ctp, line 43
+arrayToList - APP/Template/Element/orgtreebuilderelmnt.ctp, line 37
+include - APP/Template/Element/orgtreebuilderelmnt.ctp, line 50
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::_renderElement() - CORE/src/View/View.php, line 1350
+Cake\View\View::element() - CORE/src/View/View.php, line 493
+include - APP/Template/OrgCharts/index.ctp, line 5
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::render() - CORE/src/View/View.php, line 588
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 617
+Cake\Routing\Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 121
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 88
+[main] - ROOT/webroot/index.php, line 36
+
+
+
+2016-08-16 07:28:25 Warning: Warning (2): Illegal string offset 'name' in [/Users/varunprathap/hrm/src/Template/Element/orgtreebuilderelmnt.ctp, line 34]
+Request URL: /OrgCharts
+Referer URL: http://localhost:8765/legal-entities/add
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+arrayToList - APP/Template/Element/orgtreebuilderelmnt.ctp, line 34
+arrayToList - APP/Template/Element/orgtreebuilderelmnt.ctp, line 37
+include - APP/Template/Element/orgtreebuilderelmnt.ctp, line 50
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::_renderElement() - CORE/src/View/View.php, line 1350
+Cake\View\View::element() - CORE/src/View/View.php, line 493
+include - APP/Template/OrgCharts/index.ctp, line 5
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::render() - CORE/src/View/View.php, line 588
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 617
+Cake\Routing\Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 121
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 88
+[main] - ROOT/webroot/index.php, line 36
+
+
+
+2016-08-16 07:28:25 Warning: Warning (2): Illegal string offset 'name' in [/Users/varunprathap/hrm/src/Template/Element/orgtreebuilderelmnt.ctp, line 43]
+Request URL: /OrgCharts
+Referer URL: http://localhost:8765/legal-entities/add
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+arrayToList - APP/Template/Element/orgtreebuilderelmnt.ctp, line 43
+arrayToList - APP/Template/Element/orgtreebuilderelmnt.ctp, line 37
+include - APP/Template/Element/orgtreebuilderelmnt.ctp, line 50
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::_renderElement() - CORE/src/View/View.php, line 1350
+Cake\View\View::element() - CORE/src/View/View.php, line 493
+include - APP/Template/OrgCharts/index.ctp, line 5
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::render() - CORE/src/View/View.php, line 588
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 617
+Cake\Routing\Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 121
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 88
+[main] - ROOT/webroot/index.php, line 36
+
+
+
+2016-08-16 07:28:25 Warning: Warning (2): Illegal string offset 'name' in [/Users/varunprathap/hrm/src/Template/Element/orgtreebuilderelmnt.ctp, line 34]
+Request URL: /OrgCharts
+Referer URL: http://localhost:8765/legal-entities/add
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+arrayToList - APP/Template/Element/orgtreebuilderelmnt.ctp, line 34
+arrayToList - APP/Template/Element/orgtreebuilderelmnt.ctp, line 37
+include - APP/Template/Element/orgtreebuilderelmnt.ctp, line 50
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::_renderElement() - CORE/src/View/View.php, line 1350
+Cake\View\View::element() - CORE/src/View/View.php, line 493
+include - APP/Template/OrgCharts/index.ctp, line 5
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::render() - CORE/src/View/View.php, line 588
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 617
+Cake\Routing\Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 121
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 88
+[main] - ROOT/webroot/index.php, line 36
+
+
+
+2016-08-16 07:28:25 Warning: Warning (2): Illegal string offset 'name' in [/Users/varunprathap/hrm/src/Template/Element/orgtreebuilderelmnt.ctp, line 43]
+Request URL: /OrgCharts
+Referer URL: http://localhost:8765/legal-entities/add
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+arrayToList - APP/Template/Element/orgtreebuilderelmnt.ctp, line 43
+arrayToList - APP/Template/Element/orgtreebuilderelmnt.ctp, line 37
+include - APP/Template/Element/orgtreebuilderelmnt.ctp, line 50
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::_renderElement() - CORE/src/View/View.php, line 1350
+Cake\View\View::element() - CORE/src/View/View.php, line 493
+include - APP/Template/OrgCharts/index.ctp, line 5
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::render() - CORE/src/View/View.php, line 588
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 617
+Cake\Routing\Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 121
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 88
+[main] - ROOT/webroot/index.php, line 36
+
+
+
+2016-08-16 07:28:35 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Fonts could not be found.
+Exception Attributes: array (
+  'class' => 'Fonts',
+  'plugin' => NULL,
+  'prefix' => NULL,
+  '_ext' => NULL,
+)
+Request URL: /fonts/glyphicons-halflings-regular.woff2
+Referer URL: http://localhost:8765/css/bootstrap.min.css
+Stack Trace:
+#0 /Users/varunprathap/hrm/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-08-16 07:28:36 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Fonts could not be found.
+Exception Attributes: array (
+  'class' => 'Fonts',
+  'plugin' => NULL,
+  'prefix' => NULL,
+  '_ext' => NULL,
+)
+Request URL: /fonts/glyphicons-halflings-regular.woff
+Referer URL: http://localhost:8765/css/bootstrap.min.css
+Stack Trace:
+#0 /Users/varunprathap/hrm/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-08-16 07:28:36 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Fonts could not be found.
+Exception Attributes: array (
+  'class' => 'Fonts',
+  'plugin' => NULL,
+  'prefix' => NULL,
+  '_ext' => NULL,
+)
+Request URL: /fonts/glyphicons-halflings-regular.ttf
+Referer URL: http://localhost:8765/css/bootstrap.min.css
+Stack Trace:
+#0 /Users/varunprathap/hrm/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-08-16 07:28:59 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Css could not be found.
+Exception Attributes: array (
+  'class' => 'Css',
+  'plugin' => NULL,
+  'prefix' => NULL,
+  '_ext' => NULL,
+)
+Request URL: /css/bootstrap.min.css.map
+Stack Trace:
+#0 /Users/varunprathap/hrm/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-08-16 07:29:32 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Css could not be found.
+Exception Attributes: array (
+  'class' => 'Css',
+  'plugin' => NULL,
+  'prefix' => NULL,
+  '_ext' => NULL,
+)
+Request URL: /css/bootstrap.min.css.map
+Stack Trace:
+#0 /Users/varunprathap/hrm/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-08-16 08:10:42 Error: [Cake\View\Exception\MissingHelperException] Helper class BootstrapFormHelper could not be found.
+Exception Attributes: array (
+  'class' => 'BootstrapFormHelper',
+  'plugin' => 'Bootstrap',
+)
+Request URL: /job-infos/add
+Referer URL: http://localhost:8765/JobInfos
+Stack Trace:
+#0 /Users/varunprathap/hrm/vendor/cakephp/cakephp/src/Core/ObjectRegistry.php(91): Cake\View\HelperRegistry->_throwMissingClassError('BootstrapForm', 'Bootstrap')
+#1 /Users/varunprathap/hrm/vendor/cakephp/cakephp/src/View/View.php(1039): Cake\Core\ObjectRegistry->load('BootstrapForm', Array)
+#2 /Users/varunprathap/hrm/vendor/cakephp/cakephp/src/View/View.php(938): Cake\View\View->loadHelper('Form', Array)
+#3 /Users/varunprathap/hrm/vendor/cakephp/cakephp/src/View/View.php(345): Cake\View\View->loadHelpers()
+#4 /Users/varunprathap/hrm/vendor/cakephp/cakephp/src/View/ViewBuilder.php(363): Cake\View\View->__construct(Object(Cake\Network\Request), Object(Cake\Network\Response), Object(Cake\Event\EventManager), Array)
+#5 /Users/varunprathap/hrm/vendor/cakephp/cakephp/src/View/ViewVarsTrait.php(119): Cake\View\ViewBuilder->build(Array, Object(Cake\Network\Request), Object(Cake\Network\Response), Object(Cake\Event\EventManager))
+#6 /Users/varunprathap/hrm/vendor/cakephp/cakephp/src/Controller/Controller.php(616): Cake\Controller\Controller->createView()
+#7 /Users/varunprathap/hrm/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(121): Cake\Controller\Controller->render()
+#8 /Users/varunprathap/hrm/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(88): Cake\Routing\Dispatcher->_invoke(Object(App\Controller\JobInfosController))
+#9 /Users/varunprathap/hrm/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#10 {main}
+
+
+2016-08-16 08:12:59 Error: [Cake\Core\Exception\MissingPluginException] Plugin Bootstrap could not be found.
+Exception Attributes: array (
+  'plugin' => 'Bootstrap',
+)
+Stack Trace:
+#0 /Users/varunprathap/hrm/config/bootstrap.php(193): Cake\Core\Plugin::load('Bootstrap')
+#1 /Users/varunprathap/hrm/webroot/index.php(27): require('/Users/varunpra...')
+#2 {main}
+
+
+2016-08-16 09:23:58 Error: [Cake\View\Exception\MissingHelperException] Helper class BootstrapFormHelper could not be found.
+Exception Attributes: array (
+  'class' => 'BootstrapFormHelper',
+  'plugin' => 'Bootstrap',
+)
+Request URL: /admins/add
+Stack Trace:
+#0 /Users/varunprathap/hrm/vendor/cakephp/cakephp/src/Core/ObjectRegistry.php(91): Cake\View\HelperRegistry->_throwMissingClassError('BootstrapForm', 'Bootstrap')
+#1 /Users/varunprathap/hrm/vendor/cakephp/cakephp/src/View/View.php(1039): Cake\Core\ObjectRegistry->load('BootstrapForm', Array)
+#2 /Users/varunprathap/hrm/vendor/cakephp/cakephp/src/View/View.php(938): Cake\View\View->loadHelper('Form', Array)
+#3 /Users/varunprathap/hrm/vendor/cakephp/cakephp/src/View/View.php(345): Cake\View\View->loadHelpers()
+#4 /Users/varunprathap/hrm/vendor/cakephp/cakephp/src/View/ViewBuilder.php(363): Cake\View\View->__construct(Object(Cake\Network\Request), Object(Cake\Network\Response), Object(Cake\Event\EventManager), Array)
+#5 /Users/varunprathap/hrm/vendor/cakephp/cakephp/src/View/ViewVarsTrait.php(119): Cake\View\ViewBuilder->build(Array, Object(Cake\Network\Request), Object(Cake\Network\Response), Object(Cake\Event\EventManager))
+#6 /Users/varunprathap/hrm/vendor/cakephp/cakephp/src/Controller/Controller.php(616): Cake\Controller\Controller->createView()
+#7 /Users/varunprathap/hrm/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(121): Cake\Controller\Controller->render()
+#8 /Users/varunprathap/hrm/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(88): Cake\Routing\Dispatcher->_invoke(Object(App\Controller\AdminsController))
+#9 /Users/varunprathap/hrm/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#10 {main}
+
+
+2016-08-16 09:32:17 Error: [Cake\Core\Exception\MissingPluginException] Plugin BootstrapUI could not be found.
+Exception Attributes: array (
+  'plugin' => 'BootstrapUI',
+)
+Stack Trace:
+#0 /Users/varunprathap/hrm/config/bootstrap.php(195): Cake\Core\Plugin::load('BootstrapUI')
+#1 /Users/varunprathap/hrm/webroot/index.php(27): require('/Users/varunpra...')
+#2 {main}
+
+
+2016-08-16 09:32:23 Error: [Cake\Core\Exception\MissingPluginException] Plugin BootstrapUI could not be found.
+Exception Attributes: array (
+  'plugin' => 'BootstrapUI',
+)
+Stack Trace:
+#0 /Users/varunprathap/hrm/config/bootstrap.php(195): Cake\Core\Plugin::load('BootstrapUI')
+#1 /Users/varunprathap/hrm/webroot/index.php(27): require('/Users/varunpra...')
+#2 {main}
+
+
+2016-08-16 09:32:26 Error: [Cake\Core\Exception\MissingPluginException] Plugin BootstrapUI could not be found.
+Exception Attributes: array (
+  'plugin' => 'BootstrapUI',
+)
+Stack Trace:
+#0 /Users/varunprathap/hrm/config/bootstrap.php(195): Cake\Core\Plugin::load('BootstrapUI')
+#1 /Users/varunprathap/hrm/webroot/index.php(27): require('/Users/varunpra...')
+#2 {main}
+
+
+2016-08-16 09:36:27 Error: [Cake\Core\Exception\MissingPluginException] Plugin Bootstrap could not be found.
+Exception Attributes: array (
+  'plugin' => 'Bootstrap',
+)
+Stack Trace:
+#0 /Users/varunprathap/hrm/config/bootstrap.php(195): Cake\Core\Plugin::load('Bootstrap')
+#1 /Users/varunprathap/hrm/webroot/index.php(27): require('/Users/varunpra...')
+#2 {main}
+
+
+2016-08-16 09:36:36 Error: [Cake\Core\Exception\MissingPluginException] Plugin Bootstrap could not be found.
+Exception Attributes: array (
+  'plugin' => 'Bootstrap',
+)
+Stack Trace:
+#0 /Users/varunprathap/hrm/config/bootstrap.php(195): Cake\Core\Plugin::load('Bootstrap')
+#1 /Users/varunprathap/hrm/webroot/index.php(27): require('/Users/varunpra...')
+#2 {main}
+
+
+2016-08-16 09:36:44 Error: [Cake\Core\Exception\MissingPluginException] Plugin Bootstrap could not be found.
+Exception Attributes: array (
+  'plugin' => 'Bootstrap',
+)
+Stack Trace:
+#0 /Users/varunprathap/hrm/config/bootstrap.php(195): Cake\Core\Plugin::load('Bootstrap')
+#1 /Users/varunprathap/hrm/webroot/index.php(27): require('/Users/varunpra...')
+#2 {main}
+
+
+2016-08-16 09:41:27 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Fonts could not be found.
+Exception Attributes: array (
+  'class' => 'Fonts',
+  'plugin' => NULL,
+  'prefix' => NULL,
+  '_ext' => NULL,
+)
+Request URL: /fonts/glyphicons-halflings-regular.woff2
+Referer URL: http://localhost:8765/css/bootstrap.min.css
+Stack Trace:
+#0 /Users/varunprathap/hrm/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-08-16 09:41:28 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Fonts could not be found.
+Exception Attributes: array (
+  'class' => 'Fonts',
+  'plugin' => NULL,
+  'prefix' => NULL,
+  '_ext' => NULL,
+)
+Request URL: /fonts/glyphicons-halflings-regular.woff
+Referer URL: http://localhost:8765/css/bootstrap.min.css
+Stack Trace:
+#0 /Users/varunprathap/hrm/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-08-16 09:41:28 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Fonts could not be found.
+Exception Attributes: array (
+  'class' => 'Fonts',
+  'plugin' => NULL,
+  'prefix' => NULL,
+  '_ext' => NULL,
+)
+Request URL: /fonts/glyphicons-halflings-regular.ttf
+Referer URL: http://localhost:8765/css/bootstrap.min.css
+Stack Trace:
+#0 /Users/varunprathap/hrm/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-08-16 09:41:28 Warning: Warning (2): Illegal string offset 'name' in [/Users/varunprathap/hrm/src/Template/Element/orgtreebuilderelmnt.ctp, line 34]
+Request URL: /OrgCharts
+Referer URL: http://localhost:8765/Holidays
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+arrayToList - APP/Template/Element/orgtreebuilderelmnt.ctp, line 34
+arrayToList - APP/Template/Element/orgtreebuilderelmnt.ctp, line 37
+include - APP/Template/Element/orgtreebuilderelmnt.ctp, line 50
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::_renderElement() - CORE/src/View/View.php, line 1350
+Cake\View\View::element() - CORE/src/View/View.php, line 493
+include - APP/Template/OrgCharts/index.ctp, line 5
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::render() - CORE/src/View/View.php, line 588
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 617
+Cake\Routing\Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 121
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 88
+[main] - ROOT/webroot/index.php, line 36
+
+
+
+2016-08-16 09:41:28 Warning: Warning (2): Illegal string offset 'name' in [/Users/varunprathap/hrm/src/Template/Element/orgtreebuilderelmnt.ctp, line 43]
+Request URL: /OrgCharts
+Referer URL: http://localhost:8765/Holidays
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+arrayToList - APP/Template/Element/orgtreebuilderelmnt.ctp, line 43
+arrayToList - APP/Template/Element/orgtreebuilderelmnt.ctp, line 37
+include - APP/Template/Element/orgtreebuilderelmnt.ctp, line 50
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::_renderElement() - CORE/src/View/View.php, line 1350
+Cake\View\View::element() - CORE/src/View/View.php, line 493
+include - APP/Template/OrgCharts/index.ctp, line 5
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::render() - CORE/src/View/View.php, line 588
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 617
+Cake\Routing\Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 121
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 88
+[main] - ROOT/webroot/index.php, line 36
+
+
+
+2016-08-16 09:41:28 Warning: Warning (2): Illegal string offset 'name' in [/Users/varunprathap/hrm/src/Template/Element/orgtreebuilderelmnt.ctp, line 34]
+Request URL: /OrgCharts
+Referer URL: http://localhost:8765/Holidays
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+arrayToList - APP/Template/Element/orgtreebuilderelmnt.ctp, line 34
+arrayToList - APP/Template/Element/orgtreebuilderelmnt.ctp, line 37
+include - APP/Template/Element/orgtreebuilderelmnt.ctp, line 50
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::_renderElement() - CORE/src/View/View.php, line 1350
+Cake\View\View::element() - CORE/src/View/View.php, line 493
+include - APP/Template/OrgCharts/index.ctp, line 5
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::render() - CORE/src/View/View.php, line 588
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 617
+Cake\Routing\Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 121
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 88
+[main] - ROOT/webroot/index.php, line 36
+
+
+
+2016-08-16 09:41:28 Warning: Warning (2): Illegal string offset 'name' in [/Users/varunprathap/hrm/src/Template/Element/orgtreebuilderelmnt.ctp, line 43]
+Request URL: /OrgCharts
+Referer URL: http://localhost:8765/Holidays
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+arrayToList - APP/Template/Element/orgtreebuilderelmnt.ctp, line 43
+arrayToList - APP/Template/Element/orgtreebuilderelmnt.ctp, line 37
+include - APP/Template/Element/orgtreebuilderelmnt.ctp, line 50
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::_renderElement() - CORE/src/View/View.php, line 1350
+Cake\View\View::element() - CORE/src/View/View.php, line 493
+include - APP/Template/OrgCharts/index.ctp, line 5
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::render() - CORE/src/View/View.php, line 588
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 617
+Cake\Routing\Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 121
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 88
+[main] - ROOT/webroot/index.php, line 36
+
+
+
+2016-08-16 09:41:28 Warning: Warning (2): Illegal string offset 'name' in [/Users/varunprathap/hrm/src/Template/Element/orgtreebuilderelmnt.ctp, line 34]
+Request URL: /OrgCharts
+Referer URL: http://localhost:8765/Holidays
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+arrayToList - APP/Template/Element/orgtreebuilderelmnt.ctp, line 34
+arrayToList - APP/Template/Element/orgtreebuilderelmnt.ctp, line 37
+include - APP/Template/Element/orgtreebuilderelmnt.ctp, line 50
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::_renderElement() - CORE/src/View/View.php, line 1350
+Cake\View\View::element() - CORE/src/View/View.php, line 493
+include - APP/Template/OrgCharts/index.ctp, line 5
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::render() - CORE/src/View/View.php, line 588
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 617
+Cake\Routing\Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 121
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 88
+[main] - ROOT/webroot/index.php, line 36
+
+
+
+2016-08-16 09:41:28 Warning: Warning (2): Illegal string offset 'name' in [/Users/varunprathap/hrm/src/Template/Element/orgtreebuilderelmnt.ctp, line 43]
+Request URL: /OrgCharts
+Referer URL: http://localhost:8765/Holidays
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+arrayToList - APP/Template/Element/orgtreebuilderelmnt.ctp, line 43
+arrayToList - APP/Template/Element/orgtreebuilderelmnt.ctp, line 37
+include - APP/Template/Element/orgtreebuilderelmnt.ctp, line 50
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::_renderElement() - CORE/src/View/View.php, line 1350
+Cake\View\View::element() - CORE/src/View/View.php, line 493
+include - APP/Template/OrgCharts/index.ctp, line 5
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::render() - CORE/src/View/View.php, line 588
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 617
+Cake\Routing\Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 121
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 88
+[main] - ROOT/webroot/index.php, line 36
+
+
+
+2016-08-16 09:41:28 Warning: Warning (2): Illegal string offset 'name' in [/Users/varunprathap/hrm/src/Template/Element/orgtreebuilderelmnt.ctp, line 34]
+Request URL: /OrgCharts
+Referer URL: http://localhost:8765/Holidays
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+arrayToList - APP/Template/Element/orgtreebuilderelmnt.ctp, line 34
+arrayToList - APP/Template/Element/orgtreebuilderelmnt.ctp, line 37
+include - APP/Template/Element/orgtreebuilderelmnt.ctp, line 50
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::_renderElement() - CORE/src/View/View.php, line 1350
+Cake\View\View::element() - CORE/src/View/View.php, line 493
+include - APP/Template/OrgCharts/index.ctp, line 5
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::render() - CORE/src/View/View.php, line 588
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 617
+Cake\Routing\Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 121
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 88
+[main] - ROOT/webroot/index.php, line 36
+
+
+
+2016-08-16 09:41:28 Warning: Warning (2): Illegal string offset 'name' in [/Users/varunprathap/hrm/src/Template/Element/orgtreebuilderelmnt.ctp, line 43]
+Request URL: /OrgCharts
+Referer URL: http://localhost:8765/Holidays
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+arrayToList - APP/Template/Element/orgtreebuilderelmnt.ctp, line 43
+arrayToList - APP/Template/Element/orgtreebuilderelmnt.ctp, line 37
+include - APP/Template/Element/orgtreebuilderelmnt.ctp, line 50
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::_renderElement() - CORE/src/View/View.php, line 1350
+Cake\View\View::element() - CORE/src/View/View.php, line 493
+include - APP/Template/OrgCharts/index.ctp, line 5
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::render() - CORE/src/View/View.php, line 588
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 617
+Cake\Routing\Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 121
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 88
+[main] - ROOT/webroot/index.php, line 36
+
+
+
+2016-08-16 09:41:28 Warning: Warning (2): Illegal string offset 'name' in [/Users/varunprathap/hrm/src/Template/Element/orgtreebuilderelmnt.ctp, line 34]
+Request URL: /OrgCharts
+Referer URL: http://localhost:8765/Holidays
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+arrayToList - APP/Template/Element/orgtreebuilderelmnt.ctp, line 34
+arrayToList - APP/Template/Element/orgtreebuilderelmnt.ctp, line 37
+include - APP/Template/Element/orgtreebuilderelmnt.ctp, line 50
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::_renderElement() - CORE/src/View/View.php, line 1350
+Cake\View\View::element() - CORE/src/View/View.php, line 493
+include - APP/Template/OrgCharts/index.ctp, line 5
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::render() - CORE/src/View/View.php, line 588
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 617
+Cake\Routing\Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 121
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 88
+[main] - ROOT/webroot/index.php, line 36
+
+
+
+2016-08-16 09:41:28 Warning: Warning (2): Illegal string offset 'name' in [/Users/varunprathap/hrm/src/Template/Element/orgtreebuilderelmnt.ctp, line 43]
+Request URL: /OrgCharts
+Referer URL: http://localhost:8765/Holidays
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+arrayToList - APP/Template/Element/orgtreebuilderelmnt.ctp, line 43
+arrayToList - APP/Template/Element/orgtreebuilderelmnt.ctp, line 37
+include - APP/Template/Element/orgtreebuilderelmnt.ctp, line 50
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::_renderElement() - CORE/src/View/View.php, line 1350
+Cake\View\View::element() - CORE/src/View/View.php, line 493
+include - APP/Template/OrgCharts/index.ctp, line 5
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::render() - CORE/src/View/View.php, line 588
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 617
+Cake\Routing\Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 121
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 88
+[main] - ROOT/webroot/index.php, line 36
+
+
+
+2016-08-16 09:41:28 Warning: Warning (2): Illegal string offset 'name' in [/Users/varunprathap/hrm/src/Template/Element/orgtreebuilderelmnt.ctp, line 34]
+Request URL: /OrgCharts
+Referer URL: http://localhost:8765/Holidays
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+arrayToList - APP/Template/Element/orgtreebuilderelmnt.ctp, line 34
+arrayToList - APP/Template/Element/orgtreebuilderelmnt.ctp, line 37
+include - APP/Template/Element/orgtreebuilderelmnt.ctp, line 50
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::_renderElement() - CORE/src/View/View.php, line 1350
+Cake\View\View::element() - CORE/src/View/View.php, line 493
+include - APP/Template/OrgCharts/index.ctp, line 5
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::render() - CORE/src/View/View.php, line 588
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 617
+Cake\Routing\Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 121
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 88
+[main] - ROOT/webroot/index.php, line 36
+
+
+
+2016-08-16 09:41:28 Warning: Warning (2): Illegal string offset 'name' in [/Users/varunprathap/hrm/src/Template/Element/orgtreebuilderelmnt.ctp, line 43]
+Request URL: /OrgCharts
+Referer URL: http://localhost:8765/Holidays
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+arrayToList - APP/Template/Element/orgtreebuilderelmnt.ctp, line 43
+arrayToList - APP/Template/Element/orgtreebuilderelmnt.ctp, line 37
+include - APP/Template/Element/orgtreebuilderelmnt.ctp, line 50
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::_renderElement() - CORE/src/View/View.php, line 1350
+Cake\View\View::element() - CORE/src/View/View.php, line 493
+include - APP/Template/OrgCharts/index.ctp, line 5
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::render() - CORE/src/View/View.php, line 588
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 617
+Cake\Routing\Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 121
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 88
+[main] - ROOT/webroot/index.php, line 36
+
+
+
+2016-08-16 09:41:28 Warning: Warning (2): Illegal string offset 'name' in [/Users/varunprathap/hrm/src/Template/Element/orgtreebuilderelmnt.ctp, line 34]
+Request URL: /OrgCharts
+Referer URL: http://localhost:8765/Holidays
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+arrayToList - APP/Template/Element/orgtreebuilderelmnt.ctp, line 34
+arrayToList - APP/Template/Element/orgtreebuilderelmnt.ctp, line 37
+include - APP/Template/Element/orgtreebuilderelmnt.ctp, line 50
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::_renderElement() - CORE/src/View/View.php, line 1350
+Cake\View\View::element() - CORE/src/View/View.php, line 493
+include - APP/Template/OrgCharts/index.ctp, line 5
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::render() - CORE/src/View/View.php, line 588
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 617
+Cake\Routing\Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 121
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 88
+[main] - ROOT/webroot/index.php, line 36
+
+
+
+2016-08-16 09:41:28 Warning: Warning (2): Illegal string offset 'name' in [/Users/varunprathap/hrm/src/Template/Element/orgtreebuilderelmnt.ctp, line 43]
+Request URL: /OrgCharts
+Referer URL: http://localhost:8765/Holidays
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+arrayToList - APP/Template/Element/orgtreebuilderelmnt.ctp, line 43
+arrayToList - APP/Template/Element/orgtreebuilderelmnt.ctp, line 37
+include - APP/Template/Element/orgtreebuilderelmnt.ctp, line 50
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::_renderElement() - CORE/src/View/View.php, line 1350
+Cake\View\View::element() - CORE/src/View/View.php, line 493
+include - APP/Template/OrgCharts/index.ctp, line 5
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::render() - CORE/src/View/View.php, line 588
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 617
+Cake\Routing\Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 121
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 88
+[main] - ROOT/webroot/index.php, line 36
+
+
+
+2016-08-16 09:41:28 Warning: Warning (2): Illegal string offset 'name' in [/Users/varunprathap/hrm/src/Template/Element/orgtreebuilderelmnt.ctp, line 34]
+Request URL: /OrgCharts
+Referer URL: http://localhost:8765/Holidays
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+arrayToList - APP/Template/Element/orgtreebuilderelmnt.ctp, line 34
+arrayToList - APP/Template/Element/orgtreebuilderelmnt.ctp, line 37
+include - APP/Template/Element/orgtreebuilderelmnt.ctp, line 50
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::_renderElement() - CORE/src/View/View.php, line 1350
+Cake\View\View::element() - CORE/src/View/View.php, line 493
+include - APP/Template/OrgCharts/index.ctp, line 5
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::render() - CORE/src/View/View.php, line 588
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 617
+Cake\Routing\Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 121
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 88
+[main] - ROOT/webroot/index.php, line 36
+
+
+
+2016-08-16 09:41:28 Warning: Warning (2): Illegal string offset 'name' in [/Users/varunprathap/hrm/src/Template/Element/orgtreebuilderelmnt.ctp, line 43]
+Request URL: /OrgCharts
+Referer URL: http://localhost:8765/Holidays
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+arrayToList - APP/Template/Element/orgtreebuilderelmnt.ctp, line 43
+arrayToList - APP/Template/Element/orgtreebuilderelmnt.ctp, line 37
+include - APP/Template/Element/orgtreebuilderelmnt.ctp, line 50
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::_renderElement() - CORE/src/View/View.php, line 1350
+Cake\View\View::element() - CORE/src/View/View.php, line 493
+include - APP/Template/OrgCharts/index.ctp, line 5
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::render() - CORE/src/View/View.php, line 588
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 617
+Cake\Routing\Dispatcher::_invoke() - CORE/src/Routing/Dispatcher.php, line 121
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 88
+[main] - ROOT/webroot/index.php, line 36
+
+
+
+2016-08-16 09:41:39 Error: [Cake\Controller\Exception\MissingActionException] Action AdminsController::list() could not be found, or is not accessible.
+Exception Attributes: array (
+  'controller' => 'AdminsController',
+  'action' => 'list',
+  'prefix' => '',
+  'plugin' => NULL,
+)
+Request URL: /admins/List
+Referer URL: http://localhost:8765/admins/add
+Stack Trace:
+#0 /Users/varunprathap/hrm/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(115): Cake\Controller\Controller->invokeAction()
+#1 /Users/varunprathap/hrm/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(88): Cake\Routing\Dispatcher->_invoke(Object(App\Controller\AdminsController))
+#2 /Users/varunprathap/hrm/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#3 {main}
+
+
+2016-08-16 09:41:51 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Add could not be found.
+Exception Attributes: array (
+  'class' => 'Add',
+  'plugin' => NULL,
+  'prefix' => NULL,
+  '_ext' => NULL,
+)
+Request URL: /Add
+Referer URL: http://localhost:8765/Admins
+Stack Trace:
+#0 /Users/varunprathap/hrm/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-08-16 09:42:56 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Css could not be found.
+Exception Attributes: array (
+  'class' => 'Css',
+  'plugin' => NULL,
+  'prefix' => NULL,
+  '_ext' => NULL,
+)
+Request URL: /css/bootstrap.min.css.map
+Stack Trace:
+#0 /Users/varunprathap/hrm/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-08-16 09:44:22 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Css could not be found.
+Exception Attributes: array (
+  'class' => 'Css',
+  'plugin' => NULL,
+  'prefix' => NULL,
+  '_ext' => NULL,
+)
+Request URL: /css/bootstrap.min.css.map
+Stack Trace:
+#0 /Users/varunprathap/hrm/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-08-16 09:44:47 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Css could not be found.
+Exception Attributes: array (
+  'class' => 'Css',
+  'plugin' => NULL,
+  'prefix' => NULL,
+  '_ext' => NULL,
+)
+Request URL: /css/bootstrap.min.css.map
+Stack Trace:
+#0 /Users/varunprathap/hrm/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-08-16 09:46:34 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Css could not be found.
+Exception Attributes: array (
+  'class' => 'Css',
+  'plugin' => NULL,
+  'prefix' => NULL,
+  '_ext' => NULL,
+)
+Request URL: /css/bootstrap.min.css.map
+Stack Trace:
+#0 /Users/varunprathap/hrm/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-08-16 09:47:50 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Css could not be found.
+Exception Attributes: array (
+  'class' => 'Css',
+  'plugin' => NULL,
+  'prefix' => NULL,
+  '_ext' => NULL,
+)
+Request URL: /css/bootstrap.min.css.map
+Stack Trace:
+#0 /Users/varunprathap/hrm/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-08-16 09:48:53 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Css could not be found.
+Exception Attributes: array (
+  'class' => 'Css',
+  'plugin' => NULL,
+  'prefix' => NULL,
+  '_ext' => NULL,
+)
+Request URL: /css/bootstrap.min.css.map
+Stack Trace:
+#0 /Users/varunprathap/hrm/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-08-16 09:49:05 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Css could not be found.
+Exception Attributes: array (
+  'class' => 'Css',
+  'plugin' => NULL,
+  'prefix' => NULL,
+  '_ext' => NULL,
+)
+Request URL: /css/bootstrap.min.css.map
+Stack Trace:
+#0 /Users/varunprathap/hrm/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-08-16 09:49:50 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Css could not be found.
+Exception Attributes: array (
+  'class' => 'Css',
+  'plugin' => NULL,
+  'prefix' => NULL,
+  '_ext' => NULL,
+)
+Request URL: /css/bootstrap.min.css.map
+Stack Trace:
+#0 /Users/varunprathap/hrm/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-08-16 09:50:02 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Css could not be found.
+Exception Attributes: array (
+  'class' => 'Css',
+  'plugin' => NULL,
+  'prefix' => NULL,
+  '_ext' => NULL,
+)
+Request URL: /css/bootstrap.min.css.map
+Stack Trace:
+#0 /Users/varunprathap/hrm/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-08-16 09:52:53 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Css could not be found.
+Exception Attributes: array (
+  'class' => 'Css',
+  'plugin' => NULL,
+  'prefix' => NULL,
+  '_ext' => NULL,
+)
+Request URL: /css/bootstrap.min.css.map
+Stack Trace:
+#0 /Users/varunprathap/hrm/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-08-16 09:52:54 Error: [Cake\Routing\Exception\MissingControllerException] Controller class List could not be found.
+Exception Attributes: array (
+  'class' => 'List',
+  'plugin' => NULL,
+  'prefix' => NULL,
+  '_ext' => NULL,
+)
+Request URL: /List
+Referer URL: http://localhost:8765/Admins
+Stack Trace:
+#0 /Users/varunprathap/hrm/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-08-16 09:52:58 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Css could not be found.
+Exception Attributes: array (
+  'class' => 'Css',
+  'plugin' => NULL,
+  'prefix' => NULL,
+  '_ext' => NULL,
+)
+Request URL: /css/bootstrap.min.css.map
+Stack Trace:
+#0 /Users/varunprathap/hrm/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-08-16 09:53:00 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Css could not be found.
+Exception Attributes: array (
+  'class' => 'Css',
+  'plugin' => NULL,
+  'prefix' => NULL,
+  '_ext' => NULL,
+)
+Request URL: /css/bootstrap.min.css.map
+Stack Trace:
+#0 /Users/varunprathap/hrm/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-08-16 09:53:09 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Css could not be found.
+Exception Attributes: array (
+  'class' => 'Css',
+  'plugin' => NULL,
+  'prefix' => NULL,
+  '_ext' => NULL,
+)
+Request URL: /css/bootstrap.min.css.map
+Stack Trace:
+#0 /Users/varunprathap/hrm/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-08-16 09:53:11 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Css could not be found.
+Exception Attributes: array (
+  'class' => 'Css',
+  'plugin' => NULL,
+  'prefix' => NULL,
+  '_ext' => NULL,
+)
+Request URL: /css/bootstrap.min.css.map
+Stack Trace:
+#0 /Users/varunprathap/hrm/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-08-16 09:53:14 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Css could not be found.
+Exception Attributes: array (
+  'class' => 'Css',
+  'plugin' => NULL,
+  'prefix' => NULL,
+  '_ext' => NULL,
+)
+Request URL: /css/bootstrap.min.css.map
+Stack Trace:
+#0 /Users/varunprathap/hrm/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-08-16 09:53:16 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Css could not be found.
+Exception Attributes: array (
+  'class' => 'Css',
+  'plugin' => NULL,
+  'prefix' => NULL,
+  '_ext' => NULL,
+)
+Request URL: /css/bootstrap.min.css.map
+Stack Trace:
+#0 /Users/varunprathap/hrm/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
