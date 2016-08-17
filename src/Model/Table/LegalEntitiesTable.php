@@ -10,6 +10,7 @@ use Cake\Validation\Validator;
  * LegalEntities Model
  *
  * @property \Cake\ORM\Association\BelongsTo $Locations
+ * @property \Cake\ORM\Association\BelongsTo $PayGroups
  *
  * @method \App\Model\Entity\LegalEntity get($primaryKey, $options = [])
  * @method \App\Model\Entity\LegalEntity newEntity($data = null, array $options = [])
@@ -38,6 +39,9 @@ class LegalEntitiesTable extends Table
 
         $this->belongsTo('Locations', [
             'foreignKey' => 'location_id'
+        ]);
+        $this->belongsTo('PayGroups', [
+            'foreignKey' => 'paygroup_id'
         ]);
     }
 
@@ -69,9 +73,6 @@ class LegalEntitiesTable extends Table
         $validator
             ->date('effective_end_date')
             ->allowEmpty('effective_end_date');
-
-        $validator
-            ->allowEmpty('default_pay_group');
 
         $validator
             ->allowEmpty('country_of_registration');
@@ -106,6 +107,7 @@ class LegalEntitiesTable extends Table
     {
         $rules->add($rules->isUnique(['external_code']));
         $rules->add($rules->existsIn(['location_id'], 'Locations'));
+        $rules->add($rules->existsIn(['paygroup_id'], 'PayGroups'));
 
         return $rules;
     }

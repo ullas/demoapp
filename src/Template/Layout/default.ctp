@@ -71,7 +71,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
         height:280px;
     }
     .footer {
-    /*position: absolute;*/
+    position: fixed;
     bottom: 0;
     width: 100%;
     height: 35px;
@@ -102,13 +102,16 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
 .mt50{
 	margin-top:50px;
 }
+.mt30{
+	margin-top:30px;
+}
  </style>
 
 </head>
 <body>
      <div id="wrapper" class="toggled">
         <!-- <div class="overlay"></div> -->
-    <?php $this->Form->templates($form_templates['shortForm']); ?> 
+      
     <!--Topbar -->
     <nav class="navbar navbar-inverse navbar-fixed-top">
   <div class="container-fluid">
@@ -185,7 +188,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
         <!-- /#sidebar-wrapper -->
         
     <?= $this->Flash->render() ?>
-    <div  id="page-content-wrapper">
+    <div  id="page-content-wrapper" class="m50">
     	<div  class="container">
             
         <?= $this -> fetch('content') ?>

@@ -2,13 +2,15 @@
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
         <li><?= $this->Html->link(__('New Legal Entity'), ['action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('List Locations'), ['controller' => 'Locations', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New Location'), ['controller' => 'Locations', 'action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('List Pay Groups'), ['controller' => 'PayGroups', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New Pay Group'), ['controller' => 'PayGroups', 'action' => 'add']) ?></li>
     </ul>
 </nav>
 <div class="legalEntities index large-9 medium-8 columns content">
-	
-	
-	
     <h3><?= __('Legal Entities') ?></h3>
+
     <table cellpadding="0" cellspacing="0">
         <thead>
             <tr>
@@ -18,13 +20,13 @@
                 <th><?= $this->Paginator->sort('effective_status') ?></th>
                 <th><?= $this->Paginator->sort('effective_start_date') ?></th>
                 <th><?= $this->Paginator->sort('effective_end_date') ?></th>
-                <th><?= $this->Paginator->sort('default_pay_group') ?></th>
                 <th><?= $this->Paginator->sort('country_of_registration') ?></th>
                 <th><?= $this->Paginator->sort('standard_weekly_hours') ?></th>
                 <th><?= $this->Paginator->sort('currency') ?></th>
                 <th><?= $this->Paginator->sort('official_language') ?></th>
                 <th><?= $this->Paginator->sort('external_code') ?></th>
                 <th><?= $this->Paginator->sort('location_id') ?></th>
+                <th><?= $this->Paginator->sort('paygroup_id') ?></th>
                 <th class="actions"><?= __('Actions') ?></th>
             </tr>
         </thead>
@@ -37,13 +39,13 @@
                 <td><?= h($legalEntity->effective_status) ?></td>
                 <td><?= h($legalEntity->effective_start_date) ?></td>
                 <td><?= h($legalEntity->effective_end_date) ?></td>
-                <td><?= h($legalEntity->default_pay_group) ?></td>
-                <td><?= h($legalEntity->country_of_registration) ?></td>
+                <td><?= $this->Country->get_country_name(h($legalEntity->country_of_registration)) ?></td>
                 <td><?= $this->Number->format($legalEntity->standard_weekly_hours) ?></td>
                 <td><?= $this->Number->format($legalEntity->currency) ?></td>
-                <td><?= h($legalEntity->official_language) ?></td>
+                <td><?= $this->Language->get_language_name(h($legalEntity->official_language)) ?></td>
                 <td><?= h($legalEntity->external_code) ?></td>
-                <td><?= $this->Number->format($legalEntity->location_id) ?></td>
+                <td><?= $legalEntity->has('location') ? $this->Html->link($legalEntity->location->name, ['controller' => 'Locations', 'action' => 'view', $legalEntity->location->id]) : '' ?></td>
+                <td><?= $legalEntity->has('pay_group') ? $this->Html->link($legalEntity->pay_group->name, ['controller' => 'PayGroups', 'action' => 'view', $legalEntity->pay_group->id]) : '' ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $legalEntity->id]) ?>
                     <?= $this->Html->link(__('Edit'), ['action' => 'edit', $legalEntity->id]) ?>

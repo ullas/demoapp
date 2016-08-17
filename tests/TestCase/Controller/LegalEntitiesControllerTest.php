@@ -17,7 +17,8 @@ class LegalEntitiesControllerTest extends IntegrationTestCase
      */
     public $fixtures = [
         'app.legal_entities',
-        'app.locations'
+        'app.locations',
+        'app.pay_groups'
     ];
 
     /**

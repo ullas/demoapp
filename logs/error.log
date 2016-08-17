@@ -30972,3 +30972,1203 @@ Stack Trace:
 #1 {main}
 
 
+2016-08-17 08:53:50 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Css could not be found.
+Exception Attributes: array (
+  'class' => 'Css',
+  'plugin' => NULL,
+  'prefix' => NULL,
+  '_ext' => NULL,
+)
+Request URL: /css/bootstrap.min.css.map
+Stack Trace:
+#0 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-08-17 08:56:49 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Css could not be found.
+Exception Attributes: array (
+  'class' => 'Css',
+  'plugin' => NULL,
+  'prefix' => NULL,
+  '_ext' => NULL,
+)
+Request URL: /css/bootstrap.min.css.map
+Stack Trace:
+#0 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-08-17 09:14:51 Error: [Cake\Controller\Exception\MissingComponentException] Component class LoadCountryComponent could not be found.
+Exception Attributes: array (
+  'class' => 'LoadCountryComponent',
+  'plugin' => NULL,
+)
+Request URL: /JobInfos
+Stack Trace:
+#0 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Core/ObjectRegistry.php(91): Cake\Controller\ComponentRegistry->_throwMissingClassError('LoadCountry', NULL)
+#1 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Controller/Controller.php(322): Cake\Core\ObjectRegistry->load('LoadCountry', Array)
+#2 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Controller/Controller.php(481): Cake\Controller\Controller->loadComponent('LoadCountry', Array)
+#3 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Controller/Controller.php(265): Cake\Controller\Controller->_loadComponents()
+#4 [internal function]: Cake\Controller\Controller->__construct(Object(Cake\Network\Request), Object(Cake\Network\Response), 'JobInfos')
+#5 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/ControllerFactoryFilter.php(101): ReflectionClass->newInstance(Object(Cake\Network\Request), Object(Cake\Network\Response), 'JobInfos')
+#6 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/ControllerFactoryFilter.php(51): Cake\Routing\Filter\ControllerFactoryFilter->_getController(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#7 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/DispatcherFilter.php(145): Cake\Routing\Filter\ControllerFactoryFilter->beforeDispatch(Object(Cake\Event\Event))
+#8 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventManager.php(425): Cake\Routing\DispatcherFilter->handle(Object(Cake\Event\Event), Object(Cake\Network\Request), Object(Cake\Network\Response))
+#9 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventManager.php(386): Cake\Event\EventManager->_callListener(Array, Object(Cake\Event\Event))
+#10 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventDispatcherTrait.php(79): Cake\Event\EventManager->dispatch(Object(Cake\Event\Event))
+#11 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(62): Cake\Routing\Dispatcher->dispatchEvent('Dispatcher.befo...', Array)
+#12 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#13 {main}
+
+
+2016-08-17 09:16:06 Error: [Cake\Controller\Exception\MissingComponentException] Component class LoadCountryComponent could not be found.
+Exception Attributes: array (
+  'class' => 'LoadCountryComponent',
+  'plugin' => NULL,
+)
+Request URL: /JobInfos
+Stack Trace:
+#0 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Core/ObjectRegistry.php(91): Cake\Controller\ComponentRegistry->_throwMissingClassError('LoadCountry', NULL)
+#1 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Controller/Controller.php(322): Cake\Core\ObjectRegistry->load('LoadCountry', Array)
+#2 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Controller/Controller.php(481): Cake\Controller\Controller->loadComponent('LoadCountry', Array)
+#3 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Controller/Controller.php(265): Cake\Controller\Controller->_loadComponents()
+#4 [internal function]: Cake\Controller\Controller->__construct(Object(Cake\Network\Request), Object(Cake\Network\Response), 'JobInfos')
+#5 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/ControllerFactoryFilter.php(101): ReflectionClass->newInstance(Object(Cake\Network\Request), Object(Cake\Network\Response), 'JobInfos')
+#6 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/ControllerFactoryFilter.php(51): Cake\Routing\Filter\ControllerFactoryFilter->_getController(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#7 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/DispatcherFilter.php(145): Cake\Routing\Filter\ControllerFactoryFilter->beforeDispatch(Object(Cake\Event\Event))
+#8 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventManager.php(425): Cake\Routing\DispatcherFilter->handle(Object(Cake\Event\Event), Object(Cake\Network\Request), Object(Cake\Network\Response))
+#9 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventManager.php(386): Cake\Event\EventManager->_callListener(Array, Object(Cake\Event\Event))
+#10 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventDispatcherTrait.php(79): Cake\Event\EventManager->dispatch(Object(Cake\Event\Event))
+#11 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(62): Cake\Routing\Dispatcher->dispatchEvent('Dispatcher.befo...', Array)
+#12 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#13 {main}
+
+
+2016-08-17 09:16:51 Error: [Cake\Controller\Exception\MissingComponentException] Component class LoadCountryComponent could not be found.
+Exception Attributes: array (
+  'class' => 'LoadCountryComponent',
+  'plugin' => NULL,
+)
+Request URL: /JobInfos
+Stack Trace:
+#0 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Core/ObjectRegistry.php(91): Cake\Controller\ComponentRegistry->_throwMissingClassError('LoadCountry', NULL)
+#1 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Controller/Controller.php(322): Cake\Core\ObjectRegistry->load('LoadCountry', Array)
+#2 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Controller/Controller.php(481): Cake\Controller\Controller->loadComponent('LoadCountry', Array)
+#3 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Controller/Controller.php(265): Cake\Controller\Controller->_loadComponents()
+#4 [internal function]: Cake\Controller\Controller->__construct(Object(Cake\Network\Request), Object(Cake\Network\Response), 'JobInfos')
+#5 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/ControllerFactoryFilter.php(101): ReflectionClass->newInstance(Object(Cake\Network\Request), Object(Cake\Network\Response), 'JobInfos')
+#6 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/ControllerFactoryFilter.php(51): Cake\Routing\Filter\ControllerFactoryFilter->_getController(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#7 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/DispatcherFilter.php(145): Cake\Routing\Filter\ControllerFactoryFilter->beforeDispatch(Object(Cake\Event\Event))
+#8 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventManager.php(425): Cake\Routing\DispatcherFilter->handle(Object(Cake\Event\Event), Object(Cake\Network\Request), Object(Cake\Network\Response))
+#9 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventManager.php(386): Cake\Event\EventManager->_callListener(Array, Object(Cake\Event\Event))
+#10 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventDispatcherTrait.php(79): Cake\Event\EventManager->dispatch(Object(Cake\Event\Event))
+#11 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(62): Cake\Routing\Dispatcher->dispatchEvent('Dispatcher.befo...', Array)
+#12 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#13 {main}
+
+
+2016-08-17 09:17:10 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Css could not be found.
+Exception Attributes: array (
+  'class' => 'Css',
+  'plugin' => NULL,
+  'prefix' => NULL,
+  '_ext' => NULL,
+)
+Request URL: /css/bootstrap.min.css.map
+Stack Trace:
+#0 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-08-17 09:17:14 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Css could not be found.
+Exception Attributes: array (
+  'class' => 'Css',
+  'plugin' => NULL,
+  'prefix' => NULL,
+  '_ext' => NULL,
+)
+Request URL: /css/bootstrap.min.css.map
+Stack Trace:
+#0 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-08-17 09:22:30 Error: [ParseError] syntax error, unexpected '$rate' (T_VARIABLE)
+Request URL: /LegalEntities
+Referer URL: http://localhost:8765/JobInfos
+Stack Trace:
+#0 /Users/varunprathap/demoapp/vendor/composer/ClassLoader.php(301): Composer\Autoload\includeFile('/Users/varunpra...')
+#1 [internal function]: Composer\Autoload\ClassLoader->loadClass('App\\Controller\\...')
+#2 [internal function]: spl_autoload_call('App\\Controller\\...')
+#3 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Core/App.php(152): class_exists('App\\Controller\\...')
+#4 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Core/App.php(64): Cake\Core\App::_classExistsInBase('\\Controller\\Leg...', 'App')
+#5 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/ControllerFactoryFilter.php(91): Cake\Core\App::className('LegalEntities', 'Controller', 'Controller')
+#6 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/ControllerFactoryFilter.php(51): Cake\Routing\Filter\ControllerFactoryFilter->_getController(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#7 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/DispatcherFilter.php(145): Cake\Routing\Filter\ControllerFactoryFilter->beforeDispatch(Object(Cake\Event\Event))
+#8 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventManager.php(425): Cake\Routing\DispatcherFilter->handle(Object(Cake\Event\Event), Object(Cake\Network\Request), Object(Cake\Network\Response))
+#9 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventManager.php(386): Cake\Event\EventManager->_callListener(Array, Object(Cake\Event\Event))
+#10 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventDispatcherTrait.php(79): Cake\Event\EventManager->dispatch(Object(Cake\Event\Event))
+#11 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(62): Cake\Routing\Dispatcher->dispatchEvent('Dispatcher.befo...', Array)
+#12 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#13 {main}
+
+
+2016-08-17 09:23:12 Error: [ParseError] syntax error, unexpected '$rate' (T_VARIABLE)
+Request URL: /LegalEntities
+Referer URL: http://localhost:8765/JobInfos
+Stack Trace:
+#0 /Users/varunprathap/demoapp/vendor/composer/ClassLoader.php(301): Composer\Autoload\includeFile('/Users/varunpra...')
+#1 [internal function]: Composer\Autoload\ClassLoader->loadClass('App\\Controller\\...')
+#2 [internal function]: spl_autoload_call('App\\Controller\\...')
+#3 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Core/App.php(152): class_exists('App\\Controller\\...')
+#4 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Core/App.php(64): Cake\Core\App::_classExistsInBase('\\Controller\\Leg...', 'App')
+#5 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/ControllerFactoryFilter.php(91): Cake\Core\App::className('LegalEntities', 'Controller', 'Controller')
+#6 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/ControllerFactoryFilter.php(51): Cake\Routing\Filter\ControllerFactoryFilter->_getController(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#7 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/DispatcherFilter.php(145): Cake\Routing\Filter\ControllerFactoryFilter->beforeDispatch(Object(Cake\Event\Event))
+#8 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventManager.php(425): Cake\Routing\DispatcherFilter->handle(Object(Cake\Event\Event), Object(Cake\Network\Request), Object(Cake\Network\Response))
+#9 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventManager.php(386): Cake\Event\EventManager->_callListener(Array, Object(Cake\Event\Event))
+#10 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventDispatcherTrait.php(79): Cake\Event\EventManager->dispatch(Object(Cake\Event\Event))
+#11 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(62): Cake\Routing\Dispatcher->dispatchEvent('Dispatcher.befo...', Array)
+#12 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#13 {main}
+
+
+2016-08-17 09:23:32 Error: [ParseError] syntax error, unexpected '$this' (T_VARIABLE)
+Request URL: /LegalEntities
+Referer URL: http://localhost:8765/JobInfos
+Stack Trace:
+#0 /Users/varunprathap/demoapp/vendor/composer/ClassLoader.php(301): Composer\Autoload\includeFile('/Users/varunpra...')
+#1 [internal function]: Composer\Autoload\ClassLoader->loadClass('App\\Controller\\...')
+#2 [internal function]: spl_autoload_call('App\\Controller\\...')
+#3 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Core/App.php(152): class_exists('App\\Controller\\...')
+#4 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Core/App.php(64): Cake\Core\App::_classExistsInBase('\\Controller\\Leg...', 'App')
+#5 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/ControllerFactoryFilter.php(91): Cake\Core\App::className('LegalEntities', 'Controller', 'Controller')
+#6 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/ControllerFactoryFilter.php(51): Cake\Routing\Filter\ControllerFactoryFilter->_getController(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#7 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/DispatcherFilter.php(145): Cake\Routing\Filter\ControllerFactoryFilter->beforeDispatch(Object(Cake\Event\Event))
+#8 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventManager.php(425): Cake\Routing\DispatcherFilter->handle(Object(Cake\Event\Event), Object(Cake\Network\Request), Object(Cake\Network\Response))
+#9 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventManager.php(386): Cake\Event\EventManager->_callListener(Array, Object(Cake\Event\Event))
+#10 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventDispatcherTrait.php(79): Cake\Event\EventManager->dispatch(Object(Cake\Event\Event))
+#11 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(62): Cake\Routing\Dispatcher->dispatchEvent('Dispatcher.befo...', Array)
+#12 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#13 {main}
+
+
+2016-08-17 09:25:42 Error: [ParseError] syntax error, unexpected '$this' (T_VARIABLE)
+Request URL: /LegalEntities
+Referer URL: http://localhost:8765/JobInfos
+Stack Trace:
+#0 /Users/varunprathap/demoapp/vendor/composer/ClassLoader.php(301): Composer\Autoload\includeFile('/Users/varunpra...')
+#1 [internal function]: Composer\Autoload\ClassLoader->loadClass('App\\Controller\\...')
+#2 [internal function]: spl_autoload_call('App\\Controller\\...')
+#3 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Core/App.php(152): class_exists('App\\Controller\\...')
+#4 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Core/App.php(64): Cake\Core\App::_classExistsInBase('\\Controller\\Leg...', 'App')
+#5 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/ControllerFactoryFilter.php(91): Cake\Core\App::className('LegalEntities', 'Controller', 'Controller')
+#6 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/ControllerFactoryFilter.php(51): Cake\Routing\Filter\ControllerFactoryFilter->_getController(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#7 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/DispatcherFilter.php(145): Cake\Routing\Filter\ControllerFactoryFilter->beforeDispatch(Object(Cake\Event\Event))
+#8 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventManager.php(425): Cake\Routing\DispatcherFilter->handle(Object(Cake\Event\Event), Object(Cake\Network\Request), Object(Cake\Network\Response))
+#9 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventManager.php(386): Cake\Event\EventManager->_callListener(Array, Object(Cake\Event\Event))
+#10 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventDispatcherTrait.php(79): Cake\Event\EventManager->dispatch(Object(Cake\Event\Event))
+#11 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(62): Cake\Routing\Dispatcher->dispatchEvent('Dispatcher.befo...', Array)
+#12 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#13 {main}
+
+
+2016-08-17 09:25:52 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Css could not be found.
+Exception Attributes: array (
+  'class' => 'Css',
+  'plugin' => NULL,
+  'prefix' => NULL,
+  '_ext' => NULL,
+)
+Request URL: /css/bootstrap.min.css.map
+Stack Trace:
+#0 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-08-17 09:26:14 Error: [Cake\View\Exception\MissingHelperException] Helper class LoadCountryHelper could not be found.
+Exception Attributes: array (
+  'class' => 'LoadCountryHelper',
+  'plugin' => NULL,
+)
+Request URL: /LegalEntities
+Referer URL: http://localhost:8765/JobInfos
+Stack Trace:
+#0 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Core/ObjectRegistry.php(91): Cake\View\HelperRegistry->_throwMissingClassError('LoadCountry', NULL)
+#1 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/HelperRegistry.php(66): Cake\Core\ObjectRegistry->load('LoadCountry')
+#2 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/View.php(896): Cake\View\HelperRegistry->__isset('LoadCountry')
+#3 /Users/varunprathap/demoapp/src/Template/LegalEntities/index.ctp(14): Cake\View\View->__get('LoadCountry')
+#4 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/View.php(1005): include('/Users/varunpra...')
+#5 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/View.php(964): Cake\View\View->_evaluate('/Users/varunpra...', Array)
+#6 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/View.php(588): Cake\View\View->_render('/Users/varunpra...')
+#7 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Controller/Controller.php(617): Cake\View\View->render(NULL, NULL)
+#8 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(121): Cake\Controller\Controller->render()
+#9 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(88): Cake\Routing\Dispatcher->_invoke(Object(App\Controller\LegalEntitiesController))
+#10 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#11 {main}
+
+
+2016-08-17 09:31:57 Error: Fatal Error (1): Class 'Object' not found in [/Users/varunprathap/demoapp/src/Controller/Component/LoadCountryComponent.php, line 2]
+Request URL: /LegalEntities
+Referer URL: http://localhost:8765/JobInfos
+Trace:
+Cake\Error\BaseErrorHandler::handleFatalError() - CORE/src/Error/BaseErrorHandler.php, line 216
+Cake\Error\BaseErrorHandler::Cake\Error\{closure}() - CORE/src/Error/BaseErrorHandler.php, line 97
+[main] - [internal], line ??
+
+
+
+2016-08-17 09:31:58 Warning: Headers already sent in /Users/varunprathap/demoapp/src/Controller/Component/LoadCountryComponent.php:2
+2016-08-17 09:31:58 Error: [Cake\Error\FatalErrorException] Class 'Object' not found
+Request URL: /LegalEntities
+Referer URL: http://localhost:8765/JobInfos
+Stack Trace:
+#0 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Error/BaseErrorHandler.php(97): Cake\Error\BaseErrorHandler->handleFatalError(1, 'Class 'Object' ...', '/Users/varunpra...', 2)
+#1 [internal function]: Cake\Error\BaseErrorHandler->Cake\Error\{closure}()
+#2 {main}
+
+
+2016-08-17 09:32:18 Error: Fatal Error (1): Class 'Component' not found in [/Users/varunprathap/demoapp/src/Controller/Component/LoadCountryComponent.php, line 2]
+Request URL: /LegalEntities
+Referer URL: http://localhost:8765/JobInfos
+Trace:
+Cake\Error\BaseErrorHandler::handleFatalError() - CORE/src/Error/BaseErrorHandler.php, line 216
+Cake\Error\BaseErrorHandler::Cake\Error\{closure}() - CORE/src/Error/BaseErrorHandler.php, line 97
+[main] - [internal], line ??
+
+
+
+2016-08-17 09:32:18 Warning: Headers already sent in /Users/varunprathap/demoapp/src/Controller/Component/LoadCountryComponent.php:2
+2016-08-17 09:32:18 Error: [Cake\Error\FatalErrorException] Class 'Component' not found
+Request URL: /LegalEntities
+Referer URL: http://localhost:8765/JobInfos
+Stack Trace:
+#0 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Error/BaseErrorHandler.php(97): Cake\Error\BaseErrorHandler->handleFatalError(1, 'Class 'Componen...', '/Users/varunpra...', 2)
+#1 [internal function]: Cake\Error\BaseErrorHandler->Cake\Error\{closure}()
+#2 {main}
+
+
+2016-08-17 09:37:36 Error: [Error] Call to a member function get_countries() on boolean
+Request URL: /LegalEntities
+Referer URL: http://localhost:8765/JobInfos
+Stack Trace:
+#0 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Controller/Controller.php(262): App\Controller\AppController->initialize()
+#1 [internal function]: Cake\Controller\Controller->__construct(Object(Cake\Network\Request), Object(Cake\Network\Response), 'LegalEntities')
+#2 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/ControllerFactoryFilter.php(101): ReflectionClass->newInstance(Object(Cake\Network\Request), Object(Cake\Network\Response), 'LegalEntities')
+#3 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/ControllerFactoryFilter.php(51): Cake\Routing\Filter\ControllerFactoryFilter->_getController(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#4 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/DispatcherFilter.php(145): Cake\Routing\Filter\ControllerFactoryFilter->beforeDispatch(Object(Cake\Event\Event))
+#5 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventManager.php(425): Cake\Routing\DispatcherFilter->handle(Object(Cake\Event\Event), Object(Cake\Network\Request), Object(Cake\Network\Response))
+#6 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventManager.php(386): Cake\Event\EventManager->_callListener(Array, Object(Cake\Event\Event))
+#7 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventDispatcherTrait.php(79): Cake\Event\EventManager->dispatch(Object(Cake\Event\Event))
+#8 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(62): Cake\Routing\Dispatcher->dispatchEvent('Dispatcher.befo...', Array)
+#9 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#10 {main}
+
+
+2016-08-17 09:38:09 Error: [Error] Call to a member function get_countries() on boolean
+Request URL: /LegalEntities
+Referer URL: http://localhost:8765/JobInfos
+Stack Trace:
+#0 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Controller/Controller.php(262): App\Controller\AppController->initialize()
+#1 [internal function]: Cake\Controller\Controller->__construct(Object(Cake\Network\Request), Object(Cake\Network\Response), 'LegalEntities')
+#2 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/ControllerFactoryFilter.php(101): ReflectionClass->newInstance(Object(Cake\Network\Request), Object(Cake\Network\Response), 'LegalEntities')
+#3 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/ControllerFactoryFilter.php(51): Cake\Routing\Filter\ControllerFactoryFilter->_getController(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#4 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/DispatcherFilter.php(145): Cake\Routing\Filter\ControllerFactoryFilter->beforeDispatch(Object(Cake\Event\Event))
+#5 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventManager.php(425): Cake\Routing\DispatcherFilter->handle(Object(Cake\Event\Event), Object(Cake\Network\Request), Object(Cake\Network\Response))
+#6 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventManager.php(386): Cake\Event\EventManager->_callListener(Array, Object(Cake\Event\Event))
+#7 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventDispatcherTrait.php(79): Cake\Event\EventManager->dispatch(Object(Cake\Event\Event))
+#8 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(62): Cake\Routing\Dispatcher->dispatchEvent('Dispatcher.befo...', Array)
+#9 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#10 {main}
+
+
+2016-08-17 09:38:50 Error: [Error] Call to a member function get_countries() on boolean
+Request URL: /LegalEntities
+Referer URL: http://localhost:8765/JobInfos
+Stack Trace:
+#0 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Controller/Controller.php(262): App\Controller\AppController->initialize()
+#1 [internal function]: Cake\Controller\Controller->__construct(Object(Cake\Network\Request), Object(Cake\Network\Response), 'LegalEntities')
+#2 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/ControllerFactoryFilter.php(101): ReflectionClass->newInstance(Object(Cake\Network\Request), Object(Cake\Network\Response), 'LegalEntities')
+#3 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/ControllerFactoryFilter.php(51): Cake\Routing\Filter\ControllerFactoryFilter->_getController(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#4 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/DispatcherFilter.php(145): Cake\Routing\Filter\ControllerFactoryFilter->beforeDispatch(Object(Cake\Event\Event))
+#5 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventManager.php(425): Cake\Routing\DispatcherFilter->handle(Object(Cake\Event\Event), Object(Cake\Network\Request), Object(Cake\Network\Response))
+#6 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventManager.php(386): Cake\Event\EventManager->_callListener(Array, Object(Cake\Event\Event))
+#7 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventDispatcherTrait.php(79): Cake\Event\EventManager->dispatch(Object(Cake\Event\Event))
+#8 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(62): Cake\Routing\Dispatcher->dispatchEvent('Dispatcher.befo...', Array)
+#9 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#10 {main}
+
+
+2016-08-17 09:39:03 Error: Fatal Error (1): Class 'Component' not found in [/Users/varunprathap/demoapp/src/Controller/Component/LoadCountryComponent.php, line 2]
+Request URL: /LegalEntities
+Referer URL: http://localhost:8765/JobInfos
+Trace:
+Cake\Error\BaseErrorHandler::handleFatalError() - CORE/src/Error/BaseErrorHandler.php, line 216
+Cake\Error\BaseErrorHandler::Cake\Error\{closure}() - CORE/src/Error/BaseErrorHandler.php, line 97
+[main] - [internal], line ??
+
+
+
+2016-08-17 09:39:03 Warning: Headers already sent in /Users/varunprathap/demoapp/src/Controller/Component/LoadCountryComponent.php:2
+2016-08-17 09:39:03 Error: [Cake\Error\FatalErrorException] Class 'Component' not found
+Request URL: /LegalEntities
+Referer URL: http://localhost:8765/JobInfos
+Stack Trace:
+#0 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Error/BaseErrorHandler.php(97): Cake\Error\BaseErrorHandler->handleFatalError(1, 'Class 'Componen...', '/Users/varunpra...', 2)
+#1 [internal function]: Cake\Error\BaseErrorHandler->Cake\Error\{closure}()
+#2 {main}
+
+
+2016-08-17 09:40:10 Error: [Error] Class 'App' not found
+Request URL: /LegalEntities
+Referer URL: http://localhost:8765/JobInfos
+Stack Trace:
+#0 /Users/varunprathap/demoapp/vendor/composer/ClassLoader.php(412): include()
+#1 /Users/varunprathap/demoapp/vendor/composer/ClassLoader.php(301): Composer\Autoload\includeFile('/Users/varunpra...')
+#2 [internal function]: Composer\Autoload\ClassLoader->loadClass('App\\Controller\\...')
+#3 [internal function]: spl_autoload_call('App\\Controller\\...')
+#4 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Core/App.php(152): class_exists('App\\Controller\\...')
+#5 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Core/App.php(64): Cake\Core\App::_classExistsInBase('\\Controller\\Com...', 'App')
+#6 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Controller/ComponentRegistry.php(84): Cake\Core\App::className('LoadCountry', 'Controller/Comp...', 'Component')
+#7 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Core/ObjectRegistry.php(88): Cake\Controller\ComponentRegistry->_resolveClassName('LoadCountry')
+#8 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Controller/Controller.php(322): Cake\Core\ObjectRegistry->load('LoadCountry', Array)
+#9 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Controller/Controller.php(481): Cake\Controller\Controller->loadComponent('LoadCountry', Array)
+#10 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Controller/Controller.php(265): Cake\Controller\Controller->_loadComponents()
+#11 [internal function]: Cake\Controller\Controller->__construct(Object(Cake\Network\Request), Object(Cake\Network\Response), 'LegalEntities')
+#12 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/ControllerFactoryFilter.php(101): ReflectionClass->newInstance(Object(Cake\Network\Request), Object(Cake\Network\Response), 'LegalEntities')
+#13 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/ControllerFactoryFilter.php(51): Cake\Routing\Filter\ControllerFactoryFilter->_getController(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#14 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/DispatcherFilter.php(145): Cake\Routing\Filter\ControllerFactoryFilter->beforeDispatch(Object(Cake\Event\Event))
+#15 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventManager.php(425): Cake\Routing\DispatcherFilter->handle(Object(Cake\Event\Event), Object(Cake\Network\Request), Object(Cake\Network\Response))
+#16 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventManager.php(386): Cake\Event\EventManager->_callListener(Array, Object(Cake\Event\Event))
+#17 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventDispatcherTrait.php(79): Cake\Event\EventManager->dispatch(Object(Cake\Event\Event))
+#18 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(62): Cake\Routing\Dispatcher->dispatchEvent('Dispatcher.befo...', Array)
+#19 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#20 {main}
+
+
+2016-08-17 09:43:28 Error: [Error] Call to undefined method Cake\Core\App::uses()
+Request URL: /LegalEntities
+Referer URL: http://localhost:8765/JobInfos
+Stack Trace:
+#0 /Users/varunprathap/demoapp/vendor/composer/ClassLoader.php(412): include()
+#1 /Users/varunprathap/demoapp/vendor/composer/ClassLoader.php(301): Composer\Autoload\includeFile('/Users/varunpra...')
+#2 [internal function]: Composer\Autoload\ClassLoader->loadClass('App\\Controller\\...')
+#3 [internal function]: spl_autoload_call('App\\Controller\\...')
+#4 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Core/App.php(152): class_exists('App\\Controller\\...')
+#5 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Core/App.php(64): Cake\Core\App::_classExistsInBase('\\Controller\\Com...', 'App')
+#6 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Controller/ComponentRegistry.php(84): Cake\Core\App::className('LoadCountry', 'Controller/Comp...', 'Component')
+#7 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Core/ObjectRegistry.php(88): Cake\Controller\ComponentRegistry->_resolveClassName('LoadCountry')
+#8 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Controller/Controller.php(322): Cake\Core\ObjectRegistry->load('LoadCountry', Array)
+#9 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Controller/Controller.php(481): Cake\Controller\Controller->loadComponent('LoadCountry', Array)
+#10 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Controller/Controller.php(265): Cake\Controller\Controller->_loadComponents()
+#11 [internal function]: Cake\Controller\Controller->__construct(Object(Cake\Network\Request), Object(Cake\Network\Response), 'LegalEntities')
+#12 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/ControllerFactoryFilter.php(101): ReflectionClass->newInstance(Object(Cake\Network\Request), Object(Cake\Network\Response), 'LegalEntities')
+#13 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/ControllerFactoryFilter.php(51): Cake\Routing\Filter\ControllerFactoryFilter->_getController(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#14 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/DispatcherFilter.php(145): Cake\Routing\Filter\ControllerFactoryFilter->beforeDispatch(Object(Cake\Event\Event))
+#15 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventManager.php(425): Cake\Routing\DispatcherFilter->handle(Object(Cake\Event\Event), Object(Cake\Network\Request), Object(Cake\Network\Response))
+#16 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventManager.php(386): Cake\Event\EventManager->_callListener(Array, Object(Cake\Event\Event))
+#17 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventDispatcherTrait.php(79): Cake\Event\EventManager->dispatch(Object(Cake\Event\Event))
+#18 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(62): Cake\Routing\Dispatcher->dispatchEvent('Dispatcher.befo...', Array)
+#19 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#20 {main}
+
+
+2016-08-17 09:44:22 Error: [Cake\Controller\Exception\MissingComponentException] Component class LoadCountryComponent could not be found.
+Exception Attributes: array (
+  'class' => 'LoadCountryComponent',
+  'plugin' => NULL,
+)
+Request URL: /LegalEntities
+Referer URL: http://localhost:8765/JobInfos
+Stack Trace:
+#0 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Core/ObjectRegistry.php(91): Cake\Controller\ComponentRegistry->_throwMissingClassError('LoadCountry', NULL)
+#1 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Controller/Controller.php(322): Cake\Core\ObjectRegistry->load('LoadCountry', Array)
+#2 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Controller/Controller.php(481): Cake\Controller\Controller->loadComponent('LoadCountry', Array)
+#3 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Controller/Controller.php(265): Cake\Controller\Controller->_loadComponents()
+#4 [internal function]: Cake\Controller\Controller->__construct(Object(Cake\Network\Request), Object(Cake\Network\Response), 'LegalEntities')
+#5 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/ControllerFactoryFilter.php(101): ReflectionClass->newInstance(Object(Cake\Network\Request), Object(Cake\Network\Response), 'LegalEntities')
+#6 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/ControllerFactoryFilter.php(51): Cake\Routing\Filter\ControllerFactoryFilter->_getController(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#7 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/DispatcherFilter.php(145): Cake\Routing\Filter\ControllerFactoryFilter->beforeDispatch(Object(Cake\Event\Event))
+#8 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventManager.php(425): Cake\Routing\DispatcherFilter->handle(Object(Cake\Event\Event), Object(Cake\Network\Request), Object(Cake\Network\Response))
+#9 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventManager.php(386): Cake\Event\EventManager->_callListener(Array, Object(Cake\Event\Event))
+#10 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventDispatcherTrait.php(79): Cake\Event\EventManager->dispatch(Object(Cake\Event\Event))
+#11 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(62): Cake\Routing\Dispatcher->dispatchEvent('Dispatcher.befo...', Array)
+#12 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#13 {main}
+
+
+2016-08-17 09:44:57 Error: [Cake\View\Exception\MissingHelperException] Helper class LoadCountryHelper could not be found.
+Exception Attributes: array (
+  'class' => 'LoadCountryHelper',
+  'plugin' => NULL,
+)
+Request URL: /LegalEntities
+Referer URL: http://localhost:8765/JobInfos
+Stack Trace:
+#0 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Core/ObjectRegistry.php(91): Cake\View\HelperRegistry->_throwMissingClassError('LoadCountry', NULL)
+#1 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/HelperRegistry.php(66): Cake\Core\ObjectRegistry->load('LoadCountry')
+#2 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/View.php(896): Cake\View\HelperRegistry->__isset('LoadCountry')
+#3 /Users/varunprathap/demoapp/src/Template/LegalEntities/index.ctp(14): Cake\View\View->__get('LoadCountry')
+#4 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/View.php(1005): include('/Users/varunpra...')
+#5 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/View.php(964): Cake\View\View->_evaluate('/Users/varunpra...', Array)
+#6 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/View.php(588): Cake\View\View->_render('/Users/varunpra...')
+#7 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Controller/Controller.php(617): Cake\View\View->render(NULL, NULL)
+#8 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(121): Cake\Controller\Controller->render()
+#9 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(88): Cake\Routing\Dispatcher->_invoke(Object(App\Controller\LegalEntitiesController))
+#10 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#11 {main}
+
+
+2016-08-17 09:45:39 Error: [Cake\View\Exception\MissingHelperException] Helper class LoadCountryHelper could not be found.
+Exception Attributes: array (
+  'class' => 'LoadCountryHelper',
+  'plugin' => NULL,
+)
+Request URL: /LegalEntities
+Referer URL: http://localhost:8765/JobInfos
+Stack Trace:
+#0 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Core/ObjectRegistry.php(91): Cake\View\HelperRegistry->_throwMissingClassError('LoadCountry', NULL)
+#1 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/HelperRegistry.php(66): Cake\Core\ObjectRegistry->load('LoadCountry')
+#2 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/View.php(896): Cake\View\HelperRegistry->__isset('LoadCountry')
+#3 /Users/varunprathap/demoapp/src/Template/LegalEntities/index.ctp(14): Cake\View\View->__get('LoadCountry')
+#4 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/View.php(1005): include('/Users/varunpra...')
+#5 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/View.php(964): Cake\View\View->_evaluate('/Users/varunpra...', Array)
+#6 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/View.php(588): Cake\View\View->_render('/Users/varunpra...')
+#7 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Controller/Controller.php(617): Cake\View\View->render(NULL, NULL)
+#8 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(121): Cake\Controller\Controller->render()
+#9 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(88): Cake\Routing\Dispatcher->_invoke(Object(App\Controller\LegalEntitiesController))
+#10 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#11 {main}
+
+
+2016-08-17 09:45:44 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Css could not be found.
+Exception Attributes: array (
+  'class' => 'Css',
+  'plugin' => NULL,
+  'prefix' => NULL,
+  '_ext' => NULL,
+)
+Request URL: /css/bootstrap.min.css.map
+Stack Trace:
+#0 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-08-17 09:45:47 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Css could not be found.
+Exception Attributes: array (
+  'class' => 'Css',
+  'plugin' => NULL,
+  'prefix' => NULL,
+  '_ext' => NULL,
+)
+Request URL: /css/bootstrap.min.css.map
+Stack Trace:
+#0 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-08-17 09:45:47 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Fonts could not be found.
+Exception Attributes: array (
+  'class' => 'Fonts',
+  'plugin' => NULL,
+  'prefix' => NULL,
+  '_ext' => NULL,
+)
+Request URL: /fonts/glyphicons-halflings-regular.woff2
+Referer URL: http://localhost:8765/css/bootstrap.min.css
+Stack Trace:
+#0 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-08-17 09:45:48 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Fonts could not be found.
+Exception Attributes: array (
+  'class' => 'Fonts',
+  'plugin' => NULL,
+  'prefix' => NULL,
+  '_ext' => NULL,
+)
+Request URL: /fonts/glyphicons-halflings-regular.woff
+Referer URL: http://localhost:8765/css/bootstrap.min.css
+Stack Trace:
+#0 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-08-17 09:45:48 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Fonts could not be found.
+Exception Attributes: array (
+  'class' => 'Fonts',
+  'plugin' => NULL,
+  'prefix' => NULL,
+  '_ext' => NULL,
+)
+Request URL: /fonts/glyphicons-halflings-regular.ttf
+Referer URL: http://localhost:8765/css/bootstrap.min.css
+Stack Trace:
+#0 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-08-17 09:45:48 Error: [Cake\View\Exception\MissingHelperException] Helper class LoadCountryHelper could not be found.
+Exception Attributes: array (
+  'class' => 'LoadCountryHelper',
+  'plugin' => NULL,
+)
+Request URL: /LegalEntities
+Referer URL: http://localhost:8765/Holidays
+Stack Trace:
+#0 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Core/ObjectRegistry.php(91): Cake\View\HelperRegistry->_throwMissingClassError('LoadCountry', NULL)
+#1 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/HelperRegistry.php(66): Cake\Core\ObjectRegistry->load('LoadCountry')
+#2 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/View.php(896): Cake\View\HelperRegistry->__isset('LoadCountry')
+#3 /Users/varunprathap/demoapp/src/Template/LegalEntities/index.ctp(14): Cake\View\View->__get('LoadCountry')
+#4 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/View.php(1005): include('/Users/varunpra...')
+#5 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/View.php(964): Cake\View\View->_evaluate('/Users/varunpra...', Array)
+#6 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/View.php(588): Cake\View\View->_render('/Users/varunpra...')
+#7 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Controller/Controller.php(617): Cake\View\View->render(NULL, NULL)
+#8 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(121): Cake\Controller\Controller->render()
+#9 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(88): Cake\Routing\Dispatcher->_invoke(Object(App\Controller\LegalEntitiesController))
+#10 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#11 {main}
+
+
+2016-08-17 09:46:38 Error: [Cake\View\Exception\MissingHelperException] Helper class LoadCountryHelper could not be found.
+Exception Attributes: array (
+  'class' => 'LoadCountryHelper',
+  'plugin' => NULL,
+)
+Request URL: /LegalEntities
+Referer URL: http://localhost:8765/Holidays
+Stack Trace:
+#0 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Core/ObjectRegistry.php(91): Cake\View\HelperRegistry->_throwMissingClassError('LoadCountry', NULL)
+#1 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/HelperRegistry.php(66): Cake\Core\ObjectRegistry->load('LoadCountry')
+#2 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/View.php(896): Cake\View\HelperRegistry->__isset('LoadCountry')
+#3 /Users/varunprathap/demoapp/src/Template/LegalEntities/index.ctp(14): Cake\View\View->__get('LoadCountry')
+#4 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/View.php(1005): include('/Users/varunpra...')
+#5 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/View.php(964): Cake\View\View->_evaluate('/Users/varunpra...', Array)
+#6 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/View.php(588): Cake\View\View->_render('/Users/varunpra...')
+#7 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Controller/Controller.php(617): Cake\View\View->render(NULL, NULL)
+#8 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(121): Cake\Controller\Controller->render()
+#9 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(88): Cake\Routing\Dispatcher->_invoke(Object(App\Controller\LegalEntitiesController))
+#10 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#11 {main}
+
+
+2016-08-17 09:47:01 Error: [Cake\View\Exception\MissingHelperException] Helper class LoadCountryHelper could not be found.
+Exception Attributes: array (
+  'class' => 'LoadCountryHelper',
+  'plugin' => NULL,
+)
+Request URL: /LegalEntities
+Referer URL: http://localhost:8765/Holidays
+Stack Trace:
+#0 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Core/ObjectRegistry.php(91): Cake\View\HelperRegistry->_throwMissingClassError('LoadCountry', NULL)
+#1 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/HelperRegistry.php(66): Cake\Core\ObjectRegistry->load('LoadCountry')
+#2 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/View.php(896): Cake\View\HelperRegistry->__isset('LoadCountry')
+#3 /Users/varunprathap/demoapp/src/Template/LegalEntities/index.ctp(14): Cake\View\View->__get('LoadCountry')
+#4 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/View.php(1005): include('/Users/varunpra...')
+#5 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/View.php(964): Cake\View\View->_evaluate('/Users/varunpra...', Array)
+#6 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/View.php(588): Cake\View\View->_render('/Users/varunpra...')
+#7 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Controller/Controller.php(617): Cake\View\View->render(NULL, NULL)
+#8 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(121): Cake\Controller\Controller->render()
+#9 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(88): Cake\Routing\Dispatcher->_invoke(Object(App\Controller\LegalEntitiesController))
+#10 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#11 {main}
+
+
+2016-08-17 09:47:17 Error: [Cake\View\Exception\MissingHelperException] Helper class LoadCountryHelper could not be found.
+Exception Attributes: array (
+  'class' => 'LoadCountryHelper',
+  'plugin' => NULL,
+)
+Request URL: /LegalEntities
+Referer URL: http://localhost:8765/Holidays
+Stack Trace:
+#0 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Core/ObjectRegistry.php(91): Cake\View\HelperRegistry->_throwMissingClassError('LoadCountry', NULL)
+#1 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/HelperRegistry.php(66): Cake\Core\ObjectRegistry->load('LoadCountry')
+#2 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/View.php(896): Cake\View\HelperRegistry->__isset('LoadCountry')
+#3 /Users/varunprathap/demoapp/src/Template/LegalEntities/index.ctp(14): Cake\View\View->__get('LoadCountry')
+#4 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/View.php(1005): include('/Users/varunpra...')
+#5 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/View.php(964): Cake\View\View->_evaluate('/Users/varunpra...', Array)
+#6 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/View.php(588): Cake\View\View->_render('/Users/varunpra...')
+#7 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Controller/Controller.php(617): Cake\View\View->render(NULL, NULL)
+#8 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(121): Cake\Controller\Controller->render()
+#9 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(88): Cake\Routing\Dispatcher->_invoke(Object(App\Controller\LegalEntitiesController))
+#10 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#11 {main}
+
+
+2016-08-17 09:48:10 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Css could not be found.
+Exception Attributes: array (
+  'class' => 'Css',
+  'plugin' => NULL,
+  'prefix' => NULL,
+  '_ext' => NULL,
+)
+Request URL: /css/bootstrap.min.css.map
+Stack Trace:
+#0 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-08-17 09:48:13 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Css could not be found.
+Exception Attributes: array (
+  'class' => 'Css',
+  'plugin' => NULL,
+  'prefix' => NULL,
+  '_ext' => NULL,
+)
+Request URL: /css/bootstrap.min.css.map
+Stack Trace:
+#0 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-08-17 09:48:25 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Css could not be found.
+Exception Attributes: array (
+  'class' => 'Css',
+  'plugin' => NULL,
+  'prefix' => NULL,
+  '_ext' => NULL,
+)
+Request URL: /css/bootstrap.min.css.map
+Stack Trace:
+#0 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-08-17 09:48:33 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Css could not be found.
+Exception Attributes: array (
+  'class' => 'Css',
+  'plugin' => NULL,
+  'prefix' => NULL,
+  '_ext' => NULL,
+)
+Request URL: /css/bootstrap.min.css.map
+Stack Trace:
+#0 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-08-17 09:48:36 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Css could not be found.
+Exception Attributes: array (
+  'class' => 'Css',
+  'plugin' => NULL,
+  'prefix' => NULL,
+  '_ext' => NULL,
+)
+Request URL: /css/bootstrap.min.css.map
+Stack Trace:
+#0 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-08-17 09:48:49 Error: [ParseError] syntax error, unexpected '$this' (T_VARIABLE)
+Request URL: /legal-entities/add
+Referer URL: http://localhost:8765/LegalEntities
+Stack Trace:
+#0 /Users/varunprathap/demoapp/vendor/composer/ClassLoader.php(301): Composer\Autoload\includeFile('/Users/varunpra...')
+#1 [internal function]: Composer\Autoload\ClassLoader->loadClass('App\\Controller\\...')
+#2 [internal function]: spl_autoload_call('App\\Controller\\...')
+#3 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Core/App.php(152): class_exists('App\\Controller\\...')
+#4 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Core/App.php(64): Cake\Core\App::_classExistsInBase('\\Controller\\Leg...', 'App')
+#5 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/ControllerFactoryFilter.php(91): Cake\Core\App::className('LegalEntities', 'Controller', 'Controller')
+#6 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/ControllerFactoryFilter.php(51): Cake\Routing\Filter\ControllerFactoryFilter->_getController(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#7 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/DispatcherFilter.php(145): Cake\Routing\Filter\ControllerFactoryFilter->beforeDispatch(Object(Cake\Event\Event))
+#8 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventManager.php(425): Cake\Routing\DispatcherFilter->handle(Object(Cake\Event\Event), Object(Cake\Network\Request), Object(Cake\Network\Response))
+#9 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventManager.php(386): Cake\Event\EventManager->_callListener(Array, Object(Cake\Event\Event))
+#10 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventDispatcherTrait.php(79): Cake\Event\EventManager->dispatch(Object(Cake\Event\Event))
+#11 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(62): Cake\Routing\Dispatcher->dispatchEvent('Dispatcher.befo...', Array)
+#12 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#13 {main}
+
+
+2016-08-17 09:49:22 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Css could not be found.
+Exception Attributes: array (
+  'class' => 'Css',
+  'plugin' => NULL,
+  'prefix' => NULL,
+  '_ext' => NULL,
+)
+Request URL: /css/bootstrap.min.css.map
+Stack Trace:
+#0 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-08-17 09:49:38 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Css could not be found.
+Exception Attributes: array (
+  'class' => 'Css',
+  'plugin' => NULL,
+  'prefix' => NULL,
+  '_ext' => NULL,
+)
+Request URL: /css/bootstrap.min.css.map
+Stack Trace:
+#0 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-08-17 09:50:00 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Css could not be found.
+Exception Attributes: array (
+  'class' => 'Css',
+  'plugin' => NULL,
+  'prefix' => NULL,
+  '_ext' => NULL,
+)
+Request URL: /css/bootstrap.min.css.map
+Stack Trace:
+#0 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-08-17 09:50:10 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Css could not be found.
+Exception Attributes: array (
+  'class' => 'Css',
+  'plugin' => NULL,
+  'prefix' => NULL,
+  '_ext' => NULL,
+)
+Request URL: /css/bootstrap.min.css.map
+Stack Trace:
+#0 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-08-17 09:50:37 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Css could not be found.
+Exception Attributes: array (
+  'class' => 'Css',
+  'plugin' => NULL,
+  'prefix' => NULL,
+  '_ext' => NULL,
+)
+Request URL: /css/bootstrap.min.css.map
+Stack Trace:
+#0 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-08-17 09:51:29 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Css could not be found.
+Exception Attributes: array (
+  'class' => 'Css',
+  'plugin' => NULL,
+  'prefix' => NULL,
+  '_ext' => NULL,
+)
+Request URL: /css/bootstrap.min.css.map
+Stack Trace:
+#0 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-08-17 09:52:27 Warning: Headers already sent in /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Error/Debugger.php:753
+2016-08-17 09:52:28 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Css could not be found.
+Exception Attributes: array (
+  'class' => 'Css',
+  'plugin' => NULL,
+  'prefix' => NULL,
+  '_ext' => NULL,
+)
+Request URL: /css/bootstrap.min.css.map
+Stack Trace:
+#0 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-08-17 10:01:09 Warning: Headers already sent in /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Error/Debugger.php:753
+2016-08-17 10:01:10 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Css could not be found.
+Exception Attributes: array (
+  'class' => 'Css',
+  'plugin' => NULL,
+  'prefix' => NULL,
+  '_ext' => NULL,
+)
+Request URL: /css/bootstrap.min.css.map
+Stack Trace:
+#0 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-08-17 10:01:31 Warning: Headers already sent in /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Error/Debugger.php:753
+2016-08-17 10:01:32 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Css could not be found.
+Exception Attributes: array (
+  'class' => 'Css',
+  'plugin' => NULL,
+  'prefix' => NULL,
+  '_ext' => NULL,
+)
+Request URL: /css/bootstrap.min.css.map
+Stack Trace:
+#0 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-08-17 10:01:51 Warning: Headers already sent in /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Error/Debugger.php:753
+2016-08-17 10:01:51 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Css could not be found.
+Exception Attributes: array (
+  'class' => 'Css',
+  'plugin' => NULL,
+  'prefix' => NULL,
+  '_ext' => NULL,
+)
+Request URL: /css/bootstrap.min.css.map
+Stack Trace:
+#0 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-08-17 10:03:23 Warning: Headers already sent in /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Error/Debugger.php:753
+2016-08-17 10:04:31 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Css could not be found.
+Exception Attributes: array (
+  'class' => 'Css',
+  'plugin' => NULL,
+  'prefix' => NULL,
+  '_ext' => NULL,
+)
+Request URL: /css/bootstrap.min.css.map
+Stack Trace:
+#0 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-08-17 10:06:19 Error: [ParseError] syntax error, unexpected 'echo' (T_ECHO)
+Request URL: /LegalEntities
+Referer URL: http://localhost:8765/legal-entities/add
+Stack Trace:
+#0 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/View.php(964): Cake\View\View->_evaluate('/Users/varunpra...', Array)
+#1 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/View.php(588): Cake\View\View->_render('/Users/varunpra...')
+#2 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Controller/Controller.php(617): Cake\View\View->render(NULL, NULL)
+#3 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(121): Cake\Controller\Controller->render()
+#4 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(88): Cake\Routing\Dispatcher->_invoke(Object(App\Controller\LegalEntitiesController))
+#5 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#6 {main}
+
+
+2016-08-17 10:06:41 Error: [Cake\View\Exception\MissingHelperException] Helper class LoadCountryHelper could not be found.
+Exception Attributes: array (
+  'class' => 'LoadCountryHelper',
+  'plugin' => NULL,
+)
+Request URL: /LegalEntities
+Referer URL: http://localhost:8765/legal-entities/add
+Stack Trace:
+#0 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Core/ObjectRegistry.php(91): Cake\View\HelperRegistry->_throwMissingClassError('LoadCountry', NULL)
+#1 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/HelperRegistry.php(66): Cake\Core\ObjectRegistry->load('LoadCountry')
+#2 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/View.php(896): Cake\View\HelperRegistry->__isset('LoadCountry')
+#3 /Users/varunprathap/demoapp/src/Template/LegalEntities/index.ctp(14): Cake\View\View->__get('LoadCountry')
+#4 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/View.php(1005): include('/Users/varunpra...')
+#5 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/View.php(964): Cake\View\View->_evaluate('/Users/varunpra...', Array)
+#6 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/View.php(588): Cake\View\View->_render('/Users/varunpra...')
+#7 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Controller/Controller.php(617): Cake\View\View->render(NULL, NULL)
+#8 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(121): Cake\Controller\Controller->render()
+#9 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(88): Cake\Routing\Dispatcher->_invoke(Object(App\Controller\LegalEntitiesController))
+#10 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#11 {main}
+
+
+2016-08-17 10:07:14 Error: [Cake\View\Exception\MissingHelperException] Helper class LoadCountryHelper could not be found.
+Exception Attributes: array (
+  'class' => 'LoadCountryHelper',
+  'plugin' => NULL,
+)
+Request URL: /LegalEntities
+Referer URL: http://localhost:8765/legal-entities/add
+Stack Trace:
+#0 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Core/ObjectRegistry.php(91): Cake\View\HelperRegistry->_throwMissingClassError('LoadCountry', NULL)
+#1 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/HelperRegistry.php(66): Cake\Core\ObjectRegistry->load('LoadCountry')
+#2 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/View.php(896): Cake\View\HelperRegistry->__isset('LoadCountry')
+#3 /Users/varunprathap/demoapp/src/Template/LegalEntities/index.ctp(13): Cake\View\View->__get('LoadCountry')
+#4 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/View.php(1005): include('/Users/varunpra...')
+#5 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/View.php(964): Cake\View\View->_evaluate('/Users/varunpra...', Array)
+#6 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/View.php(588): Cake\View\View->_render('/Users/varunpra...')
+#7 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Controller/Controller.php(617): Cake\View\View->render(NULL, NULL)
+#8 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(121): Cake\Controller\Controller->render()
+#9 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(88): Cake\Routing\Dispatcher->_invoke(Object(App\Controller\LegalEntitiesController))
+#10 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#11 {main}
+
+
+2016-08-17 10:54:49 Error: [Cake\View\Exception\MissingHelperException] Helper class LoadCountryHelper could not be found.
+Exception Attributes: array (
+  'class' => 'LoadCountryHelper',
+  'plugin' => NULL,
+)
+Request URL: /LegalEntities
+Referer URL: http://localhost:8765/legal-entities/add
+Stack Trace:
+#0 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Core/ObjectRegistry.php(91): Cake\View\HelperRegistry->_throwMissingClassError('LoadCountry', NULL)
+#1 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/HelperRegistry.php(66): Cake\Core\ObjectRegistry->load('LoadCountry')
+#2 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/View.php(896): Cake\View\HelperRegistry->__isset('LoadCountry')
+#3 /Users/varunprathap/demoapp/src/Template/LegalEntities/index.ctp(13): Cake\View\View->__get('LoadCountry')
+#4 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/View.php(1005): include('/Users/varunpra...')
+#5 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/View.php(964): Cake\View\View->_evaluate('/Users/varunpra...', Array)
+#6 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/View.php(588): Cake\View\View->_render('/Users/varunpra...')
+#7 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Controller/Controller.php(617): Cake\View\View->render(NULL, NULL)
+#8 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(121): Cake\Controller\Controller->render()
+#9 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(88): Cake\Routing\Dispatcher->_invoke(Object(App\Controller\LegalEntitiesController))
+#10 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#11 {main}
+
+
+2016-08-17 11:03:31 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Css could not be found.
+Exception Attributes: array (
+  'class' => 'Css',
+  'plugin' => NULL,
+  'prefix' => NULL,
+  '_ext' => NULL,
+)
+Request URL: /css/bootstrap.min.css.map
+Stack Trace:
+#0 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-08-17 11:05:27 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Css could not be found.
+Exception Attributes: array (
+  'class' => 'Css',
+  'plugin' => NULL,
+  'prefix' => NULL,
+  '_ext' => NULL,
+)
+Request URL: /css/bootstrap.min.css.map
+Stack Trace:
+#0 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-08-17 11:05:30 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Css could not be found.
+Exception Attributes: array (
+  'class' => 'Css',
+  'plugin' => NULL,
+  'prefix' => NULL,
+  '_ext' => NULL,
+)
+Request URL: /css/bootstrap.min.css.map
+Stack Trace:
+#0 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-08-17 11:06:15 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Css could not be found.
+Exception Attributes: array (
+  'class' => 'Css',
+  'plugin' => NULL,
+  'prefix' => NULL,
+  '_ext' => NULL,
+)
+Request URL: /css/bootstrap.min.css.map
+Stack Trace:
+#0 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-08-17 11:07:37 Error: [Error] Call to a member function get_countries() on boolean
+Request URL: /legal-entities/add
+Referer URL: http://localhost:8765/LegalEntities
+Stack Trace:
+#0 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Controller/Controller.php(262): App\Controller\LegalEntitiesController->initialize()
+#1 [internal function]: Cake\Controller\Controller->__construct(Object(Cake\Network\Request), Object(Cake\Network\Response), 'LegalEntities')
+#2 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/ControllerFactoryFilter.php(101): ReflectionClass->newInstance(Object(Cake\Network\Request), Object(Cake\Network\Response), 'LegalEntities')
+#3 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/ControllerFactoryFilter.php(51): Cake\Routing\Filter\ControllerFactoryFilter->_getController(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#4 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/DispatcherFilter.php(145): Cake\Routing\Filter\ControllerFactoryFilter->beforeDispatch(Object(Cake\Event\Event))
+#5 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventManager.php(425): Cake\Routing\DispatcherFilter->handle(Object(Cake\Event\Event), Object(Cake\Network\Request), Object(Cake\Network\Response))
+#6 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventManager.php(386): Cake\Event\EventManager->_callListener(Array, Object(Cake\Event\Event))
+#7 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventDispatcherTrait.php(79): Cake\Event\EventManager->dispatch(Object(Cake\Event\Event))
+#8 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(62): Cake\Routing\Dispatcher->dispatchEvent('Dispatcher.befo...', Array)
+#9 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#10 {main}
+
+
+2016-08-17 11:08:44 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Css could not be found.
+Exception Attributes: array (
+  'class' => 'Css',
+  'plugin' => NULL,
+  'prefix' => NULL,
+  '_ext' => NULL,
+)
+Request URL: /css/bootstrap.min.css.map
+Stack Trace:
+#0 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-08-17 11:09:40 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Css could not be found.
+Exception Attributes: array (
+  'class' => 'Css',
+  'plugin' => NULL,
+  'prefix' => NULL,
+  '_ext' => NULL,
+)
+Request URL: /css/bootstrap.min.css.map
+Stack Trace:
+#0 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-08-17 11:11:59 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Css could not be found.
+Exception Attributes: array (
+  'class' => 'Css',
+  'plugin' => NULL,
+  'prefix' => NULL,
+  '_ext' => NULL,
+)
+Request URL: /css/bootstrap.min.css.map
+Stack Trace:
+#0 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-08-17 11:12:07 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Css could not be found.
+Exception Attributes: array (
+  'class' => 'Css',
+  'plugin' => NULL,
+  'prefix' => NULL,
+  '_ext' => NULL,
+)
+Request URL: /css/bootstrap.min.css.map
+Stack Trace:
+#0 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-08-17 11:13:12 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Css could not be found.
+Exception Attributes: array (
+  'class' => 'Css',
+  'plugin' => NULL,
+  'prefix' => NULL,
+  '_ext' => NULL,
+)
+Request URL: /css/bootstrap.min.css.map
+Stack Trace:
+#0 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-08-17 11:13:14 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Css could not be found.
+Exception Attributes: array (
+  'class' => 'Css',
+  'plugin' => NULL,
+  'prefix' => NULL,
+  '_ext' => NULL,
+)
+Request URL: /css/bootstrap.min.css.map
+Stack Trace:
+#0 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-08-17 11:13:17 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Css could not be found.
+Exception Attributes: array (
+  'class' => 'Css',
+  'plugin' => NULL,
+  'prefix' => NULL,
+  '_ext' => NULL,
+)
+Request URL: /css/bootstrap.min.css.map
+Stack Trace:
+#0 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-08-17 11:30:31 Error: [Error] Class 'App' not found
+Request URL: /legal-entities
+Referer URL: http://localhost:8765/legal-entities/edit/10
+Stack Trace:
+#0 /Users/varunprathap/demoapp/vendor/composer/ClassLoader.php(412): include()
+#1 /Users/varunprathap/demoapp/vendor/composer/ClassLoader.php(301): Composer\Autoload\includeFile('/Users/varunpra...')
+#2 [internal function]: Composer\Autoload\ClassLoader->loadClass('App\\View\\Helper...')
+#3 [internal function]: spl_autoload_call('App\\View\\Helper...')
+#4 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Core/App.php(152): class_exists('App\\View\\Helper...')
+#5 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Core/App.php(64): Cake\Core\App::_classExistsInBase('\\View\\Helper\\Co...', 'App')
+#6 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/HelperRegistry.php(110): Cake\Core\App::className('Country', 'View/Helper', 'Helper')
+#7 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Core/ObjectRegistry.php(88): Cake\View\HelperRegistry->_resolveClassName('Country')
+#8 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/HelperRegistry.php(66): Cake\Core\ObjectRegistry->load('Country')
+#9 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/View.php(896): Cake\View\HelperRegistry->__isset('Country')
+#10 /Users/varunprathap/demoapp/src/Template/LegalEntities/index.ctp(42): Cake\View\View->__get('Country')
+#11 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/View.php(1005): include('/Users/varunpra...')
+#12 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/View.php(964): Cake\View\View->_evaluate('/Users/varunpra...', Array)
+#13 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/View.php(588): Cake\View\View->_render('/Users/varunpra...')
+#14 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Controller/Controller.php(617): Cake\View\View->render(NULL, NULL)
+#15 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(121): Cake\Controller\Controller->render()
+#16 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(88): Cake\Routing\Dispatcher->_invoke(Object(App\Controller\LegalEntitiesController))
+#17 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#18 {main}
+
+
+2016-08-17 11:30:46 Error: Fatal Error (1): Class 'Helper' not found in [/Users/varunprathap/demoapp/src/View/Helper/CountryHelper.php, line 3]
+Request URL: /legal-entities
+Referer URL: http://localhost:8765/legal-entities/edit/10
+Trace:
+Cake\Error\BaseErrorHandler::handleFatalError() - CORE/src/Error/BaseErrorHandler.php, line 216
+Cake\Error\BaseErrorHandler::Cake\Error\{closure}() - CORE/src/Error/BaseErrorHandler.php, line 97
+[main] - [internal], line ??
+
+
+
+2016-08-17 11:30:46 Error: [Cake\Error\FatalErrorException] Class 'Helper' not found
+Request URL: /legal-entities
+Referer URL: http://localhost:8765/legal-entities/edit/10
+Stack Trace:
+#0 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Error/BaseErrorHandler.php(97): Cake\Error\BaseErrorHandler->handleFatalError(1, 'Class 'Helper' ...', '/Users/varunpra...', 3)
+#1 [internal function]: Cake\Error\BaseErrorHandler->Cake\Error\{closure}()
+#2 {main}
+
+
+2016-08-17 11:31:17 Error: [Cake\View\Exception\MissingHelperException] Helper class CountrytHelper could not be found.
+Exception Attributes: array (
+  'class' => 'CountrytHelper',
+  'plugin' => NULL,
+)
+Request URL: /legal-entities
+Referer URL: http://localhost:8765/legal-entities/edit/10
+Stack Trace:
+#0 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Core/ObjectRegistry.php(91): Cake\View\HelperRegistry->_throwMissingClassError('Countryt', NULL)
+#1 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/HelperRegistry.php(66): Cake\Core\ObjectRegistry->load('Countryt')
+#2 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/View.php(896): Cake\View\HelperRegistry->__isset('Countryt')
+#3 /Users/varunprathap/demoapp/src/Template/LegalEntities/index.ctp(42): Cake\View\View->__get('Countryt')
+#4 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/View.php(1005): include('/Users/varunpra...')
+#5 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/View.php(964): Cake\View\View->_evaluate('/Users/varunpra...', Array)
+#6 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/View.php(588): Cake\View\View->_render('/Users/varunpra...')
+#7 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Controller/Controller.php(617): Cake\View\View->render(NULL, NULL)
+#8 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(121): Cake\Controller\Controller->render()
+#9 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(88): Cake\Routing\Dispatcher->_invoke(Object(App\Controller\LegalEntitiesController))
+#10 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#11 {main}
+
+
+2016-08-17 11:44:14 Error: [ParseError] syntax error, unexpected '<'
+Request URL: /legal-entities
+Referer URL: http://localhost:8765/legal-entities/edit/9
+Stack Trace:
+#0 /Users/varunprathap/demoapp/vendor/composer/ClassLoader.php(301): Composer\Autoload\includeFile('/Users/varunpra...')
+#1 [internal function]: Composer\Autoload\ClassLoader->loadClass('App\\View\\Helper...')
+#2 [internal function]: spl_autoload_call('App\\View\\Helper...')
+#3 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Core/App.php(152): class_exists('App\\View\\Helper...')
+#4 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Core/App.php(64): Cake\Core\App::_classExistsInBase('\\View\\Helper\\La...', 'App')
+#5 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/HelperRegistry.php(110): Cake\Core\App::className('Language', 'View/Helper', 'Helper')
+#6 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Core/ObjectRegistry.php(88): Cake\View\HelperRegistry->_resolveClassName('Language')
+#7 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/HelperRegistry.php(66): Cake\Core\ObjectRegistry->load('Language')
+#8 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/View.php(896): Cake\View\HelperRegistry->__isset('Language')
+#9 /Users/varunprathap/demoapp/src/Template/LegalEntities/index.ctp(45): Cake\View\View->__get('Language')
+#10 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/View.php(1005): include('/Users/varunpra...')
+#11 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/View.php(964): Cake\View\View->_evaluate('/Users/varunpra...', Array)
+#12 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/View.php(588): Cake\View\View->_render('/Users/varunpra...')
+#13 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Controller/Controller.php(617): Cake\View\View->render(NULL, NULL)
+#14 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(121): Cake\Controller\Controller->render()
+#15 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(88): Cake\Routing\Dispatcher->_invoke(Object(App\Controller\LegalEntitiesController))
+#16 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#17 {main}
+
+
+2016-08-17 11:45:40 Error: [ParseError] syntax error, unexpected 'echo' (T_ECHO)
+Request URL: /legal-entities/add
+Referer URL: http://localhost:8765/legal-entities
+Stack Trace:
+#0 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/View.php(964): Cake\View\View->_evaluate('/Users/varunpra...', Array)
+#1 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/View.php(588): Cake\View\View->_render('/Users/varunpra...')
+#2 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Controller/Controller.php(617): Cake\View\View->render(NULL, NULL)
+#3 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(121): Cake\Controller\Controller->render()
+#4 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(88): Cake\Routing\Dispatcher->_invoke(Object(App\Controller\LegalEntitiesController))
+#5 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#6 {main}
+
+

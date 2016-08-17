@@ -1,5 +1,5 @@
 <div class="container">
-  <div class="row">
+  <div class="row mt30">
     <div class="col-sm-3">
       <?= $this->element('homeelmt', array('title' => 'My Info')); ?>
     </div>
@@ -14,7 +14,7 @@
     </div>
   </div>
   
-  <div class="row">
+  <div class="row mt30">
     <div class="col-sm-6">
       <?= $this->element('homeelmt', array('title' => 'To Do')); ?>
     </div>
