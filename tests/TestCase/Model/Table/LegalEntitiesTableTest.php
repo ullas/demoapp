@@ -24,7 +24,9 @@ class LegalEntitiesTableTest extends TestCase
      * @var array
      */
     public $fixtures = [
-        'app.legal_entities'
+        'app.legal_entities',
+        'app.locations',
+        'app.pay_groups'
     ];
 
     /**

@@ -44,6 +44,8 @@ class AppController extends Controller
     ]
 ];
 	
+	var $components = array('LoadCountry');
+	
 	public function isAuthorized($user)
 	{
    		 // Admin can access every action
@@ -68,7 +70,7 @@ class AppController extends Controller
     {
     	parent::initialize();
 		
-		$this->set('form_templates', Configure::read('Templates'));
+		// $this->set('form_templates', Configure::read('Templates'));
 		
 		
     	$this->loadComponent('RequestHandler');
@@ -93,6 +95,13 @@ class AppController extends Controller
 
     public function beforeFilter(Event $event)
     {
+    	$hours=['1'=>'1','2'=>'2','3'=>'3','4'=>'4','5'=>'5','6'=>'6'];
+    	$this->set('hours', $hours);
+		
+		
+		// $this->set('countries', $countries);
+		
+		
         // $this->Auth->allow(['index', 'view', 'display','add']);
     }
 

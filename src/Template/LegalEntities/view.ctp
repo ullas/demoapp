@@ -5,6 +5,10 @@
         <li><?= $this->Form->postLink(__('Delete Legal Entity'), ['action' => 'delete', $legalEntity->id], ['confirm' => __('Are you sure you want to delete # {0}?', $legalEntity->id)]) ?> </li>
         <li><?= $this->Html->link(__('List Legal Entities'), ['action' => 'index']) ?> </li>
         <li><?= $this->Html->link(__('New Legal Entity'), ['action' => 'add']) ?> </li>
+        <li><?= $this->Html->link(__('List Locations'), ['controller' => 'Locations', 'action' => 'index']) ?> </li>
+        <li><?= $this->Html->link(__('New Location'), ['controller' => 'Locations', 'action' => 'add']) ?> </li>
+        <li><?= $this->Html->link(__('List Pay Groups'), ['controller' => 'PayGroups', 'action' => 'index']) ?> </li>
+        <li><?= $this->Html->link(__('New Pay Group'), ['controller' => 'PayGroups', 'action' => 'add']) ?> </li>
     </ul>
 </nav>
 <div class="legalEntities view large-9 medium-8 columns content">
@@ -19,10 +23,6 @@
             <td><?= h($legalEntity->description) ?></td>
         </tr>
         <tr>
-            <th><?= __('Default Pay Group') ?></th>
-            <td><?= h($legalEntity->default_pay_group) ?></td>
-        </tr>
-        <tr>
             <th><?= __('Country Of Registration') ?></th>
             <td><?= h($legalEntity->country_of_registration) ?></td>
         </tr>
@@ -35,6 +35,14 @@
             <td><?= h($legalEntity->external_code) ?></td>
         </tr>
         <tr>
+            <th><?= __('Location') ?></th>
+            <td><?= $legalEntity->has('location') ? $this->Html->link($legalEntity->location->name, ['controller' => 'Locations', 'action' => 'view', $legalEntity->location->id]) : '' ?></td>
+        </tr>
+        <tr>
+            <th><?= __('Pay Group') ?></th>
+            <td><?= $legalEntity->has('pay_group') ? $this->Html->link($legalEntity->pay_group->name, ['controller' => 'PayGroups', 'action' => 'view', $legalEntity->pay_group->id]) : '' ?></td>
+        </tr>
+        <tr>
             <th><?= __('Id') ?></th>
             <td><?= $this->Number->format($legalEntity->id) ?></td>
         </tr>
@@ -45,10 +53,6 @@
         <tr>
             <th><?= __('Currency') ?></th>
             <td><?= $this->Number->format($legalEntity->currency) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Location Id') ?></th>
-            <td><?= $this->Number->format($legalEntity->location_id) ?></td>
         </tr>
         <tr>
             <th><?= __('Effective Start Date') ?></th>

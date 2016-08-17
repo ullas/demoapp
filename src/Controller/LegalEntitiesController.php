@@ -10,7 +10,9 @@ use App\Controller\AppController;
  */
 class LegalEntitiesController extends AppController
 {
-
+	public $components = array('LoadCountry');
+	
+	
     /**
      * Index method
      *
@@ -19,12 +21,15 @@ class LegalEntitiesController extends AppController
     public function index()
     {
         $this->paginate = [
-            'contain' => ['Locations']
+            'contain' => ['Locations', 'PayGroups']
         ];
         $legalEntities = $this->paginate($this->LegalEntities);
 
         $this->set(compact('legalEntities'));
         $this->set('_serialize', ['legalEntities']);
+		
+		//load countries array 
+		$this->set('countryname',$this->LoadCountry->get_country_name('AF'));
     }
 
     /**
@@ -37,7 +42,7 @@ class LegalEntitiesController extends AppController
     public function view($id = null)
     {
         $legalEntity = $this->LegalEntities->get($id, [
-            'contain' => ['Locations']
+            'contain' => ['Locations', 'PayGroups']
         ]);
 
         $this->set('legalEntity', $legalEntity);
@@ -63,8 +68,11 @@ class LegalEntitiesController extends AppController
             }
         }
         $locations = $this->LegalEntities->Locations->find('list', ['limit' => 200]);
-        $this->set(compact('legalEntity', 'locations'));
+        $payGroups = $this->LegalEntities->PayGroups->find('list', ['limit' => 200]);
+        $this->set(compact('legalEntity', 'locations', 'payGroups'));
         $this->set('_serialize', ['legalEntity']);
+		//load countries array 
+		$this->set('countries',$this->LoadCountry->get_countries());
     }
 
     /**
@@ -90,8 +98,12 @@ class LegalEntitiesController extends AppController
             }
         }
         $locations = $this->LegalEntities->Locations->find('list', ['limit' => 200]);
-        $this->set(compact('legalEntity', 'locations'));
+        $payGroups = $this->LegalEntities->PayGroups->find('list', ['limit' => 200]);
+        $this->set(compact('legalEntity', 'locations', 'payGroups'));
         $this->set('_serialize', ['legalEntity']);
+		
+		//load countries array 
+		$this->set('countries',$this->LoadCountry->get_countries());
     }
 
     /**
