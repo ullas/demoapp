@@ -1,0 +1,51 @@
+2016-08-04 09:51:48 Error: [Cake\Database\Exception] Cannot describe calendar_assignments. It has 0 columns.
+Stack Trace:
+#0 /Users/varunprathap/hrm/vendor/cakephp/cakephp/src/Database/Schema/CachedCollection.php(64): Cake\Database\Schema\Collection->describe('calendar_assign...', Array)
+#1 /Users/varunprathap/hrm/vendor/cakephp/cakephp/src/ORM/Table.php(434): Cake\Database\Schema\CachedCollection->describe('calendar_assign...')
+#2 /Users/varunprathap/hrm/vendor/cakephp/cakephp/src/ORM/Table.php(512): Cake\ORM\Table->schema()
+#3 /Users/varunprathap/hrm/vendor/cakephp/bake/src/Shell/Task/ModelTask.php(210): Cake\ORM\Table->primaryKey()
+#4 /Users/varunprathap/hrm/vendor/cakephp/bake/src/Shell/Task/ModelTask.php(127): Bake\Shell\Task\ModelTask->getAssociations(Object(Cake\ORM\Table))
+#5 /Users/varunprathap/hrm/vendor/cakephp/bake/src/Shell/Task/ModelTask.php(110): Bake\Shell\Task\ModelTask->getTableContext(Object(Cake\ORM\Table), 'calendar_assign...', 'CalendarAssignm...')
+#6 /Users/varunprathap/hrm/vendor/cakephp/bake/src/Shell/Task/ModelTask.php(97): Bake\Shell\Task\ModelTask->bake('CalendarAssignm...')
+#7 /Users/varunprathap/hrm/vendor/cakephp/bake/src/Shell/BakeShell.php(257): Bake\Shell\Task\ModelTask->main('CalendarAssignm...')
+#8 /Users/varunprathap/hrm/vendor/cakephp/cakephp/src/Collection/CollectionTrait.php(51): Bake\Shell\BakeShell->Bake\Shell\{closure}('CalendarAssignm...', 0)
+#9 /Users/varunprathap/hrm/vendor/cakephp/bake/src/Shell/BakeShell.php(260): Cake\Collection\Collection->each(Object(Closure))
+#10 [internal function]: Bake\Shell\BakeShell->all('calendar_assign...')
+#11 /Users/varunprathap/hrm/vendor/cakephp/cakephp/src/Console/Shell.php(452): call_user_func_array(Array, Array)
+#12 /Users/varunprathap/hrm/vendor/cakephp/cakephp/src/Console/ShellDispatcher.php(227): Cake\Console\Shell->runCommand(Array, true, Array)
+#13 /Users/varunprathap/hrm/vendor/cakephp/cakephp/src/Console/ShellDispatcher.php(182): Cake\Console\ShellDispatcher->_dispatch(Array)
+#14 /Users/varunprathap/hrm/vendor/cakephp/cakephp/src/Console/ShellDispatcher.php(128): Cake\Console\ShellDispatcher->dispatch(Array)
+#15 /Users/varunprathap/hrm/bin/cake.php(33): Cake\Console\ShellDispatcher::run(Array)
+#16 {main}
+
+
+2016-08-16 08:13:44 Error: [Cake\Core\Exception\MissingPluginException] Plugin Bootstrap could not be found.
+Exception Attributes: array (
+  'plugin' => 'Bootstrap',
+)
+Stack Trace:
+#0 /Users/varunprathap/hrm/config/bootstrap.php(193): Cake\Core\Plugin::load('Bootstrap')
+#1 /Users/varunprathap/hrm/bin/cake.php(31): include('/Users/varunpra...')
+#2 {main}
+
+
+2016-08-16 09:19:40 Error: [Cake\Core\Exception\MissingPluginException] Plugin Bootstrap could not be found.
+Exception Attributes: array (
+  'plugin' => 'Bootstrap',
+)
+Stack Trace:
+#0 /Users/varunprathap/hrm/config/bootstrap.php(193): Cake\Core\Plugin::load('Bootstrap')
+#1 /Users/varunprathap/hrm/bin/cake.php(31): include('/Users/varunpra...')
+#2 {main}
+
+
+2016-08-16 09:23:38 Error: [Cake\Core\Exception\MissingPluginException] Plugin Bootstrap could not be found.
+Exception Attributes: array (
+  'plugin' => 'Bootstrap',
+)
+Stack Trace:
+#0 /Users/varunprathap/hrm/config/bootstrap.php(193): Cake\Core\Plugin::load('Bootstrap')
+#1 /Users/varunprathap/hrm/bin/cake.php(31): include('/Users/varunpra...')
+#2 {main}
+
+
