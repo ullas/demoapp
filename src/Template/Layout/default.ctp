@@ -36,7 +36,6 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
      <?= $this->Html->css('prettify.css') ?>
      <?= $this->Html->css('custom.css') ?>
      <?= $this->Html->css('jquery.jOrgChart.css') ?>
-     <?= $this->Html->css('bootstrap.min.css') ?>
      <?= $this->Html->css('menu.css') ?>
      <?= $this->Html->css('bootstrap-year-calendar.min.css') ?>
      

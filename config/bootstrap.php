@@ -192,7 +192,9 @@ Request::addDetector('tablet', function ($request) {
  */
 
 Plugin::load('Migrations');
-Plugin::load('Bootstrap');
+Plugin::load('AdminLTE', ['bootstrap' => true, 'routes' => true]);
+// Plugin::load('Bootstrap');
+// Plugin::load('AdminLTE', ['bootstrap' => true, 'routes' => true]);
 
 // Only try to load DebugKit in development mode
 // Debug Kit should not be installed on a production system
@@ -221,3 +223,17 @@ Type::build('date')
     ->useImmutable();
 Type::build('datetime')
     ->useImmutable();
+	
+	
+	Configure::write('Theme', [
+    'title' => 'AdminLTE',
+    'logo' => [
+        'mini' => '<b>A</b>LT',
+        'large' => '<b>Admin</b>LTE'
+    ],
+    'login' => [
+        'show_remember' => true,
+        'show_register' => true,
+        'show_social' => true
+    ]
+]);

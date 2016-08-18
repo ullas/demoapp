@@ -18,9 +18,9 @@
             echo $this->Form->input('effective_status');
             echo $this->Form->input('effective_start_date', ['empty' => true]);
             echo $this->Form->input('effective_end_date', ['empty' => true]);
-            echo $this->Form->input('country_of_registration',['options' => $countries, 'empty' => true]);
+            echo $this->Form->input('country_of_registration',['options' => $this->Country->get_countries(), 'empty' => true]);
             echo $this->Form->input('standard_weekly_hours',['options' => $hours, 'empty' => true]);
-            echo $this->Form->input('currency');
+            echo $this->Form->input('currency',['options' => $this->Currency->get_currencies(), 'empty' => true]);
             echo $this->Form->input('official_language',['options' => $this->Language->get_languages(), 'empty' => true]);
             echo $this->Form->input('external_code');
             echo $this->Form->input('location_id', ['options' => $locations, 'empty' => true]);

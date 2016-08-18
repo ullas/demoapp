@@ -228,7 +228,7 @@ return [
             //'port' => 'non_standard_port_number',
             'username' => 'postgres',
             'password' => 'password',
-            'database' => 'hrdb',
+            'database' => 'HRDB',
             'encoding' => 'utf8',
             'timezone' => 'UTC',
             'flags' => [],

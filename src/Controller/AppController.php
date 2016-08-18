@@ -29,21 +29,21 @@ use Cake\Core\Configure;
 class AppController extends Controller
 {
 	
-	public $helpers = [
-    'Html' => [
-        'className' => 'Bootstrap.BootstrapHtml'
-    ],
-    'Form' => [
-        'className' => 'Bootstrap.BootstrapForm'
-    ],
-    'Paginator' => [
-        'className' => 'Bootstrap.BootstrapPaginator'
-    ],
-    'Modal' => [
-        'className' => 'Bootstrap.BootstrapModal'
-    ]
-];
-	
+	// public $helpers = [
+    // 'Html' => [
+        // 'className' => 'Bootstrap.BootstrapHtml'
+    // ],
+    // 'Form' => [
+        // 'className' => 'Bootstrap.BootstrapForm'
+    // ],
+    // 'Paginator' => [
+        // 'className' => 'Bootstrap.BootstrapPaginator'
+    // ],
+    // 'Modal' => [
+        // 'className' => 'Bootstrap.BootstrapModal'
+    // ]
+// ];
+// 	
 	var $components = array('LoadCountry');
 	
 	public function isAuthorized($user)
@@ -113,6 +113,8 @@ class AppController extends Controller
      */
     public function beforeRender(Event $event)
     {
+    	$this->viewBuilder()->theme('AdminLTE');
+				
         if (!array_key_exists('_serialize', $this->viewVars) &&
             in_array($this->response->type(), ['application/json', 'application/xml'])
         ) {

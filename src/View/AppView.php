@@ -37,7 +37,7 @@ class AppView extends View
      */
     public function initialize()
     {
-    	
+    	$this->loadHelper('Form', ['className' => 'AdminLTE.Form']);
 		// $temp=Configure::read('Templates');
 		// $this->Form->templates($temp['shortForm']); 
 		 

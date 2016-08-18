@@ -32172,3 +32172,537 @@ Stack Trace:
 #6 {main}
 
 
+2016-08-18 04:05:46 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Fonts could not be found.
+Exception Attributes: array (
+  'class' => 'Fonts',
+  'plugin' => NULL,
+  'prefix' => NULL,
+  '_ext' => NULL,
+)
+Request URL: /fonts/glyphicons-halflings-regular.woff2
+Referer URL: http://localhost:8765/css/bootstrap.min.css
+Stack Trace:
+#0 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-08-18 04:05:46 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Fonts could not be found.
+Exception Attributes: array (
+  'class' => 'Fonts',
+  'plugin' => NULL,
+  'prefix' => NULL,
+  '_ext' => NULL,
+)
+Request URL: /fonts/glyphicons-halflings-regular.woff
+Referer URL: http://localhost:8765/css/bootstrap.min.css
+Stack Trace:
+#0 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-08-18 04:05:46 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Fonts could not be found.
+Exception Attributes: array (
+  'class' => 'Fonts',
+  'plugin' => NULL,
+  'prefix' => NULL,
+  '_ext' => NULL,
+)
+Request URL: /fonts/glyphicons-halflings-regular.ttf
+Referer URL: http://localhost:8765/css/bootstrap.min.css
+Stack Trace:
+#0 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-08-18 04:12:03 Error: [ParseError] syntax error, unexpected '$languages' (T_VARIABLE), expecting function (T_FUNCTION)
+Request URL: /legal-entities/add
+Referer URL: http://localhost:8765/LegalEntities
+Stack Trace:
+#0 /Users/varunprathap/demoapp/vendor/composer/ClassLoader.php(301): Composer\Autoload\includeFile('/Users/varunpra...')
+#1 [internal function]: Composer\Autoload\ClassLoader->loadClass('App\\View\\Helper...')
+#2 [internal function]: spl_autoload_call('App\\View\\Helper...')
+#3 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Core/App.php(152): class_exists('App\\View\\Helper...')
+#4 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Core/App.php(64): Cake\Core\App::_classExistsInBase('\\View\\Helper\\La...', 'App')
+#5 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/HelperRegistry.php(110): Cake\Core\App::className('Language', 'View/Helper', 'Helper')
+#6 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Core/ObjectRegistry.php(88): Cake\View\HelperRegistry->_resolveClassName('Language')
+#7 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/HelperRegistry.php(66): Cake\Core\ObjectRegistry->load('Language')
+#8 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/View.php(896): Cake\View\HelperRegistry->__isset('Language')
+#9 /Users/varunprathap/demoapp/src/Template/LegalEntities/add.ctp(24): Cake\View\View->__get('Language')
+#10 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/View.php(1005): include('/Users/varunpra...')
+#11 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/View.php(964): Cake\View\View->_evaluate('/Users/varunpra...', Array)
+#12 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/View.php(588): Cake\View\View->_render('/Users/varunpra...')
+#13 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Controller/Controller.php(617): Cake\View\View->render(NULL, NULL)
+#14 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(121): Cake\Controller\Controller->render()
+#15 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(88): Cake\Routing\Dispatcher->_invoke(Object(App\Controller\LegalEntitiesController))
+#16 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#17 {main}
+
+
+2016-08-18 04:32:02 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Css could not be found.
+Exception Attributes: array (
+  'class' => 'Css',
+  'plugin' => NULL,
+  'prefix' => NULL,
+  '_ext' => NULL,
+)
+Request URL: /css/bootstrap.min.css.map
+Stack Trace:
+#0 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#1 {main}
+
+
+2016-08-18 07:14:11 Warning: Headers already sent in /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/AssetFilter.php:149
+2016-08-18 07:14:17 Error: [PDOException] SQLSTATE[08006] [7] FATAL:  database "hrdb" does not exist
+Request URL: /
+Referer URL: http://localhost:8765/
+Stack Trace:
+#0 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Database/Driver/PDODriverTrait.php(47): PDO->__construct('pgsql:host=loca...', 'postgres', 'password', Array)
+#1 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Database/Driver/Postgres.php(68): Cake\Database\Driver\Postgres->_connect('pgsql:host=loca...', Array)
+#2 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Database/Schema/BaseSchema.php(45): Cake\Database\Driver\Postgres->connect()
+#3 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Database/Dialect/PostgresDialectTrait.php(168): Cake\Database\Schema\BaseSchema->__construct(Object(Cake\Database\Driver\Postgres))
+#4 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Database/Schema/Collection.php(52): Cake\Database\Driver\Postgres->schemaDialect()
+#5 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Database/Schema/CachedCollection.php(43): Cake\Database\Schema\Collection->__construct(Object(Cake\Database\Connection))
+#6 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Database/Connection.php(322): Cake\Database\Schema\CachedCollection->__construct(Object(Cake\Database\Connection), true)
+#7 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/ORM/Table.php(433): Cake\Database\Connection->schemaCollection()
+#8 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/ORM/Query.php(211): Cake\ORM\Table->schema()
+#9 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/ORM/Query.php(169): Cake\ORM\Query->addDefaultTypes(Object(App\Model\Table\UsersTable))
+#10 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/ORM/Table.php(1312): Cake\ORM\Query->__construct(Object(Cake\Database\Connection), Object(App\Model\Table\UsersTable))
+#11 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/ORM/Table.php(958): Cake\ORM\Table->query()
+#12 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Auth/BaseAuthenticate.php(160): Cake\ORM\Table->find('all', Array)
+#13 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Auth/BaseAuthenticate.php(108): Cake\Auth\BaseAuthenticate->_query('test')
+#14 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Auth/FormAuthenticate.php(78): Cake\Auth\BaseAuthenticate->_findUser('test', '123')
+#15 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Controller/Component/AuthComponent.php(786): Cake\Auth\FormAuthenticate->authenticate(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#16 /Users/varunprathap/demoapp/src/Controller/UsersController.php(26): Cake\Controller\Component\AuthComponent->identify()
+#17 [internal function]: App\Controller\UsersController->login()
+#18 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Controller/Controller.php(435): call_user_func_array(Array, Array)
+#19 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(115): Cake\Controller\Controller->invokeAction()
+#20 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(88): Cake\Routing\Dispatcher->_invoke(Object(App\Controller\UsersController))
+#21 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#22 {main}
+
+
+2016-08-18 07:36:33 Error: Fatal Error (256): [Cake\View\Exception\MissingHelperException] Helper class FormHelper could not be found.
+#0 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Core/ObjectRegistry.php(91): Cake\View\HelperRegistry->_throwMissingClassError('Form', 'AdminLTE')
+#1 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/View.php(1039): Cake\Core\ObjectRegistry->load('Form', Array)
+#2 /Users/varunprathap/demoapp/src/View/AppView.php(40): Cake\View\View->loadHelper('Form', Array)
+#3 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/View.php(344): App\View\AppView->initialize()
+#4 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/ViewBuilder.php(363): Cake\View\View->__construct(Object(Cake\Network\Request), Object(Cake\Network\Response), Object(Cake\Event\EventManager), Array)
+#5 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/ViewVarsTrait.php(119): Cake\View\ViewBuilder->build(Array, Object(Cake\Network\Request), Object(Cake\Network\Response), Object(Cake\Event\EventManager))
+#6 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Error/ExceptionRenderer.php(364): Cake\Controller\Controller->createView()
+#7 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Error/ExceptionRenderer.php(345): Cake\Error\ExceptionRenderer->_outputMessageSafe('error500')
+#8 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Error/ExceptionRenderer.php(194): Cake\Error\ExceptionRenderer->_outputMessage('missingPlugin')
+#9 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Error/ErrorHandler.php(144): Cake\Error\ExceptionRenderer->render()
+#10 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Error/BaseErrorHandler.php(180): Cake\Error\ErrorHandler->_displayException(Object(Cake\Core\Exception\MissingPluginException))
+#11 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Error/BaseErrorHandler.php(164): Cake\Error\BaseErrorHandler->handleException(Object(Cake\Core\Exception\MissingPluginException))
+#12 [internal function]: Cake\Error\BaseErrorHandler->wrapAndHandleException(Object(Cake\Core\Exception\MissingPluginException))
+#13 {main} in [/Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Error/ErrorHandler.php, line 156]
+
+
+2016-08-18 07:36:33 Error: Fatal Error (256): [Cake\View\Exception\MissingHelperException] Helper class FormHelper could not be found.
+#0 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Core/ObjectRegistry.php(91): Cake\View\HelperRegistry->_throwMissingClassError('Form', 'AdminLTE')
+#1 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/View.php(1039): Cake\Core\ObjectRegistry->load('Form', Array)
+#2 /Users/varunprathap/demoapp/src/View/AppView.php(40): Cake\View\View->loadHelper('Form', Array)
+#3 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/View.php(344): App\View\AppView->initialize()
+#4 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/ViewBuilder.php(363): Cake\View\View->__construct(Object(Cake\Network\Request), Object(Cake\Network\Response), Object(Cake\Event\EventManager), Array)
+#5 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/ViewVarsTrait.php(119): Cake\View\ViewBuilder->build(Array, Object(Cake\Network\Request), Object(Cake\Network\Response), Object(Cake\Event\EventManager))
+#6 /Users/varu in [/Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Error/ErrorHandler.php, line 156]
+
+
+2016-08-18 07:52:30 Error: Fatal Error (256): [Cake\View\Exception\MissingHelperException] Helper class FormHelper could not be found.
+#0 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Core/ObjectRegistry.php(91): Cake\View\HelperRegistry->_throwMissingClassError('Form', 'AdminLTE')
+#1 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/View.php(1039): Cake\Core\ObjectRegistry->load('Form', Array)
+#2 /Users/varunprathap/demoapp/src/View/AppView.php(40): Cake\View\View->loadHelper('Form', Array)
+#3 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/View.php(344): App\View\AppView->initialize()
+#4 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/ViewBuilder.php(363): Cake\View\View->__construct(Object(Cake\Network\Request), Object(Cake\Network\Response), Object(Cake\Event\EventManager), Array)
+#5 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/ViewVarsTrait.php(119): Cake\View\ViewBuilder->build(Array, Object(Cake\Network\Request), Object(Cake\Network\Response), Object(Cake\Event\EventManager))
+#6 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Error/ExceptionRenderer.php(364): Cake\Controller\Controller->createView()
+#7 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Error/ExceptionRenderer.php(345): Cake\Error\ExceptionRenderer->_outputMessageSafe('error500')
+#8 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Error/ExceptionRenderer.php(194): Cake\Error\ExceptionRenderer->_outputMessage('missingPlugin')
+#9 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Error/ErrorHandler.php(144): Cake\Error\ExceptionRenderer->render()
+#10 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Error/BaseErrorHandler.php(180): Cake\Error\ErrorHandler->_displayException(Object(Cake\Core\Exception\MissingPluginException))
+#11 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Error/BaseErrorHandler.php(164): Cake\Error\BaseErrorHandler->handleException(Object(Cake\Core\Exception\MissingPluginException))
+#12 [internal function]: Cake\Error\BaseErrorHandler->wrapAndHandleException(Object(Cake\Core\Exception\MissingPluginException))
+#13 {main} in [/Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Error/ErrorHandler.php, line 156]
+
+
+2016-08-18 07:52:30 Error: Fatal Error (256): [Cake\View\Exception\MissingHelperException] Helper class FormHelper could not be found.
+#0 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Core/ObjectRegistry.php(91): Cake\View\HelperRegistry->_throwMissingClassError('Form', 'AdminLTE')
+#1 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/View.php(1039): Cake\Core\ObjectRegistry->load('Form', Array)
+#2 /Users/varunprathap/demoapp/src/View/AppView.php(40): Cake\View\View->loadHelper('Form', Array)
+#3 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/View.php(344): App\View\AppView->initialize()
+#4 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/ViewBuilder.php(363): Cake\View\View->__construct(Object(Cake\Network\Request), Object(Cake\Network\Response), Object(Cake\Event\EventManager), Array)
+#5 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/ViewVarsTrait.php(119): Cake\View\ViewBuilder->build(Array, Object(Cake\Network\Request), Object(Cake\Network\Response), Object(Cake\Event\EventManager))
+#6 /Users/varu in [/Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Error/ErrorHandler.php, line 156]
+
+
+2016-08-18 07:56:08 Error: Fatal Error (256): [Cake\View\Exception\MissingHelperException] Helper class FormHelper could not be found.
+#0 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Core/ObjectRegistry.php(91): Cake\View\HelperRegistry->_throwMissingClassError('Form', 'AdminLTE')
+#1 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/View.php(1039): Cake\Core\ObjectRegistry->load('Form', Array)
+#2 /Users/varunprathap/demoapp/src/View/AppView.php(40): Cake\View\View->loadHelper('Form', Array)
+#3 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/View.php(344): App\View\AppView->initialize()
+#4 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/ViewBuilder.php(363): Cake\View\View->__construct(Object(Cake\Network\Request), Object(Cake\Network\Response), Object(Cake\Event\EventManager), Array)
+#5 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/ViewVarsTrait.php(119): Cake\View\ViewBuilder->build(Array, Object(Cake\Network\Request), Object(Cake\Network\Response), Object(Cake\Event\EventManager))
+#6 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Error/ExceptionRenderer.php(364): Cake\Controller\Controller->createView()
+#7 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Error/ExceptionRenderer.php(345): Cake\Error\ExceptionRenderer->_outputMessageSafe('error500')
+#8 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Error/ExceptionRenderer.php(194): Cake\Error\ExceptionRenderer->_outputMessage('missingHelper')
+#9 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Error/ErrorHandler.php(144): Cake\Error\ExceptionRenderer->render()
+#10 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Error/BaseErrorHandler.php(180): Cake\Error\ErrorHandler->_displayException(Object(Cake\View\Exception\MissingHelperException))
+#11 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Error/BaseErrorHandler.php(164): Cake\Error\BaseErrorHandler->handleException(Object(Cake\View\Exception\MissingHelperException))
+#12 [internal function]: Cake\Error\BaseErrorHandler->wrapAndHandleException(Object(Cake\View\Exception\MissingHelperException))
+#13 {main} in [/Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Error/ErrorHandler.php, line 156]
+
+
+2016-08-18 07:56:08 Error: Fatal Error (256): [Cake\View\Exception\MissingHelperException] Helper class FormHelper could not be found.
+#0 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Core/ObjectRegistry.php(91): Cake\View\HelperRegistry->_throwMissingClassError('Form', 'AdminLTE')
+#1 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/View.php(1039): Cake\Core\ObjectRegistry->load('Form', Array)
+#2 /Users/varunprathap/demoapp/src/View/AppView.php(40): Cake\View\View->loadHelper('Form', Array)
+#3 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/View.php(344): App\View\AppView->initialize()
+#4 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/ViewBuilder.php(363): Cake\View\View->__construct(Object(Cake\Network\Request), Object(Cake\Network\Response), Object(Cake\Event\EventManager), Array)
+#5 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/ViewVarsTrait.php(119): Cake\View\ViewBuilder->build(Array, Object(Cake\Network\Request), Object(Cake\Network\Response), Object(Cake\Event\EventManager))
+#6 /Users/varu in [/Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Error/ErrorHandler.php, line 156]
+
+
+2016-08-18 07:58:18 Error: Fatal Error (256): [Cake\View\Exception\MissingHelperException] Helper class FormHelper could not be found.
+#0 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Core/ObjectRegistry.php(91): Cake\View\HelperRegistry->_throwMissingClassError('Form', 'AdminLTE')
+#1 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/View.php(1039): Cake\Core\ObjectRegistry->load('Form', Array)
+#2 /Users/varunprathap/demoapp/src/View/AppView.php(40): Cake\View\View->loadHelper('Form', Array)
+#3 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/View.php(344): App\View\AppView->initialize()
+#4 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/ViewBuilder.php(363): Cake\View\View->__construct(Object(Cake\Network\Request), Object(Cake\Network\Response), Object(Cake\Event\EventManager), Array)
+#5 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/ViewVarsTrait.php(119): Cake\View\ViewBuilder->build(Array, Object(Cake\Network\Request), Object(Cake\Network\Response), Object(Cake\Event\EventManager))
+#6 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Error/ExceptionRenderer.php(364): Cake\Controller\Controller->createView()
+#7 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Error/ExceptionRenderer.php(345): Cake\Error\ExceptionRenderer->_outputMessageSafe('error500')
+#8 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Error/ExceptionRenderer.php(194): Cake\Error\ExceptionRenderer->_outputMessage('missingPlugin')
+#9 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Error/ErrorHandler.php(144): Cake\Error\ExceptionRenderer->render()
+#10 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Error/BaseErrorHandler.php(180): Cake\Error\ErrorHandler->_displayException(Object(Cake\Core\Exception\MissingPluginException))
+#11 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Error/BaseErrorHandler.php(164): Cake\Error\BaseErrorHandler->handleException(Object(Cake\Core\Exception\MissingPluginException))
+#12 [internal function]: Cake\Error\BaseErrorHandler->wrapAndHandleException(Object(Cake\Core\Exception\MissingPluginException))
+#13 {main} in [/Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Error/ErrorHandler.php, line 156]
+
+
+2016-08-18 07:58:18 Error: Fatal Error (256): [Cake\View\Exception\MissingHelperException] Helper class FormHelper could not be found.
+#0 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Core/ObjectRegistry.php(91): Cake\View\HelperRegistry->_throwMissingClassError('Form', 'AdminLTE')
+#1 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/View.php(1039): Cake\Core\ObjectRegistry->load('Form', Array)
+#2 /Users/varunprathap/demoapp/src/View/AppView.php(40): Cake\View\View->loadHelper('Form', Array)
+#3 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/View.php(344): App\View\AppView->initialize()
+#4 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/ViewBuilder.php(363): Cake\View\View->__construct(Object(Cake\Network\Request), Object(Cake\Network\Response), Object(Cake\Event\EventManager), Array)
+#5 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/ViewVarsTrait.php(119): Cake\View\ViewBuilder->build(Array, Object(Cake\Network\Request), Object(Cake\Network\Response), Object(Cake\Event\EventManager))
+#6 /Users/varu in [/Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Error/ErrorHandler.php, line 156]
+
+
+2016-08-18 07:58:19 Error: Fatal Error (256): [Cake\View\Exception\MissingHelperException] Helper class FormHelper could not be found.
+#0 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Core/ObjectRegistry.php(91): Cake\View\HelperRegistry->_throwMissingClassError('Form', 'AdminLTE')
+#1 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/View.php(1039): Cake\Core\ObjectRegistry->load('Form', Array)
+#2 /Users/varunprathap/demoapp/src/View/AppView.php(40): Cake\View\View->loadHelper('Form', Array)
+#3 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/View.php(344): App\View\AppView->initialize()
+#4 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/ViewBuilder.php(363): Cake\View\View->__construct(Object(Cake\Network\Request), Object(Cake\Network\Response), Object(Cake\Event\EventManager), Array)
+#5 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/ViewVarsTrait.php(119): Cake\View\ViewBuilder->build(Array, Object(Cake\Network\Request), Object(Cake\Network\Response), Object(Cake\Event\EventManager))
+#6 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Error/ExceptionRenderer.php(364): Cake\Controller\Controller->createView()
+#7 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Error/ExceptionRenderer.php(345): Cake\Error\ExceptionRenderer->_outputMessageSafe('error500')
+#8 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Error/ExceptionRenderer.php(194): Cake\Error\ExceptionRenderer->_outputMessage('missingPlugin')
+#9 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Error/ErrorHandler.php(144): Cake\Error\ExceptionRenderer->render()
+#10 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Error/BaseErrorHandler.php(180): Cake\Error\ErrorHandler->_displayException(Object(Cake\Core\Exception\MissingPluginException))
+#11 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Error/BaseErrorHandler.php(164): Cake\Error\BaseErrorHandler->handleException(Object(Cake\Core\Exception\MissingPluginException))
+#12 [internal function]: Cake\Error\BaseErrorHandler->wrapAndHandleException(Object(Cake\Core\Exception\MissingPluginException))
+#13 {main} in [/Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Error/ErrorHandler.php, line 156]
+
+
+2016-08-18 07:58:19 Error: Fatal Error (256): [Cake\View\Exception\MissingHelperException] Helper class FormHelper could not be found.
+#0 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Core/ObjectRegistry.php(91): Cake\View\HelperRegistry->_throwMissingClassError('Form', 'AdminLTE')
+#1 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/View.php(1039): Cake\Core\ObjectRegistry->load('Form', Array)
+#2 /Users/varunprathap/demoapp/src/View/AppView.php(40): Cake\View\View->loadHelper('Form', Array)
+#3 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/View.php(344): App\View\AppView->initialize()
+#4 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/ViewBuilder.php(363): Cake\View\View->__construct(Object(Cake\Network\Request), Object(Cake\Network\Response), Object(Cake\Event\EventManager), Array)
+#5 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/ViewVarsTrait.php(119): Cake\View\ViewBuilder->build(Array, Object(Cake\Network\Request), Object(Cake\Network\Response), Object(Cake\Event\EventManager))
+#6 /Users/varu in [/Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Error/ErrorHandler.php, line 156]
+
+
+2016-08-18 08:05:22 Error: Fatal Error (256): [Cake\View\Exception\MissingHelperException] Helper class FormHelper could not be found.
+#0 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Core/ObjectRegistry.php(91): Cake\View\HelperRegistry->_throwMissingClassError('Form', 'AdminLTE')
+#1 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/View.php(1039): Cake\Core\ObjectRegistry->load('Form', Array)
+#2 /Users/varunprathap/demoapp/src/View/AppView.php(40): Cake\View\View->loadHelper('Form', Array)
+#3 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/View.php(344): App\View\AppView->initialize()
+#4 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/ViewBuilder.php(363): Cake\View\View->__construct(Object(Cake\Network\Request), Object(Cake\Network\Response), Object(Cake\Event\EventManager), Array)
+#5 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/ViewVarsTrait.php(119): Cake\View\ViewBuilder->build(Array, Object(Cake\Network\Request), Object(Cake\Network\Response), Object(Cake\Event\EventManager))
+#6 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Error/ExceptionRenderer.php(364): Cake\Controller\Controller->createView()
+#7 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Error/ExceptionRenderer.php(345): Cake\Error\ExceptionRenderer->_outputMessageSafe('error500')
+#8 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Error/ExceptionRenderer.php(194): Cake\Error\ExceptionRenderer->_outputMessage('missingPlugin')
+#9 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Error/ErrorHandler.php(144): Cake\Error\ExceptionRenderer->render()
+#10 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Error/BaseErrorHandler.php(180): Cake\Error\ErrorHandler->_displayException(Object(Cake\Core\Exception\MissingPluginException))
+#11 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Error/BaseErrorHandler.php(164): Cake\Error\BaseErrorHandler->handleException(Object(Cake\Core\Exception\MissingPluginException))
+#12 [internal function]: Cake\Error\BaseErrorHandler->wrapAndHandleException(Object(Cake\Core\Exception\MissingPluginException))
+#13 {main} in [/Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Error/ErrorHandler.php, line 156]
+
+
+2016-08-18 08:05:22 Error: Fatal Error (256): [Cake\View\Exception\MissingHelperException] Helper class FormHelper could not be found.
+#0 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Core/ObjectRegistry.php(91): Cake\View\HelperRegistry->_throwMissingClassError('Form', 'AdminLTE')
+#1 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/View.php(1039): Cake\Core\ObjectRegistry->load('Form', Array)
+#2 /Users/varunprathap/demoapp/src/View/AppView.php(40): Cake\View\View->loadHelper('Form', Array)
+#3 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/View.php(344): App\View\AppView->initialize()
+#4 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/ViewBuilder.php(363): Cake\View\View->__construct(Object(Cake\Network\Request), Object(Cake\Network\Response), Object(Cake\Event\EventManager), Array)
+#5 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/ViewVarsTrait.php(119): Cake\View\ViewBuilder->build(Array, Object(Cake\Network\Request), Object(Cake\Network\Response), Object(Cake\Event\EventManager))
+#6 /Users/varu in [/Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Error/ErrorHandler.php, line 156]
+
+
+2016-08-18 08:09:01 Error: [RuntimeException] The "Form" alias has already been loaded with the following config: array (
+  'idPrefix' => NULL,
+  'errorClass' => 'form-error',
+  'typeMap' => 
+  array (
+    'string' => 'text',
+    'datetime' => 'datetime',
+    'boolean' => 'checkbox',
+    'timestamp' => 'datetime',
+    'text' => 'textarea',
+    'time' => 'time',
+    'date' => 'date',
+    'float' => 'number',
+    'integer' => 'number',
+    'decimal' => 'number',
+    'binary' => 'file',
+    'uuid' => 'string',
+  ),
+  'templates' => 
+  array (
+    'button' => '<button{{attrs}}>{{text}}</button>',
+    'checkbox' => '<input type="checkbox" name="{{name}}" value="{{value}}"{{attrs}}>',
+    'checkboxFormGroup' => '{{label}}',
+    'checkboxWrapper' => '<div class="checkbox">{{label}}</div>',
+    'dateWidget' => '<span class="form-inline">{{year}}{{month}}{{day}}{{hour}}{{minute}}{{second}}{{meridian}}</span>',
+    'error' => '<div class="text-danger">{{content}}</div>',
+    'errorList' => '<ul>{{content}}</ul>',
+    'errorItem' => '<li>{{text}}</li>',
+    'file' => '<input type="file" name="{{name}}"{{attrs}}>',
+    'fieldset' => '<fieldset{{attrs}}>{{content}}</fieldset>',
+    'formStart' => '<form{{attrs}}>',
+    'formEnd' => '</form>',
+    'formGroup' => '{{label}}{{input}}',
+    'hiddenBlock' => '<div style="display:none;">{{content}}</div>',
+    'input' => '<input type="{{type}}" name="{{name}}"{{attrs}}/>',
+    'inputSubmit' => '<input type="{{type}}"{{attrs}}/>',
+    'inputContainer' => '<div class="form-group {{type}}{{required}}">{{content}}</div>',
+    'inputContainerError' => '<div class="form-group {{type}}{{required}} error">{{content}}{{error}}</div>',
+    'label' => '<label{{attrs}}>{{text}}</label>',
+    'nestingLabel' => '{{hidden}}<label{{attrs}}>{{input}}{{text}}</label>',
+    'legend' => '<legend>{{text}}</legend>',
+    'multicheckboxTitle' => '<legend>{{text}}</legend>',
+    'multicheckboxWrapper' => '<fieldset{{attrs}}>{{content}}</fieldset>',
+    'option' => '<option value="{{value}}"{{attrs}}>{{text}}</option>',
+    'optgroup' => '<optgroup label="{{label}}"{{attrs}}>{{content}}</optgroup>',
+    'select' => '<select name="{{name}}"{{attrs}}>{{content}}</select>',
+    'selectMultiple' => '<select name="{{name}}[]" multiple="multiple"{{attrs}}>{{content}}</select>',
+    'radio' => '<input type="radio" name="{{name}}" value="{{value}}"{{attrs}}>',
+    'radioWrapper' => '{{label}}',
+    'textarea' => '<textarea name="{{name}}"{{attrs}}>{{value}}</textarea>',
+    'submitContainer' => '<div class="submit">{{content}}</div>',
+  ),
+  'className' => 'AdminLTE.Form',
+) which differs from array (
+  'className' => 'Bootstrap.BootstrapForm',
+)
+Request URL: /
+Stack Trace:
+#0 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Core/ObjectRegistry.php(82): Cake\Core\ObjectRegistry->_checkDuplicate('Form', Array)
+#1 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/View.php(1039): Cake\Core\ObjectRegistry->load('Bootstrap.Boots...', Array)
+#2 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/View.php(938): Cake\View\View->loadHelper('Form', Array)
+#3 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/View.php(345): Cake\View\View->loadHelpers()
+#4 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/ViewBuilder.php(363): Cake\View\View->__construct(Object(Cake\Network\Request), Object(Cake\Network\Response), Object(Cake\Event\EventManager), Array)
+#5 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/ViewVarsTrait.php(119): Cake\View\ViewBuilder->build(Array, Object(Cake\Network\Request), Object(Cake\Network\Response), Object(Cake\Event\EventManager))
+#6 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Controller/Controller.php(616): Cake\Controller\Controller->createView()
+#7 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(121): Cake\Controller\Controller->render()
+#8 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(88): Cake\Routing\Dispatcher->_invoke(Object(App\Controller\UsersController))
+#9 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#10 {main}
+
+
+2016-08-18 08:11:40 Error: [RuntimeException] The "Form" alias has already been loaded with the following config: array (
+  'idPrefix' => NULL,
+  'errorClass' => 'form-error',
+  'typeMap' => 
+  array (
+    'string' => 'text',
+    'datetime' => 'datetime',
+    'boolean' => 'checkbox',
+    'timestamp' => 'datetime',
+    'text' => 'textarea',
+    'time' => 'time',
+    'date' => 'date',
+    'float' => 'number',
+    'integer' => 'number',
+    'decimal' => 'number',
+    'binary' => 'file',
+    'uuid' => 'string',
+  ),
+  'templates' => 
+  array (
+    'button' => '<button{{attrs}}>{{text}}</button>',
+    'checkbox' => '<input type="checkbox" name="{{name}}" value="{{value}}"{{attrs}}>',
+    'checkboxFormGroup' => '{{label}}',
+    'checkboxWrapper' => '<div class="checkbox">{{label}}</div>',
+    'dateWidget' => '<span class="form-inline">{{year}}{{month}}{{day}}{{hour}}{{minute}}{{second}}{{meridian}}</span>',
+    'error' => '<div class="text-danger">{{content}}</div>',
+    'errorList' => '<ul>{{content}}</ul>',
+    'errorItem' => '<li>{{text}}</li>',
+    'file' => '<input type="file" name="{{name}}"{{attrs}}>',
+    'fieldset' => '<fieldset{{attrs}}>{{content}}</fieldset>',
+    'formStart' => '<form{{attrs}}>',
+    'formEnd' => '</form>',
+    'formGroup' => '{{label}}{{input}}',
+    'hiddenBlock' => '<div style="display:none;">{{content}}</div>',
+    'input' => '<input type="{{type}}" name="{{name}}"{{attrs}}/>',
+    'inputSubmit' => '<input type="{{type}}"{{attrs}}/>',
+    'inputContainer' => '<div class="form-group {{type}}{{required}}">{{content}}</div>',
+    'inputContainerError' => '<div class="form-group {{type}}{{required}} error">{{content}}{{error}}</div>',
+    'label' => '<label{{attrs}}>{{text}}</label>',
+    'nestingLabel' => '{{hidden}}<label{{attrs}}>{{input}}{{text}}</label>',
+    'legend' => '<legend>{{text}}</legend>',
+    'multicheckboxTitle' => '<legend>{{text}}</legend>',
+    'multicheckboxWrapper' => '<fieldset{{attrs}}>{{content}}</fieldset>',
+    'option' => '<option value="{{value}}"{{attrs}}>{{text}}</option>',
+    'optgroup' => '<optgroup label="{{label}}"{{attrs}}>{{content}}</optgroup>',
+    'select' => '<select name="{{name}}"{{attrs}}>{{content}}</select>',
+    'selectMultiple' => '<select name="{{name}}[]" multiple="multiple"{{attrs}}>{{content}}</select>',
+    'radio' => '<input type="radio" name="{{name}}" value="{{value}}"{{attrs}}>',
+    'radioWrapper' => '{{label}}',
+    'textarea' => '<textarea name="{{name}}"{{attrs}}>{{value}}</textarea>',
+    'submitContainer' => '<div class="submit">{{content}}</div>',
+  ),
+  'className' => 'AdminLTE.Form',
+) which differs from array (
+  'className' => 'Bootstrap.BootstrapForm',
+)
+Request URL: /
+Stack Trace:
+#0 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Core/ObjectRegistry.php(82): Cake\Core\ObjectRegistry->_checkDuplicate('Form', Array)
+#1 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/View.php(1039): Cake\Core\ObjectRegistry->load('Bootstrap.Boots...', Array)
+#2 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/View.php(938): Cake\View\View->loadHelper('Form', Array)
+#3 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/View.php(345): Cake\View\View->loadHelpers()
+#4 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/ViewBuilder.php(363): Cake\View\View->__construct(Object(Cake\Network\Request), Object(Cake\Network\Response), Object(Cake\Event\EventManager), Array)
+#5 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/ViewVarsTrait.php(119): Cake\View\ViewBuilder->build(Array, Object(Cake\Network\Request), Object(Cake\Network\Response), Object(Cake\Event\EventManager))
+#6 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Controller/Controller.php(616): Cake\Controller\Controller->createView()
+#7 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(121): Cake\Controller\Controller->render()
+#8 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(88): Cake\Routing\Dispatcher->_invoke(Object(App\Controller\UsersController))
+#9 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#10 {main}
+
+
+2016-08-18 08:12:00 Error: [RuntimeException] The "Form" alias has already been loaded with the following config: array (
+  'idPrefix' => NULL,
+  'errorClass' => 'form-error',
+  'typeMap' => 
+  array (
+    'string' => 'text',
+    'datetime' => 'datetime',
+    'boolean' => 'checkbox',
+    'timestamp' => 'datetime',
+    'text' => 'textarea',
+    'time' => 'time',
+    'date' => 'date',
+    'float' => 'number',
+    'integer' => 'number',
+    'decimal' => 'number',
+    'binary' => 'file',
+    'uuid' => 'string',
+  ),
+  'templates' => 
+  array (
+    'button' => '<button{{attrs}}>{{text}}</button>',
+    'checkbox' => '<input type="checkbox" name="{{name}}" value="{{value}}"{{attrs}}>',
+    'checkboxFormGroup' => '{{label}}',
+    'checkboxWrapper' => '<div class="checkbox">{{label}}</div>',
+    'dateWidget' => '<span class="form-inline">{{year}}{{month}}{{day}}{{hour}}{{minute}}{{second}}{{meridian}}</span>',
+    'error' => '<div class="text-danger">{{content}}</div>',
+    'errorList' => '<ul>{{content}}</ul>',
+    'errorItem' => '<li>{{text}}</li>',
+    'file' => '<input type="file" name="{{name}}"{{attrs}}>',
+    'fieldset' => '<fieldset{{attrs}}>{{content}}</fieldset>',
+    'formStart' => '<form{{attrs}}>',
+    'formEnd' => '</form>',
+    'formGroup' => '{{label}}{{input}}',
+    'hiddenBlock' => '<div style="display:none;">{{content}}</div>',
+    'input' => '<input type="{{type}}" name="{{name}}"{{attrs}}/>',
+    'inputSubmit' => '<input type="{{type}}"{{attrs}}/>',
+    'inputContainer' => '<div class="form-group {{type}}{{required}}">{{content}}</div>',
+    'inputContainerError' => '<div class="form-group {{type}}{{required}} error">{{content}}{{error}}</div>',
+    'label' => '<label{{attrs}}>{{text}}</label>',
+    'nestingLabel' => '{{hidden}}<label{{attrs}}>{{input}}{{text}}</label>',
+    'legend' => '<legend>{{text}}</legend>',
+    'multicheckboxTitle' => '<legend>{{text}}</legend>',
+    'multicheckboxWrapper' => '<fieldset{{attrs}}>{{content}}</fieldset>',
+    'option' => '<option value="{{value}}"{{attrs}}>{{text}}</option>',
+    'optgroup' => '<optgroup label="{{label}}"{{attrs}}>{{content}}</optgroup>',
+    'select' => '<select name="{{name}}"{{attrs}}>{{content}}</select>',
+    'selectMultiple' => '<select name="{{name}}[]" multiple="multiple"{{attrs}}>{{content}}</select>',
+    'radio' => '<input type="radio" name="{{name}}" value="{{value}}"{{attrs}}>',
+    'radioWrapper' => '{{label}}',
+    'textarea' => '<textarea name="{{name}}"{{attrs}}>{{value}}</textarea>',
+    'submitContainer' => '<div class="submit">{{content}}</div>',
+  ),
+  'className' => 'AdminLTE.Form',
+) which differs from array (
+  'className' => 'Bootstrap.BootstrapForm',
+)
+Request URL: /
+Stack Trace:
+#0 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Core/ObjectRegistry.php(82): Cake\Core\ObjectRegistry->_checkDuplicate('Form', Array)
+#1 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/View.php(1039): Cake\Core\ObjectRegistry->load('Bootstrap.Boots...', Array)
+#2 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/View.php(938): Cake\View\View->loadHelper('Form', Array)
+#3 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/View.php(345): Cake\View\View->loadHelpers()
+#4 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/ViewBuilder.php(363): Cake\View\View->__construct(Object(Cake\Network\Request), Object(Cake\Network\Response), Object(Cake\Event\EventManager), Array)
+#5 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/ViewVarsTrait.php(119): Cake\View\ViewBuilder->build(Array, Object(Cake\Network\Request), Object(Cake\Network\Response), Object(Cake\Event\EventManager))
+#6 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Controller/Controller.php(616): Cake\Controller\Controller->createView()
+#7 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(121): Cake\Controller\Controller->render()
+#8 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(88): Cake\Routing\Dispatcher->_invoke(Object(App\Controller\UsersController))
+#9 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#10 {main}
+
+
+2016-08-18 08:14:05 Error: [Cake\View\Exception\MissingHelperException] Helper class BootstrapHtmlHelper could not be found.
+Exception Attributes: array (
+  'class' => 'BootstrapHtmlHelper',
+  'plugin' => 'Bootstrap',
+)
+Request URL: /
+Stack Trace:
+#0 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Core/ObjectRegistry.php(91): Cake\View\HelperRegistry->_throwMissingClassError('BootstrapHtml', 'Bootstrap')
+#1 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/View.php(1039): Cake\Core\ObjectRegistry->load('BootstrapHtml', Array)
+#2 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/View.php(938): Cake\View\View->loadHelper('Html', Array)
+#3 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/View.php(345): Cake\View\View->loadHelpers()
+#4 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/ViewBuilder.php(363): Cake\View\View->__construct(Object(Cake\Network\Request), Object(Cake\Network\Response), Object(Cake\Event\EventManager), Array)
+#5 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/ViewVarsTrait.php(118): Cake\View\ViewBuilder->build(Array, Object(Cake\Network\Request), Object(Cake\Network\Response), Object(Cake\Event\EventManager))
+#6 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Controller/Controller.php(616): Cake\Controller\Controller->createView()
+#7 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php(131): Cake\Controller\Controller->render()
+#8 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php(99): Cake\Http\ActionDispatcher->_invoke(Object(App\Controller\UsersController))
+#9 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(65): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#10 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#11 {main}
+
+
+2016-08-18 08:15:45 Error: [Cake\View\Exception\MissingHelperException] Helper class BootstrapHtmlHelper could not be found.
+Exception Attributes: array (
+  'class' => 'BootstrapHtmlHelper',
+  'plugin' => 'Bootstrap',
+)
+Request URL: /
+Stack Trace:
+#0 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Core/ObjectRegistry.php(91): Cake\View\HelperRegistry->_throwMissingClassError('BootstrapHtml', 'Bootstrap')
+#1 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/View.php(1039): Cake\Core\ObjectRegistry->load('BootstrapHtml', Array)
+#2 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/View.php(938): Cake\View\View->loadHelper('Html', Array)
+#3 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/View.php(345): Cake\View\View->loadHelpers()
+#4 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/ViewBuilder.php(363): Cake\View\View->__construct(Object(Cake\Network\Request), Object(Cake\Network\Response), Object(Cake\Event\EventManager), Array)
+#5 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/ViewVarsTrait.php(118): Cake\View\ViewBuilder->build(Array, Object(Cake\Network\Request), Object(Cake\Network\Response), Object(Cake\Event\EventManager))
+#6 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Controller/Controller.php(616): Cake\Controller\Controller->createView()
+#7 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php(131): Cake\Controller\Controller->render()
+#8 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php(99): Cake\Http\ActionDispatcher->_invoke(Object(App\Controller\UsersController))
+#9 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(65): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#10 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#11 {main}
+
+
+2016-08-18 08:16:34 Warning: Headers already sent in /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/AssetFilter.php:148
+2016-08-18 08:16:34 Warning: Headers already sent in /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/AssetFilter.php:148
+2016-08-18 08:16:34 Warning: Headers already sent in /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/AssetFilter.php:148
+2016-08-18 08:16:35 Warning: Headers already sent in /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/AssetFilter.php:148
+2016-08-18 08:16:35 Warning: Headers already sent in /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/AssetFilter.php:148
+2016-08-18 08:16:35 Warning: Headers already sent in /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/AssetFilter.php:148
+2016-08-18 08:16:35 Warning: Headers already sent in /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/AssetFilter.php:148
+2016-08-18 08:16:35 Warning: Headers already sent in /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/AssetFilter.php:148
