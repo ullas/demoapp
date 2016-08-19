@@ -47,7 +47,7 @@ class BusinessUnitsController extends AppController
             if ($this->BusinessUnits->save($businessUnit)) {
                 $this->Flash->success(__('The business unit has been saved.'));
                 return $this->redirect(['action' => 'index']);
-            } else {
+            } else {echo("failed");
                 $this->Flash->error(__('The business unit could not be saved. Please, try again.'));
             }
         }
