@@ -1,3 +1,4 @@
+
 <div class="topbar">
         <div class="topbar-inner">
         </div>
@@ -79,6 +80,15 @@
             });
         });
     </script>
-    
-    <div id="chart" class="orgChart"></div>
+   <section class="content-header">
+      <h1>
+       Organization Chart
+      </h1>
+      <ol class="breadcrumb">
+        <li class="active"><i class="fa fa-sitemap"></i> Organization Chart</li>
+      </ol>
+    </section>
+<section class="content">
+	<div class="box box-default"><div class="box-body"> 
+    <div id="chart" class="orgChart"></div></div></div></section>
     

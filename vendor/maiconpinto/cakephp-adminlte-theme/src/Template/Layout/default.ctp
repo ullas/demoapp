@@ -12,6 +12,23 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <!-- Ionicons -->
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    
+    <?= $this->Html->css('jquery.jOrgChart.css') ?>
+    
+    <!-- jQuery 2.1.4 -->
+<?php echo $this->Html->script('AdminLTE./plugins/jQuery/jQuery-2.1.4.min'); ?>
+<!-- Bootstrap 3.3.5 -->
+<?php echo $this->Html->script('AdminLTE./bootstrap/js/bootstrap'); ?>
+<!-- SlimScroll -->
+<?php echo $this->Html->script('AdminLTE./plugins/slimScroll/jquery.slimscroll.min'); ?>
+<!-- FastClick -->
+<?php echo $this->Html->script('AdminLTE./plugins/fastclick/fastclick'); ?>
+<!-- AdminLTE App -->
+<?php echo $this->Html->script('AdminLTE.AdminLTE.min'); ?>
+<?= $this->Html->script('jquery.jOrgChart.js'); ?>
+
+
+
     <!-- Theme style -->
     <?php echo $this->Html->css('AdminLTE.AdminLTE.min'); ?>
 <!-- AdminLTE Skins. Choose a skin from the css/skins
@@ -69,16 +86,7 @@
 </div>
 <!-- ./wrapper -->
 
-<!-- jQuery 2.1.4 -->
-<?php echo $this->Html->script('AdminLTE./plugins/jQuery/jQuery-2.1.4.min'); ?>
-<!-- Bootstrap 3.3.5 -->
-<?php echo $this->Html->script('AdminLTE./bootstrap/js/bootstrap'); ?>
-<!-- SlimScroll -->
-<?php echo $this->Html->script('AdminLTE./plugins/slimScroll/jquery.slimscroll.min'); ?>
-<!-- FastClick -->
-<?php echo $this->Html->script('AdminLTE./plugins/fastclick/fastclick'); ?>
-<!-- AdminLTE App -->
-<?php echo $this->Html->script('AdminLTE.AdminLTE.min'); ?>
+
 <!-- AdminLTE for demo purposes -->
 <?php echo $this->fetch('script'); ?>
 <?php echo $this->fetch('scriptBotton'); ?>
