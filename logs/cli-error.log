@@ -49,3 +49,103 @@ Stack Trace:
 #2 {main}
 
 
+2016-08-19 06:26:06 Error: [Cake\Database\Exception] Cannot describe algumacoisa. It has 0 columns.
+Stack Trace:
+#0 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Database/Schema/CachedCollection.php(63): Cake\Database\Schema\Collection->describe('algumacoisa', Array)
+#1 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/ORM/Table.php(440): Cake\Database\Schema\CachedCollection->describe('algumacoisa')
+#2 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/ORM/Table.php(518): Cake\ORM\Table->schema()
+#3 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/Task/ModelTask.php(210): Cake\ORM\Table->primaryKey()
+#4 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/Task/ModelTask.php(127): Bake\Shell\Task\ModelTask->getAssociations(Object(Cake\ORM\Table))
+#5 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/Task/ModelTask.php(110): Bake\Shell\Task\ModelTask->getTableContext(Object(Cake\ORM\Table), 'algumacoisa', 'Algumacoisa')
+#6 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/Task/ModelTask.php(97): Bake\Shell\Task\ModelTask->bake('Algumacoisa')
+#7 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/BakeShell.php(257): Bake\Shell\Task\ModelTask->main('Algumacoisa')
+#8 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Collection/CollectionTrait.php(52): Bake\Shell\BakeShell->Bake\Shell\{closure}('Algumacoisa', 0)
+#9 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/BakeShell.php(260): Cake\Collection\Collection->each(Object(Closure))
+#10 [internal function]: Bake\Shell\BakeShell->all('algumacoisa')
+#11 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Console/Shell.php(452): call_user_func_array(Array, Array)
+#12 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Console/ShellDispatcher.php(227): Cake\Console\Shell->runCommand(Array, true, Array)
+#13 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Console/ShellDispatcher.php(182): Cake\Console\ShellDispatcher->_dispatch(Array)
+#14 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Console/ShellDispatcher.php(128): Cake\Console\ShellDispatcher->dispatch(Array)
+#15 /Users/varunprathap/demoapp/bin/cake.php(33): Cake\Console\ShellDispatcher::run(Array)
+#16 {main}
+
+
+2016-08-19 06:26:31 Error: [ParseError] syntax error, unexpected '-', expecting '{'
+Stack Trace:
+#0 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/Task/ModelTask.php(111): Bake\Shell\Task\ModelTask->bakeTable(Object(Cake\ORM\Table), Array)
+#1 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/Task/ModelTask.php(97): Bake\Shell\Task\ModelTask->bake('Business-units')
+#2 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/BakeShell.php(257): Bake\Shell\Task\ModelTask->main('Business-units')
+#3 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Collection/CollectionTrait.php(52): Bake\Shell\BakeShell->Bake\Shell\{closure}('Business-units', 0)
+#4 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/BakeShell.php(260): Cake\Collection\Collection->each(Object(Closure))
+#5 [internal function]: Bake\Shell\BakeShell->all('business-units')
+#6 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Console/Shell.php(452): call_user_func_array(Array, Array)
+#7 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Console/ShellDispatcher.php(227): Cake\Console\Shell->runCommand(Array, true, Array)
+#8 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Console/ShellDispatcher.php(182): Cake\Console\ShellDispatcher->_dispatch(Array)
+#9 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Console/ShellDispatcher.php(128): Cake\Console\ShellDispatcher->dispatch(Array)
+#10 /Users/varunprathap/demoapp/bin/cake.php(33): Cake\Console\ShellDispatcher::run(Array)
+#11 {main}
+
+
+2016-08-19 06:30:21 Error: [Cake\Database\Exception] Cannot describe businessunits. It has 0 columns.
+Stack Trace:
+#0 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Database/Schema/CachedCollection.php(63): Cake\Database\Schema\Collection->describe('businessunits', Array)
+#1 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/ORM/Table.php(440): Cake\Database\Schema\CachedCollection->describe('businessunits')
+#2 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/Task/ModelTask.php(261): Cake\ORM\Table->schema()
+#3 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/Task/ModelTask.php(211): Bake\Shell\Task\ModelTask->findBelongsTo(Object(App\Model\Table\BusinessunitsTable), Array)
+#4 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/Task/ModelTask.php(127): Bake\Shell\Task\ModelTask->getAssociations(Object(App\Model\Table\BusinessunitsTable))
+#5 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/Task/ModelTask.php(110): Bake\Shell\Task\ModelTask->getTableContext(Object(App\Model\Table\BusinessunitsTable), 'business_units', 'BusinessUnits')
+#6 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/Task/ModelTask.php(97): Bake\Shell\Task\ModelTask->bake('BusinessUnits')
+#7 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/BakeShell.php(257): Bake\Shell\Task\ModelTask->main('BusinessUnits')
+#8 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Collection/CollectionTrait.php(52): Bake\Shell\BakeShell->Bake\Shell\{closure}('BusinessUnits', 0)
+#9 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/BakeShell.php(260): Cake\Collection\Collection->each(Object(Closure))
+#10 [internal function]: Bake\Shell\BakeShell->all('business_units')
+#11 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Console/Shell.php(452): call_user_func_array(Array, Array)
+#12 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Console/ShellDispatcher.php(227): Cake\Console\Shell->runCommand(Array, true, Array)
+#13 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Console/ShellDispatcher.php(182): Cake\Console\ShellDispatcher->_dispatch(Array)
+#14 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Console/ShellDispatcher.php(128): Cake\Console\ShellDispatcher->dispatch(Array)
+#15 /Users/varunprathap/demoapp/bin/cake.php(33): Cake\Console\ShellDispatcher::run(Array)
+#16 {main}
+
+
+2016-08-19 06:31:24 Error: [Cake\Database\Exception] Cannot describe businessunits. It has 0 columns.
+Stack Trace:
+#0 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Database/Schema/CachedCollection.php(63): Cake\Database\Schema\Collection->describe('businessunits', Array)
+#1 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/ORM/Table.php(440): Cake\Database\Schema\CachedCollection->describe('businessunits')
+#2 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/Task/ModelTask.php(261): Cake\ORM\Table->schema()
+#3 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/Task/ModelTask.php(211): Bake\Shell\Task\ModelTask->findBelongsTo(Object(App\Model\Table\BusinessunitsTable), Array)
+#4 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/Task/ModelTask.php(127): Bake\Shell\Task\ModelTask->getAssociations(Object(App\Model\Table\BusinessunitsTable))
+#5 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/Task/ModelTask.php(110): Bake\Shell\Task\ModelTask->getTableContext(Object(App\Model\Table\BusinessunitsTable), 'business_units', 'BusinessUnits')
+#6 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/Task/ModelTask.php(97): Bake\Shell\Task\ModelTask->bake('BusinessUnits')
+#7 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/BakeShell.php(257): Bake\Shell\Task\ModelTask->main('BusinessUnits')
+#8 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Collection/CollectionTrait.php(52): Bake\Shell\BakeShell->Bake\Shell\{closure}('BusinessUnits', 0)
+#9 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/BakeShell.php(260): Cake\Collection\Collection->each(Object(Closure))
+#10 [internal function]: Bake\Shell\BakeShell->all('business_units')
+#11 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Console/Shell.php(452): call_user_func_array(Array, Array)
+#12 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Console/ShellDispatcher.php(227): Cake\Console\Shell->runCommand(Array, true, Array)
+#13 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Console/ShellDispatcher.php(182): Cake\Console\ShellDispatcher->_dispatch(Array)
+#14 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Console/ShellDispatcher.php(128): Cake\Console\ShellDispatcher->dispatch(Array)
+#15 /Users/varunprathap/demoapp/bin/cake.php(33): Cake\Console\ShellDispatcher::run(Array)
+#16 {main}
+
+
+2016-08-19 06:32:08 Error: [Cake\Database\Exception] Cannot describe businessunits. It has 0 columns.
+Stack Trace:
+#0 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Database/Schema/CachedCollection.php(63): Cake\Database\Schema\Collection->describe('businessunits', Array)
+#1 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/ORM/Table.php(440): Cake\Database\Schema\CachedCollection->describe('businessunits')
+#2 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/Task/ModelTask.php(261): Cake\ORM\Table->schema()
+#3 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/Task/ModelTask.php(211): Bake\Shell\Task\ModelTask->findBelongsTo(Object(App\Model\Table\BusinessunitsTable), Array)
+#4 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/Task/ModelTask.php(127): Bake\Shell\Task\ModelTask->getAssociations(Object(App\Model\Table\BusinessunitsTable))
+#5 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/Task/ModelTask.php(110): Bake\Shell\Task\ModelTask->getTableContext(Object(App\Model\Table\BusinessunitsTable), 'business_units', 'BusinessUnits')
+#6 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/Task/ModelTask.php(97): Bake\Shell\Task\ModelTask->bake('BusinessUnits')
+#7 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/BakeShell.php(257): Bake\Shell\Task\ModelTask->main('BusinessUnits')
+#8 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Collection/CollectionTrait.php(52): Bake\Shell\BakeShell->Bake\Shell\{closure}('BusinessUnits', 0)
+#9 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/BakeShell.php(260): Cake\Collection\Collection->each(Object(Closure))
+#10 [internal function]: Bake\Shell\BakeShell->all('business_units')
+#11 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Console/Shell.php(452): call_user_func_array(Array, Array)
+#12 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Console/ShellDispatcher.php(227): Cake\Console\Shell->runCommand(Array, true, Array)
+#13 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Console/ShellDispatcher.php(182): Cake\Console\ShellDispatcher->_dispatch(Array)
+#14 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Console/ShellDispatcher.php(128): Cake\Console\ShellDispatcher->dispatch(Array)
+#15 /Users/varunprathap/demoapp/bin/cake.php(33): Cake\Console\ShellDispatcher::run(Array)
+#16 {main}
+
+

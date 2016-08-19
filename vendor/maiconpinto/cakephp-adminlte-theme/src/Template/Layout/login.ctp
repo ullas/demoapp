@@ -27,7 +27,8 @@
 <body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">
-    <a href="<?php echo $this->Url->build(array('controller' => 'pages', 'action' => 'display', 'home')); ?>"><?php echo $theme['logo']['large'] ?></a>
+    <a href="<?php echo $this->Url->build(array('controller' => 'pages', 'action' => 'display', 'home')); ?>">
+    	<?php echo $theme['logo']['large'] ?></a>
   </div>
   <!-- /.login-logo -->
   <div class="login-box-body">
@@ -37,17 +38,7 @@
 
 <?php echo $this->fetch('content'); ?>
 
-    <?php
-    if (isset($theme['login']['show_social']) && $theme['login']['show_social']) {
-        ?>
-        <div class="social-auth-links text-center">
-          <p>- <?php echo __('OR') ?> -</p>
-          <a href="#" class="btn btn-block btn-social btn-facebook btn-flat"><i class="fa fa-facebook"></i> <?php echo __('Sign in using Facebook') ?></a>
-          <a href="#" class="btn btn-block btn-social btn-google btn-flat"><i class="fa fa-google-plus"></i> <?php echo __('Sign in using Google+') ?></a>
-        </div>
-        <?php
-    }
-    ?>
+    
 
     <?php
     if (isset($theme['login']['show_remember']) && $theme['login']['show_remember']) {
@@ -57,7 +48,7 @@
     }
     if (isset($theme['login']['show_register']) && $theme['login']['show_register']) {
         ?>
-        <a href="#" class="text-center"><?php echo __('Register a new membership') ?></a>
+        
         <?php
     }
     ?>

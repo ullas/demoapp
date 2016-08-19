@@ -226,14 +226,15 @@ Type::build('datetime')
 	
 	
 	Configure::write('Theme', [
-    'title' => 'AdminLTE',
+    'title' => 'PeopleHR',
     'logo' => [
-        'mini' => '<b>A</b>LT',
-        'large' => '<b>Admin</b>LTE'
+        'mini' => '<b>P</b>HR',
+        'large' => '<b>People</b>HR'
     ],
     'login' => [
         'show_remember' => true,
-        'show_register' => true,
-        'show_social' => true
+        'show_register' => false,
+        'show_social' => false
     ]
 ]);
+

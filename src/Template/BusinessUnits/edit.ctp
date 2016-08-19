@@ -1,29 +1,45 @@
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Form->postLink(
-                __('Delete'),
-                ['action' => 'delete', $businessUnit->id],
-                ['confirm' => __('Are you sure you want to delete # {0}?', $businessUnit->id)]
-            )
-        ?></li>
-        <li><?= $this->Html->link(__('List Business Units'), ['action' => 'index']) ?></li>
-    </ul>
-</nav>
-<div class="businessUnits form large-9 medium-8 columns content">
-    <?= $this->Form->create($businessUnit) ?>
-    <fieldset>
-        <legend><?= __('Edit Business Unit') ?></legend>
-        <?php
+<section class="content-header">
+  <h1>
+    Businessunit
+    <small><?= __('Edit') ?></small>
+  </h1>
+  <ol class="breadcrumb">
+    <li>
+    <?= $this->Html->link('<i class="fa fa-dashboard"></i> '.__('Back'), ['action' => 'index'], ['escape' => false]) ?>
+    </li>
+  </ol>
+</section>
+
+<!-- Main content -->
+<section class="content">
+  <div class="row">
+    <!-- left column -->
+    <div class="col-md-12">
+      <!-- general form elements -->
+      <div class="box box-primary">
+        <div class="box-header with-border">
+          <h3 class="box-title"><?= __('Form') ?></h3>
+        </div>
+        <!-- /.box-header -->
+        <!-- form start -->
+        <?= $this->Form->create($businessunit, array('role' => 'form')) ?>
+          <div class="box-body">
+          <?php
             echo $this->Form->input('name');
             echo $this->Form->input('description');
             echo $this->Form->input('effective_status');
-            echo $this->Form->input('effective_start_date', ['empty' => true]);
-            echo $this->Form->input('effective_end_date', ['empty' => true]);
+            echo $this->Form->input('effective_start_date', ['empty' => true, 'default' => '']);
+            echo $this->Form->input('effective_end_date', ['empty' => true, 'default' => '']);
             echo $this->Form->input('external_code');
             echo $this->Form->input('head_of_unit');
-        ?>
-    </fieldset>
-    <?= $this->Form->button(__('Submit')) ?>
-    <?= $this->Form->end() ?>
-</div>
+          ?>
+          </div>
+          <!-- /.box-body -->
+          <div class="box-footer">
+            <?= $this->Form->button(__('Save')) ?>
+          </div>
+        <?= $this->Form->end() ?>
+      </div>
+    </div>
+  </div>
+</section>

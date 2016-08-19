@@ -1,8 +1,6 @@
 <?php
 namespace App\Controller;
-
 use App\Controller\AppController;
-
 /**
  * BusinessUnits Controller
  *
@@ -10,7 +8,6 @@ use App\Controller\AppController;
  */
 class BusinessUnitsController extends AppController
 {
-
     /**
      * Index method
      *
@@ -19,11 +16,9 @@ class BusinessUnitsController extends AppController
     public function index()
     {
         $businessUnits = $this->paginate($this->BusinessUnits);
-
         $this->set(compact('businessUnits'));
         $this->set('_serialize', ['businessUnits']);
     }
-
     /**
      * View method
      *
@@ -36,11 +31,9 @@ class BusinessUnitsController extends AppController
         $businessUnit = $this->BusinessUnits->get($id, [
             'contain' => []
         ]);
-
         $this->set('businessUnit', $businessUnit);
         $this->set('_serialize', ['businessUnit']);
     }
-
     /**
      * Add method
      *
@@ -53,7 +46,6 @@ class BusinessUnitsController extends AppController
             $businessUnit = $this->BusinessUnits->patchEntity($businessUnit, $this->request->data);
             if ($this->BusinessUnits->save($businessUnit)) {
                 $this->Flash->success(__('The business unit has been saved.'));
-
                 return $this->redirect(['action' => 'index']);
             } else {
                 $this->Flash->error(__('The business unit could not be saved. Please, try again.'));
@@ -62,7 +54,6 @@ class BusinessUnitsController extends AppController
         $this->set(compact('businessUnit'));
         $this->set('_serialize', ['businessUnit']);
     }
-
     /**
      * Edit method
      *
@@ -79,7 +70,6 @@ class BusinessUnitsController extends AppController
             $businessUnit = $this->BusinessUnits->patchEntity($businessUnit, $this->request->data);
             if ($this->BusinessUnits->save($businessUnit)) {
                 $this->Flash->success(__('The business unit has been saved.'));
-
                 return $this->redirect(['action' => 'index']);
             } else {
                 $this->Flash->error(__('The business unit could not be saved. Please, try again.'));
@@ -88,7 +78,6 @@ class BusinessUnitsController extends AppController
         $this->set(compact('businessUnit'));
         $this->set('_serialize', ['businessUnit']);
     }
-
     /**
      * Delete method
      *
@@ -105,7 +94,6 @@ class BusinessUnitsController extends AppController
         } else {
             $this->Flash->error(__('The business unit could not be deleted. Please, try again.'));
         }
-
         return $this->redirect(['action' => 'index']);
     }
 }

@@ -2,7 +2,6 @@
         <div class="topbar-inner">
         </div>
     </div>
-    <?= $this->element('orgtreebuilderelmnt', array('title' => 'My Info')); ?>
     <ul id="org" style="display:none">
     <li>
        Project manager
@@ -41,7 +40,8 @@
          </li>
        </ul>
      </li>
-   </ul>            
+   </ul>
+            
     <script>
     jQuery(document).ready(function() {
         $("#org").jOrgChart({

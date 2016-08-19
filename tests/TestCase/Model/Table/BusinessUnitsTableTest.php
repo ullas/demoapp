@@ -1,22 +1,22 @@
 <?php
 namespace App\Test\TestCase\Model\Table;
 
-use App\Model\Table\BusinessUnitsTable;
+use App\Model\Table\BusinessunitsTable;
 use Cake\ORM\TableRegistry;
 use Cake\TestSuite\TestCase;
 
 /**
- * App\Model\Table\BusinessUnitsTable Test Case
+ * App\Model\Table\BusinessunitsTable Test Case
  */
-class BusinessUnitsTableTest extends TestCase
+class BusinessunitsTableTest extends TestCase
 {
 
     /**
      * Test subject
      *
-     * @var \App\Model\Table\BusinessUnitsTable
+     * @var \App\Model\Table\BusinessunitsTable
      */
-    public $BusinessUnits;
+    public $Businessunits;
 
     /**
      * Fixtures
@@ -24,7 +24,7 @@ class BusinessUnitsTableTest extends TestCase
      * @var array
      */
     public $fixtures = [
-        'app.business_units'
+        'app.businessunits'
     ];
 
     /**
@@ -35,8 +35,8 @@ class BusinessUnitsTableTest extends TestCase
     public function setUp()
     {
         parent::setUp();
-        $config = TableRegistry::exists('BusinessUnits') ? [] : ['className' => 'App\Model\Table\BusinessUnitsTable'];
-        $this->BusinessUnits = TableRegistry::get('BusinessUnits', $config);
+        $config = TableRegistry::exists('Businessunits') ? [] : ['className' => 'App\Model\Table\BusinessunitsTable'];
+        $this->Businessunits = TableRegistry::get('Businessunits', $config);
     }
 
     /**
@@ -46,27 +46,17 @@ class BusinessUnitsTableTest extends TestCase
      */
     public function tearDown()
     {
-        unset($this->BusinessUnits);
+        unset($this->Businessunits);
 
         parent::tearDown();
     }
 
     /**
-     * Test initialize method
+     * Test initial setup
      *
      * @return void
      */
-    public function testInitialize()
-    {
-        $this->markTestIncomplete('Not implemented yet.');
-    }
-
-    /**
-     * Test validationDefault method
-     *
-     * @return void
-     */
-    public function testValidationDefault()
+    public function testInitialization()
     {
         $this->markTestIncomplete('Not implemented yet.');
     }

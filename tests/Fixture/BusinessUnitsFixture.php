@@ -4,11 +4,18 @@ namespace App\Test\Fixture;
 use Cake\TestSuite\Fixture\TestFixture;
 
 /**
- * BusinessUnitsFixture
+ * BusinessunitsFixture
  *
  */
-class BusinessUnitsFixture extends TestFixture
+class BusinessunitsFixture extends TestFixture
 {
+
+    /**
+     * Table name
+     *
+     * @var string
+     */
+    public $table = 'business_units';
 
     /**
      * Fields
@@ -44,8 +51,8 @@ class BusinessUnitsFixture extends TestFixture
             'name' => 'Lorem ipsum dolor sit amet',
             'description' => 'Lorem ipsum dolor sit amet',
             'effective_status' => 1,
-            'effective_start_date' => '2016-08-09',
-            'effective_end_date' => '2016-08-09',
+            'effective_start_date' => '2016-08-19',
+            'effective_end_date' => '2016-08-19',
             'external_code' => 'Lorem ipsum dolor sit amet',
             'head_of_unit' => 1
         ],

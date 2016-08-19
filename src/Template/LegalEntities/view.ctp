@@ -1,19 +1,19 @@
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('Edit Legal Entity'), ['action' => 'edit', $legalEntity->id]) ?> </li>
-        <li><?= $this->Form->postLink(__('Delete Legal Entity'), ['action' => 'delete', $legalEntity->id], ['confirm' => __('Are you sure you want to delete # {0}?', $legalEntity->id)]) ?> </li>
-        <li><?= $this->Html->link(__('List Legal Entities'), ['action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Legal Entity'), ['action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List Locations'), ['controller' => 'Locations', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Location'), ['controller' => 'Locations', 'action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List Pay Groups'), ['controller' => 'PayGroups', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Pay Group'), ['controller' => 'PayGroups', 'action' => 'add']) ?> </li>
-    </ul>
-</nav>
-<div class="legalEntities view large-9 medium-8 columns content">
-    <h3><?= h($legalEntity->name) ?></h3>
-    <table class="vertical-table">
+<section class="content-header">
+      <h1>
+        Legal Entity
+        <small>View</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li class="active"><i class="fa fa-university"></i> Legal Entity</li>
+        <li class="active">View</li>
+        <li><a href="<?php echo $this->Url->build(array('controller' => 'LegalEntities', 'action' => 'add')); ?>">Add</a></li>
+        <li><a href="<?php echo $this->Url->build(array('controller' => 'LegalEntities', 'action' => 'index')); ?>">List</a></li>
+      </ol>
+    </section>
+<section class="content">
+	<div class="box box-default"><div class="box-body">
+		
+    <table class="table table-hover">
         <tr>
             <th><?= __('Name') ?></th>
             <td><?= h($legalEntity->name) ?></td>
@@ -67,4 +67,4 @@
             <td><?= $legalEntity->effective_status ? __('Yes') : __('No'); ?></td>
         </tr>
     </table>
-</div>
+</div></div></section>
