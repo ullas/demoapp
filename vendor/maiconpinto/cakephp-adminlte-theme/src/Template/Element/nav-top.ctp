@@ -103,13 +103,13 @@ if (file_exists($file)) {
             <!-- User Account: style can be found in dropdown.less -->
             <li class="dropdown user user-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                    <?php echo $this->Html->image('user2-160x160.jpg', array('class' => 'user-image', 'alt' => 'User Image')); ?>
-                    <span class="hidden-xs">Sreekanth K</span>
+                    <?php echo $this->Html->image('sree.png', array('class' => 'user-image', 'alt' => 'User Image')); ?>
+                    <span class="hidden-xs">Sreekanth M</span>
                 </a>
                 <ul class="dropdown-menu">
                     <!-- User image -->
                     <li class="user-header">
-                        <?php echo $this->Html->image('profile-icon.png', array('class' => 'img-circle', 'alt' => 'User Image')); ?>
+                        <?php echo $this->Html->image('sree.png', array('class' => 'img-circle', 'alt' => 'User Image')); ?>
 
                         <p>
                             Sreekanth - Web Developer

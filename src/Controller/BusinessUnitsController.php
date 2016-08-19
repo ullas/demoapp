@@ -42,7 +42,7 @@ class BusinessUnitsController extends AppController
     public function add()
     {
         $businessUnit = $this->BusinessUnits->newEntity();
-        if ($this->request->is('post')) {
+        if ($this->request->is('post')) { print_r("entered".$businessUnit);
             $businessUnit = $this->BusinessUnits->patchEntity($businessUnit, $this->request->data);
             if ($this->BusinessUnits->save($businessUnit)) {
                 $this->Flash->success(__('The business unit has been saved.'));

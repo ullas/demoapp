@@ -12,7 +12,7 @@
 
 <!-- Main content -->
 <section class="content">
-  <div class="row">
+  <div class="box box-default"><div class="box-body">
     <!-- left column -->
     <div class="col-md-12">
       <!-- general form elements -->
@@ -41,5 +41,5 @@
         <?= $this->Form->end() ?>
       </div>
     </div>
-  </div>
+  </div></div>
 </section>
