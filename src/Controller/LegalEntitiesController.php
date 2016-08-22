@@ -2,7 +2,7 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
-
+use Cake\Event\Event;
 /**
  * LegalEntities Controller
  *
@@ -49,6 +49,10 @@ class LegalEntitiesController extends AppController
         $this->set('_serialize', ['legalEntity']);
     }
 
+	public function beforeFilter(Event $event)
+    {
+            $this->viewBuilder()->layout('admindefault');
+    }
     /**
      * Add method
      *
