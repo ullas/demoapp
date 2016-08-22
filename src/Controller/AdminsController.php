@@ -27,7 +27,7 @@ class AdminsController extends AppController
 	public function beforeFilter(Event $event)
     {
         // if (isset($this->params['prefix']) && $this->params['prefix'] == 'Admins') {
-            $this->viewBuilder()->layout('admindefault');
+            // $this->viewBuilder()->layout('admindefault');
         // } 
     }
     /**

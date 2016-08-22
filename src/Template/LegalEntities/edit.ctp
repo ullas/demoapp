@@ -11,7 +11,7 @@
       </ol>
     </section>
 <section class="content">
-	<div class="box box-default"><div class="box-body">
+	<div class="box box-primary"><div class="box-body">
     <?= $this->Form->create($legalEntity) ?>
     <fieldset>
         <?php

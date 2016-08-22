@@ -35267,3 +35267,353 @@ Stack Trace:
 #17 {main}
 
 
+2016-08-22 05:13:59 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Fonts could not be found.
+Exception Attributes: array (
+  'class' => 'Fonts',
+  'plugin' => false,
+  'prefix' => false,
+  '_ext' => false,
+)
+Request URL: /fonts/glyphicons-halflings-regular.woff2
+Referer URL: http://localhost:8765/css/bootstrap.min.css
+Stack Trace:
+#0 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Http/ControllerFactory.php(72): Cake\Http\ControllerFactory->missingController(Object(Cake\Network\Request))
+#1 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/ControllerFactoryFilter.php(66): Cake\Http\ControllerFactory->create(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#2 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/ControllerFactoryFilter.php(52): Cake\Routing\Filter\ControllerFactoryFilter->_getController(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#3 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/DispatcherFilter.php(144): Cake\Routing\Filter\ControllerFactoryFilter->beforeDispatch(Object(Cake\Event\Event))
+#4 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventManager.php(425): Cake\Routing\DispatcherFilter->handle(Object(Cake\Event\Event), Object(Cake\Network\Request), Object(Cake\Network\Response))
+#5 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventManager.php(386): Cake\Event\EventManager->_callListener(Array, Object(Cake\Event\Event))
+#6 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventDispatcherTrait.php(78): Cake\Event\EventManager->dispatch(Object(Cake\Event\Event))
+#7 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php(84): Cake\Http\ActionDispatcher->dispatchEvent('Dispatcher.befo...', Array)
+#8 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(65): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#9 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#10 {main}
+
+
+2016-08-22 05:13:59 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Fonts could not be found.
+Exception Attributes: array (
+  'class' => 'Fonts',
+  'plugin' => false,
+  'prefix' => false,
+  '_ext' => false,
+)
+Request URL: /fonts/glyphicons-halflings-regular.woff
+Referer URL: http://localhost:8765/css/bootstrap.min.css
+Stack Trace:
+#0 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Http/ControllerFactory.php(72): Cake\Http\ControllerFactory->missingController(Object(Cake\Network\Request))
+#1 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/ControllerFactoryFilter.php(66): Cake\Http\ControllerFactory->create(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#2 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/ControllerFactoryFilter.php(52): Cake\Routing\Filter\ControllerFactoryFilter->_getController(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#3 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/DispatcherFilter.php(144): Cake\Routing\Filter\ControllerFactoryFilter->beforeDispatch(Object(Cake\Event\Event))
+#4 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventManager.php(425): Cake\Routing\DispatcherFilter->handle(Object(Cake\Event\Event), Object(Cake\Network\Request), Object(Cake\Network\Response))
+#5 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventManager.php(386): Cake\Event\EventManager->_callListener(Array, Object(Cake\Event\Event))
+#6 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventDispatcherTrait.php(78): Cake\Event\EventManager->dispatch(Object(Cake\Event\Event))
+#7 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php(84): Cake\Http\ActionDispatcher->dispatchEvent('Dispatcher.befo...', Array)
+#8 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(65): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#9 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#10 {main}
+
+
+2016-08-22 05:14:00 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Fonts could not be found.
+Exception Attributes: array (
+  'class' => 'Fonts',
+  'plugin' => false,
+  'prefix' => false,
+  '_ext' => false,
+)
+Request URL: /fonts/glyphicons-halflings-regular.ttf
+Referer URL: http://localhost:8765/css/bootstrap.min.css
+Stack Trace:
+#0 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Http/ControllerFactory.php(72): Cake\Http\ControllerFactory->missingController(Object(Cake\Network\Request))
+#1 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/ControllerFactoryFilter.php(66): Cake\Http\ControllerFactory->create(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#2 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/ControllerFactoryFilter.php(52): Cake\Routing\Filter\ControllerFactoryFilter->_getController(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#3 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/DispatcherFilter.php(144): Cake\Routing\Filter\ControllerFactoryFilter->beforeDispatch(Object(Cake\Event\Event))
+#4 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventManager.php(425): Cake\Routing\DispatcherFilter->handle(Object(Cake\Event\Event), Object(Cake\Network\Request), Object(Cake\Network\Response))
+#5 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventManager.php(386): Cake\Event\EventManager->_callListener(Array, Object(Cake\Event\Event))
+#6 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventDispatcherTrait.php(78): Cake\Event\EventManager->dispatch(Object(Cake\Event\Event))
+#7 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php(84): Cake\Http\ActionDispatcher->dispatchEvent('Dispatcher.befo...', Array)
+#8 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(65): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#9 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#10 {main}
+
+
+2016-08-22 05:16:50 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Profiles could not be found.
+Exception Attributes: array (
+  'class' => 'Profiles',
+  'plugin' => false,
+  'prefix' => false,
+  '_ext' => false,
+)
+Request URL: /Profiles
+Referer URL: http://localhost:8765/Admins
+Stack Trace:
+#0 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Http/ControllerFactory.php(72): Cake\Http\ControllerFactory->missingController(Object(Cake\Network\Request))
+#1 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/ControllerFactoryFilter.php(66): Cake\Http\ControllerFactory->create(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#2 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/ControllerFactoryFilter.php(52): Cake\Routing\Filter\ControllerFactoryFilter->_getController(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#3 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/DispatcherFilter.php(144): Cake\Routing\Filter\ControllerFactoryFilter->beforeDispatch(Object(Cake\Event\Event))
+#4 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventManager.php(425): Cake\Routing\DispatcherFilter->handle(Object(Cake\Event\Event), Object(Cake\Network\Request), Object(Cake\Network\Response))
+#5 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventManager.php(386): Cake\Event\EventManager->_callListener(Array, Object(Cake\Event\Event))
+#6 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventDispatcherTrait.php(78): Cake\Event\EventManager->dispatch(Object(Cake\Event\Event))
+#7 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php(84): Cake\Http\ActionDispatcher->dispatchEvent('Dispatcher.befo...', Array)
+#8 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(65): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#9 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#10 {main}
+
+
+2016-08-22 05:20:25 Warning: Headers already sent in /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/AssetFilter.php:148
+2016-08-22 05:20:25 Warning: Headers already sent in /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/AssetFilter.php:148
+2016-08-22 05:20:25 Warning: Headers already sent in /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/AssetFilter.php:148
+2016-08-22 05:20:25 Warning: Headers already sent in /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/AssetFilter.php:148
+2016-08-22 05:20:25 Warning: Headers already sent in /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/AssetFilter.php:148
+2016-08-22 05:41:41 Warning: Headers already sent in /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/AssetFilter.php:148
+2016-08-22 05:41:41 Warning: Headers already sent in /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/AssetFilter.php:148
+2016-08-22 05:41:41 Warning: Headers already sent in /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/AssetFilter.php:148
+2016-08-22 05:41:41 Warning: Headers already sent in /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/AssetFilter.php:148
+2016-08-22 05:41:41 Warning: Headers already sent in /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/AssetFilter.php:148
+2016-08-22 05:41:41 Warning: Headers already sent in /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/AssetFilter.php:148
+2016-08-22 06:09:17 Warning: Headers already sent in /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/AssetFilter.php:148
+2016-08-22 06:09:17 Warning: Headers already sent in /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/AssetFilter.php:148
+2016-08-22 06:09:17 Warning: Headers already sent in /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/AssetFilter.php:148
+2016-08-22 06:09:17 Warning: Headers already sent in /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/AssetFilter.php:148
+2016-08-22 06:09:17 Warning: Headers already sent in /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/AssetFilter.php:148
+2016-08-22 06:09:17 Warning: Headers already sent in /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/AssetFilter.php:148
+2016-08-22 06:14:04 Warning: Headers already sent in /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/AssetFilter.php:148
+2016-08-22 06:14:04 Warning: Headers already sent in /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/AssetFilter.php:148
+2016-08-22 06:14:05 Warning: Headers already sent in /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/AssetFilter.php:148
+2016-08-22 06:14:05 Warning: Headers already sent in /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/AssetFilter.php:148
+2016-08-22 06:14:05 Warning: Headers already sent in /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/AssetFilter.php:148
+2016-08-22 06:14:05 Warning: Headers already sent in /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/AssetFilter.php:148
+2016-08-22 06:14:23 Warning: Headers already sent in /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/AssetFilter.php:148
+2016-08-22 06:14:23 Warning: Headers already sent in /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/AssetFilter.php:148
+2016-08-22 06:14:23 Warning: Headers already sent in /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/AssetFilter.php:148
+2016-08-22 06:14:24 Warning: Headers already sent in /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/AssetFilter.php:148
+2016-08-22 06:14:24 Warning: Headers already sent in /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/AssetFilter.php:148
+2016-08-22 06:14:24 Warning: Headers already sent in /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/AssetFilter.php:148
+2016-08-22 06:16:46 Warning: Headers already sent in /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/AssetFilter.php:148
+2016-08-22 06:16:46 Warning: Headers already sent in /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/AssetFilter.php:148
+2016-08-22 06:16:47 Warning: Headers already sent in /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/AssetFilter.php:148
+2016-08-22 06:16:47 Warning: Headers already sent in /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/AssetFilter.php:148
+2016-08-22 06:17:04 Warning: Headers already sent in /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/AssetFilter.php:148
+2016-08-22 06:17:04 Warning: Headers already sent in /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/AssetFilter.php:148
+2016-08-22 06:17:04 Warning: Headers already sent in /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/AssetFilter.php:148
+2016-08-22 06:17:04 Warning: Headers already sent in /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/AssetFilter.php:148
+2016-08-22 06:18:36 Warning: Headers already sent in /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/AssetFilter.php:148
+2016-08-22 06:18:36 Warning: Headers already sent in /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/AssetFilter.php:148
+2016-08-22 06:18:36 Warning: Headers already sent in /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/AssetFilter.php:148
+2016-08-22 06:18:36 Warning: Headers already sent in /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/AssetFilter.php:148
+2016-08-22 06:18:37 Warning: Headers already sent in /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/AssetFilter.php:148
+2016-08-22 06:18:37 Warning: Headers already sent in /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/AssetFilter.php:148
+2016-08-22 06:19:48 Warning: Headers already sent in /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/AssetFilter.php:148
+2016-08-22 06:19:49 Warning: Headers already sent in /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/AssetFilter.php:148
+2016-08-22 06:19:49 Warning: Headers already sent in /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/AssetFilter.php:148
+2016-08-22 06:19:49 Warning: Headers already sent in /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/AssetFilter.php:148
+2016-08-22 06:19:49 Warning: Headers already sent in /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/AssetFilter.php:148
+2016-08-22 06:20:20 Error: [Cake\Datasource\Exception\InvalidPrimaryKeyException] Record not found in table "profiles" with primary key [NULL]
+Request URL: /Profiles/View
+Stack Trace:
+#0 /Users/varunprathap/demoapp/src/Controller/ProfilesController.php(38): Cake\ORM\Table->get(Array, Array)
+#1 [internal function]: App\Controller\ProfilesController->view()
+#2 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Controller/Controller.php(435): call_user_func_array(Array, Array)
+#3 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php(125): Cake\Controller\Controller->invokeAction()
+#4 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php(99): Cake\Http\ActionDispatcher->_invoke(Object(App\Controller\ProfilesController))
+#5 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(65): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#6 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#7 {main}
+
+
+2016-08-22 06:24:17 Warning: Headers already sent in /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/AssetFilter.php:148
+2016-08-22 06:24:17 Warning: Headers already sent in /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/AssetFilter.php:148
+2016-08-22 06:24:17 Warning: Headers already sent in /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/AssetFilter.php:148
+2016-08-22 06:24:17 Warning: Headers already sent in /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/AssetFilter.php:148
+2016-08-22 06:25:23 Warning: Headers already sent in /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/AssetFilter.php:148
+2016-08-22 06:25:23 Warning: Headers already sent in /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/AssetFilter.php:148
+2016-08-22 06:25:23 Warning: Headers already sent in /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/AssetFilter.php:148
+2016-08-22 06:25:23 Warning: Headers already sent in /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/AssetFilter.php:148
+2016-08-22 06:25:23 Warning: Headers already sent in /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/AssetFilter.php:148
+2016-08-22 06:25:23 Warning: Headers already sent in /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/AssetFilter.php:148
+2016-08-22 06:25:46 Warning: Headers already sent in /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/AssetFilter.php:148
+2016-08-22 06:25:46 Warning: Headers already sent in /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/AssetFilter.php:148
+2016-08-22 06:25:46 Warning: Headers already sent in /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/AssetFilter.php:148
+2016-08-22 06:25:46 Warning: Headers already sent in /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/AssetFilter.php:148
+2016-08-22 06:25:46 Warning: Headers already sent in /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/AssetFilter.php:148
+2016-08-22 06:25:47 Warning: Headers already sent in /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/AssetFilter.php:148
+2016-08-22 06:27:01 Warning: Headers already sent in /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/AssetFilter.php:148
+2016-08-22 06:27:01 Warning: Headers already sent in /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/AssetFilter.php:148
+2016-08-22 06:27:01 Warning: Headers already sent in /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/AssetFilter.php:148
+2016-08-22 06:27:01 Warning: Headers already sent in /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/AssetFilter.php:148
+2016-08-22 06:27:01 Warning: Headers already sent in /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/AssetFilter.php:148
+2016-08-22 06:27:01 Warning: Headers already sent in /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/AssetFilter.php:148
+2016-08-22 06:28:04 Warning: Headers already sent in /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/AssetFilter.php:148
+2016-08-22 06:28:04 Warning: Headers already sent in /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/AssetFilter.php:148
+2016-08-22 06:28:04 Warning: Headers already sent in /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/AssetFilter.php:148
+2016-08-22 06:28:04 Warning: Headers already sent in /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/AssetFilter.php:148
+2016-08-22 06:28:04 Warning: Headers already sent in /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/AssetFilter.php:148
+2016-08-22 06:28:04 Warning: Headers already sent in /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/AssetFilter.php:148
+2016-08-22 07:27:48 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Admin_l_t_e could not be found.
+Exception Attributes: array (
+  'class' => 'Admin_l_t_e',
+  'plugin' => false,
+  'prefix' => false,
+  '_ext' => false,
+)
+Request URL: /admin_l_t_e/bootstrap/css/bootstrap.css.map
+Stack Trace:
+#0 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Http/ControllerFactory.php(72): Cake\Http\ControllerFactory->missingController(Object(Cake\Network\Request))
+#1 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/ControllerFactoryFilter.php(66): Cake\Http\ControllerFactory->create(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#2 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/ControllerFactoryFilter.php(52): Cake\Routing\Filter\ControllerFactoryFilter->_getController(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#3 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/DispatcherFilter.php(144): Cake\Routing\Filter\ControllerFactoryFilter->beforeDispatch(Object(Cake\Event\Event))
+#4 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventManager.php(425): Cake\Routing\DispatcherFilter->handle(Object(Cake\Event\Event), Object(Cake\Network\Request), Object(Cake\Network\Response))
+#5 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventManager.php(386): Cake\Event\EventManager->_callListener(Array, Object(Cake\Event\Event))
+#6 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventDispatcherTrait.php(78): Cake\Event\EventManager->dispatch(Object(Cake\Event\Event))
+#7 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php(84): Cake\Http\ActionDispatcher->dispatchEvent('Dispatcher.befo...', Array)
+#8 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(65): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#9 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#10 {main}
+
+
+2016-08-22 08:06:46 Warning: Warning (2): rawurlencode() expects parameter 1 to be string, array given in [/Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Route/Route.php, line 587]
+Request URL: /Profiles
+Referer URL: http://localhost:8765/legal-entities/add
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+rawurlencode - [internal], line ??
+array_map - [internal], line ??
+Cake\Routing\Route\Route::_writeUrl() - CORE/src/Routing/Route/Route.php, line 587
+Cake\Routing\Route\Route::match() - CORE/src/Routing/Route/Route.php, line 547
+Cake\Routing\Route\DashedRoute::match() - CORE/src/Routing/Route/DashedRoute.php, line 104
+Cake\Routing\RouteCollection::match() - CORE/src/Routing/RouteCollection.php, line 259
+Cake\Routing\Router::url() - CORE/src/Routing/Router.php, line 626
+Cake\View\Helper\UrlHelper::build() - CORE/src/View/Helper/UrlHelper.php, line 40
+Cake\View\Helper\HtmlHelper::link() - CORE/src/View/Helper/HtmlHelper.php, line 340
+include - ROOT/vendor/maiconpinto/cakephp-adminlte-theme/src/Template/Element/nav-top.ctp, line 127
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::_renderElement() - CORE/src/View/View.php, line 1350
+Cake\View\View::element() - CORE/src/View/View.php, line 493
+include - ROOT/vendor/maiconpinto/cakephp-adminlte-theme/src/Template/Layout/default.ctp, line 59
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::renderLayout() - CORE/src/View/View.php, line 635
+Cake\View\View::render() - CORE/src/View/View.php, line 593
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 617
+Cake\Http\ActionDispatcher::_invoke() - CORE/src/Http/ActionDispatcher.php, line 131
+Cake\Http\ActionDispatcher::dispatch() - CORE/src/Http/ActionDispatcher.php, line 99
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 65
+[main] - ROOT/webroot/index.php, line 36
+
+
+
+2016-08-22 08:06:47 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Admin_l_t_e could not be found.
+Exception Attributes: array (
+  'class' => 'Admin_l_t_e',
+  'plugin' => false,
+  'prefix' => false,
+  '_ext' => false,
+)
+Request URL: /admin_l_t_e/bootstrap/css/bootstrap.css.map
+Stack Trace:
+#0 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Http/ControllerFactory.php(72): Cake\Http\ControllerFactory->missingController(Object(Cake\Network\Request))
+#1 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/ControllerFactoryFilter.php(66): Cake\Http\ControllerFactory->create(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#2 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/ControllerFactoryFilter.php(52): Cake\Routing\Filter\ControllerFactoryFilter->_getController(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#3 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/DispatcherFilter.php(144): Cake\Routing\Filter\ControllerFactoryFilter->beforeDispatch(Object(Cake\Event\Event))
+#4 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventManager.php(425): Cake\Routing\DispatcherFilter->handle(Object(Cake\Event\Event), Object(Cake\Network\Request), Object(Cake\Network\Response))
+#5 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventManager.php(386): Cake\Event\EventManager->_callListener(Array, Object(Cake\Event\Event))
+#6 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventDispatcherTrait.php(78): Cake\Event\EventManager->dispatch(Object(Cake\Event\Event))
+#7 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php(84): Cake\Http\ActionDispatcher->dispatchEvent('Dispatcher.befo...', Array)
+#8 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(65): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#9 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#10 {main}
+
+
+2016-08-22 08:07:09 Error: [ParseError] syntax error, unexpected ')', expecting ',' or ';'
+Request URL: /Profiles
+Referer URL: http://localhost:8765/legal-entities/add
+Stack Trace:
+#0 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/View.php(964): Cake\View\View->_evaluate('/Users/varunpra...', Array)
+#1 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/View.php(1350): Cake\View\View->_render('/Users/varunpra...', Array)
+#2 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/View.php(493): Cake\View\View->_renderElement('/Users/varunpra...', Array, Array)
+#3 /Users/varunprathap/demoapp/vendor/maiconpinto/cakephp-adminlte-theme/src/Template/Layout/default.ctp(59): Cake\View\View->element('nav-top')
+#4 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/View.php(1005): include('/Users/varunpra...')
+#5 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/View.php(964): Cake\View\View->_evaluate('/Users/varunpra...', Array)
+#6 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/View.php(635): Cake\View\View->_render('/Users/varunpra...')
+#7 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/View.php(593): Cake\View\View->renderLayout('', 'default')
+#8 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Controller/Controller.php(617): Cake\View\View->render(NULL, NULL)
+#9 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php(131): Cake\Controller\Controller->render()
+#10 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php(99): Cake\Http\ActionDispatcher->_invoke(Object(App\Controller\ProfilesController))
+#11 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(65): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#12 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#13 {main}
+
+
+2016-08-22 08:07:24 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Admin_l_t_e could not be found.
+Exception Attributes: array (
+  'class' => 'Admin_l_t_e',
+  'plugin' => false,
+  'prefix' => false,
+  '_ext' => false,
+)
+Request URL: /admin_l_t_e/bootstrap/css/bootstrap.css.map
+Stack Trace:
+#0 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Http/ControllerFactory.php(72): Cake\Http\ControllerFactory->missingController(Object(Cake\Network\Request))
+#1 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/ControllerFactoryFilter.php(66): Cake\Http\ControllerFactory->create(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#2 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/ControllerFactoryFilter.php(52): Cake\Routing\Filter\ControllerFactoryFilter->_getController(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#3 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/DispatcherFilter.php(144): Cake\Routing\Filter\ControllerFactoryFilter->beforeDispatch(Object(Cake\Event\Event))
+#4 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventManager.php(425): Cake\Routing\DispatcherFilter->handle(Object(Cake\Event\Event), Object(Cake\Network\Request), Object(Cake\Network\Response))
+#5 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventManager.php(386): Cake\Event\EventManager->_callListener(Array, Object(Cake\Event\Event))
+#6 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventDispatcherTrait.php(78): Cake\Event\EventManager->dispatch(Object(Cake\Event\Event))
+#7 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php(84): Cake\Http\ActionDispatcher->dispatchEvent('Dispatcher.befo...', Array)
+#8 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(65): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#9 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#10 {main}
+
+
+2016-08-22 08:07:33 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Admin_l_t_e could not be found.
+Exception Attributes: array (
+  'class' => 'Admin_l_t_e',
+  'plugin' => false,
+  'prefix' => false,
+  '_ext' => false,
+)
+Request URL: /admin_l_t_e/bootstrap/css/bootstrap.css.map
+Stack Trace:
+#0 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Http/ControllerFactory.php(72): Cake\Http\ControllerFactory->missingController(Object(Cake\Network\Request))
+#1 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/ControllerFactoryFilter.php(66): Cake\Http\ControllerFactory->create(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#2 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/ControllerFactoryFilter.php(52): Cake\Routing\Filter\ControllerFactoryFilter->_getController(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#3 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/DispatcherFilter.php(144): Cake\Routing\Filter\ControllerFactoryFilter->beforeDispatch(Object(Cake\Event\Event))
+#4 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventManager.php(425): Cake\Routing\DispatcherFilter->handle(Object(Cake\Event\Event), Object(Cake\Network\Request), Object(Cake\Network\Response))
+#5 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventManager.php(386): Cake\Event\EventManager->_callListener(Array, Object(Cake\Event\Event))
+#6 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventDispatcherTrait.php(78): Cake\Event\EventManager->dispatch(Object(Cake\Event\Event))
+#7 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php(84): Cake\Http\ActionDispatcher->dispatchEvent('Dispatcher.befo...', Array)
+#8 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(65): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#9 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#10 {main}
+
+
+2016-08-22 08:07:43 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Admin_l_t_e could not be found.
+Exception Attributes: array (
+  'class' => 'Admin_l_t_e',
+  'plugin' => false,
+  'prefix' => false,
+  '_ext' => false,
+)
+Request URL: /admin_l_t_e/bootstrap/css/bootstrap.css.map
+Stack Trace:
+#0 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Http/ControllerFactory.php(72): Cake\Http\ControllerFactory->missingController(Object(Cake\Network\Request))
+#1 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/ControllerFactoryFilter.php(66): Cake\Http\ControllerFactory->create(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#2 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/ControllerFactoryFilter.php(52): Cake\Routing\Filter\ControllerFactoryFilter->_getController(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#3 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/DispatcherFilter.php(144): Cake\Routing\Filter\ControllerFactoryFilter->beforeDispatch(Object(Cake\Event\Event))
+#4 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventManager.php(425): Cake\Routing\DispatcherFilter->handle(Object(Cake\Event\Event), Object(Cake\Network\Request), Object(Cake\Network\Response))
+#5 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventManager.php(386): Cake\Event\EventManager->_callListener(Array, Object(Cake\Event\Event))
+#6 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventDispatcherTrait.php(78): Cake\Event\EventManager->dispatch(Object(Cake\Event\Event))
+#7 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php(84): Cake\Http\ActionDispatcher->dispatchEvent('Dispatcher.befo...', Array)
+#8 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(65): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#9 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#10 {main}
+
+
+2016-08-22 08:07:43 Warning: Headers already sent in /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/AssetFilter.php:148
+2016-08-22 08:07:43 Warning: Headers already sent in /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/AssetFilter.php:148
+2016-08-22 08:07:43 Warning: Headers already sent in /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/AssetFilter.php:148
+2016-08-22 08:07:43 Warning: Headers already sent in /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/AssetFilter.php:148
+2016-08-22 08:07:44 Warning: Headers already sent in /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/AssetFilter.php:148
+2016-08-22 08:07:44 Warning: Headers already sent in /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/AssetFilter.php:148
+2016-08-22 08:08:20 Warning: Headers already sent in /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/AssetFilter.php:148

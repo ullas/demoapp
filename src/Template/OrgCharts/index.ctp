@@ -89,6 +89,6 @@
       </ol>
     </section>
 <section class="content">
-	<div class="box box-default"><div class="box-body"> 
+	<div class="box box-primary"><div class="box-body"> 
     <div id="chart" class="orgChart"></div></div></div></section>
     
