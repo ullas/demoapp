@@ -1,6 +1,7 @@
 <?php
 namespace App\Controller;
 use App\Controller\AppController;
+use Cake\Event\Event;
 /**
  * BusinessUnits Controller
  *
@@ -18,6 +19,11 @@ class BusinessUnitsController extends AppController
         $businessUnits = $this->paginate($this->BusinessUnits);
         $this->set(compact('businessUnits'));
         $this->set('_serialize', ['businessUnits']);
+    }
+	
+	public function beforeFilter(Event $event)
+    {
+            $this->viewBuilder()->layout('admindefault');
     }
     /**
      * View method

@@ -12,6 +12,26 @@
 <!-- Main content -->
 <section class="content">
 
+<!-- Modal popover-->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Edit Profile</h4>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal popover-->
+
   <div class="row">
     <div class="col-md-3">
 
@@ -19,13 +39,14 @@
       <div class="box box-primary">
         <div class="box-body box-profile">
           <?php echo $this->Html->image('sree.png', array('class' => 'profile-user-img img-responsive img-circle', 'alt' => 'User profile picture')); ?>
+          
 
           <h3 class="profile-username text-center">Sreekanth M</h3>
 
           <p class="text-muted text-center">Software Engineer</p>
           <p class="text-center">Tawazun Dynamics,Tawazun Industrial Park</p>
 
-          <a href="#" class="btn btn-primary btn-block"><b>Edit Profile</b></a>
+          <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#myModal"> Edit Profile</button>
         </div>
         <!-- /.box-body -->
       </div>
@@ -113,7 +134,7 @@
       <div class="nav-tabs-custom">
         <ul class="nav nav-tabs">
           <li class="active"><a href="#tasks" data-toggle="tab">Roles</a></li>
-          <li><a href="#designations" data-toggle="tab">Designations</a></li>
+          <li><a href="#designations" data-toggle="tab">Responsibilities</a></li>
         </ul>
         <div class="tab-content">
           <div class="active tab-pane" id="tasks">
