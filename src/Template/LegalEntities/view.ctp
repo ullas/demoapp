@@ -11,7 +11,7 @@
       </ol>
     </section>
 <section class="content">
-	<div class="box box-default"><div class="box-body">
+	<div class="box box-primary"><div class="box-body">
 		
     <table class="table table-hover">
         <tr>

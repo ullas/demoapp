@@ -34,7 +34,7 @@
         
         <div class="col-md-3">
           <!-- MY INFO -->
-          <div class="box box-primary direct-chat direct-chat-primary">
+          <div class="box box-success direct-chat direct-chat-primary">
             <div class="box-header with-border">
               <h3 class="box-title">My Team</h3>
             </div>
@@ -53,7 +53,7 @@
         
         <div class="col-md-3">
           <!-- MY INFO -->
-          <div class="box box-primary direct-chat direct-chat-primary">
+          <div class="box box-warning direct-chat direct-chat-primary">
             <div class="box-header with-border">
               <h3 class="box-title">Links</h3>
             </div>
@@ -72,7 +72,7 @@
         
         <div class="col-md-3">
           <!-- MY INFO -->
-          <div class="box box-primary direct-chat direct-chat-primary">
+          <div class="box box-danger direct-chat direct-chat-primary">
             <div class="box-header with-border">
               <h3 class="box-title">Admin Alerts</h3>
             </div>
@@ -116,7 +116,7 @@
         
         <div class="col-md-3">
           <!-- MY INFO -->
-          <div class="box box-primary direct-chat direct-chat-primary">
+          <div class="box box-warning direct-chat direct-chat-primary">
             <div class="box-header with-border">
               <h3 class="box-title">Alerts</h3>
             </div>
@@ -135,7 +135,7 @@
         
         <div class="col-md-3">
           <!-- MY INFO -->
-          <div class="box box-primary direct-chat direct-chat-primary">
+          <div class="box box-danger direct-chat direct-chat-primary">
             <div class="box-header with-border">
               <h3 class="box-title">My Admin Favorites</h3>
             </div>

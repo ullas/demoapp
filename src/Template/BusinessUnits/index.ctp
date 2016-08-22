@@ -1,17 +1,18 @@
 <section class="content-header">
   <h1>
     Business Unit
+    <small>List</small>
   </h1>
   <ol class="breadcrumb">
     <li>
-    <?= $this->Html->link('<i class="fa fa-dashboard"></i> '.__('Back'), ['action' => 'index'], ['escape' => false]) ?>
+    <li><a href="<?php echo $this->Url->build(array('controller' => 'BusinessUnits', 'action' => 'add')); ?>">Add</a></li>
     </li>
   </ol>
 </section>
 
 <!-- Main content -->
 <section class="content">
-  <div class="box box-default"><div class="box-body">
+  <div class="box box-primary"><div class="box-body">
     <table cellpadding="0" cellspacing="0" class="table table-hover">
         <thead>
             <tr>

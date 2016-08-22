@@ -10,7 +10,7 @@
       </ol>
     </section>
 <section class="content">
-	<div class="box box-default">
+	<div class="box box-primary">
 		<div class="box-body">
 
     <table cellpadding="0" cellspacing="0" class="table table-hover">

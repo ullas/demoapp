@@ -4,16 +4,13 @@
         <small>Add</small>
       </h1>
       <ol class="breadcrumb">
-        <li class="active"><i class="fa fa-briefcase"></i> Business Unit</li>
-        <li class="active">Add</li>
-        <li><a href="<?php echo $this->Url->build(array('controller' => 'BusinessUnits', 'action' => 'index')); ?>">List</a></li>
+        <li><?= $this->Html->link('<i class="fa fa-mail-reply"></i> '.__('Back'), ['action' => 'index'], ['escape' => false]) ?></li>
       </ol>
     </section>
 <section class="content">
-	<div class="box box-default"><div class="box-body">
+	<div class="box box-primary"><div class="box-body">
 		<?= $this->Form->create($businessUnit) ?>
     <fieldset>
-        <legend><?= __('Add Business Unit') ?></legend>
         <?php
             echo $this->Form->input('name');
             echo $this->Form->input('description');
