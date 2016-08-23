@@ -1,15 +1,19 @@
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('Edit Contact Info'), ['action' => 'edit', $contactInfo->id]) ?> </li>
-        <li><?= $this->Form->postLink(__('Delete Contact Info'), ['action' => 'delete', $contactInfo->id], ['confirm' => __('Are you sure you want to delete # {0}?', $contactInfo->id)]) ?> </li>
-        <li><?= $this->Html->link(__('List Contact Infos'), ['action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Contact Info'), ['action' => 'add']) ?> </li>
-    </ul>
-</nav>
-<div class="contactInfos view large-9 medium-8 columns content">
-    <h3><?= h($contactInfo->id) ?></h3>
-    <table class="vertical-table">
+<section class="content-header">
+  <h1>
+    Contact Info
+    <small>View</small>
+  </h1>
+  <ol class="breadcrumb">
+    <li>
+    <?= $this->Html->link('<i class="fa fa-mail-reply"></i> '.__('Back'), ['action' => 'index'], ['escape' => false]) ?>
+    </li>
+  </ol>
+</section>
+
+<!-- Main content -->
+<section class="content">
+  <div class="box box-primary"><div class="box-body">
+    <table class="table table-hover">
         <tr>
             <th><?= __('Phone') ?></th>
             <td><?= h($contactInfo->phone) ?></td>
@@ -43,4 +47,4 @@
             <td><?= $this->Number->format($contactInfo->id) ?></td>
         </tr>
     </table>
-</div>
+</div></div></section>

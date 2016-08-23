@@ -1,16 +1,14 @@
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Form->postLink(
-                __('Delete'),
-                ['action' => 'delete', $address->id],
-                ['confirm' => __('Are you sure you want to delete # {0}?', $address->id)]
-            )
-        ?></li>
-        <li><?= $this->Html->link(__('List Addresses'), ['action' => 'index']) ?></li>
-    </ul>
-</nav>
-<div class="addresses form large-9 medium-8 columns content">
+<section class="content-header">
+      <h1>
+        Address
+        <small>Edit</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><?= $this->Html->link('<i class="fa fa-mail-reply"></i> '.__('Back'), ['action' => 'index'], ['escape' => false]) ?></li>
+      </ol>
+    </section>
+<section class="content">
+	<div class="box box-primary"><div class="box-body">
     <?= $this->Form->create($address) ?>
     <fieldset>
         <legend><?= __('Edit Address') ?></legend>
@@ -28,9 +26,9 @@
             echo $this->Form->input('city');
             echo $this->Form->input('county');
             echo $this->Form->input('state');
-            echo $this->Form->input('person_id_external');
+            echo $this->Form->input('emp_data_biographies_id', ['options' => $empDataBiographies, 'empty' => true]);
         ?>
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>
     <?= $this->Form->end() ?>
-</div>
+</div></div></section>

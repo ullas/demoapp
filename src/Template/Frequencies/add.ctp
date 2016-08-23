@@ -1,10 +1,14 @@
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('List Frequencies'), ['action' => 'index']) ?></li>
-    </ul>
-</nav>
-<div class="frequencies form large-9 medium-8 columns content">
+<section class="content-header">
+      <h1>
+        Frequency
+        <small>Add</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><?= $this->Html->link('<i class="fa fa-mail-reply"></i> '.__('Back'), ['action' => 'index'], ['escape' => false]) ?></li>
+      </ol>
+    </section>
+<section class="content">
+	<div class="box box-primary"><div class="box-body">
     <?= $this->Form->create($frequency) ?>
     <fieldset>
         <legend><?= __('Add Frequency') ?></legend>
@@ -17,4 +21,4 @@
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>
     <?= $this->Form->end() ?>
-</div>
+</div></div></section>

@@ -9,6 +9,8 @@ use Cake\Validation\Validator;
 /**
  * Addresses Model
  *
+ * @property \Cake\ORM\Association\BelongsTo $EmpDataBiographies
+ *
  * @method \App\Model\Entity\Address get($primaryKey, $options = [])
  * @method \App\Model\Entity\Address newEntity($data = null, array $options = [])
  * @method \App\Model\Entity\Address[] newEntities(array $data, array $options = [])
@@ -33,6 +35,10 @@ class AddressesTable extends Table
         $this->table('addresses');
         $this->displayField('id');
         $this->primaryKey('id');
+
+        $this->belongsTo('EmpDataBiographies', [
+            'foreignKey' => 'emp_data_biographies_id'
+        ]);
     }
 
     /**
@@ -85,11 +91,6 @@ class AddressesTable extends Table
         $validator
             ->allowEmpty('state');
 
-        $validator
-            ->requirePresence('person_id_external', 'create')
-            ->notEmpty('person_id_external')
-            ->add('person_id_external', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
-
         return $validator;
     }
 
@@ -102,7 +103,7 @@ class AddressesTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
-        $rules->add($rules->isUnique(['person_id_external']));
+        $rules->add($rules->existsIn(['emp_data_biographies_id'], 'EmpDataBiographies'));
 
         return $rules;
     }

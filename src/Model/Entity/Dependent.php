@@ -37,7 +37,7 @@ use Cake\ORM\Entity;
  * @property float $spouse_emplid
  * @property string $leave_passage
  * @property string $leave_passage_entitle
- * @property string $person_id_external
+ * @property int $emp_data_biographies_id
  */
 class Dependent extends Entity
 {

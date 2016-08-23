@@ -18,6 +18,9 @@ class AddressesController extends AppController
      */
     public function index()
     {
+        $this->paginate = [
+            'contain' => ['EmpDataBiographies']
+        ];
         $addresses = $this->paginate($this->Addresses);
 
         $this->set(compact('addresses'));
@@ -34,7 +37,7 @@ class AddressesController extends AppController
     public function view($id = null)
     {
         $address = $this->Addresses->get($id, [
-            'contain' => []
+            'contain' => ['EmpDataBiographies']
         ]);
 
         $this->set('address', $address);
@@ -59,7 +62,8 @@ class AddressesController extends AppController
                 $this->Flash->error(__('The address could not be saved. Please, try again.'));
             }
         }
-        $this->set(compact('address'));
+        $empDataBiographies = $this->Addresses->EmpDataBiographies->find('list', ['limit' => 200]);
+        $this->set(compact('address', 'empDataBiographies'));
         $this->set('_serialize', ['address']);
     }
 
@@ -85,7 +89,8 @@ class AddressesController extends AppController
                 $this->Flash->error(__('The address could not be saved. Please, try again.'));
             }
         }
-        $this->set(compact('address'));
+        $empDataBiographies = $this->Addresses->EmpDataBiographies->find('list', ['limit' => 200]);
+        $this->set(compact('address', 'empDataBiographies'));
         $this->set('_serialize', ['address']);
     }
 

@@ -9,6 +9,8 @@ use Cake\Validation\Validator;
 /**
  * Dependents Model
  *
+ * @property \Cake\ORM\Association\BelongsTo $EmpDataBiographies
+ *
  * @method \App\Model\Entity\Dependent get($primaryKey, $options = [])
  * @method \App\Model\Entity\Dependent newEntity($data = null, array $options = [])
  * @method \App\Model\Entity\Dependent[] newEntities(array $data, array $options = [])
@@ -33,6 +35,10 @@ class DependentsTable extends Table
         $this->table('dependents');
         $this->displayField('id');
         $this->primaryKey('id');
+
+        $this->belongsTo('EmpDataBiographies', [
+            'foreignKey' => 'emp_data_biographies_id'
+        ]);
     }
 
     /**
@@ -147,11 +153,6 @@ class DependentsTable extends Table
         $validator
             ->allowEmpty('leave_passage_entitle');
 
-        $validator
-            ->requirePresence('person_id_external', 'create')
-            ->notEmpty('person_id_external')
-            ->add('person_id_external', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
-
         return $validator;
     }
 
@@ -164,7 +165,7 @@ class DependentsTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
-        $rules->add($rules->isUnique(['person_id_external']));
+        $rules->add($rules->existsIn(['emp_data_biographies_id'], 'EmpDataBiographies'));
 
         return $rules;
     }

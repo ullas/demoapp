@@ -1,15 +1,19 @@
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('Edit Dependent'), ['action' => 'edit', $dependent->id]) ?> </li>
-        <li><?= $this->Form->postLink(__('Delete Dependent'), ['action' => 'delete', $dependent->id], ['confirm' => __('Are you sure you want to delete # {0}?', $dependent->id)]) ?> </li>
-        <li><?= $this->Html->link(__('List Dependents'), ['action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Dependent'), ['action' => 'add']) ?> </li>
-    </ul>
-</nav>
-<div class="dependents view large-9 medium-8 columns content">
-    <h3><?= h($dependent->id) ?></h3>
-    <table class="vertical-table">
+<section class="content-header">
+  <h1>
+    Dependents
+    <small>View</small>
+  </h1>
+  <ol class="breadcrumb">
+    <li>
+    <?= $this->Html->link('<i class="fa fa-mail-reply"></i> '.__('Back'), ['action' => 'index'], ['escape' => false]) ?>
+    </li>
+  </ol>
+</section>
+
+<!-- Main content -->
+<section class="content">
+  <div class="box box-primary"><div class="box-body">
+    <table class="table table-hover">
         <tr>
             <th><?= __('Relationship Type') ?></th>
             <td><?= h($dependent->relationship_type) ?></td>
@@ -87,16 +91,16 @@
             <td><?= h($dependent->leave_passage_entitle) ?></td>
         </tr>
         <tr>
-            <th><?= __('Person Id External') ?></th>
-            <td><?= h($dependent->person_id_external) ?></td>
-        </tr>
-        <tr>
             <th><?= __('Id') ?></th>
             <td><?= $this->Number->format($dependent->id) ?></td>
         </tr>
         <tr>
             <th><?= __('Spouse Emplid') ?></th>
             <td><?= $this->Number->format($dependent->spouse_emplid) ?></td>
+        </tr>
+        <tr>
+            <th><?= __('Emp Data Biographies Id') ?></th>
+            <td><?= $this->Number->format($dependent->emp_data_biographies_id) ?></td>
         </tr>
         <tr>
             <th><?= __('Date Of Birth') ?></th>
@@ -139,4 +143,4 @@
             <td><?= $dependent->employed ? __('Yes') : __('No'); ?></td>
         </tr>
     </table>
-</div>
+</div></div></section>

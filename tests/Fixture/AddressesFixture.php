@@ -31,11 +31,10 @@ class AddressesFixture extends TestFixture
         'city' => ['type' => 'string', 'length' => 256, 'default' => null, 'null' => true, 'collate' => null, 'comment' => null, 'precision' => null, 'fixed' => null],
         'county' => ['type' => 'string', 'length' => 256, 'default' => null, 'null' => true, 'collate' => null, 'comment' => null, 'precision' => null, 'fixed' => null],
         'state' => ['type' => 'string', 'length' => 256, 'default' => null, 'null' => true, 'collate' => null, 'comment' => null, 'precision' => null, 'fixed' => null],
-        'person_id_external' => ['type' => 'string', 'length' => 32, 'default' => null, 'null' => false, 'collate' => null, 'comment' => null, 'precision' => null, 'fixed' => null],
+        'emp_data_biographies_id' => ['type' => 'biginteger', 'length' => 20, 'default' => null, 'null' => true, 'comment' => null, 'precision' => null, 'unsigned' => null, 'autoIncrement' => null],
         '_constraints' => [
             'primary' => ['type' => 'primary', 'columns' => ['id'], 'length' => []],
-            'addresses_person_id_external_key' => ['type' => 'unique', 'columns' => ['person_id_external'], 'length' => []],
-            'addresses_person_id_external_fkey' => ['type' => 'foreign', 'columns' => ['person_id_external'], 'references' => ['emp_data_biographies', 'person_id_external'], 'update' => 'noAction', 'delete' => 'noAction', 'length' => []],
+            'addresses_emp_data_biographies_id_fkey' => ['type' => 'foreign', 'columns' => ['emp_data_biographies_id'], 'references' => ['emp_data_biographies', 'id'], 'update' => 'noAction', 'delete' => 'noAction', 'length' => []],
         ],
     ];
     // @codingStandardsIgnoreEnd
@@ -61,7 +60,7 @@ class AddressesFixture extends TestFixture
             'city' => 'Lorem ipsum dolor sit amet',
             'county' => 'Lorem ipsum dolor sit amet',
             'state' => 'Lorem ipsum dolor sit amet',
-            'person_id_external' => 'Lorem ipsum dolor sit amet'
+            'emp_data_biographies_id' => 1
         ],
     ];
 }

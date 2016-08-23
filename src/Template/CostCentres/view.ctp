@@ -1,15 +1,19 @@
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('Edit Cost Centre'), ['action' => 'edit', $costCentre->id]) ?> </li>
-        <li><?= $this->Form->postLink(__('Delete Cost Centre'), ['action' => 'delete', $costCentre->id], ['confirm' => __('Are you sure you want to delete # {0}?', $costCentre->id)]) ?> </li>
-        <li><?= $this->Html->link(__('List Cost Centres'), ['action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Cost Centre'), ['action' => 'add']) ?> </li>
-    </ul>
-</nav>
-<div class="costCentres view large-9 medium-8 columns content">
-    <h3><?= h($costCentre->name) ?></h3>
-    <table class="vertical-table">
+<section class="content-header">
+  <h1>
+    Cost Centre
+    <small>View</small>
+  </h1>
+  <ol class="breadcrumb">
+    <li>
+    <?= $this->Html->link('<i class="fa fa-mail-reply"></i> '.__('Back'), ['action' => 'index'], ['escape' => false]) ?>
+    </li>
+  </ol>
+</section>
+
+<!-- Main content -->
+<section class="content">
+  <div class="box box-primary"><div class="box-body">
+    <table class="table table-hover">
         <tr>
             <th><?= __('Name') ?></th>
             <td><?= h($costCentre->name) ?></td>
@@ -47,4 +51,4 @@
             <td><?= $costCentre->effective_status ? __('Yes') : __('No'); ?></td>
         </tr>
     </table>
-</div>
+</div></div></section>
