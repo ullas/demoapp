@@ -26,7 +26,7 @@
             echo "<div class='input-group-addon''><i class='fa fa-calendar'></i></div><input type='text' class='form-control' id='effective_end_date'></div></div>";
             echo $this->Form->input('country_of_registration',['options' => $countries, 'empty' => true]);
             echo $this->Form->input('standard_weekly_hours');
-            echo $this->Form->input('currency');
+            echo $this->Form->input('currency',['options' => $this->Currency->get_currencies(), 'empty' => true]);
             echo $this->Form->input('official_language',['options' => $this->Language->get_languages(), 'empty' => true]);
             echo $this->Form->input('external_code');
             echo $this->Form->input('location_id', ['options' => $locations, 'empty' => true]);

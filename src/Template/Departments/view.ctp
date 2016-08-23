@@ -5,6 +5,8 @@
         <li><?= $this->Form->postLink(__('Delete Department'), ['action' => 'delete', $department->id], ['confirm' => __('Are you sure you want to delete # {0}?', $department->id)]) ?> </li>
         <li><?= $this->Html->link(__('List Departments'), ['action' => 'index']) ?> </li>
         <li><?= $this->Html->link(__('New Department'), ['action' => 'add']) ?> </li>
+        <li><?= $this->Html->link(__('List Cost Centres'), ['controller' => 'CostCentres', 'action' => 'index']) ?> </li>
+        <li><?= $this->Html->link(__('New Cost Centre'), ['controller' => 'CostCentres', 'action' => 'add']) ?> </li>
     </ul>
 </nav>
 <div class="departments view large-9 medium-8 columns content">
@@ -23,12 +25,12 @@
             <td><?= h($department->parent_department) ?></td>
         </tr>
         <tr>
-            <th><?= __('Cost Center') ?></th>
-            <td><?= h($department->cost_center) ?></td>
-        </tr>
-        <tr>
             <th><?= __('External Code') ?></th>
             <td><?= h($department->external_code) ?></td>
+        </tr>
+        <tr>
+            <th><?= __('Cost Centre') ?></th>
+            <td><?= $department->has('cost_centre') ? $this->Html->link($department->cost_centre->name, ['controller' => 'CostCentres', 'action' => 'view', $department->cost_centre->id]) : '' ?></td>
         </tr>
         <tr>
             <th><?= __('Id') ?></th>

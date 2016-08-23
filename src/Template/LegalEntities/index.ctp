@@ -43,7 +43,7 @@
                 <td><?= h($legalEntity->effective_end_date) ?></td>
                 <td><?= $this->Country->get_country_name(h($legalEntity->country_of_registration)) ?></td>
                 <td><?= $this->Number->format($legalEntity->standard_weekly_hours) ?></td>
-                <td><?= $this->Number->format($legalEntity->currency) ?></td>
+                <td><?= $this->Currency->get_currency_name(h($legalEntity->currency)) ?></td>
                 <td><?= $this->Language->get_language_name(h($legalEntity->official_language)) ?></td>
                 <td><?= h($legalEntity->external_code) ?></td>
                 <td><?= $legalEntity->has('location') ? $this->Html->link($legalEntity->location->name, ['controller' => 'Locations', 'action' => 'view', $legalEntity->location->id]) : '' ?></td>

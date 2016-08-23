@@ -36647,3 +36647,53 @@ Stack Trace:
 #10 {main}
 
 
+2016-08-23 04:41:43 Error: [PDOException] SQLSTATE[23503]: Foreign key violation: 7 ERROR:  insert or update on table "departments" violates foreign key constraint "departments_cost_center_fkey"
+DETAIL:  Key (cost_center)=(cost ) is not present in table "cost_centres".
+Request URL: /departments/add
+Referer URL: http://localhost:8765/departments/add
+Stack Trace:
+#0 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Database/Statement/StatementDecorator.php(172): PDOStatement->execute(NULL)
+#1 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Database/Statement/StatementDecorator.php(172): Cake\Database\Statement\StatementDecorator->execute(NULL)
+#2 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Database/Log/LoggingStatement.php(56): Cake\Database\Statement\StatementDecorator->execute(NULL)
+#3 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Database/Connection.php(276): Cake\Database\Log\LoggingStatement->execute()
+#4 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Database/Query.php(189): Cake\Database\Connection->run(Object(Cake\ORM\Query))
+#5 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/ORM/Table.php(1665): Cake\Database\Query->execute()
+#6 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/ORM/Table.php(1559): Cake\ORM\Table->_insert(Object(App\Model\Entity\Department), Array)
+#7 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/ORM/Table.php(1488): Cake\ORM\Table->_processSave(Object(App\Model\Entity\Department), Object(ArrayObject))
+#8 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Database/Connection.php(570): Cake\ORM\Table->Cake\ORM\{closure}(Object(Cake\Database\Connection))
+#9 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/ORM/Table.php(1489): Cake\Database\Connection->transactional(Object(Closure))
+#10 /Users/varunprathap/demoapp/src/Controller/DepartmentsController.php(54): Cake\ORM\Table->save(Object(App\Model\Entity\Department))
+#11 [internal function]: App\Controller\DepartmentsController->add()
+#12 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Controller/Controller.php(435): call_user_func_array(Array, Array)
+#13 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php(125): Cake\Controller\Controller->invokeAction()
+#14 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php(99): Cake\Http\ActionDispatcher->_invoke(Object(App\Controller\DepartmentsController))
+#15 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(65): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#16 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#17 {main}
+
+
+2016-08-23 04:59:59 Error: [PDOException] SQLSTATE[23503]: Foreign key violation: 7 ERROR:  insert or update on table "departments" violates foreign key constraint "departments_parent_department_fkey"
+DETAIL:  Key (parent_department)=(parent) is not present in table "departments".
+Request URL: /departments/add
+Referer URL: http://localhost:8765/departments/add
+Stack Trace:
+#0 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Database/Statement/StatementDecorator.php(172): PDOStatement->execute(NULL)
+#1 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Database/Statement/StatementDecorator.php(172): Cake\Database\Statement\StatementDecorator->execute(NULL)
+#2 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Database/Log/LoggingStatement.php(56): Cake\Database\Statement\StatementDecorator->execute(NULL)
+#3 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Database/Connection.php(276): Cake\Database\Log\LoggingStatement->execute()
+#4 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Database/Query.php(189): Cake\Database\Connection->run(Object(Cake\ORM\Query))
+#5 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/ORM/Table.php(1665): Cake\Database\Query->execute()
+#6 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/ORM/Table.php(1559): Cake\ORM\Table->_insert(Object(App\Model\Entity\Department), Array)
+#7 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/ORM/Table.php(1488): Cake\ORM\Table->_processSave(Object(App\Model\Entity\Department), Object(ArrayObject))
+#8 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Database/Connection.php(570): Cake\ORM\Table->Cake\ORM\{closure}(Object(Cake\Database\Connection))
+#9 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/ORM/Table.php(1489): Cake\Database\Connection->transactional(Object(Closure))
+#10 /Users/varunprathap/demoapp/src/Controller/DepartmentsController.php(57): Cake\ORM\Table->save(Object(App\Model\Entity\Department))
+#11 [internal function]: App\Controller\DepartmentsController->add()
+#12 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Controller/Controller.php(435): call_user_func_array(Array, Array)
+#13 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php(125): Cake\Controller\Controller->invokeAction()
+#14 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php(99): Cake\Http\ActionDispatcher->_invoke(Object(App\Controller\DepartmentsController))
+#15 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(65): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#16 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#17 {main}
+
+

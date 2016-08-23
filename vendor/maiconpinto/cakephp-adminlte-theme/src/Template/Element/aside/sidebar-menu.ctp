@@ -15,12 +15,11 @@ if (file_exists($file)) {
 	<li class="treeview">
         <a href="#"> <i class="fa fa-home"></i> <span>Admin</span> <i class="fa fa-angle-left pull-right"></i>  </a>
         <ul class="treeview-menu">
-            <li>
-                <a href="<?php echo $this->Url->build('/LegalEntities'); ?>"><i class="fa fa-circle-o"></i> Legal Entity</a>
-            </li>
-            <li>
-                <a href="<?php echo $this->Url->build('/BusinessUnits'); ?>"><i class="fa fa-circle-o"></i> Business Unit</a>
-            </li>
+            <li><a href="<?php echo $this->Url->build('/LegalEntities'); ?>"><i class="fa fa-circle-o"></i> Legal Entity</a></li>
+            <li><a href="<?php echo $this->Url->build('/BusinessUnits'); ?>"><i class="fa fa-circle-o"></i> Business Unit</a></li>
+            <li><a href="<?php echo $this->Url->build('/Departments'); ?>"><i class="fa fa-circle-o"></i> Departments</a></li>
+            <li><a href="<?php echo $this->Url->build('/Divisions'); ?>"><i class="fa fa-circle-o"></i> Divisions</a></li>
+            <li><a href="<?php echo $this->Url->build('/CostCentres'); ?>"><i class="fa fa-circle-o"></i> Cost Centres</a></li>
         </ul>
     </li>
         

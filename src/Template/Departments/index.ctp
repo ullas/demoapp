@@ -2,6 +2,8 @@
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
         <li><?= $this->Html->link(__('New Department'), ['action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('List Cost Centres'), ['controller' => 'CostCentres', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New Cost Centre'), ['controller' => 'CostCentres', 'action' => 'add']) ?></li>
     </ul>
 </nav>
 <div class="departments index large-9 medium-8 columns content">
@@ -16,9 +18,9 @@
                 <th><?= $this->Paginator->sort('effective_start_date') ?></th>
                 <th><?= $this->Paginator->sort('effective_end_date') ?></th>
                 <th><?= $this->Paginator->sort('parent_department') ?></th>
-                <th><?= $this->Paginator->sort('cost_center') ?></th>
                 <th><?= $this->Paginator->sort('external_code') ?></th>
                 <th><?= $this->Paginator->sort('head_of_unit') ?></th>
+                <th><?= $this->Paginator->sort('cost_center_id') ?></th>
                 <th class="actions"><?= __('Actions') ?></th>
             </tr>
         </thead>
@@ -32,9 +34,9 @@
                 <td><?= h($department->effective_start_date) ?></td>
                 <td><?= h($department->effective_end_date) ?></td>
                 <td><?= h($department->parent_department) ?></td>
-                <td><?= h($department->cost_center) ?></td>
                 <td><?= h($department->external_code) ?></td>
                 <td><?= $this->Number->format($department->head_of_unit) ?></td>
+                <td><?= $department->has('cost_centre') ? $this->Html->link($department->cost_centre->name, ['controller' => 'CostCentres', 'action' => 'view', $department->cost_centre->id]) : '' ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $department->id]) ?>
                     <?= $this->Html->link(__('Edit'), ['action' => 'edit', $department->id]) ?>

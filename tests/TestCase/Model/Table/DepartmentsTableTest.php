@@ -24,7 +24,8 @@ class DepartmentsTableTest extends TestCase
      * @var array
      */
     public $fixtures = [
-        'app.departments'
+        'app.departments',
+        'app.cost_centres'
     ];
 
     /**
@@ -67,6 +68,16 @@ class DepartmentsTableTest extends TestCase
      * @return void
      */
     public function testValidationDefault()
+    {
+        $this->markTestIncomplete('Not implemented yet.');
+    }
+
+    /**
+     * Test buildRules method
+     *
+     * @return void
+     */
+    public function testBuildRules()
     {
         $this->markTestIncomplete('Not implemented yet.');
     }

@@ -8,6 +8,8 @@
             )
         ?></li>
         <li><?= $this->Html->link(__('List Departments'), ['action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('List Cost Centres'), ['controller' => 'CostCentres', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New Cost Centre'), ['controller' => 'CostCentres', 'action' => 'add']) ?></li>
     </ul>
 </nav>
 <div class="departments form large-9 medium-8 columns content">
@@ -21,9 +23,9 @@
             echo $this->Form->input('effective_start_date', ['empty' => true]);
             echo $this->Form->input('effective_end_date', ['empty' => true]);
             echo $this->Form->input('parent_department');
-            echo $this->Form->input('cost_center');
             echo $this->Form->input('external_code');
             echo $this->Form->input('head_of_unit');
+            echo $this->Form->input('cost_center_id', ['options' => $costCentres, 'empty' => true]);
         ?>
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>
