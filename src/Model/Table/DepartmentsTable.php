@@ -9,6 +9,8 @@ use Cake\Validation\Validator;
 /**
  * Departments Model
  *
+ * @property \Cake\ORM\Association\BelongsTo $CostCentres
+ *
  * @method \App\Model\Entity\Department get($primaryKey, $options = [])
  * @method \App\Model\Entity\Department newEntity($data = null, array $options = [])
  * @method \App\Model\Entity\Department[] newEntities(array $data, array $options = [])
@@ -33,6 +35,10 @@ class DepartmentsTable extends Table
         $this->table('departments');
         $this->displayField('name');
         $this->primaryKey('id');
+
+        $this->belongsTo('CostCentres', [
+            'foreignKey' => 'cost_center_id'
+        ]);
     }
 
     /**
@@ -68,9 +74,6 @@ class DepartmentsTable extends Table
             ->allowEmpty('parent_department');
 
         $validator
-            ->allowEmpty('cost_center');
-
-        $validator
             ->requirePresence('external_code', 'create')
             ->notEmpty('external_code')
             ->add('external_code', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
@@ -91,6 +94,7 @@ class DepartmentsTable extends Table
     public function buildRules(RulesChecker $rules)
     {
         $rules->add($rules->isUnique(['external_code']));
+        $rules->add($rules->existsIn(['cost_center_id'], 'CostCentres'));
 
         return $rules;
     }

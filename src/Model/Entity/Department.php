@@ -13,9 +13,11 @@ use Cake\ORM\Entity;
  * @property \Cake\I18n\Time $effective_start_date
  * @property \Cake\I18n\Time $effective_end_date
  * @property string $parent_department
- * @property string $cost_center
  * @property string $external_code
  * @property int $head_of_unit
+ * @property int $cost_center_id
+ *
+ * @property \App\Model\Entity\CostCentre $cost_centre
  */
 class Department extends Entity
 {

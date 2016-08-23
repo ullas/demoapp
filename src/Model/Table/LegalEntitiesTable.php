@@ -82,7 +82,6 @@ class LegalEntitiesTable extends Table
             ->allowEmpty('standard_weekly_hours');
 
         $validator
-            ->decimal('currency')
             ->allowEmpty('currency');
 
         $validator

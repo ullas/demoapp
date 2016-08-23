@@ -18,6 +18,9 @@ class DepartmentsController extends AppController
      */
     public function index()
     {
+        $this->paginate = [
+            'contain' => ['CostCentres']
+        ];
         $departments = $this->paginate($this->Departments);
 
         $this->set(compact('departments'));
@@ -34,7 +37,7 @@ class DepartmentsController extends AppController
     public function view($id = null)
     {
         $department = $this->Departments->get($id, [
-            'contain' => []
+            'contain' => ['CostCentres']
         ]);
 
         $this->set('department', $department);
@@ -59,7 +62,8 @@ class DepartmentsController extends AppController
                 $this->Flash->error(__('The department could not be saved. Please, try again.'));
             }
         }
-        $this->set(compact('department'));
+        $costCentres = $this->Departments->CostCentres->find('list', ['limit' => 200]);
+        $this->set(compact('department', 'costCentres'));
         $this->set('_serialize', ['department']);
     }
 
@@ -85,7 +89,8 @@ class DepartmentsController extends AppController
                 $this->Flash->error(__('The department could not be saved. Please, try again.'));
             }
         }
-        $this->set(compact('department'));
+        $costCentres = $this->Departments->CostCentres->find('list', ['limit' => 200]);
+        $this->set(compact('department', 'costCentres'));
         $this->set('_serialize', ['department']);
     }
 
