@@ -48,11 +48,10 @@ class DependentsFixture extends TestFixture
         'spouse_emplid' => ['type' => 'decimal', 'length' => null, 'default' => null, 'null' => true, 'comment' => null, 'precision' => null, 'unsigned' => null],
         'leave_passage' => ['type' => 'string', 'length' => 60, 'default' => null, 'null' => true, 'collate' => null, 'comment' => null, 'precision' => null, 'fixed' => null],
         'leave_passage_entitle' => ['type' => 'string', 'length' => 60, 'default' => null, 'null' => true, 'collate' => null, 'comment' => null, 'precision' => null, 'fixed' => null],
-        'person_id_external' => ['type' => 'string', 'length' => 32, 'default' => null, 'null' => false, 'collate' => null, 'comment' => null, 'precision' => null, 'fixed' => null],
+        'emp_data_biographies_id' => ['type' => 'biginteger', 'length' => 20, 'default' => null, 'null' => true, 'comment' => null, 'precision' => null, 'unsigned' => null, 'autoIncrement' => null],
         '_constraints' => [
             'primary' => ['type' => 'primary', 'columns' => ['id'], 'length' => []],
-            'dependents_person_id_external_key' => ['type' => 'unique', 'columns' => ['person_id_external'], 'length' => []],
-            'dependents_person_id_external_fkey' => ['type' => 'foreign', 'columns' => ['person_id_external'], 'references' => ['emp_data_biographies', 'person_id_external'], 'update' => 'noAction', 'delete' => 'noAction', 'length' => []],
+            'dependents_emp_data_biographies_id_fkey' => ['type' => 'foreign', 'columns' => ['emp_data_biographies_id'], 'references' => ['emp_data_biographies', 'id'], 'update' => 'noAction', 'delete' => 'noAction', 'length' => []],
         ],
     ];
     // @codingStandardsIgnoreEnd
@@ -72,7 +71,7 @@ class DependentsFixture extends TestFixture
             'last_name' => 'Lorem ipsum dolor sit amet',
             'middle_name' => 'Lorem ipsum dolor sit amet',
             'salutation' => 'Lorem ipsum dolor sit amet',
-            'date_of_birth' => '2016-08-09',
+            'date_of_birth' => '2016-08-23',
             'country_of_birth' => 'Lorem ipsum dolor sit amet',
             'country' => 'Lorem ipsum dolor sit amet',
             'card_type' => 'Lorem ipsum dolor sit amet',
@@ -80,13 +79,13 @@ class DependentsFixture extends TestFixture
             'is_add_same_as_employee' => 1,
             'address_number' => 'Lorem ipsum dolor sit amet',
             'visa' => 'Lorem ipsum dolor sit amet',
-            'visa_issue' => '2016-08-09',
-            'visa_expiry' => '2016-08-09',
+            'visa_issue' => '2016-08-23',
+            'visa_expiry' => '2016-08-23',
             'passport' => 'Lorem ipsum dolor sit amet',
-            'pass_issue' => '2016-08-09',
-            'pass_expiry' => '2016-08-09',
+            'pass_issue' => '2016-08-23',
+            'pass_expiry' => '2016-08-23',
             'employed' => 1,
-            'emp_since' => '2016-08-09',
+            'emp_since' => '2016-08-23',
             'employer' => 'Lorem ipsum dolor sit amet',
             'acco_entitlement' => 'Lorem ipsum dolor sit amet',
             'legal_nominee' => 'Lorem ipsum dolor sit amet',
@@ -95,7 +94,7 @@ class DependentsFixture extends TestFixture
             'spouse_emplid' => 1.5,
             'leave_passage' => 'Lorem ipsum dolor sit amet',
             'leave_passage_entitle' => 'Lorem ipsum dolor sit amet',
-            'person_id_external' => 'Lorem ipsum dolor sit amet'
+            'emp_data_biographies_id' => 1
         ],
     ];
 }

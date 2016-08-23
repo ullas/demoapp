@@ -1,16 +1,14 @@
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Form->postLink(
-                __('Delete'),
-                ['action' => 'delete', $contactInfo->id],
-                ['confirm' => __('Are you sure you want to delete # {0}?', $contactInfo->id)]
-            )
-        ?></li>
-        <li><?= $this->Html->link(__('List Contact Infos'), ['action' => 'index']) ?></li>
-    </ul>
-</nav>
-<div class="contactInfos form large-9 medium-8 columns content">
+<section class="content-header">
+      <h1>
+        Contact Info
+        <small>Edit</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><?= $this->Html->link('<i class="fa fa-mail-reply"></i> '.__('Back'), ['action' => 'index'], ['escape' => false]) ?></li>
+      </ol>
+    </section>
+<section class="content">
+	<div class="box box-primary"><div class="box-body">
     <?= $this->Form->create($contactInfo) ?>
     <fieldset>
         <legend><?= __('Edit Contact Info') ?></legend>
@@ -26,4 +24,4 @@
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>
     <?= $this->Form->end() ?>
-</div>
+</div></div></section>

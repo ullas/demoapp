@@ -1,15 +1,19 @@
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('Edit Holiday Calendar'), ['action' => 'edit', $holidayCalendar->id]) ?> </li>
-        <li><?= $this->Form->postLink(__('Delete Holiday Calendar'), ['action' => 'delete', $holidayCalendar->id], ['confirm' => __('Are you sure you want to delete # {0}?', $holidayCalendar->id)]) ?> </li>
-        <li><?= $this->Html->link(__('List Holiday Calendars'), ['action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Holiday Calendar'), ['action' => 'add']) ?> </li>
-    </ul>
-</nav>
-<div class="holidayCalendars view large-9 medium-8 columns content">
-    <h3><?= h($holidayCalendar->name) ?></h3>
-    <table class="vertical-table">
+<section class="content-header">
+  <h1>
+    Holiday Calendar
+    <small>View</small>
+  </h1>
+  <ol class="breadcrumb">
+    <li>
+    <?= $this->Html->link('<i class="fa fa-mail-reply"></i> '.__('Back'), ['action' => 'index'], ['escape' => false]) ?>
+    </li>
+  </ol>
+</section>
+
+<!-- Main content -->
+<section class="content">
+  <div class="box box-primary"><div class="box-body">
+    <table class="table table-hover">
         <tr>
             <th><?= __('Calendar') ?></th>
             <td><?= h($holidayCalendar->calendar) ?></td>
@@ -35,4 +39,4 @@
             <td><?= h($holidayCalendar->valid_to) ?></td>
         </tr>
     </table>
-</div>
+</div></div></section>

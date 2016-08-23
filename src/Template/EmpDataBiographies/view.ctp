@@ -1,15 +1,19 @@
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('Edit Emp Data Biography'), ['action' => 'edit', $empDataBiography->id]) ?> </li>
-        <li><?= $this->Form->postLink(__('Delete Emp Data Biography'), ['action' => 'delete', $empDataBiography->id], ['confirm' => __('Are you sure you want to delete # {0}?', $empDataBiography->id)]) ?> </li>
-        <li><?= $this->Html->link(__('List Emp Data Biographies'), ['action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Emp Data Biography'), ['action' => 'add']) ?> </li>
-    </ul>
-</nav>
-<div class="empDataBiographies view large-9 medium-8 columns content">
-    <h3><?= h($empDataBiography->id) ?></h3>
-    <table class="vertical-table">
+<section class="content-header">
+  <h1>
+    Emp data Biography
+    <small>View</small>
+  </h1>
+  <ol class="breadcrumb">
+    <li>
+    <?= $this->Html->link('<i class="fa fa-mail-reply"></i> '.__('Back'), ['action' => 'index'], ['escape' => false]) ?>
+    </li>
+  </ol>
+</section>
+
+<!-- Main content -->
+<section class="content">
+  <div class="box box-primary"><div class="box-body">
+    <table class="table table-hover">
         <tr>
             <th><?= __('Country Of Birth') ?></th>
             <td><?= h($empDataBiography->country_of_birth) ?></td>
@@ -43,4 +47,4 @@
             <td><?= h($empDataBiography->date_of_death) ?></td>
         </tr>
     </table>
-</div>
+</div></div></section>

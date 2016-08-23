@@ -1,17 +1,19 @@
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('Edit Department'), ['action' => 'edit', $department->id]) ?> </li>
-        <li><?= $this->Form->postLink(__('Delete Department'), ['action' => 'delete', $department->id], ['confirm' => __('Are you sure you want to delete # {0}?', $department->id)]) ?> </li>
-        <li><?= $this->Html->link(__('List Departments'), ['action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Department'), ['action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List Cost Centres'), ['controller' => 'CostCentres', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Cost Centre'), ['controller' => 'CostCentres', 'action' => 'add']) ?> </li>
-    </ul>
-</nav>
-<div class="departments view large-9 medium-8 columns content">
-    <h3><?= h($department->name) ?></h3>
-    <table class="vertical-table">
+<section class="content-header">
+  <h1>
+    Department
+    <small>View</small>
+  </h1>
+  <ol class="breadcrumb">
+    <li>
+    <?= $this->Html->link('<i class="fa fa-mail-reply"></i> '.__('Back'), ['action' => 'index'], ['escape' => false]) ?>
+    </li>
+  </ol>
+</section>
+
+<!-- Main content -->
+<section class="content">
+  <div class="box box-primary"><div class="box-body">
+    <table class="table table-hover">
         <tr>
             <th><?= __('Name') ?></th>
             <td><?= h($department->name) ?></td>
@@ -53,4 +55,4 @@
             <td><?= $department->effective_status ? __('Yes') : __('No'); ?></td>
         </tr>
     </table>
-</div>
+</div></</div></section>

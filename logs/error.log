@@ -36697,3 +36697,286 @@ Stack Trace:
 #17 {main}
 
 
+2016-08-23 06:55:17 Error: [PDOException] SQLSTATE[23503]: Foreign key violation: 7 ERROR:  insert or update on table "divisions" violates foreign key constraint "divisions_parent_division_fkey"
+DETAIL:  Key (parent_division)=(2) is not present in table "divisions".
+Request URL: /divisions/add
+Referer URL: http://localhost:8765/divisions/add
+Stack Trace:
+#0 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Database/Statement/StatementDecorator.php(172): PDOStatement->execute(NULL)
+#1 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Database/Statement/StatementDecorator.php(172): Cake\Database\Statement\StatementDecorator->execute(NULL)
+#2 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Database/Log/LoggingStatement.php(56): Cake\Database\Statement\StatementDecorator->execute(NULL)
+#3 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Database/Connection.php(276): Cake\Database\Log\LoggingStatement->execute()
+#4 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Database/Query.php(189): Cake\Database\Connection->run(Object(Cake\ORM\Query))
+#5 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/ORM/Table.php(1665): Cake\Database\Query->execute()
+#6 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/ORM/Table.php(1559): Cake\ORM\Table->_insert(Object(App\Model\Entity\Division), Array)
+#7 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/ORM/Table.php(1488): Cake\ORM\Table->_processSave(Object(App\Model\Entity\Division), Object(ArrayObject))
+#8 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Database/Connection.php(570): Cake\ORM\Table->Cake\ORM\{closure}(Object(Cake\Database\Connection))
+#9 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/ORM/Table.php(1489): Cake\Database\Connection->transactional(Object(Closure))
+#10 /Users/varunprathap/demoapp/src/Controller/DivisionsController.php(54): Cake\ORM\Table->save(Object(App\Model\Entity\Division))
+#11 [internal function]: App\Controller\DivisionsController->add()
+#12 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Controller/Controller.php(435): call_user_func_array(Array, Array)
+#13 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php(125): Cake\Controller\Controller->invokeAction()
+#14 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php(99): Cake\Http\ActionDispatcher->_invoke(Object(App\Controller\DivisionsController))
+#15 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(65): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#16 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#17 {main}
+
+
+2016-08-23 07:01:22 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Divsions could not be found.
+Exception Attributes: array (
+  'class' => 'Divsions',
+  'plugin' => false,
+  'prefix' => false,
+  '_ext' => false,
+)
+Request URL: /divsions/add
+Referer URL: http://localhost:8765/divisions
+Stack Trace:
+#0 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Http/ControllerFactory.php(72): Cake\Http\ControllerFactory->missingController(Object(Cake\Network\Request))
+#1 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/ControllerFactoryFilter.php(66): Cake\Http\ControllerFactory->create(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#2 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/ControllerFactoryFilter.php(52): Cake\Routing\Filter\ControllerFactoryFilter->_getController(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#3 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/DispatcherFilter.php(144): Cake\Routing\Filter\ControllerFactoryFilter->beforeDispatch(Object(Cake\Event\Event))
+#4 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventManager.php(425): Cake\Routing\DispatcherFilter->handle(Object(Cake\Event\Event), Object(Cake\Network\Request), Object(Cake\Network\Response))
+#5 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventManager.php(386): Cake\Event\EventManager->_callListener(Array, Object(Cake\Event\Event))
+#6 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventDispatcherTrait.php(78): Cake\Event\EventManager->dispatch(Object(Cake\Event\Event))
+#7 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php(84): Cake\Http\ActionDispatcher->dispatchEvent('Dispatcher.befo...', Array)
+#8 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(65): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#9 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#10 {main}
+
+
+2016-08-23 07:05:11 Error: [PDOException] SQLSTATE[23503]: Foreign key violation: 7 ERROR:  insert or update on table "cost_centres" violates foreign key constraint "cost_centres_parent_cost_center_fkey"
+DETAIL:  Key (parent_cost_center)=(2) is not present in table "cost_centres".
+Request URL: /cost-centres/add
+Referer URL: http://localhost:8765/cost-centres/add
+Stack Trace:
+#0 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Database/Statement/StatementDecorator.php(172): PDOStatement->execute(NULL)
+#1 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Database/Statement/StatementDecorator.php(172): Cake\Database\Statement\StatementDecorator->execute(NULL)
+#2 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Database/Log/LoggingStatement.php(56): Cake\Database\Statement\StatementDecorator->execute(NULL)
+#3 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Database/Connection.php(276): Cake\Database\Log\LoggingStatement->execute()
+#4 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Database/Query.php(189): Cake\Database\Connection->run(Object(Cake\ORM\Query))
+#5 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/ORM/Table.php(1665): Cake\Database\Query->execute()
+#6 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/ORM/Table.php(1559): Cake\ORM\Table->_insert(Object(App\Model\Entity\CostCentre), Array)
+#7 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/ORM/Table.php(1488): Cake\ORM\Table->_processSave(Object(App\Model\Entity\CostCentre), Object(ArrayObject))
+#8 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Database/Connection.php(570): Cake\ORM\Table->Cake\ORM\{closure}(Object(Cake\Database\Connection))
+#9 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/ORM/Table.php(1489): Cake\Database\Connection->transactional(Object(Closure))
+#10 /Users/varunprathap/demoapp/src/Controller/CostCentresController.php(54): Cake\ORM\Table->save(Object(App\Model\Entity\CostCentre))
+#11 [internal function]: App\Controller\CostCentresController->add()
+#12 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Controller/Controller.php(435): call_user_func_array(Array, Array)
+#13 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php(125): Cake\Controller\Controller->invokeAction()
+#14 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php(99): Cake\Http\ActionDispatcher->_invoke(Object(App\Controller\CostCentresController))
+#15 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(65): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#16 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#17 {main}
+
+
+2016-08-23 08:22:56 Error: [InvalidArgumentException] CalendarAssignments is not associated with Users
+Request URL: /CalendarAssignments
+Referer URL: http://localhost:8765/Addresses
+Stack Trace:
+#0 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/ORM/EagerLoader.php(254): Cake\ORM\EagerLoader->_normalizeContain(Object(App\Model\Table\CalendarAssignmentsTable), 'Users', Array, Array)
+#1 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/ORM/EagerLoader.php(380): Cake\ORM\EagerLoader->normalized(Object(App\Model\Table\CalendarAssignmentsTable))
+#2 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/ORM/EagerLoader.php(351): Cake\ORM\EagerLoader->attachableAssociations(Object(App\Model\Table\CalendarAssignmentsTable))
+#3 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/ORM/Query.php(981): Cake\ORM\EagerLoader->attachAssociations(Object(Cake\ORM\Query), Object(App\Model\Table\CalendarAssignmentsTable), true)
+#4 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/ORM/Query.php(932): Cake\ORM\Query->_transformQuery()
+#5 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Database/Driver/PDODriverTrait.php(112): Cake\ORM\Query->sql()
+#6 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Database/Connection.php(221): Cake\Database\Driver\Postgres->prepare(Object(Cake\ORM\Query))
+#7 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Database/Connection.php(274): Cake\Database\Connection->prepare(Object(Cake\ORM\Query))
+#8 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Database/Query.php(189): Cake\Database\Connection->run(Object(Cake\ORM\Query))
+#9 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/ORM/Query.php(954): Cake\Database\Query->execute()
+#10 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Datasource/QueryTrait.php(276): Cake\ORM\Query->_execute()
+#11 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/ORM/Query.php(902): Cake\ORM\Query->_all()
+#12 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Controller/Component/PaginatorComponent.php(188): Cake\ORM\Query->all()
+#13 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Controller/Controller.php(713): Cake\Controller\Component\PaginatorComponent->paginate(Object(App\Model\Table\CalendarAssignmentsTable), Array)
+#14 /Users/varunprathap/demoapp/src/Controller/CalendarAssignmentsController.php(24): Cake\Controller\Controller->paginate(Object(App\Model\Table\CalendarAssignmentsTable))
+#15 [internal function]: App\Controller\CalendarAssignmentsController->index()
+#16 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Controller/Controller.php(435): call_user_func_array(Array, Array)
+#17 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php(125): Cake\Controller\Controller->invokeAction()
+#18 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php(99): Cake\Http\ActionDispatcher->_invoke(Object(App\Controller\CalendarAssignmentsController))
+#19 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(65): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#20 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#21 {main}
+
+
+2016-08-23 08:23:18 Error: [InvalidArgumentException] CalendarAssignments is not associated with Users
+Request URL: /CalendarAssignments
+Referer URL: http://localhost:8765/Dependents
+Stack Trace:
+#0 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/ORM/EagerLoader.php(254): Cake\ORM\EagerLoader->_normalizeContain(Object(App\Model\Table\CalendarAssignmentsTable), 'Users', Array, Array)
+#1 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/ORM/EagerLoader.php(380): Cake\ORM\EagerLoader->normalized(Object(App\Model\Table\CalendarAssignmentsTable))
+#2 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/ORM/EagerLoader.php(351): Cake\ORM\EagerLoader->attachableAssociations(Object(App\Model\Table\CalendarAssignmentsTable))
+#3 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/ORM/Query.php(981): Cake\ORM\EagerLoader->attachAssociations(Object(Cake\ORM\Query), Object(App\Model\Table\CalendarAssignmentsTable), true)
+#4 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/ORM/Query.php(932): Cake\ORM\Query->_transformQuery()
+#5 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Database/Driver/PDODriverTrait.php(112): Cake\ORM\Query->sql()
+#6 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Database/Connection.php(221): Cake\Database\Driver\Postgres->prepare(Object(Cake\ORM\Query))
+#7 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Database/Connection.php(274): Cake\Database\Connection->prepare(Object(Cake\ORM\Query))
+#8 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Database/Query.php(189): Cake\Database\Connection->run(Object(Cake\ORM\Query))
+#9 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/ORM/Query.php(954): Cake\Database\Query->execute()
+#10 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Datasource/QueryTrait.php(276): Cake\ORM\Query->_execute()
+#11 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/ORM/Query.php(902): Cake\ORM\Query->_all()
+#12 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Controller/Component/PaginatorComponent.php(188): Cake\ORM\Query->all()
+#13 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Controller/Controller.php(713): Cake\Controller\Component\PaginatorComponent->paginate(Object(App\Model\Table\CalendarAssignmentsTable), Array)
+#14 /Users/varunprathap/demoapp/src/Controller/CalendarAssignmentsController.php(24): Cake\Controller\Controller->paginate(Object(App\Model\Table\CalendarAssignmentsTable))
+#15 [internal function]: App\Controller\CalendarAssignmentsController->index()
+#16 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Controller/Controller.php(435): call_user_func_array(Array, Array)
+#17 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php(125): Cake\Controller\Controller->invokeAction()
+#18 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php(99): Cake\Http\ActionDispatcher->_invoke(Object(App\Controller\CalendarAssignmentsController))
+#19 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(65): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#20 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#21 {main}
+
+
+2016-08-23 08:27:15 Error: [PDOException] SQLSTATE[23503]: Foreign key violation: 7 ERROR:  insert or update on table "addresses" violates foreign key constraint "addresses_person_id_external_fkey"
+DETAIL:  Key (person_id_external)=(gg) is not present in table "emp_data_biographies".
+Request URL: /addresses/add
+Referer URL: http://localhost:8765/addresses/add
+Stack Trace:
+#0 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Database/Statement/StatementDecorator.php(172): PDOStatement->execute(NULL)
+#1 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Database/Statement/StatementDecorator.php(172): Cake\Database\Statement\StatementDecorator->execute(NULL)
+#2 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Database/Log/LoggingStatement.php(56): Cake\Database\Statement\StatementDecorator->execute(NULL)
+#3 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Database/Connection.php(276): Cake\Database\Log\LoggingStatement->execute()
+#4 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Database/Query.php(189): Cake\Database\Connection->run(Object(Cake\ORM\Query))
+#5 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/ORM/Table.php(1665): Cake\Database\Query->execute()
+#6 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/ORM/Table.php(1559): Cake\ORM\Table->_insert(Object(App\Model\Entity\Address), Array)
+#7 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/ORM/Table.php(1488): Cake\ORM\Table->_processSave(Object(App\Model\Entity\Address), Object(ArrayObject))
+#8 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Database/Connection.php(570): Cake\ORM\Table->Cake\ORM\{closure}(Object(Cake\Database\Connection))
+#9 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/ORM/Table.php(1489): Cake\Database\Connection->transactional(Object(Closure))
+#10 /Users/varunprathap/demoapp/src/Controller/AddressesController.php(54): Cake\ORM\Table->save(Object(App\Model\Entity\Address))
+#11 [internal function]: App\Controller\AddressesController->add()
+#12 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Controller/Controller.php(435): call_user_func_array(Array, Array)
+#13 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php(125): Cake\Controller\Controller->invokeAction()
+#14 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php(99): Cake\Http\ActionDispatcher->_invoke(Object(App\Controller\AddressesController))
+#15 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(65): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#16 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#17 {main}
+
+
+2016-08-23 08:28:08 Error: [PDOException] SQLSTATE[23503]: Foreign key violation: 7 ERROR:  insert or update on table "addresses" violates foreign key constraint "addresses_person_id_external_fkey"
+DETAIL:  Key (person_id_external)=(gg) is not present in table "emp_data_biographies".
+Request URL: /addresses/add
+Referer URL: http://localhost:8765/addresses/add
+Stack Trace:
+#0 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Database/Statement/StatementDecorator.php(172): PDOStatement->execute(NULL)
+#1 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Database/Statement/StatementDecorator.php(172): Cake\Database\Statement\StatementDecorator->execute(NULL)
+#2 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Database/Log/LoggingStatement.php(56): Cake\Database\Statement\StatementDecorator->execute(NULL)
+#3 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Database/Connection.php(276): Cake\Database\Log\LoggingStatement->execute()
+#4 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Database/Query.php(189): Cake\Database\Connection->run(Object(Cake\ORM\Query))
+#5 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/ORM/Table.php(1665): Cake\Database\Query->execute()
+#6 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/ORM/Table.php(1559): Cake\ORM\Table->_insert(Object(App\Model\Entity\Address), Array)
+#7 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/ORM/Table.php(1488): Cake\ORM\Table->_processSave(Object(App\Model\Entity\Address), Object(ArrayObject))
+#8 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Database/Connection.php(570): Cake\ORM\Table->Cake\ORM\{closure}(Object(Cake\Database\Connection))
+#9 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/ORM/Table.php(1489): Cake\Database\Connection->transactional(Object(Closure))
+#10 /Users/varunprathap/demoapp/src/Controller/AddressesController.php(54): Cake\ORM\Table->save(Object(App\Model\Entity\Address))
+#11 [internal function]: App\Controller\AddressesController->add()
+#12 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Controller/Controller.php(435): call_user_func_array(Array, Array)
+#13 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php(125): Cake\Controller\Controller->invokeAction()
+#14 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php(99): Cake\Http\ActionDispatcher->_invoke(Object(App\Controller\AddressesController))
+#15 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(65): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#16 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#17 {main}
+
+
+2016-08-23 08:29:12 Error: [PDOException] SQLSTATE[23503]: Foreign key violation: 7 ERROR:  insert or update on table "addresses" violates foreign key constraint "addresses_person_id_external_fkey"
+DETAIL:  Key (person_id_external)=(gg) is not present in table "emp_data_biographies".
+Request URL: /addresses/add
+Referer URL: http://localhost:8765/addresses/add
+Stack Trace:
+#0 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Database/Statement/StatementDecorator.php(172): PDOStatement->execute(NULL)
+#1 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Database/Statement/StatementDecorator.php(172): Cake\Database\Statement\StatementDecorator->execute(NULL)
+#2 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Database/Log/LoggingStatement.php(56): Cake\Database\Statement\StatementDecorator->execute(NULL)
+#3 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Database/Connection.php(276): Cake\Database\Log\LoggingStatement->execute()
+#4 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Database/Query.php(189): Cake\Database\Connection->run(Object(Cake\ORM\Query))
+#5 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/ORM/Table.php(1665): Cake\Database\Query->execute()
+#6 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/ORM/Table.php(1559): Cake\ORM\Table->_insert(Object(App\Model\Entity\Address), Array)
+#7 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/ORM/Table.php(1488): Cake\ORM\Table->_processSave(Object(App\Model\Entity\Address), Object(ArrayObject))
+#8 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Database/Connection.php(570): Cake\ORM\Table->Cake\ORM\{closure}(Object(Cake\Database\Connection))
+#9 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/ORM/Table.php(1489): Cake\Database\Connection->transactional(Object(Closure))
+#10 /Users/varunprathap/demoapp/src/Controller/AddressesController.php(54): Cake\ORM\Table->save(Object(App\Model\Entity\Address))
+#11 [internal function]: App\Controller\AddressesController->add()
+#12 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Controller/Controller.php(435): call_user_func_array(Array, Array)
+#13 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php(125): Cake\Controller\Controller->invokeAction()
+#14 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php(99): Cake\Http\ActionDispatcher->_invoke(Object(App\Controller\AddressesController))
+#15 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(65): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#16 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#17 {main}
+
+
+2016-08-23 09:10:20 Error: [PDOException] SQLSTATE[42703]: Undefined column: 7 ERROR:  column empdatapersonals.religion does not exist
+LINE 1: ...home_airport AS "EmpDataPersonals__home_airport", EmpDataPer...
+                                                             ^
+HINT:  Perhaps you meant to reference the column "empdatapersonals.Religion".
+Request URL: /EmpDataPersonals
+Referer URL: http://localhost:8765/EmpDataBiographies
+Stack Trace:
+#0 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Database/Statement/StatementDecorator.php(172): PDOStatement->execute(NULL)
+#1 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Database/Statement/StatementDecorator.php(172): Cake\Database\Statement\StatementDecorator->execute(NULL)
+#2 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Database/Log/LoggingStatement.php(56): Cake\Database\Statement\StatementDecorator->execute(NULL)
+#3 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Database/Connection.php(276): Cake\Database\Log\LoggingStatement->execute()
+#4 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Database/Query.php(189): Cake\Database\Connection->run(Object(Cake\ORM\Query))
+#5 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/ORM/Query.php(954): Cake\Database\Query->execute()
+#6 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Datasource/QueryTrait.php(276): Cake\ORM\Query->_execute()
+#7 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/ORM/Query.php(902): Cake\ORM\Query->_all()
+#8 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Controller/Component/PaginatorComponent.php(188): Cake\ORM\Query->all()
+#9 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Controller/Controller.php(713): Cake\Controller\Component\PaginatorComponent->paginate(Object(App\Model\Table\EmpDataPersonalsTable), Array)
+#10 /Users/varunprathap/demoapp/src/Controller/EmpDataPersonalsController.php(21): Cake\Controller\Controller->paginate(Object(App\Model\Table\EmpDataPersonalsTable))
+#11 [internal function]: App\Controller\EmpDataPersonalsController->index()
+#12 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Controller/Controller.php(435): call_user_func_array(Array, Array)
+#13 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php(125): Cake\Controller\Controller->invokeAction()
+#14 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php(99): Cake\Http\ActionDispatcher->_invoke(Object(App\Controller\EmpDataPersonalsController))
+#15 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(65): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#16 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#17 {main}
+
+
+2016-08-23 09:10:36 Error: [PDOException] SQLSTATE[42703]: Undefined column: 7 ERROR:  column empdatapersonals.religion does not exist
+LINE 1: ...home_airport AS "EmpDataPersonals__home_airport", EmpDataPer...
+                                                             ^
+HINT:  Perhaps you meant to reference the column "empdatapersonals.Religion".
+Request URL: /EmpDataPersonals
+Referer URL: http://localhost:8765/EmpDataBiographies
+Stack Trace:
+#0 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Database/Statement/StatementDecorator.php(172): PDOStatement->execute(NULL)
+#1 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Database/Statement/StatementDecorator.php(172): Cake\Database\Statement\StatementDecorator->execute(NULL)
+#2 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Database/Log/LoggingStatement.php(56): Cake\Database\Statement\StatementDecorator->execute(NULL)
+#3 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Database/Connection.php(276): Cake\Database\Log\LoggingStatement->execute()
+#4 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Database/Query.php(189): Cake\Database\Connection->run(Object(Cake\ORM\Query))
+#5 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/ORM/Query.php(954): Cake\Database\Query->execute()
+#6 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Datasource/QueryTrait.php(276): Cake\ORM\Query->_execute()
+#7 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/ORM/Query.php(902): Cake\ORM\Query->_all()
+#8 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Controller/Component/PaginatorComponent.php(188): Cake\ORM\Query->all()
+#9 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Controller/Controller.php(713): Cake\Controller\Component\PaginatorComponent->paginate(Object(App\Model\Table\EmpDataPersonalsTable), Array)
+#10 /Users/varunprathap/demoapp/src/Controller/EmpDataPersonalsController.php(21): Cake\Controller\Controller->paginate(Object(App\Model\Table\EmpDataPersonalsTable))
+#11 [internal function]: App\Controller\EmpDataPersonalsController->index()
+#12 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Controller/Controller.php(435): call_user_func_array(Array, Array)
+#13 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php(125): Cake\Controller\Controller->invokeAction()
+#14 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php(99): Cake\Http\ActionDispatcher->_invoke(Object(App\Controller\EmpDataPersonalsController))
+#15 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(65): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#16 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#17 {main}
+
+
+2016-08-23 09:27:01 Error: [PDOException] SQLSTATE[23503]: Foreign key violation: 7 ERROR:  insert or update on table "dependents" violates foreign key constraint "dependents_person_id_external_fkey"
+DETAIL:  Key (person_id_external)=(h) is not present in table "emp_data_biographies".
+Request URL: /dependents/add
+Referer URL: http://localhost:8765/dependents/add
+Stack Trace:
+#0 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Database/Statement/StatementDecorator.php(172): PDOStatement->execute(NULL)
+#1 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Database/Statement/StatementDecorator.php(172): Cake\Database\Statement\StatementDecorator->execute(NULL)
+#2 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Database/Log/LoggingStatement.php(56): Cake\Database\Statement\StatementDecorator->execute(NULL)
+#3 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Database/Connection.php(276): Cake\Database\Log\LoggingStatement->execute()
+#4 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Database/Query.php(189): Cake\Database\Connection->run(Object(Cake\ORM\Query))
+#5 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/ORM/Table.php(1665): Cake\Database\Query->execute()
+#6 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/ORM/Table.php(1559): Cake\ORM\Table->_insert(Object(App\Model\Entity\Dependent), Array)
+#7 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/ORM/Table.php(1488): Cake\ORM\Table->_processSave(Object(App\Model\Entity\Dependent), Object(ArrayObject))
+#8 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Database/Connection.php(570): Cake\ORM\Table->Cake\ORM\{closure}(Object(Cake\Database\Connection))
+#9 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/ORM/Table.php(1489): Cake\Database\Connection->transactional(Object(Closure))
+#10 /Users/varunprathap/demoapp/src/Controller/DependentsController.php(54): Cake\ORM\Table->save(Object(App\Model\Entity\Dependent))
+#11 [internal function]: App\Controller\DependentsController->add()
+#12 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Controller/Controller.php(435): call_user_func_array(Array, Array)
+#13 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php(125): Cake\Controller\Controller->invokeAction()
+#14 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php(99): Cake\Http\ActionDispatcher->_invoke(Object(App\Controller\DependentsController))
+#15 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(65): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#16 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#17 {main}
+
+

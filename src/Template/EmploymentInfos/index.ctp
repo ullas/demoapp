@@ -1,12 +1,19 @@
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('New Employment Info'), ['action' => 'add']) ?></li>
-    </ul>
-</nav>
-<div class="employmentInfos index large-9 medium-8 columns content">
-    <h3><?= __('Employment Infos') ?></h3>
-    <table cellpadding="0" cellspacing="0">
+<section class="content-header">
+  <h1>
+    Employment Info
+    <small>List</small>
+  </h1>
+  <ol class="breadcrumb">
+    <li>
+    <li><a href="<?php echo $this->Url->build(array('controller' => 'EmploymentInfos', 'action' => 'add')); ?>">Add</a></li>
+    </li>
+  </ol>
+</section>
+
+<!-- Main content -->
+<section class="content">
+  <div class="box box-primary"><div class="box-body">
+    <table cellpadding="0" cellspacing="0" class="table table-hover">
         <thead>
             <tr>
                 <th><?= $this->Paginator->sort('id') ?></th>
@@ -20,7 +27,7 @@
                 <th><?= $this->Paginator->sort('prev_employeeid') ?></th>
                 <th><?= $this->Paginator->sort('eligible_for_stock') ?></th>
                 <th><?= $this->Paginator->sort('service_date') ?></th>
-                <th><?= $this->Paginator->sort('initial_stock_grant') ?></th>
+                <!-- <th><?= $this->Paginator->sort('initial_stock_grant') ?></th>
                 <th><?= $this->Paginator->sort('initial_option_grant') ?></th>
                 <th><?= $this->Paginator->sort('job_credit') ?></th>
                 <th><?= $this->Paginator->sort('notes') ?></th>
@@ -34,7 +41,7 @@
                 <th><?= $this->Paginator->sort('bonus_pay_expiration_date') ?></th>
                 <th><?= $this->Paginator->sort('stock_end_date') ?></th>
                 <th><?= $this->Paginator->sort('salary_end_date') ?></th>
-                <th><?= $this->Paginator->sort('benefits_end_date') ?></th>
+                <th><?= $this->Paginator->sort('benefits_end_date') ?></th> -->
                 <th class="actions"><?= __('Actions') ?></th>
             </tr>
         </thead>
@@ -52,7 +59,7 @@
                 <td><?= h($employmentInfo->prev_employeeid) ?></td>
                 <td><?= h($employmentInfo->eligible_for_stock) ?></td>
                 <td><?= h($employmentInfo->service_date) ?></td>
-                <td><?= $this->Number->format($employmentInfo->initial_stock_grant) ?></td>
+                <!-- <td><?= $this->Number->format($employmentInfo->initial_stock_grant) ?></td>
                 <td><?= $this->Number->format($employmentInfo->initial_option_grant) ?></td>
                 <td><?= h($employmentInfo->job_credit) ?></td>
                 <td><?= h($employmentInfo->notes) ?></td>
@@ -66,7 +73,7 @@
                 <td><?= h($employmentInfo->bonus_pay_expiration_date) ?></td>
                 <td><?= h($employmentInfo->stock_end_date) ?></td>
                 <td><?= h($employmentInfo->salary_end_date) ?></td>
-                <td><?= h($employmentInfo->benefits_end_date) ?></td>
+                <td><?= h($employmentInfo->benefits_end_date) ?></td> -->
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $employmentInfo->id]) ?>
                     <?= $this->Html->link(__('Edit'), ['action' => 'edit', $employmentInfo->id]) ?>
@@ -75,7 +82,7 @@
             </tr>
             <?php endforeach; ?>
         </tbody>
-    </table>
+    </table></div></div>
     <div class="paginator">
         <ul class="pagination">
             <?= $this->Paginator->prev('< ' . __('previous')) ?>
@@ -84,4 +91,4 @@
         </ul>
         <p><?= $this->Paginator->counter() ?></p>
     </div>
-</div>
+</section>

@@ -20,6 +20,21 @@ if (file_exists($file)) {
             <li><a href="<?php echo $this->Url->build('/Departments'); ?>"><i class="fa fa-circle-o"></i> Departments</a></li>
             <li><a href="<?php echo $this->Url->build('/Divisions'); ?>"><i class="fa fa-circle-o"></i> Divisions</a></li>
             <li><a href="<?php echo $this->Url->build('/CostCentres'); ?>"><i class="fa fa-circle-o"></i> Cost Centres</a></li>
+            
+            <li><a href="<?php echo $this->Url->build('/Addresses'); ?>"><i class="fa fa-circle-o"></i> Addresses</a></li>
+            <!--  <li><a href="<?php echo $this->Url->build('/CalendarAssignments'); ?>"><i class="fa fa-circle-o"></i> Calendar Assignments</a></li> -->
+            <li><a href="<?php echo $this->Url->build('/ContactInfos'); ?>"><i class="fa fa-circle-o"></i> Contact Infos</a></li>
+            <li><a href="<?php echo $this->Url->build('/CorporateAddresses'); ?>"><i class="fa fa-circle-o"></i> Corporate Addresses</a></li>
+            <li><a href="<?php echo $this->Url->build('/Dependents'); ?>"><i class="fa fa-circle-o"></i> Dependents</a></li>
+            
+            <li><a href="<?php echo $this->Url->build('/EmpDataBiographies'); ?>"><i class="fa fa-circle-o"></i> Emp Data Biography</a></li>
+            <!-- <li><a href="<?php echo $this->Url->build('/EmpDataPersonals'); ?>"><i class="fa fa-circle-o"></i> Emp Data Personal</a></li> -->
+            <li><a href="<?php echo $this->Url->build('/EmploymentInfos'); ?>"><i class="fa fa-circle-o"></i> Employment Info</a></li>
+            <li><a href="<?php echo $this->Url->build('/EventReasons'); ?>"><i class="fa fa-circle-o"></i> Event reason</a></li>
+            
+            <li><a href="<?php echo $this->Url->build('/Frequencies'); ?>"><i class="fa fa-circle-o"></i> Frequency</a></li>
+            <li><a href="<?php echo $this->Url->build('/HolidayCalendars'); ?>"><i class="fa fa-circle-o"></i> Holiday Calendar</a></li>
+            <li><a href="<?php echo $this->Url->build('/Holidays'); ?>"><i class="fa fa-circle-o"></i> Holiday</a></li>
         </ul>
     </li>
         

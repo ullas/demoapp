@@ -1,12 +1,19 @@
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('New Address'), ['action' => 'add']) ?></li>
-    </ul>
-</nav>
-<div class="addresses index large-9 medium-8 columns content">
-    <h3><?= __('Addresses') ?></h3>
-    <table cellpadding="0" cellspacing="0">
+<section class="content-header">
+  <h1>
+    Address
+    <small>List</small>
+  </h1>
+  <ol class="breadcrumb">
+    <li>
+    <li><a href="<?php echo $this->Url->build(array('controller' => 'Addresses', 'action' => 'add')); ?>">Add</a></li>
+    </li>
+  </ol>
+</section>
+
+<!-- Main content -->
+<section class="content">
+  <div class="box box-primary"><div class="box-body">
+    <table cellpadding="0" cellspacing="0" class="table table-hover">
         <thead>
             <tr>
                 <th><?= $this->Paginator->sort('id') ?></th>
@@ -23,7 +30,7 @@
                 <th><?= $this->Paginator->sort('city') ?></th>
                 <th><?= $this->Paginator->sort('county') ?></th>
                 <th><?= $this->Paginator->sort('state') ?></th>
-                <th><?= $this->Paginator->sort('person_id_external') ?></th>
+                <th><?= $this->Paginator->sort('emp_data_biographies_id') ?></th>
                 <th class="actions"><?= __('Actions') ?></th>
             </tr>
         </thead>
@@ -44,7 +51,7 @@
                 <td><?= h($address->city) ?></td>
                 <td><?= h($address->county) ?></td>
                 <td><?= h($address->state) ?></td>
-                <td><?= h($address->person_id_external) ?></td>
+                <td><?= $address->has('emp_data_biography') ? $this->Html->link($address->emp_data_biography->id, ['controller' => 'EmpDataBiographies', 'action' => 'view', $address->emp_data_biography->id]) : '' ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $address->id]) ?>
                     <?= $this->Html->link(__('Edit'), ['action' => 'edit', $address->id]) ?>
@@ -53,7 +60,7 @@
             </tr>
             <?php endforeach; ?>
         </tbody>
-    </table>
+    </table></div></div>
     <div class="paginator">
         <ul class="pagination">
             <?= $this->Paginator->prev('< ' . __('previous')) ?>
@@ -62,4 +69,4 @@
         </ul>
         <p><?= $this->Paginator->counter() ?></p>
     </div>
-</div>
+</section>
