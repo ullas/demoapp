@@ -72,7 +72,6 @@
     <section class="content">
     	<div class="row">
 		<div class="col-md-3">
-			<hr><hr>
           <div class="box box-solid">
            
             <div class="box-body no-padding">

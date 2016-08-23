@@ -51,7 +51,7 @@ class LegalEntitiesController extends AppController
 
 	public function beforeFilter(Event $event)
     {
-            $this->viewBuilder()->layout('admindefault');
+            // $this->viewBuilder()->layout('admindefault');
     }
     /**
      * Add method
