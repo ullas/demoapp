@@ -18,6 +18,9 @@ class JobClassesController extends AppController
      */
     public function index()
     {
+        $this->paginate = [
+            'contain' => ['PayGrades', 'JobFunctions']
+        ];
         $jobClasses = $this->paginate($this->JobClasses);
 
         $this->set(compact('jobClasses'));
@@ -34,7 +37,7 @@ class JobClassesController extends AppController
     public function view($id = null)
     {
         $jobClass = $this->JobClasses->get($id, [
-            'contain' => []
+            'contain' => ['PayGrades', 'JobFunctions']
         ]);
 
         $this->set('jobClass', $jobClass);
@@ -59,7 +62,9 @@ class JobClassesController extends AppController
                 $this->Flash->error(__('The job class could not be saved. Please, try again.'));
             }
         }
-        $this->set(compact('jobClass'));
+        $payGrades = $this->JobClasses->PayGrades->find('list', ['limit' => 200]);
+        $jobFunctions = $this->JobClasses->JobFunctions->find('list', ['limit' => 200]);
+        $this->set(compact('jobClass', 'payGrades', 'jobFunctions'));
         $this->set('_serialize', ['jobClass']);
     }
 
@@ -85,7 +90,9 @@ class JobClassesController extends AppController
                 $this->Flash->error(__('The job class could not be saved. Please, try again.'));
             }
         }
-        $this->set(compact('jobClass'));
+        $payGrades = $this->JobClasses->PayGrades->find('list', ['limit' => 200]);
+        $jobFunctions = $this->JobClasses->JobFunctions->find('list', ['limit' => 200]);
+        $this->set(compact('jobClass', 'payGrades', 'jobFunctions'));
         $this->set('_serialize', ['jobClass']);
     }
 

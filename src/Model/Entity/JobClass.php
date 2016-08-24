@@ -19,9 +19,12 @@ use Cake\ORM\Entity;
  * @property string $default_employee_class
  * @property bool $full_time_employee
  * @property string $default_supervisor_level
- * @property string $pay_grade
- * @property string $job_function
  * @property string $external_code
+ * @property int $pay_grade_id
+ * @property int $job_function_id
+ *
+ * @property \App\Model\Entity\PayGrade $pay_grade
+ * @property \App\Model\Entity\JobFunction $job_function
  */
 class JobClass extends Entity
 {

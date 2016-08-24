@@ -61,7 +61,7 @@
             <div class="box-body">
               <!-- Conversations are loaded here -->
               <div class="direct-chat-messages">
-                
+                <?= $this->element('homeelmt', array('title' => 'Links')); ?>
               </div>
             
             </div>
@@ -80,7 +80,7 @@
             <div class="box-body">
               <!-- Conversations are loaded here -->
               <div class="direct-chat-messages">
-                
+                <?= $this->element('homeelmt', array('title' => 'Admin Alerts')); ?>
               </div>
             
             </div>
@@ -100,12 +100,17 @@
           <div class="box box-primary direct-chat direct-chat-primary">
             <div class="box-header with-border">
               <h3 class="box-title">To Do</h3>
+              <div class="box-tools pull-right">
+                <span >Sort by</span>
+                <span >Date</span>
+                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-gear"></i></button>
+              </div>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
               <!-- Conversations are loaded here -->
               <div class="direct-chat-messages">
-                
+                <?= $this->element('homeelmt', array('title' => 'To Do')); ?>
               </div>
             
             </div>
@@ -118,13 +123,13 @@
           <!-- MY INFO -->
           <div class="box box-warning direct-chat direct-chat-primary">
             <div class="box-header with-border">
-              <h3 class="box-title">Alerts</h3>
+              <h3 class="box-title">My Goals</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
               <!-- Conversations are loaded here -->
               <div class="direct-chat-messages">
-                
+                <?= $this->element('homeelmt', array('title' => 'My Goals')); ?>
               </div>
             
             </div>
@@ -143,7 +148,7 @@
             <div class="box-body">
               <!-- Conversations are loaded here -->
               <div class="direct-chat-messages">
-                
+                <?= $this->element('homeelmt', array('title' => 'My Admin Favorites')); ?>
               </div>
             
             </div>

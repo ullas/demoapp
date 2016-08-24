@@ -1,12 +1,19 @@
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('New Pay Range'), ['action' => 'add']) ?></li>
-    </ul>
-</nav>
-<div class="payRanges index large-9 medium-8 columns content">
-    <h3><?= __('Pay Ranges') ?></h3>
-    <table cellpadding="0" cellspacing="0">
+<section class="content-header">
+  <h1>
+    Pay Range
+    <small>List</small>
+  </h1>
+  <ol class="breadcrumb">
+    <li>
+    <li><a href="<?php echo $this->Url->build(array('controller' => 'PayRanges', 'action' => 'add')); ?>">Add</a></li>
+    </li>
+  </ol>
+</section>
+
+<!-- Main content -->
+<section class="content">
+  <div class="box box-primary"><div class="box-body">
+    <table cellpadding="0" cellspacing="0" class="table table-hover">
         <thead>
             <tr>
                 <th><?= $this->Paginator->sort('name') ?></th>
@@ -22,10 +29,10 @@
                 <th><?= $this->Paginator->sort('incr_percentage') ?></th>
                 <th><?= $this->Paginator->sort('mid_point') ?></th>
                 <th><?= $this->Paginator->sort('geo_zone') ?></th>
-                <th><?= $this->Paginator->sort('pay_group') ?></th>
-                <th><?= $this->Paginator->sort('legal_entity') ?></th>
                 <th><?= $this->Paginator->sort('id') ?></th>
                 <th><?= $this->Paginator->sort('external_code') ?></th>
+                <th><?= $this->Paginator->sort('legal_entity_id') ?></th>
+                <th><?= $this->Paginator->sort('pay_group_id') ?></th>
                 <th class="actions"><?= __('Actions') ?></th>
             </tr>
         </thead>
@@ -45,10 +52,10 @@
                 <td><?= $this->Number->format($payRange->incr_percentage) ?></td>
                 <td><?= $this->Number->format($payRange->mid_point) ?></td>
                 <td><?= h($payRange->geo_zone) ?></td>
-                <td><?= h($payRange->pay_group) ?></td>
-                <td><?= h($payRange->legal_entity) ?></td>
                 <td><?= $this->Number->format($payRange->id) ?></td>
                 <td><?= h($payRange->external_code) ?></td>
+                <td><?= $payRange->has('legal_entity') ? $this->Html->link($payRange->legal_entity->name, ['controller' => 'LegalEntities', 'action' => 'view', $payRange->legal_entity->id]) : '' ?></td>
+                <td><?= $payRange->has('pay_group') ? $this->Html->link($payRange->pay_group->name, ['controller' => 'PayGroups', 'action' => 'view', $payRange->pay_group->id]) : '' ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $payRange->id]) ?>
                     <?= $this->Html->link(__('Edit'), ['action' => 'edit', $payRange->id]) ?>
@@ -58,6 +65,7 @@
             <?php endforeach; ?>
         </tbody>
     </table>
+</div></div>
     <div class="paginator">
         <ul class="pagination">
             <?= $this->Paginator->prev('< ' . __('previous')) ?>
@@ -66,4 +74,4 @@
         </ul>
         <p><?= $this->Paginator->counter() ?></p>
     </div>
-</div>
+</section>

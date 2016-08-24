@@ -27,7 +27,6 @@ class PayComponentsFixture extends TestFixture
         'is_earning' => ['type' => 'string', 'length' => null, 'default' => null, 'null' => true, 'collate' => null, 'comment' => null, 'precision' => null, 'fixed' => null],
         'currency' => ['type' => 'string', 'length' => null, 'default' => null, 'null' => true, 'collate' => null, 'comment' => null, 'precision' => null, 'fixed' => null],
         'pay_component_value' => ['type' => 'decimal', 'length' => null, 'default' => null, 'null' => true, 'comment' => null, 'precision' => null, 'unsigned' => null],
-        'frequency_code' => ['type' => 'string', 'length' => null, 'default' => null, 'null' => true, 'collate' => null, 'comment' => null, 'precision' => null, 'fixed' => null],
         'recurring' => ['type' => 'boolean', 'length' => null, 'default' => null, 'null' => true, 'comment' => null, 'precision' => null],
         'base_pay_component_group' => ['type' => 'string', 'length' => null, 'default' => null, 'null' => true, 'collate' => null, 'comment' => null, 'precision' => null, 'fixed' => null],
         'tax_treatment' => ['type' => 'string', 'length' => 32, 'default' => null, 'null' => true, 'collate' => null, 'comment' => null, 'precision' => null, 'fixed' => null],
@@ -42,10 +41,11 @@ class PayComponentsFixture extends TestFixture
         'rate' => ['type' => 'decimal', 'length' => null, 'default' => null, 'null' => true, 'comment' => null, 'precision' => null, 'unsigned' => null],
         'number' => ['type' => 'decimal', 'length' => null, 'default' => null, 'null' => true, 'comment' => null, 'precision' => null, 'unsigned' => null],
         'external_code' => ['type' => 'string', 'length' => 32, 'default' => null, 'null' => false, 'collate' => null, 'comment' => null, 'precision' => null, 'fixed' => null],
+        'frequency_id' => ['type' => 'biginteger', 'length' => 20, 'default' => null, 'null' => true, 'comment' => null, 'precision' => null, 'unsigned' => null, 'autoIncrement' => null],
         '_constraints' => [
             'primary' => ['type' => 'primary', 'columns' => ['id'], 'length' => []],
             'pay_components_external_code_key' => ['type' => 'unique', 'columns' => ['external_code'], 'length' => []],
-            'pay_components_frequency_code_fkey' => ['type' => 'foreign', 'columns' => ['frequency_code'], 'references' => ['frequencies', 'external_code'], 'update' => 'noAction', 'delete' => 'noAction', 'length' => []],
+            'pay_components_frequency_id_fkey' => ['type' => 'foreign', 'columns' => ['frequency_id'], 'references' => ['frequencies', 'id'], 'update' => 'noAction', 'delete' => 'noAction', 'length' => []],
         ],
     ];
     // @codingStandardsIgnoreEnd
@@ -61,13 +61,12 @@ class PayComponentsFixture extends TestFixture
             'name' => 'Lorem ipsum dolor sit amet',
             'description' => 'Lorem ipsum dolor sit amet',
             'status' => 1,
-            'start_date' => '2016-08-09',
-            'end_date' => '2016-08-09',
+            'start_date' => '2016-08-24',
+            'end_date' => '2016-08-24',
             'pay_component_type' => 'Lorem ipsum dolor sit amet',
             'is_earning' => 'Lorem ipsum dolor sit amet',
             'currency' => 'Lorem ipsum dolor sit amet',
             'pay_component_value' => 1.5,
-            'frequency_code' => 'Lorem ipsum dolor sit amet',
             'recurring' => 1,
             'base_pay_component_group' => 'Lorem ipsum dolor sit amet',
             'tax_treatment' => 'Lorem ipsum dolor sit amet',
@@ -81,7 +80,8 @@ class PayComponentsFixture extends TestFixture
             'unit_of_measure' => 'Lorem ipsum dolor sit amet',
             'rate' => 1.5,
             'number' => 1.5,
-            'external_code' => 'Lorem ipsum dolor sit amet'
+            'external_code' => 'Lorem ipsum dolor sit amet',
+            'frequency_id' => 1
         ],
     ];
 }

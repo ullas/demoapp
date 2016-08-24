@@ -2,6 +2,10 @@
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
         <li><?= $this->Html->link(__('New Job Class'), ['action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('List Pay Grades'), ['controller' => 'PayGrades', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New Pay Grade'), ['controller' => 'PayGrades', 'action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('List Job Functions'), ['controller' => 'JobFunctions', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New Job Function'), ['controller' => 'JobFunctions', 'action' => 'add']) ?></li>
     </ul>
 </nav>
 <div class="jobClasses index large-9 medium-8 columns content">
@@ -22,9 +26,9 @@
                 <th><?= $this->Paginator->sort('default_employee_class') ?></th>
                 <th><?= $this->Paginator->sort('full_time_employee') ?></th>
                 <th><?= $this->Paginator->sort('default_supervisor_level') ?></th>
-                <th><?= $this->Paginator->sort('pay_grade') ?></th>
-                <th><?= $this->Paginator->sort('job_function') ?></th>
                 <th><?= $this->Paginator->sort('external_code') ?></th>
+                <th><?= $this->Paginator->sort('pay_grade_id') ?></th>
+                <th><?= $this->Paginator->sort('job_function_id') ?></th>
                 <th class="actions"><?= __('Actions') ?></th>
             </tr>
         </thead>
@@ -44,9 +48,9 @@
                 <td><?= h($jobClass->default_employee_class) ?></td>
                 <td><?= h($jobClass->full_time_employee) ?></td>
                 <td><?= h($jobClass->default_supervisor_level) ?></td>
-                <td><?= h($jobClass->pay_grade) ?></td>
-                <td><?= h($jobClass->job_function) ?></td>
                 <td><?= h($jobClass->external_code) ?></td>
+                <td><?= $jobClass->has('pay_grade') ? $this->Html->link($jobClass->pay_grade->name, ['controller' => 'PayGrades', 'action' => 'view', $jobClass->pay_grade->id]) : '' ?></td>
+                <td><?= $jobClass->has('job_function') ? $this->Html->link($jobClass->job_function->name, ['controller' => 'JobFunctions', 'action' => 'view', $jobClass->job_function->id]) : '' ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $jobClass->id]) ?>
                     <?= $this->Html->link(__('Edit'), ['action' => 'edit', $jobClass->id]) ?>

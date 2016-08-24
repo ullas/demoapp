@@ -2,6 +2,8 @@
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
         <li><?= $this->Html->link(__('New Pay Component'), ['action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('List Frequencies'), ['controller' => 'Frequencies', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New Frequency'), ['controller' => 'Frequencies', 'action' => 'add']) ?></li>
     </ul>
 </nav>
 <div class="payComponents index large-9 medium-8 columns content">
@@ -19,7 +21,6 @@
                 <th><?= $this->Paginator->sort('is_earning') ?></th>
                 <th><?= $this->Paginator->sort('currency') ?></th>
                 <th><?= $this->Paginator->sort('pay_component_value') ?></th>
-                <th><?= $this->Paginator->sort('frequency_code') ?></th>
                 <th><?= $this->Paginator->sort('recurring') ?></th>
                 <th><?= $this->Paginator->sort('base_pay_component_group') ?></th>
                 <th><?= $this->Paginator->sort('tax_treatment') ?></th>
@@ -34,6 +35,7 @@
                 <th><?= $this->Paginator->sort('rate') ?></th>
                 <th><?= $this->Paginator->sort('number') ?></th>
                 <th><?= $this->Paginator->sort('external_code') ?></th>
+                <th><?= $this->Paginator->sort('frequency_id') ?></th>
                 <th class="actions"><?= __('Actions') ?></th>
             </tr>
         </thead>
@@ -50,7 +52,6 @@
                 <td><?= h($payComponent->is_earning) ?></td>
                 <td><?= h($payComponent->currency) ?></td>
                 <td><?= $this->Number->format($payComponent->pay_component_value) ?></td>
-                <td><?= h($payComponent->frequency_code) ?></td>
                 <td><?= h($payComponent->recurring) ?></td>
                 <td><?= h($payComponent->base_pay_component_group) ?></td>
                 <td><?= h($payComponent->tax_treatment) ?></td>
@@ -65,6 +66,7 @@
                 <td><?= $this->Number->format($payComponent->rate) ?></td>
                 <td><?= $this->Number->format($payComponent->number) ?></td>
                 <td><?= h($payComponent->external_code) ?></td>
+                <td><?= $payComponent->has('frequency') ? $this->Html->link($payComponent->frequency->name, ['controller' => 'Frequencies', 'action' => 'view', $payComponent->frequency->id]) : '' ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $payComponent->id]) ?>
                     <?= $this->Html->link(__('Edit'), ['action' => 'edit', $payComponent->id]) ?>

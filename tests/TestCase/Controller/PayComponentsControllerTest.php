@@ -16,7 +16,8 @@ class PayComponentsControllerTest extends IntegrationTestCase
      * @var array
      */
     public $fixtures = [
-        'app.pay_components'
+        'app.pay_components',
+        'app.frequencies'
     ];
 
     /**

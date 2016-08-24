@@ -35,6 +35,21 @@ if (file_exists($file)) {
             <li><a href="<?php echo $this->Url->build('/Frequencies'); ?>"><i class="fa fa-circle-o"></i> Frequency</a></li>
             <li><a href="<?php echo $this->Url->build('/HolidayCalendars'); ?>"><i class="fa fa-circle-o"></i> Holiday Calendar</a></li>
             <li><a href="<?php echo $this->Url->build('/Holidays'); ?>"><i class="fa fa-circle-o"></i> Holiday</a></li>
+            
+            <li><a href="<?php echo $this->Url->build('/JobClasses'); ?>"><i class="fa fa-circle-o"></i> Job Class</a></li>
+            <li><a href="<?php echo $this->Url->build('/JobFunctions'); ?>"><i class="fa fa-circle-o"></i> Job Function</a></li>
+            <li><a href="<?php echo $this->Url->build('/JobInfos'); ?>"><i class="fa fa-circle-o"></i> Job Info</a></li>
+            <li><a href="<?php echo $this->Url->build('/Locations'); ?>"><i class="fa fa-circle-o"></i> Location</a></li>
+            
+            <li><a href="<?php echo $this->Url->build('/PayComponentGroups'); ?>"><i class="fa fa-circle-o"></i> Pay Component Group</a></li>
+            <li><a href="<?php echo $this->Url->build('/PayComponents'); ?>"><i class="fa fa-circle-o"></i> Pay Component</a></li>
+            <li><a href="<?php echo $this->Url->build('/PayGrades'); ?>"><i class="fa fa-circle-o"></i> Pay Grade</a></li>
+            <li><a href="<?php echo $this->Url->build('/PayGroups'); ?>"><i class="fa fa-circle-o"></i> Pay Group</a></li>
+            <li><a href="<?php echo $this->Url->build('/PayRanges'); ?>"><i class="fa fa-circle-o"></i> Pay Range</a></li>
+            <li><a href="<?php echo $this->Url->build('/Picklists'); ?>"><i class="fa fa-circle-o"></i> Picklist</a></li>
+            <li><a href="<?php echo $this->Url->build('/Positions'); ?>"><i class="fa fa-circle-o"></i> Position</a></li>
+            <li><a href="<?php echo $this->Url->build('/Regions'); ?>"><i class="fa fa-circle-o"></i> Region</a></li>
+            
         </ul>
     </li>
         

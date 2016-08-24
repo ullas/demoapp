@@ -5,6 +5,10 @@
         <li><?= $this->Form->postLink(__('Delete Job Class'), ['action' => 'delete', $jobClass->id], ['confirm' => __('Are you sure you want to delete # {0}?', $jobClass->id)]) ?> </li>
         <li><?= $this->Html->link(__('List Job Classes'), ['action' => 'index']) ?> </li>
         <li><?= $this->Html->link(__('New Job Class'), ['action' => 'add']) ?> </li>
+        <li><?= $this->Html->link(__('List Pay Grades'), ['controller' => 'PayGrades', 'action' => 'index']) ?> </li>
+        <li><?= $this->Html->link(__('New Pay Grade'), ['controller' => 'PayGrades', 'action' => 'add']) ?> </li>
+        <li><?= $this->Html->link(__('List Job Functions'), ['controller' => 'JobFunctions', 'action' => 'index']) ?> </li>
+        <li><?= $this->Html->link(__('New Job Function'), ['controller' => 'JobFunctions', 'action' => 'add']) ?> </li>
     </ul>
 </nav>
 <div class="jobClasses view large-9 medium-8 columns content">
@@ -39,16 +43,16 @@
             <td><?= h($jobClass->default_supervisor_level) ?></td>
         </tr>
         <tr>
+            <th><?= __('External Code') ?></th>
+            <td><?= h($jobClass->external_code) ?></td>
+        </tr>
+        <tr>
             <th><?= __('Pay Grade') ?></th>
-            <td><?= h($jobClass->pay_grade) ?></td>
+            <td><?= $jobClass->has('pay_grade') ? $this->Html->link($jobClass->pay_grade->name, ['controller' => 'PayGrades', 'action' => 'view', $jobClass->pay_grade->id]) : '' ?></td>
         </tr>
         <tr>
             <th><?= __('Job Function') ?></th>
-            <td><?= h($jobClass->job_function) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('External Code') ?></th>
-            <td><?= h($jobClass->external_code) ?></td>
+            <td><?= $jobClass->has('job_function') ? $this->Html->link($jobClass->job_function->name, ['controller' => 'JobFunctions', 'action' => 'view', $jobClass->job_function->id]) : '' ?></td>
         </tr>
         <tr>
             <th><?= __('Id') ?></th>

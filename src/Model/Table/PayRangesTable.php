@@ -9,6 +9,9 @@ use Cake\Validation\Validator;
 /**
  * PayRanges Model
  *
+ * @property \Cake\ORM\Association\BelongsTo $LegalEntities
+ * @property \Cake\ORM\Association\BelongsTo $PayGroups
+ *
  * @method \App\Model\Entity\PayRange get($primaryKey, $options = [])
  * @method \App\Model\Entity\PayRange newEntity($data = null, array $options = [])
  * @method \App\Model\Entity\PayRange[] newEntities(array $data, array $options = [])
@@ -33,6 +36,13 @@ class PayRangesTable extends Table
         $this->table('pay_ranges');
         $this->displayField('name');
         $this->primaryKey('id');
+
+        $this->belongsTo('LegalEntities', [
+            'foreignKey' => 'legal_entity_id'
+        ]);
+        $this->belongsTo('PayGroups', [
+            'foreignKey' => 'pay_group_id'
+        ]);
     }
 
     /**
@@ -90,12 +100,6 @@ class PayRangesTable extends Table
             ->allowEmpty('geo_zone');
 
         $validator
-            ->allowEmpty('pay_group');
-
-        $validator
-            ->allowEmpty('legal_entity');
-
-        $validator
             ->allowEmpty('id', 'create');
 
         $validator
@@ -116,6 +120,8 @@ class PayRangesTable extends Table
     public function buildRules(RulesChecker $rules)
     {
         $rules->add($rules->isUnique(['external_code']));
+        $rules->add($rules->existsIn(['legal_entity_id'], 'LegalEntities'));
+        $rules->add($rules->existsIn(['pay_group_id'], 'PayGroups'));
 
         return $rules;
     }

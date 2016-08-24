@@ -1,20 +1,26 @@
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('List Pay Groups'), ['action' => 'index']) ?></li>
-    </ul>
-</nav>
-<div class="payGroups form large-9 medium-8 columns content">
+<section class="content-header">
+      <h1>
+       Pay Group
+        <small>Add</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><?= $this->Html->link('<i class="fa fa-mail-reply"></i> '.__('Back'), ['action' => 'index'], ['escape' => false]) ?></li>
+      </ol>
+    </section>
+<section class="content">
+	<div class="box box-primary"><div class="box-body">
     <?= $this->Form->create($payGroup) ?>
     <fieldset>
-        <legend><?= __('Add Pay Group') ?></legend>
         <?php
             echo $this->Form->input('name');
             echo $this->Form->input('description');
             echo $this->Form->input('effective_status');
-            echo $this->Form->input('effective_start_date', ['empty' => true]);
-            echo $this->Form->input('effective_end_date', ['empty' => true]);
-            echo $this->Form->input('earliest_change_date', ['empty' => true]);
+            echo "<div class='form-group'><label>Effective Start Date:</label><div class='input-group'>";
+            echo "<div class='input-group-addon''><i class='fa fa-calendar'></i></div><input type='text' class='form-control' id='effective_start_date'></div></div>";
+            echo "<div class='form-group'><label>Effective End Date:</label><div class='input-group'>";
+            echo "<div class='input-group-addon''><i class='fa fa-calendar'></i></div><input type='text' class='form-control' id='effective_end_date'></div></div>";
+            echo "<div class='form-group'><label>Earliest Change Date:</label><div class='input-group'>";
+            echo "<div class='input-group-addon''><i class='fa fa-calendar'></i></div><input type='text' class='form-control' id='earliest_change_date'></div></div>";
             echo $this->Form->input('payment_frequency');
             echo $this->Form->input('primary_contactid');
             echo $this->Form->input('primary_contact_email');
@@ -31,4 +37,32 @@
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>
     <?= $this->Form->end() ?>
-</div>
+</div></div></section>
+<!-- Date picker -->
+<?php
+$this->Html->css([
+    'AdminLTE./plugins/datepicker/datepicker3'
+  ],
+  ['block' => 'css']);
+
+$this->Html->script([
+  'AdminLTE./plugins/datepicker/bootstrap-datepicker'
+],
+['block' => 'script']);
+?>
+<?php $this->start('scriptBotton'); ?>
+<script>
+  $(function () { 
+    $('#effective_start_date').datepicker({
+      autoclose: true
+    }); 
+     $('#effective_end_date').datepicker({
+      autoclose: true
+    });
+     $('#earliest_change_date').datepicker({
+      autoclose: true
+    });
+  });
+</script>
+<?php $this->end(); ?>
+

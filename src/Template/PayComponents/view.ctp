@@ -5,6 +5,8 @@
         <li><?= $this->Form->postLink(__('Delete Pay Component'), ['action' => 'delete', $payComponent->id], ['confirm' => __('Are you sure you want to delete # {0}?', $payComponent->id)]) ?> </li>
         <li><?= $this->Html->link(__('List Pay Components'), ['action' => 'index']) ?> </li>
         <li><?= $this->Html->link(__('New Pay Component'), ['action' => 'add']) ?> </li>
+        <li><?= $this->Html->link(__('List Frequencies'), ['controller' => 'Frequencies', 'action' => 'index']) ?> </li>
+        <li><?= $this->Html->link(__('New Frequency'), ['controller' => 'Frequencies', 'action' => 'add']) ?> </li>
     </ul>
 </nav>
 <div class="payComponents view large-9 medium-8 columns content">
@@ -29,10 +31,6 @@
         <tr>
             <th><?= __('Currency') ?></th>
             <td><?= h($payComponent->currency) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Frequency Code') ?></th>
-            <td><?= h($payComponent->frequency_code) ?></td>
         </tr>
         <tr>
             <th><?= __('Base Pay Component Group') ?></th>
@@ -65,6 +63,10 @@
         <tr>
             <th><?= __('External Code') ?></th>
             <td><?= h($payComponent->external_code) ?></td>
+        </tr>
+        <tr>
+            <th><?= __('Frequency') ?></th>
+            <td><?= $payComponent->has('frequency') ? $this->Html->link($payComponent->frequency->name, ['controller' => 'Frequencies', 'action' => 'view', $payComponent->frequency->id]) : '' ?></td>
         </tr>
         <tr>
             <th><?= __('Id') ?></th>

@@ -24,7 +24,10 @@ class PayRangesTableTest extends TestCase
      * @var array
      */
     public $fixtures = [
-        'app.pay_ranges'
+        'app.pay_ranges',
+        'app.legal_entities',
+        'app.locations',
+        'app.pay_groups'
     ];
 
     /**
@@ -67,6 +70,16 @@ class PayRangesTableTest extends TestCase
      * @return void
      */
     public function testValidationDefault()
+    {
+        $this->markTestIncomplete('Not implemented yet.');
+    }
+
+    /**
+     * Test buildRules method
+     *
+     * @return void
+     */
+    public function testBuildRules()
     {
         $this->markTestIncomplete('Not implemented yet.');
     }

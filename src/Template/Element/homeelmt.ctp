@@ -15,20 +15,24 @@ switch (strtolower($title)) {
 		}
         break;
     case "links":
-        echo "";
+        echo "<p><i class='fa fa-pencil'></i>";
+		echo $this->Html->link(' Edit', array('controller' => '','action'     => ''));
+        echo "</p>";
         break;
 	case "adminalerts":
-        $elmntstring="<p>There are no alerts.</p>";
-		echo $elmntstring;
+        echo "<p><i class='fa fa-check-circle'> There are no alerts.</i></p>";
+		echo $this->Html->link(' Edit Admin Alert Settings', array('controller' => '','action'     => ''));
         break;
 	case "todo":
-        echo "";
+        echo "<div class='well well-sm'>Due Anytime</div>";
+		echo $this->Html->link('Finish Profile', array('controller' => 'Profiles','action'     => 'index'));
+		echo "<hr><div class='well well-sm'>Recently Completed(0)</div>";
         break;
-	case "alerts":
-        echo "";
+	case "mygoals":
+        echo "<p>Currently there are no goal plans available.</p>";
         break;
 	case "myadminfavorites":
-        echo "";
+        echo "<p>You don't have any Admin Favorites shortcut links yet.Click here to add one.</p>";
         break;
     default:
         echo "Lorem....";

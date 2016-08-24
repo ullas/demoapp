@@ -11,7 +11,6 @@
 	<div class="box box-primary"><div class="box-body">
     <?= $this->Form->create($division) ?>
     <fieldset>
-        <legend><?= __('Edit Division') ?></legend>
         <?php
             echo $this->Form->input('name');
             echo $this->Form->input('description');

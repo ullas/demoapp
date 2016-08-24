@@ -18,6 +18,9 @@ class PayComponentsController extends AppController
      */
     public function index()
     {
+        $this->paginate = [
+            'contain' => ['Frequencies']
+        ];
         $payComponents = $this->paginate($this->PayComponents);
 
         $this->set(compact('payComponents'));
@@ -34,7 +37,7 @@ class PayComponentsController extends AppController
     public function view($id = null)
     {
         $payComponent = $this->PayComponents->get($id, [
-            'contain' => []
+            'contain' => ['Frequencies']
         ]);
 
         $this->set('payComponent', $payComponent);
@@ -59,7 +62,8 @@ class PayComponentsController extends AppController
                 $this->Flash->error(__('The pay component could not be saved. Please, try again.'));
             }
         }
-        $this->set(compact('payComponent'));
+        $frequencies = $this->PayComponents->Frequencies->find('list', ['limit' => 200]);
+        $this->set(compact('payComponent', 'frequencies'));
         $this->set('_serialize', ['payComponent']);
     }
 
@@ -85,7 +89,8 @@ class PayComponentsController extends AppController
                 $this->Flash->error(__('The pay component could not be saved. Please, try again.'));
             }
         }
-        $this->set(compact('payComponent'));
+        $frequencies = $this->PayComponents->Frequencies->find('list', ['limit' => 200]);
+        $this->set(compact('payComponent', 'frequencies'));
         $this->set('_serialize', ['payComponent']);
     }
 

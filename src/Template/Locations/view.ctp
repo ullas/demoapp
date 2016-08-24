@@ -1,15 +1,19 @@
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('Edit Location'), ['action' => 'edit', $location->id]) ?> </li>
-        <li><?= $this->Form->postLink(__('Delete Location'), ['action' => 'delete', $location->id], ['confirm' => __('Are you sure you want to delete # {0}?', $location->id)]) ?> </li>
-        <li><?= $this->Html->link(__('List Locations'), ['action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Location'), ['action' => 'add']) ?> </li>
-    </ul>
-</nav>
-<div class="locations view large-9 medium-8 columns content">
-    <h3><?= h($location->name) ?></h3>
-    <table class="vertical-table">
+<section class="content-header">
+  <h1>
+    Location
+    <small>View</small>
+  </h1>
+  <ol class="breadcrumb">
+    <li>
+    <?= $this->Html->link('<i class="fa fa-mail-reply"></i> '.__('Back'), ['action' => 'index'], ['escape' => false]) ?>
+    </li>
+  </ol>
+</section>
+
+<!-- Main content -->
+<section class="content">
+  <div class="box box-primary"><div class="box-body">
+    <table class="table table-hover">
         <tr>
             <th><?= __('Name') ?></th>
             <td><?= h($location->name) ?></td>
@@ -51,4 +55,4 @@
             <td><?= $location->status ? __('Yes') : __('No'); ?></td>
         </tr>
     </table>
-</div>
+</div></div></section>

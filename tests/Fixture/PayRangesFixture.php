@@ -30,15 +30,15 @@ class PayRangesFixture extends TestFixture
         'incr_percentage' => ['type' => 'decimal', 'length' => null, 'default' => null, 'null' => true, 'comment' => null, 'precision' => null, 'unsigned' => null],
         'mid_point' => ['type' => 'decimal', 'length' => null, 'default' => null, 'null' => true, 'comment' => null, 'precision' => null, 'unsigned' => null],
         'geo_zone' => ['type' => 'string', 'length' => null, 'default' => null, 'null' => true, 'collate' => null, 'comment' => null, 'precision' => null, 'fixed' => null],
-        'pay_group' => ['type' => 'string', 'length' => null, 'default' => null, 'null' => true, 'collate' => null, 'comment' => null, 'precision' => null, 'fixed' => null],
-        'legal_entity' => ['type' => 'string', 'length' => null, 'default' => null, 'null' => true, 'collate' => null, 'comment' => null, 'precision' => null, 'fixed' => null],
         'id' => ['type' => 'biginteger', 'length' => 20, 'autoIncrement' => true, 'default' => null, 'null' => false, 'comment' => null, 'precision' => null, 'unsigned' => null],
         'external_code' => ['type' => 'string', 'length' => 32, 'default' => null, 'null' => false, 'collate' => null, 'comment' => null, 'precision' => null, 'fixed' => null],
+        'legal_entity_id' => ['type' => 'biginteger', 'length' => 20, 'default' => null, 'null' => true, 'comment' => null, 'precision' => null, 'unsigned' => null, 'autoIncrement' => null],
+        'pay_group_id' => ['type' => 'biginteger', 'length' => 20, 'default' => null, 'null' => true, 'comment' => null, 'precision' => null, 'unsigned' => null, 'autoIncrement' => null],
         '_constraints' => [
             'primary' => ['type' => 'primary', 'columns' => ['id'], 'length' => []],
             'pay_ranges_external_code_key' => ['type' => 'unique', 'columns' => ['external_code'], 'length' => []],
-            'pay_ranges_legal_entity_fkey' => ['type' => 'foreign', 'columns' => ['legal_entity'], 'references' => ['legal_entities', 'external_code'], 'update' => 'noAction', 'delete' => 'noAction', 'length' => []],
-            'pay_ranges_pay_group_fkey' => ['type' => 'foreign', 'columns' => ['pay_group'], 'references' => ['pay_groups', 'external_code'], 'update' => 'noAction', 'delete' => 'noAction', 'length' => []],
+            'pay_ranges_legal_entity_id_fkey' => ['type' => 'foreign', 'columns' => ['legal_entity_id'], 'references' => ['legal_entities', 'id'], 'update' => 'noAction', 'delete' => 'noAction', 'length' => []],
+            'pay_ranges_pay_group_id_fkey' => ['type' => 'foreign', 'columns' => ['pay_group_id'], 'references' => ['pay_groups', 'id'], 'update' => 'noAction', 'delete' => 'noAction', 'length' => []],
         ],
     ];
     // @codingStandardsIgnoreEnd
@@ -53,8 +53,8 @@ class PayRangesFixture extends TestFixture
             'name' => 'Lorem ipsum dolor sit amet',
             'description' => 'Lorem ipsum dolor sit amet',
             'status' => 'Lorem ipsum dolor sit amet',
-            'start_date' => '2016-08-09',
-            'end_date' => '2016-08-09',
+            'start_date' => '2016-08-24',
+            'end_date' => '2016-08-24',
             'currency' => 'Lorem ipsum dolor sit amet',
             'frequency_code' => 'Lorem ipsum dolor sit amet',
             'minimum_pay' => 1.5,
@@ -63,10 +63,10 @@ class PayRangesFixture extends TestFixture
             'incr_percentage' => 1.5,
             'mid_point' => 1.5,
             'geo_zone' => 'Lorem ipsum dolor sit amet',
-            'pay_group' => 'Lorem ipsum dolor sit amet',
-            'legal_entity' => 'Lorem ipsum dolor sit amet',
             'id' => 1,
-            'external_code' => 'Lorem ipsum dolor sit amet'
+            'external_code' => 'Lorem ipsum dolor sit amet',
+            'legal_entity_id' => 1,
+            'pay_group_id' => 1
         ],
     ];
 }

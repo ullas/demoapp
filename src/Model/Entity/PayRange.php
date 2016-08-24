@@ -19,10 +19,13 @@ use Cake\ORM\Entity;
  * @property float $incr_percentage
  * @property float $mid_point
  * @property string $geo_zone
- * @property string $pay_group
- * @property string $legal_entity
  * @property int $id
  * @property string $external_code
+ * @property int $legal_entity_id
+ * @property int $pay_group_id
+ *
+ * @property \App\Model\Entity\LegalEntity $legal_entity
+ * @property \App\Model\Entity\PayGroup $pay_group
  */
 class PayRange extends Entity
 {

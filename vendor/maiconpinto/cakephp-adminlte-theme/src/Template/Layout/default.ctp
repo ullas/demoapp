@@ -12,23 +12,6 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <!-- Ionicons -->
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-    
-    <?= $this->Html->css('jquery.jOrgChart.css') ?>
-    
-    <!-- jQuery 2.1.4 -->
-<?php echo $this->Html->script('AdminLTE./plugins/jQuery/jQuery-2.1.4.min'); ?>
-<!-- Bootstrap 3.3.5 -->
-<?php echo $this->Html->script('AdminLTE./bootstrap/js/bootstrap'); ?>
-<!-- SlimScroll -->
-<?php echo $this->Html->script('AdminLTE./plugins/slimScroll/jquery.slimscroll.min'); ?>
-<!-- FastClick -->
-<?php echo $this->Html->script('AdminLTE./plugins/fastclick/fastclick'); ?>
-<!-- AdminLTE App -->
-<?php echo $this->Html->script('AdminLTE.AdminLTE.min'); ?>
-<?= $this->Html->script('jquery.jOrgChart.js'); ?>
-
-
-
     <!-- Theme style -->
     <?php echo $this->Html->css('AdminLTE.AdminLTE.min'); ?>
 <!-- AdminLTE Skins. Choose a skin from the css/skins
@@ -51,9 +34,9 @@
             <!-- Logo -->
             <a href="<?php echo $this->Url->build('/'); ?>" class="logo">
                 <!-- mini logo for sidebar mini 50x50 pixels -->
-                <!-- <span class="logo-mini"><?php echo $theme['logo']['mini'] ?></span> -->
+                <span class="logo-mini"><?php echo $theme['logo']['mini'] ?></span>
                 <!-- logo for regular state and mobile devices -->
-                <!-- <span class="logo-lg"><?php echo $theme['logo']['large'] ?></span> -->
+                <span class="logo-lg"><?php echo $theme['logo']['large'] ?></span>
             </a>
             <!-- Header Navbar: style can be found in header.less -->
             <?php echo $this->element('nav-top') ?>
@@ -86,6 +69,15 @@
 </div>
 <!-- ./wrapper -->
 
+<!-- jQuery 2.1.4 -->
+<?php echo $this->Html->script('AdminLTE./plugins/jQuery/jQuery-2.1.4.min'); ?>
+<!-- Bootstrap 3.3.5 -->
+<?php echo $this->Html->script('AdminLTE./bootstrap/js/bootstrap'); ?>
+<!-- SlimScroll -->
+<?php echo $this->Html->script('AdminLTE./plugins/slimScroll/jquery.slimscroll.min'); ?>
+<!-- FastClick -->
+<?php echo $this->Html->script('AdminLTE./plugins/fastclick/fastclick'); ?>
+<!-- AdminLTE App -->
 
 <!-- AdminLTE for demo purposes -->
 <?php echo $this->fetch('script'); ?>
@@ -97,12 +89,11 @@
             alwaysVisible: false,
             size: "3px"
         }).css("width", "100%");
-
         var a = $('a[href="<?php echo $this->request->webroot . $this->request->url ?>"]');
         if (!a.parent().hasClass('treeview')) {
             a.parent().addClass('active').parents('.treeview').addClass('active');
         }
     });
-</script>
+</script><?php echo $this->Html->script('AdminLTE.AdminLTE.min'); ?>
 </body>
 </html>
