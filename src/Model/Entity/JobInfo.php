@@ -86,8 +86,8 @@ use Cake\ORM\Entity;
  * @property \Cake\I18n\Time $termination_date
  * @property \Cake\I18n\Time $leave_of_absence_start_date
  * @property \Cake\I18n\Time $leave_of_absence_return_date
- * @property string $person_id_external
- * @property int $managerid
+ * @property int $users_id
+ * @property int $emp_data_biographies_id
  */
 class JobInfo extends Entity
 {

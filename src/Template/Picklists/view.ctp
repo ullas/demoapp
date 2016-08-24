@@ -1,15 +1,19 @@
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('Edit Picklist'), ['action' => 'edit', $picklist->id]) ?> </li>
-        <li><?= $this->Form->postLink(__('Delete Picklist'), ['action' => 'delete', $picklist->id], ['confirm' => __('Are you sure you want to delete # {0}?', $picklist->id)]) ?> </li>
-        <li><?= $this->Html->link(__('List Picklists'), ['action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Picklist'), ['action' => 'add']) ?> </li>
-    </ul>
-</nav>
-<div class="picklists view large-9 medium-8 columns content">
-    <h3><?= h($picklist->id) ?></h3>
-    <table class="vertical-table">
+<section class="content-header">
+  <h1>
+    Division
+    <small>View</small>
+  </h1>
+  <ol class="breadcrumb">
+    <li>
+    <?= $this->Html->link('<i class="fa fa-mail-reply"></i> '.__('Back'), ['action' => 'index'], ['escape' => false]) ?>
+    </li>
+  </ol>
+</section>
+
+<!-- Main content -->
+<section class="content">
+  <div class="box box-primary"><div class="box-body">
+    <table class="table table-hover">
         <tr>
             <th><?= __('Description') ?></th>
             <td><?= h($picklist->description) ?></td>
@@ -27,4 +31,4 @@
             <td><?= $this->Number->format($picklist->id) ?></td>
         </tr>
     </table>
-</div>
+</div></div></section>

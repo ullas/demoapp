@@ -13,7 +13,7 @@
                 <th><?= $this->Paginator->sort('external_name') ?></th>
                 <th><?= $this->Paginator->sort('effective_start_date') ?></th>
                 <th><?= $this->Paginator->sort('effective_end_date') ?></th>
-                <th><?= $this->Paginator->sort('type') ?></th>
+                <th><?= $this->Paginator->sort('positiontype') ?></th>
                 <th><?= $this->Paginator->sort('position_criticality') ?></th>
                 <th><?= $this->Paginator->sort('position_controlled') ?></th>
                 <th><?= $this->Paginator->sort('multiple_incumbents_allowed') ?></th>
@@ -44,7 +44,8 @@
                 <th><?= $this->Paginator->sort('pay_range') ?></th>
                 <th><?= $this->Paginator->sort('position_matrix_relationship') ?></th>
                 <th><?= $this->Paginator->sort('right_to_return') ?></th>
-                <th><?= $this->Paginator->sort('code') ?></th>
+                <th><?= $this->Paginator->sort('position_code') ?></th>
+                <th><?= $this->Paginator->sort('effective_status') ?></th>
                 <th class="actions"><?= __('Actions') ?></th>
             </tr>
         </thead>
@@ -55,7 +56,7 @@
                 <td><?= h($position->external_name) ?></td>
                 <td><?= h($position->effective_start_date) ?></td>
                 <td><?= h($position->effective_end_date) ?></td>
-                <td><?= h($position->type) ?></td>
+                <td><?= h($position->positiontype) ?></td>
                 <td><?= h($position->position_criticality) ?></td>
                 <td><?= h($position->position_controlled) ?></td>
                 <td><?= h($position->multiple_incumbents_allowed) ?></td>
@@ -86,7 +87,8 @@
                 <td><?= h($position->pay_range) ?></td>
                 <td><?= h($position->position_matrix_relationship) ?></td>
                 <td><?= h($position->right_to_return) ?></td>
-                <td><?= h($position->code) ?></td>
+                <td><?= h($position->position_code) ?></td>
+                <td><?= h($position->effective_status) ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $position->id]) ?>
                     <?= $this->Html->link(__('Edit'), ['action' => 'edit', $position->id]) ?>

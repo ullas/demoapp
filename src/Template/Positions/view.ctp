@@ -15,8 +15,8 @@
             <td><?= h($position->external_name) ?></td>
         </tr>
         <tr>
-            <th><?= __('Type') ?></th>
-            <td><?= h($position->type) ?></td>
+            <th><?= __('Positiontype') ?></th>
+            <td><?= h($position->positiontype) ?></td>
         </tr>
         <tr>
             <th><?= __('Position Criticality') ?></th>
@@ -111,8 +111,8 @@
             <td><?= h($position->right_to_return) ?></td>
         </tr>
         <tr>
-            <th><?= __('Code') ?></th>
-            <td><?= h($position->code) ?></td>
+            <th><?= __('Position Code') ?></th>
+            <td><?= h($position->position_code) ?></td>
         </tr>
         <tr>
             <th><?= __('Id') ?></th>
@@ -154,9 +154,9 @@
             <th><?= __('Vacant') ?></th>
             <td><?= $position->vacant ? __('Yes') : __('No'); ?></td>
         </tr>
+        <tr>
+            <th><?= __('Effective Status') ?></th>
+            <td><?= $position->effective_status ? __('Yes') : __('No'); ?></td>
+        </tr>
     </table>
-    <div class="row">
-        <h4><?= __('Effective Status') ?></h4>
-        <?= $this->Text->autoParagraph(h($position->effective_status)); ?>
-    </div>
 </div>

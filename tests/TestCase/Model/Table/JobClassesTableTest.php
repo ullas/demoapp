@@ -24,7 +24,9 @@ class JobClassesTableTest extends TestCase
      * @var array
      */
     public $fixtures = [
-        'app.job_classes'
+        'app.job_classes',
+        'app.pay_grades',
+        'app.job_functions'
     ];
 
     /**
@@ -67,6 +69,16 @@ class JobClassesTableTest extends TestCase
      * @return void
      */
     public function testValidationDefault()
+    {
+        $this->markTestIncomplete('Not implemented yet.');
+    }
+
+    /**
+     * Test buildRules method
+     *
+     * @return void
+     */
+    public function testBuildRules()
     {
         $this->markTestIncomplete('Not implemented yet.');
     }

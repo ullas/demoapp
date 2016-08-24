@@ -50,9 +50,6 @@ class PositionsTable extends Table
             ->allowEmpty('external_name');
 
         $validator
-            ->allowEmpty('effective_status');
-
-        $validator
             ->date('effective_start_date')
             ->allowEmpty('effective_start_date');
 
@@ -61,7 +58,7 @@ class PositionsTable extends Table
             ->allowEmpty('effective_end_date');
 
         $validator
-            ->allowEmpty('type');
+            ->allowEmpty('positiontype');
 
         $validator
             ->allowEmpty('position_criticality');
@@ -161,9 +158,13 @@ class PositionsTable extends Table
             ->allowEmpty('right_to_return');
 
         $validator
-            ->requirePresence('code', 'create')
-            ->notEmpty('code')
-            ->add('code', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
+            ->requirePresence('position_code', 'create')
+            ->notEmpty('position_code')
+            ->add('position_code', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
+
+        $validator
+            ->boolean('effective_status')
+            ->allowEmpty('effective_status');
 
         return $validator;
     }
@@ -177,7 +178,7 @@ class PositionsTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
-        $rules->add($rules->isUnique(['code']));
+        $rules->add($rules->isUnique(['position_code']));
 
         return $rules;
     }

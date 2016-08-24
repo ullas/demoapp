@@ -94,8 +94,8 @@
             echo $this->Form->input('termination_date', ['empty' => true]);
             echo $this->Form->input('leave_of_absence_start_date', ['empty' => true]);
             echo $this->Form->input('leave_of_absence_return_date', ['empty' => true]);
-            echo $this->Form->input('person_id_external');
-            echo $this->Form->input('managerid');
+            echo $this->Form->input('users_id');
+            echo $this->Form->input('emp_data_biographies_id');
         ?>
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>

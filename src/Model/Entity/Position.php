@@ -8,10 +8,9 @@ use Cake\ORM\Entity;
  *
  * @property int $id
  * @property string $external_name
- * @property string $effective_status
  * @property \Cake\I18n\Time $effective_start_date
  * @property \Cake\I18n\Time $effective_end_date
- * @property string $type
+ * @property string $positiontype
  * @property string $position_criticality
  * @property bool $position_controlled
  * @property bool $multiple_incumbents_allowed
@@ -42,7 +41,8 @@ use Cake\ORM\Entity;
  * @property string $pay_range
  * @property string $position_matrix_relationship
  * @property string $right_to_return
- * @property string $code
+ * @property string $position_code
+ * @property bool $effective_status
  */
 class Position extends Entity
 {

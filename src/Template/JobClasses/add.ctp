@@ -2,6 +2,10 @@
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
         <li><?= $this->Html->link(__('List Job Classes'), ['action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('List Pay Grades'), ['controller' => 'PayGrades', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New Pay Grade'), ['controller' => 'PayGrades', 'action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('List Job Functions'), ['controller' => 'JobFunctions', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New Job Function'), ['controller' => 'JobFunctions', 'action' => 'add']) ?></li>
     </ul>
 </nav>
 <div class="jobClasses form large-9 medium-8 columns content">
@@ -21,9 +25,9 @@
             echo $this->Form->input('default_employee_class');
             echo $this->Form->input('full_time_employee');
             echo $this->Form->input('default_supervisor_level');
-            echo $this->Form->input('pay_grade');
-            echo $this->Form->input('job_function');
             echo $this->Form->input('external_code');
+            echo $this->Form->input('pay_grade_id', ['options' => $payGrades, 'empty' => true]);
+            echo $this->Form->input('job_function_id', ['options' => $jobFunctions, 'empty' => true]);
         ?>
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>

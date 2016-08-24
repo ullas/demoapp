@@ -59,6 +59,7 @@ $this->Html->script([
      $('#effective_end_date').datepicker({
       autoclose: true
     });
+    // var sidebar_height = $(".sidebar").height();alert("sidebar:"+sidebar_height);
   });
 </script>
 <?php $this->end(); ?>

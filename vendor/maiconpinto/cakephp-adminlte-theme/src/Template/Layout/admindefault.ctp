@@ -66,32 +66,11 @@
 
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
-		
 
-    <!-- Main content -->
-    <section class="content">
-    	<div class="row">
-		<div class="col-md-3">
-          <div class="box box-solid">
-           
-            <div class="box-body no-padding">
-              <ul class="nav nav-pills nav-stacked">
-                <li><a href="<?php echo $this->Url->build(array('controller' => 'LegalEntities', 'action' => 'index')); ?>"><i class="fa fa-university"></i> Legal Entity</a></li>
-                <li><a href="<?php echo $this->Url->build(array('controller' => 'BusinessUnits', 'action' => 'index')); ?>"><i class="fa fa-briefcase"></i> Business Unit</a></li>
-           
-              </ul>
-            </div>
-          </div>
-          
-        </div>
-        <!-- /.col -->
-        <div class="col-md-9">
             <?php echo $this->Flash->render(); ?>
             <?php echo $this->Flash->render('auth'); ?>
             <?php echo $this->fetch('content'); ?>
-            
-        </div></div>
-</section>
+
         </div>
         <!-- /.content-wrapper -->
 

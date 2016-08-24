@@ -16,7 +16,6 @@ use Cake\ORM\Entity;
  * @property string $is_earning
  * @property string $currency
  * @property float $pay_component_value
- * @property string $frequency_code
  * @property bool $recurring
  * @property string $base_pay_component_group
  * @property string $tax_treatment
@@ -31,6 +30,9 @@ use Cake\ORM\Entity;
  * @property float $rate
  * @property float $number
  * @property string $external_code
+ * @property int $frequency_id
+ *
+ * @property \App\Model\Entity\Frequency $frequency
  */
 class PayComponent extends Entity
 {

@@ -16,10 +16,9 @@
         <legend><?= __('Edit Position') ?></legend>
         <?php
             echo $this->Form->input('external_name');
-            echo $this->Form->input('effective_status');
             echo $this->Form->input('effective_start_date', ['empty' => true]);
             echo $this->Form->input('effective_end_date', ['empty' => true]);
-            echo $this->Form->input('type');
+            echo $this->Form->input('positiontype');
             echo $this->Form->input('position_criticality');
             echo $this->Form->input('position_controlled');
             echo $this->Form->input('multiple_incumbents_allowed');
@@ -50,7 +49,8 @@
             echo $this->Form->input('pay_range');
             echo $this->Form->input('position_matrix_relationship');
             echo $this->Form->input('right_to_return');
-            echo $this->Form->input('code');
+            echo $this->Form->input('position_code');
+            echo $this->Form->input('effective_status');
         ?>
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>

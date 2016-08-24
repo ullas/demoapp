@@ -9,6 +9,9 @@ use Cake\Validation\Validator;
 /**
  * JobClasses Model
  *
+ * @property \Cake\ORM\Association\BelongsTo $PayGrades
+ * @property \Cake\ORM\Association\BelongsTo $JobFunctions
+ *
  * @method \App\Model\Entity\JobClass get($primaryKey, $options = [])
  * @method \App\Model\Entity\JobClass newEntity($data = null, array $options = [])
  * @method \App\Model\Entity\JobClass[] newEntities(array $data, array $options = [])
@@ -33,6 +36,13 @@ class JobClassesTable extends Table
         $this->table('job_classes');
         $this->displayField('name');
         $this->primaryKey('id');
+
+        $this->belongsTo('PayGrades', [
+            'foreignKey' => 'pay_grade_id'
+        ]);
+        $this->belongsTo('JobFunctions', [
+            'foreignKey' => 'job_function_id'
+        ]);
     }
 
     /**
@@ -88,12 +98,6 @@ class JobClassesTable extends Table
             ->allowEmpty('default_supervisor_level');
 
         $validator
-            ->allowEmpty('pay_grade');
-
-        $validator
-            ->allowEmpty('job_function');
-
-        $validator
             ->requirePresence('external_code', 'create')
             ->notEmpty('external_code')
             ->add('external_code', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
@@ -111,6 +115,8 @@ class JobClassesTable extends Table
     public function buildRules(RulesChecker $rules)
     {
         $rules->add($rules->isUnique(['external_code']));
+        $rules->add($rules->existsIn(['pay_grade_id'], 'PayGrades'));
+        $rules->add($rules->existsIn(['job_function_id'], 'JobFunctions'));
 
         return $rules;
     }

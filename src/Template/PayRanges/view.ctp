@@ -1,15 +1,19 @@
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('Edit Pay Range'), ['action' => 'edit', $payRange->id]) ?> </li>
-        <li><?= $this->Form->postLink(__('Delete Pay Range'), ['action' => 'delete', $payRange->id], ['confirm' => __('Are you sure you want to delete # {0}?', $payRange->id)]) ?> </li>
-        <li><?= $this->Html->link(__('List Pay Ranges'), ['action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Pay Range'), ['action' => 'add']) ?> </li>
-    </ul>
-</nav>
-<div class="payRanges view large-9 medium-8 columns content">
-    <h3><?= h($payRange->name) ?></h3>
-    <table class="vertical-table">
+<section class="content-header">
+  <h1>
+    Pay Range
+    <small>View</small>
+  </h1>
+  <ol class="breadcrumb">
+    <li>
+    <?= $this->Html->link('<i class="fa fa-mail-reply"></i> '.__('Back'), ['action' => 'index'], ['escape' => false]) ?>
+    </li>
+  </ol>
+</section>
+
+<!-- Main content -->
+<section class="content">
+  <div class="box box-primary"><div class="box-body">
+    <table class="table table-hover">
         <tr>
             <th><?= __('Name') ?></th>
             <td><?= h($payRange->name) ?></td>
@@ -35,16 +39,16 @@
             <td><?= h($payRange->geo_zone) ?></td>
         </tr>
         <tr>
-            <th><?= __('Pay Group') ?></th>
-            <td><?= h($payRange->pay_group) ?></td>
+            <th><?= __('External Code') ?></th>
+            <td><?= h($payRange->external_code) ?></td>
         </tr>
         <tr>
             <th><?= __('Legal Entity') ?></th>
-            <td><?= h($payRange->legal_entity) ?></td>
+            <td><?= $payRange->has('legal_entity') ? $this->Html->link($payRange->legal_entity->name, ['controller' => 'LegalEntities', 'action' => 'view', $payRange->legal_entity->id]) : '' ?></td>
         </tr>
         <tr>
-            <th><?= __('External Code') ?></th>
-            <td><?= h($payRange->external_code) ?></td>
+            <th><?= __('Pay Group') ?></th>
+            <td><?= $payRange->has('pay_group') ? $this->Html->link($payRange->pay_group->name, ['controller' => 'PayGroups', 'action' => 'view', $payRange->pay_group->id]) : '' ?></td>
         </tr>
         <tr>
             <th><?= __('Minimum Pay') ?></th>
@@ -79,4 +83,4 @@
             <td><?= h($payRange->end_date) ?></td>
         </tr>
     </table>
-</div>
+</div></div></section>

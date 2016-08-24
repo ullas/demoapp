@@ -2,6 +2,8 @@
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
         <li><?= $this->Html->link(__('List Pay Components'), ['action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('List Frequencies'), ['controller' => 'Frequencies', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New Frequency'), ['controller' => 'Frequencies', 'action' => 'add']) ?></li>
     </ul>
 </nav>
 <div class="payComponents form large-9 medium-8 columns content">
@@ -18,7 +20,6 @@
             echo $this->Form->input('is_earning');
             echo $this->Form->input('currency');
             echo $this->Form->input('pay_component_value');
-            echo $this->Form->input('frequency_code');
             echo $this->Form->input('recurring');
             echo $this->Form->input('base_pay_component_group');
             echo $this->Form->input('tax_treatment');
@@ -33,6 +34,7 @@
             echo $this->Form->input('rate');
             echo $this->Form->input('number');
             echo $this->Form->input('external_code');
+            echo $this->Form->input('frequency_id', ['options' => $frequencies, 'empty' => true]);
         ?>
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>

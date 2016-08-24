@@ -89,8 +89,8 @@
                 <th><?= $this->Paginator->sort('termination_date') ?></th>
                 <th><?= $this->Paginator->sort('leave_of_absence_start_date') ?></th>
                 <th><?= $this->Paginator->sort('leave_of_absence_return_date') ?></th>
-                <th><?= $this->Paginator->sort('person_id_external') ?></th>
-                <th><?= $this->Paginator->sort('managerid') ?></th>
+                <th><?= $this->Paginator->sort('users_id') ?></th>
+                <th><?= $this->Paginator->sort('emp_data_biographies_id') ?></th>
                 <th class="actions"><?= __('Actions') ?></th>
             </tr>
         </thead>
@@ -177,8 +177,8 @@
                 <td><?= h($jobInfo->termination_date) ?></td>
                 <td><?= h($jobInfo->leave_of_absence_start_date) ?></td>
                 <td><?= h($jobInfo->leave_of_absence_return_date) ?></td>
-                <td><?= h($jobInfo->person_id_external) ?></td>
-                <td><?= $this->Number->format($jobInfo->managerid) ?></td>
+                <td><?= $this->Number->format($jobInfo->users_id) ?></td>
+                <td><?= $this->Number->format($jobInfo->emp_data_biographies_id) ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $jobInfo->id]) ?>
                     <?= $this->Html->link(__('Edit'), ['action' => 'edit', $jobInfo->id]) ?>

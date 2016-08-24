@@ -9,6 +9,9 @@ use Cake\Validation\Validator;
 /**
  * JobInfos Model
  *
+ * @property \Cake\ORM\Association\BelongsTo $Users
+ * @property \Cake\ORM\Association\BelongsTo $EmpDataBiographies
+ *
  * @method \App\Model\Entity\JobInfo get($primaryKey, $options = [])
  * @method \App\Model\Entity\JobInfo newEntity($data = null, array $options = [])
  * @method \App\Model\Entity\JobInfo[] newEntities(array $data, array $options = [])
@@ -33,6 +36,13 @@ class JobInfosTable extends Table
         $this->table('job_infos');
         $this->displayField('id');
         $this->primaryKey('id');
+
+        $this->belongsTo('Users', [
+            'foreignKey' => 'users_id'
+        ]);
+        $this->belongsTo('EmpDataBiographies', [
+            'foreignKey' => 'emp_data_biographies_id'
+        ]);
     }
 
     /**
@@ -311,14 +321,6 @@ class JobInfosTable extends Table
             ->date('leave_of_absence_return_date')
             ->allowEmpty('leave_of_absence_return_date');
 
-        $validator
-            ->requirePresence('person_id_external', 'create')
-            ->notEmpty('person_id_external')
-            ->add('person_id_external', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
-
-        $validator
-            ->allowEmpty('managerid');
-
         return $validator;
     }
 
@@ -331,7 +333,8 @@ class JobInfosTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
-        $rules->add($rules->isUnique(['person_id_external']));
+        $rules->add($rules->existsIn(['users_id'], 'Users'));
+        $rules->add($rules->existsIn(['emp_data_biographies_id'], 'EmpDataBiographies'));
 
         return $rules;
     }

@@ -215,10 +215,6 @@
             <td><?= h($jobInfo->time_in_pay_scale_level) ?></td>
         </tr>
         <tr>
-            <th><?= __('Person Id External') ?></th>
-            <td><?= h($jobInfo->person_id_external) ?></td>
-        </tr>
-        <tr>
             <th><?= __('Id') ?></th>
             <td><?= $this->Number->format($jobInfo->id) ?></td>
         </tr>
@@ -251,8 +247,12 @@
             <td><?= $this->Number->format($jobInfo->ern_number) ?></td>
         </tr>
         <tr>
-            <th><?= __('Managerid') ?></th>
-            <td><?= $this->Number->format($jobInfo->managerid) ?></td>
+            <th><?= __('Users Id') ?></th>
+            <td><?= $this->Number->format($jobInfo->users_id) ?></td>
+        </tr>
+        <tr>
+            <th><?= __('Emp Data Biographies Id') ?></th>
+            <td><?= $this->Number->format($jobInfo->emp_data_biographies_id) ?></td>
         </tr>
         <tr>
             <th><?= __('Position Entry Date') ?></th>

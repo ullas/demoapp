@@ -9,6 +9,8 @@ use Cake\Validation\Validator;
 /**
  * PayComponents Model
  *
+ * @property \Cake\ORM\Association\BelongsTo $Frequencies
+ *
  * @method \App\Model\Entity\PayComponent get($primaryKey, $options = [])
  * @method \App\Model\Entity\PayComponent newEntity($data = null, array $options = [])
  * @method \App\Model\Entity\PayComponent[] newEntities(array $data, array $options = [])
@@ -33,6 +35,10 @@ class PayComponentsTable extends Table
         $this->table('pay_components');
         $this->displayField('name');
         $this->primaryKey('id');
+
+        $this->belongsTo('Frequencies', [
+            'foreignKey' => 'frequency_id'
+        ]);
     }
 
     /**
@@ -76,9 +82,6 @@ class PayComponentsTable extends Table
         $validator
             ->decimal('pay_component_value')
             ->allowEmpty('pay_component_value');
-
-        $validator
-            ->allowEmpty('frequency_code');
 
         $validator
             ->boolean('recurring')
@@ -143,6 +146,7 @@ class PayComponentsTable extends Table
     public function buildRules(RulesChecker $rules)
     {
         $rules->add($rules->isUnique(['external_code']));
+        $rules->add($rules->existsIn(['frequency_id'], 'Frequencies'));
 
         return $rules;
     }

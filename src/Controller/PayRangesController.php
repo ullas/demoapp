@@ -18,6 +18,9 @@ class PayRangesController extends AppController
      */
     public function index()
     {
+        $this->paginate = [
+            'contain' => ['LegalEntities', 'PayGroups']
+        ];
         $payRanges = $this->paginate($this->PayRanges);
 
         $this->set(compact('payRanges'));
@@ -34,7 +37,7 @@ class PayRangesController extends AppController
     public function view($id = null)
     {
         $payRange = $this->PayRanges->get($id, [
-            'contain' => []
+            'contain' => ['LegalEntities', 'PayGroups']
         ]);
 
         $this->set('payRange', $payRange);
@@ -59,7 +62,9 @@ class PayRangesController extends AppController
                 $this->Flash->error(__('The pay range could not be saved. Please, try again.'));
             }
         }
-        $this->set(compact('payRange'));
+        $legalEntities = $this->PayRanges->LegalEntities->find('list', ['limit' => 200]);
+        $payGroups = $this->PayRanges->PayGroups->find('list', ['limit' => 200]);
+        $this->set(compact('payRange', 'legalEntities', 'payGroups'));
         $this->set('_serialize', ['payRange']);
     }
 
@@ -85,7 +90,9 @@ class PayRangesController extends AppController
                 $this->Flash->error(__('The pay range could not be saved. Please, try again.'));
             }
         }
-        $this->set(compact('payRange'));
+        $legalEntities = $this->PayRanges->LegalEntities->find('list', ['limit' => 200]);
+        $payGroups = $this->PayRanges->PayGroups->find('list', ['limit' => 200]);
+        $this->set(compact('payRange', 'legalEntities', 'payGroups'));
         $this->set('_serialize', ['payRange']);
     }
 

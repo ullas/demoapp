@@ -24,7 +24,8 @@ class PayComponentsTableTest extends TestCase
      * @var array
      */
     public $fixtures = [
-        'app.pay_components'
+        'app.pay_components',
+        'app.frequencies'
     ];
 
     /**
@@ -67,6 +68,16 @@ class PayComponentsTableTest extends TestCase
      * @return void
      */
     public function testValidationDefault()
+    {
+        $this->markTestIncomplete('Not implemented yet.');
+    }
+
+    /**
+     * Test buildRules method
+     *
+     * @return void
+     */
+    public function testBuildRules()
     {
         $this->markTestIncomplete('Not implemented yet.');
     }
