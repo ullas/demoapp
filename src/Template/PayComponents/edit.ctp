@@ -1,21 +1,16 @@
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Form->postLink(
-                __('Delete'),
-                ['action' => 'delete', $payComponent->id],
-                ['confirm' => __('Are you sure you want to delete # {0}?', $payComponent->id)]
-            )
-        ?></li>
-        <li><?= $this->Html->link(__('List Pay Components'), ['action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('List Frequencies'), ['controller' => 'Frequencies', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Frequency'), ['controller' => 'Frequencies', 'action' => 'add']) ?></li>
-    </ul>
-</nav>
-<div class="payComponents form large-9 medium-8 columns content">
+<section class="content-header">
+      <h1>
+        Pay Component
+        <small>Edit</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><?= $this->Html->link('<i class="fa fa-mail-reply"></i> '.__('Back'), ['action' => 'index'], ['escape' => false]) ?></li>
+      </ol>
+    </section>
+<section class="content">
+	<div class="box box-primary"><div class="box-body">
     <?= $this->Form->create($payComponent) ?>
     <fieldset>
-        <legend><?= __('Edit Pay Component') ?></legend>
         <?php
             echo $this->Form->input('name');
             echo $this->Form->input('description');
@@ -45,4 +40,4 @@
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>
     <?= $this->Form->end() ?>
-</div>
+</div></div></section>

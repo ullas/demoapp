@@ -8,6 +8,8 @@ if (file_exists($file)) {
 } else {
 ?>
 <footer class="main-footer">
+	<!-- go top button added -->
+	<a href="#" class="go-top"><i class="glyphicon glyphicon-arrow-up"> GoTop</i></a>
     <div class="pull-right hidden-xs">
         <b>Version</b> 1
     </div>

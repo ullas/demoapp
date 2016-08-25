@@ -43,6 +43,7 @@
                 <td><?= $this->Number->format($department->head_of_unit) ?></td>
                 <td><?= $department->has('cost_centre') ? $this->Html->link($department->cost_centre->name, ['controller' => 'CostCentres', 'action' => 'view', $department->cost_centre->id]) : '' ?></td>
                 <td class="actions">
+             
                     <?= $this->Html->link(__('View'), ['action' => 'view', $department->id]) ?>
                     <?= $this->Html->link(__('Edit'), ['action' => 'edit', $department->id]) ?>
                     <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $department->id], ['confirm' => __('Are you sure you want to delete # {0}?', $department->id)]) ?>
@@ -52,11 +53,12 @@
         </tbody>
     </table></div></div>
     <div class="paginator">
-        <ul class="pagination">
+    	<div class="pull-right">
+        <ul class="pagination pagination-sm no-margin pull-right">
             <?= $this->Paginator->prev('< ' . __('previous')) ?>
             <?= $this->Paginator->numbers() ?>
             <?= $this->Paginator->next(__('next') . ' >') ?>
-        </ul>
+        </ul></div>
         <p><?= $this->Paginator->counter() ?></p>
     </div>
 </section>

@@ -1,14 +1,19 @@
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('New Pay Component'), ['action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Frequencies'), ['controller' => 'Frequencies', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Frequency'), ['controller' => 'Frequencies', 'action' => 'add']) ?></li>
-    </ul>
-</nav>
-<div class="payComponents index large-9 medium-8 columns content">
-    <h3><?= __('Pay Components') ?></h3>
-    <table cellpadding="0" cellspacing="0">
+<section class="content-header">
+  <h1>
+    Pay Component
+    <small>List</small>
+  </h1>
+  <ol class="breadcrumb">
+    <li>
+    <li><a href="<?php echo $this->Url->build(array('controller' => 'PayComponents', 'action' => 'add')); ?>">Add</a></li>
+    </li>
+  </ol>
+</section>
+
+<!-- Main content -->
+<section class="content">
+  <div class="box box-primary"><div class="box-body">
+    <table cellpadding="0" cellspacing="0" class="table table-hover">
         <thead>
             <tr>
                 <th><?= $this->Paginator->sort('id') ?></th>
@@ -21,7 +26,7 @@
                 <th><?= $this->Paginator->sort('is_earning') ?></th>
                 <th><?= $this->Paginator->sort('currency') ?></th>
                 <th><?= $this->Paginator->sort('pay_component_value') ?></th>
-                <th><?= $this->Paginator->sort('recurring') ?></th>
+                <!-- <th><?= $this->Paginator->sort('recurring') ?></th>
                 <th><?= $this->Paginator->sort('base_pay_component_group') ?></th>
                 <th><?= $this->Paginator->sort('tax_treatment') ?></th>
                 <th><?= $this->Paginator->sort('can_override') ?></th>
@@ -34,7 +39,7 @@
                 <th><?= $this->Paginator->sort('unit_of_measure') ?></th>
                 <th><?= $this->Paginator->sort('rate') ?></th>
                 <th><?= $this->Paginator->sort('number') ?></th>
-                <th><?= $this->Paginator->sort('external_code') ?></th>
+                <th><?= $this->Paginator->sort('external_code') ?></th> -->
                 <th><?= $this->Paginator->sort('frequency_id') ?></th>
                 <th class="actions"><?= __('Actions') ?></th>
             </tr>
@@ -52,7 +57,7 @@
                 <td><?= h($payComponent->is_earning) ?></td>
                 <td><?= h($payComponent->currency) ?></td>
                 <td><?= $this->Number->format($payComponent->pay_component_value) ?></td>
-                <td><?= h($payComponent->recurring) ?></td>
+                <!-- <td><?= h($payComponent->recurring) ?></td>
                 <td><?= h($payComponent->base_pay_component_group) ?></td>
                 <td><?= h($payComponent->tax_treatment) ?></td>
                 <td><?= h($payComponent->can_override) ?></td>
@@ -65,7 +70,7 @@
                 <td><?= h($payComponent->unit_of_measure) ?></td>
                 <td><?= $this->Number->format($payComponent->rate) ?></td>
                 <td><?= $this->Number->format($payComponent->number) ?></td>
-                <td><?= h($payComponent->external_code) ?></td>
+                <td><?= h($payComponent->external_code) ?></td> -->
                 <td><?= $payComponent->has('frequency') ? $this->Html->link($payComponent->frequency->name, ['controller' => 'Frequencies', 'action' => 'view', $payComponent->frequency->id]) : '' ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $payComponent->id]) ?>
@@ -75,7 +80,7 @@
             </tr>
             <?php endforeach; ?>
         </tbody>
-    </table>
+    </table></div></div>
     <div class="paginator">
         <ul class="pagination">
             <?= $this->Paginator->prev('< ' . __('previous')) ?>
@@ -84,4 +89,4 @@
         </ul>
         <p><?= $this->Paginator->counter() ?></p>
     </div>
-</div>
+</section>

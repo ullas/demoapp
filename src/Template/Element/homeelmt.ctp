@@ -25,7 +25,7 @@ switch (strtolower($title)) {
         break;
 	case "todo":
         echo "<div class='well well-sm'>Due Anytime</div>";
-		echo $this->Html->link('Finish Profile', array('controller' => 'Profiles','action'     => 'index'));
+		echo $this->Html->link('Finish Profile', array('controller' => 'Profiles','action' => 'index'));
 		echo "<hr><div class='well well-sm'>Recently Completed(0)</div>";
         break;
 	case "mygoals":

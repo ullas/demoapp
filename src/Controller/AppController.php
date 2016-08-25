@@ -83,9 +83,8 @@ class AppController extends Controller
             'action' => 'index'
         ],
         'logoutRedirect' => [
-            'controller' => 'Pages',
-            'action' => 'display',
-            'home'
+            'controller' => 'Users',
+            'action' => 'login',
         ]
     ]);
 	
@@ -113,6 +112,8 @@ class AppController extends Controller
      */
     public function beforeRender(Event $event)
     {
+    	
+		// print_r($this);
     	$this->viewBuilder()->theme('AdminLTE');
 		$this->set('theme', Configure::read('Theme'));
 				
