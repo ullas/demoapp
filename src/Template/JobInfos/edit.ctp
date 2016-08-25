@@ -1,16 +1,14 @@
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Form->postLink(
-                __('Delete'),
-                ['action' => 'delete', $jobInfo->id],
-                ['confirm' => __('Are you sure you want to delete # {0}?', $jobInfo->id)]
-            )
-        ?></li>
-        <li><?= $this->Html->link(__('List Job Infos'), ['action' => 'index']) ?></li>
-    </ul>
-</nav>
-<div class="jobInfos form large-9 medium-8 columns content">
+<section class="content-header">
+      <h1>
+        Job info
+        <small>Edit</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><?= $this->Html->link('<i class="fa fa-mail-reply"></i> '.__('Back'), ['action' => 'index'], ['escape' => false]) ?></li>
+      </ol>
+    </section>
+<section class="content">
+	<div class="box box-primary"><div class="box-body">
     <?= $this->Form->create($jobInfo) ?>
     <fieldset>
         <legend><?= __('Edit Job Info') ?></legend>
@@ -100,4 +98,4 @@
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>
     <?= $this->Form->end() ?>
-</div>
+</div></div></section>

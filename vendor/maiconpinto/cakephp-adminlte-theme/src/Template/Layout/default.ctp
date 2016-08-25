@@ -17,8 +17,22 @@
 <!-- AdminLTE Skins. Choose a skin from the css/skins
     folder instead of downloading all of them to reduce the load. -->
     <?php echo $this->Html->css('AdminLTE.skins/skin-blue'); ?>
+    
+     <?= $this->Html->css('jquery.jOrgChart.css') ?>
 
     <?php echo $this->fetch('css'); ?>
+    
+    
+    <!-- jQuery 2.1.4 -->
+<?php echo $this->Html->script('AdminLTE./plugins/jQuery/jQuery-2.1.4.min'); ?>
+<!-- Bootstrap 3.3.5 -->
+<?php echo $this->Html->script('AdminLTE./bootstrap/js/bootstrap'); ?>
+<!-- SlimScroll -->
+<?php echo $this->Html->script('AdminLTE./plugins/slimScroll/jquery.slimscroll.min'); ?>
+<!-- FastClick -->
+<?php echo $this->Html->script('AdminLTE./plugins/fastclick/fastclick'); ?>
+<!-- AdminLTE App -->
+ <?= $this->Html->script('jquery.jOrgChart.js'); ?>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -26,6 +40,29 @@
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
+<style>
+	/* go top button */
+
+.go-top {
+	position: fixed;
+	bottom: 2em;
+	right: 2em;
+	text-decoration: none;
+	color: white;
+	background-color: rgba(0, 0, 0, 0.3);
+	font-size: 12px;
+	padding: 1em;
+	display: none;
+}
+
+.go-top:hover {
+	background-color: rgba(0, 0, 0, 0.6);
+	color:#FFFFFF;
+}
+.p3{
+	padding:3px;
+}
+</style>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
     <!-- Site wrapper -->
@@ -69,15 +106,6 @@
 </div>
 <!-- ./wrapper -->
 
-<!-- jQuery 2.1.4 -->
-<?php echo $this->Html->script('AdminLTE./plugins/jQuery/jQuery-2.1.4.min'); ?>
-<!-- Bootstrap 3.3.5 -->
-<?php echo $this->Html->script('AdminLTE./bootstrap/js/bootstrap'); ?>
-<!-- SlimScroll -->
-<?php echo $this->Html->script('AdminLTE./plugins/slimScroll/jquery.slimscroll.min'); ?>
-<!-- FastClick -->
-<?php echo $this->Html->script('AdminLTE./plugins/fastclick/fastclick'); ?>
-<!-- AdminLTE App -->
 
 <!-- AdminLTE for demo purposes -->
 <?php echo $this->fetch('script'); ?>
@@ -89,11 +117,48 @@
             alwaysVisible: false,
             size: "3px"
         }).css("width", "100%");
-        var a = $('a[href="<?php echo $this->request->webroot . $this->request->url ?>"]');
+        var a = $('a[href="<?php echo $this->request->webroot . $this->request->url ?>"]'); 
         if (!a.parent().hasClass('treeview')) {
             a.parent().addClass('active').parents('.treeview').addClass('active');
         }
+        
+        
+        $(window).scroll(function() {
+				if ($(this).scrollTop() > 200) {
+					$('.go-top').fadeIn(200);
+				} else {
+					$('.go-top').fadeOut(200);
+				}
+			});
+			
+			// Animate the scroll to top
+			$('.go-top').click(function(event) {
+				event.preventDefault();
+				
+				$('html, body').animate({scrollTop: 0}, 300);
+			})
+			
+			
+			$(".actions a").each(function(){
+				  if($(this).text()=='View')
+				  {
+				  	$(this).addClass('fa fa-file-text-o p3');
+				  	$(this).text("");
+				  }
+				  if($(this).text()=='Edit')
+				  {
+				  	$(this).addClass('fa fa-pencil p3');
+				  	$(this).text("");
+				  }
+				  if($(this).text()=='Delete')
+				  {
+				  	$(this).addClass('fa fa-trash');
+				  	$(this).text("");
+				  }
+			});
     });
-</script><?php echo $this->Html->script('AdminLTE.AdminLTE.min'); ?>
+</script>
+<?php echo $this->Html->script('AdminLTE.AdminLTE.min'); ?>
+
 </body>
 </html>

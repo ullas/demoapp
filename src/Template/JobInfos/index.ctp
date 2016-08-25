@@ -1,12 +1,19 @@
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('New Job Info'), ['action' => 'add']) ?></li>
-    </ul>
-</nav>
-<div class="jobInfos index large-9 medium-8 columns content">
-    <h3><?= __('Job Infos') ?></h3>
-    <table cellpadding="0" cellspacing="0">
+<section class="content-header">
+  <h1>
+    Job Info
+    <small>List</small>
+  </h1>
+  <ol class="breadcrumb">
+    <li>
+    <li><a href="<?php echo $this->Url->build(array('controller' => 'JobInfos', 'action' => 'add')); ?>">Add</a></li>
+    </li>
+  </ol>
+</section>
+
+<!-- Main content -->
+<section class="content">
+  <div class="box box-primary"><div class="box-body">
+    <table cellpadding="0" cellspacing="0" class="table table-hover">
         <thead>
             <tr>
                 <th><?= $this->Paginator->sort('id') ?></th>
@@ -24,7 +31,7 @@
                 <th><?= $this->Paginator->sort('job_code') ?></th>
                 <th><?= $this->Paginator->sort('job_title') ?></th>
                 <th><?= $this->Paginator->sort('local_job_title') ?></th>
-                <th><?= $this->Paginator->sort('employee_class') ?></th>
+                <!-- <th><?= $this->Paginator->sort('employee_class') ?></th>
                 <th><?= $this->Paginator->sort('pay_grade') ?></th>
                 <th><?= $this->Paginator->sort('regular_temp') ?></th>
                 <th><?= $this->Paginator->sort('standard_hours') ?></th>
@@ -66,7 +73,7 @@
                 <th><?= $this->Paginator->sort('time_recording_profile_code') ?></th>
                 <th><?= $this->Paginator->sort('time_recording_admissibility_code') ?></th>
                 <th><?= $this->Paginator->sort('time_recording_variant') ?></th>
-                <th><?= $this->Paginator->sort('default_overtime_compensation_variant') ?></th>
+                <th><?= $this->Paginator->sort('default_overtime_compensation_variant') ?></th> 
                 <th><?= $this->Paginator->sort('event') ?></th>
                 <th><?= $this->Paginator->sort('event_reason') ?></th>
                 <th><?= $this->Paginator->sort('notice_period') ?></th>
@@ -90,7 +97,7 @@
                 <th><?= $this->Paginator->sort('leave_of_absence_start_date') ?></th>
                 <th><?= $this->Paginator->sort('leave_of_absence_return_date') ?></th>
                 <th><?= $this->Paginator->sort('users_id') ?></th>
-                <th><?= $this->Paginator->sort('emp_data_biographies_id') ?></th>
+                <th><?= $this->Paginator->sort('emp_data_biographies_id') ?></th> -->
                 <th class="actions"><?= __('Actions') ?></th>
             </tr>
         </thead>
@@ -112,7 +119,7 @@
                 <td><?= h($jobInfo->job_code) ?></td>
                 <td><?= h($jobInfo->job_title) ?></td>
                 <td><?= h($jobInfo->local_job_title) ?></td>
-                <td><?= h($jobInfo->employee_class) ?></td>
+                <!-- <td><?= h($jobInfo->employee_class) ?></td>
                 <td><?= h($jobInfo->pay_grade) ?></td>
                 <td><?= h($jobInfo->regular_temp) ?></td>
                 <td><?= $this->Number->format($jobInfo->standard_hours) ?></td>
@@ -178,7 +185,7 @@
                 <td><?= h($jobInfo->leave_of_absence_start_date) ?></td>
                 <td><?= h($jobInfo->leave_of_absence_return_date) ?></td>
                 <td><?= $this->Number->format($jobInfo->users_id) ?></td>
-                <td><?= $this->Number->format($jobInfo->emp_data_biographies_id) ?></td>
+                <td><?= $this->Number->format($jobInfo->emp_data_biographies_id) ?></td> -->
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $jobInfo->id]) ?>
                     <?= $this->Html->link(__('Edit'), ['action' => 'edit', $jobInfo->id]) ?>
@@ -187,7 +194,7 @@
             </tr>
             <?php endforeach; ?>
         </tbody>
-    </table>
+    </table></div></div>
     <div class="paginator">
         <ul class="pagination">
             <?= $this->Paginator->prev('< ' . __('previous')) ?>
@@ -196,4 +203,4 @@
         </ul>
         <p><?= $this->Paginator->counter() ?></p>
     </div>
-</div>
+</section>

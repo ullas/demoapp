@@ -58,11 +58,12 @@
         </tbody>
     </table></div></div>
     <div class="paginator">
-        <ul class="pagination">
+        <div class="pull-right">
+        <ul class="pagination pagination-sm no-margin pull-right">
             <?= $this->Paginator->prev('< ' . __('previous')) ?>
             <?= $this->Paginator->numbers() ?>
             <?= $this->Paginator->next(__('next') . ' >') ?>
-        </ul>
+        </ul></div>
         <p><?= $this->Paginator->counter() ?></p>
     </div>
 </section>

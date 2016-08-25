@@ -50,11 +50,16 @@ if (file_exists($file)) {
             <li><a href="<?php echo $this->Url->build('/Positions'); ?>"><i class="fa fa-circle-o"></i> Position</a></li>
             <li><a href="<?php echo $this->Url->build('/Regions'); ?>"><i class="fa fa-circle-o"></i> Region</a></li>
             
+            <li><a href="<?php echo $this->Url->build('/PayGroups'); ?>"><i class="fa fa-circle-o"></i> Pay Group</a></li>
+            <li><a href="<?php echo $this->Url->build('/TimeAccountTypes'); ?>"><i class="fa fa-circle-o"></i> Time Account Type</a></li>
+            <li><a href="<?php echo $this->Url->build('/TimeTypeProfiles'); ?>"><i class="fa fa-circle-o"></i> Time Type Profile</a></li>
+            <li><a href="<?php echo $this->Url->build('/TimeTypes'); ?>"><i class="fa fa-circle-o"></i> Time Type</a></li>
+            <li><a href="<?php echo $this->Url->build('/WorkSchedules'); ?>"><i class="fa fa-circle-o"></i> Work Schedule</a></li>
+            
         </ul>
     </li>
         
     <li><a href="<?php echo $this->Url->build('/OrgCharts'); ?>"><i class="fa fa-sitemap"></i><span> Organizational Chart </span></a></li>
-    <li><a href="<?php echo $this->Url->build('/Holidays'); ?>"><i class="fa fa-calendar"></i><span> Holidays </span></a></li>
     <li><a href="#"><i class="fa fa-question-circle"></i> <span>Help</span></a></li>
 </ul>
 <?php } ?>

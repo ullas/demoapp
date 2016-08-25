@@ -13,7 +13,7 @@
     
     <!-- 1st row -->
       <div class="row">
-        <div class="col-md-3">
+        <div class="col-md-3" draggable="true">
           <!-- MY INFO -->
           <div class="box box-primary direct-chat direct-chat-primary">
             <div class="box-header with-border">
@@ -24,6 +24,8 @@
               <!-- Conversations are loaded here -->
               <div class="direct-chat-messages">
                 <?= $this->element('homeelmt', array('title' => 'My Info')); ?>
+          
+          
               </div>
             
             </div>
@@ -32,7 +34,7 @@
         </div>
         <!-- /.col -->
         
-        <div class="col-md-3">
+        <div class="col-md-3" draggable="true">
           <!-- MY INFO -->
           <div class="box box-success direct-chat direct-chat-primary">
             <div class="box-header with-border">
@@ -56,6 +58,9 @@
           <div class="box box-warning direct-chat direct-chat-primary">
             <div class="box-header with-border">
               <h3 class="box-title">Links</h3>
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-gear"></i></button>
+              </div>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
@@ -102,7 +107,17 @@
               <h3 class="box-title">To Do</h3>
               <div class="box-tools pull-right">
                 <span >Sort by</span>
-                <span >Date</span>
+                
+				<span class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+                  Date <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                  <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Date</a></li>
+                  <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Type</a></li>
+                </ul>
+              </span>
+              
                 <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-gear"></i></button>
               </div>
             </div>
