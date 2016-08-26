@@ -10,7 +10,7 @@
         <li><a href="<?php echo $this->Url->build(array('controller' => 'LegalEntities', 'action' => 'index')); ?>">List</a></li>
       </ol>
     </section>
-<section class="content">
+<section class="content"><div class="col-md-6">
 	<div class="box box-primary"><div class="box-body">
 		
     <table class="table table-hover">
@@ -67,4 +67,4 @@
             <td><?= $legalEntity->effective_status ? __('Yes') : __('No'); ?></td>
         </tr>
     </table>
-</div></div></section>
+</div></div></div></section>
