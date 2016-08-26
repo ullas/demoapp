@@ -47,12 +47,11 @@ if (file_exists($file)) {
             <li><a href="<?php echo $this->Url->build('/PayGroups'); ?>"><i class="fa fa-circle-o"></i> Pay Group</a></li>
             <li><a href="<?php echo $this->Url->build('/PayRanges'); ?>"><i class="fa fa-circle-o"></i> Pay Range</a></li>
             <li><a href="<?php echo $this->Url->build('/Picklists'); ?>"><i class="fa fa-circle-o"></i> Picklist</a></li>
-            <li><a href="<?php echo $this->Url->build('/Positions'); ?>"><i class="fa fa-circle-o"></i> Position</a></li>
+            <!-- <li><a href="<?php echo $this->Url->build('/Positions'); ?>"><i class="fa fa-circle-o"></i> Position</a></li> -->
             <li><a href="<?php echo $this->Url->build('/Regions'); ?>"><i class="fa fa-circle-o"></i> Region</a></li>
             
-            <li><a href="<?php echo $this->Url->build('/PayGroups'); ?>"><i class="fa fa-circle-o"></i> Pay Group</a></li>
-            <li><a href="<?php echo $this->Url->build('/TimeAccountTypes'); ?>"><i class="fa fa-circle-o"></i> Time Account Type</a></li>
-            <li><a href="<?php echo $this->Url->build('/TimeTypeProfiles'); ?>"><i class="fa fa-circle-o"></i> Time Type Profile</a></li>
+            <!-- <li><a href="<?php echo $this->Url->build('/TimeAccountTypes'); ?>"><i class="fa fa-circle-o"></i> Time Account Type</a></li>
+            <li><a href="<?php echo $this->Url->build('/TimeTypeProfiles'); ?>"><i class="fa fa-circle-o"></i> Time Type Profile</a></li> -->
             <li><a href="<?php echo $this->Url->build('/TimeTypes'); ?>"><i class="fa fa-circle-o"></i> Time Type</a></li>
             <li><a href="<?php echo $this->Url->build('/WorkSchedules'); ?>"><i class="fa fa-circle-o"></i> Work Schedule</a></li>
             
