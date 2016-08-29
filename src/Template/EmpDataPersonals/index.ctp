@@ -1,12 +1,19 @@
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('New Emp Data Personal'), ['action' => 'add']) ?></li>
-    </ul>
-</nav>
-<div class="empDataPersonals index large-9 medium-8 columns content">
-    <h3><?= __('Emp Data Personals') ?></h3>
-    <table cellpadding="0" cellspacing="0">
+<section class="content-header">
+  <h1>
+    Emp Data Personal
+    <small>List</small>
+  </h1>
+  <ol class="breadcrumb">
+    <li>
+    <li><a href="<?php echo $this->Url->build(array('controller' => 'EmpDataPersonals', 'action' => 'add')); ?>">Add</a></li>
+    </li>
+  </ol>
+</section>
+
+<!-- Main content -->
+<section class="content">
+  <div class="box box-primary"><div class="box-body">
+    <table cellpadding="0" cellspacing="0" class="table table-hover">
         <thead>
             <tr>
                 <th><?= $this->Paginator->sort('id') ?></th>
@@ -22,7 +29,7 @@
                 <th><?= $this->Paginator->sort('middle_name_alt2') ?></th>
                 <th><?= $this->Paginator->sort('last_name_alt2') ?></th>
                 <th><?= $this->Paginator->sort('display_name') ?></th>
-                <th><?= $this->Paginator->sort('formal_name') ?></th>
+                <!-- <th><?= $this->Paginator->sort('formal_name') ?></th>
                 <th><?= $this->Paginator->sort('birth_name') ?></th>
                 <th><?= $this->Paginator->sort('birth_name_alt1') ?></th>
                 <th><?= $this->Paginator->sort('birth_name_alt2') ?></th>
@@ -42,7 +49,7 @@
                 <th><?= $this->Paginator->sort('exclude_legal') ?></th>
                 <th><?= $this->Paginator->sort('nationality_date') ?></th>
                 <th><?= $this->Paginator->sort('home_airport') ?></th>
-                <th><?= $this->Paginator->sort('Religion') ?></th>
+                <th><?= $this->Paginator->sort('religion') ?></th>
                 <th><?= $this->Paginator->sort('number_children') ?></th>
                 <th><?= $this->Paginator->sort('disability_date') ?></th>
                 <th><?= $this->Paginator->sort('disable_group') ?></th>
@@ -50,7 +57,7 @@
                 <th><?= $this->Paginator->sort('disable_type') ?></th>
                 <th><?= $this->Paginator->sort('disable_authority') ?></th>
                 <th><?= $this->Paginator->sort('disable_ref') ?></th>
-                <th><?= $this->Paginator->sort('person_id_external') ?></th>
+                <th><?= $this->Paginator->sort('person_id_external') ?></th> -->
                 <th class="actions"><?= __('Actions') ?></th>
             </tr>
         </thead>
@@ -70,7 +77,7 @@
                 <td><?= h($empDataPersonal->middle_name_alt2) ?></td>
                 <td><?= h($empDataPersonal->last_name_alt2) ?></td>
                 <td><?= h($empDataPersonal->display_name) ?></td>
-                <td><?= h($empDataPersonal->formal_name) ?></td>
+                <!-- <td><?= h($empDataPersonal->formal_name) ?></td>
                 <td><?= h($empDataPersonal->birth_name) ?></td>
                 <td><?= h($empDataPersonal->birth_name_alt1) ?></td>
                 <td><?= h($empDataPersonal->birth_name_alt2) ?></td>
@@ -90,7 +97,7 @@
                 <td><?= h($empDataPersonal->exclude_legal) ?></td>
                 <td><?= h($empDataPersonal->nationality_date) ?></td>
                 <td><?= h($empDataPersonal->home_airport) ?></td>
-                <td><?= h($empDataPersonal->Religion) ?></td>
+                <td><?= h($empDataPersonal->religion) ?></td>
                 <td><?= $this->Number->format($empDataPersonal->number_children) ?></td>
                 <td><?= h($empDataPersonal->disability_date) ?></td>
                 <td><?= h($empDataPersonal->disable_group) ?></td>
@@ -98,7 +105,7 @@
                 <td><?= h($empDataPersonal->disable_type) ?></td>
                 <td><?= h($empDataPersonal->disable_authority) ?></td>
                 <td><?= h($empDataPersonal->disable_ref) ?></td>
-                <td><?= h($empDataPersonal->person_id_external) ?></td>
+                <td><?= h($empDataPersonal->person_id_external) ?></td> -->
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $empDataPersonal->id]) ?>
                     <?= $this->Html->link(__('Edit'), ['action' => 'edit', $empDataPersonal->id]) ?>
@@ -107,7 +114,7 @@
             </tr>
             <?php endforeach; ?>
         </tbody>
-    </table>
+    </table></div></div>
     <div class="paginator">
         <ul class="pagination">
             <?= $this->Paginator->prev('< ' . __('previous')) ?>
@@ -116,4 +123,4 @@
         </ul>
         <p><?= $this->Paginator->counter() ?></p>
     </div>
-</div>
+</section>

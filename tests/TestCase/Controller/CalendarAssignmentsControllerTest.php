@@ -17,7 +17,8 @@ class CalendarAssignmentsControllerTest extends IntegrationTestCase
      */
     public $fixtures = [
         'app.calendar_assignments',
-        'app.users'
+        'app.users',
+        'app.holidays'
     ];
 
     /**

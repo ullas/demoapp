@@ -21,13 +21,12 @@ class CalendarAssignmentsFixture extends TestFixture
         'calendar' => ['type' => 'string', 'length' => 10, 'default' => null, 'null' => true, 'collate' => null, 'comment' => null, 'precision' => null, 'fixed' => null],
         'assignmentyear' => ['type' => 'string', 'length' => 4, 'default' => null, 'null' => true, 'collate' => null, 'comment' => null, 'precision' => null, 'fixed' => null],
         'assignmentdate' => ['type' => 'date', 'length' => null, 'default' => null, 'null' => true, 'comment' => null, 'precision' => null],
-        'User' => ['type' => 'string', 'length' => null, 'default' => null, 'null' => true, 'collate' => null, 'comment' => null, 'precision' => null, 'fixed' => null],
-        'holiday_code' => ['type' => 'string', 'length' => 10, 'default' => null, 'null' => false, 'collate' => null, 'comment' => null, 'precision' => null, 'fixed' => null],
+        'user_id' => ['type' => 'biginteger', 'length' => 20, 'default' => null, 'null' => true, 'comment' => null, 'precision' => null, 'unsigned' => null, 'autoIncrement' => null],
+        'holiday_id' => ['type' => 'biginteger', 'length' => 20, 'default' => null, 'null' => true, 'comment' => null, 'precision' => null, 'unsigned' => null, 'autoIncrement' => null],
         '_constraints' => [
             'primary' => ['type' => 'primary', 'columns' => ['id'], 'length' => []],
-            'calendar_assignments_holiday_code_key' => ['type' => 'unique', 'columns' => ['holiday_code'], 'length' => []],
-            'calendar_assignments_User_fkey' => ['type' => 'foreign', 'columns' => ['User'], 'references' => ['users', 'username'], 'update' => 'noAction', 'delete' => 'noAction', 'length' => []],
-            'calendar_assignments_holiday_code_fkey' => ['type' => 'foreign', 'columns' => ['holiday_code'], 'references' => ['holidays', 'holiday_code'], 'update' => 'noAction', 'delete' => 'noAction', 'length' => []],
+            'calendar_assignments_holiday_id_fkey' => ['type' => 'foreign', 'columns' => ['holiday_id'], 'references' => ['holidays', 'id'], 'update' => 'noAction', 'delete' => 'noAction', 'length' => []],
+            'calendar_assignments_user_id_fkey' => ['type' => 'foreign', 'columns' => ['user_id'], 'references' => ['users', 'id'], 'update' => 'noAction', 'delete' => 'noAction', 'length' => []],
         ],
     ];
     // @codingStandardsIgnoreEnd
@@ -42,9 +41,9 @@ class CalendarAssignmentsFixture extends TestFixture
             'id' => 1,
             'calendar' => 'Lorem ip',
             'assignmentyear' => 'Lo',
-            'assignmentdate' => '2016-08-09',
-            'User' => 'Lorem ipsum dolor sit amet',
-            'holiday_code' => 'Lorem ip'
+            'assignmentdate' => '2016-08-29',
+            'user_id' => 1,
+            'holiday_id' => 1
         ],
     ];
 }

@@ -39,7 +39,7 @@ use Cake\ORM\Entity;
  * @property string $exclude_legal
  * @property \Cake\I18n\Time $nationality_date
  * @property string $home_airport
- * @property string $Religion
+ * @property string $religion
  * @property float $number_children
  * @property \Cake\I18n\Time $disability_date
  * @property string $disable_group

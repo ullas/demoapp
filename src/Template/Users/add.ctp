@@ -2,8 +2,6 @@
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
         <li><?= $this->Html->link(__('List Users'), ['action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('List Calendar Assignments'), ['controller' => 'CalendarAssignments', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Calendar Assignment'), ['controller' => 'CalendarAssignments', 'action' => 'add']) ?></li>
     </ul>
 </nav>
 <div class="users form large-9 medium-8 columns content">
@@ -15,6 +13,7 @@
             echo $this->Form->input('password');
             echo $this->Form->input('role');
             echo $this->Form->input('username');
+            echo $this->Form->input('name');
         ?>
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>

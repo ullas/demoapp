@@ -44322,3 +44322,905 @@ Stack Trace:
 
 2016-08-26 09:10:25 Warning: Headers already sent in /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/AssetFilter.php:148
 2016-08-26 09:38:58 Warning: Headers already sent in /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/AssetFilter.php:148
+2016-08-26 11:32:20 Warning: Headers already sent in /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/AssetFilter.php:148
+2016-08-26 11:50:23 Warning: Headers already sent in /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/AssetFilter.php:148
+2016-08-29 04:19:05 Error: [BadMethodCallException] Unknown finder method "username"
+Request URL: /Homes
+Referer URL: http://localhost:8765/legal-entities
+Stack Trace:
+#0 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/ORM/Table.php(967): Cake\ORM\Table->callFinder('username', Object(Cake\ORM\Query), Array)
+#1 /Users/varunprathap/demoapp/src/Controller/AppController.php(101): Cake\ORM\Table->find('username')
+#2 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventManager.php(421): App\Controller\AppController->beforeFilter(Object(Cake\Event\Event))
+#3 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventManager.php(386): Cake\Event\EventManager->_callListener(Array, Object(Cake\Event\Event))
+#4 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventDispatcherTrait.php(78): Cake\Event\EventManager->dispatch(Object(Cake\Event\Event))
+#5 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Controller/Controller.php(497): Cake\Controller\Controller->dispatchEvent('Controller.init...')
+#6 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php(120): Cake\Controller\Controller->startupProcess()
+#7 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php(99): Cake\Http\ActionDispatcher->_invoke(Object(App\Controller\HomesController))
+#8 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(65): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#9 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#10 {main}
+
+
+2016-08-29 04:22:24 Error: [BadMethodCallException] Unknown finder method "first"
+Request URL: /Homes
+Referer URL: http://localhost:8765/legal-entities
+Stack Trace:
+#0 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/ORM/Table.php(967): Cake\ORM\Table->callFinder('first', Object(Cake\ORM\Query), Array)
+#1 /Users/varunprathap/demoapp/src/Controller/AppController.php(102): Cake\ORM\Table->find('first', Array)
+#2 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventManager.php(421): App\Controller\AppController->beforeFilter(Object(Cake\Event\Event))
+#3 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventManager.php(386): Cake\Event\EventManager->_callListener(Array, Object(Cake\Event\Event))
+#4 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventDispatcherTrait.php(78): Cake\Event\EventManager->dispatch(Object(Cake\Event\Event))
+#5 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Controller/Controller.php(497): Cake\Controller\Controller->dispatchEvent('Controller.init...')
+#6 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php(120): Cake\Controller\Controller->startupProcess()
+#7 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php(99): Cake\Http\ActionDispatcher->_invoke(Object(App\Controller\HomesController))
+#8 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(65): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#9 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#10 {main}
+
+
+2016-08-29 04:22:35 Warning: Headers already sent in /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Error/Debugger.php:753
+2016-08-29 04:24:21 Warning: Headers already sent in /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/AssetFilter.php:148
+2016-08-29 04:25:00 Warning: Headers already sent in /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/AssetFilter.php:148
+2016-08-29 04:30:11 Error: [Error] Class 'AuthComponent' not found
+Request URL: /Homes
+Referer URL: http://localhost:8765/legal-entities
+Stack Trace:
+#0 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/View.php(1005): include()
+#1 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/View.php(964): Cake\View\View->_evaluate('/Users/varunpra...', Array)
+#2 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/View.php(1350): Cake\View\View->_render('/Users/varunpra...', Array)
+#3 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/View.php(493): Cake\View\View->_renderElement('/Users/varunpra...', Array, Array)
+#4 /Users/varunprathap/demoapp/vendor/maiconpinto/cakephp-adminlte-theme/src/Template/Element/aside-main-sidebar.ctp(14): Cake\View\View->element('aside/user-pane...')
+#5 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/View.php(1005): include('/Users/varunpra...')
+#6 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/View.php(964): Cake\View\View->_evaluate('/Users/varunpra...', Array)
+#7 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/View.php(1350): Cake\View\View->_render('/Users/varunpra...', Array)
+#8 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/View.php(493): Cake\View\View->_renderElement('/Users/varunpra...', Array, Array)
+#9 /Users/varunprathap/demoapp/vendor/maiconpinto/cakephp-adminlte-theme/src/Template/Layout/default.ctp(96): Cake\View\View->element('aside-main-side...')
+#10 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/View.php(1005): include('/Users/varunpra...')
+#11 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/View.php(964): Cake\View\View->_evaluate('/Users/varunpra...', Array)
+#12 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/View.php(635): Cake\View\View->_render('/Users/varunpra...')
+#13 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/View.php(593): Cake\View\View->renderLayout('', 'default')
+#14 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Controller/Controller.php(617): Cake\View\View->render(NULL, NULL)
+#15 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php(131): Cake\Controller\Controller->render()
+#16 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php(99): Cake\Http\ActionDispatcher->_invoke(Object(App\Controller\HomesController))
+#17 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(65): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#18 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#19 {main}
+
+
+2016-08-29 04:31:18 Error: [Error] Call to a member function read() on boolean
+Request URL: /Homes
+Referer URL: http://localhost:8765/legal-entities
+Stack Trace:
+#0 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventManager.php(421): App\Controller\AppController->beforeFilter(Object(Cake\Event\Event))
+#1 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventManager.php(386): Cake\Event\EventManager->_callListener(Array, Object(Cake\Event\Event))
+#2 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventDispatcherTrait.php(78): Cake\Event\EventManager->dispatch(Object(Cake\Event\Event))
+#3 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Controller/Controller.php(497): Cake\Controller\Controller->dispatchEvent('Controller.init...')
+#4 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php(120): Cake\Controller\Controller->startupProcess()
+#5 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php(99): Cake\Http\ActionDispatcher->_invoke(Object(App\Controller\HomesController))
+#6 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(65): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#7 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#8 {main}
+
+
+2016-08-29 04:31:21 Error: [Error] Call to a member function read() on boolean
+Request URL: /Homes
+Referer URL: http://localhost:8765/legal-entities
+Stack Trace:
+#0 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventManager.php(421): App\Controller\AppController->beforeFilter(Object(Cake\Event\Event))
+#1 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventManager.php(386): Cake\Event\EventManager->_callListener(Array, Object(Cake\Event\Event))
+#2 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventDispatcherTrait.php(78): Cake\Event\EventManager->dispatch(Object(Cake\Event\Event))
+#3 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Controller/Controller.php(497): Cake\Controller\Controller->dispatchEvent('Controller.init...')
+#4 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php(120): Cake\Controller\Controller->startupProcess()
+#5 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php(99): Cake\Http\ActionDispatcher->_invoke(Object(App\Controller\HomesController))
+#6 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(65): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#7 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#8 {main}
+
+
+2016-08-29 04:42:22 Warning: Headers already sent in /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Error/Debugger.php:753
+2016-08-29 04:43:41 Warning: Headers already sent in /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Error/Debugger.php:753
+2016-08-29 04:44:46 Warning: Headers already sent in /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Error/Debugger.php:753
+2016-08-29 04:45:17 Warning: Headers already sent in /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Error/Debugger.php:753
+2016-08-29 04:47:14 Warning: Warning (2): Declaration of App\Controller\UsersController::beforeFilter(App\Controller\Event $event) should be compatible with App\Controller\AppController::beforeFilter(Cake\Event\Event $event) in [/Users/varunprathap/demoapp/src/Controller/UsersController.php, line 11]
+Request URL: /Users
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+include - APP/Controller/UsersController.php, line 11
+Composer\Autoload\includeFile - ROOT/vendor/composer/ClassLoader.php, line 412
+Composer\Autoload\ClassLoader::loadClass() - ROOT/vendor/composer/ClassLoader.php, line 301
+spl_autoload_call - [internal], line ??
+class_exists - [internal], line ??
+Cake\Core\App::_classExistsInBase() - CORE/src/Core/App.php, line 152
+Cake\Core\App::className() - CORE/src/Core/App.php, line 64
+Cake\Http\ControllerFactory::create() - CORE/src/Http/ControllerFactory.php, line 70
+Cake\Routing\Filter\ControllerFactoryFilter::_getController() - CORE/src/Routing/Filter/ControllerFactoryFilter.php, line 66
+Cake\Routing\Filter\ControllerFactoryFilter::beforeDispatch() - CORE/src/Routing/Filter/ControllerFactoryFilter.php, line 52
+Cake\Routing\DispatcherFilter::handle() - CORE/src/Routing/DispatcherFilter.php, line 144
+Cake\Event\EventManager::_callListener() - CORE/src/Event/EventManager.php, line 425
+Cake\Event\EventManager::dispatch() - CORE/src/Event/EventManager.php, line 386
+Cake\Http\ActionDispatcher::dispatchEvent() - CORE/src/Event/EventDispatcherTrait.php, line 78
+Cake\Http\ActionDispatcher::dispatch() - CORE/src/Http/ActionDispatcher.php, line 84
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 65
+[main] - ROOT/webroot/index.php, line 36
+
+
+
+2016-08-29 04:47:14 Error: [TypeError] Argument 1 passed to App\Controller\UsersController::beforeFilter() must be an instance of App\Controller\Event, instance of Cake\Event\Event given, called in /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventManager.php on line 421
+Request URL: /Users
+Stack Trace:
+#0 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventManager.php(421): App\Controller\UsersController->beforeFilter(Object(Cake\Event\Event))
+#1 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventManager.php(386): Cake\Event\EventManager->_callListener(Array, Object(Cake\Event\Event))
+#2 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventDispatcherTrait.php(78): Cake\Event\EventManager->dispatch(Object(Cake\Event\Event))
+#3 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Controller/Controller.php(497): Cake\Controller\Controller->dispatchEvent('Controller.init...')
+#4 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php(120): Cake\Controller\Controller->startupProcess()
+#5 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php(99): Cake\Http\ActionDispatcher->_invoke(Object(App\Controller\UsersController))
+#6 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(65): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#7 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#8 {main}
+
+
+2016-08-29 04:48:16 Warning: Headers already sent in /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Error/Debugger.php:753
+2016-08-29 04:55:18 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Admin_l_t_e could not be found.
+Exception Attributes: array (
+  'class' => 'Admin_l_t_e',
+  'plugin' => false,
+  'prefix' => false,
+  '_ext' => false,
+)
+Request URL: /admin_l_t_e/bootstrap/css/bootstrap.css.map
+Stack Trace:
+#0 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Http/ControllerFactory.php(72): Cake\Http\ControllerFactory->missingController(Object(Cake\Network\Request))
+#1 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/ControllerFactoryFilter.php(66): Cake\Http\ControllerFactory->create(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#2 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/ControllerFactoryFilter.php(52): Cake\Routing\Filter\ControllerFactoryFilter->_getController(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#3 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/DispatcherFilter.php(144): Cake\Routing\Filter\ControllerFactoryFilter->beforeDispatch(Object(Cake\Event\Event))
+#4 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventManager.php(425): Cake\Routing\DispatcherFilter->handle(Object(Cake\Event\Event), Object(Cake\Network\Request), Object(Cake\Network\Response))
+#5 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventManager.php(386): Cake\Event\EventManager->_callListener(Array, Object(Cake\Event\Event))
+#6 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventDispatcherTrait.php(78): Cake\Event\EventManager->dispatch(Object(Cake\Event\Event))
+#7 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php(84): Cake\Http\ActionDispatcher->dispatchEvent('Dispatcher.befo...', Array)
+#8 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(65): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#9 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#10 {main}
+
+
+2016-08-29 04:55:41 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Admin_l_t_e could not be found.
+Exception Attributes: array (
+  'class' => 'Admin_l_t_e',
+  'plugin' => false,
+  'prefix' => false,
+  '_ext' => false,
+)
+Request URL: /admin_l_t_e/bootstrap/css/bootstrap.css.map
+Stack Trace:
+#0 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Http/ControllerFactory.php(72): Cake\Http\ControllerFactory->missingController(Object(Cake\Network\Request))
+#1 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/ControllerFactoryFilter.php(66): Cake\Http\ControllerFactory->create(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#2 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/ControllerFactoryFilter.php(52): Cake\Routing\Filter\ControllerFactoryFilter->_getController(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#3 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/DispatcherFilter.php(144): Cake\Routing\Filter\ControllerFactoryFilter->beforeDispatch(Object(Cake\Event\Event))
+#4 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventManager.php(425): Cake\Routing\DispatcherFilter->handle(Object(Cake\Event\Event), Object(Cake\Network\Request), Object(Cake\Network\Response))
+#5 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventManager.php(386): Cake\Event\EventManager->_callListener(Array, Object(Cake\Event\Event))
+#6 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventDispatcherTrait.php(78): Cake\Event\EventManager->dispatch(Object(Cake\Event\Event))
+#7 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php(84): Cake\Http\ActionDispatcher->dispatchEvent('Dispatcher.befo...', Array)
+#8 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(65): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#9 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#10 {main}
+
+
+2016-08-29 04:57:40 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Admin_l_t_e could not be found.
+Exception Attributes: array (
+  'class' => 'Admin_l_t_e',
+  'plugin' => false,
+  'prefix' => false,
+  '_ext' => false,
+)
+Request URL: /admin_l_t_e/bootstrap/css/bootstrap.css.map
+Stack Trace:
+#0 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Http/ControllerFactory.php(72): Cake\Http\ControllerFactory->missingController(Object(Cake\Network\Request))
+#1 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/ControllerFactoryFilter.php(66): Cake\Http\ControllerFactory->create(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#2 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/ControllerFactoryFilter.php(52): Cake\Routing\Filter\ControllerFactoryFilter->_getController(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#3 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/DispatcherFilter.php(144): Cake\Routing\Filter\ControllerFactoryFilter->beforeDispatch(Object(Cake\Event\Event))
+#4 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventManager.php(425): Cake\Routing\DispatcherFilter->handle(Object(Cake\Event\Event), Object(Cake\Network\Request), Object(Cake\Network\Response))
+#5 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventManager.php(386): Cake\Event\EventManager->_callListener(Array, Object(Cake\Event\Event))
+#6 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventDispatcherTrait.php(78): Cake\Event\EventManager->dispatch(Object(Cake\Event\Event))
+#7 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php(84): Cake\Http\ActionDispatcher->dispatchEvent('Dispatcher.befo...', Array)
+#8 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(65): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#9 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#10 {main}
+
+
+2016-08-29 04:57:44 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Admin_l_t_e could not be found.
+Exception Attributes: array (
+  'class' => 'Admin_l_t_e',
+  'plugin' => false,
+  'prefix' => false,
+  '_ext' => false,
+)
+Request URL: /admin_l_t_e/bootstrap/css/bootstrap.css.map
+Stack Trace:
+#0 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Http/ControllerFactory.php(72): Cake\Http\ControllerFactory->missingController(Object(Cake\Network\Request))
+#1 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/ControllerFactoryFilter.php(66): Cake\Http\ControllerFactory->create(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#2 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/ControllerFactoryFilter.php(52): Cake\Routing\Filter\ControllerFactoryFilter->_getController(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#3 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/DispatcherFilter.php(144): Cake\Routing\Filter\ControllerFactoryFilter->beforeDispatch(Object(Cake\Event\Event))
+#4 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventManager.php(425): Cake\Routing\DispatcherFilter->handle(Object(Cake\Event\Event), Object(Cake\Network\Request), Object(Cake\Network\Response))
+#5 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventManager.php(386): Cake\Event\EventManager->_callListener(Array, Object(Cake\Event\Event))
+#6 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventDispatcherTrait.php(78): Cake\Event\EventManager->dispatch(Object(Cake\Event\Event))
+#7 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php(84): Cake\Http\ActionDispatcher->dispatchEvent('Dispatcher.befo...', Array)
+#8 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(65): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#9 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#10 {main}
+
+
+2016-08-29 05:01:49 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Admin_l_t_e could not be found.
+Exception Attributes: array (
+  'class' => 'Admin_l_t_e',
+  'plugin' => false,
+  'prefix' => false,
+  '_ext' => false,
+)
+Request URL: /admin_l_t_e/bootstrap/css/bootstrap.css.map
+Stack Trace:
+#0 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Http/ControllerFactory.php(72): Cake\Http\ControllerFactory->missingController(Object(Cake\Network\Request))
+#1 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/ControllerFactoryFilter.php(66): Cake\Http\ControllerFactory->create(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#2 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/ControllerFactoryFilter.php(52): Cake\Routing\Filter\ControllerFactoryFilter->_getController(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#3 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/DispatcherFilter.php(144): Cake\Routing\Filter\ControllerFactoryFilter->beforeDispatch(Object(Cake\Event\Event))
+#4 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventManager.php(425): Cake\Routing\DispatcherFilter->handle(Object(Cake\Event\Event), Object(Cake\Network\Request), Object(Cake\Network\Response))
+#5 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventManager.php(386): Cake\Event\EventManager->_callListener(Array, Object(Cake\Event\Event))
+#6 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventDispatcherTrait.php(78): Cake\Event\EventManager->dispatch(Object(Cake\Event\Event))
+#7 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php(84): Cake\Http\ActionDispatcher->dispatchEvent('Dispatcher.befo...', Array)
+#8 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(65): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#9 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#10 {main}
+
+
+2016-08-29 05:07:39 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Admin_l_t_e could not be found.
+Exception Attributes: array (
+  'class' => 'Admin_l_t_e',
+  'plugin' => false,
+  'prefix' => false,
+  '_ext' => false,
+)
+Request URL: /admin_l_t_e/bootstrap/css/bootstrap.css.map
+Stack Trace:
+#0 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Http/ControllerFactory.php(72): Cake\Http\ControllerFactory->missingController(Object(Cake\Network\Request))
+#1 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/ControllerFactoryFilter.php(66): Cake\Http\ControllerFactory->create(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#2 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/ControllerFactoryFilter.php(52): Cake\Routing\Filter\ControllerFactoryFilter->_getController(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#3 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/DispatcherFilter.php(144): Cake\Routing\Filter\ControllerFactoryFilter->beforeDispatch(Object(Cake\Event\Event))
+#4 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventManager.php(425): Cake\Routing\DispatcherFilter->handle(Object(Cake\Event\Event), Object(Cake\Network\Request), Object(Cake\Network\Response))
+#5 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventManager.php(386): Cake\Event\EventManager->_callListener(Array, Object(Cake\Event\Event))
+#6 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventDispatcherTrait.php(78): Cake\Event\EventManager->dispatch(Object(Cake\Event\Event))
+#7 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php(84): Cake\Http\ActionDispatcher->dispatchEvent('Dispatcher.befo...', Array)
+#8 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(65): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#9 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#10 {main}
+
+
+2016-08-29 05:15:58 Error: [PDOException] SQLSTATE[42703]: Undefined column: 7 ERROR:  column empdatapersonals.religion does not exist
+LINE 1: ...home_airport AS "EmpDataPersonals__home_airport", EmpDataPer...
+                                                             ^
+HINT:  Perhaps you meant to reference the column "empdatapersonals.Religion".
+Request URL: /EmpDataPersonals
+Referer URL: http://localhost:8765/Homes
+Stack Trace:
+#0 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Database/Statement/StatementDecorator.php(172): PDOStatement->execute(NULL)
+#1 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Database/Statement/StatementDecorator.php(172): Cake\Database\Statement\StatementDecorator->execute(NULL)
+#2 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Database/Log/LoggingStatement.php(56): Cake\Database\Statement\StatementDecorator->execute(NULL)
+#3 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Database/Connection.php(276): Cake\Database\Log\LoggingStatement->execute()
+#4 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Database/Query.php(189): Cake\Database\Connection->run(Object(Cake\ORM\Query))
+#5 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/ORM/Query.php(954): Cake\Database\Query->execute()
+#6 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Datasource/QueryTrait.php(276): Cake\ORM\Query->_execute()
+#7 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/ORM/Query.php(902): Cake\ORM\Query->_all()
+#8 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Controller/Component/PaginatorComponent.php(188): Cake\ORM\Query->all()
+#9 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Controller/Controller.php(713): Cake\Controller\Component\PaginatorComponent->paginate(Object(App\Model\Table\EmpDataPersonalsTable), Array)
+#10 /Users/varunprathap/demoapp/src/Controller/EmpDataPersonalsController.php(21): Cake\Controller\Controller->paginate(Object(App\Model\Table\EmpDataPersonalsTable))
+#11 [internal function]: App\Controller\EmpDataPersonalsController->index()
+#12 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Controller/Controller.php(435): call_user_func_array(Array, Array)
+#13 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php(125): Cake\Controller\Controller->invokeAction()
+#14 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php(99): Cake\Http\ActionDispatcher->_invoke(Object(App\Controller\EmpDataPersonalsController))
+#15 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(65): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#16 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#17 {main}
+
+
+2016-08-29 05:18:24 Error: [InvalidArgumentException] CalendarAssignments is not associated with Users
+Request URL: /CalendarAssignments
+Referer URL: http://localhost:8765/emp-data-personals/add
+Stack Trace:
+#0 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/ORM/EagerLoader.php(254): Cake\ORM\EagerLoader->_normalizeContain(Object(App\Model\Table\CalendarAssignmentsTable), 'Users', Array, Array)
+#1 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/ORM/EagerLoader.php(380): Cake\ORM\EagerLoader->normalized(Object(App\Model\Table\CalendarAssignmentsTable))
+#2 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/ORM/EagerLoader.php(351): Cake\ORM\EagerLoader->attachableAssociations(Object(App\Model\Table\CalendarAssignmentsTable))
+#3 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/ORM/Query.php(981): Cake\ORM\EagerLoader->attachAssociations(Object(Cake\ORM\Query), Object(App\Model\Table\CalendarAssignmentsTable), true)
+#4 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/ORM/Query.php(932): Cake\ORM\Query->_transformQuery()
+#5 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Database/Driver/PDODriverTrait.php(112): Cake\ORM\Query->sql()
+#6 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Database/Connection.php(221): Cake\Database\Driver\Postgres->prepare(Object(Cake\ORM\Query))
+#7 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Database/Connection.php(274): Cake\Database\Connection->prepare(Object(Cake\ORM\Query))
+#8 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Database/Query.php(189): Cake\Database\Connection->run(Object(Cake\ORM\Query))
+#9 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/ORM/Query.php(954): Cake\Database\Query->execute()
+#10 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Datasource/QueryTrait.php(276): Cake\ORM\Query->_execute()
+#11 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/ORM/Query.php(902): Cake\ORM\Query->_all()
+#12 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Controller/Component/PaginatorComponent.php(188): Cake\ORM\Query->all()
+#13 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Controller/Controller.php(713): Cake\Controller\Component\PaginatorComponent->paginate(Object(App\Model\Table\CalendarAssignmentsTable), Array)
+#14 /Users/varunprathap/demoapp/src/Controller/CalendarAssignmentsController.php(24): Cake\Controller\Controller->paginate(Object(App\Model\Table\CalendarAssignmentsTable))
+#15 [internal function]: App\Controller\CalendarAssignmentsController->index()
+#16 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Controller/Controller.php(435): call_user_func_array(Array, Array)
+#17 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php(125): Cake\Controller\Controller->invokeAction()
+#18 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php(99): Cake\Http\ActionDispatcher->_invoke(Object(App\Controller\CalendarAssignmentsController))
+#19 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(65): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#20 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#21 {main}
+
+
+2016-08-29 05:25:42 Error: [PDOException] SQLSTATE[23503]: Foreign key violation: 7 ERROR:  insert or update on table "calendar_assignments" violates foreign key constraint "calendar_assignments_holiday_code_fkey"
+DETAIL:  Key (holiday_code)=(2) is not present in table "holidays".
+Request URL: /calendar-assignments/add
+Referer URL: http://localhost:8765/calendar-assignments/add
+Stack Trace:
+#0 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Database/Statement/StatementDecorator.php(172): PDOStatement->execute(NULL)
+#1 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Database/Statement/StatementDecorator.php(172): Cake\Database\Statement\StatementDecorator->execute(NULL)
+#2 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Database/Log/LoggingStatement.php(56): Cake\Database\Statement\StatementDecorator->execute(NULL)
+#3 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Database/Connection.php(276): Cake\Database\Log\LoggingStatement->execute()
+#4 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Database/Query.php(189): Cake\Database\Connection->run(Object(Cake\ORM\Query))
+#5 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/ORM/Table.php(1665): Cake\Database\Query->execute()
+#6 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/ORM/Table.php(1559): Cake\ORM\Table->_insert(Object(App\Model\Entity\CalendarAssignment), Array)
+#7 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/ORM/Table.php(1488): Cake\ORM\Table->_processSave(Object(App\Model\Entity\CalendarAssignment), Object(ArrayObject))
+#8 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Database/Connection.php(570): Cake\ORM\Table->Cake\ORM\{closure}(Object(Cake\Database\Connection))
+#9 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/ORM/Table.php(1489): Cake\Database\Connection->transactional(Object(Closure))
+#10 /Users/varunprathap/demoapp/src/Controller/CalendarAssignmentsController.php(57): Cake\ORM\Table->save(Object(App\Model\Entity\CalendarAssignment))
+#11 [internal function]: App\Controller\CalendarAssignmentsController->add()
+#12 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Controller/Controller.php(435): call_user_func_array(Array, Array)
+#13 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php(125): Cake\Controller\Controller->invokeAction()
+#14 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php(99): Cake\Http\ActionDispatcher->_invoke(Object(App\Controller\CalendarAssignmentsController))
+#15 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(65): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#16 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#17 {main}
+
+
+2016-08-29 06:07:50 Error: [PDOException] SQLSTATE[23503]: Foreign key violation: 7 ERROR:  insert or update on table "positions" violates foreign key constraint "positions_company_fkey"
+DETAIL:  Key (company)=() is not present in table "legal_entities".
+Request URL: /positions/add
+Referer URL: http://localhost:8765/positions/add
+Stack Trace:
+#0 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Database/Statement/StatementDecorator.php(172): PDOStatement->execute(NULL)
+#1 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Database/Statement/StatementDecorator.php(172): Cake\Database\Statement\StatementDecorator->execute(NULL)
+#2 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Database/Log/LoggingStatement.php(56): Cake\Database\Statement\StatementDecorator->execute(NULL)
+#3 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Database/Connection.php(276): Cake\Database\Log\LoggingStatement->execute()
+#4 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Database/Query.php(189): Cake\Database\Connection->run(Object(Cake\ORM\Query))
+#5 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/ORM/Table.php(1665): Cake\Database\Query->execute()
+#6 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/ORM/Table.php(1559): Cake\ORM\Table->_insert(Object(App\Model\Entity\Position), Array)
+#7 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/ORM/Table.php(1488): Cake\ORM\Table->_processSave(Object(App\Model\Entity\Position), Object(ArrayObject))
+#8 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Database/Connection.php(570): Cake\ORM\Table->Cake\ORM\{closure}(Object(Cake\Database\Connection))
+#9 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/ORM/Table.php(1489): Cake\Database\Connection->transactional(Object(Closure))
+#10 /Users/varunprathap/demoapp/src/Controller/PositionsController.php(54): Cake\ORM\Table->save(Object(App\Model\Entity\Position))
+#11 [internal function]: App\Controller\PositionsController->add()
+#12 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Controller/Controller.php(435): call_user_func_array(Array, Array)
+#13 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php(125): Cake\Controller\Controller->invokeAction()
+#14 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php(99): Cake\Http\ActionDispatcher->_invoke(Object(App\Controller\PositionsController))
+#15 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(65): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#16 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#17 {main}
+
+
+2016-08-29 06:16:33 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Admin_l_t_e could not be found.
+Exception Attributes: array (
+  'class' => 'Admin_l_t_e',
+  'plugin' => false,
+  'prefix' => false,
+  '_ext' => false,
+)
+Request URL: /admin_l_t_e/bootstrap/css/bootstrap.css.map
+Stack Trace:
+#0 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Http/ControllerFactory.php(72): Cake\Http\ControllerFactory->missingController(Object(Cake\Network\Request))
+#1 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/ControllerFactoryFilter.php(66): Cake\Http\ControllerFactory->create(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#2 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/ControllerFactoryFilter.php(52): Cake\Routing\Filter\ControllerFactoryFilter->_getController(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#3 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/DispatcherFilter.php(144): Cake\Routing\Filter\ControllerFactoryFilter->beforeDispatch(Object(Cake\Event\Event))
+#4 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventManager.php(425): Cake\Routing\DispatcherFilter->handle(Object(Cake\Event\Event), Object(Cake\Network\Request), Object(Cake\Network\Response))
+#5 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventManager.php(386): Cake\Event\EventManager->_callListener(Array, Object(Cake\Event\Event))
+#6 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventDispatcherTrait.php(78): Cake\Event\EventManager->dispatch(Object(Cake\Event\Event))
+#7 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php(84): Cake\Http\ActionDispatcher->dispatchEvent('Dispatcher.befo...', Array)
+#8 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(65): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#9 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#10 {main}
+
+
+2016-08-29 06:19:21 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Admin_l_t_e could not be found.
+Exception Attributes: array (
+  'class' => 'Admin_l_t_e',
+  'plugin' => false,
+  'prefix' => false,
+  '_ext' => false,
+)
+Request URL: /admin_l_t_e/bootstrap/css/bootstrap.css.map
+Stack Trace:
+#0 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Http/ControllerFactory.php(72): Cake\Http\ControllerFactory->missingController(Object(Cake\Network\Request))
+#1 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/ControllerFactoryFilter.php(66): Cake\Http\ControllerFactory->create(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#2 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/ControllerFactoryFilter.php(52): Cake\Routing\Filter\ControllerFactoryFilter->_getController(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#3 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/DispatcherFilter.php(144): Cake\Routing\Filter\ControllerFactoryFilter->beforeDispatch(Object(Cake\Event\Event))
+#4 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventManager.php(425): Cake\Routing\DispatcherFilter->handle(Object(Cake\Event\Event), Object(Cake\Network\Request), Object(Cake\Network\Response))
+#5 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventManager.php(386): Cake\Event\EventManager->_callListener(Array, Object(Cake\Event\Event))
+#6 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventDispatcherTrait.php(78): Cake\Event\EventManager->dispatch(Object(Cake\Event\Event))
+#7 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php(84): Cake\Http\ActionDispatcher->dispatchEvent('Dispatcher.befo...', Array)
+#8 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(65): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#9 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#10 {main}
+
+
+2016-08-29 06:52:56 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Admin_l_t_e could not be found.
+Exception Attributes: array (
+  'class' => 'Admin_l_t_e',
+  'plugin' => false,
+  'prefix' => false,
+  '_ext' => false,
+)
+Request URL: /admin_l_t_e/bootstrap/css/bootstrap.css.map
+Stack Trace:
+#0 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Http/ControllerFactory.php(72): Cake\Http\ControllerFactory->missingController(Object(Cake\Network\Request))
+#1 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/ControllerFactoryFilter.php(66): Cake\Http\ControllerFactory->create(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#2 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/ControllerFactoryFilter.php(52): Cake\Routing\Filter\ControllerFactoryFilter->_getController(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#3 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/DispatcherFilter.php(144): Cake\Routing\Filter\ControllerFactoryFilter->beforeDispatch(Object(Cake\Event\Event))
+#4 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventManager.php(425): Cake\Routing\DispatcherFilter->handle(Object(Cake\Event\Event), Object(Cake\Network\Request), Object(Cake\Network\Response))
+#5 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventManager.php(386): Cake\Event\EventManager->_callListener(Array, Object(Cake\Event\Event))
+#6 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventDispatcherTrait.php(78): Cake\Event\EventManager->dispatch(Object(Cake\Event\Event))
+#7 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php(84): Cake\Http\ActionDispatcher->dispatchEvent('Dispatcher.befo...', Array)
+#8 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(65): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#9 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#10 {main}
+
+
+2016-08-29 06:53:32 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Admin_l_t_e could not be found.
+Exception Attributes: array (
+  'class' => 'Admin_l_t_e',
+  'plugin' => false,
+  'prefix' => false,
+  '_ext' => false,
+)
+Request URL: /admin_l_t_e/bootstrap/css/bootstrap.css.map
+Stack Trace:
+#0 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Http/ControllerFactory.php(72): Cake\Http\ControllerFactory->missingController(Object(Cake\Network\Request))
+#1 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/ControllerFactoryFilter.php(66): Cake\Http\ControllerFactory->create(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#2 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/ControllerFactoryFilter.php(52): Cake\Routing\Filter\ControllerFactoryFilter->_getController(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#3 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/DispatcherFilter.php(144): Cake\Routing\Filter\ControllerFactoryFilter->beforeDispatch(Object(Cake\Event\Event))
+#4 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventManager.php(425): Cake\Routing\DispatcherFilter->handle(Object(Cake\Event\Event), Object(Cake\Network\Request), Object(Cake\Network\Response))
+#5 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventManager.php(386): Cake\Event\EventManager->_callListener(Array, Object(Cake\Event\Event))
+#6 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventDispatcherTrait.php(78): Cake\Event\EventManager->dispatch(Object(Cake\Event\Event))
+#7 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php(84): Cake\Http\ActionDispatcher->dispatchEvent('Dispatcher.befo...', Array)
+#8 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(65): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#9 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#10 {main}
+
+
+2016-08-29 06:54:57 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Admin_l_t_e could not be found.
+Exception Attributes: array (
+  'class' => 'Admin_l_t_e',
+  'plugin' => false,
+  'prefix' => false,
+  '_ext' => false,
+)
+Request URL: /admin_l_t_e/bootstrap/css/bootstrap.css.map
+Stack Trace:
+#0 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Http/ControllerFactory.php(72): Cake\Http\ControllerFactory->missingController(Object(Cake\Network\Request))
+#1 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/ControllerFactoryFilter.php(66): Cake\Http\ControllerFactory->create(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#2 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/ControllerFactoryFilter.php(52): Cake\Routing\Filter\ControllerFactoryFilter->_getController(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#3 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/DispatcherFilter.php(144): Cake\Routing\Filter\ControllerFactoryFilter->beforeDispatch(Object(Cake\Event\Event))
+#4 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventManager.php(425): Cake\Routing\DispatcherFilter->handle(Object(Cake\Event\Event), Object(Cake\Network\Request), Object(Cake\Network\Response))
+#5 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventManager.php(386): Cake\Event\EventManager->_callListener(Array, Object(Cake\Event\Event))
+#6 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventDispatcherTrait.php(78): Cake\Event\EventManager->dispatch(Object(Cake\Event\Event))
+#7 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php(84): Cake\Http\ActionDispatcher->dispatchEvent('Dispatcher.befo...', Array)
+#8 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(65): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#9 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#10 {main}
+
+
+2016-08-29 06:55:20 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Admin_l_t_e could not be found.
+Exception Attributes: array (
+  'class' => 'Admin_l_t_e',
+  'plugin' => false,
+  'prefix' => false,
+  '_ext' => false,
+)
+Request URL: /admin_l_t_e/bootstrap/css/bootstrap.css.map
+Stack Trace:
+#0 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Http/ControllerFactory.php(72): Cake\Http\ControllerFactory->missingController(Object(Cake\Network\Request))
+#1 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/ControllerFactoryFilter.php(66): Cake\Http\ControllerFactory->create(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#2 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/ControllerFactoryFilter.php(52): Cake\Routing\Filter\ControllerFactoryFilter->_getController(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#3 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/DispatcherFilter.php(144): Cake\Routing\Filter\ControllerFactoryFilter->beforeDispatch(Object(Cake\Event\Event))
+#4 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventManager.php(425): Cake\Routing\DispatcherFilter->handle(Object(Cake\Event\Event), Object(Cake\Network\Request), Object(Cake\Network\Response))
+#5 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventManager.php(386): Cake\Event\EventManager->_callListener(Array, Object(Cake\Event\Event))
+#6 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventDispatcherTrait.php(78): Cake\Event\EventManager->dispatch(Object(Cake\Event\Event))
+#7 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php(84): Cake\Http\ActionDispatcher->dispatchEvent('Dispatcher.befo...', Array)
+#8 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(65): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#9 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#10 {main}
+
+
+2016-08-29 07:30:35 Warning: Headers already sent in /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/AssetFilter.php:148
+2016-08-29 08:15:54 Error: [ParseError] syntax error, unexpected '"<div class='form-group'><labe' (T_CONSTANT_ENCAPSED_STRING)
+Request URL: /calendar-assignments/add
+Referer URL: http://localhost:8765/CalendarAssignments
+Stack Trace:
+#0 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/View.php(964): Cake\View\View->_evaluate('/Users/varunpra...', Array)
+#1 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/View/View.php(588): Cake\View\View->_render('/Users/varunpra...')
+#2 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Controller/Controller.php(617): Cake\View\View->render(NULL, NULL)
+#3 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php(131): Cake\Controller\Controller->render()
+#4 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php(99): Cake\Http\ActionDispatcher->_invoke(Object(App\Controller\CalendarAssignmentsController))
+#5 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(65): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#6 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#7 {main}
+
+
+2016-08-29 08:40:45 Error: [Cake\Datasource\Exception\InvalidPrimaryKeyException] Record not found in table "profiles" with primary key [NULL]
+Request URL: /Profiles/edit
+Stack Trace:
+#0 /Users/varunprathap/demoapp/src/Controller/ProfilesController.php(77): Cake\ORM\Table->get(Array, Array)
+#1 [internal function]: App\Controller\ProfilesController->edit()
+#2 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Controller/Controller.php(435): call_user_func_array(Array, Array)
+#3 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php(125): Cake\Controller\Controller->invokeAction()
+#4 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php(99): Cake\Http\ActionDispatcher->_invoke(Object(App\Controller\ProfilesController))
+#5 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(65): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#6 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#7 {main}
+
+
+2016-08-29 08:41:07 Error: [Cake\Datasource\Exception\RecordNotFoundException] Record not found in table "profiles"
+Request URL: /Profiles/edit/1
+Stack Trace:
+#0 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/ORM/Table.php(1225): Cake\ORM\Query->firstOrFail()
+#1 /Users/varunprathap/demoapp/src/Controller/ProfilesController.php(77): Cake\ORM\Table->get(Array, Array)
+#2 [internal function]: App\Controller\ProfilesController->edit('1')
+#3 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Controller/Controller.php(435): call_user_func_array(Array, Array)
+#4 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php(125): Cake\Controller\Controller->invokeAction()
+#5 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php(99): Cake\Http\ActionDispatcher->_invoke(Object(App\Controller\ProfilesController))
+#6 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(65): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#7 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#8 {main}
+
+
+2016-08-29 08:41:56 Error: [Cake\Datasource\Exception\RecordNotFoundException] Record not found in table "profiles"
+Request URL: /Profiles/edit/1
+Stack Trace:
+#0 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/ORM/Table.php(1225): Cake\ORM\Query->firstOrFail()
+#1 /Users/varunprathap/demoapp/src/Controller/ProfilesController.php(77): Cake\ORM\Table->get(Array, Array)
+#2 [internal function]: App\Controller\ProfilesController->edit('1')
+#3 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Controller/Controller.php(435): call_user_func_array(Array, Array)
+#4 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php(125): Cake\Controller\Controller->invokeAction()
+#5 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php(99): Cake\Http\ActionDispatcher->_invoke(Object(App\Controller\ProfilesController))
+#6 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(65): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#7 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#8 {main}
+
+
+2016-08-29 08:42:03 Error: [Cake\Controller\Exception\MissingActionException] Action ProfilesController::editprofile() could not be found, or is not accessible.
+Exception Attributes: array (
+  'controller' => 'ProfilesController',
+  'action' => 'editprofile',
+  'prefix' => '',
+  'plugin' => NULL,
+)
+Request URL: /Profiles/editprofile/1
+Stack Trace:
+#0 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php(125): Cake\Controller\Controller->invokeAction()
+#1 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php(99): Cake\Http\ActionDispatcher->_invoke(Object(App\Controller\ProfilesController))
+#2 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(65): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#3 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#4 {main}
+
+
+2016-08-29 08:46:21 Error: [Cake\Datasource\Exception\InvalidPrimaryKeyException] Record not found in table "profiles" with primary key [NULL]
+Request URL: /Profiles/edit
+Stack Trace:
+#0 /Users/varunprathap/demoapp/src/Controller/ProfilesController.php(79): Cake\ORM\Table->get(Array, Array)
+#1 [internal function]: App\Controller\ProfilesController->edit()
+#2 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Controller/Controller.php(435): call_user_func_array(Array, Array)
+#3 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php(125): Cake\Controller\Controller->invokeAction()
+#4 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php(99): Cake\Http\ActionDispatcher->_invoke(Object(App\Controller\ProfilesController))
+#5 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(65): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#6 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#7 {main}
+
+
+2016-08-29 08:49:03 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Editprofile could not be found.
+Exception Attributes: array (
+  'class' => 'Editprofile',
+  'plugin' => false,
+  'prefix' => false,
+  '_ext' => false,
+)
+Request URL: /editprofile
+Referer URL: http://localhost:8765/Profiles
+Stack Trace:
+#0 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Http/ControllerFactory.php(72): Cake\Http\ControllerFactory->missingController(Object(Cake\Network\Request))
+#1 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/ControllerFactoryFilter.php(66): Cake\Http\ControllerFactory->create(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#2 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/ControllerFactoryFilter.php(52): Cake\Routing\Filter\ControllerFactoryFilter->_getController(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#3 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/DispatcherFilter.php(144): Cake\Routing\Filter\ControllerFactoryFilter->beforeDispatch(Object(Cake\Event\Event))
+#4 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventManager.php(425): Cake\Routing\DispatcherFilter->handle(Object(Cake\Event\Event), Object(Cake\Network\Request), Object(Cake\Network\Response))
+#5 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventManager.php(386): Cake\Event\EventManager->_callListener(Array, Object(Cake\Event\Event))
+#6 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventDispatcherTrait.php(78): Cake\Event\EventManager->dispatch(Object(Cake\Event\Event))
+#7 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php(84): Cake\Http\ActionDispatcher->dispatchEvent('Dispatcher.befo...', Array)
+#8 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(65): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#9 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#10 {main}
+
+
+2016-08-29 08:57:08 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Editprofile could not be found.
+Exception Attributes: array (
+  'class' => 'Editprofile',
+  'plugin' => false,
+  'prefix' => false,
+  '_ext' => false,
+)
+Request URL: /editprofile
+Referer URL: http://localhost:8765/Profiles
+Stack Trace:
+#0 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Http/ControllerFactory.php(72): Cake\Http\ControllerFactory->missingController(Object(Cake\Network\Request))
+#1 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/ControllerFactoryFilter.php(66): Cake\Http\ControllerFactory->create(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#2 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/ControllerFactoryFilter.php(52): Cake\Routing\Filter\ControllerFactoryFilter->_getController(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#3 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/DispatcherFilter.php(144): Cake\Routing\Filter\ControllerFactoryFilter->beforeDispatch(Object(Cake\Event\Event))
+#4 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventManager.php(425): Cake\Routing\DispatcherFilter->handle(Object(Cake\Event\Event), Object(Cake\Network\Request), Object(Cake\Network\Response))
+#5 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventManager.php(386): Cake\Event\EventManager->_callListener(Array, Object(Cake\Event\Event))
+#6 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventDispatcherTrait.php(78): Cake\Event\EventManager->dispatch(Object(Cake\Event\Event))
+#7 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php(84): Cake\Http\ActionDispatcher->dispatchEvent('Dispatcher.befo...', Array)
+#8 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(65): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#9 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#10 {main}
+
+
+2016-08-29 08:57:51 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Admin_l_t_e could not be found.
+Exception Attributes: array (
+  'class' => 'Admin_l_t_e',
+  'plugin' => false,
+  'prefix' => false,
+  '_ext' => false,
+)
+Request URL: /admin_l_t_e/bootstrap/css/bootstrap.css.map
+Stack Trace:
+#0 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Http/ControllerFactory.php(72): Cake\Http\ControllerFactory->missingController(Object(Cake\Network\Request))
+#1 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/ControllerFactoryFilter.php(66): Cake\Http\ControllerFactory->create(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#2 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/ControllerFactoryFilter.php(52): Cake\Routing\Filter\ControllerFactoryFilter->_getController(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#3 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/DispatcherFilter.php(144): Cake\Routing\Filter\ControllerFactoryFilter->beforeDispatch(Object(Cake\Event\Event))
+#4 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventManager.php(425): Cake\Routing\DispatcherFilter->handle(Object(Cake\Event\Event), Object(Cake\Network\Request), Object(Cake\Network\Response))
+#5 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventManager.php(386): Cake\Event\EventManager->_callListener(Array, Object(Cake\Event\Event))
+#6 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventDispatcherTrait.php(78): Cake\Event\EventManager->dispatch(Object(Cake\Event\Event))
+#7 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php(84): Cake\Http\ActionDispatcher->dispatchEvent('Dispatcher.befo...', Array)
+#8 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(65): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#9 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#10 {main}
+
+
+2016-08-29 08:58:21 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Admin_l_t_e could not be found.
+Exception Attributes: array (
+  'class' => 'Admin_l_t_e',
+  'plugin' => false,
+  'prefix' => false,
+  '_ext' => false,
+)
+Request URL: /admin_l_t_e/bootstrap/css/bootstrap.css.map
+Stack Trace:
+#0 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Http/ControllerFactory.php(72): Cake\Http\ControllerFactory->missingController(Object(Cake\Network\Request))
+#1 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/ControllerFactoryFilter.php(66): Cake\Http\ControllerFactory->create(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#2 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/ControllerFactoryFilter.php(52): Cake\Routing\Filter\ControllerFactoryFilter->_getController(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#3 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/DispatcherFilter.php(144): Cake\Routing\Filter\ControllerFactoryFilter->beforeDispatch(Object(Cake\Event\Event))
+#4 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventManager.php(425): Cake\Routing\DispatcherFilter->handle(Object(Cake\Event\Event), Object(Cake\Network\Request), Object(Cake\Network\Response))
+#5 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventManager.php(386): Cake\Event\EventManager->_callListener(Array, Object(Cake\Event\Event))
+#6 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventDispatcherTrait.php(78): Cake\Event\EventManager->dispatch(Object(Cake\Event\Event))
+#7 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php(84): Cake\Http\ActionDispatcher->dispatchEvent('Dispatcher.befo...', Array)
+#8 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(65): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#9 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#10 {main}
+
+
+2016-08-29 08:58:23 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Admin_l_t_e could not be found.
+Exception Attributes: array (
+  'class' => 'Admin_l_t_e',
+  'plugin' => false,
+  'prefix' => false,
+  '_ext' => false,
+)
+Request URL: /admin_l_t_e/bootstrap/css/bootstrap.css.map
+Stack Trace:
+#0 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Http/ControllerFactory.php(72): Cake\Http\ControllerFactory->missingController(Object(Cake\Network\Request))
+#1 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/ControllerFactoryFilter.php(66): Cake\Http\ControllerFactory->create(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#2 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/ControllerFactoryFilter.php(52): Cake\Routing\Filter\ControllerFactoryFilter->_getController(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#3 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/DispatcherFilter.php(144): Cake\Routing\Filter\ControllerFactoryFilter->beforeDispatch(Object(Cake\Event\Event))
+#4 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventManager.php(425): Cake\Routing\DispatcherFilter->handle(Object(Cake\Event\Event), Object(Cake\Network\Request), Object(Cake\Network\Response))
+#5 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventManager.php(386): Cake\Event\EventManager->_callListener(Array, Object(Cake\Event\Event))
+#6 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventDispatcherTrait.php(78): Cake\Event\EventManager->dispatch(Object(Cake\Event\Event))
+#7 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php(84): Cake\Http\ActionDispatcher->dispatchEvent('Dispatcher.befo...', Array)
+#8 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(65): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#9 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#10 {main}
+
+
+2016-08-29 08:58:26 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Admin_l_t_e could not be found.
+Exception Attributes: array (
+  'class' => 'Admin_l_t_e',
+  'plugin' => false,
+  'prefix' => false,
+  '_ext' => false,
+)
+Request URL: /admin_l_t_e/bootstrap/css/bootstrap.css.map
+Stack Trace:
+#0 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Http/ControllerFactory.php(72): Cake\Http\ControllerFactory->missingController(Object(Cake\Network\Request))
+#1 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/ControllerFactoryFilter.php(66): Cake\Http\ControllerFactory->create(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#2 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/ControllerFactoryFilter.php(52): Cake\Routing\Filter\ControllerFactoryFilter->_getController(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#3 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/DispatcherFilter.php(144): Cake\Routing\Filter\ControllerFactoryFilter->beforeDispatch(Object(Cake\Event\Event))
+#4 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventManager.php(425): Cake\Routing\DispatcherFilter->handle(Object(Cake\Event\Event), Object(Cake\Network\Request), Object(Cake\Network\Response))
+#5 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventManager.php(386): Cake\Event\EventManager->_callListener(Array, Object(Cake\Event\Event))
+#6 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventDispatcherTrait.php(78): Cake\Event\EventManager->dispatch(Object(Cake\Event\Event))
+#7 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php(84): Cake\Http\ActionDispatcher->dispatchEvent('Dispatcher.befo...', Array)
+#8 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(65): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#9 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#10 {main}
+
+
+2016-08-29 08:59:33 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Admin_l_t_e could not be found.
+Exception Attributes: array (
+  'class' => 'Admin_l_t_e',
+  'plugin' => false,
+  'prefix' => false,
+  '_ext' => false,
+)
+Request URL: /admin_l_t_e/bootstrap/css/bootstrap.css.map
+Stack Trace:
+#0 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Http/ControllerFactory.php(72): Cake\Http\ControllerFactory->missingController(Object(Cake\Network\Request))
+#1 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/ControllerFactoryFilter.php(66): Cake\Http\ControllerFactory->create(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#2 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/ControllerFactoryFilter.php(52): Cake\Routing\Filter\ControllerFactoryFilter->_getController(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#3 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/DispatcherFilter.php(144): Cake\Routing\Filter\ControllerFactoryFilter->beforeDispatch(Object(Cake\Event\Event))
+#4 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventManager.php(425): Cake\Routing\DispatcherFilter->handle(Object(Cake\Event\Event), Object(Cake\Network\Request), Object(Cake\Network\Response))
+#5 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventManager.php(386): Cake\Event\EventManager->_callListener(Array, Object(Cake\Event\Event))
+#6 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventDispatcherTrait.php(78): Cake\Event\EventManager->dispatch(Object(Cake\Event\Event))
+#7 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php(84): Cake\Http\ActionDispatcher->dispatchEvent('Dispatcher.befo...', Array)
+#8 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(65): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#9 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#10 {main}
+
+
+2016-08-29 09:23:22 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Admin_l_t_e could not be found.
+Exception Attributes: array (
+  'class' => 'Admin_l_t_e',
+  'plugin' => false,
+  'prefix' => false,
+  '_ext' => false,
+)
+Request URL: /admin_l_t_e/bootstrap/css/bootstrap.css.map
+Stack Trace:
+#0 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Http/ControllerFactory.php(72): Cake\Http\ControllerFactory->missingController(Object(Cake\Network\Request))
+#1 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/ControllerFactoryFilter.php(66): Cake\Http\ControllerFactory->create(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#2 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/ControllerFactoryFilter.php(52): Cake\Routing\Filter\ControllerFactoryFilter->_getController(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#3 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/DispatcherFilter.php(144): Cake\Routing\Filter\ControllerFactoryFilter->beforeDispatch(Object(Cake\Event\Event))
+#4 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventManager.php(425): Cake\Routing\DispatcherFilter->handle(Object(Cake\Event\Event), Object(Cake\Network\Request), Object(Cake\Network\Response))
+#5 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventManager.php(386): Cake\Event\EventManager->_callListener(Array, Object(Cake\Event\Event))
+#6 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventDispatcherTrait.php(78): Cake\Event\EventManager->dispatch(Object(Cake\Event\Event))
+#7 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php(84): Cake\Http\ActionDispatcher->dispatchEvent('Dispatcher.befo...', Array)
+#8 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(65): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#9 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#10 {main}
+
+
+2016-08-29 09:52:35 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Admin_l_t_e could not be found.
+Exception Attributes: array (
+  'class' => 'Admin_l_t_e',
+  'plugin' => false,
+  'prefix' => false,
+  '_ext' => false,
+)
+Request URL: /admin_l_t_e/bootstrap/css/bootstrap.css.map
+Stack Trace:
+#0 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Http/ControllerFactory.php(72): Cake\Http\ControllerFactory->missingController(Object(Cake\Network\Request))
+#1 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/ControllerFactoryFilter.php(66): Cake\Http\ControllerFactory->create(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#2 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/ControllerFactoryFilter.php(52): Cake\Routing\Filter\ControllerFactoryFilter->_getController(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#3 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/DispatcherFilter.php(144): Cake\Routing\Filter\ControllerFactoryFilter->beforeDispatch(Object(Cake\Event\Event))
+#4 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventManager.php(425): Cake\Routing\DispatcherFilter->handle(Object(Cake\Event\Event), Object(Cake\Network\Request), Object(Cake\Network\Response))
+#5 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventManager.php(386): Cake\Event\EventManager->_callListener(Array, Object(Cake\Event\Event))
+#6 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventDispatcherTrait.php(78): Cake\Event\EventManager->dispatch(Object(Cake\Event\Event))
+#7 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php(84): Cake\Http\ActionDispatcher->dispatchEvent('Dispatcher.befo...', Array)
+#8 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(65): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#9 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#10 {main}
+
+
+2016-08-29 09:54:10 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Admin_l_t_e could not be found.
+Exception Attributes: array (
+  'class' => 'Admin_l_t_e',
+  'plugin' => false,
+  'prefix' => false,
+  '_ext' => false,
+)
+Request URL: /admin_l_t_e/bootstrap/css/bootstrap.css.map
+Stack Trace:
+#0 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Http/ControllerFactory.php(72): Cake\Http\ControllerFactory->missingController(Object(Cake\Network\Request))
+#1 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/ControllerFactoryFilter.php(66): Cake\Http\ControllerFactory->create(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#2 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/ControllerFactoryFilter.php(52): Cake\Routing\Filter\ControllerFactoryFilter->_getController(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#3 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/DispatcherFilter.php(144): Cake\Routing\Filter\ControllerFactoryFilter->beforeDispatch(Object(Cake\Event\Event))
+#4 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventManager.php(425): Cake\Routing\DispatcherFilter->handle(Object(Cake\Event\Event), Object(Cake\Network\Request), Object(Cake\Network\Response))
+#5 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventManager.php(386): Cake\Event\EventManager->_callListener(Array, Object(Cake\Event\Event))
+#6 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventDispatcherTrait.php(78): Cake\Event\EventManager->dispatch(Object(Cake\Event\Event))
+#7 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php(84): Cake\Http\ActionDispatcher->dispatchEvent('Dispatcher.befo...', Array)
+#8 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(65): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#9 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#10 {main}
+
+
+2016-08-29 10:33:06 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Admin_l_t_e could not be found.
+Exception Attributes: array (
+  'class' => 'Admin_l_t_e',
+  'plugin' => false,
+  'prefix' => false,
+  '_ext' => false,
+)
+Request URL: /admin_l_t_e/bootstrap/css/bootstrap.css.map
+Stack Trace:
+#0 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Http/ControllerFactory.php(72): Cake\Http\ControllerFactory->missingController(Object(Cake\Network\Request))
+#1 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/ControllerFactoryFilter.php(66): Cake\Http\ControllerFactory->create(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#2 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/ControllerFactoryFilter.php(52): Cake\Routing\Filter\ControllerFactoryFilter->_getController(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#3 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/DispatcherFilter.php(144): Cake\Routing\Filter\ControllerFactoryFilter->beforeDispatch(Object(Cake\Event\Event))
+#4 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventManager.php(425): Cake\Routing\DispatcherFilter->handle(Object(Cake\Event\Event), Object(Cake\Network\Request), Object(Cake\Network\Response))
+#5 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventManager.php(386): Cake\Event\EventManager->_callListener(Array, Object(Cake\Event\Event))
+#6 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventDispatcherTrait.php(78): Cake\Event\EventManager->dispatch(Object(Cake\Event\Event))
+#7 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php(84): Cake\Http\ActionDispatcher->dispatchEvent('Dispatcher.befo...', Array)
+#8 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(65): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#9 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#10 {main}
+
+
+2016-08-29 10:33:59 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Admin_l_t_e could not be found.
+Exception Attributes: array (
+  'class' => 'Admin_l_t_e',
+  'plugin' => false,
+  'prefix' => false,
+  '_ext' => false,
+)
+Request URL: /admin_l_t_e/bootstrap/css/bootstrap.css.map
+Stack Trace:
+#0 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Http/ControllerFactory.php(72): Cake\Http\ControllerFactory->missingController(Object(Cake\Network\Request))
+#1 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/ControllerFactoryFilter.php(66): Cake\Http\ControllerFactory->create(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#2 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/ControllerFactoryFilter.php(52): Cake\Routing\Filter\ControllerFactoryFilter->_getController(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#3 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/DispatcherFilter.php(144): Cake\Routing\Filter\ControllerFactoryFilter->beforeDispatch(Object(Cake\Event\Event))
+#4 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventManager.php(425): Cake\Routing\DispatcherFilter->handle(Object(Cake\Event\Event), Object(Cake\Network\Request), Object(Cake\Network\Response))
+#5 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventManager.php(386): Cake\Event\EventManager->_callListener(Array, Object(Cake\Event\Event))
+#6 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventDispatcherTrait.php(78): Cake\Event\EventManager->dispatch(Object(Cake\Event\Event))
+#7 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php(84): Cake\Http\ActionDispatcher->dispatchEvent('Dispatcher.befo...', Array)
+#8 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(65): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#9 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#10 {main}
+
+
+2016-08-29 10:34:33 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Admin_l_t_e could not be found.
+Exception Attributes: array (
+  'class' => 'Admin_l_t_e',
+  'plugin' => false,
+  'prefix' => false,
+  '_ext' => false,
+)
+Request URL: /admin_l_t_e/bootstrap/css/bootstrap.css.map
+Stack Trace:
+#0 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Http/ControllerFactory.php(72): Cake\Http\ControllerFactory->missingController(Object(Cake\Network\Request))
+#1 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/ControllerFactoryFilter.php(66): Cake\Http\ControllerFactory->create(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#2 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/ControllerFactoryFilter.php(52): Cake\Routing\Filter\ControllerFactoryFilter->_getController(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#3 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/DispatcherFilter.php(144): Cake\Routing\Filter\ControllerFactoryFilter->beforeDispatch(Object(Cake\Event\Event))
+#4 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventManager.php(425): Cake\Routing\DispatcherFilter->handle(Object(Cake\Event\Event), Object(Cake\Network\Request), Object(Cake\Network\Response))
+#5 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventManager.php(386): Cake\Event\EventManager->_callListener(Array, Object(Cake\Event\Event))
+#6 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventDispatcherTrait.php(78): Cake\Event\EventManager->dispatch(Object(Cake\Event\Event))
+#7 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php(84): Cake\Http\ActionDispatcher->dispatchEvent('Dispatcher.befo...', Array)
+#8 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(65): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#9 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#10 {main}
+
+
+2016-08-29 11:33:28 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Admin_l_t_e could not be found.
+Exception Attributes: array (
+  'class' => 'Admin_l_t_e',
+  'plugin' => false,
+  'prefix' => false,
+  '_ext' => false,
+)
+Request URL: /admin_l_t_e/bootstrap/css/bootstrap.css.map
+Stack Trace:
+#0 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Http/ControllerFactory.php(72): Cake\Http\ControllerFactory->missingController(Object(Cake\Network\Request))
+#1 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/ControllerFactoryFilter.php(66): Cake\Http\ControllerFactory->create(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#2 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Filter/ControllerFactoryFilter.php(52): Cake\Routing\Filter\ControllerFactoryFilter->_getController(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#3 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/DispatcherFilter.php(144): Cake\Routing\Filter\ControllerFactoryFilter->beforeDispatch(Object(Cake\Event\Event))
+#4 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventManager.php(425): Cake\Routing\DispatcherFilter->handle(Object(Cake\Event\Event), Object(Cake\Network\Request), Object(Cake\Network\Response))
+#5 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventManager.php(386): Cake\Event\EventManager->_callListener(Array, Object(Cake\Event\Event))
+#6 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Event/EventDispatcherTrait.php(78): Cake\Event\EventManager->dispatch(Object(Cake\Event\Event))
+#7 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Http/ActionDispatcher.php(84): Cake\Http\ActionDispatcher->dispatchEvent('Dispatcher.befo...', Array)
+#8 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Routing/Dispatcher.php(65): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#9 /Users/varunprathap/demoapp/webroot/index.php(36): Cake\Routing\Dispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#10 {main}
+
+

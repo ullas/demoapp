@@ -21,14 +21,17 @@ use Cake\ORM\Entity;
  * @property float $min_balance
  * @property string $posting_order
  * @property float $time_to_accrual
- * @property string $time_to_accrual_unit
  * @property bool $proration_used
  * @property bool $rounding_used
  * @property string $update_rule
  * @property string $payout_eligiblity
- * @property string $pay_comp_group
- * @property string $pay_comp
  * @property string $code
+ * @property int $pay_component_id
+ * @property string $time_to_actual_unit
+ * @property int $pay_component_group_id
+ *
+ * @property \App\Model\Entity\PayComponent $pay_component
+ * @property \App\Model\Entity\PayComponentGroup $pay_component_group
  */
 class TimeAccountType extends Entity
 {

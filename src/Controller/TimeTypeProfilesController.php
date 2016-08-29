@@ -18,6 +18,9 @@ class TimeTypeProfilesController extends AppController
      */
     public function index()
     {
+        $this->paginate = [
+            'contain' => ['TimeTypes']
+        ];
         $timeTypeProfiles = $this->paginate($this->TimeTypeProfiles);
 
         $this->set(compact('timeTypeProfiles'));
@@ -34,7 +37,7 @@ class TimeTypeProfilesController extends AppController
     public function view($id = null)
     {
         $timeTypeProfile = $this->TimeTypeProfiles->get($id, [
-            'contain' => []
+            'contain' => ['TimeTypes']
         ]);
 
         $this->set('timeTypeProfile', $timeTypeProfile);
@@ -59,7 +62,8 @@ class TimeTypeProfilesController extends AppController
                 $this->Flash->error(__('The time type profile could not be saved. Please, try again.'));
             }
         }
-        $this->set(compact('timeTypeProfile'));
+        $timeTypes = $this->TimeTypeProfiles->TimeTypes->find('list', ['limit' => 200]);
+        $this->set(compact('timeTypeProfile', 'timeTypes'));
         $this->set('_serialize', ['timeTypeProfile']);
     }
 
@@ -85,7 +89,8 @@ class TimeTypeProfilesController extends AppController
                 $this->Flash->error(__('The time type profile could not be saved. Please, try again.'));
             }
         }
-        $this->set(compact('timeTypeProfile'));
+        $timeTypes = $this->TimeTypeProfiles->TimeTypes->find('list', ['limit' => 200]);
+        $this->set(compact('timeTypeProfile', 'timeTypes'));
         $this->set('_serialize', ['timeTypeProfile']);
     }
 

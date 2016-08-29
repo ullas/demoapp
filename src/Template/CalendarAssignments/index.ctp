@@ -1,22 +1,27 @@
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('New Calendar Assignment'), ['action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Users'), ['controller' => 'Users', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New User'), ['controller' => 'Users', 'action' => 'add']) ?></li>
-    </ul>
-</nav>
-<div class="calendarAssignments index large-9 medium-8 columns content">
-    <h3><?= __('Calendar Assignments') ?></h3>
-    <table cellpadding="0" cellspacing="0">
+<section class="content-header">
+  <h1>
+    Calendar Assignment
+    <small>List</small>
+  </h1>
+  <ol class="breadcrumb">
+    <li>
+    <li><a href="<?php echo $this->Url->build(array('controller' => 'CalendarAssignments', 'action' => 'add')); ?>">Add</a></li>
+    </li>
+  </ol>
+</section>
+
+<!-- Main content -->
+<section class="content">
+  <div class="box box-primary"><div class="box-body">
+    <table cellpadding="0" cellspacing="0" class="table table-hover">
         <thead>
             <tr>
                 <th><?= $this->Paginator->sort('id') ?></th>
                 <th><?= $this->Paginator->sort('calendar') ?></th>
                 <th><?= $this->Paginator->sort('assignmentyear') ?></th>
                 <th><?= $this->Paginator->sort('assignmentdate') ?></th>
-                <th><?= $this->Paginator->sort('User') ?></th>
-                <th><?= $this->Paginator->sort('holiday_code') ?></th>
+                <th><?= $this->Paginator->sort('user_id') ?></th>
+                <th><?= $this->Paginator->sort('holiday_id') ?></th>
                 <th class="actions"><?= __('Actions') ?></th>
             </tr>
         </thead>
@@ -27,8 +32,8 @@
                 <td><?= h($calendarAssignment->calendar) ?></td>
                 <td><?= h($calendarAssignment->assignmentyear) ?></td>
                 <td><?= h($calendarAssignment->assignmentdate) ?></td>
-                <td><?= h($calendarAssignment->User) ?></td>
-                <td><?= h($calendarAssignment->holiday_code) ?></td>
+                <td><?= $calendarAssignment->has('user') ? $this->Html->link($calendarAssignment->user->id, ['controller' => 'Users', 'action' => 'view', $calendarAssignment->user->id]) : '' ?></td>
+                <td><?= $calendarAssignment->has('holiday') ? $this->Html->link($calendarAssignment->holiday->name, ['controller' => 'Holidays', 'action' => 'view', $calendarAssignment->holiday->id]) : '' ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $calendarAssignment->id]) ?>
                     <?= $this->Html->link(__('Edit'), ['action' => 'edit', $calendarAssignment->id]) ?>
@@ -37,7 +42,7 @@
             </tr>
             <?php endforeach; ?>
         </tbody>
-    </table>
+    </table></div></div>
     <div class="paginator">
         <ul class="pagination">
             <?= $this->Paginator->prev('< ' . __('previous')) ?>
@@ -46,4 +51,4 @@
         </ul>
         <p><?= $this->Paginator->counter() ?></p>
     </div>
-</div>
+</section>

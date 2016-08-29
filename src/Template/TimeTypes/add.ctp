@@ -13,7 +13,7 @@
     <fieldset>
         <legend><?= __('Add Time Type') ?></legend>
         <?php
-            echo $this->Form->input('country');
+            echo $this->Form->input('country',['options' => $this->Country->get_countries(), 'empty' => true]);
             echo $this->Form->input('classification');
             echo $this->Form->input('unit');
             echo $this->Form->input('perm_fractions_days');

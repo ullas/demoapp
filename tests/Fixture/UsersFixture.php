@@ -24,6 +24,7 @@ class UsersFixture extends TestFixture
         'role' => ['type' => 'string', 'length' => null, 'default' => null, 'null' => true, 'collate' => null, 'comment' => null, 'precision' => null, 'fixed' => null],
         'username' => ['type' => 'string', 'length' => null, 'default' => null, 'null' => false, 'collate' => null, 'comment' => null, 'precision' => null, 'fixed' => null],
         'id' => ['type' => 'biginteger', 'length' => 20, 'autoIncrement' => true, 'default' => null, 'null' => false, 'comment' => null, 'precision' => null, 'unsigned' => null],
+        'name' => ['type' => 'string', 'length' => null, 'default' => null, 'null' => true, 'collate' => null, 'comment' => null, 'precision' => null, 'fixed' => null],
         '_constraints' => [
             'primary' => ['type' => 'primary', 'columns' => ['id'], 'length' => []],
             'users_username_key' => ['type' => 'unique', 'columns' => ['username'], 'length' => []],
@@ -40,11 +41,12 @@ class UsersFixture extends TestFixture
         [
             'email' => 'Lorem ipsum dolor sit amet',
             'password' => 'Lorem ipsum dolor sit amet',
-            'created' => 1470741799,
-            'modified' => 1470741799,
+            'created' => 1472445692,
+            'modified' => 1472445692,
             'role' => 'Lorem ipsum dolor sit amet',
             'username' => 'Lorem ipsum dolor sit amet',
-            'id' => 1
+            'id' => 1,
+            'name' => 'Lorem ipsum dolor sit amet'
         ],
     ];
 }

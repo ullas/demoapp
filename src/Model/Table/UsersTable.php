@@ -67,6 +67,9 @@ class UsersTable extends Table
         $validator
             ->allowEmpty('id', 'create');
 
+        $validator
+            ->allowEmpty('name');
+
         return $validator;
     }
 
