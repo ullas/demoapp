@@ -38,10 +38,10 @@
         <div class="box-body box-profile">
         	
           <div class="col-sm-12 thumbnail img-circle">     
-          <?php echo $this->Html->image('sree.png', array('class' => 'profile-user-img img-responsive img-circle', 'alt' => 'User profile picture')); ?>
-          <div class="caption">
-                        <i class="fa fa-pencil"></i>
-                    </div>
+          	<?php echo $this->Html->image('sree.png', array('class' => 'profile-user-img img-responsive img-circle', 'alt' => 'User profile picture')); ?>
+          	<div class="caption">
+          		<i class="fa fa-pencil"></i>
+           	</div>
            </div>
 
           <!-- <h3 class="profile-username text-center">Sreekanth M</h3>
