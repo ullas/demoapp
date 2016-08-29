@@ -22,13 +22,13 @@ if (file_exists($file)) {
             <li><a href="<?php echo $this->Url->build('/CostCentres'); ?>"><i class="fa fa-circle-o"></i> Cost Centres</a></li>
             
             <li><a href="<?php echo $this->Url->build('/Addresses'); ?>"><i class="fa fa-circle-o"></i> Addresses</a></li>
-            <!--  <li><a href="<?php echo $this->Url->build('/CalendarAssignments'); ?>"><i class="fa fa-circle-o"></i> Calendar Assignments</a></li> -->
+             <li><a href="<?php echo $this->Url->build('/CalendarAssignments'); ?>"><i class="fa fa-circle-o"></i> Calendar Assignments</a></li>
             <li><a href="<?php echo $this->Url->build('/ContactInfos'); ?>"><i class="fa fa-circle-o"></i> Contact Infos</a></li>
             <li><a href="<?php echo $this->Url->build('/CorporateAddresses'); ?>"><i class="fa fa-circle-o"></i> Corporate Addresses</a></li>
             <li><a href="<?php echo $this->Url->build('/Dependents'); ?>"><i class="fa fa-circle-o"></i> Dependents</a></li>
             
             <li><a href="<?php echo $this->Url->build('/EmpDataBiographies'); ?>"><i class="fa fa-circle-o"></i> Emp Data Biography</a></li>
-            <!-- <li><a href="<?php echo $this->Url->build('/EmpDataPersonals'); ?>"><i class="fa fa-circle-o"></i> Emp Data Personal</a></li> -->
+            <li><a href="<?php echo $this->Url->build('/EmpDataPersonals'); ?>"><i class="fa fa-circle-o"></i> Emp Data Personal</a></li>
             <li><a href="<?php echo $this->Url->build('/EmploymentInfos'); ?>"><i class="fa fa-circle-o"></i> Employment Info</a></li>
             <li><a href="<?php echo $this->Url->build('/EventReasons'); ?>"><i class="fa fa-circle-o"></i> Event reason</a></li>
             
@@ -50,14 +50,14 @@ if (file_exists($file)) {
             <!-- <li><a href="<?php echo $this->Url->build('/Positions'); ?>"><i class="fa fa-circle-o"></i> Position</a></li> -->
             <li><a href="<?php echo $this->Url->build('/Regions'); ?>"><i class="fa fa-circle-o"></i> Region</a></li>
             
-            <!-- <li><a href="<?php echo $this->Url->build('/TimeAccountTypes'); ?>"><i class="fa fa-circle-o"></i> Time Account Type</a></li>
-            <li><a href="<?php echo $this->Url->build('/TimeTypeProfiles'); ?>"><i class="fa fa-circle-o"></i> Time Type Profile</a></li> -->
+            <li><a href="<?php echo $this->Url->build('/TimeAccountTypes'); ?>"><i class="fa fa-circle-o"></i> Time Account Type</a></li>
+            <li><a href="<?php echo $this->Url->build('/TimeTypeProfiles'); ?>"><i class="fa fa-circle-o"></i> Time Type Profile</a></li>
             <li><a href="<?php echo $this->Url->build('/TimeTypes'); ?>"><i class="fa fa-circle-o"></i> Time Type</a></li>
             <li><a href="<?php echo $this->Url->build('/WorkSchedules'); ?>"><i class="fa fa-circle-o"></i> Work Schedule</a></li>
             
         </ul>
     </li>
-        
+    <li><a href="<?php echo $this->Url->build('/Profiles'); ?>"><i class="glyphicon glyphicon-user"></i><span> Profile </span></a></li>   
     <li><a href="<?php echo $this->Url->build('/OrgCharts'); ?>"><i class="fa fa-sitemap"></i><span> Organizational Chart </span></a></li>
     <li><a href="#"><i class="fa fa-question-circle"></i> <span>Help</span></a></li>
 </ul>

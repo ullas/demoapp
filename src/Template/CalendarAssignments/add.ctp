@@ -1,23 +1,37 @@
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('List Calendar Assignments'), ['action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('List Users'), ['controller' => 'Users', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New User'), ['controller' => 'Users', 'action' => 'add']) ?></li>
-    </ul>
-</nav>
-<div class="calendarAssignments form large-9 medium-8 columns content">
+<section class="content-header">
+      <h1>
+        Calendar Assignments
+        <small>Add</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><?= $this->Html->link('<i class="fa fa-mail-reply"></i> '.__('Back'), ['action' => 'index'], ['escape' => false]) ?></li>
+      </ol>
+    </section>
+<section class="content">
+	<div class="box box-primary"><div class="box-body">
     <?= $this->Form->create($calendarAssignment) ?>
     <fieldset>
         <legend><?= __('Add Calendar Assignment') ?></legend>
         <?php
             echo $this->Form->input('calendar');
             echo $this->Form->input('assignmentyear');
-            echo $this->Form->input('assignmentdate', ['empty' => true]);
-            echo $this->Form->input('User');
-            echo $this->Form->input('holiday_code');
+            echo "<div class='form-group'><label>Assignment Date:</label><div class='input-group'>";
+            echo "<div class='input-group-addon''><i class='fa fa-calendar'></i></div><input type='text' class='form-control' id='assignmentdate'></div></div>";
+            echo $this->Form->input('user_id', ['options' => $users, 'empty' => true]);
+            echo $this->Form->input('holiday_id', ['options' => $holidays, 'empty' => true]);
         ?>
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>
     <?= $this->Form->end() ?>
-</div>
+</div></div></section>
+<!-- Date picker -->
+<?php
+$this->Html->css([  'AdminLTE./plugins/datepicker/datepicker3' ], ['block' => 'css']);
+$this->Html->script([ 'AdminLTE./plugins/datepicker/bootstrap-datepicker' ], ['block' => 'script']); ?>
+<?php $this->start('scriptBotton'); ?>
+<script>
+  $(function () { 
+     $('#assignmentdate').datepicker({ autoclose: true }); 
+  });
+</script>
+<?php $this->end(); ?>

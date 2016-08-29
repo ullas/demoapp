@@ -23,7 +23,9 @@ class ProfilesController extends AppController
         $this->set(compact('profiles'));
         $this->set('_serialize', ['profiles']);
     }
-
+	public function editprofile()
+    {
+	}
     /**
      * View method
      *

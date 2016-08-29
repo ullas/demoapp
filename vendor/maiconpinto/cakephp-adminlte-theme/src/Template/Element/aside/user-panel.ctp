@@ -10,9 +10,10 @@ if (file_exists($file)) {
 <div class="user-panel">
     <div class="pull-left image">
         <?php echo $this->Html->image('sree.png', array('class' => 'img-circle', 'alt' => 'User Image')); ?>
+        
     </div>
     <div class="pull-left info">
-        <p>Sreekanth M</p>
+    	        <p><a href="<?php echo $this->Url->build('/Profiles'); ?>"><?php echo $name ?></a></p>
         <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
     </div>
 </div>

@@ -24,7 +24,8 @@ class TimeTypeProfilesTableTest extends TestCase
      * @var array
      */
     public $fixtures = [
-        'app.time_type_profiles'
+        'app.time_type_profiles',
+        'app.time_types'
     ];
 
     /**
@@ -67,6 +68,16 @@ class TimeTypeProfilesTableTest extends TestCase
      * @return void
      */
     public function testValidationDefault()
+    {
+        $this->markTestIncomplete('Not implemented yet.');
+    }
+
+    /**
+     * Test buildRules method
+     *
+     * @return void
+     */
+    public function testBuildRules()
     {
         $this->markTestIncomplete('Not implemented yet.');
     }

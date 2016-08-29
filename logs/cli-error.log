@@ -149,3 +149,129 @@ Stack Trace:
 #16 {main}
 
 
+2016-08-29 06:32:10 Error: [ParseError] syntax error, unexpected '->' (T_OBJECT_OPERATOR)
+Stack Trace:
+#0 /Users/varunprathap/demoapp/vendor/composer/ClassLoader.php(301): Composer\Autoload\includeFile('/Users/varunpra...')
+#1 [internal function]: Composer\Autoload\ClassLoader->loadClass('App\\Controller\\...')
+#2 [internal function]: spl_autoload_call('App\\Controller\\...')
+#3 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/Task/TestTask.php(223): class_exists('App\\Controller\\...')
+#4 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/Task/ControllerTask.php(206): Bake\Shell\Task\TestTask->bake('Controller', 'TimeAccountType...')
+#5 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/Task/ControllerTask.php(152): Bake\Shell\Task\ControllerTask->bakeTest('TimeAccountType...')
+#6 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/Task/ControllerTask.php(66): Bake\Shell\Task\ControllerTask->bake('TimeAccountType...')
+#7 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/BakeShell.php(258): Bake\Shell\Task\ControllerTask->main('TimeAccountType...')
+#8 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Collection/CollectionTrait.php(52): Bake\Shell\BakeShell->Bake\Shell\{closure}('TimeAccountType...', 0)
+#9 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/BakeShell.php(260): Cake\Collection\Collection->each(Object(Closure))
+#10 [internal function]: Bake\Shell\BakeShell->all('time_account_ty...')
+#11 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Console/Shell.php(452): call_user_func_array(Array, Array)
+#12 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Console/ShellDispatcher.php(227): Cake\Console\Shell->runCommand(Array, true, Array)
+#13 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Console/ShellDispatcher.php(182): Cake\Console\ShellDispatcher->_dispatch(Array)
+#14 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Console/ShellDispatcher.php(128): Cake\Console\ShellDispatcher->dispatch(Array)
+#15 /Users/varunprathap/demoapp/bin/cake.php(33): Cake\Console\ShellDispatcher::run(Array)
+#16 {main}
+
+
+2016-08-29 06:33:23 Error: [ParseError] syntax error, unexpected '->' (T_OBJECT_OPERATOR)
+Stack Trace:
+#0 /Users/varunprathap/demoapp/vendor/composer/ClassLoader.php(301): Composer\Autoload\includeFile('/Users/varunpra...')
+#1 [internal function]: Composer\Autoload\ClassLoader->loadClass('App\\Controller\\...')
+#2 [internal function]: spl_autoload_call('App\\Controller\\...')
+#3 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/Task/TestTask.php(223): class_exists('App\\Controller\\...')
+#4 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/Task/ControllerTask.php(206): Bake\Shell\Task\TestTask->bake('Controller', 'TimeAccountType...')
+#5 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/Task/ControllerTask.php(152): Bake\Shell\Task\ControllerTask->bakeTest('TimeAccountType...')
+#6 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/Task/ControllerTask.php(66): Bake\Shell\Task\ControllerTask->bake('TimeAccountType...')
+#7 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/BakeShell.php(258): Bake\Shell\Task\ControllerTask->main('TimeAccountType...')
+#8 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Collection/CollectionTrait.php(52): Bake\Shell\BakeShell->Bake\Shell\{closure}('TimeAccountType...', 0)
+#9 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/BakeShell.php(260): Cake\Collection\Collection->each(Object(Closure))
+#10 [internal function]: Bake\Shell\BakeShell->all('time_account_ty...')
+#11 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Console/Shell.php(452): call_user_func_array(Array, Array)
+#12 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Console/ShellDispatcher.php(227): Cake\Console\Shell->runCommand(Array, true, Array)
+#13 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Console/ShellDispatcher.php(182): Cake\Console\ShellDispatcher->_dispatch(Array)
+#14 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Console/ShellDispatcher.php(128): Cake\Console\ShellDispatcher->dispatch(Array)
+#15 /Users/varunprathap/demoapp/bin/cake.php(33): Cake\Console\ShellDispatcher::run(Array)
+#16 {main}
+
+
+2016-08-29 06:33:39 Error: [ParseError] syntax error, unexpected '->' (T_OBJECT_OPERATOR)
+Stack Trace:
+#0 /Users/varunprathap/demoapp/vendor/composer/ClassLoader.php(301): Composer\Autoload\includeFile('/Users/varunpra...')
+#1 [internal function]: Composer\Autoload\ClassLoader->loadClass('App\\Controller\\...')
+#2 [internal function]: spl_autoload_call('App\\Controller\\...')
+#3 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/Task/TestTask.php(223): class_exists('App\\Controller\\...')
+#4 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/Task/ControllerTask.php(206): Bake\Shell\Task\TestTask->bake('Controller', 'TimeAccountType...')
+#5 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/Task/ControllerTask.php(152): Bake\Shell\Task\ControllerTask->bakeTest('TimeAccountType...')
+#6 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/Task/ControllerTask.php(66): Bake\Shell\Task\ControllerTask->bake('TimeAccountType...')
+#7 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/BakeShell.php(258): Bake\Shell\Task\ControllerTask->main('TimeAccountType...')
+#8 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Collection/CollectionTrait.php(52): Bake\Shell\BakeShell->Bake\Shell\{closure}('TimeAccountType...', 0)
+#9 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/BakeShell.php(260): Cake\Collection\Collection->each(Object(Closure))
+#10 [internal function]: Bake\Shell\BakeShell->all('time_account_ty...')
+#11 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Console/Shell.php(452): call_user_func_array(Array, Array)
+#12 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Console/ShellDispatcher.php(227): Cake\Console\Shell->runCommand(Array, true, Array)
+#13 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Console/ShellDispatcher.php(182): Cake\Console\ShellDispatcher->_dispatch(Array)
+#14 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Console/ShellDispatcher.php(128): Cake\Console\ShellDispatcher->dispatch(Array)
+#15 /Users/varunprathap/demoapp/bin/cake.php(33): Cake\Console\ShellDispatcher::run(Array)
+#16 {main}
+
+
+2016-08-29 06:34:49 Error: [ParseError] syntax error, unexpected '->' (T_OBJECT_OPERATOR)
+Stack Trace:
+#0 /Users/varunprathap/demoapp/vendor/composer/ClassLoader.php(301): Composer\Autoload\includeFile('/Users/varunpra...')
+#1 [internal function]: Composer\Autoload\ClassLoader->loadClass('App\\Controller\\...')
+#2 [internal function]: spl_autoload_call('App\\Controller\\...')
+#3 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/Task/TestTask.php(223): class_exists('App\\Controller\\...')
+#4 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/Task/ControllerTask.php(206): Bake\Shell\Task\TestTask->bake('Controller', 'TimeAccountType...')
+#5 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/Task/ControllerTask.php(152): Bake\Shell\Task\ControllerTask->bakeTest('TimeAccountType...')
+#6 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/Task/ControllerTask.php(66): Bake\Shell\Task\ControllerTask->bake('TimeAccountType...')
+#7 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/BakeShell.php(258): Bake\Shell\Task\ControllerTask->main('TimeAccountType...')
+#8 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Collection/CollectionTrait.php(52): Bake\Shell\BakeShell->Bake\Shell\{closure}('TimeAccountType...', 0)
+#9 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/BakeShell.php(260): Cake\Collection\Collection->each(Object(Closure))
+#10 [internal function]: Bake\Shell\BakeShell->all('time_account_ty...')
+#11 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Console/Shell.php(452): call_user_func_array(Array, Array)
+#12 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Console/ShellDispatcher.php(227): Cake\Console\Shell->runCommand(Array, true, Array)
+#13 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Console/ShellDispatcher.php(182): Cake\Console\ShellDispatcher->_dispatch(Array)
+#14 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Console/ShellDispatcher.php(128): Cake\Console\ShellDispatcher->dispatch(Array)
+#15 /Users/varunprathap/demoapp/bin/cake.php(33): Cake\Console\ShellDispatcher::run(Array)
+#16 {main}
+
+
+2016-08-29 06:36:23 Error: [ParseError] syntax error, unexpected '->' (T_OBJECT_OPERATOR)
+Stack Trace:
+#0 /Users/varunprathap/demoapp/vendor/composer/ClassLoader.php(301): Composer\Autoload\includeFile('/Users/varunpra...')
+#1 [internal function]: Composer\Autoload\ClassLoader->loadClass('App\\Controller\\...')
+#2 [internal function]: spl_autoload_call('App\\Controller\\...')
+#3 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/Task/TestTask.php(223): class_exists('App\\Controller\\...')
+#4 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/Task/ControllerTask.php(206): Bake\Shell\Task\TestTask->bake('Controller', 'TimeAccountType...')
+#5 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/Task/ControllerTask.php(152): Bake\Shell\Task\ControllerTask->bakeTest('TimeAccountType...')
+#6 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/Task/ControllerTask.php(66): Bake\Shell\Task\ControllerTask->bake('TimeAccountType...')
+#7 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/BakeShell.php(258): Bake\Shell\Task\ControllerTask->main('TimeAccountType...')
+#8 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Collection/CollectionTrait.php(52): Bake\Shell\BakeShell->Bake\Shell\{closure}('TimeAccountType...', 0)
+#9 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/BakeShell.php(260): Cake\Collection\Collection->each(Object(Closure))
+#10 [internal function]: Bake\Shell\BakeShell->all('time_account_ty...')
+#11 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Console/Shell.php(452): call_user_func_array(Array, Array)
+#12 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Console/ShellDispatcher.php(227): Cake\Console\Shell->runCommand(Array, true, Array)
+#13 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Console/ShellDispatcher.php(182): Cake\Console\ShellDispatcher->_dispatch(Array)
+#14 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Console/ShellDispatcher.php(128): Cake\Console\ShellDispatcher->dispatch(Array)
+#15 /Users/varunprathap/demoapp/bin/cake.php(33): Cake\Console\ShellDispatcher::run(Array)
+#16 {main}
+
+
+2016-08-29 06:38:46 Error: [ParseError] syntax error, unexpected '->' (T_OBJECT_OPERATOR)
+Stack Trace:
+#0 /Users/varunprathap/demoapp/vendor/composer/ClassLoader.php(301): Composer\Autoload\includeFile('/Users/varunpra...')
+#1 [internal function]: Composer\Autoload\ClassLoader->loadClass('App\\Controller\\...')
+#2 [internal function]: spl_autoload_call('App\\Controller\\...')
+#3 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/Task/TestTask.php(223): class_exists('App\\Controller\\...')
+#4 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/Task/ControllerTask.php(206): Bake\Shell\Task\TestTask->bake('Controller', 'TimeAccountType...')
+#5 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/Task/ControllerTask.php(152): Bake\Shell\Task\ControllerTask->bakeTest('TimeAccountType...')
+#6 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/Task/ControllerTask.php(66): Bake\Shell\Task\ControllerTask->bake('TimeAccountType...')
+#7 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/BakeShell.php(258): Bake\Shell\Task\ControllerTask->main('TimeAccountType...')
+#8 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Collection/CollectionTrait.php(52): Bake\Shell\BakeShell->Bake\Shell\{closure}('TimeAccountType...', 0)
+#9 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/BakeShell.php(260): Cake\Collection\Collection->each(Object(Closure))
+#10 [internal function]: Bake\Shell\BakeShell->all('time_account_ty...')
+#11 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Console/Shell.php(452): call_user_func_array(Array, Array)
+#12 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Console/ShellDispatcher.php(227): Cake\Console\Shell->runCommand(Array, true, Array)
+#13 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Console/ShellDispatcher.php(182): Cake\Console\ShellDispatcher->_dispatch(Array)
+#14 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Console/ShellDispatcher.php(128): Cake\Console\ShellDispatcher->dispatch(Array)
+#15 /Users/varunprathap/demoapp/bin/cake.php(33): Cake\Console\ShellDispatcher::run(Array)
+#16 {main}
+
+

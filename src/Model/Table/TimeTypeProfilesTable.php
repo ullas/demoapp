@@ -9,6 +9,8 @@ use Cake\Validation\Validator;
 /**
  * TimeTypeProfiles Model
  *
+ * @property \Cake\ORM\Association\BelongsTo $TimeTypes
+ *
  * @method \App\Model\Entity\TimeTypeProfile get($primaryKey, $options = [])
  * @method \App\Model\Entity\TimeTypeProfile newEntity($data = null, array $options = [])
  * @method \App\Model\Entity\TimeTypeProfile[] newEntities(array $data, array $options = [])
@@ -33,6 +35,10 @@ class TimeTypeProfilesTable extends Table
         $this->table('time_type_profiles');
         $this->displayField('name');
         $this->primaryKey('id');
+
+        $this->belongsTo('TimeTypes', [
+            'foreignKey' => 'time_type_id'
+        ]);
     }
 
     /**
@@ -66,9 +72,6 @@ class TimeTypeProfilesTable extends Table
             ->allowEmpty('status');
 
         $validator
-            ->allowEmpty('time_type');
-
-        $validator
             ->boolean('enable_ess')
             ->allowEmpty('enable_ess');
 
@@ -90,6 +93,7 @@ class TimeTypeProfilesTable extends Table
     public function buildRules(RulesChecker $rules)
     {
         $rules->add($rules->isUnique(['external_code']));
+        $rules->add($rules->existsIn(['time_type_id'], 'TimeTypes'));
 
         return $rules;
     }

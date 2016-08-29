@@ -10,10 +10,11 @@ use Cake\ORM\Entity;
  * @property string $calendar
  * @property string $assignmentyear
  * @property \Cake\I18n\Time $assignmentdate
- * @property string $User
- * @property string $holiday_code
+ * @property int $user_id
+ * @property int $holiday_id
  *
  * @property \App\Model\Entity\User $user
+ * @property \App\Model\Entity\Holiday $holiday
  */
 class CalendarAssignment extends Entity
 {

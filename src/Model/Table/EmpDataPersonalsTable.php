@@ -145,7 +145,7 @@ class EmpDataPersonalsTable extends Table
             ->allowEmpty('home_airport');
 
         $validator
-            ->allowEmpty('Religion');
+            ->allowEmpty('religion');
 
         $validator
             ->decimal('number_children')

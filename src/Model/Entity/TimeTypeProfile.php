@@ -13,9 +13,11 @@ use Cake\ORM\Entity;
  * @property \Cake\I18n\Time $start_date
  * @property string $time_rec_variant
  * @property string $status
- * @property string $time_type
  * @property bool $enable_ess
  * @property string $external_code
+ * @property int $time_type_id
+ *
+ * @property \App\Model\Entity\TimeType $time_type
  */
 class TimeTypeProfile extends Entity
 {

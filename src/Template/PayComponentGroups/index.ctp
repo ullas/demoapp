@@ -5,7 +5,7 @@
   </h1>
   <ol class="breadcrumb">
     <li>
-    <li><a href="<?php echo $this->Url->build(array('controller' => 'Departments', 'action' => 'add')); ?>">Add</a></li>
+    <li><a href="<?php echo $this->Url->build(array('controller' => 'PayComponentGroups', 'action' => 'add')); ?>">Add</a></li>
     </li>
   </ol>
 </section>

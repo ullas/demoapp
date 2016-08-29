@@ -19,7 +19,7 @@ class CalendarAssignmentsController extends AppController
     public function index()
     {
         $this->paginate = [
-            'contain' => ['Users']
+            'contain' => ['Users', 'Holidays']
         ];
         $calendarAssignments = $this->paginate($this->CalendarAssignments);
 
@@ -37,7 +37,7 @@ class CalendarAssignmentsController extends AppController
     public function view($id = null)
     {
         $calendarAssignment = $this->CalendarAssignments->get($id, [
-            'contain' => ['Users']
+            'contain' => ['Users', 'Holidays']
         ]);
 
         $this->set('calendarAssignment', $calendarAssignment);
@@ -63,7 +63,8 @@ class CalendarAssignmentsController extends AppController
             }
         }
         $users = $this->CalendarAssignments->Users->find('list', ['limit' => 200]);
-        $this->set(compact('calendarAssignment', 'users'));
+        $holidays = $this->CalendarAssignments->Holidays->find('list', ['limit' => 200]);
+        $this->set(compact('calendarAssignment', 'users', 'holidays'));
         $this->set('_serialize', ['calendarAssignment']);
     }
 
@@ -90,7 +91,8 @@ class CalendarAssignmentsController extends AppController
             }
         }
         $users = $this->CalendarAssignments->Users->find('list', ['limit' => 200]);
-        $this->set(compact('calendarAssignment', 'users'));
+        $holidays = $this->CalendarAssignments->Holidays->find('list', ['limit' => 200]);
+        $this->set(compact('calendarAssignment', 'users', 'holidays'));
         $this->set('_serialize', ['calendarAssignment']);
     }
 

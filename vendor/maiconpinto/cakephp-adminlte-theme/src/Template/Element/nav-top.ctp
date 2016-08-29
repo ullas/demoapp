@@ -104,7 +104,7 @@ if (file_exists($file)) {
             <li class="dropdown user user-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                     <?php echo $this->Html->image('sree.png', array('class' => 'user-image', 'alt' => 'User Image')); ?>
-                    <span class="hidden-xs">Sreekanth M</span>
+                    <span class="hidden-xs"><?php echo $name ?></span>
                 </a>
                 <ul class="dropdown-menu">
                     <!-- User image -->
@@ -112,7 +112,7 @@ if (file_exists($file)) {
                         <?php echo $this->Html->image('sree.png', array('class' => 'img-circle', 'alt' => 'User Image')); ?>
 
                         <p>
-                            Sreekanth - Web Developer
+                            <?php echo $name ?> - Web Developer
                             <small>Member since Nov. 2012</small>
                         </p>
                     </li>

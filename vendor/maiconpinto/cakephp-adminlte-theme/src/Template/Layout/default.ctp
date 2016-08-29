@@ -62,6 +62,25 @@
 .p3{
 	padding:3px;
 }
+#back-to-contents {
+    position: fixed;
+    bottom: calc(100% - 50%);
+    right: 0;
+    background: #363637;
+    padding: 5px 0px 4px;
+    z-index: 90;
+}
+.icon-improve {
+    color: #bdbdb5;
+    padding: 3px 9px 0 10px;
+    font-size: 24px;
+}
+.caption {
+        width:100%;
+        bottom: .3rem;
+        position: absolute;
+        color:#FFFFFF;
+    }
 </style>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
@@ -69,7 +88,7 @@
     <div class="wrapper">
         <header class="main-header">
             <!-- Logo -->
-            <a href="<?php echo $this->Url->build('/'); ?>" class="logo">
+            <a href="<?php echo $this->Url->build('/Homes'); ?>" class="logo">
                 <!-- mini logo for sidebar mini 50x50 pixels -->
                 <span class="logo-mini"><?php echo $theme['logo']['mini'] ?></span>
                 <!-- logo for regular state and mobile devices -->
@@ -86,7 +105,9 @@
 
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
-
+        	<!-- support -->
+			<a id="back-to-contents" href="#"><i class="glyphicon glyphicon-earphone icon-improve" title="Support"></i></a>
+			
             <?php echo $this->Flash->render(); ?>
             <?php echo $this->Flash->render('auth'); ?>
             <?php echo $this->fetch('content'); ?>

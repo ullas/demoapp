@@ -9,6 +9,9 @@ use Cake\Validation\Validator;
 /**
  * TimeAccountTypes Model
  *
+ * @property \Cake\ORM\Association\BelongsTo $PayComponents
+ * @property \Cake\ORM\Association\BelongsTo $PayComponentGroups
+ *
  * @method \App\Model\Entity\TimeAccountType get($primaryKey, $options = [])
  * @method \App\Model\Entity\TimeAccountType newEntity($data = null, array $options = [])
  * @method \App\Model\Entity\TimeAccountType[] newEntities(array $data, array $options = [])
@@ -33,6 +36,13 @@ class TimeAccountTypesTable extends Table
         $this->table('time_account_types');
         $this->displayField('name');
         $this->primaryKey('id');
+
+        $this->belongsTo('PayComponents', [
+            'foreignKey' => 'pay_component_id'
+        ]);
+        $this->belongsTo('PayComponentGroups', [
+            'foreignKey' => 'pay_component_group_id'
+        ]);
     }
 
     /**
@@ -97,9 +107,6 @@ class TimeAccountTypesTable extends Table
             ->allowEmpty('time_to_accrual');
 
         $validator
-            ->allowEmpty('time_to_accrual_unit');
-
-        $validator
             ->boolean('proration_used')
             ->allowEmpty('proration_used');
 
@@ -114,15 +121,12 @@ class TimeAccountTypesTable extends Table
             ->allowEmpty('payout_eligiblity');
 
         $validator
-            ->allowEmpty('pay_comp_group');
-
-        $validator
-            ->allowEmpty('pay_comp');
-
-        $validator
             ->requirePresence('code', 'create')
             ->notEmpty('code')
             ->add('code', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
+
+        $validator
+            ->allowEmpty('time_to_actual_unit');
 
         return $validator;
     }
@@ -137,6 +141,8 @@ class TimeAccountTypesTable extends Table
     public function buildRules(RulesChecker $rules)
     {
         $rules->add($rules->isUnique(['code']));
+        $rules->add($rules->existsIn(['pay_component_id'], 'PayComponents'));
+        $rules->add($rules->existsIn(['pay_component_group_id'], 'PayComponentGroups'));
 
         return $rules;
     }

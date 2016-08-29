@@ -1,17 +1,19 @@
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('Edit Calendar Assignment'), ['action' => 'edit', $calendarAssignment->id]) ?> </li>
-        <li><?= $this->Form->postLink(__('Delete Calendar Assignment'), ['action' => 'delete', $calendarAssignment->id], ['confirm' => __('Are you sure you want to delete # {0}?', $calendarAssignment->id)]) ?> </li>
-        <li><?= $this->Html->link(__('List Calendar Assignments'), ['action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Calendar Assignment'), ['action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List Users'), ['controller' => 'Users', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New User'), ['controller' => 'Users', 'action' => 'add']) ?> </li>
-    </ul>
-</nav>
-<div class="calendarAssignments view large-9 medium-8 columns content">
-    <h3><?= h($calendarAssignment->id) ?></h3>
-    <table class="vertical-table">
+<section class="content-header">
+  <h1>
+    Calendar Assignments
+    <small>View</small>
+  </h1>
+  <ol class="breadcrumb">
+    <li>
+    <?= $this->Html->link('<i class="fa fa-mail-reply"></i> '.__('Back'), ['action' => 'index'], ['escape' => false]) ?>
+    </li>
+  </ol>
+</section>
+
+<!-- Main content -->
+<section class="content">
+  <div class="box box-primary"><div class="box-body">
+    <table class="table table-hover">
         <tr>
             <th><?= __('Calendar') ?></th>
             <td><?= h($calendarAssignment->calendar) ?></td>
@@ -22,11 +24,11 @@
         </tr>
         <tr>
             <th><?= __('User') ?></th>
-            <td><?= h($calendarAssignment->User) ?></td>
+            <td><?= $calendarAssignment->has('user') ? $this->Html->link($calendarAssignment->user->id, ['controller' => 'Users', 'action' => 'view', $calendarAssignment->user->id]) : '' ?></td>
         </tr>
         <tr>
-            <th><?= __('Holiday Code') ?></th>
-            <td><?= h($calendarAssignment->holiday_code) ?></td>
+            <th><?= __('Holiday') ?></th>
+            <td><?= $calendarAssignment->has('holiday') ? $this->Html->link($calendarAssignment->holiday->name, ['controller' => 'Holidays', 'action' => 'view', $calendarAssignment->holiday->id]) : '' ?></td>
         </tr>
         <tr>
             <th><?= __('Id') ?></th>
@@ -37,4 +39,4 @@
             <td><?= h($calendarAssignment->assignmentdate) ?></td>
         </tr>
     </table>
-</div>
+</div></div></section>

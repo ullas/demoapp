@@ -25,7 +25,8 @@ class CalendarAssignmentsTableTest extends TestCase
      */
     public $fixtures = [
         'app.calendar_assignments',
-        'app.users'
+        'app.users',
+        'app.holidays'
     ];
 
     /**

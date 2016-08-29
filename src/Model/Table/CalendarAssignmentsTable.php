@@ -9,6 +9,9 @@ use Cake\Validation\Validator;
 /**
  * CalendarAssignments Model
  *
+ * @property \Cake\ORM\Association\BelongsTo $Users
+ * @property \Cake\ORM\Association\BelongsTo $Holidays
+ *
  * @method \App\Model\Entity\CalendarAssignment get($primaryKey, $options = [])
  * @method \App\Model\Entity\CalendarAssignment newEntity($data = null, array $options = [])
  * @method \App\Model\Entity\CalendarAssignment[] newEntities(array $data, array $options = [])
@@ -33,6 +36,13 @@ class CalendarAssignmentsTable extends Table
         $this->table('calendar_assignments');
         $this->displayField('id');
         $this->primaryKey('id');
+
+        $this->belongsTo('Users', [
+            'foreignKey' => 'user_id'
+        ]);
+        $this->belongsTo('Holidays', [
+            'foreignKey' => 'holiday_id'
+        ]);
     }
 
     /**
@@ -56,14 +66,6 @@ class CalendarAssignmentsTable extends Table
             ->date('assignmentdate')
             ->allowEmpty('assignmentdate');
 
-        $validator
-            ->allowEmpty('User');
-
-        $validator
-            ->requirePresence('holiday_code', 'create')
-            ->notEmpty('holiday_code')
-            ->add('holiday_code', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
-
         return $validator;
     }
 
@@ -76,7 +78,8 @@ class CalendarAssignmentsTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
-        $rules->add($rules->isUnique(['holiday_code']));
+        $rules->add($rules->existsIn(['user_id'], 'Users'));
+        $rules->add($rules->existsIn(['holiday_id'], 'Holidays'));
 
         return $rules;
     }

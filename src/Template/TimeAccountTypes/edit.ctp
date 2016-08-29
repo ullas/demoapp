@@ -1,19 +1,16 @@
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Form->postLink(
-                __('Delete'),
-                ['action' => 'delete', $timeAccountType->id],
-                ['confirm' => __('Are you sure you want to delete # {0}?', $timeAccountType->id)]
-            )
-        ?></li>
-        <li><?= $this->Html->link(__('List Time Account Types'), ['action' => 'index']) ?></li>
-    </ul>
-</nav>
-<div class="timeAccountTypes form large-9 medium-8 columns content">
+<section class="content-header">
+      <h1>
+        Time Account Type
+        <small>Edit</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><?= $this->Html->link('<i class="fa fa-mail-reply"></i> '.__('Back'), ['action' => 'index'], ['escape' => false]) ?></li>
+      </ol>
+    </section>
+<section class="content">
+	<div class="box box-primary"><div class="box-body">
     <?= $this->Form->create($timeAccountType) ?>
     <fieldset>
-        <legend><?= __('Edit Time Account Type') ?></legend>
         <?php
             echo $this->Form->input('name');
             echo $this->Form->input('unit');
@@ -29,16 +26,16 @@
             echo $this->Form->input('min_balance');
             echo $this->Form->input('posting_order');
             echo $this->Form->input('time_to_accrual');
-            echo $this->Form->input('time_to_accrual_unit');
             echo $this->Form->input('proration_used');
             echo $this->Form->input('rounding_used');
             echo $this->Form->input('update_rule');
             echo $this->Form->input('payout_eligiblity');
-            echo $this->Form->input('pay_comp_group');
-            echo $this->Form->input('pay_comp');
             echo $this->Form->input('code');
+            echo $this->Form->input('pay_component_id', ['options' => $payComponents, 'empty' => true]);
+            echo $this->Form->input('time_to_actual_unit');
+            echo $this->Form->input('pay_component_group_id', ['options' => $payComponentGroups, 'empty' => true]);
         ?>
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>
     <?= $this->Form->end() ?>
-</div>
+</div></div></section>

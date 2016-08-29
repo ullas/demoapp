@@ -1,15 +1,19 @@
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('Edit Time Account Type'), ['action' => 'edit', $timeAccountType->id]) ?> </li>
-        <li><?= $this->Form->postLink(__('Delete Time Account Type'), ['action' => 'delete', $timeAccountType->id], ['confirm' => __('Are you sure you want to delete # {0}?', $timeAccountType->id)]) ?> </li>
-        <li><?= $this->Html->link(__('List Time Account Types'), ['action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Time Account Type'), ['action' => 'add']) ?> </li>
-    </ul>
-</nav>
-<div class="timeAccountTypes view large-9 medium-8 columns content">
-    <h3><?= h($timeAccountType->name) ?></h3>
-    <table class="vertical-table">
+<section class="content-header">
+  <h1>
+    Time Account Type
+    <small>View</small>
+  </h1>
+  <ol class="breadcrumb">
+    <li>
+    <?= $this->Html->link('<i class="fa fa-mail-reply"></i> '.__('Back'), ['action' => 'index'], ['escape' => false]) ?>
+    </li>
+  </ol>
+</section>
+
+<!-- Main content -->
+<section class="content">
+  <div class="box box-primary"><div class="box-body">
+    <table class="table table-hover">
         <tr>
             <th><?= __('Name') ?></th>
             <td><?= h($timeAccountType->name) ?></td>
@@ -35,10 +39,6 @@
             <td><?= h($timeAccountType->posting_order) ?></td>
         </tr>
         <tr>
-            <th><?= __('Time To Accrual Unit') ?></th>
-            <td><?= h($timeAccountType->time_to_accrual_unit) ?></td>
-        </tr>
-        <tr>
             <th><?= __('Update Rule') ?></th>
             <td><?= h($timeAccountType->update_rule) ?></td>
         </tr>
@@ -47,16 +47,20 @@
             <td><?= h($timeAccountType->payout_eligiblity) ?></td>
         </tr>
         <tr>
-            <th><?= __('Pay Comp Group') ?></th>
-            <td><?= h($timeAccountType->pay_comp_group) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Pay Comp') ?></th>
-            <td><?= h($timeAccountType->pay_comp) ?></td>
-        </tr>
-        <tr>
             <th><?= __('Code') ?></th>
             <td><?= h($timeAccountType->code) ?></td>
+        </tr>
+        <tr>
+            <th><?= __('Pay Component') ?></th>
+            <td><?= $timeAccountType->has('pay_component') ? $this->Html->link($timeAccountType->pay_component->name, ['controller' => 'PayComponents', 'action' => 'view', $timeAccountType->pay_component->id]) : '' ?></td>
+        </tr>
+        <tr>
+            <th><?= __('Time To Actual Unit') ?></th>
+            <td><?= h($timeAccountType->time_to_actual_unit) ?></td>
+        </tr>
+        <tr>
+            <th><?= __('Pay Component Group') ?></th>
+            <td><?= $timeAccountType->has('pay_component_group') ? $this->Html->link($timeAccountType->pay_component_group->name, ['controller' => 'PayComponentGroups', 'action' => 'view', $timeAccountType->pay_component_group->id]) : '' ?></td>
         </tr>
         <tr>
             <th><?= __('Id') ?></th>
@@ -103,4 +107,4 @@
             <td><?= $timeAccountType->rounding_used ? __('Yes') : __('No'); ?></td>
         </tr>
     </table>
-</div>
+</div></div></section>

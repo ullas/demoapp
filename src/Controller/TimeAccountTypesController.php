@@ -18,6 +18,9 @@ class TimeAccountTypesController extends AppController
      */
     public function index()
     {
+        $this->paginate = [
+            'contain' => ['PayComponents', 'PayComponentGroups']
+        ];
         $timeAccountTypes = $this->paginate($this->TimeAccountTypes);
 
         $this->set(compact('timeAccountTypes'));
@@ -34,7 +37,7 @@ class TimeAccountTypesController extends AppController
     public function view($id = null)
     {
         $timeAccountType = $this->TimeAccountTypes->get($id, [
-            'contain' => []
+            'contain' => ['PayComponents', 'PayComponentGroups']
         ]);
 
         $this->set('timeAccountType', $timeAccountType);
@@ -59,7 +62,9 @@ class TimeAccountTypesController extends AppController
                 $this->Flash->error(__('The time account type could not be saved. Please, try again.'));
             }
         }
-        $this->set(compact('timeAccountType'));
+        $payComponents = $this->TimeAccountTypes->PayComponents->find('list', ['limit' => 200]);
+        $payComponentGroups = $this->TimeAccountTypes->PayComponentGroups->find('list', ['limit' => 200]);
+        $this->set(compact('timeAccountType', 'payComponents', 'payComponentGroups'));
         $this->set('_serialize', ['timeAccountType']);
     }
 
@@ -85,7 +90,9 @@ class TimeAccountTypesController extends AppController
                 $this->Flash->error(__('The time account type could not be saved. Please, try again.'));
             }
         }
-        $this->set(compact('timeAccountType'));
+        $payComponents = $this->TimeAccountTypes->PayComponents->find('list', ['limit' => 200]);
+        $payComponentGroups = $this->TimeAccountTypes->PayComponentGroups->find('list', ['limit' => 200]);
+        $this->set(compact('timeAccountType', 'payComponents', 'payComponentGroups'));
         $this->set('_serialize', ['timeAccountType']);
     }
 

@@ -15,11 +15,13 @@
             echo $this->Form->input('name');
             echo $this->Form->input('description');
             echo $this->Form->input('status');
-            echo $this->Form->input('start_date', ['empty' => true]);
-            echo $this->Form->input('end_date', ['empty' => true]);
+            echo "<div class='form-group'><label>Start Date:</label><div class='input-group'>";
+            echo "<div class='input-group-addon''><i class='fa fa-calendar'></i></div><input type='text' class='form-control' id='start_date'></div></div>";
+			echo "<div class='form-group'><label>End Date:</label><div class='input-group'>";
+            echo "<div class='input-group-addon''><i class='fa fa-calendar'></i></div><input type='text' class='form-control' id='end_date'></div></div>";
             echo $this->Form->input('pay_component_type');
             echo $this->Form->input('is_earning');
-            echo $this->Form->input('currency');
+            echo $this->Form->input('currency',['options' => $this->Currency->get_currencies(), 'empty' => true]);
             echo $this->Form->input('pay_component_value');
             echo $this->Form->input('recurring');
             echo $this->Form->input('base_pay_component_group');
@@ -41,3 +43,17 @@
     <?= $this->Form->button(__('Submit')) ?>
     <?= $this->Form->end() ?>
 </div></div></section>
+<!-- Date picker -->
+<?php
+$this->Html->css([  'AdminLTE./plugins/datepicker/datepicker3' ], ['block' => 'css']);
+$this->Html->script([ 'AdminLTE./plugins/datepicker/bootstrap-datepicker' ], ['block' => 'script']); ?>
+<?php $this->start('scriptBotton'); ?>
+<script>
+  $(function () { 
+     $('#start_date').datepicker({ autoclose: true }); 
+     $('#end_date').datepicker({ autoclose: true }); 
+  });
+</script>
+<?php $this->end(); ?>
+
+

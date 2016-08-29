@@ -1,21 +1,18 @@
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Form->postLink(
-                __('Delete'),
-                ['action' => 'delete', $timeType->id],
-                ['confirm' => __('Are you sure you want to delete # {0}?', $timeType->id)]
-            )
-        ?></li>
-        <li><?= $this->Html->link(__('List Time Types'), ['action' => 'index']) ?></li>
-    </ul>
-</nav>
-<div class="timeTypes form large-9 medium-8 columns content">
+<section class="content-header">
+      <h1>
+        Time Type
+        <small>Edit</small>
+      </h1>
+      <ol class="breadcrumb">
+      	<li><?= $this->Html->link('<i class="fa fa-mail-reply"></i> '.__('Back'), ['action' => 'index'], ['escape' => false]) ?></li>
+      </ol>
+    </section>
+<section class="content">
+	<div class="box box-primary"><div class="box-body">
     <?= $this->Form->create($timeType) ?>
     <fieldset>
-        <legend><?= __('Edit Time Type') ?></legend>
         <?php
-            echo $this->Form->input('country');
+            echo $this->Form->input('country',['options' => $this->Country->get_countries(), 'empty' => true]);
             echo $this->Form->input('classification');
             echo $this->Form->input('unit');
             echo $this->Form->input('perm_fractions_days');
@@ -31,4 +28,4 @@
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>
     <?= $this->Form->end() ?>
-</div>
+</div></div></section>

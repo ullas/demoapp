@@ -24,7 +24,10 @@ class TimeAccountTypesTableTest extends TestCase
      * @var array
      */
     public $fixtures = [
-        'app.time_account_types'
+        'app.time_account_types',
+        'app.pay_components',
+        'app.frequencies',
+        'app.pay_component_groups'
     ];
 
     /**
@@ -67,6 +70,16 @@ class TimeAccountTypesTableTest extends TestCase
      * @return void
      */
     public function testValidationDefault()
+    {
+        $this->markTestIncomplete('Not implemented yet.');
+    }
+
+    /**
+     * Test buildRules method
+     *
+     * @return void
+     */
+    public function testBuildRules()
     {
         $this->markTestIncomplete('Not implemented yet.');
     }

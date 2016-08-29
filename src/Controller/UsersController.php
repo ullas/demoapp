@@ -10,8 +10,7 @@ use Cake\Event\Event;
  */
 class UsersController extends AppController
 {
-	
-    public function beforeFilter(Event $event)
+	public function beforeFilter(Event $event)
     {
         parent::beforeFilter($event);
         // Allow users to register and logout.
@@ -19,7 +18,6 @@ class UsersController extends AppController
         // cause problems with normal functioning of AuthComponent.
         $this->Auth->allow(['logout']);
     }
-
     public function login()
     {
         if ($this->request->is('post')) {
@@ -31,7 +29,6 @@ class UsersController extends AppController
             $this->Flash->error(__('Invalid username or password, try again'));
         }
     }
-
     public function logout()
     {
         return $this->redirect($this->Auth->logout());
@@ -59,7 +56,7 @@ class UsersController extends AppController
     public function view($id = null)
     {
         $user = $this->Users->get($id, [
-            'contain' => ['CalendarAssignments']
+            'contain' => []
         ]);
 
         $this->set('user', $user);

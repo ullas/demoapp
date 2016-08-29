@@ -28,7 +28,7 @@
                 <th><?= $this->Paginator->sort('ws_days') ?></th>
                 <th><?= $this->Paginator->sort('model') ?></th>
                 <th><?= $this->Paginator->sort('start_date') ?></th>
-                <th><?= $this->Paginator->sort('day1_planhours') ?></th>
+                <!-- <th><?= $this->Paginator->sort('day1_planhours') ?></th>
                 <th><?= $this->Paginator->sort('day2_planhours') ?></th>
                 <th><?= $this->Paginator->sort('day3_planhours') ?></th>
                 <th><?= $this->Paginator->sort('day4_planhours') ?></th>
@@ -50,7 +50,7 @@
                 <th><?= $this->Paginator->sort('starting_date') ?></th>
                 <th><?= $this->Paginator->sort('period_model') ?></th>
                 <th><?= $this->Paginator->sort('time_rec_variant_3') ?></th>
-                <th><?= $this->Paginator->sort('ws_code') ?></th>
+                <th><?= $this->Paginator->sort('ws_code') ?></th> -->
                 <th class="actions"><?= __('Actions') ?></th>
             </tr>
         </thead>
@@ -69,7 +69,7 @@
                 <td><?= $this->Number->format($workSchedule->ws_days) ?></td>
                 <td><?= h($workSchedule->model) ?></td>
                 <td><?= h($workSchedule->start_date) ?></td>
-                <td><?= $this->Number->format($workSchedule->day1_planhours) ?></td>
+                <!-- <td><?= $this->Number->format($workSchedule->day1_planhours) ?></td>
                 <td><?= $this->Number->format($workSchedule->day2_planhours) ?></td>
                 <td><?= $this->Number->format($workSchedule->day3_planhours) ?></td>
                 <td><?= $this->Number->format($workSchedule->day4_planhours) ?></td>
@@ -91,7 +91,7 @@
                 <td><?= h($workSchedule->starting_date) ?></td>
                 <td><?= h($workSchedule->period_model) ?></td>
                 <td><?= h($workSchedule->time_rec_variant_3) ?></td>
-                <td><?= h($workSchedule->ws_code) ?></td>
+                <td><?= h($workSchedule->ws_code) ?></td> -->
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $workSchedule->id]) ?>
                     <?= $this->Html->link(__('Edit'), ['action' => 'edit', $workSchedule->id]) ?>
