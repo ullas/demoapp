@@ -51,6 +51,8 @@ class AppController extends Controller
    		 // Admin can access every action
     	if (isset($user['role']) && $user['role'] === 'admin') {
     		$this->set('name', $user['name']);
+			$this->set('userid', $user['id']);      
+			$this->request->session()->write('userid', $user['id']);
         	return true;
     	}
 
