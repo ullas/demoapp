@@ -9,6 +9,9 @@ if (file_exists($file)) {
 ?>
 <ul class="sidebar-menu">
     <li class="header">MAIN NAVIGATION</li>
+    
+    <li><a href="<?php echo $this->Url->build('/Admins'); ?>"><i class="fa fa-truck"></i><span> Trips </span></a></li>
+    
    <li><a href="<?php echo $this->Url->build('/Homes'); ?>"><i class="fa fa-dashboard"></i><span> Dashboard </span></a></li>
     
     

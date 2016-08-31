@@ -11,7 +11,7 @@
 
 <!-- Main content -->
 <section class="content">
-
+    
   <div class="row">
     <div class="col-md-3">
 
@@ -21,10 +21,10 @@
           <?php echo $this->Html->image('sree.png', array('class' => 'profile-user-img img-responsive img-circle', 'alt' => 'User profile picture')); ?>
           
 
-          <h3 class="profile-username text-center">Sreekanth M</h3>
+          <h3 class="profile-username text-center"><?php echo $name ?></h3>
 
-          <p class="text-muted text-center">Software Engineer</p>
-          <p class="text-center">Tawazun Dynamics,Tawazun Industrial Park</p>
+          <p class="text-muted text-center" id="position"><?= h($jobinfo->position) ?></p>
+          <p class="text-center" id="company"><?= h($jobinfo->company) ?></p>
 
           <a href="/Profiles/editprofile"><button type="button" class="btn btn-primary btn-block"> Edit Profile</button></a>
         </div>
@@ -85,7 +85,7 @@
                 <tbody>
                 <tr>
                   <td>Current</td>
-                  <td>Tawazun Dynamics</td>
+                  <td><?= h($jobinfo->company) ?></td>
                 </tr>
                 <tr>
                   <td>Previous</td>
@@ -97,7 +97,7 @@
                 </tr>
                 <tr>
                  <td>Period</td>
-                  <td>Since Nov. 2012</td>
+                  <td>Since <?= h($jobinfo->company_entry_date) ?></td>
                 </tr>
               </tbody></table>
             </div>

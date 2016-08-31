@@ -22,6 +22,15 @@ class ProfilesController extends AppController
 
         $this->set(compact('profiles'));
         $this->set('_serialize', ['profiles']);
+		
+		
+		//get userid from session var
+		$userid=$this->request->session()->read('userid');
+		//loading position and company name from jobinfos
+		$this->loadModel('JobInfos');
+		$jobinfo = $this->JobInfos->find() ->where(['users_id' => $userid]) ->first();
+		$this->set('jobinfo', $jobinfo);
+		// print_r($jobinfo);
     }
 	public function editprofile()
     {

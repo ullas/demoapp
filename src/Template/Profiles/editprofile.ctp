@@ -40,8 +40,16 @@
           <div class="col-sm-12 thumbnail img-circle">     
           	<?php echo $this->Html->image('sree.png', array('class' => 'profile-user-img img-responsive img-circle', 'alt' => 'User profile picture')); ?>
           	<div class="caption">
-          		<i class="fa fa-pencil"></i>
+          		<input type="image" id="exampleInputFile" class="fa fa-pencil">
            	</div>
+           	
+           	<!-- <div class="form-group">
+                  <label for="exampleInputFile">File input</label>
+                  <input type="image" id="exampleInputFile">
+
+                  <p class="help-block">Example block-level help text here.</p>
+                </div> -->
+                
            </div>
 
           <!-- <h3 class="profile-username text-center">Sreekanth M</h3>
