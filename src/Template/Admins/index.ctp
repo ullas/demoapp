@@ -27,7 +27,7 @@
   position: relative;
   margin: 0 5%;
   display: inline-block;
-  background: #0073b7 !important;
+  /*background: #0073b7 !important;*/
   vertical-align: bottom;
   border-radius: 50%;
 }
@@ -72,6 +72,10 @@
 .mptl-h60{
 	height:60px;
 }
+.mptl-mt9{
+	margin-top:9px;
+}
+
 </style>
 <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -93,12 +97,12 @@
             </div>
             <div class="box-body">
               <!-- the events -->
-              <div id="external-events">
-                <div class="external-event bg-green ui-draggable ui-draggable-handle" style="position: relative;">Driver 1</div>
-                <div class="external-event bg-yellow ui-draggable ui-draggable-handle" style="position: relative;">Driver 2</div>
-                <div class="external-event bg-aqua ui-draggable ui-draggable-handle" style="position: relative;">Driver 3</div>
-                <div class="external-event bg-light-blue ui-draggable ui-draggable-handle" style="position: relative;">Driver 4</div>
-                <div class="external-event bg-red ui-draggable ui-draggable-handle" style="position: relative;">Driver 5</div>
+              <div id="external-events" class="driver">
+                <div class="external-event bg-green driver" id="driver1">Driver 1</div>
+                <div class="external-event bg-yellow driver" id="driver2">Driver 2</div>
+                <div class="external-event bg-aqua" id="driver3">Driver 3</div>
+                <div class="external-event bg-light-blue" id="driver4">Driver 4</div>
+                <div class="external-event bg-red" id="driver5">Driver 5</div>
               </div>
             </div>
             <!-- /.box-body -->
@@ -111,370 +115,44 @@
             <div class="box-body">
               <!-- the events -->
               <div id="external-events">
-                <div class="external-event bg-green ui-draggable ui-draggable-handle" style="position: relative;">Vehicle 1</div>
-                <div class="external-event bg-yellow ui-draggable ui-draggable-handle" style="position: relative;">Vehicle 2</div>
-                <div class="external-event bg-aqua ui-draggable ui-draggable-handle" style="position: relative;">Vehicle 3</div>
-                <div class="external-event bg-light-blue ui-draggable ui-draggable-handle" style="position: relative;">Vehicle 4</div>
-                <div class="external-event bg-red ui-draggable ui-draggable-handle" style="position: relative;">Vehicle 5</div>
+                <div class="external-event bg-green vehicle" id="vehicle1">Vehicle 1</div>
+                <div class="external-event bg-yellow vehicle" id="vehicle2">Vehicle 2</div>
+                <div class="external-event bg-aqua" id="vehicle3">Vehicle 3</div>
+                <div class="external-event bg-light-blue" id="vehicle4">Vehicle 4</div>
+                <div class="external-event bg-red" id="vehicle5">Vehicle 5</div>
               </div>
             </div>
             <!-- /.box-body -->
           </div>
+          
+          <div class="box-primary">
+              
+            <!-- <div class="box-header with-border">
+              <h4 class="box-title">Delete</h4>
+            </div> -->
+            <div class="box-body" id="trash">
+              <!-- the events --><div align="center">
+              <img class="" src="/img/trash.png" alt="Trash" ></div>
+
+            </div>
+            <!-- /.box-body -->
+          </div>
+          
         </div>
         <!-- /.col -->
         <div class="col-md-9">
           <div class="box box-primary">
-            <div class="box-body ">
-            	
+            <div class="box-body">
             	
             	<div class="content">
+            		<?php for ($x = 1; $x <= 10; $x++) { ?>
+            		<div class="row mptldrop" id="row<?php echo $x ?>">
             		
-            		<div class="row">
-            		
-            		<div class="col-md-1 mptl-trimpad"><div class="pull-right user-block">
-                    <img class="img-circle img-bordered-sm" src="/img/sree.png" alt="User Image"><img class="img-circle img-bordered-sm" src="/img/sree.png" alt="User Image">
-                  </div>
-            			
-            		</div>
-            	
-            		
-            		<div class="col-md-1 mptl-trimpad user-block">
-            			<div class="pull-right ">
-                        <span class="label triplabel bg-green ">Trip Start</span>
-                        
-               </div>
-               <!-- <img class="img-circle img-bordered-sm" src="/img/sree.png" alt="User Image"> -->
-            			</div>
-          <!-- /.tab-pane -->
-         <div class="col-md-8 mptl-trimpad">
-          	          	
-          	<!-- <span class="triplabel label bg-red">Trip Start</span> -->
-          	
-          	<div class="timeline ">
-          		<span>Vehicle</span>
-  
-  
-  <div class="event down"><div class="timeline-badge"><i class="fa fa-truck fa-lg fa-flip-horizontal"></i></div>
-  	<div class="detail"> <span class="text-muted">Stop 1</span></div>
-  </div>
-  <div class="event down"><div class="timeline-badge"><i class="fa fa-truck fa-lg fa-flip-horizontal"></i></div>
-    <div class="detail"> <span class="text-muted">Stop 2</span></div>
-  </div>
-  <div class="event down"><div class="timeline-badge"><i class="fa fa-truck fa-lg fa-flip-horizontal"></i></div>
-    <div class="detail"> <span class="text-muted">Stop 3</span></div>
-  </div>
-  <div class="event down"><div class="timeline-badge"><i class="fa fa-truck fa-lg fa-flip-horizontal"></i></div>
-    <div class="detail"> <span class="text-muted">Stop 4</span></div>
-  </div>
-  <div class="event down"><div class="timeline-badge"><i class="fa fa-truck fa-lg fa-flip-horizontal"></i></div>
-    <div class="detail"> <span class="text-muted">Stop 5</span></div>
-  </div>
-  
-  <!-- <div class="pull-right">
-                        <span class="label triplabel bg-red">Trip End</span>
-               </div> -->
-               
-</div>
-
-
-          
-          </div>
-          <div class="col-md-1 mptl-trimpad">
-                        <span class="label triplabel bg-green">Trip End</span>
-               </div>
-          <div class="col-md-1">
-          	<a class="btn btn-primary btn-xs">More</a>
-          </div>
-          <!-- /.tab-pane -->
-		</div>
-<hr>
-		<div class="row">
-            		
-            		<div class="col-md-2">
-            			<!-- <div class="small-box bg-aqua">
-            				<div class="inner">
-              					<h3>70%</h3>
-              					<p>completed</p>
-            				</div>
-          				</div> -->
-            		</div>
-          <!-- /.tab-pane -->
-         <div class="col-md-10">
-          	          	
-          	<!-- <span class="triplabel label bg-red">Trip Start</span> -->
-          	
-          	<div class="timeline">
-  <div class="event down"><div class="timeline-badge"><i class="fa fa-truck fa-lg fa-flip-horizontal"></i></div>
-  	<div class="detail"> <span class="text-muted">Stop 1</span></div>
-  </div>
-  <div class="event down"><div class="timeline-badge"><i class="fa fa-truck fa-lg fa-flip-horizontal"></i></div>
-    <div class="detail"> <span class="text-muted">Stop 2</span></div>
-  </div>
-  <div class="event down"><div class="timeline-badge"><i class="fa fa-truck fa-lg fa-flip-horizontal"></i></div>
-    <div class="detail"> <span class="text-muted">Stop 3</span></div>
-  </div>
-  <div class="event down"><div class="timeline-badge"><i class="fa fa-truck fa-lg fa-flip-horizontal"></i></div>
-    <div class="detail"> <span class="text-muted">Stop 4</span></div>
-  </div>
-  <div class="event down"><div class="timeline-badge"><i class="fa fa-truck fa-lg fa-flip-horizontal"></i></div>
-    <div class="detail"> <span class="text-muted">Stop 5</span></div>
-  </div>
-</div>
-
-
-          
-          </div>
-          <!-- /.tab-pane -->
-		</div>
-		
-		<hr>
-		<div class="row">
-            		
-            		<div class="col-md-2">
-            			<!-- <div class="small-box bg-aqua">
-            				<div class="inner">
-              					<h3>70%</h3>
-              					<p>completed</p>
-            				</div>
-          				</div> -->
-            		</div>
-          <!-- /.tab-pane -->
-         <div class="col-md-10">
-          	          	
-          	<!-- <span class="triplabel label bg-red">Trip Start</span> -->
-          	
-          	<div class="timeline">
-  <div class="event down"><div class="timeline-badge"><i class="fa fa-truck fa-lg fa-flip-horizontal"></i></div>
-  	<div class="detail"> <span class="text-muted">Stop 1</span></div>
-  </div>
-  <div class="event down"><div class="timeline-badge"><i class="fa fa-truck fa-lg fa-flip-horizontal"></i></div>
-    <div class="detail"> <span class="text-muted">Stop 2</span></div>
-  </div>
-  <div class="event down"><div class="timeline-badge"><i class="fa fa-truck fa-lg fa-flip-horizontal"></i></div>
-    <div class="detail"> <span class="text-muted">Stop 3</span></div>
-  </div>
-  <div class="event down"><div class="timeline-badge"><i class="fa fa-truck fa-lg fa-flip-horizontal"></i></div>
-    <div class="detail"> <span class="text-muted">Stop 4</span></div>
-  </div>
-  <div class="event down"><div class="timeline-badge"><i class="fa fa-truck fa-lg fa-flip-horizontal"></i></div>
-    <div class="detail"> <span class="text-muted">Stop 5</span></div>
-  </div>
-</div>
-
-
-          
-          </div>
-          <!-- /.tab-pane -->
-		</div>
-		
-		
-		<hr>
-		<div class="row">
-            		
-            		<div class="col-md-2">
-            			<!-- <div class="small-box bg-aqua">
-            				<div class="inner">
-              					<h3>70%</h3>
-              					<p>completed</p>
-            				</div>
-          				</div> -->
-            		</div>
-          <!-- /.tab-pane -->
-         <div class="col-md-10">
-          	          	
-          	<!-- <span class="triplabel label bg-red">Trip Start</span> -->
-          	
-          	<div class="timeline">
-  <div class="event down"><div class="timeline-badge"><i class="fa fa-truck fa-lg fa-flip-horizontal"></i></div>
-  	<div class="detail"> <span class="text-muted">Stop 1</span></div>
-  </div>
-  <div class="event down"><div class="timeline-badge"><i class="fa fa-truck fa-lg fa-flip-horizontal"></i></div>
-    <div class="detail"> <span class="text-muted">Stop 2</span></div>
-  </div>
-  <div class="event down"><div class="timeline-badge"><i class="fa fa-truck fa-lg fa-flip-horizontal"></i></div>
-    <div class="detail"> <span class="text-muted">Stop 3</span></div>
-  </div>
-  <div class="event down"><div class="timeline-badge"><i class="fa fa-truck fa-lg fa-flip-horizontal"></i></div>
-    <div class="detail"> <span class="text-muted">Stop 4</span></div>
-  </div>
-  <div class="event down"><div class="timeline-badge"><i class="fa fa-truck fa-lg fa-flip-horizontal"></i></div>
-    <div class="detail"> <span class="text-muted">Stop 5</span></div>
-  </div>
-</div>
-
-
-          
-          </div>
-          <!-- /.tab-pane -->
-		</div>
-		
-		
-		
-		<hr>
-		<div class="row">
-            		
-            		<div class="col-md-2">
-            			<!-- <div class="small-box bg-aqua">
-            				<div class="inner">
-              					<h3>70%</h3>
-              					<p>completed</p>
-            				</div>
-          				</div> -->
-            		</div>
-          <!-- /.tab-pane -->
-         <div class="col-md-10">
-          	          	
-          	<!-- <span class="triplabel label bg-red">Trip Start</span> -->
-          	
-          	<div class="timeline">
-  <div class="event down"><div class="timeline-badge"><i class="fa fa-truck fa-lg fa-flip-horizontal"></i></div>
-  	<div class="detail"> <span class="text-muted">Stop 1</span></div>
-  </div>
-  <div class="event down"><div class="timeline-badge"><i class="fa fa-truck fa-lg fa-flip-horizontal"></i></div>
-    <div class="detail"> <span class="text-muted">Stop 2</span></div>
-  </div>
-  <div class="event down"><div class="timeline-badge"><i class="fa fa-truck fa-lg fa-flip-horizontal"></i></div>
-    <div class="detail"> <span class="text-muted">Stop 3</span></div>
-  </div>
-  <div class="event down"><div class="timeline-badge"><i class="fa fa-truck fa-lg fa-flip-horizontal"></i></div>
-    <div class="detail"> <span class="text-muted">Stop 4</span></div>
-  </div>
-  <div class="event down"><div class="timeline-badge"><i class="fa fa-truck fa-lg fa-flip-horizontal"></i></div>
-    <div class="detail"> <span class="text-muted">Stop 5</span></div>
-  </div>
-</div>
-
-
-          
-          </div>
-          <!-- /.tab-pane -->
-		</div>
-		
-		
-		<hr>
-		<div class="row">
-            		
-            		<div class="col-md-2">
-            			<!-- <div class="small-box bg-aqua">
-            				<div class="inner">
-              					<h3>70%</h3>
-              					<p>completed</p>
-            				</div>
-          				</div> -->
-            		</div>
-          <!-- /.tab-pane -->
-         <div class="col-md-10">
-          	          	
-          	<!-- <span class="triplabel label bg-red">Trip Start</span> -->
-          	
-          	<div class="timeline">
-  <div class="event down"><div class="timeline-badge"><i class="fa fa-truck fa-lg fa-flip-horizontal"></i></div>
-  	<div class="detail"> <span class="text-muted">Stop 1</span></div>
-  </div>
-  <div class="event down"><div class="timeline-badge"><i class="fa fa-truck fa-lg fa-flip-horizontal"></i></div>
-    <div class="detail"> <span class="text-muted">Stop 2</span></div>
-  </div>
-  <div class="event down"><div class="timeline-badge"><i class="fa fa-truck fa-lg fa-flip-horizontal"></i></div>
-    <div class="detail"> <span class="text-muted">Stop 3</span></div>
-  </div>
-  <div class="event down"><div class="timeline-badge"><i class="fa fa-truck fa-lg fa-flip-horizontal"></i></div>
-    <div class="detail"> <span class="text-muted">Stop 4</span></div>
-  </div>
-  <div class="event down"><div class="timeline-badge"><i class="fa fa-truck fa-lg fa-flip-horizontal"></i></div>
-    <div class="detail"> <span class="text-muted">Stop 5</span></div>
-  </div>
-</div>
-
-
-          
-          </div>
-          <!-- /.tab-pane -->
-		</div>
-		
-		<hr>
-		<div class="row">
-            		
-            		<div class="col-md-2">
-            			<!-- <div class="small-box bg-aqua">
-            				<div class="inner">
-              					<h3>70%</h3>
-              					<p>completed</p>
-            				</div>
-          				</div> -->
-            		</div>
-          <!-- /.tab-pane -->
-         <div class="col-md-10">
-          	          	
-          	<!-- <span class="triplabel label bg-red">Trip Start</span> -->
-          	
-          	<div class="timeline">
-  <div class="event down"><div class="timeline-badge"><i class="fa fa-truck fa-lg fa-flip-horizontal"></i></div>
-  	<div class="detail"> <span class="text-muted">Stop 1</span></div>
-  </div>
-  <div class="event down"><div class="timeline-badge"><i class="fa fa-truck fa-lg fa-flip-horizontal"></i></div>
-    <div class="detail"> <span class="text-muted">Stop 2</span></div>
-  </div>
-  <div class="event down"><div class="timeline-badge"><i class="fa fa-truck fa-lg fa-flip-horizontal"></i></div>
-    <div class="detail"> <span class="text-muted">Stop 3</span></div>
-  </div>
-  <div class="event down"><div class="timeline-badge"><i class="fa fa-truck fa-lg fa-flip-horizontal"></i></div>
-    <div class="detail"> <span class="text-muted">Stop 4</span></div>
-  </div>
-  <div class="event down"><div class="timeline-badge"><i class="fa fa-truck fa-lg fa-flip-horizontal"></i></div>
-    <div class="detail"> <span class="text-muted">Stop 5</span></div>
-  </div>
-</div>
-
-
-          
-          </div>
-          <!-- /.tab-pane -->
-		</div>
-		
-		
-		<hr>
-		<div class="row">
-            		
-            		<div class="col-md-2">
-            			<!-- <div class="small-box bg-aqua">
-            				<div class="inner">
-              					<h3>70%</h3>
-              					<p>completed</p>
-            				</div>
-          				</div> -->
-            		</div>
-          <!-- /.tab-pane -->
-         <div class="col-md-10">
-          	          	
-          	<!-- <span class="triplabel label bg-red">Trip Start</span> -->
-          	
-          	<div class="timeline">
-  <div class="event down"><div class="timeline-badge"><i class="fa fa-truck fa-lg fa-flip-horizontal"></i></div>
-  	<div class="detail"> <span class="text-muted">Stop 1</span></div>
-  </div>
-  <div class="event down"><div class="timeline-badge"><i class="fa fa-truck fa-lg fa-flip-horizontal"></i></div>
-    <div class="detail"> <span class="text-muted">Stop 2</span></div>
-  </div>
-  <div class="event down"><div class="timeline-badge"><i class="fa fa-truck fa-lg fa-flip-horizontal"></i></div>
-    <div class="detail"> <span class="text-muted">Stop 3</span></div>
-  </div>
-  <div class="event down"><div class="timeline-badge"><i class="fa fa-truck fa-lg fa-flip-horizontal"></i></div>
-    <div class="detail"> <span class="text-muted">Stop 4</span></div>
-  </div>
-  <div class="event down"><div class="timeline-badge"><i class="fa fa-truck fa-lg fa-flip-horizontal"></i></div>
-    <div class="detail"> <span class="text-muted">Stop 5</span></div>
-  </div>
-</div>
-
-
-          
-          </div>
-          <!-- /.tab-pane -->
-		</div>
-		
-		
-		
-		
+            		<?= $this->element('tripelement', array('tripstart' => false, 'tripend' => true, 'id' => $x,'statusarr' => [ ['1','Loc 1'], ['2','Loc 2'], ['3','Loc 3'], ['4','Loc 4'], ['5','Loc 5'] ] )); ?>
+          			<!-- /.row end -->
+					</div>
+					<!-- <hr> -->
+					<?php } ?>
 		
         </div>
         
@@ -489,4 +167,100 @@
       <!-- /.row -->
     </section>
     <!-- /.content -->
+    
+    
+    
+    
+    <?php
+// $this->Html->css('AdminLTE./plugins/fullcalendar/fullcalendar.min', ['block' => 'css']);
+// $this->Html->css('AdminLTE./plugins/fullcalendar/fullcalendar.print', ['block' => 'css', 'media' => 'print']);
+
+$this->Html->script([
+  'https://code.jquery.com/ui/1.11.4/jquery-ui.min.js',
+  'https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js',
+  // 'AdminLTE./plugins/fullcalendar/fullcalendar.min',
+],
+['block' => 'script']);
+?>
+
+<?php $this->start('scriptBotton'); ?>
+<script>
+  $(function () {
+
+    /* initialize the external events
+     -----------------------------------------------------------------*/
+    function ini_events(ele) {
+      ele.each(function () {
+
+        // create an Event Object (http://arshaw.com/fullcalendar/docs/event_data/Event_Object/)
+        // it doesn't need to have a start or end
+        var eventObject = {
+          title: $.trim($(this).text()) // use the element's text as the event title
+        };
+
+        // store the Event Object in the DOM element so we can get to it later
+        $(this).data('eventObject', eventObject);
+
+        // make the event draggable using jQuery UI
+        $(this).draggable({
+          zIndex: 1070,
+          revert: true, // will cause the event to go back to its
+          revertDuration: 0  //  original position after the drag
+        });
+
+      });
+    }
+
+    ini_events($('#external-events div.external-event'));
+    
+    ini_events($('#drivimgs img.dimg'));
+    ini_events($('#drivimgs img.vimg'));
+
+    $('.mptldrop').droppable({
+      drop: function( event, ui ) {
+      	var draggableId = ui.draggable.attr("id");
+      	if ($("#"+draggableId).parents('.driver').length) {
+      		$(this).find(".dimg").addClass('mptldrag').attr("src","img/profile-icon.png");
+      		$(this).find(".pdriver").html(draggableId);
+      	}else{
+        	$(this).find(".vimg").addClass('mptldrag').attr("src","img/car.png");
+        	$(this).find(".pvehicle").html(draggableId);
+        }
+      }
+    });
+    
+    $('#trash').droppable({
+      drop: function( event, ui ) {
+      	var draggableId = ui.draggable.attr("id");
+      	if ($("#"+draggableId).parents('.mptl-driv').length) {
+      		if ($("#"+draggableId).hasClass('mptldrag')) {
+      			$("#"+draggableId).removeClass('mptldrag').attr("src","img/cross.png");
+      			$(this).parents().find(".pdriver").html("Driver");
+      		}else{
+      			alert("No driver assigned.");
+      		}
+      	}else{
+      		if ($("#"+draggableId).hasClass('mptldrag')) {
+      			$("#"+draggableId).removeClass('mptldrag').attr("src","img/cross.png");
+      			$(this).parents().find(".pvehicle").html("Vehicle");
+      		}else{
+      			alert("No vehicle assigned.");
+      		}
+      	}
+      }
+    });
+
+   
+    $("#add-new-event").click(function (e) {
+      e.preventDefault();
+     
+      //Add draggable funtionality
+      ini_events(event);
+
+      //Remove event from text input
+      $("#new-event").val("");
+    });
+  });
+</script>
+<?php $this->end(); ?>
     
