@@ -19,6 +19,7 @@ var $components = array('Datatable');
 		  zip_code,city,county,state, array('name'=>'emp_data_biographies_id','type'=>'bigint'));
 									  
 		$output =$this->Datatable->getView($fields);
+		
 		echo json_encode($output);			
     }
     /**
