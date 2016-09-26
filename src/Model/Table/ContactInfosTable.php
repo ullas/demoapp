@@ -9,6 +9,8 @@ use Cake\Validation\Validator;
 /**
  * ContactInfos Model
  *
+ * @property \Cake\ORM\Association\BelongsTo $Customers
+ *
  * @method \App\Model\Entity\ContactInfo get($primaryKey, $options = [])
  * @method \App\Model\Entity\ContactInfo newEntity($data = null, array $options = [])
  * @method \App\Model\Entity\ContactInfo[] newEntities(array $data, array $options = [])
@@ -33,6 +35,10 @@ class ContactInfosTable extends Table
         $this->table('contact_infos');
         $this->displayField('id');
         $this->primaryKey('id');
+
+        $this->belongsTo('Customers', [
+            'foreignKey' => 'customer_id'
+        ]);
     }
 
     /**
@@ -82,6 +88,7 @@ class ContactInfosTable extends Table
     public function buildRules(RulesChecker $rules)
     {
         $rules->add($rules->isUnique(['person_id_external']));
+        $rules->add($rules->existsIn(['customer_id'], 'Customers'));
 
         return $rules;
     }

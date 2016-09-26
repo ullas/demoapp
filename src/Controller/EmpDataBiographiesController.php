@@ -10,7 +10,16 @@ use App\Controller\AppController;
  */
 class EmpDataBiographiesController extends AppController
 {
+	var $components = array('Datatable');
+	
+	public function ajaxData() {
+		$this->autoRender= False;
 
+		$fields = array(array('name'=>'id','type'=>'int'),'name',array('name'=>'date_of_birth','type'=>'date'),'country_of_birth','region_of_birth','place_of_birth','birth_name',array('name'=>'date_of_death ','type'=>'date'),'person_id_external');
+									  
+		$output =$this->Datatable->getView($fields);
+		echo json_encode($output);			
+    }
     /**
      * Index method
      *
@@ -18,6 +27,9 @@ class EmpDataBiographiesController extends AppController
      */
     public function index()
     {
+        $this->paginate = [
+            'contain' => ['Customers']
+        ];
         $empDataBiographies = $this->paginate($this->EmpDataBiographies);
 
         $this->set(compact('empDataBiographies'));
@@ -34,7 +46,7 @@ class EmpDataBiographiesController extends AppController
     public function view($id = null)
     {
         $empDataBiography = $this->EmpDataBiographies->get($id, [
-            'contain' => []
+            'contain' => ['Customers']
         ]);
 
         $this->set('empDataBiography', $empDataBiography);
@@ -59,7 +71,8 @@ class EmpDataBiographiesController extends AppController
                 $this->Flash->error(__('The emp data biography could not be saved. Please, try again.'));
             }
         }
-        $this->set(compact('empDataBiography'));
+        $customers = $this->EmpDataBiographies->Customers->find('list', ['limit' => 200]);
+        $this->set(compact('empDataBiography', 'customers'));
         $this->set('_serialize', ['empDataBiography']);
     }
 
@@ -85,7 +98,8 @@ class EmpDataBiographiesController extends AppController
                 $this->Flash->error(__('The emp data biography could not be saved. Please, try again.'));
             }
         }
-        $this->set(compact('empDataBiography'));
+        $customers = $this->EmpDataBiographies->Customers->find('list', ['limit' => 200]);
+        $this->set(compact('empDataBiography', 'customers'));
         $this->set('_serialize', ['empDataBiography']);
     }
 

@@ -31,6 +31,7 @@ use Cake\ORM\Entity;
  * @property float $number
  * @property string $external_code
  * @property int $frequency_id
+ * @property int $customer_id
  *
  * @property \App\Model\Entity\Frequency $frequency
  */

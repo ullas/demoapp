@@ -11,6 +11,7 @@ use Cake\Validation\Validator;
  *
  * @property \Cake\ORM\Association\BelongsTo $LegalEntities
  * @property \Cake\ORM\Association\BelongsTo $PayGroups
+ * @property \Cake\ORM\Association\BelongsTo $Customers
  *
  * @method \App\Model\Entity\PayRange get($primaryKey, $options = [])
  * @method \App\Model\Entity\PayRange newEntity($data = null, array $options = [])
@@ -42,6 +43,9 @@ class PayRangesTable extends Table
         ]);
         $this->belongsTo('PayGroups', [
             'foreignKey' => 'pay_group_id'
+        ]);
+        $this->belongsTo('Customers', [
+            'foreignKey' => 'customer_id'
         ]);
     }
 
@@ -122,6 +126,7 @@ class PayRangesTable extends Table
         $rules->add($rules->isUnique(['external_code']));
         $rules->add($rules->existsIn(['legal_entity_id'], 'LegalEntities'));
         $rules->add($rules->existsIn(['pay_group_id'], 'PayGroups'));
+        $rules->add($rules->existsIn(['customer_id'], 'Customers'));
 
         return $rules;
     }

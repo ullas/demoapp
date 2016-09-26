@@ -16,7 +16,11 @@ class PayGroupsControllerTest extends IntegrationTestCase
      * @var array
      */
     public $fixtures = [
-        'app.pay_groups'
+        'app.pay_groups',
+        'app.customers',
+        'app.pay_ranges',
+        'app.legal_entities',
+        'app.locations'
     ];
 
     /**

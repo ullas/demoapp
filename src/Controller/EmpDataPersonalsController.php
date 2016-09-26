@@ -10,7 +10,16 @@ use App\Controller\AppController;
  */
 class EmpDataPersonalsController extends AppController
 {
+var $components = array('Datatable');
+	
+	public function ajaxData() {
+		$this->autoRender= False;
 
+		$fields = array(array('name'=>'id','type'=>'int'),'salutation','first_name','last_name','initials','middle_name','first_name_alt1','middle_name_alt1','last_name_alt1','first_name_alt2','middle_name_alt2','last_name_alt2','display_name');
+									  
+		$output =$this->Datatable->getView($fields);
+		echo json_encode($output);			
+    }
     /**
      * Index method
      *
@@ -18,6 +27,9 @@ class EmpDataPersonalsController extends AppController
      */
     public function index()
     {
+        $this->paginate = [
+            'contain' => ['Customers']
+        ];
         $empDataPersonals = $this->paginate($this->EmpDataPersonals);
 
         $this->set(compact('empDataPersonals'));
@@ -34,7 +46,7 @@ class EmpDataPersonalsController extends AppController
     public function view($id = null)
     {
         $empDataPersonal = $this->EmpDataPersonals->get($id, [
-            'contain' => []
+            'contain' => ['Customers']
         ]);
 
         $this->set('empDataPersonal', $empDataPersonal);
@@ -59,7 +71,8 @@ class EmpDataPersonalsController extends AppController
                 $this->Flash->error(__('The emp data personal could not be saved. Please, try again.'));
             }
         }
-        $this->set(compact('empDataPersonal'));
+        $customers = $this->EmpDataPersonals->Customers->find('list', ['limit' => 200]);
+        $this->set(compact('empDataPersonal', 'customers'));
         $this->set('_serialize', ['empDataPersonal']);
     }
 
@@ -85,7 +98,8 @@ class EmpDataPersonalsController extends AppController
                 $this->Flash->error(__('The emp data personal could not be saved. Please, try again.'));
             }
         }
-        $this->set(compact('empDataPersonal'));
+        $customers = $this->EmpDataPersonals->Customers->find('list', ['limit' => 200]);
+        $this->set(compact('empDataPersonal', 'customers'));
         $this->set('_serialize', ['empDataPersonal']);
     }
 

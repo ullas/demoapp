@@ -26,6 +26,7 @@ class JobClassesTableTest extends TestCase
     public $fixtures = [
         'app.job_classes',
         'app.pay_grades',
+        'app.customers',
         'app.job_functions'
     ];
 

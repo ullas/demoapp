@@ -11,6 +11,7 @@ use Cake\Validation\Validator;
  *
  * @property \Cake\ORM\Association\BelongsTo $PayGrades
  * @property \Cake\ORM\Association\BelongsTo $JobFunctions
+ * @property \Cake\ORM\Association\BelongsTo $Customers
  *
  * @method \App\Model\Entity\JobClass get($primaryKey, $options = [])
  * @method \App\Model\Entity\JobClass newEntity($data = null, array $options = [])
@@ -42,6 +43,9 @@ class JobClassesTable extends Table
         ]);
         $this->belongsTo('JobFunctions', [
             'foreignKey' => 'job_function_id'
+        ]);
+        $this->belongsTo('Customers', [
+            'foreignKey' => 'customer_id'
         ]);
     }
 
@@ -117,6 +121,7 @@ class JobClassesTable extends Table
         $rules->add($rules->isUnique(['external_code']));
         $rules->add($rules->existsIn(['pay_grade_id'], 'PayGrades'));
         $rules->add($rules->existsIn(['job_function_id'], 'JobFunctions'));
+        $rules->add($rules->existsIn(['customer_id'], 'Customers'));
 
         return $rules;
     }

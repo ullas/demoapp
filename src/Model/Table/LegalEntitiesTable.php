@@ -11,6 +11,8 @@ use Cake\Validation\Validator;
  *
  * @property \Cake\ORM\Association\BelongsTo $Locations
  * @property \Cake\ORM\Association\BelongsTo $PayGroups
+ * @property \Cake\ORM\Association\BelongsTo $Customers
+ * @property \Cake\ORM\Association\HasMany $PayRanges
  *
  * @method \App\Model\Entity\LegalEntity get($primaryKey, $options = [])
  * @method \App\Model\Entity\LegalEntity newEntity($data = null, array $options = [])
@@ -42,6 +44,12 @@ class LegalEntitiesTable extends Table
         ]);
         $this->belongsTo('PayGroups', [
             'foreignKey' => 'paygroup_id'
+        ]);
+        $this->belongsTo('Customers', [
+            'foreignKey' => 'customer_id'
+        ]);
+        $this->hasMany('PayRanges', [
+            'foreignKey' => 'legal_entity_id'
         ]);
     }
 
@@ -82,15 +90,15 @@ class LegalEntitiesTable extends Table
             ->allowEmpty('standard_weekly_hours');
 
         $validator
-            ->allowEmpty('currency');
-
-        $validator
             ->allowEmpty('official_language');
 
         $validator
             ->requirePresence('external_code', 'create')
             ->notEmpty('external_code')
             ->add('external_code', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
+
+        $validator
+            ->allowEmpty('currency');
 
         return $validator;
     }
@@ -107,6 +115,7 @@ class LegalEntitiesTable extends Table
         $rules->add($rules->isUnique(['external_code']));
         $rules->add($rules->existsIn(['location_id'], 'Locations'));
         $rules->add($rules->existsIn(['paygroup_id'], 'PayGroups'));
+        $rules->add($rules->existsIn(['customer_id'], 'Customers'));
 
         return $rules;
     }

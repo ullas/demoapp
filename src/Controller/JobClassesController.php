@@ -10,7 +10,17 @@ use App\Controller\AppController;
  */
 class JobClassesController extends AppController
 {
+	var $components = array('Datatable');
+	
+	public function ajaxData() {
+		$this->autoRender= False;
 
+		$fields = array(array('name'=>'id','type'=>'int'),'name','description',array('name'=>'effective_status','type'=>'bool'),
+		array('name'=>'effective_start_date','type'=>'date'),array('name'=>'effective_end_date','type'=>'date'),'worker_comp_code','default_job_level',array('name'=>'standard_weekly_hours','type'=>'numeric'),'regular_temporary','default_employee_class',array('name'=>'full_time_employee','type'=>'bool'),'default_supervisor_level','external_code',array('name'=>'pay_grade_id','type'=>'bigint'),array('name'=>'job_function_id','type'=>'bigint'));
+									  
+		$output =$this->Datatable->getView($fields);
+		echo json_encode($output);			
+    }
     /**
      * Index method
      *
@@ -19,7 +29,7 @@ class JobClassesController extends AppController
     public function index()
     {
         $this->paginate = [
-            'contain' => ['PayGrades', 'JobFunctions']
+            'contain' => ['PayGrades', 'JobFunctions', 'Customers']
         ];
         $jobClasses = $this->paginate($this->JobClasses);
 
@@ -37,7 +47,7 @@ class JobClassesController extends AppController
     public function view($id = null)
     {
         $jobClass = $this->JobClasses->get($id, [
-            'contain' => ['PayGrades', 'JobFunctions']
+            'contain' => ['PayGrades', 'JobFunctions', 'Customers']
         ]);
 
         $this->set('jobClass', $jobClass);
@@ -64,7 +74,8 @@ class JobClassesController extends AppController
         }
         $payGrades = $this->JobClasses->PayGrades->find('list', ['limit' => 200]);
         $jobFunctions = $this->JobClasses->JobFunctions->find('list', ['limit' => 200]);
-        $this->set(compact('jobClass', 'payGrades', 'jobFunctions'));
+        $customers = $this->JobClasses->Customers->find('list', ['limit' => 200]);
+        $this->set(compact('jobClass', 'payGrades', 'jobFunctions', 'customers'));
         $this->set('_serialize', ['jobClass']);
     }
 
@@ -92,7 +103,8 @@ class JobClassesController extends AppController
         }
         $payGrades = $this->JobClasses->PayGrades->find('list', ['limit' => 200]);
         $jobFunctions = $this->JobClasses->JobFunctions->find('list', ['limit' => 200]);
-        $this->set(compact('jobClass', 'payGrades', 'jobFunctions'));
+        $customers = $this->JobClasses->Customers->find('list', ['limit' => 200]);
+        $this->set(compact('jobClass', 'payGrades', 'jobFunctions', 'customers'));
         $this->set('_serialize', ['jobClass']);
     }
 

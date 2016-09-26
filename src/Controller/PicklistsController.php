@@ -10,7 +10,17 @@ use App\Controller\AppController;
  */
 class PicklistsController extends AppController
 {
+var $components = array('Datatable');
+	
+	public function ajaxData() {
+		$this->autoRender= False;
 
+		$fields = array(array('name'=>'id','type'=>'int'),
+									  'description','comments','external_code');
+									  
+		$output =$this->Datatable->getView($fields);
+		echo json_encode($output);			
+    }
     /**
      * Index method
      *
@@ -18,6 +28,9 @@ class PicklistsController extends AppController
      */
     public function index()
     {
+        $this->paginate = [
+            'contain' => ['Customers']
+        ];
         $picklists = $this->paginate($this->Picklists);
 
         $this->set(compact('picklists'));
@@ -34,7 +47,7 @@ class PicklistsController extends AppController
     public function view($id = null)
     {
         $picklist = $this->Picklists->get($id, [
-            'contain' => []
+            'contain' => ['Customers']
         ]);
 
         $this->set('picklist', $picklist);
@@ -59,7 +72,8 @@ class PicklistsController extends AppController
                 $this->Flash->error(__('The picklist could not be saved. Please, try again.'));
             }
         }
-        $this->set(compact('picklist'));
+        $customers = $this->Picklists->Customers->find('list', ['limit' => 200]);
+        $this->set(compact('picklist', 'customers'));
         $this->set('_serialize', ['picklist']);
     }
 
@@ -85,7 +99,8 @@ class PicklistsController extends AppController
                 $this->Flash->error(__('The picklist could not be saved. Please, try again.'));
             }
         }
-        $this->set(compact('picklist'));
+        $customers = $this->Picklists->Customers->find('list', ['limit' => 200]);
+        $this->set(compact('picklist', 'customers'));
         $this->set('_serialize', ['picklist']);
     }
 

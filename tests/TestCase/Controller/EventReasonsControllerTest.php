@@ -16,7 +16,8 @@ class EventReasonsControllerTest extends IntegrationTestCase
      * @var array
      */
     public $fixtures = [
-        'app.event_reasons'
+        'app.event_reasons',
+        'app.customers'
     ];
 
     /**

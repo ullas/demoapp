@@ -41,6 +41,7 @@ use Cake\ORM\Entity;
  * @property string $period_model
  * @property string $time_rec_variant_3
  * @property string $ws_code
+ * @property int $customer_id
  */
 class WorkSchedule extends Entity
 {

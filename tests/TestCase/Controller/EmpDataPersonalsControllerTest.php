@@ -16,7 +16,8 @@ class EmpDataPersonalsControllerTest extends IntegrationTestCase
      * @var array
      */
     public $fixtures = [
-        'app.emp_data_personals'
+        'app.emp_data_personals',
+        'app.customers'
     ];
 
     /**

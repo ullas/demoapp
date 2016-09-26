@@ -36,9 +36,11 @@ class PayGroupsFixture extends TestFixture
         'decimal_point' => ['type' => 'string', 'length' => 32, 'default' => null, 'null' => true, 'collate' => null, 'comment' => null, 'precision' => null, 'fixed' => null],
         'lag' => ['type' => 'decimal', 'length' => null, 'default' => null, 'null' => true, 'comment' => null, 'precision' => null, 'unsigned' => null],
         'external_code' => ['type' => 'string', 'length' => 32, 'default' => null, 'null' => false, 'collate' => null, 'comment' => null, 'precision' => null, 'fixed' => null],
+        'customer_id' => ['type' => 'biginteger', 'length' => 20, 'default' => null, 'null' => true, 'comment' => null, 'precision' => null, 'unsigned' => null, 'autoIncrement' => null],
         '_constraints' => [
             'primary' => ['type' => 'primary', 'columns' => ['id'], 'length' => []],
             'pay_groups_external_code_key' => ['type' => 'unique', 'columns' => ['external_code'], 'length' => []],
+            'pay_groups_customer_id_fkey' => ['type' => 'foreign', 'columns' => ['customer_id'], 'references' => ['customers', 'id'], 'update' => 'noAction', 'delete' => 'noAction', 'length' => []],
         ],
     ];
     // @codingStandardsIgnoreEnd
@@ -54,9 +56,9 @@ class PayGroupsFixture extends TestFixture
             'name' => 'Lorem ipsum dolor sit amet',
             'description' => 'Lorem ipsum dolor sit amet',
             'effective_status' => 1,
-            'effective_start_date' => '2016-08-09',
-            'effective_end_date' => '2016-08-09',
-            'earliest_change_date' => '2016-08-09',
+            'effective_start_date' => '2016-09-09',
+            'effective_end_date' => '2016-09-09',
+            'earliest_change_date' => '2016-09-09',
             'payment_frequency' => 'Lorem ipsum dolor sit amet',
             'primary_contactid' => 'Lorem ipsum dolor sit amet',
             'primary_contact_email' => 'Lorem ipsum dolor sit amet',
@@ -68,7 +70,8 @@ class PayGroupsFixture extends TestFixture
             'data_delimiter' => 'Lorem ipsum dolor sit amet',
             'decimal_point' => 'Lorem ipsum dolor sit amet',
             'lag' => 1.5,
-            'external_code' => 'Lorem ipsum dolor sit amet'
+            'external_code' => 'Lorem ipsum dolor sit amet',
+            'customer_id' => 1
         ],
     ];
 }

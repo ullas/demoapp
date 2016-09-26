@@ -11,6 +11,19 @@ use App\Controller\AppController;
 class PayGroupsController extends AppController
 {
 
+var $components = array('Datatable');
+	
+	public function ajaxData() {
+		$this->autoRender= False;
+
+		$fields = array(array('name'=>'id','type'=>'int'),'name','description',array('name'=>'effective_status','type'=>'bool'),array('name'=>'effective_start_date','type'=>'date'),array('name'=>'effective_end_date','type'=>'date'),array('name'=>'earliest_change_date','type'=>'date'),
+		'payment_frequency','primary_contactid','primary_contact_email','primary_contact_name','secondary_contactid','secondary_contact_email','secondary_contact_name',array('name'=>'weeks_in_pay_period','type'=>'numeric'),'data_delimiter','decimal_point',array('name'=>'lag','type'=>'numeric'),'external_code');
+		
+						  
+									  
+		$output =$this->Datatable->getView($fields);
+		echo json_encode($output);			
+    }
     /**
      * Index method
      *
@@ -18,6 +31,9 @@ class PayGroupsController extends AppController
      */
     public function index()
     {
+        $this->paginate = [
+            'contain' => ['Customers']
+        ];
         $payGroups = $this->paginate($this->PayGroups);
 
         $this->set(compact('payGroups'));
@@ -34,7 +50,7 @@ class PayGroupsController extends AppController
     public function view($id = null)
     {
         $payGroup = $this->PayGroups->get($id, [
-            'contain' => []
+            'contain' => ['Customers', 'PayRanges']
         ]);
 
         $this->set('payGroup', $payGroup);
@@ -59,7 +75,8 @@ class PayGroupsController extends AppController
                 $this->Flash->error(__('The pay group could not be saved. Please, try again.'));
             }
         }
-        $this->set(compact('payGroup'));
+        $customers = $this->PayGroups->Customers->find('list', ['limit' => 200]);
+        $this->set(compact('payGroup', 'customers'));
         $this->set('_serialize', ['payGroup']);
     }
 
@@ -85,7 +102,8 @@ class PayGroupsController extends AppController
                 $this->Flash->error(__('The pay group could not be saved. Please, try again.'));
             }
         }
-        $this->set(compact('payGroup'));
+        $customers = $this->PayGroups->Customers->find('list', ['limit' => 200]);
+        $this->set(compact('payGroup', 'customers'));
         $this->set('_serialize', ['payGroup']);
     }
 

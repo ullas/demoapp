@@ -9,6 +9,8 @@ use Cake\Validation\Validator;
 /**
  * CorporateAddresses Model
  *
+ * @property \Cake\ORM\Association\BelongsTo $Customers
+ *
  * @method \App\Model\Entity\CorporateAddress get($primaryKey, $options = [])
  * @method \App\Model\Entity\CorporateAddress newEntity($data = null, array $options = [])
  * @method \App\Model\Entity\CorporateAddress[] newEntities(array $data, array $options = [])
@@ -33,6 +35,10 @@ class CorporateAddressesTable extends Table
         $this->table('corporate_addresses');
         $this->displayField('id');
         $this->primaryKey('id');
+
+        $this->belongsTo('Customers', [
+            'foreignKey' => 'customer_id'
+        ]);
     }
 
     /**
@@ -82,5 +88,19 @@ class CorporateAddressesTable extends Table
             ->allowEmpty('country');
 
         return $validator;
+    }
+
+    /**
+     * Returns a rules checker object that will be used for validating
+     * application integrity.
+     *
+     * @param \Cake\ORM\RulesChecker $rules The rules object to be modified.
+     * @return \Cake\ORM\RulesChecker
+     */
+    public function buildRules(RulesChecker $rules)
+    {
+        $rules->add($rules->existsIn(['customer_id'], 'Customers'));
+
+        return $rules;
     }
 }

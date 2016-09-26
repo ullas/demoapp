@@ -14,6 +14,7 @@ use Cake\ORM\Entity;
  * @property string $username
  * @property int $id
  * @property string $name
+ * @property int $customer_id
  */
 class User extends Entity
 {

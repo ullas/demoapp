@@ -10,6 +10,7 @@ use Cake\Validation\Validator;
  * Departments Model
  *
  * @property \Cake\ORM\Association\BelongsTo $CostCentres
+ * @property \Cake\ORM\Association\BelongsTo $Customers
  *
  * @method \App\Model\Entity\Department get($primaryKey, $options = [])
  * @method \App\Model\Entity\Department newEntity($data = null, array $options = [])
@@ -38,6 +39,9 @@ class DepartmentsTable extends Table
 
         $this->belongsTo('CostCentres', [
             'foreignKey' => 'cost_center_id'
+        ]);
+        $this->belongsTo('Customers', [
+            'foreignKey' => 'customer_id'
         ]);
     }
 
@@ -95,6 +99,7 @@ class DepartmentsTable extends Table
     {
         $rules->add($rules->isUnique(['external_code']));
         $rules->add($rules->existsIn(['cost_center_id'], 'CostCentres'));
+        $rules->add($rules->existsIn(['customer_id'], 'Customers'));
 
         return $rules;
     }

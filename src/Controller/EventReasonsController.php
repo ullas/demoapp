@@ -10,7 +10,16 @@ use App\Controller\AppController;
  */
 class EventReasonsController extends AppController
 {
+var $components = array('Datatable');
+	
+	public function ajaxData() {
+		$this->autoRender= False;
 
+		$fields = array(array('name'=>'id','type'=>'int'),'name','description',array('name'=>'status','type'=>'bool'),array('name'=>'start_date','type'=>'date'),array('name'=>'end_date','type'=>'date'),'event','empl_status','implicit_position_action','external_code');
+									  
+		$output =$this->Datatable->getView($fields);
+		echo json_encode($output);			
+    }
     /**
      * Index method
      *
@@ -18,6 +27,9 @@ class EventReasonsController extends AppController
      */
     public function index()
     {
+        $this->paginate = [
+            'contain' => ['Customers']
+        ];
         $eventReasons = $this->paginate($this->EventReasons);
 
         $this->set(compact('eventReasons'));
@@ -34,7 +46,7 @@ class EventReasonsController extends AppController
     public function view($id = null)
     {
         $eventReason = $this->EventReasons->get($id, [
-            'contain' => []
+            'contain' => ['Customers']
         ]);
 
         $this->set('eventReason', $eventReason);
@@ -59,7 +71,8 @@ class EventReasonsController extends AppController
                 $this->Flash->error(__('The event reason could not be saved. Please, try again.'));
             }
         }
-        $this->set(compact('eventReason'));
+        $customers = $this->EventReasons->Customers->find('list', ['limit' => 200]);
+        $this->set(compact('eventReason', 'customers'));
         $this->set('_serialize', ['eventReason']);
     }
 
@@ -85,7 +98,8 @@ class EventReasonsController extends AppController
                 $this->Flash->error(__('The event reason could not be saved. Please, try again.'));
             }
         }
-        $this->set(compact('eventReason'));
+        $customers = $this->EventReasons->Customers->find('list', ['limit' => 200]);
+        $this->set(compact('eventReason', 'customers'));
         $this->set('_serialize', ['eventReason']);
     }
 

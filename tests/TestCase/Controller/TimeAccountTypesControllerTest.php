@@ -19,7 +19,8 @@ class TimeAccountTypesControllerTest extends IntegrationTestCase
         'app.time_account_types',
         'app.pay_components',
         'app.frequencies',
-        'app.pay_component_groups'
+        'app.pay_component_groups',
+        'app.customers'
     ];
 
     /**

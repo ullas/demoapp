@@ -17,7 +17,8 @@ class DepartmentsControllerTest extends IntegrationTestCase
      */
     public $fixtures = [
         'app.departments',
-        'app.cost_centres'
+        'app.cost_centres',
+        'app.customers'
     ];
 
     /**

@@ -15,6 +15,7 @@ use Cake\ORM\Entity;
  * @property string $parent_cost_center
  * @property string $external_code
  * @property int $cost_center_manager
+ * @property int $customer_id
  */
 class CostCentre extends Entity
 {

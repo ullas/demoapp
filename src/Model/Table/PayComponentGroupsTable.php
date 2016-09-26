@@ -9,6 +9,9 @@ use Cake\Validation\Validator;
 /**
  * PayComponentGroups Model
  *
+ * @property \Cake\ORM\Association\BelongsTo $Customers
+ * @property \Cake\ORM\Association\HasMany $TimeAccountTypes
+ *
  * @method \App\Model\Entity\PayComponentGroup get($primaryKey, $options = [])
  * @method \App\Model\Entity\PayComponentGroup newEntity($data = null, array $options = [])
  * @method \App\Model\Entity\PayComponentGroup[] newEntities(array $data, array $options = [])
@@ -33,6 +36,13 @@ class PayComponentGroupsTable extends Table
         $this->table('pay_component_groups');
         $this->displayField('name');
         $this->primaryKey('id');
+
+        $this->belongsTo('Customers', [
+            'foreignKey' => 'customer_id'
+        ]);
+        $this->hasMany('TimeAccountTypes', [
+            'foreignKey' => 'pay_component_group_id'
+        ]);
     }
 
     /**
@@ -102,6 +112,7 @@ class PayComponentGroupsTable extends Table
     public function buildRules(RulesChecker $rules)
     {
         $rules->add($rules->isUnique(['external_code']));
+        $rules->add($rules->existsIn(['customer_id'], 'Customers'));
 
         return $rules;
     }

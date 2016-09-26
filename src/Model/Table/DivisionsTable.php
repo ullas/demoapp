@@ -9,6 +9,8 @@ use Cake\Validation\Validator;
 /**
  * Divisions Model
  *
+ * @property \Cake\ORM\Association\BelongsTo $Customers
+ *
  * @method \App\Model\Entity\Division get($primaryKey, $options = [])
  * @method \App\Model\Entity\Division newEntity($data = null, array $options = [])
  * @method \App\Model\Entity\Division[] newEntities(array $data, array $options = [])
@@ -33,6 +35,10 @@ class DivisionsTable extends Table
         $this->table('divisions');
         $this->displayField('name');
         $this->primaryKey('id');
+
+        $this->belongsTo('Customers', [
+            'foreignKey' => 'customer_id'
+        ]);
     }
 
     /**
@@ -88,6 +94,7 @@ class DivisionsTable extends Table
     public function buildRules(RulesChecker $rules)
     {
         $rules->add($rules->isUnique(['external_code']));
+        $rules->add($rules->existsIn(['customer_id'], 'Customers'));
 
         return $rules;
     }

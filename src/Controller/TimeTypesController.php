@@ -10,7 +10,18 @@ use App\Controller\AppController;
  */
 class TimeTypesController extends AppController
 {
+var $components = array('Datatable');
+	
+	public function ajaxData() {
+		$this->autoRender= False;
 
+		$fields = array(array('name'=>'id','type'=>'int'),
+									  'country','classification',array('name'=>'unit','type'=>'int'),array('name'=>'perm_fractions_days','type'=>'int'),'workflow','calc_base',array('name'=>'flex_req_allow','type'=>'bool'),
+									  'take_rule','code','name');
+									  
+		$output =$this->Datatable->getView($fields);
+		echo json_encode($output);			
+    }
     /**
      * Index method
      *
@@ -18,6 +29,9 @@ class TimeTypesController extends AppController
      */
     public function index()
     {
+        $this->paginate = [
+            'contain' => ['Customers']
+        ];
         $timeTypes = $this->paginate($this->TimeTypes);
 
         $this->set(compact('timeTypes'));
@@ -34,7 +48,7 @@ class TimeTypesController extends AppController
     public function view($id = null)
     {
         $timeType = $this->TimeTypes->get($id, [
-            'contain' => []
+            'contain' => ['Customers', 'TimeTypeProfiles']
         ]);
 
         $this->set('timeType', $timeType);
@@ -59,7 +73,8 @@ class TimeTypesController extends AppController
                 $this->Flash->error(__('The time type could not be saved. Please, try again.'));
             }
         }
-        $this->set(compact('timeType'));
+        $customers = $this->TimeTypes->Customers->find('list', ['limit' => 200]);
+        $this->set(compact('timeType', 'customers'));
         $this->set('_serialize', ['timeType']);
     }
 
@@ -85,7 +100,8 @@ class TimeTypesController extends AppController
                 $this->Flash->error(__('The time type could not be saved. Please, try again.'));
             }
         }
-        $this->set(compact('timeType'));
+        $customers = $this->TimeTypes->Customers->find('list', ['limit' => 200]);
+        $this->set(compact('timeType', 'customers'));
         $this->set('_serialize', ['timeType']);
     }
 

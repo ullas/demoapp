@@ -16,7 +16,8 @@ class HolidayCalendarsControllerTest extends IntegrationTestCase
      * @var array
      */
     public $fixtures = [
-        'app.holiday_calendars'
+        'app.holiday_calendars',
+        'app.customers'
     ];
 
     /**

@@ -10,7 +10,16 @@ use App\Controller\AppController;
  */
 class HolidayCalendarsController extends AppController
 {
+var $components = array('Datatable');
+	
+	public function ajaxData() {
+		$this->autoRender= False;
 
+		$fields = array(array('name'=>'id','type'=>'int'),'calendar','name','country',array('name'=>'valid_from','type'=>'date'),array('name'=>'valid_to','type'=>'date'));
+									  
+		$output =$this->Datatable->getView($fields);
+		echo json_encode($output);			
+    }
     /**
      * Index method
      *
@@ -18,6 +27,9 @@ class HolidayCalendarsController extends AppController
      */
     public function index()
     {
+        $this->paginate = [
+            'contain' => ['Customers']
+        ];
         $holidayCalendars = $this->paginate($this->HolidayCalendars);
 
         $this->set(compact('holidayCalendars'));
@@ -34,7 +46,7 @@ class HolidayCalendarsController extends AppController
     public function view($id = null)
     {
         $holidayCalendar = $this->HolidayCalendars->get($id, [
-            'contain' => []
+            'contain' => ['Customers']
         ]);
 
         $this->set('holidayCalendar', $holidayCalendar);
@@ -59,7 +71,8 @@ class HolidayCalendarsController extends AppController
                 $this->Flash->error(__('The holiday calendar could not be saved. Please, try again.'));
             }
         }
-        $this->set(compact('holidayCalendar'));
+        $customers = $this->HolidayCalendars->Customers->find('list', ['limit' => 200]);
+        $this->set(compact('holidayCalendar', 'customers'));
         $this->set('_serialize', ['holidayCalendar']);
     }
 
@@ -85,7 +98,8 @@ class HolidayCalendarsController extends AppController
                 $this->Flash->error(__('The holiday calendar could not be saved. Please, try again.'));
             }
         }
-        $this->set(compact('holidayCalendar'));
+        $customers = $this->HolidayCalendars->Customers->find('list', ['limit' => 200]);
+        $this->set(compact('holidayCalendar', 'customers'));
         $this->set('_serialize', ['holidayCalendar']);
     }
 

@@ -9,6 +9,9 @@ use Cake\Validation\Validator;
 /**
  * Holidays Model
  *
+ * @property \Cake\ORM\Association\BelongsTo $Customers
+ * @property \Cake\ORM\Association\HasMany $CalendarAssignments
+ *
  * @method \App\Model\Entity\Holiday get($primaryKey, $options = [])
  * @method \App\Model\Entity\Holiday newEntity($data = null, array $options = [])
  * @method \App\Model\Entity\Holiday[] newEntities(array $data, array $options = [])
@@ -33,6 +36,13 @@ class HolidaysTable extends Table
         $this->table('holidays');
         $this->displayField('name');
         $this->primaryKey('id');
+
+        $this->belongsTo('Customers', [
+            'foreignKey' => 'customer_id'
+        ]);
+        $this->hasMany('CalendarAssignments', [
+            'foreignKey' => 'holiday_id'
+        ]);
     }
 
     /**
@@ -74,6 +84,7 @@ class HolidaysTable extends Table
     public function buildRules(RulesChecker $rules)
     {
         $rules->add($rules->isUnique(['holiday_code']));
+        $rules->add($rules->existsIn(['customer_id'], 'Customers'));
 
         return $rules;
     }

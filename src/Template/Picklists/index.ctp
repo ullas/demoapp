@@ -9,42 +9,76 @@
     </li>
   </ol>
 </section>
-
+            	
 <!-- Main content -->
 <section class="content">
-  <div class="box box-primary"><div class="box-body">
-    <table cellpadding="0" cellspacing="0" class="table table-hover">
+	<div class="row">
+        <div class="col-xs-12">
+  <div class="box box-primary">
+  	<div class="box-body">
+    <table id="mptlindextbl" class="table table-hover  table-bordered ">
         <thead>
             <tr>
-                <th><?= $this->Paginator->sort('id') ?></th>
-                <th><?= $this->Paginator->sort('description') ?></th>
-                <th><?= $this->Paginator->sort('comments') ?></th>
-                <th><?= $this->Paginator->sort('external_code') ?></th>
-                <th class="actions"><?= __('Actions') ?></th>
+                <th>Id</th>
+                
+                <th>Description</th>
+                <th>Comments</th>
+                <th>External Code</th>
+                                                   
+                
+                
+                <th class="actions" data-orderable="false"><?= __('Actions') ?></th>
             </tr>
         </thead>
         <tbody>
-            <?php foreach ($picklists as $picklist): ?>
-            <tr>
-                <td><?= $this->Number->format($picklist->id) ?></td>
-                <td><?= h($picklist->description) ?></td>
-                <td><?= h($picklist->comments) ?></td>
-                <td><?= h($picklist->external_code) ?></td>
-                <td class="actions">
-                    <?= $this->Html->link(__('View'), ['action' => 'view', $picklist->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['action' => 'edit', $picklist->id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $picklist->id], ['confirm' => __('Are you sure you want to delete # {0}?', $picklist->id)]) ?>
-                </td>
-            </tr>
-            <?php endforeach; ?>
         </tbody>
     </table></div></div>
-    <div class="paginator">
-        <ul class="pagination">
-            <?= $this->Paginator->prev('< ' . __('previous')) ?>
-            <?= $this->Paginator->numbers() ?>
-            <?= $this->Paginator->next(__('next') . ' >') ?>
-        </ul>
-        <p><?= $this->Paginator->counter() ?></p>
-    </div>
+    </div></div>
+   
 </section>
+<?php
+$this->Html->css([
+    'AdminLTE./plugins/datatables/dataTables.bootstrap',
+  ],
+  ['block' => 'css']);
+
+$this->Html->script([
+  'AdminLTE./plugins/datatables/jquery.dataTables.min',
+  'AdminLTE./plugins/datatables/dataTables.bootstrap.min',
+],
+['block' => 'script']);
+?>
+
+<?php $this->start('scriptBotton'); ?>
+<script>
+  $(function () {
+    $('#mptlindextbl').DataTable({
+      	"paging": true,
+      	"lengthChange": true,
+      	"searching": true,
+      	"ordering": true,
+      	"info": true,
+      	"autoWidth": false,
+     
+      	//server side processing
+      	"processing": true,
+     	 "serverSide": true,
+      	"ajax": "/<?php echo $this->request->params['controller'] ?>/ajaxData"
+     
+    });
+  });
+</script>
+<?php $this->end(); ?>
+
+
+
+
+
+
+
+
+
+
+
+
+

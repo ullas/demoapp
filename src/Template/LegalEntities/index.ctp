@@ -1,69 +1,84 @@
 <section class="content-header">
-      <h1>
-        Legal Entity
-        <small>List</small>
-      </h1>
-      <ol class="breadcrumb">
-        <li class="active"><i class="fa fa-university"></i> Legal Entity</li>
-        <li class="active">List</li>
-        <li><a href="<?php echo $this->Url->build(array('controller' => 'LegalEntities', 'action' => 'add')); ?>">Add</a></li>
-      </ol>
-    </section>
+  <h1>
+    Legal Entity
+    <small>List</small>
+  </h1>
+  <ol class="breadcrumb">
+    <li>
+    <li><a href="<?php echo $this->Url->build(array('controller' => 'LegalEntities', 'action' => 'add')); ?>">Add</a></li>
+    </li>
+  </ol>
+</section>
+            	
+<!-- Main content -->
 <section class="content">
-	<div class="box box-primary">
-		<div class="box-body">
-
-    <table cellpadding="0" cellspacing="0" class="table table-hover">
+	<div class="row">
+        <div class="col-xs-12">
+  <div class="box box-primary">
+  	<div class="box-body">
+    <table id="mptlindextbl" class="table table-hover  table-bordered ">
         <thead>
             <tr>
-                <th><?= $this->Paginator->sort('id') ?></th>
-                <th><?= $this->Paginator->sort('name') ?></th>
-                <th><?= $this->Paginator->sort('description') ?></th>
-                <th><?= $this->Paginator->sort('effective_status') ?></th>
-                <th><?= $this->Paginator->sort('effective_start_date') ?></th>
-                <th><?= $this->Paginator->sort('effective_end_date') ?></th>
-                <th><?= $this->Paginator->sort('country_of_registration') ?></th>
-                <th><?= $this->Paginator->sort('standard_weekly_hours') ?></th>
-                <th><?= $this->Paginator->sort('currency') ?></th>
-                <th><?= $this->Paginator->sort('official_language') ?></th>
-                <th><?= $this->Paginator->sort('external_code') ?></th>
-                <th><?= $this->Paginator->sort('location_id') ?></th>
-                <th><?= $this->Paginator->sort('paygroup_id') ?></th>
-                <th class="actions"><?= __('Actions') ?></th>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Effective Status</th>
+                <th>Effective Start date</th>
+                <th>Effective End Date</th>
+                <th>Country Of Registration</th>
+                <th>Standard Weekly Hours</th>
+                <th>Currency</th>
+                <th>Official Language</th>
+                <th>External Code</th>
+                <th>Location</th>
+                <th>Paygroup</th>
+                <th class="actions" data-orderable="false"><?= __('Actions') ?></th>
             </tr>
         </thead>
         <tbody>
-            <?php foreach ($legalEntities as $legalEntity): ?>
-            <tr>
-                <td><?= $this->Number->format($legalEntity->id) ?></td>
-                <td><?= h($legalEntity->name) ?></td>
-                <td><?= h($legalEntity->description) ?></td>
-                <td><?= h($legalEntity->effective_status) ?></td>
-                <td><?= h($legalEntity->effective_start_date) ?></td>
-                <td><?= h($legalEntity->effective_end_date) ?></td>
-                <td><?= $this->Country->get_country_name(h($legalEntity->country_of_registration)) ?></td>
-                <td><?= $this->Number->format($legalEntity->standard_weekly_hours) ?></td>
-                <td><?= $this->Currency->get_currency_name(h($legalEntity->currency)) ?></td>
-                <td><?= $this->Language->get_language_name(h($legalEntity->official_language)) ?></td>
-                <td><?= h($legalEntity->external_code) ?></td>
-                <td><?= $legalEntity->has('location') ? $this->Html->link($legalEntity->location->name, ['controller' => 'Locations', 'action' => 'view', $legalEntity->location->id]) : '' ?></td>
-                <td><?= $legalEntity->has('pay_group') ? $this->Html->link($legalEntity->pay_group->name, ['controller' => 'PayGroups', 'action' => 'view', $legalEntity->pay_group->id]) : '' ?></td>
-                <td class="actions">
-                    <?= $this->Html->link(__('View'), ['action' => 'view', $legalEntity->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['action' => 'edit', $legalEntity->id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $legalEntity->id], ['confirm' => __('Are you sure you want to delete # {0}?', $legalEntity->id)]) ?>
-                </td>
-            </tr>
-            <?php endforeach; ?>
         </tbody>
     </table></div></div>
-    <div class="paginator">
-        <div class="pull-right">
-        <ul class="pagination pagination-sm no-margin pull-right">
-            <?= $this->Paginator->prev('< ' . __('previous')) ?>
-            <?= $this->Paginator->numbers() ?>
-            <?= $this->Paginator->next(__('next') . ' >') ?>
-        </ul></div>
-        <p><?= $this->Paginator->counter() ?></p>
-    </div>
+    </div></div>
+   
 </section>
+<?php
+$this->Html->css([
+    'AdminLTE./plugins/datatables/dataTables.bootstrap',
+  ],
+  ['block' => 'css']);
+
+$this->Html->script([
+  'AdminLTE./plugins/datatables/jquery.dataTables.min',
+  'AdminLTE./plugins/datatables/dataTables.bootstrap.min',
+],
+['block' => 'script']);
+?>
+
+<?php $this->start('scriptBotton'); ?>
+<script>
+  $(function () {
+    $('#mptlindextbl').DataTable({
+      	"paging": true,
+      	"lengthChange": true,
+      	"searching": true,
+      	"ordering": true,
+      	"info": true,
+      	"autoWidth": false,
+     
+      	//server side processing
+      	"processing": true,
+     	 "serverSide": true,
+      	"ajax": "/<?php echo $this->request->params['controller'] ?>/ajaxData"
+     
+    });
+  });
+</script>
+<?php $this->end(); ?>
+
+
+
+
+
+
+
+

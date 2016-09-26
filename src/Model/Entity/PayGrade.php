@@ -14,6 +14,7 @@ use Cake\ORM\Entity;
  * @property \Cake\I18n\Time $end_date
  * @property float $pay_grade_level
  * @property string $external_code
+ * @property int $customer_id
  */
 class PayGrade extends Entity
 {

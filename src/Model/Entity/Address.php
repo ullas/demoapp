@@ -21,6 +21,7 @@ use Cake\ORM\Entity;
  * @property string $county
  * @property string $state
  * @property int $emp_data_biographies_id
+ * @property int $customer_id
  *
  * @property \App\Model\Entity\EmpDataBiography $emp_data_biography
  */

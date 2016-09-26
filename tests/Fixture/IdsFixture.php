@@ -22,8 +22,10 @@ class IdsFixture extends TestFixture
         'card_type' => ['type' => 'string', 'length' => 256, 'default' => null, 'null' => true, 'collate' => null, 'comment' => null, 'precision' => null, 'fixed' => null],
         'nationalid' => ['type' => 'string', 'length' => 256, 'default' => null, 'null' => true, 'collate' => null, 'comment' => null, 'precision' => null, 'fixed' => null],
         'is_primary' => ['type' => 'boolean', 'length' => null, 'default' => null, 'null' => true, 'comment' => null, 'precision' => null],
+        'customer_id' => ['type' => 'biginteger', 'length' => 20, 'default' => null, 'null' => true, 'comment' => null, 'precision' => null, 'unsigned' => null, 'autoIncrement' => null],
         '_constraints' => [
             'primary' => ['type' => 'primary', 'columns' => ['id'], 'length' => []],
+            'ids_customer_id_fkey' => ['type' => 'foreign', 'columns' => ['customer_id'], 'references' => ['customers', 'id'], 'update' => 'noAction', 'delete' => 'noAction', 'length' => []],
         ],
     ];
     // @codingStandardsIgnoreEnd
@@ -39,7 +41,8 @@ class IdsFixture extends TestFixture
             'country' => 'Lorem ipsum dolor sit amet',
             'card_type' => 'Lorem ipsum dolor sit amet',
             'nationalid' => 'Lorem ipsum dolor sit amet',
-            'is_primary' => 1
+            'is_primary' => 1,
+            'customer_id' => 1
         ],
     ];
 }

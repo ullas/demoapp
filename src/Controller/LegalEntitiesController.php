@@ -2,7 +2,7 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
-use Cake\Event\Event;
+
 /**
  * LegalEntities Controller
  *
@@ -10,9 +10,19 @@ use Cake\Event\Event;
  */
 class LegalEntitiesController extends AppController
 {
-	public $components = array('LoadCountry');
+	var $components = array('Datatable');
 	
-	
+	public function ajaxData() {
+		$this->autoRender= False;
+
+		$fields = array(array('name'=>'id','type'=>'int'),'name','description',array('name'=>'effective_status','type'=>'bool'),
+									  array('name'=>'effective_start_date','type'=>'date'),array('name'=>'effective_end_date','type'=>'date'),
+									  'country_of_registration ',array('name'=>'standard_weekly_hours ','type'=>'numeric'),'currency','official_language',
+									  'external_code',array('name'=>'location_id','type'=>'bigint'),array('name'=>'paygroup_id','type'=>'integer'));
+									  
+		$output =$this->Datatable->getView($fields);
+		echo json_encode($output);			
+    }
     /**
      * Index method
      *
@@ -21,15 +31,12 @@ class LegalEntitiesController extends AppController
     public function index()
     {
         $this->paginate = [
-            'contain' => ['Locations', 'PayGroups']
+            'contain' => ['Locations', 'PayGroups', 'Customers']
         ];
         $legalEntities = $this->paginate($this->LegalEntities);
 
         $this->set(compact('legalEntities'));
         $this->set('_serialize', ['legalEntities']);
-		
-		//load countries array 
-		$this->set('countryname',$this->LoadCountry->get_country_name('AF'));
     }
 
     /**
@@ -42,17 +49,13 @@ class LegalEntitiesController extends AppController
     public function view($id = null)
     {
         $legalEntity = $this->LegalEntities->get($id, [
-            'contain' => ['Locations', 'PayGroups']
+            'contain' => ['Locations', 'PayGroups', 'Customers', 'PayRanges']
         ]);
 
         $this->set('legalEntity', $legalEntity);
         $this->set('_serialize', ['legalEntity']);
     }
 
-	public function beforeFilter(Event $event)
-    {
-            // $this->viewBuilder()->layout('admindefault');
-    }
     /**
      * Add method
      *
@@ -73,10 +76,9 @@ class LegalEntitiesController extends AppController
         }
         $locations = $this->LegalEntities->Locations->find('list', ['limit' => 200]);
         $payGroups = $this->LegalEntities->PayGroups->find('list', ['limit' => 200]);
-        $this->set(compact('legalEntity', 'locations', 'payGroups'));
+        $customers = $this->LegalEntities->Customers->find('list', ['limit' => 200]);
+        $this->set(compact('legalEntity', 'locations', 'payGroups', 'customers'));
         $this->set('_serialize', ['legalEntity']);
-		//load countries array 
-		$this->set('countries',$this->LoadCountry->get_countries());
     }
 
     /**
@@ -103,11 +105,9 @@ class LegalEntitiesController extends AppController
         }
         $locations = $this->LegalEntities->Locations->find('list', ['limit' => 200]);
         $payGroups = $this->LegalEntities->PayGroups->find('list', ['limit' => 200]);
-        $this->set(compact('legalEntity', 'locations', 'payGroups'));
+        $customers = $this->LegalEntities->Customers->find('list', ['limit' => 200]);
+        $this->set(compact('legalEntity', 'locations', 'payGroups', 'customers'));
         $this->set('_serialize', ['legalEntity']);
-		
-		//load countries array 
-		$this->set('countries',$this->LoadCountry->get_countries());
     }
 
     /**

@@ -16,7 +16,10 @@ class JobFunctionsControllerTest extends IntegrationTestCase
      * @var array
      */
     public $fixtures = [
-        'app.job_functions'
+        'app.job_functions',
+        'app.customers',
+        'app.job_classes',
+        'app.pay_grades'
     ];
 
     /**

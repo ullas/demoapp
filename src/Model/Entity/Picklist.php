@@ -10,6 +10,7 @@ use Cake\ORM\Entity;
  * @property string $description
  * @property string $comments
  * @property string $external_code
+ * @property int $customer_id
  */
 class Picklist extends Entity
 {

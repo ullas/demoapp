@@ -9,6 +9,9 @@ use Cake\Validation\Validator;
 /**
  * PayGrades Model
  *
+ * @property \Cake\ORM\Association\BelongsTo $Customers
+ * @property \Cake\ORM\Association\HasMany $JobClasses
+ *
  * @method \App\Model\Entity\PayGrade get($primaryKey, $options = [])
  * @method \App\Model\Entity\PayGrade newEntity($data = null, array $options = [])
  * @method \App\Model\Entity\PayGrade[] newEntities(array $data, array $options = [])
@@ -33,6 +36,13 @@ class PayGradesTable extends Table
         $this->table('pay_grades');
         $this->displayField('name');
         $this->primaryKey('id');
+
+        $this->belongsTo('Customers', [
+            'foreignKey' => 'customer_id'
+        ]);
+        $this->hasMany('JobClasses', [
+            'foreignKey' => 'pay_grade_id'
+        ]);
     }
 
     /**
@@ -86,6 +96,7 @@ class PayGradesTable extends Table
     public function buildRules(RulesChecker $rules)
     {
         $rules->add($rules->isUnique(['external_code']));
+        $rules->add($rules->existsIn(['customer_id'], 'Customers'));
 
         return $rules;
     }

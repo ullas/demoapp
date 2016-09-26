@@ -16,7 +16,8 @@ class EmploymentInfosControllerTest extends IntegrationTestCase
      * @var array
      */
     public $fixtures = [
-        'app.employment_infos'
+        'app.employment_infos',
+        'app.customers'
     ];
 
     /**

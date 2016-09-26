@@ -19,6 +19,7 @@ use Cake\ORM\Entity;
  * @property float $sort_order
  * @property bool $system_defined
  * @property string $external_code
+ * @property int $customer_id
  */
 class PayComponentGroup extends Entity
 {

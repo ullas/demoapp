@@ -9,13 +9,9 @@
        <ul>
          <li id="beer">System Administrator</li>
          <li>Technical
-           <a href="http://wesnolte.com" target="_blank">Click me</a>
            <ul>
              <li>Fac</li>
-             <li>
-                <a href="http://tquila.com" target="_blank">Aubergine</a>
-                <p>A link and paragraph is all we need.</p>
-             </li>
+             <li> Aubergine</li>
            </ul>
          </li>
          <li class="fruit">Training
@@ -88,7 +84,7 @@
         <li class="active"><i class="fa fa-sitemap"></i> Organization Chart</li>
       </ol>
     </section>
-<section class="content">
+<section class="content ">
 	<div class="box box-primary"><div class="box-body"> 
     <div id="chart" class="orgChart"></div></div></div></section>
     

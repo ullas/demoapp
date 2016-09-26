@@ -10,6 +10,7 @@ use Cake\Validation\Validator;
  * TimeTypeProfiles Model
  *
  * @property \Cake\ORM\Association\BelongsTo $TimeTypes
+ * @property \Cake\ORM\Association\BelongsTo $Customers
  *
  * @method \App\Model\Entity\TimeTypeProfile get($primaryKey, $options = [])
  * @method \App\Model\Entity\TimeTypeProfile newEntity($data = null, array $options = [])
@@ -38,6 +39,9 @@ class TimeTypeProfilesTable extends Table
 
         $this->belongsTo('TimeTypes', [
             'foreignKey' => 'time_type_id'
+        ]);
+        $this->belongsTo('Customers', [
+            'foreignKey' => 'customer_id'
         ]);
     }
 
@@ -94,6 +98,7 @@ class TimeTypeProfilesTable extends Table
     {
         $rules->add($rules->isUnique(['external_code']));
         $rules->add($rules->existsIn(['time_type_id'], 'TimeTypes'));
+        $rules->add($rules->existsIn(['customer_id'], 'Customers'));
 
         return $rules;
     }

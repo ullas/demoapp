@@ -10,7 +10,18 @@ use App\Controller\AppController;
  */
 class JobFunctionsController extends AppController
 {
+var $components = array('Datatable');
+	
+	public function ajaxData() {
+		$this->autoRender= False;
 
+		$fields = array(array('name'=>'id','type'=>'int'),'name','description',array('name'=>'effective_status','type'=>'bool'),
+									  array('name'=>'effective_start_date','type'=>'date'),array('name'=>'effective_end_date','type'=>'date'),'job_function_type',
+									  'external_code');
+									  
+		$output =$this->Datatable->getView($fields);
+		echo json_encode($output);			
+    }
     /**
      * Index method
      *
@@ -18,6 +29,9 @@ class JobFunctionsController extends AppController
      */
     public function index()
     {
+        $this->paginate = [
+            'contain' => ['Customers']
+        ];
         $jobFunctions = $this->paginate($this->JobFunctions);
 
         $this->set(compact('jobFunctions'));
@@ -34,7 +48,7 @@ class JobFunctionsController extends AppController
     public function view($id = null)
     {
         $jobFunction = $this->JobFunctions->get($id, [
-            'contain' => []
+            'contain' => ['Customers', 'JobClasses']
         ]);
 
         $this->set('jobFunction', $jobFunction);
@@ -59,7 +73,8 @@ class JobFunctionsController extends AppController
                 $this->Flash->error(__('The job function could not be saved. Please, try again.'));
             }
         }
-        $this->set(compact('jobFunction'));
+        $customers = $this->JobFunctions->Customers->find('list', ['limit' => 200]);
+        $this->set(compact('jobFunction', 'customers'));
         $this->set('_serialize', ['jobFunction']);
     }
 
@@ -85,7 +100,8 @@ class JobFunctionsController extends AppController
                 $this->Flash->error(__('The job function could not be saved. Please, try again.'));
             }
         }
-        $this->set(compact('jobFunction'));
+        $customers = $this->JobFunctions->Customers->find('list', ['limit' => 200]);
+        $this->set(compact('jobFunction', 'customers'));
         $this->set('_serialize', ['jobFunction']);
     }
 

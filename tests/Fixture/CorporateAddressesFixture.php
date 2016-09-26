@@ -29,8 +29,10 @@ class CorporateAddressesFixture extends TestFixture
         'province' => ['type' => 'string', 'length' => 256, 'default' => null, 'null' => true, 'collate' => null, 'comment' => null, 'precision' => null, 'fixed' => null],
         'zip_code' => ['type' => 'string', 'length' => 256, 'default' => null, 'null' => true, 'collate' => null, 'comment' => null, 'precision' => null, 'fixed' => null],
         'country' => ['type' => 'string', 'length' => 256, 'default' => null, 'null' => true, 'collate' => null, 'comment' => null, 'precision' => null, 'fixed' => null],
+        'customer_id' => ['type' => 'biginteger', 'length' => 20, 'default' => null, 'null' => true, 'comment' => null, 'precision' => null, 'unsigned' => null, 'autoIncrement' => null],
         '_constraints' => [
             'primary' => ['type' => 'primary', 'columns' => ['id'], 'length' => []],
+            'corporate_addresses_customer_id_fkey' => ['type' => 'foreign', 'columns' => ['customer_id'], 'references' => ['customers', 'id'], 'update' => 'noAction', 'delete' => 'noAction', 'length' => []],
         ],
     ];
     // @codingStandardsIgnoreEnd
@@ -43,8 +45,8 @@ class CorporateAddressesFixture extends TestFixture
     public $records = [
         [
             'id' => 1,
-            'start_date' => '2016-08-09',
-            'end_date' => '2016-08-09',
+            'start_date' => '2016-09-09',
+            'end_date' => '2016-09-09',
             'address1' => 'Lorem ipsum dolor sit amet',
             'address2' => 'Lorem ipsum dolor sit amet',
             'address3' => 'Lorem ipsum dolor sit amet',
@@ -53,7 +55,8 @@ class CorporateAddressesFixture extends TestFixture
             'state' => 'Lorem ipsum dolor sit amet',
             'province' => 'Lorem ipsum dolor sit amet',
             'zip_code' => 'Lorem ipsum dolor sit amet',
-            'country' => 'Lorem ipsum dolor sit amet'
+            'country' => 'Lorem ipsum dolor sit amet',
+            'customer_id' => 1
         ],
     ];
 }

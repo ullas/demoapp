@@ -16,7 +16,8 @@ class ContactInfosControllerTest extends IntegrationTestCase
      * @var array
      */
     public $fixtures = [
-        'app.contact_infos'
+        'app.contact_infos',
+        'app.customers'
     ];
 
     /**

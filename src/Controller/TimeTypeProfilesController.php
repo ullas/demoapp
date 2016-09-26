@@ -11,6 +11,17 @@ use App\Controller\AppController;
 class TimeTypeProfilesController extends AppController
 {
 
+var $components = array('Datatable');
+	
+	public function ajaxData() {
+		$this->autoRender= False;
+
+		$fields = array(array('name'=>'id','type'=>'int'),'code','name','country',array('name'=>'start_date','type'=>'date'),'time_rec_variant','status',array('name'=>'enable_ess','type'=>'bool'),'external_code',array('name'=>'time_type_id','type'=>'bigint'));
+						  
+									  
+		$output =$this->Datatable->getView($fields);
+		echo json_encode($output);			
+    }
     /**
      * Index method
      *
@@ -19,7 +30,7 @@ class TimeTypeProfilesController extends AppController
     public function index()
     {
         $this->paginate = [
-            'contain' => ['TimeTypes']
+            'contain' => ['TimeTypes', 'Customers']
         ];
         $timeTypeProfiles = $this->paginate($this->TimeTypeProfiles);
 
@@ -37,7 +48,7 @@ class TimeTypeProfilesController extends AppController
     public function view($id = null)
     {
         $timeTypeProfile = $this->TimeTypeProfiles->get($id, [
-            'contain' => ['TimeTypes']
+            'contain' => ['TimeTypes', 'Customers']
         ]);
 
         $this->set('timeTypeProfile', $timeTypeProfile);
@@ -63,7 +74,8 @@ class TimeTypeProfilesController extends AppController
             }
         }
         $timeTypes = $this->TimeTypeProfiles->TimeTypes->find('list', ['limit' => 200]);
-        $this->set(compact('timeTypeProfile', 'timeTypes'));
+        $customers = $this->TimeTypeProfiles->Customers->find('list', ['limit' => 200]);
+        $this->set(compact('timeTypeProfile', 'timeTypes', 'customers'));
         $this->set('_serialize', ['timeTypeProfile']);
     }
 
@@ -90,7 +102,8 @@ class TimeTypeProfilesController extends AppController
             }
         }
         $timeTypes = $this->TimeTypeProfiles->TimeTypes->find('list', ['limit' => 200]);
-        $this->set(compact('timeTypeProfile', 'timeTypes'));
+        $customers = $this->TimeTypeProfiles->Customers->find('list', ['limit' => 200]);
+        $this->set(compact('timeTypeProfile', 'timeTypes', 'customers'));
         $this->set('_serialize', ['timeTypeProfile']);
     }
 

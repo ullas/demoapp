@@ -9,98 +9,74 @@
     </li>
   </ol>
 </section>
-
+            	
 <!-- Main content -->
 <section class="content">
-  <div class="box box-primary"><div class="box-body">
-    <table cellpadding="0" cellspacing="0" class="table table-hover">
+	<div class="row">
+        <div class="col-xs-12">
+  <div class="box box-primary">
+  	<div class="box-body">
+    <table id="mptlindextbl" class="table table-hover  table-bordered ">
         <thead>
             <tr>
-                <th><?= $this->Paginator->sort('id') ?></th>
-                <th><?= $this->Paginator->sort('relationship_type') ?></th>
-                <th><?= $this->Paginator->sort('is_accompanying_dependent') ?></th>
-                <th><?= $this->Paginator->sort('is_beneficiary') ?></th>
-                <th><?= $this->Paginator->sort('first_name') ?></th>
-                <th><?= $this->Paginator->sort('last_name') ?></th>
-                <th><?= $this->Paginator->sort('middle_name') ?></th>
-                <th><?= $this->Paginator->sort('salutation') ?></th>
-                <th><?= $this->Paginator->sort('date_of_birth') ?></th>
-                <th><?= $this->Paginator->sort('country_of_birth') ?></th>
-                <th><?= $this->Paginator->sort('country') ?></th>
-                <!-- <th><?= $this->Paginator->sort('card_type') ?></th>
-                <th><?= $this->Paginator->sort('nationalid') ?></th>
-                <th><?= $this->Paginator->sort('is_add_same_as_employee') ?></th>
-                <th><?= $this->Paginator->sort('address_number') ?></th>
-                <th><?= $this->Paginator->sort('visa') ?></th>
-                <th><?= $this->Paginator->sort('visa_issue') ?></th>
-                <th><?= $this->Paginator->sort('visa_expiry') ?></th>
-                <th><?= $this->Paginator->sort('passport') ?></th>
-                <th><?= $this->Paginator->sort('pass_issue') ?></th>
-                <th><?= $this->Paginator->sort('pass_expiry') ?></th>
-                <th><?= $this->Paginator->sort('employed') ?></th>
-                <th><?= $this->Paginator->sort('emp_since') ?></th>
-                <th><?= $this->Paginator->sort('employer') ?></th>
-                <th><?= $this->Paginator->sort('acco_entitlement') ?></th>
-                <th><?= $this->Paginator->sort('legal_nominee') ?></th>
-                <th><?= $this->Paginator->sort('degree') ?></th>
-                <th><?= $this->Paginator->sort('specialization') ?></th>
-                <th><?= $this->Paginator->sort('spouse_emplid') ?></th>
-                <th><?= $this->Paginator->sort('leave_passage') ?></th>
-                <th><?= $this->Paginator->sort('leave_passage_entitle') ?></th>
-                <th><?= $this->Paginator->sort('emp_data_biographies_id') ?></th> -->
-                <th class="actions"><?= __('Actions') ?></th>
+                <th>Id</th>
+                <th>Relationship Type</th>
+                <th>Is Accompanying Dependent</th>
+                <th>Is Beneficiary</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Middle Name</th>
+                <th>Salutation</th>
+                <th>Date Of Birth</th>
+                <th>Country Of Birth</th>
+                <th>Country</th>
+                <th class="actions" data-orderable="false"><?= __('Actions') ?></th>
             </tr>
         </thead>
         <tbody>
-            <?php foreach ($dependents as $dependent): ?>
-            <tr>
-                <td><?= $this->Number->format($dependent->id) ?></td>
-                <td><?= h($dependent->relationship_type) ?></td>
-                <td><?= h($dependent->is_accompanying_dependent) ?></td>
-                <td><?= h($dependent->is_beneficiary) ?></td>
-                <td><?= h($dependent->first_name) ?></td>
-                <td><?= h($dependent->last_name) ?></td>
-                <td><?= h($dependent->middle_name) ?></td>
-                <td><?= h($dependent->salutation) ?></td>
-                <td><?= h($dependent->date_of_birth) ?></td>
-                <td><?= h($dependent->country_of_birth) ?></td>
-                <td><?= h($dependent->country) ?></td>
-                <!-- <td><?= h($dependent->card_type) ?></td>
-                <td><?= h($dependent->nationalid) ?></td>
-                <td><?= h($dependent->is_add_same_as_employee) ?></td>
-                <td><?= h($dependent->address_number) ?></td>
-                <td><?= h($dependent->visa) ?></td>
-                <td><?= h($dependent->visa_issue) ?></td>
-                <td><?= h($dependent->visa_expiry) ?></td>
-                <td><?= h($dependent->passport) ?></td>
-                <td><?= h($dependent->pass_issue) ?></td>
-                <td><?= h($dependent->pass_expiry) ?></td>
-                <td><?= h($dependent->employed) ?></td>
-                <td><?= h($dependent->emp_since) ?></td>
-                <td><?= h($dependent->employer) ?></td>
-                <td><?= h($dependent->acco_entitlement) ?></td>
-                <td><?= h($dependent->legal_nominee) ?></td>
-                <td><?= h($dependent->degree) ?></td>
-                <td><?= h($dependent->specialization) ?></td>
-                <td><?= $this->Number->format($dependent->spouse_emplid) ?></td>
-                <td><?= h($dependent->leave_passage) ?></td>
-                <td><?= h($dependent->leave_passage_entitle) ?></td>
-                <td><?= $this->Number->format($dependent->emp_data_biographies_id) ?></td> -->
-                <td class="actions">
-                    <?= $this->Html->link(__('View'), ['action' => 'view', $dependent->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['action' => 'edit', $dependent->id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $dependent->id], ['confirm' => __('Are you sure you want to delete # {0}?', $dependent->id)]) ?>
-                </td>
-            </tr>
-            <?php endforeach; ?>
         </tbody>
     </table></div></div>
-    <div class="paginator">
-        <ul class="pagination">
-            <?= $this->Paginator->prev('< ' . __('previous')) ?>
-            <?= $this->Paginator->numbers() ?>
-            <?= $this->Paginator->next(__('next') . ' >') ?>
-        </ul>
-        <p><?= $this->Paginator->counter() ?></p>
-    </div>
+    </div></div>
+   
 </section>
+<?php
+$this->Html->css([
+    'AdminLTE./plugins/datatables/dataTables.bootstrap',
+  ],
+  ['block' => 'css']);
+
+$this->Html->script([
+  'AdminLTE./plugins/datatables/jquery.dataTables.min',
+  'AdminLTE./plugins/datatables/dataTables.bootstrap.min',
+],
+['block' => 'script']);
+?>
+
+<?php $this->start('scriptBotton'); ?>
+<script>
+  $(function () {
+    $('#mptlindextbl').DataTable({
+      	"paging": true,
+      	"lengthChange": true,
+      	"searching": true,
+      	"ordering": true,
+      	"info": true,
+      	"autoWidth": false,
+     
+      	//server side processing
+      	"processing": true,
+     	 "serverSide": true,
+      	"ajax": "/<?php echo $this->request->params['controller'] ?>/ajaxData"
+     
+    });
+  });
+</script>
+<?php $this->end(); ?>
+
+
+
+
+
+
+
+

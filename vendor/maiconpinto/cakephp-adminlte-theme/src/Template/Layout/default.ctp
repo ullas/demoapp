@@ -25,6 +25,10 @@
     
     <!-- jQuery 2.1.4 -->
 <?php echo $this->Html->script('AdminLTE./plugins/jQuery/jQuery-2.1.4.min'); ?>
+
+<!-- /added to include drag and drop -->
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+
 <!-- Bootstrap 3.3.5 -->
 <?php echo $this->Html->script('AdminLTE./bootstrap/js/bootstrap'); ?>
 <!-- SlimScroll -->
@@ -126,13 +130,23 @@
     <div class="control-sidebar-bg"></div>
 </div>
 <!-- ./wrapper -->
-
+<!-- Date picker -->
+<?php
+$this->Html->css([ 'AdminLTE./plugins/datepicker/datepicker3' ], ['block' => 'css']);
+$this->Html->script([ 'AdminLTE./plugins/datepicker/bootstrap-datepicker' ], ['block' => 'script']);
+?>
 
 <!-- AdminLTE for demo purposes -->
 <?php echo $this->fetch('script'); ?>
 <?php echo $this->fetch('scriptBotton'); ?>
 <script type="text/javascript">
     $(document).ready(function(){
+    	
+    	$('.bootstrapdp').datepicker({
+    		format:"dd/mm/yy",
+      		autoclose: true
+    	});
+    
         $(".navbar .menu").slimscroll({
             height: "200px",
             alwaysVisible: false,
@@ -147,7 +161,7 @@
         
         $(window).scroll(function() {
 				if ($(this).scrollTop() > 200) {
-					$('.go-top').fadeIn(200);
+					$('.go-top').fadeIn(200); 
 				} else {
 					$('.go-top').fadeOut(200);
 				}

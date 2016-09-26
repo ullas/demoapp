@@ -14,6 +14,7 @@ use Cake\ORM\Entity;
  * @property \Cake\I18n\Time $effective_end_date
  * @property string $job_function_type
  * @property string $external_code
+ * @property int $customer_id
  */
 class JobFunction extends Entity
 {

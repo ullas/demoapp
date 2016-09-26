@@ -15,6 +15,7 @@ use Cake\ORM\Entity;
  * @property string $parent_division
  * @property string $external_code
  * @property int $head_of_unit
+ * @property int $customer_id
  */
 class Division extends Entity
 {

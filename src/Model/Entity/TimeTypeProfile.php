@@ -16,6 +16,7 @@ use Cake\ORM\Entity;
  * @property bool $enable_ess
  * @property string $external_code
  * @property int $time_type_id
+ * @property int $customer_id
  *
  * @property \App\Model\Entity\TimeType $time_type
  */

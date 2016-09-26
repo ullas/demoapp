@@ -10,7 +10,16 @@ use App\Controller\AppController;
  */
 class DependentsController extends AppController
 {
+var $components = array('Datatable');
+	
+	public function ajaxData() {
+		$this->autoRender= False;
 
+		$fields = array('relationship_type',array('name'=>'is_accompanying_dependent','type'=>'bool'), array('name'=>'is_beneficiary','type'=>'bool'),'first_name','last_name','middle_name','salutation', array('name'=>'date_of_birth','type'=>'date'), 'country_of_birth', 'country');
+									  
+		$output =$this->Datatable->getView($fields);
+		echo json_encode($output);			
+    }
     /**
      * Index method
      *
@@ -18,6 +27,9 @@ class DependentsController extends AppController
      */
     public function index()
     {
+        $this->paginate = [
+            'contain' => ['EmpDataBiographies', 'Customers']
+        ];
         $dependents = $this->paginate($this->Dependents);
 
         $this->set(compact('dependents'));
@@ -34,7 +46,7 @@ class DependentsController extends AppController
     public function view($id = null)
     {
         $dependent = $this->Dependents->get($id, [
-            'contain' => []
+            'contain' => ['EmpDataBiographies', 'Customers']
         ]);
 
         $this->set('dependent', $dependent);
@@ -59,7 +71,9 @@ class DependentsController extends AppController
                 $this->Flash->error(__('The dependent could not be saved. Please, try again.'));
             }
         }
-        $this->set(compact('dependent'));
+        $empDataBiographies = $this->Dependents->EmpDataBiographies->find('list', ['limit' => 200]);
+        $customers = $this->Dependents->Customers->find('list', ['limit' => 200]);
+        $this->set(compact('dependent', 'empDataBiographies', 'customers'));
         $this->set('_serialize', ['dependent']);
     }
 
@@ -85,7 +99,9 @@ class DependentsController extends AppController
                 $this->Flash->error(__('The dependent could not be saved. Please, try again.'));
             }
         }
-        $this->set(compact('dependent'));
+        $empDataBiographies = $this->Dependents->EmpDataBiographies->find('list', ['limit' => 200]);
+        $customers = $this->Dependents->Customers->find('list', ['limit' => 200]);
+        $this->set(compact('dependent', 'empDataBiographies', 'customers'));
         $this->set('_serialize', ['dependent']);
     }
 

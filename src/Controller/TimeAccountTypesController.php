@@ -10,7 +10,19 @@ use App\Controller\AppController;
  */
 class TimeAccountTypesController extends AppController
 {
+var $components = array('Datatable');
+	
+	public function ajaxData() {
+		$this->autoRender= False;
 
+		$fields = array(array('name'=>'id','type'=>'int'),
+									  'name','unit','perm_reccur',array('name'=>'start_date','type'=>'date'),array('name'=>'valid_from','type'=>'date'),array('name'=>'valid_from_day','type'=>'date'),
+									 array('name'=>'account_booking_off','type'=>'numeric'),'freq_period',array('name'=>'start_accrual','type'=>'numeric'),'accrual_base',array('name'=>'min_balance','type'=>'numeric'),'posting_order',array('name'=>'time_to_accrual','type'=>'numeric'),array('name'=>'proration_used','type'=>'bool'),
+									 array('name'=>'rounding_used','type'=>'bool'),'update_rule','payout_eligiblity ','code',array('name'=>'pay_component','type'=>'bigint'),'time_to_actual_unit',array('name'=>'pay_component_group_id','type'=>'bigint'));
+									  
+		$output =$this->Datatable->getView($fields);
+		echo json_encode($output);			
+    }
     /**
      * Index method
      *
@@ -19,7 +31,7 @@ class TimeAccountTypesController extends AppController
     public function index()
     {
         $this->paginate = [
-            'contain' => ['PayComponents', 'PayComponentGroups']
+            'contain' => ['PayComponents', 'PayComponentGroups', 'Customers']
         ];
         $timeAccountTypes = $this->paginate($this->TimeAccountTypes);
 
@@ -37,7 +49,7 @@ class TimeAccountTypesController extends AppController
     public function view($id = null)
     {
         $timeAccountType = $this->TimeAccountTypes->get($id, [
-            'contain' => ['PayComponents', 'PayComponentGroups']
+            'contain' => ['PayComponents', 'PayComponentGroups', 'Customers']
         ]);
 
         $this->set('timeAccountType', $timeAccountType);
@@ -64,7 +76,8 @@ class TimeAccountTypesController extends AppController
         }
         $payComponents = $this->TimeAccountTypes->PayComponents->find('list', ['limit' => 200]);
         $payComponentGroups = $this->TimeAccountTypes->PayComponentGroups->find('list', ['limit' => 200]);
-        $this->set(compact('timeAccountType', 'payComponents', 'payComponentGroups'));
+        $customers = $this->TimeAccountTypes->Customers->find('list', ['limit' => 200]);
+        $this->set(compact('timeAccountType', 'payComponents', 'payComponentGroups', 'customers'));
         $this->set('_serialize', ['timeAccountType']);
     }
 
@@ -92,7 +105,8 @@ class TimeAccountTypesController extends AppController
         }
         $payComponents = $this->TimeAccountTypes->PayComponents->find('list', ['limit' => 200]);
         $payComponentGroups = $this->TimeAccountTypes->PayComponentGroups->find('list', ['limit' => 200]);
-        $this->set(compact('timeAccountType', 'payComponents', 'payComponentGroups'));
+        $customers = $this->TimeAccountTypes->Customers->find('list', ['limit' => 200]);
+        $this->set(compact('timeAccountType', 'payComponents', 'payComponentGroups', 'customers'));
         $this->set('_serialize', ['timeAccountType']);
     }
 

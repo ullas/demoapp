@@ -18,6 +18,9 @@ class PositionsController extends AppController
      */
     public function index()
     {
+        $this->paginate = [
+            'contain' => ['Customers']
+        ];
         $positions = $this->paginate($this->Positions);
 
         $this->set(compact('positions'));
@@ -34,7 +37,7 @@ class PositionsController extends AppController
     public function view($id = null)
     {
         $position = $this->Positions->get($id, [
-            'contain' => []
+            'contain' => ['Customers']
         ]);
 
         $this->set('position', $position);
@@ -59,7 +62,8 @@ class PositionsController extends AppController
                 $this->Flash->error(__('The position could not be saved. Please, try again.'));
             }
         }
-        $this->set(compact('position'));
+        $customers = $this->Positions->Customers->find('list', ['limit' => 200]);
+        $this->set(compact('position', 'customers'));
         $this->set('_serialize', ['position']);
     }
 
@@ -85,7 +89,8 @@ class PositionsController extends AppController
                 $this->Flash->error(__('The position could not be saved. Please, try again.'));
             }
         }
-        $this->set(compact('position'));
+        $customers = $this->Positions->Customers->find('list', ['limit' => 200]);
+        $this->set(compact('position', 'customers'));
         $this->set('_serialize', ['position']);
     }
 

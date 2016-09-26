@@ -19,6 +19,7 @@ use Cake\ORM\Entity;
  * @property string $take_rule
  * @property string $code
  * @property string $name
+ * @property int $customer_id
  */
 class TimeType extends Entity
 {

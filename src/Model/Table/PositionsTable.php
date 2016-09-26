@@ -9,6 +9,8 @@ use Cake\Validation\Validator;
 /**
  * Positions Model
  *
+ * @property \Cake\ORM\Association\BelongsTo $Customers
+ *
  * @method \App\Model\Entity\Position get($primaryKey, $options = [])
  * @method \App\Model\Entity\Position newEntity($data = null, array $options = [])
  * @method \App\Model\Entity\Position[] newEntities(array $data, array $options = [])
@@ -33,6 +35,10 @@ class PositionsTable extends Table
         $this->table('positions');
         $this->displayField('id');
         $this->primaryKey('id');
+
+        $this->belongsTo('Customers', [
+            'foreignKey' => 'customer_id'
+        ]);
     }
 
     /**
@@ -117,9 +123,6 @@ class PositionsTable extends Table
             ->allowEmpty('company');
 
         $validator
-            ->allowEmpty('business_unit');
-
-        $validator
             ->allowEmpty('division');
 
         $validator
@@ -179,6 +182,7 @@ class PositionsTable extends Table
     public function buildRules(RulesChecker $rules)
     {
         $rules->add($rules->isUnique(['position_code']));
+        $rules->add($rules->existsIn(['customer_id'], 'Customers'));
 
         return $rules;
     }

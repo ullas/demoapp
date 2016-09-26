@@ -13,6 +13,7 @@ use Cake\ORM\Entity;
  * @property \Cake\I18n\Time $end_date
  * @property bool $status
  * @property string $external_code
+ * @property int $customer_id
  */
 class Region extends Entity
 {

@@ -10,7 +10,16 @@ use App\Controller\AppController;
  */
 class JobInfosController extends AppController
 {
+var $components = array('Datatable');
+	
+	public function ajaxData() {
+		$this->autoRender= False;
 
+		$fields = array(array('name'=>'id','type'=>'int'),'position',array('name'=>'position_entry_date','type'=>'date'),'time_in_position','company','country_of_company','business_unit','division','department','location','timezone','cost_center','job_code','job_title','local_job_title');
+									  
+		$output =$this->Datatable->getView($fields);
+		echo json_encode($output);			
+    }
     /**
      * Index method
      *
@@ -18,6 +27,9 @@ class JobInfosController extends AppController
      */
     public function index()
     {
+        $this->paginate = [
+            'contain' => ['Users', 'EmpDataBiographies', 'Customers']
+        ];
         $jobInfos = $this->paginate($this->JobInfos);
 
         $this->set(compact('jobInfos'));
@@ -34,7 +46,7 @@ class JobInfosController extends AppController
     public function view($id = null)
     {
         $jobInfo = $this->JobInfos->get($id, [
-            'contain' => []
+            'contain' => ['Users', 'EmpDataBiographies', 'Customers']
         ]);
 
         $this->set('jobInfo', $jobInfo);
@@ -59,7 +71,10 @@ class JobInfosController extends AppController
                 $this->Flash->error(__('The job info could not be saved. Please, try again.'));
             }
         }
-        $this->set(compact('jobInfo'));
+        $users = $this->JobInfos->Users->find('list', ['limit' => 200]);
+        $empDataBiographies = $this->JobInfos->EmpDataBiographies->find('list', ['limit' => 200]);
+        $customers = $this->JobInfos->Customers->find('list', ['limit' => 200]);
+        $this->set(compact('jobInfo', 'users', 'empDataBiographies', 'customers'));
         $this->set('_serialize', ['jobInfo']);
     }
 
@@ -85,7 +100,10 @@ class JobInfosController extends AppController
                 $this->Flash->error(__('The job info could not be saved. Please, try again.'));
             }
         }
-        $this->set(compact('jobInfo'));
+        $users = $this->JobInfos->Users->find('list', ['limit' => 200]);
+        $empDataBiographies = $this->JobInfos->EmpDataBiographies->find('list', ['limit' => 200]);
+        $customers = $this->JobInfos->Customers->find('list', ['limit' => 200]);
+        $this->set(compact('jobInfo', 'users', 'empDataBiographies', 'customers'));
         $this->set('_serialize', ['jobInfo']);
     }
 

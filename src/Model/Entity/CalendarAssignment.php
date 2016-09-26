@@ -12,6 +12,7 @@ use Cake\ORM\Entity;
  * @property \Cake\I18n\Time $assignmentdate
  * @property int $user_id
  * @property int $holiday_id
+ * @property int $customer_id
  *
  * @property \App\Model\Entity\User $user
  * @property \App\Model\Entity\Holiday $holiday

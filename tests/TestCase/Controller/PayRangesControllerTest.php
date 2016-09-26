@@ -19,7 +19,8 @@ class PayRangesControllerTest extends IntegrationTestCase
         'app.pay_ranges',
         'app.legal_entities',
         'app.locations',
-        'app.pay_groups'
+        'app.pay_groups',
+        'app.customers'
     ];
 
     /**

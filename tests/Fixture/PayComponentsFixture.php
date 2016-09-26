@@ -42,9 +42,11 @@ class PayComponentsFixture extends TestFixture
         'number' => ['type' => 'decimal', 'length' => null, 'default' => null, 'null' => true, 'comment' => null, 'precision' => null, 'unsigned' => null],
         'external_code' => ['type' => 'string', 'length' => 32, 'default' => null, 'null' => false, 'collate' => null, 'comment' => null, 'precision' => null, 'fixed' => null],
         'frequency_id' => ['type' => 'biginteger', 'length' => 20, 'default' => null, 'null' => true, 'comment' => null, 'precision' => null, 'unsigned' => null, 'autoIncrement' => null],
+        'customer_id' => ['type' => 'biginteger', 'length' => 20, 'default' => null, 'null' => true, 'comment' => null, 'precision' => null, 'unsigned' => null, 'autoIncrement' => null],
         '_constraints' => [
             'primary' => ['type' => 'primary', 'columns' => ['id'], 'length' => []],
             'pay_components_external_code_key' => ['type' => 'unique', 'columns' => ['external_code'], 'length' => []],
+            'pay_components_customer_id_fkey' => ['type' => 'foreign', 'columns' => ['customer_id'], 'references' => ['customers', 'id'], 'update' => 'noAction', 'delete' => 'noAction', 'length' => []],
             'pay_components_frequency_id_fkey' => ['type' => 'foreign', 'columns' => ['frequency_id'], 'references' => ['frequencies', 'id'], 'update' => 'noAction', 'delete' => 'noAction', 'length' => []],
         ],
     ];
@@ -61,8 +63,8 @@ class PayComponentsFixture extends TestFixture
             'name' => 'Lorem ipsum dolor sit amet',
             'description' => 'Lorem ipsum dolor sit amet',
             'status' => 1,
-            'start_date' => '2016-08-24',
-            'end_date' => '2016-08-24',
+            'start_date' => '2016-09-09',
+            'end_date' => '2016-09-09',
             'pay_component_type' => 'Lorem ipsum dolor sit amet',
             'is_earning' => 'Lorem ipsum dolor sit amet',
             'currency' => 'Lorem ipsum dolor sit amet',
@@ -81,7 +83,8 @@ class PayComponentsFixture extends TestFixture
             'rate' => 1.5,
             'number' => 1.5,
             'external_code' => 'Lorem ipsum dolor sit amet',
-            'frequency_id' => 1
+            'frequency_id' => 1,
+            'customer_id' => 1
         ],
     ];
 }

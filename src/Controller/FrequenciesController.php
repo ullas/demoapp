@@ -10,7 +10,16 @@ use App\Controller\AppController;
  */
 class FrequenciesController extends AppController
 {
+	var $components = array('Datatable');
+	
+	public function ajaxData() {
+		$this->autoRender= False;
 
+		$fields = array(array('name'=>'id','type'=>'int'),'name','description',array('name'=>'annualization_factor','type'=>'numeric'),'external_code');
+									  
+		$output =$this->Datatable->getView($fields);
+		echo json_encode($output);			
+    }
     /**
      * Index method
      *
@@ -18,6 +27,9 @@ class FrequenciesController extends AppController
      */
     public function index()
     {
+        $this->paginate = [
+            'contain' => ['Customers']
+        ];
         $frequencies = $this->paginate($this->Frequencies);
 
         $this->set(compact('frequencies'));
@@ -34,7 +46,7 @@ class FrequenciesController extends AppController
     public function view($id = null)
     {
         $frequency = $this->Frequencies->get($id, [
-            'contain' => []
+            'contain' => ['Customers', 'PayComponents']
         ]);
 
         $this->set('frequency', $frequency);
@@ -59,7 +71,8 @@ class FrequenciesController extends AppController
                 $this->Flash->error(__('The frequency could not be saved. Please, try again.'));
             }
         }
-        $this->set(compact('frequency'));
+        $customers = $this->Frequencies->Customers->find('list', ['limit' => 200]);
+        $this->set(compact('frequency', 'customers'));
         $this->set('_serialize', ['frequency']);
     }
 
@@ -85,7 +98,8 @@ class FrequenciesController extends AppController
                 $this->Flash->error(__('The frequency could not be saved. Please, try again.'));
             }
         }
-        $this->set(compact('frequency'));
+        $customers = $this->Frequencies->Customers->find('list', ['limit' => 200]);
+        $this->set(compact('frequency', 'customers'));
         $this->set('_serialize', ['frequency']);
     }
 

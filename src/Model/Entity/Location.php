@@ -16,6 +16,7 @@ use Cake\ORM\Entity;
  * @property float $standard_hours
  * @property bool $status
  * @property string $external_code
+ * @property int $customer_id
  */
 class Location extends Entity
 {

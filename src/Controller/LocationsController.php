@@ -10,7 +10,18 @@ use App\Controller\AppController;
  */
 class LocationsController extends AppController
 {
+	var $components = array('Datatable');
+	
+	public function ajaxData() {
+		$this->autoRender= False;
 
+		$fields = array(array('name'=>'id','type'=>'int'),'name','description',array('name'=>'start_date','type'=>'date'),array('name'=>'end_date','type'=>'date'),' location_group','time_zone',
+		array('name'=>'standard_hours ','type'=>'numeric'), array('name'=>'status','type'=>'bool'), 'external_code',);                              
+
+									  
+		$output =$this->Datatable->getView($fields);
+		echo json_encode($output);			
+    }
     /**
      * Index method
      *
@@ -18,6 +29,9 @@ class LocationsController extends AppController
      */
     public function index()
     {
+        $this->paginate = [
+            'contain' => ['Customers']
+        ];
         $locations = $this->paginate($this->Locations);
 
         $this->set(compact('locations'));
@@ -34,7 +48,7 @@ class LocationsController extends AppController
     public function view($id = null)
     {
         $location = $this->Locations->get($id, [
-            'contain' => []
+            'contain' => ['Customers', 'LegalEntities']
         ]);
 
         $this->set('location', $location);
@@ -59,7 +73,8 @@ class LocationsController extends AppController
                 $this->Flash->error(__('The location could not be saved. Please, try again.'));
             }
         }
-        $this->set(compact('location'));
+        $customers = $this->Locations->Customers->find('list', ['limit' => 200]);
+        $this->set(compact('location', 'customers'));
         $this->set('_serialize', ['location']);
     }
 
@@ -85,7 +100,8 @@ class LocationsController extends AppController
                 $this->Flash->error(__('The location could not be saved. Please, try again.'));
             }
         }
-        $this->set(compact('location'));
+        $customers = $this->Locations->Customers->find('list', ['limit' => 200]);
+        $this->set(compact('location', 'customers'));
         $this->set('_serialize', ['location']);
     }
 

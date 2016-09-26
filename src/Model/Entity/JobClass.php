@@ -22,6 +22,7 @@ use Cake\ORM\Entity;
  * @property string $external_code
  * @property int $pay_grade_id
  * @property int $job_function_id
+ * @property int $customer_id
  *
  * @property \App\Model\Entity\PayGrade $pay_grade
  * @property \App\Model\Entity\JobFunction $job_function

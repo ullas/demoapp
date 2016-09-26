@@ -17,7 +17,10 @@ class PayComponentsControllerTest extends IntegrationTestCase
      */
     public $fixtures = [
         'app.pay_components',
-        'app.frequencies'
+        'app.frequencies',
+        'app.customers',
+        'app.time_account_types',
+        'app.pay_component_groups'
     ];
 
     /**

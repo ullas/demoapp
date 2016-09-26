@@ -10,7 +10,18 @@ use App\Controller\AppController;
  */
 class RegionsController extends AppController
 {
+var $components = array('Datatable');
+	
+	public function ajaxData() {
+		$this->autoRender= False;
 
+		$fields = array(array('name'=>'id','type'=>'int'),
+									  'name','description',array('name'=>'start_date','type'=>'date'),array('name'=>'end_date','type'=>'date'),array('name'=>'status','type'=>'bool'),
+									  'external_code');
+									  
+		$output =$this->Datatable->getView($fields);
+		echo json_encode($output);			
+    }
     /**
      * Index method
      *

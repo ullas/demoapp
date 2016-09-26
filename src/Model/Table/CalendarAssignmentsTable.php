@@ -11,6 +11,7 @@ use Cake\Validation\Validator;
  *
  * @property \Cake\ORM\Association\BelongsTo $Users
  * @property \Cake\ORM\Association\BelongsTo $Holidays
+ * @property \Cake\ORM\Association\BelongsTo $Customers
  *
  * @method \App\Model\Entity\CalendarAssignment get($primaryKey, $options = [])
  * @method \App\Model\Entity\CalendarAssignment newEntity($data = null, array $options = [])
@@ -42,6 +43,9 @@ class CalendarAssignmentsTable extends Table
         ]);
         $this->belongsTo('Holidays', [
             'foreignKey' => 'holiday_id'
+        ]);
+        $this->belongsTo('Customers', [
+            'foreignKey' => 'customer_id'
         ]);
     }
 
@@ -80,6 +84,7 @@ class CalendarAssignmentsTable extends Table
     {
         $rules->add($rules->existsIn(['user_id'], 'Users'));
         $rules->add($rules->existsIn(['holiday_id'], 'Holidays'));
+        $rules->add($rules->existsIn(['customer_id'], 'Customers'));
 
         return $rules;
     }

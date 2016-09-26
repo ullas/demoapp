@@ -9,118 +9,76 @@
     </li>
   </ol>
 </section>
-
+            	
 <!-- Main content -->
 <section class="content">
-  <div class="box box-primary"><div class="box-body">
-    <table cellpadding="0" cellspacing="0" class="table table-hover">
+	<div class="row">
+        <div class="col-xs-12">
+  <div class="box box-primary">
+  	<div class="box-body">
+    <table id="mptlindextbl" class="table table-hover  table-bordered ">
         <thead>
             <tr>
-                <th><?= $this->Paginator->sort('id') ?></th>
-                <th><?= $this->Paginator->sort('salutation') ?></th>
-                <th><?= $this->Paginator->sort('first_name') ?></th>
-                <th><?= $this->Paginator->sort('last_name') ?></th>
-                <th><?= $this->Paginator->sort('initials') ?></th>
-                <th><?= $this->Paginator->sort('middle_name') ?></th>
-                <th><?= $this->Paginator->sort('first_name_alt1') ?></th>
-                <th><?= $this->Paginator->sort('middle_name_alt1') ?></th>
-                <th><?= $this->Paginator->sort('last_name_alt1') ?></th>
-                <th><?= $this->Paginator->sort('first_name_alt2') ?></th>
-                <th><?= $this->Paginator->sort('middle_name_alt2') ?></th>
-                <th><?= $this->Paginator->sort('last_name_alt2') ?></th>
-                <th><?= $this->Paginator->sort('display_name') ?></th>
-                <!-- <th><?= $this->Paginator->sort('formal_name') ?></th>
-                <th><?= $this->Paginator->sort('birth_name') ?></th>
-                <th><?= $this->Paginator->sort('birth_name_alt1') ?></th>
-                <th><?= $this->Paginator->sort('birth_name_alt2') ?></th>
-                <th><?= $this->Paginator->sort('preferred_name') ?></th>
-                <th><?= $this->Paginator->sort('display_name_alt1') ?></th>
-                <th><?= $this->Paginator->sort('display_name_alt2') ?></th>
-                <th><?= $this->Paginator->sort('formal_name_alt1') ?></th>
-                <th><?= $this->Paginator->sort('formal_name_alt2') ?></th>
-                <th><?= $this->Paginator->sort('name_format') ?></th>
-                <th><?= $this->Paginator->sort('is_overridden') ?></th>
-                <th><?= $this->Paginator->sort('nationality') ?></th>
-                <th><?= $this->Paginator->sort('second_nationality') ?></th>
-                <th><?= $this->Paginator->sort('third_nationality') ?></th>
-                <th><?= $this->Paginator->sort('wps_code') ?></th>
-                <th><?= $this->Paginator->sort('uniqueid') ?></th>
-                <th><?= $this->Paginator->sort('prof_legal') ?></th>
-                <th><?= $this->Paginator->sort('exclude_legal') ?></th>
-                <th><?= $this->Paginator->sort('nationality_date') ?></th>
-                <th><?= $this->Paginator->sort('home_airport') ?></th>
-                <th><?= $this->Paginator->sort('religion') ?></th>
-                <th><?= $this->Paginator->sort('number_children') ?></th>
-                <th><?= $this->Paginator->sort('disability_date') ?></th>
-                <th><?= $this->Paginator->sort('disable_group') ?></th>
-                <th><?= $this->Paginator->sort('disable_degree') ?></th>
-                <th><?= $this->Paginator->sort('disable_type') ?></th>
-                <th><?= $this->Paginator->sort('disable_authority') ?></th>
-                <th><?= $this->Paginator->sort('disable_ref') ?></th>
-                <th><?= $this->Paginator->sort('person_id_external') ?></th> -->
-                <th class="actions"><?= __('Actions') ?></th>
+                <th>Id</th>
+                <th>Salutation</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Initials</th>
+                <th>Middle Name</th>
+                <th>First Name Alt1</th>
+                <th>Middle Name Alt1</th>
+                <th>Last Name Alt1</th>
+				<th>First Name Alt2</th>
+				<th>Middle Name Alt2</th>
+				<th>Last Name Alt2</th>
+				
+                <th class="actions" data-orderable="false"><?= __('Actions') ?></th>
             </tr>
         </thead>
         <tbody>
-            <?php foreach ($empDataPersonals as $empDataPersonal): ?>
-            <tr>
-                <td><?= $this->Number->format($empDataPersonal->id) ?></td>
-                <td><?= h($empDataPersonal->salutation) ?></td>
-                <td><?= h($empDataPersonal->first_name) ?></td>
-                <td><?= h($empDataPersonal->last_name) ?></td>
-                <td><?= h($empDataPersonal->initials) ?></td>
-                <td><?= h($empDataPersonal->middle_name) ?></td>
-                <td><?= h($empDataPersonal->first_name_alt1) ?></td>
-                <td><?= h($empDataPersonal->middle_name_alt1) ?></td>
-                <td><?= h($empDataPersonal->last_name_alt1) ?></td>
-                <td><?= h($empDataPersonal->first_name_alt2) ?></td>
-                <td><?= h($empDataPersonal->middle_name_alt2) ?></td>
-                <td><?= h($empDataPersonal->last_name_alt2) ?></td>
-                <td><?= h($empDataPersonal->display_name) ?></td>
-                <!-- <td><?= h($empDataPersonal->formal_name) ?></td>
-                <td><?= h($empDataPersonal->birth_name) ?></td>
-                <td><?= h($empDataPersonal->birth_name_alt1) ?></td>
-                <td><?= h($empDataPersonal->birth_name_alt2) ?></td>
-                <td><?= h($empDataPersonal->preferred_name) ?></td>
-                <td><?= h($empDataPersonal->display_name_alt1) ?></td>
-                <td><?= h($empDataPersonal->display_name_alt2) ?></td>
-                <td><?= h($empDataPersonal->formal_name_alt1) ?></td>
-                <td><?= h($empDataPersonal->formal_name_alt2) ?></td>
-                <td><?= h($empDataPersonal->name_format) ?></td>
-                <td><?= h($empDataPersonal->is_overridden) ?></td>
-                <td><?= h($empDataPersonal->nationality) ?></td>
-                <td><?= h($empDataPersonal->second_nationality) ?></td>
-                <td><?= h($empDataPersonal->third_nationality) ?></td>
-                <td><?= h($empDataPersonal->wps_code) ?></td>
-                <td><?= h($empDataPersonal->uniqueid) ?></td>
-                <td><?= h($empDataPersonal->prof_legal) ?></td>
-                <td><?= h($empDataPersonal->exclude_legal) ?></td>
-                <td><?= h($empDataPersonal->nationality_date) ?></td>
-                <td><?= h($empDataPersonal->home_airport) ?></td>
-                <td><?= h($empDataPersonal->religion) ?></td>
-                <td><?= $this->Number->format($empDataPersonal->number_children) ?></td>
-                <td><?= h($empDataPersonal->disability_date) ?></td>
-                <td><?= h($empDataPersonal->disable_group) ?></td>
-                <td><?= $this->Number->format($empDataPersonal->disable_degree) ?></td>
-                <td><?= h($empDataPersonal->disable_type) ?></td>
-                <td><?= h($empDataPersonal->disable_authority) ?></td>
-                <td><?= h($empDataPersonal->disable_ref) ?></td>
-                <td><?= h($empDataPersonal->person_id_external) ?></td> -->
-                <td class="actions">
-                    <?= $this->Html->link(__('View'), ['action' => 'view', $empDataPersonal->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['action' => 'edit', $empDataPersonal->id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $empDataPersonal->id], ['confirm' => __('Are you sure you want to delete # {0}?', $empDataPersonal->id)]) ?>
-                </td>
-            </tr>
-            <?php endforeach; ?>
         </tbody>
     </table></div></div>
-    <div class="paginator">
-        <ul class="pagination">
-            <?= $this->Paginator->prev('< ' . __('previous')) ?>
-            <?= $this->Paginator->numbers() ?>
-            <?= $this->Paginator->next(__('next') . ' >') ?>
-        </ul>
-        <p><?= $this->Paginator->counter() ?></p>
-    </div>
+    </div></div>
+   
 </section>
+<?php
+$this->Html->css([
+    'AdminLTE./plugins/datatables/dataTables.bootstrap',
+  ],
+  ['block' => 'css']);
+
+$this->Html->script([
+  'AdminLTE./plugins/datatables/jquery.dataTables.min',
+  'AdminLTE./plugins/datatables/dataTables.bootstrap.min',
+],
+['block' => 'script']);
+?>
+
+<?php $this->start('scriptBotton'); ?>
+<script>
+  $(function () {
+    $('#mptlindextbl').DataTable({
+      	"paging": true,
+      	"lengthChange": true,
+      	"searching": true,
+      	"ordering": true,
+      	"info": true,
+      	"autoWidth": false,
+     
+      	//server side processing
+      	"processing": true,
+     	 "serverSide": true,
+      	"ajax": "/<?php echo $this->request->params['controller'] ?>/ajaxData"
+     
+    });
+  });
+</script>
+<?php $this->end(); ?>
+
+
+
+
+
+
+
+

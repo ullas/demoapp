@@ -16,7 +16,8 @@ class IdsControllerTest extends IntegrationTestCase
      * @var array
      */
     public $fixtures = [
-        'app.ids'
+        'app.ids',
+        'app.customers'
     ];
 
     /**

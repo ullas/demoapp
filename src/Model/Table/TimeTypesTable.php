@@ -9,6 +9,9 @@ use Cake\Validation\Validator;
 /**
  * TimeTypes Model
  *
+ * @property \Cake\ORM\Association\BelongsTo $Customers
+ * @property \Cake\ORM\Association\HasMany $TimeTypeProfiles
+ *
  * @method \App\Model\Entity\TimeType get($primaryKey, $options = [])
  * @method \App\Model\Entity\TimeType newEntity($data = null, array $options = [])
  * @method \App\Model\Entity\TimeType[] newEntities(array $data, array $options = [])
@@ -33,6 +36,13 @@ class TimeTypesTable extends Table
         $this->table('time_types');
         $this->displayField('name');
         $this->primaryKey('id');
+
+        $this->belongsTo('Customers', [
+            'foreignKey' => 'customer_id'
+        ]);
+        $this->hasMany('TimeTypeProfiles', [
+            'foreignKey' => 'time_type_id'
+        ]);
     }
 
     /**
@@ -104,6 +114,7 @@ class TimeTypesTable extends Table
     {
         $rules->add($rules->isUnique(['code']));
         $rules->add($rules->isUnique(['name']));
+        $rules->add($rules->existsIn(['customer_id'], 'Customers'));
 
         return $rules;
     }

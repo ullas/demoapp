@@ -18,6 +18,7 @@ class JobClassesControllerTest extends IntegrationTestCase
     public $fixtures = [
         'app.job_classes',
         'app.pay_grades',
+        'app.customers',
         'app.job_functions'
     ];
 

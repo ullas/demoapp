@@ -10,7 +10,18 @@ use App\Controller\AppController;
  */
 class AddressesController extends AppController
 {
+var $components = array('Datatable');
+	
+	public function ajaxData() {
+		$this->autoRender= False;
 
+		$fields = array(array('name'=>'id','type'=>'int'),address_no,address1,address2,address3,address4,address5,address6,address7,address8, 
+		  zip_code,city,county,state, array('name'=>'emp_data_biographies_id','type'=>'bigint'));
+									  
+		$output =$this->Datatable->getView($fields);
+		
+		echo json_encode($output);			
+    }
     /**
      * Index method
      *
@@ -19,7 +30,7 @@ class AddressesController extends AppController
     public function index()
     {
         $this->paginate = [
-            'contain' => ['EmpDataBiographies']
+            'contain' => ['EmpDataBiographies', 'Customers']
         ];
         $addresses = $this->paginate($this->Addresses);
 
@@ -37,7 +48,7 @@ class AddressesController extends AppController
     public function view($id = null)
     {
         $address = $this->Addresses->get($id, [
-            'contain' => ['EmpDataBiographies']
+            'contain' => ['EmpDataBiographies', 'Customers']
         ]);
 
         $this->set('address', $address);
@@ -63,7 +74,8 @@ class AddressesController extends AppController
             }
         }
         $empDataBiographies = $this->Addresses->EmpDataBiographies->find('list', ['limit' => 200]);
-        $this->set(compact('address', 'empDataBiographies'));
+        $customers = $this->Addresses->Customers->find('list', ['limit' => 200]);
+        $this->set(compact('address', 'empDataBiographies', 'customers'));
         $this->set('_serialize', ['address']);
     }
 
@@ -90,7 +102,8 @@ class AddressesController extends AppController
             }
         }
         $empDataBiographies = $this->Addresses->EmpDataBiographies->find('list', ['limit' => 200]);
-        $this->set(compact('address', 'empDataBiographies'));
+        $customers = $this->Addresses->Customers->find('list', ['limit' => 200]);
+        $this->set(compact('address', 'empDataBiographies', 'customers'));
         $this->set('_serialize', ['address']);
     }
 

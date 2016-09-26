@@ -14,6 +14,7 @@ use Cake\ORM\Entity;
  * @property string $facebook
  * @property string $linkedin
  * @property string $person_id_external
+ * @property int $customer_id
  */
 class ContactInfo extends Entity
 {

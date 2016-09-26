@@ -1,7 +1,8 @@
 <?php
 namespace App\Controller;
+
 use App\Controller\AppController;
-use Cake\Event\Event;
+
 /**
  * BusinessUnits Controller
  *
@@ -9,6 +10,19 @@ use Cake\Event\Event;
  */
 class BusinessUnitsController extends AppController
 {
+	
+	var $components = array('Datatable');
+	
+	public function ajaxData() {
+		$this->autoRender= False;
+
+		$fields = array(array('name'=>'id','type'=>'int'),'name','description',array('name'=>'effective_status','type'=>'bool'),
+									  array('name'=>'effective_start_date','type'=>'date'),array('name'=>'effective_end_date','type'=>'date'),
+									  'external_code',array('name'=>'head_of_unit','type'=>'bigint'));
+									  
+		$output =$this->Datatable->getView($fields);
+		echo json_encode($output);			
+    }
     /**
      * Index method
      *
@@ -16,15 +30,15 @@ class BusinessUnitsController extends AppController
      */
     public function index()
     {
+        $this->paginate = [
+            'contain' => ['Customers']
+        ];
         $businessUnits = $this->paginate($this->BusinessUnits);
+
         $this->set(compact('businessUnits'));
         $this->set('_serialize', ['businessUnits']);
     }
-	
-	public function beforeFilter(Event $event)
-    {
-            // $this->viewBuilder()->layout('admindefault');
-    }
+
     /**
      * View method
      *
@@ -35,11 +49,13 @@ class BusinessUnitsController extends AppController
     public function view($id = null)
     {
         $businessUnit = $this->BusinessUnits->get($id, [
-            'contain' => []
+            'contain' => ['Customers']
         ]);
+
         $this->set('businessUnit', $businessUnit);
         $this->set('_serialize', ['businessUnit']);
     }
+
     /**
      * Add method
      *
@@ -48,18 +64,21 @@ class BusinessUnitsController extends AppController
     public function add()
     {
         $businessUnit = $this->BusinessUnits->newEntity();
-        if ($this->request->is('post')) { print_r("entered".$businessUnit);
+        if ($this->request->is('post')) {
             $businessUnit = $this->BusinessUnits->patchEntity($businessUnit, $this->request->data);
             if ($this->BusinessUnits->save($businessUnit)) {
                 $this->Flash->success(__('The business unit has been saved.'));
+
                 return $this->redirect(['action' => 'index']);
-            } else {echo("failed");
+            } else {
                 $this->Flash->error(__('The business unit could not be saved. Please, try again.'));
             }
         }
-        $this->set(compact('businessUnit'));
+        $customers = $this->BusinessUnits->Customers->find('list', ['limit' => 200]);
+        $this->set(compact('businessUnit', 'customers'));
         $this->set('_serialize', ['businessUnit']);
     }
+
     /**
      * Edit method
      *
@@ -76,14 +95,17 @@ class BusinessUnitsController extends AppController
             $businessUnit = $this->BusinessUnits->patchEntity($businessUnit, $this->request->data);
             if ($this->BusinessUnits->save($businessUnit)) {
                 $this->Flash->success(__('The business unit has been saved.'));
+
                 return $this->redirect(['action' => 'index']);
             } else {
                 $this->Flash->error(__('The business unit could not be saved. Please, try again.'));
             }
         }
-        $this->set(compact('businessUnit'));
+        $customers = $this->BusinessUnits->Customers->find('list', ['limit' => 200]);
+        $this->set(compact('businessUnit', 'customers'));
         $this->set('_serialize', ['businessUnit']);
     }
+
     /**
      * Delete method
      *
@@ -100,6 +122,7 @@ class BusinessUnitsController extends AppController
         } else {
             $this->Flash->error(__('The business unit could not be deleted. Please, try again.'));
         }
+
         return $this->redirect(['action' => 'index']);
     }
 }

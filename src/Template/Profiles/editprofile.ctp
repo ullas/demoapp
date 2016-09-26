@@ -1,3 +1,5 @@
+<link rel="stylesheet" type="text/css" href="/css/dropzone.css" />
+<script type="text/javascript" src="/js/dropzone.js"></script>
 <section class="content-header">
   <h1>
     User Profile
@@ -37,11 +39,18 @@
       <div class="box box-primary">
         <div class="box-body box-profile">
         	
-          <div class="col-sm-12 thumbnail img-circle">     
-          	<?php echo $this->Html->image('sree.png', array('class' => 'profile-user-img img-responsive img-circle', 'alt' => 'User profile picture')); ?>
+        	
+
+        	<div class="image_upload_div">
+    <form action="/Profiles/upload" class="dropzone">
+    </form>
+</div>
+        	
+          <!-- <div class="col-sm-12 thumbnail img-circle">     
+          	 <?php echo $this->Html->image('sree.png', array('class' => 'profile-user-img img-responsive img-circle', 'alt' => 'User profile picture')); ?>
           	<div class="caption">
           		<input type="image" id="exampleInputFile" class="fa fa-pencil">
-           	</div>
+           	</div> -->
            	
            	<!-- <div class="form-group">
                   <label for="exampleInputFile">File input</label>
@@ -50,7 +59,7 @@
                   <p class="help-block">Example block-level help text here.</p>
                 </div> -->
                 
-           </div>
+           <!-- </div> -->
 
           <!-- <h3 class="profile-username text-center">Sreekanth M</h3>
 
@@ -329,3 +338,6 @@
     <!-- <?= $this->Form->button(__('Submit')) ?>
     <?= $this->Form->end() ?> -->
 </section>
+<?php $this->start('scriptBotton'); ?>
+
+<?php $this->end(); ?>

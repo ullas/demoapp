@@ -10,7 +10,18 @@ use App\Controller\AppController;
  */
 class DepartmentsController extends AppController
 {
+var $components = array('Datatable');
+	
+	public function ajaxData() {
+		$this->autoRender= False;
 
+		$fields = array(array('name'=>'id','type'=>'int'),'name','description',array('name'=>'effective_status','type'=>'bool'),
+									  array('name'=>'effective_start_date','type'=>'date'),array('name'=>'effective_end_date','type'=>'date'),
+									  'parent_department','external_code',array('name'=>'head_of_unit','type'=>'bigint'),array('name'=>'cost_center_id','type'=>'bigint'));
+									  
+		$output =$this->Datatable->getView($fields);
+		echo json_encode($output);			
+    }
     /**
      * Index method
      *
@@ -19,7 +30,7 @@ class DepartmentsController extends AppController
     public function index()
     {
         $this->paginate = [
-            'contain' => ['CostCentres']
+            'contain' => ['CostCentres', 'Customers']
         ];
         $departments = $this->paginate($this->Departments);
 
@@ -37,7 +48,7 @@ class DepartmentsController extends AppController
     public function view($id = null)
     {
         $department = $this->Departments->get($id, [
-            'contain' => ['CostCentres']
+            'contain' => ['CostCentres', 'Customers']
         ]);
 
         $this->set('department', $department);
@@ -63,7 +74,8 @@ class DepartmentsController extends AppController
             }
         }
         $costCentres = $this->Departments->CostCentres->find('list', ['limit' => 200]);
-        $this->set(compact('department', 'costCentres'));
+        $customers = $this->Departments->Customers->find('list', ['limit' => 200]);
+        $this->set(compact('department', 'costCentres', 'customers'));
         $this->set('_serialize', ['department']);
     }
 
@@ -90,7 +102,8 @@ class DepartmentsController extends AppController
             }
         }
         $costCentres = $this->Departments->CostCentres->find('list', ['limit' => 200]);
-        $this->set(compact('department', 'costCentres'));
+        $customers = $this->Departments->Customers->find('list', ['limit' => 200]);
+        $this->set(compact('department', 'costCentres', 'customers'));
         $this->set('_serialize', ['department']);
     }
 

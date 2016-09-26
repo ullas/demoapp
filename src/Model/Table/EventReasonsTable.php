@@ -9,6 +9,8 @@ use Cake\Validation\Validator;
 /**
  * EventReasons Model
  *
+ * @property \Cake\ORM\Association\BelongsTo $Customers
+ *
  * @method \App\Model\Entity\EventReason get($primaryKey, $options = [])
  * @method \App\Model\Entity\EventReason newEntity($data = null, array $options = [])
  * @method \App\Model\Entity\EventReason[] newEntities(array $data, array $options = [])
@@ -33,6 +35,10 @@ class EventReasonsTable extends Table
         $this->table('event_reasons');
         $this->displayField('name');
         $this->primaryKey('id');
+
+        $this->belongsTo('Customers', [
+            'foreignKey' => 'customer_id'
+        ]);
     }
 
     /**
@@ -91,6 +97,7 @@ class EventReasonsTable extends Table
     public function buildRules(RulesChecker $rules)
     {
         $rules->add($rules->isUnique(['external_code']));
+        $rules->add($rules->existsIn(['customer_id'], 'Customers'));
 
         return $rules;
     }

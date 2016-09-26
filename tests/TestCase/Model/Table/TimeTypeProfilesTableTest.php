@@ -25,7 +25,8 @@ class TimeTypeProfilesTableTest extends TestCase
      */
     public $fixtures = [
         'app.time_type_profiles',
-        'app.time_types'
+        'app.time_types',
+        'app.customers'
     ];
 
     /**

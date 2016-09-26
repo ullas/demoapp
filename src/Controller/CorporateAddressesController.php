@@ -10,7 +10,16 @@ use App\Controller\AppController;
  */
 class CorporateAddressesController extends AppController
 {
+var $components = array('Datatable');
+	
+	public function ajaxData() {
+		$this->autoRender= False;
 
+		$fields = array(array('name'=>'start_date','type'=>'date'),array('name'=>'end_date','type'=>'date'),'address1','address2','address3','city','country','state','province','zip_code','country');
+									  
+		$output =$this->Datatable->getView($fields);
+		echo json_encode($output);			
+    }
     /**
      * Index method
      *
@@ -18,6 +27,9 @@ class CorporateAddressesController extends AppController
      */
     public function index()
     {
+        $this->paginate = [
+            'contain' => ['Customers']
+        ];
         $corporateAddresses = $this->paginate($this->CorporateAddresses);
 
         $this->set(compact('corporateAddresses'));
@@ -34,7 +46,7 @@ class CorporateAddressesController extends AppController
     public function view($id = null)
     {
         $corporateAddress = $this->CorporateAddresses->get($id, [
-            'contain' => []
+            'contain' => ['Customers']
         ]);
 
         $this->set('corporateAddress', $corporateAddress);
@@ -59,7 +71,8 @@ class CorporateAddressesController extends AppController
                 $this->Flash->error(__('The corporate address could not be saved. Please, try again.'));
             }
         }
-        $this->set(compact('corporateAddress'));
+        $customers = $this->CorporateAddresses->Customers->find('list', ['limit' => 200]);
+        $this->set(compact('corporateAddress', 'customers'));
         $this->set('_serialize', ['corporateAddress']);
     }
 
@@ -85,7 +98,8 @@ class CorporateAddressesController extends AppController
                 $this->Flash->error(__('The corporate address could not be saved. Please, try again.'));
             }
         }
-        $this->set(compact('corporateAddress'));
+        $customers = $this->CorporateAddresses->Customers->find('list', ['limit' => 200]);
+        $this->set(compact('corporateAddress', 'customers'));
         $this->set('_serialize', ['corporateAddress']);
     }
 

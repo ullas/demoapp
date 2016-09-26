@@ -10,6 +10,7 @@ use Cake\Validation\Validator;
  * Dependents Model
  *
  * @property \Cake\ORM\Association\BelongsTo $EmpDataBiographies
+ * @property \Cake\ORM\Association\BelongsTo $Customers
  *
  * @method \App\Model\Entity\Dependent get($primaryKey, $options = [])
  * @method \App\Model\Entity\Dependent newEntity($data = null, array $options = [])
@@ -38,6 +39,9 @@ class DependentsTable extends Table
 
         $this->belongsTo('EmpDataBiographies', [
             'foreignKey' => 'emp_data_biographies_id'
+        ]);
+        $this->belongsTo('Customers', [
+            'foreignKey' => 'customer_id'
         ]);
     }
 
@@ -166,6 +170,7 @@ class DependentsTable extends Table
     public function buildRules(RulesChecker $rules)
     {
         $rules->add($rules->existsIn(['emp_data_biographies_id'], 'EmpDataBiographies'));
+        $rules->add($rules->existsIn(['customer_id'], 'Customers'));
 
         return $rules;
     }

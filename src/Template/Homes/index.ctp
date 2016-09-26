@@ -1,3 +1,8 @@
+<style>
+.panel-body{
+	height:250px;
+}	
+</style>
 <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>Home</h1>
@@ -9,172 +14,79 @@
     
     <section class="content">
     	
-    	
+    	<div id="draggablePanelList" class="list-unstyled row">
+			
+    <div class="col-sm-3">
+    	<div class="box box-primary direct-chat direct-chat-primary">
+        	<div class="box-header with-border">My Info</div>
+        	<div class="box-body"><?= $this->element('homeelmt', array('title' => 'My Info')); ?></div>
+        </div>
+    </div>
+    <div class="col-sm-3">
+    	<div class="box box-primary direct-chat direct-chat-primary">
+        	<div class="box-header with-border">My Team</div>
+        	<div class="panel-body"><?= $this->element('homeelmt', array('title' => 'My Team')); ?></div>
+        </div>
+    </div>
+    <div class="col-sm-3">
+    	<div class="box box-primary direct-chat direct-chat-primary">
+        	<div class="panel-heading">Links</div>
+        	<div class="panel-body"><?= $this->element('homeelmt', array('title' => 'Links')); ?></div>
+        </div>
+    </div>
     
-    <!-- 1st row -->
-      <div class="row">
-        <div class="col-md-3" draggable="true">
-          <!-- MY INFO -->
-          <div class="box box-primary direct-chat direct-chat-primary">
-            <div class="box-header with-border">
-              <h3 class="box-title">My Info</h3>
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-              <!-- Conversations are loaded here -->
-              <div class="direct-chat-messages">
-                <?= $this->element('homeelmt', array('title' => 'My Info')); ?>
-          
-          
-              </div>
-            
-            </div>
-            
-          </div>
+    <div class="col-sm-3">
+    	<div class="box box-primary direct-chat direct-chat-primary">
+        	<div class="box-header with-border">Admin Alerts</div>
+        	<div class="panel-body"><?= $this->element('homeelmt', array('title' => 'Admin Alerts')); ?></div>
         </div>
-        <!-- /.col -->
-        
-        <div class="col-md-3" draggable="true">
-          <!-- MY INFO -->
-          <div class="box box-success direct-chat direct-chat-primary">
-            <div class="box-header with-border">
-              <h3 class="box-title">My Team</h3>
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-              <!-- Conversations are loaded here -->
-              <div class="direct-chat-messages">
-                <?= $this->element('homeelmt', array('title' => 'My Team')); ?>
-              </div>
-            
-            </div>
-            
-          </div>
+    </div>
+    
+    <div class="col-sm-6">
+    	<div class="box box-primary direct-chat direct-chat-primary">
+        	<div class="box-header with-border">To Do</div>
+        	<div class="panel-body"><?= $this->element('homeelmt', array('title' => 'To Do')); ?></div>
         </div>
-        <!-- /.col -->
-        
-        <div class="col-md-3">
-          <!-- MY INFO -->
-          <div class="box box-warning direct-chat direct-chat-primary">
-            <div class="box-header with-border">
-              <h3 class="box-title">Links</h3>
-              <div class="box-tools pull-right">
-                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-gear"></i></button>
-              </div>
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-              <!-- Conversations are loaded here -->
-              <div class="direct-chat-messages">
-                <?= $this->element('homeelmt', array('title' => 'Links')); ?>
-              </div>
-            
-            </div>
-            
-          </div>
+    </div>
+    <div class="col-sm-3">
+    	<div class="box box-primary direct-chat direct-chat-primary">
+        	<div class="box-header with-border">My Goals</div>
+        	<div class="panel-body"><?= $this->element('homeelmt', array('title' => 'My Goals')); ?></div>
         </div>
-        <!-- /.col -->
-        
-        <div class="col-md-3">
-          <!-- MY INFO -->
-          <div class="box box-danger direct-chat direct-chat-primary">
-            <div class="box-header with-border">
-              <h3 class="box-title">Admin Alerts</h3>
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-              <!-- Conversations are loaded here -->
-              <div class="direct-chat-messages">
-                <?= $this->element('homeelmt', array('title' => 'Admin Alerts')); ?>
-              </div>
-            
-            </div>
-            
-          </div>
+    </div>
+    <div class="col-sm-3">
+    	<div class="box box-primary direct-chat direct-chat-primary">
+        	<div class="box-header with-border">My Admin Favorites</div>
+        	<div class="panel-body"><?= $this->element('homeelmt', array('title' => 'My Admin Favorites')); ?></div>
         </div>
-        <!-- /.col -->
+    </div>
 
-      </div>
-      <!-- /.row -->
-      
-      
-      <!-- 2nd row -->
-      <div class="row">
-        <div class="col-md-6">
-          <!-- MY INFO -->
-          <div class="box box-primary direct-chat direct-chat-primary">
-            <div class="box-header with-border">
-              <h3 class="box-title">To Do</h3>
-              <div class="box-tools pull-right">
-                <span >Sort by</span>
-                
-				<span class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
-                  Date <span class="caret"></span>
-                </a>
-                <ul class="dropdown-menu">
-                  <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Date</a></li>
-                  <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Type</a></li>
-                </ul>
-              </span>
-              
-                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-gear"></i></button>
-              </div>
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-              <!-- Conversations are loaded here -->
-              <div class="direct-chat-messages">
-                <?= $this->element('homeelmt', array('title' => 'To Do')); ?>
-              </div>
-            
-            </div>
-            
-          </div>
-        </div>
-        <!-- /.col -->
-        
-        <div class="col-md-3">
-          <!-- MY INFO -->
-          <div class="box box-warning direct-chat direct-chat-primary">
-            <div class="box-header with-border">
-              <h3 class="box-title">My Goals</h3>
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-              <!-- Conversations are loaded here -->
-              <div class="direct-chat-messages">
-                <?= $this->element('homeelmt', array('title' => 'My Goals')); ?>
-              </div>
-            
-            </div>
-            
-          </div>
-        </div>
-        <!-- /.col -->
-        
-        <div class="col-md-3">
-          <!-- MY INFO -->
-          <div class="box box-danger direct-chat direct-chat-primary">
-            <div class="box-header with-border">
-              <h3 class="box-title">My Admin Favorites</h3>
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-              <!-- Conversations are loaded here -->
-              <div class="direct-chat-messages">
-                <?= $this->element('homeelmt', array('title' => 'My Admin Favorites')); ?>
-              </div>
-            
-            </div>
-            
-          </div>
-        </div>
-        <!-- /.col -->
-
-      </div>
-      <!-- /.row -->
+</div>
+    
+         <!-- /.row -->
         
   
   
 </section>
+
+<?php $this->start('scriptBotton'); ?>
+<script>
+ jQuery(function($) {
+        var panelList = $('#draggablePanelList');
+
+        panelList.sortable({
+            // Only make the .panel-heading child elements support dragging.
+            // Omit this to make then entire <li>...</li> draggable.
+            handle: '.box-header', 
+            update: function() {
+                $('.box', panelList).each(function(index, elem) {
+                     var $listItem = $(elem),
+                         newIndex = $listItem.index();
+
+                     // Persist the new indices.
+                });
+            }
+        });
+  });
+</script>
+<?php $this->end(); ?>

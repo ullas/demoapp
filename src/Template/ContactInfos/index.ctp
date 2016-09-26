@@ -9,50 +9,70 @@
     </li>
   </ol>
 </section>
-
+            	
 <!-- Main content -->
 <section class="content">
-  <div class="box box-primary"><div class="box-body">
-    <table cellpadding="0" cellspacing="0" class="table table-hover">
+	<div class="row">
+        <div class="col-xs-12">
+  <div class="box box-primary">
+  	<div class="box-body">
+    <table id="mptlindextbl" class="table table-hover  table-bordered ">
         <thead>
             <tr>
-                <th><?= $this->Paginator->sort('id') ?></th>
-                <th><?= $this->Paginator->sort('phone') ?></th>
-                <th><?= $this->Paginator->sort('mobile') ?></th>
-                <th><?= $this->Paginator->sort('email_address1') ?></th>
-                <th><?= $this->Paginator->sort('email_address2') ?></th>
-                <th><?= $this->Paginator->sort('facebook') ?></th>
-                <th><?= $this->Paginator->sort('linkedin') ?></th>
-                <th><?= $this->Paginator->sort('person_id_external') ?></th>
-                <th class="actions"><?= __('Actions') ?></th>
+                <th>Id</th>
+                <th>Phone</th>
+				<th>Mobile</th>
+				<th>Email Address1</th>
+				<th>Email Address2</th>
+				<th>Facebook</th>
+				<th>Linkedin</th>
+				<th>Personal Id External</th>
+                <th class="actions" data-orderable="false"><?= __('Actions') ?></th>
             </tr>
         </thead>
         <tbody>
-            <?php foreach ($contactInfos as $contactInfo): ?>
-            <tr>
-                <td><?= $this->Number->format($contactInfo->id) ?></td>
-                <td><?= h($contactInfo->phone) ?></td>
-                <td><?= h($contactInfo->mobile) ?></td>
-                <td><?= h($contactInfo->email_address1) ?></td>
-                <td><?= h($contactInfo->email_address2) ?></td>
-                <td><?= h($contactInfo->facebook) ?></td>
-                <td><?= h($contactInfo->linkedin) ?></td>
-                <td><?= h($contactInfo->person_id_external) ?></td>
-                <td class="actions">
-                    <?= $this->Html->link(__('View'), ['action' => 'view', $contactInfo->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['action' => 'edit', $contactInfo->id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $contactInfo->id], ['confirm' => __('Are you sure you want to delete # {0}?', $contactInfo->id)]) ?>
-                </td>
-            </tr>
-            <?php endforeach; ?>
         </tbody>
     </table></div></div>
-    <div class="paginator">
-        <ul class="pagination">
-            <?= $this->Paginator->prev('< ' . __('previous')) ?>
-            <?= $this->Paginator->numbers() ?>
-            <?= $this->Paginator->next(__('next') . ' >') ?>
-        </ul>
-        <p><?= $this->Paginator->counter() ?></p>
-    </div>
+    </div></div>
+   
 </section>
+<?php
+$this->Html->css([
+    'AdminLTE./plugins/datatables/dataTables.bootstrap',
+  ],
+  ['block' => 'css']);
+
+$this->Html->script([
+  'AdminLTE./plugins/datatables/jquery.dataTables.min',
+  'AdminLTE./plugins/datatables/dataTables.bootstrap.min',
+],
+['block' => 'script']);
+?>
+
+<?php $this->start('scriptBotton'); ?>
+<script>
+  $(function () {
+    $('#mptlindextbl').DataTable({
+      	"paging": true,
+      	"lengthChange": true,
+      	"searching": true,
+      	"ordering": true,
+      	"info": true,
+      	"autoWidth": false,
+     
+      	//server side processing
+      	"processing": true,
+     	 "serverSide": true,
+      	"ajax": "/<?php echo $this->request->params['controller'] ?>/ajaxData"
+     
+    });
+  });
+</script>
+<?php $this->end(); ?>
+
+
+
+
+
+
+

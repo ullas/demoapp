@@ -10,7 +10,18 @@ use App\Controller\AppController;
  */
 class CostCentresController extends AppController
 {
+var $components = array('Datatable');
+	
+	public function ajaxData() {
+		$this->autoRender= False;
 
+		$fields = array(array('name'=>'id','type'=>'int'),'name','description',array('name'=>'effective_status','type'=>'bool'),
+									  array('name'=>'effective_start_date','type'=>'date'),array('name'=>'effective_end_date','type'=>'date'),
+									 'parent_cost_center', 'external_code',array('name'=>'cost_center_manager','type'=>'bigint'));
+									  
+		$output =$this->Datatable->getView($fields);
+		echo json_encode($output);			
+    }
     /**
      * Index method
      *
@@ -18,6 +29,9 @@ class CostCentresController extends AppController
      */
     public function index()
     {
+        $this->paginate = [
+            'contain' => ['Customers']
+        ];
         $costCentres = $this->paginate($this->CostCentres);
 
         $this->set(compact('costCentres'));
@@ -34,7 +48,7 @@ class CostCentresController extends AppController
     public function view($id = null)
     {
         $costCentre = $this->CostCentres->get($id, [
-            'contain' => []
+            'contain' => ['Customers']
         ]);
 
         $this->set('costCentre', $costCentre);
@@ -59,7 +73,8 @@ class CostCentresController extends AppController
                 $this->Flash->error(__('The cost centre could not be saved. Please, try again.'));
             }
         }
-        $this->set(compact('costCentre'));
+        $customers = $this->CostCentres->Customers->find('list', ['limit' => 200]);
+        $this->set(compact('costCentre', 'customers'));
         $this->set('_serialize', ['costCentre']);
     }
 
@@ -85,7 +100,8 @@ class CostCentresController extends AppController
                 $this->Flash->error(__('The cost centre could not be saved. Please, try again.'));
             }
         }
-        $this->set(compact('costCentre'));
+        $customers = $this->CostCentres->Customers->find('list', ['limit' => 200]);
+        $this->set(compact('costCentre', 'customers'));
         $this->set('_serialize', ['costCentre']);
     }
 

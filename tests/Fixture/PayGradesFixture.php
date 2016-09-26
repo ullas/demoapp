@@ -25,9 +25,11 @@ class PayGradesFixture extends TestFixture
         'end_date' => ['type' => 'date', 'length' => null, 'default' => null, 'null' => true, 'comment' => null, 'precision' => null],
         'pay_grade_level' => ['type' => 'decimal', 'length' => null, 'default' => null, 'null' => true, 'comment' => null, 'precision' => null, 'unsigned' => null],
         'external_code' => ['type' => 'string', 'length' => 32, 'default' => null, 'null' => false, 'collate' => null, 'comment' => null, 'precision' => null, 'fixed' => null],
+        'customer_id' => ['type' => 'biginteger', 'length' => 20, 'default' => null, 'null' => true, 'comment' => null, 'precision' => null, 'unsigned' => null, 'autoIncrement' => null],
         '_constraints' => [
             'primary' => ['type' => 'primary', 'columns' => ['id'], 'length' => []],
             'pay_grades_external_code_key' => ['type' => 'unique', 'columns' => ['external_code'], 'length' => []],
+            'pay_grades_customer_id_fkey' => ['type' => 'foreign', 'columns' => ['customer_id'], 'references' => ['customers', 'id'], 'update' => 'noAction', 'delete' => 'noAction', 'length' => []],
         ],
     ];
     // @codingStandardsIgnoreEnd
@@ -43,10 +45,11 @@ class PayGradesFixture extends TestFixture
             'name' => 'Lorem ipsum dolor sit amet',
             'description' => 'Lorem ipsum dolor sit amet',
             'status' => 1,
-            'start_date' => '2016-08-09',
-            'end_date' => '2016-08-09',
+            'start_date' => '2016-09-09',
+            'end_date' => '2016-09-09',
             'pay_grade_level' => 1.5,
-            'external_code' => 'Lorem ipsum dolor sit amet'
+            'external_code' => 'Lorem ipsum dolor sit amet',
+            'customer_id' => 1
         ],
     ];
 }

@@ -26,7 +26,9 @@ class LegalEntitiesTableTest extends TestCase
     public $fixtures = [
         'app.legal_entities',
         'app.locations',
-        'app.pay_groups'
+        'app.customers',
+        'app.pay_groups',
+        'app.pay_ranges'
     ];
 
     /**

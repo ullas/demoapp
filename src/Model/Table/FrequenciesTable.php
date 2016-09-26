@@ -9,6 +9,9 @@ use Cake\Validation\Validator;
 /**
  * Frequencies Model
  *
+ * @property \Cake\ORM\Association\BelongsTo $Customers
+ * @property \Cake\ORM\Association\HasMany $PayComponents
+ *
  * @method \App\Model\Entity\Frequency get($primaryKey, $options = [])
  * @method \App\Model\Entity\Frequency newEntity($data = null, array $options = [])
  * @method \App\Model\Entity\Frequency[] newEntities(array $data, array $options = [])
@@ -33,6 +36,13 @@ class FrequenciesTable extends Table
         $this->table('frequencies');
         $this->displayField('name');
         $this->primaryKey('id');
+
+        $this->belongsTo('Customers', [
+            'foreignKey' => 'customer_id'
+        ]);
+        $this->hasMany('PayComponents', [
+            'foreignKey' => 'frequency_id'
+        ]);
     }
 
     /**
@@ -74,6 +84,7 @@ class FrequenciesTable extends Table
     public function buildRules(RulesChecker $rules)
     {
         $rules->add($rules->isUnique(['external_code']));
+        $rules->add($rules->existsIn(['customer_id'], 'Customers'));
 
         return $rules;
     }

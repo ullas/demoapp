@@ -14,6 +14,7 @@ use Cake\ORM\Entity;
  * @property string $birth_name
  * @property \Cake\I18n\Time $date_of_death
  * @property string $person_id_external
+ * @property int $customer_id
  */
 class EmpDataBiography extends Entity
 {

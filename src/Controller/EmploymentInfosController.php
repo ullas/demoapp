@@ -10,7 +10,16 @@ use App\Controller\AppController;
  */
 class EmploymentInfosController extends AppController
 {
+var $components = array('Datatable');
+	
+	public function ajaxData() {
+		$this->autoRender= False;
 
+		$fields = array(array('name'=>'id','type'=>'int'),array('name'=>'start_date','type'=>'date'),array('name'=>'first_date_worked','type'=>'date'),array('name'=>'original_start_date','type'=>'date'),'company',array('name'=>'is_primary','type'=>'bool'),array('name'=>'seniority_date','type'=>'date'),array('name'=>'benefits_eligibility_start_date','type'=>'date'),'prev_employeeid',array('name'=>'eligible_for_stock','type'=>'bool'),array('name'=>'service_date','type'=>'date'),array('name'=>'initial_stock_grant','type'=>'numeric'),array('name'=>'initial_option_grant','type'=>'numeric'),'job_credit','notes',array('name'=>'is_contingent_worker','type'=>'bool'),array('name'=>'end_date','type'=>'date'),array('name'=>'ok_to_rehire','type'=>'bool'),array('name'=>'pay_roll_end_date','type'=>'date'),array('name'=>'last_date_worked','type'=>'date'),array('name'=>'regret_termination','type'=>'bool'),array('name'=>'eligible_for_sal_continuation','type'=>'bool'),array('name'=>'bonus_pay_expiration_date','type'=>'date'),array('name'=>'stock_end_date','type'=>'date'),array('name'=>'salary_end_date','type'=>'date'),array('name'=>'benefits_end_date','type'=>'date'));
+									  
+		$output =$this->Datatable->getView($fields);
+		echo json_encode($output);			
+    }
     /**
      * Index method
      *
@@ -18,6 +27,9 @@ class EmploymentInfosController extends AppController
      */
     public function index()
     {
+        $this->paginate = [
+            'contain' => ['Customers']
+        ];
         $employmentInfos = $this->paginate($this->EmploymentInfos);
 
         $this->set(compact('employmentInfos'));
@@ -34,7 +46,7 @@ class EmploymentInfosController extends AppController
     public function view($id = null)
     {
         $employmentInfo = $this->EmploymentInfos->get($id, [
-            'contain' => []
+            'contain' => ['Customers']
         ]);
 
         $this->set('employmentInfo', $employmentInfo);
@@ -59,7 +71,8 @@ class EmploymentInfosController extends AppController
                 $this->Flash->error(__('The employment info could not be saved. Please, try again.'));
             }
         }
-        $this->set(compact('employmentInfo'));
+        $customers = $this->EmploymentInfos->Customers->find('list', ['limit' => 200]);
+        $this->set(compact('employmentInfo', 'customers'));
         $this->set('_serialize', ['employmentInfo']);
     }
 
@@ -85,7 +98,8 @@ class EmploymentInfosController extends AppController
                 $this->Flash->error(__('The employment info could not be saved. Please, try again.'));
             }
         }
-        $this->set(compact('employmentInfo'));
+        $customers = $this->EmploymentInfos->Customers->find('list', ['limit' => 200]);
+        $this->set(compact('employmentInfo', 'customers'));
         $this->set('_serialize', ['employmentInfo']);
     }
 

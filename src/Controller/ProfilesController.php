@@ -16,6 +16,9 @@ class ProfilesController extends AppController
      *
      * @return \Cake\Network\Response|null
      */
+     public function upload(){
+     	print_r("testing");
+     }
     public function index()
     {
         $profiles = $this->paginate($this->Profiles);
@@ -24,8 +27,9 @@ class ProfilesController extends AppController
         $this->set('_serialize', ['profiles']);
 		
 		
+
 		//get userid from session var
-		$userid=$this->request->session()->read('userid');
+		$userid=$this->request->session()->read('sessionuser')['id'];
 		//loading position and company name from jobinfos
 		$this->loadModel('JobInfos');
 		$jobinfo = $this->JobInfos->find() ->where(['users_id' => $userid]) ->first();

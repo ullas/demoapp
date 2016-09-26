@@ -9,6 +9,8 @@ use Cake\Validation\Validator;
 /**
  * CostCentres Model
  *
+ * @property \Cake\ORM\Association\BelongsTo $Customers
+ *
  * @method \App\Model\Entity\CostCentre get($primaryKey, $options = [])
  * @method \App\Model\Entity\CostCentre newEntity($data = null, array $options = [])
  * @method \App\Model\Entity\CostCentre[] newEntities(array $data, array $options = [])
@@ -33,6 +35,10 @@ class CostCentresTable extends Table
         $this->table('cost_centres');
         $this->displayField('name');
         $this->primaryKey('id');
+
+        $this->belongsTo('Customers', [
+            'foreignKey' => 'customer_id'
+        ]);
     }
 
     /**
@@ -88,6 +94,7 @@ class CostCentresTable extends Table
     public function buildRules(RulesChecker $rules)
     {
         $rules->add($rules->isUnique(['external_code']));
+        $rules->add($rules->existsIn(['customer_id'], 'Customers'));
 
         return $rules;
     }

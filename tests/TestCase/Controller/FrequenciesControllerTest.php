@@ -16,7 +16,11 @@ class FrequenciesControllerTest extends IntegrationTestCase
      * @var array
      */
     public $fixtures = [
-        'app.frequencies'
+        'app.frequencies',
+        'app.customers',
+        'app.pay_components',
+        'app.time_account_types',
+        'app.pay_component_groups'
     ];
 
     /**

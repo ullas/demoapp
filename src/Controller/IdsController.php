@@ -18,6 +18,9 @@ class IdsController extends AppController
      */
     public function index()
     {
+        $this->paginate = [
+            'contain' => ['Customers']
+        ];
         $ids = $this->paginate($this->Ids);
 
         $this->set(compact('ids'));
@@ -34,7 +37,7 @@ class IdsController extends AppController
     public function view($id = null)
     {
         $id = $this->Ids->get($id, [
-            'contain' => []
+            'contain' => ['Customers']
         ]);
 
         $this->set('id', $id);
@@ -59,7 +62,8 @@ class IdsController extends AppController
                 $this->Flash->error(__('The id could not be saved. Please, try again.'));
             }
         }
-        $this->set(compact('id'));
+        $customers = $this->Ids->Customers->find('list', ['limit' => 200]);
+        $this->set(compact('id', 'customers'));
         $this->set('_serialize', ['id']);
     }
 
@@ -85,7 +89,8 @@ class IdsController extends AppController
                 $this->Flash->error(__('The id could not be saved. Please, try again.'));
             }
         }
-        $this->set(compact('id'));
+        $customers = $this->Ids->Customers->find('list', ['limit' => 200]);
+        $this->set(compact('id', 'customers'));
         $this->set('_serialize', ['id']);
     }
 

@@ -18,6 +18,7 @@ use Cake\ORM\Entity;
  * @property string $province
  * @property string $zip_code
  * @property string $country
+ * @property int $customer_id
  */
 class CorporateAddress extends Entity
 {

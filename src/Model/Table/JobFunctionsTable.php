@@ -9,6 +9,9 @@ use Cake\Validation\Validator;
 /**
  * JobFunctions Model
  *
+ * @property \Cake\ORM\Association\BelongsTo $Customers
+ * @property \Cake\ORM\Association\HasMany $JobClasses
+ *
  * @method \App\Model\Entity\JobFunction get($primaryKey, $options = [])
  * @method \App\Model\Entity\JobFunction newEntity($data = null, array $options = [])
  * @method \App\Model\Entity\JobFunction[] newEntities(array $data, array $options = [])
@@ -33,6 +36,13 @@ class JobFunctionsTable extends Table
         $this->table('job_functions');
         $this->displayField('name');
         $this->primaryKey('id');
+
+        $this->belongsTo('Customers', [
+            'foreignKey' => 'customer_id'
+        ]);
+        $this->hasMany('JobClasses', [
+            'foreignKey' => 'job_function_id'
+        ]);
     }
 
     /**
@@ -85,6 +95,7 @@ class JobFunctionsTable extends Table
     public function buildRules(RulesChecker $rules)
     {
         $rules->add($rules->isUnique(['external_code']));
+        $rules->add($rules->existsIn(['customer_id'], 'Customers'));
 
         return $rules;
     }

@@ -10,7 +10,17 @@ use App\Controller\AppController;
  */
 class PayComponentGroupsController extends AppController
 {
+var $components = array('Datatable');
+	
+	public function ajaxData() {
+		$this->autoRender= False;
 
+		$fields = array(array('name'=>'id','type'=>'int'),'name','description',array('name'=>'status','type'=>'bool'),
+									  array('name'=>'start_date','type'=>'date'),array('name'=>'end_date','type'=>'date'),'currency','show_on_comp_ui','use_for_comparatio_calc','use_for_range_penetration',array('name'=>'sort_order','type'=>'numeric'),array('name'=>'system_defined','type'=>'bool'),'external_code');
+									  
+		$output =$this->Datatable->getView($fields);
+		echo json_encode($output);			
+    }
     /**
      * Index method
      *
@@ -18,6 +28,9 @@ class PayComponentGroupsController extends AppController
      */
     public function index()
     {
+        $this->paginate = [
+            'contain' => ['Customers']
+        ];
         $payComponentGroups = $this->paginate($this->PayComponentGroups);
 
         $this->set(compact('payComponentGroups'));
@@ -34,7 +47,7 @@ class PayComponentGroupsController extends AppController
     public function view($id = null)
     {
         $payComponentGroup = $this->PayComponentGroups->get($id, [
-            'contain' => []
+            'contain' => ['Customers', 'TimeAccountTypes']
         ]);
 
         $this->set('payComponentGroup', $payComponentGroup);
@@ -59,7 +72,8 @@ class PayComponentGroupsController extends AppController
                 $this->Flash->error(__('The pay component group could not be saved. Please, try again.'));
             }
         }
-        $this->set(compact('payComponentGroup'));
+        $customers = $this->PayComponentGroups->Customers->find('list', ['limit' => 200]);
+        $this->set(compact('payComponentGroup', 'customers'));
         $this->set('_serialize', ['payComponentGroup']);
     }
 
@@ -85,7 +99,8 @@ class PayComponentGroupsController extends AppController
                 $this->Flash->error(__('The pay component group could not be saved. Please, try again.'));
             }
         }
-        $this->set(compact('payComponentGroup'));
+        $customers = $this->PayComponentGroups->Customers->find('list', ['limit' => 200]);
+        $this->set(compact('payComponentGroup', 'customers'));
         $this->set('_serialize', ['payComponentGroup']);
     }
 

@@ -52,9 +52,11 @@ class WorkSchedulesFixture extends TestFixture
         'period_model' => ['type' => 'string', 'length' => 10, 'default' => null, 'null' => true, 'collate' => null, 'comment' => null, 'precision' => null, 'fixed' => null],
         'time_rec_variant_3' => ['type' => 'string', 'length' => 10, 'default' => null, 'null' => true, 'collate' => null, 'comment' => null, 'precision' => null, 'fixed' => null],
         'ws_code' => ['type' => 'string', 'length' => 10, 'default' => null, 'null' => false, 'collate' => null, 'comment' => null, 'precision' => null, 'fixed' => null],
+        'customer_id' => ['type' => 'biginteger', 'length' => 20, 'default' => null, 'null' => true, 'comment' => null, 'precision' => null, 'unsigned' => null, 'autoIncrement' => null],
         '_constraints' => [
             'primary' => ['type' => 'primary', 'columns' => ['id'], 'length' => []],
             'work_schedules_ws_code_key' => ['type' => 'unique', 'columns' => ['ws_code'], 'length' => []],
+            'work_schedules_customer_id_fkey' => ['type' => 'foreign', 'columns' => ['customer_id'], 'references' => ['customers', 'id'], 'update' => 'noAction', 'delete' => 'noAction', 'length' => []],
         ],
     ];
     // @codingStandardsIgnoreEnd
@@ -77,7 +79,7 @@ class WorkSchedulesFixture extends TestFixture
             'days_week' => 1.5,
             'ws_days' => 1.5,
             'model' => 'Lorem ipsum dolor sit a',
-            'start_date' => '2016-08-09',
+            'start_date' => '2016-09-09',
             'day1_planhours' => 1.5,
             'day2_planhours' => 1.5,
             'day3_planhours' => 1.5,
@@ -89,18 +91,19 @@ class WorkSchedulesFixture extends TestFixture
             'time_rec_variant_1' => 'Lorem ip',
             'category' => 'Lorem ip',
             'day' => 1.5,
-            'start_time' => '11:23:04',
-            'end_time' => '11:23:04',
+            'start_time' => '05:20:40',
+            'end_time' => '05:20:40',
             'shift_class' => 'Lorem ip',
             'planned_hours' => 1.5,
-            'planned_hours_minutes' => '11:23:04',
+            'planned_hours_minutes' => '05:20:40',
             'day_model' => 'Lorem ip',
             'time_rec_variant_2' => 'Lorem ip',
             'search_field' => 'Lorem ipsum dolor sit a',
-            'starting_date' => '2016-08-09',
+            'starting_date' => '2016-09-09',
             'period_model' => 'Lorem ip',
             'time_rec_variant_3' => 'Lorem ip',
-            'ws_code' => 'Lorem ip'
+            'ws_code' => 'Lorem ip',
+            'customer_id' => 1
         ],
     ];
 }

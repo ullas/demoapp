@@ -2,24 +2,24 @@
 /* Draw the lines */
 .jOrgChart .line {
   height                : 20px;
-  width                 : 4px;
+  width                 : 2px;
 }
 
 .jOrgChart .down {
-  background-color 		: black;	
+  background-color 		: #ddd;	
   margin 				: 0px auto;
 }
 
 .jOrgChart .top {
-  border-top          : 3px solid black;
+  border-top          : 2px solid #ddd;
 }
 
 .jOrgChart .left {
-  border-right          : 2px solid black;
+  border-right          : 2px solid #ddd;
 }
 
 .jOrgChart .right {
-  border-left           : 2px solid black;
+  border-left           : 2px solid #ddd;
 }
 
 /* node cell */
@@ -31,8 +31,13 @@
 
 /* The node */
 .jOrgChart .node {
-  background 		: #3c8dbc;
-  color:#FFFFFF;
+    border:2px solid #ddd;
+  background 		: #ddd;
+  /*maptell*/
+  background-image:url(/img/profile-icon.png);background-repeat: no-repeat;background-size: 100% 100%;
+  /*maptell*/
+  color:#000;
+  font-weight         :bold;
   display               : inline-block;
   width                 : 96px;
   height                : 96px;

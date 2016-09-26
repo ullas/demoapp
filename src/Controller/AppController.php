@@ -28,31 +28,55 @@ use Cake\Core\Configure;
  */
 class AppController extends Controller
 {
+	protected $loggedinuser;
 	
-	// public $helpers = [
-    // 'Html' => [
-        // 'className' => 'Bootstrap.BootstrapHtml'
-    // ],
-    // 'Form' => [
-        // 'className' => 'Bootstrap.BootstrapForm'
-    // ],
-    // 'Paginator' => [
-        // 'className' => 'Bootstrap.BootstrapPaginator'
-    // ],
-    // 'Modal' => [
-        // 'className' => 'Bootstrap.BootstrapModal'
-    // ]
-// ];
-// 	
+	// public function GetData($columns,$data){
+// 		
+		// $out = array();
+		// for ( $i=0, $ien=count($data) ; $i<$ien ; $i++ ) {
+			// $row = array();
+			// for ( $j=0, $jen=count($columns) ; $j<$jen ; $j++ ) {
+				// $column = $columns[$j];
+				// if (isset( $column['alias'] )){
+					// if ($column['alias']!= '' ){
+						// $c = $column['alias'];
+					// }else{
+						// $c = $column['db'];
+					// }	
+				// }else{
+					// $c = $column['db'];
+				// }
+// 				
+				// // Is there a formatter?
+				// if ( isset( $column['formatter'] ) ) {
+					// $row[ $column['dt'] ] =  utf8_encode($column['formatter']( $data[$i][ $c ], $data[$i] ));
+				// }
+				// else {
+					// $row[ $column['dt'] ] =  utf8_encode($data[$i][ $c ]);
+				// }
+			// }
+			// $out[] = $row;
+		// }
+// 
+		// return array(
+			// "draw"            => intval( $this->request->query['draw'] ),
+		 	// "recordsFiltered"    => count( $out ),
+		 	// "recordsTotal" => count( $out ),
+		 	// "data"            => $out
+		 // );
+	// }
+	
 	var $components = array('LoadCountry');
 	
 	public function isAuthorized($user)
 	{
    		 // Admin can access every action
-    	if (isset($user['role']) && $user['role'] === 'admin') {
+    	// if (isset($user['role']) && $user['role'] === 'admin') {
+    	if (isset($user['role'])) {
     		$this->set('name', $user['name']);
 			$this->set('userid', $user['id']);      
-			$this->request->session()->write('userid', $user['id']);
+			$this->request->session()->write('sessionuser', $user);
+			$this->loggedinuser=$user;
         	return true;
     	}
 
@@ -80,16 +104,16 @@ class AppController extends Controller
         $this->loadComponent('Flash');
         
 	    $this->loadComponent('Auth', [
-        'authorize' => ['Controller'], // Added this line
-        'loginRedirect' => [
-            'controller' => 'Homes',
-            'action' => 'index'
-        ],
-        'logoutRedirect' => [
-            'controller' => 'Users',
-            'action' => 'login',
-        ]
-    ]);
+        	'authorize' => ['Controller'], // Added this line
+        	'loginRedirect' => [
+            	'controller' => 'Homes',
+            	'action' => 'index'
+        	],
+        	'logoutRedirect' => [
+            	'controller' => 'Users',
+            	'action' => 'login',
+        	]
+    	]);
 	
 	
 	
@@ -97,14 +121,25 @@ class AppController extends Controller
 
     public function beforeFilter(Event $event)
     {
-    	$hours=['1'=>'1','2'=>'2','3'=>'3','4'=>'4','5'=>'5','6'=>'6'];
-    	$this->set('hours', $hours);
+    	// $hours=['1'=>'1','2'=>'2','3'=>'3','4'=>'4','5'=>'5','6'=>'6'];
+    	// $this->set('hours', $hours);
 		
+		parent::beforeFilter($event);
+		$this->Auth->deny(['add', 'edit']);	
 		
-		// $this->set('countries', $countries);
+		$userrole=$this->request->session()->read('sessionuser')['role'];
 		
+		switch ($userrole) {
+			case "admin":
+				$adminarray=["Homes","LegalEntities","BusinessUnits"];
+        		foreach ($adminarray as $value) {
+        			// print_r($value);
+        		}
+				break;
+			default:
+				break;
+		}
 		
-        // $this->Auth->allow(['index', 'view', 'display','add']);
     }
 
     /**

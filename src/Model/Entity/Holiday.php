@@ -11,6 +11,7 @@ use Cake\ORM\Entity;
  * @property string $name
  * @property \Cake\I18n\Time $date
  * @property string $holiday_code
+ * @property int $customer_id
  */
 class Holiday extends Entity
 {

@@ -2,7 +2,6 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
-use Cake\Event\Event;
 
 /**
  * Admins Controller
@@ -24,10 +23,7 @@ class AdminsController extends AppController
         $this->set(compact('admins'));
         $this->set('_serialize', ['admins']);
     }
-	public function beforeFilter(Event $event)
-    {
-            // $this->viewBuilder()->layout('admindefault');
-    }
+
     /**
      * View method
      *

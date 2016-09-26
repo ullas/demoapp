@@ -9,6 +9,9 @@ use Cake\Validation\Validator;
 /**
  * Locations Model
  *
+ * @property \Cake\ORM\Association\BelongsTo $Customers
+ * @property \Cake\ORM\Association\HasMany $LegalEntities
+ *
  * @method \App\Model\Entity\Location get($primaryKey, $options = [])
  * @method \App\Model\Entity\Location newEntity($data = null, array $options = [])
  * @method \App\Model\Entity\Location[] newEntities(array $data, array $options = [])
@@ -33,6 +36,13 @@ class LocationsTable extends Table
         $this->table('locations');
         $this->displayField('name');
         $this->primaryKey('id');
+
+        $this->belongsTo('Customers', [
+            'foreignKey' => 'customer_id'
+        ]);
+        $this->hasMany('LegalEntities', [
+            'foreignKey' => 'location_id'
+        ]);
     }
 
     /**
@@ -92,6 +102,7 @@ class LocationsTable extends Table
     public function buildRules(RulesChecker $rules)
     {
         $rules->add($rules->isUnique(['external_code']));
+        $rules->add($rules->existsIn(['customer_id'], 'Customers'));
 
         return $rules;
     }

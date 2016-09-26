@@ -28,7 +28,6 @@ use Cake\ORM\Entity;
  * @property bool $vacant
  * @property float $standard_hours
  * @property string $company
- * @property string $business_unit
  * @property string $division
  * @property string $department
  * @property string $location
@@ -43,6 +42,7 @@ use Cake\ORM\Entity;
  * @property string $right_to_return
  * @property string $position_code
  * @property bool $effective_status
+ * @property int $customer_id
  */
 class Position extends Entity
 {

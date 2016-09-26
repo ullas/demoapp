@@ -29,6 +29,7 @@ use Cake\ORM\Entity;
  * @property int $pay_component_id
  * @property string $time_to_actual_unit
  * @property int $pay_component_group_id
+ * @property int $customer_id
  *
  * @property \App\Model\Entity\PayComponent $pay_component
  * @property \App\Model\Entity\PayComponentGroup $pay_component_group

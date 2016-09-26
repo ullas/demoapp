@@ -49,8 +49,10 @@ class DependentsFixture extends TestFixture
         'leave_passage' => ['type' => 'string', 'length' => 60, 'default' => null, 'null' => true, 'collate' => null, 'comment' => null, 'precision' => null, 'fixed' => null],
         'leave_passage_entitle' => ['type' => 'string', 'length' => 60, 'default' => null, 'null' => true, 'collate' => null, 'comment' => null, 'precision' => null, 'fixed' => null],
         'emp_data_biographies_id' => ['type' => 'biginteger', 'length' => 20, 'default' => null, 'null' => true, 'comment' => null, 'precision' => null, 'unsigned' => null, 'autoIncrement' => null],
+        'customer_id' => ['type' => 'biginteger', 'length' => 20, 'default' => null, 'null' => true, 'comment' => null, 'precision' => null, 'unsigned' => null, 'autoIncrement' => null],
         '_constraints' => [
             'primary' => ['type' => 'primary', 'columns' => ['id'], 'length' => []],
+            'dependents_customer_id_fkey' => ['type' => 'foreign', 'columns' => ['customer_id'], 'references' => ['customers', 'id'], 'update' => 'noAction', 'delete' => 'noAction', 'length' => []],
             'dependents_emp_data_biographies_id_fkey' => ['type' => 'foreign', 'columns' => ['emp_data_biographies_id'], 'references' => ['emp_data_biographies', 'id'], 'update' => 'noAction', 'delete' => 'noAction', 'length' => []],
         ],
     ];
@@ -71,7 +73,7 @@ class DependentsFixture extends TestFixture
             'last_name' => 'Lorem ipsum dolor sit amet',
             'middle_name' => 'Lorem ipsum dolor sit amet',
             'salutation' => 'Lorem ipsum dolor sit amet',
-            'date_of_birth' => '2016-08-23',
+            'date_of_birth' => '2016-09-09',
             'country_of_birth' => 'Lorem ipsum dolor sit amet',
             'country' => 'Lorem ipsum dolor sit amet',
             'card_type' => 'Lorem ipsum dolor sit amet',
@@ -79,13 +81,13 @@ class DependentsFixture extends TestFixture
             'is_add_same_as_employee' => 1,
             'address_number' => 'Lorem ipsum dolor sit amet',
             'visa' => 'Lorem ipsum dolor sit amet',
-            'visa_issue' => '2016-08-23',
-            'visa_expiry' => '2016-08-23',
+            'visa_issue' => '2016-09-09',
+            'visa_expiry' => '2016-09-09',
             'passport' => 'Lorem ipsum dolor sit amet',
-            'pass_issue' => '2016-08-23',
-            'pass_expiry' => '2016-08-23',
+            'pass_issue' => '2016-09-09',
+            'pass_expiry' => '2016-09-09',
             'employed' => 1,
-            'emp_since' => '2016-08-23',
+            'emp_since' => '2016-09-09',
             'employer' => 'Lorem ipsum dolor sit amet',
             'acco_entitlement' => 'Lorem ipsum dolor sit amet',
             'legal_nominee' => 'Lorem ipsum dolor sit amet',
@@ -94,7 +96,8 @@ class DependentsFixture extends TestFixture
             'spouse_emplid' => 1.5,
             'leave_passage' => 'Lorem ipsum dolor sit amet',
             'leave_passage_entitle' => 'Lorem ipsum dolor sit amet',
-            'emp_data_biographies_id' => 1
+            'emp_data_biographies_id' => 1,
+            'customer_id' => 1
         ],
     ];
 }

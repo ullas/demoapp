@@ -10,6 +10,8 @@ use Cake\Validation\Validator;
  * PayComponents Model
  *
  * @property \Cake\ORM\Association\BelongsTo $Frequencies
+ * @property \Cake\ORM\Association\BelongsTo $Customers
+ * @property \Cake\ORM\Association\HasMany $TimeAccountTypes
  *
  * @method \App\Model\Entity\PayComponent get($primaryKey, $options = [])
  * @method \App\Model\Entity\PayComponent newEntity($data = null, array $options = [])
@@ -38,6 +40,12 @@ class PayComponentsTable extends Table
 
         $this->belongsTo('Frequencies', [
             'foreignKey' => 'frequency_id'
+        ]);
+        $this->belongsTo('Customers', [
+            'foreignKey' => 'customer_id'
+        ]);
+        $this->hasMany('TimeAccountTypes', [
+            'foreignKey' => 'pay_component_id'
         ]);
     }
 
@@ -147,6 +155,7 @@ class PayComponentsTable extends Table
     {
         $rules->add($rules->isUnique(['external_code']));
         $rules->add($rules->existsIn(['frequency_id'], 'Frequencies'));
+        $rules->add($rules->existsIn(['customer_id'], 'Customers'));
 
         return $rules;
     }

@@ -9,6 +9,8 @@ use Cake\Validation\Validator;
 /**
  * WorkSchedules Model
  *
+ * @property \Cake\ORM\Association\BelongsTo $Customers
+ *
  * @method \App\Model\Entity\WorkSchedule get($primaryKey, $options = [])
  * @method \App\Model\Entity\WorkSchedule newEntity($data = null, array $options = [])
  * @method \App\Model\Entity\WorkSchedule[] newEntities(array $data, array $options = [])
@@ -33,6 +35,10 @@ class WorkSchedulesTable extends Table
         $this->table('work_schedules');
         $this->displayField('id');
         $this->primaryKey('id');
+
+        $this->belongsTo('Customers', [
+            'foreignKey' => 'customer_id'
+        ]);
     }
 
     /**
@@ -184,6 +190,7 @@ class WorkSchedulesTable extends Table
     public function buildRules(RulesChecker $rules)
     {
         $rules->add($rules->isUnique(['ws_code']));
+        $rules->add($rules->existsIn(['customer_id'], 'Customers'));
 
         return $rules;
     }

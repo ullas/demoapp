@@ -32,6 +32,7 @@ use Cake\ORM\Entity;
  * @property \Cake\I18n\Time $stock_end_date
  * @property \Cake\I18n\Time $salary_end_date
  * @property \Cake\I18n\Time $benefits_end_date
+ * @property int $customer_id
  */
 class EmploymentInfo extends Entity
 {

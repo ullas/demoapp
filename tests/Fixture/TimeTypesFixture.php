@@ -30,10 +30,12 @@ class TimeTypesFixture extends TestFixture
         'take_rule' => ['type' => 'string', 'length' => 10, 'default' => null, 'null' => true, 'collate' => null, 'comment' => null, 'precision' => null, 'fixed' => null],
         'code' => ['type' => 'string', 'length' => 25, 'default' => null, 'null' => false, 'collate' => null, 'comment' => null, 'precision' => null, 'fixed' => null],
         'name' => ['type' => 'string', 'length' => 100, 'default' => null, 'null' => false, 'collate' => null, 'comment' => null, 'precision' => null, 'fixed' => null],
+        'customer_id' => ['type' => 'biginteger', 'length' => 20, 'default' => null, 'null' => true, 'comment' => null, 'precision' => null, 'unsigned' => null, 'autoIncrement' => null],
         '_constraints' => [
             'primary' => ['type' => 'primary', 'columns' => ['id'], 'length' => []],
             'time_types_code_key' => ['type' => 'unique', 'columns' => ['code'], 'length' => []],
             'time_types_name_key' => ['type' => 'unique', 'columns' => ['name'], 'length' => []],
+            'time_types_customer_id_fkey' => ['type' => 'foreign', 'columns' => ['customer_id'], 'references' => ['customers', 'id'], 'update' => 'noAction', 'delete' => 'noAction', 'length' => []],
         ],
     ];
     // @codingStandardsIgnoreEnd
@@ -57,7 +59,8 @@ class TimeTypesFixture extends TestFixture
             'time_acc_type' => 'Lorem ip',
             'take_rule' => 'Lorem ip',
             'code' => 'Lorem ipsum dolor sit a',
-            'name' => 'Lorem ipsum dolor sit amet'
+            'name' => 'Lorem ipsum dolor sit amet',
+            'customer_id' => 1
         ],
     ];
 }

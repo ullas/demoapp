@@ -43,8 +43,10 @@ class EmploymentInfosFixture extends TestFixture
         'stock_end_date' => ['type' => 'date', 'length' => null, 'default' => null, 'null' => true, 'comment' => null, 'precision' => null],
         'salary_end_date' => ['type' => 'date', 'length' => null, 'default' => null, 'null' => true, 'comment' => null, 'precision' => null],
         'benefits_end_date' => ['type' => 'date', 'length' => null, 'default' => null, 'null' => true, 'comment' => null, 'precision' => null],
+        'customer_id' => ['type' => 'biginteger', 'length' => 20, 'default' => null, 'null' => true, 'comment' => null, 'precision' => null, 'unsigned' => null, 'autoIncrement' => null],
         '_constraints' => [
             'primary' => ['type' => 'primary', 'columns' => ['id'], 'length' => []],
+            'employment_infos_customer_id_fkey' => ['type' => 'foreign', 'columns' => ['customer_id'], 'references' => ['customers', 'id'], 'update' => 'noAction', 'delete' => 'noAction', 'length' => []],
         ],
     ];
     // @codingStandardsIgnoreEnd
@@ -57,31 +59,32 @@ class EmploymentInfosFixture extends TestFixture
     public $records = [
         [
             'id' => 1,
-            'start_date' => '2016-08-09',
-            'first_date_worked' => '2016-08-09',
-            'original_start_date' => '2016-08-09',
+            'start_date' => '2016-09-09',
+            'first_date_worked' => '2016-09-09',
+            'original_start_date' => '2016-09-09',
             'company' => 'Lorem ipsum dolor sit amet',
             'is_primary' => 1,
-            'seniority_date' => '2016-08-09',
-            'benefits_eligibility_start_date' => '2016-08-09',
+            'seniority_date' => '2016-09-09',
+            'benefits_eligibility_start_date' => '2016-09-09',
             'prev_employeeid' => 'Lorem ipsum dolor sit amet',
             'eligible_for_stock' => 1,
-            'service_date' => '2016-08-09',
+            'service_date' => '2016-09-09',
             'initial_stock_grant' => 1.5,
             'initial_option_grant' => 1.5,
             'job_credit' => 'Lor',
             'notes' => 'Lorem ipsum dolor sit amet',
             'is_contingent_worker' => 1,
-            'end_date' => '2016-08-09',
+            'end_date' => '2016-09-09',
             'ok_to_rehire' => 1,
-            'pay_roll_end_date' => '2016-08-09',
-            'last_date_worked' => '2016-08-09',
+            'pay_roll_end_date' => '2016-09-09',
+            'last_date_worked' => '2016-09-09',
             'regret_termination' => 1,
             'eligible_for_sal_continuation' => 1,
-            'bonus_pay_expiration_date' => '2016-08-09',
-            'stock_end_date' => '2016-08-09',
-            'salary_end_date' => '2016-08-09',
-            'benefits_end_date' => '2016-08-09'
+            'bonus_pay_expiration_date' => '2016-09-09',
+            'stock_end_date' => '2016-09-09',
+            'salary_end_date' => '2016-09-09',
+            'benefits_end_date' => '2016-09-09',
+            'customer_id' => 1
         ],
     ];
 }

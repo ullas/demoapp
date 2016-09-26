@@ -16,7 +16,8 @@ class PicklistsControllerTest extends IntegrationTestCase
      * @var array
      */
     public $fixtures = [
-        'app.picklists'
+        'app.picklists',
+        'app.customers'
     ];
 
     /**

@@ -16,7 +16,10 @@ class PayGradesControllerTest extends IntegrationTestCase
      * @var array
      */
     public $fixtures = [
-        'app.pay_grades'
+        'app.pay_grades',
+        'app.customers',
+        'app.job_classes',
+        'app.job_functions'
     ];
 
     /**

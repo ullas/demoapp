@@ -14,11 +14,12 @@ use Cake\ORM\Entity;
  * @property \Cake\I18n\Time $effective_end_date
  * @property string $country_of_registration
  * @property float $standard_weekly_hours
- * @property float $currency
  * @property string $official_language
  * @property string $external_code
  * @property int $location_id
  * @property int $paygroup_id
+ * @property string $currency
+ * @property int $customer_id
  *
  * @property \App\Model\Entity\Location $location
  * @property \App\Model\Entity\PayGroup $pay_group

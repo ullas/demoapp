@@ -11,6 +11,7 @@ use Cake\Validation\Validator;
  *
  * @property \Cake\ORM\Association\BelongsTo $PayComponents
  * @property \Cake\ORM\Association\BelongsTo $PayComponentGroups
+ * @property \Cake\ORM\Association\BelongsTo $Customers
  *
  * @method \App\Model\Entity\TimeAccountType get($primaryKey, $options = [])
  * @method \App\Model\Entity\TimeAccountType newEntity($data = null, array $options = [])
@@ -42,6 +43,9 @@ class TimeAccountTypesTable extends Table
         ]);
         $this->belongsTo('PayComponentGroups', [
             'foreignKey' => 'pay_component_group_id'
+        ]);
+        $this->belongsTo('Customers', [
+            'foreignKey' => 'customer_id'
         ]);
     }
 
@@ -143,6 +147,7 @@ class TimeAccountTypesTable extends Table
         $rules->add($rules->isUnique(['code']));
         $rules->add($rules->existsIn(['pay_component_id'], 'PayComponents'));
         $rules->add($rules->existsIn(['pay_component_group_id'], 'PayComponentGroups'));
+        $rules->add($rules->existsIn(['customer_id'], 'Customers'));
 
         return $rules;
     }

@@ -10,7 +10,18 @@ use App\Controller\AppController;
  */
 class HolidaysController extends AppController
 {
+var $components = array('Datatable');
+	
+	public function ajaxData() {
+		$this->autoRender= False;
 
+		$fields = array(array('name'=>'id','type'=>'int'),'holiday_class','name',array('name'=>'date','type'=>'date'),'holiday_code');
+		
+						  
+									  
+		$output =$this->Datatable->getView($fields);
+		echo json_encode($output);			
+    }
     /**
      * Index method
      *
@@ -18,6 +29,9 @@ class HolidaysController extends AppController
      */
     public function index()
     {
+        $this->paginate = [
+            'contain' => ['Customers']
+        ];
         $holidays = $this->paginate($this->Holidays);
 
         $this->set(compact('holidays'));
@@ -34,7 +48,7 @@ class HolidaysController extends AppController
     public function view($id = null)
     {
         $holiday = $this->Holidays->get($id, [
-            'contain' => []
+            'contain' => ['Customers', 'CalendarAssignments']
         ]);
 
         $this->set('holiday', $holiday);
@@ -59,7 +73,8 @@ class HolidaysController extends AppController
                 $this->Flash->error(__('The holiday could not be saved. Please, try again.'));
             }
         }
-        $this->set(compact('holiday'));
+        $customers = $this->Holidays->Customers->find('list', ['limit' => 200]);
+        $this->set(compact('holiday', 'customers'));
         $this->set('_serialize', ['holiday']);
     }
 
@@ -85,7 +100,8 @@ class HolidaysController extends AppController
                 $this->Flash->error(__('The holiday could not be saved. Please, try again.'));
             }
         }
-        $this->set(compact('holiday'));
+        $customers = $this->Holidays->Customers->find('list', ['limit' => 200]);
+        $this->set(compact('holiday', 'customers'));
         $this->set('_serialize', ['holiday']);
     }
 

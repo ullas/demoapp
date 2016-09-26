@@ -10,7 +10,16 @@ use App\Controller\AppController;
  */
 class ContactInfosController extends AppController
 {
+var $components = array('Datatable');
+	
+	public function ajaxData() {
+		$this->autoRender= False;
 
+		$fields = array('phone','mobile','email_address1','em ail_address2','facebook','linkedin','person_id_external');
+									  
+		$output =$this->Datatable->getView($fields);
+		echo json_encode($output);			
+    }
     /**
      * Index method
      *
@@ -18,6 +27,9 @@ class ContactInfosController extends AppController
      */
     public function index()
     {
+        $this->paginate = [
+            'contain' => ['Customers']
+        ];
         $contactInfos = $this->paginate($this->ContactInfos);
 
         $this->set(compact('contactInfos'));
@@ -34,7 +46,7 @@ class ContactInfosController extends AppController
     public function view($id = null)
     {
         $contactInfo = $this->ContactInfos->get($id, [
-            'contain' => []
+            'contain' => ['Customers']
         ]);
 
         $this->set('contactInfo', $contactInfo);
@@ -59,7 +71,8 @@ class ContactInfosController extends AppController
                 $this->Flash->error(__('The contact info could not be saved. Please, try again.'));
             }
         }
-        $this->set(compact('contactInfo'));
+        $customers = $this->ContactInfos->Customers->find('list', ['limit' => 200]);
+        $this->set(compact('contactInfo', 'customers'));
         $this->set('_serialize', ['contactInfo']);
     }
 
@@ -85,7 +98,8 @@ class ContactInfosController extends AppController
                 $this->Flash->error(__('The contact info could not be saved. Please, try again.'));
             }
         }
-        $this->set(compact('contactInfo'));
+        $customers = $this->ContactInfos->Customers->find('list', ['limit' => 200]);
+        $this->set(compact('contactInfo', 'customers'));
         $this->set('_serialize', ['contactInfo']);
     }
 

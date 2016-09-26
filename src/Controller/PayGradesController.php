@@ -11,6 +11,20 @@ use App\Controller\AppController;
 class PayGradesController extends AppController
 {
 
+var $components = array('Datatable');
+	
+	public function ajaxData() {
+		$this->autoRender= False;
+
+		$fields = array(array('name'=>'id','type'=>'int'),'name','description',array('name'=>'status','type'=>'bool'),array('name'=>'start_date','type'=>'date'),array('name'=>'end_date','type'=>'date'),array('name'=>'pay_grade_level','type'=>'numeric'),
+		'external_code');
+		
+						  
+									  
+		$output =$this->Datatable->getView($fields);
+		echo json_encode($output);			
+    }
+
     /**
      * Index method
      *
@@ -18,6 +32,9 @@ class PayGradesController extends AppController
      */
     public function index()
     {
+        $this->paginate = [
+            'contain' => ['Customers']
+        ];
         $payGrades = $this->paginate($this->PayGrades);
 
         $this->set(compact('payGrades'));
@@ -34,7 +51,7 @@ class PayGradesController extends AppController
     public function view($id = null)
     {
         $payGrade = $this->PayGrades->get($id, [
-            'contain' => []
+            'contain' => ['Customers', 'JobClasses']
         ]);
 
         $this->set('payGrade', $payGrade);
@@ -59,7 +76,8 @@ class PayGradesController extends AppController
                 $this->Flash->error(__('The pay grade could not be saved. Please, try again.'));
             }
         }
-        $this->set(compact('payGrade'));
+        $customers = $this->PayGrades->Customers->find('list', ['limit' => 200]);
+        $this->set(compact('payGrade', 'customers'));
         $this->set('_serialize', ['payGrade']);
     }
 
@@ -85,7 +103,8 @@ class PayGradesController extends AppController
                 $this->Flash->error(__('The pay grade could not be saved. Please, try again.'));
             }
         }
-        $this->set(compact('payGrade'));
+        $customers = $this->PayGrades->Customers->find('list', ['limit' => 200]);
+        $this->set(compact('payGrade', 'customers'));
         $this->set('_serialize', ['payGrade']);
     }
 

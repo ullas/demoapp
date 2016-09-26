@@ -17,7 +17,8 @@ class AddressesControllerTest extends IntegrationTestCase
      */
     public $fixtures = [
         'app.addresses',
-        'app.emp_data_biographies'
+        'app.emp_data_biographies',
+        'app.customers'
     ];
 
     /**

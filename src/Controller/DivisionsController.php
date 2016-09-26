@@ -10,7 +10,19 @@ use App\Controller\AppController;
  */
 class DivisionsController extends AppController
 {
+	
+var $components = array('Datatable');
+	
+	public function ajaxData() {
+		$this->autoRender= False;
 
+		$fields = array(array('name'=>'id','type'=>'int'),'name','description',array('name'=>'effective_status','type'=>'bool'),
+									  array('name'=>'effective_start_date','type'=>'date'),array('name'=>'effective_end_date','type'=>'date'),
+									  'parent_division','external_code',array('name'=>'head_of_unit','type'=>'bigint'));
+									  
+		$output =$this->Datatable->getView($fields);
+		echo json_encode($output);			
+    }
     /**
      * Index method
      *
@@ -18,6 +30,9 @@ class DivisionsController extends AppController
      */
     public function index()
     {
+        $this->paginate = [
+            'contain' => ['Customers']
+        ];
         $divisions = $this->paginate($this->Divisions);
 
         $this->set(compact('divisions'));
@@ -34,7 +49,7 @@ class DivisionsController extends AppController
     public function view($id = null)
     {
         $division = $this->Divisions->get($id, [
-            'contain' => []
+            'contain' => ['Customers']
         ]);
 
         $this->set('division', $division);
@@ -59,7 +74,8 @@ class DivisionsController extends AppController
                 $this->Flash->error(__('The division could not be saved. Please, try again.'));
             }
         }
-        $this->set(compact('division'));
+        $customers = $this->Divisions->Customers->find('list', ['limit' => 200]);
+        $this->set(compact('division', 'customers'));
         $this->set('_serialize', ['division']);
     }
 
@@ -85,7 +101,8 @@ class DivisionsController extends AppController
                 $this->Flash->error(__('The division could not be saved. Please, try again.'));
             }
         }
-        $this->set(compact('division'));
+        $customers = $this->Divisions->Customers->find('list', ['limit' => 200]);
+        $this->set(compact('division', 'customers'));
         $this->set('_serialize', ['division']);
     }
 

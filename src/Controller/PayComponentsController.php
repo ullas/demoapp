@@ -10,7 +10,18 @@ use App\Controller\AppController;
  */
 class PayComponentsController extends AppController
 {
+	var $components = array('Datatable');
+	
+	public function ajaxData() {
+		$this->autoRender= False;
 
+		$fields = array(array('name'=>'id','type'=>'int'),'name','description',array('name'=>'status','type'=>'bool'),
+		array('name'=>'start_date ','type'=>'date'),array('name'=>'end_date','type'=>'date'),'pay_component_type',' is_earning','currency',
+		array('name'=>'pay_component_value','type'=>'numeric'),array('name'=>'frequency_id' ,'type'=>'bigint'));
+									  
+		$output =$this->Datatable->getView($fields);
+		echo json_encode($output);			
+    }
     /**
      * Index method
      *
@@ -19,7 +30,7 @@ class PayComponentsController extends AppController
     public function index()
     {
         $this->paginate = [
-            'contain' => ['Frequencies']
+            'contain' => ['Frequencies', 'Customers']
         ];
         $payComponents = $this->paginate($this->PayComponents);
 
@@ -37,7 +48,7 @@ class PayComponentsController extends AppController
     public function view($id = null)
     {
         $payComponent = $this->PayComponents->get($id, [
-            'contain' => ['Frequencies']
+            'contain' => ['Frequencies', 'Customers', 'TimeAccountTypes']
         ]);
 
         $this->set('payComponent', $payComponent);
@@ -63,7 +74,8 @@ class PayComponentsController extends AppController
             }
         }
         $frequencies = $this->PayComponents->Frequencies->find('list', ['limit' => 200]);
-        $this->set(compact('payComponent', 'frequencies'));
+        $customers = $this->PayComponents->Customers->find('list', ['limit' => 200]);
+        $this->set(compact('payComponent', 'frequencies', 'customers'));
         $this->set('_serialize', ['payComponent']);
     }
 
@@ -90,7 +102,8 @@ class PayComponentsController extends AppController
             }
         }
         $frequencies = $this->PayComponents->Frequencies->find('list', ['limit' => 200]);
-        $this->set(compact('payComponent', 'frequencies'));
+        $customers = $this->PayComponents->Customers->find('list', ['limit' => 200]);
+        $this->set(compact('payComponent', 'frequencies', 'customers'));
         $this->set('_serialize', ['payComponent']);
     }
 

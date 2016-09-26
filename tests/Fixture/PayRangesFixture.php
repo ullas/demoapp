@@ -34,9 +34,11 @@ class PayRangesFixture extends TestFixture
         'external_code' => ['type' => 'string', 'length' => 32, 'default' => null, 'null' => false, 'collate' => null, 'comment' => null, 'precision' => null, 'fixed' => null],
         'legal_entity_id' => ['type' => 'biginteger', 'length' => 20, 'default' => null, 'null' => true, 'comment' => null, 'precision' => null, 'unsigned' => null, 'autoIncrement' => null],
         'pay_group_id' => ['type' => 'biginteger', 'length' => 20, 'default' => null, 'null' => true, 'comment' => null, 'precision' => null, 'unsigned' => null, 'autoIncrement' => null],
+        'customer_id' => ['type' => 'biginteger', 'length' => 20, 'default' => null, 'null' => true, 'comment' => null, 'precision' => null, 'unsigned' => null, 'autoIncrement' => null],
         '_constraints' => [
             'primary' => ['type' => 'primary', 'columns' => ['id'], 'length' => []],
             'pay_ranges_external_code_key' => ['type' => 'unique', 'columns' => ['external_code'], 'length' => []],
+            'pay_ranges_customer_id_fkey' => ['type' => 'foreign', 'columns' => ['customer_id'], 'references' => ['customers', 'id'], 'update' => 'noAction', 'delete' => 'noAction', 'length' => []],
             'pay_ranges_legal_entity_id_fkey' => ['type' => 'foreign', 'columns' => ['legal_entity_id'], 'references' => ['legal_entities', 'id'], 'update' => 'noAction', 'delete' => 'noAction', 'length' => []],
             'pay_ranges_pay_group_id_fkey' => ['type' => 'foreign', 'columns' => ['pay_group_id'], 'references' => ['pay_groups', 'id'], 'update' => 'noAction', 'delete' => 'noAction', 'length' => []],
         ],
@@ -53,8 +55,8 @@ class PayRangesFixture extends TestFixture
             'name' => 'Lorem ipsum dolor sit amet',
             'description' => 'Lorem ipsum dolor sit amet',
             'status' => 'Lorem ipsum dolor sit amet',
-            'start_date' => '2016-08-24',
-            'end_date' => '2016-08-24',
+            'start_date' => '2016-09-09',
+            'end_date' => '2016-09-09',
             'currency' => 'Lorem ipsum dolor sit amet',
             'frequency_code' => 'Lorem ipsum dolor sit amet',
             'minimum_pay' => 1.5,
@@ -66,7 +68,8 @@ class PayRangesFixture extends TestFixture
             'id' => 1,
             'external_code' => 'Lorem ipsum dolor sit amet',
             'legal_entity_id' => 1,
-            'pay_group_id' => 1
+            'pay_group_id' => 1,
+            'customer_id' => 1
         ],
     ];
 }

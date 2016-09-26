@@ -16,7 +16,8 @@ class WorkSchedulesControllerTest extends IntegrationTestCase
      * @var array
      */
     public $fixtures = [
-        'app.work_schedules'
+        'app.work_schedules',
+        'app.customers'
     ];
 
     /**

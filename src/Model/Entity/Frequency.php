@@ -11,6 +11,7 @@ use Cake\ORM\Entity;
  * @property string $description
  * @property float $annualization_factor
  * @property string $external_code
+ * @property int $customer_id
  */
 class Frequency extends Entity
 {

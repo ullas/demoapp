@@ -1,11 +1,15 @@
 <?php
 namespace App\Model\Table;
+
 use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
+
 /**
  * BusinessUnits Model
+ *
+ * @property \Cake\ORM\Association\BelongsTo $Customers
  *
  * @method \App\Model\Entity\BusinessUnit get($primaryKey, $options = [])
  * @method \App\Model\Entity\BusinessUnit newEntity($data = null, array $options = [])
@@ -17,6 +21,7 @@ use Cake\Validation\Validator;
  */
 class BusinessUnitsTable extends Table
 {
+
     /**
      * Initialize method
      *
@@ -26,10 +31,16 @@ class BusinessUnitsTable extends Table
     public function initialize(array $config)
     {
         parent::initialize($config);
+
         $this->table('business_units');
         $this->displayField('name');
         $this->primaryKey('id');
+
+        $this->belongsTo('Customers', [
+            'foreignKey' => 'customer_id'
+        ]);
     }
+
     /**
      * Default validation rules.
      *
@@ -40,27 +51,36 @@ class BusinessUnitsTable extends Table
     {
         $validator
             ->allowEmpty('id', 'create');
+
         $validator
             ->allowEmpty('name');
+
         $validator
             ->allowEmpty('description');
+
         $validator
             ->boolean('effective_status')
             ->allowEmpty('effective_status');
+
         $validator
             ->date('effective_start_date')
             ->allowEmpty('effective_start_date');
+
         $validator
             ->date('effective_end_date')
             ->allowEmpty('effective_end_date');
+
         $validator
             ->requirePresence('external_code', 'create')
             ->notEmpty('external_code')
             ->add('external_code', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
+
         $validator
             ->allowEmpty('head_of_unit');
+
         return $validator;
     }
+
     /**
      * Returns a rules checker object that will be used for validating
      * application integrity.
@@ -71,6 +91,8 @@ class BusinessUnitsTable extends Table
     public function buildRules(RulesChecker $rules)
     {
         $rules->add($rules->isUnique(['external_code']));
+        $rules->add($rules->existsIn(['customer_id'], 'Customers'));
+
         return $rules;
     }
 }

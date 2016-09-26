@@ -25,6 +25,7 @@ use Cake\ORM\Entity;
  * @property string $decimal_point
  * @property float $lag
  * @property string $external_code
+ * @property int $customer_id
  */
 class PayGroup extends Entity
 {

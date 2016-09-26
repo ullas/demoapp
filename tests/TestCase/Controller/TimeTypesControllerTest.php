@@ -16,7 +16,9 @@ class TimeTypesControllerTest extends IntegrationTestCase
      * @var array
      */
     public $fixtures = [
-        'app.time_types'
+        'app.time_types',
+        'app.customers',
+        'app.time_type_profiles'
     ];
 
     /**

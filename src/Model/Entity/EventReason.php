@@ -16,6 +16,7 @@ use Cake\ORM\Entity;
  * @property string $empl_status
  * @property string $implicit_position_action
  * @property string $external_code
+ * @property int $customer_id
  */
 class EventReason extends Entity
 {

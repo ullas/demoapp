@@ -48,6 +48,7 @@ use Cake\ORM\Entity;
  * @property string $disable_authority
  * @property string $disable_ref
  * @property string $person_id_external
+ * @property int $customer_id
  */
 class EmpDataPersonal extends Entity
 {

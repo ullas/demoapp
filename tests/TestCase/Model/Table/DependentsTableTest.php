@@ -24,7 +24,9 @@ class DependentsTableTest extends TestCase
      * @var array
      */
     public $fixtures = [
-        'app.dependents'
+        'app.dependents',
+        'app.emp_data_biographies',
+        'app.customers'
     ];
 
     /**

@@ -9,6 +9,8 @@ use Cake\Validation\Validator;
 /**
  * EmpDataPersonals Model
  *
+ * @property \Cake\ORM\Association\BelongsTo $Customers
+ *
  * @method \App\Model\Entity\EmpDataPersonal get($primaryKey, $options = [])
  * @method \App\Model\Entity\EmpDataPersonal newEntity($data = null, array $options = [])
  * @method \App\Model\Entity\EmpDataPersonal[] newEntities(array $data, array $options = [])
@@ -33,6 +35,10 @@ class EmpDataPersonalsTable extends Table
         $this->table('emp_data_personals');
         $this->displayField('id');
         $this->primaryKey('id');
+
+        $this->belongsTo('Customers', [
+            'foreignKey' => 'customer_id'
+        ]);
     }
 
     /**
@@ -189,6 +195,7 @@ class EmpDataPersonalsTable extends Table
     public function buildRules(RulesChecker $rules)
     {
         $rules->add($rules->isUnique(['person_id_external']));
+        $rules->add($rules->existsIn(['customer_id'], 'Customers'));
 
         return $rules;
     }

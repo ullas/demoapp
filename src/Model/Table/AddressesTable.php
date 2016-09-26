@@ -10,6 +10,7 @@ use Cake\Validation\Validator;
  * Addresses Model
  *
  * @property \Cake\ORM\Association\BelongsTo $EmpDataBiographies
+ * @property \Cake\ORM\Association\BelongsTo $Customers
  *
  * @method \App\Model\Entity\Address get($primaryKey, $options = [])
  * @method \App\Model\Entity\Address newEntity($data = null, array $options = [])
@@ -38,6 +39,9 @@ class AddressesTable extends Table
 
         $this->belongsTo('EmpDataBiographies', [
             'foreignKey' => 'emp_data_biographies_id'
+        ]);
+        $this->belongsTo('Customers', [
+            'foreignKey' => 'customer_id'
         ]);
     }
 
@@ -104,6 +108,7 @@ class AddressesTable extends Table
     public function buildRules(RulesChecker $rules)
     {
         $rules->add($rules->existsIn(['emp_data_biographies_id'], 'EmpDataBiographies'));
+        $rules->add($rules->existsIn(['customer_id'], 'Customers'));
 
         return $rules;
     }

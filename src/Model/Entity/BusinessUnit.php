@@ -4,7 +4,7 @@ namespace App\Model\Entity;
 use Cake\ORM\Entity;
 
 /**
- * Businessunit Entity
+ * BusinessUnit Entity
  *
  * @property int $id
  * @property string $name
@@ -14,8 +14,9 @@ use Cake\ORM\Entity;
  * @property \Cake\I18n\Time $effective_end_date
  * @property string $external_code
  * @property int $head_of_unit
+ * @property int $customer_id
  */
-class Businessunit extends Entity
+class BusinessUnit extends Entity
 {
 
     /**

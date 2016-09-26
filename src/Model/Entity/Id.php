@@ -11,6 +11,7 @@ use Cake\ORM\Entity;
  * @property string $card_type
  * @property string $nationalid
  * @property bool $is_primary
+ * @property int $customer_id
  */
 class Id extends Entity
 {
