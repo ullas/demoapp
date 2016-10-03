@@ -1,8 +1,6 @@
 <?php
 namespace App\Controller\Component;
-
 use Cake\Controller\Component;
-
 	class DatatableComponent extends Component {
 										  
 		public function getView($fields) 
@@ -183,7 +181,6 @@ use Cake\Controller\Component;
 				}
 				$out[] = $row;
 			}
-
 			return array(
 				"draw"            => intval( $this->request->query['draw'] ),
 		 		"recordsFiltered"    => $filteredCount,

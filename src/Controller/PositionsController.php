@@ -10,7 +10,16 @@ use App\Controller\AppController;
  */
 class PositionsController extends AppController
 {
+	var $components = array('Datatable');
+	public function ajaxData() {
+		$this->autoRender= False;
 
+		$fields = array(array('name'=>'id','type'=>'int'),'external_name','position_type', array('name'=>'effective_start_date','type'=>'date'),
+					 array('name'=>'effective_end_date','type'=>'date'), 'division_id',array('name'=>'department_id ','type'=>'int'));
+									  
+		$output =$this->Datatable->getView($fields);
+		echo json_encode($output);			
+    }
     /**
      * Index method
      *
@@ -19,7 +28,7 @@ class PositionsController extends AppController
     public function index()
     {
         $this->paginate = [
-            'contain' => ['Customers']
+            'contain' => ['PayGrades', 'LegalEntities', 'Divisions', 'Departments', 'Locations', 'CostCentres', 'PayRanges', 'Customers']
         ];
         $positions = $this->paginate($this->Positions);
 
@@ -37,7 +46,7 @@ class PositionsController extends AppController
     public function view($id = null)
     {
         $position = $this->Positions->get($id, [
-            'contain' => ['Customers']
+            'contain' => ['PayGrades', 'LegalEntities', 'Divisions', 'Departments', 'Locations', 'CostCentres', 'PayRanges', 'Customers']
         ]);
 
         $this->set('position', $position);
@@ -62,8 +71,15 @@ class PositionsController extends AppController
                 $this->Flash->error(__('The position could not be saved. Please, try again.'));
             }
         }
+        $payGrades = $this->Positions->PayGrades->find('list', ['limit' => 200]);
+        $legalEntities = $this->Positions->LegalEntities->find('list', ['limit' => 200]);
+        $divisions = $this->Positions->Divisions->find('list', ['limit' => 200]);
+        $departments = $this->Positions->Departments->find('list', ['limit' => 200]);
+        $locations = $this->Positions->Locations->find('list', ['limit' => 200]);
+        $costCentres = $this->Positions->CostCentres->find('list', ['limit' => 200]);
+        $payRanges = $this->Positions->PayRanges->find('list', ['limit' => 200]);
         $customers = $this->Positions->Customers->find('list', ['limit' => 200]);
-        $this->set(compact('position', 'customers'));
+        $this->set(compact('position', 'payGrades', 'legalEntities', 'divisions', 'departments', 'locations', 'costCentres', 'payRanges', 'customers'));
         $this->set('_serialize', ['position']);
     }
 
@@ -89,8 +105,15 @@ class PositionsController extends AppController
                 $this->Flash->error(__('The position could not be saved. Please, try again.'));
             }
         }
+        $payGrades = $this->Positions->PayGrades->find('list', ['limit' => 200]);
+        $legalEntities = $this->Positions->LegalEntities->find('list', ['limit' => 200]);
+        $divisions = $this->Positions->Divisions->find('list', ['limit' => 200]);
+        $departments = $this->Positions->Departments->find('list', ['limit' => 200]);
+        $locations = $this->Positions->Locations->find('list', ['limit' => 200]);
+        $costCentres = $this->Positions->CostCentres->find('list', ['limit' => 200]);
+        $payRanges = $this->Positions->PayRanges->find('list', ['limit' => 200]);
         $customers = $this->Positions->Customers->find('list', ['limit' => 200]);
-        $this->set(compact('position', 'customers'));
+        $this->set(compact('position', 'payGrades', 'legalEntities', 'divisions', 'departments', 'locations', 'costCentres', 'payRanges', 'customers'));
         $this->set('_serialize', ['position']);
     }
 

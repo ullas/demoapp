@@ -42,7 +42,8 @@ class UsersTable extends Table
         $this->addBehavior('Timestamp');
 
         $this->belongsTo('Customers', [
-            'foreignKey' => 'customer_id'
+            'foreignKey' => 'customer_id',
+            'joinType' => 'INNER'
         ]);
         $this->hasMany('CalendarAssignments', [
             'foreignKey' => 'user_id'
@@ -67,7 +68,8 @@ class UsersTable extends Table
             ->notEmpty('password');
 
         $validator
-            ->allowEmpty('role');
+            ->requirePresence('role', 'create')
+            ->notEmpty('role');
 
         $validator
             ->requirePresence('username', 'create')

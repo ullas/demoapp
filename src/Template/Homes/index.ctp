@@ -3,6 +3,8 @@
 	height:250px;
 }	
 </style>
+
+    	
 <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>Home</h1>
@@ -13,8 +15,7 @@
     
     
     <section class="content">
-    	
-    	<div id="draggablePanelList" class="list-unstyled row">
+    <div id="draggablePanelList" class="list-unstyled row">
 			
     <div class="col-sm-3">
     	<div class="box box-primary direct-chat direct-chat-primary">
@@ -62,9 +63,7 @@
     </div>
 
 </div>
-    
-         <!-- /.row -->
-        
+
   
   
 </section>
@@ -87,6 +86,7 @@
                 });
             }
         });
+        
   });
 </script>
 <?php $this->end(); ?>

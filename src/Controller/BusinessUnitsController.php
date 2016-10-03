@@ -78,7 +78,23 @@ class BusinessUnitsController extends AppController
         $this->set(compact('businessUnit', 'customers'));
         $this->set('_serialize', ['businessUnit']);
     }
-
+	public function addwizard()
+    {
+        $businessUnit = $this->BusinessUnits->newEntity();
+        if ($this->request->is('post')) {
+            $businessUnit = $this->BusinessUnits->patchEntity($businessUnit, $this->request->data);
+			$businessUnit['customer_id']=$this->loggedinuser['customer_id'];
+            if ($this->BusinessUnits->save($businessUnit)) {
+                $this->Flash->success(__('The business unit has been saved.'));
+				return $this->redirect(array('controller' => 'Departments', 'action' => 'addwizard'));
+            } else {
+                $this->Flash->error(__('The business unit could not be saved. Please, try again.'));
+            }
+        }
+        $customers = $this->BusinessUnits->Customers->find('list', ['limit' => 200]);
+        $this->set(compact('businessUnit', 'customers'));
+        $this->set('_serialize', ['businessUnit']);
+    }
     /**
      * Edit method
      *
