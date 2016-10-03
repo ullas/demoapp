@@ -78,6 +78,23 @@ var $components = array('Datatable');
         $this->set('_serialize', ['costCentre']);
     }
 
+	public function addwizard()
+    {
+        $costCentre = $this->CostCentres->newEntity();
+        if ($this->request->is('post')) {
+            $costCentre = $this->CostCentres->patchEntity($costCentre, $this->request->data);
+			$costCentre['customer_id']=$this->loggedinuser['customer_id'];
+            if ($this->CostCentres->save($costCentre)) {
+                $this->Flash->success(__('The cost centre has been saved.'));
+				return $this->redirect(array('controller' => 'Positions', 'action' => 'addwizard'));
+            } else {
+                $this->Flash->error(__('The cost centre could not be saved. Please, try again.'));
+            }
+        }
+        $customers = $this->CostCentres->Customers->find('list', ['limit' => 200]);
+        $this->set(compact('costCentre', 'customers'));
+        $this->set('_serialize', ['costCentre']);
+    }
     /**
      * Edit method
      *

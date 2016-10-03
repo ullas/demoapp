@@ -1,13 +1,16 @@
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('List Positions'), ['action' => 'index']) ?></li>
-    </ul>
-</nav>
-<div class="positions form large-9 medium-8 columns content">
+<section class="content-header">
+      <h1>
+        Position
+        <small>Add</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><?= $this->Html->link('<i class="fa fa-mail-reply"></i> '.__('Back'), ['action' => 'index'], ['escape' => false]) ?></li>
+      </ol>
+    </section>
+<section class="content">
+	<div class="box box-primary"><div class="box-body">
     <?= $this->Form->create($position) ?>
     <fieldset>
-        <legend><?= __('Add Position') ?></legend>
         <?php
             echo $this->Form->input('external_name');
             echo $this->Form->input('effective_start_date', ['empty' => true]);
@@ -25,28 +28,28 @@
             echo $this->Form->input('job_level');
             echo $this->Form->input('employee_class');
             echo $this->Form->input('regular_temporary');
-            echo $this->Form->input('pay_grade');
             echo $this->Form->input('target_fte');
             echo $this->Form->input('vacant');
             echo $this->Form->input('standard_hours');
-            echo $this->Form->input('company');
-            echo $this->Form->input('business_unit');
-            echo $this->Form->input('division');
-            echo $this->Form->input('department');
-            echo $this->Form->input('location');
-            echo $this->Form->input('cost_center');
             echo $this->Form->input('created_by');
             echo $this->Form->input('created_date', ['empty' => true]);
             echo $this->Form->input('last_modified_by');
             echo $this->Form->input('last_modified_date', ['empty' => true]);
-            echo $this->Form->input('parent_position');
-            echo $this->Form->input('pay_range');
             echo $this->Form->input('position_matrix_relationship');
             echo $this->Form->input('right_to_return');
             echo $this->Form->input('position_code');
             echo $this->Form->input('effective_status');
+            echo $this->Form->input('customer_id', ['options' => $customers, 'empty' => true]);
+            echo $this->Form->input('legal_entity_id', ['options' => $legalEntities, 'empty' => true]);
+            echo $this->Form->input('department_id', ['options' => $departments, 'empty' => true]);
+            echo $this->Form->input('cost_center_id', ['options' => $costCentres, 'empty' => true]);
+            echo $this->Form->input('location_id', ['options' => $locations, 'empty' => true]);
+            echo $this->Form->input('division_id', ['options' => $divisions, 'empty' => true]);
+            echo $this->Form->input('pay_grade_id', ['options' => $payGrades, 'empty' => true]);
+            echo $this->Form->input('pay_range_id', ['options' => $payRanges, 'empty' => true]);
+            echo $this->Form->input('parent_position_id');
         ?>
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>
     <?= $this->Form->end() ?>
-</div>
+</div></div></section>

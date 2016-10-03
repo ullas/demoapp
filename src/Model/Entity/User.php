@@ -2,6 +2,7 @@
 namespace App\Model\Entity;
 
 use Cake\ORM\Entity;
+use Cake\Auth\DefaultPasswordHasher;
 
 /**
  * User Entity
@@ -15,6 +16,9 @@ use Cake\ORM\Entity;
  * @property int $id
  * @property string $name
  * @property int $customer_id
+ *
+ * @property \App\Model\Entity\Customer $customer
+ * @property \App\Model\Entity\CalendarAssignment[] $calendar_assignments
  */
 class User extends Entity
 {
@@ -41,4 +45,8 @@ class User extends Entity
     protected $_hidden = [
         'password'
     ];
+	protected function _setPassword($password)
+    {
+        return (new DefaultPasswordHasher)->hash($password);
+    }
 }

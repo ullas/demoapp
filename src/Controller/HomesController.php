@@ -18,6 +18,13 @@ class HomesController extends AppController
      */
     public function index()
     {
+    	//legalentities
+       $legalEntities = $this->paginate($this->LegalEntities);
+
+        $this->set(compact('legalEntities'));
+        $this->set('_serialize', ['legalEntities']);
+		
+		//homes
         $homes = $this->paginate($this->Homes);
 
         $this->set(compact('homes'));

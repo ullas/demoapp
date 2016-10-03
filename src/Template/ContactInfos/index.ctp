@@ -21,12 +21,7 @@
             <tr>
                 <th>Id</th>
                 <th>Phone</th>
-				<th>Mobile</th>
-				<th>Email Address1</th>
-				<th>Email Address2</th>
-				<th>Facebook</th>
-				<th>Linkedin</th>
-				<th>Personal Id External</th>
+				
                 <th class="actions" data-orderable="false"><?= __('Actions') ?></th>
             </tr>
         </thead>

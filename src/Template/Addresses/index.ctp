@@ -20,29 +20,36 @@
         <thead>
             <tr>
                 <th>Id</th>
-              	<th>Address No</th>
-				<th>Address1</th>
-				<th>Address2</th>
-				<th>Address3</th>
-				<th>Address4</th>
-				<th>Address5</th>
-				<th>Address6</th>
-				<th>Address7</th>
-				<th>Address8</th>
-				<th>Zip Code</th>
-				<th>City</th>
-				<th>Country</th>
-				<th>State</th>
-				<th>Emp Data Biographies</th>
-
-                <th class="actions" data-orderable="false"><?= __('Actions') ?></th>
+                <th>Last name</th>
+                <th>Position</th>
+                <th>Office</th>
+                <th>Start date</th>
+                <th>Salary</th>
             </tr>
         </thead>
-        <tbody>
-        </tbody>
+        <tbody></tbody>
     </table></div></div>
     </div></div>
    
+   
+   
+   <div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                "header"
+            </div>
+            <div class="modal-body">
+                "body"
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                <a class="btn btn-danger btn-ok">Delete</a>
+            </div>
+        </div>
+    </div>
+</div>
+
 </section>
 <?php
 $this->Html->css([
@@ -60,6 +67,9 @@ $this->Html->script([
 <?php $this->start('scriptBotton'); ?>
 <script>
   $(function () {
+  	
+  	// $.fn.dataTable.ext.errMode=throw;
+  	
     $('#mptlindextbl').DataTable({
       	"paging": true,
       	"lengthChange": true,
@@ -72,7 +82,7 @@ $this->Html->script([
       	"processing": true,
      	 "serverSide": true,
       	"ajax": "/<?php echo $this->request->params['controller'] ?>/ajaxData"
-     
+  
     });
   });
 </script>

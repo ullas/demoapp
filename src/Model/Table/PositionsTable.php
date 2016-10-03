@@ -10,6 +10,14 @@ use Cake\Validation\Validator;
  * Positions Model
  *
  * @property \Cake\ORM\Association\BelongsTo $Customers
+ * @property \Cake\ORM\Association\BelongsTo $LegalEntities
+ * @property \Cake\ORM\Association\BelongsTo $Departments
+ * @property \Cake\ORM\Association\BelongsTo $CostCentres
+ * @property \Cake\ORM\Association\BelongsTo $Locations
+ * @property \Cake\ORM\Association\BelongsTo $Divisions
+ * @property \Cake\ORM\Association\BelongsTo $PayGrades
+ * @property \Cake\ORM\Association\BelongsTo $PayRanges
+ * @property \Cake\ORM\Association\BelongsTo $Positions
  *
  * @method \App\Model\Entity\Position get($primaryKey, $options = [])
  * @method \App\Model\Entity\Position newEntity($data = null, array $options = [])
@@ -38,6 +46,30 @@ class PositionsTable extends Table
 
         $this->belongsTo('Customers', [
             'foreignKey' => 'customer_id'
+        ]);
+        $this->belongsTo('LegalEntities', [
+            'foreignKey' => 'legal_entity_id'
+        ]);
+        $this->belongsTo('Departments', [
+            'foreignKey' => 'department_id'
+        ]);
+        $this->belongsTo('CostCentres', [
+            'foreignKey' => 'cost_center_id'
+        ]);
+        $this->belongsTo('Locations', [
+            'foreignKey' => 'location_id'
+        ]);
+        $this->belongsTo('Divisions', [
+            'foreignKey' => 'division_id'
+        ]);
+        $this->belongsTo('PayGrades', [
+            'foreignKey' => 'pay_grade_id'
+        ]);
+        $this->belongsTo('PayRanges', [
+            'foreignKey' => 'pay_range_id'
+        ]);
+        $this->belongsTo('Positions', [
+            'foreignKey' => 'parent_position_id'
         ]);
     }
 
@@ -105,9 +137,6 @@ class PositionsTable extends Table
             ->allowEmpty('regular_temporary');
 
         $validator
-            ->allowEmpty('pay_grade');
-
-        $validator
             ->decimal('target_fte')
             ->allowEmpty('target_fte');
 
@@ -118,21 +147,6 @@ class PositionsTable extends Table
         $validator
             ->decimal('standard_hours')
             ->allowEmpty('standard_hours');
-
-        $validator
-            ->allowEmpty('company');
-
-        $validator
-            ->allowEmpty('division');
-
-        $validator
-            ->allowEmpty('department');
-
-        $validator
-            ->allowEmpty('location');
-
-        $validator
-            ->allowEmpty('cost_center');
 
         $validator
             ->allowEmpty('created_by');
@@ -147,12 +161,6 @@ class PositionsTable extends Table
         $validator
             ->date('last_modified_date')
             ->allowEmpty('last_modified_date');
-
-        $validator
-            ->allowEmpty('parent_position');
-
-        $validator
-            ->allowEmpty('pay_range');
 
         $validator
             ->allowEmpty('position_matrix_relationship');
@@ -183,6 +191,14 @@ class PositionsTable extends Table
     {
         $rules->add($rules->isUnique(['position_code']));
         $rules->add($rules->existsIn(['customer_id'], 'Customers'));
+        $rules->add($rules->existsIn(['legal_entity_id'], 'LegalEntities'));
+        $rules->add($rules->existsIn(['department_id'], 'Departments'));
+        $rules->add($rules->existsIn(['cost_center_id'], 'CostCentres'));
+        $rules->add($rules->existsIn(['location_id'], 'Locations'));
+        $rules->add($rules->existsIn(['division_id'], 'Divisions'));
+        $rules->add($rules->existsIn(['pay_grade_id'], 'PayGrades'));
+        $rules->add($rules->existsIn(['pay_range_id'], 'PayRanges'));
+        $rules->add($rules->existsIn(['parent_position_id'], 'Positions'));
 
         return $rules;
     }

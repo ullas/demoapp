@@ -78,7 +78,24 @@ var $components = array('Datatable');
         $this->set(compact('department', 'costCentres', 'customers'));
         $this->set('_serialize', ['department']);
     }
-
+	public function addwizard()
+    {
+        $department = $this->Departments->newEntity();
+        if ($this->request->is('post')) {
+            $department = $this->Departments->patchEntity($department, $this->request->data);
+			$department['customer_id']=$this->loggedinuser['customer_id'];
+            if ($this->Departments->save($department)) {
+                $this->Flash->success(__('The department has been saved.'));
+				return $this->redirect(array('controller' => 'CostCentres', 'action' => 'addwizard'));
+            } else {
+                $this->Flash->error(__('The department could not be saved. Please, try again.'));
+            }
+        }
+        $costCentres = $this->Departments->CostCentres->find('list', ['limit' => 200]);
+        $customers = $this->Departments->Customers->find('list', ['limit' => 200]);
+        $this->set(compact('department', 'costCentres', 'customers'));
+        $this->set('_serialize', ['department']);
+    }
     /**
      * Edit method
      *
