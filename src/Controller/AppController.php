@@ -30,42 +30,6 @@ class AppController extends Controller
 {
 	protected $loggedinuser;
 	
-	// public function GetData($columns,$data){
-// 		
-		// $out = array();
-		// for ( $i=0, $ien=count($data) ; $i<$ien ; $i++ ) {
-			// $row = array();
-			// for ( $j=0, $jen=count($columns) ; $j<$jen ; $j++ ) {
-				// $column = $columns[$j];
-				// if (isset( $column['alias'] )){
-					// if ($column['alias']!= '' ){
-						// $c = $column['alias'];
-					// }else{
-						// $c = $column['db'];
-					// }	
-				// }else{
-					// $c = $column['db'];
-				// }
-// 				
-				// // Is there a formatter?
-				// if ( isset( $column['formatter'] ) ) {
-					// $row[ $column['dt'] ] =  utf8_encode($column['formatter']( $data[$i][ $c ], $data[$i] ));
-				// }
-				// else {
-					// $row[ $column['dt'] ] =  utf8_encode($data[$i][ $c ]);
-				// }
-			// }
-			// $out[] = $row;
-		// }
-// 
-		// return array(
-			// "draw"            => intval( $this->request->query['draw'] ),
-		 	// "recordsFiltered"    => count( $out ),
-		 	// "recordsTotal" => count( $out ),
-		 	// "data"            => $out
-		 // );
-	// }
-	
 	var $components = array('LoadCountry');
 	
 	public function isAuthorized($user)
@@ -87,28 +51,32 @@ class AppController extends Controller
 			$this->loadModel('LegalEntities');
 			$counts['legalentity'] = $this->LegalEntities->find('all')->where(['customer_id'=>$user['customer_id']])->count();
 			
-			//get legal entities count
+			//get business units count
 			$this->loadModel('BusinessUnits');
 			$counts['businessunit'] = $this->BusinessUnits->find('all')->where(['customer_id'=>$user['customer_id']])->count();
 			
-			//get legal entities count
+			//get division count
+			$this->loadModel('Divisions');
+			$counts['division'] = $this->Divisions->find('all')->where(['customer_id'=>$user['customer_id']])->count();
+			
+			//get department count
 			$this->loadModel('Departments');
 			$counts['department'] = $this->Departments->find('all')->where(['customer_id'=>$user['customer_id']])->count();
 			
-			//get legal entities count
+			//get costcenter count
 			$this->loadModel('CostCentres');
 			$counts['costcenter'] = $this->CostCentres->find('all')->where(['customer_id'=>$user['customer_id']])->count();
 			
-			//get legal entities count
+			//get position count
 			$this->loadModel('Positions');
 			$counts['position'] = $this->Positions->find('all')->where(['customer_id'=>$user['customer_id']])->count();
 			
-			//get legal entities count
+			//get employee count
 			$this->loadModel('EmpDataBiographies');
 			$counts['employee'] = $this->EmpDataBiographies->find('all')->where(['customer_id'=>$user['customer_id']])->count();
 			
 			$this->set('counts', $counts);
-		
+			$this->counts=$counts;
 		
         	return true;
     	}

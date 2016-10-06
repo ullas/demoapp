@@ -8,22 +8,24 @@
             )
         ?></li>
         <li><?= $this->Html->link(__('List Positions'), ['action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('List Pay Grades'), ['controller' => 'PayGrades', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Pay Grade'), ['controller' => 'PayGrades', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Legal Entities'), ['controller' => 'LegalEntities', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Legal Entity'), ['controller' => 'LegalEntities', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Divisions'), ['controller' => 'Divisions', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Division'), ['controller' => 'Divisions', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Departments'), ['controller' => 'Departments', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Department'), ['controller' => 'Departments', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Locations'), ['controller' => 'Locations', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Location'), ['controller' => 'Locations', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Cost Centres'), ['controller' => 'CostCentres', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Cost Centre'), ['controller' => 'CostCentres', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Pay Ranges'), ['controller' => 'PayRanges', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Pay Range'), ['controller' => 'PayRanges', 'action' => 'add']) ?></li>
         <li><?= $this->Html->link(__('List Customers'), ['controller' => 'Customers', 'action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('New Customer'), ['controller' => 'Customers', 'action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('List Legal Entities'), ['controller' => 'LegalEntities', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New Legal Entity'), ['controller' => 'LegalEntities', 'action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('List Departments'), ['controller' => 'Departments', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New Department'), ['controller' => 'Departments', 'action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('List Cost Centres'), ['controller' => 'CostCentres', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New Cost Centre'), ['controller' => 'CostCentres', 'action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('List Locations'), ['controller' => 'Locations', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New Location'), ['controller' => 'Locations', 'action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('List Divisions'), ['controller' => 'Divisions', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New Division'), ['controller' => 'Divisions', 'action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('List Pay Grades'), ['controller' => 'PayGrades', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New Pay Grade'), ['controller' => 'PayGrades', 'action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('List Pay Ranges'), ['controller' => 'PayRanges', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New Pay Range'), ['controller' => 'PayRanges', 'action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('List Parents'), ['controller' => 'Positions', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New Parent'), ['controller' => 'Positions', 'action' => 'add']) ?></li>
     </ul>
 </nav>
 <div class="positions form large-9 medium-8 columns content">
@@ -66,7 +68,7 @@
             echo $this->Form->input('division_id', ['options' => $divisions, 'empty' => true]);
             echo $this->Form->input('pay_grade_id', ['options' => $payGrades, 'empty' => true]);
             echo $this->Form->input('pay_range_id', ['options' => $payRanges, 'empty' => true]);
-            echo $this->Form->input('parent_position_id');
+            echo $this->Form->input('parent_position_id', ['options' => $parents, 'empty' => true]);
         ?>
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>

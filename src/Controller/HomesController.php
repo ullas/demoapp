@@ -10,7 +10,10 @@ use App\Controller\AppController;
  */
 class HomesController extends AppController
 {
-
+	public function initialize()
+    {
+    	parent::initialize();
+	}
     /**
      * Index method
      *
@@ -18,6 +21,15 @@ class HomesController extends AppController
      */
     public function index()
     {
+
+		//redirect to the stepform wizard 
+		if( (isset($this->counts['legalentity']) && $this->counts['legalentity'] <1) || (isset($this->counts['businessunit']) && $this->counts['businessunit'] <1) || 
+			(isset($this->counts['division']) && $this->counts['division'] <1) || (isset($this->counts['department']) && $this->counts['department'] <1) ||
+			(isset($this->counts['costcenter']) && $this->counts['costcenter'] <1) || (isset($this->counts['position']) && $this->counts['position'] <1) || 
+			(isset($this->counts['employee']) && $this->counts['employee'] <1))
+		{
+			return $this->redirect( ['controller' => 'LegalEntities', 'action' => 'addwizard'] );
+		}
     	//legalentities
        $legalEntities = $this->paginate($this->LegalEntities);
 

@@ -24,6 +24,11 @@ case "root":
     endif;
 	break;
 	case "admin":
+		if( (isset($counts['legalentity']) && $counts['legalentity'] >0) || (isset($counts['businessunit']) && $counts['businessunit'] >0) || 
+			(isset($counts['division']) && $counts['division'] >0) || (isset($counts['department']) && $counts['department'] >0) ||
+			(isset($counts['costcenter']) && $counts['costcenter'] >0) || (isset($counts['position']) && $counts['position'] >0) || 
+			(isset($counts['employee']) && $counts['employee'] >0)){
+			
     ?>
     <li><a href="<?php echo $this -> Url -> build('/Homes'); ?>"><i class="fa fa-dashboard"></i><span> Dashboard </span></a></li>
 
@@ -33,15 +38,12 @@ case "root":
 
     <li><a href="<?php echo $this -> Url -> build('/LegalEntities'); ?>"><i class="fa fa-circle-o"></i> Legal Entity</a></li>
     <li><a href="<?php echo $this -> Url -> build('/BusinessUnits'); ?>"><i class="fa fa-circle-o"></i> Business Unit</a></li>
-    <li><a href="<?php echo $this -> Url -> build('/Departments'); ?>"><i class="fa fa-circle-o"></i> Departments</a></li>
     <li><a href="<?php echo $this -> Url -> build('/Divisions'); ?>"><i class="fa fa-circle-o"></i> Divisions</a></li>
+    <li><a href="<?php echo $this -> Url -> build('/Departments'); ?>"><i class="fa fa-circle-o"></i> Departments</a></li>
     <li><a href="<?php echo $this -> Url -> build('/CostCentres'); ?>"><i class="fa fa-circle-o"></i> Cost Centres</a></li>
-
-    <li><a href="<?php echo $this -> Url -> build('/Addresses'); ?>"><i class="fa fa-circle-o"></i> Addresses</a></li>
-    <li><a href="<?php echo $this -> Url -> build('/CalendarAssignments'); ?>"><i class="fa fa-circle-o"></i> Calendar Assignments</a></li>
-    <li><a href="<?php echo $this -> Url -> build('/ContactInfos'); ?>"><i class="fa fa-circle-o"></i> Contact Infos</a></li>
-    <li><a href="<?php echo $this -> Url -> build('/CorporateAddresses'); ?>"><i class="fa fa-circle-o"></i> Corporate Addresses</a></li>
-    <li><a href="<?php echo $this -> Url -> build('/Dependents'); ?>"><i class="fa fa-circle-o"></i> Dependents</a></li>
+    <li><a href="<?php echo $this->Url->build('/Positions'); ?>"><i class="fa fa-circle-o"></i> Position</a></li>
+    <li><a href="<?php echo $this -> Url -> build('/EmpDataBiographies'); ?>"><i class="fa fa-circle-o"></i> Emp Data Biography</a></li>
+    
     </ul>
     </li>
     <li><a href="<?php echo $this -> Url -> build('/Profiles'); ?>"><i class="glyphicon glyphicon-user"></i><span> Profile </span></a></li>
@@ -49,6 +51,7 @@ case "root":
     <li><a href="#"><i class="fa fa-question-circle"></i> <span>Help</span></a></li>
 
     <?php
+		}
 	break;
 	case "manager":
     ?>
@@ -61,8 +64,13 @@ case "root":
     <li><a href="<?php echo $this -> Url -> build('/LegalEntities'); ?>"><i class="fa fa-circle-o"></i> Legal Entity</a></li>
     <li><a href="<?php echo $this -> Url -> build('/BusinessUnits'); ?>"><i class="fa fa-circle-o"></i> Business Unit</a></li>
     <li><a href="<?php echo $this -> Url -> build('/Departments'); ?>"><i class="fa fa-circle-o"></i> Departments</a></li>
-    <li><a href="<?php echo $this -> Url -> build('/Divisions'); ?>"><i class="fa fa-circle-o"></i> Divisions</a></li>
     <li><a href="<?php echo $this -> Url -> build('/CostCentres'); ?>"><i class="fa fa-circle-o"></i> Cost Centres</a></li>
+    <li><a href="<?php echo $this->Url->build('/Positions'); ?>"><i class="fa fa-circle-o"></i> Position</a></li>
+    <li><a href="<?php echo $this -> Url -> build('/EmpDataBiographies'); ?>"><i class="fa fa-circle-o"></i> Emp Data Biography</a></li>
+    
+    
+    <li><a href="<?php echo $this -> Url -> build('/Divisions'); ?>"><i class="fa fa-circle-o"></i> Divisions</a></li>
+    
 
     <li><a href="<?php echo $this -> Url -> build('/Addresses'); ?>"><i class="fa fa-circle-o"></i> Addresses</a></li>
     <li><a href="<?php echo $this -> Url -> build('/CalendarAssignments'); ?>"><i class="fa fa-circle-o"></i> Calendar Assignments</a></li>

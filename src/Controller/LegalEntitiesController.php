@@ -30,10 +30,11 @@ class LegalEntitiesController extends AppController
      */
     public function index()
     {
+    	
         $this->paginate = [
             'contain' => ['Locations', 'PayGroups', 'Customers']
         ];
-        $legalEntities = $this->paginate($this->LegalEntities);
+        $legalEntities = $this->paginate($this->LegalEntities);   
 
         $this->set(compact('legalEntities'));
         $this->set('_serialize', ['legalEntities']);

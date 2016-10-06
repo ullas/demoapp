@@ -31,42 +31,21 @@
     </table></div></div>
     </div></div>
    
-   
-   
-   <div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                "header"
-            </div>
-            <div class="modal-body">
-                "body"
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                <a class="btn btn-danger btn-ok">Delete</a>
-            </div>
-        </div>
-    </div>
-</div>
+ 
 
 </section>
 <?php
-$this->Html->css([
-    'AdminLTE./plugins/datatables/dataTables.bootstrap',
-  ],
-  ['block' => 'css']);
+$this->Html->css([ 'AdminLTE./plugins/datatables/dataTables.bootstrap',  ], ['block' => 'css']);
 
 $this->Html->script([
   'AdminLTE./plugins/datatables/jquery.dataTables.min',
   'AdminLTE./plugins/datatables/dataTables.bootstrap.min',
-],
-['block' => 'script']);
-?>
+], ['block' => 'script']); ?>
 
 <?php $this->start('scriptBotton'); ?>
 <script>
   $(function () {
+  	
   	
   	// $.fn.dataTable.ext.errMode=throw;
   	
@@ -84,6 +63,10 @@ $this->Html->script([
       	"ajax": "/<?php echo $this->request->params['controller'] ?>/ajaxData"
   
     });
+    
+    $('<a href="/<?php echo $this->request->params['controller'] ?>/add/" class="btn btn-sm btn-success" style="margin-left:5px;"><i class="fa fa-plus" aria-hidden="true"></i></a>').appendTo('div.dataTables_filter');
+    
+
   });
 </script>
 <?php $this->end(); ?>

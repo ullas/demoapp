@@ -44,14 +44,15 @@ use Cake\ORM\Entity;
  * @property int $pay_range_id
  * @property int $parent_position_id
  *
- * @property \App\Model\Entity\PayGrade $pay_grade
- * @property \App\Model\Entity\LegalEntity $legal_entity
- * @property \App\Model\Entity\Division $division
- * @property \App\Model\Entity\Department $department
- * @property \App\Model\Entity\Location $location
- * @property \App\Model\Entity\CostCentre $cost_centre
- * @property \App\Model\Entity\PayRange $pay_range
  * @property \App\Model\Entity\Customer $customer
+ * @property \App\Model\Entity\LegalEntity $legal_entity
+ * @property \App\Model\Entity\Department $department
+ * @property \App\Model\Entity\CostCentre $cost_centre
+ * @property \App\Model\Entity\Location $location
+ * @property \App\Model\Entity\Division $division
+ * @property \App\Model\Entity\PayGrade $pay_grade
+ * @property \App\Model\Entity\PayRange $pay_range
+ * @property \App\Model\Entity\Position $parent
  */
 class Position extends Entity
 {

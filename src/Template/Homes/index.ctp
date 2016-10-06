@@ -20,13 +20,13 @@
     <div class="col-sm-3">
     	<div class="box box-primary direct-chat direct-chat-primary">
         	<div class="box-header with-border">My Info</div>
-        	<div class="box-body"><?= $this->element('homeelmt', array('title' => 'My Info')); ?></div>
+        	<div class="panel-body bg-light-blue-gradient"><?= $this->element('homeelmt', array('title' => 'My Info')); ?></div>
         </div>
     </div>
     <div class="col-sm-3">
     	<div class="box box-primary direct-chat direct-chat-primary">
         	<div class="box-header with-border">My Team</div>
-        	<div class="panel-body"><?= $this->element('homeelmt', array('title' => 'My Team')); ?></div>
+        	<div class="panel-body box-body"><?= $this->element('homeelmt', array('title' => 'My Team')); ?></div>
         </div>
     </div>
     <div class="col-sm-3">

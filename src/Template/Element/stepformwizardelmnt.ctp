@@ -124,6 +124,19 @@
       </div>
       <div class="stepwizard-step">
       	<?php
+      	if($counts['division'] > 0){	
+      		echo '<a type="button" class="btn btn-success btn-circle"><i class="fa fa-database"></i></a>';
+      		echo '<dt class="text-success"><i class="icon fa fa-check-square"></i> Division</dt>';
+      	}else{
+      		$btntype="default";$disabledstr='disabled="disabled"';$texttype='';
+      		if($wcontent=="Divsion"){$btntype="primary";$disabledstr='';$texttype=' class="text-blue"';}
+      		echo '<a type="button" class="btn btn-'.$btntype.' btn-circle" '.$disabledstr.'><i class="fa fa-database"></i></a>';
+      		echo '<dd'.$texttype.'>Division</dd>';
+      	}
+        ?>
+      </div>
+      <div class="stepwizard-step">
+      	<?php
       	if($counts['department'] > 0){	
       		echo '<a type="button" class="btn btn-success btn-circle"><i class="fa fa-cubes"></i></a>';
       		echo '<dt class="text-success"><i class="icon fa fa-check-square"></i> Department</dt>';
@@ -166,7 +179,7 @@
       		echo '<dt class="text-success"><i class="icon fa fa-check-square"></i> Employee Biography</dt>';
       	}else{
       		$btntype="default";$disabledstr='disabled="disabled"';$texttype='';
-      		if($wcontent=="Employee"){$btntype="primary";$disabledstr='';$texttype=' class="text-blue"';}
+      		if($wcontent=="EmployeeDataBiography"){$btntype="primary";$disabledstr='';$texttype=' class="text-blue"';}
       		echo '<a type="button" class="btn btn-'.$btntype.' btn-circle" '.$disabledstr.'><i class="fa fa-user-plus"></i></a>';
       		echo '<dd'.$texttype.'>Employee Biography</dd>';
       	}
