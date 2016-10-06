@@ -39,9 +39,11 @@ class PositionsTable extends Table
     public function initialize(array $config)
     {
         parent::initialize($config);
+		
+		$this->addBehavior('Tree');
 
         $this->table('positions');
-        $this->displayField('id');
+        $this->displayField('external_name');
         $this->primaryKey('id');
 
         $this->belongsTo('Customers', [
@@ -68,8 +70,8 @@ class PositionsTable extends Table
         $this->belongsTo('PayRanges', [
             'foreignKey' => 'pay_range_id'
         ]);
-        $this->belongsTo('Positions', [
-            'foreignKey' => 'parent_position_id'
+        $this->belongsTo('Parents', [
+            'className' => 'Positions','foreignKey' => 'parent_position_id'
         ]);
     }
 
@@ -198,7 +200,7 @@ class PositionsTable extends Table
         $rules->add($rules->existsIn(['division_id'], 'Divisions'));
         $rules->add($rules->existsIn(['pay_grade_id'], 'PayGrades'));
         $rules->add($rules->existsIn(['pay_range_id'], 'PayRanges'));
-        $rules->add($rules->existsIn(['parent_position_id'], 'Positions'));
+        // $rules->add($rules->existsIn(['parent_position_id'], 'Positions'));
 
         return $rules;
     }

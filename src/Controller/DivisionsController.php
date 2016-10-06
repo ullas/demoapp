@@ -78,6 +78,22 @@ var $components = array('Datatable');
         $this->set(compact('division', 'customers'));
         $this->set('_serialize', ['division']);
     }
+	public function addwizard()
+    {
+        $division = $this->Divisions->newEntity();
+        if ($this->request->is('post')) {
+            $division = $this->Divisions->patchEntity($division, $this->request->data);
+            if ($this->Divisions->save($division)) {
+                $this->Flash->success(__('The division has been saved.'));
+				return $this->redirect(array('controller' => 'Departments', 'action' => 'addwizard'));
+            } else {
+                $this->Flash->error(__('The division could not be saved. Please, try again.'));
+            }
+        }
+        $customers = $this->Divisions->Customers->find('list', ['limit' => 200]);
+        $this->set(compact('division', 'customers'));
+        $this->set('_serialize', ['division']);
+    }
 
     /**
      * Edit method

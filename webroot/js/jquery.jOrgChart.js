@@ -109,10 +109,10 @@
     var $tbody = $("<tbody/>");
 
     // Construct the node container(s)
-    var $nodeRow = $("<tr/>").addClass("node-cells");
+    var $nodeRow = $("<tr/>").addClass("node-cells");var $nodeRowrr = $("<td/>").addClass("node-maptell");
     var $nodeCell = $("<td/>").addClass("node-cell").attr("colspan", 2);
     var $childNodes = $node.children("ul:first").children("li");
-    var $nodeDiv;
+    var $nodeDiv;var $nodeContentDiv;
     
     if($childNodes.length > 1) {
       $nodeCell.attr("colspan", $childNodes.length * 2);
@@ -125,12 +125,15 @@
                             .end()
                             .html();
 	
+	$nodeContentDiv = $("<div>").addClass("node");
+	$nodeImgDiv = $("<div>").addClass("node-img");
+	$nodeTxtDiv = $("<div>").addClass("node-txt")
+                                     .append($nodeContent);
       //Increaments the node count which is used to link the source list and the org chart
   	nodeCount++;
   	$node.data("tree-node", nodeCount);
-  	$nodeDiv = $("<div>").addClass("node")
-                                     .data("tree-node", nodeCount)
-                                     .append($nodeContent);
+  	$nodeDiv = $("<div>").addClass("node-expand nodeexp")
+                                     .data("tree-node", nodeCount);
 
     // Expand and contract nodes
     if ($childNodes.length > 0) {
@@ -138,7 +141,7 @@
           var $this = $(this);
           var $tr = $this.closest("tr");
 
-          if($tr.hasClass('contracted')){
+          if($tr.hasClass('contracted')){$nodeDiv.removeClass('nodehide').addClass('nodeexp');
             $this.css('cursor','n-resize');
             $tr.removeClass('contracted').addClass('expanded');
             $tr.nextAll("tr").css('visibility', '');
@@ -146,7 +149,7 @@
             // Update the <li> appropriately so that if the tree redraws collapsed/non-collapsed nodes
             // maintain their appearance
             $node.removeClass('collapsed');
-          }else{
+          }else{$nodeDiv.removeClass('nodeexp').addClass('nodehide');
             $this.css('cursor','s-resize');
             $tr.removeClass('expanded').addClass('contracted');
             $tr.nextAll("tr").css('visibility', 'hidden');
@@ -154,9 +157,14 @@
             $node.addClass('collapsed');
           }
         });
+    }else{
+        $nodeDiv.addClass('dnone');
     }
     
-    $nodeCell.append($nodeDiv);
+    $nodeContentDiv.append($nodeImgDiv);
+    $nodeContentDiv.append($nodeTxtDiv);
+    $nodeContentDiv.append($nodeDiv);
+    $nodeCell.append($nodeContentDiv);
     $nodeRow.append($nodeCell);
     $tbody.append($nodeRow);
 

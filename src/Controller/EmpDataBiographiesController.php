@@ -83,8 +83,7 @@ class EmpDataBiographiesController extends AppController
 			$empDataBiography['customer_id']=$this->loggedinuser['customer_id'];
             if ($this->EmpDataBiographies->save($empDataBiography)) {
                 $this->Flash->success(__('The emp data biography has been saved.'));
-
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(array('controller' => 'Homes', 'action' => 'index'));
             } else {
                 $this->Flash->error(__('The emp data biography could not be saved. Please, try again.'));
             }

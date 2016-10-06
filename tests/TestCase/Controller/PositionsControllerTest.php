@@ -17,7 +17,6 @@ class PositionsControllerTest extends IntegrationTestCase
      */
     public $fixtures = [
         'app.positions',
-        'app.pay_grades',
         'app.customers',
         'app.addresses',
         'app.emp_data_biographies',
@@ -41,6 +40,7 @@ class PositionsControllerTest extends IntegrationTestCase
         'app.holiday_calendars',
         'app.ids',
         'app.job_classes',
+        'app.pay_grades',
         'app.job_functions',
         'app.job_infos',
         'app.legal_entities',

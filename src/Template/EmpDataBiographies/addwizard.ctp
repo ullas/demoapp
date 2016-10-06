@@ -1,3 +1,5 @@
+		<?= $this->element('stepformwizardelmnt', array('wcontent' => 'EmployeeDataBiography','wid' => '6')); ?>
+
 <section class="content-header">
       <h1>
         Emp Data Biography
