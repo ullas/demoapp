@@ -3,7 +3,7 @@ $elmntstring;
 $title=preg_replace('/\s+/', '', $title);
 switch (strtolower($title)) {
     case "myinfo":
-        echo $this->Html->image('photo4.jpg', ['alt' => 'Photo', 'class' => 'img-responsive pad']);
+        // echo $this->Html->image('photo4.jpg', ['alt' => 'Photo', 'class' => 'img-responsive pad']);
         break;
     case "myteam":
     echo "<ul class='users-list clearfix'>";

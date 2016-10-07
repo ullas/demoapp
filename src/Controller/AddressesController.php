@@ -14,12 +14,17 @@ var $components = array('Datatable');
 	
 	public function ajaxData() {
 		$this->autoRender= False;
-
-		$fields = array(array('name'=>'id','type'=>'int'),address_no,address1,address2,address3,address4,address5,address6,address7,address8, 
-		  zip_code,city,county,state, array('name'=>'emp_data_biographies_id','type'=>'bigint'));
-									  
-		$output =$this->Datatable->getView($fields);
+		  
+		$this->loadModel('CreateConfigs');
+		$dbout=$this->CreateConfigs->find()->select(['field_name', 'datatype'])->where(['table_name' => $this->request->params['controller']])->order(['id' => 'ASC'])->toArray();
+		$fields = array();
+		foreach($dbout as $value){
+			$fields[] = array("name" => $value['field_name'] , "type" => $value['datatype'] );
+		}
 		
+		$contains=['EmpDataBiographies', 'Customers'];
+									  
+		$output =$this->Datatable->getView($fields,$contains);
 		echo json_encode($output);			
     }
     /**

@@ -75,6 +75,23 @@ class EmpDataBiographiesController extends AppController
         $this->set(compact('empDataBiography', 'customers'));
         $this->set('_serialize', ['empDataBiography']);
     }
+    public function addwizard()
+    {
+        $empDataBiography = $this->EmpDataBiographies->newEntity();
+        if ($this->request->is('post')) {
+            $empDataBiography = $this->EmpDataBiographies->patchEntity($empDataBiography, $this->request->data);
+			$empDataBiography['customer_id']=$this->loggedinuser['customer_id'];
+            if ($this->EmpDataBiographies->save($empDataBiography)) {
+                $this->Flash->success(__('The emp data biography has been saved.'));
+                return $this->redirect(array('controller' => 'Homes', 'action' => 'index'));
+            } else {
+                $this->Flash->error(__('The emp data biography could not be saved. Please, try again.'));
+            }
+        }
+        $customers = $this->EmpDataBiographies->Customers->find('list', ['limit' => 200]);
+        $this->set(compact('empDataBiography', 'customers'));
+        $this->set('_serialize', ['empDataBiography']);
+    }
 
     /**
      * Edit method

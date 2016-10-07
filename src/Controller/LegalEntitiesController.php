@@ -30,10 +30,11 @@ class LegalEntitiesController extends AppController
      */
     public function index()
     {
+    	
         $this->paginate = [
             'contain' => ['Locations', 'PayGroups', 'Customers']
         ];
-        $legalEntities = $this->paginate($this->LegalEntities);
+        $legalEntities = $this->paginate($this->LegalEntities);   
 
         $this->set(compact('legalEntities'));
         $this->set('_serialize', ['legalEntities']);
@@ -66,6 +67,7 @@ class LegalEntitiesController extends AppController
         $legalEntity = $this->LegalEntities->newEntity();
         if ($this->request->is('post')) {
             $legalEntity = $this->LegalEntities->patchEntity($legalEntity, $this->request->data);
+            $legalEntity['customer_id']=$this->loggedinuser['customer_id'];
             if ($this->LegalEntities->save($legalEntity)) {
                 $this->Flash->success(__('The legal entity has been saved.'));
 
@@ -73,6 +75,27 @@ class LegalEntitiesController extends AppController
             } else {
                 $this->Flash->error(__('The legal entity could not be saved. Please, try again.'));
             }
+        }
+        $locations = $this->LegalEntities->Locations->find('list', ['limit' => 200]);
+        $payGroups = $this->LegalEntities->PayGroups->find('list', ['limit' => 200]);
+        $customers = $this->LegalEntities->Customers->find('list', ['limit' => 200]);
+        $this->set(compact('legalEntity', 'locations', 'payGroups', 'customers'));
+        $this->set('_serialize', ['legalEntity']);
+    }
+	
+	public function addwizard()
+    {
+        $legalEntity = $this->LegalEntities->newEntity();
+        if ($this->request->is('post')) {
+            $legalEntity = $this->LegalEntities->patchEntity($legalEntity, $this->request->data);
+			$legalEntity['customer_id']=$this->loggedinuser['customer_id'];
+            if ($this->LegalEntities->save($legalEntity)) {
+                $this->Flash->success(__('The legal entity has been saved.'));
+				return $this->redirect(array('controller' => 'BusinessUnits', 'action' => 'addwizard'));
+            } else {
+                $this->Flash->error(__('The legal entity could not be saved. Please, try again.')); 
+            }
+
         }
         $locations = $this->LegalEntities->Locations->find('list', ['limit' => 200]);
         $payGroups = $this->LegalEntities->PayGroups->find('list', ['limit' => 200]);

@@ -188,6 +188,14 @@ return [
             'tls' => null,
             'url' => env('EMAIL_TRANSPORT_DEFAULT_URL', null),
         ],
+    	'webmail' => [
+        	'host' => 'mail.maptell.com',
+        	'port' => 587,
+        	'timeout' => 60,
+        	'username' => 'renjith@maptell.com',
+        	'password' => 'password',
+        	'className' => 'Smtp'
+   		]
     ],
 
     /**

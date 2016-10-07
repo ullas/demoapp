@@ -20,46 +20,35 @@
         <thead>
             <tr>
                 <th>Id</th>
-              	<th>Address No</th>
-				<th>Address1</th>
-				<th>Address2</th>
-				<th>Address3</th>
-				<th>Address4</th>
-				<th>Address5</th>
-				<th>Address6</th>
-				<th>Address7</th>
-				<th>Address8</th>
-				<th>Zip Code</th>
-				<th>City</th>
-				<th>Country</th>
-				<th>State</th>
-				<th>Emp Data Biographies</th>
-
-                <th class="actions" data-orderable="false"><?= __('Actions') ?></th>
+                <th>Last name</th>
+                <th>Position</th>
+                <th>Office</th>
+                <th>Start date</th>
+                <th>Salary</th>
             </tr>
         </thead>
-        <tbody>
-        </tbody>
+        <tbody></tbody>
     </table></div></div>
     </div></div>
    
+ 
+
 </section>
 <?php
-$this->Html->css([
-    'AdminLTE./plugins/datatables/dataTables.bootstrap',
-  ],
-  ['block' => 'css']);
+$this->Html->css([ 'AdminLTE./plugins/datatables/dataTables.bootstrap',  ], ['block' => 'css']);
 
 $this->Html->script([
   'AdminLTE./plugins/datatables/jquery.dataTables.min',
   'AdminLTE./plugins/datatables/dataTables.bootstrap.min',
-],
-['block' => 'script']);
-?>
+], ['block' => 'script']); ?>
 
 <?php $this->start('scriptBotton'); ?>
 <script>
   $(function () {
+  	
+  	
+  	// $.fn.dataTable.ext.errMode=throw;
+  	
     $('#mptlindextbl').DataTable({
       	"paging": true,
       	"lengthChange": true,
@@ -72,8 +61,12 @@ $this->Html->script([
       	"processing": true,
      	 "serverSide": true,
       	"ajax": "/<?php echo $this->request->params['controller'] ?>/ajaxData"
-     
+  
     });
+    
+    $('<a href="/<?php echo $this->request->params['controller'] ?>/add/" class="btn btn-sm btn-success" style="margin-left:5px;"><i class="fa fa-plus" aria-hidden="true"></i></a>').appendTo('div.dataTables_filter');
+    
+
   });
 </script>
 <?php $this->end(); ?>

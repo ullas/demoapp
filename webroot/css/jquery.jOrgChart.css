@@ -6,20 +6,20 @@
 }
 
 .jOrgChart .down {
-  background-color 		: #ddd;	
+  background-color 		: #bdbdbd;	
   margin 				: 0px auto;
 }
 
 .jOrgChart .top {
-  border-top          : 2px solid #ddd;
+  border-top          : 2px solid #bdbdbd;
 }
 
 .jOrgChart .left {
-  border-right          : 2px solid #ddd;
+  border-right          : 2px solid #bdbdbd;
 }
 
 .jOrgChart .right {
-  border-left           : 2px solid #ddd;
+  border-left           : 2px solid #bdbdbd;
 }
 
 /* node cell */
@@ -31,18 +31,15 @@
 
 /* The node */
 .jOrgChart .node {
-    border:2px solid #ddd;
-  background 		: #ddd;
-  /*maptell*/
-  background-image:url(/img/profile-icon.png);background-repeat: no-repeat;background-size: 100% 100%;
-  /*maptell*/
+    /*border:2px solid #ddd;*/
+  /*background 		: #ddd;*/
   color:#000;
   font-weight         :bold;
   display               : inline-block;
   width                 : 96px;
-  height                : 96px;
+  /*height                : 140px;*/
   z-index 				: 10;
-  margin               : 0 2px;
+  margin               : 0 12px;
 }
 
 /* jQuery drag 'n drop */

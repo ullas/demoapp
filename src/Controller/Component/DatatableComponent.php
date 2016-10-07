@@ -1,11 +1,9 @@
 <?php
 namespace App\Controller\Component;
-
 use Cake\Controller\Component;
-
 	class DatatableComponent extends Component {
 										  
-		public function getView($fields) 
+		public function getView($fields,$contains) 
 		{
 			
 			$length = count($fields);
@@ -46,7 +44,10 @@ use Cake\Controller\Component;
 			$controller = $this->_registry->getController();
 			
 			$model=$controller->loadModel($controller->modelClass);
-			$data = $model->find()->where($where)->order($order)->limit($limit)->page($page)->toArray();
+			// $data = $model->find('all')->contain(['EmpDataBiographies' => function ($q) { return $q->select(['associatedVal'=>'birth_name']) ; }])->where($where)->order($order)->limit($limit)->page($page)->toArray();
+			
+			$data = $model->find('all')->contain($contains)->where($where)->order($order)->limit($limit)->page($page)->toArray();
+			
 			//getting totalcount
 			$totalCount = $model->find() ->count();
 			//getting filteredcount
@@ -178,12 +179,16 @@ use Cake\Controller\Component;
 						$row[ $column['dt'] ] =  utf8_encode($column['formatter']( $data[$i][ $c ], $data[$i],$modalname ));
 					}
 					else {
-						$row[ $column['dt'] ] =  utf8_encode($data[$i][ $c ]);
+						if(strpos($c, '.') !== false){
+							$colname[]=explode(".",$c);
+							$row[ $column['dt'] ] =  utf8_encode($data[$i][$colname[0][0]][$colname[0][1]]);
+						}else{
+							$row[ $column['dt'] ] =  utf8_encode($data[$i][$c]);
+						}
 					}
 				}
 				$out[] = $row;
 			}
-
 			return array(
 				"draw"            => intval( $this->request->query['draw'] ),
 		 		"recordsFiltered"    => $filteredCount,

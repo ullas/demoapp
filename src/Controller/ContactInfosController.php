@@ -15,7 +15,7 @@ var $components = array('Datatable');
 	public function ajaxData() {
 		$this->autoRender= False;
 
-		$fields = array('phone','mobile','email_address1','em ail_address2','facebook','linkedin','person_id_external');
+		$fields = array('id','phone');
 									  
 		$output =$this->Datatable->getView($fields);
 		echo json_encode($output);			

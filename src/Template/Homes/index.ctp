@@ -3,6 +3,8 @@
 	height:250px;
 }	
 </style>
+
+    	
 <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>Home</h1>
@@ -13,19 +15,18 @@
     
     
     <section class="content">
-    	
-    	<div id="draggablePanelList" class="list-unstyled row">
+    <div id="draggablePanelList" class="list-unstyled row">
 			
     <div class="col-sm-3">
     	<div class="box box-primary direct-chat direct-chat-primary">
         	<div class="box-header with-border">My Info</div>
-        	<div class="box-body"><?= $this->element('homeelmt', array('title' => 'My Info')); ?></div>
+        	<div class="panel-body bg-light-blue-gradient"><?= $this->element('homeelmt', array('title' => 'My Info')); ?></div>
         </div>
     </div>
     <div class="col-sm-3">
     	<div class="box box-primary direct-chat direct-chat-primary">
         	<div class="box-header with-border">My Team</div>
-        	<div class="panel-body"><?= $this->element('homeelmt', array('title' => 'My Team')); ?></div>
+        	<div class="panel-body box-body"><?= $this->element('homeelmt', array('title' => 'My Team')); ?></div>
         </div>
     </div>
     <div class="col-sm-3">
@@ -62,9 +63,7 @@
     </div>
 
 </div>
-    
-         <!-- /.row -->
-        
+
   
   
 </section>
@@ -87,6 +86,7 @@
                 });
             }
         });
+        
   });
 </script>
 <?php $this->end(); ?>
