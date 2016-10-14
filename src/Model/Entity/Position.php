@@ -7,7 +7,7 @@ use Cake\ORM\Entity;
  * Position Entity
  *
  * @property int $id
- * @property string $external_name
+ * @property string $name
  * @property \Cake\I18n\Time $effective_start_date
  * @property \Cake\I18n\Time $effective_end_date
  * @property string $positiontype
@@ -42,7 +42,9 @@ use Cake\ORM\Entity;
  * @property int $division_id
  * @property int $pay_grade_id
  * @property int $pay_range_id
- * @property int $parent_position_id
+ * @property int $parent_id
+ * @property int $lft
+ * @property int $rght
  *
  * @property \App\Model\Entity\Customer $customer
  * @property \App\Model\Entity\LegalEntity $legal_entity
@@ -52,6 +54,7 @@ use Cake\ORM\Entity;
  * @property \App\Model\Entity\Division $division
  * @property \App\Model\Entity\PayGrade $pay_grade
  * @property \App\Model\Entity\PayRange $pay_range
+ * @property \App\Model\Entity\Position $parent_position
  * @property \App\Model\Entity\Position $parent
  */
 class Position extends Entity

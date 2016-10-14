@@ -18,7 +18,7 @@ class PositionsFixture extends TestFixture
     // @codingStandardsIgnoreStart
     public $fields = [
         'id' => ['type' => 'biginteger', 'length' => 20, 'autoIncrement' => true, 'default' => null, 'null' => false, 'comment' => null, 'precision' => null, 'unsigned' => null],
-        'external_name' => ['type' => 'string', 'length' => 255, 'default' => null, 'null' => true, 'collate' => null, 'comment' => null, 'precision' => null, 'fixed' => null],
+        'name' => ['type' => 'string', 'length' => 255, 'default' => null, 'null' => true, 'collate' => null, 'comment' => null, 'precision' => null, 'fixed' => null],
         'effective_start_date' => ['type' => 'date', 'length' => null, 'default' => null, 'null' => true, 'comment' => null, 'precision' => null],
         'effective_end_date' => ['type' => 'date', 'length' => null, 'default' => null, 'null' => true, 'comment' => null, 'precision' => null],
         'positiontype' => ['type' => 'string', 'length' => null, 'default' => null, 'null' => true, 'collate' => null, 'comment' => null, 'precision' => null, 'fixed' => null],
@@ -53,7 +53,9 @@ class PositionsFixture extends TestFixture
         'division_id' => ['type' => 'biginteger', 'length' => 20, 'default' => null, 'null' => true, 'comment' => null, 'precision' => null, 'unsigned' => null, 'autoIncrement' => null],
         'pay_grade_id' => ['type' => 'biginteger', 'length' => 20, 'default' => null, 'null' => true, 'comment' => null, 'precision' => null, 'unsigned' => null, 'autoIncrement' => null],
         'pay_range_id' => ['type' => 'biginteger', 'length' => 20, 'default' => null, 'null' => true, 'comment' => null, 'precision' => null, 'unsigned' => null, 'autoIncrement' => null],
-        'parent_position_id' => ['type' => 'biginteger', 'length' => 20, 'default' => null, 'null' => true, 'comment' => null, 'precision' => null, 'unsigned' => null, 'autoIncrement' => null],
+        'parent_id' => ['type' => 'biginteger', 'length' => 20, 'default' => null, 'null' => true, 'comment' => null, 'precision' => null, 'unsigned' => null, 'autoIncrement' => null],
+        'lft' => ['type' => 'biginteger', 'length' => 20, 'default' => null, 'null' => true, 'comment' => null, 'precision' => null, 'unsigned' => null, 'autoIncrement' => null],
+        'rght' => ['type' => 'biginteger', 'length' => 20, 'default' => null, 'null' => true, 'comment' => null, 'precision' => null, 'unsigned' => null, 'autoIncrement' => null],
         '_constraints' => [
             'primary' => ['type' => 'primary', 'columns' => ['id'], 'length' => []],
             'positions_code_key' => ['type' => 'unique', 'columns' => ['position_code'], 'length' => []],
@@ -63,7 +65,7 @@ class PositionsFixture extends TestFixture
             'positions_division_id_fkey' => ['type' => 'foreign', 'columns' => ['division_id'], 'references' => ['divisions', 'id'], 'update' => 'noAction', 'delete' => 'noAction', 'length' => []],
             'positions_legal_entity_id_fkey' => ['type' => 'foreign', 'columns' => ['legal_entity_id'], 'references' => ['legal_entities', 'id'], 'update' => 'noAction', 'delete' => 'noAction', 'length' => []],
             'positions_location_id_fkey' => ['type' => 'foreign', 'columns' => ['location_id'], 'references' => ['locations', 'id'], 'update' => 'noAction', 'delete' => 'noAction', 'length' => []],
-            'positions_parent_position_id_fkey' => ['type' => 'foreign', 'columns' => ['parent_position_id'], 'references' => ['positions', 'id'], 'update' => 'noAction', 'delete' => 'noAction', 'length' => []],
+            'positions_parent_position_id_fkey' => ['type' => 'foreign', 'columns' => ['parent_id'], 'references' => ['positions', 'id'], 'update' => 'noAction', 'delete' => 'noAction', 'length' => []],
             'positions_pay_grade_id_fkey' => ['type' => 'foreign', 'columns' => ['pay_grade_id'], 'references' => ['pay_grades', 'id'], 'update' => 'noAction', 'delete' => 'noAction', 'length' => []],
             'positions_pay_range_id_fkey' => ['type' => 'foreign', 'columns' => ['pay_range_id'], 'references' => ['pay_ranges', 'id'], 'update' => 'noAction', 'delete' => 'noAction', 'length' => []],
         ],
@@ -78,9 +80,9 @@ class PositionsFixture extends TestFixture
     public $records = [
         [
             'id' => 1,
-            'external_name' => 'Lorem ipsum dolor sit amet',
-            'effective_start_date' => '2016-10-04',
-            'effective_end_date' => '2016-10-04',
+            'name' => 'Lorem ipsum dolor sit amet',
+            'effective_start_date' => '2016-10-06',
+            'effective_end_date' => '2016-10-06',
             'positiontype' => 'Lorem ipsum dolor sit amet',
             'position_criticality' => 'Lorem ipsum dolor sit amet',
             'position_controlled' => 1,
@@ -98,9 +100,9 @@ class PositionsFixture extends TestFixture
             'vacant' => 1,
             'standard_hours' => 1.5,
             'created_by' => 'Lorem ipsum dolor sit amet',
-            'created_date' => '2016-10-04',
+            'created_date' => '2016-10-06',
             'last_modified_by' => 'Lorem ipsum dolor sit amet',
-            'last_modified_date' => '2016-10-04',
+            'last_modified_date' => '2016-10-06',
             'position_matrix_relationship' => 'Lorem ipsum dolor sit amet',
             'right_to_return' => 'Lorem ipsum dolor sit amet',
             'position_code' => 'Lorem ipsum dolor sit amet',
@@ -113,7 +115,9 @@ class PositionsFixture extends TestFixture
             'division_id' => 1,
             'pay_grade_id' => 1,
             'pay_range_id' => 1,
-            'parent_position_id' => 1
+            'parent_id' => 1,
+            'lft' => 1,
+            'rght' => 1
         ],
     ];
 }

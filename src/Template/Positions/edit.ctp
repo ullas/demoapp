@@ -24,8 +24,8 @@
         <li><?= $this->Html->link(__('New Pay Grade'), ['controller' => 'PayGrades', 'action' => 'add']) ?></li>
         <li><?= $this->Html->link(__('List Pay Ranges'), ['controller' => 'PayRanges', 'action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('New Pay Range'), ['controller' => 'PayRanges', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Parents'), ['controller' => 'Positions', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Parent'), ['controller' => 'Positions', 'action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('List Parent Positions'), ['controller' => 'Positions', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New Parent Position'), ['controller' => 'Positions', 'action' => 'add']) ?></li>
     </ul>
 </nav>
 <div class="positions form large-9 medium-8 columns content">
@@ -33,7 +33,7 @@
     <fieldset>
         <legend><?= __('Edit Position') ?></legend>
         <?php
-            echo $this->Form->input('external_name');
+            echo $this->Form->input('name');
             echo $this->Form->input('effective_start_date', ['empty' => true]);
             echo $this->Form->input('effective_end_date', ['empty' => true]);
             echo $this->Form->input('positiontype');
@@ -68,7 +68,9 @@
             echo $this->Form->input('division_id', ['options' => $divisions, 'empty' => true]);
             echo $this->Form->input('pay_grade_id', ['options' => $payGrades, 'empty' => true]);
             echo $this->Form->input('pay_range_id', ['options' => $payRanges, 'empty' => true]);
-            echo $this->Form->input('parent_position_id', ['options' => $parents, 'empty' => true]);
+            echo $this->Form->input('parent_id', ['options' => $parents, 'empty' => true]);
+            echo $this->Form->input('lft');
+            echo $this->Form->input('rght');
         ?>
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>

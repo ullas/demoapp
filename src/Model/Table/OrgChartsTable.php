@@ -30,6 +30,8 @@ class OrgChartsTable extends Table
     {
         parent::initialize($config);
 
+		$this->addBehavior('Tree');
+
         $this->table('org_charts');
         $this->displayField('name');
         $this->primaryKey('id');
