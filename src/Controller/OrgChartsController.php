@@ -18,10 +18,17 @@ class OrgChartsController extends AppController
      */
     public function index()
     {
-        $orgCharts = $this->paginate($this->OrgCharts);
-
-        $this->set(compact('orgCharts'));
-        $this->set('_serialize', ['orgCharts']);
+        // $orgCharts = $this->paginate($this->OrgCharts);
+// 
+        // $this->set(compact('orgCharts'));
+        // $this->set('_serialize', ['orgCharts']);
+        $list = $this->OrgCharts->find('treeList');
+		
+		$orgCharts = $this->OrgCharts->find('threaded', array(
+                    'order' => array('OrgCharts.lft'))
+            );
+			
+			$this->set('orgCharts', $orgCharts);
     }
 
     /**

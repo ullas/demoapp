@@ -192,7 +192,15 @@ $this->Html->script([ 'AdminLTE./plugins/datepicker/bootstrap-datepicker' ], ['b
 				  	$(this).text("");
 				  }
 			});
+			
+			
+			
     });
+    
+    $(".delete-btn").click(function(){
+       $("#ajax_button").html("<a href='Categories/delete/"+ $(this).attr("data-id")+"' class='btn btn-outline pull-right'>Confirm</a>");
+      $("#trigger").click();  
+ });
 </script>
 <?php echo $this->Html->script('AdminLTE.AdminLTE.min'); ?>
 

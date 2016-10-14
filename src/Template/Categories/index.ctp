@@ -1,113 +1,111 @@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+  <h1>
+    Categories
+    <div class="pull-right"><?= $this->Html->link(__('New'), ['action' => 'add'], ['class'=>'btn btn-success btn-xs']) ?></div>
+  </h1>
+</section>
 
-<?php
-function RecursiveCategories($array) {
- 
-    if (count($array)) {
-            echo "\n<ul id='org' style='display:none'>\n";
-        foreach ($array as $vals) {
-			
-			$htmlstr="<div id=mptl>Mptl</div>";
-			
-                    echo "<li id=\"".$vals['id']."\"><a href='#' tabindex='0' id='".$vals['id']."' class='popoverbtn' data-trigger='focus' data-html='true' data-toggle='popover' title='".$vals['name']."' data-content='".$htmlstr."'>".$vals['name'];
-                    if (count($vals['children'])) {
-                            RecursiveCategories($vals['children']);
-                    }
-                    echo "</a></li>\n";
-        }
-            echo "</ul>\n";
-    }
-} ?>
+<!-- Main content -->
+<section class="content">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="box">
+        <div class="box-header">
+          <h3 class="box-title"><?= __('List of') ?> Categories</h3>
+          <div class="box-tools">
+            <form action="<?php echo $this->Url->build(); ?>" method="POST">
+              <div class="input-group input-group-sm">
+                <input type="text" name="search" class="form-control" placeholder="<?= __('Fill in to start search') ?>">
+                <span class="input-group-btn">
+                <button class="btn btn-info btn-flat" type="submit"><?= __('Filter') ?></button>
+                </span>
+              </div>
+            </form>
+          </div>
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body table-responsive no-padding">
+          <table class="table table-hover">
+            <tr>
+              <th><?= $this->Paginator->sort('id') ?></th>
+              <th><?= $this->Paginator->sort('parent_id') ?></th>
+              <th><?= $this->Paginator->sort('lft') ?></th>
+              <th><?= $this->Paginator->sort('rght') ?></th>
+              <th><?= $this->Paginator->sort('name') ?></th>
+              <th><?= __('Actions') ?></th>
+            </tr>
+            <?php foreach ($categories as $category): ?>
+              <tr>
+                <td><?= $this->Number->format($category->id) ?></td>
+                <td><?= $category->has('parent_category') ? $this->Html->link($category->parent_category->name, ['controller' => 'Categories', 'action' => 'view', $category->parent_category->id]) : '' ?></td>
+                <td><?= $this->Number->format($category->lft) ?></td>
+                <td><?= $this->Number->format($category->rght) ?></td>
+                <td><?= h($category->name) ?></td>
+                <td class="actions" style="white-space:nowrap">
+                	
+                  <?= $this->Html->tag('i','',['class' => 'fa fa-times fa-fw icon-delete deleteUser', 'data-toggle' => 'modal', 'data-target' => '#confirmModal' , 'id' => $category->id ]) ?>
+                	
+				  <?= $this->Html->link(__('Delete'), '#', ['class'=>'btn btn-danger delete-btn',"data-id"=>$category->id]) ?>
+                	
+                  <?= $this->Html->link(__('Edit'), ['action' => 'edit', $category->id], ['class'=>'btn btn-primary btn-xs']) ?>
+                  <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $category->id], ['confirm' => __('Confirm to delete this entry?'), 'class'=>'btn btn-danger btn-xs']) ?>
+                </td>
+              </tr>
+            <?php endforeach; ?>
+          </table>
+        </div>
+        <!-- /.box-body -->
+        <div class="box-footer clearfix">
+          <ul class="pagination pagination-sm no-margin pull-right">
+            <?php echo $this->Paginator->numbers(); ?>
+          </ul>
+        </div>
+      </div>
+      <!-- /.box -->
+    </div>
+  </div>
+</section>
+<!-- /.content -->
+<a data-target="#ConfirmDelete" role="button" data-toggle="modal" id="trigger"></a>
+     <div class="modal fade" id="ConfirmDelete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-danger">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                  <h4 class="modal-title" id="myModalLabel">Category deletion</h4>
+              </div>
+              <div class="modal-body">
+                  Do you  really want  to delete this element?
+              </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Cancel</button>
+                  <div id="ajax_button"></div>
+              </div>
+          </div>
+      </div>
+  </div>
+  
 
-<?= RecursiveCategories($categories) ?>
 
-
-
-<script>
-    jQuery(document).ready(function() {
-        $("#org").jOrgChart({
-            chartElement : '#chart',
-            dragAndDrop  : false
-        });
-    });
-    </script>
-    <script>
-        jQuery(document).ready(function() {
-            
-            /* Custom jQuery for the example */
-            $("#show-list").click(function(e){
-                e.preventDefault();
-                
-                $('#list-html').toggle('fast', function(){
-                    if($(this).is(':visible')){
-                        $('#show-list').text('Hide underlying list.');
-                        $(".topbar").fadeTo('fast',0.9);
-                    }else{
-                        $('#show-list').text('Show underlying list.');
-                        $(".topbar").fadeTo('fast',1);                  
-                    }
-                });
-            });
-            
-            $('#list-html').text($('#org').html());
-            
-            $("#org").bind("DOMSubtreeModified", function() {
-                $('#list-html').text('');
-                
-                $('#list-html').text($('#org').html());
-                
-                // prettyPrint();                
-            });
-            
-            
-            //Maptell
-            
-            // $('<div class="node-img"></div>').appendTo('td.node-cell');
-            
-            //popover
-            $('[data-toggle="popover"]').popover();
-            
-    
-        });
-    </script>
-   <section class="content-header">
-      <h1>
-       Organization Chart
-      </h1>
-      <ol class="breadcrumb">
-        <li class="active"><i class="fa fa-sitemap"></i> Organization Chart</li>
-      </ol>
-    </section>
-<section class="content ">
-	<div class="box box-primary"><div class="box-body"> 
-    <div id="chart" class="orgChart"></div></div></div></section>
-   <style>
-   	.jOrgChart table {
-margin: 0px auto;
-}
-.jOrgChart .node-img {
-  background-image:url(/img/profile-icon.png);background-repeat: no-repeat;background-size: 100% 100%;
-  width                 : 96px;
-  height                : 96px;
- border-bottom:1px solid #ddd;
-  margin:0px auto;
-}
-.jOrgChart .node{
-	-webkit-box-shadow: 0px 0px 10px rgba(0,0,0,.8);
-              -moz-box-shadow: 0px 0px 10px rgba(0,0,0,.8);
-                         box-shadow: 0px 0px 10px rgba(0,0,0,.8);
-}
-.jOrgChart.node-cell{
-	margin:0 10px;
-}
-.node-txt{
-	background:#FFFFFF;
-}
-.node-expand{
-	width                 : 96px;
-  height                : 20px;
-  background:#ddd;
-}
-.nodeexp{background-image:url(/img/uparrow.png);background-repeat: no-repeat;}
-.nodehide{background-image:url(/img/downarrow.png);background-repeat: no-repeat;}
-.dnone{display: none;}
-   </style> 
+<div class="modal fade" id="confirmModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-danger">
+        <div class="modal-content">
+        	<div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                  <h4 class="modal-title" id="myModalLabel">Category deletion</h4>
+              </div>
+            <div class="modal-body">Are you sure,you want  to delete this element?</div>
+            <div class="modal-footer">  
+                <?= $this->Form->postLink(
+                    $this->Html->tag('button','Delete',['class' => 'btn btn-outline pull-right']),
+                    ['action' => 'delete', 3],
+                    ['escape' => false])
+                ?>
+                <button type="button" class="btn btn-outline pull-right" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>

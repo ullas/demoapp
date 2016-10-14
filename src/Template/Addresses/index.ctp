@@ -19,6 +19,7 @@
     <table id="mptlindextbl" class="table table-hover  table-bordered ">
         <thead>
             <tr>
+            	<!-- <th><input type="checkbox" name="select_all" value="1" id="example-select-all"></th> -->
                 <th>Id</th>
                 <th>Last name</th>
                 <th>Position</th>
@@ -60,7 +61,16 @@ $this->Html->script([
       	//server side processing
       	"processing": true,
      	 "serverSide": true,
-      	"ajax": "/<?php echo $this->request->params['controller'] ?>/ajaxData"
+      	"ajax": "/<?php echo $this->request->params['controller'] ?>/ajaxData",
+      	'columnDefs': [{
+         'targets': 0,
+         'searchable': false,
+         'orderable': false,
+         'className': 'dt-body-center',
+         'render': function (data, type, full, meta){
+             return '<input type="checkbox" name="chk' + data + '" value="' + $('<div/>').text(data).html() + '">';
+         }
+      }]
   
     });
     

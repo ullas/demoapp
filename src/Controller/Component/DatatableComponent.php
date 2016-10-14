@@ -34,7 +34,7 @@ use Cake\Controller\Component;
 			//getting orderby
 	   		$order = $this->Order( $colmns );
 			//getting filter
-			$where = $this->Filter( $colmns, null );
+			$where = $this->Filter( $colmns, $fields );
 			
 			//getting limit
 			$limit = $this->Limit( );
@@ -44,14 +44,19 @@ use Cake\Controller\Component;
 			$controller = $this->_registry->getController();
 			
 			$model=$controller->loadModel($controller->modelClass);
-			// $data = $model->find('all')->contain(['EmpDataBiographies' => function ($q) { return $q->select(['associatedVal'=>'birth_name']) ; }])->where($where)->order($order)->limit($limit)->page($page)->toArray();
+
+			$wherestr="";
+			foreach($where  as $key => $value){
+				if($wherestr != ''){$wherestr.=" OR ";}
+				$wherestr.=$key. " '". $value. "'";
+			}
 			
-			$data = $model->find('all')->contain($contains)->where($where)->order($order)->limit($limit)->page($page)->toArray();
+			$data = $model->find('all')->contain($contains)->where($wherestr)->limit($limit)->page($page)->toArray();
 			
 			//getting totalcount
 			$totalCount = $model->find() ->count();
 			//getting filteredcount
-			$filteredCount = $model->find()->where($where)->count();
+			$filteredCount = $model->find()->where($wherestr)->count();
 		
 			$output =$this->GetData($colmns,$data,$totalCount,$filteredCount);
 		
@@ -64,11 +69,23 @@ use Cake\Controller\Component;
 			}
 			return $limit;
 		}
-		public function Filter( $columns, $filtroAdd ){
+		function validateDate($date, $format)
+		{
+    		$d = \DateTime::createFromFormat($format, $date);
+    		return $d && $d->format($format) == $date;
+		}
+		function isBoolean($value) {
+   			if ($value && (strtolower($value) == "false" || strtolower($value) == "true")) {
+      			return true;
+   			} else {
+      			return false;
+   			}
+		}
+		public function Filter( $columns, $fields ){
 			$globalSearch = [];
 			// $columnSearch = array();
 			$dtColumns = $this->pluck( $columns, 'dt' );
-			/*if ( isset($this->request->query['search']) && $this->request->query['search']['value'] != '' ) {
+			if ( isset($this->request->query['search']) && $this->request->query['search']['value'] != '' ) {
 				$str = $this->request->query['search']['value'];
 				$str = pg_escape_string($str);
 				for ( $i=0, $ien=count($this->request->query['columns']) ; $i<$ien ; $i++ ) {
@@ -76,16 +93,32 @@ use Cake\Controller\Component;
 					$columnIdx = array_search( $requestColumn['data'], $dtColumns );
 					$column = $columns[ $columnIdx ];
 					if ( $requestColumn['searchable'] == 'true' ) {
-						$globalSearch[$column['db'].' LIKE'] = "%" . $str. "%";
+						
+						foreach ($fields as $rowval) {
+							if( ($rowval['name']==$column['db']) && ($rowval['type']=="character") ){
+								$globalSearch[$column['db'].' ILIKE'] = "%" . $str. "%";
+							}
+							else if( ($rowval['name']==$column['db']) && ($rowval['type']=="date") ){
+								if($this->validateDate($str,'m/d/y')){
+									$globalSearch[$column['db'].'::date ='] = $str;
+								}
+							}
+							else if( ($rowval['name']==$column['db']) && ($rowval['type']=="boolean") ){
+								if($this->isBoolean($str) === true){
+									$globalSearch[$column['db'].' ='] =  $str;
+								}
+							}
+						}
+					
 					}
 				}
-			}*/
-			
-			
-			if ( isset($this->request->query['search']) && $this->request->query['search']['value'] != '' ) {
-				$str = $this->request->query['search']['value'];
-				$globalSearch["name LIKE"] = "%" . $str. "%";
 			}
+			
+			
+			// if ( isset($this->request->query['search']) && $this->request->query['search']['value'] != '' ) {
+				// $str = $this->request->query['search']['value'];
+				// $globalSearch["name LIKE"] = "%" . $str. "%";
+			// }
 			
 			// Individual column filtering
 			// for ( $i=0, $ien=count($this->request->query['columns']) ; $i<$ien ; $i++ ) {
@@ -99,10 +132,10 @@ use Cake\Controller\Component;
 				// }
 			// }
 			// Combine the filters into a single string
-			$where = '';
-			if ( count( $globalSearch ) ) {
-				$where = '('.implode(' OR ', $globalSearch).')';
-			}
+			// $where = '';
+			// if ( count( $globalSearch ) ) {
+				// $where = '('.implode(' OR ', $globalSearch).')';
+			// }
 			// if ( count( $columnSearch ) ) {
 				// $where = $where === '' ?
 					// implode(' AND ', $columnSearch) :
@@ -117,9 +150,9 @@ use Cake\Controller\Component;
 				// }						
 			// }
 		
-			if ( $where !== '' ) {
-				$where = 'WHERE '.$where;
-			}
+			// if ( $where !== '' ) {
+				// $where = 'WHERE '.$where;
+			// }
 			return $globalSearch;
 		}
 		public function Order ( $columns )

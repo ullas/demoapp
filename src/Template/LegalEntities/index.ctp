@@ -20,18 +20,11 @@
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Name</th>
                 <th>Description</th>
+                <th>Name</th>
                 <th>Effective Status</th>
-                <th>Effective Start date</th>
-                <th>Effective End Date</th>
-                <th>Country Of Registration</th>
-                <th>Standard Weekly Hours</th>
-                <th>Currency</th>
-                <th>Official Language</th>
                 <th>External Code</th>
-                <th>Location</th>
-                <th>Paygroup</th>
+                
                 <th class="actions" data-orderable="false"><?= __('Actions') ?></th>
             </tr>
         </thead>

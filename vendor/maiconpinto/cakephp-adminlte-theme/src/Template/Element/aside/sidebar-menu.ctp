@@ -47,7 +47,7 @@ case "root":
     </ul>
     </li>
     <li><a href="<?php echo $this -> Url -> build('/Profiles'); ?>"><i class="glyphicon glyphicon-user"></i><span> Profile </span></a></li>
-    <li><a href="<?php echo $this -> Url -> build('/OrgCharts'); ?>"><i class="fa fa-sitemap"></i><span> Organizational Chart </span></a></li>
+    <li><a href="<?php echo $this -> Url -> build('/Positions/orgchart'); ?>"><i class="fa fa-sitemap"></i><span> Organizational Chart </span></a></li>
     <li><a href="#"><i class="fa fa-question-circle"></i> <span>Help</span></a></li>
 
     <?php
