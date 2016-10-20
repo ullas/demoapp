@@ -21,6 +21,7 @@ class LegalEntitiesController extends AppController
 		foreach($dbout as $value){
 			$fields[] = array("name" => $value['field_name'] , "type" => $value['datatype'] );
 		}
+		$this->set('fields', $fields);
 		
 		$contains=[];
 									  

@@ -21,12 +21,11 @@
             <tr>
                 <th>Id</th>
                 <th>Name</th>
-                <th>Description</th>
                 <th>Effective Status</th>
                 <th>Effective Start date</th>
                 <th>Effective End Date</th>
-                <th>External Code</th>
-                <th>Head of Unit</th>
+                <th>Customer Name</th>
+                <th>Customer ContactNo</th>
                 <th class="actions" data-orderable="false"><?= __('Actions') ?></th>
             </tr>
         </thead>

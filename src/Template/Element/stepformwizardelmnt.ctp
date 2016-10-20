@@ -47,9 +47,13 @@
 	text-align: right;
 }	
 </style>
-
-  
-<div class="stepwizard col-md-offset-3 jumbotron">
+<!-- <div class="pad margin no-print">
+      <div class="callout callout-warning">
+        <i class="fa fa-info-circle"></i> To begin, please fill out the following forms.
+      </div>
+    </div> -->
+     
+<div class="stepwizard col-md-offset-3 jumbotron bgwhite">
     <div class="stepwizard-row setup-panel">
     	
     	<!-- $extdiv='<div class="stepwizard-step">';
@@ -129,22 +133,9 @@
       		echo '<dt class="text-success"><i class="icon fa fa-check-square"></i> Division</dt>';
       	}else{
       		$btntype="default";$disabledstr='disabled="disabled"';$texttype='';
-      		if($wcontent=="Divsion"){$btntype="primary";$disabledstr='';$texttype=' class="text-blue"';}
+      		if($wcontent=="Division"){$btntype="primary";$disabledstr='';$texttype=' class="text-blue"';}
       		echo '<a type="button" class="btn btn-'.$btntype.' btn-circle" '.$disabledstr.'><i class="fa fa-database"></i></a>';
       		echo '<dd'.$texttype.'>Division</dd>';
-      	}
-        ?>
-      </div>
-      <div class="stepwizard-step">
-      	<?php
-      	if($counts['department'] > 0){	
-      		echo '<a type="button" class="btn btn-success btn-circle"><i class="fa fa-cubes"></i></a>';
-      		echo '<dt class="text-success"><i class="icon fa fa-check-square"></i> Department</dt>';
-      	}else{
-      		$btntype="default";$disabledstr='disabled="disabled"';$texttype='';
-      		if($wcontent=="Department"){$btntype="primary";$disabledstr='';$texttype=' class="text-blue"';}
-      		echo '<a type="button" class="btn btn-'.$btntype.' btn-circle" '.$disabledstr.'><i class="fa fa-cubes"></i></a>';
-      		echo '<dd'.$texttype.'>Department</dd>';
       	}
         ?>
       </div>
@@ -158,6 +149,19 @@
       		if($wcontent=="CostCenter"){$btntype="primary";$disabledstr='';$texttype=' class="text-blue"';}
       		echo '<a type="button" class="btn btn-'.$btntype.' btn-circle" '.$disabledstr.'><i class="fa fa-creative-commons"></i></a>';
       		echo '<dd'.$texttype.'>Cost Center</dd>';
+      	}
+        ?>
+      </div>
+      <div class="stepwizard-step">
+      	<?php
+      	if($counts['department'] > 0){	
+      		echo '<a type="button" class="btn btn-success btn-circle"><i class="fa fa-cubes"></i></a>';
+      		echo '<dt class="text-success"><i class="icon fa fa-check-square"></i> Department</dt>';
+      	}else{
+      		$btntype="default";$disabledstr='disabled="disabled"';$texttype='';
+      		if($wcontent=="Department"){$btntype="primary";$disabledstr='';$texttype=' class="text-blue"';}
+      		echo '<a type="button" class="btn btn-'.$btntype.' btn-circle" '.$disabledstr.'><i class="fa fa-cubes"></i></a>';
+      		echo '<dd'.$texttype.'>Department</dd>';
       	}
         ?>
       </div>

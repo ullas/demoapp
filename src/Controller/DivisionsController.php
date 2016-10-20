@@ -15,13 +15,18 @@ var $components = array('Datatable');
 	
 	public function ajaxData() {
 		$this->autoRender= False;
-
-		$fields = array(array('name'=>'id','type'=>'int'),'name','description',array('name'=>'effective_status','type'=>'bool'),
-									  array('name'=>'effective_start_date','type'=>'date'),array('name'=>'effective_end_date','type'=>'date'),
-									  'parent_division','external_code',array('name'=>'head_of_unit','type'=>'bigint'));
+		  
+		$this->loadModel('CreateConfigs');
+		$dbout=$this->CreateConfigs->find()->select(['field_name', 'datatype'])->where(['table_name' => $this->request->params['controller']])->order(['id' => 'ASC'])->toArray();
+		$fields = array();
+		foreach($dbout as $value){
+			$fields[] = array("name" => $value['field_name'] , "type" => $value['datatype'] );
+		}
+		
+		$contains=['Customers'];
 									  
-		$output =$this->Datatable->getView($fields);
-		echo json_encode($output);			
+		$output =$this->Datatable->getView($fields,$contains);
+		echo json_encode($output);				
     }
     /**
      * Index method
@@ -83,9 +88,10 @@ var $components = array('Datatable');
         $division = $this->Divisions->newEntity();
         if ($this->request->is('post')) {
             $division = $this->Divisions->patchEntity($division, $this->request->data);
+			$division['customer_id']=$this->loggedinuser['customer_id'];
             if ($this->Divisions->save($division)) {
                 $this->Flash->success(__('The division has been saved.'));
-				return $this->redirect(array('controller' => 'Departments', 'action' => 'addwizard'));
+				return $this->redirect(array('controller' => 'CostCentres', 'action' => 'addwizard'));
             } else {
                 $this->Flash->error(__('The division could not be saved. Please, try again.'));
             }

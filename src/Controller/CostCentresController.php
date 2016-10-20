@@ -14,13 +14,18 @@ var $components = array('Datatable');
 	
 	public function ajaxData() {
 		$this->autoRender= False;
-
-		$fields = array(array('name'=>'id','type'=>'int'),'name','description',array('name'=>'effective_status','type'=>'bool'),
-									  array('name'=>'effective_start_date','type'=>'date'),array('name'=>'effective_end_date','type'=>'date'),
-									 'parent_cost_center', 'external_code',array('name'=>'cost_center_manager','type'=>'bigint'));
+		  
+		$this->loadModel('CreateConfigs');
+		$dbout=$this->CreateConfigs->find()->select(['field_name', 'datatype'])->where(['table_name' => $this->request->params['controller']])->order(['id' => 'ASC'])->toArray();
+		$fields = array();
+		foreach($dbout as $value){
+			$fields[] = array("name" => $value['field_name'] , "type" => $value['datatype'] );
+		}
+		
+		$contains=['Customers'];
 									  
-		$output =$this->Datatable->getView($fields);
-		echo json_encode($output);			
+		$output =$this->Datatable->getView($fields,$contains);
+		echo json_encode($output);		
     }
     /**
      * Index method
@@ -86,7 +91,7 @@ var $components = array('Datatable');
 			$costCentre['customer_id']=$this->loggedinuser['customer_id'];
             if ($this->CostCentres->save($costCentre)) {
                 $this->Flash->success(__('The cost centre has been saved.'));
-				return $this->redirect(array('controller' => 'Positions', 'action' => 'addwizard'));
+				return $this->redirect(array('controller' => 'Departments', 'action' => 'addwizard'));
             } else {
                 $this->Flash->error(__('The cost centre could not be saved. Please, try again.'));
             }

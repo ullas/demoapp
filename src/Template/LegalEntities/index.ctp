@@ -19,13 +19,11 @@
     <table id="mptlindextbl" class="table table-hover  table-bordered ">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Description</th>
-                <th>Name</th>
-                <th>Effective Status</th>
-                <th>External Code</th>
-                
+            	<th>Id</th>	
+            	<th>Name</th>	
+            	<th></th>	           
                 <th class="actions" data-orderable="false"><?= __('Actions') ?></th>
+              
             </tr>
         </thead>
         <tbody>

@@ -14,12 +14,17 @@ var $components = array('Datatable');
 	
 	public function ajaxData() {
 		$this->autoRender= False;
-
-		$fields = array(array('name'=>'id','type'=>'int'),'name','description',array('name'=>'effective_status','type'=>'bool'),
-									  array('name'=>'effective_start_date','type'=>'date'),array('name'=>'effective_end_date','type'=>'date'),
-									  'parent_department','external_code',array('name'=>'head_of_unit','type'=>'bigint'),array('name'=>'cost_center_id','type'=>'bigint'));
+		  
+		$this->loadModel('CreateConfigs');
+		$dbout=$this->CreateConfigs->find()->select(['field_name', 'datatype'])->where(['table_name' => $this->request->params['controller']])->order(['id' => 'ASC'])->toArray();
+		$fields = array();
+		foreach($dbout as $value){
+			$fields[] = array("name" => $value['field_name'] , "type" => $value['datatype'] );
+		}
+		
+		$contains=['CostCentres','Customers'];
 									  
-		$output =$this->Datatable->getView($fields);
+		$output =$this->Datatable->getView($fields,$contains);
 		echo json_encode($output);			
     }
     /**
@@ -86,7 +91,7 @@ var $components = array('Datatable');
 			$department['customer_id']=$this->loggedinuser['customer_id'];
             if ($this->Departments->save($department)) {
                 $this->Flash->success(__('The department has been saved.'));
-				return $this->redirect(array('controller' => 'CostCentres', 'action' => 'addwizard'));
+				return $this->redirect(array('controller' => 'Positions', 'action' => 'addwizard'));
             } else {
                 $this->Flash->error(__('The department could not be saved. Please, try again.'));
             }

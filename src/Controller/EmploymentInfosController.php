@@ -14,10 +14,17 @@ var $components = array('Datatable');
 	
 	public function ajaxData() {
 		$this->autoRender= False;
-
-		$fields = array(array('name'=>'id','type'=>'int'),array('name'=>'start_date','type'=>'date'),array('name'=>'first_date_worked','type'=>'date'),array('name'=>'original_start_date','type'=>'date'),'company',array('name'=>'is_primary','type'=>'bool'),array('name'=>'seniority_date','type'=>'date'),array('name'=>'benefits_eligibility_start_date','type'=>'date'),'prev_employeeid',array('name'=>'eligible_for_stock','type'=>'bool'),array('name'=>'service_date','type'=>'date'),array('name'=>'initial_stock_grant','type'=>'numeric'),array('name'=>'initial_option_grant','type'=>'numeric'),'job_credit','notes',array('name'=>'is_contingent_worker','type'=>'bool'),array('name'=>'end_date','type'=>'date'),array('name'=>'ok_to_rehire','type'=>'bool'),array('name'=>'pay_roll_end_date','type'=>'date'),array('name'=>'last_date_worked','type'=>'date'),array('name'=>'regret_termination','type'=>'bool'),array('name'=>'eligible_for_sal_continuation','type'=>'bool'),array('name'=>'bonus_pay_expiration_date','type'=>'date'),array('name'=>'stock_end_date','type'=>'date'),array('name'=>'salary_end_date','type'=>'date'),array('name'=>'benefits_end_date','type'=>'date'));
+		  
+		$this->loadModel('CreateConfigs');
+		$dbout=$this->CreateConfigs->find()->select(['field_name', 'datatype'])->where(['table_name' => $this->request->params['controller']])->order(['id' => 'ASC'])->toArray();
+		$fields = array();
+		foreach($dbout as $value){
+			$fields[] = array("name" => $value['field_name'] , "type" => $value['datatype'] );
+		}
+		
+		$contains=['Customers'];
 									  
-		$output =$this->Datatable->getView($fields);
+		$output =$this->Datatable->getView($fields,$contains);
 		echo json_encode($output);			
     }
     /**

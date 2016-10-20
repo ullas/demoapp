@@ -1,4 +1,6 @@
-		<?= $this->element('stepformwizardelmnt', array('wcontent' => 'LegalEntity','wid' => '1')); ?>
+<div class="box bgwhite">
+	<?= $this->element('stepformwizardelmnt', array('wcontent' => 'LegalEntity','wid' => '1')); ?>
+</div>
 
     
     <section class="content-header">

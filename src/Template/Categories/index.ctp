@@ -42,14 +42,12 @@
                 <td><?= $this->Number->format($category->lft) ?></td>
                 <td><?= $this->Number->format($category->rght) ?></td>
                 <td><?= h($category->name) ?></td>
-                <td class="actions" style="white-space:nowrap">
+                <td class="actions" >
                 	
-                  <?= $this->Html->tag('i','',['class' => 'fa fa-times fa-fw icon-delete deleteUser', 'data-toggle' => 'modal', 'data-target' => '#confirmModal' , 'id' => $category->id ]) ?>
+                  <?= $this->Html->link(__('View'), ['action' => 'view', $category->id], ['class'=>'btn btn-info ']) ?>
+                  <?= $this->Html->link(__('Edit'), ['action' => 'edit', $category->id], ['class'=>'btn btn-primary ']) ?>
+				  <?= $this->Html->link(__('Delete'), '#', ['class'=>'btn btn-danger delete-btn p3',"data-id"=>$category->id]) ?>
                 	
-				  <?= $this->Html->link(__('Delete'), '#', ['class'=>'btn btn-danger delete-btn',"data-id"=>$category->id]) ?>
-                	
-                  <?= $this->Html->link(__('Edit'), ['action' => 'edit', $category->id], ['class'=>'btn btn-primary btn-xs']) ?>
-                  <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $category->id], ['confirm' => __('Confirm to delete this entry?'), 'class'=>'btn btn-danger btn-xs']) ?>
                 </td>
               </tr>
             <?php endforeach; ?>
@@ -67,6 +65,8 @@
   </div>
 </section>
 <!-- /.content -->
+
+  
 <a data-target="#ConfirmDelete" role="button" data-toggle="modal" id="trigger"></a>
      <div class="modal fade" id="ConfirmDelete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-danger">
@@ -80,7 +80,7 @@
               </div>
               <div class="modal-footer">
                   <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Cancel</button>
-                  <div id="ajax_button"></div>
+                  <div id="ajax_button" class="pull-right"></div>
               </div>
           </div>
       </div>

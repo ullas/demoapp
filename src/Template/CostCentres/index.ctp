@@ -22,12 +22,6 @@
                 <th>Id</th>
                 <th>Name</th>
                 <th>Description</th>
-                <th>Effective Status</th>
-                <th>Effective Start date</th>
-                <th>Effective End Date</th>
-                <th>Parent Cost Center</th>
-                <th>External Code</th>
-                <th>Cost Center Manager</th>
                 <th class="actions" data-orderable="false"><?= __('Actions') ?></th>
             </tr>
         </thead>

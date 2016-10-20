@@ -6,13 +6,17 @@ function RecursiveCategories($array) {
             echo "\n<ul id='org' style='display:none'>\n";
         foreach ($array as $vals) {
 			
-			$htmlstr="<div id=mptl><dd>Actions</dd><ul class=list-unstyled>
+			$htmlstr="<div id=mptl><dd>Take Action</dd><ul class=list-unstyled>
+							<li><a href=\"../EmploymentInfos\">Employment Details</a></li>
 							<li><a href=\"#\" onclick=\"onclickTerminate(".$vals['id'].");\">Terminate</a></li>
-							<li><a href=\"#\" onclick=\"onclickTerminate(".$vals['id'].");\">Job Change</a></li>
-							<li><a href=\"#\" onclick=\"onclickTerminate(".$vals['id'].");\">Employment Details</a></li></ul>
-							<div class=uline></div>
-							<dd>Go to</dd><ul class=list-unstyled><li><a href=\"../Profiles\">Profile</a></li>
-							<li><a href=\"linkaddress\">Link</a></li></ul></div>";
+							<li><a href=\"../JobInfos\">Change Job and Compensation Info</a></li>
+							<li><a href=\"#\" class=\"open-Popup\" data-toggle=\"modal\" data-target=\"#PopOver\" id=\"".$vals['id']."\">Add Note</a></li>
+							</ul><div class=uline></div><dd>Go to</dd><ul class=list-unstyled>
+							<li><a href=\"../Profiles\">Profile</a></li>
+							<li><a href=\"../#\">Employment Information</a></li>
+							<li><a href=\"../#\">Notes</a></li>
+							<li><a href=\"../#\">Goal Plan</a></li>
+							<li><a href=\"#\">Others</a></li></ul></div>";
 			
                     echo "<li id=\"".$vals['id']."\"><a href='#' tabindex='0' id='".$vals['id']."' class='popoverbtn' data-trigger='focus' data-html='true' data-toggle='popover' title='".$vals['name']."'
                      		 data-content='".$htmlstr."'>".$vals['name'];
@@ -77,11 +81,33 @@ function RecursiveCategories($array) {
         });
         
         function onclickTerminate(id){
-        	$.ajax({
+        	if (confirm("Are you sure you want to terminate ?") == true) {
+        		$.ajax({
+        			type: "get",
+        			url: "../Actions/terminate/"+id,
+        			data: {
+            			Id:id
+       				},
+        			success: function (data){
+            			alert(data);
+        			},
+        			error: function (xhr, ajaxOptions, thrownError){
+						alert(thrownError);
+        			}
+    			});
+    		}
+    		return false;
+        }
+        
+        function addNote(){
+        	var id=document.getElementById("UID").value;alert(id);
+        	var note=document.getElementById("notes").value;
+       		$.ajax({
         		type: "get",
-        		url: "../Actions/terminate/"+id,
+        		url: "../Actions/addnote/"+id,
         		data: {
-            		Id:id
+            		Id:id,
+            		Notes:note
        			},
         		success: function (data){
             		alert(data);
@@ -90,8 +116,14 @@ function RecursiveCategories($array) {
 					alert(thrownError);
         		}
     		});
-    		return false;
-        }
+    		return false; 
+ 		}
+
+// called when popover shown
+$(document).on("click", ".open-Popup", function () {
+     document.getElementById('UID').value = $(this).attr("id");
+});
+
     </script>
    <section class="content-header">
       <h1>
@@ -158,11 +190,33 @@ margin: 0px auto;
 	color:#555;font-size: 12px;text-align:left;font-weight: bold;margin-left:5px;
 }
 .popover-content a:hover {
-    color: #3d8db8;
+    color: #fff;background:#3d8db8;padding:4px;
 }
 .node-desc{
 }
 .uline{
 	height:2px;width:100%;background:#FFFFFF;margin:10px;
 }
+.tcenter{text-align:center}
    </style> 
+
+
+<!-- hidden field -->
+<input type="hidden" id="UID">
+
+<div class="modal fade" id="PopOver" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+          <div class="modal-content">
+              <div class="modal-header bg-aqua">
+                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                  <h4 class="modal-title tcenter" id="myModalLabel">Add Note</h4>
+              </div>
+              <div class="modal-body">
+					<div class='form-group'><label>Notes:</label><br><textarea  id='notes' class='form-control'></textarea></></div>
+              </div>
+              <div class="modal-footer">
+                  <input type="button" class="save-btn btn btn-info pull-right" value="Save changes" onclick="addNote()"/>
+              </div>
+          </div>
+      </div>
+  </div>

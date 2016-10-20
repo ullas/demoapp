@@ -21,12 +21,7 @@
             <tr>
                 <th>Id</th>
                 <th>Date Of Birth</th>
-                <th>Country Of Birth</th>
-                <th>Region Of Birth</th>
-                <th>Place Of Birth</th>
                 <th>Birth Name</th>
-                <th>Date Of Death</th>
-                <th>Person Id External</th>
                 <th class="actions" data-orderable="false"><?= __('Actions') ?></th>
             </tr>
         </thead>
