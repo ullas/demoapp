@@ -29,6 +29,17 @@
             echo $this->Form->input('emp_data_biographies_id', ['options' => $empDataBiographies, 'empty' => true]);
         ?>
     </fieldset>
+    <fieldset>
+    	<?php
+    	// foreach ($subjectGroup['Subject'] as $subject):
+        	echo $this->Form->input('EmpDataBiographies.0.id');
+        	echo $this->Form->input('EmpDataBiographies.0.birth_name');
+			// echo $this->Form->input('EmpDataBiographies.1.birth_name');
+			// echo $this->Form->input('EmpDataBiographies.2.birth_name');
+        	// $j++;
+    	// endforeach;
+		?>
+    </fieldset>
     <?= $this->Form->button(__('Submit')) ?>
     <?= $this->Form->end() ?>
 </div></div></section>

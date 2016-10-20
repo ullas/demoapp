@@ -85,6 +85,9 @@
         position: absolute;
         color:#FFFFFF;
     }
+    .bgwhite{
+    	background-color:#FFFFFF;
+    }
 </style>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
@@ -178,7 +181,7 @@ $this->Html->script([ 'AdminLTE./plugins/datepicker/bootstrap-datepicker' ], ['b
 			$(".actions a").each(function(){
 				  if($(this).text()=='View')
 				  {
-				  	$(this).addClass('fa fa-file-text-o p3');
+				  	$(this).addClass('fa fa-eye p3');
 				  	$(this).text("");
 				  }
 				  if($(this).text()=='Edit')
@@ -198,11 +201,10 @@ $this->Html->script([ 'AdminLTE./plugins/datepicker/bootstrap-datepicker' ], ['b
     });
     
     $(".delete-btn").click(function(){
-       $("#ajax_button").html("<a href='Categories/delete/"+ $(this).attr("data-id")+"' class='btn btn-outline pull-right'>Confirm</a>");
+       $("#ajax_button").html("<a href='/<?php echo $this->request->params['controller'] ?>/delete/"+ $(this).attr("data-id")+"' class='btn btn-outline btn-danger'>Confirm</a>");
       $("#trigger").click();  
  });
 </script>
 <?php echo $this->Html->script('AdminLTE.AdminLTE.min'); ?>
-
 </body>
 </html>

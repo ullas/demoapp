@@ -15,13 +15,18 @@ class BusinessUnitsController extends AppController
 	
 	public function ajaxData() {
 		$this->autoRender= False;
-
-		$fields = array(array('name'=>'id','type'=>'int'),'name','description',array('name'=>'effective_status','type'=>'bool'),
-									  array('name'=>'effective_start_date','type'=>'date'),array('name'=>'effective_end_date','type'=>'date'),
-									  'external_code',array('name'=>'head_of_unit','type'=>'bigint'));
+		  
+		$this->loadModel('CreateConfigs');
+		$dbout=$this->CreateConfigs->find()->select(['field_name', 'datatype'])->where(['table_name' => $this->request->params['controller']])->order(['id' => 'ASC'])->toArray();
+		$fields = array();
+		foreach($dbout as $value){
+			$fields[] = array("name" => $value['field_name'] , "type" => $value['datatype'] );
+		}
+		
+		$contains=['Customers'];
 									  
-		$output =$this->Datatable->getView($fields);
-		echo json_encode($output);			
+		$output =$this->Datatable->getView($fields,$contains);
+		echo json_encode($output);		
     }
     /**
      * Index method

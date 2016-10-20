@@ -51,7 +51,7 @@ use Cake\Controller\Component;
 				$wherestr.=$key. " '". $value. "'";
 			}
 			
-			$data = $model->find('all')->contain($contains)->where($wherestr)->limit($limit)->page($page)->toArray();
+			$data = $model->find('all')->contain($contains)->where($wherestr)->order($order)->limit($limit)->page($page)->toArray();
 			
 			//getting totalcount
 			$totalCount = $model->find() ->count();
@@ -194,9 +194,9 @@ use Cake\Controller\Component;
 			
 			$out = array();
 			for ( $i=0, $ien=count($data) ; $i<$ien ; $i++ ) {
-				$row = array();
+				$row = array();  
 				for ( $j=0, $jen=count($columns) ; $j<$jen ; $j++ ) {
-					$column = $columns[$j];
+					$column = $columns[$j];//$row[ "mptlren".$j ] = $columns[$j];  
 					if (isset( $column['alias'] )){
 						if ($column['alias']!= '' ){
 							$c = $column['alias'];
@@ -213,8 +213,13 @@ use Cake\Controller\Component;
 					}
 					else {
 						if(strpos($c, '.') !== false){
+							$colname="";
 							$colname[]=explode(".",$c);
 							$row[ $column['dt'] ] =  utf8_encode($data[$i][$colname[0][0]][$colname[0][1]]);
+							//if it is null check the second value from dot seperated in data
+							if($row[ $column['dt'] ]=="" && $colname[0][0]==$controller->name){
+								$row[ $column['dt'] ] = utf8_encode($data[$i][$colname[0][1]]);  
+							}
 						}else{
 							$row[ $column['dt'] ] =  utf8_encode($data[$i][$c]);
 						}

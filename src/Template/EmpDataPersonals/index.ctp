@@ -23,14 +23,7 @@
                 <th>Salutation</th>
                 <th>First Name</th>
                 <th>Last Name</th>
-                <th>Initials</th>
-                <th>Middle Name</th>
-                <th>First Name Alt1</th>
-                <th>Middle Name Alt1</th>
-                <th>Last Name Alt1</th>
-				<th>First Name Alt2</th>
-				<th>Middle Name Alt2</th>
-				<th>Last Name Alt2</th>
+                
 				
                 <th class="actions" data-orderable="false"><?= __('Actions') ?></th>
             </tr>

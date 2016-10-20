@@ -1,4 +1,4 @@
-		<?= $this->element('stepformwizardelmnt', array('wcontent' => 'CostCenter','wid' => '4')); ?>
+<div class="box"><?= $this->element('stepformwizardelmnt', array('wcontent' => 'CostCenter','wid' => '3')); ?></div>
 
     <section class="content-header">
       <h1>

@@ -2,7 +2,7 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
-
+use Cake\Routing\Router;
 /**
  * Categories Controller
  *
@@ -24,7 +24,7 @@ class CategoriesController extends AppController
         $categories = $this->paginate($this->Categories);
 
         $this->set(compact('categories'));
-        $this->set('_serialize', ['categories']);
+        $this->set('_serialize', ['categories']); 
     }
 
     /**
@@ -101,7 +101,7 @@ class CategoriesController extends AppController
      */
     public function delete($id = null)
     {
-        $this->request->allowMethod(['post', 'delete']);
+        // $this->request->allowMethod(['post', 'delete']);
         $category = $this->Categories->get($id);
         if ($this->Categories->delete($category)) {
             $this->Flash->success(__('The {0} has been deleted.', 'Category'));
