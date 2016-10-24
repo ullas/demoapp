@@ -26,7 +26,11 @@ class BusinessUnitsController extends AppController
 		$contains=['Customers'];
 									  
 		$output =$this->Datatable->getView($fields,$contains);
-		echo json_encode($output);		
+		// echo json_encode($output);		
+        $out =json_encode($output);  
+	
+		$this->response->body($out);
+	    return $this->response;
     }
     /**
      * Index method
