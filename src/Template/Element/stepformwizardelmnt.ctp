@@ -47,11 +47,11 @@
 	text-align: right;
 }	
 </style>
-<!-- <div class="pad margin no-print">
+<div class="pad margin no-print">
       <div class="callout callout-warning">
         <i class="fa fa-info-circle"></i> To begin, please fill out the following forms.
       </div>
-    </div> -->
+    </div>
      
 <div class="stepwizard col-md-offset-3 jumbotron bgwhite">
     <div class="stepwizard-row setup-panel">

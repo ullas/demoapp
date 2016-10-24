@@ -42,10 +42,8 @@ case "root":
     <li><a href="<?php echo $this -> Url -> build('/Departments'); ?>"><i class="fa fa-circle-o"></i> Departments</a></li>
     <li><a href="<?php echo $this -> Url -> build('/CostCentres'); ?>"><i class="fa fa-circle-o"></i> Cost Centres</a></li>
     <li><a href="<?php echo $this->Url->build('/Positions'); ?>"><i class="fa fa-circle-o"></i> Position</a></li>
-    <li><a href="<?php echo $this -> Url -> build('/EmpDataBiographies'); ?>"><i class="fa fa-circle-o"></i> Emp Data Biography</a></li>
+    <li><a href="<?php echo $this -> Url -> build('/Employees'); ?>"><i class="fa fa-circle-o"></i> Employee</a></li>
     
-    <li><a href="<?php echo $this -> Url -> build('/EmpDataPersonals'); ?>"><i class="fa fa-circle-o"></i> Emp Data Personal</a></li>
-    <li><a href="<?php echo $this -> Url -> build('/EmploymentInfos'); ?>"><i class="fa fa-circle-o"></i> Employment Info</a></li>
     <!-- <li><a href="<?php echo $this -> Url -> build('/EventReasons'); ?>"><i class="fa fa-circle-o"></i> Event reason</a></li>
     <li><a href="<?php echo $this -> Url -> build('/Frequencies'); ?>"><i class="fa fa-circle-o"></i> Frequency</a></li>
     <li><a href="<?php echo $this -> Url -> build('/HolidayCalendars'); ?>"><i class="fa fa-circle-o"></i> Holiday Calendar</a></li>

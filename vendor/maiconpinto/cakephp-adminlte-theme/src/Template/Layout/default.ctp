@@ -145,7 +145,7 @@ $this->Html->script([ 'AdminLTE./plugins/datepicker/bootstrap-datepicker' ], ['b
 <script type="text/javascript">
     $(document).ready(function(){
     	
-    	$('.bootstrapdp').datepicker({
+    	$('.dp').datepicker({
     		format:"dd/mm/yy",
       		autoclose: true
     	});
