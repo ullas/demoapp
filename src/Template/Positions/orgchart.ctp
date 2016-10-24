@@ -212,7 +212,15 @@ margin: 0px auto;
                   <h4 class="modal-title tcenter" id="myModalLabel">Add Note</h4>
               </div>
               <div class="modal-body">
-					<div class='form-group'><label>Notes:</label><br><textarea  id='notes' class='form-control'></textarea></></div>
+              	<div class='form-group'><label>Title:</label><br><input type="text"  id='ntitle' class='form-control' placeholder="Enter title"/></div>
+				<div class='form-group'><label>Description:</label><br><textarea  id='ndescription' class='form-control' placeholder="Enter description"></textarea></div>
+				<div class='form-group'><label>Visible to:</label>
+					<div class="checkbox">
+                    	<label><input type="checkbox" name="nvisibleto" value="me">Me</label>
+						<label><input type="checkbox" name="nvisibleto" value="admin">Admin</label>
+						<label><input type="checkbox" name="nvisibleto" value="others">Others</label>
+					</div>
+				</div>
               </div>
               <div class="modal-footer">
                   <input type="button" class="save-btn btn btn-info pull-right" value="Save changes" onclick="addNote()"/>
