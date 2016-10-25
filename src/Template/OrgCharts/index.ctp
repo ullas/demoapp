@@ -1,4 +1,4 @@
-
+<script type="text/javascript" src="../js/prettify.js"></script>
 <div class="topbar">
         <div class="topbar-inner">
         </div>
@@ -88,7 +88,7 @@
 	<div class="box box-primary"><div class="box-body"> 
     <div id="chart" class="orgChart"></div></div></div></section>
   <style>
-   	.jOrgChart table {
+   	/*.jOrgChart table {
 margin: 0px auto;
 }
 .jOrgChart .node-img {
@@ -98,7 +98,6 @@ margin: 0px auto;
   height                : 96px;
  border-right:1px solid #ddd;
  float:left;
-  /*margin:0px auto;*/
 }
 .jOrgChart .node{
 	-webkit-box-shadow: 0px 0px 10px rgba(0,0,0,.8);
@@ -130,8 +129,7 @@ margin: 0px auto;
 }
 .popover-content {
 	width:300px;
-    /*font-size: 14px;*/
-}
+   }
 .node-desc{
-}
+}*/
    </style>   

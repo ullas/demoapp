@@ -2,24 +2,24 @@
 /* Draw the lines */
 .jOrgChart .line {
   height                : 20px;
-  width                 : 2px;
+  width                 : 4px;
 }
 
 .jOrgChart .down {
-  background-color 		: #bdbdbd;	
-  margin 				: 0px auto;
+  background-color      : black;    
+  margin                : 0px auto;
 }
 
 .jOrgChart .top {
-  border-top          : 2px solid #bdbdbd;
+  border-top          : 3px solid black;
 }
 
 .jOrgChart .left {
-  border-right          : 2px solid #bdbdbd;
+  border-right          : 2px solid black;
 }
 
 .jOrgChart .right {
-  border-left           : 2px solid #bdbdbd;
+  border-left           : 2px solid black;
 }
 
 /* node cell */
@@ -31,24 +31,21 @@
 
 /* The node */
 .jOrgChart .node {
-    /*border:2px solid #ddd;*/
-  /*background 		: #ddd;*/
-  color:#000;
-  font-weight         :bold;
+  background-color      : #35363B;
   display               : inline-block;
-  width                 : 250px;
-  /*height                : 140px;*/
-  z-index 				: 10;
-  margin               : 0 12px;
+  width                 : 96px;
+  height                : 60px;
+  z-index               : 10;
+  margin               : 0 2px;
 }
 
 /* jQuery drag 'n drop */
 
 .drag-active {
-  border-style			: dotted !important;
+  border-style          : dotted !important;
 }
 
 .drop-hover {
-  border-style			: solid !important;
-  border-color 			: #E05E00 !important;
+  border-style          : solid !important;
+  border-color          : #E05E00 !important;
 }
