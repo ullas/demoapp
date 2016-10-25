@@ -50,6 +50,14 @@ class EmployeesTable extends Table
         $this->belongsTo('EmploymentInfos', [
             'foreignKey' => 'employment_info_id'
         ]);
+		
+		$this->belongsTo('Customers', [
+            'foreignKey' => 'customer_id'
+        ]);
+        $this->hasOne('Customers', [
+            'foreignKey' => 'employee_id'
+        ]);
+		
         $this->hasOne('EmpDataBiographies', [
             'foreignKey' => 'employee_id'
         ]);

@@ -51,6 +51,7 @@ class EmployeesController extends AppController
         $employee = $this->Employees->newEntity();
         if ($this->request->is('post')) {
             $employee = $this->Employees->patchEntity($employee, $this->request->data);
+			$employee['customer_id']=$this->loggedinuser['customer_id'];
             if ($this->Employees->save($employee)) {
                 $this->Flash->success(__('The employee has been saved.'));
 
