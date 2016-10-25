@@ -68,27 +68,27 @@
     
       // Drop event handler for nodes
       $('div.node').bind("drop", function handleDropEvent( event, ui ) {    
-	  
+    
         var targetID = $(this).data("tree-node");
         var targetLi = $this.find("li").filter(function() { return $(this).data("tree-node") === targetID; } );
         var targetUl = targetLi.children('ul');
-		
-        var sourceID = ui.draggable.data("tree-node");		
-        var sourceLi = $this.find("li").filter(function() { return $(this).data("tree-node") === sourceID; } );		
+    
+        var sourceID = ui.draggable.data("tree-node");    
+        var sourceLi = $this.find("li").filter(function() { return $(this).data("tree-node") === sourceID; } );   
         var sourceUl = sourceLi.parent('ul');
 
         if (targetUl.length > 0){
-  		    targetUl.append(sourceLi);
+          targetUl.append(sourceLi);
         } else {
-  		    targetLi.append("<ul></ul>");
-  		    targetLi.children('ul').append(sourceLi);
+          targetLi.append("<ul></ul>");
+          targetLi.children('ul').append(sourceLi);
         }
         
         //Removes any empty lists
         if (sourceUl.children().length === 0){
           sourceUl.remove();
         }
-		
+    
       }); // handleDropEvent
         
     } // Drag and drop
@@ -101,7 +101,7 @@
     chartClass : "jOrgChart",
     dragAndDrop: false
   };
-	
+  
   var nodeCount = 0;
   // Method that recursively builds the tree
   function buildNode($node, $appendTo, level, opts) {
@@ -109,10 +109,10 @@
     var $tbody = $("<tbody/>");
 
     // Construct the node container(s)
-    var $nodeRow = $("<tr/>").addClass("node-cells");var $nodeRowrr = $("<td/>").addClass("node-maptell");
+    var $nodeRow = $("<tr/>").addClass("node-cells");
     var $nodeCell = $("<td/>").addClass("node-cell").attr("colspan", 2);
     var $childNodes = $node.children("ul:first").children("li");
-    var $nodeDiv;var $nodeContentDiv;var $nodeImgDiv;var $nodeTxtDiv;var $nodeDescDiv;
+    var $nodeDiv;
     
     if($childNodes.length > 1) {
       $nodeCell.attr("colspan", $childNodes.length * 2);
@@ -124,19 +124,13 @@
                             .remove()
                             .end()
                             .html();
-	
-	$nodeContentDiv = $("<div>").addClass("node");
-	$nodeImgDiv = $("<div>").addClass("node-img");
-	$nodeTxtDiv = $("<div>").addClass("node-title")
-                                     .append($nodeContent);
-    $nodeDescDiv = $("<span>").addClass("node-desc text-muted")
-                                     .append("Senior HR Manager");
-                                     
+  
       //Increaments the node count which is used to link the source list and the org chart
-  	nodeCount++;
-  	$node.data("tree-node", nodeCount);
-  	$nodeDiv = $("<div>").addClass("node-expand nodeexp")
-                                     .data("tree-node", nodeCount);
+    nodeCount++;
+    $node.data("tree-node", nodeCount);
+    $nodeDiv = $("<div>").addClass("node")
+                                     .data("tree-node", nodeCount)
+                                     .append($nodeContent);
 
     // Expand and contract nodes
     if ($childNodes.length > 0) {
@@ -144,7 +138,7 @@
           var $this = $(this);
           var $tr = $this.closest("tr");
 
-          if($tr.hasClass('contracted')){$nodeDiv.removeClass('nodehide').addClass('nodeexp');
+          if($tr.hasClass('contracted')){
             $this.css('cursor','n-resize');
             $tr.removeClass('contracted').addClass('expanded');
             $tr.nextAll("tr").css('visibility', '');
@@ -152,7 +146,7 @@
             // Update the <li> appropriately so that if the tree redraws collapsed/non-collapsed nodes
             // maintain their appearance
             $node.removeClass('collapsed');
-          }else{$nodeDiv.removeClass('nodeexp').addClass('nodehide');
+          }else{
             $this.css('cursor','s-resize');
             $tr.removeClass('expanded').addClass('contracted');
             $tr.nextAll("tr").css('visibility', 'hidden');
@@ -160,15 +154,9 @@
             $node.addClass('collapsed');
           }
         });
-    }else{
-        $nodeDiv.addClass('dnone');
     }
     
-    $nodeContentDiv.append($nodeImgDiv);
-    $nodeContentDiv.append($nodeTxtDiv);
-    $nodeContentDiv.append($nodeDescDiv);
-    $nodeContentDiv.append($nodeDiv);
-    $nodeCell.append($nodeContentDiv);
+    $nodeCell.append($nodeDiv);
     $nodeRow.append($nodeCell);
     $tbody.append($nodeRow);
 

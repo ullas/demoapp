@@ -16,9 +16,9 @@
             echo $this->Form->input('description');
             echo $this->Form->input('effective_status');
             echo "<div class='form-group'><label>Effective Start Date:</label><div class='input-group'>";
-            echo "<div class='input-group-addon''><i class='fa fa-calendar'></i></div><input type='text' class='form-control' id='effective_start_date'></div></div>";
+            echo "<input type='text' class='form-control' id='effective_start_date' name='effective_start_date'></div></div>";
             echo "<div class='form-group'><label>Effective End Date:</label><div class='input-group'>";
-            echo "<div class='input-group-addon''><i class='fa fa-calendar'></i></div><input type='text' class='form-control' id='effective_end_date'></div></div>";
+            echo "<div class='input-group-addon''><i class='fa fa-calendar'></i></div><input type='text' class='form-control' id='effective_end_date' name='effective_end_date'></div></div>";
             echo $this->Form->input('parent_division');
             echo $this->Form->input('external_code');
             echo $this->Form->input('head_of_unit');
@@ -39,15 +39,3 @@ $this->Html->script([
 ],
 ['block' => 'script']);
 ?>
-<?php $this->start('scriptBotton'); ?>
-<script>
-  $(function () { 
-    $('#effective_start_date').datepicker({
-      autoclose: true
-    }); 
-     $('#effective_end_date').datepicker({
-      autoclose: true
-    });
-  });
-</script>
-<?php $this->end(); ?>
