@@ -10,6 +10,8 @@ use Cake\Validation\Validator;
  * EmploymentInfos Model
  *
  * @property \Cake\ORM\Association\BelongsTo $Customers
+ * @property \Cake\ORM\Association\BelongsTo $Employees
+ * @property \Cake\ORM\Association\HasMany $Employees
  *
  * @method \App\Model\Entity\EmploymentInfo get($primaryKey, $options = [])
  * @method \App\Model\Entity\EmploymentInfo newEntity($data = null, array $options = [])
@@ -38,6 +40,12 @@ class EmploymentInfosTable extends Table
 
         $this->belongsTo('Customers', [
             'foreignKey' => 'customer_id'
+        ]);
+        $this->belongsTo('Employees', [
+            'foreignKey' => 'employee_id'
+        ]);
+        $this->hasMany('Employees', [
+            'foreignKey' => 'employment_info_id'
         ]);
     }
 
@@ -161,6 +169,7 @@ class EmploymentInfosTable extends Table
     public function buildRules(RulesChecker $rules)
     {
         $rules->add($rules->existsIn(['customer_id'], 'Customers'));
+        $rules->add($rules->existsIn(['employee_id'], 'Employees'));
 
         return $rules;
     }

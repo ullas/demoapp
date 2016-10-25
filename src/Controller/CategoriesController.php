@@ -2,7 +2,7 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
-use Cake\ORM\TableRegistry;
+use Cake\Routing\Router;
 /**
  * Categories Controller
  *
@@ -18,26 +18,13 @@ class CategoriesController extends AppController
      */
     public function index()
     {
-        // $this->paginate = [
-            // 'contain' => ['ParentCategories']
-        // ];
-        // $categories = $this->paginate($this->Categories);
-// 
-        // $this->set(compact('categories'));
-        // $this->set('_serialize', ['categories']);
-		
-		 // $categories = TableRegistry::get('Categories');
-		 // $categories->recover();
-		 
-		$list = $this->Categories->find('treeList');
-		// $this->set('categories', $list);
-		
-		$categories = $this->Categories->find('threaded', array(
-                    'order' => array('Categories.lft'))
-            );
-			
-			$this->set('categories', $categories);
+        $this->paginate = [
+            'contain' => ['ParentCategories']
+        ];
+        $categories = $this->paginate($this->Categories);
 
+        $this->set(compact('categories'));
+        $this->set('_serialize', ['categories']); 
     }
 
     /**
@@ -68,11 +55,10 @@ class CategoriesController extends AppController
         if ($this->request->is('post')) {
             $category = $this->Categories->patchEntity($category, $this->request->data);
             if ($this->Categories->save($category)) {
-                $this->Flash->success(__('The category has been saved.'));
-
+                $this->Flash->success(__('The {0} has been saved.', 'Category'));
                 return $this->redirect(['action' => 'index']);
             } else {
-                $this->Flash->error(__('The category could not be saved. Please, try again.'));
+                $this->Flash->error(__('The {0} could not be saved. Please, try again.', 'Category'));
             }
         }
         $parentCategories = $this->Categories->ParentCategories->find('list', ['limit' => 200]);
@@ -95,11 +81,10 @@ class CategoriesController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $category = $this->Categories->patchEntity($category, $this->request->data);
             if ($this->Categories->save($category)) {
-                $this->Flash->success(__('The category has been saved.'));
-
+                $this->Flash->success(__('The {0} has been saved.', 'Category'));
                 return $this->redirect(['action' => 'index']);
             } else {
-                $this->Flash->error(__('The category could not be saved. Please, try again.'));
+                $this->Flash->error(__('The {0} could not be saved. Please, try again.', 'Category'));
             }
         }
         $parentCategories = $this->Categories->ParentCategories->find('list', ['limit' => 200]);
@@ -116,14 +101,13 @@ class CategoriesController extends AppController
      */
     public function delete($id = null)
     {
-        $this->request->allowMethod(['post', 'delete']);
+        // $this->request->allowMethod(['post', 'delete']);
         $category = $this->Categories->get($id);
         if ($this->Categories->delete($category)) {
-            $this->Flash->success(__('The category has been deleted.'));
+            $this->Flash->success(__('The {0} has been deleted.', 'Category'));
         } else {
-            $this->Flash->error(__('The category could not be deleted. Please, try again.'));
+            $this->Flash->error(__('The {0} could not be deleted. Please, try again.', 'Category'));
         }
-
         return $this->redirect(['action' => 'index']);
     }
 }

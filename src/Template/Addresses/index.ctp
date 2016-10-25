@@ -19,7 +19,8 @@
     <table id="mptlindextbl" class="table table-hover  table-bordered ">
         <thead>
             <tr>
-                <th>Id</th>
+            	<!-- <th><input type="checkbox" name="select_all" value="1" id="example-select-all"></th> -->
+                <th data-orderable="false">Id</th>
                 <th>Last name</th>
                 <th>Position</th>
                 <th>Office</th>
@@ -31,7 +32,10 @@
     </table></div></div>
     </div></div>
    
+ <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/colreorder/1.1.3/css/dataTables.colReorder.css"/>
  
+
+
 
 </section>
 <?php
@@ -39,6 +43,7 @@ $this->Html->css([ 'AdminLTE./plugins/datatables/dataTables.bootstrap',  ], ['bl
 
 $this->Html->script([
   'AdminLTE./plugins/datatables/jquery.dataTables.min',
+  'AdminLTE./plugins/datatables/extensions/ColReorder/js/dataTables.colReorder',
   'AdminLTE./plugins/datatables/dataTables.bootstrap.min',
 ], ['block' => 'script']); ?>
 
@@ -56,16 +61,29 @@ $this->Html->script([
       	"ordering": true,
       	"info": true,
       	"autoWidth": false,
-     
+      	"order": [[1, 'asc']],
       	//server side processing
       	"processing": true,
      	 "serverSide": true,
-      	"ajax": "/<?php echo $this->request->params['controller'] ?>/ajaxData"
+      	"ajax": "/<?php echo $this->request->params['controller'] ?>/ajaxData",
+      	'columnDefs': [{
+         'targets': 0,
+         'searchable': false,
+         'orderable': false,
+         'className': 'dt-body-center',
+         'render': function (data, type, full, meta){
+             return '<input type="checkbox" name="chk' + data + '" value="' + $('<div/>').text(data).html() + '">';
+         }
+      }]
   
     });
     
     $('<a href="/<?php echo $this->request->params['controller'] ?>/add/" class="btn btn-sm btn-success" style="margin-left:5px;"><i class="fa fa-plus" aria-hidden="true"></i></a>').appendTo('div.dataTables_filter');
-    
+ 
+ var table = $('#mptlindextbl').DataTable();   
+new $.fn.dataTable.ColReorder( table, {
+    // options
+} );
 
   });
 </script>

@@ -1,6 +1,6 @@
 <section class="content-header">
   <h1>
-    Position
+    Positions
     <small>List</small>
   </h1>
   <ol class="breadcrumb">
@@ -20,13 +20,11 @@
         <thead>
             <tr>
                 <th><?= $this->Paginator->sort('id') ?></th>
-                <th><?= $this->Paginator->sort('external_name') ?></th>
+                <th><?= $this->Paginator->sort('name') ?></th>
                 <th><?= $this->Paginator->sort('effective_start_date') ?></th>
                 <th><?= $this->Paginator->sort('effective_end_date') ?></th>
                 <th><?= $this->Paginator->sort('positiontype') ?></th>
-                <th><?= $this->Paginator->sort('division_id') ?></th>
-                <th><?= $this->Paginator->sort('department_id') ?></th>
-                <th class="actions"><?= __('Actions') ?></th>
+                <th class="actions" data-orderable="false"><?= __('Actions') ?></th>
             </tr>
         </thead>
         <tbody>

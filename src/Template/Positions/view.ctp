@@ -21,16 +21,16 @@
         <li><?= $this->Html->link(__('New Pay Grade'), ['controller' => 'PayGrades', 'action' => 'add']) ?> </li>
         <li><?= $this->Html->link(__('List Pay Ranges'), ['controller' => 'PayRanges', 'action' => 'index']) ?> </li>
         <li><?= $this->Html->link(__('New Pay Range'), ['controller' => 'PayRanges', 'action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List Parents'), ['controller' => 'Positions', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Parent'), ['controller' => 'Positions', 'action' => 'add']) ?> </li>
+        <li><?= $this->Html->link(__('List Parent Positions'), ['controller' => 'Positions', 'action' => 'index']) ?> </li>
+        <li><?= $this->Html->link(__('New Parent Position'), ['controller' => 'Positions', 'action' => 'add']) ?> </li>
     </ul>
 </nav>
 <div class="positions view large-9 medium-8 columns content">
-    <h3><?= h($position->external_name) ?></h3>
+    <h3><?= h($position->name) ?></h3>
     <table class="vertical-table">
         <tr>
             <th><?= __('External Name') ?></th>
-            <td><?= h($position->external_name) ?></td>
+            <td><?= h($position->name) ?></td>
         </tr>
         <tr>
             <th><?= __('Positiontype') ?></th>
@@ -129,8 +129,8 @@
             <td><?= $position->has('pay_range') ? $this->Html->link($position->pay_range->name, ['controller' => 'PayRanges', 'action' => 'view', $position->pay_range->id]) : '' ?></td>
         </tr>
         <tr>
-            <th><?= __('Parent') ?></th>
-            <td><?= $position->has('parent') ? $this->Html->link($position->parent->external_name, ['controller' => 'Positions', 'action' => 'view', $position->parent->id]) : '' ?></td>
+            <th><?= __('Parent Position') ?></th>
+            <td><?= $position->has('parent_position') ? $this->Html->link($position->parent_position->name, ['controller' => 'Positions', 'action' => 'view', $position->parent_position->id]) : '' ?></td>
         </tr>
         <tr>
             <th><?= __('Id') ?></th>
@@ -143,6 +143,14 @@
         <tr>
             <th><?= __('Standard Hours') ?></th>
             <td><?= $this->Number->format($position->standard_hours) ?></td>
+        </tr>
+        <tr>
+            <th><?= __('Lft') ?></th>
+            <td><?= $this->Number->format($position->lft) ?></td>
+        </tr>
+        <tr>
+            <th><?= __('Rght') ?></th>
+            <td><?= $this->Number->format($position->rght) ?></td>
         </tr>
         <tr>
             <th><?= __('Effective Start Date') ?></th>

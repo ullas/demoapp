@@ -14,13 +14,18 @@ class LegalEntitiesController extends AppController
 	
 	public function ajaxData() {
 		$this->autoRender= False;
-
-		$fields = array(array('name'=>'id','type'=>'int'),'name','description',array('name'=>'effective_status','type'=>'bool'),
-									  array('name'=>'effective_start_date','type'=>'date'),array('name'=>'effective_end_date','type'=>'date'),
-									  'country_of_registration ',array('name'=>'standard_weekly_hours ','type'=>'numeric'),'currency','official_language',
-									  'external_code',array('name'=>'location_id','type'=>'bigint'),array('name'=>'paygroup_id','type'=>'integer'));
+		  
+		$this->loadModel('CreateConfigs');
+		$dbout=$this->CreateConfigs->find()->select(['field_name', 'datatype'])->where(['table_name' => $this->request->params['controller']])->order(['id' => 'ASC'])->toArray();
+		$fields = array();
+		foreach($dbout as $value){
+			$fields[] = array("name" => $value['field_name'] , "type" => $value['datatype'] );
+		}
+		$this->set('fields', $fields);
+		
+		$contains=[];
 									  
-		$output =$this->Datatable->getView($fields);
+		$output =$this->Datatable->getView($fields,$contains);
 		echo json_encode($output);			
     }
     /**

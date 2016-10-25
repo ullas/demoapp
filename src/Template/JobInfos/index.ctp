@@ -21,19 +21,7 @@
             <tr>
                 <th>Id</th>
                 <th>Position</th>
-                <th>Position Entry Date</th>
-                <th>Time In Position</th>
                 <th>Company</th>
-                <th>Country Of Company</th>
-                <th>Business Unit</th>
-                <th>Division</th>
-                <th>Department</th>
-				<th>Location</th>
-				<th>Timezone</th>
-				<th>Cost Center</th>
-				<th>Job Code</th>
-				<th>Job Title</th>
-				<th>Local Job Title</th>
                 <th class="actions" data-orderable="false"><?= __('Actions') ?></th>
             </tr>
         </thead>

@@ -10,16 +10,7 @@ use App\Controller\AppController;
  */
 class EmpDataBiographiesController extends AppController
 {
-	var $components = array('Datatable');
-	
-	public function ajaxData() {
-		$this->autoRender= False;
 
-		$fields = array(array('name'=>'id','type'=>'int'),'name',array('name'=>'date_of_birth','type'=>'date'),'country_of_birth','region_of_birth','place_of_birth','birth_name',array('name'=>'date_of_death ','type'=>'date'),'person_id_external');
-									  
-		$output =$this->Datatable->getView($fields);
-		echo json_encode($output);			
-    }
     /**
      * Index method
      *
@@ -67,23 +58,6 @@ class EmpDataBiographiesController extends AppController
                 $this->Flash->success(__('The emp data biography has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
-            } else {
-                $this->Flash->error(__('The emp data biography could not be saved. Please, try again.'));
-            }
-        }
-        $customers = $this->EmpDataBiographies->Customers->find('list', ['limit' => 200]);
-        $this->set(compact('empDataBiography', 'customers'));
-        $this->set('_serialize', ['empDataBiography']);
-    }
-    public function addwizard()
-    {
-        $empDataBiography = $this->EmpDataBiographies->newEntity();
-        if ($this->request->is('post')) {
-            $empDataBiography = $this->EmpDataBiographies->patchEntity($empDataBiography, $this->request->data);
-			$empDataBiography['customer_id']=$this->loggedinuser['customer_id'];
-            if ($this->EmpDataBiographies->save($empDataBiography)) {
-                $this->Flash->success(__('The emp data biography has been saved.'));
-                return $this->redirect(array('controller' => 'Homes', 'action' => 'index'));
             } else {
                 $this->Flash->error(__('The emp data biography could not be saved. Please, try again.'));
             }

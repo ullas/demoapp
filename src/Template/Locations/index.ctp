@@ -22,13 +22,6 @@
                 <th>Id</th>
                 <th>Name</th>
                 <th>Description</th>
-                <th>Start Date</th>
-                <th>End Date</th>
-                <th>Location Group</th>
-                <th>Time Zone</th>
-                <th>Standard Hours</th>
-                <th>Status</th>
-                <th>External Code</th>
                 <th class="actions" data-orderable="false"><?= __('Actions') ?></th>
             </tr>
         </thead>

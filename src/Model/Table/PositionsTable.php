@@ -17,7 +17,8 @@ use Cake\Validation\Validator;
  * @property \Cake\ORM\Association\BelongsTo $Divisions
  * @property \Cake\ORM\Association\BelongsTo $PayGrades
  * @property \Cake\ORM\Association\BelongsTo $PayRanges
- * @property \Cake\ORM\Association\BelongsTo $Positions
+ * @property \Cake\ORM\Association\BelongsTo $ParentPositions
+ * @property \Cake\ORM\Association\HasMany $ChildPositions
  *
  * @method \App\Model\Entity\Position get($primaryKey, $options = [])
  * @method \App\Model\Entity\Position newEntity($data = null, array $options = [])
@@ -39,11 +40,11 @@ class PositionsTable extends Table
     public function initialize(array $config)
     {
         parent::initialize($config);
-		
-		$this->addBehavior('Tree');
+
+$this->addBehavior('Tree');
 
         $this->table('positions');
-        $this->displayField('external_name');
+        $this->displayField('name');
         $this->primaryKey('id');
 
         $this->belongsTo('Customers', [
@@ -70,9 +71,18 @@ class PositionsTable extends Table
         $this->belongsTo('PayRanges', [
             'foreignKey' => 'pay_range_id'
         ]);
-        $this->belongsTo('Parents', [
-            'className' => 'Positions','foreignKey' => 'parent_position_id'
+        $this->belongsTo('ParentPositions', [
+            'className' => 'Positions',
+            'foreignKey' => 'parent_id'
         ]);
+        // $this->hasMany('ChildPositions', [
+            // 'className' => 'Positions',
+            // 'foreignKey' => 'parent_id'
+        // ]);
+		$this->belongsTo('Parents', [
+            'className' => 'Positions','foreignKey' => 'parent_id'
+        ]);
+
     }
 
     /**
@@ -87,7 +97,7 @@ class PositionsTable extends Table
             ->allowEmpty('id', 'create');
 
         $validator
-            ->allowEmpty('external_name');
+            ->allowEmpty('name');
 
         $validator
             ->date('effective_start_date')
@@ -179,6 +189,12 @@ class PositionsTable extends Table
             ->boolean('effective_status')
             ->allowEmpty('effective_status');
 
+        $validator
+            ->allowEmpty('lft');
+
+        $validator
+            ->allowEmpty('rght');
+
         return $validator;
     }
 
@@ -200,7 +216,7 @@ class PositionsTable extends Table
         $rules->add($rules->existsIn(['division_id'], 'Divisions'));
         $rules->add($rules->existsIn(['pay_grade_id'], 'PayGrades'));
         $rules->add($rules->existsIn(['pay_range_id'], 'PayRanges'));
-        // $rules->add($rules->existsIn(['parent_position_id'], 'Positions'));
+        $rules->add($rules->existsIn(['parent_id'], 'ParentPositions'));
 
         return $rules;
     }

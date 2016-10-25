@@ -112,7 +112,7 @@
     var $nodeRow = $("<tr/>").addClass("node-cells");var $nodeRowrr = $("<td/>").addClass("node-maptell");
     var $nodeCell = $("<td/>").addClass("node-cell").attr("colspan", 2);
     var $childNodes = $node.children("ul:first").children("li");
-    var $nodeDiv;var $nodeContentDiv;
+    var $nodeDiv;var $nodeContentDiv;var $nodeImgDiv;var $nodeTxtDiv;var $nodeDescDiv;
     
     if($childNodes.length > 1) {
       $nodeCell.attr("colspan", $childNodes.length * 2);
@@ -127,8 +127,11 @@
 	
 	$nodeContentDiv = $("<div>").addClass("node");
 	$nodeImgDiv = $("<div>").addClass("node-img");
-	$nodeTxtDiv = $("<div>").addClass("node-txt")
+	$nodeTxtDiv = $("<div>").addClass("node-title")
                                      .append($nodeContent);
+    $nodeDescDiv = $("<span>").addClass("node-desc text-muted")
+                                     .append("Senior HR Manager");
+                                     
       //Increaments the node count which is used to link the source list and the org chart
   	nodeCount++;
   	$node.data("tree-node", nodeCount);
@@ -163,6 +166,7 @@
     
     $nodeContentDiv.append($nodeImgDiv);
     $nodeContentDiv.append($nodeTxtDiv);
+    $nodeContentDiv.append($nodeDescDiv);
     $nodeContentDiv.append($nodeDiv);
     $nodeCell.append($nodeContentDiv);
     $nodeRow.append($nodeCell);

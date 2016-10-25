@@ -11,13 +11,21 @@ use App\Controller\AppController;
 class PositionsController extends AppController
 {
 	var $components = array('Datatable');
+	
 	public function ajaxData() {
 		$this->autoRender= False;
-		$fields = array(array('name'=>'id','type'=>'int'),'external_name','position_type', array('name'=>'effective_start_date','type'=>'date'),
-					 array('name'=>'effective_end_date','type'=>'date'), 'division_id',array('name'=>'department_id ','type'=>'int'));
+		  
+		$this->loadModel('CreateConfigs');
+		$dbout=$this->CreateConfigs->find()->select(['field_name', 'datatype'])->where(['table_name' => $this->request->params['controller']])->order(['id' => 'ASC'])->toArray();
+		$fields = array();
+		foreach($dbout as $value){
+			$fields[] = array("name" => $value['field_name'] , "type" => $value['datatype'] );
+		}
+		
+		$contains=['Customers', 'LegalEntities', 'Departments', 'CostCentres', 'Locations', 'Divisions', 'PayGrades', 'PayRanges', 'ParentPositions', 'Parents'];
 									  
-		$output =$this->Datatable->getView($fields);
-		echo json_encode($output);			
+		$output =$this->Datatable->getView($fields,$contains);
+		echo json_encode($output);		
     }
     /**
      * Index method
@@ -27,12 +35,22 @@ class PositionsController extends AppController
     public function index()
     {
         $this->paginate = [
-            'contain' => ['Customers', 'LegalEntities', 'Departments', 'CostCentres', 'Locations', 'Divisions', 'PayGrades', 'PayRanges', 'Parents']
+            'contain' => ['Customers', 'LegalEntities', 'Departments', 'CostCentres', 'Locations', 'Divisions', 'PayGrades', 'PayRanges', 'ParentPositions', 'Parents']
         ];
         $positions = $this->paginate($this->Positions);
 
         $this->set(compact('positions'));
         $this->set('_serialize', ['positions']);
+	}
+	public function orgchart()
+    {
+		$list = $this->Positions->find('treeList');
+		
+		$orgpositions = $this->Positions->find('threaded', array(
+                    'order' => array('Positions.lft'))
+            );
+			
+		$this->set('orgpositions', $orgpositions);
     }
 
     /**
@@ -45,7 +63,7 @@ class PositionsController extends AppController
     public function view($id = null)
     {
         $position = $this->Positions->get($id, [
-            'contain' => ['Customers', 'LegalEntities', 'Departments', 'CostCentres', 'Locations', 'Divisions', 'PayGrades', 'PayRanges', 'Parents']
+            'contain' => ['Customers', 'LegalEntities', 'Departments', 'CostCentres', 'Locations', 'Divisions', 'PayGrades', 'PayRanges', 'ParentPositions', 'Parents']
         ]);
 
         $this->set('position', $position);
@@ -78,8 +96,9 @@ class PositionsController extends AppController
         $divisions = $this->Positions->Divisions->find('list', ['limit' => 200]);
         $payGrades = $this->Positions->PayGrades->find('list', ['limit' => 200]);
         $payRanges = $this->Positions->PayRanges->find('list', ['limit' => 200]);
+        $parentPositions = $this->Positions->ParentPositions->find('list', ['limit' => 200]);
         $parents = $this->Positions->Parents->find('list', ['limit' => 200]);
-        $this->set(compact('position', 'customers', 'legalEntities', 'departments', 'costCentres', 'locations', 'divisions', 'payGrades', 'payRanges', 'parents'));
+        $this->set(compact('position', 'customers', 'legalEntities', 'departments', 'costCentres', 'locations', 'divisions', 'payGrades', 'payRanges', 'parentPositions', 'parents'));
         $this->set('_serialize', ['position']);
     }
 	public function addwizard()
@@ -95,17 +114,20 @@ class PositionsController extends AppController
                 $this->Flash->error(__('The position could not be saved. Please, try again.'));
             }
         }
-        $payGrades = $this->Positions->PayGrades->find('list', ['limit' => 200]);
-        $legalEntities = $this->Positions->LegalEntities->find('list', ['limit' => 200]);
-        $divisions = $this->Positions->Divisions->find('list', ['limit' => 200]);
-        $departments = $this->Positions->Departments->find('list', ['limit' => 200]);
-        $locations = $this->Positions->Locations->find('list', ['limit' => 200]);
-        $costCentres = $this->Positions->CostCentres->find('list', ['limit' => 200]);
-        $payRanges = $this->Positions->PayRanges->find('list', ['limit' => 200]);
         $customers = $this->Positions->Customers->find('list', ['limit' => 200]);
-        $this->set(compact('position', 'payGrades', 'legalEntities', 'divisions', 'departments', 'locations', 'costCentres', 'payRanges', 'customers'));
+        $legalEntities = $this->Positions->LegalEntities->find('list', ['limit' => 200]);
+        $departments = $this->Positions->Departments->find('list', ['limit' => 200]);
+        $costCentres = $this->Positions->CostCentres->find('list', ['limit' => 200]);
+        $locations = $this->Positions->Locations->find('list', ['limit' => 200]);
+        $divisions = $this->Positions->Divisions->find('list', ['limit' => 200]);
+        $payGrades = $this->Positions->PayGrades->find('list', ['limit' => 200]);
+        $payRanges = $this->Positions->PayRanges->find('list', ['limit' => 200]);
+        $parentPositions = $this->Positions->ParentPositions->find('list', ['limit' => 200]);
+        $parents = $this->Positions->Parents->find('list', ['limit' => 200]);
+        $this->set(compact('position', 'customers', 'legalEntities', 'departments', 'costCentres', 'locations', 'divisions', 'payGrades', 'payRanges', 'parentPositions', 'parents'));
         $this->set('_serialize', ['position']);
     }
+
     /**
      * Edit method
      *
@@ -136,8 +158,9 @@ class PositionsController extends AppController
         $divisions = $this->Positions->Divisions->find('list', ['limit' => 200]);
         $payGrades = $this->Positions->PayGrades->find('list', ['limit' => 200]);
         $payRanges = $this->Positions->PayRanges->find('list', ['limit' => 200]);
+        $parentPositions = $this->Positions->ParentPositions->find('list', ['limit' => 200]);
         $parents = $this->Positions->Parents->find('list', ['limit' => 200]);
-        $this->set(compact('position', 'customers', 'legalEntities', 'departments', 'costCentres', 'locations', 'divisions', 'payGrades', 'payRanges', 'parents'));
+        $this->set(compact('position', 'customers', 'legalEntities', 'departments', 'costCentres', 'locations', 'divisions', 'payGrades', 'payRanges', 'parentPositions', 'parents'));
         $this->set('_serialize', ['position']);
     }
 

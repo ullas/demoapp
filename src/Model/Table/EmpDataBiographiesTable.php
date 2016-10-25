@@ -10,6 +10,8 @@ use Cake\Validation\Validator;
  * EmpDataBiographies Model
  *
  * @property \Cake\ORM\Association\BelongsTo $Customers
+ * @property \Cake\ORM\Association\BelongsTo $Employees
+ * @property \Cake\ORM\Association\HasMany $Employees
  *
  * @method \App\Model\Entity\EmpDataBiography get($primaryKey, $options = [])
  * @method \App\Model\Entity\EmpDataBiography newEntity($data = null, array $options = [])
@@ -38,6 +40,12 @@ class EmpDataBiographiesTable extends Table
 
         $this->belongsTo('Customers', [
             'foreignKey' => 'customer_id'
+        ]);
+        $this->belongsTo('Employees', [
+            'foreignKey' => 'employee_id'
+        ]);
+        $this->hasMany('Employees', [
+            'foreignKey' => 'emp_data_biography_id'
         ]);
     }
 
@@ -91,6 +99,7 @@ class EmpDataBiographiesTable extends Table
     {
         $rules->add($rules->isUnique(['person_id_external']));
         $rules->add($rules->existsIn(['customer_id'], 'Customers'));
+        $rules->add($rules->existsIn(['employee_id'], 'Employees'));
 
         return $rules;
     }

@@ -33,8 +33,6 @@ class CategoriesTable extends Table
     {
         parent::initialize($config);
 
-		$this->addBehavior('Tree');
-
         $this->table('categories');
         $this->displayField('name');
         $this->primaryKey('id');

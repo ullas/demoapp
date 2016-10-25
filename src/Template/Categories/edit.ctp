@@ -1,28 +1,42 @@
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Form->postLink(
-                __('Delete'),
-                ['action' => 'delete', $category->id],
-                ['confirm' => __('Are you sure you want to delete # {0}?', $category->id)]
-            )
-        ?></li>
-        <li><?= $this->Html->link(__('List Categories'), ['action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('List Parent Categories'), ['controller' => 'Categories', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Parent Category'), ['controller' => 'Categories', 'action' => 'add']) ?></li>
-    </ul>
-</nav>
-<div class="categories form large-9 medium-8 columns content">
-    <?= $this->Form->create($category) ?>
-    <fieldset>
-        <legend><?= __('Edit Category') ?></legend>
-        <?php
+<section class="content-header">
+  <h1>
+    Category
+    <small><?= __('Edit') ?></small>
+  </h1>
+  <ol class="breadcrumb">
+    <li>
+    <?= $this->Html->link('<i class="fa fa-dashboard"></i> '.__('Back'), ['action' => 'index'], ['escape' => false]) ?>
+    </li>
+  </ol>
+</section>
+
+<!-- Main content -->
+<section class="content">
+  <div class="row">
+    <!-- left column -->
+    <div class="col-md-12">
+      <!-- general form elements -->
+      <div class="box box-primary">
+        <div class="box-header with-border">
+          <h3 class="box-title"><?= __('Form') ?></h3>
+        </div>
+        <!-- /.box-header -->
+        <!-- form start -->
+        <?= $this->Form->create($category, array('role' => 'form')) ?>
+          <div class="box-body">
+          <?php
             echo $this->Form->input('parent_id', ['options' => $parentCategories, 'empty' => true]);
             echo $this->Form->input('lft');
             echo $this->Form->input('rght');
             echo $this->Form->input('name');
-        ?>
-    </fieldset>
-    <?= $this->Form->button(__('Submit')) ?>
-    <?= $this->Form->end() ?>
-</div>
+          ?>
+          </div>
+          <!-- /.box-body -->
+          <div class="box-footer">
+            <?= $this->Form->button(__('Save')) ?>
+          </div>
+        <?= $this->Form->end() ?>
+      </div>
+    </div>
+  </div>
+</section>

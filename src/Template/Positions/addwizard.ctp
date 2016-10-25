@@ -1,4 +1,4 @@
-		<?= $this->element('stepformwizardelmnt', array('wcontent' => 'Position','wid' => '5')); ?>
+<div class="box"><?= $this->element('stepformwizardelmnt', array('wcontent' => 'Position','wid' => '5')); ?></div>
 
 <section class="content-header">
       <h1>
@@ -11,7 +11,7 @@
     <?= $this->Form->create($position) ?>
     <fieldset>
         <?php
-            echo $this->Form->input('external_name');
+            echo $this->Form->input('name');
             echo "<div class='form-group'><label>Effective Start Date:</label><div class='input-group'>";
             echo "<div class='input-group-addon''><i class='fa fa-calendar'></i></div><input type='text' class='form-control' id='effective_start_date'></div></div>";
             echo "<div class='form-group'><label>Effective End Date:</label><div class='input-group'>";

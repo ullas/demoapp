@@ -24,9 +24,9 @@ case "root":
     endif;
 	break;
 	case "admin":
-		if( (isset($counts['legalentity']) && $counts['legalentity'] >0) || (isset($counts['businessunit']) && $counts['businessunit'] >0) || 
-			(isset($counts['division']) && $counts['division'] >0) || (isset($counts['department']) && $counts['department'] >0) ||
-			(isset($counts['costcenter']) && $counts['costcenter'] >0) || (isset($counts['position']) && $counts['position'] >0) || 
+		if( (isset($counts['legalentity']) && $counts['legalentity'] >0) && (isset($counts['businessunit']) && $counts['businessunit'] >0) && 
+			(isset($counts['division']) && $counts['division'] >0) && (isset($counts['department']) && $counts['department'] >0) &&
+			(isset($counts['costcenter']) && $counts['costcenter'] >0) && (isset($counts['position']) && $counts['position'] >0) && 
 			(isset($counts['employee']) && $counts['employee'] >0)){
 			
     ?>
@@ -42,12 +42,22 @@ case "root":
     <li><a href="<?php echo $this -> Url -> build('/Departments'); ?>"><i class="fa fa-circle-o"></i> Departments</a></li>
     <li><a href="<?php echo $this -> Url -> build('/CostCentres'); ?>"><i class="fa fa-circle-o"></i> Cost Centres</a></li>
     <li><a href="<?php echo $this->Url->build('/Positions'); ?>"><i class="fa fa-circle-o"></i> Position</a></li>
-    <li><a href="<?php echo $this -> Url -> build('/EmpDataBiographies'); ?>"><i class="fa fa-circle-o"></i> Emp Data Biography</a></li>
+    <li><a href="<?php echo $this -> Url -> build('/Employees'); ?>"><i class="fa fa-circle-o"></i> Employee</a></li>
+    
+    <!-- <li><a href="<?php echo $this -> Url -> build('/EventReasons'); ?>"><i class="fa fa-circle-o"></i> Event reason</a></li>
+    <li><a href="<?php echo $this -> Url -> build('/Frequencies'); ?>"><i class="fa fa-circle-o"></i> Frequency</a></li>
+    <li><a href="<?php echo $this -> Url -> build('/HolidayCalendars'); ?>"><i class="fa fa-circle-o"></i> Holiday Calendar</a></li>
+    <li><a href="<?php echo $this -> Url -> build('/Holidays'); ?>"><i class="fa fa-circle-o"></i> Holiday</a></li>
+
+    <li><a href="<?php echo $this -> Url -> build('/JobClasses'); ?>"><i class="fa fa-circle-o"></i> Job Class</a></li>
+    <li><a href="<?php echo $this -> Url -> build('/JobFunctions'); ?>"><i class="fa fa-circle-o"></i> Job Function</a></li> -->
+    <li><a href="<?php echo $this -> Url -> build('/JobInfos'); ?>"><i class="fa fa-circle-o"></i> Job Info</a></li>
+    <li><a href="<?php echo $this -> Url -> build('/Locations'); ?>"><i class="fa fa-circle-o"></i> Location</a></li>
     
     </ul>
     </li>
     <li><a href="<?php echo $this -> Url -> build('/Profiles'); ?>"><i class="glyphicon glyphicon-user"></i><span> Profile </span></a></li>
-    <li><a href="<?php echo $this -> Url -> build('/OrgCharts'); ?>"><i class="fa fa-sitemap"></i><span> Organizational Chart </span></a></li>
+    <li><a href="<?php echo $this -> Url -> build('/Positions/orgchart'); ?>"><i class="fa fa-sitemap"></i><span> Organizational Chart </span></a></li>
     <li><a href="#"><i class="fa fa-question-circle"></i> <span>Help</span></a></li>
 
     <?php

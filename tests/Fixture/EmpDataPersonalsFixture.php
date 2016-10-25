@@ -60,10 +60,12 @@ class EmpDataPersonalsFixture extends TestFixture
         'disable_ref' => ['type' => 'string', 'length' => 256, 'default' => null, 'null' => true, 'collate' => null, 'comment' => null, 'precision' => null, 'fixed' => null],
         'person_id_external' => ['type' => 'string', 'length' => 32, 'default' => null, 'null' => false, 'collate' => null, 'comment' => null, 'precision' => null, 'fixed' => null],
         'customer_id' => ['type' => 'biginteger', 'length' => 20, 'default' => null, 'null' => true, 'comment' => null, 'precision' => null, 'unsigned' => null, 'autoIncrement' => null],
+        'employee_id' => ['type' => 'biginteger', 'length' => 20, 'default' => null, 'null' => true, 'comment' => null, 'precision' => null, 'unsigned' => null, 'autoIncrement' => null],
         '_constraints' => [
             'primary' => ['type' => 'primary', 'columns' => ['id'], 'length' => []],
             'emp_data_personals_person_id_external_key' => ['type' => 'unique', 'columns' => ['person_id_external'], 'length' => []],
             'emp_data_personals_customer_id_fkey' => ['type' => 'foreign', 'columns' => ['customer_id'], 'references' => ['customers', 'id'], 'update' => 'noAction', 'delete' => 'noAction', 'length' => []],
+            'emp_data_personals_employee_id_fkey' => ['type' => 'foreign', 'columns' => ['employee_id'], 'references' => ['employees', 'id'], 'update' => 'noAction', 'delete' => 'noAction', 'length' => []],
             'emp_data_personals_person_id_external_fkey' => ['type' => 'foreign', 'columns' => ['person_id_external'], 'references' => ['emp_data_biographies', 'person_id_external'], 'update' => 'noAction', 'delete' => 'noAction', 'length' => []],
         ],
     ];
@@ -107,18 +109,19 @@ class EmpDataPersonalsFixture extends TestFixture
             'uniqueid' => 'Lorem ipsum dolor sit amet',
             'prof_legal' => 'Lorem ipsum dolor sit amet',
             'exclude_legal' => 'Lorem ipsum dolor sit amet',
-            'nationality_date' => '2016-09-09',
+            'nationality_date' => '2016-10-24',
             'home_airport' => 'Lorem ipsum dolor sit amet',
             'religion' => 'Lorem ipsum dolor sit amet',
             'number_children' => 1.5,
-            'disability_date' => '2016-09-09',
+            'disability_date' => '2016-10-24',
             'disable_group' => 'Lorem ipsum dolor sit amet',
             'disable_degree' => 1.5,
             'disable_type' => 'Lorem ipsum dolor sit amet',
             'disable_authority' => 'Lorem ipsum dolor sit amet',
             'disable_ref' => 'Lorem ipsum dolor sit amet',
             'person_id_external' => 'Lorem ipsum dolor sit amet',
-            'customer_id' => 1
+            'customer_id' => 1,
+            'employee_id' => 1
         ],
     ];
 }
