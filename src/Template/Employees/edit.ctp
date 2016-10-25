@@ -21,9 +21,10 @@
     <fieldset>
         <legend><?= __('Edit Employee') ?></legend>
         <?php
-            echo $this->Form->input('emp_data_biography_id', ['options' => $empDataBiographies, 'empty' => true]);
-            echo $this->Form->input('emp_data_personal_id', ['options' => $empDataPersonals, 'empty' => true]);
+            echo $this->Form->input('emp_data_biography_id');
+            echo $this->Form->input('emp_data_personal_id');
             echo $this->Form->input('employment_info_id');
+            echo $this->Form->input('description');
         ?>
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>

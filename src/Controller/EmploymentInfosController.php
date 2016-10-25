@@ -10,23 +10,7 @@ use App\Controller\AppController;
  */
 class EmploymentInfosController extends AppController
 {
-var $components = array('Datatable');
-	
-	public function ajaxData() {
-		$this->autoRender= False;
-		  
-		$this->loadModel('CreateConfigs');
-		$dbout=$this->CreateConfigs->find()->select(['field_name', 'datatype'])->where(['table_name' => $this->request->params['controller']])->order(['id' => 'ASC'])->toArray();
-		$fields = array();
-		foreach($dbout as $value){
-			$fields[] = array("name" => $value['field_name'] , "type" => $value['datatype'] );
-		}
-		
-		$contains=['Customers'];
-									  
-		$output =$this->Datatable->getView($fields,$contains);
-		echo json_encode($output);			
-    }
+
     /**
      * Index method
      *

@@ -10,10 +10,11 @@ use Cake\ORM\Entity;
  * @property int $emp_data_biography_id
  * @property int $emp_data_personal_id
  * @property int $employment_info_id
+ * @property string $description
  *
- * @property \App\Model\Entity\EmpDataBiography $emp_data_biography
- * @property \App\Model\Entity\EmpDataPersonal $emp_data_personal
- * @property \App\Model\Entity\EmploymentInfo $employment_info
+ * @property \App\Model\Entity\EmpDataBiography[] $emp_data_biographies
+ * @property \App\Model\Entity\EmpDataPersonal[] $emp_data_personals
+ * @property \App\Model\Entity\EmploymentInfo[] $employment_infos
  */
 class Employee extends Entity
 {

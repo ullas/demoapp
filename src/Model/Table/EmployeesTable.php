@@ -12,6 +12,9 @@ use Cake\Validation\Validator;
  * @property \Cake\ORM\Association\BelongsTo $EmpDataBiographies
  * @property \Cake\ORM\Association\BelongsTo $EmpDataPersonals
  * @property \Cake\ORM\Association\BelongsTo $EmploymentInfos
+ * @property \Cake\ORM\Association\HasMany $EmpDataBiographies
+ * @property \Cake\ORM\Association\HasMany $EmpDataPersonals
+ * @property \Cake\ORM\Association\HasMany $EmploymentInfos
  *
  * @method \App\Model\Entity\Employee get($primaryKey, $options = [])
  * @method \App\Model\Entity\Employee newEntity($data = null, array $options = [])
@@ -38,14 +41,23 @@ class EmployeesTable extends Table
         $this->displayField('id');
         $this->primaryKey('id');
 
-        $this->hasMany('EmpDataBiographies', [
+        $this->belongsTo('EmpDataBiographies', [
             'foreignKey' => 'emp_data_biography_id'
         ]);
-        $this->hasMany('EmpDataPersonals', [
+        $this->belongsTo('EmpDataPersonals', [
             'foreignKey' => 'emp_data_personal_id'
         ]);
-        $this->hasMany('EmploymentInfos', [
+        $this->belongsTo('EmploymentInfos', [
             'foreignKey' => 'employment_info_id'
+        ]);
+        $this->hasOne('EmpDataBiographies', [
+            'foreignKey' => 'employee_id'
+        ]);
+        $this->hasOne('EmpDataPersonals', [
+            'foreignKey' => 'employee_id'
+        ]);
+        $this->hasOne('EmploymentInfos', [
+            'foreignKey' => 'employee_id'
         ]);
     }
 
@@ -59,6 +71,9 @@ class EmployeesTable extends Table
     {
         $validator
             ->allowEmpty('id', 'create');
+
+        $validator
+            ->allowEmpty('description');
 
         return $validator;
     }
