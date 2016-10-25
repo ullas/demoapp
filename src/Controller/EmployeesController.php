@@ -18,9 +18,6 @@ class EmployeesController extends AppController
      */
     public function index()
     {
-        $this->paginate = [
-            'contain' => ['EmpDataBiographies', 'EmpDataPersonals']
-        ];
         $employees = $this->paginate($this->Employees);
 
         $this->set(compact('employees'));
@@ -62,9 +59,7 @@ class EmployeesController extends AppController
                 $this->Flash->error(__('The employee could not be saved. Please, try again.'));
             }
         }
-        $empDataBiographies = $this->Employees->EmpDataBiographies->find('list', ['limit' => 200]);
-        $empDataPersonals = $this->Employees->EmpDataPersonals->find('list', ['limit' => 200]);
-        $this->set(compact('employee', 'empDataBiographies', 'empDataPersonals'));
+        $this->set(compact('employee'));
         $this->set('_serialize', ['employee']);
     }
 
@@ -81,18 +76,15 @@ class EmployeesController extends AppController
             'contain' => []
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $employee = $this->Employees->patchEntity($employee, $this->request->data);
+            $employee = $this->Employees->patchEntity($employee, $this->request->data,['associated' => ['EmpDataBiographies']]);
             if ($this->Employees->save($employee)) {
                 $this->Flash->success(__('The employee has been saved.'));
-
                 return $this->redirect(['action' => 'index']);
             } else {
                 $this->Flash->error(__('The employee could not be saved. Please, try again.'));
             }
         }
-        $empDataBiographies = $this->Employees->EmpDataBiographies->find('list', ['limit' => 200]);
-        $empDataPersonals = $this->Employees->EmpDataPersonals->find('list', ['limit' => 200]);
-        $this->set(compact('employee', 'empDataBiographies', 'empDataPersonals'));
+        $this->set(compact('employee'));
         $this->set('_serialize', ['employee']);
     }
 

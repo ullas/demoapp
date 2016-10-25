@@ -19,6 +19,7 @@
                 <th><?= $this->Paginator->sort('emp_data_biography_id') ?></th>
                 <th><?= $this->Paginator->sort('emp_data_personal_id') ?></th>
                 <th><?= $this->Paginator->sort('employment_info_id') ?></th>
+                <th><?= $this->Paginator->sort('description') ?></th>
                 <th class="actions"><?= __('Actions') ?></th>
             </tr>
         </thead>
@@ -26,9 +27,10 @@
             <?php foreach ($employees as $employee): ?>
             <tr>
                 <td><?= $this->Number->format($employee->id) ?></td>
-                <td><?= $employee->has('emp_data_biography') ? $this->Html->link($employee->emp_data_biography->id, ['controller' => 'EmpDataBiographies', 'action' => 'view', $employee->emp_data_biography->id]) : '' ?></td>
-                <td><?= $employee->has('emp_data_personal') ? $this->Html->link($employee->emp_data_personal->id, ['controller' => 'EmpDataPersonals', 'action' => 'view', $employee->emp_data_personal->id]) : '' ?></td>
+                <td><?= $this->Number->format($employee->emp_data_biography_id) ?></td>
+                <td><?= $this->Number->format($employee->emp_data_personal_id) ?></td>
                 <td><?= $this->Number->format($employee->employment_info_id) ?></td>
+                <td><?= h($employee->description) ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $employee->id]) ?>
                     <?= $this->Html->link(__('Edit'), ['action' => 'edit', $employee->id]) ?>

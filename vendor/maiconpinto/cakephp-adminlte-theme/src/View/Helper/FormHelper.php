@@ -40,7 +40,7 @@ class FormHelper extends CakeFormHelper {
     }
 
     public function button($title, array $options = array()) {
-        return parent::button($title, $this->_injectStyles($options, 'btn btn-success'));
+        return parent::button($title, $this->_injectStyles($options, 'btn btn-primary'));
     }
 
     public function submit($caption = null, array $options = []) {

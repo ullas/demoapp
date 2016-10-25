@@ -21,6 +21,7 @@ class EmployeesFixture extends TestFixture
         'emp_data_biography_id' => ['type' => 'biginteger', 'length' => 20, 'default' => null, 'null' => true, 'comment' => null, 'precision' => null, 'unsigned' => null, 'autoIncrement' => null],
         'emp_data_personal_id' => ['type' => 'biginteger', 'length' => 20, 'default' => null, 'null' => true, 'comment' => null, 'precision' => null, 'unsigned' => null, 'autoIncrement' => null],
         'employment_info_id' => ['type' => 'biginteger', 'length' => 20, 'default' => null, 'null' => true, 'comment' => null, 'precision' => null, 'unsigned' => null, 'autoIncrement' => null],
+        'description' => ['type' => 'string', 'length' => null, 'default' => null, 'null' => true, 'collate' => null, 'comment' => null, 'precision' => null, 'fixed' => null],
         '_constraints' => [
             'primary' => ['type' => 'primary', 'columns' => ['id'], 'length' => []],
             'employees_emp_data_biography_id_fkey' => ['type' => 'foreign', 'columns' => ['emp_data_biography_id'], 'references' => ['emp_data_biographies', 'id'], 'update' => 'noAction', 'delete' => 'noAction', 'length' => []],
@@ -40,7 +41,8 @@ class EmployeesFixture extends TestFixture
             'id' => 1,
             'emp_data_biography_id' => 1,
             'emp_data_personal_id' => 1,
-            'employment_info_id' => 1
+            'employment_info_id' => 1,
+            'description' => 'Lorem ipsum dolor sit amet'
         ],
     ];
 }

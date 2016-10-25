@@ -10,23 +10,7 @@ use App\Controller\AppController;
  */
 class EmpDataBiographiesController extends AppController
 {
-	var $components = array('Datatable');
-	
-	public function ajaxData() {
-		$this->autoRender= False;
-		  
-		$this->loadModel('CreateConfigs');
-		$dbout=$this->CreateConfigs->find()->select(['field_name', 'datatype'])->where(['table_name' => $this->request->params['controller']])->order(['id' => 'ASC'])->toArray();
-		$fields = array();
-		foreach($dbout as $value){
-			$fields[] = array("name" => $value['field_name'] , "type" => $value['datatype'] );
-		}
-		
-		$contains=['Customers'];
-									  
-		$output =$this->Datatable->getView($fields,$contains);
-		echo json_encode($output);					
-    }
+
     /**
      * Index method
      *
@@ -74,23 +58,6 @@ class EmpDataBiographiesController extends AppController
                 $this->Flash->success(__('The emp data biography has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
-            } else {
-                $this->Flash->error(__('The emp data biography could not be saved. Please, try again.'));
-            }
-        }
-        $customers = $this->EmpDataBiographies->Customers->find('list', ['limit' => 200]);
-        $this->set(compact('empDataBiography', 'customers'));
-        $this->set('_serialize', ['empDataBiography']);
-    }
-    public function addwizard()
-    {
-        $empDataBiography = $this->EmpDataBiographies->newEntity();
-        if ($this->request->is('post')) {
-            $empDataBiography = $this->EmpDataBiographies->patchEntity($empDataBiography, $this->request->data);
-			$empDataBiography['customer_id']=$this->loggedinuser['customer_id'];
-            if ($this->EmpDataBiographies->save($empDataBiography)) {
-                $this->Flash->success(__('The emp data biography has been saved.'));
-                return $this->redirect(array('controller' => 'Homes', 'action' => 'index'));
             } else {
                 $this->Flash->error(__('The emp data biography could not be saved. Please, try again.'));
             }

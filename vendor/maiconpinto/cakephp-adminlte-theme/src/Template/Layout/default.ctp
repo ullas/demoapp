@@ -16,13 +16,13 @@
     <?php echo $this->Html->css('AdminLTE.AdminLTE.min'); ?>
 <!-- AdminLTE Skins. Choose a skin from the css/skins
     folder instead of downloading all of them to reduce the load. -->
-    <?php echo $this->Html->css('AdminLTE.skins/skin-blue'); ?>
-    
+    <?php echo $this->Html->css('AdminLTE.skins/skin-greenjam'); ?>
+
      <?= $this->Html->css('jquery.jOrgChart.css') ?>
 
     <?php echo $this->fetch('css'); ?>
-    
-    
+
+
     <!-- jQuery 2.1.4 -->
 <?php echo $this->Html->script('AdminLTE./plugins/jQuery/jQuery-2.1.4.min'); ?>
 
@@ -90,7 +90,7 @@
     }
 </style>
 </head>
-<body class="hold-transition skin-blue sidebar-mini">
+<body class="hold-transition skin-greenjam sidebar-mini">
     <!-- Site wrapper -->
     <div class="wrapper">
         <header class="main-header">
@@ -114,7 +114,7 @@
         <div class="content-wrapper">
         	<!-- support -->
 			<a id="back-to-contents" href="#"><i class="glyphicon glyphicon-earphone icon-improve" title="Support"></i></a>
-			
+
             <?php echo $this->Flash->render(); ?>
             <?php echo $this->Flash->render('auth'); ?>
             <?php echo $this->fetch('content'); ?>
@@ -144,40 +144,40 @@ $this->Html->script([ 'AdminLTE./plugins/datepicker/bootstrap-datepicker' ], ['b
 <?php echo $this->fetch('scriptBotton'); ?>
 <script type="text/javascript">
     $(document).ready(function(){
-    	
-    	$('.dp').datepicker({
+
+    	$('.mptldp').datepicker({
     		format:"dd/mm/yy",
       		autoclose: true
     	});
-    
+
         $(".navbar .menu").slimscroll({
             height: "200px",
             alwaysVisible: false,
             size: "3px"
         }).css("width", "100%");
-        
-        var a = $('a[href="/<?php echo $this->request->params['controller'] ?>"]'); 
+
+        var a = $('a[href="/<?php echo $this->request->params['controller'] ?>"]');
         if (!a.parent().hasClass('treeview')) {
             a.parent().addClass('active').parents('.treeview').addClass('active');
         }
-        
-        
+
+
         $(window).scroll(function() {
 				if ($(this).scrollTop() > 200) {
-					$('.go-top').fadeIn(200); 
+					$('.go-top').fadeIn(200);
 				} else {
 					$('.go-top').fadeOut(200);
 				}
 			});
-			
+
 			// Animate the scroll to top
 			$('.go-top').click(function(event) {
 				event.preventDefault();
-				
+
 				$('html, body').animate({scrollTop: 0}, 300);
 			})
-			
-			
+
+
 			$(".actions a").each(function(){
 				  if($(this).text()=='View')
 				  {
@@ -195,14 +195,14 @@ $this->Html->script([ 'AdminLTE./plugins/datepicker/bootstrap-datepicker' ], ['b
 				  	$(this).text("");
 				  }
 			});
-			
-			
-			
+
+
+
     });
-    
+
     $(".delete-btn").click(function(){
        $("#ajax_button").html("<a href='/<?php echo $this->request->params['controller'] ?>/delete/"+ $(this).attr("data-id")+"' class='btn btn-outline btn-danger'>Confirm</a>");
-      $("#trigger").click();  
+      $("#trigger").click();
  });
 </script>
 <?php echo $this->Html->script('AdminLTE.AdminLTE.min'); ?>
