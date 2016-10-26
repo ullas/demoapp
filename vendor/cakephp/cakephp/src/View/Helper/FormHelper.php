@@ -2398,7 +2398,7 @@ class FormHelper extends Helper
         $options += [
             'empty' => true,
             'value' => null,
-            'monthNames' => true,
+            'monthNames' => null,
             'minYear' => null,
             'maxYear' => null,
             'orderYear' => 'desc',
