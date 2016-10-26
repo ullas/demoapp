@@ -19,7 +19,7 @@ function RecursiveCategories($array) {
                             <li><a href=\"#\">Others</a></li></ul></div>";
                     echo "<li id=\"".$vals['id']."\"><div class='node-title'><a href='#' tabindex='0' id='".$vals['id']."' class='popoverbtn' data-trigger='focus' data-html='true' data-toggle='popover' title='".$vals['name']."'
  							data-content='".$htmlstr."'>".$vals['name']."</a></div><div class='node-pic'><img class='node-profile-img' src='https://almsaeedstudio.com/themes/AdminLTE/dist/img/user1-128x128.jpg'></div>
- 							<div class='node-position'>Director</div>";
+ 							<div class='node-position'>Position</div>";
                     if (count($vals['children'])) {
                             RecursiveCategories($vals['children']);
                     }
@@ -144,7 +144,6 @@ $(document).on("click", ".open-Popup", function () {
 });
 
     </script>
-
  <!-- hidden field -->
 <input type="hidden" id="UID">
 
