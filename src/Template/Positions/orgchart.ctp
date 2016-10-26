@@ -1,10 +1,3 @@
-<style>
-	.node-profile-img{
-		border-radius: 50%;
-    	width: 40px;
-   	 	height: 40px;
-	}
-</style>
 
 <?php
 function RecursiveCategories($array) {
@@ -24,10 +17,9 @@ function RecursiveCategories($array) {
                             <li><a href=\"../#\">Notes</a></li>
                             <li><a href=\"../#\">Goal Plan</a></li>
                             <li><a href=\"#\">Others</a></li></ul></div>";
-
                     echo "<li id=\"".$vals['id']."\"><div class='node-title'><a href='#' tabindex='0' id='".$vals['id']."' class='popoverbtn' data-trigger='focus' data-html='true' data-toggle='popover' title='".$vals['name']."'
  							data-content='".$htmlstr."'>".$vals['name']."</a></div><div class='node-pic'><img class='node-profile-img' src='https://almsaeedstudio.com/themes/AdminLTE/dist/img/user1-128x128.jpg'></div>
- 							<div class='node-position'>Position</div><div class='node-icon'><i class='glyphicon glyphicon-menu-down text-green'></i></div>";
+ 							<div class='node-position'>Director</div>";
                     if (count($vals['children'])) {
                             RecursiveCategories($vals['children']);
                     }
@@ -37,7 +29,7 @@ function RecursiveCategories($array) {
     }
 } ?>
 
-<?= RecursiveCategories($orgpositions) ?> 
+<?= RecursiveCategories($orgpositions) ?>
 
 <ul id="org" style="display:none">
     <li>
@@ -47,25 +39,11 @@ function RecursiveCategories($array) {
          	 <div class='node-title'><dt>Title</dt></div>
              <div class='node-pic'><img class="node-profile-img" src="https://almsaeedstudio.com/themes/AdminLTE/dist/img/user1-128x128.jpg" alt="message user image"></div>
              <div class='node-position'>Position</div>
-			 <div class='node-icon'><i class="glyphicon glyphicon-menu-down text-green"></i></div>
 		 </li>
          <li>Bread</li>
        </ul>
      </li>
-   </ul>            
-
-
-
-    <link rel="stylesheet" href="../css/custom.css"/>
-
-    <script type="text/javascript" src="../js/prettify.js"></script> 
-    
-   
-
-  
-    
-              
-    
+   </ul>
     <section class="content-header">
       <h1>
        Organization Chart
@@ -76,18 +54,16 @@ function RecursiveCategories($array) {
     </section>
 <section class="content">
     <div class="box box-primary"><div class="box-body">
-    <div id="chart" class="orgChart"></div></div></div></section> 
-    
-   
+    <div id="chart" class="orgChart"></div></div></div></section>
     <script>
         jQuery(document).ready(function() {
-        	
+
         	$("#org").jOrgChart({
             chartElement : '#chart',
             dragAndDrop  : false
         });
 
-            /* Custom jQuery for the example 
+            /* Custom jQuery for the example
             $("#show-list").click(function(e){
                 e.preventDefault();
 
@@ -167,11 +143,11 @@ $(document).on("click", ".open-Popup", function () {
      document.getElementById('UID').value = $(this).attr("id");
 });
 
-    </script> 
- 
+    </script>
+
  <!-- hidden field -->
-<input type="hidden" id="UID"> 
-   
+<input type="hidden" id="UID">
+
 <div class="modal fade" id="PopOver" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
       <div class="modal-dialog">
           <div class="modal-content">
@@ -195,4 +171,4 @@ $(document).on("click", ".open-Popup", function () {
               </div>
           </div>
       </div>
-  </div> 
+  </div>
