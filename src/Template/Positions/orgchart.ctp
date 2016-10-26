@@ -1,3 +1,11 @@
+<style>
+	.node-profile-img{
+		border-radius: 50%;
+    	width: 40px;
+   	 	height: 40px;
+	}
+</style>
+
 <?php
 function RecursiveCategories($array) {
 
@@ -17,18 +25,35 @@ function RecursiveCategories($array) {
                             <li><a href=\"../#\">Goal Plan</a></li>
                             <li><a href=\"#\">Others</a></li></ul></div>";
 
-                    echo "<li id=\"".$vals['id']."\"><a href='#' tabindex='0' id='".$vals['id']."' class='popoverbtn' data-trigger='focus' data-html='true' data-toggle='popover' title='".$vals['name']."'
- data-content='".$htmlstr."'>".$vals['name'];
+                    echo "<li id=\"".$vals['id']."\"><div class='node-title'><a href='#' tabindex='0' id='".$vals['id']."' class='popoverbtn' data-trigger='focus' data-html='true' data-toggle='popover' title='".$vals['name']."'
+ 							data-content='".$htmlstr."'>".$vals['name']."</a></div><div class='node-pic'><img class='node-profile-img' src='https://almsaeedstudio.com/themes/AdminLTE/dist/img/user1-128x128.jpg'></div>
+ 							<div class='node-position'>Position</div><div class='node-icon'><i class='glyphicon glyphicon-menu-down text-green'></i></div>";
                     if (count($vals['children'])) {
                             RecursiveCategories($vals['children']);
                     }
-                    echo "</a></li>\n";
+                    echo "</li>\n";
         }
             echo "</ul>\n";
     }
 } ?>
 
-<?= RecursiveCategories($orgpositions) ?>
+<?= RecursiveCategories($orgpositions) ?> 
+
+<ul id="org" style="display:none">
+    <li>
+       Food
+       <ul>
+         <li id="beer">
+         	 <div class='node-title'><dt>Title</dt></div>
+             <div class='node-pic'><img class="node-profile-img" src="https://almsaeedstudio.com/themes/AdminLTE/dist/img/user1-128x128.jpg" alt="message user image"></div>
+             <div class='node-position'>Position</div>
+			 <div class='node-icon'><i class="glyphicon glyphicon-menu-down text-green"></i></div>
+		 </li>
+         <li>Bread</li>
+       </ul>
+     </li>
+   </ul>            
+
 
 
     <link rel="stylesheet" href="../css/custom.css"/>
@@ -37,9 +62,7 @@ function RecursiveCategories($array) {
     
    
 
-  </head>
-
-  <body onload="prettyPrint();">
+  
     
               
     
@@ -55,18 +78,16 @@ function RecursiveCategories($array) {
     <div class="box box-primary"><div class="box-body">
     <div id="chart" class="orgChart"></div></div></div></section> 
     
+   
     <script>
-    jQuery(document).ready(function() {
-        $("#org").jOrgChart({
+        jQuery(document).ready(function() {
+        	
+        	$("#org").jOrgChart({
             chartElement : '#chart',
             dragAndDrop  : false
         });
-    });
-    </script>
-    <script>
-        jQuery(document).ready(function() {
 
-            /* Custom jQuery for the example */
+            /* Custom jQuery for the example 
             $("#show-list").click(function(e){
                 e.preventDefault();
 
@@ -79,7 +100,7 @@ function RecursiveCategories($array) {
 $(".topbar").fadeTo('fast',1);
                     }
                 });
-            });
+            });*/
 
             $('#list-html').text($('#org').html());
 
