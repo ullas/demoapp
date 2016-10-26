@@ -140,57 +140,75 @@
 .skin-greenjam.layout-top-nav .main-header > .logo:hover {
   background-color: #3b8ab8;
 }
-
-/*JiMap modified*/
-.box.box-primary {
+/*********JiMap modified Green Jam Specific***************/
+.skin-greenjam .box.box-primary {
   border-top-color: #21A57E;
 }
-.pagination > .active > a,
-.pagination > .active > span,
-.pagination > .active > a:hover,
-.pagination > .active > span:hover,
-.pagination > .active > a:focus,
-.pagination > .active > span:focus{
+.skin-greenjam .pagination > .active > a,
+.skin-greenjam .pagination > .active > span,
+.skin-greenjam .pagination > .active > a:hover,
+.skin-greenjam .pagination > .active > span:hover,
+.skin-greenjam .pagination > .active > a:focus,
+.skin-greenjam .pagination > .active > span:focus{
   background-color: #21A57E;
   border-color: #21A57E;
 }
-a{
+.skin-greenjam a{
   color: #21A57E;
 }
-a:hover, a:active, a:focus{
+.skin-greenjam a:hover, .skin-greenjam a:active, .skin-greenjam a:focus{
   color: #6ECAAF;
 }
-.btn-primary{
+.skin-greenjam .btn-primary{
   background-color: #00a1e6;
   border-color: transparent;
 }
-.btn-primary:hover,
-.btn-primary:active,
-.btn-primary.hover {
+.skin-greenjam .btn-primary:hover,
+.skin-greenjam .btn-primary:active,
+.skin-greenjam .btn-primary.hover {
   background-color: #0093D2;
   border-color: transparent;
 }
-textarea:focus,
-input[type="text"]:focus,
-input[type="password"]:focus,
-input[type="datetime"]:focus,
-input[type="datetime-local"]:focus,
-input[type="date"]:focus,
-input[type="month"]:focus,
-input[type="time"]:focus,
-input[type="week"]:focus,
-input[type="number"]:focus,
-input[type="email"]:focus,
-input[type="url"]:focus,
-input[type="search"]:focus,
-input[type="tel"]:focus,
-input[type="color"]:focus,
-.uneditable-input:focus,
-.form-control:focus {
+.skin-greenjam textarea:focus,
+.skin-greenjam input[type="text"]:focus,
+.skin-greenjam input[type="password"]:focus,
+.skin-greenjam input[type="datetime"]:focus,
+.skin-greenjam input[type="datetime-local"]:focus,
+.skin-greenjam input[type="date"]:focus,
+.skin-greenjam input[type="month"]:focus,
+.skin-greenjam input[type="time"]:focus,
+.skin-greenjam input[type="week"]:focus,
+.skin-greenjam input[type="number"]:focus,
+.skin-greenjam input[type="email"]:focus,
+.skin-greenjam input[type="url"]:focus,
+.skin-greenjam input[type="search"]:focus,
+.skin-greenjam input[type="tel"]:focus,
+.skin-greenjam input[type="color"]:focus,
+.skin-greenjam .uneditable-input:focus,
+.skin-greenjam .form-control:focus {
   border-color: rgba(33, 165, 126, 0.8);
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(33, 165, 126, 0.6);
   outline: 0 none;
 }
-.nav-tabs-custom > .nav-tabs > li.active {
+.skin-greenjam .nav-tabs-custom > .nav-tabs > li.active {
     border-top-color: #21A57E;
+}
+.skin-greenjam .modal-content .bg-aqua{
+  background-color: #21A57E !important;
+}
+/***************popover**********************/
+.skin-greenjam .popover{
+  cursor:default;
+}
+.skin-greenjam .popover dd{
+  font-weight:400;
+}
+.skin-greenjam .popover-title {
+  background:#21A57E;
+  color: #FFFFFF;
+  font-size: 15px;
+  text-align:center;font-weight: bold;
+}
+.skin-greenjam .popover-content a{
+  margin-left:10px;
 }
