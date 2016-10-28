@@ -31,8 +31,8 @@ label.mandatory:after {
             echo $this->Form->input('name',['label'=>['text'=>'Name','class'=>'mandatory']]);
             echo $this->Form->input('description');
             echo $this->Form->input('effective_status');
-            echo $this->Form->input('effective_start_date',['empty' => true]);
-            echo $this->Form->input('effective_end_date');
+            echo $this->Form->input('effective_start_date', ['class' => 'mptldp','type' => 'text']);
+            echo $this->Form->input('effective_end_date', ['class' => 'mptldp','type' => 'text']);
             echo $this->Form->input('country_of_registration',['class'=>'select2','options' => $this->Country->get_countries(), 'empty' => true]);
             echo $this->Form->input('standard_weekly_hours');
             echo $this->Form->input('currency',['class'=>'select2','options' => $this->Currency->get_currencies(), 'empty' => true]);
@@ -50,20 +50,7 @@ label.mandatory:after {
     </div>
   </div>
 </section>
-<!-- Date picker -->
-<?php
-$this->Html->css([
-    'AdminLTE./plugins/datepicker/datepicker3',
-    'AdminLTE./plugins/select2/select2.min',
-  ],
-  ['block' => 'css']);
 
-$this->Html->script([
-  'AdminLTE./plugins/datepicker/bootstrap-datepicker',
-  'AdminLTE./plugins/select2/select2.full.min',
-],
-['block' => 'script']);
-?>
 <?php $this->start('scriptBotton'); ?>
 <script>
   $(function () {

@@ -1,3 +1,5 @@
+<?= $this->element('templateelmnt'); ?>
+
 <section class="content-header">
       <h1>
        Pay Component
@@ -16,10 +18,8 @@
             echo $this->Form->input('name');
             echo $this->Form->input('description');
             echo $this->Form->input('status');
-            echo "<div class='form-group'><label>Start Date:</label><div class='input-group'>";
-            echo "<div class='input-group-addon''><i class='fa fa-calendar'></i></div><input type='text' class='form-control' id='start_date'></div></div>";
-			echo "<div class='form-group'><label>End Date:</label><div class='input-group'>";
-            echo "<div class='input-group-addon''><i class='fa fa-calendar'></i></div><input type='text' class='form-control' id='end_date'></div></div>";
+			echo $this->Form->input('start_date');
+			echo $this->Form->input('end_date');
             echo $this->Form->input('pay_component_type');
             echo $this->Form->input('is_earning');
             echo $this->Form->input('currency',['options' => $this->Currency->get_currencies(), 'empty' => true]);

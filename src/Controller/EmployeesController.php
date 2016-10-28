@@ -51,14 +51,14 @@ class EmployeesController extends AppController
         $employee = $this->Employees->newEntity();
         if ($this->request->is('post')) {
             $employee = $this->Employees->patchEntity($employee, $this->request->data);
-			$employee['customer_id']=$this->loggedinuser['customer_id'];
-            if ($this->Employees->save($employee)) {
-                $this->Flash->success(__('The employee has been saved.'));
-
-                return $this->redirect(['action' => 'index']);
-            } else {
-                $this->Flash->error(__('The employee could not be saved. Please, try again.'));
-            }
+			$employee['customer_id']=$this->loggedinuser['customer_id'];$this->log($employee);
+            // if ($this->Employees->save($employee)) {
+                // $this->Flash->success(__('The employee has been saved.'));
+// 
+                // return $this->redirect(['action' => 'index']);
+            // } else {
+                // $this->Flash->error(__('The employee could not be saved. Please, try again.'));
+            // }
         }
         $this->set(compact('employee'));
         $this->set('_serialize', ['employee']);

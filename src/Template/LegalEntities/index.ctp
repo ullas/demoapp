@@ -21,6 +21,7 @@
             <tr>
             	<th>Id</th>	
             	<th>Name</th>	
+            	<th></th>	
             	<th></th>	           
                 <th class="actions" data-orderable="false"><?= __('Actions') ?></th>
               

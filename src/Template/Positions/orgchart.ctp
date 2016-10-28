@@ -85,7 +85,7 @@ $(".topbar").fadeTo('fast',1);
 
                 $('#list-html').text($('#org').html());
 
-                prettyPrint();
+                // prettyPrint();
             });
 
 
