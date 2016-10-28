@@ -27,14 +27,15 @@ label.mandatory:after {
 	<div class="box box-primary"><div class="box-body">
     <?= $this->Form->create($legalEntity) ?>
     <fieldset>
+    	
         <?php
-            echo $this->Form->input('name',['label'=>['text'=>'Name','class'=>'mandatory']]);
+            echo $this->Form->input('name',['label'=>['text'=>'Name'],'templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-user"></i></div>']]);
             echo $this->Form->input('description');
             echo $this->Form->input('effective_status');
-            echo $this->Form->input('effective_start_date', ['class' => 'mptldp','type' => 'text']);
-            echo $this->Form->input('effective_end_date', ['class' => 'mptldp','type' => 'text']);
+            echo $this->Form->input('effective_start_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+            echo $this->Form->input('effective_end_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
             echo $this->Form->input('country_of_registration',['class'=>'select2','options' => $this->Country->get_countries(), 'empty' => true]);
-            echo $this->Form->input('standard_weekly_hours');
+            echo $this->Form->input('standard_weekly_hours',['templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-clock-o"></i></div>']]);
             echo $this->Form->input('currency',['class'=>'select2','options' => $this->Currency->get_currencies(), 'empty' => true]);
             echo $this->Form->input('official_language',['class'=>'select2','options' => $this->Language->get_languages(), 'empty' => true]);
             echo $this->Form->input('external_code',['label'=>['text'=>'External Code','class'=>'mandatory']]);

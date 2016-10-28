@@ -10,11 +10,26 @@ use Cake\Controller\Component;
 			$colmns = array();
 			$i = 0;
 			foreach($fields as $value){
-        		if(is_array($value)) {
-          			$colmns[] = array("db" => $value['name'] , "dt" => $i++);
-        		}else{
-        			$colmns[] = array("db" => $value , "dt" => $i++);
-        		}
+				// if($value['type']=='boolean'){
+// 					
+					// $colmns[] =array( 
+            	// 'db' => $value['name'], 
+            	// 'dt' => 5,
+            	// 'formatter' => function( $d, $row ,$modalname) {
+                	// $buttons='<a href="/'.   $modalname  . '/view/'.$d.'" class="fa fa-file-text-o p3"></a>';
+// 						
+                	// return $buttons;
+            	// }
+       		// );
+// 					
+				// }else{
+					if(is_array($value)) {
+          				$colmns[] = array("db" => $value['name'] , "dt" => $i++);
+        			}else{
+        				$colmns[] = array("db" => $value , "dt" => $i++);
+        			}
+				// }
+        		
     		}
 	
 			$colmns[] =array( 
@@ -81,6 +96,16 @@ use Cake\Controller\Component;
       			return false;
    			}
 		}
+		
+		function isItValidDate($date) {
+  			if(preg_match("/^(\d{2})\/(\d{2})\/(\d{2})$/", $date, $matches))
+   			{
+    			if(checkdate($matches[2], $matches[1], $matches[3]))
+      			{
+       				return true; 
+      			}
+   			}
+ 		}
 		public function Filter( $columns, $fields ){
 			$globalSearch = [];
 			// $columnSearch = array();
@@ -99,7 +124,7 @@ use Cake\Controller\Component;
 								$globalSearch[$column['db'].' ILIKE'] = "%" . $str. "%";
 							}
 							else if( ($rowval['name']==$column['db']) && ($rowval['type']=="date") ){
-								if($this->validateDate($str,'m/d/y')){
+								if($this->isItValidDate($str)){
 									$globalSearch[$column['db'].'::date ='] = $str;
 								}
 							}
@@ -157,6 +182,7 @@ use Cake\Controller\Component;
 		}
 		public function Order ( $columns )
 		{
+			$controller = $this->_registry->getController();
 			$order = array();
 			if ( isset($this->request->query['order']) && count($this->request->query['order']) ) {
 				$orderBy = array();

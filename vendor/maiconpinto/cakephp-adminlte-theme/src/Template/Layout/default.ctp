@@ -95,12 +95,15 @@
     color: #ff5a4d;
     display: inline;
 }
-.datepicker table tr th {
-	background-color: #21A57E;
-}
-/*.datepicker table .dow {
+/*.datepicker table tr th {
 	background-color: #21A57E;
 }*/
+.input-group {
+	width:100%;
+}
+.checkbox{
+	padding-top:30px;
+}
 </style>
 
 </head>

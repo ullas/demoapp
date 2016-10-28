@@ -25,21 +25,6 @@
                 <th>Effective Status</th>
                 <th>Effective Start Date</th>
                 <th>Effective End Date</th>
-                 <th>Earliest Change Date</th>
-                <th>Payment Frequency</th>
-                <th>Primary Contactid</th>
-                <th>Primary Contact Email</th>
-                <th>Primary Contact Name</th>
-               <th>Secondary Contactid</th>
-                <th>Secondary Contact Email/th>
-                 <th>Secondary Contact Name</th>
-                 <th>Weeks In Pay Period</th>
-                 <th>Data Delimiter</th>
-                 <th>Decimal Point</th>
-                 <th>Lag</th>
-                  <th>External Code</th>
-                 
-                
                 
                 <th class="actions" data-orderable="false"><?= __('Actions') ?></th>
             </tr>
