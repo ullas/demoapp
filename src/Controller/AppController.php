@@ -32,6 +32,16 @@ class AppController extends Controller
 	
 	var $components = array('LoadCountry');
 	
+	
+	private function toPostDBDate($date){
+		$ret="";
+		$parts=explode("/",$date);
+		if(count($parts)==3){
+			$ret= $date= '20' .trim($parts[2]) . "-" . trim($parts[1]) . "-" . trim($parts[0]);	
+		}
+	  return $ret;
+	}
+	
 	public function isAuthorized($user)
 	{
    		 // Admin can access every action
@@ -168,6 +178,9 @@ class AppController extends Controller
 		// print_r($this);
     	$this->viewBuilder()->theme('AdminLTE');
 		$this->set('theme', Configure::read('Theme'));
+			
+		$this->set('mptlusercurrencyfaclass',"fa fa-rupee");
+		$this->set('mptlusercalendarfaclass',"fa fa-calendar");
 				
         if (!array_key_exists('_serialize', $this->viewVars) &&
             in_array($this->response->type(), ['application/json', 'application/xml'])

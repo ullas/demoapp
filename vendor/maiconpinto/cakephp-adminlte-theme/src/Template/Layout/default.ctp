@@ -8,6 +8,8 @@
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.5 -->
     <?php echo $this->Html->css('AdminLTE./bootstrap/css/bootstrap'); ?>
+    <?php echo $this->Html->css('AdminLTE./plugins/select2/select2.min'); ?>
+    <?php echo $this->Html->css('AdminLTE./plugins/datepicker/datepicker3'); ?>
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <!-- Ionicons -->
@@ -88,8 +90,28 @@
     .bgwhite{
     	background-color:#FFFFFF;
     }
+    label.mandatory:after {
+    content: ' *';
+    color: #ff5a4d;
+    display: inline;
+}
+/*.datepicker table tr th {
+	background-color: #21A57E;
+}*/
+.input-group {
+	width:100%;
+}
+.checkbox{
+	padding-top:30px;
+}
 </style>
+
 </head>
+<!-- Date picker -->
+<?php
+$this->Html->script([ 'AdminLTE./plugins/select2/select2.full.min' ], ['block' => 'script']);
+$this->Html->script([ 'AdminLTE./plugins/datepicker/bootstrap-datepicker' ], ['block' => 'script']);
+?>
 <body class="hold-transition skin-greenjam sidebar-mini">
     <!-- Site wrapper -->
     <div class="wrapper">
@@ -133,18 +155,33 @@
     <div class="control-sidebar-bg"></div>
 </div>
 <!-- ./wrapper -->
-<!-- Date picker -->
-<?php
-$this->Html->css([ 'AdminLTE./plugins/datepicker/datepicker3' ], ['block' => 'css']);
-$this->Html->script([ 'AdminLTE./plugins/datepicker/bootstrap-datepicker' ], ['block' => 'script']);
-?>
+
 
 <!-- AdminLTE for demo purposes -->
 <?php echo $this->fetch('script'); ?>
 <?php echo $this->fetch('scriptBotton'); ?>
 <script type="text/javascript">
     $(document).ready(function(){
+    	
+//popover resize    	
+$(window).off("resize").on("resize", function() {
+    $(".popover").each(function() {
+        var popover = $(this);
+        if (popover.is(":visible")) {
+            var ctrl = $(popover.context);
+            ctrl.popover('show');
+        }
+    });
+}); 
 
+    //set mnadatory * after required label	
+    $( ':input[required]' ).each( function () {
+        $("label[for='" + this.id + "']").addClass('mandatory');
+    });
+
+		//select 2 
+    	$(".select2").select2({ width: '100%' });
+		//datepicker
     	$('.mptldp').datepicker({
     		format:"dd/mm/yy",
       		autoclose: true

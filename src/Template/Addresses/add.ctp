@@ -1,3 +1,4 @@
+<?= $this->element('templateelmnt'); ?>
 <section class="content-header">
       <h1>
         Address
@@ -26,20 +27,12 @@
             echo $this->Form->input('city');
             echo $this->Form->input('county');
             echo $this->Form->input('state');
-            echo $this->Form->input('emp_data_biographies_id', ['options' => $empDataBiographies, 'empty' => true]);
+            echo $this->Form->input('emp_data_biographies_id',  ['class'=>'select2','options' => $empDataBiographies, 'empty' => true]);
         ?>
     </fieldset>
-    <fieldset>
-    	<?php
-    	// foreach ($subjectGroup['Subject'] as $subject):
-        	echo $this->Form->input('EmpDataBiographies.0.id');
-        	echo $this->Form->input('EmpDataBiographies.0.birth_name');
-			// echo $this->Form->input('EmpDataBiographies.1.birth_name');
-			// echo $this->Form->input('EmpDataBiographies.2.birth_name');
-        	// $j++;
-    	// endforeach;
-		?>
-    </fieldset>
-    <?= $this->Form->button(__('Submit')) ?>
+ 	<div class="box-footer">
+    <?=$this->Html->link(__('Cancel'), ['action' => 'index'], ['escape' => false])?>
+    <?= $this->Form->button(__('Save Address'),['title'=>'Save Address','class'=>'pull-right']) ?>
+    </div>
     <?= $this->Form->end() ?>
 </div></div></section>

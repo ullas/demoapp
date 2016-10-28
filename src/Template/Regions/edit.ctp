@@ -1,3 +1,4 @@
+<?= $this->element('templateelmnt'); ?>
 <section class="content-header">
       <h1>
         Region
@@ -11,19 +12,19 @@
 	<div class="box box-primary"><div class="box-body">
     <?= $this->Form->create($region) ?>
     <fieldset>
-        <legend><?= __('Edit Region') ?></legend>
         <?php
-            echo $this->Form->input('name');
+             echo $this->Form->input('name');
             echo $this->Form->input('description');
-             echo "<div class='form-group'><label>Start Date:</label><div class='input-group'>";
-            echo "<div class='input-group-addon''><i class='fa fa-calendar'></i></div><input type='text' class='form-control' id='start_date'></div></div>";
-            echo "<div class='form-group'><label>End Date:</label><div class='input-group'>";
-            echo "<div class='input-group-addon''><i class='fa fa-calendar'></i></div><input type='text' class='form-control' id='end_date'></div></div>";
+			echo $this->Form->input('start_date',['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+            echo $this->Form->input('end_date',['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
             echo $this->Form->input('status');
             echo $this->Form->input('external_code');
         ?>
     </fieldset>
-    <?= $this->Form->button(__('Submit')) ?>
+    <div class="box-footer">
+    <?=$this->Html->link(__('Cancel'), ['action' => 'index'], ['escape' => false])?>
+    <?= $this->Form->button(__('Update Region'),['title'=>'Update Region','class'=>'pull-right']) ?>
+    </div>
     <?= $this->Form->end() ?>
 </div></div></section>
 <!-- Date picker -->

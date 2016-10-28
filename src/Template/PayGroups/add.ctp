@@ -1,3 +1,4 @@
+<?= $this->element('templateelmnt'); ?>
 <section class="content-header">
       <h1>
        Pay Group
@@ -15,18 +16,15 @@
             echo $this->Form->input('name');
             echo $this->Form->input('description');
             echo $this->Form->input('effective_status');
-            echo "<div class='form-group'><label>Effective Start Date:</label><div class='input-group'>";
-            echo "<div class='input-group-addon''><i class='fa fa-calendar'></i></div><input type='text' class='form-control' id='effective_start_date'></div></div>";
-            echo "<div class='form-group'><label>Effective End Date:</label><div class='input-group'>";
-            echo "<div class='input-group-addon''><i class='fa fa-calendar'></i></div><input type='text' class='form-control' id='effective_end_date'></div></div>";
-            echo "<div class='form-group'><label>Earliest Change Date:</label><div class='input-group'>";
-            echo "<div class='input-group-addon''><i class='fa fa-calendar'></i></div><input type='text' class='form-control' id='earliest_change_date'></div></div>";
+			echo $this->Form->input('effective_start_date',['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+            echo $this->Form->input('effective_end_date',['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+            echo $this->Form->input('earliest_change_date',['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
             echo $this->Form->input('payment_frequency');
             echo $this->Form->input('primary_contactid');
-            echo $this->Form->input('primary_contact_email');
+            echo $this->Form->input('primary_contact_email',['templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-envelope"></i></div>']]);
             echo $this->Form->input('primary_contact_name');
             echo $this->Form->input('secondary_contactid');
-            echo $this->Form->input('secondary_contact_email');
+            echo $this->Form->input('secondary_contact_email',['templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-envelope"></i></div>']]);
             echo $this->Form->input('secondary_contact_name');
             echo $this->Form->input('weeks_in_pay_period');
             echo $this->Form->input('data_delimiter');
@@ -35,7 +33,10 @@
             echo $this->Form->input('external_code');
         ?>
     </fieldset>
-    <?= $this->Form->button(__('Submit')) ?>
+    <div class="box-footer">
+    <?=$this->Html->link(__('Cancel'), ['action' => 'index'], ['escape' => false])?>
+    <?= $this->Form->button(__('Save PayGroup'),['title'=>'Save Paygroup','class'=>'pull-right']) ?>
+    </div>
     <?= $this->Form->end() ?>
 </div></div></section>
 <!-- Date picker -->

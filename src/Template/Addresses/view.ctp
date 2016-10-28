@@ -1,3 +1,4 @@
+<?= $this->element('templateelmnt'); ?>
 <section class="content-header">
   <h1>
     Address
@@ -13,66 +14,25 @@
 <!-- Main content -->
 <section class="content">
   <div class="box box-primary"><div class="box-body">
-    <table class="table table-hover">
-        <tr>
-            <th><?= __('Address No') ?></th>
-            <td><?= h($address->address_no) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Address1') ?></th>
-            <td><?= h($address->address1) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Address2') ?></th>
-            <td><?= h($address->address2) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Address3') ?></th>
-            <td><?= h($address->address3) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Address4') ?></th>
-            <td><?= h($address->address4) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Address5') ?></th>
-            <td><?= h($address->address5) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Address6') ?></th>
-            <td><?= h($address->address6) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Address7') ?></th>
-            <td><?= h($address->address7) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Address8') ?></th>
-            <td><?= h($address->address8) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Zip Code') ?></th>
-            <td><?= h($address->zip_code) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('City') ?></th>
-            <td><?= h($address->city) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('County') ?></th>
-            <td><?= h($address->county) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('State') ?></th>
-            <td><?= h($address->state) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Emp Data Biography') ?></th>
-            <td><?= $address->has('emp_data_biography') ? $this->Html->link($address->emp_data_biography->id, ['controller' => 'EmpDataBiographies', 'action' => 'view', $address->emp_data_biography->id]) : '' ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Id') ?></th>
-            <td><?= $this->Number->format($address->id) ?></td>
-        </tr>
-    </table>
+  	<?= $this->Form->create($address, array('role' => 'form')) ?>
+    <?php
+            echo $this->Form->input('address_no',['disabled' => true]);
+            echo $this->Form->input('address1',['disabled' => true]);
+            echo $this->Form->input('address2',['disabled' => true]);
+            echo $this->Form->input('address3',['disabled' => true]);
+            echo $this->Form->input('address4',['disabled' => true]);
+            echo $this->Form->input('address5',['disabled' => true]);
+            echo $this->Form->input('address6',['disabled' => true]);
+            echo $this->Form->input('address7',['disabled' => true]);
+            echo $this->Form->input('address8',['disabled' => true]);
+            echo $this->Form->input('zip_code',['disabled' => true]);
+            echo $this->Form->input('city',['disabled' => true]);
+            echo $this->Form->input('county',['disabled' => true]);
+            echo $this->Form->input('state',['disabled' => true]);
+            echo $this->Form->input('emp_data_biographies_id', ['class'=>'select2','options' => $empDataBiographies, 'empty' => true,'disabled' => true]);
+        ?>
+        <div class="box-footer">
+          	<?=$this->Html->link(__('Cancel'), ['action' => 'index'], ['escape' => false])?>
+            <?=$this->Html->link(__('Edit Address'), ['action' => 'edit', $address['id']],['class'=>'btn btn-primary label-info pull-right'], ['escape' => false])?>
+          </div><?= $this->Form->end() ?>
 </div></div></section>
