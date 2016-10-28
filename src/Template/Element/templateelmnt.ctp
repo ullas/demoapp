@@ -6,7 +6,7 @@
     
     'inputContainer' => '<div class="col-md-6"><div class="form-group {{type}}">{{content}}</div></div>',
     'label' => '<label class="control-label" {{attrs}}>{{text}}</label>',
-    // 'input' => '<div class="col-sm-6"><input type="{{type}}" name="{{name}}"{{attrs}}/></div>',
+    'input' => '<div class="input-group">{{icon}}<input type="{{type}}" name="{{name}}"{{attrs}}/></div>',
     // 'select' => '<div class="col-sm-6"><select name="{{name}}"{{attrs}}>{{content}}</select></div>',
     // 'textarea' => '<div class="col-sm-6"><textarea name="{{name}}"{{attrs}}>{{value}}</textarea></div>',
     'dateContainer' => '<div class="col-md-6"><div class="form-group">{{content}}</div></div>',

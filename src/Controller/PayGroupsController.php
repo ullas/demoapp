@@ -15,14 +15,18 @@ var $components = array('Datatable');
 	
 	public function ajaxData() {
 		$this->autoRender= False;
-
-		$fields = array(array('name'=>'id','type'=>'int'),'name','description',array('name'=>'effective_status','type'=>'bool'),array('name'=>'effective_start_date','type'=>'date'),array('name'=>'effective_end_date','type'=>'date'),array('name'=>'earliest_change_date','type'=>'date'),
-		'payment_frequency','primary_contactid','primary_contact_email','primary_contact_name','secondary_contactid','secondary_contact_email','secondary_contact_name',array('name'=>'weeks_in_pay_period','type'=>'numeric'),'data_delimiter','decimal_point',array('name'=>'lag','type'=>'numeric'),'external_code');
+		  
+		$this->loadModel('CreateConfigs');
+		$dbout=$this->CreateConfigs->find()->select(['field_name', 'datatype'])->where(['table_name' => $this->request->params['controller']])->order(['id' => 'ASC'])->toArray();
+		$fields = array();
+		foreach($dbout as $value){
+			$fields[] = array("name" => $value['field_name'] , "type" => $value['datatype'] );
+		}
 		
-						  
+		$contains=['Customers'];
 									  
-		$output =$this->Datatable->getView($fields);
-		echo json_encode($output);			
+		$output =$this->Datatable->getView($fields,$contains);
+		echo json_encode($output);				
     }
     /**
      * Index method

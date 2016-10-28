@@ -5,7 +5,7 @@
   </h1>
   <ol class="breadcrumb">
     <li>
-    <li><a href="<?php echo $this->Url->build(array('controller' => 'Location', 'action' => 'add')); ?>">Add</a></li>
+    <li><a href="<?php echo $this->Url->build(array('controller' => 'Locations', 'action' => 'add')); ?>">Add</a></li>
     </li>
   </ol>
 </section>
@@ -22,6 +22,9 @@
                 <th>Id</th>
                 <th>Name</th>
                 <th>Description</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Status</th>
                 <th class="actions" data-orderable="false"><?= __('Actions') ?></th>
             </tr>
         </thead>

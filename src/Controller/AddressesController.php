@@ -55,8 +55,9 @@ var $components = array('Datatable');
         $address = $this->Addresses->get($id, [
             'contain' => ['EmpDataBiographies', 'Customers']
         ]);
-
-        $this->set('address', $address);
+		$empDataBiographies = $this->Addresses->EmpDataBiographies->find('list', ['limit' => 200]);
+		$this->set(compact('address', 'empDataBiographies'));
+        // $this->set('address', $address);
         $this->set('_serialize', ['address']);
     }
 

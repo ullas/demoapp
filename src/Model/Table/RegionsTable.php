@@ -33,6 +33,10 @@ class RegionsTable extends Table
         $this->table('regions');
         $this->displayField('name');
         $this->primaryKey('id');
+		
+		$this->belongsTo('Customers', [
+            'foreignKey' => 'customer_id'
+        ]);
     }
 
     /**

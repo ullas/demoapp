@@ -1,3 +1,4 @@
+<?= $this->element('templateelmnt'); ?>
 <section class="content-header">
   <h1>
     Region
@@ -13,34 +14,18 @@
 <!-- Main content -->
 <section class="content">
   <div class="box box-primary"><div class="box-body">
-    <table class="table table-hover">
-	    <tr>
-            <th><?= __('Name') ?></th>
-            <td><?= h($region->name) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Description') ?></th>
-            <td><?= h($region->description) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('External Code') ?></th>
-            <td><?= h($region->external_code) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Id') ?></th>
-            <td><?= $this->Number->format($region->id) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Start Date') ?></th>
-            <td><?= h($region->start_date) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('End Date') ?></th>
-            <td><?= h($region->end_date) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Status') ?></th>
-            <td><?= $region->status ? __('Yes') : __('No'); ?></td>
-        </tr>
-    </table>
+  	<?= $this->Form->create($region, array('role' => 'form')) ?>
+    <?php
+             echo $this->Form->input('name',['disabled' => true]);
+            echo $this->Form->input('description',['disabled' => true]);
+			echo $this->Form->input('start_date',['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
+            echo $this->Form->input('end_date',['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
+            echo $this->Form->input('status',['disabled' => true]);
+            echo $this->Form->input('external_code',['disabled' => true]);
+        ?>
+<div class="box-footer">
+          	<?=$this->Html->link(__('Cancel'), ['action' => 'index'], ['escape' => false])?>
+            <?=$this->Html->link(__('Edit Region'), ['action' => 'edit', $region['id']],['class'=>'btn btn-primary label-info pull-right'], ['escape' => false])?>
+          </div><?= $this->Form->end() ?>
 </div></div></section>
+

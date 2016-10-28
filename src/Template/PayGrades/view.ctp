@@ -1,3 +1,4 @@
+<?= $this->element('templateelmnt'); ?>
 <section class="content-header">
   <h1>
     Pay Grade
@@ -13,38 +14,20 @@
 <!-- Main content -->
 <section class="content">
   <div class="box box-primary"><div class="box-body">
-    <table class="table table-hover">
-        <tr>
-            <th><?= __('Name') ?></th>
-            <td><?= h($payGrade->name) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Description') ?></th>
-            <td><?= h($payGrade->description) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('External Code') ?></th>
-            <td><?= h($payGrade->external_code) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Id') ?></th>
-            <td><?= $this->Number->format($payGrade->id) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Pay Grade Level') ?></th>
-            <td><?= $this->Number->format($payGrade->pay_grade_level) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Start Date') ?></th>
-            <td><?= h($payGrade->start_date) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('End Date') ?></th>
-            <td><?= h($payGrade->end_date) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Status') ?></th>
-            <td><?= $payGrade->status ? __('Yes') : __('No'); ?></td>
-        </tr>
-    </table>
-</div></div></section>
+      <?= $this->Form->create($payGrade, array('role' => 'form')) ?>
+      <fieldset>
+		<?php
+            echo $this->Form->input('name',['disabled' => true]);
+            echo $this->Form->input('description',['disabled' => true]);
+            echo $this->Form->input('status',['disabled' => true]);
+			echo $this->Form->input('start_date',['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],['disabled' => true]]);
+            echo $this->Form->input('end_date',['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],['disabled' => true]]);
+            echo $this->Form->input('pay_grade_level',['disabled' => true]);
+            echo $this->Form->input('external_code',['disabled' => true]);
+        ?>
+        <fieldset>
+        </div><div class="box-footer">
+          	<?=$this->Html->link(__('Cancel'), ['action' => 'index'], ['escape' => false])?>
+            <?=$this->Html->link(__('Edit Paygrade'), ['action' => 'edit', $payGrade['id']],['class'=>'btn btn-primary label-info pull-right'], ['escape' => false])?>
+          </div><?= $this->Form->end() ?>
+</div></section>

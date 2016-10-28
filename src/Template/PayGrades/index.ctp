@@ -26,7 +26,6 @@
                 <th>Start Date</th>
                 <th>End Date</th>
                  <th>Pay Grade Level</th>
-                <th>External Code</th>
                                  
                 
                 
