@@ -47,6 +47,9 @@ class JobClassesTable extends Table
         $this->belongsTo('Customers', [
             'foreignKey' => 'customer_id'
         ]);
+		$this->belongsTo('Jobs', [
+            'foreignKey' => 'job_id'
+        ]);
     }
 
     /**

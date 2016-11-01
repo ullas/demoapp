@@ -14,12 +14,17 @@ class PayComponentsController extends AppController
 	
 	public function ajaxData() {
 		$this->autoRender= False;
-
-		$fields = array(array('name'=>'id','type'=>'int'),'name','description',array('name'=>'status','type'=>'bool'),
-		array('name'=>'start_date ','type'=>'date'),array('name'=>'end_date','type'=>'date'),'pay_component_type',' is_earning','currency',
-		array('name'=>'pay_component_value','type'=>'numeric'),array('name'=>'frequency_id' ,'type'=>'bigint'));
+		  
+		$this->loadModel('CreateConfigs');
+		$dbout=$this->CreateConfigs->find()->select(['field_name', 'datatype'])->where(['table_name' => $this->request->params['controller']])->order(['id' => 'ASC'])->toArray();
+		$fields = array();
+		foreach($dbout as $value){
+			$fields[] = array("name" => $value['field_name'] , "type" => $value['datatype'] );
+		}
+		
+		$contains=['Frequencies','Customers'];
 									  
-		$output =$this->Datatable->getView($fields);
+		$output =$this->Datatable->getView($fields,$contains);
 		echo json_encode($output);			
     }
     /**
@@ -51,6 +56,8 @@ class PayComponentsController extends AppController
             'contain' => ['Frequencies', 'Customers', 'TimeAccountTypes']
         ]);
 
+		$frequencies = $this->PayComponents->Frequencies->find('list', ['limit' => 200]);
+		$this->set('frequencies', $frequencies);
         $this->set('payComponent', $payComponent);
         $this->set('_serialize', ['payComponent']);
     }

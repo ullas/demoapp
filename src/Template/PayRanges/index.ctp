@@ -25,21 +25,7 @@
                 <th>Status</th>
                 <th>Start Date</th>
                 <th>End Date</th>
-                 <th>Currency</th>
-                <th>Frequency Code</th>
-                <th>Minimum Pay</th>
-                <th>Maximum Pay</th>
-                <th>Increment</th>
-               <th>Incr Percentage</th>
-                <th>Mid Point</th>
-                 <th>Geo Zone</th>
-                 <th>Id</th>
-                 <th>External Code</th>
-                 <th>Legal Entity</th>
-                 <th>Pay Group</th>
-                 
-                
-                
+              
                 <th class="actions" data-orderable="false"><?= __('Actions') ?></th>
             </tr>
         </thead>

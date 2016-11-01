@@ -15,14 +15,17 @@ var $components = array('Datatable');
 	
 	public function ajaxData() {
 		$this->autoRender= False;
-
-		$fields = array(array('name'=>'id','type'=>'int'),'name','description','status',array('name'=>'start_date','type'=>'date'),array('name'=>'end_date','type'=>'date'),'currency','frequency_code',array('name'=>'minimum_pay','type'=>'numeric'),
-		array('name'=>'maximum_pay','type'=>'numeric'),array('name'=>'increment','type'=>'numeric'),array('name'=>'incr_percentage','type'=>'numeric'),array('name'=>'mid_point','type'=>'numeric'),'geo_zone',array('name'=>'id','type'=>'bigint'),'external_code',
-		array('name'=>'legal_entity_id','type'=>'bigint'),array('name'=>'pay_group_id','type'=>'bigint'));
+		  
+		$this->loadModel('CreateConfigs');
+		$dbout=$this->CreateConfigs->find()->select(['field_name', 'datatype'])->where(['table_name' => $this->request->params['controller']])->order(['id' => 'ASC'])->toArray();
+		$fields = array();
+		foreach($dbout as $value){
+			$fields[] = array("name" => $value['field_name'] , "type" => $value['datatype'] );
+		}
 		
-						  
+		$contains=['LegalEntities', 'PayGroups', 'Customers'];
 									  
-		$output =$this->Datatable->getView($fields);
+		$output =$this->Datatable->getView($fields,$contains);
 		echo json_encode($output);			
     }
 
@@ -55,6 +58,10 @@ var $components = array('Datatable');
             'contain' => ['LegalEntities', 'PayGroups', 'Customers']
         ]);
 
+        $legalEntities = $this->PayRanges->LegalEntities->find('list', ['limit' => 200]);
+        $payGroups = $this->PayRanges->PayGroups->find('list', ['limit' => 200]);
+        $customers = $this->PayRanges->Customers->find('list', ['limit' => 200]);
+        $this->set(compact('payRange', 'legalEntities', 'payGroups', 'customers'));
         $this->set('payRange', $payRange);
         $this->set('_serialize', ['payRange']);
     }

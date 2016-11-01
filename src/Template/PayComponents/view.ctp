@@ -1,6 +1,7 @@
+<?= $this->element('templateelmnt'); ?>
 <section class="content-header">
   <h1>
-    pay Component
+    Pay Component
     <small>View</small>
   </h1>
   <ol class="breadcrumb">
@@ -12,107 +13,37 @@
 
 <!-- Main content -->
 <section class="content">
-  <div class="box box-primary"><div class="box-body">
-    <table class="table table-hover">
-        <tr>
-            <th><?= __('Name') ?></th>
-            <td><?= h($payComponent->name) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Description') ?></th>
-            <td><?= h($payComponent->description) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Pay Component Type') ?></th>
-            <td><?= h($payComponent->pay_component_type) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Is Earning') ?></th>
-            <td><?= h($payComponent->is_earning) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Currency') ?></th>
-            <td><?= h($payComponent->currency) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Base Pay Component Group') ?></th>
-            <td><?= h($payComponent->base_pay_component_group) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Tax Treatment') ?></th>
-            <td><?= h($payComponent->tax_treatment) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Can Override') ?></th>
-            <td><?= h($payComponent->can_override) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Self Service Description') ?></th>
-            <td><?= h($payComponent->self_service_description) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Display On Self Service') ?></th>
-            <td><?= h($payComponent->display_on_self_service) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Used For Comp Planning') ?></th>
-            <td><?= h($payComponent->used_for_comp_planning) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Unit Of Measure') ?></th>
-            <td><?= h($payComponent->unit_of_measure) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('External Code') ?></th>
-            <td><?= h($payComponent->external_code) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Frequency') ?></th>
-            <td><?= $payComponent->has('frequency') ? $this->Html->link($payComponent->frequency->name, ['controller' => 'Frequencies', 'action' => 'view', $payComponent->frequency->id]) : '' ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Id') ?></th>
-            <td><?= $this->Number->format($payComponent->id) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Pay Component Value') ?></th>
-            <td><?= $this->Number->format($payComponent->pay_component_value) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Max Fraction Digits') ?></th>
-            <td><?= $this->Number->format($payComponent->max_fraction_digits) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Rate') ?></th>
-            <td><?= $this->Number->format($payComponent->rate) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Number') ?></th>
-            <td><?= $this->Number->format($payComponent->number) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Start Date') ?></th>
-            <td><?= h($payComponent->start_date) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('End Date') ?></th>
-            <td><?= h($payComponent->end_date) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Status') ?></th>
-            <td><?= $payComponent->status ? __('Yes') : __('No'); ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Recurring') ?></th>
-            <td><?= $payComponent->recurring ? __('Yes') : __('No'); ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Target') ?></th>
-            <td><?= $payComponent->target ? __('Yes') : __('No'); ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Is Relevant For Advance Payment') ?></th>
-            <td><?= $payComponent->is_relevant_for_advance_payment ? __('Yes') : __('No'); ?></td>
-        </tr>
-    </table>
-</div></div></section>
+ <div class="box box-primary"><div class="box-body">
+      <?= $this->Form->create($payComponent, array('role' => 'form')) ?>
+      <fieldset>
+		<?php
+    		echo $this->Form->input('name',['disabled' => true]);
+            echo $this->Form->input('description',['disabled' => true]);
+            echo $this->Form->input('status',['disabled' => true]);
+			echo $this->Form->input('start_date',['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
+            echo $this->Form->input('end_date',['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
+            echo $this->Form->input('pay_component_type',['disabled' => true]);
+            echo $this->Form->input('is_earning',['disabled' => true]);
+            echo $this->Form->input('currency',['options' => $this->Currency->get_currencies(), 'empty' => true,'disabled' => true]);
+            echo $this->Form->input('pay_component_value',['disabled' => true]);
+            echo $this->Form->input('recurring',['disabled' => true]);
+            echo $this->Form->input('base_pay_component_group',['disabled' => true]);
+            echo $this->Form->input('tax_treatment',['disabled' => true]);
+            echo $this->Form->input('can_override',['disabled' => true]);
+            echo $this->Form->input('self_service_description',['disabled' => true]);
+            echo $this->Form->input('display_on_self_service',['disabled' => true]);
+            echo $this->Form->input('used_for_comp_planning',['disabled' => true]);
+            echo $this->Form->input('target',['disabled' => true]);
+            echo $this->Form->input('is_relevant_for_advance_payment',['disabled' => true]);
+            echo $this->Form->input('max_fraction_digits',['disabled' => true]);
+            echo $this->Form->input('unit_of_measure',['disabled' => true]);
+            echo $this->Form->input('rate',['disabled' => true]);
+            echo $this->Form->input('number',['disabled' => true]);
+            echo $this->Form->input('external_code',['disabled' => true]);
+            echo $this->Form->input('frequency_id', ['options' => $frequencies, 'empty' => true,'disabled' => true]);
+			?>
+</fieldset>
+        </div><div class="box-footer">
+          	<?=$this->Html->link(__('Cancel'), ['action' => 'index'], ['escape' => false])?>
+            <?=$this->Html->link(__('Edit PayComponent'), ['action' => 'edit', $payComponent['id']],['class'=>'btn btn-primary label-info pull-right'], ['escape' => false])?>
+          </div><?= $this->Form->end() ?></div></section>

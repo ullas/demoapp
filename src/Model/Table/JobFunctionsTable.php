@@ -43,6 +43,9 @@ class JobFunctionsTable extends Table
         $this->hasMany('JobClasses', [
             'foreignKey' => 'job_function_id'
         ]);
+		$this->belongsTo('Jobs', [
+            'foreignKey' => 'job_id'
+        ]);
     }
 
     /**

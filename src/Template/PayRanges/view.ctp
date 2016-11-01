@@ -13,74 +13,27 @@
 <!-- Main content -->
 <section class="content">
   <div class="box box-primary"><div class="box-body">
-    <table class="table table-hover">
-        <tr>
-            <th><?= __('Name') ?></th>
-            <td><?= h($payRange->name) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Description') ?></th>
-            <td><?= h($payRange->description) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Status') ?></th>
-            <td><?= h($payRange->status) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Currency') ?></th>
-            <td><?= h($payRange->currency) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Frequency Code') ?></th>
-            <td><?= h($payRange->frequency_code) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Geo Zone') ?></th>
-            <td><?= h($payRange->geo_zone) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('External Code') ?></th>
-            <td><?= h($payRange->external_code) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Legal Entity') ?></th>
-            <td><?= $payRange->has('legal_entity') ? $this->Html->link($payRange->legal_entity->name, ['controller' => 'LegalEntities', 'action' => 'view', $payRange->legal_entity->id]) : '' ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Pay Group') ?></th>
-            <td><?= $payRange->has('pay_group') ? $this->Html->link($payRange->pay_group->name, ['controller' => 'PayGroups', 'action' => 'view', $payRange->pay_group->id]) : '' ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Minimum Pay') ?></th>
-            <td><?= $this->Number->format($payRange->minimum_pay) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Maximum Pay') ?></th>
-            <td><?= $this->Number->format($payRange->maximum_pay) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Increment') ?></th>
-            <td><?= $this->Number->format($payRange->increment) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Incr Percentage') ?></th>
-            <td><?= $this->Number->format($payRange->incr_percentage) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Mid Point') ?></th>
-            <td><?= $this->Number->format($payRange->mid_point) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Id') ?></th>
-            <td><?= $this->Number->format($payRange->id) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Start Date') ?></th>
-            <td><?= h($payRange->start_date) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('End Date') ?></th>
-            <td><?= h($payRange->end_date) ?></td>
-        </tr>
-    </table>
+    <?= $this->Form->create($payRange, array('role' => 'form')) ?>
+    <?php
+            echo $this->Form->input('name');
+            echo $this->Form->input('description');
+            echo $this->Form->input('status');
+            echo $this->Form->input('start_date',['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+            echo $this->Form->input('end_date',['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+            echo $this->Form->input('currency',['options' => $this->Currency->get_currencies(), 'empty' => true]);
+            echo $this->Form->input('frequency_code');
+            echo $this->Form->input('minimum_pay');
+            echo $this->Form->input('maximum_pay');
+            echo $this->Form->input('increment');
+            echo $this->Form->input('incr_percentage');
+            echo $this->Form->input('mid_point');
+            echo $this->Form->input('geo_zone');
+            echo $this->Form->input('external_code');
+            echo $this->Form->input('legal_entity_id', ['options' => $legalEntities, 'empty' => true]);
+            echo $this->Form->input('pay_group_id', ['options' => $payGroups, 'empty' => true]);
+        ?>
+<div class="box-footer">
+          	<?=$this->Html->link(__('Cancel'), ['action' => 'index'], ['escape' => false])?>
+            <?=$this->Html->link(__('Edit PayRange'), ['action' => 'edit', $payRange['id']],['class'=>'btn btn-primary label-info pull-right'], ['escape' => false])?>
+          </div><?= $this->Form->end() ?>
 </div></div></section>

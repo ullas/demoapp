@@ -5,7 +5,7 @@
   </h1>
   <ol class="breadcrumb">
     <li>
-    <li><a href="<?php echo $this->Url->build(array('controller' => 'Pay Component', 'action' => 'add')); ?>">Add</a></li>
+    <li><a href="<?php echo $this->Url->build(array('controller' => 'PayComponents', 'action' => 'add')); ?>">Add</a></li>
     </li>
   </ol>
 </section>
@@ -25,11 +25,6 @@
                 <th>Status</th>
                 <th>Start Date</th>
                 <th>End Date</th>
-                <th>Pay Component Type</th>
-                <th>Is Earning</th>
-                <th>Currency</th>
-                <th>Pay Component Value</th>
-                <th>Frequency</th>
                 <th class="actions" data-orderable="false"><?= __('Actions') ?></th>
             </tr>
         </thead>

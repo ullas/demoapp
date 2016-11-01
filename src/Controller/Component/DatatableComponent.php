@@ -10,25 +10,24 @@ use Cake\Controller\Component;
 			$colmns = array();
 			$i = 0;
 			foreach($fields as $value){
-				// if($value['type']=='boolean'){
-// 					
-					// $colmns[] =array( 
-            	// 'db' => $value['name'], 
-            	// 'dt' => 5,
-            	// 'formatter' => function( $d, $row ,$modalname) {
-                	// $buttons='<a href="/'.   $modalname  . '/view/'.$d.'" class="fa fa-file-text-o p3"></a>';
-// 						
-                	// return $buttons;
-            	// }
-       		// );
-// 					
-				// }else{
+				if($value['type']=='boolean'){
+					
+					$colmns[] =array( 
+            		'db' => $value['name'], 
+            		'dt' => $i++,
+            		'formatter' => function( $d, $row ,$modalname) {
+                		$div='<div class="mptldtbool">'.$d.'</div>';
+                		return $div;
+            		}
+       				);
+					
+				}else{
 					if(is_array($value)) {
           				$colmns[] = array("db" => $value['name'] , "dt" => $i++);
         			}else{
         				$colmns[] = array("db" => $value , "dt" => $i++);
         			}
-				// }
+				}
         		
     		}
 	

@@ -59,6 +59,7 @@
 	font-size: 12px;
 	padding: 1em;
 	display: none;
+	z-index:10;
 }
 
 .go-top:hover {
@@ -162,6 +163,7 @@ $this->Html->script([ 'AdminLTE./plugins/datepicker/bootstrap-datepicker' ], ['b
 <?php echo $this->fetch('scriptBotton'); ?>
 <script type="text/javascript">
     $(document).ready(function(){
+    
     	
 //popover resize    	
 $(window).off("resize").on("resize", function() {
