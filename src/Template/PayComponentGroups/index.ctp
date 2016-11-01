@@ -25,14 +25,7 @@
 				<th>Status</th>
 				<th>Start Date</th>
 				<th>End Date</th>
-				<th>Currency</th>
-				<th>Show On Comp Ui</th>
-				<th>Use For Comparatio Calc</th>
-				<th>Use For Range Penetration</th>
-				<th>Sort Order</th>
-				<th>System Defined</th>
-				<th>External Code</th>
-				
+			
                 <th class="actions" data-orderable="false"><?= __('Actions') ?></th>
             </tr>
         </thead>

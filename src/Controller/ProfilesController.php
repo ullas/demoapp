@@ -26,8 +26,7 @@ class ProfilesController extends AppController
         $this->set(compact('profiles'));
         $this->set('_serialize', ['profiles']);
 		
-		
-
+	
 		//get userid from session var
 		$userid=$this->request->session()->read('sessionuser')['id'];
 		//loading position and company name from jobinfos
