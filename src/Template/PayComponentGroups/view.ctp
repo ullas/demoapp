@@ -15,7 +15,7 @@
 <section class="content">
   <div class="box box-primary"><div class="box-body">
     <?= $this->Form->create($payComponentGroup, array('role' => 'form')) ?>
-    <?php
+    <fieldset><?php
             echo $this->Form->input('name',['disabled' => true]);
             echo $this->Form->input('description',['disabled' => true]);
             echo $this->Form->input('status',['disabled' => true]);
@@ -28,7 +28,7 @@
             echo $this->Form->input('sort_order',['disabled' => true]);
             echo $this->Form->input('system_defined',['disabled' => true]);
             echo $this->Form->input('external_code',['disabled' => true]);
-        ?>
+        ?></fieldset>
 <div class="box-footer">
           	<?=$this->Html->link(__('Cancel'), ['action' => 'index'], ['escape' => false])?>
             <?=$this->Html->link(__('Edit PayComponentGroup'), ['action' => 'edit', $payComponentGroup['id']],['class'=>'btn btn-primary label-info pull-right'], ['escape' => false])?>

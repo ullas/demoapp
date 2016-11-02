@@ -1,10 +1,5 @@
-<style>
-label.mandatory:after {
-    content: ' *';
-    color: #ff5a4d;
-    display: inline;
-}
-</style>
+<?= $this->element('templateelmnt'); ?>
+
 <section class="content-header">
   <h1>
     Business Unit
@@ -24,33 +19,13 @@ label.mandatory:after {
         <?= $this->Form->create($businessUnit, array('role' => 'form')) ?>
           <div class="box-body">
           <?php
-          echo "<div class='row'>";
-          echo "<div class='col-md-6'>";
           echo $this->Form->input('name',['label'=>['text'=>'Name','class'=>'mandatory']]);
-          echo "</div>";
-          echo "<div class='col-md-6'>";
           echo $this->Form->input('description');
-          echo "</div>";
-          echo "<div class='col-md-6'>";
           echo $this->Form->input('effective_status');
-          echo "</div>";
-          echo "</div>";
-          echo "<div class='row'>";
-          echo "<div class='col-md-6'>";
-          echo "<div class='form-group'><label>Effective Start Date:</label><div class='input-group'>";
-          echo "<div class='input-group-addon''><i class='fa fa-calendar'></i></div><input type='text' class='form-control' id='effective_start_date'></div></div>";
-          echo "</div>";
-          echo "<div class='col-md-6'>";
-          echo "<div class='form-group'><label>Effective End Date:</label><div class='input-group'>";
-          echo "<div class='input-group-addon''><i class='fa fa-calendar'></i></div><input type='text' class='form-control' id='effective_end_date'></div></div>";
-          echo "</div>";
-          echo "<div class='col-md-6'>";
+          echo $this->Form->input('effective_start_date',['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+		  echo $this->Form->input('effective_end_date',['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
           echo $this->Form->input('external_code',['label'=>['text'=>'External Code','class'=>'mandatory']]);
-          echo "</div>";
-          echo "<div class='col-md-6'>";
           echo $this->Form->input('head_of_unit');
-          echo "</div>";
-          echo "</div>";
           ?>
           </div>
           <!-- /.box-body -->

@@ -82,8 +82,8 @@ class AppController extends Controller
 			$counts['position'] = $this->Positions->find('all')->where(['customer_id'=>$user['customer_id']])->count();
 			
 			//get employee count
-			$this->loadModel('EmpDataBiographies');
-			$counts['employee'] = $this->EmpDataBiographies->find('all')->where(['customer_id'=>$user['customer_id']])->count();
+			// $this->loadModel('EmpDataBiographies');
+			// $counts['employee'] = $this->EmpDataBiographies->find('all')->where(['customer_id'=>$user['customer_id']])->count();
 			
 			$this->set('counts', $counts);
 			$this->counts=$counts;

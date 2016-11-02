@@ -15,7 +15,7 @@
 <section class="content">
   <div class="box box-primary"><div class="box-body">
   	  	<?= $this->Form->create($payGroup, array('role' => 'form')) ?>
-    <?php
+    <fieldset><?php
             echo $this->Form->input('name',['disabled' => true]);
             echo $this->Form->input('description',['disabled' => true]);
             echo $this->Form->input('effective_status',['disabled' => true]);
@@ -34,7 +34,7 @@
             echo $this->Form->input('decimal_point',['disabled' => true]);
             echo $this->Form->input('lag',['disabled' => true]);
             echo $this->Form->input('external_code',['disabled' => true]);
-        ?>
+        ?></fieldset>
 <div class="box-footer">
           	<?=$this->Html->link(__('Cancel'), ['action' => 'index'], ['escape' => false])?>
             <?=$this->Html->link(__('Edit Paygroup'), ['action' => 'edit', $payGroup['id']],['class'=>'btn btn-primary label-info pull-right'], ['escape' => false])?>

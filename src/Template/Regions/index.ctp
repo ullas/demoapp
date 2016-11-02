@@ -35,8 +35,16 @@
         </tbody>
     </table></div></div>
     </div></div>
-   
+
 </section>
+<style>
+	 /*margin left for export buttons*/
+	.DTTT{
+		margin-left:10px;
+		background-color: #21A57E;
+    	border-color: #21A57E;color:#FFF;
+	}
+</style>
 <?php
 $this->Html->css([
     'AdminLTE./plugins/datatables/dataTables.bootstrap',
@@ -45,15 +53,17 @@ $this->Html->css([
 
 $this->Html->script([
   'AdminLTE./plugins/datatables/jquery.dataTables.min',
+  'AdminLTE./plugins/datatables/extensions/TableTools/js/dataTables.tableTools',
   'AdminLTE./plugins/datatables/dataTables.bootstrap.min',
-],
+],     
 ['block' => 'script']);
 ?>
 
 <?php $this->start('scriptBotton'); ?>
 <script>
   $(function () {
-    $('#mptlindextbl').DataTable({
+  	
+    var table =$('#mptlindextbl').DataTable({
       	"paging": true,
       	"lengthChange": true,
       	"searching": true,
@@ -64,9 +74,20 @@ $this->Html->script([
       	//server side processing
       	"processing": true,
      	 "serverSide": true,
-      	"ajax": "/<?php echo $this->request->params['controller'] ?>/ajaxData"
-     
+      	"ajax": "/<?php echo $this->request->params['controller'] ?>/ajaxData",
+        // dom: 'T<"clear">lfrtip',
+		// tableTools: {
+			// "aButtons": [ "copy", "csv", "xls", "pdf", "print" ]
+		// }
+        
     });
+    
+    //table tools like export
+    var tt = new $.fn.dataTable.TableTools( table, {aButtons: [ "copy", "csv", "xls", "pdf", "print" ]} );
+	$( tt.fnContainer() ).appendTo('div.dataTables_filter');
+	
+	
+	
   });
 </script>
 <?php $this->end(); ?>

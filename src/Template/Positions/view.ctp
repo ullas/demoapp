@@ -1,188 +1,63 @@
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('Edit Position'), ['action' => 'edit', $position->id]) ?> </li>
-        <li><?= $this->Form->postLink(__('Delete Position'), ['action' => 'delete', $position->id], ['confirm' => __('Are you sure you want to delete # {0}?', $position->id)]) ?> </li>
-        <li><?= $this->Html->link(__('List Positions'), ['action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Position'), ['action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List Customers'), ['controller' => 'Customers', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Customer'), ['controller' => 'Customers', 'action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List Legal Entities'), ['controller' => 'LegalEntities', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Legal Entity'), ['controller' => 'LegalEntities', 'action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List Departments'), ['controller' => 'Departments', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Department'), ['controller' => 'Departments', 'action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List Cost Centres'), ['controller' => 'CostCentres', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Cost Centre'), ['controller' => 'CostCentres', 'action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List Locations'), ['controller' => 'Locations', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Location'), ['controller' => 'Locations', 'action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List Divisions'), ['controller' => 'Divisions', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Division'), ['controller' => 'Divisions', 'action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List Pay Grades'), ['controller' => 'PayGrades', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Pay Grade'), ['controller' => 'PayGrades', 'action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List Pay Ranges'), ['controller' => 'PayRanges', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Pay Range'), ['controller' => 'PayRanges', 'action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List Parent Positions'), ['controller' => 'Positions', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Parent Position'), ['controller' => 'Positions', 'action' => 'add']) ?> </li>
-    </ul>
-</nav>
-<div class="positions view large-9 medium-8 columns content">
-    <h3><?= h($position->name) ?></h3>
-    <table class="vertical-table">
-        <tr>
-            <th><?= __('External Name') ?></th>
-            <td><?= h($position->name) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Positiontype') ?></th>
-            <td><?= h($position->positiontype) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Position Criticality') ?></th>
-            <td><?= h($position->position_criticality) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Comment') ?></th>
-            <td><?= h($position->comment) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Incumbent') ?></th>
-            <td><?= h($position->incumbent) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Change Reason') ?></th>
-            <td><?= h($position->change_reason) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Description') ?></th>
-            <td><?= h($position->description) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Job Title') ?></th>
-            <td><?= h($position->job_title) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Job Code') ?></th>
-            <td><?= h($position->job_code) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Job Level') ?></th>
-            <td><?= h($position->job_level) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Employee Class') ?></th>
-            <td><?= h($position->employee_class) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Regular Temporary') ?></th>
-            <td><?= h($position->regular_temporary) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Created By') ?></th>
-            <td><?= h($position->created_by) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Last Modified By') ?></th>
-            <td><?= h($position->last_modified_by) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Position Matrix Relationship') ?></th>
-            <td><?= h($position->position_matrix_relationship) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Right To Return') ?></th>
-            <td><?= h($position->right_to_return) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Position Code') ?></th>
-            <td><?= h($position->position_code) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Customer') ?></th>
-            <td><?= $position->has('customer') ? $this->Html->link($position->customer->name, ['controller' => 'Customers', 'action' => 'view', $position->customer->id]) : '' ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Legal Entity') ?></th>
-            <td><?= $position->has('legal_entity') ? $this->Html->link($position->legal_entity->name, ['controller' => 'LegalEntities', 'action' => 'view', $position->legal_entity->id]) : '' ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Department') ?></th>
-            <td><?= $position->has('department') ? $this->Html->link($position->department->name, ['controller' => 'Departments', 'action' => 'view', $position->department->id]) : '' ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Cost Centre') ?></th>
-            <td><?= $position->has('cost_centre') ? $this->Html->link($position->cost_centre->name, ['controller' => 'CostCentres', 'action' => 'view', $position->cost_centre->id]) : '' ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Location') ?></th>
-            <td><?= $position->has('location') ? $this->Html->link($position->location->name, ['controller' => 'Locations', 'action' => 'view', $position->location->id]) : '' ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Division') ?></th>
-            <td><?= $position->has('division') ? $this->Html->link($position->division->name, ['controller' => 'Divisions', 'action' => 'view', $position->division->id]) : '' ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Pay Grade') ?></th>
-            <td><?= $position->has('pay_grade') ? $this->Html->link($position->pay_grade->name, ['controller' => 'PayGrades', 'action' => 'view', $position->pay_grade->id]) : '' ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Pay Range') ?></th>
-            <td><?= $position->has('pay_range') ? $this->Html->link($position->pay_range->name, ['controller' => 'PayRanges', 'action' => 'view', $position->pay_range->id]) : '' ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Parent Position') ?></th>
-            <td><?= $position->has('parent_position') ? $this->Html->link($position->parent_position->name, ['controller' => 'Positions', 'action' => 'view', $position->parent_position->id]) : '' ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Id') ?></th>
-            <td><?= $this->Number->format($position->id) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Target Fte') ?></th>
-            <td><?= $this->Number->format($position->target_fte) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Standard Hours') ?></th>
-            <td><?= $this->Number->format($position->standard_hours) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Lft') ?></th>
-            <td><?= $this->Number->format($position->lft) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Rght') ?></th>
-            <td><?= $this->Number->format($position->rght) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Effective Start Date') ?></th>
-            <td><?= h($position->effective_start_date) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Effective End Date') ?></th>
-            <td><?= h($position->effective_end_date) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Created Date') ?></th>
-            <td><?= h($position->created_date) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Last Modified Date') ?></th>
-            <td><?= h($position->last_modified_date) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Position Controlled') ?></th>
-            <td><?= $position->position_controlled ? __('Yes') : __('No'); ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Multiple Incumbents Allowed') ?></th>
-            <td><?= $position->multiple_incumbents_allowed ? __('Yes') : __('No'); ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Vacant') ?></th>
-            <td><?= $position->vacant ? __('Yes') : __('No'); ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Effective Status') ?></th>
-            <td><?= $position->effective_status ? __('Yes') : __('No'); ?></td>
-        </tr>
-    </table>
-</div>
+<?= $this->element('templateelmnt'); ?>
+<section class="content-header">
+      <h1>
+        Position
+        <small>View</small>
+      </h1>
+      <ol class="breadcrumb">
+        
+        <?= $this->Html->link('<i class="fa fa-mail-reply"></i> '.__('Back'), ['action' => 'index'], ['escape' => false]) ?>
+      </ol>
+    </section>
+<section class="content">
+	<div class="box box-primary"><div class="box-body">
+        <?= $this->Form->create($position, array('role' => 'form')) ?>
+        <fieldset>
+          <?php
+            echo $this->Form->input('name',['disabled' => true]);
+            echo $this->Form->input('effective_start_date',['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
+            echo $this->Form->input('effective_end_date',['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
+            echo $this->Form->input('positiontype',['disabled' => true]);
+            echo $this->Form->input('position_criticality',['disabled' => true]);
+            echo $this->Form->input('position_controlled',['disabled' => true]);
+            echo $this->Form->input('multiple_incumbents_allowed',['disabled' => true]);
+            echo $this->Form->input('comment',['disabled' => true]);
+            echo $this->Form->input('incumbent',['disabled' => true]);
+            echo $this->Form->input('change_reason',['disabled' => true]);
+            echo $this->Form->input('description',['disabled' => true]);
+            echo $this->Form->input('job_title',['disabled' => true]);
+            echo $this->Form->input('job_code',['disabled' => true]);
+            echo $this->Form->input('job_level',['disabled' => true]);
+            echo $this->Form->input('employee_class',['disabled' => true]);
+            echo $this->Form->input('regular_temporary',['disabled' => true]);
+            echo $this->Form->input('target_fte',['disabled' => true]);
+            echo $this->Form->input('vacant',['disabled' => true]);
+            echo $this->Form->input('standard_hours',['disabled' => true]);
+            echo $this->Form->input('created_by',['disabled' => true]);
+            echo $this->Form->input('created_date',['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
+            echo $this->Form->input('last_modified_by',['disabled' => true]);
+            echo $this->Form->input('last_modified_date',['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
+            echo $this->Form->input('position_matrix_relationship',['disabled' => true]);
+            echo $this->Form->input('right_to_return',['disabled' => true]);
+            echo $this->Form->input('position_code',['disabled' => true]);
+            echo $this->Form->input('effective_status',['disabled' => true]);
+            echo $this->Form->input('customer_id', ['options' => $customers, 'empty' => true,'disabled' => true]);
+            echo $this->Form->input('legal_entity_id', ['options' => $legalEntities, 'empty' => true,'disabled' => true]);
+            echo $this->Form->input('department_id', ['options' => $departments, 'empty' => true,'disabled' => true]);
+            echo $this->Form->input('cost_center_id', ['options' => $costCentres, 'empty' => true,'disabled' => true]);
+            echo $this->Form->input('location_id', ['options' => $locations, 'empty' => true,'disabled' => true]);
+            echo $this->Form->input('division_id', ['options' => $divisions, 'empty' => true,'disabled' => true]);
+            echo $this->Form->input('pay_grade_id', ['options' => $payGrades, 'empty' => true,'disabled' => true]);
+            echo $this->Form->input('pay_range_id', ['options' => $payRanges, 'empty' => true,'disabled' => true]);
+            echo $this->Form->input('parent_id', ['options' => $parents, 'empty' => true,'disabled' => true]);
+            echo $this->Form->input('lft',['disabled' => true]);
+            echo $this->Form->input('rght',['disabled' => true]);
+          ?></fieldset>
+          <!-- /.box-body -->
+          <div class="box-footer">
+          	<?=$this->Html->link(__('Cancel'), ['action' => 'index'], ['escape' => false])?>
+            <?=$this->Html->link(__('Edit Position'), ['action' => 'edit', $position['id']],['class'=>'btn btn-primary label-info pull-right'], ['escape' => false])?>
+          </div>
+        <?= $this->Form->end() ?>
+      </div>
+  </div></section>

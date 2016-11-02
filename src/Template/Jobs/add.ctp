@@ -38,8 +38,8 @@
             echo $this->Form->input('job_class.full_time_employee');
             echo $this->Form->input('job_class.default_supervisor_level');
             echo $this->Form->input('job_class.external_code');
-            echo $this->Form->input('job_class.pay_grade_id', ['options' => $payGrades, 'empty' => true]);
-            echo $this->Form->input('job_class.job_function_id', ['options' => $jobFunctions, 'empty' => true]);
+            echo $this->Form->input('job_class.pay_grade_id', ['class'=>'select2','options' => $payGrades, 'empty' => true]);
+            echo $this->Form->input('job_class.job_function_id', ['class'=>'select2','options' => $jobFunctions, 'empty' => true]);
         		?>
              	 </fieldset>
             <!-- </div> -->
