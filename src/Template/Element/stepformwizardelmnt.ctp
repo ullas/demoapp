@@ -165,7 +165,7 @@
       	}
         ?>
       </div>
-      <div class="stepwizard-step">
+      <div class="stepwizard-step rt">
       	<?php if($counts['position'] > 0){
       		echo '<a type="button" class="btn btn-success btn-circle"><i class="fa fa-tasks"></i></a>';
       		echo '<dt class="text-success"><i class="icon fa fa-check-square"></i> Position</dt>';
@@ -177,7 +177,7 @@
       	}
         ?>
       </div>
-      <div class="stepwizard-step rt">
+      <!-- <div class="stepwizard-step rt">
       	<?php if($counts['employee'] > 0){
       		echo '<a type="button" class="btn btn-success btn-circle"><i class="fa fa-user-plus"></i></a>';
       		echo '<dt class="text-success"><i class="icon fa fa-check-square"></i> Employee Biography</dt>';
@@ -188,7 +188,7 @@
       		echo '<dd'.$texttype.'>Employee Biography</dd>';
       	}
         ?>
-      </div>
+      </div> -->
       
       
     </div>

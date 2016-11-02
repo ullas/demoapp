@@ -1,3 +1,4 @@
+<?= $this->element('templateelmnt'); ?>
 <section class="content-header">
   <h1>
     Division
@@ -13,42 +14,23 @@
 <!-- Main content -->
 <section class="content">
   <div class="box box-primary"><div class="box-body">
-    <table class="table table-hover">
-        <tr>
-            <th><?= __('Name') ?></th>
-            <td><?= h($division->name) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Description') ?></th>
-            <td><?= h($division->description) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Parent Division') ?></th>
-            <td><?= h($division->parent_division) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('External Code') ?></th>
-            <td><?= h($division->external_code) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Id') ?></th>
-            <td><?= $this->Number->format($division->id) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Head Of Unit') ?></th>
-            <td><?= $this->Number->format($division->head_of_unit) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Effective Start Date') ?></th>
-            <td><?= h($division->effective_start_date) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Effective End Date') ?></th>
-            <td><?= h($division->effective_end_date) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Effective Status') ?></th>
-            <td><?= $division->effective_status ? __('Yes') : __('No'); ?></td>
-        </tr>
-    </table>
-</div></div></section>
+        <?= $this->Form->create($division, array('role' => 'form')) ?>
+        <fieldset>
+          <?php
+            echo $this->Form->input('name',['disabled' => true]);
+            echo $this->Form->input('description',['disabled' => true]);
+            echo $this->Form->input('effective_status',['disabled' => true]);
+            echo $this->Form->input('effective_start_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
+            echo $this->Form->input('effective_end_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
+            echo $this->Form->input('parent_division',['disabled' => true]);
+            echo $this->Form->input('external_code',['disabled' => true]);
+            echo $this->Form->input('head_of_unit',['disabled' => true]);
+          ?></fieldset>
+          <!-- /.box-body -->
+          <div class="box-footer">
+          	<?=$this->Html->link(__('Cancel'), ['action' => 'index'], ['escape' => false])?>
+            <?=$this->Html->link(__('Edit Divison'), ['action' => 'edit', $division['id']],['class'=>'btn btn-primary label-info pull-right'], ['escape' => false])?>
+          </div>
+        <?= $this->Form->end() ?>
+      </div>
+  </div></section>

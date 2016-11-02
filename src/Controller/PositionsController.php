@@ -65,8 +65,18 @@ class PositionsController extends AppController
         $position = $this->Positions->get($id, [
             'contain' => ['Customers', 'LegalEntities', 'Departments', 'CostCentres', 'Locations', 'Divisions', 'PayGrades', 'PayRanges', 'ParentPositions', 'Parents']
         ]);
-
-        $this->set('position', $position);
+		
+		$customers = $this->Positions->Customers->find('list', ['limit' => 200]);
+        $legalEntities = $this->Positions->LegalEntities->find('list', ['limit' => 200]);
+        $departments = $this->Positions->Departments->find('list', ['limit' => 200]);
+        $costCentres = $this->Positions->CostCentres->find('list', ['limit' => 200]);
+        $locations = $this->Positions->Locations->find('list', ['limit' => 200]);
+        $divisions = $this->Positions->Divisions->find('list', ['limit' => 200]);
+        $payGrades = $this->Positions->PayGrades->find('list', ['limit' => 200]);
+        $payRanges = $this->Positions->PayRanges->find('list', ['limit' => 200]);
+        $parentPositions = $this->Positions->ParentPositions->find('list', ['limit' => 200]);
+        $parents = $this->Positions->Parents->find('list', ['limit' => 200]);
+        $this->set(compact('position', 'customers', 'legalEntities', 'departments', 'costCentres', 'locations', 'divisions', 'payGrades', 'payRanges', 'parentPositions', 'parents'));
         $this->set('_serialize', ['position']);
     }
 
@@ -109,7 +119,7 @@ class PositionsController extends AppController
 			$position['customer_id']=$this->loggedinuser['customer_id'];
             if ($this->Positions->save($position)) {
                 $this->Flash->success(__('The position has been saved.'));
-				return $this->redirect(array('controller' => 'EmpDataBiographies', 'action' => 'addwizard'));
+				return $this->redirect(array('controller' => 'Homes', 'action' => 'index'));
             } else {
                 $this->Flash->error(__('The position could not be saved. Please, try again.'));
             }

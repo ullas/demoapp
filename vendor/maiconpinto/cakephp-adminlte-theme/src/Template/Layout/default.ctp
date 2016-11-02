@@ -24,12 +24,12 @@
 
     <?php echo $this->fetch('css'); ?>
 
-
     <!-- jQuery 2.1.4 -->
 <?php echo $this->Html->script('AdminLTE./plugins/jQuery/jQuery-2.1.4.min'); ?>
 
 <!-- /added to include drag and drop -->
 <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+
 
 <!-- Bootstrap 3.3.5 -->
 <?php echo $this->Html->script('AdminLTE./bootstrap/js/bootstrap'); ?>
@@ -103,7 +103,10 @@
 	width:100%;
 }
 .checkbox{
-	padding-top:30px;
+	padding-top:16px;
+}
+.btn .fa{
+	color:#FFFFFF;
 }
 </style>
 

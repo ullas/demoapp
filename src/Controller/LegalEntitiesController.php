@@ -59,7 +59,10 @@ class LegalEntitiesController extends AppController
         ]);
 
         $this->set('legalEntity', $legalEntity);
-        $this->set('_serialize', ['legalEntity']);
+		$locations = $this->LegalEntities->Locations->find('list', ['limit' => 200]);
+        $payGroups = $this->LegalEntities->PayGroups->find('list', ['limit' => 200]);
+        $customers = $this->LegalEntities->Customers->find('list', ['limit' => 200]);
+        $this->set(compact('legalEntity', 'locations', 'payGroups'));
     }
 
     /**
