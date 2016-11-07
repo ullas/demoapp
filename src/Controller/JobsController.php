@@ -2,7 +2,7 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
-
+use Cake\ORM\TableRegistry;
 /**
  * Jobs Controller
  *
@@ -11,13 +11,32 @@ use App\Controller\AppController;
 class JobsController extends AppController
 {
 
+	var $components = array('Datatable');
     /**
      * Index method
      *
      * @return \Cake\Network\Response|null
      */
+     public function ajaxData() {
+		$this->autoRender= False;
+		  
+		$this->loadModel('CreateConfigs');
+		$dbout=$this->CreateConfigs->find()->select(['field_name', 'datatype'])->where(['table_name' => $this->request->params['controller']])->order(['id' => 'ASC'])->toArray();
+		$fields = array();
+		foreach($dbout as $value){
+			$fields[] = array("name" => $value['field_name'] , "type" => $value['datatype'] );
+		}
+		$contains=['JobClasses', 'JobFunctions', 'JobInfos'];
+									  
+		$output =$this->Datatable->getView($fields,$contains);
+		echo json_encode($output);			
+    }
     public function index()
     {
+    	$this->loadModel('CreateConfigs');
+        $configs=$this->CreateConfigs->find('all')->where(['table_name' => $this->request->params['controller']])->order(['"id"' => 'ASC'])->toArray();
+        $this->set('configs',$configs);	
+		
         $this->paginate = [
             'contain' => ['JobClasses', 'JobFunctions', 'JobInfos']
         ];
@@ -41,7 +60,12 @@ class JobsController extends AppController
         ]);
 
         $this->set('job', $job);
-        $this->set('_serialize', ['job']);
+		
+		$jobFunctions = $this->Jobs->JobFunctions->find('list', ['limit' => 200]);
+		$payGrades =TableRegistry::get('PayGrades')->find('list', ['limit' => 200]);
+		$this->set(compact( 'jobFunctions','payGrades'));
+		
+		$this->set('_serialize', ['job']);
     }
 
     /**
@@ -53,7 +77,8 @@ class JobsController extends AppController
     {
         $job = $this->Jobs->newEntity();
         if ($this->request->is('post')) {
-            $job = $this->Jobs->patchEntity($job, $this->request->data);
+            $job = $this->Jobs->patchEntity($job, $this->request->data,['associated' => ['JobClasses', 'JobFunctions', 'JobInfos']]);
+			$job['customer_id']=$this->loggedinuser['customer_id'];
             if ($this->Jobs->save($job)) {
                 $this->Flash->success(__('The job has been saved.'));
 
@@ -65,8 +90,8 @@ class JobsController extends AppController
         $jobClasses = $this->Jobs->JobClasses->find('list', ['limit' => 200]);
         $jobFunctions = $this->Jobs->JobFunctions->find('list', ['limit' => 200]);
         $jobInfos = $this->Jobs->JobInfos->find('list', ['limit' => 200]);
-		// $payGrades = $this->Jobs->PayGrades->find('list', ['limit' => 200]);
-        $this->set(compact('job', 'jobClasses', 'jobFunctions', 'jobInfos'));
+		$payGrades =TableRegistry::get('PayGrades')->find('list', ['limit' => 200]);
+        $this->set(compact('job', 'jobClasses', 'jobFunctions', 'jobInfos','payGrades'));
         $this->set('_serialize', ['job']);
     }
 
@@ -80,10 +105,11 @@ class JobsController extends AppController
     public function edit($id = null)
     {
         $job = $this->Jobs->get($id, [
-            'contain' => []
+            'contain' => ['JobClasses', 'JobFunctions', 'JobInfos']
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $job = $this->Jobs->patchEntity($job, $this->request->data);
+			$job['customer_id']=$this->loggedinuser['customer_id'];
             if ($this->Jobs->save($job)) {
                 $this->Flash->success(__('The job has been saved.'));
 
@@ -95,7 +121,8 @@ class JobsController extends AppController
         $jobClasses = $this->Jobs->JobClasses->find('list', ['limit' => 200]);
         $jobFunctions = $this->Jobs->JobFunctions->find('list', ['limit' => 200]);
         $jobInfos = $this->Jobs->JobInfos->find('list', ['limit' => 200]);
-        $this->set(compact('job', 'jobClasses', 'jobFunctions', 'jobInfos'));
+		$payGrades =TableRegistry::get('PayGrades')->find('list', ['limit' => 200]);
+        $this->set(compact('job', 'jobClasses', 'jobFunctions', 'jobInfos','payGrades'));
         $this->set('_serialize', ['job']);
     }
 

@@ -10,6 +10,7 @@
     <?php echo $this->Html->css('AdminLTE./bootstrap/css/bootstrap'); ?>
     <?php echo $this->Html->css('AdminLTE./plugins/select2/select2.min'); ?>
     <?php echo $this->Html->css('AdminLTE./plugins/datepicker/datepicker3'); ?>
+    <?php echo $this->Html->css('AdminLTE./plugins/timepicker/bootstrap-timepicker.min'); ?>
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <!-- Ionicons -->
@@ -103,10 +104,16 @@
 	width:100%;
 }
 .checkbox{
-	padding-top:16px;
+	padding-top:17px;
+	padding-bottom:17px;
 }
+/*adduizard btn icon*/
 .btn .fa{
 	color:#FFFFFF;
+}
+div.dataTables_filter input {
+	margin-left:0px;
+	background-color: #ddd;
 }
 </style>
 
@@ -115,6 +122,7 @@
 <?php
 $this->Html->script([ 'AdminLTE./plugins/select2/select2.full.min' ], ['block' => 'script']);
 $this->Html->script([ 'AdminLTE./plugins/datepicker/bootstrap-datepicker' ], ['block' => 'script']);
+$this->Html->script([ 'AdminLTE./plugins/timepicker/bootstrap-timepicker.min' ], ['block' => 'script']);
 ?>
 <body class="hold-transition skin-greenjam sidebar-mini">
     <!-- Site wrapper -->

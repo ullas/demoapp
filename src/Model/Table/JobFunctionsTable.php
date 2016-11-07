@@ -80,11 +80,7 @@ class JobFunctionsTable extends Table
         $validator
             ->allowEmpty('job_function_type');
 
-        $validator
-            ->requirePresence('external_code', 'create')
-            ->notEmpty('external_code')
-            ->add('external_code', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
-
+        
         return $validator;
     }
 

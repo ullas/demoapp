@@ -10,14 +10,33 @@ use App\Controller\AppController;
  */
 class EmployeesController extends AppController
 {
-
+	var $components = array('Datatable');
     /**
      * Index method
      *
      * @return \Cake\Network\Response|null
      */
+     public function ajaxData() {
+		$this->autoRender= False;
+		  
+		$this->loadModel('CreateConfigs');
+		$dbout=$this->CreateConfigs->find()->select(['field_name', 'datatype'])->where(['table_name' => $this->request->params['controller']])->order(['id' => 'ASC'])->toArray();
+		$fields = array();
+		foreach($dbout as $value){
+			$fields[] = array("name" => $value['field_name'] , "type" => $value['datatype'] );
+		}
+		$contains=['EmpDataBiographies', 'EmpDataPersonals', 'EmploymentInfos'];
+									  
+		$output =$this->Datatable->getView($fields,$contains);
+		echo json_encode($output);			
+    }
     public function index()
     {
+		$this->loadModel('CreateConfigs');
+        $configs=$this->CreateConfigs->find('all')->where(['table_name' => $this->request->params['controller']])->order(['"id"' => 'ASC'])->toArray();
+        $this->set('configs',$configs);	
+        // $this->set('_serialize', ['configs']);
+		 
         $employees = $this->paginate($this->Employees);
 
         $this->set(compact('employees'));
@@ -50,10 +69,10 @@ class EmployeesController extends AppController
     {
         $employee = $this->Employees->newEntity();
         if ($this->request->is('post')) {
-            $employee = $this->Employees->patchEntity($employee, $this->request->data);
+            $employee = $this->Employees->patchEntity($employee, $this->request->data,['associated' => ['EmpDataBiographies', 'EmpDataPersonals', 'EmploymentInfos']]);
 			$employee['customer_id']=$this->loggedinuser['customer_id'];
             if ($this->Employees->save($employee)) {
-                $this->Flash->success(__('The employee has been saved.'));$this->log($employee);
+                $this->Flash->success(__('The employee has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
             } else {
@@ -80,7 +99,7 @@ class EmployeesController extends AppController
             $employee = $this->Employees->patchEntity($employee, $this->request->data);
 			$employee['customer_id']=$this->loggedinuser['customer_id'];
             if ($this->Employees->save($employee)) {
-                $this->Flash->success(__('The employee has been saved.'));$this->log($employee);
+                $this->Flash->success(__('The employee has been saved.'));
                 return $this->redirect(['action' => 'index']);
             } else {
                 $this->Flash->error(__('The employee could not be saved. Please, try again.'));

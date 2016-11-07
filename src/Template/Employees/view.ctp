@@ -97,7 +97,6 @@
             echo $this->Form->input('emp_data_personal.disable_type',['disabled' => true]);
             echo $this->Form->input('emp_data_personal.disable_authority',['disabled' => true]);
             echo $this->Form->input('emp_data_personal.disable_ref',['disabled' => true]);
-            echo $this->Form->input('emp_data_personal.person_id_external',['disabled' => true]);
         ?>
             <!-- </div> -->
      </fieldset>

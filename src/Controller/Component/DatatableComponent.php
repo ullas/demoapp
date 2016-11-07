@@ -1,6 +1,8 @@
 <?php
 namespace App\Controller\Component;
 use Cake\Controller\Component;
+use Cake\Utility\Inflector;
+
 	class DatatableComponent extends Component {
 										  
 		public function getView($fields,$contains) 
@@ -233,21 +235,27 @@ use Cake\Controller\Component;
 					}
 				    
 					// Is there a formatter?
-					if ( isset( $column['formatter'] ) ) {
-						$row[ $column['dt'] ] =  utf8_encode($column['formatter']( $data[$i][ $c ], $data[$i],$modalname ));
-					}
-					else {
-						if(strpos($c, '.') !== false){
-							$colname="";
-							$colname[]=explode(".",$c);
-							$row[ $column['dt'] ] =  utf8_encode($data[$i][$colname[0][0]][$colname[0][1]]);
-							//if it is null check the second value from dot seperated in data
-							if($row[ $column['dt'] ]=="" && $colname[0][0]==$controller->name){
-								$row[ $column['dt'] ] = utf8_encode($data[$i][$colname[0][1]]);  
-							}
-						}else{
-							$row[ $column['dt'] ] =  utf8_encode($data[$i][$c]);
-						}
+                   if ( isset( $column['formatter'] ) ) {
+                       $row[ $column['dt'] ] = utf8_encode($column['formatter']( $data[$i][ $c ], $data[$i],$modalname ));
+                   }
+                   else {
+                       if(strpos($c, '.') !== false){
+                           $colname="";
+                           $colname[]=explode(".",$c);
+
+						   
+						  $secmodal=strtolower(Inflector::singularize( $colname[0][0]));
+						  if ($secmodal=='template'){
+						    $secmodal=$colname[0][0];
+						  }
+                           $row[ $column['dt'] ] = utf8_encode($data[$i][$secmodal][$colname[0][1]]);
+                           //if it is null check the second value from dot seperated in data
+                           if($row[ $column['dt'] ]=="" && $colname[0][0]==$controller->name){
+                               $row[ $column['dt'] ] = utf8_encode($data[$i][$colname[0][1]]);
+                           }
+                       }else{
+                           $row[ $column['dt'] ] = utf8_encode($data[$i][$c]);
+                       }
 					}
 				}
 				$out[] = $row;

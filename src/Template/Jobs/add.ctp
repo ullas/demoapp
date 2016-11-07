@@ -58,7 +58,6 @@
             echo $this->Form->input('job_function.emp_data_biography.effective_start_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
 			echo $this->Form->input('job_function.emp_data_biography.effective_end_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
             echo $this->Form->input('job_function.job_function_type');
-            echo $this->Form->input('job_function.external_code');
         ?>
             <!-- </div> -->
      </fieldset>
@@ -148,8 +147,8 @@
             echo $this->Form->input('job_info.termination_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
             echo $this->Form->input('job_info.emp_data_biography.leave_of_absence_start_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
 			echo $this->Form->input('job_info.emp_data_biography.leave_of_absence_start_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
-			echo $this->Form->input('job_info.users_id');
-            echo $this->Form->input('job_info.emp_data_biographies_id');
+			echo $this->Form->input('job_info.users_id',['class' => 'select2']);
+            echo $this->Form->input('job_info.emp_data_biographies_id',['class' => 'select2']);
 	 ?></fieldset>
             <!-- </div> -->
            </div>

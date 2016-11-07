@@ -92,7 +92,6 @@
             echo $this->Form->input('emp_data_personal.disable_type');
             echo $this->Form->input('emp_data_personal.disable_authority');
             echo $this->Form->input('emp_data_personal.disable_ref');
-            echo $this->Form->input('emp_data_personal.person_id_external');
         ?>
             <!-- </div> -->
      </fieldset>

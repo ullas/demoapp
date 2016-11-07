@@ -24,23 +24,23 @@
         <div class=" tab-content">
           <div class="active tab-pane" id="jobclass">
              <!-- <div class="form-horizontal"> -->
-             	<fieldset>
+             	      	<fieldset>
                 <?php
-                echo $this->Form->input('name');
-            echo $this->Form->input('description');
-            echo $this->Form->input('effective_status');
-			echo $this->Form->input('emp_data_biography.effective_start_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
-			echo $this->Form->input('emp_data_biography.effective_end_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
-            echo $this->Form->input('worker_comp_code');
-            echo $this->Form->input('default_job_level');
-            echo $this->Form->input('standard_weekly_hours',['templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-clock"></i></div>']]);
-            echo $this->Form->input('regular_temporary');
-            echo $this->Form->input('default_employee_class');
-            echo $this->Form->input('full_time_employee');
-            echo $this->Form->input('default_supervisor_level');
-            echo $this->Form->input('external_code');
-            echo $this->Form->input('pay_grade_id', ['options' => $payGrades, 'empty' => true]);
-            echo $this->Form->input('job_function_id', ['options' => $jobFunctions, 'empty' => true]);
+                echo $this->Form->input('job_class.name');
+            echo $this->Form->input('job_class.description');
+            echo $this->Form->input('job_class.effective_status');
+			echo $this->Form->input('job_class.emp_data_biography.effective_start_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+			echo $this->Form->input('job_class.emp_data_biography.effective_end_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+            echo $this->Form->input('job_class.worker_comp_code');
+            echo $this->Form->input('job_class.default_job_level');
+            echo $this->Form->input('job_class.standard_weekly_hours',['templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-clock-o"></i></div>']]);
+            echo $this->Form->input('job_class.regular_temporary');
+            echo $this->Form->input('job_class.default_employee_class');
+            echo $this->Form->input('job_class.full_time_employee');
+            echo $this->Form->input('job_class.default_supervisor_level');
+            echo $this->Form->input('job_class.external_code');
+            echo $this->Form->input('job_class.pay_grade_id', ['class'=>'select2','options' => $payGrades, 'empty' => true]);
+            echo $this->Form->input('job_class.job_function_id', ['class'=>'select2','options' => $jobFunctions, 'empty' => true]);
         		?>
              	 </fieldset>
             <!-- </div> -->
@@ -53,13 +53,12 @@
              <!-- <div class="form-horizontal"> -->
              	<fieldset>
              		<?php
-            echo $this->Form->input('name');
-            echo $this->Form->input('description');
-            echo $this->Form->input('effective_status');
-            echo $this->Form->input('emp_data_biography.effective_start_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
-			echo $this->Form->input('emp_data_biography.effective_end_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
-            echo $this->Form->input('job_function_type');
-            echo $this->Form->input('external_code');
+            echo $this->Form->input('job_function.name');
+            echo $this->Form->input('job_function.description');
+            echo $this->Form->input('job_function.effective_status');
+            echo $this->Form->input('job_function.emp_data_biography.effective_start_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+			echo $this->Form->input('job_function.emp_data_biography.effective_end_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+            echo $this->Form->input('job_function.job_function_type');
         ?>
             <!-- </div> -->
      </fieldset>
@@ -70,93 +69,91 @@
              <!-- <div class="form-horizontal"> --><fieldset>
               <?php
 
-			echo $this->Form->input('position');
-			echo $this->Form->input('emp_data_biography.position_entry_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
-			echo $this->Form->input('time_in_position',['templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-clock"></i></div>']]);
-            echo $this->Form->input('company');
-            echo $this->Form->input('country_of_company');
-            echo $this->Form->input('business_unit');
-            echo $this->Form->input('division');
-            echo $this->Form->input('department');
-            echo $this->Form->input('location',['templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-location"></i></div>']]);
-            echo $this->Form->input('timezone');
-            echo $this->Form->input('cost_center');
-            echo $this->Form->input('job_code');
+			echo $this->Form->input('job_info.position');
+			echo $this->Form->input('job_info.emp_data_biography.position_entry_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+			echo $this->Form->input('job_info.time_in_position',['templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-clock"></i></div>']]);
+            echo $this->Form->input('job_info.company');
+            echo $this->Form->input('job_info.country_of_company');
+            echo $this->Form->input('job_info.business_unit');
+            echo $this->Form->input('job_info.division');
+            echo $this->Form->input('job_info.department');
+            echo $this->Form->input('job_info.location',['templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-location"></i></div>']]);
+            echo $this->Form->input('job_info.timezone');
+            echo $this->Form->input('job_info.cost_center');
+            echo $this->Form->input('job_info.job_code');
             echo $this->Form->input('job_title');
-            echo $this->Form->input('local_job_title');
-            echo $this->Form->input('employee_class');
-            echo $this->Form->input('pay_grade');
-            echo $this->Form->input('regular_temp');
-            echo $this->Form->input('standard_hours',['templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-clock"></i></div>']]);
-            echo $this->Form->input('working_days_per_week');
-            echo $this->Form->input('work_period');
-            echo $this->Form->input('fte');
-            echo $this->Form->input('is_full_time_employee');
-            echo $this->Form->input('is_shift_employee');
-            echo $this->Form->input('shift_code');
-            echo $this->Form->input('shift_rate');
-            echo $this->Form->input('shift_factor');
-            echo $this->Form->input('employee_type');
-            echo $this->Form->input('manager_category');
-            echo $this->Form->input('is_cross_border_worker');
-            echo $this->Form->input('is_competition_clause_active');
-			echo $this->Form->input('emp_data_biography.probation_period_end_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
-			echo $this->Form->input('notes');
-            echo $this->Form->input('attachmentid');
-            echo $this->Form->input('custom_string1');
-            echo $this->Form->input('eeo_class');
-            echo $this->Form->input('change_reason_external');
-            echo $this->Form->input('radford_jobcode');
-            echo $this->Form->input('is_primary');
-            echo $this->Form->input('trackid');
-            echo $this->Form->input('employment_type');
-            echo $this->Form->input('is_eligible_for_car');
-            echo $this->Form->input('is_eligible_for_benefit');
-            echo $this->Form->input('international_org_code');
-            echo $this->Form->input('is_eligible_for_financial_plan');
-            echo $this->Form->input('amount_of_financial_plan');
-            echo $this->Form->input('supervisor_level');
-            echo $this->Form->input('ern_number');
-            echo $this->Form->input('sick_pay_supplement');
-            echo $this->Form->input('company_leaving_for');
-            echo $this->Form->input('is_side_line_job_allowed');
-            echo $this->Form->input('holiday_calendar_code');
-            echo $this->Form->input('work_schedule_code');
-            echo $this->Form->input('time_type_profile_code');
-            echo $this->Form->input('time_recording_profile_code');
-            echo $this->Form->input('time_recording_admissibility_code');
-            echo $this->Form->input('time_recording_variant');
-            echo $this->Form->input('default_overtime_compensation_variant');
-            echo $this->Form->input('event');
-            echo $this->Form->input('event_reason');
-            echo $this->Form->input('notice_period');
-			echo $this->Form->input('emp_data_biography.expected_return_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
-			echo $this->Form->input('pay_scale_area');
-            echo $this->Form->input('pay_scale_type');
-            echo $this->Form->input('pay_scale_group');
-            echo $this->Form->input('pay_scale_level');
-            echo $this->Form->input('emp_data_biography.job_entry_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
-			echo $this->Form->input('time_in_job');
-			echo $this->Form->input('emp_data_biography.company_entry_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
-			echo $this->Form->input('time_in_company');
-			echo $this->Form->input('emp_data_biography.location_entry_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
-			echo $this->Form->input('time_in_location');
-			echo $this->Form->input('emp_data_biography.department_entry_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
-			echo $this->Form->input('time_in_department');
-			echo $this->Form->input('emp_data_biography.pay_scale_level_entry_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
-			echo $this->Form->input('time_in_pay_scale_level');
-            echo $this->Form->input('hire_date', ['empty' => true]);
-            echo $this->Form->input('termination_date', ['empty' => true]);
-            echo $this->Form->input('emp_data_biography.leave_of_absence_start_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
-			echo $this->Form->input('emp_data_biography.leave_of_absence_start_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
-			echo $this->Form->input('users_id');
-            echo $this->Form->input('emp_data_biographies_id');
+            echo $this->Form->input('job_info.local_job_title');
+            echo $this->Form->input('job_info.employee_class');
+            echo $this->Form->input('job_info.pay_grade');
+            echo $this->Form->input('job_info.regular_temp');
+            echo $this->Form->input('job_info.standard_hours',['templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-clock"></i></div>']]);
+            echo $this->Form->input('job_info.working_days_per_week');
+            echo $this->Form->input('job_info.work_period');
+            echo $this->Form->input('job_info.fte');
+            echo $this->Form->input('job_info.is_full_time_employee');
+            echo $this->Form->input('job_info.is_shift_employee');
+            echo $this->Form->input('job_info.shift_code');
+            echo $this->Form->input('job_info.shift_rate');
+            echo $this->Form->input('job_info.shift_factor');
+            echo $this->Form->input('job_info.employee_type');
+            echo $this->Form->input('job_info.manager_category');
+            echo $this->Form->input('job_info.is_cross_border_worker');
+            echo $this->Form->input('job_info.is_competition_clause_active');
+			echo $this->Form->input('job_info.emp_data_biography.probation_period_end_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+			echo $this->Form->input('job_info.notes');
+            echo $this->Form->input('job_info.attachmentid');
+            echo $this->Form->input('job_info.custom_string1');
+            echo $this->Form->input('job_info.eeo_class');
+            echo $this->Form->input('job_info.change_reason_external');
+            echo $this->Form->input('job_info.radford_jobcode');
+            echo $this->Form->input('job_info.is_primary');
+            echo $this->Form->input('job_info.trackid');
+            echo $this->Form->input('job_info.employment_type');
+            echo $this->Form->input('job_info.is_eligible_for_car');
+            echo $this->Form->input('job_info.is_eligible_for_benefit');
+            echo $this->Form->input('job_info.international_org_code');
+            echo $this->Form->input('job_info.is_eligible_for_financial_plan');
+            echo $this->Form->input('job_info.amount_of_financial_plan');
+            echo $this->Form->input('job_info.supervisor_level');
+            echo $this->Form->input('job_info.ern_number');
+            echo $this->Form->input('job_info.sick_pay_supplement');
+            echo $this->Form->input('job_info.company_leaving_for');
+            echo $this->Form->input('job_info.is_side_line_job_allowed');
+            echo $this->Form->input('job_info.holiday_calendar_code');
+            echo $this->Form->input('job_info.work_schedule_code');
+            echo $this->Form->input('job_info.time_type_profile_code');
+            echo $this->Form->input('job_info.time_recording_profile_code');
+            echo $this->Form->input('job_info.time_recording_admissibility_code');
+            echo $this->Form->input('job_info.time_recording_variant');
+            echo $this->Form->input('job_info.default_overtime_compensation_variant');
+            echo $this->Form->input('job_info.event');
+            echo $this->Form->input('job_info.event_reason');
+            echo $this->Form->input('job_info.notice_period');
+			echo $this->Form->input('job_info.emp_data_biography.expected_return_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+			echo $this->Form->input('job_info.pay_scale_area');
+            echo $this->Form->input('job_info.pay_scale_type');
+            echo $this->Form->input('job_info.pay_scale_group');
+            echo $this->Form->input('job_info.pay_scale_level');
+            echo $this->Form->input('job_info.emp_data_biography.job_entry_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+			echo $this->Form->input('job_info.time_in_job');
+			echo $this->Form->input('job_info.emp_data_biography.company_entry_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+			echo $this->Form->input('job_info.time_in_company');
+			echo $this->Form->input('job_info.emp_data_biography.location_entry_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+			echo $this->Form->input('job_info.time_in_location');
+			echo $this->Form->input('job_info.emp_data_biography.department_entry_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+			echo $this->Form->input('job_info.time_in_department');
+			echo $this->Form->input('job_info.emp_data_biography.pay_scale_level_entry_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+			echo $this->Form->input('job_info.time_in_pay_scale_level');
+            echo $this->Form->input('job_info.hire_date',['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+            echo $this->Form->input('job_info.termination_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+            echo $this->Form->input('job_info.emp_data_biography.leave_of_absence_start_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+			echo $this->Form->input('job_info.emp_data_biography.leave_of_absence_start_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+			echo $this->Form->input('job_info.users_id',['class' => 'select2']);
+            echo $this->Form->input('job_info.emp_data_biographies_id',['class' => 'select2']);
 	 ?></fieldset>
             <!-- </div> -->
            </div>
           <!-- Tab Pane-->
-          
-          
           
         </div>
         <!-- /.tab-content -->

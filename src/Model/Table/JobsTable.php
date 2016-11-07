@@ -9,10 +9,10 @@ use Cake\Validation\Validator;
 /**
  * Jobs Model
  *
- * @property \Cake\ORM\Association\BelongsTo $JobClasses
- * @property \Cake\ORM\Association\BelongsTo $JobFunctions
- * @property \Cake\ORM\Association\BelongsTo $JobInfos
  * @property \Cake\ORM\Association\BelongsTo $Customers
+ * @property \Cake\ORM\Association\HasMany $JobClasses
+ * @property \Cake\ORM\Association\HasMany $JobFunctions
+ * @property \Cake\ORM\Association\HasMany $JobInfos
  *
  * @method \App\Model\Entity\Job get($primaryKey, $options = [])
  * @method \App\Model\Entity\Job newEntity($data = null, array $options = [])
@@ -39,31 +39,17 @@ class JobsTable extends Table
         $this->displayField('id');
         $this->primaryKey('id');
 
-        $this->belongsTo('JobClasses', [
-            'foreignKey' => 'job_class_id'
-        ]);
-        $this->belongsTo('JobFunctions', [
-            'foreignKey' => 'job_function_id'
-        ]);
-        $this->belongsTo('JobInfos', [
-            'foreignKey' => 'job_info_id'
-        ]);
         $this->belongsTo('Customers', [
-            'foreignKey' => 'customer_id'
+            'foreignKey' => 'customer_id','dependent' => true
         ]);
-		
-		$this->hasOne('Customers', [
-            'foreignKey' => 'job_id'
-        ]);
-		
         $this->hasOne('JobClasses', [
-            'foreignKey' => 'job_id'
+            'foreignKey' => 'job_id','dependent' => true
         ]);
         $this->hasOne('JobFunctions', [
-            'foreignKey' => 'job_id'
+            'foreignKey' => 'job_id','dependent' => true
         ]);
         $this->hasOne('JobInfos', [
-            'foreignKey' => 'job_id'
+            'foreignKey' => 'job_id','dependent' => true
         ]);
     }
 
@@ -90,9 +76,6 @@ class JobsTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
-        $rules->add($rules->existsIn(['job_class_id'], 'JobClasses'));
-        $rules->add($rules->existsIn(['job_function_id'], 'JobFunctions'));
-        $rules->add($rules->existsIn(['job_info_id'], 'JobInfos'));
         $rules->add($rules->existsIn(['customer_id'], 'Customers'));
 
         return $rules;

@@ -10,7 +10,7 @@
     // 'select' => '<div class="col-sm-6"><select name="{{name}}"{{attrs}}>{{content}}</select></div>',
     // 'textarea' => '<div class="col-sm-6"><textarea name="{{name}}"{{attrs}}>{{value}}</textarea></div>',
     'dateContainer' => '<div class="col-md-6"><div class="form-group">{{content}}</div></div>',
-    //'dateWidget' => '<div class="input-group" ><div class="input-group-addon"><i class="fa fa-calendar"></i></div><input type="text" class="form-control mptldp" name="{{name}}"{{attrs}} /></div>'
+    // 'dateWidget' => '<div class="input-group" ><div class="input-group-addon"><i class="fa fa-calendar"></i></div><input type="text" class="form-control mptldp" name="{{name}}"{{attrs}} /></div>'
     // 'select' => '<select class="form-control class2" name="{{name}}"{{attrs}}>{{content}}</select>',      
 ];
 $this->Form->templates($myTemplates);
