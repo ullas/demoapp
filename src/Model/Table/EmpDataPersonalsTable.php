@@ -185,11 +185,6 @@ class EmpDataPersonalsTable extends Table
         $validator
             ->allowEmpty('disable_ref');
 
-        $validator
-            ->requirePresence('person_id_external', 'create')
-            ->notEmpty('person_id_external')
-            ->add('person_id_external', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
-
         return $validator;
     }
 

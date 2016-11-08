@@ -104,11 +104,7 @@ class JobClassesTable extends Table
         $validator
             ->allowEmpty('default_supervisor_level');
 
-        $validator
-            ->requirePresence('external_code', 'create')
-            ->notEmpty('external_code')
-            ->add('external_code', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
-
+       
         return $validator;
     }
 

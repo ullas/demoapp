@@ -18,6 +18,7 @@ use Cake\ORM\Entity;
  * @property int $employee_id
  *
  * @property \App\Model\Entity\Customer $customer
+ * @property \App\Model\Entity\Employee[] $employees
  */
 class EmpDataBiography extends Entity
 {

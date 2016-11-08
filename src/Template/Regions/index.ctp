@@ -1,16 +1,13 @@
-<section class="content-header">
+<!-- <section class="content-header">
   <h1>
     Region
     <small>List</small>
   </h1>
   <ol class="breadcrumb">
-    <li>
     <li><a href="<?php echo $this->Url->build(array('controller' => 'Regions', 'action' => 'add')); ?>">Add</a></li>
-    </li>
   </ol>
 </section>
             	
-<!-- Main content -->
 <section class="content">
 	<div class="row">
         <div class="col-xs-12">
@@ -38,11 +35,12 @@
 
 </section>
 <style>
-	 /*margin left for export buttons*/
 	.DTTT{
 		margin-left:10px;
-		background-color: #21A57E;
-    	border-color: #21A57E;color:#FFF;
+	}
+	.DTTT .btn{
+		background-color: #00a65a;
+    	border-color: #008d4c;color:#FFF;padding:4px 10px;
 	}
 </style>
 <?php
@@ -75,6 +73,14 @@ $this->Html->script([
       	"processing": true,
      	 "serverSide": true,
       	"ajax": "/<?php echo $this->request->params['controller'] ?>/ajaxData",
+      	
+        oLanguage        : {
+        	// sSearch: '<div class="input-group"><span class="input-group-addon"><span class="fa fa-search"></span></span>',
+            sSearchPlaceholder: 'Search here...',
+    // search: '<i class="fa fa-search"></i>'
+},
+      	
+      	
         // dom: 'T<"clear">lfrtip',
 		// tableTools: {
 			// "aButtons": [ "copy", "csv", "xls", "pdf", "print" ]
@@ -83,40 +89,14 @@ $this->Html->script([
     });
     
     //table tools like export
-    var tt = new $.fn.dataTable.TableTools( table, {aButtons: [ "copy", "csv", "xls", "pdf", "print" ]} );
-	$( tt.fnContainer() ).appendTo('div.dataTables_filter');
+    // var tt = new $.fn.dataTable.TableTools( table, {aButtons: [ "copy", "csv", "xls", "pdf", "print" ]} );
+	// $( tt.fnContainer() ).appendTo('div.dataTables_filter');
 	
 	
 	
   });
 </script>
-<?php $this->end(); ?>
+<?php $this->end(); ?> -->
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<?php echo $this->element('indexbasic'); ?>

@@ -34,6 +34,10 @@ var $components = array('Datatable');
      */
     public function index()
     {
+		$this->loadModel('CreateConfigs');
+        $configs=$this->CreateConfigs->find('all')->where(['table_name' => $this->request->params['controller']])->order(['"id"' => 'ASC'])->toArray();
+        $this->set('configs',$configs);	
+		
         $regions = $this->paginate($this->Regions);
 
         $this->set(compact('regions'));

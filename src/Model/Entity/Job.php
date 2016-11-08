@@ -7,14 +7,12 @@ use Cake\ORM\Entity;
  * Job Entity
  *
  * @property int $id
- * @property int $job_class_id
- * @property int $job_function_id
- * @property int $job_info_id
  * @property int $customer_id
  *
  * @property \App\Model\Entity\JobClass $job_class
  * @property \App\Model\Entity\JobFunction $job_function
  * @property \App\Model\Entity\JobInfo $job_info
+ * @property \App\Model\Entity\Customer $customer
  */
 class Job extends Entity
 {
