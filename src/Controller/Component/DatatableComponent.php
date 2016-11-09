@@ -67,15 +67,14 @@ use Cake\Utility\Inflector;
 				$wherestr.=$key. " '". $value. "'";
 			}
 			
-			$data = $model->find('all')->contain($contains)->where($wherestr)->order($order)->limit($limit)->page($page)->toArray();
+			$data = $model->find('all')->where($wherestr)->contain($contains)->order($order)->limit($limit)->page($page)->toArray();
 			
 			//getting totalcount
-			$totalCount = $model->find() ->count();
+			$totalCount = $model->find()->contain($contains)->count();
 			//getting filteredcount
-			$filteredCount = $model->find()->where($wherestr)->count();
+			$filteredCount = $model->find()->contain($contains)->where($wherestr)->count();
 		
 			$output =$this->GetData($colmns,$data,$totalCount,$filteredCount);
-		
         	return $output;
 		}
 		public function Limit(){
@@ -125,9 +124,9 @@ use Cake\Utility\Inflector;
 								$globalSearch[$column['db'].' ILIKE'] = "%" . $str. "%";
 							}
 							else if( ($rowval['name']==$column['db']) && ($rowval['type']=="date") ){
-								if($this->isItValidDate($str)){
-									$globalSearch[$column['db'].'::date ='] = $str;
-								}
+								// if($this->isItValidDate($str)){
+									$globalSearch[$column['db'].'::text LIKE'] = "%" . $str. "%";
+								// }
 							}
 							else if( ($rowval['name']==$column['db']) && ($rowval['type']=="boolean") ){
 								if($this->isBoolean($str) === true){
@@ -256,7 +255,7 @@ use Cake\Utility\Inflector;
                        }else{
                            $row[ $column['dt'] ] = utf8_encode($data[$i][$c]);
                        }
-					}
+                   }
 				}
 				$out[] = $row;
 			}

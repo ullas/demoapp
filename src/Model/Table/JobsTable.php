@@ -10,9 +10,9 @@ use Cake\Validation\Validator;
  * Jobs Model
  *
  * @property \Cake\ORM\Association\BelongsTo $Customers
- * @property \Cake\ORM\Association\HasMany $JobClasses
  * @property \Cake\ORM\Association\HasMany $JobFunctions
  * @property \Cake\ORM\Association\HasMany $JobInfos
+ * @property \Cake\ORM\Association\HasMany $Jobclasses
  *
  * @method \App\Model\Entity\Job get($primaryKey, $options = [])
  * @method \App\Model\Entity\Job newEntity($data = null, array $options = [])
@@ -42,13 +42,13 @@ class JobsTable extends Table
         $this->belongsTo('Customers', [
             'foreignKey' => 'customer_id','dependent' => true
         ]);
-        $this->hasOne('JobClasses', [
+        $this->hasOne('Jobfunctions', [
             'foreignKey' => 'job_id','dependent' => true
         ]);
-        $this->hasOne('JobFunctions', [
+        $this->hasOne('Jobinfos', [
             'foreignKey' => 'job_id','dependent' => true
         ]);
-        $this->hasOne('JobInfos', [
+        $this->hasOne('Jobclasses', [
             'foreignKey' => 'job_id','dependent' => true
         ]);
     }

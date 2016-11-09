@@ -34,7 +34,7 @@ class EmpDataPersonalsTable extends Table
     {
         parent::initialize($config);
 
-        $this->table('emp_data_personals');
+        $this->table('empdatapersonals');
         $this->displayField('id');
         $this->primaryKey('id');
 

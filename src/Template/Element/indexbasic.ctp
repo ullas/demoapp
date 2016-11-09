@@ -116,7 +116,7 @@ $this->Html->script([
                 // tableLoaded();
           // },
           "drawCallback": function( settings ) {
-        		// tableLoaded();
+        		tableLoaded();
    		  },
           oLanguage        : {
         		sSearch: '<div class="input-group"><span class="input-group-addon"><span class="fa fa-search"></span></span>',

@@ -1,22 +1,22 @@
 <?php
 namespace App\Test\TestCase\Model\Table;
 
-use App\Model\Table\JobClassesTable;
+use App\Model\Table\JobclassesTable;
 use Cake\ORM\TableRegistry;
 use Cake\TestSuite\TestCase;
 
 /**
- * App\Model\Table\JobClassesTable Test Case
+ * App\Model\Table\JobclassesTable Test Case
  */
-class JobClassesTableTest extends TestCase
+class JobclassesTableTest extends TestCase
 {
 
     /**
      * Test subject
      *
-     * @var \App\Model\Table\JobClassesTable
+     * @var \App\Model\Table\JobclassesTable
      */
-    public $JobClasses;
+    public $Jobclasses;
 
     /**
      * Fixtures
@@ -24,10 +24,45 @@ class JobClassesTableTest extends TestCase
      * @var array
      */
     public $fixtures = [
-        'app.job_classes',
+        'app.jobclasses',
         'app.pay_grades',
         'app.customers',
-        'app.job_functions'
+        'app.addresses',
+        'app.emp_data_biographies',
+        'app.employees',
+        'app.emp_data_personals',
+        'app.employment_infos',
+        'app.business_units',
+        'app.calendar_assignments',
+        'app.users',
+        'app.holidays',
+        'app.contact_infos',
+        'app.corporate_addresses',
+        'app.cost_centres',
+        'app.departments',
+        'app.dependents',
+        'app.divisions',
+        'app.event_reasons',
+        'app.frequencies',
+        'app.pay_components',
+        'app.time_account_types',
+        'app.pay_component_groups',
+        'app.holiday_calendars',
+        'app.ids',
+        'app.job_classes',
+        'app.job_functions',
+        'app.jobs',
+        'app.job_infos',
+        'app.legal_entities',
+        'app.locations',
+        'app.pay_groups',
+        'app.pay_ranges',
+        'app.picklists',
+        'app.positions',
+        'app.regions',
+        'app.time_type_profiles',
+        'app.time_types',
+        'app.work_schedules'
     ];
 
     /**
@@ -38,8 +73,8 @@ class JobClassesTableTest extends TestCase
     public function setUp()
     {
         parent::setUp();
-        $config = TableRegistry::exists('JobClasses') ? [] : ['className' => 'App\Model\Table\JobClassesTable'];
-        $this->JobClasses = TableRegistry::get('JobClasses', $config);
+        $config = TableRegistry::exists('Jobclasses') ? [] : ['className' => 'App\Model\Table\JobclassesTable'];
+        $this->Jobclasses = TableRegistry::get('Jobclasses', $config);
     }
 
     /**
@@ -49,37 +84,17 @@ class JobClassesTableTest extends TestCase
      */
     public function tearDown()
     {
-        unset($this->JobClasses);
+        unset($this->Jobclasses);
 
         parent::tearDown();
     }
 
     /**
-     * Test initialize method
+     * Test initial setup
      *
      * @return void
      */
-    public function testInitialize()
-    {
-        $this->markTestIncomplete('Not implemented yet.');
-    }
-
-    /**
-     * Test validationDefault method
-     *
-     * @return void
-     */
-    public function testValidationDefault()
-    {
-        $this->markTestIncomplete('Not implemented yet.');
-    }
-
-    /**
-     * Test buildRules method
-     *
-     * @return void
-     */
-    public function testBuildRules()
+    public function testInitialization()
     {
         $this->markTestIncomplete('Not implemented yet.');
     }

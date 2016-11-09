@@ -26,19 +26,19 @@
              	<fieldset>
                 <?php
                 echo "<div class='row'>";
-            	echo $this->Form->input('emp_data_biography.date_of_birth', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
-            	echo $this->Form->input('emp_data_biography.country_of_birth',['class'=>'select2','label'=>['text'=>'Country of birth'],'options' => $this->Country->get_countries(), 'empty' => true]);
+            	echo $this->Form->input('empdatabiography.date_of_birth', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+            	echo $this->Form->input('empdatabiography.country_of_birth',['class'=>'select2','label'=>['text'=>'Country of birth'],'options' => $this->Country->get_countries(), 'empty' => true]);
 				echo "</div>";
             	echo "<div class='row'>";
-            	echo $this->Form->input('emp_data_biography.region_of_birth',['templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-location-arrow"></i></div>']]);
-            	echo $this->Form->input('emp_data_biography.place_of_birth',['templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-location-arrow"></i></div>']]);
+            	echo $this->Form->input('empdatabiography.region_of_birth',['templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-location-arrow"></i></div>']]);
+            	echo $this->Form->input('empdatabiography.place_of_birth',['templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-location-arrow"></i></div>']]);
 				echo "</div>";
             	echo "<div class='row'>";
-            	echo $this->Form->input('emp_data_biography.birth_name',['templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-user"></i></div>']]);
-				echo $this->Form->input('emp_data_biography.date_of_death', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+            	echo $this->Form->input('empdatabiography.birth_name',['templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-user"></i></div>']]);
+				echo $this->Form->input('empdatabiography.date_of_death', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
 				echo "</div>";
             	echo "<div class='row'>";
-            	echo $this->Form->input('emp_data_biography.person_id_external');
+            	echo $this->Form->input('empdatabiography.person_id_external');
 				echo "</div>";
         		?>
              	 </fieldset>
@@ -52,46 +52,46 @@
              <!-- <div class="form-horizontal"> -->
              	<fieldset>
              		<?php
-            echo $this->Form->input('emp_data_personal.salutation');
-            echo $this->Form->input('emp_data_personal.first_name');
-            echo $this->Form->input('emp_data_personal.last_name');
-            echo $this->Form->input('emp_data_personal.initials');
-            echo $this->Form->input('emp_data_personal.middle_name');
-            echo $this->Form->input('emp_data_personal.first_name_alt1');
-            echo $this->Form->input('emp_data_personal.middle_name_alt1');
-            echo $this->Form->input('emp_data_personal.last_name_alt1');
-            echo $this->Form->input('emp_data_personal.first_name_alt2');
-            echo $this->Form->input('emp_data_personal.middle_name_alt2');
-            echo $this->Form->input('emp_data_personal.last_name_alt2');
-            echo $this->Form->input('emp_data_personal.display_name');
-            echo $this->Form->input('emp_data_personal.formal_name');
-            echo $this->Form->input('emp_data_personal.birth_name');
-            echo $this->Form->input('emp_data_personal.birth_name_alt1');
-            echo $this->Form->input('emp_data_personal.birth_name_alt2');
-            echo $this->Form->input('emp_data_personal.preferred_name');
-            echo $this->Form->input('emp_data_personal.display_name_alt1');
-            echo $this->Form->input('emp_data_personal.display_name_alt2');
-            echo $this->Form->input('emp_data_personal.formal_name_alt1');
-            echo $this->Form->input('emp_data_personal.formal_name_alt2');
-            echo $this->Form->input('emp_data_personal.name_format');
-            echo $this->Form->input('emp_data_personal.is_overridden');
-            echo $this->Form->input('emp_data_personal.nationality',['class'=>'select2','label'=>['text'=>'Nationality'],'options' => $this->Country->get_countries(), 'empty' => true]);
-            echo $this->Form->input('emp_data_personal.second_nationality',['class'=>'select2','label'=>['text'=>'Second Nationality'],'options' => $this->Country->get_countries(), 'empty' => true]);
-            echo $this->Form->input('emp_data_personal.third_nationality',['class'=>'select2','label'=>['text'=>'Third Nationality'],'options' => $this->Country->get_countries(), 'empty' => true]);
-            echo $this->Form->input('emp_data_personal.wps_code');
-            echo $this->Form->input('emp_data_personal.uniqueid');
-            echo $this->Form->input('emp_data_personal.prof_legal');
-            echo $this->Form->input('emp_data_personal.exclude_legal');
-			echo $this->Form->input('emp_data_personal.nationality_date',['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
-            echo $this->Form->input('emp_data_personal.home_airport');
-            echo $this->Form->input('emp_data_personal.religion');
-            echo $this->Form->input('emp_data_personal.number_children');
-            echo $this->Form->input('emp_data_personal.disability_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
-            echo $this->Form->input('emp_data_personal.disable_group');
-            echo $this->Form->input('emp_data_personal.disable_degree');
-            echo $this->Form->input('emp_data_personal.disable_type');
-            echo $this->Form->input('emp_data_personal.disable_authority');
-            echo $this->Form->input('emp_data_personal.disable_ref');
+            echo $this->Form->input('empdatapersonal.salutation');
+            echo $this->Form->input('empdatapersonal.first_name');
+            echo $this->Form->input('empdatapersonal.last_name');
+            echo $this->Form->input('empdatapersonal.initials');
+            echo $this->Form->input('empdatapersonal.middle_name');
+            echo $this->Form->input('empdatapersonal.first_name_alt1');
+            echo $this->Form->input('empdatapersonal.middle_name_alt1');
+            echo $this->Form->input('empdatapersonal.last_name_alt1');
+            echo $this->Form->input('empdatapersonal.first_name_alt2');
+            echo $this->Form->input('empdatapersonal.middle_name_alt2');
+            echo $this->Form->input('empdatapersonal.last_name_alt2');
+            echo $this->Form->input('empdatapersonal.display_name');
+            echo $this->Form->input('empdatapersonal.formal_name');
+            echo $this->Form->input('empdatapersonal.birth_name');
+            echo $this->Form->input('empdatapersonal.birth_name_alt1');
+            echo $this->Form->input('empdatapersonal.birth_name_alt2');
+            echo $this->Form->input('empdatapersonal.preferred_name');
+            echo $this->Form->input('empdatapersonal.display_name_alt1');
+            echo $this->Form->input('empdatapersonal.display_name_alt2');
+            echo $this->Form->input('empdatapersonal.formal_name_alt1');
+            echo $this->Form->input('empdatapersonal.formal_name_alt2');
+            echo $this->Form->input('empdatapersonal.name_format');
+            echo $this->Form->input('empdatapersonal.is_overridden');
+            echo $this->Form->input('empdatapersonal.nationality',['class'=>'select2','label'=>['text'=>'Nationality'],'options' => $this->Country->get_countries(), 'empty' => true]);
+            echo $this->Form->input('empdatapersonal.second_nationality',['class'=>'select2','label'=>['text'=>'Second Nationality'],'options' => $this->Country->get_countries(), 'empty' => true]);
+            echo $this->Form->input('empdatapersonal.third_nationality',['class'=>'select2','label'=>['text'=>'Third Nationality'],'options' => $this->Country->get_countries(), 'empty' => true]);
+            echo $this->Form->input('empdatapersonal.wps_code');
+            echo $this->Form->input('empdatapersonal.uniqueid');
+            echo $this->Form->input('empdatapersonal.prof_legal');
+            echo $this->Form->input('empdatapersonal.exclude_legal');
+			echo $this->Form->input('empdatapersonal.nationality_date',['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+            echo $this->Form->input('empdatapersonal.home_airport');
+            echo $this->Form->input('empdatapersonal.religion');
+            echo $this->Form->input('empdatapersonal.number_children');
+            echo $this->Form->input('empdatapersonal.disability_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+            echo $this->Form->input('empdatapersonal.disable_group');
+            echo $this->Form->input('empdatapersonal.disable_degree');
+            echo $this->Form->input('empdatapersonal.disable_type');
+            echo $this->Form->input('empdatapersonal.disable_authority');
+            echo $this->Form->input('empdatapersonal.disable_ref');
         ?>
             <!-- </div> -->
      </fieldset>
@@ -101,31 +101,31 @@
           <div class="tab-pane" id="EmploymentInfo">
              <!-- <div class="form-horizontal"> --><fieldset>
               <?php
-            echo $this->Form->input('employment_info.start_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
-            echo $this->Form->input('employment_info.first_date_worked', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
-            echo $this->Form->input('employment_info.original_start_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
-            echo $this->Form->input('employment_info.company');
-            echo $this->Form->input('employment_info.is_primary');
-			echo $this->Form->input('employment_info.seniority_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
-            echo $this->Form->input('employment_info.benefits_eligibility_start_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
-            echo $this->Form->input('employment_info.prev_employeeid');
-            echo $this->Form->input('employment_info.eligible_for_stock');
-			echo $this->Form->input('employment_info.service_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
-            echo $this->Form->input('employment_info.initial_stock_grant');
-            echo $this->Form->input('employment_info.initial_option_grant');
-            echo $this->Form->input('employment_info.job_credit');
-            echo $this->Form->input('employment_info.notes',['templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-sticky-note-o"></i></div>']]);
-            echo $this->Form->input('employment_info.is_contingent_worker');
-            echo $this->Form->input('employment_info.end_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
-            echo $this->Form->input('employment_info.ok_to_rehire');
-			echo $this->Form->input('employment_info.pay_roll_end_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
-			echo $this->Form->input('employment_info.last_date_worked', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
-            echo $this->Form->input('employment_info.regret_termination');
-			echo $this->Form->input('employment_info.eligible_for_sal_continuation');
-            echo $this->Form->input('employment_info.bonus_pay_expiration_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
-            echo $this->Form->input('employment_info.stock_end_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
-            echo $this->Form->input('employment_info.salary_end_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
-            echo $this->Form->input('employment_info.benefits_end_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+            echo $this->Form->input('employmentinfo.start_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+            echo $this->Form->input('employmentinfo.first_date_worked', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+            echo $this->Form->input('employmentinfo.original_start_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+            echo $this->Form->input('employmentinfo.company');
+            echo $this->Form->input('employmentinfo.is_primary');
+			echo $this->Form->input('employmentinfo.seniority_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+            echo $this->Form->input('employmentinfo.benefits_eligibility_start_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+            echo $this->Form->input('employmentinfo.prev_employeeid');
+            echo $this->Form->input('employmentinfo.eligible_for_stock');
+			echo $this->Form->input('employmentinfo.service_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+            echo $this->Form->input('employmentinfo.initial_stock_grant');
+            echo $this->Form->input('employmentinfo.initial_option_grant');
+            echo $this->Form->input('employmentinfo.job_credit');
+            echo $this->Form->input('employmentinfo.notes',['templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-sticky-note-o"></i></div>']]);
+            echo $this->Form->input('employmentinfo.is_contingent_worker');
+            echo $this->Form->input('employmentinfo.end_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+            echo $this->Form->input('employmentinfo.ok_to_rehire');
+			echo $this->Form->input('employmentinfo.pay_roll_end_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+			echo $this->Form->input('employmentinfo.last_date_worked', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+            echo $this->Form->input('employmentinfo.regret_termination');
+			echo $this->Form->input('employmentinfo.eligible_for_sal_continuation');
+            echo $this->Form->input('employmentinfo.bonus_pay_expiration_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+            echo $this->Form->input('employmentinfo.stock_end_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+            echo $this->Form->input('employmentinfo.salary_end_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+            echo $this->Form->input('employmentinfo.benefits_end_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
         ?></fieldset>
             <!-- </div> -->
            </div>

@@ -9,10 +9,10 @@ use Cake\ORM\Entity;
  * @property int $id
  * @property int $customer_id
  *
- * @property \App\Model\Entity\JobClass $job_class
+ * @property \App\Model\Entity\Customer $customer
+ * @property \App\Model\Entity\Jobclass $job_class
  * @property \App\Model\Entity\JobFunction $job_function
  * @property \App\Model\Entity\JobInfo $job_info
- * @property \App\Model\Entity\Customer $customer
  */
 class Job extends Entity
 {

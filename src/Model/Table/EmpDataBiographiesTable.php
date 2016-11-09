@@ -33,7 +33,7 @@ class EmpDataBiographiesTable extends Table
     {
         parent::initialize($config);
 
-        $this->table('emp_data_biographies');
+        $this->table('empdatabiographies');
         $this->displayField('id');
         $this->primaryKey('id');
 

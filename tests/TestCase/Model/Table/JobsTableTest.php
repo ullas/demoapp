@@ -25,8 +25,6 @@ class JobsTableTest extends TestCase
      */
     public $fixtures = [
         'app.jobs',
-        'app.job_classes',
-        'app.pay_grades',
         'app.customers',
         'app.addresses',
         'app.emp_data_biographies',
@@ -50,6 +48,8 @@ class JobsTableTest extends TestCase
         'app.pay_component_groups',
         'app.holiday_calendars',
         'app.ids',
+        'app.job_classes',
+        'app.pay_grades',
         'app.job_functions',
         'app.job_infos',
         'app.legal_entities',
