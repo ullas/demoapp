@@ -34,7 +34,7 @@ class JobInfosTable extends Table
     {
         parent::initialize($config);
 
-        $this->table('job_infos');
+        $this->table('jobinfos');
         $this->displayField('id');
         $this->primaryKey('id');
 

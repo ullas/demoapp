@@ -4,23 +4,13 @@ namespace App\Controller;
 use App\Controller\AppController;
 
 /**
- * JobClasses Controller
+ * Jobclasses Controller
  *
- * @property \App\Model\Table\JobClassesTable $JobClasses
+ * @property \App\Model\Table\JobclassesTable $Jobclasses
  */
-class JobClassesController extends AppController
+class JobclassesController extends AppController
 {
-	var $components = array('Datatable');
-	
-	public function ajaxData() {
-		$this->autoRender= False;
 
-		$fields = array(array('name'=>'id','type'=>'int'),'name','description',array('name'=>'effective_status','type'=>'bool'),
-		array('name'=>'effective_start_date','type'=>'date'),array('name'=>'effective_end_date','type'=>'date'),'worker_comp_code','default_job_level',array('name'=>'standard_weekly_hours','type'=>'numeric'),'regular_temporary','default_employee_class',array('name'=>'full_time_employee','type'=>'bool'),'default_supervisor_level','external_code',array('name'=>'pay_grade_id','type'=>'bigint'),array('name'=>'job_function_id','type'=>'bigint'));
-									  
-		$output =$this->Datatable->getView($fields);
-		echo json_encode($output);			
-    }
     /**
      * Index method
      *
@@ -29,29 +19,29 @@ class JobClassesController extends AppController
     public function index()
     {
         $this->paginate = [
-            'contain' => ['PayGrades', 'JobFunctions', 'Customers']
+            'contain' => ['PayGrades', 'JobFunctions', 'Customers', 'Jobs']
         ];
-        $jobClasses = $this->paginate($this->JobClasses);
+        $jobclasses = $this->paginate($this->Jobclasses);
 
-        $this->set(compact('jobClasses'));
-        $this->set('_serialize', ['jobClasses']);
+        $this->set(compact('jobclasses'));
+        $this->set('_serialize', ['jobclasses']);
     }
 
     /**
      * View method
      *
-     * @param string|null $id Job Class id.
+     * @param string|null $id Jobclass id.
      * @return \Cake\Network\Response|null
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
     public function view($id = null)
     {
-        $jobClass = $this->JobClasses->get($id, [
-            'contain' => ['PayGrades', 'JobFunctions', 'Customers']
+        $jobclass = $this->Jobclasses->get($id, [
+            'contain' => ['PayGrades', 'JobFunctions', 'Customers', 'Jobs']
         ]);
 
-        $this->set('jobClass', $jobClass);
-        $this->set('_serialize', ['jobClass']);
+        $this->set('jobclass', $jobclass);
+        $this->set('_serialize', ['jobclass']);
     }
 
     /**
@@ -61,68 +51,70 @@ class JobClassesController extends AppController
      */
     public function add()
     {
-        $jobClass = $this->JobClasses->newEntity();
+        $jobclass = $this->Jobclasses->newEntity();
         if ($this->request->is('post')) {
-            $jobClass = $this->JobClasses->patchEntity($jobClass, $this->request->data);
-            if ($this->JobClasses->save($jobClass)) {
-                $this->Flash->success(__('The job class has been saved.'));
+            $jobclass = $this->Jobclasses->patchEntity($jobclass, $this->request->data);
+            if ($this->Jobclasses->save($jobclass)) {
+                $this->Flash->success(__('The jobclass has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
             } else {
-                $this->Flash->error(__('The job class could not be saved. Please, try again.'));
+                $this->Flash->error(__('The jobclass could not be saved. Please, try again.'));
             }
         }
-        $payGrades = $this->JobClasses->PayGrades->find('list', ['limit' => 200]);
-        $jobFunctions = $this->JobClasses->JobFunctions->find('list', ['limit' => 200]);
-        $customers = $this->JobClasses->Customers->find('list', ['limit' => 200]);
-        $this->set(compact('jobClass', 'payGrades', 'jobFunctions', 'customers'));
-        $this->set('_serialize', ['jobClass']);
+        $payGrades = $this->Jobclasses->PayGrades->find('list', ['limit' => 200]);
+        $jobFunctions = $this->Jobclasses->JobFunctions->find('list', ['limit' => 200]);
+        $customers = $this->Jobclasses->Customers->find('list', ['limit' => 200]);
+        $jobs = $this->Jobclasses->Jobs->find('list', ['limit' => 200]);
+        $this->set(compact('jobclass', 'payGrades', 'jobFunctions', 'customers', 'jobs'));
+        $this->set('_serialize', ['jobclass']);
     }
 
     /**
      * Edit method
      *
-     * @param string|null $id Job Class id.
+     * @param string|null $id Jobclass id.
      * @return \Cake\Network\Response|void Redirects on successful edit, renders view otherwise.
      * @throws \Cake\Network\Exception\NotFoundException When record not found.
      */
     public function edit($id = null)
     {
-        $jobClass = $this->JobClasses->get($id, [
+        $jobclass = $this->Jobclasses->get($id, [
             'contain' => []
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $jobClass = $this->JobClasses->patchEntity($jobClass, $this->request->data);
-            if ($this->JobClasses->save($jobClass)) {
-                $this->Flash->success(__('The job class has been saved.'));
+            $jobclass = $this->Jobclasses->patchEntity($jobclass, $this->request->data);
+            if ($this->Jobclasses->save($jobclass)) {
+                $this->Flash->success(__('The jobclass has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
             } else {
-                $this->Flash->error(__('The job class could not be saved. Please, try again.'));
+                $this->Flash->error(__('The jobclass could not be saved. Please, try again.'));
             }
         }
-        $payGrades = $this->JobClasses->PayGrades->find('list', ['limit' => 200]);
-        $jobFunctions = $this->JobClasses->JobFunctions->find('list', ['limit' => 200]);
-        $customers = $this->JobClasses->Customers->find('list', ['limit' => 200]);
-        $this->set(compact('jobClass', 'payGrades', 'jobFunctions', 'customers'));
-        $this->set('_serialize', ['jobClass']);
+        $payGrades = $this->Jobclasses->PayGrades->find('list', ['limit' => 200]);
+        $jobFunctions = $this->Jobclasses->JobFunctions->find('list', ['limit' => 200]);
+        $customers = $this->Jobclasses->Customers->find('list', ['limit' => 200]);
+        $jobs = $this->Jobclasses->Jobs->find('list', ['limit' => 200]);
+        $this->set(compact('jobclass', 'payGrades', 'jobFunctions', 'customers', 'jobs'));
+        $this->set('_serialize', ['jobclass']);
     }
 
     /**
      * Delete method
      *
-     * @param string|null $id Job Class id.
+     * @param string|null $id Jobclass id.
      * @return \Cake\Network\Response|null Redirects to index.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
     public function delete($id = null)
     {
         $this->request->allowMethod(['post', 'delete']);
-        $jobClass = $this->JobClasses->get($id);
-        if ($this->JobClasses->delete($jobClass)) {
-            $this->Flash->success(__('The job class has been deleted.'));
+        $jobclass = $this->Jobclasses->get($id);
+        if ($this->Jobclasses->delete($jobclass)) {
+            $this->Flash->success(__('The jobclass has been deleted.'));
         } else {
-            $this->Flash->error(__('The job class could not be deleted. Please, try again.'));
+            $this->Flash->error(__('The jobclass could not be deleted. Please, try again.'));
         }
 
         return $this->redirect(['action' => 'index']);

@@ -42,13 +42,13 @@ class EmployeesTable extends Table
         $this->belongsTo('Customers', [
             'foreignKey' => 'customer_id','dependent' => true
         ]);
-        $this->hasOne('EmpDataBiographies', [
+        $this->hasOne('Empdatabiographies', [
             'foreignKey' => 'employee_id','dependent'=>true
         ]);
-        $this->hasOne('EmpDataPersonals', [
+        $this->hasOne('Empdatapersonals', [
             'foreignKey' => 'employee_id','dependent'=>true
         ]);
-        $this->hasOne('EmploymentInfos', [
+        $this->hasOne('Employmentinfos', [
             'foreignKey' => 'employee_id','dependent'=>true
         ]);
     }

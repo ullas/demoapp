@@ -25,7 +25,7 @@ class EmployeesController extends AppController
 		foreach($dbout as $value){
 			$fields[] = array("name" => $value['field_name'] , "type" => $value['datatype'] );
 		}
-		$contains=['EmpDataBiographies', 'EmpDataPersonals', 'EmploymentInfos'];
+		$contains=['Empdatabiographies', 'Empdatapersonals', 'Employmentinfos'];
 									  
 		$output =$this->Datatable->getView($fields,$contains);
 		echo json_encode($output);			
@@ -53,7 +53,7 @@ class EmployeesController extends AppController
     public function view($id = null)
     {
         $employee = $this->Employees->get($id, [
-            'contain' => ['EmpDataBiographies', 'EmpDataPersonals', 'EmploymentInfos']
+            'contain' => ['Empdatabiographies', 'Empdatapersonals', 'Employmentinfos']
         ]);
 
         $this->set('employee', $employee);
@@ -69,7 +69,7 @@ class EmployeesController extends AppController
     {
         $employee = $this->Employees->newEntity();
         if ($this->request->is('post')) {
-            $employee = $this->Employees->patchEntity($employee, $this->request->data,['associated' => ['EmpDataBiographies', 'EmpDataPersonals', 'EmploymentInfos']]);
+            $employee = $this->Employees->patchEntity($employee, $this->request->data,['associated' => ['Empdatabiographies', 'Empdatapersonals', 'Employmentinfos']]);
 			$employee['customer_id']=$this->loggedinuser['customer_id'];
             if ($this->Employees->save($employee)) {
                 $this->Flash->success(__('The employee has been saved.'));
@@ -93,7 +93,7 @@ class EmployeesController extends AppController
     public function edit($id = null)
     {
         $employee = $this->Employees->get($id, [
-            'contain' => ['EmpDataBiographies', 'EmpDataPersonals', 'EmploymentInfos']
+            'contain' => ['Empdatabiographies', 'Empdatapersonals', 'Employmentinfos']
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $employee = $this->Employees->patchEntity($employee, $this->request->data);

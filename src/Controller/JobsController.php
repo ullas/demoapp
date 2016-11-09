@@ -26,7 +26,7 @@ class JobsController extends AppController
 		foreach($dbout as $value){
 			$fields[] = array("name" => $value['field_name'] , "type" => $value['datatype'] );
 		}
-		$contains=['JobClasses', 'JobFunctions', 'JobInfos'];
+		$contains=['Jobclasses', 'Jobfunctions', 'Jobinfos'];
 									  
 		$output =$this->Datatable->getView($fields,$contains);
 		echo json_encode($output);			
@@ -38,7 +38,7 @@ class JobsController extends AppController
         $this->set('configs',$configs);	
 		
         $this->paginate = [
-            'contain' => ['JobClasses', 'JobFunctions', 'JobInfos']
+            'contain' => ['Jobclasses', 'Jobfunctions', 'Jobinfos']
         ];
         $jobs = $this->paginate($this->Jobs);
 
@@ -56,7 +56,7 @@ class JobsController extends AppController
     public function view($id = null)
     {
         $job = $this->Jobs->get($id, [
-            'contain' => ['JobClasses', 'JobFunctions', 'JobInfos']
+            'contain' => ['Jobclasses', 'Jobfunctions', 'Jobinfos']
         ]);
 
         $this->set('job', $job);
@@ -77,7 +77,7 @@ class JobsController extends AppController
     {
         $job = $this->Jobs->newEntity();
         if ($this->request->is('post')) {
-            $job = $this->Jobs->patchEntity($job, $this->request->data,['associated' => ['JobClasses', 'JobFunctions', 'JobInfos']]);
+            $job = $this->Jobs->patchEntity($job, $this->request->data,['associated' => ['Jobclasses', 'Jobfunctions', 'Jobinfos']]);
 			$job['customer_id']=$this->loggedinuser['customer_id'];
             if ($this->Jobs->save($job)) {
                 $this->Flash->success(__('The job has been saved.'));
@@ -105,15 +105,15 @@ class JobsController extends AppController
     public function edit($id = null)
     {
         $job = $this->Jobs->get($id, [
-            'contain' => ['JobClasses', 'JobFunctions', 'JobInfos']
+            'contain' => ['Jobclasses', 'Jobfunctions', 'Jobinfos']
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $job = $this->Jobs->patchEntity($job, $this->request->data);
 			$job['customer_id']=$this->loggedinuser['customer_id'];
             if ($this->Jobs->save($job)) {
-                $this->Flash->success(__('The job has been saved.'));
+                $this->Flash->success(__('The job has been saved.'));debug($this->request->data);
 
-                return $this->redirect(['action' => 'index']);
+                // return $this->redirect(['action' => 'index']);
             } else {
                 $this->Flash->error(__('The job could not be saved. Please, try again.'));
             }

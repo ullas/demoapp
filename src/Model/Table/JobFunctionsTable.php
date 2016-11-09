@@ -33,7 +33,7 @@ class JobFunctionsTable extends Table
     {
         parent::initialize($config);
 
-        $this->table('job_functions');
+        $this->table('jobfunctions');
         $this->displayField('name');
         $this->primaryKey('id');
 
