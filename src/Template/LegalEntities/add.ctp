@@ -18,9 +18,7 @@ label.mandatory:after {
         <small>Add</small>
       </h1>
       <ol class="breadcrumb">
-        <li class="active"><i class="fa fa-university"></i> Legal Entity</li>
-        <li class="active">Add</li>
-        <li><a href="<?php echo $this->Url->build(array('controller' => 'LegalEntities', 'action' => 'index')); ?>">List</a></li>
+        <?= $this->Html->link('<i class="fa fa-mail-reply"></i> '.__('Back'), ['action' => 'index'], ['escape' => false]) ?>
       </ol>
 </section>
 <section class="content">

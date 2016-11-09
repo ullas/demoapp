@@ -33,7 +33,7 @@ class JobFunctionsTable extends Table
     {
         parent::initialize($config);
 
-        $this->table('job_functions');
+        $this->table('jobfunctions');
         $this->displayField('name');
         $this->primaryKey('id');
 
@@ -42,6 +42,9 @@ class JobFunctionsTable extends Table
         ]);
         $this->hasMany('JobClasses', [
             'foreignKey' => 'job_function_id'
+        ]);
+		$this->belongsTo('Jobs', [
+            'foreignKey' => 'job_id'
         ]);
     }
 
@@ -77,11 +80,7 @@ class JobFunctionsTable extends Table
         $validator
             ->allowEmpty('job_function_type');
 
-        $validator
-            ->requirePresence('external_code', 'create')
-            ->notEmpty('external_code')
-            ->add('external_code', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
-
+        
         return $validator;
     }
 

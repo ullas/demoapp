@@ -25,7 +25,7 @@
             echo $this->Form->input('pay_grade_level',['disabled' => true]);
             echo $this->Form->input('external_code',['disabled' => true]);
         ?>
-        <fieldset>
+        </fieldset>
         </div><div class="box-footer">
           	<?=$this->Html->link(__('Cancel'), ['action' => 'index'], ['escape' => false])?>
             <?=$this->Html->link(__('Edit Paygrade'), ['action' => 'edit', $payGrade['id']],['class'=>'btn btn-primary label-info pull-right'], ['escape' => false])?>

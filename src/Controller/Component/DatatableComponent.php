@@ -1,6 +1,8 @@
 <?php
 namespace App\Controller\Component;
 use Cake\Controller\Component;
+use Cake\Utility\Inflector;
+
 	class DatatableComponent extends Component {
 										  
 		public function getView($fields,$contains) 
@@ -10,25 +12,24 @@ use Cake\Controller\Component;
 			$colmns = array();
 			$i = 0;
 			foreach($fields as $value){
-				// if($value['type']=='boolean'){
-// 					
-					// $colmns[] =array( 
-            	// 'db' => $value['name'], 
-            	// 'dt' => 5,
-            	// 'formatter' => function( $d, $row ,$modalname) {
-                	// $buttons='<a href="/'.   $modalname  . '/view/'.$d.'" class="fa fa-file-text-o p3"></a>';
-// 						
-                	// return $buttons;
-            	// }
-       		// );
-// 					
-				// }else{
+				if($value['type']=='boolean'){
+					
+					$colmns[] =array( 
+            		'db' => $value['name'], 
+            		'dt' => $i++,
+            		'formatter' => function( $d, $row ,$modalname) {
+                		$div='<div class="mptldtbool">'.$d.'</div>';
+                		return $div;
+            		}
+       				);
+					
+				}else{
 					if(is_array($value)) {
           				$colmns[] = array("db" => $value['name'] , "dt" => $i++);
         			}else{
         				$colmns[] = array("db" => $value , "dt" => $i++);
         			}
-				// }
+				}
         		
     		}
 	
@@ -66,15 +67,14 @@ use Cake\Controller\Component;
 				$wherestr.=$key. " '". $value. "'";
 			}
 			
-			$data = $model->find('all')->contain($contains)->where($wherestr)->order($order)->limit($limit)->page($page)->toArray();
+			$data = $model->find('all')->where($wherestr)->contain($contains)->order($order)->limit($limit)->page($page)->toArray();
 			
 			//getting totalcount
-			$totalCount = $model->find() ->count();
+			$totalCount = $model->find()->contain($contains)->count();
 			//getting filteredcount
-			$filteredCount = $model->find()->where($wherestr)->count();
+			$filteredCount = $model->find()->contain($contains)->where($wherestr)->count();
 		
 			$output =$this->GetData($colmns,$data,$totalCount,$filteredCount);
-		
         	return $output;
 		}
 		public function Limit(){
@@ -124,9 +124,9 @@ use Cake\Controller\Component;
 								$globalSearch[$column['db'].' ILIKE'] = "%" . $str. "%";
 							}
 							else if( ($rowval['name']==$column['db']) && ($rowval['type']=="date") ){
-								if($this->isItValidDate($str)){
-									$globalSearch[$column['db'].'::date ='] = $str;
-								}
+								// if($this->isItValidDate($str)){
+									$globalSearch[$column['db'].'::text LIKE'] = "%" . $str. "%";
+								// }
 							}
 							else if( ($rowval['name']==$column['db']) && ($rowval['type']=="boolean") ){
 								if($this->isBoolean($str) === true){
@@ -234,22 +234,28 @@ use Cake\Controller\Component;
 					}
 				    
 					// Is there a formatter?
-					if ( isset( $column['formatter'] ) ) {
-						$row[ $column['dt'] ] =  utf8_encode($column['formatter']( $data[$i][ $c ], $data[$i],$modalname ));
-					}
-					else {
-						if(strpos($c, '.') !== false){
-							$colname="";
-							$colname[]=explode(".",$c);
-							$row[ $column['dt'] ] =  utf8_encode($data[$i][$colname[0][0]][$colname[0][1]]);
-							//if it is null check the second value from dot seperated in data
-							if($row[ $column['dt'] ]=="" && $colname[0][0]==$controller->name){
-								$row[ $column['dt'] ] = utf8_encode($data[$i][$colname[0][1]]);  
-							}
-						}else{
-							$row[ $column['dt'] ] =  utf8_encode($data[$i][$c]);
-						}
-					}
+                   if ( isset( $column['formatter'] ) ) {
+                       $row[ $column['dt'] ] = utf8_encode($column['formatter']( $data[$i][ $c ], $data[$i],$modalname ));
+                   }
+                   else {
+                       if(strpos($c, '.') !== false){
+                           $colname="";
+                           $colname[]=explode(".",$c);
+
+						   
+						  $secmodal=strtolower(Inflector::singularize( $colname[0][0]));
+						  if ($secmodal=='template'){
+						    $secmodal=$colname[0][0];
+						  }
+                           $row[ $column['dt'] ] = utf8_encode($data[$i][$secmodal][$colname[0][1]]);
+                           //if it is null check the second value from dot seperated in data
+                           if($row[ $column['dt'] ]=="" && $colname[0][0]==$controller->name){
+                               $row[ $column['dt'] ] = utf8_encode($data[$i][$colname[0][1]]);
+                           }
+                       }else{
+                           $row[ $column['dt'] ] = utf8_encode($data[$i][$c]);
+                       }
+                   }
 				}
 				$out[] = $row;
 			}

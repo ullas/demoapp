@@ -1,16 +1,13 @@
-<section class="content-header">
+<!-- <section class="content-header">
   <h1>
     Region
     <small>List</small>
   </h1>
   <ol class="breadcrumb">
-    <li>
     <li><a href="<?php echo $this->Url->build(array('controller' => 'Regions', 'action' => 'add')); ?>">Add</a></li>
-    </li>
   </ol>
 </section>
             	
-<!-- Main content -->
 <section class="content">
 	<div class="row">
         <div class="col-xs-12">
@@ -35,8 +32,17 @@
         </tbody>
     </table></div></div>
     </div></div>
-   
+
 </section>
+<style>
+	.DTTT{
+		margin-left:10px;
+	}
+	.DTTT .btn{
+		background-color: #00a65a;
+    	border-color: #008d4c;color:#FFF;padding:4px 10px;
+	}
+</style>
 <?php
 $this->Html->css([
     'AdminLTE./plugins/datatables/dataTables.bootstrap',
@@ -45,15 +51,17 @@ $this->Html->css([
 
 $this->Html->script([
   'AdminLTE./plugins/datatables/jquery.dataTables.min',
+  'AdminLTE./plugins/datatables/extensions/TableTools/js/dataTables.tableTools',
   'AdminLTE./plugins/datatables/dataTables.bootstrap.min',
-],
+],     
 ['block' => 'script']);
 ?>
 
 <?php $this->start('scriptBotton'); ?>
 <script>
   $(function () {
-    $('#mptlindextbl').DataTable({
+  	
+    var table =$('#mptlindextbl').DataTable({
       	"paging": true,
       	"lengthChange": true,
       	"searching": true,
@@ -64,38 +72,31 @@ $this->Html->script([
       	//server side processing
       	"processing": true,
      	 "serverSide": true,
-      	"ajax": "/<?php echo $this->request->params['controller'] ?>/ajaxData"
-     
+      	"ajax": "/<?php echo $this->request->params['controller'] ?>/ajaxData",
+      	
+        oLanguage        : {
+        	// sSearch: '<div class="input-group"><span class="input-group-addon"><span class="fa fa-search"></span></span>',
+            sSearchPlaceholder: 'Search here...',
+    // search: '<i class="fa fa-search"></i>'
+},
+      	
+      	
+        // dom: 'T<"clear">lfrtip',
+		// tableTools: {
+			// "aButtons": [ "copy", "csv", "xls", "pdf", "print" ]
+		// }
+        
     });
+    
+    //table tools like export
+    // var tt = new $.fn.dataTable.TableTools( table, {aButtons: [ "copy", "csv", "xls", "pdf", "print" ]} );
+	// $( tt.fnContainer() ).appendTo('div.dataTables_filter');
+	
+	
+	
   });
 </script>
-<?php $this->end(); ?>
+<?php $this->end(); ?> -->
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<?php echo $this->element('indexbasic'); ?>

@@ -7,21 +7,22 @@ use Cake\ORM\Table;
 use Cake\Validation\Validator;
 
 /**
- * JobClasses Model
+ * Jobclasses Model
  *
  * @property \Cake\ORM\Association\BelongsTo $PayGrades
  * @property \Cake\ORM\Association\BelongsTo $JobFunctions
  * @property \Cake\ORM\Association\BelongsTo $Customers
+ * @property \Cake\ORM\Association\BelongsTo $Jobs
  *
- * @method \App\Model\Entity\JobClass get($primaryKey, $options = [])
- * @method \App\Model\Entity\JobClass newEntity($data = null, array $options = [])
- * @method \App\Model\Entity\JobClass[] newEntities(array $data, array $options = [])
- * @method \App\Model\Entity\JobClass|bool save(\Cake\Datasource\EntityInterface $entity, $options = [])
- * @method \App\Model\Entity\JobClass patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
- * @method \App\Model\Entity\JobClass[] patchEntities($entities, array $data, array $options = [])
- * @method \App\Model\Entity\JobClass findOrCreate($search, callable $callback = null)
+ * @method \App\Model\Entity\Jobclass get($primaryKey, $options = [])
+ * @method \App\Model\Entity\Jobclass newEntity($data = null, array $options = [])
+ * @method \App\Model\Entity\Jobclass[] newEntities(array $data, array $options = [])
+ * @method \App\Model\Entity\Jobclass|bool save(\Cake\Datasource\EntityInterface $entity, $options = [])
+ * @method \App\Model\Entity\Jobclass patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
+ * @method \App\Model\Entity\Jobclass[] patchEntities($entities, array $data, array $options = [])
+ * @method \App\Model\Entity\Jobclass findOrCreate($search, callable $callback = null)
  */
-class JobClassesTable extends Table
+class JobclassesTable extends Table
 {
 
     /**
@@ -34,18 +35,21 @@ class JobClassesTable extends Table
     {
         parent::initialize($config);
 
-        $this->table('job_classes');
+        $this->table('jobclasses');
         $this->displayField('name');
         $this->primaryKey('id');
 
         $this->belongsTo('PayGrades', [
-            'foreignKey' => 'pay_grade_id'
+            'foreignKey' => 'pay_grade_id','dependent'=>true
         ]);
         $this->belongsTo('JobFunctions', [
-            'foreignKey' => 'job_function_id'
+            'foreignKey' => 'job_function_id','dependent'=>true
         ]);
         $this->belongsTo('Customers', [
-            'foreignKey' => 'customer_id'
+            'foreignKey' => 'customer_id','dependent'=>true
+        ]);
+        $this->belongsTo('Jobs', [
+            'foreignKey' => 'job_id','dependent'=>true
         ]);
     }
 
@@ -122,6 +126,7 @@ class JobClassesTable extends Table
         $rules->add($rules->existsIn(['pay_grade_id'], 'PayGrades'));
         $rules->add($rules->existsIn(['job_function_id'], 'JobFunctions'));
         $rules->add($rules->existsIn(['customer_id'], 'Customers'));
+        $rules->add($rules->existsIn(['job_id'], 'Jobs'));
 
         return $rules;
     }

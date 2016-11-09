@@ -45,12 +45,12 @@ class EmpDataBiographiesFixture extends TestFixture
     public $records = [
         [
             'id' => 1,
-            'date_of_birth' => '2016-10-24',
+            'date_of_birth' => '2016-11-07',
             'country_of_birth' => 'Lorem ipsum dolor sit amet',
             'region_of_birth' => 'Lorem ipsum dolor sit amet',
             'place_of_birth' => 'Lorem ipsum dolor sit amet',
             'birth_name' => 'Lorem ipsum dolor sit amet',
-            'date_of_death' => '2016-10-24',
+            'date_of_death' => '2016-11-07',
             'person_id_external' => 'Lorem ipsum dolor sit amet',
             'customer_id' => 1,
             'employee_id' => 1

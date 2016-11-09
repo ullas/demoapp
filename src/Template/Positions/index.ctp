@@ -1,4 +1,4 @@
-<section class="content-header">
+<!--<section class="content-header">
   <h1>
     Positions
     <small>List</small>
@@ -10,7 +10,7 @@
   </ol>
 </section>
             	
-<!-- Main content -->
+
 <section class="content">
 	<div class="row">
         <div class="col-xs-12">
@@ -24,6 +24,8 @@
                 <th><?= $this->Paginator->sort('effective_start_date') ?></th>
                 <th><?= $this->Paginator->sort('effective_end_date') ?></th>
                 <th><?= $this->Paginator->sort('positiontype') ?></th>
+                <th>Position Controlled</th>
+                <th>Effective Status</th>
                 <th class="actions" data-orderable="false"><?= __('Actions') ?></th>
             </tr>
         </thead>
@@ -44,7 +46,7 @@ $this->Html->script([
   'AdminLTE./plugins/datatables/dataTables.bootstrap.min',
 ],
 ['block' => 'script']);
-?>
+?> 
 
 <?php $this->start('scriptBotton'); ?>
 <script>
@@ -65,4 +67,6 @@ $this->Html->script([
     });
   });
 </script>
-<?php $this->end(); ?>
+<?php $this->end(); ?>  -->
+
+<?php echo $this->element('indexbasic'); ?>

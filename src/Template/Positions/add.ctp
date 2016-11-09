@@ -1,35 +1,21 @@
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('List Positions'), ['action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('List Customers'), ['controller' => 'Customers', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Customer'), ['controller' => 'Customers', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Legal Entities'), ['controller' => 'LegalEntities', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Legal Entity'), ['controller' => 'LegalEntities', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Departments'), ['controller' => 'Departments', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Department'), ['controller' => 'Departments', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Cost Centres'), ['controller' => 'CostCentres', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Cost Centre'), ['controller' => 'CostCentres', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Locations'), ['controller' => 'Locations', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Location'), ['controller' => 'Locations', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Divisions'), ['controller' => 'Divisions', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Division'), ['controller' => 'Divisions', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Pay Grades'), ['controller' => 'PayGrades', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Pay Grade'), ['controller' => 'PayGrades', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Pay Ranges'), ['controller' => 'PayRanges', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Pay Range'), ['controller' => 'PayRanges', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Parent Positions'), ['controller' => 'Positions', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Parent Position'), ['controller' => 'Positions', 'action' => 'add']) ?></li>
-    </ul>
-</nav>
-<div class="positions form large-9 medium-8 columns content">
-    <?= $this->Form->create($position) ?>
+<?= $this->element('templateelmnt'); ?>
+<section class="content-header">
+      <h1>
+        Position
+        <small>Add</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><?= $this->Html->link('<i class="fa fa-mail-reply"></i> '.__('Back'), ['action' => 'index'], ['escape' => false]) ?></li>
+      </ol>
+    </section>
+<section class="content">
+	<div class="box box-primary"><div class="box-body">
+		<?= $this->Form->create($position) ?>
     <fieldset>
-        <legend><?= __('Add Position') ?></legend>
         <?php
             echo $this->Form->input('name');
-            echo $this->Form->input('effective_start_date', ['empty' => true]);
-            echo $this->Form->input('effective_end_date', ['empty' => true]);
+            echo $this->Form->input('effective_start_date',['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+            echo $this->Form->input('effective_end_date',['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
             echo $this->Form->input('positiontype');
             echo $this->Form->input('position_criticality');
             echo $this->Form->input('position_controlled');
@@ -47,9 +33,9 @@
             echo $this->Form->input('vacant');
             echo $this->Form->input('standard_hours');
             echo $this->Form->input('created_by');
-            echo $this->Form->input('created_date', ['empty' => true]);
+            echo $this->Form->input('created_date',['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
             echo $this->Form->input('last_modified_by');
-            echo $this->Form->input('last_modified_date', ['empty' => true]);
+            echo $this->Form->input('last_modified_date',['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
             echo $this->Form->input('position_matrix_relationship');
             echo $this->Form->input('right_to_return');
             echo $this->Form->input('position_code');
@@ -67,6 +53,10 @@
             echo $this->Form->input('rght');
         ?>
     </fieldset>
-    <?= $this->Form->button(__('Submit')) ?>
+    <div class="box-footer">
+    <?=$this->Html->link(__('Cancel'), ['action' => 'index'], ['escape' => false])?>
+    <?= $this->Form->button(__('Save Position'),['title'=>'Save Position','class'=>'pull-right']) ?>
+    </div>
     <?= $this->Form->end() ?>
-</div>
+</div></div>
+</section>

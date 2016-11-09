@@ -4,10 +4,10 @@ namespace App\Test\Fixture;
 use Cake\TestSuite\Fixture\TestFixture;
 
 /**
- * JobClassesFixture
+ * JobclassesFixture
  *
  */
-class JobClassesFixture extends TestFixture
+class JobclassesFixture extends TestFixture
 {
 
     /**
@@ -34,11 +34,13 @@ class JobClassesFixture extends TestFixture
         'pay_grade_id' => ['type' => 'biginteger', 'length' => 20, 'default' => null, 'null' => true, 'comment' => null, 'precision' => null, 'unsigned' => null, 'autoIncrement' => null],
         'job_function_id' => ['type' => 'biginteger', 'length' => 20, 'default' => null, 'null' => true, 'comment' => null, 'precision' => null, 'unsigned' => null, 'autoIncrement' => null],
         'customer_id' => ['type' => 'biginteger', 'length' => 20, 'default' => null, 'null' => true, 'comment' => null, 'precision' => null, 'unsigned' => null, 'autoIncrement' => null],
+        'job_id' => ['type' => 'biginteger', 'length' => 20, 'default' => null, 'null' => true, 'comment' => null, 'precision' => null, 'unsigned' => null, 'autoIncrement' => null],
         '_constraints' => [
             'primary' => ['type' => 'primary', 'columns' => ['id'], 'length' => []],
             'job_classes_external_code_key' => ['type' => 'unique', 'columns' => ['external_code'], 'length' => []],
             'job_classes_customer_id_fkey' => ['type' => 'foreign', 'columns' => ['customer_id'], 'references' => ['customers', 'id'], 'update' => 'noAction', 'delete' => 'noAction', 'length' => []],
             'job_classes_job_function_id_fkey' => ['type' => 'foreign', 'columns' => ['job_function_id'], 'references' => ['job_functions', 'id'], 'update' => 'noAction', 'delete' => 'noAction', 'length' => []],
+            'job_classes_job_id_fkey' => ['type' => 'foreign', 'columns' => ['job_id'], 'references' => ['jobs', 'id'], 'update' => 'noAction', 'delete' => 'noAction', 'length' => []],
             'job_classes_pay_grade_id_fkey' => ['type' => 'foreign', 'columns' => ['pay_grade_id'], 'references' => ['pay_grades', 'id'], 'update' => 'noAction', 'delete' => 'noAction', 'length' => []],
         ],
     ];
@@ -55,8 +57,8 @@ class JobClassesFixture extends TestFixture
             'name' => 'Lorem ipsum dolor sit amet',
             'description' => 'Lorem ipsum dolor sit amet',
             'effective_status' => 1,
-            'effective_start_date' => '2016-09-09',
-            'effective_end_date' => '2016-09-09',
+            'effective_start_date' => '2016-11-09',
+            'effective_end_date' => '2016-11-09',
             'worker_comp_code' => 'Lorem ipsum dolor sit amet',
             'default_job_level' => 'Lorem ipsum dolor sit amet',
             'standard_weekly_hours' => 1.5,
@@ -67,7 +69,8 @@ class JobClassesFixture extends TestFixture
             'external_code' => 'Lorem ipsum dolor sit amet',
             'pay_grade_id' => 1,
             'job_function_id' => 1,
-            'customer_id' => 1
+            'customer_id' => 1,
+            'job_id' => 1
         ],
     ];
 }

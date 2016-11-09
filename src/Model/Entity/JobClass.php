@@ -4,7 +4,7 @@ namespace App\Model\Entity;
 use Cake\ORM\Entity;
 
 /**
- * JobClass Entity
+ * Jobclass Entity
  *
  * @property int $id
  * @property string $name
@@ -23,11 +23,14 @@ use Cake\ORM\Entity;
  * @property int $pay_grade_id
  * @property int $job_function_id
  * @property int $customer_id
+ * @property int $job_id
  *
  * @property \App\Model\Entity\PayGrade $pay_grade
  * @property \App\Model\Entity\JobFunction $job_function
+ * @property \App\Model\Entity\Customer $customer
+ * @property \App\Model\Entity\Job $job
  */
-class JobClass extends Entity
+class Jobclass extends Entity
 {
 
     /**

@@ -55,7 +55,8 @@ var $components = array('Datatable');
         $department = $this->Departments->get($id, [
             'contain' => ['CostCentres', 'Customers']
         ]);
-
+		$costCentres = $this->Departments->CostCentres->find('list', ['limit' => 200]);
+		$this->set('costCentres', $costCentres);
         $this->set('department', $department);
         $this->set('_serialize', ['department']);
     }

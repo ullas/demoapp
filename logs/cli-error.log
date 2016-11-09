@@ -275,3 +275,379 @@ Stack Trace:
 #16 {main}
 
 
+2016-11-09 04:18:37 Error: [Cake\Database\Exception] Cannot describe job_classes. It has 0 columns.
+Stack Trace:
+#0 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Database/Schema/CachedCollection.php(63): Cake\Database\Schema\Collection->describe('job_classes', Array)
+#1 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/ORM/Table.php(440): Cake\Database\Schema\CachedCollection->describe('job_classes')
+#2 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/Task/ModelTask.php(261): Cake\ORM\Table->schema()
+#3 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/Task/ModelTask.php(211): Bake\Shell\Task\ModelTask->findBelongsTo(Object(App\Model\Table\JobClassesTable), Array)
+#4 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/Task/ModelTask.php(127): Bake\Shell\Task\ModelTask->getAssociations(Object(App\Model\Table\JobClassesTable))
+#5 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/Task/ModelTask.php(110): Bake\Shell\Task\ModelTask->getTableContext(Object(App\Model\Table\JobClassesTable), 'jobclasses', 'Jobclasses')
+#6 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/Task/ModelTask.php(97): Bake\Shell\Task\ModelTask->bake('Jobclasses')
+#7 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/BakeShell.php(257): Bake\Shell\Task\ModelTask->main('Jobclasses')
+#8 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Collection/CollectionTrait.php(52): Bake\Shell\BakeShell->Bake\Shell\{closure}('Jobclasses', 0)
+#9 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/BakeShell.php(260): Cake\Collection\Collection->each(Object(Closure))
+#10 [internal function]: Bake\Shell\BakeShell->all('jobclasses')
+#11 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Console/Shell.php(452): call_user_func_array(Array, Array)
+#12 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Console/ShellDispatcher.php(227): Cake\Console\Shell->runCommand(Array, true, Array)
+#13 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Console/ShellDispatcher.php(182): Cake\Console\ShellDispatcher->_dispatch(Array)
+#14 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Console/ShellDispatcher.php(128): Cake\Console\ShellDispatcher->dispatch(Array)
+#15 /Users/varunprathap/demoapp/bin/cake.php(33): Cake\Console\ShellDispatcher::run(Array)
+#16 {main}
+
+
+2016-11-09 07:03:10 Error: [Cake\Database\Exception] Cannot describe job_functions. It has 0 columns.
+Stack Trace:
+#0 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Database/Schema/CachedCollection.php(63): Cake\Database\Schema\Collection->describe('job_functions', Array)
+#1 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/ORM/Table.php(440): Cake\Database\Schema\CachedCollection->describe('job_functions')
+#2 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/Task/ModelTask.php(261): Cake\ORM\Table->schema()
+#3 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/Task/ModelTask.php(211): Bake\Shell\Task\ModelTask->findBelongsTo(Object(App\Model\Table\JobFunctionsTable), Array)
+#4 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/Task/ModelTask.php(127): Bake\Shell\Task\ModelTask->getAssociations(Object(App\Model\Table\JobFunctionsTable))
+#5 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/Task/ModelTask.php(110): Bake\Shell\Task\ModelTask->getTableContext(Object(App\Model\Table\JobFunctionsTable), 'jobfunctions', 'Jobfunctions')
+#6 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/Task/ModelTask.php(97): Bake\Shell\Task\ModelTask->bake('Jobfunctions')
+#7 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/BakeShell.php(257): Bake\Shell\Task\ModelTask->main('Jobfunctions')
+#8 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Collection/CollectionTrait.php(52): Bake\Shell\BakeShell->Bake\Shell\{closure}('Jobfunctions', 0)
+#9 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/BakeShell.php(260): Cake\Collection\Collection->each(Object(Closure))
+#10 [internal function]: Bake\Shell\BakeShell->all('jobfunctions')
+#11 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Console/Shell.php(452): call_user_func_array(Array, Array)
+#12 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Console/ShellDispatcher.php(227): Cake\Console\Shell->runCommand(Array, true, Array)
+#13 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Console/ShellDispatcher.php(182): Cake\Console\ShellDispatcher->_dispatch(Array)
+#14 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Console/ShellDispatcher.php(128): Cake\Console\ShellDispatcher->dispatch(Array)
+#15 /Users/varunprathap/demoapp/bin/cake.php(33): Cake\Console\ShellDispatcher::run(Array)
+#16 {main}
+
+
+2016-11-09 07:03:34 Error: [Cake\Database\Exception] Cannot describe job_functions. It has 0 columns.
+Stack Trace:
+#0 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Database/Schema/CachedCollection.php(63): Cake\Database\Schema\Collection->describe('job_functions', Array)
+#1 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/ORM/Table.php(440): Cake\Database\Schema\CachedCollection->describe('job_functions')
+#2 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/Task/ModelTask.php(261): Cake\ORM\Table->schema()
+#3 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/Task/ModelTask.php(211): Bake\Shell\Task\ModelTask->findBelongsTo(Object(App\Model\Table\JobFunctionsTable), Array)
+#4 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/Task/ModelTask.php(127): Bake\Shell\Task\ModelTask->getAssociations(Object(App\Model\Table\JobFunctionsTable))
+#5 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/Task/ModelTask.php(110): Bake\Shell\Task\ModelTask->getTableContext(Object(App\Model\Table\JobFunctionsTable), 'jobfunctions', 'Jobfunctions')
+#6 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/Task/ModelTask.php(97): Bake\Shell\Task\ModelTask->bake('Jobfunctions')
+#7 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/BakeShell.php(257): Bake\Shell\Task\ModelTask->main('Jobfunctions')
+#8 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Collection/CollectionTrait.php(52): Bake\Shell\BakeShell->Bake\Shell\{closure}('Jobfunctions', 0)
+#9 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/BakeShell.php(260): Cake\Collection\Collection->each(Object(Closure))
+#10 [internal function]: Bake\Shell\BakeShell->all('jobfunctions')
+#11 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Console/Shell.php(452): call_user_func_array(Array, Array)
+#12 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Console/ShellDispatcher.php(227): Cake\Console\Shell->runCommand(Array, true, Array)
+#13 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Console/ShellDispatcher.php(182): Cake\Console\ShellDispatcher->_dispatch(Array)
+#14 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Console/ShellDispatcher.php(128): Cake\Console\ShellDispatcher->dispatch(Array)
+#15 /Users/varunprathap/demoapp/bin/cake.php(33): Cake\Console\ShellDispatcher::run(Array)
+#16 {main}
+
+
+2016-11-09 07:03:37 Error: [Cake\Database\Exception] Cannot describe job_functions. It has 0 columns.
+Stack Trace:
+#0 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Database/Schema/CachedCollection.php(63): Cake\Database\Schema\Collection->describe('job_functions', Array)
+#1 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/ORM/Table.php(440): Cake\Database\Schema\CachedCollection->describe('job_functions')
+#2 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/Task/ModelTask.php(261): Cake\ORM\Table->schema()
+#3 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/Task/ModelTask.php(211): Bake\Shell\Task\ModelTask->findBelongsTo(Object(App\Model\Table\JobFunctionsTable), Array)
+#4 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/Task/ModelTask.php(127): Bake\Shell\Task\ModelTask->getAssociations(Object(App\Model\Table\JobFunctionsTable))
+#5 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/Task/ModelTask.php(110): Bake\Shell\Task\ModelTask->getTableContext(Object(App\Model\Table\JobFunctionsTable), 'jobfunctions', 'Jobfunctions')
+#6 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/Task/ModelTask.php(97): Bake\Shell\Task\ModelTask->bake('Jobfunctions')
+#7 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/BakeShell.php(257): Bake\Shell\Task\ModelTask->main('Jobfunctions')
+#8 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Collection/CollectionTrait.php(52): Bake\Shell\BakeShell->Bake\Shell\{closure}('Jobfunctions', 0)
+#9 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/BakeShell.php(260): Cake\Collection\Collection->each(Object(Closure))
+#10 [internal function]: Bake\Shell\BakeShell->all('jobfunctions')
+#11 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Console/Shell.php(452): call_user_func_array(Array, Array)
+#12 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Console/ShellDispatcher.php(227): Cake\Console\Shell->runCommand(Array, true, Array)
+#13 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Console/ShellDispatcher.php(182): Cake\Console\ShellDispatcher->_dispatch(Array)
+#14 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Console/ShellDispatcher.php(128): Cake\Console\ShellDispatcher->dispatch(Array)
+#15 /Users/varunprathap/demoapp/bin/cake.php(33): Cake\Console\ShellDispatcher::run(Array)
+#16 {main}
+
+
+2016-11-09 07:04:42 Error: [Cake\Database\Exception] Cannot describe job_infos. It has 0 columns.
+Stack Trace:
+#0 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Database/Schema/CachedCollection.php(63): Cake\Database\Schema\Collection->describe('job_infos', Array)
+#1 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/ORM/Table.php(440): Cake\Database\Schema\CachedCollection->describe('job_infos')
+#2 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/Task/ModelTask.php(345): Cake\ORM\Table->schema()
+#3 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/Task/ModelTask.php(221): Bake\Shell\Task\ModelTask->findHasMany(Object(App\Model\Table\JobFunctionsTable), Array)
+#4 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/Task/ModelTask.php(127): Bake\Shell\Task\ModelTask->getAssociations(Object(App\Model\Table\JobFunctionsTable))
+#5 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/Task/ModelTask.php(110): Bake\Shell\Task\ModelTask->getTableContext(Object(App\Model\Table\JobFunctionsTable), 'jobfunctions', 'Jobfunctions')
+#6 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/Task/ModelTask.php(97): Bake\Shell\Task\ModelTask->bake('Jobfunctions')
+#7 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/BakeShell.php(257): Bake\Shell\Task\ModelTask->main('Jobfunctions')
+#8 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Collection/CollectionTrait.php(52): Bake\Shell\BakeShell->Bake\Shell\{closure}('Jobfunctions', 0)
+#9 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/BakeShell.php(260): Cake\Collection\Collection->each(Object(Closure))
+#10 [internal function]: Bake\Shell\BakeShell->all('jobfunctions')
+#11 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Console/Shell.php(452): call_user_func_array(Array, Array)
+#12 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Console/ShellDispatcher.php(227): Cake\Console\Shell->runCommand(Array, true, Array)
+#13 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Console/ShellDispatcher.php(182): Cake\Console\ShellDispatcher->_dispatch(Array)
+#14 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Console/ShellDispatcher.php(128): Cake\Console\ShellDispatcher->dispatch(Array)
+#15 /Users/varunprathap/demoapp/bin/cake.php(33): Cake\Console\ShellDispatcher::run(Array)
+#16 {main}
+
+
+2016-11-09 07:06:51 Error: [Cake\Database\Exception] Cannot describe job_infos. It has 0 columns.
+Stack Trace:
+#0 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Database/Schema/CachedCollection.php(63): Cake\Database\Schema\Collection->describe('job_infos', Array)
+#1 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/ORM/Table.php(440): Cake\Database\Schema\CachedCollection->describe('job_infos')
+#2 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/Task/ModelTask.php(345): Cake\ORM\Table->schema()
+#3 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/Task/ModelTask.php(221): Bake\Shell\Task\ModelTask->findHasMany(Object(App\Model\Table\JobsTable), Array)
+#4 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/Task/ModelTask.php(127): Bake\Shell\Task\ModelTask->getAssociations(Object(App\Model\Table\JobsTable))
+#5 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/Task/ModelTask.php(110): Bake\Shell\Task\ModelTask->getTableContext(Object(App\Model\Table\JobsTable), 'jobs', 'Jobs')
+#6 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/Task/ModelTask.php(97): Bake\Shell\Task\ModelTask->bake('Jobs')
+#7 [internal function]: Bake\Shell\Task\ModelTask->main('Jobs')
+#8 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Console/Shell.php(466): call_user_func_array(Array, Array)
+#9 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Console/Shell.php(459): Cake\Console\Shell->runCommand(Array, false, Array)
+#10 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Console/ShellDispatcher.php(227): Cake\Console\Shell->runCommand(Array, true, Array)
+#11 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Console/ShellDispatcher.php(182): Cake\Console\ShellDispatcher->_dispatch(Array)
+#12 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Console/ShellDispatcher.php(128): Cake\Console\ShellDispatcher->dispatch(Array)
+#13 /Users/varunprathap/demoapp/bin/cake.php(33): Cake\Console\ShellDispatcher::run(Array)
+#14 {main}
+
+
+2016-11-09 07:06:57 Error: [Cake\Database\Exception] Cannot describe job_infos. It has 0 columns.
+Stack Trace:
+#0 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Database/Schema/CachedCollection.php(63): Cake\Database\Schema\Collection->describe('job_infos', Array)
+#1 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/ORM/Table.php(440): Cake\Database\Schema\CachedCollection->describe('job_infos')
+#2 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/Task/ModelTask.php(345): Cake\ORM\Table->schema()
+#3 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/Task/ModelTask.php(221): Bake\Shell\Task\ModelTask->findHasMany(Object(App\Model\Table\JobFunctionsTable), Array)
+#4 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/Task/ModelTask.php(127): Bake\Shell\Task\ModelTask->getAssociations(Object(App\Model\Table\JobFunctionsTable))
+#5 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/Task/ModelTask.php(110): Bake\Shell\Task\ModelTask->getTableContext(Object(App\Model\Table\JobFunctionsTable), 'jobfunctions', 'Jobfunctions')
+#6 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/Task/ModelTask.php(97): Bake\Shell\Task\ModelTask->bake('Jobfunctions')
+#7 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/BakeShell.php(257): Bake\Shell\Task\ModelTask->main('Jobfunctions')
+#8 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Collection/CollectionTrait.php(52): Bake\Shell\BakeShell->Bake\Shell\{closure}('Jobfunctions', 0)
+#9 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/BakeShell.php(260): Cake\Collection\Collection->each(Object(Closure))
+#10 [internal function]: Bake\Shell\BakeShell->all('jobfunctions')
+#11 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Console/Shell.php(452): call_user_func_array(Array, Array)
+#12 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Console/ShellDispatcher.php(227): Cake\Console\Shell->runCommand(Array, true, Array)
+#13 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Console/ShellDispatcher.php(182): Cake\Console\ShellDispatcher->_dispatch(Array)
+#14 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Console/ShellDispatcher.php(128): Cake\Console\ShellDispatcher->dispatch(Array)
+#15 /Users/varunprathap/demoapp/bin/cake.php(33): Cake\Console\ShellDispatcher::run(Array)
+#16 {main}
+
+
+2016-11-09 07:08:16 Error: [Cake\Database\Exception] Cannot describe job_infos. It has 0 columns.
+Stack Trace:
+#0 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Database/Schema/CachedCollection.php(63): Cake\Database\Schema\Collection->describe('job_infos', Array)
+#1 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/ORM/Table.php(440): Cake\Database\Schema\CachedCollection->describe('job_infos')
+#2 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/Task/ModelTask.php(261): Cake\ORM\Table->schema()
+#3 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/Task/ModelTask.php(211): Bake\Shell\Task\ModelTask->findBelongsTo(Object(App\Model\Table\JobInfosTable), Array)
+#4 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/Task/ModelTask.php(127): Bake\Shell\Task\ModelTask->getAssociations(Object(App\Model\Table\JobInfosTable))
+#5 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/Task/ModelTask.php(110): Bake\Shell\Task\ModelTask->getTableContext(Object(App\Model\Table\JobInfosTable), 'jobinfos', 'Jobinfos')
+#6 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/Task/ModelTask.php(97): Bake\Shell\Task\ModelTask->bake('Jobinfos')
+#7 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/BakeShell.php(257): Bake\Shell\Task\ModelTask->main('Jobinfos')
+#8 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Collection/CollectionTrait.php(52): Bake\Shell\BakeShell->Bake\Shell\{closure}('Jobinfos', 0)
+#9 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/BakeShell.php(260): Cake\Collection\Collection->each(Object(Closure))
+#10 [internal function]: Bake\Shell\BakeShell->all('jobinfos')
+#11 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Console/Shell.php(452): call_user_func_array(Array, Array)
+#12 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Console/ShellDispatcher.php(227): Cake\Console\Shell->runCommand(Array, true, Array)
+#13 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Console/ShellDispatcher.php(182): Cake\Console\ShellDispatcher->_dispatch(Array)
+#14 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Console/ShellDispatcher.php(128): Cake\Console\ShellDispatcher->dispatch(Array)
+#15 /Users/varunprathap/demoapp/bin/cake.php(33): Cake\Console\ShellDispatcher::run(Array)
+#16 {main}
+
+
+2016-11-09 07:08:58 Error: [Cake\Database\Exception] Cannot describe job_infos. It has 0 columns.
+Stack Trace:
+#0 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Database/Schema/CachedCollection.php(63): Cake\Database\Schema\Collection->describe('job_infos', Array)
+#1 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/ORM/Table.php(440): Cake\Database\Schema\CachedCollection->describe('job_infos')
+#2 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/Task/ModelTask.php(345): Cake\ORM\Table->schema()
+#3 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/Task/ModelTask.php(221): Bake\Shell\Task\ModelTask->findHasMany(Object(App\Model\Table\JobFunctionsTable), Array)
+#4 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/Task/ModelTask.php(127): Bake\Shell\Task\ModelTask->getAssociations(Object(App\Model\Table\JobFunctionsTable))
+#5 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/Task/ModelTask.php(110): Bake\Shell\Task\ModelTask->getTableContext(Object(App\Model\Table\JobFunctionsTable), 'jobfunctions', 'Jobfunctions')
+#6 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/Task/ModelTask.php(97): Bake\Shell\Task\ModelTask->bake('Jobfunctions')
+#7 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/BakeShell.php(257): Bake\Shell\Task\ModelTask->main('Jobfunctions')
+#8 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Collection/CollectionTrait.php(52): Bake\Shell\BakeShell->Bake\Shell\{closure}('Jobfunctions', 0)
+#9 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/BakeShell.php(260): Cake\Collection\Collection->each(Object(Closure))
+#10 [internal function]: Bake\Shell\BakeShell->all('jobfunctions')
+#11 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Console/Shell.php(452): call_user_func_array(Array, Array)
+#12 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Console/ShellDispatcher.php(227): Cake\Console\Shell->runCommand(Array, true, Array)
+#13 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Console/ShellDispatcher.php(182): Cake\Console\ShellDispatcher->_dispatch(Array)
+#14 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Console/ShellDispatcher.php(128): Cake\Console\ShellDispatcher->dispatch(Array)
+#15 /Users/varunprathap/demoapp/bin/cake.php(33): Cake\Console\ShellDispatcher::run(Array)
+#16 {main}
+
+
+2016-11-09 07:11:05 Error: [Cake\Database\Exception] Cannot describe job_infos. It has 0 columns.
+Stack Trace:
+#0 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Database/Schema/CachedCollection.php(63): Cake\Database\Schema\Collection->describe('job_infos', Array)
+#1 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/ORM/Table.php(440): Cake\Database\Schema\CachedCollection->describe('job_infos')
+#2 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/Task/ModelTask.php(345): Cake\ORM\Table->schema()
+#3 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/Task/ModelTask.php(221): Bake\Shell\Task\ModelTask->findHasMany(Object(App\Model\Table\JobFunctionsTable), Array)
+#4 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/Task/ModelTask.php(127): Bake\Shell\Task\ModelTask->getAssociations(Object(App\Model\Table\JobFunctionsTable))
+#5 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/Task/ModelTask.php(110): Bake\Shell\Task\ModelTask->getTableContext(Object(App\Model\Table\JobFunctionsTable), 'jobfunctions', 'Jobfunctions')
+#6 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/Task/ModelTask.php(97): Bake\Shell\Task\ModelTask->bake('Jobfunctions')
+#7 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/BakeShell.php(257): Bake\Shell\Task\ModelTask->main('Jobfunctions')
+#8 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Collection/CollectionTrait.php(52): Bake\Shell\BakeShell->Bake\Shell\{closure}('Jobfunctions', 0)
+#9 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/BakeShell.php(260): Cake\Collection\Collection->each(Object(Closure))
+#10 [internal function]: Bake\Shell\BakeShell->all('jobfunctions')
+#11 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Console/Shell.php(452): call_user_func_array(Array, Array)
+#12 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Console/ShellDispatcher.php(227): Cake\Console\Shell->runCommand(Array, true, Array)
+#13 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Console/ShellDispatcher.php(182): Cake\Console\ShellDispatcher->_dispatch(Array)
+#14 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Console/ShellDispatcher.php(128): Cake\Console\ShellDispatcher->dispatch(Array)
+#15 /Users/varunprathap/demoapp/bin/cake.php(33): Cake\Console\ShellDispatcher::run(Array)
+#16 {main}
+
+
+2016-11-09 07:11:30 Error: [Cake\Database\Exception] Cannot describe job_infos. It has 0 columns.
+Stack Trace:
+#0 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Database/Schema/CachedCollection.php(63): Cake\Database\Schema\Collection->describe('job_infos', Array)
+#1 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/ORM/Table.php(440): Cake\Database\Schema\CachedCollection->describe('job_infos')
+#2 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/Task/ModelTask.php(345): Cake\ORM\Table->schema()
+#3 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/Task/ModelTask.php(221): Bake\Shell\Task\ModelTask->findHasMany(Object(App\Model\Table\JobFunctionsTable), Array)
+#4 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/Task/ModelTask.php(127): Bake\Shell\Task\ModelTask->getAssociations(Object(App\Model\Table\JobFunctionsTable))
+#5 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/Task/ModelTask.php(110): Bake\Shell\Task\ModelTask->getTableContext(Object(App\Model\Table\JobFunctionsTable), 'jobfunctions', 'Jobfunctions')
+#6 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/Task/ModelTask.php(97): Bake\Shell\Task\ModelTask->bake('Jobfunctions')
+#7 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/BakeShell.php(257): Bake\Shell\Task\ModelTask->main('Jobfunctions')
+#8 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Collection/CollectionTrait.php(52): Bake\Shell\BakeShell->Bake\Shell\{closure}('Jobfunctions', 0)
+#9 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/BakeShell.php(260): Cake\Collection\Collection->each(Object(Closure))
+#10 [internal function]: Bake\Shell\BakeShell->all('Jobfunctions')
+#11 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Console/Shell.php(452): call_user_func_array(Array, Array)
+#12 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Console/ShellDispatcher.php(227): Cake\Console\Shell->runCommand(Array, true, Array)
+#13 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Console/ShellDispatcher.php(182): Cake\Console\ShellDispatcher->_dispatch(Array)
+#14 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Console/ShellDispatcher.php(128): Cake\Console\ShellDispatcher->dispatch(Array)
+#15 /Users/varunprathap/demoapp/bin/cake.php(33): Cake\Console\ShellDispatcher::run(Array)
+#16 {main}
+
+
+2016-11-09 07:11:47 Error: [Cake\Database\Exception] Cannot describe job_infos. It has 0 columns.
+Stack Trace:
+#0 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Database/Schema/CachedCollection.php(63): Cake\Database\Schema\Collection->describe('job_infos', Array)
+#1 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/ORM/Table.php(440): Cake\Database\Schema\CachedCollection->describe('job_infos')
+#2 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/Task/ModelTask.php(345): Cake\ORM\Table->schema()
+#3 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/Task/ModelTask.php(221): Bake\Shell\Task\ModelTask->findHasMany(Object(App\Model\Table\JobFunctionsTable), Array)
+#4 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/Task/ModelTask.php(127): Bake\Shell\Task\ModelTask->getAssociations(Object(App\Model\Table\JobFunctionsTable))
+#5 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/Task/ModelTask.php(110): Bake\Shell\Task\ModelTask->getTableContext(Object(App\Model\Table\JobFunctionsTable), 'job_functions', 'JobFunctions')
+#6 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/Task/ModelTask.php(97): Bake\Shell\Task\ModelTask->bake('JobFunctions')
+#7 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/BakeShell.php(257): Bake\Shell\Task\ModelTask->main('JobFunctions')
+#8 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Collection/CollectionTrait.php(52): Bake\Shell\BakeShell->Bake\Shell\{closure}('JobFunctions', 0)
+#9 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/BakeShell.php(260): Cake\Collection\Collection->each(Object(Closure))
+#10 [internal function]: Bake\Shell\BakeShell->all('JobFunctions')
+#11 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Console/Shell.php(452): call_user_func_array(Array, Array)
+#12 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Console/ShellDispatcher.php(227): Cake\Console\Shell->runCommand(Array, true, Array)
+#13 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Console/ShellDispatcher.php(182): Cake\Console\ShellDispatcher->_dispatch(Array)
+#14 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Console/ShellDispatcher.php(128): Cake\Console\ShellDispatcher->dispatch(Array)
+#15 /Users/varunprathap/demoapp/bin/cake.php(33): Cake\Console\ShellDispatcher::run(Array)
+#16 {main}
+
+
+2016-11-09 07:12:10 Error: [Cake\Database\Exception] Cannot describe job_infos. It has 0 columns.
+Stack Trace:
+#0 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Database/Schema/CachedCollection.php(63): Cake\Database\Schema\Collection->describe('job_infos', Array)
+#1 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/ORM/Table.php(440): Cake\Database\Schema\CachedCollection->describe('job_infos')
+#2 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/Task/ModelTask.php(345): Cake\ORM\Table->schema()
+#3 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/Task/ModelTask.php(221): Bake\Shell\Task\ModelTask->findHasMany(Object(App\Model\Table\JobFunctionsTable), Array)
+#4 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/Task/ModelTask.php(127): Bake\Shell\Task\ModelTask->getAssociations(Object(App\Model\Table\JobFunctionsTable))
+#5 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/Task/ModelTask.php(110): Bake\Shell\Task\ModelTask->getTableContext(Object(App\Model\Table\JobFunctionsTable), 'jobfunctions', 'Jobfunctions')
+#6 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/Task/ModelTask.php(97): Bake\Shell\Task\ModelTask->bake('Jobfunctions')
+#7 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/BakeShell.php(257): Bake\Shell\Task\ModelTask->main('Jobfunctions')
+#8 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Collection/CollectionTrait.php(52): Bake\Shell\BakeShell->Bake\Shell\{closure}('Jobfunctions', 0)
+#9 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/BakeShell.php(260): Cake\Collection\Collection->each(Object(Closure))
+#10 [internal function]: Bake\Shell\BakeShell->all('jobfunctions')
+#11 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Console/Shell.php(452): call_user_func_array(Array, Array)
+#12 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Console/ShellDispatcher.php(227): Cake\Console\Shell->runCommand(Array, true, Array)
+#13 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Console/ShellDispatcher.php(182): Cake\Console\ShellDispatcher->_dispatch(Array)
+#14 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Console/ShellDispatcher.php(128): Cake\Console\ShellDispatcher->dispatch(Array)
+#15 /Users/varunprathap/demoapp/bin/cake.php(33): Cake\Console\ShellDispatcher::run(Array)
+#16 {main}
+
+
+2016-11-09 07:12:19 Error: [Cake\Database\Exception] Cannot describe job_infos. It has 0 columns.
+Stack Trace:
+#0 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Database/Schema/CachedCollection.php(63): Cake\Database\Schema\Collection->describe('job_infos', Array)
+#1 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/ORM/Table.php(440): Cake\Database\Schema\CachedCollection->describe('job_infos')
+#2 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/Task/ModelTask.php(345): Cake\ORM\Table->schema()
+#3 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/Task/ModelTask.php(221): Bake\Shell\Task\ModelTask->findHasMany(Object(App\Model\Table\JobclassesTable), Array)
+#4 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/Task/ModelTask.php(127): Bake\Shell\Task\ModelTask->getAssociations(Object(App\Model\Table\JobclassesTable))
+#5 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/Task/ModelTask.php(110): Bake\Shell\Task\ModelTask->getTableContext(Object(App\Model\Table\JobclassesTable), 'jobclasses', 'Jobclasses')
+#6 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/Task/ModelTask.php(97): Bake\Shell\Task\ModelTask->bake('Jobclasses')
+#7 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/BakeShell.php(257): Bake\Shell\Task\ModelTask->main('Jobclasses')
+#8 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Collection/CollectionTrait.php(52): Bake\Shell\BakeShell->Bake\Shell\{closure}('Jobclasses', 0)
+#9 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/BakeShell.php(260): Cake\Collection\Collection->each(Object(Closure))
+#10 [internal function]: Bake\Shell\BakeShell->all('jobclasses')
+#11 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Console/Shell.php(452): call_user_func_array(Array, Array)
+#12 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Console/ShellDispatcher.php(227): Cake\Console\Shell->runCommand(Array, true, Array)
+#13 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Console/ShellDispatcher.php(182): Cake\Console\ShellDispatcher->_dispatch(Array)
+#14 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Console/ShellDispatcher.php(128): Cake\Console\ShellDispatcher->dispatch(Array)
+#15 /Users/varunprathap/demoapp/bin/cake.php(33): Cake\Console\ShellDispatcher::run(Array)
+#16 {main}
+
+
+2016-11-09 07:20:26 Error: [Cake\Database\Exception] Cannot describe job_infos. It has 0 columns.
+Stack Trace:
+#0 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Database/Schema/CachedCollection.php(63): Cake\Database\Schema\Collection->describe('job_infos', Array)
+#1 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/ORM/Table.php(440): Cake\Database\Schema\CachedCollection->describe('job_infos')
+#2 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/Task/ModelTask.php(345): Cake\ORM\Table->schema()
+#3 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/Task/ModelTask.php(221): Bake\Shell\Task\ModelTask->findHasMany(Object(App\Model\Table\JobclassesTable), Array)
+#4 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/Task/ModelTask.php(127): Bake\Shell\Task\ModelTask->getAssociations(Object(App\Model\Table\JobclassesTable))
+#5 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/Task/ModelTask.php(110): Bake\Shell\Task\ModelTask->getTableContext(Object(App\Model\Table\JobclassesTable), 'jobclasses', 'Jobclasses')
+#6 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/Task/ModelTask.php(97): Bake\Shell\Task\ModelTask->bake('Jobclasses')
+#7 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/BakeShell.php(257): Bake\Shell\Task\ModelTask->main('Jobclasses')
+#8 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Collection/CollectionTrait.php(52): Bake\Shell\BakeShell->Bake\Shell\{closure}('Jobclasses', 0)
+#9 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/BakeShell.php(260): Cake\Collection\Collection->each(Object(Closure))
+#10 [internal function]: Bake\Shell\BakeShell->all('jobclasses')
+#11 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Console/Shell.php(452): call_user_func_array(Array, Array)
+#12 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Console/ShellDispatcher.php(227): Cake\Console\Shell->runCommand(Array, true, Array)
+#13 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Console/ShellDispatcher.php(182): Cake\Console\ShellDispatcher->_dispatch(Array)
+#14 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Console/ShellDispatcher.php(128): Cake\Console\ShellDispatcher->dispatch(Array)
+#15 /Users/varunprathap/demoapp/bin/cake.php(33): Cake\Console\ShellDispatcher::run(Array)
+#16 {main}
+
+
+2016-11-09 07:31:38 Error: [Cake\Database\Exception] Cannot describe job_infos. It has 0 columns.
+Stack Trace:
+#0 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Database/Schema/CachedCollection.php(63): Cake\Database\Schema\Collection->describe('job_infos', Array)
+#1 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/ORM/Table.php(440): Cake\Database\Schema\CachedCollection->describe('job_infos')
+#2 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/Task/ModelTask.php(345): Cake\ORM\Table->schema()
+#3 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/Task/ModelTask.php(221): Bake\Shell\Task\ModelTask->findHasMany(Object(App\Model\Table\JobclassesTable), Array)
+#4 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/Task/ModelTask.php(127): Bake\Shell\Task\ModelTask->getAssociations(Object(App\Model\Table\JobclassesTable))
+#5 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/Task/ModelTask.php(110): Bake\Shell\Task\ModelTask->getTableContext(Object(App\Model\Table\JobclassesTable), 'jobclasses', 'Jobclasses')
+#6 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/Task/ModelTask.php(97): Bake\Shell\Task\ModelTask->bake('Jobclasses')
+#7 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/BakeShell.php(257): Bake\Shell\Task\ModelTask->main('Jobclasses')
+#8 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Collection/CollectionTrait.php(52): Bake\Shell\BakeShell->Bake\Shell\{closure}('Jobclasses', 0)
+#9 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/BakeShell.php(260): Cake\Collection\Collection->each(Object(Closure))
+#10 [internal function]: Bake\Shell\BakeShell->all('jobclasses')
+#11 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Console/Shell.php(452): call_user_func_array(Array, Array)
+#12 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Console/ShellDispatcher.php(227): Cake\Console\Shell->runCommand(Array, true, Array)
+#13 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Console/ShellDispatcher.php(182): Cake\Console\ShellDispatcher->_dispatch(Array)
+#14 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Console/ShellDispatcher.php(128): Cake\Console\ShellDispatcher->dispatch(Array)
+#15 /Users/varunprathap/demoapp/bin/cake.php(33): Cake\Console\ShellDispatcher::run(Array)
+#16 {main}
+
+
+2016-11-09 08:24:37 Error: [Cake\Database\Exception] Cannot describe job_infos. It has 0 columns.
+Stack Trace:
+#0 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Database/Schema/CachedCollection.php(63): Cake\Database\Schema\Collection->describe('job_infos', Array)
+#1 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/ORM/Table.php(440): Cake\Database\Schema\CachedCollection->describe('job_infos')
+#2 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/Task/ModelTask.php(345): Cake\ORM\Table->schema()
+#3 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/Task/ModelTask.php(221): Bake\Shell\Task\ModelTask->findHasMany(Object(App\Model\Table\JobclassesTable), Array)
+#4 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/Task/ModelTask.php(127): Bake\Shell\Task\ModelTask->getAssociations(Object(App\Model\Table\JobclassesTable))
+#5 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/Task/ModelTask.php(110): Bake\Shell\Task\ModelTask->getTableContext(Object(App\Model\Table\JobclassesTable), 'jobclasses', 'Jobclasses')
+#6 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/Task/ModelTask.php(97): Bake\Shell\Task\ModelTask->bake('Jobclasses')
+#7 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/BakeShell.php(257): Bake\Shell\Task\ModelTask->main('Jobclasses')
+#8 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Collection/CollectionTrait.php(52): Bake\Shell\BakeShell->Bake\Shell\{closure}('Jobclasses', 0)
+#9 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/BakeShell.php(260): Cake\Collection\Collection->each(Object(Closure))
+#10 [internal function]: Bake\Shell\BakeShell->all('jobclasses')
+#11 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Console/Shell.php(452): call_user_func_array(Array, Array)
+#12 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Console/ShellDispatcher.php(227): Cake\Console\Shell->runCommand(Array, true, Array)
+#13 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Console/ShellDispatcher.php(182): Cake\Console\ShellDispatcher->_dispatch(Array)
+#14 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Console/ShellDispatcher.php(128): Cake\Console\ShellDispatcher->dispatch(Array)
+#15 /Users/varunprathap/demoapp/bin/cake.php(33): Cake\Console\ShellDispatcher::run(Array)
+#16 {main}
+
+
+2016-11-09 08:44:26 Error: [Cake\Database\Exception] Cannot describe job_infos. It has 0 columns.
+Stack Trace:
+#0 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Database/Schema/CachedCollection.php(63): Cake\Database\Schema\Collection->describe('job_infos', Array)
+#1 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/ORM/Table.php(440): Cake\Database\Schema\CachedCollection->describe('job_infos')
+#2 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/Task/ModelTask.php(345): Cake\ORM\Table->schema()
+#3 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/Task/ModelTask.php(221): Bake\Shell\Task\ModelTask->findHasMany(Object(App\Model\Table\JobclassesTable), Array)
+#4 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/Task/ModelTask.php(127): Bake\Shell\Task\ModelTask->getAssociations(Object(App\Model\Table\JobclassesTable))
+#5 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/Task/ModelTask.php(110): Bake\Shell\Task\ModelTask->getTableContext(Object(App\Model\Table\JobclassesTable), 'jobclasses', 'Jobclasses')
+#6 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/Task/ModelTask.php(97): Bake\Shell\Task\ModelTask->bake('Jobclasses')
+#7 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/BakeShell.php(257): Bake\Shell\Task\ModelTask->main('Jobclasses')
+#8 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Collection/CollectionTrait.php(52): Bake\Shell\BakeShell->Bake\Shell\{closure}('Jobclasses', 0)
+#9 /Users/varunprathap/demoapp/vendor/cakephp/bake/src/Shell/BakeShell.php(260): Cake\Collection\Collection->each(Object(Closure))
+#10 [internal function]: Bake\Shell\BakeShell->all('jobclasses')
+#11 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Console/Shell.php(452): call_user_func_array(Array, Array)
+#12 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Console/ShellDispatcher.php(227): Cake\Console\Shell->runCommand(Array, true, Array)
+#13 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Console/ShellDispatcher.php(182): Cake\Console\ShellDispatcher->_dispatch(Array)
+#14 /Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Console/ShellDispatcher.php(128): Cake\Console\ShellDispatcher->dispatch(Array)
+#15 /Users/varunprathap/demoapp/bin/cake.php(33): Cake\Console\ShellDispatcher::run(Array)
+#16 {main}
+
+

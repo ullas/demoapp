@@ -9,9 +9,7 @@ use Cake\Validation\Validator;
 /**
  * Employees Model
  *
- * @property \Cake\ORM\Association\BelongsTo $EmpDataBiographies
- * @property \Cake\ORM\Association\BelongsTo $EmpDataPersonals
- * @property \Cake\ORM\Association\BelongsTo $EmploymentInfos
+ * @property \Cake\ORM\Association\BelongsTo $Customers
  * @property \Cake\ORM\Association\HasMany $EmpDataBiographies
  * @property \Cake\ORM\Association\HasMany $EmpDataPersonals
  * @property \Cake\ORM\Association\HasMany $EmploymentInfos
@@ -41,31 +39,17 @@ class EmployeesTable extends Table
         $this->displayField('id');
         $this->primaryKey('id');
 
-        $this->belongsTo('EmpDataBiographies', [
-            'foreignKey' => 'emp_data_biography_id'
+        $this->belongsTo('Customers', [
+            'foreignKey' => 'customer_id','dependent' => true
         ]);
-        $this->belongsTo('EmpDataPersonals', [
-            'foreignKey' => 'emp_data_personal_id'
+        $this->hasOne('Empdatabiographies', [
+            'foreignKey' => 'employee_id','dependent'=>true
         ]);
-        $this->belongsTo('EmploymentInfos', [
-            'foreignKey' => 'employment_info_id'
+        $this->hasOne('Empdatapersonals', [
+            'foreignKey' => 'employee_id','dependent'=>true
         ]);
-		
-		$this->belongsTo('Customers', [
-            'foreignKey' => 'customer_id'
-        ]);
-        $this->hasOne('Customers', [
-            'foreignKey' => 'employee_id'
-        ]);
-		
-        $this->hasOne('EmpDataBiographies', [
-            'foreignKey' => 'employee_id'
-        ]);
-        $this->hasOne('EmpDataPersonals', [
-            'foreignKey' => 'employee_id'
-        ]);
-        $this->hasOne('EmploymentInfos', [
-            'foreignKey' => 'employee_id'
+        $this->hasOne('Employmentinfos', [
+            'foreignKey' => 'employee_id','dependent'=>true
         ]);
     }
 
@@ -80,9 +64,6 @@ class EmployeesTable extends Table
         $validator
             ->allowEmpty('id', 'create');
 
-        $validator
-            ->allowEmpty('description');
-
         return $validator;
     }
 
@@ -95,9 +76,7 @@ class EmployeesTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
-        $rules->add($rules->existsIn(['emp_data_biography_id'], 'EmpDataBiographies'));
-        $rules->add($rules->existsIn(['emp_data_personal_id'], 'EmpDataPersonals'));
-        $rules->add($rules->existsIn(['employment_info_id'], 'EmploymentInfos'));
+        $rules->add($rules->existsIn(['customer_id'], 'Customers'));
 
         return $rules;
     }

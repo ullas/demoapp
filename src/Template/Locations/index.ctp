@@ -61,8 +61,16 @@ $this->Html->script([
       	//server side processing
       	"processing": true,
      	 "serverSide": true,
-      	"ajax": "/<?php echo $this->request->params['controller'] ?>/ajaxData"
-     
+      	"ajax": "/<?php echo $this->request->params['controller'] ?>/ajaxData",
+     	"initComplete": function(settings, json) {
+    			//set bool value
+    			var innerHtml = $('.mptldtbool').html();
+    			if(innerHtml=="1"){
+    				$('.mptldtbool').html("True");
+    			}else{
+    				$('.mptldtbool').html("False");
+    			}
+  		}
     });
   });
 </script>

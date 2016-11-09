@@ -11,7 +11,6 @@ use Cake\Validation\Validator;
  *
  * @property \Cake\ORM\Association\BelongsTo $Customers
  * @property \Cake\ORM\Association\BelongsTo $Employees
- * @property \Cake\ORM\Association\HasMany $Employees
  *
  * @method \App\Model\Entity\EmpDataBiography get($primaryKey, $options = [])
  * @method \App\Model\Entity\EmpDataBiography newEntity($data = null, array $options = [])
@@ -34,7 +33,7 @@ class EmpDataBiographiesTable extends Table
     {
         parent::initialize($config);
 
-        $this->table('emp_data_biographies');
+        $this->table('empdatabiographies');
         $this->displayField('id');
         $this->primaryKey('id');
 
@@ -43,9 +42,6 @@ class EmpDataBiographiesTable extends Table
         ]);
         $this->belongsTo('Employees', [
             'foreignKey' => 'employee_id'
-        ]);
-        $this->hasMany('Employees', [
-            'foreignKey' => 'emp_data_biography_id'
         ]);
     }
 

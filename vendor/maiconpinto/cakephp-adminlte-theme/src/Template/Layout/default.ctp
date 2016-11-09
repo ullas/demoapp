@@ -10,6 +10,7 @@
     <?php echo $this->Html->css('AdminLTE./bootstrap/css/bootstrap'); ?>
     <?php echo $this->Html->css('AdminLTE./plugins/select2/select2.min'); ?>
     <?php echo $this->Html->css('AdminLTE./plugins/datepicker/datepicker3'); ?>
+    <?php echo $this->Html->css('AdminLTE./plugins/timepicker/bootstrap-timepicker.min'); ?>
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <!-- Ionicons -->
@@ -24,12 +25,12 @@
 
     <?php echo $this->fetch('css'); ?>
 
-
     <!-- jQuery 2.1.4 -->
 <?php echo $this->Html->script('AdminLTE./plugins/jQuery/jQuery-2.1.4.min'); ?>
 
 <!-- /added to include drag and drop -->
 <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+
 
 <!-- Bootstrap 3.3.5 -->
 <?php echo $this->Html->script('AdminLTE./bootstrap/js/bootstrap'); ?>
@@ -59,6 +60,7 @@
 	font-size: 12px;
 	padding: 1em;
 	display: none;
+	z-index:10;
 }
 
 .go-top:hover {
@@ -102,7 +104,16 @@
 	width:100%;
 }
 .checkbox{
-	padding-top:30px;
+	padding-top:17px;
+	padding-bottom:17px;
+}
+/*adduizard btn icon*/
+.btn .fa{
+	color:#FFFFFF;
+}
+div.dataTables_filter input {
+	margin-left:0px;
+	background-color: #ddd;
 }
 </style>
 
@@ -111,6 +122,7 @@
 <?php
 $this->Html->script([ 'AdminLTE./plugins/select2/select2.full.min' ], ['block' => 'script']);
 $this->Html->script([ 'AdminLTE./plugins/datepicker/bootstrap-datepicker' ], ['block' => 'script']);
+$this->Html->script([ 'AdminLTE./plugins/timepicker/bootstrap-timepicker.min' ], ['block' => 'script']);
 ?>
 <body class="hold-transition skin-greenjam sidebar-mini">
     <!-- Site wrapper -->
@@ -162,6 +174,7 @@ $this->Html->script([ 'AdminLTE./plugins/datepicker/bootstrap-datepicker' ], ['b
 <?php echo $this->fetch('scriptBotton'); ?>
 <script type="text/javascript">
     $(document).ready(function(){
+    
     	
 //popover resize    	
 $(window).off("resize").on("resize", function() {

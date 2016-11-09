@@ -13,7 +13,6 @@
 	<div class="box box-primary"><div class="box-body">
     <?= $this->Form->create($region) ?>
     <fieldset>
-        <legend><?= __('Add Region') ?></legend>
         <?php
             echo $this->Form->input('name');
             echo $this->Form->input('description');

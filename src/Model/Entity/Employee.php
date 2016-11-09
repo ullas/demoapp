@@ -7,14 +7,9 @@ use Cake\ORM\Entity;
  * Employee Entity
  *
  * @property int $id
- * @property int $emp_data_biography_id
- * @property int $emp_data_personal_id
- * @property int $employment_info_id
- * @property string $description
+ * @property int $customer_id
  *
- * @property \App\Model\Entity\EmpDataBiography[] $emp_data_biographies
- * @property \App\Model\Entity\EmpDataPersonal[] $emp_data_personals
- * @property \App\Model\Entity\EmploymentInfo[] $employment_infos
+ * @property \App\Model\Entity\Customer[] $customers
  */
 class Employee extends Entity
 {
