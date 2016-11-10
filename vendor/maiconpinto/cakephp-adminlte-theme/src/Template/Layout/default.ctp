@@ -113,7 +113,6 @@
 }
 div.dataTables_filter input {
 	margin-left:0px;
-	background-color: #ddd;
 }
 </style>
 
@@ -174,8 +173,7 @@ $this->Html->script([ 'AdminLTE./plugins/timepicker/bootstrap-timepicker.min' ],
 <?php echo $this->fetch('scriptBotton'); ?>
 <script type="text/javascript">
     $(document).ready(function(){
-    
-    	
+   
 //popover resize    	
 $(window).off("resize").on("resize", function() {
     $(".popover").each(function() {
@@ -245,15 +243,9 @@ $(window).off("resize").on("resize", function() {
 				  	$(this).text("");
 				  }
 			});
-
-
-
     });
 
-    $(".delete-btn").click(function(){
-       $("#ajax_button").html("<a href='/<?php echo $this->request->params['controller'] ?>/delete/"+ $(this).attr("data-id")+"' class='btn btn-outline btn-danger'>Confirm</a>");
-      $("#trigger").click();
- });
+    
 </script>
 <?php echo $this->Html->script('AdminLTE.AdminLTE.min'); ?>
 </body>
