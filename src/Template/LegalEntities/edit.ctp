@@ -46,19 +46,6 @@ label.mandatory:after {
     </div>
     <?= $this->Form->end() ?>
 </div></div></section>
-<?php
-$this->Html->css([
-    'AdminLTE./plugins/datepicker/datepicker3',
-    'AdminLTE./plugins/select2/select2.min',
-  ],
-  ['block' => 'css']);
-
-$this->Html->script([
-  'AdminLTE./plugins/datepicker/bootstrap-datepicker',
-  'AdminLTE./plugins/select2/select2.full.min',
-],
-['block' => 'script']);
-?>
 <?php $this->start('scriptBotton'); ?>
 <script>
   $(function () {
