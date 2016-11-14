@@ -11,10 +11,11 @@
     <?php echo $this->Html->css('AdminLTE./plugins/select2/select2.min'); ?>
     <?php echo $this->Html->css('AdminLTE./plugins/datepicker/datepicker3'); ?>
     <?php echo $this->Html->css('AdminLTE./plugins/timepicker/bootstrap-timepicker.min'); ?>
+    <?php echo $this->Html->css('AdminLTE./plugins/datatables/extensions/ColReorder/css/dataTables.colReorder.min'); ?>
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/font-awesome.min.css">
     <!-- Ionicons -->
-    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="stylesheet" href="/css/ionicons.min.css">
     <!-- Theme style -->
     <?php echo $this->Html->css('AdminLTE.AdminLTE.min'); ?>
 <!-- AdminLTE Skins. Choose a skin from the css/skins
@@ -29,7 +30,7 @@
 <?php echo $this->Html->script('AdminLTE./plugins/jQuery/jQuery-2.1.4.min'); ?>
 
 <!-- /added to include drag and drop -->
-<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+<script src="/js/jquery-ui.min.js"></script>
 
 
 <!-- Bootstrap 3.3.5 -->
@@ -210,7 +211,7 @@ $(window).off("resize").on("resize", function() {
         }
 
 
-        $(window).scroll(function() {
+        	$(window).scroll(function() {
 				if ($(this).scrollTop() > 200) {
 					$('.go-top').fadeIn(200);
 				} else {
@@ -229,23 +230,27 @@ $(window).off("resize").on("resize", function() {
 			$(".actions a").each(function(){
 				  if($(this).text()=='View')
 				  {
-				  	$(this).addClass('fa fa-eye p3');
+				  	$(this).addClass('fa fa-file-text-o p3');
 				  	$(this).text("");
 				  }
 				  if($(this).text()=='Edit')
 				  {
-				  	$(this).addClass('fa fa-pencil p3');
+				  	$(this).addClass('fa fa-pencil p3 text-aqua');
 				  	$(this).text("");
 				  }
 				  if($(this).text()=='Delete')
 				  {
-				  	$(this).addClass('fa fa-trash');
+				  	$(this).addClass('fa fa-trash text-red');
 				  	$(this).text("");
 				  }
 			});
-    });
-
     
+			//disable div onclick if (title)anchor tag clicked org chart
+    		$(".node-title").click(function(event){
+		  		event.stopPropagation();
+			})
+
+});
 </script>
 <?php echo $this->Html->script('AdminLTE.AdminLTE.min'); ?>
 </body>

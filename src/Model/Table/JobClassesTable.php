@@ -40,16 +40,16 @@ class JobclassesTable extends Table
         $this->primaryKey('id');
 
         $this->belongsTo('PayGrades', [
-            'foreignKey' => 'pay_grade_id','dependent'=>true
+            'foreignKey' => 'pay_grade_id'
         ]);
         $this->belongsTo('JobFunctions', [
-            'foreignKey' => 'job_function_id','dependent'=>true
+            'foreignKey' => 'job_function_id'
         ]);
         $this->belongsTo('Customers', [
-            'foreignKey' => 'customer_id','dependent'=>true
+            'foreignKey' => 'customer_id'
         ]);
         $this->belongsTo('Jobs', [
-            'foreignKey' => 'job_id','dependent'=>true
+            'foreignKey' => 'job_id'
         ]);
     }
 

@@ -108,12 +108,12 @@ class JobsController extends AppController
             'contain' => ['Jobclasses', 'Jobfunctions', 'Jobinfos']
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $job = $this->Jobs->patchEntity($job, $this->request->data);
+            $job = $this->Jobs->patchEntity($job, $this->request->data,['atomic'=>false,['associated' => ['Jobclasses', 'Jobfunctions', 'Jobinfos']]]);
 			$job['customer_id']=$this->loggedinuser['customer_id'];
-            if ($this->Jobs->save($job)) {
-                $this->Flash->success(__('The job has been saved.'));debug($this->request->data);
+            if ($this->Jobs->save($job,['associated' => ['Jobclasses', 'Jobfunctions', 'Jobinfos']])) {
+                $this->Flash->success(__('The job has been saved.'));//debug($this->request->data);
 
-                // return $this->redirect(['action' => 'index']);
+                return $this->redirect(['action' => 'index']);
             } else {
                 $this->Flash->error(__('The job could not be saved. Please, try again.'));
             }
@@ -135,7 +135,7 @@ class JobsController extends AppController
      */
     public function delete($id = null)
     {
-        $this->request->allowMethod(['post', 'delete']);
+        // $this->request->allowMethod(['post', 'delete']);
         $job = $this->Jobs->get($id);
         if ($this->Jobs->delete($job)) {
             $this->Flash->success(__('The job has been deleted.'));
