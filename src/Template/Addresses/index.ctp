@@ -30,10 +30,7 @@
         </thead>
         <tbody></tbody>
     </table></div></div>
-    </div></div>
-   
- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/colreorder/1.1.3/css/dataTables.colReorder.css"/>
- 
+    </div></div> 
 
 
 
@@ -43,7 +40,6 @@ $this->Html->css([ 'AdminLTE./plugins/datatables/dataTables.bootstrap',  ], ['bl
 
 $this->Html->script([
   'AdminLTE./plugins/datatables/jquery.dataTables.min',
-  'AdminLTE./plugins/datatables/extensions/ColReorder/js/dataTables.colReorder',
   'AdminLTE./plugins/datatables/dataTables.bootstrap.min',
 ], ['block' => 'script']); ?>
 

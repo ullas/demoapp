@@ -153,9 +153,9 @@
   background-color: #21A57E;
   border-color: #21A57E;
 }
-.skin-greenjam a{
+/*.skin-greenjam a{
   color: #21A57E;
-}
+}*/
 .skin-greenjam a:hover, .skin-greenjam a:active, .skin-greenjam a:focus{
   color: #6ECAAF;
 }

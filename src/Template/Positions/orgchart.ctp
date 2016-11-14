@@ -1,4 +1,3 @@
-
 <?php
 function RecursiveCategories($array) {
 
@@ -6,12 +5,14 @@ function RecursiveCategories($array) {
             echo "\n<ul id='org' style='display:none'>\n";
         foreach ($array as $vals) {
 
-            $htmlstr="<div id=mptl><dd>Take Action</dd><ul class=list-unstyled>
+            $htmlstr="<div id=mptl><h3 class=\"profile-username text-center\">".$vals['name']."</h3>
+  							<h6 class=\"text-muted text-center\">Position</h6>
+            				<hr/><b>Take Action</b><ul class=list-unstyled>
                             <li><a href=\"../EmploymentInfos\">Employment Details</a></li>
                             <li><a href=\"#\" onclick=\"onclickTerminate(".$vals['id'].");\">Terminate</a></li>
                             <li><a href=\"../JobInfos\">Change Job and Compensation Info</a></li>
                             <li><a href=\"#\" class=\"open-Popup\" data-toggle=\"modal\" data-target=\"#PopOver\" id=\"".$vals['id']."\">Add Note</a></li>
-                            </ul><div class=uline></div><dd>Go to</dd><ul class=list-unstyled>
+                            </ul><hr/><b>Go to</b><ul class=list-unstyled>
                             <li><a href=\"../Profiles\">Profile</a></li>
                             <li><a href=\"../#\">Employment Information</a></li>
                             <li><a href=\"../#\">Notes</a></li>
@@ -29,9 +30,10 @@ function RecursiveCategories($array) {
     }
 } ?>
 
-<?= RecursiveCategories($orgpositions) ?>
+<?= RecursiveCategories($orgpositions) ?> 
 
-<ul id="org" style="display:none">
+<style>.popover-content  a{font-size:12px;}</style>
+<!-- <ul id="org" style="display:none">
     <li>
        Food
        <ul>
@@ -43,7 +45,7 @@ function RecursiveCategories($array) {
          <li>Bread</li>
        </ul>
      </li>
-   </ul>
+   </ul> -->
     <section class="content-header">
       <h1>
        Organization Chart
