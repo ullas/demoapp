@@ -10,9 +10,9 @@ use App\Controller\AppController;
  */
 class RegionsController extends AppController
 {
-var $components = array('Datatable');
+	 var $components = array('Datatable');
 	
-	public function ajaxData() {
+	 public function ajaxData() {
 		$this->autoRender= False;
 		  
 		$this->loadModel('CreateConfigs');
@@ -56,9 +56,12 @@ var $components = array('Datatable');
         $region = $this->Regions->get($id, [
             'contain' => []
         ]);
-
-        $this->set('region', $region);
-        $this->set('_serialize', ['region']);
+		if($regions['customer_id']==$this->loggedinuser['customer_id']){
+ 			$this->set('region', $region);
+        	$this->set('_serialize', ['region']);
+ 		}else{
+		   $this->redirect(['action' => 'logout','controller'=>'users']);
+        }   
     }
 
     /**

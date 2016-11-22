@@ -136,7 +136,7 @@ class JobsController extends AppController
     public function delete($id = null)
     {
         // $this->request->allowMethod(['post', 'delete']);
-        $job = $this->Jobs->get($id);
+        $job = $this->Jobs->get($id)->where("customer_id=".$this->loggedinuser['customer_id']);
         if ($this->Jobs->delete($job)) {
             $this->Flash->success(__('The job has been deleted.'));
         } else {

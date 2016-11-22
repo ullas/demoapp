@@ -57,9 +57,13 @@ var $components = array('Datatable');
         $payGrade = $this->PayGrades->get($id, [
             'contain' => ['Customers', 'JobClasses']
         ]);
-
-        $this->set('payGrade', $payGrade);
-        $this->set('_serialize', ['payGrade']);
+		
+		if($payGrade['customer_id']==$this->loggedinuser['customer_id']){
+ 			$this->set('payGrade', $payGrade);
+        	$this->set('_serialize', ['payGrade']);
+ 		}else{
+		   $this->redirect(['action' => 'logout','controller'=>'users']);
+        } 
     }
 
     /**

@@ -174,6 +174,8 @@ $this->Html->script([ 'AdminLTE./plugins/timepicker/bootstrap-timepicker.min' ],
 <?php echo $this->fetch('scriptBotton'); ?>
 <script type="text/javascript">
     $(document).ready(function(){
+
+// jQuery("[required]").after("<span class='required'>*</span>");
    
 //popover resize    	
 $(window).off("resize").on("resize", function() {
@@ -192,11 +194,11 @@ $(window).off("resize").on("resize", function() {
     });
 
 		//select 2 
-    	$(".select2").select2({ width: '100%' });
+    	$(".select2").select2({ width: '100%',allowClear: true,placeholder: "Select" });
 		//datepicker
     	$('.mptldp').datepicker({
     		format:"dd/mm/yy",
-      		autoclose: true
+      		autoclose: true,clearBtn: true
     	});
 
         $(".navbar .menu").slimscroll({

@@ -57,13 +57,17 @@ var $components = array('Datatable');
         $payRange = $this->PayRanges->get($id, [
             'contain' => ['LegalEntities', 'PayGroups', 'Customers']
         ]);
-
-        $legalEntities = $this->PayRanges->LegalEntities->find('list', ['limit' => 200]);
-        $payGroups = $this->PayRanges->PayGroups->find('list', ['limit' => 200]);
-        $customers = $this->PayRanges->Customers->find('list', ['limit' => 200]);
-        $this->set(compact('payRange', 'legalEntities', 'payGroups', 'customers'));
-        $this->set('payRange', $payRange);
-        $this->set('_serialize', ['payRange']);
+		
+		if($payRange['customer_id']==$this->loggedinuser['customer_id']){
+ 			$legalEntities = $this->PayRanges->LegalEntities->find('list', ['limit' => 200])->where("customer_id=".$this->loggedinuser['customer_id']);
+        	$payGroups = $this->PayRanges->PayGroups->find('list', ['limit' => 200])->where("customer_id=".$this->loggedinuser['customer_id']);
+        	$customers = $this->PayRanges->Customers->find('list', ['limit' => 200]);
+        	$this->set(compact('payRange', 'legalEntities', 'payGroups', 'customers'));
+        	$this->set('payRange', $payRange);
+        	$this->set('_serialize', ['payRange']);
+ 		}else{
+		   $this->redirect(['action' => 'logout','controller'=>'users']);
+        } 
     }
 
     /**
@@ -84,8 +88,8 @@ var $components = array('Datatable');
                 $this->Flash->error(__('The pay range could not be saved. Please, try again.'));
             }
         }
-        $legalEntities = $this->PayRanges->LegalEntities->find('list', ['limit' => 200]);
-        $payGroups = $this->PayRanges->PayGroups->find('list', ['limit' => 200]);
+        $legalEntities = $this->PayRanges->LegalEntities->find('list', ['limit' => 200])->where("customer_id=".$this->loggedinuser['customer_id']);
+        $payGroups = $this->PayRanges->PayGroups->find('list', ['limit' => 200])->where("customer_id=".$this->loggedinuser['customer_id']);
         $customers = $this->PayRanges->Customers->find('list', ['limit' => 200]);
         $this->set(compact('payRange', 'legalEntities', 'payGroups', 'customers'));
         $this->set('_serialize', ['payRange']);
@@ -113,8 +117,8 @@ var $components = array('Datatable');
                 $this->Flash->error(__('The pay range could not be saved. Please, try again.'));
             }
         }
-        $legalEntities = $this->PayRanges->LegalEntities->find('list', ['limit' => 200]);
-        $payGroups = $this->PayRanges->PayGroups->find('list', ['limit' => 200]);
+        $legalEntities = $this->PayRanges->LegalEntities->find('list', ['limit' => 200])->where("customer_id=".$this->loggedinuser['customer_id']);
+        $payGroups = $this->PayRanges->PayGroups->find('list', ['limit' => 200])->where("customer_id=".$this->loggedinuser['customer_id']);
         $customers = $this->PayRanges->Customers->find('list', ['limit' => 200]);
         $this->set(compact('payRange', 'legalEntities', 'payGroups', 'customers'));
         $this->set('_serialize', ['payRange']);
