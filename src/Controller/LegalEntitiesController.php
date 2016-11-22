@@ -58,11 +58,16 @@ class LegalEntitiesController extends AppController
             'contain' => ['Locations', 'PayGroups', 'Customers', 'PayRanges']
         ]);
 
-        $this->set('legalEntity', $legalEntity);
-		$locations = $this->LegalEntities->Locations->find('list', ['limit' => 200]);
-        $payGroups = $this->LegalEntities->PayGroups->find('list', ['limit' => 200]);
-        $customers = $this->LegalEntities->Customers->find('list', ['limit' => 200]);
-        $this->set(compact('legalEntity', 'locations', 'payGroups'));
+        if($legalEntity['customer_id']==$this->loggedinuser['customer_id']){
+       	    $this->set('legalEntity', $legalEntity);
+			$locations = $this->LegalEntities->Locations->find('list', ['limit' => 200])->where("customer_id=".$this->loggedinuser['customer_id']);
+        	$payGroups = $this->LegalEntities->PayGroups->find('list', ['limit' => 200])->where("customer_id=".$this->loggedinuser['customer_id']);
+        	$customers = $this->LegalEntities->Customers->find('list', ['limit' => 200]);
+        	$this->set(compact('legalEntity', 'locations', 'payGroups'));
+		
+       }else{
+		   $this->redirect(['action' => 'logout','controller'=>'users']);
+       }    
     }
 
     /**
@@ -84,8 +89,8 @@ class LegalEntitiesController extends AppController
                 $this->Flash->error(__('The legal entity could not be saved. Please, try again.'));
             }
         }
-        $locations = $this->LegalEntities->Locations->find('list', ['limit' => 200]);
-        $payGroups = $this->LegalEntities->PayGroups->find('list', ['limit' => 200]);
+        $locations = $this->LegalEntities->Locations->find('list', ['limit' => 200])->where("customer_id=".$this->loggedinuser['customer_id']);
+        $payGroups = $this->LegalEntities->PayGroups->find('list', ['limit' => 200])->where("customer_id=".$this->loggedinuser['customer_id']);
         $customers = $this->LegalEntities->Customers->find('list', ['limit' => 200]);
         $this->set(compact('legalEntity', 'locations', 'payGroups', 'customers'));
         $this->set('_serialize', ['legalEntity']);
@@ -105,8 +110,8 @@ class LegalEntitiesController extends AppController
             }
 
         }
-        $locations = $this->LegalEntities->Locations->find('list', ['limit' => 200]);
-        $payGroups = $this->LegalEntities->PayGroups->find('list', ['limit' => 200]);
+        $locations = $this->LegalEntities->Locations->find('list', ['limit' => 200])->where("customer_id=".$this->loggedinuser['customer_id']);
+        $payGroups = $this->LegalEntities->PayGroups->find('list', ['limit' => 200])->where("customer_id=".$this->loggedinuser['customer_id']);
         $customers = $this->LegalEntities->Customers->find('list', ['limit' => 200]);
         $this->set(compact('legalEntity', 'locations', 'payGroups', 'customers'));
         $this->set('_serialize', ['legalEntity']);
@@ -134,8 +139,8 @@ class LegalEntitiesController extends AppController
                 $this->Flash->error(__('The legal entity could not be saved. Please, try again.'));
             }
         }
-        $locations = $this->LegalEntities->Locations->find('list', ['limit' => 200]);
-        $payGroups = $this->LegalEntities->PayGroups->find('list', ['limit' => 200]);
+        $locations = $this->LegalEntities->Locations->find('list', ['limit' => 200])->where("customer_id=".$this->loggedinuser['customer_id']);
+        $payGroups = $this->LegalEntities->PayGroups->find('list', ['limit' => 200])->where("customer_id=".$this->loggedinuser['customer_id']);
         $customers = $this->LegalEntities->Customers->find('list', ['limit' => 200]);
         $this->set(compact('legalEntity', 'locations', 'payGroups', 'customers'));
         $this->set('_serialize', ['legalEntity']);

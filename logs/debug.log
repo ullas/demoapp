@@ -2987,3 +2987,2198 @@ Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 65
 
 
 
+2016-11-15 05:35:44 Notice: Notice (8): Undefined variable: configs in [/Users/varunprathap/demoapp/src/Template/Element/indexbasic.ctp, line 23]
+Request URL: /Addresses
+Referer URL: http://localhost:8765/PayComponentGroups
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+include - APP/Template/Element/indexbasic.ctp, line 23
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::_renderElement() - CORE/src/View/View.php, line 1350
+Cake\View\View::element() - CORE/src/View/View.php, line 493
+include - APP/Template/Addresses/index.ctp, line 1
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::render() - CORE/src/View/View.php, line 588
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 617
+Cake\Http\ActionDispatcher::_invoke() - CORE/src/Http/ActionDispatcher.php, line 131
+Cake\Http\ActionDispatcher::dispatch() - CORE/src/Http/ActionDispatcher.php, line 99
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 65
+[main] - ROOT/webroot/index.php, line 36
+
+
+
+2016-11-15 05:35:44 Notice: Notice (8): Undefined variable: configs in [/Users/varunprathap/demoapp/src/Template/Element/indexbasic.ctp, line 221]
+Request URL: /Addresses
+Referer URL: http://localhost:8765/PayComponentGroups
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+include - APP/Template/Element/indexbasic.ctp, line 221
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::_renderElement() - CORE/src/View/View.php, line 1350
+Cake\View\View::element() - CORE/src/View/View.php, line 493
+include - APP/Template/Addresses/index.ctp, line 1
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::render() - CORE/src/View/View.php, line 588
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 617
+Cake\Http\ActionDispatcher::_invoke() - CORE/src/Http/ActionDispatcher.php, line 131
+Cake\Http\ActionDispatcher::dispatch() - CORE/src/Http/ActionDispatcher.php, line 99
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 65
+[main] - ROOT/webroot/index.php, line 36
+
+
+
+2016-11-15 06:26:34 Notice: Notice (8): Undefined variable: profile in [/Users/varunprathap/demoapp/src/Template/Profiles/index.ctp, line 9]
+Request URL: /profiles
+Referer URL: http://localhost:8765/
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+include - APP/Template/Profiles/index.ctp, line 9
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::render() - CORE/src/View/View.php, line 588
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 617
+Cake\Http\ActionDispatcher::_invoke() - CORE/src/Http/ActionDispatcher.php, line 131
+Cake\Http\ActionDispatcher::dispatch() - CORE/src/Http/ActionDispatcher.php, line 99
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 65
+[main] - ROOT/webroot/index.php, line 36
+
+
+
+2016-11-15 06:26:34 Notice: Notice (8): Undefined variable: payGrades in [/Users/varunprathap/demoapp/src/Template/Profiles/index.ctp, line 42]
+Request URL: /profiles
+Referer URL: http://localhost:8765/
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+include - APP/Template/Profiles/index.ctp, line 42
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::render() - CORE/src/View/View.php, line 588
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 617
+Cake\Http\ActionDispatcher::_invoke() - CORE/src/Http/ActionDispatcher.php, line 131
+Cake\Http\ActionDispatcher::dispatch() - CORE/src/Http/ActionDispatcher.php, line 99
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 65
+[main] - ROOT/webroot/index.php, line 36
+
+
+
+2016-11-15 06:26:34 Notice: Notice (8): Undefined variable: jobFunctions in [/Users/varunprathap/demoapp/src/Template/Profiles/index.ctp, line 43]
+Request URL: /profiles
+Referer URL: http://localhost:8765/
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+include - APP/Template/Profiles/index.ctp, line 43
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::render() - CORE/src/View/View.php, line 588
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 617
+Cake\Http\ActionDispatcher::_invoke() - CORE/src/Http/ActionDispatcher.php, line 131
+Cake\Http\ActionDispatcher::dispatch() - CORE/src/Http/ActionDispatcher.php, line 99
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 65
+[main] - ROOT/webroot/index.php, line 36
+
+
+
+2016-11-15 06:34:10 Notice: Notice (8): Undefined variable: profile in [/Users/varunprathap/demoapp/src/Template/Profiles/index.ctp, line 9]
+Request URL: /Profiles
+Referer URL: http://localhost:8765/
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+include - APP/Template/Profiles/index.ctp, line 9
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::render() - CORE/src/View/View.php, line 588
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 617
+Cake\Http\ActionDispatcher::_invoke() - CORE/src/Http/ActionDispatcher.php, line 131
+Cake\Http\ActionDispatcher::dispatch() - CORE/src/Http/ActionDispatcher.php, line 99
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 65
+[main] - ROOT/webroot/index.php, line 36
+
+
+
+2016-11-15 06:34:10 Notice: Notice (8): Undefined variable: payGrades in [/Users/varunprathap/demoapp/src/Template/Profiles/index.ctp, line 42]
+Request URL: /Profiles
+Referer URL: http://localhost:8765/
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+include - APP/Template/Profiles/index.ctp, line 42
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::render() - CORE/src/View/View.php, line 588
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 617
+Cake\Http\ActionDispatcher::_invoke() - CORE/src/Http/ActionDispatcher.php, line 131
+Cake\Http\ActionDispatcher::dispatch() - CORE/src/Http/ActionDispatcher.php, line 99
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 65
+[main] - ROOT/webroot/index.php, line 36
+
+
+
+2016-11-15 06:34:10 Notice: Notice (8): Undefined variable: jobFunctions in [/Users/varunprathap/demoapp/src/Template/Profiles/index.ctp, line 43]
+Request URL: /Profiles
+Referer URL: http://localhost:8765/
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+include - APP/Template/Profiles/index.ctp, line 43
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::render() - CORE/src/View/View.php, line 588
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 617
+Cake\Http\ActionDispatcher::_invoke() - CORE/src/Http/ActionDispatcher.php, line 131
+Cake\Http\ActionDispatcher::dispatch() - CORE/src/Http/ActionDispatcher.php, line 99
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 65
+[main] - ROOT/webroot/index.php, line 36
+
+
+
+2016-11-15 09:06:52 Notice: Notice (8): Undefined variable: profile in [/Users/varunprathap/demoapp/src/Template/Profiles/index.ctp, line 9]
+Request URL: /profiles
+Referer URL: http://localhost:8765/
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+include - APP/Template/Profiles/index.ctp, line 9
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::render() - CORE/src/View/View.php, line 588
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 617
+Cake\Http\ActionDispatcher::_invoke() - CORE/src/Http/ActionDispatcher.php, line 131
+Cake\Http\ActionDispatcher::dispatch() - CORE/src/Http/ActionDispatcher.php, line 99
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 65
+[main] - ROOT/webroot/index.php, line 36
+
+
+
+2016-11-15 09:06:53 Notice: Notice (8): Undefined variable: payGrades in [/Users/varunprathap/demoapp/src/Template/Profiles/index.ctp, line 42]
+Request URL: /profiles
+Referer URL: http://localhost:8765/
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+include - APP/Template/Profiles/index.ctp, line 42
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::render() - CORE/src/View/View.php, line 588
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 617
+Cake\Http\ActionDispatcher::_invoke() - CORE/src/Http/ActionDispatcher.php, line 131
+Cake\Http\ActionDispatcher::dispatch() - CORE/src/Http/ActionDispatcher.php, line 99
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 65
+[main] - ROOT/webroot/index.php, line 36
+
+
+
+2016-11-15 09:06:53 Notice: Notice (8): Undefined variable: jobFunctions in [/Users/varunprathap/demoapp/src/Template/Profiles/index.ctp, line 43]
+Request URL: /profiles
+Referer URL: http://localhost:8765/
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+include - APP/Template/Profiles/index.ctp, line 43
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::render() - CORE/src/View/View.php, line 588
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 617
+Cake\Http\ActionDispatcher::_invoke() - CORE/src/Http/ActionDispatcher.php, line 131
+Cake\Http\ActionDispatcher::dispatch() - CORE/src/Http/ActionDispatcher.php, line 99
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 65
+[main] - ROOT/webroot/index.php, line 36
+
+
+
+2016-11-15 09:06:55 Notice: Notice (8): Undefined variable: profile in [/Users/varunprathap/demoapp/src/Template/Profiles/index.ctp, line 9]
+Request URL: /profiles
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+include - APP/Template/Profiles/index.ctp, line 9
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::render() - CORE/src/View/View.php, line 588
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 617
+Cake\Http\ActionDispatcher::_invoke() - CORE/src/Http/ActionDispatcher.php, line 131
+Cake\Http\ActionDispatcher::dispatch() - CORE/src/Http/ActionDispatcher.php, line 99
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 65
+[main] - ROOT/webroot/index.php, line 36
+
+
+
+2016-11-15 09:06:55 Notice: Notice (8): Undefined variable: payGrades in [/Users/varunprathap/demoapp/src/Template/Profiles/index.ctp, line 42]
+Request URL: /profiles
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+include - APP/Template/Profiles/index.ctp, line 42
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::render() - CORE/src/View/View.php, line 588
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 617
+Cake\Http\ActionDispatcher::_invoke() - CORE/src/Http/ActionDispatcher.php, line 131
+Cake\Http\ActionDispatcher::dispatch() - CORE/src/Http/ActionDispatcher.php, line 99
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 65
+[main] - ROOT/webroot/index.php, line 36
+
+
+
+2016-11-15 09:06:55 Notice: Notice (8): Undefined variable: jobFunctions in [/Users/varunprathap/demoapp/src/Template/Profiles/index.ctp, line 43]
+Request URL: /profiles
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+include - APP/Template/Profiles/index.ctp, line 43
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::render() - CORE/src/View/View.php, line 588
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 617
+Cake\Http\ActionDispatcher::_invoke() - CORE/src/Http/ActionDispatcher.php, line 131
+Cake\Http\ActionDispatcher::dispatch() - CORE/src/Http/ActionDispatcher.php, line 99
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 65
+[main] - ROOT/webroot/index.php, line 36
+
+
+
+2016-11-15 09:20:18 Notice: Notice (8): Undefined variable: position in [/Users/varunprathap/demoapp/src/Controller/PositionsController.php, line 56]
+Request URL: /Positions/orgchart
+Referer URL: http://localhost:8765/profiles
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+App\Controller\PositionsController::orgchart() - APP/Controller/PositionsController.php, line 56
+Cake\Controller\Controller::invokeAction() - CORE/src/Controller/Controller.php, line 435
+Cake\Http\ActionDispatcher::_invoke() - CORE/src/Http/ActionDispatcher.php, line 125
+Cake\Http\ActionDispatcher::dispatch() - CORE/src/Http/ActionDispatcher.php, line 99
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 65
+[main] - ROOT/webroot/index.php, line 36
+
+
+
+2016-11-15 09:20:25 Notice: Notice (8): Undefined variable: position in [/Users/varunprathap/demoapp/src/Controller/PositionsController.php, line 56]
+Request URL: /Positions/orgchart
+Referer URL: http://localhost:8765/profiles
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+App\Controller\PositionsController::orgchart() - APP/Controller/PositionsController.php, line 56
+Cake\Controller\Controller::invokeAction() - CORE/src/Controller/Controller.php, line 435
+Cake\Http\ActionDispatcher::_invoke() - CORE/src/Http/ActionDispatcher.php, line 125
+Cake\Http\ActionDispatcher::dispatch() - CORE/src/Http/ActionDispatcher.php, line 99
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 65
+[main] - ROOT/webroot/index.php, line 36
+
+
+
+2016-11-15 09:20:30 Notice: Notice (8): Undefined variable: position in [/Users/varunprathap/demoapp/src/Controller/PositionsController.php, line 56]
+Request URL: /Positions/orgchart
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+App\Controller\PositionsController::orgchart() - APP/Controller/PositionsController.php, line 56
+Cake\Controller\Controller::invokeAction() - CORE/src/Controller/Controller.php, line 435
+Cake\Http\ActionDispatcher::_invoke() - CORE/src/Http/ActionDispatcher.php, line 125
+Cake\Http\ActionDispatcher::dispatch() - CORE/src/Http/ActionDispatcher.php, line 99
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 65
+[main] - ROOT/webroot/index.php, line 36
+
+
+
+2016-11-16 04:19:30 Notice: Notice (8): Undefined index: employee in [/Users/varunprathap/demoapp/src/Template/Element/stepformwizardelmnt.ctp, line 181]
+Request URL: /legal-entities/addwizard
+Referer URL: http://localhost:8765/users/login
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+include - APP/Template/Element/stepformwizardelmnt.ctp, line 181
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::_renderElement() - CORE/src/View/View.php, line 1350
+Cake\View\View::element() - CORE/src/View/View.php, line 493
+include - APP/Template/LegalEntities/addwizard.ctp, line 2
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::render() - CORE/src/View/View.php, line 588
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 617
+Cake\Http\ActionDispatcher::_invoke() - CORE/src/Http/ActionDispatcher.php, line 131
+Cake\Http\ActionDispatcher::dispatch() - CORE/src/Http/ActionDispatcher.php, line 99
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 65
+[main] - ROOT/webroot/index.php, line 36
+
+
+
+2016-11-16 04:19:44 Notice: Notice (8): Undefined index: employee in [/Users/varunprathap/demoapp/src/Template/Element/stepformwizardelmnt.ctp, line 181]
+Request URL: /legal-entities/addwizard
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+include - APP/Template/Element/stepformwizardelmnt.ctp, line 181
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::_renderElement() - CORE/src/View/View.php, line 1350
+Cake\View\View::element() - CORE/src/View/View.php, line 493
+include - APP/Template/LegalEntities/addwizard.ctp, line 2
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::render() - CORE/src/View/View.php, line 588
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 617
+Cake\Http\ActionDispatcher::_invoke() - CORE/src/Http/ActionDispatcher.php, line 131
+Cake\Http\ActionDispatcher::dispatch() - CORE/src/Http/ActionDispatcher.php, line 99
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 65
+[main] - ROOT/webroot/index.php, line 36
+
+
+
+2016-11-16 04:20:42 Notice: Notice (8): Undefined variable: contains in [/Users/varunprathap/demoapp/src/Controller/Component/DatatableComponent.php, line 67]
+Request URL: /Holidays/ajaxData?draw=1&columns%5B0%5D%5Bdata%5D=0&columns%5B0%5D%5Bname%5D=&columns%5B0%5D%5Bsearchable%5D=true&columns%5B0%5D%5Borderable%5D=true&columns%5B0%5D%5Bsearch%5D%5Bvalue%5D=&columns%5B0%5D%5Bsearch%5D%5Bregex%5D=false&columns%5B1%5D%5Bdata%5D=1&columns%5B1%5D%5Bname%5D=&columns%5B1%5D%5Bsearchable%5D=true&columns%5B1%5D%5Borderable%5D=true&columns%5B1%5D%5Bsearch%5D%5Bvalue%5D=&columns%5B1%5D%5Bsearch%5D%5Bregex%5D=false&columns%5B2%5D%5Bdata%5D=2&columns%5B2%5D%5Bname%5D=&columns%5B2%5D%5Bsearchable%5D=true&columns%5B2%5D%5Borderable%5D=true&columns%5B2%5D%5Bsearch%5D%5Bvalue%5D=&columns%5B2%5D%5Bsearch%5D%5Bregex%5D=false&columns%5B3%5D%5Bdata%5D=3&columns%5B3%5D%5Bname%5D=&columns%5B3%5D%5Bsearchable%5D=true&columns%5B3%5D%5Borderable%5D=true&columns%5B3%5D%5Bsearch%5D%5Bvalue%5D=&columns%5B3%5D%5Bsearch%5D%5Bregex%5D=false&columns%5B4%5D%5Bdata%5D=4&columns%5B4%5D%5Bname%5D=&columns%5B4%5D%5Bsearchable%5D=true&columns%5B4%5D%5Borderable%5D=true&columns%5B4%5D%5Bsearch%5D%5Bvalue%5D=&columns%5B4%5D%5Bsearch%5D%5Bregex%5D=false&columns%5B5%5D%5Bdata%5D=5&columns%5B5%5D%5Bname%5D=&columns%5B5%5D%5Bsearchable%5D=true&columns%5B5%5D%5Borderable%5D=false&columns%5B5%5D%5Bsearch%5D%5Bvalue%5D=&columns%5B5%5D%5Bsearch%5D%5Bregex%5D=false&order%5B0%5D%5Bcolumn%5D=0&order%5B0%5D%5Bdir%5D=asc&start=0&length=10&search%5Bvalue%5D=&search%5Bregex%5D=false&_=1479270042252
+Referer URL: http://localhost:8765/Holidays
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+App\Controller\Component\DatatableComponent::getView() - APP/Controller/Component/DatatableComponent.php, line 67
+App\Controller\HolidaysController::ajaxData() - APP/Controller/HolidaysController.php, line 22
+Cake\Controller\Controller::invokeAction() - CORE/src/Controller/Controller.php, line 435
+Cake\Http\ActionDispatcher::_invoke() - CORE/src/Http/ActionDispatcher.php, line 125
+Cake\Http\ActionDispatcher::dispatch() - CORE/src/Http/ActionDispatcher.php, line 99
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 65
+[main] - ROOT/webroot/index.php, line 36
+
+
+
+2016-11-16 04:20:57 Notice: Notice (8): Undefined variable: profile in [/Users/varunprathap/demoapp/src/Template/Profiles/index.ctp, line 9]
+Request URL: /Profiles
+Referer URL: http://localhost:8765/Positions/orgchart
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+include - APP/Template/Profiles/index.ctp, line 9
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::render() - CORE/src/View/View.php, line 588
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 617
+Cake\Http\ActionDispatcher::_invoke() - CORE/src/Http/ActionDispatcher.php, line 131
+Cake\Http\ActionDispatcher::dispatch() - CORE/src/Http/ActionDispatcher.php, line 99
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 65
+[main] - ROOT/webroot/index.php, line 36
+
+
+
+2016-11-16 04:20:57 Notice: Notice (8): Undefined variable: payGrades in [/Users/varunprathap/demoapp/src/Template/Profiles/index.ctp, line 42]
+Request URL: /Profiles
+Referer URL: http://localhost:8765/Positions/orgchart
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+include - APP/Template/Profiles/index.ctp, line 42
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::render() - CORE/src/View/View.php, line 588
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 617
+Cake\Http\ActionDispatcher::_invoke() - CORE/src/Http/ActionDispatcher.php, line 131
+Cake\Http\ActionDispatcher::dispatch() - CORE/src/Http/ActionDispatcher.php, line 99
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 65
+[main] - ROOT/webroot/index.php, line 36
+
+
+
+2016-11-16 04:20:57 Notice: Notice (8): Undefined variable: jobFunctions in [/Users/varunprathap/demoapp/src/Template/Profiles/index.ctp, line 43]
+Request URL: /Profiles
+Referer URL: http://localhost:8765/Positions/orgchart
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+include - APP/Template/Profiles/index.ctp, line 43
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::render() - CORE/src/View/View.php, line 588
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 617
+Cake\Http\ActionDispatcher::_invoke() - CORE/src/Http/ActionDispatcher.php, line 131
+Cake\Http\ActionDispatcher::dispatch() - CORE/src/Http/ActionDispatcher.php, line 99
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 65
+[main] - ROOT/webroot/index.php, line 36
+
+
+
+2016-11-16 10:03:44 Notice: Notice (8): Undefined variable: regions in [/Users/varunprathap/demoapp/src/Controller/LocationsController.php, line 58]
+Request URL: /Locations/view/2
+Referer URL: http://localhost:8765/locations
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+App\Controller\LocationsController::view() - APP/Controller/LocationsController.php, line 58
+Cake\Controller\Controller::invokeAction() - CORE/src/Controller/Controller.php, line 435
+Cake\Http\ActionDispatcher::_invoke() - CORE/src/Http/ActionDispatcher.php, line 125
+Cake\Http\ActionDispatcher::dispatch() - CORE/src/Http/ActionDispatcher.php, line 99
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 65
+[main] - ROOT/webroot/index.php, line 36
+
+
+
+2016-11-18 06:20:20 Notice: Notice (8): Undefined variable: poptitle in [/Users/varunprathap/demoapp/src/Template/Element/popoverelmnt.ctp, line 1]
+Request URL: /Employees/edit/23
+Referer URL: http://localhost:8765/Employees
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+include - APP/Template/Element/popoverelmnt.ctp, line 1
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::_renderElement() - CORE/src/View/View.php, line 1350
+Cake\View\View::element() - CORE/src/View/View.php, line 493
+include - APP/Template/Employees/edit.ctp, line 250
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::render() - CORE/src/View/View.php, line 588
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 617
+Cake\Http\ActionDispatcher::_invoke() - CORE/src/Http/ActionDispatcher.php, line 131
+Cake\Http\ActionDispatcher::dispatch() - CORE/src/Http/ActionDispatcher.php, line 99
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 65
+[main] - ROOT/webroot/index.php, line 36
+
+
+
+2016-11-18 06:20:20 Notice: Notice (8): Undefined variable: title in [/Users/varunprathap/demoapp/src/Template/Element/popoverelmnt.ctp, line 6]
+Request URL: /Employees/edit/23
+Referer URL: http://localhost:8765/Employees
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+include - APP/Template/Element/popoverelmnt.ctp, line 6
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::_renderElement() - CORE/src/View/View.php, line 1350
+Cake\View\View::element() - CORE/src/View/View.php, line 493
+include - APP/Template/Employees/edit.ctp, line 250
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::render() - CORE/src/View/View.php, line 588
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 617
+Cake\Http\ActionDispatcher::_invoke() - CORE/src/Http/ActionDispatcher.php, line 131
+Cake\Http\ActionDispatcher::dispatch() - CORE/src/Http/ActionDispatcher.php, line 99
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 65
+[main] - ROOT/webroot/index.php, line 36
+
+
+
+2016-11-18 06:20:20 Notice: Notice (8): Undefined variable: array in [/Users/varunprathap/demoapp/src/Template/Element/popoverelmnt.ctp, line 11]
+Request URL: /Employees/edit/23
+Referer URL: http://localhost:8765/Employees
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+include - APP/Template/Element/popoverelmnt.ctp, line 11
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::_renderElement() - CORE/src/View/View.php, line 1350
+Cake\View\View::element() - CORE/src/View/View.php, line 493
+include - APP/Template/Employees/edit.ctp, line 250
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::render() - CORE/src/View/View.php, line 588
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 617
+Cake\Http\ActionDispatcher::_invoke() - CORE/src/Http/ActionDispatcher.php, line 131
+Cake\Http\ActionDispatcher::dispatch() - CORE/src/Http/ActionDispatcher.php, line 99
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 65
+[main] - ROOT/webroot/index.php, line 36
+
+
+
+2016-11-18 06:20:20 Notice: Notice (8): Undefined variable: array in [/Users/varunprathap/demoapp/src/Template/Element/popoverelmnt.ctp, line 11]
+Request URL: /Employees/edit/23
+Referer URL: http://localhost:8765/Employees
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+include - APP/Template/Element/popoverelmnt.ctp, line 11
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::_renderElement() - CORE/src/View/View.php, line 1350
+Cake\View\View::element() - CORE/src/View/View.php, line 493
+include - APP/Template/Employees/edit.ctp, line 250
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::render() - CORE/src/View/View.php, line 588
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 617
+Cake\Http\ActionDispatcher::_invoke() - CORE/src/Http/ActionDispatcher.php, line 131
+Cake\Http\ActionDispatcher::dispatch() - CORE/src/Http/ActionDispatcher.php, line 99
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 65
+[main] - ROOT/webroot/index.php, line 36
+
+
+
+2016-11-18 06:20:20 Notice: Notice (8): Undefined variable: array in [/Users/varunprathap/demoapp/src/Template/Element/popoverelmnt.ctp, line 11]
+Request URL: /Employees/edit/23
+Referer URL: http://localhost:8765/Employees
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+include - APP/Template/Element/popoverelmnt.ctp, line 11
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::_renderElement() - CORE/src/View/View.php, line 1350
+Cake\View\View::element() - CORE/src/View/View.php, line 493
+include - APP/Template/Employees/edit.ctp, line 250
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::render() - CORE/src/View/View.php, line 588
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 617
+Cake\Http\ActionDispatcher::_invoke() - CORE/src/Http/ActionDispatcher.php, line 131
+Cake\Http\ActionDispatcher::dispatch() - CORE/src/Http/ActionDispatcher.php, line 99
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 65
+[main] - ROOT/webroot/index.php, line 36
+
+
+
+2016-11-18 06:20:20 Notice: Notice (8): Undefined variable: array in [/Users/varunprathap/demoapp/src/Template/Element/popoverelmnt.ctp, line 11]
+Request URL: /Employees/edit/23
+Referer URL: http://localhost:8765/Employees
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+include - APP/Template/Element/popoverelmnt.ctp, line 11
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::_renderElement() - CORE/src/View/View.php, line 1350
+Cake\View\View::element() - CORE/src/View/View.php, line 493
+include - APP/Template/Employees/edit.ctp, line 250
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::render() - CORE/src/View/View.php, line 588
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 617
+Cake\Http\ActionDispatcher::_invoke() - CORE/src/Http/ActionDispatcher.php, line 131
+Cake\Http\ActionDispatcher::dispatch() - CORE/src/Http/ActionDispatcher.php, line 99
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 65
+[main] - ROOT/webroot/index.php, line 36
+
+
+
+2016-11-18 06:20:20 Notice: Notice (8): Undefined variable: array in [/Users/varunprathap/demoapp/src/Template/Element/popoverelmnt.ctp, line 11]
+Request URL: /Employees/edit/23
+Referer URL: http://localhost:8765/Employees
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+include - APP/Template/Element/popoverelmnt.ctp, line 11
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::_renderElement() - CORE/src/View/View.php, line 1350
+Cake\View\View::element() - CORE/src/View/View.php, line 493
+include - APP/Template/Employees/edit.ctp, line 250
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::render() - CORE/src/View/View.php, line 588
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 617
+Cake\Http\ActionDispatcher::_invoke() - CORE/src/Http/ActionDispatcher.php, line 131
+Cake\Http\ActionDispatcher::dispatch() - CORE/src/Http/ActionDispatcher.php, line 99
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 65
+[main] - ROOT/webroot/index.php, line 36
+
+
+
+2016-11-18 06:20:20 Notice: Notice (8): Undefined variable: array in [/Users/varunprathap/demoapp/src/Template/Element/popoverelmnt.ctp, line 11]
+Request URL: /Employees/edit/23
+Referer URL: http://localhost:8765/Employees
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+include - APP/Template/Element/popoverelmnt.ctp, line 11
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::_renderElement() - CORE/src/View/View.php, line 1350
+Cake\View\View::element() - CORE/src/View/View.php, line 493
+include - APP/Template/Employees/edit.ctp, line 250
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::render() - CORE/src/View/View.php, line 588
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 617
+Cake\Http\ActionDispatcher::_invoke() - CORE/src/Http/ActionDispatcher.php, line 131
+Cake\Http\ActionDispatcher::dispatch() - CORE/src/Http/ActionDispatcher.php, line 99
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 65
+[main] - ROOT/webroot/index.php, line 36
+
+
+
+2016-11-18 06:20:20 Notice: Notice (8): Undefined variable: array in [/Users/varunprathap/demoapp/src/Template/Element/popoverelmnt.ctp, line 11]
+Request URL: /Employees/edit/23
+Referer URL: http://localhost:8765/Employees
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+include - APP/Template/Element/popoverelmnt.ctp, line 11
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::_renderElement() - CORE/src/View/View.php, line 1350
+Cake\View\View::element() - CORE/src/View/View.php, line 493
+include - APP/Template/Employees/edit.ctp, line 250
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::render() - CORE/src/View/View.php, line 588
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 617
+Cake\Http\ActionDispatcher::_invoke() - CORE/src/Http/ActionDispatcher.php, line 131
+Cake\Http\ActionDispatcher::dispatch() - CORE/src/Http/ActionDispatcher.php, line 99
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 65
+[main] - ROOT/webroot/index.php, line 36
+
+
+
+2016-11-18 06:21:15 Notice: Notice (8): Undefined variable: poptitle in [/Users/varunprathap/demoapp/src/Template/Element/popoverelmnt.ctp, line 1]
+Request URL: /Employees/edit/23
+Referer URL: http://localhost:8765/Employees
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+include - APP/Template/Element/popoverelmnt.ctp, line 1
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::_renderElement() - CORE/src/View/View.php, line 1350
+Cake\View\View::element() - CORE/src/View/View.php, line 493
+include - APP/Template/Employees/edit.ctp, line 250
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::render() - CORE/src/View/View.php, line 588
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 617
+Cake\Http\ActionDispatcher::_invoke() - CORE/src/Http/ActionDispatcher.php, line 131
+Cake\Http\ActionDispatcher::dispatch() - CORE/src/Http/ActionDispatcher.php, line 99
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 65
+[main] - ROOT/webroot/index.php, line 36
+
+
+
+2016-11-18 06:21:15 Notice: Notice (8): Undefined variable: title in [/Users/varunprathap/demoapp/src/Template/Element/popoverelmnt.ctp, line 6]
+Request URL: /Employees/edit/23
+Referer URL: http://localhost:8765/Employees
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+include - APP/Template/Element/popoverelmnt.ctp, line 6
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::_renderElement() - CORE/src/View/View.php, line 1350
+Cake\View\View::element() - CORE/src/View/View.php, line 493
+include - APP/Template/Employees/edit.ctp, line 250
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::render() - CORE/src/View/View.php, line 588
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 617
+Cake\Http\ActionDispatcher::_invoke() - CORE/src/Http/ActionDispatcher.php, line 131
+Cake\Http\ActionDispatcher::dispatch() - CORE/src/Http/ActionDispatcher.php, line 99
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 65
+[main] - ROOT/webroot/index.php, line 36
+
+
+
+2016-11-18 06:21:15 Notice: Notice (8): Undefined variable: array in [/Users/varunprathap/demoapp/src/Template/Element/popoverelmnt.ctp, line 11]
+Request URL: /Employees/edit/23
+Referer URL: http://localhost:8765/Employees
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+include - APP/Template/Element/popoverelmnt.ctp, line 11
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::_renderElement() - CORE/src/View/View.php, line 1350
+Cake\View\View::element() - CORE/src/View/View.php, line 493
+include - APP/Template/Employees/edit.ctp, line 250
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::render() - CORE/src/View/View.php, line 588
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 617
+Cake\Http\ActionDispatcher::_invoke() - CORE/src/Http/ActionDispatcher.php, line 131
+Cake\Http\ActionDispatcher::dispatch() - CORE/src/Http/ActionDispatcher.php, line 99
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 65
+[main] - ROOT/webroot/index.php, line 36
+
+
+
+2016-11-18 06:21:15 Notice: Notice (8): Undefined variable: array in [/Users/varunprathap/demoapp/src/Template/Element/popoverelmnt.ctp, line 11]
+Request URL: /Employees/edit/23
+Referer URL: http://localhost:8765/Employees
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+include - APP/Template/Element/popoverelmnt.ctp, line 11
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::_renderElement() - CORE/src/View/View.php, line 1350
+Cake\View\View::element() - CORE/src/View/View.php, line 493
+include - APP/Template/Employees/edit.ctp, line 250
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::render() - CORE/src/View/View.php, line 588
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 617
+Cake\Http\ActionDispatcher::_invoke() - CORE/src/Http/ActionDispatcher.php, line 131
+Cake\Http\ActionDispatcher::dispatch() - CORE/src/Http/ActionDispatcher.php, line 99
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 65
+[main] - ROOT/webroot/index.php, line 36
+
+
+
+2016-11-18 06:21:15 Notice: Notice (8): Undefined variable: array in [/Users/varunprathap/demoapp/src/Template/Element/popoverelmnt.ctp, line 11]
+Request URL: /Employees/edit/23
+Referer URL: http://localhost:8765/Employees
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+include - APP/Template/Element/popoverelmnt.ctp, line 11
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::_renderElement() - CORE/src/View/View.php, line 1350
+Cake\View\View::element() - CORE/src/View/View.php, line 493
+include - APP/Template/Employees/edit.ctp, line 250
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::render() - CORE/src/View/View.php, line 588
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 617
+Cake\Http\ActionDispatcher::_invoke() - CORE/src/Http/ActionDispatcher.php, line 131
+Cake\Http\ActionDispatcher::dispatch() - CORE/src/Http/ActionDispatcher.php, line 99
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 65
+[main] - ROOT/webroot/index.php, line 36
+
+
+
+2016-11-18 06:21:15 Notice: Notice (8): Undefined variable: array in [/Users/varunprathap/demoapp/src/Template/Element/popoverelmnt.ctp, line 11]
+Request URL: /Employees/edit/23
+Referer URL: http://localhost:8765/Employees
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+include - APP/Template/Element/popoverelmnt.ctp, line 11
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::_renderElement() - CORE/src/View/View.php, line 1350
+Cake\View\View::element() - CORE/src/View/View.php, line 493
+include - APP/Template/Employees/edit.ctp, line 250
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::render() - CORE/src/View/View.php, line 588
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 617
+Cake\Http\ActionDispatcher::_invoke() - CORE/src/Http/ActionDispatcher.php, line 131
+Cake\Http\ActionDispatcher::dispatch() - CORE/src/Http/ActionDispatcher.php, line 99
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 65
+[main] - ROOT/webroot/index.php, line 36
+
+
+
+2016-11-18 06:21:15 Notice: Notice (8): Undefined variable: array in [/Users/varunprathap/demoapp/src/Template/Element/popoverelmnt.ctp, line 11]
+Request URL: /Employees/edit/23
+Referer URL: http://localhost:8765/Employees
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+include - APP/Template/Element/popoverelmnt.ctp, line 11
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::_renderElement() - CORE/src/View/View.php, line 1350
+Cake\View\View::element() - CORE/src/View/View.php, line 493
+include - APP/Template/Employees/edit.ctp, line 250
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::render() - CORE/src/View/View.php, line 588
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 617
+Cake\Http\ActionDispatcher::_invoke() - CORE/src/Http/ActionDispatcher.php, line 131
+Cake\Http\ActionDispatcher::dispatch() - CORE/src/Http/ActionDispatcher.php, line 99
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 65
+[main] - ROOT/webroot/index.php, line 36
+
+
+
+2016-11-18 06:21:15 Notice: Notice (8): Undefined variable: array in [/Users/varunprathap/demoapp/src/Template/Element/popoverelmnt.ctp, line 11]
+Request URL: /Employees/edit/23
+Referer URL: http://localhost:8765/Employees
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+include - APP/Template/Element/popoverelmnt.ctp, line 11
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::_renderElement() - CORE/src/View/View.php, line 1350
+Cake\View\View::element() - CORE/src/View/View.php, line 493
+include - APP/Template/Employees/edit.ctp, line 250
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::render() - CORE/src/View/View.php, line 588
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 617
+Cake\Http\ActionDispatcher::_invoke() - CORE/src/Http/ActionDispatcher.php, line 131
+Cake\Http\ActionDispatcher::dispatch() - CORE/src/Http/ActionDispatcher.php, line 99
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 65
+[main] - ROOT/webroot/index.php, line 36
+
+
+
+2016-11-18 06:21:15 Notice: Notice (8): Undefined variable: array in [/Users/varunprathap/demoapp/src/Template/Element/popoverelmnt.ctp, line 11]
+Request URL: /Employees/edit/23
+Referer URL: http://localhost:8765/Employees
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+include - APP/Template/Element/popoverelmnt.ctp, line 11
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::_renderElement() - CORE/src/View/View.php, line 1350
+Cake\View\View::element() - CORE/src/View/View.php, line 493
+include - APP/Template/Employees/edit.ctp, line 250
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::render() - CORE/src/View/View.php, line 588
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 617
+Cake\Http\ActionDispatcher::_invoke() - CORE/src/Http/ActionDispatcher.php, line 131
+Cake\Http\ActionDispatcher::dispatch() - CORE/src/Http/ActionDispatcher.php, line 99
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 65
+[main] - ROOT/webroot/index.php, line 36
+
+
+
+2016-11-18 06:25:22 Notice: Notice (8): Undefined variable: poptitle in [/Users/varunprathap/demoapp/src/Template/Element/popoverelmnt.ctp, line 1]
+Request URL: /Employees/edit/23
+Referer URL: http://localhost:8765/Employees
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+include - APP/Template/Element/popoverelmnt.ctp, line 1
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::_renderElement() - CORE/src/View/View.php, line 1350
+Cake\View\View::element() - CORE/src/View/View.php, line 493
+include - APP/Template/Employees/edit.ctp, line 250
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::render() - CORE/src/View/View.php, line 588
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 617
+Cake\Http\ActionDispatcher::_invoke() - CORE/src/Http/ActionDispatcher.php, line 131
+Cake\Http\ActionDispatcher::dispatch() - CORE/src/Http/ActionDispatcher.php, line 99
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 65
+[main] - ROOT/webroot/index.php, line 36
+
+
+
+2016-11-18 06:25:22 Notice: Notice (8): Undefined variable: title in [/Users/varunprathap/demoapp/src/Template/Element/popoverelmnt.ctp, line 6]
+Request URL: /Employees/edit/23
+Referer URL: http://localhost:8765/Employees
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+include - APP/Template/Element/popoverelmnt.ctp, line 6
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::_renderElement() - CORE/src/View/View.php, line 1350
+Cake\View\View::element() - CORE/src/View/View.php, line 493
+include - APP/Template/Employees/edit.ctp, line 250
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::render() - CORE/src/View/View.php, line 588
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 617
+Cake\Http\ActionDispatcher::_invoke() - CORE/src/Http/ActionDispatcher.php, line 131
+Cake\Http\ActionDispatcher::dispatch() - CORE/src/Http/ActionDispatcher.php, line 99
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 65
+[main] - ROOT/webroot/index.php, line 36
+
+
+
+2016-11-18 06:25:22 Notice: Notice (8): Undefined variable: array in [/Users/varunprathap/demoapp/src/Template/Element/popoverelmnt.ctp, line 11]
+Request URL: /Employees/edit/23
+Referer URL: http://localhost:8765/Employees
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+include - APP/Template/Element/popoverelmnt.ctp, line 11
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::_renderElement() - CORE/src/View/View.php, line 1350
+Cake\View\View::element() - CORE/src/View/View.php, line 493
+include - APP/Template/Employees/edit.ctp, line 250
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::render() - CORE/src/View/View.php, line 588
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 617
+Cake\Http\ActionDispatcher::_invoke() - CORE/src/Http/ActionDispatcher.php, line 131
+Cake\Http\ActionDispatcher::dispatch() - CORE/src/Http/ActionDispatcher.php, line 99
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 65
+[main] - ROOT/webroot/index.php, line 36
+
+
+
+2016-11-18 06:25:22 Notice: Notice (8): Undefined variable: array in [/Users/varunprathap/demoapp/src/Template/Element/popoverelmnt.ctp, line 11]
+Request URL: /Employees/edit/23
+Referer URL: http://localhost:8765/Employees
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+include - APP/Template/Element/popoverelmnt.ctp, line 11
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::_renderElement() - CORE/src/View/View.php, line 1350
+Cake\View\View::element() - CORE/src/View/View.php, line 493
+include - APP/Template/Employees/edit.ctp, line 250
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::render() - CORE/src/View/View.php, line 588
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 617
+Cake\Http\ActionDispatcher::_invoke() - CORE/src/Http/ActionDispatcher.php, line 131
+Cake\Http\ActionDispatcher::dispatch() - CORE/src/Http/ActionDispatcher.php, line 99
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 65
+[main] - ROOT/webroot/index.php, line 36
+
+
+
+2016-11-18 06:25:22 Notice: Notice (8): Undefined variable: array in [/Users/varunprathap/demoapp/src/Template/Element/popoverelmnt.ctp, line 11]
+Request URL: /Employees/edit/23
+Referer URL: http://localhost:8765/Employees
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+include - APP/Template/Element/popoverelmnt.ctp, line 11
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::_renderElement() - CORE/src/View/View.php, line 1350
+Cake\View\View::element() - CORE/src/View/View.php, line 493
+include - APP/Template/Employees/edit.ctp, line 250
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::render() - CORE/src/View/View.php, line 588
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 617
+Cake\Http\ActionDispatcher::_invoke() - CORE/src/Http/ActionDispatcher.php, line 131
+Cake\Http\ActionDispatcher::dispatch() - CORE/src/Http/ActionDispatcher.php, line 99
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 65
+[main] - ROOT/webroot/index.php, line 36
+
+
+
+2016-11-18 06:25:22 Notice: Notice (8): Undefined variable: array in [/Users/varunprathap/demoapp/src/Template/Element/popoverelmnt.ctp, line 11]
+Request URL: /Employees/edit/23
+Referer URL: http://localhost:8765/Employees
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+include - APP/Template/Element/popoverelmnt.ctp, line 11
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::_renderElement() - CORE/src/View/View.php, line 1350
+Cake\View\View::element() - CORE/src/View/View.php, line 493
+include - APP/Template/Employees/edit.ctp, line 250
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::render() - CORE/src/View/View.php, line 588
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 617
+Cake\Http\ActionDispatcher::_invoke() - CORE/src/Http/ActionDispatcher.php, line 131
+Cake\Http\ActionDispatcher::dispatch() - CORE/src/Http/ActionDispatcher.php, line 99
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 65
+[main] - ROOT/webroot/index.php, line 36
+
+
+
+2016-11-18 06:25:22 Notice: Notice (8): Undefined variable: array in [/Users/varunprathap/demoapp/src/Template/Element/popoverelmnt.ctp, line 11]
+Request URL: /Employees/edit/23
+Referer URL: http://localhost:8765/Employees
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+include - APP/Template/Element/popoverelmnt.ctp, line 11
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::_renderElement() - CORE/src/View/View.php, line 1350
+Cake\View\View::element() - CORE/src/View/View.php, line 493
+include - APP/Template/Employees/edit.ctp, line 250
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::render() - CORE/src/View/View.php, line 588
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 617
+Cake\Http\ActionDispatcher::_invoke() - CORE/src/Http/ActionDispatcher.php, line 131
+Cake\Http\ActionDispatcher::dispatch() - CORE/src/Http/ActionDispatcher.php, line 99
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 65
+[main] - ROOT/webroot/index.php, line 36
+
+
+
+2016-11-18 06:25:22 Notice: Notice (8): Undefined variable: array in [/Users/varunprathap/demoapp/src/Template/Element/popoverelmnt.ctp, line 11]
+Request URL: /Employees/edit/23
+Referer URL: http://localhost:8765/Employees
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+include - APP/Template/Element/popoverelmnt.ctp, line 11
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::_renderElement() - CORE/src/View/View.php, line 1350
+Cake\View\View::element() - CORE/src/View/View.php, line 493
+include - APP/Template/Employees/edit.ctp, line 250
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::render() - CORE/src/View/View.php, line 588
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 617
+Cake\Http\ActionDispatcher::_invoke() - CORE/src/Http/ActionDispatcher.php, line 131
+Cake\Http\ActionDispatcher::dispatch() - CORE/src/Http/ActionDispatcher.php, line 99
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 65
+[main] - ROOT/webroot/index.php, line 36
+
+
+
+2016-11-18 06:25:22 Notice: Notice (8): Undefined variable: array in [/Users/varunprathap/demoapp/src/Template/Element/popoverelmnt.ctp, line 11]
+Request URL: /Employees/edit/23
+Referer URL: http://localhost:8765/Employees
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+include - APP/Template/Element/popoverelmnt.ctp, line 11
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::_renderElement() - CORE/src/View/View.php, line 1350
+Cake\View\View::element() - CORE/src/View/View.php, line 493
+include - APP/Template/Employees/edit.ctp, line 250
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::render() - CORE/src/View/View.php, line 588
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 617
+Cake\Http\ActionDispatcher::_invoke() - CORE/src/Http/ActionDispatcher.php, line 131
+Cake\Http\ActionDispatcher::dispatch() - CORE/src/Http/ActionDispatcher.php, line 99
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 65
+[main] - ROOT/webroot/index.php, line 36
+
+
+
+2016-11-18 06:28:55 Notice: Notice (8): Undefined variable: poptitle in [/Users/varunprathap/demoapp/src/Template/Element/popoverelmnt.ctp, line 1]
+Request URL: /Employees/edit/23
+Referer URL: http://localhost:8765/Employees
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+include - APP/Template/Element/popoverelmnt.ctp, line 1
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::_renderElement() - CORE/src/View/View.php, line 1350
+Cake\View\View::element() - CORE/src/View/View.php, line 493
+include - APP/Template/Employees/edit.ctp, line 250
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::render() - CORE/src/View/View.php, line 588
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 617
+Cake\Http\ActionDispatcher::_invoke() - CORE/src/Http/ActionDispatcher.php, line 131
+Cake\Http\ActionDispatcher::dispatch() - CORE/src/Http/ActionDispatcher.php, line 99
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 65
+[main] - ROOT/webroot/index.php, line 36
+
+
+
+2016-11-18 06:28:55 Notice: Notice (8): Undefined variable: title in [/Users/varunprathap/demoapp/src/Template/Element/popoverelmnt.ctp, line 6]
+Request URL: /Employees/edit/23
+Referer URL: http://localhost:8765/Employees
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+include - APP/Template/Element/popoverelmnt.ctp, line 6
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::_renderElement() - CORE/src/View/View.php, line 1350
+Cake\View\View::element() - CORE/src/View/View.php, line 493
+include - APP/Template/Employees/edit.ctp, line 250
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::render() - CORE/src/View/View.php, line 588
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 617
+Cake\Http\ActionDispatcher::_invoke() - CORE/src/Http/ActionDispatcher.php, line 131
+Cake\Http\ActionDispatcher::dispatch() - CORE/src/Http/ActionDispatcher.php, line 99
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 65
+[main] - ROOT/webroot/index.php, line 36
+
+
+
+2016-11-18 06:28:55 Notice: Notice (8): Undefined variable: array in [/Users/varunprathap/demoapp/src/Template/Element/popoverelmnt.ctp, line 11]
+Request URL: /Employees/edit/23
+Referer URL: http://localhost:8765/Employees
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+include - APP/Template/Element/popoverelmnt.ctp, line 11
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::_renderElement() - CORE/src/View/View.php, line 1350
+Cake\View\View::element() - CORE/src/View/View.php, line 493
+include - APP/Template/Employees/edit.ctp, line 250
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::render() - CORE/src/View/View.php, line 588
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 617
+Cake\Http\ActionDispatcher::_invoke() - CORE/src/Http/ActionDispatcher.php, line 131
+Cake\Http\ActionDispatcher::dispatch() - CORE/src/Http/ActionDispatcher.php, line 99
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 65
+[main] - ROOT/webroot/index.php, line 36
+
+
+
+2016-11-18 06:28:55 Notice: Notice (8): Undefined variable: array in [/Users/varunprathap/demoapp/src/Template/Element/popoverelmnt.ctp, line 11]
+Request URL: /Employees/edit/23
+Referer URL: http://localhost:8765/Employees
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+include - APP/Template/Element/popoverelmnt.ctp, line 11
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::_renderElement() - CORE/src/View/View.php, line 1350
+Cake\View\View::element() - CORE/src/View/View.php, line 493
+include - APP/Template/Employees/edit.ctp, line 250
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::render() - CORE/src/View/View.php, line 588
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 617
+Cake\Http\ActionDispatcher::_invoke() - CORE/src/Http/ActionDispatcher.php, line 131
+Cake\Http\ActionDispatcher::dispatch() - CORE/src/Http/ActionDispatcher.php, line 99
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 65
+[main] - ROOT/webroot/index.php, line 36
+
+
+
+2016-11-18 06:28:55 Notice: Notice (8): Undefined variable: array in [/Users/varunprathap/demoapp/src/Template/Element/popoverelmnt.ctp, line 11]
+Request URL: /Employees/edit/23
+Referer URL: http://localhost:8765/Employees
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+include - APP/Template/Element/popoverelmnt.ctp, line 11
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::_renderElement() - CORE/src/View/View.php, line 1350
+Cake\View\View::element() - CORE/src/View/View.php, line 493
+include - APP/Template/Employees/edit.ctp, line 250
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::render() - CORE/src/View/View.php, line 588
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 617
+Cake\Http\ActionDispatcher::_invoke() - CORE/src/Http/ActionDispatcher.php, line 131
+Cake\Http\ActionDispatcher::dispatch() - CORE/src/Http/ActionDispatcher.php, line 99
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 65
+[main] - ROOT/webroot/index.php, line 36
+
+
+
+2016-11-18 06:28:55 Notice: Notice (8): Undefined variable: array in [/Users/varunprathap/demoapp/src/Template/Element/popoverelmnt.ctp, line 11]
+Request URL: /Employees/edit/23
+Referer URL: http://localhost:8765/Employees
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+include - APP/Template/Element/popoverelmnt.ctp, line 11
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::_renderElement() - CORE/src/View/View.php, line 1350
+Cake\View\View::element() - CORE/src/View/View.php, line 493
+include - APP/Template/Employees/edit.ctp, line 250
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::render() - CORE/src/View/View.php, line 588
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 617
+Cake\Http\ActionDispatcher::_invoke() - CORE/src/Http/ActionDispatcher.php, line 131
+Cake\Http\ActionDispatcher::dispatch() - CORE/src/Http/ActionDispatcher.php, line 99
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 65
+[main] - ROOT/webroot/index.php, line 36
+
+
+
+2016-11-18 06:28:55 Notice: Notice (8): Undefined variable: array in [/Users/varunprathap/demoapp/src/Template/Element/popoverelmnt.ctp, line 11]
+Request URL: /Employees/edit/23
+Referer URL: http://localhost:8765/Employees
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+include - APP/Template/Element/popoverelmnt.ctp, line 11
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::_renderElement() - CORE/src/View/View.php, line 1350
+Cake\View\View::element() - CORE/src/View/View.php, line 493
+include - APP/Template/Employees/edit.ctp, line 250
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::render() - CORE/src/View/View.php, line 588
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 617
+Cake\Http\ActionDispatcher::_invoke() - CORE/src/Http/ActionDispatcher.php, line 131
+Cake\Http\ActionDispatcher::dispatch() - CORE/src/Http/ActionDispatcher.php, line 99
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 65
+[main] - ROOT/webroot/index.php, line 36
+
+
+
+2016-11-18 06:28:55 Notice: Notice (8): Undefined variable: array in [/Users/varunprathap/demoapp/src/Template/Element/popoverelmnt.ctp, line 11]
+Request URL: /Employees/edit/23
+Referer URL: http://localhost:8765/Employees
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+include - APP/Template/Element/popoverelmnt.ctp, line 11
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::_renderElement() - CORE/src/View/View.php, line 1350
+Cake\View\View::element() - CORE/src/View/View.php, line 493
+include - APP/Template/Employees/edit.ctp, line 250
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::render() - CORE/src/View/View.php, line 588
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 617
+Cake\Http\ActionDispatcher::_invoke() - CORE/src/Http/ActionDispatcher.php, line 131
+Cake\Http\ActionDispatcher::dispatch() - CORE/src/Http/ActionDispatcher.php, line 99
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 65
+[main] - ROOT/webroot/index.php, line 36
+
+
+
+2016-11-18 06:28:55 Notice: Notice (8): Undefined variable: array in [/Users/varunprathap/demoapp/src/Template/Element/popoverelmnt.ctp, line 11]
+Request URL: /Employees/edit/23
+Referer URL: http://localhost:8765/Employees
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+include - APP/Template/Element/popoverelmnt.ctp, line 11
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::_renderElement() - CORE/src/View/View.php, line 1350
+Cake\View\View::element() - CORE/src/View/View.php, line 493
+include - APP/Template/Employees/edit.ctp, line 250
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::render() - CORE/src/View/View.php, line 588
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 617
+Cake\Http\ActionDispatcher::_invoke() - CORE/src/Http/ActionDispatcher.php, line 131
+Cake\Http\ActionDispatcher::dispatch() - CORE/src/Http/ActionDispatcher.php, line 99
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 65
+[main] - ROOT/webroot/index.php, line 36
+
+
+
+2016-11-18 06:29:36 Notice: Notice (8): Undefined variable: array in [/Users/varunprathap/demoapp/src/Template/Element/popoverelmnt.ctp, line 11]
+Request URL: /Employees/edit/23
+Referer URL: http://localhost:8765/Employees
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+include - APP/Template/Element/popoverelmnt.ctp, line 11
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::_renderElement() - CORE/src/View/View.php, line 1350
+Cake\View\View::element() - CORE/src/View/View.php, line 493
+include - APP/Template/Employees/edit.ctp, line 250
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::render() - CORE/src/View/View.php, line 588
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 617
+Cake\Http\ActionDispatcher::_invoke() - CORE/src/Http/ActionDispatcher.php, line 131
+Cake\Http\ActionDispatcher::dispatch() - CORE/src/Http/ActionDispatcher.php, line 99
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 65
+[main] - ROOT/webroot/index.php, line 36
+
+
+
+2016-11-18 06:29:36 Notice: Notice (8): Undefined variable: array in [/Users/varunprathap/demoapp/src/Template/Element/popoverelmnt.ctp, line 11]
+Request URL: /Employees/edit/23
+Referer URL: http://localhost:8765/Employees
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+include - APP/Template/Element/popoverelmnt.ctp, line 11
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::_renderElement() - CORE/src/View/View.php, line 1350
+Cake\View\View::element() - CORE/src/View/View.php, line 493
+include - APP/Template/Employees/edit.ctp, line 250
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::render() - CORE/src/View/View.php, line 588
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 617
+Cake\Http\ActionDispatcher::_invoke() - CORE/src/Http/ActionDispatcher.php, line 131
+Cake\Http\ActionDispatcher::dispatch() - CORE/src/Http/ActionDispatcher.php, line 99
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 65
+[main] - ROOT/webroot/index.php, line 36
+
+
+
+2016-11-18 06:29:36 Notice: Notice (8): Undefined variable: array in [/Users/varunprathap/demoapp/src/Template/Element/popoverelmnt.ctp, line 11]
+Request URL: /Employees/edit/23
+Referer URL: http://localhost:8765/Employees
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+include - APP/Template/Element/popoverelmnt.ctp, line 11
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::_renderElement() - CORE/src/View/View.php, line 1350
+Cake\View\View::element() - CORE/src/View/View.php, line 493
+include - APP/Template/Employees/edit.ctp, line 250
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::render() - CORE/src/View/View.php, line 588
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 617
+Cake\Http\ActionDispatcher::_invoke() - CORE/src/Http/ActionDispatcher.php, line 131
+Cake\Http\ActionDispatcher::dispatch() - CORE/src/Http/ActionDispatcher.php, line 99
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 65
+[main] - ROOT/webroot/index.php, line 36
+
+
+
+2016-11-18 06:29:36 Notice: Notice (8): Undefined variable: array in [/Users/varunprathap/demoapp/src/Template/Element/popoverelmnt.ctp, line 11]
+Request URL: /Employees/edit/23
+Referer URL: http://localhost:8765/Employees
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+include - APP/Template/Element/popoverelmnt.ctp, line 11
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::_renderElement() - CORE/src/View/View.php, line 1350
+Cake\View\View::element() - CORE/src/View/View.php, line 493
+include - APP/Template/Employees/edit.ctp, line 250
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::render() - CORE/src/View/View.php, line 588
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 617
+Cake\Http\ActionDispatcher::_invoke() - CORE/src/Http/ActionDispatcher.php, line 131
+Cake\Http\ActionDispatcher::dispatch() - CORE/src/Http/ActionDispatcher.php, line 99
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 65
+[main] - ROOT/webroot/index.php, line 36
+
+
+
+2016-11-18 06:29:36 Notice: Notice (8): Undefined variable: array in [/Users/varunprathap/demoapp/src/Template/Element/popoverelmnt.ctp, line 11]
+Request URL: /Employees/edit/23
+Referer URL: http://localhost:8765/Employees
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+include - APP/Template/Element/popoverelmnt.ctp, line 11
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::_renderElement() - CORE/src/View/View.php, line 1350
+Cake\View\View::element() - CORE/src/View/View.php, line 493
+include - APP/Template/Employees/edit.ctp, line 250
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::render() - CORE/src/View/View.php, line 588
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 617
+Cake\Http\ActionDispatcher::_invoke() - CORE/src/Http/ActionDispatcher.php, line 131
+Cake\Http\ActionDispatcher::dispatch() - CORE/src/Http/ActionDispatcher.php, line 99
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 65
+[main] - ROOT/webroot/index.php, line 36
+
+
+
+2016-11-18 06:29:36 Notice: Notice (8): Undefined variable: array in [/Users/varunprathap/demoapp/src/Template/Element/popoverelmnt.ctp, line 11]
+Request URL: /Employees/edit/23
+Referer URL: http://localhost:8765/Employees
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+include - APP/Template/Element/popoverelmnt.ctp, line 11
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::_renderElement() - CORE/src/View/View.php, line 1350
+Cake\View\View::element() - CORE/src/View/View.php, line 493
+include - APP/Template/Employees/edit.ctp, line 250
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::render() - CORE/src/View/View.php, line 588
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 617
+Cake\Http\ActionDispatcher::_invoke() - CORE/src/Http/ActionDispatcher.php, line 131
+Cake\Http\ActionDispatcher::dispatch() - CORE/src/Http/ActionDispatcher.php, line 99
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 65
+[main] - ROOT/webroot/index.php, line 36
+
+
+
+2016-11-18 06:29:36 Notice: Notice (8): Undefined variable: array in [/Users/varunprathap/demoapp/src/Template/Element/popoverelmnt.ctp, line 11]
+Request URL: /Employees/edit/23
+Referer URL: http://localhost:8765/Employees
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+include - APP/Template/Element/popoverelmnt.ctp, line 11
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::_renderElement() - CORE/src/View/View.php, line 1350
+Cake\View\View::element() - CORE/src/View/View.php, line 493
+include - APP/Template/Employees/edit.ctp, line 250
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::render() - CORE/src/View/View.php, line 588
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 617
+Cake\Http\ActionDispatcher::_invoke() - CORE/src/Http/ActionDispatcher.php, line 131
+Cake\Http\ActionDispatcher::dispatch() - CORE/src/Http/ActionDispatcher.php, line 99
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 65
+[main] - ROOT/webroot/index.php, line 36
+
+
+
+2016-11-18 06:30:15 Notice: Notice (8): Array to string conversion in [/Users/varunprathap/demoapp/src/Template/Element/popoverelmnt.ctp, line 11]
+Request URL: /Employees/edit/23
+Referer URL: http://localhost:8765/Employees
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+include - APP/Template/Element/popoverelmnt.ctp, line 11
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::_renderElement() - CORE/src/View/View.php, line 1350
+Cake\View\View::element() - CORE/src/View/View.php, line 493
+include - APP/Template/Employees/edit.ctp, line 250
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::render() - CORE/src/View/View.php, line 588
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 617
+Cake\Http\ActionDispatcher::_invoke() - CORE/src/Http/ActionDispatcher.php, line 131
+Cake\Http\ActionDispatcher::dispatch() - CORE/src/Http/ActionDispatcher.php, line 99
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 65
+[main] - ROOT/webroot/index.php, line 36
+
+
+
+2016-11-18 06:30:15 Notice: Notice (8): Array to string conversion in [/Users/varunprathap/demoapp/src/Template/Element/popoverelmnt.ctp, line 11]
+Request URL: /Employees/edit/23
+Referer URL: http://localhost:8765/Employees
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+include - APP/Template/Element/popoverelmnt.ctp, line 11
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::_renderElement() - CORE/src/View/View.php, line 1350
+Cake\View\View::element() - CORE/src/View/View.php, line 493
+include - APP/Template/Employees/edit.ctp, line 250
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::render() - CORE/src/View/View.php, line 588
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 617
+Cake\Http\ActionDispatcher::_invoke() - CORE/src/Http/ActionDispatcher.php, line 131
+Cake\Http\ActionDispatcher::dispatch() - CORE/src/Http/ActionDispatcher.php, line 99
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 65
+[main] - ROOT/webroot/index.php, line 36
+
+
+
+2016-11-18 06:30:15 Notice: Notice (8): Array to string conversion in [/Users/varunprathap/demoapp/src/Template/Element/popoverelmnt.ctp, line 11]
+Request URL: /Employees/edit/23
+Referer URL: http://localhost:8765/Employees
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+include - APP/Template/Element/popoverelmnt.ctp, line 11
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::_renderElement() - CORE/src/View/View.php, line 1350
+Cake\View\View::element() - CORE/src/View/View.php, line 493
+include - APP/Template/Employees/edit.ctp, line 250
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::render() - CORE/src/View/View.php, line 588
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 617
+Cake\Http\ActionDispatcher::_invoke() - CORE/src/Http/ActionDispatcher.php, line 131
+Cake\Http\ActionDispatcher::dispatch() - CORE/src/Http/ActionDispatcher.php, line 99
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 65
+[main] - ROOT/webroot/index.php, line 36
+
+
+
+2016-11-18 06:30:15 Notice: Notice (8): Array to string conversion in [/Users/varunprathap/demoapp/src/Template/Element/popoverelmnt.ctp, line 11]
+Request URL: /Employees/edit/23
+Referer URL: http://localhost:8765/Employees
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+include - APP/Template/Element/popoverelmnt.ctp, line 11
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::_renderElement() - CORE/src/View/View.php, line 1350
+Cake\View\View::element() - CORE/src/View/View.php, line 493
+include - APP/Template/Employees/edit.ctp, line 250
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::render() - CORE/src/View/View.php, line 588
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 617
+Cake\Http\ActionDispatcher::_invoke() - CORE/src/Http/ActionDispatcher.php, line 131
+Cake\Http\ActionDispatcher::dispatch() - CORE/src/Http/ActionDispatcher.php, line 99
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 65
+[main] - ROOT/webroot/index.php, line 36
+
+
+
+2016-11-18 06:30:15 Notice: Notice (8): Array to string conversion in [/Users/varunprathap/demoapp/src/Template/Element/popoverelmnt.ctp, line 11]
+Request URL: /Employees/edit/23
+Referer URL: http://localhost:8765/Employees
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+include - APP/Template/Element/popoverelmnt.ctp, line 11
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::_renderElement() - CORE/src/View/View.php, line 1350
+Cake\View\View::element() - CORE/src/View/View.php, line 493
+include - APP/Template/Employees/edit.ctp, line 250
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::render() - CORE/src/View/View.php, line 588
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 617
+Cake\Http\ActionDispatcher::_invoke() - CORE/src/Http/ActionDispatcher.php, line 131
+Cake\Http\ActionDispatcher::dispatch() - CORE/src/Http/ActionDispatcher.php, line 99
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 65
+[main] - ROOT/webroot/index.php, line 36
+
+
+
+2016-11-18 06:30:15 Notice: Notice (8): Array to string conversion in [/Users/varunprathap/demoapp/src/Template/Element/popoverelmnt.ctp, line 11]
+Request URL: /Employees/edit/23
+Referer URL: http://localhost:8765/Employees
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+include - APP/Template/Element/popoverelmnt.ctp, line 11
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::_renderElement() - CORE/src/View/View.php, line 1350
+Cake\View\View::element() - CORE/src/View/View.php, line 493
+include - APP/Template/Employees/edit.ctp, line 250
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::render() - CORE/src/View/View.php, line 588
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 617
+Cake\Http\ActionDispatcher::_invoke() - CORE/src/Http/ActionDispatcher.php, line 131
+Cake\Http\ActionDispatcher::dispatch() - CORE/src/Http/ActionDispatcher.php, line 99
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 65
+[main] - ROOT/webroot/index.php, line 36
+
+
+
+2016-11-18 06:30:15 Notice: Notice (8): Array to string conversion in [/Users/varunprathap/demoapp/src/Template/Element/popoverelmnt.ctp, line 11]
+Request URL: /Employees/edit/23
+Referer URL: http://localhost:8765/Employees
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+include - APP/Template/Element/popoverelmnt.ctp, line 11
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::_renderElement() - CORE/src/View/View.php, line 1350
+Cake\View\View::element() - CORE/src/View/View.php, line 493
+include - APP/Template/Employees/edit.ctp, line 250
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::render() - CORE/src/View/View.php, line 588
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 617
+Cake\Http\ActionDispatcher::_invoke() - CORE/src/Http/ActionDispatcher.php, line 131
+Cake\Http\ActionDispatcher::dispatch() - CORE/src/Http/ActionDispatcher.php, line 99
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 65
+[main] - ROOT/webroot/index.php, line 36
+
+
+
+2016-11-18 06:31:10 Notice: Notice (8): Undefined index: title in [/Users/varunprathap/demoapp/src/Template/Element/popoverelmnt.ctp, line 11]
+Request URL: /Employees/edit/23
+Referer URL: http://localhost:8765/Employees
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+include - APP/Template/Element/popoverelmnt.ctp, line 11
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::_renderElement() - CORE/src/View/View.php, line 1350
+Cake\View\View::element() - CORE/src/View/View.php, line 493
+include - APP/Template/Employees/edit.ctp, line 250
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::render() - CORE/src/View/View.php, line 588
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 617
+Cake\Http\ActionDispatcher::_invoke() - CORE/src/Http/ActionDispatcher.php, line 131
+Cake\Http\ActionDispatcher::dispatch() - CORE/src/Http/ActionDispatcher.php, line 99
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 65
+[main] - ROOT/webroot/index.php, line 36
+
+
+
+2016-11-18 06:31:10 Notice: Notice (8): Undefined index: title in [/Users/varunprathap/demoapp/src/Template/Element/popoverelmnt.ctp, line 11]
+Request URL: /Employees/edit/23
+Referer URL: http://localhost:8765/Employees
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+include - APP/Template/Element/popoverelmnt.ctp, line 11
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::_renderElement() - CORE/src/View/View.php, line 1350
+Cake\View\View::element() - CORE/src/View/View.php, line 493
+include - APP/Template/Employees/edit.ctp, line 250
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::render() - CORE/src/View/View.php, line 588
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 617
+Cake\Http\ActionDispatcher::_invoke() - CORE/src/Http/ActionDispatcher.php, line 131
+Cake\Http\ActionDispatcher::dispatch() - CORE/src/Http/ActionDispatcher.php, line 99
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 65
+[main] - ROOT/webroot/index.php, line 36
+
+
+
+2016-11-18 06:31:10 Notice: Notice (8): Undefined index: title in [/Users/varunprathap/demoapp/src/Template/Element/popoverelmnt.ctp, line 11]
+Request URL: /Employees/edit/23
+Referer URL: http://localhost:8765/Employees
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+include - APP/Template/Element/popoverelmnt.ctp, line 11
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::_renderElement() - CORE/src/View/View.php, line 1350
+Cake\View\View::element() - CORE/src/View/View.php, line 493
+include - APP/Template/Employees/edit.ctp, line 250
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::render() - CORE/src/View/View.php, line 588
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 617
+Cake\Http\ActionDispatcher::_invoke() - CORE/src/Http/ActionDispatcher.php, line 131
+Cake\Http\ActionDispatcher::dispatch() - CORE/src/Http/ActionDispatcher.php, line 99
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 65
+[main] - ROOT/webroot/index.php, line 36
+
+
+
+2016-11-18 06:31:10 Notice: Notice (8): Undefined index: title in [/Users/varunprathap/demoapp/src/Template/Element/popoverelmnt.ctp, line 11]
+Request URL: /Employees/edit/23
+Referer URL: http://localhost:8765/Employees
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+include - APP/Template/Element/popoverelmnt.ctp, line 11
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::_renderElement() - CORE/src/View/View.php, line 1350
+Cake\View\View::element() - CORE/src/View/View.php, line 493
+include - APP/Template/Employees/edit.ctp, line 250
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::render() - CORE/src/View/View.php, line 588
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 617
+Cake\Http\ActionDispatcher::_invoke() - CORE/src/Http/ActionDispatcher.php, line 131
+Cake\Http\ActionDispatcher::dispatch() - CORE/src/Http/ActionDispatcher.php, line 99
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 65
+[main] - ROOT/webroot/index.php, line 36
+
+
+
+2016-11-18 06:31:10 Notice: Notice (8): Undefined index: title in [/Users/varunprathap/demoapp/src/Template/Element/popoverelmnt.ctp, line 11]
+Request URL: /Employees/edit/23
+Referer URL: http://localhost:8765/Employees
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+include - APP/Template/Element/popoverelmnt.ctp, line 11
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::_renderElement() - CORE/src/View/View.php, line 1350
+Cake\View\View::element() - CORE/src/View/View.php, line 493
+include - APP/Template/Employees/edit.ctp, line 250
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::render() - CORE/src/View/View.php, line 588
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 617
+Cake\Http\ActionDispatcher::_invoke() - CORE/src/Http/ActionDispatcher.php, line 131
+Cake\Http\ActionDispatcher::dispatch() - CORE/src/Http/ActionDispatcher.php, line 99
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 65
+[main] - ROOT/webroot/index.php, line 36
+
+
+
+2016-11-18 06:31:10 Notice: Notice (8): Undefined index: title in [/Users/varunprathap/demoapp/src/Template/Element/popoverelmnt.ctp, line 11]
+Request URL: /Employees/edit/23
+Referer URL: http://localhost:8765/Employees
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+include - APP/Template/Element/popoverelmnt.ctp, line 11
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::_renderElement() - CORE/src/View/View.php, line 1350
+Cake\View\View::element() - CORE/src/View/View.php, line 493
+include - APP/Template/Employees/edit.ctp, line 250
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::render() - CORE/src/View/View.php, line 588
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 617
+Cake\Http\ActionDispatcher::_invoke() - CORE/src/Http/ActionDispatcher.php, line 131
+Cake\Http\ActionDispatcher::dispatch() - CORE/src/Http/ActionDispatcher.php, line 99
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 65
+[main] - ROOT/webroot/index.php, line 36
+
+
+
+2016-11-18 06:31:10 Notice: Notice (8): Undefined index: title in [/Users/varunprathap/demoapp/src/Template/Element/popoverelmnt.ctp, line 11]
+Request URL: /Employees/edit/23
+Referer URL: http://localhost:8765/Employees
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+include - APP/Template/Element/popoverelmnt.ctp, line 11
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::_renderElement() - CORE/src/View/View.php, line 1350
+Cake\View\View::element() - CORE/src/View/View.php, line 493
+include - APP/Template/Employees/edit.ctp, line 250
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::render() - CORE/src/View/View.php, line 588
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 617
+Cake\Http\ActionDispatcher::_invoke() - CORE/src/Http/ActionDispatcher.php, line 131
+Cake\Http\ActionDispatcher::dispatch() - CORE/src/Http/ActionDispatcher.php, line 99
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 65
+[main] - ROOT/webroot/index.php, line 36
+
+
+
+2016-11-18 06:33:58 Notice: Notice (8): Array to string conversion in [/Users/varunprathap/demoapp/src/Template/Element/popoverelmnt.ctp, line 10]
+Request URL: /Employees/edit/23
+Referer URL: http://localhost:8765/Employees
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+include - APP/Template/Element/popoverelmnt.ctp, line 10
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::_renderElement() - CORE/src/View/View.php, line 1350
+Cake\View\View::element() - CORE/src/View/View.php, line 493
+include - APP/Template/Employees/edit.ctp, line 250
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::render() - CORE/src/View/View.php, line 588
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 617
+Cake\Http\ActionDispatcher::_invoke() - CORE/src/Http/ActionDispatcher.php, line 131
+Cake\Http\ActionDispatcher::dispatch() - CORE/src/Http/ActionDispatcher.php, line 99
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 65
+[main] - ROOT/webroot/index.php, line 36
+
+
+
+2016-11-18 06:36:32 Notice: Notice (8): Undefined offset: 0 in [/Users/varunprathap/demoapp/src/Template/Element/popoverelmnt.ctp, line 12]
+Request URL: /Employees/edit/23
+Referer URL: http://localhost:8765/Employees
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+include - APP/Template/Element/popoverelmnt.ctp, line 12
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::_renderElement() - CORE/src/View/View.php, line 1350
+Cake\View\View::element() - CORE/src/View/View.php, line 493
+include - APP/Template/Employees/edit.ctp, line 250
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::render() - CORE/src/View/View.php, line 588
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 617
+Cake\Http\ActionDispatcher::_invoke() - CORE/src/Http/ActionDispatcher.php, line 131
+Cake\Http\ActionDispatcher::dispatch() - CORE/src/Http/ActionDispatcher.php, line 99
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 65
+[main] - ROOT/webroot/index.php, line 36
+
+
+
+2016-11-18 06:36:32 Notice: Notice (8): Undefined offset: 1 in [/Users/varunprathap/demoapp/src/Template/Element/popoverelmnt.ctp, line 12]
+Request URL: /Employees/edit/23
+Referer URL: http://localhost:8765/Employees
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+include - APP/Template/Element/popoverelmnt.ctp, line 12
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::_renderElement() - CORE/src/View/View.php, line 1350
+Cake\View\View::element() - CORE/src/View/View.php, line 493
+include - APP/Template/Employees/edit.ctp, line 250
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::render() - CORE/src/View/View.php, line 588
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 617
+Cake\Http\ActionDispatcher::_invoke() - CORE/src/Http/ActionDispatcher.php, line 131
+Cake\Http\ActionDispatcher::dispatch() - CORE/src/Http/ActionDispatcher.php, line 99
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 65
+[main] - ROOT/webroot/index.php, line 36
+
+
+
+2016-11-21 05:01:25 Notice: Notice (8): Undefined variable: title in [/Users/varunprathap/demoapp/src/Template/Element/popoverelmnt.ctp, line 6]
+Request URL: /Employees/edit/23
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+include - APP/Template/Element/popoverelmnt.ctp, line 6
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::_renderElement() - CORE/src/View/View.php, line 1350
+Cake\View\View::element() - CORE/src/View/View.php, line 493
+include - APP/Template/Employees/edit.ctp, line 214
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::render() - CORE/src/View/View.php, line 588
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 617
+Cake\Http\ActionDispatcher::_invoke() - CORE/src/Http/ActionDispatcher.php, line 131
+Cake\Http\ActionDispatcher::dispatch() - CORE/src/Http/ActionDispatcher.php, line 99
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 65
+[main] - ROOT/webroot/index.php, line 36
+
+
+
+2016-11-21 05:01:25 Notice: Notice (8): Undefined variable: array in [/Users/varunprathap/demoapp/src/Template/Element/popoverelmnt.ctp, line 10]
+Request URL: /Employees/edit/23
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+include - APP/Template/Element/popoverelmnt.ctp, line 10
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::_renderElement() - CORE/src/View/View.php, line 1350
+Cake\View\View::element() - CORE/src/View/View.php, line 493
+include - APP/Template/Employees/edit.ctp, line 214
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::render() - CORE/src/View/View.php, line 588
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 617
+Cake\Http\ActionDispatcher::_invoke() - CORE/src/Http/ActionDispatcher.php, line 131
+Cake\Http\ActionDispatcher::dispatch() - CORE/src/Http/ActionDispatcher.php, line 99
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 65
+[main] - ROOT/webroot/index.php, line 36
+
+
+
+2016-11-21 05:06:40 Notice: Notice (8): Undefined variable: title in [/Users/varunprathap/demoapp/src/Template/Element/popoverelmnt.ctp, line 6]
+Request URL: /Employees/edit/23
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+include - APP/Template/Element/popoverelmnt.ctp, line 6
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::_renderElement() - CORE/src/View/View.php, line 1350
+Cake\View\View::element() - CORE/src/View/View.php, line 493
+include - APP/Template/Employees/edit.ctp, line 214
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::render() - CORE/src/View/View.php, line 588
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 617
+Cake\Http\ActionDispatcher::_invoke() - CORE/src/Http/ActionDispatcher.php, line 131
+Cake\Http\ActionDispatcher::dispatch() - CORE/src/Http/ActionDispatcher.php, line 99
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 65
+[main] - ROOT/webroot/index.php, line 36
+
+
+
+2016-11-21 05:06:40 Notice: Notice (8): Undefined variable: array in [/Users/varunprathap/demoapp/src/Template/Element/popoverelmnt.ctp, line 10]
+Request URL: /Employees/edit/23
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+include - APP/Template/Element/popoverelmnt.ctp, line 10
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::_renderElement() - CORE/src/View/View.php, line 1350
+Cake\View\View::element() - CORE/src/View/View.php, line 493
+include - APP/Template/Employees/edit.ctp, line 214
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::render() - CORE/src/View/View.php, line 588
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 617
+Cake\Http\ActionDispatcher::_invoke() - CORE/src/Http/ActionDispatcher.php, line 131
+Cake\Http\ActionDispatcher::dispatch() - CORE/src/Http/ActionDispatcher.php, line 99
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 65
+[main] - ROOT/webroot/index.php, line 36
+
+
+
+2016-11-21 05:55:28 Notice: Notice (8): Undefined variable: title in [/Users/varunprathap/demoapp/src/Template/Element/popoverelmnt.ctp, line 6]
+Request URL: /Employees/edit/23
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+include - APP/Template/Element/popoverelmnt.ctp, line 6
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::_renderElement() - CORE/src/View/View.php, line 1350
+Cake\View\View::element() - CORE/src/View/View.php, line 493
+include - APP/Template/Employees/edit.ctp, line 214
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::render() - CORE/src/View/View.php, line 588
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 617
+Cake\Http\ActionDispatcher::_invoke() - CORE/src/Http/ActionDispatcher.php, line 131
+Cake\Http\ActionDispatcher::dispatch() - CORE/src/Http/ActionDispatcher.php, line 99
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 65
+[main] - ROOT/webroot/index.php, line 36
+
+
+
+2016-11-21 05:56:25 Notice: Notice (8): Undefined variable: title in [/Users/varunprathap/demoapp/src/Template/Element/popoverelmnt.ctp, line 6]
+Request URL: /Employees/edit/23
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+include - APP/Template/Element/popoverelmnt.ctp, line 6
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::_renderElement() - CORE/src/View/View.php, line 1350
+Cake\View\View::element() - CORE/src/View/View.php, line 493
+include - APP/Template/Employees/edit.ctp, line 214
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::render() - CORE/src/View/View.php, line 588
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 617
+Cake\Http\ActionDispatcher::_invoke() - CORE/src/Http/ActionDispatcher.php, line 131
+Cake\Http\ActionDispatcher::dispatch() - CORE/src/Http/ActionDispatcher.php, line 99
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 65
+[main] - ROOT/webroot/index.php, line 36
+
+
+
+2016-11-21 05:56:30 Notice: Notice (8): Undefined variable: title in [/Users/varunprathap/demoapp/src/Template/Element/popoverelmnt.ctp, line 6]
+Request URL: /Employees/edit/23
+Referer URL: http://localhost:8765/Employees/edit/23
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+include - APP/Template/Element/popoverelmnt.ctp, line 6
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::_renderElement() - CORE/src/View/View.php, line 1350
+Cake\View\View::element() - CORE/src/View/View.php, line 493
+include - APP/Template/Employees/edit.ctp, line 214
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::render() - CORE/src/View/View.php, line 588
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 617
+Cake\Http\ActionDispatcher::_invoke() - CORE/src/Http/ActionDispatcher.php, line 131
+Cake\Http\ActionDispatcher::dispatch() - CORE/src/Http/ActionDispatcher.php, line 99
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 65
+[main] - ROOT/webroot/index.php, line 36
+
+
+
+2016-11-21 06:32:22 Notice: Notice (8): Undefined variable: title in [/Users/varunprathap/demoapp/src/Template/Element/popoverelmnt.ctp, line 6]
+Request URL: /Employees/edit/23
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+include - APP/Template/Element/popoverelmnt.ctp, line 6
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::_renderElement() - CORE/src/View/View.php, line 1350
+Cake\View\View::element() - CORE/src/View/View.php, line 493
+include - APP/Template/Employees/edit.ctp, line 214
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::render() - CORE/src/View/View.php, line 588
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 617
+Cake\Http\ActionDispatcher::_invoke() - CORE/src/Http/ActionDispatcher.php, line 131
+Cake\Http\ActionDispatcher::dispatch() - CORE/src/Http/ActionDispatcher.php, line 99
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 65
+[main] - ROOT/webroot/index.php, line 36
+
+
+
+2016-11-21 06:32:32 Notice: Notice (8): Undefined variable: title in [/Users/varunprathap/demoapp/src/Template/Element/popoverelmnt.ctp, line 6]
+Request URL: /Employees/edit/23
+Referer URL: http://localhost:8765/Employees/edit/23
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+include - APP/Template/Element/popoverelmnt.ctp, line 6
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::_renderElement() - CORE/src/View/View.php, line 1350
+Cake\View\View::element() - CORE/src/View/View.php, line 493
+include - APP/Template/Employees/edit.ctp, line 214
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::render() - CORE/src/View/View.php, line 588
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 617
+Cake\Http\ActionDispatcher::_invoke() - CORE/src/Http/ActionDispatcher.php, line 131
+Cake\Http\ActionDispatcher::dispatch() - CORE/src/Http/ActionDispatcher.php, line 99
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 65
+[main] - ROOT/webroot/index.php, line 36
+
+
+
+2016-11-21 06:38:14 Notice: Notice (8): Undefined variable: title in [/Users/varunprathap/demoapp/src/Template/Element/popoverelmnt.ctp, line 6]
+Request URL: /Employees/edit/23
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+include - APP/Template/Element/popoverelmnt.ctp, line 6
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::_renderElement() - CORE/src/View/View.php, line 1350
+Cake\View\View::element() - CORE/src/View/View.php, line 493
+include - APP/Template/Employees/edit.ctp, line 214
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::render() - CORE/src/View/View.php, line 588
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 617
+Cake\Http\ActionDispatcher::_invoke() - CORE/src/Http/ActionDispatcher.php, line 131
+Cake\Http\ActionDispatcher::dispatch() - CORE/src/Http/ActionDispatcher.php, line 99
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 65
+[main] - ROOT/webroot/index.php, line 36
+
+
+
+2016-11-21 06:38:30 Notice: Notice (8): Undefined variable: title in [/Users/varunprathap/demoapp/src/Template/Element/popoverelmnt.ctp, line 6]
+Request URL: /Employees/edit/23
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+include - APP/Template/Element/popoverelmnt.ctp, line 6
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::_renderElement() - CORE/src/View/View.php, line 1350
+Cake\View\View::element() - CORE/src/View/View.php, line 493
+include - APP/Template/Employees/edit.ctp, line 214
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::render() - CORE/src/View/View.php, line 588
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 617
+Cake\Http\ActionDispatcher::_invoke() - CORE/src/Http/ActionDispatcher.php, line 131
+Cake\Http\ActionDispatcher::dispatch() - CORE/src/Http/ActionDispatcher.php, line 99
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 65
+[main] - ROOT/webroot/index.php, line 36
+
+
+
+2016-11-21 06:43:22 Notice: Notice (8): Undefined variable: title in [/Users/varunprathap/demoapp/src/Template/Element/popoverelmnt.ctp, line 6]
+Request URL: /Employees/edit/23
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+include - APP/Template/Element/popoverelmnt.ctp, line 6
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::_renderElement() - CORE/src/View/View.php, line 1350
+Cake\View\View::element() - CORE/src/View/View.php, line 493
+include - APP/Template/Employees/edit.ctp, line 214
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::render() - CORE/src/View/View.php, line 588
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 617
+Cake\Http\ActionDispatcher::_invoke() - CORE/src/Http/ActionDispatcher.php, line 131
+Cake\Http\ActionDispatcher::dispatch() - CORE/src/Http/ActionDispatcher.php, line 99
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 65
+[main] - ROOT/webroot/index.php, line 36
+
+
+
+2016-11-21 06:43:47 Notice: Notice (8): Undefined variable: title in [/Users/varunprathap/demoapp/src/Template/Element/popoverelmnt.ctp, line 6]
+Request URL: /Employees/edit/23
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+include - APP/Template/Element/popoverelmnt.ctp, line 6
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::_renderElement() - CORE/src/View/View.php, line 1350
+Cake\View\View::element() - CORE/src/View/View.php, line 493
+include - APP/Template/Employees/edit.ctp, line 214
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::render() - CORE/src/View/View.php, line 588
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 617
+Cake\Http\ActionDispatcher::_invoke() - CORE/src/Http/ActionDispatcher.php, line 131
+Cake\Http\ActionDispatcher::dispatch() - CORE/src/Http/ActionDispatcher.php, line 99
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 65
+[main] - ROOT/webroot/index.php, line 36
+
+
+
+2016-11-21 06:44:36 Notice: Notice (8): Undefined variable: title in [/Users/varunprathap/demoapp/src/Template/Element/popoverelmnt.ctp, line 6]
+Request URL: /Employees/edit/23
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+include - APP/Template/Element/popoverelmnt.ctp, line 6
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::_renderElement() - CORE/src/View/View.php, line 1350
+Cake\View\View::element() - CORE/src/View/View.php, line 493
+include - APP/Template/Employees/edit.ctp, line 214
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::render() - CORE/src/View/View.php, line 588
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 617
+Cake\Http\ActionDispatcher::_invoke() - CORE/src/Http/ActionDispatcher.php, line 131
+Cake\Http\ActionDispatcher::dispatch() - CORE/src/Http/ActionDispatcher.php, line 99
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 65
+[main] - ROOT/webroot/index.php, line 36
+
+
+
+2016-11-21 06:46:27 Notice: Notice (8): Undefined variable: title in [/Users/varunprathap/demoapp/src/Template/Element/popoverelmnt.ctp, line 6]
+Request URL: /Employees/edit/23
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+include - APP/Template/Element/popoverelmnt.ctp, line 6
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::_renderElement() - CORE/src/View/View.php, line 1350
+Cake\View\View::element() - CORE/src/View/View.php, line 493
+include - APP/Template/Employees/edit.ctp, line 214
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::render() - CORE/src/View/View.php, line 588
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 617
+Cake\Http\ActionDispatcher::_invoke() - CORE/src/Http/ActionDispatcher.php, line 131
+Cake\Http\ActionDispatcher::dispatch() - CORE/src/Http/ActionDispatcher.php, line 99
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 65
+[main] - ROOT/webroot/index.php, line 36
+
+
+
+2016-11-21 06:47:43 Notice: Notice (8): Undefined variable: title in [/Users/varunprathap/demoapp/src/Template/Element/popoverelmnt.ctp, line 6]
+Request URL: /Employees/edit/23
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+include - APP/Template/Element/popoverelmnt.ctp, line 6
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::_renderElement() - CORE/src/View/View.php, line 1350
+Cake\View\View::element() - CORE/src/View/View.php, line 493
+include - APP/Template/Employees/edit.ctp, line 214
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::render() - CORE/src/View/View.php, line 588
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 617
+Cake\Http\ActionDispatcher::_invoke() - CORE/src/Http/ActionDispatcher.php, line 131
+Cake\Http\ActionDispatcher::dispatch() - CORE/src/Http/ActionDispatcher.php, line 99
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 65
+[main] - ROOT/webroot/index.php, line 36
+
+
+
+2016-11-21 06:50:44 Notice: Notice (8): Undefined variable: title in [/Users/varunprathap/demoapp/src/Template/Element/popoverelmnt.ctp, line 6]
+Request URL: /Employees/edit/23
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+include - APP/Template/Element/popoverelmnt.ctp, line 6
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::_renderElement() - CORE/src/View/View.php, line 1350
+Cake\View\View::element() - CORE/src/View/View.php, line 493
+include - APP/Template/Employees/edit.ctp, line 214
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::render() - CORE/src/View/View.php, line 588
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 617
+Cake\Http\ActionDispatcher::_invoke() - CORE/src/Http/ActionDispatcher.php, line 131
+Cake\Http\ActionDispatcher::dispatch() - CORE/src/Http/ActionDispatcher.php, line 99
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 65
+[main] - ROOT/webroot/index.php, line 36
+
+
+
+2016-11-21 08:54:28 Notice: Notice (8): Trying to get property of non-object in [/Users/varunprathap/demoapp/src/Controller/ActionsController.php, line 77]
+Request URL: /Actions/transfer/21
+Referer URL: http://localhost:8765/employees/edit/21
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+App\Controller\ActionsController::transfer() - APP/Controller/ActionsController.php, line 77
+Cake\Controller\Controller::invokeAction() - CORE/src/Controller/Controller.php, line 435
+Cake\Http\ActionDispatcher::_invoke() - CORE/src/Http/ActionDispatcher.php, line 125
+Cake\Http\ActionDispatcher::dispatch() - CORE/src/Http/ActionDispatcher.php, line 99
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 65
+[main] - ROOT/webroot/index.php, line 36
+
+
+
+2016-11-21 08:54:40 Notice: Notice (8): Trying to get property of non-object in [/Users/varunprathap/demoapp/src/Controller/ActionsController.php, line 77]
+Request URL: /Actions/transfer/21
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+App\Controller\ActionsController::transfer() - APP/Controller/ActionsController.php, line 77
+Cake\Controller\Controller::invokeAction() - CORE/src/Controller/Controller.php, line 435
+Cake\Http\ActionDispatcher::_invoke() - CORE/src/Http/ActionDispatcher.php, line 125
+Cake\Http\ActionDispatcher::dispatch() - CORE/src/Http/ActionDispatcher.php, line 99
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 65
+[main] - ROOT/webroot/index.php, line 36
+
+
+
+2016-11-21 09:39:31 Notice: Notice (8): Undefined variable: jobInfo in [/Users/varunprathap/demoapp/src/Template/Actions/addresschange.ctp, line 15]
+Request URL: /Actions/addresschange/21
+Referer URL: http://localhost:8765/employees/edit/21
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+include - APP/Template/Actions/addresschange.ctp, line 15
+Cake\View\View::_evaluate() - CORE/src/View/View.php, line 1005
+Cake\View\View::_render() - CORE/src/View/View.php, line 964
+Cake\View\View::render() - CORE/src/View/View.php, line 588
+Cake\Controller\Controller::render() - CORE/src/Controller/Controller.php, line 617
+Cake\Http\ActionDispatcher::_invoke() - CORE/src/Http/ActionDispatcher.php, line 131
+Cake\Http\ActionDispatcher::dispatch() - CORE/src/Http/ActionDispatcher.php, line 99
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 65
+[main] - ROOT/webroot/index.php, line 36
+
+
+
+2016-11-22 07:08:58 Notice: Notice (8): session_start(): Unexpected end of serialized data in [/Users/varunprathap/demoapp/vendor/cakephp/cakephp/src/Network/Session.php, line 325]
+Request URL: /Actions/addresschange/21
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+session_start - [internal], line ??
+Cake\Network\Session::start() - CORE/src/Network/Session.php, line 325
+Cake\Network\Session::read() - CORE/src/Network/Session.php, line 387
+App\Controller\AppController::initialize() - APP/Controller/AppController.php, line 117
+Cake\Controller\Controller::__construct() - CORE/src/Controller/Controller.php, line 262
+ReflectionClass::newInstance() - [internal], line ??
+Cake\Http\ControllerFactory::create() - CORE/src/Http/ControllerFactory.php, line 79
+Cake\Routing\Filter\ControllerFactoryFilter::_getController() - CORE/src/Routing/Filter/ControllerFactoryFilter.php, line 66
+Cake\Routing\Filter\ControllerFactoryFilter::beforeDispatch() - CORE/src/Routing/Filter/ControllerFactoryFilter.php, line 52
+Cake\Routing\DispatcherFilter::handle() - CORE/src/Routing/DispatcherFilter.php, line 144
+Cake\Event\EventManager::_callListener() - CORE/src/Event/EventManager.php, line 425
+Cake\Event\EventManager::dispatch() - CORE/src/Event/EventManager.php, line 386
+Cake\Http\ActionDispatcher::dispatchEvent() - CORE/src/Event/EventDispatcherTrait.php, line 78
+Cake\Http\ActionDispatcher::dispatch() - CORE/src/Http/ActionDispatcher.php, line 84
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 65
+[main] - ROOT/webroot/index.php, line 36
+
+
+
+2016-11-22 07:10:46 Notice: Notice (8): Array to string conversion in [/Users/varunprathap/demoapp/src/Controller/ActionsController.php, line 109]
+Request URL: /Actions/addresschange/21
+Referer URL: http://localhost:8765/Employees/edit/21
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+App\Controller\ActionsController::addresschange() - APP/Controller/ActionsController.php, line 109
+Cake\Controller\Controller::invokeAction() - CORE/src/Controller/Controller.php, line 435
+Cake\Http\ActionDispatcher::_invoke() - CORE/src/Http/ActionDispatcher.php, line 125
+Cake\Http\ActionDispatcher::dispatch() - CORE/src/Http/ActionDispatcher.php, line 99
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 65
+[main] - ROOT/webroot/index.php, line 36
+
+
+
+2016-11-22 07:22:38 Notice: Notice (8): Undefined offset: 0 in [/Users/varunprathap/demoapp/src/Controller/ActionsController.php, line 136]
+Request URL: /Actions/addnote/21
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+App\Controller\ActionsController::addnote() - APP/Controller/ActionsController.php, line 136
+Cake\Controller\Controller::invokeAction() - CORE/src/Controller/Controller.php, line 435
+Cake\Http\ActionDispatcher::_invoke() - CORE/src/Http/ActionDispatcher.php, line 125
+Cake\Http\ActionDispatcher::dispatch() - CORE/src/Http/ActionDispatcher.php, line 99
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 65
+[main] - ROOT/webroot/index.php, line 36
+
+
+
+2016-11-22 07:24:31 Notice: Notice (8): Undefined offset: 0 in [/Users/varunprathap/demoapp/src/Controller/ActionsController.php, line 136]
+Request URL: /Actions/addnote/21
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE/src/Error/BaseErrorHandler.php, line 146
+App\Controller\ActionsController::addnote() - APP/Controller/ActionsController.php, line 136
+Cake\Controller\Controller::invokeAction() - CORE/src/Controller/Controller.php, line 435
+Cake\Http\ActionDispatcher::_invoke() - CORE/src/Http/ActionDispatcher.php, line 125
+Cake\Http\ActionDispatcher::dispatch() - CORE/src/Http/ActionDispatcher.php, line 99
+Cake\Routing\Dispatcher::dispatch() - CORE/src/Routing/Dispatcher.php, line 65
+[main] - ROOT/webroot/index.php, line 36
+
+
+

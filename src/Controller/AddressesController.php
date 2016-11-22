@@ -34,6 +34,10 @@ var $components = array('Datatable');
      */
     public function index()
     {
+    	$this->loadModel('CreateConfigs');
+        $configs=$this->CreateConfigs->find('all')->where(['table_name' => $this->request->params['controller']])->order(['"id"' => 'ASC'])->toArray();
+        $this->set('configs',$configs);	
+		
         $this->paginate = [
             'contain' => ['EmpDataBiographies', 'Customers']
         ];
@@ -55,10 +59,14 @@ var $components = array('Datatable');
         $address = $this->Addresses->get($id, [
             'contain' => ['EmpDataBiographies', 'Customers']
         ]);
-		$empDataBiographies = $this->Addresses->EmpDataBiographies->find('list', ['limit' => 200]);
-		$this->set(compact('address', 'empDataBiographies'));
-        // $this->set('address', $address);
-        $this->set('_serialize', ['address']);
+		if($regions['customer_id']==$this->loggedinuser['customer_id']){
+ 			$empDataBiographies = $this->Addresses->EmpDataBiographies->find('list', ['limit' => 200])->where("customer_id=".$this->loggedinuser['customer_id']);
+			$this->set(compact('address', 'empDataBiographies'));
+        	// $this->set('address', $address);
+        	$this->set('_serialize', ['address']);
+ 		}else{
+		   $this->redirect(['action' => 'logout','controller'=>'users']);
+        } 
     }
 
     /**
@@ -79,7 +87,7 @@ var $components = array('Datatable');
                 $this->Flash->error(__('The address could not be saved. Please, try again.'));
             }
         }
-        $empDataBiographies = $this->Addresses->EmpDataBiographies->find('list', ['limit' => 200]);
+        $empDataBiographies = $this->Addresses->EmpDataBiographies->find('list', ['limit' => 200])->where("customer_id=".$this->loggedinuser['customer_id']);
         $customers = $this->Addresses->Customers->find('list', ['limit' => 200]);
         $this->set(compact('address', 'empDataBiographies', 'customers'));
         $this->set('_serialize', ['address']);
@@ -107,7 +115,7 @@ var $components = array('Datatable');
                 $this->Flash->error(__('The address could not be saved. Please, try again.'));
             }
         }
-        $empDataBiographies = $this->Addresses->EmpDataBiographies->find('list', ['limit' => 200]);
+        $empDataBiographies = $this->Addresses->EmpDataBiographies->find('list', ['limit' => 200])->where("customer_id=".$this->loggedinuser['customer_id']);
         $customers = $this->Addresses->Customers->find('list', ['limit' => 200]);
         $this->set(compact('address', 'empDataBiographies', 'customers'));
         $this->set('_serialize', ['address']);
@@ -122,7 +130,7 @@ var $components = array('Datatable');
      */
     public function delete($id = null)
     {
-        $this->request->allowMethod(['post', 'delete']);
+        // $this->request->allowMethod(['post', 'delete']);
         $address = $this->Addresses->get($id);
         if ($this->Addresses->delete($address)) {
             $this->Flash->success(__('The address has been deleted.'));

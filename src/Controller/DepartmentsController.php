@@ -55,10 +55,15 @@ var $components = array('Datatable');
         $department = $this->Departments->get($id, [
             'contain' => ['CostCentres', 'Customers']
         ]);
-		$costCentres = $this->Departments->CostCentres->find('list', ['limit' => 200]);
-		$this->set('costCentres', $costCentres);
-        $this->set('department', $department);
-        $this->set('_serialize', ['department']);
+		
+		if($department['customer_id']==$this->loggedinuser['customer_id']){
+       	    $costCentres = $this->Departments->CostCentres->find('list', ['limit' => 200]);
+			$this->set('costCentres', $costCentres);
+        	$this->set('department', $department);
+        	$this->set('_serialize', ['department']);
+       }else{
+		   $this->redirect(['action' => 'logout','controller'=>'users']);
+       }
     }
 
     /**
@@ -79,7 +84,7 @@ var $components = array('Datatable');
                 $this->Flash->error(__('The department could not be saved. Please, try again.'));
             }
         }
-        $costCentres = $this->Departments->CostCentres->find('list', ['limit' => 200]);
+        $costCentres = $this->Departments->CostCentres->find('list', ['limit' => 200])->where("customer_id=".$this->loggedinuser['customer_id']);
         $customers = $this->Departments->Customers->find('list', ['limit' => 200]);
         $this->set(compact('department', 'costCentres', 'customers'));
         $this->set('_serialize', ['department']);
@@ -97,7 +102,7 @@ var $components = array('Datatable');
                 $this->Flash->error(__('The department could not be saved. Please, try again.'));
             }
         }
-        $costCentres = $this->Departments->CostCentres->find('list', ['limit' => 200]);
+        $costCentres = $this->Departments->CostCentres->find('list', ['limit' => 200])->where("customer_id=".$this->loggedinuser['customer_id']);
         $customers = $this->Departments->Customers->find('list', ['limit' => 200]);
         $this->set(compact('department', 'costCentres', 'customers'));
         $this->set('_serialize', ['department']);
@@ -124,7 +129,7 @@ var $components = array('Datatable');
                 $this->Flash->error(__('The department could not be saved. Please, try again.'));
             }
         }
-        $costCentres = $this->Departments->CostCentres->find('list', ['limit' => 200]);
+        $costCentres = $this->Departments->CostCentres->find('list', ['limit' => 200])->where("customer_id=".$this->loggedinuser['customer_id']);
         $customers = $this->Departments->Customers->find('list', ['limit' => 200]);
         $this->set(compact('department', 'costCentres', 'customers'));
         $this->set('_serialize', ['department']);

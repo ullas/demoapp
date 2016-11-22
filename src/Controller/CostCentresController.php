@@ -55,9 +55,14 @@ var $components = array('Datatable');
         $costCentre = $this->CostCentres->get($id, [
             'contain' => ['Customers']
         ]);
-
-        $this->set('costCentre', $costCentre);
-        $this->set('_serialize', ['costCentre']);
+		
+		if($costCentre['customer_id']==$this->loggedinuser['customer_id']){
+       	    $this->set('costCentre', $costCentre);
+       		$this->set('_serialize', ['costCentre']);
+       }else{
+		   $this->redirect(['action' => 'logout','controller'=>'users']);
+       }
+	   
     }
 
     /**

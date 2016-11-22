@@ -5,8 +5,9 @@ function RecursiveCategories($array) {
             echo "\n<ul id='org' style='display:none'>\n";
         foreach ($array as $vals) {
 
-            $htmlstr="<div id=mptl><h3 class=\"profile-username text-center\">".$vals['name']."</h3>
-  							<h6 class=\"text-muted text-center\">Position</h6>
+            $htmlstr="<div id=mptl><h5 class=\"text-muted text-center\">Position</h5>
+            				<h5 class=\"text-muted text-center\">Company</h5>
+             				<i class=\"fa fa-envelope text-muted\"></i><small> maill@server.com</small>
             				<hr/><b>Take Action</b><ul class=list-unstyled>
                             <li><a href=\"../EmploymentInfos\">Employment Details</a></li>
                             <li><a href=\"#\" onclick=\"onclickTerminate(".$vals['id'].");\">Terminate</a></li>
@@ -32,7 +33,10 @@ function RecursiveCategories($array) {
 
 <?= RecursiveCategories($orgpositions) ?> 
 
-<style>.popover-content  a{font-size:12px;}</style>
+<style>
+.popover-content  a{font-size:12px;}
+/*.popover{ min-width: 500px; }*/
+</style>
 <!-- <ul id="org" style="display:none">
     <li>
        Food
@@ -96,7 +100,9 @@ $(".topbar").fadeTo('fast',1);
             // $('<div class="node-img"></div>').appendTo('td.node-cell');
 
             //popover
-            $('[data-toggle="popover"]').popover();
+            $('[data-toggle="popover"]').popover({
+            	container: 'body'
+            });
 
 
         });
@@ -121,7 +127,7 @@ $(".topbar").fadeTo('fast',1);
         }
 
         function addNote(){
-            var id=document.getElementById("UID").value;alert(id);
+            var id=document.getElementById("UID").value;
             var note=document.getElementById("notes").value;
                $.ajax({
                 type: "get",

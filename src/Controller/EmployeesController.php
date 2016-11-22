@@ -55,9 +55,12 @@ class EmployeesController extends AppController
         $employee = $this->Employees->get($id, [
             'contain' => ['Empdatabiographies', 'Empdatapersonals', 'Employmentinfos']
         ]);
-
-        $this->set('employee', $employee);
-        $this->set('_serialize', ['employee']);
+		if($employee['customer_id']==$this->loggedinuser['customer_id']){
+        	$this->set('employee', $employee);
+        	$this->set('_serialize', ['employee']);
+		}else{
+		   $this->redirect(['action' => 'logout','controller'=>'users']);
+       }
     }
 
     /**
@@ -105,6 +108,9 @@ class EmployeesController extends AppController
                 $this->Flash->error(__('The employee could not be saved. Please, try again.'));
             }
         }
+		
+		$this->set('id', $id);
+		
         $this->set(compact('employee'));
         $this->set('_serialize', ['employee']);
     }

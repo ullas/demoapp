@@ -57,8 +57,14 @@ var $components = array('Datatable');
             'contain' => ['Customers']
         ]);
 
-        $this->set('division', $division);
-        $this->set('_serialize', ['division']);
+
+		if($division['customer_id']==$this->loggedinuser['customer_id']){
+        	$this->set('division', $division);
+        	$this->set('_serialize', ['division']); 
+		
+       }else{
+		   $this->redirect(['action' => 'logout','controller'=>'users']);
+       } 
     }
 
     /**

@@ -15,9 +15,9 @@
     <div class="col-md-12">
       <div class="nav-tabs-custom">
         <ul class="nav nav-tabs">
-          	<li  class="active"><a href="#EmpDataBiography" data-toggle="tab">Employee Data Biography</a></li>	
-            <li><a href="#EmpDataPersonal" data-toggle="tab">Employee Data Personals</a></li>
-           <li><a href="#EmploymentInfo" data-toggle="tab">Employment Infos</a></li>  
+          	<li  class="active"><a href="#EmpDataBiography" data-toggle="tab">Biography</a></li>	
+            <li><a href="#EmpDataPersonal" data-toggle="tab">Personal Datas</a></li>
+           <li><a href="#EmploymentInfo" data-toggle="tab">Infos</a></li>  
         </ul>
         
         <div class=" tab-content">
@@ -147,7 +147,7 @@
 
 <div class="box-footer">
     <a href="/employees">Cancel</a>    
-    <button class="pull-right btn btn-primary" type="submit">Save</button>  
+    <button id="butn" class="pull-right btn btn-primary" type="submit">Save</button>  
 </div>
     
     </div>
@@ -160,3 +160,14 @@
    </div>
    </div> -->
   <?= $this->Form->end() ?></section>
+  
+   <?php $this->start('scriptBotton'); ?>
+ <script>
+$(function () {
+	 // $( "#butn" ).click(function( ) {
+ 		 // $("#EmpDataBiography").addClass("active");$("#EmploymentInfo").removeClass("active");
+//  
+	 // });
+ });
+</script>
+ <?php $this->end(); ?>

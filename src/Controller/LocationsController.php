@@ -55,9 +55,12 @@ class LocationsController extends AppController
         $location = $this->Locations->get($id, [
             'contain' => ['Customers', 'LegalEntities']
         ]);
-
-        $this->set('location', $location);
-        $this->set('_serialize', ['location']);
+		if($regions['customer_id']==$this->loggedinuser['customer_id']){
+ 			$this->set('location', $location);
+        	$this->set('_serialize', ['location']);
+ 		}else{
+		   $this->redirect(['action' => 'logout','controller'=>'users']);
+        } 
     }
 
     /**
