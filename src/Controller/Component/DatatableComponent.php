@@ -38,11 +38,8 @@ use Cake\Utility\Inflector;
             	'dt' => $length++,
             	'formatter' => function( $d, $row ,$modalname) {
                 	$buttons='<a href="/'.   $modalname  . '/view/'.$d.'" class="fa fa-file-text-o p3"></a>
-                					<a href="/'.   $modalname  . '/edit/'.$d.'" class="fa fa-pencil p3"></a>
-                					<form name="formdelete" id="formdelete' .$d. '" method="post" action="/'.   $modalname  . '/delete/'.$d.'" style="display:none;" >
-                					<input type="hidden" name="_method" value="POST"></form>
-									<a href="#" onclick="if (confirm(&quot;Are you sure you want to delete # '.$d.'?&quot;)) { document.getElementById(&quot;formdelete'.$d.'&quot;).submit(); }
-									 event.returnValue = false; return false;" class="fa fa-trash"></a>';
+                					<a href="/'.   $modalname  . '/edit/'.$d.'" class="fa fa-pencil p3 text-aqua"></a>
+									<a href="#" class="delete-btn fa fa-trash text-red" data-id="'.$d.'"></a>';
 						
                 	return $buttons;
             	}
@@ -58,6 +55,7 @@ use Cake\Utility\Inflector;
 			$page=ceil($this->request->query['start']/$limit)+1;
 			
 			$controller = $this->_registry->getController();
+			$wherecustomer=$this->request->params['controller'].".customer_id=".$this->loggedinuser['customer_id'];
 			
 			$model=$controller->loadModel($controller->modelClass);
 
@@ -66,8 +64,8 @@ use Cake\Utility\Inflector;
 				if($wherestr != ''){$wherestr.=" OR ";}
 				$wherestr.=$key. " '". $value. "'";
 			}
-			
-			$data = $model->find('all')->where($wherestr)->contain($contains)->order($order)->limit($limit)->page($page)->toArray();
+						
+			$data = $model->find('all')->where($wherestr)/*->where($wherecustomer)*/->contain($contains)->order($order)->limit($limit)->page($page)->toArray();
 			
 			//getting totalcount
 			$totalCount = $model->find()->contain($contains)->count();

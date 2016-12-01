@@ -22,10 +22,10 @@
                     <i class="fa fa-bars"></i></button>
                   <ul class="dropdown-menu pull-right" role="menu">
                     <li><a href="../add" >Hiring</a></li>
-                    <li><a href="../../Actions/transfer/<?php echo $id; ?>" data-remote="false" class="open-Popup" data-toggle="modal" data-target="#actionspopover">Transfer</a></li>
-                    <li><a href="../../Actions/promotion/<?php echo $id; ?>" data-remote="false" class="open-Popup" data-toggle="modal" data-target="#actionspopover">Promotion</a></li>
+                    <li><a href="/Actions/transfer/<?php echo $id; ?>" data-remote="false" class="open-Popup" data-toggle="modal" data-target="#actionspopover">Transfer</a></li>
+                    <li><a href="/Actions/promotion/<?php echo $id; ?>" data-remote="false" class="open-Popup" data-toggle="modal" data-target="#actionspopover">Promotion</a></li>
                     <li class="divider"></li>
-                    <li><a href="../../Actions/addresschange/<?php echo $id; ?>" data-remote="false" class="open-Popup" data-toggle="modal" data-target="#actionspopover">Address Change</a></li>
+                    <li><a href="/Actions/addresschange/<?php echo $id; ?>" data-remote="false" class="open-Popup" data-toggle="modal" data-target="#actionspopover">Address Change</a></li>
                     <li><a href="#" class="open-Popup" data-toggle="modal" data-remote="false" data-target="#actionspopover">Global Assignment</a></li>
                     <li><a href="/Actions/addnote/<?php echo $id; ?>" data-remote="false" class="open-Popup" data-toggle="modal" data-target="#actionspopover">Add Note</a></li>
                     <li><a href="/Actions/terminate/<?php echo $id; ?>" data-remote="false" class="open-Popup" data-toggle="modal" data-target="#actionspopover">Termination</a></li>
