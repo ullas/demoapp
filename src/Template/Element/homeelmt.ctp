@@ -9,7 +9,7 @@ switch (strtolower($title)) {
     echo "<ul class='users-list clearfix'>";
 		for ($x = 0; $x < 7; $x++) {
 			echo "<li>";
-        	echo $this->Html->image('profile-icon.png');
+        	echo $this->Html->image('circle-512.png');
 			echo "<a href='#' class='users-list-name'>User</a>";
 			echo "</li>";
 		}

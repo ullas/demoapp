@@ -1,4 +1,3 @@
-
 <?php
 function RecursiveCategories($array) {
 
@@ -6,17 +5,19 @@ function RecursiveCategories($array) {
             echo "\n<ul id='org' style='display:none'>\n";
         foreach ($array as $vals) {
 
-            $htmlstr="<div id=mptl><dd>Take Action</dd><ul class=list-unstyled>
-                            <li><a href=\"../EmploymentInfos\">Employment Details</a></li>
-                            <li><a href=\"#\" onclick=\"onclickTerminate(".$vals['id'].");\">Terminate</a></li>
-                            <li><a href=\"../JobInfos\">Change Job and Compensation Info</a></li>
-                            <li><a href=\"#\" class=\"open-Popup\" data-toggle=\"modal\" data-target=\"#PopOver\" id=\"".$vals['id']."\">Add Note</a></li>
-                            </ul><div class=uline></div><dd>Go to</dd><ul class=list-unstyled>
-                            <li><a href=\"../Profiles\">Profile</a></li>
-                            <li><a href=\"../#\">Employment Information</a></li>
-                            <li><a href=\"../#\">Notes</a></li>
-                            <li><a href=\"../#\">Goal Plan</a></li>
-                            <li><a href=\"#\">Others</a></li></ul></div>";
+            $htmlstr='<div id=mptl><h5 class="text-muted text-center">Position</h5>
+            				<i class="fa fa-briefcase text-muted"></i><small> Company</small><br/>
+             				<i class="fa fa-envelope text-muted"></i><small> maill@server.com</small>
+            				<hr/><b>Take Action</b><ul class=list-unstyled>
+                    		<li><a href="/Actions/transfer/'.$vals['id'].'" data-remote="false" class="open-Popup" data-toggle="modal" data-target="#actionspopover">Transfer</a></li>
+                    		<li><a href="/Actions/promotion/'.$vals['id'].'" data-remote="false" class="open-Popup" data-toggle="modal" data-target="#actionspopover">Promotion</a></li>
+                    	<li class="divider"></li>
+                    	<li><a href="/Actions/addresschange/'.$vals['id'].'" data-remote="false" class="open-Popup" data-toggle="modal" data-target="#actionspopover">Address Change</a></li>
+                    	<li><a href="#" class="open-Popup" data-toggle="modal" data-remote="false" data-target="#actionspopover">Global Assignment</a></li>
+                    	<li><a href="/Actions/addnote/'.$vals['id'].'" data-remote="false" class="open-Popup" data-toggle="modal" data-target="#actionspopover">Add Note</a></li>
+                    	<li><a href="/Actions/terminate/'.$vals['id'].'" data-remote="false" class="open-Popup" data-toggle="modal" data-target="#actionspopover">Termination</a></li>
+                    	<li><a href="/Actions/retirement/'.$vals['id'].'" data-remote="false" class="open-Popup" data-toggle="modal" data-target="#actionspopover">Retirement</a></li>
+	                    </ul></div>';
                     echo "<li id=\"".$vals['id']."\"><div class='node-title'><a href='#' tabindex='0' id='".$vals['id']."' class='popoverbtn' data-trigger='focus' data-html='true' data-toggle='popover' title='".$vals['name']."'
  							data-content='".$htmlstr."'>".$vals['name']."</a></div><div class='node-pic'><img class='node-profile-img' src='https://almsaeedstudio.com/themes/AdminLTE/dist/img/user1-128x128.jpg'></div>
  							<div class='node-position'>Position</div>";
@@ -29,9 +30,13 @@ function RecursiveCategories($array) {
     }
 } ?>
 
-<?= RecursiveCategories($orgpositions) ?>
+<?= RecursiveCategories($orgpositions) ?> 
 
-<ul id="org" style="display:none">
+<style>
+.popover-content  a{font-size:12px;}
+/*.popover{ min-width: 500px; }*/
+</style>
+<!-- <ul id="org" style="display:none">
     <li>
        Food
        <ul>
@@ -43,7 +48,7 @@ function RecursiveCategories($array) {
          <li>Bread</li>
        </ul>
      </li>
-   </ul>
+   </ul> -->
     <section class="content-header">
       <h1>
        Organization Chart
@@ -61,6 +66,9 @@ function RecursiveCategories($array) {
         	$("#org").jOrgChart({
             chartElement : '#chart',
             dragAndDrop  : false
+            
+            
+            
         });
 
             /* Custom jQuery for the example
@@ -94,49 +102,43 @@ $(".topbar").fadeTo('fast',1);
             // $('<div class="node-img"></div>').appendTo('td.node-cell');
 
             //popover
-            $('[data-toggle="popover"]').popover();
+            $('[data-toggle="popover"]').popover({
+            	container: 'body'
+            });
 
+$("#actionspopover").on("show.bs.modal", function(e) {
+		//loading icon show
+		if(e.relatedTarget!=null){$('#loadingmessage').show();}
+		var link = $(e.relatedTarget);
+		$(this).find(".modal-body").load(link.attr("href"),function( response, status, xhr ){
+			if ( status == "error" ) {
+				var msg = "Sorry but there was an error.";
+				alert(msg);
+			}else{
+				//loading icon hide
+				if(e.relatedTarget!=null){$('#loadingmessage').hide();}
+				//datepicker
+	    		$('.mptldp').datepicker({
+	    			format:"dd/mm/yy",
+	      			autoclose: true,clearBtn: true
+	    		});
+	    		//select 2 
+    			$(".select2").select2({ width: '100%',allowClear: true,placeholder: "Select" });
+				//hide popover on button click
+				$( ".popoverDelete" ).click(function() {
+					$('#actionspopover').modal('hide');
+				});
+			}
+		});
+	});
+
+
+	$('#actionspopover').on('hidden.bs.modal', function (e) {
+	  $('.modal-body', this).empty();
+	})
+	
 
         });
-
-        function onclickTerminate(id){
-            if (confirm("Are you sure you want to terminate ?") == true) {
-                $.ajax({
-                    type: "get",
-                    url: "../Actions/terminate/"+id,
-                    data: {
-                        Id:id
-                       },
-                    success: function (data){
-                        alert(data);
-                    },
-                    error: function (xhr, ajaxOptions, thrownError){
-                        alert(thrownError);
-                    }
-                });
-            }
-            return false;
-        }
-
-        function addNote(){
-            var id=document.getElementById("UID").value;alert(id);
-            var note=document.getElementById("notes").value;
-               $.ajax({
-                type: "get",
-                url: "../Actions/addnote/"+id,
-                data: {
-                    Id:id,
-                    Notes:note
-                   },
-                success: function (data){
-                    alert(data);
-                },
-                error: function (xhr, ajaxOptions, thrownError){
-                    alert(thrownError);
-                }
-            });
-            return false;
-         }
 
 // called when popover shown
 $(document).on("click", ".open-Popup", function () {
@@ -147,27 +149,5 @@ $(document).on("click", ".open-Popup", function () {
  <!-- hidden field -->
 <input type="hidden" id="UID">
 
-<div class="modal fade" id="PopOver" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-          <div class="modal-content">
-              <div class="modal-header bg-aqua">
-                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                  <h4 class="modal-title tcenter" id="myModalLabel">Add Note</h4>
-              </div>
-              <div class="modal-body">
-                  <div class='form-group'><label>Title:</label><br><input type="text"  id='ntitle' class='form-control' placeholder="Enter title"/></div>
-                <div class='form-group'><label>Description:</label><br><textarea id='ndescription' class='form-control' placeholder="Enter description"></textarea></div>
-                <div class='form-group'><label>Visible to:</label>
-                    <div class="checkbox">
-                        <label><input type="checkbox" name="nvisibleto" value="me">Me</label>
-                        <label><input type="checkbox" name="nvisibleto" value="admin">Admin</label>
-                        <label><input type="checkbox" name="nvisibleto" value="others">Others</label>
-                    </div>
-                </div>
-              </div>
-              <div class="modal-footer">
-                  <input type="button" class="save-btn btn btn-info pull-right" value="Save changes" onclick="addNote()"/>
-              </div>
-          </div>
-      </div>
-  </div>
+<!-- add actions popover -->
+<?php echo $this->element('popoverelmnt'); ?>

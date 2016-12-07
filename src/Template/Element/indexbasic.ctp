@@ -18,7 +18,7 @@
         <thead>
             <tr>
            	
-                <th data-orderable="false"><input type="checkbox" name="select_all" value="1" id="select-all" ></th>
+                <th data-orderable="false" ><input type="checkbox" name="select_all" value="1" id="select-all" ></th>
            		<?php
                   for($i=1;$i<count($configs);$i++){
                   		
@@ -103,6 +103,8 @@ $this->Html->script([
       
      table= $('#mptlindextbl').DataTable({
           "paging": true,
+          //disable 0th column checkbox default sort order
+          "order": [[ 1, 'asc' ]],
           "lengthChange": true,
           "searching": true,
           "ordering": true,
@@ -113,7 +115,6 @@ $this->Html->script([
           stateSave:false,
           responsive: true,
           // "initComplete": function(settings, json) {
-                // tableLoaded();
           // },
           "drawCallback": function( settings ) {
         		tableLoaded();
@@ -275,9 +276,16 @@ $this->Html->script([
   });
   
 function tableLoaded() {
+	//delete confirm
+    $(".delete-btn").click(function(){
+       $("#ajax_button").html("<a href='/<?php echo $this->request->params['controller'] ?>/delete/"+ $(this).attr("data-id")+"' class='btn btn-outline'>Confirm</a>");
+      $("#trigger").click();
+    });
+ 
     $("#mptlindextbl tbody").find('tr').each(function () {
     	$(this).find('td').each (function() {
         var innerHtml=$(this).find('div.mptldtbool').html();
+        // true/false instead of 1/0
         (innerHtml=="1") ? $(this).find('div.mptldtbool').html("True") : $(this).find('div.mptldtbool').html("False");      
         });    
     });
@@ -372,3 +380,24 @@ $('.mptl-filter-base').on('ifUnchecked', function(event){
   
 </script>
 <?php $this->end(); ?>
+
+
+<!-- confirm delete -->
+<a data-target="#ConfirmDelete" role="button" data-toggle="modal" id="trigger"></a>
+<div class="modal fade" id="ConfirmDelete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-danger">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                  <h4 class="modal-title" id="myModalLabel"> PeopleHR</h4>
+              </div>
+              <div class="modal-body">
+                  Do you  really want  to delete this element?
+              </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Cancel</button>
+                  <div id="ajax_button" class="pull-right"></div>
+              </div>
+          </div>
+      </div>
+  </div>

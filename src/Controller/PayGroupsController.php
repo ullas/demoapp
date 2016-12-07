@@ -56,9 +56,13 @@ var $components = array('Datatable');
         $payGroup = $this->PayGroups->get($id, [
             'contain' => ['Customers', 'PayRanges']
         ]);
-
-        $this->set('payGroup', $payGroup);
-        $this->set('_serialize', ['payGroup']);
+		
+		if($payGroup['customer_id']==$this->loggedinuser['customer_id']){
+ 			$this->set('payGroup', $payGroup);
+        	$this->set('_serialize', ['payGroup']);
+ 		}else{
+		   $this->redirect(['action' => 'logout','controller'=>'users']);
+        } 
     }
 
     /**

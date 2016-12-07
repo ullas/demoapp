@@ -55,9 +55,13 @@ var $components = array('Datatable');
         $payComponentGroup = $this->PayComponentGroups->get($id, [
             'contain' => ['Customers', 'TimeAccountTypes']
         ]);
-
-        $this->set('payComponentGroup', $payComponentGroup);
-        $this->set('_serialize', ['payComponentGroup']);
+		
+		if($payComponentGroup['customer_id']==$this->loggedinuser['customer_id']){
+ 			$this->set('payComponentGroup', $payComponentGroup);
+        	$this->set('_serialize', ['payComponentGroup']);
+ 		}else{
+		   $this->redirect(['action' => 'logout','controller'=>'users']);
+        } 
     }
 
     /**

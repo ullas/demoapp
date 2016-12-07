@@ -53,8 +53,8 @@ class PositionsController extends AppController
 		$orgpositions = $this->Positions->find('threaded', array(
                     'order' => array('Positions.lft'))
             );
-			
 		$this->set('orgpositions', $orgpositions);
+		
     }
 
     /**
@@ -70,18 +70,23 @@ class PositionsController extends AppController
             'contain' => ['Customers', 'LegalEntities', 'Departments', 'CostCentres', 'Locations', 'Divisions', 'PayGrades', 'PayRanges', 'ParentPositions', 'Parents']
         ]);
 		
-		$customers = $this->Positions->Customers->find('list', ['limit' => 200]);
-        $legalEntities = $this->Positions->LegalEntities->find('list', ['limit' => 200]);
-        $departments = $this->Positions->Departments->find('list', ['limit' => 200]);
-        $costCentres = $this->Positions->CostCentres->find('list', ['limit' => 200]);
-        $locations = $this->Positions->Locations->find('list', ['limit' => 200]);
-        $divisions = $this->Positions->Divisions->find('list', ['limit' => 200]);
-        $payGrades = $this->Positions->PayGrades->find('list', ['limit' => 200]);
-        $payRanges = $this->Positions->PayRanges->find('list', ['limit' => 200]);
-        $parentPositions = $this->Positions->ParentPositions->find('list', ['limit' => 200]);
-        $parents = $this->Positions->Parents->find('list', ['limit' => 200]);
-        $this->set(compact('position', 'customers', 'legalEntities', 'departments', 'costCentres', 'locations', 'divisions', 'payGrades', 'payRanges', 'parentPositions', 'parents'));
-        $this->set('_serialize', ['position']);
+		if($position['customer_id']==$this->loggedinuser['customer_id']){
+       	    $customers = $this->Positions->Customers->find('list', ['limit' => 200]);
+        	$legalEntities = $this->Positions->LegalEntities->find('list', ['limit' => 200])->where("customer_id=".$this->loggedinuser['customer_id']);
+        	$departments = $this->Positions->Departments->find('list', ['limit' => 200])->where("customer_id=".$this->loggedinuser['customer_id']);
+        	$costCentres = $this->Positions->CostCentres->find('list', ['limit' => 200])->where("customer_id=".$this->loggedinuser['customer_id']);
+        	$locations = $this->Positions->Locations->find('list', ['limit' => 200])->where("customer_id=".$this->loggedinuser['customer_id']);
+       		$divisions = $this->Positions->Divisions->find('list', ['limit' => 200])->where("customer_id=".$this->loggedinuser['customer_id']);
+        	$payGrades = $this->Positions->PayGrades->find('list', ['limit' => 200])->where("customer_id=".$this->loggedinuser['customer_id']);
+        	$payRanges = $this->Positions->PayRanges->find('list', ['limit' => 200])->where("customer_id=".$this->loggedinuser['customer_id']);
+        	$parentPositions = $this->Positions->ParentPositions->find('list', ['limit' => 200])->where("customer_id=".$this->loggedinuser['customer_id']);
+        	$parents = $this->Positions->Parents->find('list', ['limit' => 200])->where("customer_id=".$this->loggedinuser['customer_id']);
+        	$this->set(compact('position', 'customers', 'legalEntities', 'departments', 'costCentres', 'locations', 'divisions', 'payGrades', 'payRanges', 'parentPositions', 'parents'));
+        	$this->set('_serialize', ['position']);
+		
+       }else{
+		   $this->redirect(['action' => 'logout','controller'=>'users']);
+       }
     }
 
     /**
@@ -103,15 +108,15 @@ class PositionsController extends AppController
             }
         }
         $customers = $this->Positions->Customers->find('list', ['limit' => 200]);
-        $legalEntities = $this->Positions->LegalEntities->find('list', ['limit' => 200]);
-        $departments = $this->Positions->Departments->find('list', ['limit' => 200]);
-        $costCentres = $this->Positions->CostCentres->find('list', ['limit' => 200]);
-        $locations = $this->Positions->Locations->find('list', ['limit' => 200]);
-        $divisions = $this->Positions->Divisions->find('list', ['limit' => 200]);
-        $payGrades = $this->Positions->PayGrades->find('list', ['limit' => 200]);
-        $payRanges = $this->Positions->PayRanges->find('list', ['limit' => 200]);
-        $parentPositions = $this->Positions->ParentPositions->find('list', ['limit' => 200]);
-        $parents = $this->Positions->Parents->find('list', ['limit' => 200]);
+        $legalEntities = $this->Positions->LegalEntities->find('list', ['limit' => 200])->where("customer_id=".$this->loggedinuser['customer_id']);
+        $departments = $this->Positions->Departments->find('list', ['limit' => 200])->where("customer_id=".$this->loggedinuser['customer_id']);
+        $costCentres = $this->Positions->CostCentres->find('list', ['limit' => 200])->where("customer_id=".$this->loggedinuser['customer_id']);
+        $locations = $this->Positions->Locations->find('list', ['limit' => 200])->where("customer_id=".$this->loggedinuser['customer_id']);
+        $divisions = $this->Positions->Divisions->find('list', ['limit' => 200])->where("customer_id=".$this->loggedinuser['customer_id']);
+        $payGrades = $this->Positions->PayGrades->find('list', ['limit' => 200])->where("customer_id=".$this->loggedinuser['customer_id']);
+        $payRanges = $this->Positions->PayRanges->find('list', ['limit' => 200])->where("customer_id=".$this->loggedinuser['customer_id']);
+        $parentPositions = $this->Positions->ParentPositions->find('list', ['limit' => 200])->where("customer_id=".$this->loggedinuser['customer_id']);
+        $parents = $this->Positions->Parents->find('list', ['limit' => 200])->where("customer_id=".$this->loggedinuser['customer_id']);
         $this->set(compact('position', 'customers', 'legalEntities', 'departments', 'costCentres', 'locations', 'divisions', 'payGrades', 'payRanges', 'parentPositions', 'parents'));
         $this->set('_serialize', ['position']);
     }
@@ -129,15 +134,15 @@ class PositionsController extends AppController
             }
         }
         $customers = $this->Positions->Customers->find('list', ['limit' => 200]);
-        $legalEntities = $this->Positions->LegalEntities->find('list', ['limit' => 200]);
-        $departments = $this->Positions->Departments->find('list', ['limit' => 200]);
-        $costCentres = $this->Positions->CostCentres->find('list', ['limit' => 200]);
-        $locations = $this->Positions->Locations->find('list', ['limit' => 200]);
-        $divisions = $this->Positions->Divisions->find('list', ['limit' => 200]);
-        $payGrades = $this->Positions->PayGrades->find('list', ['limit' => 200]);
-        $payRanges = $this->Positions->PayRanges->find('list', ['limit' => 200]);
-        $parentPositions = $this->Positions->ParentPositions->find('list', ['limit' => 200]);
-        $parents = $this->Positions->Parents->find('list', ['limit' => 200]);
+        $legalEntities = $this->Positions->LegalEntities->find('list', ['limit' => 200])->where("customer_id=".$this->loggedinuser['customer_id']);
+        $departments = $this->Positions->Departments->find('list', ['limit' => 200])->where("customer_id=".$this->loggedinuser['customer_id']);
+        $costCentres = $this->Positions->CostCentres->find('list', ['limit' => 200])->where("customer_id=".$this->loggedinuser['customer_id']);
+        $locations = $this->Positions->Locations->find('list', ['limit' => 200])->where("customer_id=".$this->loggedinuser['customer_id']);
+        $divisions = $this->Positions->Divisions->find('list', ['limit' => 200])->where("customer_id=".$this->loggedinuser['customer_id']);
+        $payGrades = $this->Positions->PayGrades->find('list', ['limit' => 200])->where("customer_id=".$this->loggedinuser['customer_id']);
+        $payRanges = $this->Positions->PayRanges->find('list', ['limit' => 200])->where("customer_id=".$this->loggedinuser['customer_id']);
+        $parentPositions = $this->Positions->ParentPositions->find('list', ['limit' => 200])->where("customer_id=".$this->loggedinuser['customer_id']);
+        $parents = $this->Positions->Parents->find('list', ['limit' => 200])->where("customer_id=".$this->loggedinuser['customer_id']);
         $this->set(compact('position', 'customers', 'legalEntities', 'departments', 'costCentres', 'locations', 'divisions', 'payGrades', 'payRanges', 'parentPositions', 'parents'));
         $this->set('_serialize', ['position']);
     }
@@ -165,15 +170,15 @@ class PositionsController extends AppController
             }
         }
         $customers = $this->Positions->Customers->find('list', ['limit' => 200]);
-        $legalEntities = $this->Positions->LegalEntities->find('list', ['limit' => 200]);
-        $departments = $this->Positions->Departments->find('list', ['limit' => 200]);
-        $costCentres = $this->Positions->CostCentres->find('list', ['limit' => 200]);
-        $locations = $this->Positions->Locations->find('list', ['limit' => 200]);
-        $divisions = $this->Positions->Divisions->find('list', ['limit' => 200]);
-        $payGrades = $this->Positions->PayGrades->find('list', ['limit' => 200]);
-        $payRanges = $this->Positions->PayRanges->find('list', ['limit' => 200]);
-        $parentPositions = $this->Positions->ParentPositions->find('list', ['limit' => 200]);
-        $parents = $this->Positions->Parents->find('list', ['limit' => 200]);
+        $legalEntities = $this->Positions->LegalEntities->find('list', ['limit' => 200])->where("customer_id=".$this->loggedinuser['customer_id']);
+        $departments = $this->Positions->Departments->find('list', ['limit' => 200])->where("customer_id=".$this->loggedinuser['customer_id']);
+        $costCentres = $this->Positions->CostCentres->find('list', ['limit' => 200])->where("customer_id=".$this->loggedinuser['customer_id']);
+        $locations = $this->Positions->Locations->find('list', ['limit' => 200])->where("customer_id=".$this->loggedinuser['customer_id']);
+        $divisions = $this->Positions->Divisions->find('list', ['limit' => 200])->where("customer_id=".$this->loggedinuser['customer_id']);
+        $payGrades = $this->Positions->PayGrades->find('list', ['limit' => 200])->where("customer_id=".$this->loggedinuser['customer_id']);
+        $payRanges = $this->Positions->PayRanges->find('list', ['limit' => 200])->where("customer_id=".$this->loggedinuser['customer_id']);
+        $parentPositions = $this->Positions->ParentPositions->find('list', ['limit' => 200])->where("customer_id=".$this->loggedinuser['customer_id']);
+        $parents = $this->Positions->Parents->find('list', ['limit' => 200])->where("customer_id=".$this->loggedinuser['customer_id']);
         $this->set(compact('position', 'customers', 'legalEntities', 'departments', 'costCentres', 'locations', 'divisions', 'payGrades', 'payRanges', 'parentPositions', 'parents'));
         $this->set('_serialize', ['position']);
     }
