@@ -30,7 +30,11 @@ use Cake\Validation\Validator;
  */
 class PositionsTable extends Table
 {
-
+	public function positionquery()
+	{
+    	$sql = "SELECT name FROM positions ORDER by id desc";
+    	return $this->Position->query($sql);
+	}
     /**
      * Initialize method
      *

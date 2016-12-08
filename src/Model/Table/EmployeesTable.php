@@ -10,9 +10,9 @@ use Cake\Validation\Validator;
  * Employees Model
  *
  * @property \Cake\ORM\Association\BelongsTo $Customers
- * @property \Cake\ORM\Association\HasMany $EmpDataBiographies
- * @property \Cake\ORM\Association\HasMany $EmpDataPersonals
- * @property \Cake\ORM\Association\HasMany $EmploymentInfos
+ * @property \Cake\ORM\Association\HasMany $Empdatabiographies
+ * @property \Cake\ORM\Association\HasMany $Empdatapersonals
+ * @property \Cake\ORM\Association\HasMany $Employmentinfos
  *
  * @method \App\Model\Entity\Employee get($primaryKey, $options = [])
  * @method \App\Model\Entity\Employee newEntity($data = null, array $options = [])
@@ -24,7 +24,7 @@ use Cake\Validation\Validator;
  */
 class EmployeesTable extends Table
 {
-
+	
     /**
      * Initialize method
      *
@@ -40,7 +40,7 @@ class EmployeesTable extends Table
         $this->primaryKey('id');
 
         $this->belongsTo('Customers', [
-            'foreignKey' => 'customer_id','dependent' => true
+            'foreignKey' => 'customer_id'
         ]);
         $this->hasOne('Empdatabiographies', [
             'foreignKey' => 'employee_id','dependent'=>true
@@ -51,6 +51,7 @@ class EmployeesTable extends Table
         $this->hasOne('Employmentinfos', [
             'foreignKey' => 'employee_id','dependent'=>true
         ]);
+		
     }
 
     /**

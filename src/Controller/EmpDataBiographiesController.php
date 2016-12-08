@@ -19,7 +19,7 @@ class EmpDataBiographiesController extends AppController
     public function index()
     {
         $this->paginate = [
-            'contain' => ['Customers']
+            'contain' => ['Customers', 'Employees', 'Positions']
         ];
         $empDataBiographies = $this->paginate($this->EmpDataBiographies);
 
@@ -37,7 +37,7 @@ class EmpDataBiographiesController extends AppController
     public function view($id = null)
     {
         $empDataBiography = $this->EmpDataBiographies->get($id, [
-            'contain' => ['Customers']
+            'contain' => ['Customers', 'Employees', 'Positions']
         ]);
 
         $this->set('empDataBiography', $empDataBiography);
@@ -63,7 +63,9 @@ class EmpDataBiographiesController extends AppController
             }
         }
         $customers = $this->EmpDataBiographies->Customers->find('list', ['limit' => 200]);
-        $this->set(compact('empDataBiography', 'customers'));
+        $employees = $this->EmpDataBiographies->Employees->find('list', ['limit' => 200]);
+        $positions = $this->EmpDataBiographies->Positions->find('list', ['limit' => 200]);
+        $this->set(compact('empDataBiography', 'customers', 'employees', 'positions'));
         $this->set('_serialize', ['empDataBiography']);
     }
 
@@ -90,7 +92,9 @@ class EmpDataBiographiesController extends AppController
             }
         }
         $customers = $this->EmpDataBiographies->Customers->find('list', ['limit' => 200]);
-        $this->set(compact('empDataBiography', 'customers'));
+        $employees = $this->EmpDataBiographies->Employees->find('list', ['limit' => 200]);
+        $positions = $this->EmpDataBiographies->Positions->find('list', ['limit' => 200]);
+        $this->set(compact('empDataBiography', 'customers', 'employees', 'positions'));
         $this->set('_serialize', ['empDataBiography']);
     }
 

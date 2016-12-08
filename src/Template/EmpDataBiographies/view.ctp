@@ -7,6 +7,8 @@
         <li><?= $this->Html->link(__('New Emp Data Biography'), ['action' => 'add']) ?> </li>
         <li><?= $this->Html->link(__('List Customers'), ['controller' => 'Customers', 'action' => 'index']) ?> </li>
         <li><?= $this->Html->link(__('New Customer'), ['controller' => 'Customers', 'action' => 'add']) ?> </li>
+        <li><?= $this->Html->link(__('List Employees'), ['controller' => 'Employees', 'action' => 'index']) ?> </li>
+        <li><?= $this->Html->link(__('New Employee'), ['controller' => 'Employees', 'action' => 'add']) ?> </li>
     </ul>
 </nav>
 <div class="empDataBiographies view large-9 medium-8 columns content">
@@ -37,12 +39,16 @@
             <td><?= $empDataBiography->has('customer') ? $this->Html->link($empDataBiography->customer->name, ['controller' => 'Customers', 'action' => 'view', $empDataBiography->customer->id]) : '' ?></td>
         </tr>
         <tr>
+            <th><?= __('Employee') ?></th>
+            <td><?= $empDataBiography->has('employee') ? $this->Html->link($empDataBiography->employee->id, ['controller' => 'Employees', 'action' => 'view', $empDataBiography->employee->id]) : '' ?></td>
+        </tr>
+        <tr>
             <th><?= __('Id') ?></th>
             <td><?= $this->Number->format($empDataBiography->id) ?></td>
         </tr>
         <tr>
-            <th><?= __('Employee Id') ?></th>
-            <td><?= $this->Number->format($empDataBiography->employee_id) ?></td>
+            <th><?= __('Position Id') ?></th>
+            <td><?= $this->Number->format($empDataBiography->position_id) ?></td>
         </tr>
         <tr>
             <th><?= __('Date Of Birth') ?></th>

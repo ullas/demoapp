@@ -21,7 +21,6 @@
 <!-- AdminLTE Skins. Choose a skin from the css/skins
     folder instead of downloading all of them to reduce the load. -->
     <?php echo $this->Html->css('AdminLTE.skins/skin-greenjam'); ?>
-
      <?= $this->Html->css('jquery.jOrgChart.css') ?>
 
     <?php echo $this->fetch('css'); ?>
@@ -35,6 +34,7 @@
 
 <!-- Bootstrap 3.3.5 -->
 <?php echo $this->Html->script('AdminLTE./bootstrap/js/bootstrap'); ?>
+
 <!-- SlimScroll -->
 <?php echo $this->Html->script('AdminLTE./plugins/slimScroll/jquery.slimscroll.min'); ?>
 <!-- FastClick -->

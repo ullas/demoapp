@@ -72,17 +72,23 @@ class EmployeesController extends AppController
     {
         $employee = $this->Employees->newEntity();
         if ($this->request->is('post')) {
-            $employee = $this->Employees->patchEntity($employee, $this->request->data,['associated' => ['Empdatabiographies', 'Empdatapersonals', 'Employmentinfos']]);
+            $employee = $this->Employees->patchEntity($employee, $this->request->data,['associated' => ['Empdatabiographies', 'Empdatapersonals', 'Employmentinfos', 'Customers']]);
+			//saving customer_id to all associated models
 			$employee['customer_id']=$this->loggedinuser['customer_id'];
+			$employee['empdatabiography']['customer_id']=$this->loggedinuser['customer_id'];
+			$employee['empdatapersonal']['customer_id']=$this->loggedinuser['customer_id'];
+			$employee['employmentinfo']['customer_id']=$this->loggedinuser['customer_id'];
+			
             if ($this->Employees->save($employee)) {
+                	
                 $this->Flash->success(__('The employee has been saved.'));
-
                 return $this->redirect(['action' => 'index']);
             } else {
                 $this->Flash->error(__('The employee could not be saved. Please, try again.'));
             }
         }
-        $this->set(compact('employee'));
+		$positions = $this->Employees->EmpDataBiographies->Positions->find('list', ['limit' => 200])->where("customer_id=".$this->loggedinuser['customer_id']);
+        $this->set(compact('positions', 'employee'));
         $this->set('_serialize', ['employee']);
     }
 
@@ -99,11 +105,24 @@ class EmployeesController extends AppController
             'contain' => ['Empdatabiographies', 'Empdatapersonals', 'Employmentinfos']
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
+        	
             $employee = $this->Employees->patchEntity($employee, $this->request->data);
 			$employee['customer_id']=$this->loggedinuser['customer_id'];
+			
             if ($this->Employees->save($employee)) {
-                $this->Flash->success(__('The employee has been saved.'));
-                return $this->redirect(['action' => 'index']);
+            	//associated EmpDataBiographies
+            	$this->loadModel('EmpDataBiographies');
+				$arr = $this->EmpDataBiographies->find('all',['conditions' => array('employee_id' => $id), 'contain' => []])->toArray();
+				if(isset($arr[0])){
+					$empDataBiography = $arr[0];
+					$empDataBiography = $this->EmpDataBiographies->patchEntity($empDataBiography, $this->request->data['empdatabiography']);
+            		if ($this->Employees->EmpDataBiographies->save($empDataBiography)) {
+                		// $this->Flash->success(__('The employee has been saved.'));
+                		// return $this->redirect(['action' => 'index']);
+					}
+				}
+				$this->Flash->success(__('The employee has been saved.'));
+				return $this->redirect(['action' => 'index']);
             } else {
                 $this->Flash->error(__('The employee could not be saved. Please, try again.'));
             }
@@ -111,7 +130,9 @@ class EmployeesController extends AppController
 		
 		$this->set('id', $id);
 		
-        $this->set(compact('employee'));
+        $positions = $this->Employees->EmpDataBiographies->Positions->positionquery();
+        // $positions = $this->Employees->EmpDataBiographies->Positions->find('list', ['limit' => 200])->where("customer_id=".$this->loggedinuser['customer_id']);
+        $this->set(compact('positions', 'employee'));
         $this->set('_serialize', ['employee']);
     }
 
