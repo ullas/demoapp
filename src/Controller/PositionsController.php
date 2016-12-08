@@ -55,6 +55,7 @@ class PositionsController extends AppController
             );
 		$this->set('orgpositions', $orgpositions);
 		
+		
     }
 
     /**
@@ -99,6 +100,7 @@ class PositionsController extends AppController
         $position = $this->Positions->newEntity();
         if ($this->request->is('post')) {
             $position = $this->Positions->patchEntity($position, $this->request->data);
+			$position['customer_id']=$this->loggedinuser['customer_id'];
             if ($this->Positions->save($position)) {
                 $this->Flash->success(__('The position has been saved.'));
 
@@ -161,6 +163,7 @@ class PositionsController extends AppController
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $position = $this->Positions->patchEntity($position, $this->request->data);
+			$position['customer_id']=$this->loggedinuser['customer_id'];
             if ($this->Positions->save($position)) {
                 $this->Flash->success(__('The position has been saved.'));
 

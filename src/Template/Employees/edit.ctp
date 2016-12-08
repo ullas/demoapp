@@ -56,6 +56,7 @@
 				echo $this->Form->input('empdatabiography.birth_name',['templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-user"></i></div>']]);
 				echo $this->Form->input('empdatabiography.date_of_death', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
             	echo $this->Form->input('empdatabiography.person_id_external');
+				echo $this->Form->input('empdatabiography.position_id',['class'=>'select2','label'=>['text'=>'Position'], 'empty' => true]);
         		?>
              	 </fieldset>
             <!-- </div> -->
@@ -202,12 +203,13 @@ $(document).ready(function(){
 		if(e.relatedTarget!=null){$('#loadingmessage').show();}
 		var link = $(e.relatedTarget);
 		$(this).find(".modal-body").load(link.attr("href"),function( response, status, xhr ){
+			//loading icon hide
+			if(e.relatedTarget!=null){$('#loadingmessage').hide();}
 			if ( status == "error" ) {
 				var msg = "Sorry but there was an error.";
 				alert(msg);
 			}else{
-				//loading icon hide
-				if(e.relatedTarget!=null){$('#loadingmessage').hide();}
+				
 				//datepicker
 	    		$('.mptldp').datepicker({
 	    			format:"dd/mm/yy",

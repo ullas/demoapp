@@ -9,7 +9,10 @@ use Cake\ORM\Entity;
  * @property int $id
  * @property int $customer_id
  *
- * @property \App\Model\Entity\Customer[] $customers
+ * @property \App\Model\Entity\Customer $customer
+ * @property \App\Model\Entity\EmpDataBiography $empdatabiography
+ * @property \App\Model\Entity\EmpDataPersonal $empdatapersonal
+ * @property \App\Model\Entity\EmploymentInfo $employmentinfo
  */
 class Employee extends Entity
 {
