@@ -21,7 +21,7 @@
             echo $this->Form->input('cost_center');
 			echo $this->Form->input('manager_category');
 			echo $this->Form->input('position');
-			echo $this->Form->input('position_id');
+			echo $this->Form->input('position_id',['class'=>'select2']);
 			
 		?>
 		</div>

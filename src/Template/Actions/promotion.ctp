@@ -27,6 +27,7 @@
             echo $this->Form->input('job_title');
 			echo $this->Form->input('employee_class');
             echo $this->Form->input('pay_grade');
+			echo $this->Form->input('position_id',['class'=>'select2','empty' => true]);
 			
         ?>
     </div>

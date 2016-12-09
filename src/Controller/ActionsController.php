@@ -11,11 +11,13 @@ use App\Controller\AppController;
 class ActionsController extends AppController
 {
 	public function retirement($id = null) {
-		// $this->autoRender=FALSE;
+
 		$this->loadModel('EmploymentInfos');
-		$employmentInfo = $this->EmploymentInfos->get($id, [
+		$arr = $this->EmploymentInfos->find('all',[ 'conditions' => array('employee_id' => $id),
             'contain' => []
-        ]);
+        ])->toArray();
+		
+		isset($arr[0]) ? $employmentInfo = $arr[0] : $employmentInfo = $this->EmploymentInfos->newEntity();
 		
 		if ($this->request->is(['patch', 'post', 'put'])) {
             $employmentInfo = $this->EmploymentInfos->patchEntity($employmentInfo, $this->request->data);
@@ -33,10 +35,13 @@ class ActionsController extends AppController
 	}
 	
 	public function terminate($id = null) {
+		
 		$this->loadModel('EmploymentInfos');
-		$employmentInfo = $this->EmploymentInfos->get($id, [
+		$arr = $this->EmploymentInfos->find('all',[ 'conditions' => array('employee_id' => $id),
             'contain' => []
-        ]);
+        ])->toArray();
+		
+		isset($arr[0]) ? $employmentInfo = $arr[0] : $employmentInfo = $this->EmploymentInfos->newEntity();
 		
 		if ($this->request->is(['patch', 'post', 'put'])) {
             $employmentInfo = $this->EmploymentInfos->patchEntity($employmentInfo, $this->request->data);
@@ -53,10 +58,15 @@ class ActionsController extends AppController
         $this->set('_serialize', ['employmentInfo']);
 	}
 	public function transfer($id = null) {
+		
+		$this->loadModel('EmpDataBiographies');
+		$emparr=$this->EmpDataBiographies->find('all',['conditions' => array('employee_id' => $id),'contain' => []])->toArray();
+		isset($emparr[0]) ? $empid = $emparr[0]['id'] : $empid = "" ;  
+		
 		$this->loadModel('JobInfos');
-		$jobInfo = $this->JobInfos->get($id, [
-            'contain' => []
-        ]);
+		$arr = $this->JobInfos->find('all',[ 'conditions' => array('emp_data_biographies_id' => $empid),'contain' => []])->toArray();
+
+		isset($arr[0]) ? $jobInfo = $arr[0] : $jobInfo = $this->JobInfos->newEntity();  
 		
 		if ($this->request->is(['patch', 'post', 'put'])) {
            $jobInfo = $this->JobInfos->patchEntity($jobInfo, $this->request->data);
@@ -67,16 +77,29 @@ class ActionsController extends AppController
                 $this->Flash->error(__('The job info could not be saved. Please, try again.'));
             }
         }
-		
+
 		$customers = $this->JobInfos->Customers->find('list', ['limit' => 200]);
-		$this->set(compact('jobInfo', 'customers'));
+		
+		$this->loadModel('Employees');
+		$rslt=$this->Employees->getIncludedPositions($id);  
+		foreach($rslt as $key =>$value){
+			$positions[$value['id']]=$value['name'];
+		}
+		
+		$this->set(compact('jobInfo', 'customers','positions'));
         $this->set('_serialize', ['jobInfo']);
 	}
 	public function promotion($id = null) {
+		
+		$this->loadModel('EmpDataBiographies');
+		$emparr=$this->EmpDataBiographies->find('all',['conditions' => array('employee_id' => $id),'contain' => []])->toArray();
+		isset($emparr[0]) ? $empid = $emparr[0]['id'] : $empid = "" ;  
+		
 		$this->loadModel('JobInfos');
-		$jobInfo = $this->JobInfos->get($id, [
-            'contain' => []
-        ]);
+		$arr = $this->JobInfos->find('all',[ 'conditions' => array('emp_data_biographies_id' => $empid),'contain' => []])->toArray();
+
+		isset($arr[0]) ? $jobInfo = $arr[0] : $jobInfo = $this->JobInfos->newEntity();  
+		
 		if ($this->request->is(['patch', 'post', 'put'])) {
            $jobInfo = $this->JobInfos->patchEntity($jobInfo, $this->request->data);
             if ($this->JobInfos->save($jobInfo)) {
@@ -88,16 +111,28 @@ class ActionsController extends AppController
         }
 		
 		$customers = $this->JobInfos->Customers->find('list', ['limit' => 200]);
-		$this->set(compact('jobInfo', 'customers'));
+		$this->loadModel('Employees');
+		$rslt=$this->Employees->getIncludedPositions($id);  
+		foreach($rslt as $key =>$value){
+			$positions[$value['id']]=$value['name'];
+		}
+		
+		$this->set(compact('jobInfo', 'customers','positions'));
         $this->set('_serialize', ['jobInfo']);
 	}
 	public function addresschange($id = null) {
+		
+		$this->loadModel('EmpDataBiographies');
+		$emparr=$this->EmpDataBiographies->find('all',['conditions' => array('employee_id' => $id),'contain' => []])->toArray();
+		isset($emparr[0]) ? $empid = $emparr[0]['id'] : $empid = "" ;  
+		
 		$this->loadModel('Addresses');
-		$arr = $this->Addresses->find('all',[ 'conditions' => array('emp_data_biographies_id' => $id),
+		$arr = $this->Addresses->find('all',[ 'conditions' => array('emp_data_biographies_id' => $empid),
             'contain' => []
         ])->toArray();
 		
-		$address = $arr[0];
+		isset($arr[0]) ? $address = $arr[0] : $address = $this->Addresses->newEntity();  
+		
 		if ($this->request->is(['patch', 'post', 'put'])) {
             $address = $this->Addresses->patchEntity($address, $this->request->data);
             if ($this->Addresses->save($address)) {
@@ -114,12 +149,15 @@ class ActionsController extends AppController
 	}
 	
 	public function addnote($id = null) {
-		$this->loadModel('Notes');
-		$arr = $this->Notes->find('all',[ 'conditions' => array('emp_data_biographies_id' => $id),
-            'contain' => []
-        ])->toArray();
 		
-		$note = $arr[0];
+		$this->loadModel('EmpDataBiographies');
+		$emparr=$this->EmpDataBiographies->find('all',['conditions' => array('employee_id' => $id),'contain' => []])->toArray();
+		isset($emparr[0]) ? $empid = $emparr[0]['id'] : $empid = "" ;  
+		
+		$this->loadModel('Notes');
+		$arr = $this->Notes->find('all',[ 'conditions' => array('emp_data_biographies_id' => $empid), 'contain' => [] ])->toArray();
+		
+		isset($arr[0]) ? $note = $arr[0] : $note = $this->Notes->newEntity();  
 		
         if ($this->request->is(['patch', 'post', 'put'])) {
             $note = $this->Notes->patchEntity($note, $this->request->data);
