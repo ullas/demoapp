@@ -5,6 +5,7 @@ use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
+use Cake\Datasource\ConnectionManager;
 
 /**
  * Positions Model
@@ -30,10 +31,18 @@ use Cake\Validation\Validator;
  */
 class PositionsTable extends Table
 {
-	public function positionquery()
+	public function getExcludedPositions()
 	{
-    	$sql = "SELECT name FROM positions ORDER by id desc";
-    	return $this->Position->query($sql);
+		$conn = ConnectionManager::get('default');
+		$arrayTemp1 = $conn->execute('select id,name from positions where id not in(select position_id from empdatabiographies where position_id >0)')->fetchAll('assoc');
+		return $arrayTemp1; 
+	}
+	public function getIncludedPositions( $id = null)
+	{
+		$querystr='select id,name from positions where id not in(select position_id from empdatabiographies where position_id >0 AND employee_id!='.'40'.') ;';
+		$conn = ConnectionManager::get('default');
+		$arrayTemp1 = $conn->execute($querystr)->fetchAll('assoc');
+		return $arrayTemp1; 
 	}
     /**
      * Initialize method

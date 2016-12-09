@@ -20,8 +20,8 @@
             echo $this->Form->input('department');
             echo $this->Form->input('cost_center');
 			echo $this->Form->input('manager_category');
-			echo $this->Form->input('position');
-			echo $this->Form->input('position_id');
+			echo $this->Form->input('position',['class'=>'select2']);
+			echo $this->Form->input('position_id',['class'=>'select2','empty' => true]);
 			
 		?>
 		</div>

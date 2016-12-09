@@ -87,7 +87,12 @@ class EmployeesController extends AppController
                 $this->Flash->error(__('The employee could not be saved. Please, try again.'));
             }
         }
-		$positions = $this->Employees->EmpDataBiographies->Positions->find('list', ['limit' => 200])->where("customer_id=".$this->loggedinuser['customer_id']);
+		
+		$rslt=$this->Employees->getExcludedPositions();  
+		foreach($rslt as $key =>$value){
+			$positions[$value['id']]=$value['name'];
+		}
+		// $positions = $this->Employees->EmpDataBiographies->Positions->find('list', ['limit' => 200])->where("customer_id=".$this->loggedinuser['customer_id']);
         $this->set(compact('positions', 'employee'));
         $this->set('_serialize', ['employee']);
     }
@@ -130,8 +135,15 @@ class EmployeesController extends AppController
 		
 		$this->set('id', $id);
 		
-        $positions = $this->Employees->EmpDataBiographies->Positions->positionquery();
-        // $positions = $this->Employees->EmpDataBiographies->Positions->find('list', ['limit' => 200])->where("customer_id=".$this->loggedinuser['customer_id']);
+		$rslt=$this->Employees->getIncludedPositions($id);  
+		foreach($rslt as $key =>$value){
+			$positions[$value['id']]=$value['name'];
+		}
+		// $this->log($positions);
+		
+        // $positions = $this->Employees->EmpDataBiographies->Positions->find('list', ['limit' => 200])->where("customer_id=".$this->loggedinuser['customer_id']);$this->log($positions);
+		
+		
         $this->set(compact('positions', 'employee'));
         $this->set('_serialize', ['employee']);
     }
