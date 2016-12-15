@@ -103,8 +103,14 @@ class ActionsController extends AppController
 		if ($this->request->is(['patch', 'post', 'put'])) {
            $jobInfo = $this->JobInfos->patchEntity($jobInfo, $this->request->data);
             if ($this->JobInfos->save($jobInfo)) {
-                $this->Flash->success(__('The job info has been saved.'));
-                return $this->redirect(['action' => 'edit',$id,'controller'=>'Employees']);
+                //associated EmpDataBiographies
+            	$this->loadModel('EmpDataBiographies');
+				$empDataBiography = $this->EmpDataBiographies->get($id, [ 'contain' => [] ]);
+				$empDataBiography = $this->EmpDataBiographies->patchEntity($empDataBiography, $this->request->data);
+            	if ($this->EmpDataBiographies->save($empDataBiography)) {
+                	$this->Flash->success(__('The employee has been promoted.'));
+					return $this->redirect(['action' => 'edit',$id,'controller'=>'Employees']);
+				}             
             } else {
                 $this->Flash->error(__('The job info could not be saved. Please, try again.'));
             }

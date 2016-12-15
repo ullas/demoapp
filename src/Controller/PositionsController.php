@@ -50,7 +50,7 @@ class PositionsController extends AppController
     {
 		$list = $this->Positions->find('treeList');
 		$orgpositions = $this->Positions->find('threaded', array('order' => array('Positions.lft')) )
-		->select(['EmpDataBiographies.id','EmpDataBiographies.birth_name','EmpDataBiographies.place_of_birth','EmpDataBiographies.employee_id'])
+		->select(['EmpDataBiographies.id','EmpDataBiographies.birth_name','EmpDataBiographies.country_of_birth','EmpDataBiographies.employee_id'])
     	->select($this->Positions)
         ->leftJoin('EmpDataBiographies', 'EmpDataBiographies.position_id = Positions.id');
             
@@ -58,12 +58,6 @@ class PositionsController extends AppController
            
 		$this->set('orgpositions', $orgpositions);
 		
-		
-		// $rslt=$this->Positions->getIncludedPositions($id);  
-		// foreach($rslt as $key =>$value){
-			// $positions[$value['id']]=$value['name'];
-		// }
-		// $this->set('positions', $positions);
     }
 
     /**

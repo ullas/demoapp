@@ -1,14 +1,20 @@
-<section class="content-header">
-      <h1>
-        Contact Info
-        <small>Edit</small>
-      </h1>
-      <ol class="breadcrumb">
-        <li><?= $this->Html->link('<i class="fa fa-mail-reply"></i> '.__('Back'), ['action' => 'index'], ['escape' => false]) ?></li>
-      </ol>
-    </section>
-<section class="content">
-	<div class="box box-primary"><div class="box-body">
+<nav class="large-3 medium-4 columns" id="actions-sidebar">
+    <ul class="side-nav">
+        <li class="heading"><?= __('Actions') ?></li>
+        <li><?= $this->Form->postLink(
+                __('Delete'),
+                ['action' => 'delete', $contactInfo->id],
+                ['confirm' => __('Are you sure you want to delete # {0}?', $contactInfo->id)]
+            )
+        ?></li>
+        <li><?= $this->Html->link(__('List Contact Infos'), ['action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('List Customers'), ['controller' => 'Customers', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New Customer'), ['controller' => 'Customers', 'action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('List Employees'), ['controller' => 'Employees', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New Employee'), ['controller' => 'Employees', 'action' => 'add']) ?></li>
+    </ul>
+</nav>
+<div class="contactInfos form large-9 medium-8 columns content">
     <?= $this->Form->create($contactInfo) ?>
     <fieldset>
         <legend><?= __('Edit Contact Info') ?></legend>
@@ -19,9 +25,10 @@
             echo $this->Form->input('email_address2');
             echo $this->Form->input('facebook');
             echo $this->Form->input('linkedin');
-            echo $this->Form->input('person_id_external');
+            echo $this->Form->input('customer_id', ['options' => $customers, 'empty' => true]);
+            echo $this->Form->input('employee_id', ['options' => $employees, 'empty' => true]);
         ?>
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>
     <?= $this->Form->end() ?>
-</div></div></section>
+</div>

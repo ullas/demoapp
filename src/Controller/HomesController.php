@@ -33,9 +33,20 @@ class HomesController extends AppController
     	//legalentities
        $legalEntities = $this->paginate($this->LegalEntities);
 
-        $this->set(compact('legalEntities'));
-        $this->set('_serialize', ['legalEntities']);
+
+		//get empid from session var
+		$empid=$this->request->session()->read('sessionuser')['employee_id'];
 		
+		$this->loadModel('EmpDataBiographies');
+		$emparr=$this->EmpDataBiographies->find('all',['conditions' => array('employee_id' => $empid),'contain' => []])->toArray();
+		isset($emparr[0]) ? $posid = $emparr[0]['position_id'] : $posid = "" ; 
+		
+		$myteam = $this->EmpDataBiographies->find('all')->where(['position_id >' => $posid])->toArray();
+		$this->set('myteam',$myteam);
+		// $this->loadModel('Positions');
+		// $myteam = $this->Positions->find('all')->where(['id >=' => $posid])->toArray();
+		// $this->log(json_encode($myteam));
+        
 		//homes
         $homes = $this->paginate($this->Homes);
 

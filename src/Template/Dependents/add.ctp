@@ -1,3 +1,5 @@
+<?= $this->element('templateelmnt'); ?>
+
 <section class="content-header">
       <h1>
         Dependents
@@ -19,8 +21,7 @@
             echo $this->Form->input('last_name');
             echo $this->Form->input('middle_name');
             echo $this->Form->input('salutation');
-			echo "<div class='form-group'><label>Date of Birth:</label><div class='input-group'>";
-            echo "<div class='input-group-addon''><i class='fa fa-calendar'></i></div><input type='text' class='form-control' id='date_of_birth'></div></div>";
+			echo $this->Form->input('date_of_birth', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
             echo $this->Form->input('country_of_birth',['options' => $this->Country->get_countries(), 'empty' => true]);
             echo $this->Form->input('country',['options' => $this->Country->get_countries(), 'empty' => true]);
             echo $this->Form->input('card_type');
@@ -28,18 +29,13 @@
             echo $this->Form->input('is_add_same_as_employee');
             echo $this->Form->input('address_number');
             echo $this->Form->input('visa');
-			echo "<div class='form-group'><label>Visa issue:</label><div class='input-group'>";
-            echo "<div class='input-group-addon''><i class='fa fa-calendar'></i></div><input type='text' class='form-control' id='visa_issue'></div></div>";
-			echo "<div class='form-group'><label>Visa Expiry:</label><div class='input-group'>";
-            echo "<div class='input-group-addon''><i class='fa fa-calendar'></i></div><input type='text' class='form-control' id='visa_expiry'></div></div>";
+			echo $this->Form->input('visa_issue', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+            echo $this->Form->input('visa_expiry', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
             echo $this->Form->input('passport');
-            echo "<div class='form-group'><label>Passport Issue:</label><div class='input-group'>";
-            echo "<div class='input-group-addon''><i class='fa fa-calendar'></i></div><input type='text' class='form-control' id='pass_issue'></div></div>";
-			echo "<div class='form-group'><label>Passport Expiry:</label><div class='input-group'>";
-            echo "<div class='input-group-addon''><i class='fa fa-calendar'></i></div><input type='text' class='form-control' id='pass_expiry'></div></div>";
+            echo $this->Form->input('pass_issue', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+            echo $this->Form->input('pass_expiry', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
             echo $this->Form->input('employed');
-            echo "<div class='form-group'><label>Emp Since:</label><div class='input-group'>";
-            echo "<div class='input-group-addon''><i class='fa fa-calendar'></i></div><input type='text' class='form-control' id='emp_since'></div></div>";
+            echo $this->Form->input('emp_since', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
             echo $this->Form->input('employer');
             echo $this->Form->input('acco_entitlement');
             echo $this->Form->input('legal_nominee');
@@ -51,7 +47,10 @@
             echo $this->Form->input('emp_data_biographies_id');
         ?>
     </fieldset>
-    <?= $this->Form->button(__('Submit')) ?>
+    <div class="box-footer">
+    <?=$this->Html->link(__('Cancel'), ['action' => 'index'], ['escape' => false])?>
+    <?= $this->Form->button(__('Save Dependent'),['title'=>'Save Dependent','class'=>'pull-right']) ?>
+    </div>
     <?= $this->Form->end() ?>
 </div></div></section>
 <!-- Date picker -->

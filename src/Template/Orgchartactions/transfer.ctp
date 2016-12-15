@@ -1,5 +1,5 @@
 <?= $this->element('templateelmnt'); ?>
-<div class="box box-success box-solid">
+<div class="box box-success box-solid" style="border-radius:0px;">
     <div class="box-header with-border text-center">
         <h3 class="box-title">Transfer</h3>
 
@@ -18,7 +18,7 @@
 			echo $this->Form->input('business_unit');
             echo $this->Form->input('division');
             echo $this->Form->input('department');
-            echo $this->Form->input('cost_center');
+            echo $this->Form->input('cost_center', ['options' => $costCentres, 'empty' => true]);
 			echo $this->Form->input('manager_category');
 			echo $this->Form->input('position');
 			echo $this->Form->input('position_id',['class'=>'select2']);

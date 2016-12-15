@@ -13,8 +13,8 @@ if (file_exists($file)) {
     </li>
 
     <?php $userrole=$this->request->session()->read('sessionuser')['role'];
-switch ($userrole) {
-case "root":
+	switch ($userrole) {
+	case "root":
     ?>
     <li><a href="<?php echo $this -> Url -> build('/Customers'); ?>"><i class="glyphicon glyphicon-king"></i><span> Customer </span></a></li>
     <?php if ($counts['customer'] > 0): ?>
@@ -38,7 +38,6 @@ case "root":
     	
 	<li><a href="<?php echo $this -> Url -> build('/Regions'); ?>"><i class="fa fa-circle-o"></i> Region</a></li>
     <li><a href="<?php echo $this -> Url -> build('/Locations'); ?>"><i class="fa fa-circle-o"></i> Location</a></li>
-    <li><a href="<?php echo $this -> Url -> build('/Addresses'); ?>"><i class="fa fa-circle-o"></i> Addresses</a></li>
     <li><a href="<?php echo $this -> Url -> build('/PayGroups'); ?>"><i class="fa fa-circle-o"></i> Pay Group</a></li>
     <li><a href="<?php echo $this -> Url -> build('/PayGrades'); ?>"><i class="fa fa-circle-o"></i> Pay Grade</a></li>
     <li><a href="<?php echo $this -> Url -> build('/PayRanges'); ?>"><i class="fa fa-circle-o"></i> Pay Range</a></li>
@@ -101,8 +100,9 @@ case "root":
 	case "employee":
     ?>
     <li><a href="<?php echo $this -> Url -> build('/Homes'); ?>"><i class="fa fa-dashboard"></i><span> Dashboard </span></a></li>
-
-    <li><a href="<?php echo $this -> Url -> build('/Profiles'); ?>"><i class="glyphicon glyphicon-user"></i><span> Profile </span></a></li>
+	<li><a href="<?php echo $this -> Url -> build('/Profiles'); ?>"><i class="glyphicon glyphicon-user"></i><span> Profile </span></a></li>
+	<li><a href="<?php echo $this -> Url -> build('/Dependents'); ?>"><i class="fa fa-users"></i><span> Dependents </span></a></li>
+    <li><a href="<?php echo $this -> Url -> build('/Notes'); ?>"><i class="fa fa-file-text-o"></i><span> Notes </span></a></li>
     <li><a href="<?php echo $this -> Url -> build('/Positions/orgchart'); ?>"><i class="fa fa-sitemap"></i><span> Organizational Chart </span></a></li>
     <li><a href="<?php echo $this -> Url -> build('/Holidays'); ?>"><i class="fa fa-calendar "></i> Leave Management</a></li>
 
