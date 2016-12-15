@@ -12,6 +12,7 @@
     <?php echo $this->Html->css('AdminLTE./plugins/datepicker/datepicker3'); ?>
     <?php echo $this->Html->css('AdminLTE./plugins/timepicker/bootstrap-timepicker.min'); ?>
     <?php echo $this->Html->css('AdminLTE./plugins/datatables/extensions/ColReorder/css/dataTables.colReorder.min'); ?>
+    <?php echo $this->Html->css('/css/dropzone'); ?>
     <!-- Font Awesome -->
     <link rel="stylesheet" href="/css/font-awesome.min.css">
     <!-- Ionicons -->
@@ -115,6 +116,10 @@
 div.dataTables_filter input {
 	margin-left:0px;
 }
+/*hide box shadow*/
+.nav-tabs-custom {
+    box-shadow: none;
+}
 </style>
 
 </head>
@@ -123,6 +128,7 @@ div.dataTables_filter input {
 $this->Html->script([ 'AdminLTE./plugins/select2/select2.full.min' ], ['block' => 'script']);
 $this->Html->script([ 'AdminLTE./plugins/datepicker/bootstrap-datepicker' ], ['block' => 'script']);
 $this->Html->script([ 'AdminLTE./plugins/timepicker/bootstrap-timepicker.min' ], ['block' => 'script']);
+$this->Html->script([ '/js/dropzone' ], ['block' => 'script']);
 ?>
 <body class="hold-transition skin-greenjam sidebar-mini">
     <!-- Site wrapper -->

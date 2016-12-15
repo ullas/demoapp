@@ -1,343 +1,335 @@
-<link rel="stylesheet" type="text/css" href="/css/dropzone.css" />
-<script type="text/javascript" src="/js/dropzone.js"></script>
+<?= $this->element('templateelmnt'); ?>
+<style>
+div#myDropZone {
+    width: 100%;
+    min-height: 500px;
+    border : 1.9px dashed #008FE2;display: table;
+}
+.dz-message {
+	color:#333;
+	font-size:26px;
+    font-weight: 400;
+  	display: table-cell;
+   vertical-align: middle;
+}
+.dz-clickable {
+    cursor: pointer;
+}
+.dz-max-files-reached {
+          /*pointer-events: none;*/          cursor: default;
+}
+.upload-btn{
+	font-size:16px;font-weight: 400;padding:8px;
+}
+</style>
 <section class="content-header">
-  <h1>
-    User Profile
-    <small>Edit</small>
-  </h1>
- 
-</section>
-
-<!-- Main content -->
-<section class="content">
-    <!-- <?= $this->Form->create($profile) ?> -->
-    <fieldset>
-       <!-- Modal popover-->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Edit Profile</h4>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- Modal popover-->
-
-  <div class="row">
+      <h1>
+        User Profile
+                <small>Edit</small>
+      </h1>
+     <ol class="breadcrumb">
+        <li><?= $this->Html->link('<i class="fa fa-mail-reply"></i> '.__('Back'), ['action' => 'index'], ['escape' => false]) ?></li>
+      </ol>
+    </section>
+<section class="content"><?= $this->Form->create($employee) ?>
+	 <div class="row">
     <div class="col-md-3">
+
 
       <!-- Profile Image -->
       <div class="box box-primary">
         <div class="box-body box-profile">
-        	
-        	
-
-        	<div class="image_upload_div">
-    <form action="/Profiles/upload" class="dropzone">
-    </form>
-</div>
-        	
-          <!-- <div class="col-sm-12 thumbnail img-circle">     
-          	 <?php echo $this->Html->image('sree.png', array('class' => 'profile-user-img img-responsive img-circle', 'alt' => 'User profile picture')); ?>
-          	<div class="caption">
-          		<input type="image" id="exampleInputFile" class="fa fa-pencil">
-           	</div> -->
-           	
-           	<!-- <div class="form-group">
-                  <label for="exampleInputFile">File input</label>
-                  <input type="image" id="exampleInputFile">
-
-                  <p class="help-block">Example block-level help text here.</p>
-                </div> -->
-                
-           <!-- </div> -->
-
-          <!-- <h3 class="profile-username text-center">Sreekanth M</h3>
-
-          <p class="text-muted text-center">Software Engineer</p>
-          <p class="text-center">Tawazun Dynamics,Tawazun Industrial Park</p> -->
-          <div class="form-group">
-          	<label for="exampleInputEmail1">Name</label>
-          	<input type="text" class="form-control" id="exampleInputEmail1" placeholder="Enter name" value="Sreekanth M">
-          </div>
-          <div class="form-group">
-          	<label for="exampleInputEmail1">Position</label>
-          	<input type="text" class="form-control" id="exampleInputEmail1" placeholder="Enter position" value="Software Engineer">
-           </div>
-           <div class="form-group">
-          	<label for="exampleInputEmail1">Company</label>
-          	<input type="text" class="form-control" id="exampleInputEmail1" placeholder="Enter company" value="Tawazun Dynamics,Tawazun Industrial Park">
-           </div>
           
-			<a href="#"><button type="button" class="btn btn-success btn-block"> Save Changes</button></a>
+            	<?php echo $this->Html->image('sree.png', array('class' => 'profile-user-img img-responsive img-circle', 'alt' => 'User profile picture','title'=>'text')); ?>
+				<a href="#" class="open-Popup pull-right" data-toggle="modal" data-remote="false" data-target="#editpicpopover" style="margin-top:-50px;"><i class="fa fa-pencil"></i> Change Picture</a>
+  
+             <h3 class="profile-username text-center" ><?php echo $name ?></h3>
+          
+			 <ul class="list-group list-group-unbordered">
+                <li class="list-group-item">
+                  <b>Notes</b> <a class="pull-right">0</a>
+                </li>
+                <li class="list-group-item">
+                  <b>Dependents</b> <a class="pull-right">0</a>
+                </li>
+             </ul>
+
+          <button type="submit" class="btn btn-primary btn-block"> Save Changes</button>
         </div>
         <!-- /.box-body -->
       </div>
       <!-- /.box -->
 
-      <!-- About Me Box -->
-      <div class="box box-primary">
+
+      <!-- Notes Box -->
+      <div class="box box-primary" style="border-color:transparent;">
         <div class="box-header with-border">
-          <h3 class="box-title">About Me</h3>
-        </div>
-        <!-- /.box-header -->
-        <div class="box-body">
-          <strong><i class="fa fa-book margin-r-5"></i> Education</strong>
-		  <input type="text" class="form-control" id="exampleInputEmail1" value="B.S. in Computer Science from the University of Kerala">
+              <h3 class="box-title">About Me</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+     
+			  <strong><i class="fa fa-briefcase margin-r-5"></i> Position</strong>
 
-          <hr>
+              <p class="text-muted">
+                Manager
+              </p>
+              <hr>
+              <strong><i class="fa fa-bank margin-r-5"></i> Legal Entity</strong>
 
-          <strong><i class="fa fa-map-marker margin-r-5"></i> Location</strong>
+              <p class="text-muted">
+                Maptell 
+              </p>
 
-          <input type="text" class="form-control" id="exampleInputEmail1" value="Trivandrum,India">
+              <hr>
+              <strong><i class="fa fa-map-marker margin-r-5"></i> Location</strong>
 
-          <hr>
+              <p class="text-muted">Malibu, California</p>
 
-          <strong><i class="fa fa-pencil margin-r-5"></i> Skills</strong>
-
-          <p>
-            <span class="label label-danger">UI Design</span>
-            <span class="label label-success">Coding</span>
-            <span class="label label-info">Javascript</span>
-            <span class="label label-warning">PHP</span>
-            <span class="label label-primary">Node.js</span>
-          </p>
-		<div class="input-group form-group">
-                <input id="new-event" type="text" class="form-control" placeholder="Skill">
-                <div class="input-group-btn"><button type="button" class="btn btn-success"><i class="fa fa-plus"></i></button></div>
-              </div>
-        </div>
-        <!-- /.box-body -->
+            </div>
+            <!-- /.box-body -->
       </div>
       <!-- /.box -->
+      
+      
     </div>
-    <!-- /.col -->
+    
     <div class="col-md-9">
+	<div class="box box-primary" style="border-color:transparent;"><div class="box-body">
+    
       <div class="nav-tabs-custom">
         <ul class="nav nav-tabs">
-          <li class="active"><a href="#activity" data-toggle="tab">Job Profile</a></li>
-          <li><a href="#timeline" data-toggle="tab">Experience</a></li>
+           <li  class="active"><a href="#personal" data-toggle="tab">Personal Information</a></li>	
+           <li><a href="#empinfo" data-toggle="tab">Employment Information</a></li>
+           <li><a href="#profile" data-toggle="tab">Profile</a></li>  
+           <li><a href="#social" data-toggle="tab">Social</a></li>
+           <li><a href="#others" data-toggle="tab">Others</a></li>
         </ul>
-        <div class="tab-content">
-          <div class="active tab-pane" id="activity">
-            <!-- Post -->
-            <div class="post">
-              <!-- <div class="box"> -->
-                 <div class="box-body no-padding">
-              <table class="table table-condensed">
-                <tbody>
-                <tr>
-                  <td>Current</td>
-                  <td>Tawazun Dynamics</td>
-                </tr>
-                <tr>
-                  <td>Previous</td>
-                  <td>Purple Systems</td>
-                </tr>
-                <tr>
-                  <td>Education</td>
-                  <td>University of Kerala</td>
-                </tr>
-                <tr>
-                 <td>Period</td>
-                  <td>Since Nov. 2012</td>
-                </tr>
-              </tbody></table>
-            </div>
-            <!-- /.box-body -->
-          <!-- </div> -->
-            </div>
-            <!-- /.post -->
-
-           
-
-
-
-
-      <div class="nav-tabs-custom">
-        <ul class="nav nav-tabs">
-          <li class="active"><a href="#tasks" data-toggle="tab">Roles</a></li>
-          <li><a href="#designations" data-toggle="tab">Responsibilities</a></li>
-        </ul>
-        <div class="tab-content">
-          <div class="active tab-pane" id="tasks">
-            <!-- Post -->
-            <div class="post">
-             
-              <div class="input-group form-group">
-                <input id="new-event" type="text" class="form-control" placeholder="Achievement" value="Execute full lifecycle software development.">
-                <div class="input-group-btn"><button type="button" class="btn btn-danger"><i class="fa fa-trash"></i></button></div>
-              </div>
-              <div class="input-group form-group">
-                <input id="new-event" type="text" class="form-control" placeholder="Achievement">
-                <div class="input-group-btn"><button type="button" class="btn btn-success"><i class="fa fa-plus"></i></button></div>
-              </div>
-
-            </div>
-            <!-- /.post -->
-
-           
-
-            
-          </div>
-          <!-- /.tab-pane -->
-          <div class="tab-pane" id="designations">
-          	<div class="input-group form-group">
-                <input id="new-event" type="text" class="form-control" placeholder="Achievement" value="Project manager">
-                <div class="input-group-btn"><button type="button" class="btn btn-danger"><i class="fa fa-trash"></i></button></div>
-              </div>
-              <div class="input-group form-group">
-                <input id="new-event" type="text" class="form-control" placeholder="New Responsibility">
-                <div class="input-group-btn"><button type="button" class="btn btn-success"><i class="fa fa-plus"></i></button></div>
-              </div>
-          </div>
-          <!-- /.tab-pane -->
-
-        </div>
-        <!-- /.tab-content -->
-      </div>
-      <!-- /.nav-tabs-custom -->
-    
-    
-           
-           
-           <div class="nav-tabs-custom">
-        <ul class="nav nav-tabs">
-          <li class="active"><a href="#" data-toggle="tab">Achievements</a></li>
-        </ul>
-        <div class="tab-content">
-          <div class="active tab-pane" id="achievements">
-            <!-- Post -->
-            <div class="post">
         
-            <div class="box-body">
-
-              <div class="input-group form-group">
-                <input id="new-event" type="text" class="form-control" placeholder="Achievement" value="increased sales by 15%.">
-                <div class="input-group-btn"><button type="button" class="btn btn-danger"><i class="fa fa-trash"></i></button></div>
-              </div>
-              <div class="input-group form-group">
-                <input id="new-event" type="text" class="form-control" placeholder="Achievement" value="member of a high-performing team which won the regional support award last year.">
-                <div class="input-group-btn"><button type="button" class="btn btn-danger"><i class="fa fa-trash"></i></button></div>
-              </div>
-              <div class="input-group form-group">
-                <input id="new-event" type="text" class="form-control" placeholder="Achievement" value="Contributed to good customer service.">
-                <div class="input-group-btn"><button type="button" class="btn btn-danger"><i class="fa fa-trash"></i></button></div>
-              </div>
-              <div class="input-group form-group">
-                <input id="new-event" type="text" class="form-control" placeholder="Achievement">
-                <div class="input-group-btn"><button type="button" class="btn btn-success"><i class="fa fa-plus"></i></button></div>
-              </div>
-              
-            </div>
-            <!-- /.box-body -->
-            </div>
-            <!-- /.post -->
-
-           
-
-            
+        <div class=" tab-content">
+          <div class="active tab-pane" id="personal">
+             <!-- <div class="form-horizontal"> -->
+             	<fieldset>
+                <?php
+            echo $this->Form->input('empdatapersonal.salutation');
+            echo $this->Form->input('empdatapersonal.first_name');
+            echo $this->Form->input('empdatapersonal.last_name');
+            echo $this->Form->input('empdatapersonal.initials');
+            echo $this->Form->input('empdatapersonal.middle_name');
+            echo $this->Form->input('empdatapersonal.first_name_alt1');
+            echo $this->Form->input('empdatapersonal.middle_name_alt1');
+            echo $this->Form->input('empdatapersonal.last_name_alt1');
+            echo $this->Form->input('empdatapersonal.first_name_alt2');
+            echo $this->Form->input('empdatapersonal.middle_name_alt2');
+            echo $this->Form->input('empdatapersonal.last_name_alt2');
+            echo $this->Form->input('empdatapersonal.display_name');
+            echo $this->Form->input('empdatapersonal.formal_name');
+            echo $this->Form->input('empdatapersonal.birth_name');
+            echo $this->Form->input('empdatapersonal.birth_name_alt1');
+            echo $this->Form->input('empdatapersonal.birth_name_alt2');
+            echo $this->Form->input('empdatapersonal.preferred_name');
+            echo $this->Form->input('empdatapersonal.display_name_alt1');
+            echo $this->Form->input('empdatapersonal.display_name_alt2');
+            echo $this->Form->input('empdatapersonal.formal_name_alt1');
+            echo $this->Form->input('empdatapersonal.formal_name_alt2');
+            echo $this->Form->input('empdatapersonal.name_format');
+            echo $this->Form->input('empdatapersonal.is_overridden');
+            echo $this->Form->input('empdatapersonal.nationality');
+            echo $this->Form->input('empdatapersonal.second_nationality');
+            echo $this->Form->input('empdatapersonal.third_nationality');
+            echo $this->Form->input('empdatapersonal.wps_code');
+            echo $this->Form->input('empdatapersonal.uniqueid');
+            echo $this->Form->input('empdatapersonal.prof_legal');
+            echo $this->Form->input('empdatapersonal.exclude_legal');
+            echo $this->Form->input('empdatapersonal.nationality_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+            echo $this->Form->input('empdatapersonal.home_airport');
+            echo $this->Form->input('empdatapersonal.religion');
+            echo $this->Form->input('empdatapersonal.number_children');
+            echo $this->Form->input('empdatapersonal.disability_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+            echo $this->Form->input('empdatapersonal.disable_group');
+            echo $this->Form->input('empdatapersonal.disable_degree');
+            echo $this->Form->input('empdatapersonal.disable_type');
+            echo $this->Form->input('empdatapersonal.disable_authority');
+            echo $this->Form->input('empdatapersonal.disable_ref');
+        ?>
+             	 </fieldset>
+            <!-- </div> -->
+ 
           </div>
           <!-- /.tab-pane -->
           
-
+          
+          <div class="tab-pane" id="empinfo">
+             <!-- <div class="form-horizontal"> -->
+             	<fieldset>
+             		<?php
+            echo $this->Form->input('employmentinfo.start_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+            echo $this->Form->input('employmentinfo.first_date_worked', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+            echo $this->Form->input('employmentinfo.original_start_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+            echo $this->Form->input('employmentinfo.company');
+            echo $this->Form->input('employmentinfo.is_primary');
+            echo $this->Form->input('employmentinfo.seniority_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+            echo $this->Form->input('employmentinfo.benefits_eligibility_start_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+            echo $this->Form->input('employmentinfo.prev_employeeid');
+            echo $this->Form->input('employmentinfo.eligible_for_stock');
+            echo $this->Form->input('employmentinfo.service_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+            echo $this->Form->input('employmentinfo.initial_stock_grant');
+            echo $this->Form->input('employmentinfo.initial_option_grant');
+            echo $this->Form->input('employmentinfo.job_credit');
+            echo $this->Form->input('employmentinfo.notes');
+            echo $this->Form->input('employmentinfo.is_contingent_worker');
+            echo $this->Form->input('employmentinfo.end_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+            echo $this->Form->input('employmentinfo.ok_to_rehire');
+            echo $this->Form->input('employmentinfo.pay_roll_end_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+            echo $this->Form->input('employmentinfo.last_date_worked', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+            echo $this->Form->input('employmentinfo.regret_termination');
+            echo $this->Form->input('employmentinfo.eligible_for_sal_continuation');
+            echo $this->Form->input('employmentinfo.bonus_pay_expiration_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+            echo $this->Form->input('employmentinfo.stock_end_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+            echo $this->Form->input('employmentinfo.salary_end_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+            echo $this->Form->input('employmentinfo.benefits_end_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+        ?>
+            <!-- </div> -->
+     </fieldset>
+          </div>
+          <!-- Tab Pane-->
+          
+          <div class="tab-pane" id="profile">
+             <!-- <div class="form-horizontal"> --><fieldset>
+              <?php
+            echo $this->Form->input('empdatabiography.date_of_birth', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+            echo $this->Form->input('empdatabiography.country_of_birth');
+            echo $this->Form->input('empdatabiography.region_of_birth');
+            echo $this->Form->input('empdatabiography.place_of_birth');
+            echo $this->Form->input('empdatabiography.birth_name');
+            echo $this->Form->input('empdatabiography.date_of_death', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+            echo $this->Form->input('empdatabiography.person_id_external', ['disabled' => true]);
+        ?>
+        </fieldset>
+            <!-- </div> -->
+           </div>
+          <!-- Tab Pane-->
+         
+          
+          <div class="tab-pane" id="social">
+             <!-- <div class="form-horizontal"> -->
+             	<fieldset>
+             		<?php
+            		echo $this->Form->input('contact_info.phone');
+            		echo $this->Form->input('contact_info.mobile');
+            		echo $this->Form->input('contact_info.email_address1');
+            		echo $this->Form->input('contact_info.email_address2');
+            		echo $this->Form->input('contact_info.facebook');
+            		echo $this->Form->input('contact_info.linkedin');
+        			?>
+        			
+        			<?php echo $this->Form->input('profilepicture', array('type' => 'hidden')); ?>
+            <!-- </div> -->
+     		</fieldset>
+          </div>
+          <!-- Tab Pane-->
+          
+          <div class="tab-pane" id="others">
+             <!-- <div class="form-horizontal"> -->
+             <fieldset>
+             		
+            <!-- </div> -->
+     		</fieldset>
+          </div>
+          <!-- Tab Pane-->
+          
         </div>
         <!-- /.tab-content -->
       </div>
       <!-- /.nav-tabs-custom -->
-      
-       
-          </div>
-          <!-- /.tab-pane -->
-          <div class="tab-pane" id="timeline">
-            <!-- The timeline -->
-            <ul class="timeline timeline-inverse">
-              <!-- timeline time label -->
-              <li class="time-label">
-                    <span class="bg-red">
-                      Job Experience
-                    </span>
-              </li>
-              <!-- /.timeline-label -->
-              <!-- timeline item -->
-              <li>
-                <i class="fa fa-suitcase bg-blue"></i>
-
-                <div class="timeline-item">
-                  <span class="time"><i class="fa fa-clock-o"></i> November 2011 - March 2012</span>
-
-                  <h3 class="timeline-header">iOS Consultant</h3>
-
-                  <div class="timeline-body">
-                     Designed,Developed and implemented projects on iOS platform. 
-                  </div>
-                  <div class="timeline-footer">
-                    <a class="btn btn-primary btn-xs">Edit</a>
-                    <a class="btn btn-danger btn-xs">Delete</a>
-                  </div>
-                </div>
-              </li>
-              <!-- END timeline item -->
-              
-              <!-- timeline item -->
-              <li>
-                <i class="fa fa-suitcase bg-blue"></i>
-
-                <div class="timeline-item">
-                  <span class="time"><i class="fa fa-clock-o"></i> June 2010 – November 2011 </span>
-
-                  <h3 class="timeline-header">iOS Developer</h3>
-
-                  <div class="timeline-body">
-                    Designed,Developed iOS applications.
-                  </div>
-                  <div class="timeline-footer">
-                    <a class="btn btn-primary btn-xs">Edit</a>
-                    <a class="btn btn-danger btn-xs">Delete</a>
-                  </div>
-                </div>
-              </li>
-              <!-- END timeline item -->
-              <!-- timeline time label -->
-              
-              <!-- /.timeline-label -->
-              
-              <!-- END timeline item -->
-              <li>
-                <i class="fa fa-clock-o bg-gray"></i>
-              </li>
-            </ul>
-            
-            <div class="box-footer clearfix no-border">
-              <button type="button" class="btn btn-default pull-right"><i class="fa fa-plus"></i> Add more</button>
-            </div>
-            
-          </div>
-          <!-- /.tab-pane -->
-			
-            
-        </div>
-        <!-- /.tab-content -->
-      </div>
-      <!-- /.nav-tabs-custom -->
-    </div>
-    <!-- /.col -->
+    
   </div>
-  <!-- /.row -->
+  
+   <!-- /.row -->
+</div>
 
-    </fieldset>
-    <!-- <?= $this->Form->button(__('Submit')) ?>
-    <?= $this->Form->end() ?> -->
-</section>
-<?php $this->start('scriptBotton'); ?>
+<!-- <div class="box-footer">
+    <a href="/employees">Cancel</a>    
+    <button class="pull-right btn btn-primary" type="submit">Save</button>  
+</div> -->
+    
+    </div></div>
 
+<!-- <div class="row">
+   <div class="form-group">
+                <div class="col-sm-offset-6 col-sm-12">
+                  <button type="submit" class="btn btn-primary pull-right">Save</button>
+                </div>
+   </div>
+   </div> -->
+  <?= $this->Form->end() ?></section>
+  <?php $this->start('scriptBotton'); ?>
+<script>
+  $(function () { 
+   //dropzone
+	Dropzone.autoDiscover = false;
+	var myDropzone = $("div#myDropZone").dropzone({
+         url : "/Uploads/upload",
+         maxFiles: 1,
+         addRemoveLinks: true, 
+         dictRemoveFileConfirmation : 'Are you sure you want to remove the particular file ?' ,
+         init: function() {
+     		this.on("complete", function (file) {
+      			if (this.getUploadingFiles().length === 0 && this.getQueuedFiles().length === 0) {
+					//alert(file);      
+				}
+    		});
+    		this.on("removedfile", function (file) {
+          		$("#profilepicture").val("");
+      		});
+    		this.on("queuecomplete", function (file) {
+          // alert("All files have uploaded ");
+      		});
+      
+      		this.on("success", function (file) {
+          		$("#profilepicture").val(file['name']);console.log(file['name']); //alert("Success ");
+      		});
+      
+      		this.on("error", function (file) {
+          		// alert("Error in uploading ");
+      		});
+      
+      		this.on("maxfilesexceeded", function(file){
+        		alert("You can not upload any more files.");this.removeFile(file);
+    		});
+    	},
+       
+    });
+  });
+</script>
 <?php $this->end(); ?>
+<div class="modal fade" id="editpicpopover" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+          <div class="modal-content">
+          	  <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Edit Profile Picture</h4>
+      </div>
+              <div class="modal-body" >
+            <div class="form-horizontal">
+            	
+            	
+            	
+            	
+			    <!-- upload component -->
+            	<div class="form-group" style="margin:20px;"><div id="myDropZone" class="dropzone"><div class="dz-message text-center"><i class="fa fa-cloud-upload text-light-blue fa-5x"></i>
+            		<br/><span>Drag and Drop the picture Here to upload.</span>
+            		<br/><span class="upload-btn bg-info">or select the picture to Upload</span></div></div>
+            	</div>
+            	
+            	
+            	
+            </div>
+			  </div>
+			  
+			  
+
+          </div>
+      </div>
+</div>
+

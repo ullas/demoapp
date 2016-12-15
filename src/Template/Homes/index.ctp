@@ -26,7 +26,7 @@
     <div class="col-sm-3">
     	<div class="box box-primary direct-chat direct-chat-primary">
         	<div class="box-header with-border">My Team</div>
-        	<div class="panel-body box-body"><?= $this->element('homeelmt', array('title' => 'My Team')); ?></div>
+        	 <div class="panel-body box-body"><?= $this->element('homeelmt', array('title' => 'My Team','teammembers' => $myteam)); ?></div>
         </div>
     </div>
     <div class="col-sm-3">

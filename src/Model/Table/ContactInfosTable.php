@@ -10,6 +10,7 @@ use Cake\Validation\Validator;
  * ContactInfos Model
  *
  * @property \Cake\ORM\Association\BelongsTo $Customers
+ * @property \Cake\ORM\Association\BelongsTo $Employees
  *
  * @method \App\Model\Entity\ContactInfo get($primaryKey, $options = [])
  * @method \App\Model\Entity\ContactInfo newEntity($data = null, array $options = [])
@@ -38,6 +39,9 @@ class ContactInfosTable extends Table
 
         $this->belongsTo('Customers', [
             'foreignKey' => 'customer_id'
+        ]);
+        $this->belongsTo('Employees', [
+            'foreignKey' => 'employee_id'
         ]);
     }
 
@@ -70,11 +74,6 @@ class ContactInfosTable extends Table
         $validator
             ->allowEmpty('linkedin');
 
-        $validator
-            ->requirePresence('person_id_external', 'create')
-            ->notEmpty('person_id_external')
-            ->add('person_id_external', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
-
         return $validator;
     }
 
@@ -87,8 +86,8 @@ class ContactInfosTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
-        $rules->add($rules->isUnique(['person_id_external']));
         $rules->add($rules->existsIn(['customer_id'], 'Customers'));
+        $rules->add($rules->existsIn(['employee_id'], 'Employees'));
 
         return $rules;
     }

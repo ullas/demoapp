@@ -10,16 +10,7 @@ use App\Controller\AppController;
  */
 class ContactInfosController extends AppController
 {
-var $components = array('Datatable');
-	
-	public function ajaxData() {
-		$this->autoRender= False;
 
-		$fields = array('id','phone');
-									  
-		$output =$this->Datatable->getView($fields);
-		echo json_encode($output);			
-    }
     /**
      * Index method
      *
@@ -28,7 +19,7 @@ var $components = array('Datatable');
     public function index()
     {
         $this->paginate = [
-            'contain' => ['Customers']
+            'contain' => ['Customers', 'Employees']
         ];
         $contactInfos = $this->paginate($this->ContactInfos);
 
@@ -46,7 +37,7 @@ var $components = array('Datatable');
     public function view($id = null)
     {
         $contactInfo = $this->ContactInfos->get($id, [
-            'contain' => ['Customers']
+            'contain' => ['Customers', 'Employees']
         ]);
 
         $this->set('contactInfo', $contactInfo);
@@ -72,7 +63,8 @@ var $components = array('Datatable');
             }
         }
         $customers = $this->ContactInfos->Customers->find('list', ['limit' => 200]);
-        $this->set(compact('contactInfo', 'customers'));
+        $employees = $this->ContactInfos->Employees->find('list', ['limit' => 200]);
+        $this->set(compact('contactInfo', 'customers', 'employees'));
         $this->set('_serialize', ['contactInfo']);
     }
 
@@ -99,7 +91,8 @@ var $components = array('Datatable');
             }
         }
         $customers = $this->ContactInfos->Customers->find('list', ['limit' => 200]);
-        $this->set(compact('contactInfo', 'customers'));
+        $employees = $this->ContactInfos->Employees->find('list', ['limit' => 200]);
+        $this->set(compact('contactInfo', 'customers', 'employees'));
         $this->set('_serialize', ['contactInfo']);
     }
 

@@ -5,7 +5,8 @@ function RecursiveCategories($array) {
             echo "\n<ul id='org' style='display:none'>\n";
         foreach ($array as $vals) {
 
-            $htmlstr='<div id=mptl><h5 class="text-muted text-center">'.$vals['name'].'</h5>
+            $htmlstr='<div id=mptl><i class="fa fa-briefcase"></i> <small class="text-muted">'.$vals['name'].'</small>
+            				<br/><i class="fa fa-flag"></i> <small class="text-muted">'.$vals['EmpDataBiographies']['country_of_birth'].'</small>
             				<hr/><b>Take Action</b><ul class=list-unstyled>
                     		<li><a href="/Orgchartactions/transfer/'.$vals['EmpDataBiographies']['id'].'" data-remote="false" class="open-Popup" data-toggle="modal" data-target="#actionspopover">Transfer</a></li>
                     		<li><a href="/Orgchartactions/promotion/'.$vals['EmpDataBiographies']['id'].'" data-remote="false" class="open-Popup" data-toggle="modal" data-target="#actionspopover">Promotion</a></li>
@@ -33,7 +34,7 @@ function RecursiveCategories($array) {
 
 <style>
 .popover-content  a{font-size:12px;}
-/*.popover{ min-width: 500px; }*/
+.popover{ min-width: 200px; }
 </style>
 
 <section class="content-header">

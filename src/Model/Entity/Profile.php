@@ -7,6 +7,7 @@ use Cake\ORM\Entity;
  * Profile Entity
  *
  * @property int $id
+ * @property int $customer_id
  */
 class Profile extends Entity
 {

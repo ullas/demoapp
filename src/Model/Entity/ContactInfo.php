@@ -13,8 +13,11 @@ use Cake\ORM\Entity;
  * @property string $email_address2
  * @property string $facebook
  * @property string $linkedin
- * @property string $person_id_external
  * @property int $customer_id
+ * @property int $employee_id
+ *
+ * @property \App\Model\Entity\Customer $customer
+ * @property \App\Model\Entity\Employee $employee
  */
 class ContactInfo extends Entity
 {
