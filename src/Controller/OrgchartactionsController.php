@@ -63,18 +63,18 @@ class OrgchartactionsController extends AppController
 	public function transfer($id = null) {
 		
 		$this->loadModel('JobInfos');
-		$arr = $this->JobInfos->find('all',[ 'conditions' => array('emp_data_biographies_id' => $id),'contain' => []])->toArray();
+		$arr = $this->JobInfos->find('all',[ 'conditions' => array('position_id' => $id),'contain' => []])->toArray();
 
-		isset($arr[0]) ? $jobInfo = $arr[0] : $jobInfo = $this->JobInfos->newEntity();  
+		if(isset($arr[0])){ $jobInfo = $arr[0]; }else{ $jobInfo = $this->JobInfos->newEntity();}  
 				
 		if ($this->request->is(['patch', 'post', 'put'])) {
             $jobInfo = $this->JobInfos->patchEntity($jobInfo, $this->request->data);
 			$jobInfo['customer_id']=$this->loggedinuser['customer_id'];
-			$jobInfo['emp_data_biographies_id']=$id;
             if ($this->JobInfos->save($jobInfo)) {
                 //associated EmpDataBiographies
             	$this->loadModel('EmpDataBiographies');
-				$empDataBiography = $this->EmpDataBiographies->get($id, [ 'contain' => [] ]);
+				$empdataarr = $this->EmpDataBiographies->find('all',[ 'conditions' => array('position_id' => $id),'contain' => []])->toArray();
+				isset($empdataarr[0]) ? $empDataBiography = $empdataarr[0] : $empDataBiography = $this->EmpDataBiographies->newEntity(); 
 				$empDataBiography = $this->EmpDataBiographies->patchEntity($empDataBiography, $this->request->data);
             	if ($this->EmpDataBiographies->save($empDataBiography)) {
                 	$this->Flash->success(__('The employee has been transferred.'));
@@ -88,7 +88,7 @@ class OrgchartactionsController extends AppController
 		$customers = $this->JobInfos->Customers->find('list', ['limit' => 200]);
 		
 		$this->loadModel('EmpDataBiographies');
-		$emparr=$this->EmpDataBiographies->find('all',['conditions' => array('id' => $id),'contain' => []])->toArray();
+		$emparr=$this->EmpDataBiographies->find('all',['conditions' => array('position_id' => $id),'contain' => []])->toArray();
 		isset($emparr[0]) ? $empid = $emparr[0]['employee_id'] : $empid = "" ;  
 		
 		$this->loadModel('Employees');
@@ -107,18 +107,18 @@ class OrgchartactionsController extends AppController
 	public function promotion($id = null) {
 
 		$this->loadModel('JobInfos');
-		$arr = $this->JobInfos->find('all',[ 'conditions' => array('emp_data_biographies_id' => $id),'contain' => []])->toArray();
+		$arr = $this->JobInfos->find('all',[ 'conditions' => array('position_id' => $id),'contain' => []])->toArray();
 
 		isset($arr[0]) ? $jobInfo = $arr[0] : $jobInfo = $this->JobInfos->newEntity();  
 	
 		if ($this->request->is(['patch', 'post', 'put'])) {
            $jobInfo = $this->JobInfos->patchEntity($jobInfo, $this->request->data);
 			$jobInfo['customer_id']=$this->loggedinuser['customer_id'];
-			$jobInfo['emp_data_biographies_id']=$id;
             if ($this->JobInfos->save($jobInfo)) {
             	//associated EmpDataBiographies
             	$this->loadModel('EmpDataBiographies');
-				$empDataBiography = $this->EmpDataBiographies->get($id, [ 'contain' => [] ]);
+				$empdataarr = $this->EmpDataBiographies->find('all',[ 'conditions' => array('position_id' => $id),'contain' => []])->toArray();
+				isset($empdataarr[0]) ? $empDataBiography = $empdataarr[0] : $empDataBiography = $this->EmpDataBiographies->newEntity();	
 				$empDataBiography = $this->EmpDataBiographies->patchEntity($empDataBiography, $this->request->data);
             	if ($this->EmpDataBiographies->save($empDataBiography)) {
                 	$this->Flash->success(__('The employee has been promoted.'));
@@ -132,7 +132,7 @@ class OrgchartactionsController extends AppController
 		$customers = $this->JobInfos->Customers->find('list', ['limit' => 200]);
 		
 		$this->loadModel('EmpDataBiographies');
-		$emparr=$this->EmpDataBiographies->find('all',['conditions' => array('id' => $id),'contain' => []])->toArray();
+		$emparr=$this->EmpDataBiographies->find('all',['conditions' => array('position_id' => $id),'contain' => []])->toArray();
 		isset($emparr[0]) ? $empid = $emparr[0]['employee_id'] : $empid = "" ;  
 		
 		$this->loadModel('Employees');

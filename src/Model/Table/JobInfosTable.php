@@ -7,21 +7,28 @@ use Cake\ORM\Table;
 use Cake\Validation\Validator;
 
 /**
- * JobInfos Model
+ * Jobinfos Model
  *
  * @property \Cake\ORM\Association\BelongsTo $Users
- * @property \Cake\ORM\Association\BelongsTo $EmpDataBiographies
  * @property \Cake\ORM\Association\BelongsTo $Customers
+ * @property \Cake\ORM\Association\BelongsTo $Jobs
+ * @property \Cake\ORM\Association\BelongsTo $Positions
+ * @property \Cake\ORM\Association\BelongsTo $BusinessUnits
+ * @property \Cake\ORM\Association\BelongsTo $Divisions
+ * @property \Cake\ORM\Association\BelongsTo $CostCentres
+ * @property \Cake\ORM\Association\BelongsTo $PayGrades
+ * @property \Cake\ORM\Association\BelongsTo $Locations
+ * @property \Cake\ORM\Association\BelongsTo $Departments
  *
- * @method \App\Model\Entity\JobInfo get($primaryKey, $options = [])
- * @method \App\Model\Entity\JobInfo newEntity($data = null, array $options = [])
- * @method \App\Model\Entity\JobInfo[] newEntities(array $data, array $options = [])
- * @method \App\Model\Entity\JobInfo|bool save(\Cake\Datasource\EntityInterface $entity, $options = [])
- * @method \App\Model\Entity\JobInfo patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
- * @method \App\Model\Entity\JobInfo[] patchEntities($entities, array $data, array $options = [])
- * @method \App\Model\Entity\JobInfo findOrCreate($search, callable $callback = null)
+ * @method \App\Model\Entity\Jobinfo get($primaryKey, $options = [])
+ * @method \App\Model\Entity\Jobinfo newEntity($data = null, array $options = [])
+ * @method \App\Model\Entity\Jobinfo[] newEntities(array $data, array $options = [])
+ * @method \App\Model\Entity\Jobinfo|bool save(\Cake\Datasource\EntityInterface $entity, $options = [])
+ * @method \App\Model\Entity\Jobinfo patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
+ * @method \App\Model\Entity\Jobinfo[] patchEntities($entities, array $data, array $options = [])
+ * @method \App\Model\Entity\Jobinfo findOrCreate($search, callable $callback = null)
  */
-class JobInfosTable extends Table
+class JobinfosTable extends Table
 {
 
     /**
@@ -41,14 +48,32 @@ class JobInfosTable extends Table
         $this->belongsTo('Users', [
             'foreignKey' => 'users_id'
         ]);
-        $this->belongsTo('EmpDataBiographies', [
-            'foreignKey' => 'emp_data_biographies_id'
-        ]);
         $this->belongsTo('Customers', [
             'foreignKey' => 'customer_id'
         ]);
-		$this->belongsTo('Jobs', [
+        $this->belongsTo('Jobs', [
             'foreignKey' => 'job_id'
+        ]);
+        $this->belongsTo('Positions', [
+            'foreignKey' => 'position_id'
+        ]);
+        $this->belongsTo('BusinessUnits', [
+            'foreignKey' => 'business_unit_id'
+        ]);
+        $this->belongsTo('Divisions', [
+            'foreignKey' => 'division_id'
+        ]);
+        $this->belongsTo('CostCentres', [
+            'foreignKey' => 'cost_centre_id'
+        ]);
+        $this->belongsTo('PayGrades', [
+            'foreignKey' => 'pay_grade_id'
+        ]);
+        $this->belongsTo('Locations', [
+            'foreignKey' => 'location_id'
+        ]);
+        $this->belongsTo('Departments', [
+            'foreignKey' => 'department_id'
         ]);
     }
 
@@ -64,9 +89,6 @@ class JobInfosTable extends Table
             ->allowEmpty('id', 'create');
 
         $validator
-            ->allowEmpty('position');
-
-        $validator
             ->date('position_entry_date')
             ->allowEmpty('position_entry_date');
 
@@ -80,22 +102,7 @@ class JobInfosTable extends Table
             ->allowEmpty('country_of_company');
 
         $validator
-            ->allowEmpty('business_unit');
-
-        $validator
-            ->allowEmpty('division');
-
-        $validator
-            ->allowEmpty('department');
-
-        $validator
-            ->allowEmpty('location');
-
-        $validator
             ->allowEmpty('timezone');
-
-        $validator
-            ->allowEmpty('cost_center');
 
         $validator
             ->allowEmpty('job_code');
@@ -108,9 +115,6 @@ class JobInfosTable extends Table
 
         $validator
             ->allowEmpty('employee_class');
-
-        $validator
-            ->allowEmpty('pay_grade');
 
         $validator
             ->allowEmpty('regular_temp');
@@ -341,8 +345,15 @@ class JobInfosTable extends Table
     public function buildRules(RulesChecker $rules)
     {
         $rules->add($rules->existsIn(['users_id'], 'Users'));
-        $rules->add($rules->existsIn(['emp_data_biographies_id'], 'EmpDataBiographies'));
         $rules->add($rules->existsIn(['customer_id'], 'Customers'));
+        $rules->add($rules->existsIn(['job_id'], 'Jobs'));
+        $rules->add($rules->existsIn(['position_id'], 'Positions'));
+        $rules->add($rules->existsIn(['business_unit_id'], 'BusinessUnits'));
+        $rules->add($rules->existsIn(['division_id'], 'Divisions'));
+        $rules->add($rules->existsIn(['cost_centre_id'], 'CostCentres'));
+        $rules->add($rules->existsIn(['pay_grade_id'], 'PayGrades'));
+        $rules->add($rules->existsIn(['location_id'], 'Locations'));
+        $rules->add($rules->existsIn(['department_id'], 'Departments'));
 
         return $rules;
     }

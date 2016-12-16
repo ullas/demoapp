@@ -120,6 +120,9 @@ div.dataTables_filter input {
 .nav-tabs-custom {
     box-shadow: none;
 }
+.profile-user-img {
+	height:100px;	
+}
 </style>
 
 </head>

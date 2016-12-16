@@ -88,6 +88,9 @@ $this->addBehavior('Tree');
             'className' => 'Positions',
             'foreignKey' => 'parent_id'
         ]);
+		$this->hasOne('JobInfos', [
+            'foreignKey' => 'position_id'
+        ]);
         // $this->hasMany('ChildPositions', [
             // 'className' => 'Positions',
             // 'foreignKey' => 'parent_id'

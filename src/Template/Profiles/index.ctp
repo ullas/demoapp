@@ -11,32 +11,27 @@
 	 <div class="row">
     <div class="col-md-3">
 
-
       <!-- Profile Image -->
       <div class="box box-primary">
         <div class="box-body box-profile">
-          <?php echo $this->Html->image('/webroot/uploadedpics/back1.jpg', array('class' => 'profile-user-img img-responsive img-circle', 'alt' => 'User profile picture')); ?>
-          
-          <h3 class="profile-username text-center"><?php echo $name ?></h3>
-          
+          <!-- <?php echo $this->Html->image('/webroot/uploadedpics/back1.jpg', array('class' => 'profile-user-img img-responsive img-circle', 'alt' => 'User profile picture')); ?> -->
+          <?php $picturename='/img/uploadedpics/'.$profiles->profilepicture;
+          	echo $this->Html->image($picturename, array('class' => 'profile-user-img img-responsive img-circle', 'alt' => 'User profile picture')); ?>
+          <h3 class="profile-username text-center"><?php echo $name; ?></h3>
+          <p class="text-muted text-center"><?php if(isset($position)){echo $position['name'];} ?></p>
 			 <ul class="list-group list-group-unbordered">
-                <li class="list-group-item">
-                  <b>Notes</b> <a class="pull-right">0</a>
-                </li>
-                <li class="list-group-item">
-                  <b>Dependents</b> <a class="pull-right">0</a>
-                </li>
+                <li class="list-group-item"><a href="#">Notes <span class="pull-right badge bg-blue">1</span></a></li>
+                <li class="list-group-item"><a href="#">Dependents <span class="pull-right badge bg-red">3</span></a></li>
              </ul>
 
           <a href="/Profiles/editprofile"><button type="button" class="btn btn-primary btn-block"> Edit Profile</button></a>
         </div>
-        <!-- /.box-body -->
       </div>
       <!-- /.box -->
 
 
       <!-- Notes Box -->
-      <div class="box box-primary" style="border-color:transparent;">
+      <div class="box box-primary" >
         <div class="box-header with-border">
               <h3 class="box-title">About Me</h3>
             </div>

@@ -60,19 +60,29 @@ class ActionsController extends AppController
 	public function transfer($id = null) {
 		
 		$this->loadModel('EmpDataBiographies');
-		$emparr=$this->EmpDataBiographies->find('all',['conditions' => array('employee_id' => $id),'contain' => []])->toArray();
-		isset($emparr[0]) ? $empid = $emparr[0]['id'] : $empid = "" ;  
+		$posarr=$this->EmpDataBiographies->find('all',['conditions' => array('employee_id' => $id),'contain' => []])->toArray();
+		isset($posarr[0]) ? $posid = $posarr[0]['position_id'] : $posid = "" ;  
 		
 		$this->loadModel('JobInfos');
-		$arr = $this->JobInfos->find('all',[ 'conditions' => array('emp_data_biographies_id' => $empid),'contain' => []])->toArray();
+		$arr = $this->JobInfos->find('all',[ 'conditions' => array('position_id' => $posid),'contain' => []])->toArray();
 
 		isset($arr[0]) ? $jobInfo = $arr[0] : $jobInfo = $this->JobInfos->newEntity();  
 		
 		if ($this->request->is(['patch', 'post', 'put'])) {
            $jobInfo = $this->JobInfos->patchEntity($jobInfo, $this->request->data);
             if ($this->JobInfos->save($jobInfo)) {
-                $this->Flash->success(__('The job info has been saved.'));
-                return $this->redirect(['action' => 'edit',$id,'controller'=>'Employees']);
+               //associated EmpDataBiographies
+            	$this->loadModel('EmpDataBiographies');
+				$empdataarr = $this->EmpDataBiographies->find('all',[ 'conditions' => array('position_id' => $posid),'contain' => []])->toArray();
+				isset($empdataarr[0]) ? $empDataBiography = $empdataarr[0] : $empDataBiography = $this->EmpDataBiographies->newEntity(); 
+				$empDataBiography = $this->EmpDataBiographies->patchEntity($empDataBiography, $this->request->data);
+            	if ($this->EmpDataBiographies->save($empDataBiography)) {
+                	$this->Flash->success(__('The employee has been transferred.'));
+                	
+				}else{
+					$this->Flash->success(__('Partially updated.'));
+				}
+				return $this->redirect(['action' => 'edit',$id,'controller'=>'Employees']);
             } else {
                 $this->Flash->error(__('The job info could not be saved. Please, try again.'));
             }
@@ -92,11 +102,11 @@ class ActionsController extends AppController
 	public function promotion($id = null) {
 		
 		$this->loadModel('EmpDataBiographies');
-		$emparr=$this->EmpDataBiographies->find('all',['conditions' => array('employee_id' => $id),'contain' => []])->toArray();
-		isset($emparr[0]) ? $empid = $emparr[0]['id'] : $empid = "" ;  
+		$posarr=$this->EmpDataBiographies->find('all',['conditions' => array('employee_id' => $id),'contain' => []])->toArray();
+		isset($posarr[0]) ? $posid = $posarr[0]['position_id'] : $posid = "" ;   
 		
 		$this->loadModel('JobInfos');
-		$arr = $this->JobInfos->find('all',[ 'conditions' => array('emp_data_biographies_id' => $empid),'contain' => []])->toArray();
+		$arr = $this->JobInfos->find('all',[ 'conditions' => array('position_id' => $posid),'contain' => []])->toArray();
 
 		isset($arr[0]) ? $jobInfo = $arr[0] : $jobInfo = $this->JobInfos->newEntity();  
 		
@@ -105,7 +115,8 @@ class ActionsController extends AppController
             if ($this->JobInfos->save($jobInfo)) {
                 //associated EmpDataBiographies
             	$this->loadModel('EmpDataBiographies');
-				$empDataBiography = $this->EmpDataBiographies->get($id, [ 'contain' => [] ]);
+				$empdataarr = $this->EmpDataBiographies->find('all',[ 'conditions' => array('position_id' => $id),'contain' => []])->toArray();
+				isset($empdataarr[0]) ? $empDataBiography = $empdataarr[0] : $empDataBiography = $this->EmpDataBiographies->newEntity(); 
 				$empDataBiography = $this->EmpDataBiographies->patchEntity($empDataBiography, $this->request->data);
             	if ($this->EmpDataBiographies->save($empDataBiography)) {
                 	$this->Flash->success(__('The employee has been promoted.'));
