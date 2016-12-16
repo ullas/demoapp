@@ -8,8 +8,8 @@ function RecursiveCategories($array) {
             $htmlstr='<div id=mptl><i class="fa fa-briefcase"></i> <small class="text-muted">'.$vals['name'].'</small>
             				<br/><i class="fa fa-flag"></i> <small class="text-muted">'.$vals['EmpDataBiographies']['country_of_birth'].'</small>
             				<hr/><b>Take Action</b><ul class=list-unstyled>
-                    		<li><a href="/Orgchartactions/transfer/'.$vals['EmpDataBiographies']['id'].'" data-remote="false" class="open-Popup" data-toggle="modal" data-target="#actionspopover">Transfer</a></li>
-                    		<li><a href="/Orgchartactions/promotion/'.$vals['EmpDataBiographies']['id'].'" data-remote="false" class="open-Popup" data-toggle="modal" data-target="#actionspopover">Promotion</a></li>
+                    		<li><a href="/Orgchartactions/transfer/'.$vals['id'].'" data-remote="false" class="open-Popup" data-toggle="modal" data-target="#actionspopover">Transfer</a></li>
+                    		<li><a href="/Orgchartactions/promotion/'.$vals['id'].'" data-remote="false" class="open-Popup" data-toggle="modal" data-target="#actionspopover">Promotion</a></li>
                     		<li class="divider"></li>
                     		<li><a href="/Orgchartactions/addresschange/'.$vals['EmpDataBiographies']['id'].'" data-remote="false" class="open-Popup" data-toggle="modal" data-target="#actionspopover">Address Change</a></li>
                     		<li><a href="#" class="open-Popup" data-toggle="modal" data-remote="false" data-target="#actionspopover">Global Assignment</a></li>

@@ -25,22 +25,24 @@ class ProfilesController extends AppController
 		$empid=$this->request->session()->read('sessionuser')['employee_id'];
 
 		$this->loadModel('Employees');
-		
-		$profiles = $this->Employees->get($empid, [
-            'contain' => ['Empdatabiographies', 'Empdatapersonals', 'Employmentinfos', 'ContactInfos']
-        ]);
+		$profiles = $this->Employees->get($empid, ['contain' => ['Empdatabiographies', 'Empdatapersonals', 'Employmentinfos', 'ContactInfos']]);
 		
         $this->set(compact('profiles'));
         $this->set('_serialize', ['profiles']);
 		
-	
-		//get userid from session var
-		// $userid=$this->request->session()->read('sessionuser')['id'];
-		//loading position and company name from jobinfos
-		// $this->loadModel('JobInfos');
-		// $jobinfo = $this->JobInfos->find() ->where(['users_id' => $userid]) ->first();
-		// $this->set('jobinfo', $jobinfo);
-		// print_r($jobinfo);
+		//to get position name
+		$this->loadModel('EmpDataBiographies');
+		$emparr=$this->EmpDataBiographies->find('all',['conditions' => array('employee_id' => $empid),'contain' => []])->toArray();
+		if(isset($emparr[0])){ $posid = $emparr[0]['position_id'];$empdatabiographyid = $emparr[0]['id'];}else{ $posid = "" ;$empdatabiographyid="";}
+		
+		$this->loadModel('Positions');
+		$posarr=$this->Positions->find('all',['conditions' => array('id' => $posid),'contain' => []])->toArray();
+		if(isset($posarr[0])){
+			$this->set('position',$posarr[0]);
+		}
+		
+		//get notes & dependents count
+		// $empdatabiographyid
     }
 	public function editprofile()
     {

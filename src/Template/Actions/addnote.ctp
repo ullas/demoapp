@@ -16,8 +16,6 @@
           <?php
 
             echo $this->Form->input('title');
-            echo $this->Form->input('created_at',['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
-            echo $this->Form->input('modified_at',['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
             echo $this->Form->input('visibleto',['class'=>'select2','options' => array('Admin', 'All'), 'empty' => true]);
 			echo $this->Form->input('description');
             

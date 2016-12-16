@@ -40,7 +40,9 @@ div#myDropZone {
       <div class="box box-primary">
         <div class="box-body box-profile">
           
-            	<?php echo $this->Html->image('sree.png', array('class' => 'profile-user-img img-responsive img-circle', 'alt' => 'User profile picture','title'=>'text')); ?>
+          		<?php $picturename='/img/uploadedpics/'.$employee->profilepicture;
+          			echo $this->Html->image($picturename, array('class' => 'profile-user-img img-responsive img-circle', 'id'=>'profilepic', 'alt' => 'User profile picture')); ?>
+            	<!-- <?php echo $this->Html->image('sree.png', array('class' => 'profile-user-img img-responsive img-circle', 'alt' => 'User profile picture','title'=>'text')); ?> -->
 				<a href="#" class="open-Popup pull-right" data-toggle="modal" data-remote="false" data-target="#editpicpopover" style="margin-top:-50px;"><i class="fa fa-pencil"></i> Change Picture</a>
   
              <h3 class="profile-username text-center" ><?php echo $name ?></h3>
@@ -288,6 +290,7 @@ div#myDropZone {
       
       		this.on("success", function (file) {
           		$("#profilepicture").val(file['name']);console.log(file['name']); //alert("Success ");
+          		$('#profilepic').attr("src", "/img/uploadedpics/"+file['name']);
       		});
       
       		this.on("error", function (file) {

@@ -14,7 +14,7 @@ if (file_exists($file)) {
         <?php echo $this->element('aside/user-panel'); ?>
 
         <!-- search form -->
-        <?php echo $this->element('aside/form'); ?>
+        <!-- <?php echo $this->element('aside/form'); ?> -->
         <!-- /.search form -->
 
         <!-- sidebar menu: : style can be found in sidebar.less -->
