@@ -4,25 +4,18 @@ namespace App\Model\Entity;
 use Cake\ORM\Entity;
 
 /**
- * JobInfo Entity
+ * Jobinfo Entity
  *
  * @property int $id
- * @property string $position
  * @property \Cake\I18n\Time $position_entry_date
  * @property string $time_in_position
  * @property string $company
  * @property string $country_of_company
- * @property string $business_unit
- * @property string $division
- * @property string $department
- * @property string $location
  * @property string $timezone
- * @property string $cost_center
  * @property string $job_code
  * @property string $job_title
  * @property string $local_job_title
  * @property string $employee_class
- * @property string $pay_grade
  * @property string $regular_temp
  * @property float $standard_hours
  * @property float $working_days_per_week
@@ -87,13 +80,28 @@ use Cake\ORM\Entity;
  * @property \Cake\I18n\Time $leave_of_absence_start_date
  * @property \Cake\I18n\Time $leave_of_absence_return_date
  * @property int $users_id
- * @property int $emp_data_biographies_id
  * @property int $customer_id
+ * @property int $job_id
+ * @property int $position_id
+ * @property int $business_unit_id
+ * @property int $division_id
+ * @property int $cost_centre_id
+ * @property int $pay_grade_id
+ * @property int $location_id
+ * @property int $department_id
  *
  * @property \App\Model\Entity\User $user
- * @property \App\Model\Entity\EmpDataBiography $emp_data_biography
+ * @property \App\Model\Entity\Customer $customer
+ * @property \App\Model\Entity\Job $job
+ * @property \App\Model\Entity\Position $position
+ * @property \App\Model\Entity\BusinessUnit $business_unit
+ * @property \App\Model\Entity\Division $division
+ * @property \App\Model\Entity\CostCentre $cost_centre
+ * @property \App\Model\Entity\PayGrade $pay_grade
+ * @property \App\Model\Entity\Location $location
+ * @property \App\Model\Entity\Department $department
  */
-class JobInfo extends Entity
+class Jobinfo extends Entity
 {
 
     /**

@@ -49,10 +49,13 @@ class PositionsController extends AppController
 	public function orgchart()
     {
 		$list = $this->Positions->find('treeList');
-		
-		$orgpositions = $this->Positions->find('threaded', array(
-                    'order' => array('Positions.lft'))
-            );
+		$orgpositions = $this->Positions->find('threaded', array('order' => array('Positions.lft')) )
+		->select(['EmpDataBiographies.id','EmpDataBiographies.birth_name','EmpDataBiographies.country_of_birth','EmpDataBiographies.employee_id'])
+    	->select($this->Positions)
+        ->leftJoin('EmpDataBiographies', 'EmpDataBiographies.position_id = Positions.id');
+            
+		$this->log($orgpositions);
+           
 		$this->set('orgpositions', $orgpositions);
 		
     }
@@ -99,6 +102,7 @@ class PositionsController extends AppController
         $position = $this->Positions->newEntity();
         if ($this->request->is('post')) {
             $position = $this->Positions->patchEntity($position, $this->request->data);
+			$position['customer_id']=$this->loggedinuser['customer_id'];
             if ($this->Positions->save($position)) {
                 $this->Flash->success(__('The position has been saved.'));
 
@@ -161,6 +165,7 @@ class PositionsController extends AppController
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $position = $this->Positions->patchEntity($position, $this->request->data);
+			$position['customer_id']=$this->loggedinuser['customer_id'];
             if ($this->Positions->save($position)) {
                 $this->Flash->success(__('The position has been saved.'));
 

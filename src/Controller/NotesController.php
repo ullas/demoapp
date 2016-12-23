@@ -10,7 +10,23 @@ use App\Controller\AppController;
  */
 class NotesController extends AppController
 {
-
+	var $components = array('Datatable');
+	
+	public function ajaxData() {
+		$this->autoRender= False;
+		  
+		$this->loadModel('CreateConfigs');
+		$dbout=$this->CreateConfigs->find()->select(['field_name', 'datatype'])->where(['table_name' => $this->request->params['controller']])->order(['id' => 'ASC'])->toArray();
+		$fields = array();
+		foreach($dbout as $value){
+			$fields[] = array("name" => $value['field_name'] , "type" => $value['datatype'] );
+		}
+		
+		$contains=['Users','Empdatabiographies', 'Customers'];
+									  
+		$output =$this->Datatable->getView($fields,$contains);
+		echo json_encode($output);			
+    }
     /**
      * Index method
      *
@@ -18,6 +34,10 @@ class NotesController extends AppController
      */
     public function index()
     {
+    	$this->loadModel('CreateConfigs');
+        $configs=$this->CreateConfigs->find('all')->where(['table_name' => $this->request->params['controller']])->order(['"id"' => 'ASC'])->toArray();
+        $this->set('configs',$configs);	
+		
         $this->paginate = [
             'contain' => ['Users', 'Empdatabiographies', 'Customers']
         ];
@@ -51,12 +71,22 @@ class NotesController extends AppController
      */
     public function add()
     {
+    	//get empid from session var
+		$empid=$this->request->session()->read('sessionuser')['employee_id'];
+		
+		$this->loadModel('EmpDataBiographies');
+		$emparr=$this->EmpDataBiographies->find('all',['conditions' => array('employee_id' => $empid),'contain' => []])->toArray();
+		isset($emparr[0]) ? $empdatabiographyid = $emparr[0]['id'] : $empdatabiographyid = "" ; 
+		
+		$this->loadModel('Notes');
         $note = $this->Notes->newEntity();
         if ($this->request->is('post')) {
             $note = $this->Notes->patchEntity($note, $this->request->data);
+			$note['emp_data_biographies_id']=$empdatabiographyid;
+			$note['customer_id']=$this->loggedinuser['customer_id'];
             if ($this->Notes->save($note)) {
+            	
                 $this->Flash->success(__('The note has been saved.'));
-
                 return $this->redirect(['action' => 'index']);
             } else {
                 $this->Flash->error(__('The note could not be saved. Please, try again.'));
@@ -83,6 +113,7 @@ class NotesController extends AppController
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $note = $this->Notes->patchEntity($note, $this->request->data);
+			$note['customer_id']=$this->loggedinuser['customer_id'];
             if ($this->Notes->save($note)) {
                 $this->Flash->success(__('The note has been saved.'));
 

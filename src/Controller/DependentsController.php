@@ -10,14 +10,21 @@ use App\Controller\AppController;
  */
 class DependentsController extends AppController
 {
-var $components = array('Datatable');
+	var $components = array('Datatable');
 	
 	public function ajaxData() {
 		$this->autoRender= False;
-
-		$fields = array('relationship_type',array('name'=>'is_accompanying_dependent','type'=>'bool'), array('name'=>'is_beneficiary','type'=>'bool'),'first_name','last_name','middle_name','salutation', array('name'=>'date_of_birth','type'=>'date'), 'country_of_birth', 'country');
+		  
+		$this->loadModel('CreateConfigs');
+		$dbout=$this->CreateConfigs->find()->select(['field_name', 'datatype'])->where(['table_name' => $this->request->params['controller']])->order(['id' => 'ASC'])->toArray();
+		$fields = array();
+		foreach($dbout as $value){
+			$fields[] = array("name" => $value['field_name'] , "type" => $value['datatype'] );
+		}
+		
+		$contains=['EmpDataBiographies', 'Customers'];
 									  
-		$output =$this->Datatable->getView($fields);
+		$output =$this->Datatable->getView($fields,$contains);
 		echo json_encode($output);			
     }
     /**
@@ -27,6 +34,10 @@ var $components = array('Datatable');
      */
     public function index()
     {
+    	$this->loadModel('CreateConfigs');
+        $configs=$this->CreateConfigs->find('all')->where(['table_name' => $this->request->params['controller']])->order(['"id"' => 'ASC'])->toArray();
+        $this->set('configs',$configs);	
+		
         $this->paginate = [
             'contain' => ['EmpDataBiographies', 'Customers']
         ];

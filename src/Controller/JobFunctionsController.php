@@ -14,12 +14,16 @@ var $components = array('Datatable');
 	
 	public function ajaxData() {
 		$this->autoRender= False;
-
-		$fields = array(array('name'=>'id','type'=>'int'),'name','description',array('name'=>'effective_status','type'=>'bool'),
-									  array('name'=>'effective_start_date','type'=>'date'),array('name'=>'effective_end_date','type'=>'date'),'job_function_type',
-									  'external_code');
+		  
+		$this->loadModel('CreateConfigs');
+		$dbout=$this->CreateConfigs->find()->select(['field_name', 'datatype'])->where(['table_name' => $this->request->params['controller']])->order(['id' => 'ASC'])->toArray();
+		$fields = array();
+		foreach($dbout as $value){
+			$fields[] = array("name" => $value['field_name'] , "type" => $value['datatype'] );
+		}
+		$contains=['Customers'];
 									  
-		$output =$this->Datatable->getView($fields);
+		$output =$this->Datatable->getView($fields,$contains);
 		echo json_encode($output);			
     }
     /**
@@ -29,6 +33,10 @@ var $components = array('Datatable');
      */
     public function index()
     {
+    	$this->loadModel('CreateConfigs');
+        $configs=$this->CreateConfigs->find('all')->where(['table_name' => $this->request->params['controller']])->order(['"id"' => 'ASC'])->toArray();
+        $this->set('configs',$configs);
+		
         $this->paginate = [
             'contain' => ['Customers']
         ];
@@ -48,7 +56,7 @@ var $components = array('Datatable');
     public function view($id = null)
     {
         $jobFunction = $this->JobFunctions->get($id, [
-            'contain' => ['Customers', 'JobClasses']
+            'contain' => ['Customers']
         ]);
 
         $this->set('jobFunction', $jobFunction);

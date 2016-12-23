@@ -5,22 +5,21 @@ function RecursiveCategories($array) {
             echo "\n<ul id='org' style='display:none'>\n";
         foreach ($array as $vals) {
 
-            $htmlstr='<div id=mptl><h5 class="text-muted text-center">Position</h5>
-            				<i class="fa fa-briefcase text-muted"></i><small> Company</small><br/>
-             				<i class="fa fa-envelope text-muted"></i><small> maill@server.com</small>
+            $htmlstr='<div id=mptl><i class="fa fa-briefcase"></i> <small class="text-muted">'.$vals['name'].'</small>
+            				<br/><i class="fa fa-flag"></i> <small class="text-muted">'.$vals['EmpDataBiographies']['country_of_birth'].'</small>
             				<hr/><b>Take Action</b><ul class=list-unstyled>
-                    		<li><a href="/Actions/transfer/'.$vals['id'].'" data-remote="false" class="open-Popup" data-toggle="modal" data-target="#actionspopover">Transfer</a></li>
-                    		<li><a href="/Actions/promotion/'.$vals['id'].'" data-remote="false" class="open-Popup" data-toggle="modal" data-target="#actionspopover">Promotion</a></li>
-                    	<li class="divider"></li>
-                    	<li><a href="/Actions/addresschange/'.$vals['id'].'" data-remote="false" class="open-Popup" data-toggle="modal" data-target="#actionspopover">Address Change</a></li>
-                    	<li><a href="#" class="open-Popup" data-toggle="modal" data-remote="false" data-target="#actionspopover">Global Assignment</a></li>
-                    	<li><a href="/Actions/addnote/'.$vals['id'].'" data-remote="false" class="open-Popup" data-toggle="modal" data-target="#actionspopover">Add Note</a></li>
-                    	<li><a href="/Actions/terminate/'.$vals['id'].'" data-remote="false" class="open-Popup" data-toggle="modal" data-target="#actionspopover">Termination</a></li>
-                    	<li><a href="/Actions/retirement/'.$vals['id'].'" data-remote="false" class="open-Popup" data-toggle="modal" data-target="#actionspopover">Retirement</a></li>
-	                    </ul></div>';
-                    echo "<li id=\"".$vals['id']."\"><div class='node-title'><a href='#' tabindex='0' id='".$vals['id']."' class='popoverbtn' data-trigger='focus' data-html='true' data-toggle='popover' title='".$vals['name']."'
- 							data-content='".$htmlstr."'>".$vals['name']."</a></div><div class='node-pic'><img class='node-profile-img' src='https://almsaeedstudio.com/themes/AdminLTE/dist/img/user1-128x128.jpg'></div>
- 							<div class='node-position'>Position</div>";
+                    		<li><a href="/Orgchartactions/transfer/'.$vals['id'].'" data-remote="false" class="open-Popup" data-toggle="modal" data-target="#actionspopover">Transfer</a></li>
+                    		<li><a href="/Orgchartactions/promotion/'.$vals['id'].'" data-remote="false" class="open-Popup" data-toggle="modal" data-target="#actionspopover">Promotion</a></li>
+                    		<li class="divider"></li>
+                    		<li><a href="/Orgchartactions/addresschange/'.$vals['EmpDataBiographies']['id'].'" data-remote="false" class="open-Popup" data-toggle="modal" data-target="#actionspopover">Address Change</a></li>
+                    		<li><a href="#" class="open-Popup" data-toggle="modal" data-remote="false" data-target="#actionspopover">Global Assignment</a></li>
+                    		<li><a href="/Orgchartactions/addnote/'.$vals['EmpDataBiographies']['id'].'" data-remote="false" class="open-Popup" data-toggle="modal" data-target="#actionspopover">Add Note</a></li>
+                    		<li><a href="/Orgchartactions/terminate/'.$vals['EmpDataBiographies']['id'].'" data-remote="false" class="open-Popup" data-toggle="modal" data-target="#actionspopover">Termination</a></li>
+                    		<li><a href="/Orgchartactions/retirement/'.$vals['EmpDataBiographies']['employee_id'].'" data-remote="false" class="open-Popup" data-toggle="modal" data-target="#actionspopover">Retirement</a></li>
+	                    	</ul></div>';
+                    echo "<li id=\"".$vals['id']."\"><div class='node-title'><a href='#' tabindex='0' id='".$vals['id']."' class='popoverbtn' data-trigger='focus' data-html='true' data-toggle='popover' title='".$vals['EmpDataBiographies']['birth_name']."'
+ 							data-content='".$htmlstr."'>".$vals['EmpDataBiographies']['birth_name']."</a></div><div class='node-pic'><img class='node-profile-img' src='https://almsaeedstudio.com/themes/AdminLTE/dist/img/user1-128x128.jpg'></div>
+ 							<div class='node-position'>".$vals['name']."</div>";
                     if (count($vals['children'])) {
                             RecursiveCategories($vals['children']);
                     }
@@ -30,45 +29,51 @@ function RecursiveCategories($array) {
     }
 } ?>
 
-<?= RecursiveCategories($orgpositions) ?> 
+<?= RecursiveCategories($orgpositions); 
+// foreach ($orgpositions as $vals) {echo '<a>'.$vals.'</a>';}?> 
 
 <style>
 .popover-content  a{font-size:12px;}
-/*.popover{ min-width: 500px; }*/
+.popover{ min-width: 200px; }
 </style>
-<!-- <ul id="org" style="display:none">
-    <li>
-       Food
-       <ul>
-         <li id="beer">
-         	 <div class='node-title'><dt>Title</dt></div>
-             <div class='node-pic'><img class="node-profile-img" src="https://almsaeedstudio.com/themes/AdminLTE/dist/img/user1-128x128.jpg" alt="message user image"></div>
-             <div class='node-position'>Position</div>
-		 </li>
-         <li>Bread</li>
-       </ul>
-     </li>
-   </ul> -->
-    <section class="content-header">
-      <h1>
-       Organization Chart
-      </h1>
-      <ol class="breadcrumb">
-        <li class="active"><i class="fa fa-sitemap"></i> Organization Chart</li>
-      </ol>
-    </section>
+
+<section class="content-header">
+	<h1> Organization Chart </h1>
+	<ol class="breadcrumb">
+		<li class="active"><i class="fa fa-sitemap"></i> Organization Chart</li>
+	</ol>
+</section>
 <section class="content">
     <div class="box box-primary"><div class="box-body">
-    <div id="chart" class="orgChart"></div></div></div></section>
+    <div id="chart" class="orgChart"></div></div></div>
+</section>
+    
+<div id='loadingmessage' style='display:none;'>
+	<i class="fa fa-refresh fa-spin loading-icon"></i>
+</div>
+<style>
+	#loadingmessage{
+		position: fixed;
+    	bottom: calc(100% - 50%);
+    	right:50%;
+    	/*background: #363637;*/
+    	padding: 5px 0px 4px;
+    	z-index: 1900;
+	}
+	.loading-icon{
+    	color: #21A57E;
+    	padding: 3px 9px 0 10px;
+    	font-size: 45px;
+	}
+</style>
+
     <script>
         jQuery(document).ready(function() {
 
         	$("#org").jOrgChart({
             chartElement : '#chart',
             dragAndDrop  : false
-            
-            
-            
+ 
         });
 
             /* Custom jQuery for the example
@@ -106,17 +111,18 @@ $(".topbar").fadeTo('fast',1);
             	container: 'body'
             });
 
-$("#actionspopover").on("show.bs.modal", function(e) {
+	$("#actionspopover").on("show.bs.modal", function(e) {
 		//loading icon show
 		if(e.relatedTarget!=null){$('#loadingmessage').show();}
 		var link = $(e.relatedTarget);
 		$(this).find(".modal-body").load(link.attr("href"),function( response, status, xhr ){
+				//loading icon hide
+				if(e.relatedTarget!=null){$('#loadingmessage').hide();}
 			if ( status == "error" ) {
 				var msg = "Sorry but there was an error.";
 				alert(msg);
 			}else{
-				//loading icon hide
-				if(e.relatedTarget!=null){$('#loadingmessage').hide();}
+				
 				//datepicker
 	    		$('.mptldp').datepicker({
 	    			format:"dd/mm/yy",
@@ -137,7 +143,6 @@ $("#actionspopover").on("show.bs.modal", function(e) {
 	  $('.modal-body', this).empty();
 	})
 	
-
         });
 
 // called when popover shown

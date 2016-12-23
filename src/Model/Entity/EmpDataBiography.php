@@ -16,9 +16,10 @@ use Cake\ORM\Entity;
  * @property string $person_id_external
  * @property int $customer_id
  * @property int $employee_id
- *
+ * @property int $position_id
+ 
  * @property \App\Model\Entity\Customer $customer
- * @property \App\Model\Entity\Employee[] $employees
+ * @property \App\Model\Entity\Employee $employee
  */
 class EmpDataBiography extends Entity
 {

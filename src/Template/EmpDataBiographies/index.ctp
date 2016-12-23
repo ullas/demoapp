@@ -4,6 +4,8 @@
         <li><?= $this->Html->link(__('New Emp Data Biography'), ['action' => 'add']) ?></li>
         <li><?= $this->Html->link(__('List Customers'), ['controller' => 'Customers', 'action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('New Customer'), ['controller' => 'Customers', 'action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('List Employees'), ['controller' => 'Employees', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New Employee'), ['controller' => 'Employees', 'action' => 'add']) ?></li>
     </ul>
 </nav>
 <div class="empDataBiographies index large-9 medium-8 columns content">
@@ -21,6 +23,7 @@
                 <th><?= $this->Paginator->sort('person_id_external') ?></th>
                 <th><?= $this->Paginator->sort('customer_id') ?></th>
                 <th><?= $this->Paginator->sort('employee_id') ?></th>
+                <th><?= $this->Paginator->sort('position_id') ?></th>
                 <th class="actions"><?= __('Actions') ?></th>
             </tr>
         </thead>
@@ -36,7 +39,8 @@
                 <td><?= h($empDataBiography->date_of_death) ?></td>
                 <td><?= h($empDataBiography->person_id_external) ?></td>
                 <td><?= $empDataBiography->has('customer') ? $this->Html->link($empDataBiography->customer->name, ['controller' => 'Customers', 'action' => 'view', $empDataBiography->customer->id]) : '' ?></td>
-                <td><?= $this->Number->format($empDataBiography->employee_id) ?></td>
+                <td><?= $empDataBiography->has('employee') ? $this->Html->link($empDataBiography->employee->id, ['controller' => 'Employees', 'action' => 'view', $empDataBiography->employee->id]) : '' ?></td>
+                <td><?= $this->Number->format($empDataBiography->position_id) ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $empDataBiography->id]) ?>
                     <?= $this->Html->link(__('Edit'), ['action' => 'edit', $empDataBiography->id]) ?>

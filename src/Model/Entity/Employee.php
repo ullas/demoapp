@@ -8,8 +8,13 @@ use Cake\ORM\Entity;
  *
  * @property int $id
  * @property int $customer_id
+ * @property string $profilepicture
  *
- * @property \App\Model\Entity\Customer[] $customers
+ * @property \App\Model\Entity\Customer $customer
+ * @property \App\Model\Entity\EmpDataBiography $empdatabiography
+ * @property \App\Model\Entity\EmpDataPersonal $empdatapersonal
+ * @property \App\Model\Entity\EmploymentInfo $employmentinfo
+ * @property \App\Model\Entity\ContactInfo $contactinfo
  */
 class Employee extends Entity
 {

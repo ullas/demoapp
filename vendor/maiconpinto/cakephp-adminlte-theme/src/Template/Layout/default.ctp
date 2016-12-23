@@ -12,6 +12,7 @@
     <?php echo $this->Html->css('AdminLTE./plugins/datepicker/datepicker3'); ?>
     <?php echo $this->Html->css('AdminLTE./plugins/timepicker/bootstrap-timepicker.min'); ?>
     <?php echo $this->Html->css('AdminLTE./plugins/datatables/extensions/ColReorder/css/dataTables.colReorder.min'); ?>
+    <?php echo $this->Html->css('/css/dropzone'); ?>
     <!-- Font Awesome -->
     <link rel="stylesheet" href="/css/font-awesome.min.css">
     <!-- Ionicons -->
@@ -21,7 +22,6 @@
 <!-- AdminLTE Skins. Choose a skin from the css/skins
     folder instead of downloading all of them to reduce the load. -->
     <?php echo $this->Html->css('AdminLTE.skins/skin-greenjam'); ?>
-
      <?= $this->Html->css('jquery.jOrgChart.css') ?>
 
     <?php echo $this->fetch('css'); ?>
@@ -35,6 +35,7 @@
 
 <!-- Bootstrap 3.3.5 -->
 <?php echo $this->Html->script('AdminLTE./bootstrap/js/bootstrap'); ?>
+
 <!-- SlimScroll -->
 <?php echo $this->Html->script('AdminLTE./plugins/slimScroll/jquery.slimscroll.min'); ?>
 <!-- FastClick -->
@@ -115,6 +116,13 @@
 div.dataTables_filter input {
 	margin-left:0px;
 }
+/*hide box shadow*/
+.nav-tabs-custom {
+    box-shadow: none;
+}
+.profile-user-img {
+	height:100px;	
+}
 </style>
 
 </head>
@@ -123,6 +131,7 @@ div.dataTables_filter input {
 $this->Html->script([ 'AdminLTE./plugins/select2/select2.full.min' ], ['block' => 'script']);
 $this->Html->script([ 'AdminLTE./plugins/datepicker/bootstrap-datepicker' ], ['block' => 'script']);
 $this->Html->script([ 'AdminLTE./plugins/timepicker/bootstrap-timepicker.min' ], ['block' => 'script']);
+$this->Html->script([ '/js/dropzone' ], ['block' => 'script']);
 ?>
 <body class="hold-transition skin-greenjam sidebar-mini">
     <!-- Site wrapper -->

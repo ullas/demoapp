@@ -27,7 +27,7 @@
             echo $this->Form->input('city');
             echo $this->Form->input('county');
             echo $this->Form->input('state');
-            echo $this->Form->input('emp_data_biographies_id',  ['class'=>'select2','options' => $empDataBiographies, 'empty' => true]);
+            echo $this->Form->input('emp_data_biographies_id',  ['label'=>'Employee','class'=>'select2','options' => $empDataBiographies, 'empty' => true]);
         ?>
     </fieldset>
  	<div class="box-footer">

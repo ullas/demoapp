@@ -6,12 +6,13 @@ switch (strtolower($title)) {
         // echo $this->Html->image('photo4.jpg', ['alt' => 'Photo', 'class' => 'img-responsive pad']);
         break;
     case "myteam":
-    echo "<ul class='users-list clearfix'>";
-		for ($x = 0; $x < 7; $x++) {
+	    echo "<ul class='users-list clearfix'>";
+		for ($x = 0; $x < count($teammembers); $x++) {
 			echo "<li>";
         	echo $this->Html->image('circle-512.png');
-			echo "<a href='#' class='users-list-name'>User</a>";
-			echo "</li>";
+			echo "<a href='#' class='users-list-name'>";
+			echo $teammembers[$x]['birth_name'];
+			echo "</a></li>";
 		}
         break;
     case "links":

@@ -5,14 +5,17 @@ use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
+use Cake\Datasource\ConnectionManager;
 
 /**
  * Employees Model
  *
  * @property \Cake\ORM\Association\BelongsTo $Customers
- * @property \Cake\ORM\Association\HasMany $EmpDataBiographies
- * @property \Cake\ORM\Association\HasMany $EmpDataPersonals
- * @property \Cake\ORM\Association\HasMany $EmploymentInfos
+ * @property \Cake\ORM\Association\HasMany $ContactInfos
+ * @property \Cake\ORM\Association\HasMany $Empdatabiographies
+ * @property \Cake\ORM\Association\HasMany $Empdatapersonals
+ * @property \Cake\ORM\Association\HasMany $Employmentinfos
+ * @property \Cake\ORM\Association\HasMany $Users
  *
  * @method \App\Model\Entity\Employee get($primaryKey, $options = [])
  * @method \App\Model\Entity\Employee newEntity($data = null, array $options = [])
@@ -25,6 +28,18 @@ use Cake\Validation\Validator;
 class EmployeesTable extends Table
 {
 
+	public function getExcludedPositions()
+	{
+		$conn = ConnectionManager::get('default');
+		$arrayTemp1 = $conn->execute('select id,name from positions where id not in(select position_id from empdatabiographies where position_id >0)')->fetchAll('assoc');
+		return $arrayTemp1; 
+	}
+	public function getIncludedPositions($id=null)
+	{
+		$conn = ConnectionManager::get('default');
+		$arrayTemp1 = $conn->execute('select id,name from positions where id not in(select position_id from empdatabiographies where position_id >0 AND employee_id!='.$id.') ;')->fetchAll('assoc');
+		return $arrayTemp1; 
+	}
     /**
      * Initialize method
      *
@@ -40,16 +55,22 @@ class EmployeesTable extends Table
         $this->primaryKey('id');
 
         $this->belongsTo('Customers', [
-            'foreignKey' => 'customer_id','dependent' => true
+            'foreignKey' => 'customer_id'
+        ]);
+        $this->hasOne('ContactInfos', [
+            'foreignKey' => 'employee_id'
         ]);
         $this->hasOne('Empdatabiographies', [
-            'foreignKey' => 'employee_id','dependent'=>true
+            'foreignKey' => 'employee_id'
         ]);
         $this->hasOne('Empdatapersonals', [
-            'foreignKey' => 'employee_id','dependent'=>true
+            'foreignKey' => 'employee_id'
         ]);
         $this->hasOne('Employmentinfos', [
-            'foreignKey' => 'employee_id','dependent'=>true
+            'foreignKey' => 'employee_id'
+        ]);
+        $this->hasOne('Users', [
+            'foreignKey' => 'employee_id'
         ]);
     }
 
@@ -63,6 +84,9 @@ class EmployeesTable extends Table
     {
         $validator
             ->allowEmpty('id', 'create');
+
+        $validator
+            ->allowEmpty('profilepicture');
 
         return $validator;
     }
