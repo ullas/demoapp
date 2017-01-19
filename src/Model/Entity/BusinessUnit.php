@@ -15,6 +15,8 @@ use Cake\ORM\Entity;
  * @property string $external_code
  * @property int $head_of_unit
  * @property int $customer_id
+ *
+ * @property \App\Model\Entity\Customer $customer
  */
 class BusinessUnit extends Entity
 {

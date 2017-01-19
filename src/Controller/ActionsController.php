@@ -96,7 +96,11 @@ class ActionsController extends AppController
 			$positions[$value['id']]=$value['name'];
 		}
 		
-		$this->set(compact('jobInfo', 'customers','positions'));
+		$businessUnits = $this->Positions->BusinessUnits->find('list', ['limit' => 200])->where("customer_id=".$this->loggedinuser['customer_id']);
+		$departments = $this->Positions->Departments->find('list', ['limit' => 200])->where("customer_id=".$this->loggedinuser['customer_id']);
+		$costCentres = $this->Positions->CostCentres->find('list', ['limit' => 200])->where("customer_id=".$this->loggedinuser['customer_id']);
+		$divisions = $this->Positions->Divisions->find('list', ['limit' => 200])->where("customer_id=".$this->loggedinuser['customer_id']);
+		$this->set(compact('jobInfo', 'customers','positions','departments','divisions','costCentres','businessUnits'));
         $this->set('_serialize', ['jobInfo']);
 	}
 	public function promotion($id = null) {
@@ -134,7 +138,12 @@ class ActionsController extends AppController
 			$positions[$value['id']]=$value['name'];
 		}
 		
-		$this->set(compact('jobInfo', 'customers','positions'));
+		$payGrades = $this->Positions->PayGrades->find('list', ['limit' => 200])->where("customer_id=".$this->loggedinuser['customer_id']);
+		$businessUnits = $this->Positions->BusinessUnits->find('list', ['limit' => 200])->where("customer_id=".$this->loggedinuser['customer_id']);
+		$departments = $this->Positions->Departments->find('list', ['limit' => 200])->where("customer_id=".$this->loggedinuser['customer_id']);
+		$costCentres = $this->Positions->CostCentres->find('list', ['limit' => 200])->where("customer_id=".$this->loggedinuser['customer_id']);
+		$divisions = $this->Positions->Divisions->find('list', ['limit' => 200])->where("customer_id=".$this->loggedinuser['customer_id']);
+		$this->set(compact('jobInfo', 'customers','positions','departments','divisions','costCentres','businessUnits','payGrades'));
         $this->set('_serialize', ['jobInfo']);
 	}
 	public function addresschange($id = null) {

@@ -15,10 +15,10 @@
           <div class="box-body">
           <?php
 
-			echo $this->Form->input('business_unit');
-            echo $this->Form->input('division');
-            echo $this->Form->input('department');
-            echo $this->Form->input('cost_center');
+			echo $this->Form->input('business_unit',['class'=>'select2']);
+            echo $this->Form->input('division',['class'=>'select2']);
+            echo $this->Form->input('department',['class'=>'select2']);
+            echo $this->Form->input('cost_center',['class'=>'select2','options' => $costCentres]);
 			echo $this->Form->input('manager_category');
 			echo $this->Form->input('position',['class'=>'select2']);
 			echo $this->Form->input('position_id',['class'=>'select2','empty' => true]);

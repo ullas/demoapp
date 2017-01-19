@@ -33,19 +33,27 @@ if (file_exists($file)) {
 	<li><a href="<?php echo $this -> Url -> build('/Employees'); ?>"><i class="fa fa-user"></i><span> Employee</span></a></li>
 	<li><a href="<?php echo $this -> Url -> build('/JobInfos'); ?>"><i class="fa fa-briefcase "></i><span> Job</span></a></li>
     <li class="treeview">
-    <a href="#"> <i class="fa fa-puzzle-piece"></i> <span>Master</span> <i class="fa fa-angle-left pull-right"></i>  </a>
-    <ul class="treeview-menu">
-    <li><a href="<?php echo $this -> Url -> build('/JobFunctions'); ?>"><i class="fa fa-circle-o"></i> Job Function</a></li>
-    <li><a href="<?php echo $this -> Url -> build('/JobClasses'); ?>"><i class="fa fa-circle-o"></i> Job Class</a></li>
-	<li><a href="<?php echo $this -> Url -> build('/Regions'); ?>"><i class="fa fa-circle-o"></i> Region</a></li>
-    <li><a href="<?php echo $this -> Url -> build('/Locations'); ?>"><i class="fa fa-circle-o"></i> Location</a></li>
-    <li><a href="<?php echo $this -> Url -> build('/PayGroups'); ?>"><i class="fa fa-circle-o"></i> Pay Group</a></li>
-    <li><a href="<?php echo $this -> Url -> build('/PayGrades'); ?>"><i class="fa fa-circle-o"></i> Pay Grade</a></li>
-    <li><a href="<?php echo $this -> Url -> build('/PayRanges'); ?>"><i class="fa fa-circle-o"></i> Pay Range</a></li>
-    <li><a href="<?php echo $this -> Url -> build('/PayComponents'); ?>"><i class="fa fa-circle-o"></i> Pay Component</a></li>
-    <li><a href="<?php echo $this -> Url -> build('/PayComponentGroups'); ?>"><i class="fa fa-circle-o"></i> Pay Component Group</a></li>
+    	<a href="#"> <i class="fa fa-puzzle-piece"></i> <span>Master</span> <i class="fa fa-angle-left pull-right"></i>  </a>
+    	<ul class="treeview-menu">
+    		<li><a href="<?php echo $this -> Url -> build('/JobFunctions'); ?>"><i class="fa fa-circle-o"></i> Job Function</a></li>
+    		<li><a href="<?php echo $this -> Url -> build('/JobClasses'); ?>"><i class="fa fa-circle-o"></i> Job Class</a></li>
+			<li><a href="<?php echo $this -> Url -> build('/Regions'); ?>"><i class="fa fa-circle-o"></i> Region</a></li>
+    		<li><a href="<?php echo $this -> Url -> build('/Locations'); ?>"><i class="fa fa-circle-o"></i> Location</a></li>
+    		<li><a href="<?php echo $this -> Url -> build('/PayGroups'); ?>"><i class="fa fa-circle-o"></i> Pay Group</a></li>
+    		<li><a href="<?php echo $this -> Url -> build('/PayGrades'); ?>"><i class="fa fa-circle-o"></i> Pay Grade</a></li>
+    		<li><a href="<?php echo $this -> Url -> build('/PayRanges'); ?>"><i class="fa fa-circle-o"></i> Pay Range</a></li>
+    		<li><a href="<?php echo $this -> Url -> build('/PayComponents'); ?>"><i class="fa fa-circle-o"></i> Pay Component</a></li>
+    		<li><a href="<?php echo $this -> Url -> build('/PayComponentGroups'); ?>"><i class="fa fa-circle-o"></i> Pay Component Group</a></li>
     
-    </ul>
+    		<li><a href="<?php echo $this -> Url -> build('/PayrollArea'); ?>"><i class="fa fa-circle-o"></i> Pay Roll Area</a></li>
+    		<li><a href="<?php echo $this -> Url -> build('/PayrollRecord'); ?>"><i class="fa fa-circle-o"></i> Pay Roll Record</a></li>
+    		<li><a href="<?php echo $this -> Url -> build('/PayrollStatus'); ?>"><i class="fa fa-circle-o"></i> Pay Roll Status</a></li>
+    
+    		<li><a href="<?php echo $this -> Url -> build('/HolidayCalendars'); ?>"><i class="fa fa-circle-o"></i> Holiday Calendars</a></li>
+    		<li><a href="<?php echo $this -> Url -> build('/CalendarAssignments'); ?>"><i class="fa fa-circle-o"></i> Calendar Assignments</a></li>
+    
+    
+    	</ul>
     </li>
     <li class="treeview">
     <a href="#"> <i class="fa fa-lock"></i> <span>Admin</span> <i class="fa fa-angle-left pull-right"></i>  </a>
@@ -105,8 +113,9 @@ if (file_exists($file)) {
 	<li><a href="<?php echo $this -> Url -> build('/Dependents'); ?>"><i class="fa fa-users"></i><span> Dependents </span></a></li>
     <li><a href="<?php echo $this -> Url -> build('/Notes'); ?>"><i class="fa fa-file-text-o"></i><span> Notes </span></a></li>
     <li><a href="<?php echo $this -> Url -> build('/Positions/orgchart'); ?>"><i class="fa fa-sitemap"></i><span> Organizational Chart </span></a></li>
-    <li><a href="<?php echo $this -> Url -> build('/Holidays'); ?>"><i class="fa fa-calendar "></i> Leave Management</a></li>
+    <li><a href="<?php echo $this -> Url -> build('/Holidays'); ?>"><i class="fa fa-calendar "></i> Holidays</a></li>
 
+   
     <?php
 	break;
 	default:

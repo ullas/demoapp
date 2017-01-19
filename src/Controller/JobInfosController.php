@@ -82,11 +82,19 @@ class JobInfosController extends AppController
                 $this->Flash->error(__('The jobinfo could not be saved. Please, try again.'));
             }
         }
-        $users = $this->JobInfos->Users->find('list', ['limit' => 200]);
-        $customers = $this->JobInfos->Customers->find('list', ['limit' => 200]);
-        $jobs = $this->JobInfos->Jobs->find('list', ['limit' => 200]);
-        $positions = $this->JobInfos->Positions->find('list', ['limit' => 200]);
-        $this->set(compact('jobinfo', 'users', 'customers', 'jobs', 'positions'));
+		
+		$costCentres = $this->JobInfos->CostCentres->find('list', ['limit' => 200])->where("customer_id=".$this->loggedinuser['customer_id']);
+		$payGrades = $this->JobInfos->PayGrades->find('list', ['limit' => 200])->where("customer_id=".$this->loggedinuser['customer_id']);
+		$legalEntities = $this->JobInfos->LegalEntities->find('list', ['limit' => 200])->where("customer_id=".$this->loggedinuser['customer_id']);
+		$businessUnits = $this->JobInfos->BusinessUnits->find('list', ['limit' => 200])->where("customer_id=".$this->loggedinuser['customer_id']);
+		$divisions = $this->JobInfos->Divisions->find('list', ['limit' => 200])->where("customer_id=".$this->loggedinuser['customer_id']);
+		$departments = $this->JobInfos->Departments->find('list', ['limit' => 200])->where("customer_id=".$this->loggedinuser['customer_id']);
+		$locations = $this->JobInfos->Locations->find('list', ['limit' => 200])->where("customer_id=".$this->loggedinuser['customer_id']);
+        $users = $this->JobInfos->Users->find('list', ['limit' => 200])->where("customer_id=".$this->loggedinuser['customer_id']);
+        $customers = $this->JobInfos->Customers->find('list', ['limit' => 200])->where("customer_id=".$this->loggedinuser['customer_id']);
+        $jobs = $this->JobInfos->Jobs->find('list', ['limit' => 200])->where("customer_id=".$this->loggedinuser['customer_id']);
+        $positions = $this->JobInfos->Positions->find('list', ['limit' => 200])->where("customer_id=".$this->loggedinuser['customer_id']);
+        $this->set(compact('jobinfo', 'users', 'customers', 'jobs', 'positions','costCentres','payGrades','legalEntities','businessUnits','divisions','departments','locations'));
         $this->set('_serialize', ['jobinfo']);
     }
 

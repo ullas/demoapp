@@ -45,6 +45,7 @@ use Cake\ORM\Entity;
  * @property int $parent_id
  * @property int $lft
  * @property int $rght
+ * @property int $business_unit_id
  *
  * @property \App\Model\Entity\Customer $customer
  * @property \App\Model\Entity\LegalEntity $legal_entity
@@ -55,6 +56,7 @@ use Cake\ORM\Entity;
  * @property \App\Model\Entity\PayGrade $pay_grade
  * @property \App\Model\Entity\PayRange $pay_range
  * @property \App\Model\Entity\Position $parent_position
+ * @property \App\Model\Entity\Jobinfo $job_info
  * @property \App\Model\Entity\Position $parent
  */
 class Position extends Entity

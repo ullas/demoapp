@@ -17,11 +17,11 @@
     <div class="box-body">
         <?php
 
-			echo $this->Form->input('position');
+			// echo $this->Form->input('position');
 			echo $this->Form->input('business_unit');
             echo $this->Form->input('division');
             echo $this->Form->input('department');
-            echo $this->Form->input('cost_center');
+            echo $this->Form->input('cost_center', ['class'=>'select2','options' => $costCentres, 'empty' => true]);
 			echo $this->Form->input('manager_category');
 			echo $this->Form->input('job_code');
             echo $this->Form->input('job_title');
