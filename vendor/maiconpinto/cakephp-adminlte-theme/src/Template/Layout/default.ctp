@@ -11,8 +11,8 @@
     <?php echo $this->Html->css('AdminLTE./plugins/select2/select2.min'); ?>
     <?php echo $this->Html->css('AdminLTE./plugins/datepicker/datepicker3'); ?>
     <?php echo $this->Html->css('AdminLTE./plugins/timepicker/bootstrap-timepicker.min'); ?>
-    <?php echo $this->Html->css('AdminLTE./plugins/datatables/extensions/ColReorder/css/dataTables.colReorder.min'); ?>
-    <?php echo $this->Html->css('/css/dropzone'); ?>
+    <!-- <?php echo $this->Html->css('AdminLTE./plugins/datatables/extensions/ColReorder/css/dataTables.colReorder.min'); ?>
+    <?php echo $this->Html->css('/css/dropzone'); ?> -->
     <!-- Font Awesome -->
     <link rel="stylesheet" href="/css/font-awesome.min.css">
     <!-- Ionicons -->
@@ -88,13 +88,12 @@
 .caption {
         width:100%;
         bottom: .3rem;
-        position: absolute;
-        color:#FFFFFF;
-    }
-    .bgwhite{
-    	background-color:#FFFFFF;
-    }
-    label.mandatory:after {
+        position: absolute;color:#FFFFFF;
+}
+.bgwhite{
+	background-color:#FFFFFF;
+}
+label.mandatory:after {
     content: ' *';
     color: #ff5a4d;
     display: inline;
@@ -106,10 +105,9 @@
 	width:100%;
 }
 .checkbox{
-	padding-top:17px;
-	padding-bottom:17px;
+	padding-top:17px;padding-bottom:17px;
 }
-/*adduizard btn icon*/
+/*add wizard btn icon*/
 .btn .fa{
 	color:#FFFFFF;
 }
@@ -120,8 +118,29 @@ div.dataTables_filter input {
 .nav-tabs-custom {
     box-shadow: none;
 }
+/*profile page pic*/
 .profile-user-img {
 	height:100px;	
+}
+/*dashboard myinfo*/
+.myinfo-footer {
+	position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    padding: 3px 0;
+    color: rgba(255,255,255,0.8); 
+    display: none; 
+    z-index: 10; 
+    background: rgba(0,0,0,0.1); 
+    text-decoration: none; 
+}
+#mptlmyinfo:hover > .myinfo-footer { 
+	background-color:#21A57E;display:block;
+}
+#myinfopic{
+	max-width:100%;max-height:100%;margin:auto;
 }
 </style>
 
@@ -177,6 +196,19 @@ $this->Html->script([ '/js/dropzone' ], ['block' => 'script']);
 </div>
 <!-- ./wrapper -->
 
+<!-- jQuery 2.1.4 -->
+<?php echo $this->Html->script('AdminLTE./plugins/jQuery/jQuery-2.1.4.min'); ?>
+<!-- jQueryUI 1.11.4 -->
+<?php echo $this->Html->script('AdminLTE./plugins/jQueryUI/jquery-ui.min.js'); ?>
+<!-- Bootstrap 3.3.5 -->
+<?php echo $this->Html->script('AdminLTE./bootstrap/js/bootstrap'); ?>
+<!-- SlimScroll -->
+<?php echo $this->Html->script('AdminLTE./plugins/slimScroll/jquery.slimscroll.min'); ?>
+<!-- FastClick -->
+<?php echo $this->Html->script('AdminLTE./plugins/fastclick/fastclick'); ?>
+
+<?php echo $this->Html->script('AdminLTE./plugins/datatables/jquery.dataTables.min'); ?>
+<?php echo $this->Html->script('AdminLTE./plugins/datatables/dataTables.bootstrap.min'); ?>
 
 <!-- AdminLTE for demo purposes -->
 <?php echo $this->fetch('script'); ?>
@@ -206,10 +238,15 @@ $(window).off("resize").on("resize", function() {
     	$(".select2").select2({ width: '100%',allowClear: true,placeholder: "Select" });
 		//datepicker
     	$('.mptldp').datepicker({
-    		format:"dd/mm/yy",
+    		format:"dd/mm/yyyy",
       		autoclose: true,clearBtn: true
     	});
 
+		$(".mptltp").timepicker({
+      		showInputs: false,autoclose: true,maxHours:24,showMeridian:false
+    	});
+    	
+    	
         $(".navbar .menu").slimscroll({
             height: "200px",
             alwaysVisible: false,

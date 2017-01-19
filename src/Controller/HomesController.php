@@ -42,7 +42,11 @@ class HomesController extends AppController
 		isset($emparr[0]) ? $posid = $emparr[0]['position_id'] : $posid = "" ; 
 		
 		$myteam = $this->EmpDataBiographies->find('all')->where(['position_id >' => $posid])->toArray();
-		$this->set('myteam',$myteam);
+		
+		$this->loadModel('Employees');
+		$employeearr=$this->Employees->find('all',['conditions' => array('id' => $empid),'contain' => []])->toArray();
+		isset($employeearr[0]) ? $mypic = $employeearr[0]['profilepicture'] : $mypic = "" ; 
+		// $this->set('myteam',$myteam);
 		// $this->loadModel('Positions');
 		// $myteam = $this->Positions->find('all')->where(['id >=' => $posid])->toArray();
 		// $this->log(json_encode($myteam));
@@ -50,7 +54,7 @@ class HomesController extends AppController
 		//homes
         $homes = $this->paginate($this->Homes);
 
-        $this->set(compact('homes'));
+        $this->set(compact('homes','myteam','mypic'));
         $this->set('_serialize', ['homes']);
     }
 

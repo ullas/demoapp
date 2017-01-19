@@ -12,23 +12,23 @@
     <?= $this->Form->create($jobinfo) ?>
     <fieldset>
         <?php
-            echo $this->Form->input('position_id', ['class'=>'select2','options' => $positions, 'empty' => true]);
+            echo $this->Form->input('position_id', ['templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-briefcase"></i></div>'],'class'=>'select2','options' => $positions, 'empty' => true]);
             echo $this->Form->input('position_entry_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
             echo $this->Form->input('time_in_position');
-            echo $this->Form->input('company');
+            echo $this->Form->input('legal_entity_id',['class'=>'select2']);
 			echo $this->Form->input('business_unit_id',['class'=>'select2']);
             echo $this->Form->input('division_id',['class'=>'select2']);
             echo $this->Form->input('cost_centre_id',['class'=>'select2']);
             echo $this->Form->input('pay_grade_id',['class'=>'select2']);
             echo $this->Form->input('location_id',['class'=>'select2']);
             echo $this->Form->input('department_id',['class'=>'select2']);
-            echo $this->Form->input('country_of_company');
+            echo $this->Form->input('country_of_company',['templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-flag"></i></div>'],'class'=>'select2','options' => $this->Country->get_countries(), 'empty' => true]);
             echo $this->Form->input('timezone');
             echo $this->Form->input('job_code');
             echo $this->Form->input('job_title');
             echo $this->Form->input('local_job_title');
             echo $this->Form->input('employee_class');
-            echo $this->Form->input('regular_temp');
+            echo $this->Form->input('regular_temp',['label'=>'Regular/Temporary','class'=>'select2','options' => array('Regular', 'Temporary'), 'empty' => true]);
             echo $this->Form->input('standard_hours');
             echo $this->Form->input('working_days_per_week');
             echo $this->Form->input('work_period');
@@ -37,13 +37,13 @@
             echo $this->Form->input('is_shift_employee');
             echo $this->Form->input('shift_code');
             echo $this->Form->input('shift_rate');
-            echo $this->Form->input('shift_factor');
+            echo $this->Form->input('shift_factor',['label'=>'Shift Percentage']);
             echo $this->Form->input('employee_type');
             echo $this->Form->input('manager_category');
             echo $this->Form->input('is_cross_border_worker');
             echo $this->Form->input('is_competition_clause_active');
             echo $this->Form->input('probation_period_end_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
-            echo $this->Form->input('notes');
+            
             echo $this->Form->input('attachmentid');
             echo $this->Form->input('custom_string1');
             echo $this->Form->input('eeo_class');
@@ -92,6 +92,7 @@
             echo $this->Form->input('leave_of_absence_start_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
             echo $this->Form->input('leave_of_absence_return_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
             
+			echo $this->Form->input('notes',['type'=>'textArea']);
         ?>
     </fieldset>
     <div class="box-footer">

@@ -19,7 +19,7 @@
             echo $this->Form->input('position_id', ['disabled' => true,'class'=>'select2','options' => $positions, 'empty' => true]);
             echo $this->Form->input('position_entry_date', ['disabled' => true,'class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
             echo $this->Form->input('time_in_position',['disabled' => true]);
-            echo $this->Form->input('company',['disabled' => true]);
+            echo $this->Form->input('legal_entity_id',['class'=>'select2','disabled' => true]);
 			echo $this->Form->input('business_unit_id',['disabled' => true,'class'=>'select2']);
             echo $this->Form->input('division_id',['disabled' => true,'class'=>'select2']);
             echo $this->Form->input('cost_centre_id',['disabled' => true,'class'=>'select2']);

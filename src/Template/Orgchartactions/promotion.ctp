@@ -17,16 +17,16 @@
     <div class="box-body">
         <?php
 
-			echo $this->Form->input('position');
-			echo $this->Form->input('business_unit');
-            echo $this->Form->input('division');
-            echo $this->Form->input('department');
-            echo $this->Form->input('cost_center');
+			// echo $this->Form->input('position');
+			echo $this->Form->input('business_unit',['class'=>'select2','empty' => true]);
+            echo $this->Form->input('division',['class'=>'select2','empty' => true]);
+            echo $this->Form->input('department',['class'=>'select2','empty' => true]);
+            echo $this->Form->input('cost_center',['class'=>'select2','empty' => true]);
 			echo $this->Form->input('manager_category');
 			echo $this->Form->input('job_code');
             echo $this->Form->input('job_title');
 			echo $this->Form->input('employee_class');
-            echo $this->Form->input('pay_grade');
+            echo $this->Form->input('pay_grade',['class'=>'select2','empty' => true]);
 			echo $this->Form->input('position_id',['class'=>'select2','empty' => true]);
 			
         ?>

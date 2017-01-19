@@ -7,7 +7,7 @@ use Cake\ORM\Table;
 use Cake\Validation\Validator;
 
 /**
- * Jobinfos Model
+ * JobInfos Model
  *
  * @property \Cake\ORM\Association\BelongsTo $Users
  * @property \Cake\ORM\Association\BelongsTo $Customers
@@ -19,16 +19,17 @@ use Cake\Validation\Validator;
  * @property \Cake\ORM\Association\BelongsTo $PayGrades
  * @property \Cake\ORM\Association\BelongsTo $Locations
  * @property \Cake\ORM\Association\BelongsTo $Departments
+ * @property \Cake\ORM\Association\BelongsTo $LegalEntities
  *
- * @method \App\Model\Entity\Jobinfo get($primaryKey, $options = [])
- * @method \App\Model\Entity\Jobinfo newEntity($data = null, array $options = [])
- * @method \App\Model\Entity\Jobinfo[] newEntities(array $data, array $options = [])
- * @method \App\Model\Entity\Jobinfo|bool save(\Cake\Datasource\EntityInterface $entity, $options = [])
- * @method \App\Model\Entity\Jobinfo patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
- * @method \App\Model\Entity\Jobinfo[] patchEntities($entities, array $data, array $options = [])
- * @method \App\Model\Entity\Jobinfo findOrCreate($search, callable $callback = null)
+ * @method \App\Model\Entity\JobInfo get($primaryKey, $options = [])
+ * @method \App\Model\Entity\JobInfo newEntity($data = null, array $options = [])
+ * @method \App\Model\Entity\JobInfo[] newEntities(array $data, array $options = [])
+ * @method \App\Model\Entity\JobInfo|bool save(\Cake\Datasource\EntityInterface $entity, $options = [])
+ * @method \App\Model\Entity\JobInfo patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
+ * @method \App\Model\Entity\JobInfo[] patchEntities($entities, array $data, array $options = [])
+ * @method \App\Model\Entity\JobInfo findOrCreate($search, callable $callback = null)
  */
-class JobinfosTable extends Table
+class JobInfosTable extends Table
 {
 
     /**
@@ -74,6 +75,9 @@ class JobinfosTable extends Table
         ]);
         $this->belongsTo('Departments', [
             'foreignKey' => 'department_id'
+        ]);
+        $this->belongsTo('LegalEntities', [
+            'foreignKey' => 'legal_entity_id'
         ]);
     }
 
@@ -354,6 +358,7 @@ class JobinfosTable extends Table
         $rules->add($rules->existsIn(['pay_grade_id'], 'PayGrades'));
         $rules->add($rules->existsIn(['location_id'], 'Locations'));
         $rules->add($rules->existsIn(['department_id'], 'Departments'));
+        $rules->add($rules->existsIn(['legal_entity_id'], 'LegalEntities'));
 
         return $rules;
     }

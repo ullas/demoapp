@@ -121,6 +121,11 @@ use Cake\Utility\Inflector;
 							if( ($rowval['name']==$column['db']) && ($rowval['type']=="character") ){
 								$globalSearch[$column['db'].' ILIKE'] = "%" . $str. "%";
 							}
+							else if( ($rowval['name']==$column['db']) && ($rowval['type']=="number") ){
+                               if(is_numeric($str))	{
+                                  $globalSearch[$column['db']. '='] = "" . $str. "";
+							   }
+                            }
 							else if( ($rowval['name']==$column['db']) && ($rowval['type']=="date") ){
 								// if($this->isItValidDate($str)){
 									$globalSearch[$column['db'].'::text LIKE'] = "%" . $str. "%";

@@ -85,7 +85,8 @@ class ProfilesController extends AppController
 					//associated EmpDataBiographies
             		$this->loadModel('EmploymentInfos');
 					$arr = $this->EmploymentInfos->find('all',['conditions' => array('employee_id' => $empid), 'contain' => []])->toArray();
-					isset($arr[0]) ? $employmentinfo = $arr[0] : $employmentinfo = $this->EmploymentInfos->newEntity();  						$employmentinfo = $arr[0];
+					isset($arr[0]) ? $employmentinfo = $arr[0] : $employmentinfo = $this->EmploymentInfos->newEntity();  						
+					$employmentinfo = $arr[0];
 						$employmentinfo = $this->EmploymentInfos->patchEntity($employmentinfo, $this->request->data['employmentinfo']);
             			if ($this->Employees->EmploymentInfos->save($employmentinfo)) {
                 			
