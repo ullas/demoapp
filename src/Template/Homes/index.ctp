@@ -20,7 +20,8 @@
     <div class="col-sm-3">
     	<div class="box box-primary direct-chat direct-chat-primary">
         	<div class="box-header with-border">My Info</div>
-        	<div class="panel-body bg-success"><?= $this->element('homeelmt', array('title' => 'My Info')); ?></div>
+        	<div class="panel-body bg-default"  id='mptlmyinfo'><?= $this->element('homeelmt', array('title' => 'My Info','dp' => $mypic)); ?>
+        	<a href="/Profiles" class="myinfo-footer">More info <i class="fa fa-arrow-circle-right"></i></a></div>
         </div>
     </div>
     <div class="col-sm-3">

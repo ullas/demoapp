@@ -4,21 +4,18 @@ namespace App\Model\Entity;
 use Cake\ORM\Entity;
 
 /**
- * BusinessUnit Entity
+ * PayrollRecord Entity
  *
  * @property int $id
- * @property string $name
- * @property string $description
- * @property bool $effective_status
- * @property \Cake\I18n\Time $effective_start_date
- * @property \Cake\I18n\Time $effective_end_date
- * @property string $external_code
- * @property int $head_of_unit
- * @property int $customer_id
+ * @property string $code
+ * @property int $payroll_area_id
+ * @property string $period
+ * @property \Cake\I18n\Time $run_date
+ * @property \Cake\I18n\Time $run_time
  *
- * @property \App\Model\Entity\Customer $customer
+ * @property \App\Model\Entity\PayrollArea $payroll_area
  */
-class BusinessUnit extends Entity
+class PayrollRecord extends Entity
 {
 
     /**

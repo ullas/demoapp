@@ -3,7 +3,10 @@ $elmntstring;
 $title=preg_replace('/\s+/', '', $title);
 switch (strtolower($title)) {
     case "myinfo":
-        // echo $this->Html->image('photo4.jpg', ['alt' => 'Photo', 'class' => 'img-responsive pad']);
+		if($mypic!=""){
+        	$picturename='/img/uploadedpics/'.$mypic;
+        	echo $this->Html->image($picturename, array('class' => 'img-responsive', 'id'=>'myinfopic', 'alt' => 'User profile picture')); 
+		}
         break;
     case "myteam":
 	    echo "<ul class='users-list clearfix'>";
@@ -17,12 +20,12 @@ switch (strtolower($title)) {
         break;
     case "links":
         echo "<p><i class='fa fa-pencil'></i>";
-		echo $this->Html->link(' Edit', array('controller' => '','action'     => ''));
+		echo $this->Html->link(' Edit', array('controller' => '','action'=> ''));
         echo "</p>";
         break;
 	case "adminalerts":
         echo "<p><i class='fa fa-check-circle'> There are no alerts.</i></p>";
-		echo $this->Html->link(' Edit Admin Alert Settings', array('controller' => '','action'     => ''));
+		echo $this->Html->link(' Edit Admin Alert Settings', array('controller' => '','action'=> ''));
         break;
 	case "todo":
         echo "<div class='well well-sm'>Due Anytime</div>";

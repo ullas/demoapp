@@ -113,38 +113,38 @@ div#myDropZone {
              <!-- <div class="form-horizontal"> -->
              	<fieldset>
                 <?php
-            echo $this->Form->input('empdatapersonal.salutation');
-            echo $this->Form->input('empdatapersonal.first_name');
-            echo $this->Form->input('empdatapersonal.last_name');
-            echo $this->Form->input('empdatapersonal.initials');
-            echo $this->Form->input('empdatapersonal.middle_name');
-            echo $this->Form->input('empdatapersonal.first_name_alt1');
-            echo $this->Form->input('empdatapersonal.middle_name_alt1');
-            echo $this->Form->input('empdatapersonal.last_name_alt1');
-            echo $this->Form->input('empdatapersonal.first_name_alt2');
-            echo $this->Form->input('empdatapersonal.middle_name_alt2');
-            echo $this->Form->input('empdatapersonal.last_name_alt2');
-            echo $this->Form->input('empdatapersonal.display_name');
-            echo $this->Form->input('empdatapersonal.formal_name');
-            echo $this->Form->input('empdatapersonal.birth_name');
-            echo $this->Form->input('empdatapersonal.birth_name_alt1');
-            echo $this->Form->input('empdatapersonal.birth_name_alt2');
-            echo $this->Form->input('empdatapersonal.preferred_name');
-            echo $this->Form->input('empdatapersonal.display_name_alt1');
-            echo $this->Form->input('empdatapersonal.display_name_alt2');
-            echo $this->Form->input('empdatapersonal.formal_name_alt1');
-            echo $this->Form->input('empdatapersonal.formal_name_alt2');
+            echo $this->Form->input('empdatapersonal.salutation',['templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-user"></i></div>']]);
+            echo $this->Form->input('empdatapersonal.first_name',['templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-user"></i></div>']]);
+            echo $this->Form->input('empdatapersonal.last_name',['templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-user"></i></div>']]);
+            echo $this->Form->input('empdatapersonal.initials',['templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-user"></i></div>']]);
+            echo $this->Form->input('empdatapersonal.middle_name',['templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-user"></i></div>']]);
+            echo $this->Form->input('empdatapersonal.first_name_alt1',['templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-user"></i></div>']]);
+            echo $this->Form->input('empdatapersonal.middle_name_alt1',['templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-user"></i></div>']]);
+            echo $this->Form->input('empdatapersonal.last_name_alt1',['templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-user"></i></div>']]);
+            echo $this->Form->input('empdatapersonal.first_name_alt2',['templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-user"></i></div>']]);
+            echo $this->Form->input('empdatapersonal.middle_name_alt2',['templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-user"></i></div>']]);
+            echo $this->Form->input('empdatapersonal.last_name_alt2',['templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-user"></i></div>']]);
+            echo $this->Form->input('empdatapersonal.display_name',['templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-user"></i></div>']]);
+            echo $this->Form->input('empdatapersonal.formal_name',['templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-user"></i></div>']]);
+            echo $this->Form->input('empdatapersonal.birth_name',['templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-user"></i></div>']]);
+            echo $this->Form->input('empdatapersonal.birth_name_alt1',['templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-user"></i></div>']]);
+            echo $this->Form->input('empdatapersonal.birth_name_alt2',['templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-user"></i></div>']]);
+            echo $this->Form->input('empdatapersonal.preferred_name',['templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-user"></i></div>']]);
+            echo $this->Form->input('empdatapersonal.display_name_alt1',['templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-user"></i></div>']]);
+            echo $this->Form->input('empdatapersonal.display_name_alt2',['templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-user"></i></div>']]);
+            echo $this->Form->input('empdatapersonal.formal_name_alt1',['templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-user"></i></div>']]);
+            echo $this->Form->input('empdatapersonal.formal_name_alt2',['templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-user"></i></div>']]);
             echo $this->Form->input('empdatapersonal.name_format');
             echo $this->Form->input('empdatapersonal.is_overridden');
-            echo $this->Form->input('empdatapersonal.nationality');
-            echo $this->Form->input('empdatapersonal.second_nationality');
-            echo $this->Form->input('empdatapersonal.third_nationality');
+            echo $this->Form->input('empdatapersonal.nationality',['templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-flag"></i></div>'],'class'=>'select2','options' => $this->Country->get_countries(), 'empty' => true]);
+            echo $this->Form->input('empdatapersonal.second_nationality',['templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-flag"></i></div>'],'class'=>'select2','options' => $this->Country->get_countries(), 'empty' => true]);
+            echo $this->Form->input('empdatapersonal.third_nationality',['templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-flag"></i></div>'],'class'=>'select2','options' => $this->Country->get_countries(), 'empty' => true]);
             echo $this->Form->input('empdatapersonal.wps_code');
             echo $this->Form->input('empdatapersonal.uniqueid');
             echo $this->Form->input('empdatapersonal.prof_legal');
             echo $this->Form->input('empdatapersonal.exclude_legal');
             echo $this->Form->input('empdatapersonal.nationality_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
-            echo $this->Form->input('empdatapersonal.home_airport');
+            echo $this->Form->input('empdatapersonal.home_airport',['templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-plane"></i></div>']]);
             echo $this->Form->input('empdatapersonal.religion');
             echo $this->Form->input('empdatapersonal.number_children');
             echo $this->Form->input('empdatapersonal.disability_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
@@ -178,7 +178,7 @@ div#myDropZone {
             echo $this->Form->input('employmentinfo.initial_stock_grant');
             echo $this->Form->input('employmentinfo.initial_option_grant');
             echo $this->Form->input('employmentinfo.job_credit');
-            echo $this->Form->input('employmentinfo.notes');
+            echo $this->Form->input('employmentinfo.notes',['templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-file-text-o"></i></div>']]);
             echo $this->Form->input('employmentinfo.is_contingent_worker');
             echo $this->Form->input('employmentinfo.end_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
             echo $this->Form->input('employmentinfo.ok_to_rehire');
@@ -200,10 +200,10 @@ div#myDropZone {
              <!-- <div class="form-horizontal"> --><fieldset>
               <?php
             echo $this->Form->input('empdatabiography.date_of_birth', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
-            echo $this->Form->input('empdatabiography.country_of_birth');
-            echo $this->Form->input('empdatabiography.region_of_birth');
-            echo $this->Form->input('empdatabiography.place_of_birth');
-            echo $this->Form->input('empdatabiography.birth_name');
+            echo $this->Form->input('empdatabiography.country_of_birth',['templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-flag"></i></div>'],'class'=>'select2','options' => $this->Country->get_countries(), 'empty' => true]);
+            echo $this->Form->input('empdatabiography.region_of_birth',['templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-map-marker"></i></div>']]);
+            echo $this->Form->input('empdatabiography.place_of_birth',['templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-location-arrow"></i></div>']]);
+            echo $this->Form->input('empdatabiography.birth_name',['templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-user"></i></div>']]);
             echo $this->Form->input('empdatabiography.date_of_death', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
             echo $this->Form->input('empdatabiography.person_id_external', ['disabled' => true]);
         ?>
@@ -217,12 +217,12 @@ div#myDropZone {
              <!-- <div class="form-horizontal"> -->
              	<fieldset>
              		<?php
-            		echo $this->Form->input('contact_info.phone');
-            		echo $this->Form->input('contact_info.mobile');
-            		echo $this->Form->input('contact_info.email_address1');
-            		echo $this->Form->input('contact_info.email_address2');
-            		echo $this->Form->input('contact_info.facebook');
-            		echo $this->Form->input('contact_info.linkedin');
+            		echo $this->Form->input('contact_info.phone',['templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-mobile"></i></div>']]);
+            		echo $this->Form->input('contact_info.mobile',['templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-phone"></i></div>']]);
+            		echo $this->Form->input('contact_info.email_address1',['templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa  fa-envelope"></i></div>']]);
+            		echo $this->Form->input('contact_info.email_address2',['templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa  fa-envelope"></i></div>']]);
+            		echo $this->Form->input('contact_info.facebook',['templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-facebook"></i></div>']]);
+            		echo $this->Form->input('contact_info.linkedin',['templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-linkedin"></i></div>']]);
         			?>
         			
         			<?php echo $this->Form->input('profilepicture', array('type' => 'hidden')); ?>

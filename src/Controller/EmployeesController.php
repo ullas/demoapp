@@ -122,10 +122,30 @@ class EmployeesController extends AppController
 					$empDataBiography = $arr[0];
 					$empDataBiography = $this->EmpDataBiographies->patchEntity($empDataBiography, $this->request->data['empdatabiography']);
             		if ($this->Employees->EmpDataBiographies->save($empDataBiography)) {
-                		// $this->Flash->success(__('The employee has been saved.'));
-                		// return $this->redirect(['action' => 'index']);
+              
 					}
 				}
+				
+				//associated Empdatapersonals
+            		$this->loadModel('EmpDataPersonals');
+					$arr = $this->EmpDataPersonals->find('all',['conditions' => array('employee_id' => $id), 'contain' => []])->toArray();
+					isset($arr[0]) ? $empDataPersonal = $arr[0] : $empDataPersonal = $this->EmpDataPersonals->newEntity();  
+						$empDataPersonal = $arr[0];
+						$empDataPersonal = $this->EmpDataPersonals->patchEntity($empDataPersonal, $this->request->data['empdatapersonal']);
+            			if ($this->Employees->EmpDataPersonals->save($empDataPersonal)) {
+                			
+                		}
+
+					//associated EmpDataBiographies
+            		$this->loadModel('EmploymentInfos');
+					$arr = $this->EmploymentInfos->find('all',['conditions' => array('employee_id' => $id), 'contain' => []])->toArray();
+					isset($arr[0]) ? $employmentinfo = $arr[0] : $employmentinfo = $this->EmploymentInfos->newEntity();  						
+					$employmentinfo = $arr[0];
+						$employmentinfo = $this->EmploymentInfos->patchEntity($employmentinfo, $this->request->data['employmentinfo']);
+            			if ($this->Employees->EmploymentInfos->save($employmentinfo)) {
+                			
+                		}
+						
 				$this->Flash->success(__('The employee has been saved.'));
 				return $this->redirect(['action' => 'index']);
             } else {

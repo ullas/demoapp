@@ -19,6 +19,9 @@ use Cake\Datasource\ConnectionManager;
  * @property \Cake\ORM\Association\BelongsTo $PayGrades
  * @property \Cake\ORM\Association\BelongsTo $PayRanges
  * @property \Cake\ORM\Association\BelongsTo $ParentPositions
+ * @property \Cake\ORM\Association\BelongsTo $BusinessUnits
+ * @property \Cake\ORM\Association\HasMany $Empdatabiographies
+ * @property \Cake\ORM\Association\HasMany $Jobinfos
  * @property \Cake\ORM\Association\HasMany $ChildPositions
  *
  * @method \App\Model\Entity\Position get($primaryKey, $options = [])
@@ -88,7 +91,13 @@ $this->addBehavior('Tree');
             'className' => 'Positions',
             'foreignKey' => 'parent_id'
         ]);
-		$this->hasOne('JobInfos', [
+        $this->belongsTo('BusinessUnits', [
+            'foreignKey' => 'business_unit_id'
+        ]);
+        $this->hasOne('Empdatabiographies', [
+            'foreignKey' => 'position_id'
+        ]);
+        $this->hasOne('Jobinfos', [
             'foreignKey' => 'position_id'
         ]);
         // $this->hasMany('ChildPositions', [
@@ -233,6 +242,7 @@ $this->addBehavior('Tree');
         $rules->add($rules->existsIn(['pay_grade_id'], 'PayGrades'));
         $rules->add($rules->existsIn(['pay_range_id'], 'PayRanges'));
         $rules->add($rules->existsIn(['parent_id'], 'ParentPositions'));
+        $rules->add($rules->existsIn(['business_unit_id'], 'BusinessUnits'));
 
         return $rules;
     }
