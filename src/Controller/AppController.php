@@ -17,6 +17,11 @@ namespace App\Controller;
 use Cake\Controller\Controller;
 use Cake\Event\Event;
 use Cake\Core\Configure;
+use Cake\I18n\Time;
+use Cake\I18n\FrozenDate;
+use Cake\I18n\FrozenTime;
+use Cake\I18n\Date;
+
 
 /**
  * Application Controller
@@ -110,7 +115,6 @@ class AppController extends Controller
     	parent::initialize();
 		
 		// $this->set('form_templates', Configure::read('Templates'));
-		
 		
     	$this->loadComponent('RequestHandler');
         $this->loadComponent('Flash');

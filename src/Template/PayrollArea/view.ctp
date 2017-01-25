@@ -1,3 +1,4 @@
+<?= $this->element('templateelmnt'); ?>
 <section class="content-header">
   <h1>
     Payroll Area
@@ -21,9 +22,9 @@
             echo $this->Form->input('division_id', ['options' => $divisions, 'empty' => true,'disabled' => true]);
             echo $this->Form->input('location_id', ['options' => $locations, 'empty' => true,'disabled' => true]);
             echo $this->Form->input('name',['disabled' => true]);
-        ?>
+        ?></div>
 <div class="box-footer">
           	<?=$this->Html->link(__('Cancel'), ['action' => 'index'], ['escape' => false])?>
             <?=$this->Html->link(__('Edit PayrollArea'), ['action' => 'edit', $payrollArea['id']],['class'=>'btn btn-primary label-info pull-right'], ['escape' => false])?>
           </div><?= $this->Form->end() ?>
-</div></div></section>
+</div></section>
