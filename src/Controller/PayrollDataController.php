@@ -4,20 +4,20 @@ namespace App\Controller;
 use App\Controller\AppController;
 
 /**
- * PayrollStatus Controller
+ * PayrollData Controller
  *
- * @property \App\Model\Table\PayrollStatusTable $PayrollStatus
+ * @property \App\Model\Table\PayrollDataTable $PayrollData
  */
-class PayrollStatusController extends AppController
+class PayrollDataController extends AppController
 {
-var $components = array('Datatable');
+
+   var $components = array('Datatable');
     /**
      * Index method
      *
      * @return \Cake\Network\Response|null
      */
-    
-    public function ajaxData() {
+     public function ajaxData() {
 		$this->autoRender= False;
 		  
 		$this->loadModel('CreateConfigs');
@@ -26,7 +26,7 @@ var $components = array('Datatable');
 		foreach($dbout as $value){
 			$fields[] = array("name" => $value['field_name'] , "type" => $value['datatype'] );
 		}
-		$contains=['PayrollArea'];
+		$contains=['PayComponents'];
 									  
 		$output =$this->Datatable->getView($fields,$contains);
 		echo json_encode($output);			
@@ -38,29 +38,30 @@ var $components = array('Datatable');
         $this->set('configs',$configs);	
 		
         $this->paginate = [
-            'contain' => ['PayrollArea']
+            'contain' => ['PayComponents']
         ];
-        $payrollStatus = $this->paginate($this->PayrollStatus);
+        $payrollData = $this->paginate($this->PayrollData);
 
-        $this->set(compact('payrollStatus'));
-        $this->set('_serialize', ['payrollStatus']);
+        $this->set(compact('payrollData'));
+        $this->set('_serialize', ['payrollData']);
     }
 
     /**
      * View method
      *
-     * @param string|null $id Payroll Status id.
+     * @param string|null $id Payroll Data id.
      * @return \Cake\Network\Response|null
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
     public function view($id = null)
     {
-        $payrollStatus = $this->PayrollStatus->get($id, [
-            'contain' => ['PayrollArea']
+        $payrollData = $this->PayrollData->get($id, [
+            'contain' => ['PayComponents']
         ]);
-
-        $this->set('payrollStatus', $payrollStatus);
-        $this->set('_serialize', ['payrollStatus']);
+		$payComponents = $this->PayrollData->PayComponents->find('list', ['limit' => 200]);
+		$this->set('payComponents', $payComponents);
+        $this->set('payrollData', $payrollData);
+        $this->set('_serialize', ['payrollData']);
     }
 
     /**
@@ -70,67 +71,64 @@ var $components = array('Datatable');
      */
     public function add()
     {
-        $payrollStatus = $this->PayrollStatus->newEntity();
+        $payrollData = $this->PayrollData->newEntity();
         if ($this->request->is('post')) {
-            $payrollStatus = $this->PayrollStatus->patchEntity($payrollStatus, $this->request->data);
-            if ($this->PayrollStatus->save($payrollStatus)) {
-                $this->Flash->success(__('The payroll status has been saved.'));
+            $payrollData = $this->PayrollData->patchEntity($payrollData, $this->request->data);
+            if ($this->PayrollData->save($payrollData)) {
+                $this->Flash->success(__('The payroll data has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
             } else {
-                $this->Flash->error(__('The payroll status could not be saved. Please, try again.'));
+                $this->Flash->error(__('The payroll data could not be saved. Please, try again.'));
             }
         }
-        $payrollArea = $this->PayrollStatus->PayrollArea->find('list', ['limit' => 200]);
-        $this->set(compact('payrollStatus', 'payrollArea'));
-        $this->set('_serialize', ['payrollStatus']);
+        $payComponents = $this->PayrollData->PayComponents->find('list', ['limit' => 200]);
+        $this->set(compact('payrollData', 'payComponents'));
+        $this->set('_serialize', ['payrollData']);
     }
 
     /**
      * Edit method
      *
-     * @param string|null $id Payroll Status id.
+     * @param string|null $id Payroll Data id.
      * @return \Cake\Network\Response|void Redirects on successful edit, renders view otherwise.
      * @throws \Cake\Network\Exception\NotFoundException When record not found.
      */
     public function edit($id = null)
     {
-        $payrollStatus = $this->PayrollStatus->get($id, [
+        $payrollData = $this->PayrollData->get($id, [
             'contain' => []
         ]);
-		
-			
-
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $payrollStatus = $this->PayrollStatus->patchEntity($payrollStatus, $this->request->data);
-            if ($this->PayrollStatus->save($payrollStatus)) {
-                $this->Flash->success(__('The payroll status has been saved.'));
+            $payrollData = $this->PayrollData->patchEntity($payrollData, $this->request->data);
+            if ($this->PayrollData->save($payrollData)) {
+                $this->Flash->success(__('The payroll data has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
             } else {
-                $this->Flash->error(__('The payroll status could not be saved. Please, try again.'));
+                $this->Flash->error(__('The payroll data could not be saved. Please, try again.'));
             }
         }
-        $payrollArea = $this->PayrollStatus->PayrollArea->find('list', ['limit' => 200]);
-        $this->set(compact('payrollStatus', 'payrollArea'));
-        $this->set('_serialize', ['payrollStatus']);
+        $payComponents = $this->PayrollData->PayComponents->find('list', ['limit' => 200]);
+        $this->set(compact('payrollData', 'payComponents'));
+        $this->set('_serialize', ['payrollData']);
     }
 
     /**
      * Delete method
      *
-     * @param string|null $id Payroll Status id.
+     * @param string|null $id Payroll Data id.
      * @return \Cake\Network\Response|null Redirects to index.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
     public function delete($id = null)
     {
         $this->request->allowMethod(['post', 'delete']);
-        $payrollStatus = $this->PayrollStatus->get($id);
-        if ($this->PayrollStatus->delete($payrollStatus)) {
-            $this->Flash->success(__('The payroll status has been deleted.'));
+        $payrollData = $this->PayrollData->get($id);
+        if ($this->PayrollData->delete($payrollData)) {
+            $this->Flash->success(__('The payroll data has been deleted.'));
         } else {
-            $this->Flash->error(__('The payroll status could not be deleted. Please, try again.'));
+            $this->Flash->error(__('The payroll data could not be deleted. Please, try again.'));
         }
 
         return $this->redirect(['action' => 'index']);

@@ -236,12 +236,14 @@ $(window).off("resize").on("resize", function() {
 
 		//select 2 
     	$(".select2").select2({ width: '100%',allowClear: true,placeholder: "Select" });
-		//datepicker
-    	$('.mptldp').datepicker({
-    		format:"dd/mm/yyyy",
-      		autoclose: true,clearBtn: true
+		//year picker
+    	$('.mptlyp').datepicker({
+    		format:"yyyy", viewMode: "years", minViewMode: "years", autoclose: true, clearBtn: true
     	});
-
+		//date picker
+    	$('.mptldp').datepicker({
+    		format:"yyyy/mm/dd",autoclose: true,clearBtn: true
+    	});
 		$(".mptltp").timepicker({
       		showInputs: false,autoclose: true,maxHours:24,showMeridian:false
     	});

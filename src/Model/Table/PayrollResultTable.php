@@ -7,19 +7,20 @@ use Cake\ORM\Table;
 use Cake\Validation\Validator;
 
 /**
- * PayrollStatus Model
+ * PayrollResult Model
  *
  * @property \Cake\ORM\Association\BelongsTo $PayrollArea
+ * @property \Cake\ORM\Association\BelongsTo $PayComponents
  *
- * @method \App\Model\Entity\PayrollStatus get($primaryKey, $options = [])
- * @method \App\Model\Entity\PayrollStatus newEntity($data = null, array $options = [])
- * @method \App\Model\Entity\PayrollStatus[] newEntities(array $data, array $options = [])
- * @method \App\Model\Entity\PayrollStatus|bool save(\Cake\Datasource\EntityInterface $entity, $options = [])
- * @method \App\Model\Entity\PayrollStatus patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
- * @method \App\Model\Entity\PayrollStatus[] patchEntities($entities, array $data, array $options = [])
- * @method \App\Model\Entity\PayrollStatus findOrCreate($search, callable $callback = null)
+ * @method \App\Model\Entity\PayrollResult get($primaryKey, $options = [])
+ * @method \App\Model\Entity\PayrollResult newEntity($data = null, array $options = [])
+ * @method \App\Model\Entity\PayrollResult[] newEntities(array $data, array $options = [])
+ * @method \App\Model\Entity\PayrollResult|bool save(\Cake\Datasource\EntityInterface $entity, $options = [])
+ * @method \App\Model\Entity\PayrollResult patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
+ * @method \App\Model\Entity\PayrollResult[] patchEntities($entities, array $data, array $options = [])
+ * @method \App\Model\Entity\PayrollResult findOrCreate($search, callable $callback = null)
  */
-class PayrollStatusTable extends Table
+class PayrollResultTable extends Table
 {
 
     /**
@@ -32,12 +33,15 @@ class PayrollStatusTable extends Table
     {
         parent::initialize($config);
 
-        $this->table('payroll_status');
+        $this->table('payroll_result');
         $this->displayField('id');
         $this->primaryKey('id');
 
         $this->belongsTo('PayrollArea', [
             'foreignKey' => 'payroll_area_id'
+        ]);
+        $this->belongsTo('PayComponents', [
+            'foreignKey' => 'pay_component_id'
         ]);
     }
 
@@ -53,27 +57,26 @@ class PayrollStatusTable extends Table
             ->allowEmpty('id', 'create');
 
         $validator
-            ->allowEmpty('code');
+            ->allowEmpty('employee_code');
 
         $validator
-            ->allowEmpty('current_period');
+            ->allowEmpty('period');
 
         $validator
-        	->add('datefield', ['rule' => ['date']])
-            // ->date('earliest_retro_date')
-            ->allowEmpty('earliest_retro_date');
+            ->numeric('pay_component_value')
+            ->allowEmpty('pay_component_value');
 
         $validator
-            ->boolean('payroll_lock')
-            ->allowEmpty('payroll_lock');
+            ->numeric('paid_salary')
+            ->allowEmpty('paid_salary');
 
         $validator
-            ->date('lock_date')
-            ->allowEmpty('lock_date');
+            ->date('run_date')
+            ->allowEmpty('run_date');
 
         $validator
-            ->time('lock_time')
-            ->allowEmpty('lock_time');
+            ->time('run_time')
+            ->allowEmpty('run_time');
 
         return $validator;
     }
@@ -88,6 +91,7 @@ class PayrollStatusTable extends Table
     public function buildRules(RulesChecker $rules)
     {
         $rules->add($rules->existsIn(['payroll_area_id'], 'PayrollArea'));
+        $rules->add($rules->existsIn(['pay_component_id'], 'PayComponents'));
 
         return $rules;
     }
