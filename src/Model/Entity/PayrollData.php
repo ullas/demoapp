@@ -4,21 +4,18 @@ namespace App\Model\Entity;
 use Cake\ORM\Entity;
 
 /**
- * CalendarAssignment Entity
+ * PayrollData Entity
  *
  * @property int $id
- * @property string $assignmentyear
- * @property \Cake\I18n\Time $assignmentdate
- * @property int $user_id
- * @property int $holiday_id
- * @property int $customer_id
- * @property int $holiday_calendar_id
+ * @property string $employee_code
+ * @property int $pay_component_id
+ * @property string $pay_component_value
+ * @property \Cake\I18n\Time $start_date
+ * @property \Cake\I18n\Time $end_date
  *
- * @property \App\Model\Entity\User $user
- * @property \App\Model\Entity\Holiday $holiday
- * @property \App\Model\Entity\Customer $customer
+ * @property \App\Model\Entity\PayComponent $pay_component
  */
-class CalendarAssignment extends Entity
+class PayrollData extends Entity
 {
 
     /**

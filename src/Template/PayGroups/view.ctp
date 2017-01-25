@@ -34,10 +34,10 @@
             echo $this->Form->input('decimal_point',['disabled' => true]);
             echo $this->Form->input('lag',['disabled' => true]);
             echo $this->Form->input('external_code',['disabled' => true]);
-        ?></fieldset>
+        ?></fieldset></div>
 <div class="box-footer">
           	<?=$this->Html->link(__('Cancel'), ['action' => 'index'], ['escape' => false])?>
             <?=$this->Html->link(__('Edit Paygroup'), ['action' => 'edit', $payGroup['id']],['class'=>'btn btn-primary label-info pull-right'], ['escape' => false])?>
           </div><?= $this->Form->end() ?>
-</div></div></section>
+</div></section>
 

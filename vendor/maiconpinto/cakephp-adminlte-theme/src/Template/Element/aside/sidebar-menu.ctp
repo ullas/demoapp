@@ -50,7 +50,7 @@ if (file_exists($file)) {
     		<li><a href="<?php echo $this -> Url -> build('/PayrollStatus'); ?>"><i class="fa fa-circle-o"></i> Pay Roll Status</a></li>
     
     		<li><a href="<?php echo $this -> Url -> build('/HolidayCalendars'); ?>"><i class="fa fa-circle-o"></i> Holiday Calendars</a></li>
-    		<li><a href="<?php echo $this -> Url -> build('/CalendarAssignments'); ?>"><i class="fa fa-circle-o"></i> Calendar Assignments</a></li>
+    		<li><a href="<?php echo $this -> Url -> build('/Holidays'); ?>"><i class="fa fa-circle-o"></i> Holidays</a></li>
     
     
     	</ul>
@@ -65,7 +65,7 @@ if (file_exists($file)) {
     <li><a href="<?php echo $this -> Url -> build('/Divisions'); ?>"><i class="fa fa-circle-o"></i> Divisions</a></li>
     <li><a href="<?php echo $this -> Url -> build('/CostCentres'); ?>"><i class="fa fa-circle-o"></i> Cost Centres</a></li>
     <li><a href="<?php echo $this->Url->build('/Positions'); ?>"><i class="fa fa-circle-o"></i> Position</a></li>
-    
+    <li><a href="<?php echo $this -> Url -> build('/CalendarAssignments'); ?>"><i class="fa fa-circle-o"></i> Calendar Assignments</a></li>
     </ul>
     </li>
 	

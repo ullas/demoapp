@@ -13,11 +13,10 @@
     <?= $this->Form->create($calendarAssignment) ?>
     <fieldset>
         <?php
-            echo $this->Form->input('calendar');
-            echo $this->Form->input('assignmentyear');
+            echo $this->Form->input('calendar', ['options' => $holidayCalendars, 'class' => 'select2']);
+            echo $this->Form->input('assignmentyear', ['class' => 'mptlyp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
 			echo $this->Form->input('assignmentdate', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
-            echo $this->Form->input('user_id', ['options' => $users, 'empty' => true]);
-            echo $this->Form->input('holiday_id', ['options' => $holidays, 'empty' => true]);
+            echo $this->Form->input('holiday_id', ['options' => $holidays, 'class' => 'select2']);
         ?>
     </fieldset>
     <div class="box-footer">
@@ -26,14 +25,4 @@
 	</div>
     <?= $this->Form->end() ?>
 </div></div></section>
-<!-- Date picker -->
-<?php
-$this->Html->css([  'AdminLTE./plugins/datepicker/datepicker3' ], ['block' => 'css']);
-$this->Html->script([ 'AdminLTE./plugins/datepicker/bootstrap-datepicker' ], ['block' => 'script']); ?>
-<?php $this->start('scriptBotton'); ?>
-<script>
-  $(function () { 
-     $('#assignmentdate').datepicker({ autoclose: true }); 
-  });
-</script>
-<?php $this->end(); ?>
+
