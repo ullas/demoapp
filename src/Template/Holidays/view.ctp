@@ -1,34 +1,33 @@
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('Edit Holiday'), ['action' => 'edit', $holiday->id]) ?> </li>
-        <li><?= $this->Form->postLink(__('Delete Holiday'), ['action' => 'delete', $holiday->id], ['confirm' => __('Are you sure you want to delete # {0}?', $holiday->id)]) ?> </li>
-        <li><?= $this->Html->link(__('List Holidays'), ['action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Holiday'), ['action' => 'add']) ?> </li>
-    </ul>
-</nav>
-<div class="holidays view large-9 medium-8 columns content">
-    <h3><?= h($holiday->name) ?></h3>
-    <table class="vertical-table">
-        <tr>
-            <th><?= __('Holiday Class') ?></th>
-            <td><?= h($holiday->holiday_class) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Name') ?></th>
-            <td><?= h($holiday->name) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Holiday Code') ?></th>
-            <td><?= h($holiday->holiday_code) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Id') ?></th>
-            <td><?= $this->Number->format($holiday->id) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Date') ?></th>
-            <td><?= h($holiday->date) ?></td>
-        </tr>
-    </table>
-</div>
+<?= $this->element('templateelmnt'); ?>
+<section class="content-header">
+  <h1>
+    Holidays
+    <small>View</small>
+  </h1>
+  <ol class="breadcrumb">
+    <li>
+    <?= $this->Html->link('<i class="fa fa-mail-reply"></i> '.__('Back'), ['action' => 'index'], ['escape' => false]) ?>
+    </li>
+  </ol>
+</section>
+
+<!-- Main content -->
+<section class="content">
+  <div class="box box-primary"><div class="box-body">
+        <?= $this->Form->create($holiday, array('role' => 'form')) ?>
+        <fieldset>
+          <?php
+            echo $this->Form->input('holiday_class',['disabled' => true]);
+            echo $this->Form->input('name',['disabled' => true]);
+            echo $this->Form->input('date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
+            echo $this->Form->input('holiday_code',['disabled' => true]);
+        ?>
+        </fieldset>
+          <!-- /.box-body -->
+          <div class="box-footer">
+          	<?=$this->Html->link(__('Cancel'), ['action' => 'index'], ['escape' => false])?>
+            <?=$this->Html->link(__('Edit Holidays'), ['action' => 'edit', $holiday['id']],['class'=>'btn btn-primary label-info pull-right'], ['escape' => false])?>
+          </div>
+        <?= $this->Form->end() ?>
+      </div>
+  </div></section>
