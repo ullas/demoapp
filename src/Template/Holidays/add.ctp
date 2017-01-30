@@ -1,20 +1,27 @@
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('List Holidays'), ['action' => 'index']) ?></li>
-    </ul>
-</nav>
-<div class="holidays form large-9 medium-8 columns content">
+<?= $this->element('templateelmnt'); ?>
+<section class="content-header">
+      <h1>
+        Holiday Calendar
+        <small>Add</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><?= $this->Html->link('<i class="fa fa-mail-reply"></i> '.__('Back'), ['action' => 'index'], ['escape' => false]) ?></li>
+      </ol>
+    </section>
+<section class="content">
+	<div class="box box-primary"><div class="box-body">
     <?= $this->Form->create($holiday) ?>
     <fieldset>
-        <legend><?= __('Add Holiday') ?></legend>
         <?php
             echo $this->Form->input('holiday_class');
             echo $this->Form->input('name');
-            echo $this->Form->input('date', ['empty' => true]);
+            echo $this->Form->input('date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
             echo $this->Form->input('holiday_code');
         ?>
-    </fieldset>
-    <?= $this->Form->button(__('Submit')) ?>
+    </fieldset></div>
+    <div class="box-footer">
+    	<?=$this->Html->link(__('Cancel'), ['action' => 'index'], ['escape' => false])?>
+    	<?= $this->Form->button(__('Save'),['title'=>'Save','class'=>'pull-right']) ?> 
+	</div>
     <?= $this->Form->end() ?>
-</div>
+</div></section>
