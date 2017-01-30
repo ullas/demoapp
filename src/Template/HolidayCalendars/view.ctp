@@ -1,6 +1,7 @@
+<?= $this->element('templateelmnt'); ?>
 <section class="content-header">
   <h1>
-    Holiday Calendar
+    Holiday Clendar
     <small>View</small>
   </h1>
   <ol class="breadcrumb">
@@ -13,30 +14,20 @@
 <!-- Main content -->
 <section class="content">
   <div class="box box-primary"><div class="box-body">
-    <table class="table table-hover">
-        <tr>
-            <th><?= __('Calendar') ?></th>
-            <td><?= h($holidayCalendar->calendar) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Name') ?></th>
-            <td><?= h($holidayCalendar->name) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Country') ?></th>
-            <td><?= h($holidayCalendar->country) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Id') ?></th>
-            <td><?= $this->Number->format($holidayCalendar->id) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Valid From') ?></th>
-            <td><?= h($holidayCalendar->valid_from) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Valid To') ?></th>
-            <td><?= h($holidayCalendar->valid_to) ?></td>
-        </tr>
-    </table>
-</div></div></section>
+        <?= $this->Form->create($holidayCalendar, array('role' => 'form')) ?>
+        <fieldset>
+          <?php
+             echo $this->Form->input('calendar',['disabled' => true]);
+             echo $this->Form->input('name',['disabled' => true]);
+             echo $this->Form->input('country',['disabled' => true]);
+             echo $this->Form->input('valid_from', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
+			 echo $this->Form->input('valid_to', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
+          ?></fieldset>
+          <!-- /.box-body -->
+          <div class="box-footer">
+          	<?=$this->Html->link(__('Cancel'), ['action' => 'index'], ['escape' => false])?>
+            <?=$this->Html->link(__('Edit HolidayClendar'), ['action' => 'edit', $holidayCalendar['id']],['class'=>'btn btn-primary label-info pull-right'], ['escape' => false])?>
+          </div>
+        <?= $this->Form->end() ?>
+      </div>
+  </div></section>
