@@ -11,15 +11,21 @@ use App\Controller\AppController;
 class TimeTypeProfilesController extends AppController
 {
 
-var $components = array('Datatable');
+    var $components = array('Datatable');
 	
-	public function ajaxData() {
+	 public function ajaxData() {
 		$this->autoRender= False;
-
-		$fields = array(array('name'=>'id','type'=>'int'),'code','name','country',array('name'=>'start_date','type'=>'date'),'time_rec_variant','status',array('name'=>'enable_ess','type'=>'bool'),'external_code',array('name'=>'time_type_id','type'=>'bigint'));
-						  
+		  
+		$this->loadModel('CreateConfigs');
+		$dbout=$this->CreateConfigs->find()->select(['field_name', 'datatype'])->where(['table_name' => $this->request->params['controller']])->order(['id' => 'ASC'])->toArray();
+		$fields = array();
+		foreach($dbout as $value){
+			$fields[] = array("name" => $value['field_name'] , "type" => $value['datatype'] );
+		}
+		
+		$contains=['TimeTypes', 'Customers'];
 									  
-		$output =$this->Datatable->getView($fields);
+		$output =$this->Datatable->getView($fields,$contains);
 		echo json_encode($output);			
     }
     /**
@@ -29,6 +35,10 @@ var $components = array('Datatable');
      */
     public function index()
     {
+		$this->loadModel('CreateConfigs');
+        $configs=$this->CreateConfigs->find('all')->where(['table_name' => $this->request->params['controller']])->order(['"id"' => 'ASC'])->toArray();
+        $this->set('configs',$configs);	
+		
         $this->paginate = [
             'contain' => ['TimeTypes', 'Customers']
         ];

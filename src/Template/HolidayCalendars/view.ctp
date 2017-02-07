@@ -1,33 +1,44 @@
-<?= $this->element('templateelmnt'); ?>
-<section class="content-header">
-  <h1>
-    Holiday Clendar
-    <small>View</small>
-  </h1>
-  <ol class="breadcrumb">
-    <li>
-    <?= $this->Html->link('<i class="fa fa-mail-reply"></i> '.__('Back'), ['action' => 'index'], ['escape' => false]) ?>
-    </li>
-  </ol>
-</section>
-
-<!-- Main content -->
-<section class="content">
-  <div class="box box-primary"><div class="box-body">
-        <?= $this->Form->create($holidayCalendar, array('role' => 'form')) ?>
-        <fieldset>
-          <?php
-             echo $this->Form->input('calendar',['disabled' => true]);
-             echo $this->Form->input('name',['disabled' => true]);
-             echo $this->Form->input('country',['disabled' => true]);
-             echo $this->Form->input('valid_from', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
-			 echo $this->Form->input('valid_to', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
-          ?></fieldset>
-          <!-- /.box-body -->
-          <div class="box-footer">
-          	<?=$this->Html->link(__('Cancel'), ['action' => 'index'], ['escape' => false])?>
-            <?=$this->Html->link(__('Edit HolidayClendar'), ['action' => 'edit', $holidayCalendar['id']],['class'=>'btn btn-primary label-info pull-right'], ['escape' => false])?>
-          </div>
-        <?= $this->Form->end() ?>
-      </div>
-  </div></section>
+<nav class="large-3 medium-4 columns" id="actions-sidebar">
+    <ul class="side-nav">
+        <li class="heading"><?= __('Actions') ?></li>
+        <li><?= $this->Html->link(__('Edit Holiday Calendar'), ['action' => 'edit', $holidayCalendar->id]) ?> </li>
+        <li><?= $this->Form->postLink(__('Delete Holiday Calendar'), ['action' => 'delete', $holidayCalendar->id], ['confirm' => __('Are you sure you want to delete # {0}?', $holidayCalendar->id)]) ?> </li>
+        <li><?= $this->Html->link(__('List Holiday Calendars'), ['action' => 'index']) ?> </li>
+        <li><?= $this->Html->link(__('New Holiday Calendar'), ['action' => 'add']) ?> </li>
+        <li><?= $this->Html->link(__('List Customers'), ['controller' => 'Customers', 'action' => 'index']) ?> </li>
+        <li><?= $this->Html->link(__('New Customer'), ['controller' => 'Customers', 'action' => 'add']) ?> </li>
+    </ul>
+</nav>
+<div class="holidayCalendars view large-9 medium-8 columns content">
+    <h3><?= h($holidayCalendar->name) ?></h3>
+    <table class="vertical-table">
+        <tr>
+            <th><?= __('Calendar') ?></th>
+            <td><?= h($holidayCalendar->calendar) ?></td>
+        </tr>
+        <tr>
+            <th><?= __('Name') ?></th>
+            <td><?= h($holidayCalendar->name) ?></td>
+        </tr>
+        <tr>
+            <th><?= __('Country') ?></th>
+            <td><?= h($holidayCalendar->country) ?></td>
+        </tr>
+        <tr>
+            <th><?= __('Customer') ?></th>
+            <td><?= $holidayCalendar->has('customer') ? $this->Html->link($holidayCalendar->customer->name, ['controller' => 'Customers', 'action' => 'view', $holidayCalendar->customer->id]) : '' ?></td>
+        </tr>
+        <tr>
+            <th><?= __('Id') ?></th>
+            <td><?= $this->Number->format($holidayCalendar->id) ?></td>
+        </tr>
+        <tr>
+            <th><?= __('Valid From') ?></th>
+            <td><?= h($holidayCalendar->valid_from) ?></td>
+        </tr>
+        <tr>
+            <th><?= __('Valid To') ?></th>
+            <td><?= h($holidayCalendar->valid_to) ?></td>
+        </tr>
+    </table>
+</div>

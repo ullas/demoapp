@@ -10,7 +10,8 @@ use App\Controller\AppController;
  */
 class HolidayCalendarsController extends AppController
 {
-var $components = array('Datatable');
+
+    var $components = array('Datatable');
 	
 	public function ajaxData() {
 		$this->autoRender= False;
@@ -21,17 +22,23 @@ var $components = array('Datatable');
 		foreach($dbout as $value){
 			$fields[] = array("name" => $value['field_name'] , "type" => $value['datatype'] );
 		}
+		
 		$contains=['Customers'];
 									  
 		$output =$this->Datatable->getView($fields,$contains);
-		echo json_encode($output);			
+		echo json_encode($output);		
     }
+    /**
+     * Index method
+     *
+     * @return \Cake\Network\Response|null
+     */
     public function index()
     {
-		$this->loadModel('CreateConfigs');
+    	$this->loadModel('CreateConfigs');
         $configs=$this->CreateConfigs->find('all')->where(['table_name' => $this->request->params['controller']])->order(['"id"' => 'ASC'])->toArray();
         $this->set('configs',$configs);	
-        
+		
         $this->paginate = [
             'contain' => ['Customers']
         ];
@@ -90,6 +97,11 @@ var $components = array('Datatable');
      */
     public function edit($id = null)
     {
+    	$this->loadModel('CreateConfigs');
+        $configs=$this->CreateConfigs->find('all')->where(['table_name' => 'Holidays'])->order(['"id"' => 'ASC'])->toArray();
+        $this->set('configs',$configs);	
+		
+		
         $holidayCalendar = $this->HolidayCalendars->get($id, [
             'contain' => []
         ]);

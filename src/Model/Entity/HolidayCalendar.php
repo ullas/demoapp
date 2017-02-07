@@ -13,6 +13,8 @@ use Cake\ORM\Entity;
  * @property \Cake\I18n\Time $valid_from
  * @property \Cake\I18n\Time $valid_to
  * @property int $customer_id
+ *
+ * @property \App\Model\Entity\Customer $customer
  */
 class HolidayCalendar extends Entity
 {

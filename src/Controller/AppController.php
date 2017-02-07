@@ -21,6 +21,7 @@ use Cake\I18n\Time;
 use Cake\I18n\FrozenDate;
 use Cake\I18n\FrozenTime;
 use Cake\I18n\Date;
+use Cake\Database\Type;
 
 
 /**
@@ -118,6 +119,13 @@ class AppController extends Controller
 		
     	$this->loadComponent('RequestHandler');
         $this->loadComponent('Flash');
+		
+		
+		
+		// Type::build('datetime')->useLocaleParser()->setLocaleFormat('dd-mm-yyyy');
+        // Time::setToStringFormat('dd/MM/YYYY');
+		
+
 		
 		$userrole=$this->request->session()->read('sessionuser')['role'];
 		

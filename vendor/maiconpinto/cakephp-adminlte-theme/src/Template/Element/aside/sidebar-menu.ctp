@@ -32,6 +32,16 @@ if (file_exists($file)) {
     <li><a href="<?php echo $this -> Url -> build('/Homes'); ?>"><i class="fa fa-dashboard"></i><span> Dashboard </span></a></li>
 	<li><a href="<?php echo $this -> Url -> build('/Employees'); ?>"><i class="fa fa-user"></i><span> Employee</span></a></li>
 	<li><a href="<?php echo $this -> Url -> build('/JobInfos'); ?>"><i class="fa fa-briefcase "></i><span> Job</span></a></li>
+	
+	 <li class="treeview">
+    <a href="#"> <i class="fa fa-calendar-times-o"></i> <span>Leave</span> <i class="fa fa-angle-left pull-right"></i>  </a>
+    <ul class="treeview-menu">
+    	<li><a href="<?php echo $this -> Url -> build('/TimeTypes'); ?>"><i class="fa fa-circle-o"></i> Leave Type</a></li>
+		<li><a href="<?php echo $this -> Url -> build('/TimeAccountTypes'); ?>"><i class="fa fa-circle-o"></i> Leave Application</a></li>
+	
+    </ul>
+    </li>
+    
     <li class="treeview">
     	<a href="#"> <i class="fa fa-puzzle-piece"></i> <span>Master</span> <i class="fa fa-angle-left pull-right"></i>  </a>
     	<ul class="treeview-menu">
@@ -49,8 +59,7 @@ if (file_exists($file)) {
     		<li><a href="<?php echo $this -> Url -> build('/PayrollRecord'); ?>"><i class="fa fa-circle-o"></i> Pay Roll Record</a></li>
     		<li><a href="<?php echo $this -> Url -> build('/PayrollStatus'); ?>"><i class="fa fa-circle-o"></i> Pay Roll Status</a></li>
     
-    		<li><a href="<?php echo $this -> Url -> build('/HolidayCalendars'); ?>"><i class="fa fa-circle-o"></i> Holiday Calendars</a></li>
-    		<li><a href="<?php echo $this -> Url -> build('/Holidays'); ?>"><i class="fa fa-circle-o"></i> Holidays</a></li>
+    		<li><a href="<?php echo $this -> Url -> build('/HolidayCalendars'); ?>"><i class="fa fa-circle-o"></i> Holidays</a></li>
     
     
     	</ul>

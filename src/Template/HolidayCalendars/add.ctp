@@ -1,29 +1,24 @@
-<?= $this->element('templateelmnt'); ?>
-<section class="content-header">
-      <h1>
-        Holiday Calendar
-        <small>Add</small>
-      </h1>
-      <ol class="breadcrumb">
-        <li><?= $this->Html->link('<i class="fa fa-mail-reply"></i> '.__('Back'), ['action' => 'index'], ['escape' => false]) ?></li>
-      </ol>
-    </section>
-<section class="content">
-	<div class="box box-primary"><div class="box-body">
+<nav class="large-3 medium-4 columns" id="actions-sidebar">
+    <ul class="side-nav">
+        <li class="heading"><?= __('Actions') ?></li>
+        <li><?= $this->Html->link(__('List Holiday Calendars'), ['action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('List Customers'), ['controller' => 'Customers', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New Customer'), ['controller' => 'Customers', 'action' => 'add']) ?></li>
+    </ul>
+</nav>
+<div class="holidayCalendars form large-9 medium-8 columns content">
     <?= $this->Form->create($holidayCalendar) ?>
     <fieldset>
+        <legend><?= __('Add Holiday Calendar') ?></legend>
         <?php
             echo $this->Form->input('calendar');
             echo $this->Form->input('name');
             echo $this->Form->input('country');
-            echo $this->Form->input('valid_from', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
-			echo $this->Form->input('valid_to', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
-		
+            echo $this->Form->input('valid_from', ['empty' => true]);
+            echo $this->Form->input('valid_to', ['empty' => true]);
+            echo $this->Form->input('customer_id', ['options' => $customers, 'empty' => true]);
         ?>
     </fieldset>
+    <?= $this->Form->button(__('Submit')) ?>
+    <?= $this->Form->end() ?>
 </div>
-<div class="box-footer">
-    	<?=$this->Html->link(__('Cancel'), ['action' => 'index'], ['escape' => false])?>
-    	<?= $this->Form->button(__('Save'),['title'=>'Save','class'=>'pull-right']) ?> 
-	</div>
-	</div></section>

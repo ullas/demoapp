@@ -10,7 +10,7 @@ use App\Controller\AppController;
  */
 class HolidaysController extends AppController
 {
-var $components = array('Datatable');
+	var $components = array('Datatable');
 	
 	public function ajaxData() {
 		$this->autoRender= False;
@@ -21,19 +21,21 @@ var $components = array('Datatable');
 		foreach($dbout as $value){
 			$fields[] = array("name" => $value['field_name'] , "type" => $value['datatype'] );
 		}
-		$contains=['Customers'];
+		
+		$contains= ['Customers', 'HolidayCalendars'];
 									  
 		$output =$this->Datatable->getView($fields,$contains);
-		echo json_encode($output);			
+		echo json_encode($output);		
     }
+    /**
+     * Index method
+     *
+     * @return \Cake\Network\Response|null
+     */
     public function index()
     {
-		$this->loadModel('CreateConfigs');
-        $configs=$this->CreateConfigs->find('all')->where(['table_name' => $this->request->params['controller']])->order(['"id"' => 'ASC'])->toArray();
-        $this->set('configs',$configs);	
-        
         $this->paginate = [
-            'contain' => ['Customers']
+            'contain' => ['Customers', 'HolidayCalendars']
         ];
         $holidays = $this->paginate($this->Holidays);
 
@@ -51,7 +53,7 @@ var $components = array('Datatable');
     public function view($id = null)
     {
         $holiday = $this->Holidays->get($id, [
-            'contain' => ['Customers', 'CalendarAssignments']
+            'contain' => ['Customers', 'HolidayCalendars', 'CalendarAssignments']
         ]);
 
         $this->set('holiday', $holiday);
@@ -77,7 +79,8 @@ var $components = array('Datatable');
             }
         }
         $customers = $this->Holidays->Customers->find('list', ['limit' => 200]);
-        $this->set(compact('holiday', 'customers'));
+        $holidayCalendars = $this->Holidays->HolidayCalendars->find('list', ['limit' => 200]);
+        $this->set(compact('holiday', 'customers', 'holidayCalendars'));
         $this->set('_serialize', ['holiday']);
     }
 
@@ -104,7 +107,8 @@ var $components = array('Datatable');
             }
         }
         $customers = $this->Holidays->Customers->find('list', ['limit' => 200]);
-        $this->set(compact('holiday', 'customers'));
+        $holidayCalendars = $this->Holidays->HolidayCalendars->find('list', ['limit' => 200]);
+        $this->set(compact('holiday', 'customers', 'holidayCalendars'));
         $this->set('_serialize', ['holiday']);
     }
 
