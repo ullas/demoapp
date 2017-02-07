@@ -16,6 +16,9 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="/css/font-awesome.min.css">
     <!-- Ionicons -->
+
+<!-- <link rel="stylesheet" href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/rowreorder/1.2.0/css/rowReorder.dataTables.min.css"> -->
     <link rel="stylesheet" href="/css/ionicons.min.css">
     <!-- Theme style -->
     <?php echo $this->Html->css('AdminLTE.AdminLTE.min'); ?>
@@ -207,7 +210,9 @@ $this->Html->script([ '/js/dropzone' ], ['block' => 'script']);
 <!-- FastClick -->
 <?php echo $this->Html->script('AdminLTE./plugins/fastclick/fastclick'); ?>
 
-<?php echo $this->Html->script('AdminLTE./plugins/datatables/jquery.dataTables.min'); ?>
+<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.13/datatables.min.js"></script>
+
+<!--  <?php echo $this->Html->script('AdminLTE./plugins/datatables/jquery.dataTables.min'); ?> -->
 <?php echo $this->Html->script('AdminLTE./plugins/datatables/dataTables.bootstrap.min'); ?>
 
 <!-- AdminLTE for demo purposes -->
@@ -302,6 +307,6 @@ $(window).off("resize").on("resize", function() {
 
 });
 </script>
-<?php echo $this->Html->script('AdminLTE.AdminLTE.min'); ?>
+<?php echo $this->Html->script('AdminLTE.AdminLTE.min'); ?><script src="https://cdn.datatables.net/rowreorder/1.2.0/js/dataTables.rowReorder.min.js"></script>
 </body>
 </html>

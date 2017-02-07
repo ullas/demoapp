@@ -71,9 +71,6 @@ class TimeTypesTable extends Table
             ->allowEmpty('perm_fractions_days');
 
         $validator
-            ->allowEmpty('workflow');
-
-        $validator
             ->decimal('perm_fractions_hours')
             ->allowEmpty('perm_fractions_hours');
 

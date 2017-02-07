@@ -10,16 +10,22 @@ use App\Controller\AppController;
  */
 class TimeTypesController extends AppController
 {
-var $components = array('Datatable');
-	
-	public function ajaxData() {
-		$this->autoRender= False;
 
-		$fields = array(array('name'=>'id','type'=>'int'),
-									  'country','classification',array('name'=>'unit','type'=>'int'),array('name'=>'perm_fractions_days','type'=>'int'),'workflow','calc_base',array('name'=>'flex_req_allow','type'=>'bool'),
-									  'take_rule','code','name');
+   var $components = array('Datatable');
+	
+	 public function ajaxData() {
+		$this->autoRender= False;
+		  
+		$this->loadModel('CreateConfigs');
+		$dbout=$this->CreateConfigs->find()->select(['field_name', 'datatype'])->where(['table_name' => $this->request->params['controller']])->order(['id' => 'ASC'])->toArray();
+		$fields = array();
+		foreach($dbout as $value){
+			$fields[] = array("name" => $value['field_name'] , "type" => $value['datatype'] );
+		}
+		
+		$contains=['Customers'];
 									  
-		$output =$this->Datatable->getView($fields);
+		$output =$this->Datatable->getView($fields,$contains);
 		echo json_encode($output);			
     }
     /**
@@ -29,6 +35,10 @@ var $components = array('Datatable');
      */
     public function index()
     {
+		$this->loadModel('CreateConfigs');
+        $configs=$this->CreateConfigs->find('all')->where(['table_name' => $this->request->params['controller']])->order(['"id"' => 'ASC'])->toArray();
+        $this->set('configs',$configs);	
+		
         $this->paginate = [
             'contain' => ['Customers']
         ];

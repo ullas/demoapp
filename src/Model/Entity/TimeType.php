@@ -11,7 +11,6 @@ use Cake\ORM\Entity;
  * @property string $classification
  * @property float $unit
  * @property float $perm_fractions_days
- * @property string $workflow
  * @property float $perm_fractions_hours
  * @property string $calc_base
  * @property bool $flex_req_allow
@@ -20,6 +19,10 @@ use Cake\ORM\Entity;
  * @property string $code
  * @property string $name
  * @property int $customer_id
+ *
+ * @property \App\Model\Entity\Customer $customer
+ * @property \App\Model\Entity\Workflow $workflow
+ * @property \App\Model\Entity\TimeTypeProfile[] $time_type_profiles
  */
 class TimeType extends Entity
 {

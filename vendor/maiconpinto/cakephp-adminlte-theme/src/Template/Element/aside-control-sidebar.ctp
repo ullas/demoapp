@@ -24,6 +24,11 @@ if (file_exists($file)) {
                 
                 <h3 class="control-sidebar-heading">General Settings</h3>
                 
+                <div class="form-group">
+					<p>Allow the user to change his date format</p>
+					<a>Date Format</a>
+                </div>
+                
             </form>
         </div>
         <!-- /.tab-pane -->

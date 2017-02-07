@@ -10,6 +10,7 @@
     'label' => '<label class="control-label" {{attrs}}>{{text}}</label>',
     'input' => '{{opentag}}<div class="input-group">{{icon}}<input type="{{type}}" name="{{name}}"{{attrs}}/></div>{{closetag}}',
     'select' => '<div class="input-group">{{icon}}<select style="width:1px;" class="select2 form-control select2-hidden-accessible mptlw1" name="{{name}}"{{attrs}}>{{content}}</select></div>',
+    'selectMultiple' => '<select name="{{name}}[]" multiple="multiple"{{attrs}}>{{content}}</select>',
     // 'textarea' => '<div class="col-sm-6"><textarea name="{{name}}"{{attrs}}>{{value}}</textarea></div>',
     'dateContainer' => '<div class="col-md-4"><div class="form-group">{{content}}</div></div>',
     // 'dateWidget' => '<div class="input-group" ><div class="input-group-addon"><i class="fa fa-calendar"></i></div><input type="text" class="form-control mptldp" name="{{name}}"{{attrs}} /></div>'

@@ -242,7 +242,7 @@ return [
             'flags' => [],
             'cacheMetadata' => true,
             'log' => false,
-            // 'init' => ['SET datestyle TO ISO, DMY '],
+            'init' => ['SET datestyle TO ISO, DMY '],
 
             /**
              * Set identifier quoting to true if you are using reserved words or

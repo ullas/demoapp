@@ -12,6 +12,11 @@ use Cake\ORM\Entity;
  * @property \Cake\I18n\Time $date
  * @property string $holiday_code
  * @property int $customer_id
+ * @property int $holiday_calendar_id
+ *
+ * @property \App\Model\Entity\Customer $customer
+ * @property \App\Model\Entity\HolidayCalendar $holiday_calendar
+ * @property \App\Model\Entity\CalendarAssignment[] $calendar_assignments
  */
 class Holiday extends Entity
 {

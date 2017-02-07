@@ -18,7 +18,7 @@
         <thead>
             <tr>
            	
-                <th data-orderable="false" ><input type="checkbox" name="select_all" value="1" id="select-all" ></th>
+                <th data-orderable="false"><input type="checkbox" name="select_all" value="1" id="select-all" ></th>
            		<?php
                   for($i=1;$i<count($configs);$i++){
                   		
@@ -111,7 +111,8 @@ $this->Html->script([
           "info": true,
           "autoWidth": false,
           "scrollX":true,
-          colReorder: false,
+          colReorder: true,
+          rowReorder: { update:false },
           stateSave:false,
           responsive: true,
           // "initComplete": function(settings, json) {
@@ -157,7 +158,9 @@ $this->Html->script([
    table.search(searchTerm).draw();
    $.fn.dataTable.ext.search.pop();
 })
- //order= new $.fn.dataTable.ColReorder( table );
+
+//col reorder
+ order= new $.fn.dataTable.ColReorder( table );
  
  
   // Handle click on "Select all" control
