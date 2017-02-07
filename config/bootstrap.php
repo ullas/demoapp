@@ -99,6 +99,11 @@ if (!Configure::read('debug')) {
  */
 date_default_timezone_set('UTC');
 
+// date_default_timezone_set('Indian/Christmas');
+// ini_set('date.timezone', 'Indian/Christmas');
+
+
+
 /**
  * Configure the mbstring extension to use the correct encoding.
  */
@@ -108,14 +113,25 @@ mb_internal_encoding(Configure::read('App.encoding'));
  * Set the default locale. This controls how dates, number and currency is
  * formatted and sets the default language to use for translations.
  */
+// ini_set('intl.default_locale', 'en-IR@calendar=persian');
+// \Cake\I18n\Time::setToStringFormat('HH:mm:ss');
+// Cake\I18n\Date::setToStringFormat('dd.MM.yyyy');
+// // Cake\I18n\FrozenDate::setToStringFormat('yyyy/MM/dd');
+// 
+// \Cake\Database\Type::build('date')
+    // ->useImmutable()
+    // ->useLocaleParser()
+    // ->setLocaleFormat('dd.MM.yyyy');
+    
+  
 ini_set('intl.default_locale', 'fr-FR');
 Cake\I18n\Date::setToStringFormat('yyyy/MM/dd');
 Cake\I18n\FrozenDate::setToStringFormat('yyyy/MM/dd');
-
 \Cake\Database\Type::build('date')
     ->useImmutable()
     ->useLocaleParser()
     ->setLocaleFormat('yyyy/MM/dd');
+    
 // ini_set('intl.default_locale', Configure::read('App.defaultLocale'));
 
 /**
@@ -228,9 +244,13 @@ DispatcherFactory::add('ControllerFactory');
 Type::build('time')
     ->useImmutable();
 Type::build('date')
-    ->useImmutable();
+    ->useLocaleParser();
 Type::build('datetime')
     ->useImmutable();
+// Type :: build ( 'date' ) 
+ // -> useLocaleParser ( ) 
+ // -> setLocaleFormat ( 'dd/mm/yyyy' ) ; 
+        
 	
 	
 	Configure::write('Theme', [

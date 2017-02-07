@@ -51,7 +51,12 @@
             echo $this->Form->input('parent_id', ['options' => $parents, 'empty' => true]);
             echo $this->Form->input('lft');
             echo $this->Form->input('rght');
+			
+			
+			echo $this->Html->link( 'Add', 'Divisions', ['label'=>'Add more', 'class' => 'button', 'target' => '_blank', 'data-toggle'=>'modal', 'data-remote'=>'false', 'data-target'=>'#actionspopover'] );
+		
         ?>
+          
     </fieldset>
     <div class="box-footer">
     <?=$this->Html->link(__('Cancel'), ['action' => 'index'], ['escape' => false])?>
@@ -60,3 +65,129 @@
     <?= $this->Form->end() ?>
 </div></div>
 </section>
+
+<?php $this->start('scriptBotton'); ?>
+<script>
+  $(function () { 
+   //dropzone
+	Dropzone.autoDiscover = false;
+	var myDropzone = $("div#myDropZone").dropzone({
+         url : "/Uploads/upload",
+         maxFiles: 1,
+         addRemoveLinks: true, 
+         dictRemoveFileConfirmation : 'Are you sure you want to remove the particular file ?' ,
+         init: function() {
+     		this.on("complete", function (file) {
+      			if (this.getUploadingFiles().length === 0 && this.getQueuedFiles().length === 0) {
+					//alert(file);      
+				}
+    		});
+    		this.on("removedfile", function (file) {
+          		$("#profilepicture").val("");
+      		});
+    		this.on("queuecomplete", function (file) {
+          // alert("All files have uploaded ");
+      		});
+      
+      		this.on("success", function (file) {
+          		$("#profilepicture").val(file['name']);console.log(file['name']); //alert("Success ");
+          		$('#profilepic').attr("src", "/img/uploadedpics/"+file['name']);
+      		});
+      
+      		this.on("error", function (file) {
+          		// alert("Error in uploading ");
+      		});
+      
+      		this.on("maxfilesexceeded", function(file){
+        		alert("You can not upload any more files.");this.removeFile(file);
+    		});
+    	},
+       
+    });
+    
+    $("#actionspopover").on("show.bs.modal", function(e) {
+		    var link = $(e.relatedTarget);
+		    //alert(link.attr("href"));
+		    $(this).find(".modal-body").load(link.attr("href"),function( response, status, xhr ){
+		    	
+		    	  if ( status == "error" ) {
+					    var msg = "Sorry but there was an error: ";
+					    alert(msg);
+				  }else{
+				  	   
+				  	     table= $('#mptlindextblmaster').DataTable({
+         					 "paging": true,
+          					 "lengthChange": true,
+          					 "ajax":  link.attr("href")+"/ajaxData",
+          					 "processing": true,
+         					 "serverSide": true,
+         					 "drawCallback":function(settings){
+         					 	tableLoaded(link);
+         					 },
+         					 "searching": true,
+          					 "ordering": true,
+         					 'columnDefs': [{
+						        'targets': 0,
+						        'className': 'dt-body-center',
+						        'render': function (data, type, full, meta){
+						            return '<input type="checkbox" class="mptl-lst-chkbox-master" name="chk-' + data + '" value="' + $('<div/>').text(data).html() + '">';
+						        }
+						     }]
+				  		});
+				  		$(".mptlmaster-edit").click(function(){
+  							alert($(this).attr("data-id"));
+  						});
+				  		
+
+				  		$('<a href='+ link.attr("href") +'"/add/" id="masterdataadd" class="btn btn-sm btn-success" style="margin-left:5px;" title="Add New"><i class="fa fa-plus" aria-hidden="true"></i></a>').appendTo('#mptlindextblmaster_filter');
+
+   
+				  		$("div.dataTables_filter").delegate("#masterdataadd","click", function(e){
+				  			 e.preventDefault();
+						     $("#mptlmodal").load("/"+link.attr("href")+"/add",function( response, status, xhr ){
+						     	
+							//set mnadatory * after required label
+     						$( ':input[required]' ).each( function () {
+         						$("label[for='" + this.id + "']").addClass('mandatory');
+     						});
+     						
+					    
+						     	   $('#actionspopover').on("submit", "form#masterdataform", function(e){ 
+									    
+									    e.preventDefault(); 
+									    
+									    var postData = $(this).serializeArray();
+									    var formURL = $(this).attr("action");
+									    $.ajax(
+									    {
+									        url : formURL,
+									        type: "POST",
+									        data : postData,
+									        success:function(data, textStatus, jqXHR) 
+									        {
+									            $('#actionspopover').modal("hide");
+									        },
+									        error: function(jqXHR, textStatus, errorThrown) 
+									        {
+									            $('#actionspopover').modal("hide");   
+									        }
+									    });
+									    $(this).unbind(e);
+								    
+									});
+						     });
+				  		});
+				  		
+          
+				 }
+		    });
+		});
+		
+		 
+   
+
+  });
+</script>
+<?php $this->end(); ?>
+<!-- add actions popover -->
+<?php echo $this->element('popoverelmnt'); ?>

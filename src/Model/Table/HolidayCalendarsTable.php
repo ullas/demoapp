@@ -10,6 +10,7 @@ use Cake\Validation\Validator;
  * HolidayCalendars Model
  *
  * @property \Cake\ORM\Association\BelongsTo $Customers
+ * @property \Cake\ORM\Association\HasMany $CalendarAssignments
  *
  * @method \App\Model\Entity\HolidayCalendar get($primaryKey, $options = [])
  * @method \App\Model\Entity\HolidayCalendar newEntity($data = null, array $options = [])
@@ -38,6 +39,9 @@ class HolidayCalendarsTable extends Table
 
         $this->belongsTo('Customers', [
             'foreignKey' => 'customer_id'
+        ]);
+        $this->hasMany('CalendarAssignments', [
+            'foreignKey' => 'holiday_calendar_id'
         ]);
     }
 

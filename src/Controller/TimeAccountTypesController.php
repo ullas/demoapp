@@ -14,14 +14,18 @@ var $components = array('Datatable');
 	
 	public function ajaxData() {
 		$this->autoRender= False;
-
-		$fields = array(array('name'=>'id','type'=>'int'),
-									  'name','unit','perm_reccur',array('name'=>'start_date','type'=>'date'),array('name'=>'valid_from','type'=>'date'),array('name'=>'valid_from_day','type'=>'date'),
-									 array('name'=>'account_booking_off','type'=>'numeric'),'freq_period',array('name'=>'start_accrual','type'=>'numeric'),'accrual_base',array('name'=>'min_balance','type'=>'numeric'),'posting_order',array('name'=>'time_to_accrual','type'=>'numeric'),array('name'=>'proration_used','type'=>'bool'),
-									 array('name'=>'rounding_used','type'=>'bool'),'update_rule','payout_eligiblity ','code',array('name'=>'pay_component','type'=>'bigint'),'time_to_actual_unit',array('name'=>'pay_component_group_id','type'=>'bigint'));
+		  
+		$this->loadModel('CreateConfigs');
+		$dbout=$this->CreateConfigs->find()->select(['field_name', 'datatype'])->where(['table_name' => $this->request->params['controller']])->order(['id' => 'ASC'])->toArray();
+		$fields = array();
+		foreach($dbout as $value){
+			$fields[] = array("name" => $value['field_name'] , "type" => $value['datatype'] );
+		}
+		
+		$contains=['PayComponents', 'PayComponentGroups', 'Customers'];
 									  
-		$output =$this->Datatable->getView($fields);
-		echo json_encode($output);			
+		$output =$this->Datatable->getView($fields,$contains);
+		echo json_encode($output);		
     }
     /**
      * Index method
@@ -30,6 +34,10 @@ var $components = array('Datatable');
      */
     public function index()
     {
+    	$this->loadModel('CreateConfigs');
+        $configs=$this->CreateConfigs->find('all')->where(['table_name' => $this->request->params['controller']])->order(['"id"' => 'ASC'])->toArray();
+        $this->set('configs',$configs);	
+		
         $this->paginate = [
             'contain' => ['PayComponents', 'PayComponentGroups', 'Customers']
         ];

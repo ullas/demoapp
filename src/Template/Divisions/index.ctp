@@ -30,39 +30,6 @@
     </div></div>
    
 </section>
-<?php
-$this->Html->css([
-    'AdminLTE./plugins/datatables/dataTables.bootstrap',
-  ],
-  ['block' => 'css']);
-
-$this->Html->script([
-  'AdminLTE./plugins/datatables/jquery.dataTables.min',
-  'AdminLTE./plugins/datatables/dataTables.bootstrap.min',
-],
-['block' => 'script']);
-?>
-
-<?php $this->start('scriptBotton'); ?>
-<script>
-  $(function () {
-    $('#mptlindextbl').DataTable({
-      	"paging": true,
-      	"lengthChange": true,
-      	"searching": true,
-      	"ordering": true,
-      	"info": true,
-      	"autoWidth": false,
-     
-      	//server side processing
-      	"processing": true,
-     	 "serverSide": true,
-      	"ajax": "/<?php echo $this->request->params['controller'] ?>/ajaxData"
-     
-    });
-  });
-</script>
-<?php $this->end(); ?>
 
 
 
