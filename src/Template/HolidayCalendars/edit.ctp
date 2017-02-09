@@ -13,6 +13,9 @@
     <?= $this->Form->create($holidayCalendar) ?>
     <fieldset>
         <?php
+        
+        	echo $this->Form->input('holidaycalendarid', array('type' => 'hidden'));
+		
             echo $this->Form->input('calendar');
             echo $this->Form->input('name');
             echo $this->Form->input('country');
@@ -24,7 +27,7 @@
 			
         ?>
         
-        <div class="col-md-4 pull-right"><div class="form-group"><input type="button" value="Get Weekly Off Dates" class="btn btn-xs btn-default" id="getweeklyoffdates"/></div></div>
+        <!-- <div class="col-md-4 pull-right"><div class="form-group"><input type="button" value="Get Weekly Off Dates" class="btn btn-xs btn-default" id="getweeklyoffdates"/></div></div> -->
         
     </fieldset>
     <div class="box-footer">
@@ -48,6 +51,7 @@
 
               
  <div class="box box-primary">
+ 	<div class="box-header"><h3 class="box-title">Holidays</h3></div>
       <div class="box-body">
     <table id="mptlindextbl" class="table table-hover  table-bordered ">
         <thead>
@@ -68,7 +72,26 @@
 
 </section>
 
-
+<div id='loadingmessage' style='display:none;'>
+	<i class="fa fa-refresh fa-spin loading-icon"></i>
+</div>
+<style>
+	#loadingmessage{
+		position: fixed;
+    	bottom: calc(100% - 50%);
+    	right:50%;
+    	/*background: #363637;*/
+    	padding: 5px 0px 4px;
+    	z-index: 1900;
+	}
+	.loading-icon{
+    	color: #21A57E;
+    	padding: 3px 9px 0 10px;
+    	font-size: 45px;
+	}
+</style>
+<!-- add actions popover -->
+<?php echo $this->element('popoverelmnt'); ?>
 
 <?php
 $this->Html->css([ 'AdminLTE./plugins/datatables/dataTables.bootstrap', 
@@ -96,19 +119,21 @@ $this->Html->script([
         }
   }
   $(function () {
-    
+  	
+  	//$( "#holidaycalendarid" ).val(1);
+
       
      table= $('#mptlindextbl').DataTable({
           "paging": true,
           //disable 0th column checkbox default sort order
-          "order": [[ 1, 'asc' ]],
+          // "order": [[ 1, 'asc' ]],
           "lengthChange": true,
           "searching": true,
           "ordering": true,
           "info": true,
           "autoWidth": false,
           "scrollX":true,
-          colReorder: true,
+          colReorder: false,
           rowReorder: { update:false },
           stateSave:false,
           responsive: true,
@@ -117,17 +142,17 @@ $this->Html->script([
           "drawCallback": function( settings ) {
         		tableLoaded();
    		  },
-          oLanguage        : {
+   		  oLanguage        : {
         		sSearch: '<div class="input-group"><span class="input-group-addon"><span class="fa fa-search"></span></span>',
             	sSearchPlaceholder: 'Search here...',
 		},
         //server side processing
-          "processing": true,
-          "serverSide": true,
-          "ajax": "/Holidays/ajaxData",
-          'columnDefs': [{
+        "processing": true,
+        "serverSide": true,
+        "ajax": "/Holidays/ajaxData?holidaycalendar="+<?php echo $calid ?>,
+        'columnDefs': [{
         'targets': 0,
-        'className': 'dt-body-center',
+        'className': 'text-center',
         'render': function (data, type, full, meta){
             return '<input type="checkbox" class="mptl-lst-chkbox" name="chk-' + data + '" value="' + $('<div/>').text(data).html() + '">';
         },
@@ -137,9 +162,6 @@ $this->Html->script([
      ]
     
     
-     
-     
-	 
 	
 });
 
@@ -147,7 +169,8 @@ $this->Html->script([
  order= new $.fn.dataTable.ColReorder( table );
  
  //get weekly off dates
- $('#getweeklyoffdates').click(function(){
+ // $('#getweeklyoffdates').click(function(){
+$("#weekoff-ids").change(function(){
  	
  	var validfrom = document.getElementById('valid-from').value;
  	var validtill = document.getElementById('valid-to').value;
@@ -155,17 +178,88 @@ $this->Html->script([
 	var d2 = new Date(validtill);
 	
 	var weekoffdate = $("#weekoff-ids").val();
-	var offdates = weekoffdate.toString().split(',');
+	
+	var offdates = '';
+	if(weekoffdate!=null){offdates =weekoffdate.toString().split(',');}
  	var result=calcWeekOffDays(d1,d2,offdates);
  	
  	
+ 	// var name=$("#name").val();
+    // var name="test";
+    // var date="2017-01-26";
+    // $.get('/HolidayCalendars/addWeekOff?name='+name+"&date="+date, function(d) {
+    	// // alert(d);
+    	// table.ajax.reload(null,false);
+    	// table.draw();
+    // });
  	
-	for(t = 0; t < result.length; t++){
-		var resArr = result[t].toString().split('^');
-        $("#mptlindextbl").find("tbody").append( "<tr><td></td><td></td><td>"+resArr[1]+"</td><td>"+resArr[0]+"</td></tr>" );
+ 	
+ 	//iniitially delete all 
+ 	$.get('/HolidayCalendars/deleteWeekOff?holidaycalendar=<?php echo $calid ?>', function(d) {
+    	// alert(d);
+    });
+    		
+   var postdata=[]; 		
+ 	if(result!=null){
+		for(t = 0; t < result.length; t++){
+			var resArr = result[t].toString().split('^');
+			var holidaycode = resArr[0].replace(/-/g, "");
+			
+		    postdata.push(result[t]+"^"+<?php echo $calid ?>+"^"+holidaycode);
+			// $.get('/HolidayCalendars/addWeekOff?name='+resArr[1]+"&date="+resArr[0]+"&holidaycode="+holidaycode+"&holidaycalendar="+"1"+"&holidayclass="+"2", function(d) {
+    			// alert(d);
+    		// });
+    		
+  		}
+  		
+  		$.get('/HolidayCalendars/addWeekOff?content='+JSON.stringify(postdata), function(d) {
+    		// alert(d);
+    	});
   	}
+  	
+  	//reload table
+  	table.ajax.reload(null,false);
+    // table.draw();
  });
  
+ 
+ $("#actionspopover").on("show.bs.modal", function(e) {
+		//loading icon show
+		if(e.relatedTarget!=null){$('#loadingmessage').show();}
+		var link = $(e.relatedTarget);
+		$(this).find(".modal-body").load(link.attr("href"),function( response, status, xhr ){
+			//loading icon hide
+			if(e.relatedTarget!=null){$('#loadingmessage').hide();}
+			if ( status == "error" ) {
+				var msg = "Sorry but there was an error.";
+				alert(msg);
+			}else{
+				
+				//datepicker
+	    		$('.mptldp').datepicker({
+	    			format:"yyyy/mm/dd",autoclose: true,clearBtn: true
+	    		});
+	    		//select 2 
+    			$(".select2").select2({ width: '100%',allowClear: true,placeholder: "Select" });
+				//hide popover on button click
+				$( ".popoverDelete" ).click(function() {
+					$('#actionspopover').modal('hide');
+				});
+			}
+		});
+	});
+
+
+	$('#actionspopover').on('hidden.bs.modal', function (e) {
+	  $('.modal-body', this).empty();
+	  	//reload table
+  		table.ajax.reload(null,false);
+    	// table.draw();
+	})
+	
+	
+	$('<a href="/Holidays/add" class="open-Popup btn btn-sm btn-success" data-toggle="modal" data-target="#actionspopover" style="margin-left:15px;" title="Add"><i class="fa fa-plus" aria-hidden="true"></i></a>').appendTo('div.dataTables_filter');
+     
 });
 
 
@@ -185,8 +279,8 @@ function calcWeekOffDays(dDate1, dDate2, dArr) {
 	
     while (date < dDate2) {
     	for (i = 0; i < dArr.length; i++) {
-    		if (date.getDay().toString() === dArr[i].toString()){
-         		dates.push(new Date(date).toLocaleDateString('en-GB')+"^"+weekday[date.getDay()]);
+    		if (date.getDay().toString() === dArr[i].toString()){//console.log(formatDate(new Date(date)));
+         		dates.push(formatDate(new Date(date))+"^"+weekday[date.getDay()]);
         	}
     	}
         
@@ -195,7 +289,17 @@ function calcWeekOffDays(dDate1, dDate2, dArr) {
     
     return dates;
 }
- 
+function formatDate(date) {
+    var d = new Date(date),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
+
+    if (month.length < 2) month = '0' + month;
+    if (day.length < 2) day = '0' + day;
+
+    return [year, month, day].join('-');
+} 
 function tableLoaded() {
 	//delete confirm
     $(".delete-btn").click(function(){

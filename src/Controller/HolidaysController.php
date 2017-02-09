@@ -10,7 +10,7 @@ use App\Controller\AppController;
  */
 class HolidaysController extends AppController
 {
-	var $components = array('Datatable');
+	var $components = array('ActionPopoupDatatable');
 	
 	public function ajaxData() {
 		$this->autoRender= False;
@@ -22,11 +22,22 @@ class HolidaysController extends AppController
 			$fields[] = array("name" => $value['field_name'] , "type" => $value['datatype'] );
 		}
 		
+		
+		$usrfilter="";
+        //msgdtime filter
+        if( isset($this->request->query['holidaycalendar']) && ($this->request->query['holidaycalendar'])!=null ){
+        	
+			$usrfilter.="holiday_calendar_id ='" .$this->request->query['holidaycalendar']. "'";
+		}
+																	
 		$contains= ['Customers', 'HolidayCalendars'];
 									  
-		$output =$this->Datatable->getView($fields,$contains);
+		$output =$this->ActionPopoupDatatable->getView($fields,$contains,$usrfilter);
 		echo json_encode($output);		
     }
+	
+	
+
     /**
      * Index method
      *
@@ -67,16 +78,21 @@ class HolidaysController extends AppController
      */
     public function add()
     {
+    	
+		$this->Flash->success(__('The details.'.$this->referer() ));
+		
         $holiday = $this->Holidays->newEntity();
         if ($this->request->is('post')) {
             $holiday = $this->Holidays->patchEntity($holiday, $this->request->data);
+			$holiday['holiday_calendar_id'] = $this->request->data['holidaycalendarid'];
             if ($this->Holidays->save($holiday)) {
                 $this->Flash->success(__('The holiday has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+                // return $this->redirect(['action' => 'index']);
             } else {
                 $this->Flash->error(__('The holiday could not be saved. Please, try again.'));
             }
+			return $this->redirect($this->referer());
         }
         $customers = $this->Holidays->Customers->find('list', ['limit' => 200]);
         $holidayCalendars = $this->Holidays->HolidayCalendars->find('list', ['limit' => 200]);
@@ -101,10 +117,12 @@ class HolidaysController extends AppController
             if ($this->Holidays->save($holiday)) {
                 $this->Flash->success(__('The holiday has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+                // return $this->redirect($this->referer());
             } else {
-                $this->Flash->error(__('The holiday could not be saved. Please, try again.'));
+                $this->Flash->error(__('The holiday could not be saved. Please, try again.'.$holiday));
+				// return $this->redirect($this->referer());
             }
+			return $this->redirect($this->referer());
         }
         $customers = $this->Holidays->Customers->find('list', ['limit' => 200]);
         $holidayCalendars = $this->Holidays->HolidayCalendars->find('list', ['limit' => 200]);
@@ -121,14 +139,14 @@ class HolidaysController extends AppController
      */
     public function delete($id = null)
     {
-        $this->request->allowMethod(['post', 'delete']);
+        // $this->request->allowMethod(['post', 'delete']);
         $holiday = $this->Holidays->get($id);
         if ($this->Holidays->delete($holiday)) {
             $this->Flash->success(__('The holiday has been deleted.'));
         } else {
             $this->Flash->error(__('The holiday could not be deleted. Please, try again.'));
         }
-
-        return $this->redirect(['action' => 'index']);
+	return $this->redirect($this->referer());
+        // return $this->redirect(['action' => 'index']);
     }
 }
