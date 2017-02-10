@@ -1,28 +1,32 @@
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('List Holidays'), ['action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('List Customers'), ['controller' => 'Customers', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Customer'), ['controller' => 'Customers', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Holiday Calendars'), ['controller' => 'HolidayCalendars', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Holiday Calendar'), ['controller' => 'HolidayCalendars', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Calendar Assignments'), ['controller' => 'CalendarAssignments', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Calendar Assignment'), ['controller' => 'CalendarAssignments', 'action' => 'add']) ?></li>
-    </ul>
-</nav>
-<div class="holidays form large-9 medium-8 columns content">
-    <?= $this->Form->create($holiday) ?>
-    <fieldset>
-        <legend><?= __('Add Holiday') ?></legend>
-        <?php
+<?= $this->element('templateelmnt'); ?>
+<div class="box box-success box-solid">
+    <div class="box-header with-border text-center">
+        <h3 class="box-title">Holidays</h3>
+
+        <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool popoverDelete">
+                <i class="fa fa-times"></i>
+            </button>
+        </div>
+        <!-- /.box-tools -->
+    </div>
+        <!-- form start -->
+        <?= $this->Form->create($holiday) ?>
+          <div class="box-body">
+          <?php
+
             echo $this->Form->input('holiday_class');
             echo $this->Form->input('name');
-            echo $this->Form->input('date', ['empty' => true]);
+            echo $this->Form->input('date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
             echo $this->Form->input('holiday_code');
-            echo $this->Form->input('customer_id', ['options' => $customers, 'empty' => true]);
-            echo $this->Form->input('holiday_calendar_id');
-        ?>
-    </fieldset>
-    <?= $this->Form->button(__('Submit')) ?>
-    <?= $this->Form->end() ?>
+            // echo $this->Form->input('holiday_calendar_id');
+            
+		?>
+		</div>
+		<div class="box-footer">
+    <!-- <?=$this->Html->link(__('Cancel'), ['action' => 'index'], ['escape' => false])?> -->
+    <?= $this->Form->button(__('Save Holidays'),['title'=>'Save Holidays','class'=>'pull-right']) ?> 
 </div>
+	<?= $this->Form->end() ?>
+</div>
+	  

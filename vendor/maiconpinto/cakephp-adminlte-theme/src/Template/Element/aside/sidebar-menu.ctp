@@ -59,7 +59,7 @@ if (file_exists($file)) {
     		<li><a href="<?php echo $this -> Url -> build('/PayrollRecord'); ?>"><i class="fa fa-circle-o"></i> Pay Roll Record</a></li>
     		<li><a href="<?php echo $this -> Url -> build('/PayrollStatus'); ?>"><i class="fa fa-circle-o"></i> Pay Roll Status</a></li>
     
-    		<li><a href="<?php echo $this -> Url -> build('/HolidayCalendars'); ?>"><i class="fa fa-circle-o"></i> Holidays</a></li>
+    		<li><a href="<?php echo $this -> Url -> build('/HolidayCalendars'); ?>"><i class="fa fa-circle-o"></i> Holiday Calendars</a></li>
     
     
     	</ul>
@@ -122,7 +122,7 @@ if (file_exists($file)) {
 	<li><a href="<?php echo $this -> Url -> build('/Dependents'); ?>"><i class="fa fa-users"></i><span> Dependents </span></a></li>
     <li><a href="<?php echo $this -> Url -> build('/Notes'); ?>"><i class="fa fa-file-text-o"></i><span> Notes </span></a></li>
     <li><a href="<?php echo $this -> Url -> build('/Positions/orgchart'); ?>"><i class="fa fa-sitemap"></i><span> Organizational Chart </span></a></li>
-    <li><a href="<?php echo $this -> Url -> build('/Holidays'); ?>"><i class="fa fa-calendar "></i> Holidays</a></li>
+    <li><a href="<?php echo $this -> Url -> build('/Holidays'); ?>"><i class="fa fa-calendar "></i> Holiday Calendars</a></li>
 
    
     <?php
