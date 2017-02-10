@@ -78,13 +78,11 @@ class HolidaysController extends AppController
      */
     public function add()
     {
-    	
-		$this->Flash->success(__('The details.'.$this->referer() ));
 		
         $holiday = $this->Holidays->newEntity();
         if ($this->request->is('post')) {
             $holiday = $this->Holidays->patchEntity($holiday, $this->request->data);
-			$holiday['holiday_calendar_id'] = $this->request->data['holidaycalendarid'];
+			$holiday['holiday_calendar_id'] = $this->request->query['hcid'];
             if ($this->Holidays->save($holiday)) {
                 $this->Flash->success(__('The holiday has been saved.'));
 
@@ -109,6 +107,7 @@ class HolidaysController extends AppController
      */
     public function edit($id = null)
     {
+	
         $holiday = $this->Holidays->get($id, [
             'contain' => []
         ]);

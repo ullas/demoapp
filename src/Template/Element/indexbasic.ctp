@@ -395,7 +395,7 @@ $('.mptl-filter-base').on('ifUnchecked', function(event){
                   <h4 class="modal-title" id="myModalLabel"> PeopleHR</h4>
               </div>
               <div class="modal-body">
-                  Do you  really want  to delete this element?
+                  Do you  really want  to delete the element(s)?
               </div>
               <div class="modal-footer">
                   <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Cancel</button>

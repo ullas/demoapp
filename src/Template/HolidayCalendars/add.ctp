@@ -17,10 +17,11 @@
          	echo $this->Form->input('holidaycalendarid', array('type' => 'hidden'));
 		
             echo $this->Form->input('calendar');
-            echo $this->Form->input('name');
-            echo $this->Form->input('country');
+            echo $this->Form->input('name',['required' => true,'label'=>['text'=>'Name of Calendar','class'=>'mandatory']]);
+            echo $this->Form->input('country',['options' => $this->Country->get_countries(), 'empty' => true]);
             echo $this->Form->input('valid_from', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
             echo $this->Form->input('valid_to', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+			
 			
 			echo $this->Form->input('weekoff._ids', ['label'=>'Weekly Off','options' => array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'),'class'=>'select2']);
 			
@@ -167,25 +168,33 @@ $('#createhc').click(function(){
     	//get input value
 		var calendar = document.getElementById("calendar").value;
 		var name = document.getElementById("name").value;
-		var country = document.getElementById("country").value;
+		var countryelm = document.getElementById("country");
+		var country = countryelm.options[countryelm.selectedIndex].value;
 		var validfrom = document.getElementById("valid-from").value;
 		var validto = document.getElementById("valid-to").value;
     	
-    	$.get('/HolidayCalendars/createajax_data?calendar='+calendar+'&name='+name+'&country='+country+'&validfrom='+validfrom+'&validto='+validto, function(d) {
-   		 	if(d!="error"){
-   		 		$( "#holidaycalendarid" ).val(d);
+    	if (name != "" && name!=null) {
+        
+    		$.get('/HolidayCalendars/createajax_data?calendar='+calendar+'&name='+name+'&country='+country+'&validfrom='+validfrom+'&validto='+validto, function(d) {
+   		 		if(d!="error"){
+   		 			$( "#holidaycalendarid" ).val(d);
 
-   		 		//enable weeklyoff select initially
-  				$('#weekoff-ids').attr("disabled", false);
-  				$(".mptlhcsave").removeClass("disabled");
-  				$("#adddt").removeClass("disabled");
+   		 			//enable weeklyoff select initially
+  					$('#weekoff-ids').attr("disabled", false);
+  					$(".mptlhcsave").removeClass("disabled");
+  					$("#adddt").removeClass("disabled");
   				
-  				$('.mptlhccreate').attr("disabled", true);
-   		 	}
-    	});
+  					$("#adddt").attr("href", "/Holidays/add?hcid="+d);
+
+  					$('.mptlhccreate').attr("disabled", true);
+   		 		}
+    		});
+    	}else{
+    		alert("Please enter name for the holiday calendar.");
+    		return false;
+    	}
    		
 });
-
 
 
 
@@ -274,7 +283,7 @@ $("#weekoff-ids").change(function(){
     	// table.draw();
 	})
 	
-	
+	var holidaycalendarid=$("#holidaycalendarid").val(); 
 	$('<a href="/Holidays/add" id="adddt" class="open-Popup btn btn-sm btn-success disabled" data-toggle="modal" data-target="#actionspopover" style="margin-left:15px;" title="Add"><i class="fa fa-plus" aria-hidden="true"></i></a>').appendTo('div.dataTables_filter');
      
 });
@@ -340,3 +349,22 @@ function tableLoaded() {
 </script>
 <?php $this->end(); ?>
 
+<!-- confirm delete -->
+<a data-target="#ConfirmDelete" role="button" data-toggle="modal" id="trigger"></a>
+<div class="modal fade" id="ConfirmDelete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-danger">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                  <h4 class="modal-title" id="myModalLabel"> PeopleHR</h4>
+              </div>
+              <div class="modal-body">
+                  Do you  really want  to delete the element(s)?
+              </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Cancel</button>
+                  <div id="ajax_button" class="pull-right"></div>
+              </div>
+          </div>
+      </div>
+  </div>
