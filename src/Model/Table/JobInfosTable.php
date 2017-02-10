@@ -161,7 +161,7 @@ class JobInfosTable extends Table
             ->allowEmpty('employee_type');
 
         $validator
-            ->allowEmpty('manager_category');
+            ->allowEmpty('manager_id1');
 
         $validator
             ->boolean('is_cross_border_worker')
@@ -335,6 +335,18 @@ class JobInfosTable extends Table
         $validator
             ->date('leave_of_absence_return_date')
             ->allowEmpty('leave_of_absence_return_date');
+
+        $validator
+            ->allowEmpty('manager_id2');
+
+        $validator
+            ->allowEmpty('manager_id3');
+
+        $validator
+            ->allowEmpty('manager_id4');
+
+        $validator
+            ->allowEmpty('manager_id5');
 
         return $validator;
     }

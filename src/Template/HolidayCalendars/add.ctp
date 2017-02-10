@@ -19,7 +19,7 @@
             echo $this->Form->input('calendar');
             echo $this->Form->input('name',['required' => true,'label'=>['text'=>'Name of Calendar','class'=>'mandatory']]);
             echo $this->Form->input('country',['options' => $this->Country->get_countries(), 'empty' => true]);
-            echo $this->Form->input('valid_from', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+            echo $this->Form->input('valid_from', ['class' => 'mptldphc','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
             echo $this->Form->input('valid_to', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
 			
 			
@@ -127,6 +127,11 @@ $this->Html->script([
   }
   $(function () {
   	
+  	$('.mptldphc').datepicker({
+	    			format:"yyyy/mm/dd",autoclose: true,clearBtn: true
+	    		}).on('changeDate', function (e) {
+           					dateChanged();
+    					});
   	//disable weeklyoff select initially
   	$('#weekoff-ids').attr("disabled", true);
     
@@ -210,11 +215,12 @@ $("#weekoff-ids").change(function(){
  	var d1 = new Date(validfrom);
 	var d2 = new Date(validtill);
 	
-	var weekoffdate = $("#weekoff-ids").val();
+	if(document.getElementById('valid-from').value!="" && document.getElementById('valid-from').value!=undefined && document.getElementById('valid-to').value!="" && document.getElementById('valid-to').value!=undefined){
+		var weekoffdate = $("#weekoff-ids").val();
 	
-	var offdates = '';
-	if(weekoffdate!=null){offdates =weekoffdate.toString().split(',');}
- 	var result=calcWeekOffDays(d1,d2,offdates);
+		var offdates = '';
+		if(weekoffdate!=null){offdates =weekoffdate.toString().split(',');}
+ 		var result=calcWeekOffDays(d1,d2,offdates);
  	
  	
  	//iniitially delete all 
@@ -246,6 +252,10 @@ $("#weekoff-ids").change(function(){
   	// table.ajax.reload(null,false);
   	table.ajax.url('/Holidays/ajaxData?holidaycalendar='+holidaycalendarid).load();
     // table.draw();
+    }else{
+   		alert("Please select the Valid From/Valid To date.");
+   		return false;
+   }
  });
  
  
@@ -288,7 +298,22 @@ $("#weekoff-ids").change(function(){
      
 });
 
-
+//validfrom datepicker changed
+function dateChanged() {
+	var validfrom = document.getElementById('valid-from').value;
+ 	
+	var d = new Date(validfrom);
+	var year = d.getFullYear();
+	var month = d.getMonth();
+	var day = d.getDate();
+	var c = new Date(year + 1, month, day);
+	var fdate = formatDate(c).replace(/-/g, "/");
+	console.log(fdate);
+	if (document.getElementById('valid-to').value=="" || document.getElementById('valid-to').value==undefined)
+    {
+         $('#valid-to').val(fdate);
+	 }
+}
 function calcWeekOffDays(dDate1, dDate2, dArr) {
     if (dDate1 > dDate2) return false;
     var date  = dDate1;
