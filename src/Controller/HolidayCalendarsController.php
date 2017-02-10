@@ -222,7 +222,7 @@ class HolidayCalendarsController extends AppController
      */
     public function delete($id = null)
     {
-        $this->request->allowMethod(['post', 'delete']);
+        // $this->request->allowMethod(['post', 'delete']);
         $holidayCalendar = $this->HolidayCalendars->get($id);
         if ($this->HolidayCalendars->delete($holidayCalendar)) {
             $this->Flash->success(__('The holiday calendar has been deleted.'));

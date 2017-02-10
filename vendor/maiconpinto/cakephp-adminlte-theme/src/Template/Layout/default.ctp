@@ -234,7 +234,7 @@ $(window).off("resize").on("resize", function() {
     });
 }); 
 
-    //set mnadatory * after required label	
+    //set mandatory * after required label	
     $( ':input[required]' ).each( function () {
         $("label[for='" + this.id + "']").addClass('mandatory');
     });

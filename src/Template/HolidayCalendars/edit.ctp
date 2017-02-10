@@ -18,7 +18,7 @@
 		
             echo $this->Form->input('calendar');
             echo $this->Form->input('name');
-            echo $this->Form->input('country');
+            echo $this->Form->input('country',['options' => $this->Country->get_countries(), 'empty' => true]);
             echo $this->Form->input('valid_from', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
             echo $this->Form->input('valid_to', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
 			
@@ -121,7 +121,8 @@ $this->Html->script([
   $(function () {
   	
   	//$( "#holidaycalendarid" ).val(1);
-
+	//select 2 
+    $(".select2").select2({ width: '100%',allowClear: false,placeholder: "Select" });
       
      table= $('#mptlindextbl').DataTable({
           "paging": true,
@@ -258,7 +259,7 @@ $("#weekoff-ids").change(function(){
 	})
 	
 	
-	$('<a href="/Holidays/add" class="open-Popup btn btn-sm btn-success" data-toggle="modal" data-target="#actionspopover" style="margin-left:15px;" title="Add"><i class="fa fa-plus" aria-hidden="true"></i></a>').appendTo('div.dataTables_filter');
+	$('<a href="/Holidays/add?hcid=<?php echo $calid ?>" class="open-Popup btn btn-sm btn-success" data-toggle="modal" data-target="#actionspopover" style="margin-left:15px;" title="Add"><i class="fa fa-plus" aria-hidden="true"></i></a>').appendTo('div.dataTables_filter');
      
 });
 
@@ -323,3 +324,22 @@ function tableLoaded() {
 </script>
 <?php $this->end(); ?>
 
+<!-- confirm delete -->
+<a data-target="#ConfirmDelete" role="button" data-toggle="modal" id="trigger"></a>
+<div class="modal fade" id="ConfirmDelete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-danger">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                  <h4 class="modal-title" id="myModalLabel"> PeopleHR</h4>
+              </div>
+              <div class="modal-body">
+                  Do you  really want  to delete the element(s)?
+              </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Cancel</button>
+                  <div id="ajax_button" class="pull-right"></div>
+              </div>
+          </div>
+      </div>
+  </div>
