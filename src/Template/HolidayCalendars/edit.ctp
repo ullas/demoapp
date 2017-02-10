@@ -19,7 +19,7 @@
             echo $this->Form->input('calendar');
             echo $this->Form->input('name');
             echo $this->Form->input('country',['options' => $this->Country->get_countries(), 'empty' => true]);
-            echo $this->Form->input('valid_from', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+            echo $this->Form->input('valid_from', ['class' => 'mptldphc','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
             echo $this->Form->input('valid_to', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
 			
 			
@@ -120,7 +120,13 @@ $this->Html->script([
   }
   $(function () {
   	
-  	//$( "#holidaycalendarid" ).val(1);
+ 
+
+  	$('.mptldphc').datepicker({
+	    			format:"yyyy/mm/dd",autoclose: true,clearBtn: true
+	    		}).on('changeDate', function (e) {
+           					dateChanged();
+    					});
 	//select 2 
     $(".select2").select2({ width: '100%',allowClear: false,placeholder: "Select" });
       
@@ -178,52 +184,42 @@ $("#weekoff-ids").change(function(){
  	var d1 = new Date(validfrom);
 	var d2 = new Date(validtill);
 	
-	var weekoffdate = $("#weekoff-ids").val();
+	if(document.getElementById('valid-from').value!="" && document.getElementById('valid-from').value!=undefined && document.getElementById('valid-to').value!="" && document.getElementById('valid-to').value!=undefined){
+		var weekoffdate = $("#weekoff-ids").val();
 	
-	var offdates = '';
-	if(weekoffdate!=null){offdates =weekoffdate.toString().split(',');}
- 	var result=calcWeekOffDays(d1,d2,offdates);
+		var offdates = '';
+		if(weekoffdate!=null){offdates =weekoffdate.toString().split(',');}
+ 		var result=calcWeekOffDays(d1,d2,offdates);
  	
- 	
- 	// var name=$("#name").val();
-    // var name="test";
-    // var date="2017-01-26";
-    // $.get('/HolidayCalendars/addWeekOff?name='+name+"&date="+date, function(d) {
-    	// // alert(d);
-    	// table.ajax.reload(null,false);
-    	// table.draw();
-    // });
- 	
- 	
- 	//iniitially delete all 
- 	$.get('/HolidayCalendars/deleteWeekOff?holidaycalendar=<?php echo $calid ?>', function(d) {
-    	// alert(d);
-    });
-    		
-   var postdata=[]; 		
- 	if(result!=null){
-		for(t = 0; t < result.length; t++){
-			var resArr = result[t].toString().split('^');
-			var holidaycode = resArr[0].replace(/-/g, "");
-			
-		    postdata.push(result[t]+"^"+<?php echo $calid ?>+"^"+holidaycode);
-			// $.get('/HolidayCalendars/addWeekOff?name='+resArr[1]+"&date="+resArr[0]+"&holidaycode="+holidaycode+"&holidaycalendar="+"1"+"&holidayclass="+"2", function(d) {
-    			// alert(d);
-    		// });
-    		
-  		}
-  		
-  		$.get('/HolidayCalendars/addWeekOff?content='+JSON.stringify(postdata), function(d) {
+ 		//iniitially delete all 
+ 		$.get('/HolidayCalendars/deleteWeekOff?holidaycalendar=<?php echo $calid ?>', function(d) {
     		// alert(d);
     	});
-  	}
+    		
+   		var postdata=[]; 		
+ 		if(result!=null){
+			for(t = 0; t < result.length; t++){
+				var resArr = result[t].toString().split('^');
+				var holidaycode = resArr[0].replace(/-/g, "");
+			
+		    	postdata.push(result[t]+"^"+<?php echo $calid ?>+"^"+holidaycode);
+  			}
+  		
+  			$.get('/HolidayCalendars/addWeekOff?content='+JSON.stringify(postdata), function(d) {
+    		// alert(d);
+    		});
+  		}
   	
-  	//reload table
-  	table.ajax.reload(null,false);
-    // table.draw();
+  		//reload table
+  		table.ajax.reload(null,false);
+    	// table.draw();
+   }else{
+   		alert("Please select the Valid From/Valid To date.");
+   		return false;
+   }
  });
  
- 
+ //popover
  $("#actionspopover").on("show.bs.modal", function(e) {
 		//loading icon show
 		if(e.relatedTarget!=null){$('#loadingmessage').show();}
@@ -240,6 +236,7 @@ $("#weekoff-ids").change(function(){
 	    		$('.mptldp').datepicker({
 	    			format:"yyyy/mm/dd",autoclose: true,clearBtn: true
 	    		});
+    				
 	    		//select 2 
     			$(".select2").select2({ width: '100%',allowClear: true,placeholder: "Select" });
 				//hide popover on button click
@@ -262,8 +259,23 @@ $("#weekoff-ids").change(function(){
 	$('<a href="/Holidays/add?hcid=<?php echo $calid ?>" class="open-Popup btn btn-sm btn-success" data-toggle="modal" data-target="#actionspopover" style="margin-left:15px;" title="Add"><i class="fa fa-plus" aria-hidden="true"></i></a>').appendTo('div.dataTables_filter');
      
 });
-
-
+//validfrom datepicker changed
+function dateChanged() {
+	var validfrom = document.getElementById('valid-from').value;
+ 	
+	var d = new Date(validfrom);
+	var year = d.getFullYear();
+	var month = d.getMonth();
+	var day = d.getDate();
+	var c = new Date(year + 1, month, day);
+	var fdate = formatDate(c).replace(/-/g, "/");
+	console.log(fdate);
+	if (document.getElementById('valid-to').value=="" || document.getElementById('valid-to').value==undefined)
+    {
+         $('#valid-to').val(fdate);
+	 }
+}
+//find weekly off days
 function calcWeekOffDays(dDate1, dDate2, dArr) {
     if (dDate1 > dDate2) return false;
     var date  = dDate1;
@@ -290,6 +302,7 @@ function calcWeekOffDays(dDate1, dDate2, dArr) {
     
     return dates;
 }
+//format utc date to yyyy/mm/dd
 function formatDate(date) {
     var d = new Date(date),
         month = '' + (d.getMonth() + 1),
@@ -317,9 +330,6 @@ function tableLoaded() {
     });
 }
 
-
-  
-  
   
 </script>
 <?php $this->end(); ?>

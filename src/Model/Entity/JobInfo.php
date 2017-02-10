@@ -27,7 +27,7 @@ use Cake\ORM\Entity;
  * @property float $shift_rate
  * @property float $shift_factor
  * @property string $employee_type
- * @property string $manager_category
+ * @property string $manager_id1
  * @property bool $is_cross_border_worker
  * @property bool $is_competition_clause_active
  * @property \Cake\I18n\Time $probation_period_end_date
@@ -90,6 +90,10 @@ use Cake\ORM\Entity;
  * @property int $location_id
  * @property int $department_id
  * @property int $legal_entity_id
+ * @property string $manager_id2
+ * @property string $manager_id3
+ * @property string $manager_id4
+ * @property string $manager_id5
  *
  * @property \App\Model\Entity\User $user
  * @property \App\Model\Entity\Customer $customer
@@ -101,6 +105,7 @@ use Cake\ORM\Entity;
  * @property \App\Model\Entity\PayGrade $pay_grade
  * @property \App\Model\Entity\Location $location
  * @property \App\Model\Entity\Department $department
+ * @property \App\Model\Entity\LegalEntity $legal_entity
  */
 class JobInfo extends Entity
 {

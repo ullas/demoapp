@@ -222,7 +222,19 @@ class HolidayCalendarsController extends AppController
      */
     public function delete($id = null)
     {
+		//initially delete all holidays with the particular calendar id
+		$this->loadModel('Holidays');
+		$arr = $this->Holidays->find('all',['conditions' => array('holiday_calendar_id' => $id), 'contain' => []])->toArray();
+		for($t=0;$t<sizeof($arr);$t++){
+			if(isset($arr[$t])){
+				$holiday = $arr[$t];
+            	if ($this->Holidays->delete($holiday)) {
+              		
+				}
+			}
+		}
         // $this->request->allowMethod(['post', 'delete']);
+        $this->loadModel('HolidayCalendars');
         $holidayCalendar = $this->HolidayCalendars->get($id);
         if ($this->HolidayCalendars->delete($holidayCalendar)) {
             $this->Flash->success(__('The holiday calendar has been deleted.'));

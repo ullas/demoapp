@@ -9,7 +9,7 @@
       </ol>
     </section>
 <section class="content"><div class="box box-primary"><div class="box-body">
-    <?= $this->Form->create($jobinfo) ?>
+    <?= $this->Form->create($jobInfo) ?>
     <fieldset>
         <?php
              
@@ -40,7 +40,11 @@
             echo $this->Form->input('shift_rate');
             echo $this->Form->input('shift_factor',['label'=>'Shift Percentage']);
             echo $this->Form->input('employee_type');
-            echo $this->Form->input('manager_category');
+            echo $this->Form->input('manager_id1',['label'=>'Manager 1']);
+			echo $this->Form->input('manager_id2',['label'=>'Manager 2']);
+			echo $this->Form->input('manager_id3',['label'=>'Manager 3']);
+			echo $this->Form->input('manager_id4',['label'=>'Manager 4']);
+			echo $this->Form->input('manager_id5',['label'=>'Manager 5']);
             echo $this->Form->input('is_cross_border_worker');
             echo $this->Form->input('is_competition_clause_active');
             echo $this->Form->input('probation_period_end_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
