@@ -1,8 +1,8 @@
 <?= $this->element('templateelmnt'); ?>
 <section class="content-header">
       <h1>
-        Holiday Calendar
-        <small>View</small>
+        Workflow Rule
+        <small>Add</small>
       </h1>
       <ol class="breadcrumb">
         <li><?= $this->Html->link('<i class="fa fa-mail-reply"></i> '.__('Back'), ['action' => 'index'], ['escape' => false]) ?></li>
@@ -10,45 +10,34 @@
     </section>
 <section class="content">
 	<div class="box box-primary"><div class="box-body">
-    <?= $this->Form->create($holidayCalendar) ?>
+    <?= $this->Form->create("workflowrule") ?>
+    <!-- <input type="hidden" value=""  id="holidaycalendarid"/> -->
     <fieldset>
         <?php
-            echo $this->Form->input('calendar',['disabled'=>true]);
-            echo $this->Form->input('name',['disabled'=>true]);
-            echo $this->Form->input('country',['options' => $this->Country->get_countries(), 'empty' => true,'disabled'=>true]);
-            echo $this->Form->input('valid_from', ['class' => 'mptldphc','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled'=>true]);
-            echo $this->Form->input('valid_to', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled'=>true]);
+         	echo $this->Form->input('workflowruleid', array('type' => 'hidden'));
 			
-			
-			echo $this->Form->input('weekoff._ids', ['label'=>'Weekly Off','options' => array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'),'class'=>'select2']);
-			
+			echo $this->Form->input('name',['required' => true,'label'=>['text'=>'Name','class'=>'mandatory']]);
+            echo $this->Form->input('description');
+            // echo $this->Form->input('created_by');
+            // echo $this->Form->input('modified_by');
+		
         ?>
         
-        <!-- <div class="col-md-4 pull-right"><div class="form-group"><input type="button" value="Get Weekly Off Dates" class="btn btn-xs btn-default" id="getweeklyoffdates"/></div></div> -->
         
     </fieldset>
     <div class="box-footer">
+    	
     <?=$this->Html->link(__('Cancel'), ['action' => 'index'], ['escape' => false])?>
-    <?=$this->Html->link(__('Edit HolidayCalendar'), ['action' => 'edit', $holidayCalendar['id']],['class'=>'btn btn-primary label-info pull-right'], ['escape' => false])?>
+    <?= $this->Form->button(__('Save'),['title'=>'Save','class'=>'mptlwrsave pull-right disabled']) ?>
+    <input type="button" value="Create" class="mptlwrcreate btn btn-success pull-right" id="createwr"/>
+    
     </div>
     <?= $this->Form->end() ?>
 </div></div>
 
-
-
-<!-- <div class="box box-primary"><div class="box-body">
-	<table id="weeklyofftable" border="1">
-        <thead><tr>
-            <th>Date</th>
-        </tr>
-        </thead>
-        <tbody></tbody>
-    </table>
-</div></div> -->
-
               
  <div class="box box-primary">
- 	<div class="box-header"><h3 class="box-title">Holidays</h3></div>
+ 	<div class="box-header"><h3 class="box-title">Actions</h3></div>
       <div class="box-body">
     <table id="mptlindextbl" class="table table-hover  table-bordered ">
         <thead>
@@ -86,6 +75,10 @@
     	padding: 3px 9px 0 10px;
     	font-size: 45px;
 	}
+	.mptlwrsave{
+		margin-left:10px;
+	}
+	
 </style>
 <!-- add actions popover -->
 <?php echo $this->element('popoverelmnt'); ?>
@@ -116,13 +109,9 @@ $this->Html->script([
         }
   }
   $(function () {
-    
-      $('.mptldphc').datepicker({
-	    			format:"yyyy/mm/dd",autoclose: true,clearBtn: true
-	    		}).on('changeDate', function (e) {
-           					dateChanged();
-    					});
-    					
+  	
+  
+     //initialise datatable   
      table= $('#mptlindextbl').DataTable({
           "paging": true,
           //disable 0th column checkbox default sort order
@@ -137,97 +126,55 @@ $this->Html->script([
           rowReorder: { update:false },
           stateSave:false,
           responsive: true,
-          // "initComplete": function(settings, json) {
-          // },
           "drawCallback": function( settings ) {
         		tableLoaded();
    		  },
-   		  oLanguage        : {
+          "deferLoading": 0, // here
+          oLanguage        : {
         		sSearch: '<div class="input-group"><span class="input-group-addon"><span class="fa fa-search"></span></span>',
             	sSearchPlaceholder: 'Search here...',
-		},
+		   },
         //server side processing
-        "processing": true,
-        "serverSide": true,
-        "ajax": "/Holidays/ajaxData?holidaycalendar="+<?php echo $calid ?>,
-        'columnDefs': [{
+         "processing": true,
+         "serverSide": true,
+         "ajax": {url:""}, 
+         'columnDefs': [{
         'targets': 0,
         'className': 'text-center',
         'render': function (data, type, full, meta){
             return '<input type="checkbox" class="mptl-lst-chkbox" name="chk-' + data + '" value="' + $('<div/>').text(data).html() + '">';
-        },
-           
-     },
-     
-     ]
-    
-    
-	
+        },}]
+    });
+
+
+//create btn onclick
+$('#createwr').click(function(){
+    	//get input value
+		var name = document.getElementById("name").value;
+		var description = document.getElementById("description").value;
+    	
+    	if (name != "" && name!=null) {
+        
+    		$.get('/Workflowrules/createajax_data?name='+name+'&description='+description, function(d) {
+   		 		if(d!="error"){
+   		 			$( "#workflowruleid" ).val(d);
+
+   		 			//enable weeklyoff select initially
+  					$(".mptlwrsave").removeClass("disabled");
+  					$("#adddt").removeClass("disabled");
+  				
+  					$("#adddt").attr("href", "/Workflowactions/add?wrid="+d);
+
+  					$('.mptlwrcreate').attr("disabled", true);
+   		 		}
+    		});
+    	}else{
+    		alert("Please enter the name.");
+    		return false;
+    	}
+   		
 });
 
-//col reorder
- order= new $.fn.dataTable.ColReorder( table );
- 
- //get weekly off dates
- // $('#getweeklyoffdates').click(function(){
-$("#weekoff-ids").change(function(){
- 	
- 	var validfrom = document.getElementById('valid-from').value;
- 	var validtill = document.getElementById('valid-to').value;
- 	var d1 = new Date(validfrom);
-	var d2 = new Date(validtill);
-	
-	if(document.getElementById('valid-from').value!="" && document.getElementById('valid-from').value!=undefined && document.getElementById('valid-to').value!="" && document.getElementById('valid-to').value!=undefined){
-		var weekoffdate = $("#weekoff-ids").val();
-	
-	var offdates = '';
-	if(weekoffdate!=null){offdates =weekoffdate.toString().split(',');}
- 	var result=calcWeekOffDays(d1,d2,offdates);
- 	
- 	
- 	// var name=$("#name").val();
-    // var name="test";
-    // var date="2017-01-26";
-    // $.get('/HolidayCalendars/addWeekOff?name='+name+"&date="+date, function(d) {
-    	// // alert(d);
-    	// table.ajax.reload(null,false);
-    	// table.draw();
-    // });
- 	
- 	
- 	//iniitially delete all 
- 	$.get('/HolidayCalendars/deleteWeekOff?holidaycalendar=<?php echo $calid ?>', function(d) {
-    	// alert(d);
-    });
-    		
-   var postdata=[]; 		
- 	if(result!=null){
-		for(t = 0; t < result.length; t++){
-			var resArr = result[t].toString().split('^');
-			var holidaycode = resArr[0].replace(/-/g, "");
-			
-		    postdata.push(result[t]+"^"+<?php echo $calid ?>+"^"+holidaycode);
-			// $.get('/HolidayCalendars/addWeekOff?name='+resArr[1]+"&date="+resArr[0]+"&holidaycode="+holidaycode+"&holidaycalendar="+"1"+"&holidayclass="+"2", function(d) {
-    			// alert(d);
-    		// });
-    		
-  		}
-  		
-  		$.get('/HolidayCalendars/addWeekOff?content='+JSON.stringify(postdata), function(d) {
-    		// alert(d);
-    	});
-  	}
-  	
-  	//reload table
-  	table.ajax.reload(null,false);
-    // table.draw();
-    }else{
-   		alert("Please select the Valid From/Valid To date.");
-   		return false;
-   }
- });
- 
- 
  $("#actionspopover").on("show.bs.modal", function(e) {
 		//loading icon show
 		if(e.relatedTarget!=null){$('#loadingmessage').show();}
@@ -258,68 +205,17 @@ $("#weekoff-ids").change(function(){
 	$('#actionspopover').on('hidden.bs.modal', function (e) {
 	  $('.modal-body', this).empty();
 	  	//reload table
-  		table.ajax.reload(null,false);
+	  	var workflowruleid=$("#workflowruleid").val(); 
+  		table.ajax.url('/Workflowactions/ajaxData?workflowrule='+workflowruleid).load();
     	// table.draw();
 	})
 	
-	
-	$('<a href="/Holidays/add?hcid=<?php echo $calid ?>" class="open-Popup btn btn-sm btn-success" data-toggle="modal" data-target="#actionspopover" style="margin-left:15px;" title="Add"><i class="fa fa-plus" aria-hidden="true"></i></a>').appendTo('div.dataTables_filter');
+	var holidaycalendarid=$("#holidaycalendarid").val(); 
+	$('<a href="/Workflowactions/add" id="adddt" class="open-Popup btn btn-sm btn-success disabled" data-toggle="modal" data-target="#actionspopover" style="margin-left:15px;" title="Add"><i class="fa fa-plus" aria-hidden="true"></i></a>').appendTo('div.dataTables_filter');
      
 });
 
-//validfrom datepicker changed
-function dateChanged() {
-	var validfrom = document.getElementById('valid-from').value;
- 	
-	var d = new Date(validfrom);
-	var year = d.getFullYear();
-	var month = d.getMonth();
-	var day = d.getDate();
-	var c = new Date(year + 1, month, day);
-	var fdate = formatDate(c).replace(/-/g, "/");
-	console.log(fdate);
-	if (document.getElementById('valid-to').value=="" || document.getElementById('valid-to').value==undefined)
-    {
-         $('#valid-to').val(fdate);
-	 }
-}
-function calcWeekOffDays(dDate1, dDate2, dArr) {
-    if (dDate1 > dDate2) return false;
-    var date  = dDate1;
-    var dates = [];
 
-	var weekday = new Array(7);
-	weekday[0] =  "Sunday";
-	weekday[1] = "Monday";
-	weekday[2] = "Tuesday";
-	weekday[3] = "Wednesday";
-	weekday[4] = "Thursday";
-	weekday[5] = "Friday";
-	weekday[6] = "Saturday";
-	
-    while (date < dDate2) {
-    	for (i = 0; i < dArr.length; i++) {
-    		if (date.getDay().toString() === dArr[i].toString()){//console.log(formatDate(new Date(date)));
-         		dates.push(formatDate(new Date(date))+"^"+weekday[date.getDay()]);
-        	}
-    	}
-        
-        date.setDate( date.getDate() + 1 );
-    }
-    
-    return dates;
-}
-function formatDate(date) {
-    var d = new Date(date),
-        month = '' + (d.getMonth() + 1),
-        day = '' + d.getDate(),
-        year = d.getFullYear();
-
-    if (month.length < 2) month = '0' + month;
-    if (day.length < 2) day = '0' + day;
-
-    return [year, month, day].join('-');
-} 
 function tableLoaded() {
 	//delete confirm
     $(".delete-btn").click(function(){
@@ -362,11 +258,5 @@ function tableLoaded() {
           </div>
       </div>
   </div>
- 
- 
-<!-- remove clear button for weekly selection dates  -->
-<style>	
-.select2-selection--multiple .select2-selection__rendered .select2-selection__clear{
-	display:none;
-}
-</style>
+  
+

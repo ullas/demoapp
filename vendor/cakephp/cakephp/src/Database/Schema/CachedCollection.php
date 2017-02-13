@@ -13,16 +13,13 @@
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
 namespace Cake\Database\Schema;
-
 use Cake\Cache\Cache;
 use Cake\Datasource\ConnectionInterface;
-
 /**
  * Extends the schema collection class to provide caching
  */
 class CachedCollection extends Collection
 {
-
     /**
      * The name of the cache config key to use for caching table metadata,
      * of false if disabled.
@@ -30,7 +27,6 @@ class CachedCollection extends Collection
      * @var string|bool
      */
     protected $_cache = false;
-
     /**
      * Constructor.
      *
@@ -42,7 +38,6 @@ class CachedCollection extends Collection
         parent::__construct($connection);
         $this->cacheMetadata($cacheKey);
     }
-
     /**
      * {@inheritDoc}
      *
@@ -52,23 +47,18 @@ class CachedCollection extends Collection
         $options += ['forceRefresh' => false];
         $cacheConfig = $this->cacheMetadata();
         $cacheKey = $this->cacheKey($name);
-
         if (!empty($cacheConfig) && !$options['forceRefresh']) {
             $cached = Cache::read($cacheKey, $cacheConfig);
             if ($cached !== false) {
                 return $cached;
             }
         }
-
         $table = parent::describe($name, $options);
-
         if (!empty($cacheConfig)) {
             Cache::write($cacheKey, $table, $cacheConfig);
         }
-
         return $table;
     }
-
     /**
      * Get the cache key for a given name.
      *
@@ -79,7 +69,6 @@ class CachedCollection extends Collection
     {
         return $this->_connection->configName() . '_' . $name;
     }
-
     /**
      * Sets the cache config name to use for caching table metadata, or
      * disables it if false is passed.
@@ -96,7 +85,6 @@ class CachedCollection extends Collection
         if ($enable === true) {
             $enable = '_cake_model_';
         }
-
         return $this->_cache = $enable;
     }
 }
