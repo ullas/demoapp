@@ -164,7 +164,7 @@ $this->Html->script([
         'className': 'text-center',
         'render': function (data, type, full, meta){
             return '<input type="checkbox" class="mptl-lst-chkbox" name="chk-' + data + '" value="' + $('<div/>').text(data).html() + '">';
-        },},]
+        },}]
     });
 
 
@@ -393,3 +393,11 @@ function tableLoaded() {
           </div>
       </div>
   </div>
+  
+
+<!-- remove clear button for weekly selection dates  -->
+<style>	
+.select2-selection--multiple .select2-selection__rendered .select2-selection__clear{
+	display:none;
+}
+</style>

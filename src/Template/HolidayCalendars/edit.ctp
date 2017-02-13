@@ -353,3 +353,13 @@ function tableLoaded() {
           </div>
       </div>
   </div>
+  
+
+
+
+<!-- remove clear button for weekly selection dates  -->
+<style>	
+.select2-selection--multiple .select2-selection__rendered .select2-selection__clear{
+	display:none;
+}
+</style>
