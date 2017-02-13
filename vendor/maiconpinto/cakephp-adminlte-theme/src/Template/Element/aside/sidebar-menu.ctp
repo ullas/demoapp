@@ -75,6 +75,9 @@ if (file_exists($file)) {
     <li><a href="<?php echo $this -> Url -> build('/CostCentres'); ?>"><i class="fa fa-circle-o"></i> Cost Centres</a></li>
     <li><a href="<?php echo $this->Url->build('/Positions'); ?>"><i class="fa fa-circle-o"></i> Position</a></li>
     <li><a href="<?php echo $this -> Url -> build('/CalendarAssignments'); ?>"><i class="fa fa-circle-o"></i> Calendar Assignments</a></li>
+    
+    <li><a href="<?php echo $this -> Url -> build('/Workflowrules'); ?>"><i class="fa fa-circle-o"></i> Workflow</a></li>
+    
     </ul>
     </li>
 	
