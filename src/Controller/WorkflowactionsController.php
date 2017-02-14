@@ -37,7 +37,37 @@ class WorkflowactionsController extends AppController
 		echo json_encode($output);		
     }
 	
-	
+	public function editStepId()
+	{
+    	
+      	
+		if($this->request->is('ajax')) {
+				
+			$this->autoRender=false;
+			foreach(json_decode($this->request->query['content'])  as $d){
+    		
+				$items="";
+    			$items=explode("^",$d);
+				$workflowaction = $this->Workflowactions->get($items[0], [
+            		'contain' => []
+        		]);
+            	// $this->request->data['id']=$items[0];
+           	 	$this->request->data['stepid']=$items[1];
+            	$workflowaction=$this->Workflowactions->patchEntity($workflowaction,$this->request->data);
+				if ($this->Workflowactions->save($workflowaction)) {
+
+               	 	// $this->response->body("success");
+	    			// return $this->response;
+            	} else {
+                	// $this->response->body("error");
+	    			// return $this->response;
+            	}
+				
+			}
+			
+		}
+        
+    }
 
     /**
      * Index method
@@ -81,10 +111,19 @@ class WorkflowactionsController extends AppController
      */
     public function add()
     {
+    	
         $workflowaction = $this->Workflowactions->newEntity();
         if ($this->request->is('post')) {
+        		
+        	
+			$query=$this->Workflowactions->find('All')->where(['workflowrule_id'=>$this->request->query['wrid']]);
+    		$maxID=$query->select(['maxstepid' => $query->func()->max('stepid')])->toArray();
+    		(isset($maxID)) ? $maxstepid=intval($maxID[0]['maxstepid']) : $maxstepid=0;
+
+	
             $workflowaction = $this->Workflowactions->patchEntity($workflowaction, $this->request->data);
 			$workflowaction['workflowrule_id'] = $this->request->query['wrid'];
+			$workflowaction['stepid'] = $maxstepid+1;
             if ($this->Workflowactions->save($workflowaction)) {
                 $this->Flash->success(__('The workflowaction has been saved.'));
 

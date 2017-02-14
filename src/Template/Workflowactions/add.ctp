@@ -18,7 +18,7 @@
             echo $this->Form->input('name');
             echo $this->Form->input('displayname');
             echo $this->Form->input('position_id', ['options' => $positions, 'empty' => true]);
-            echo $this->Form->input('stepid');
+            // echo $this->Form->input('stepid');
             echo $this->Form->input('nextactionid');
             echo $this->Form->input('onfailureactionid');
             echo $this->Form->input('failuretime');

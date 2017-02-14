@@ -169,7 +169,7 @@ class WorkflowrulesController extends AppController
      */
     public function delete($id = null)
     {
-        $this->request->allowMethod(['post', 'delete']);
+        // $this->request->allowMethod(['post', 'delete']);
         $workflowrule = $this->Workflowrules->get($id);
         if ($this->Workflowrules->delete($workflowrule)) {
             $this->Flash->success(__('The workflowrule has been deleted.'));
