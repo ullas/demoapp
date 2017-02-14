@@ -18,7 +18,7 @@
           	echo $this->Form->input('name',['disabled'=>true]);
             echo $this->Form->input('displayname',['disabled'=>true]);
             echo $this->Form->input('position_id', ['options' => $positions, 'empty' => true,'disabled'=>true]);
-            echo $this->Form->input('stepid',['disabled'=>true]);
+            // echo $this->Form->input('stepid',['disabled'=>true]);
             echo $this->Form->input('nextactionid',['disabled'=>true]);
             echo $this->Form->input('onfailureactionid',['disabled'=>true]);
             echo $this->Form->input('failuretime',['disabled'=>true]);

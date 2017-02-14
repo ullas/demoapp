@@ -23,7 +23,7 @@
     </fieldset>
     <div class="box-footer">
     <?=$this->Html->link(__('Cancel'), ['action' => 'index'], ['escape' => false])?>
-    <?= $this->Form->button(__('Update'),['title'=>'Update','class'=>'pull-right']) ?>
+    <?= $this->Form->button(__('Update'),['title'=>'Update','class'=>'pull-right submit']) ?>
     </div>
     <?= $this->Form->end() ?>
 </div></div>
@@ -36,7 +36,11 @@
         <thead>
             <tr>
            	
-                <th data-orderable="false"><input type="checkbox" name="select_all" value="1" id="select-all" ></th>
+                <th data-orderable="false">
+                	<!-- <span class="handle"><i class="fa fa-ellipsis-v"></i>&nbsp;<i class="fa fa-ellipsis-v"></i></span> -->
+                	<input type="checkbox" name="select_all" value="1" id="select-all" >
+                	
+                </th>
            		<?php
                   for($i=1;$i<count($configs);$i++){
                   		
@@ -102,11 +106,31 @@ $this->Html->script([
   $(function () {
   	
   
+	$(".submit").click(function (){
+         //save all rows on submit button
+		var postdata=[]; 		
+    	var tbl = $("#mptlindextbl tbody");
+    	tbl.find('tr').each(function (i) {
+       		var $tds = $(this).find('td'),
+            	chkname = $tds.eq(0).find("input[type='checkbox']").attr('name'),
+            	stepid = $tds.eq(1).text();
+            var rowid=chkname.split("-");
+        	postdata.push(rowid[1]+"^"+stepid);
+    	});
+    	$.get('/Workflowactions/editStepId?content='+JSON.stringify(postdata), function(d) {
+    		// alert(d);
+    	});
+    	
+    	return true;
+    
+	});
+        
+        
      //initialise datatable   
      table= $('#mptlindextbl').DataTable({
           "paging": true,
           //disable 0th column checkbox default sort order
-          // "order": [[ 1, 'asc' ]],
+          "order": [[ 1, 'asc' ]],
           "lengthChange": true,
           "searching": true,
           "ordering": true,
@@ -114,7 +138,11 @@ $this->Html->script([
           "autoWidth": false,
           "scrollX":true,
           colReorder: false,
-          rowReorder: { update:false },
+          rowReorder: {
+				                // dataSrc: 'stepid',
+				                update:false
+				              },
+          // rowReorder: { update:false },
           stateSave:false,
           responsive: true,
           "drawCallback": function( settings ) {
@@ -136,6 +164,21 @@ $this->Html->script([
         },}]
     });
 
+
+
+//row reorder
+table.on( 'row-reorder', function ( e, diff, edit ) {
+ 
+	for ( var i=0, ien=diff.length ; i<ien ; i++ ) {
+			
+		var cell = table.cell(table.row(diff[i].node),1);
+		cell.data(diff[i].newPosition+1);
+		
+		
+	}
+	
+});
+    
 
  $("#actionspopover").on("show.bs.modal", function(e) {
 		//loading icon show
@@ -220,3 +263,11 @@ function tableLoaded() {
   </div>
   
 
+<style>
+	table.dt-rowReorder-float{position:absolute !important;opacity:0.8;table-layout:fixed;outline:2px solid #888;outline-offset:-2px;z-index:2001}
+	tr.dt-rowReorder-moving{outline:2px solid #555;outline-offset:-2px}body.dt-rowReorder-noOverflow{overflow-x:hidden}
+	table.dataTable td.reorder{text-align:center;cursor:move}
+	
+	
+	table.dataTable thead .sorting,table.dataTable thead .sorting_asc,table.dataTable thead .sorting_desc{cursor:pointer;*cursor:hand}
+</style>

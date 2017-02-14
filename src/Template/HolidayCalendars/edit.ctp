@@ -267,7 +267,8 @@ function dateChanged() {
 	var year = d.getFullYear();
 	var month = d.getMonth();
 	var day = d.getDate();
-	var c = new Date(year + 1, month, day);
+	// var c = new Date(year + 1, month, day);
+	var c = new Date(year, "11", "31");
 	var fdate = formatDate(c).replace(/-/g, "/");
 	console.log(fdate);
 	if (document.getElementById('valid-to').value=="" || document.getElementById('valid-to').value==undefined)
