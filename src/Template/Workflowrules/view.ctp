@@ -23,7 +23,8 @@
     </fieldset>
     <div class="box-footer">
     <?=$this->Html->link(__('Cancel'), ['action' => 'index'], ['escape' => false])?>
-    <?= $this->Form->button(__('Update'),['title'=>'Update','class'=>'pull-right']) ?>
+    <?=$this->Html->link(__('Edit workflowrule'), ['action' => 'edit', $workflowrule['id']],['class'=>'btn btn-primary label-info pull-right submit'], ['escape' => false])?>
+     <!-- <?= $this->Form->button(__('Update'),['title'=>'Update','class'=>'pull-right submit']) ?> -->
     </div>
     <?= $this->Form->end() ?>
 </div></div>
@@ -101,12 +102,31 @@ $this->Html->script([
   }
   $(function () {
   	
-  
+  $(".submit").click(function (){
+         //save all rows on submit button
+		var postdata=[]; 		
+    	var tbl = $("#mptlindextbl tbody");
+    	tbl.find('tr').each(function (i) {
+       		var $tds = $(this).find('td'),
+            	chkname = $tds.eq(0).find("input[type='checkbox']").attr('name'),
+            	stepid = $tds.eq(1).text();
+            var rowid=chkname.split("-");
+        	postdata.push(rowid[1]+"^"+stepid);
+    	});
+    	$.get('/Workflowactions/editStepId?content='+JSON.stringify(postdata), function(d) {
+    		// alert(d);
+    	});
+    	
+    	return true;
+    
+	});
+	
+	
      //initialise datatable   
      table= $('#mptlindextbl').DataTable({
           "paging": true,
           //disable 0th column checkbox default sort order
-          // "order": [[ 1, 'asc' ]],
+          "order": [[ 1, 'asc' ]],
           "lengthChange": true,
           "searching": true,
           "ordering": true,
@@ -143,7 +163,7 @@ $this->Html->script([
 		var link = $(e.relatedTarget);
 		$(this).find(".modal-body").load(link.attr("href"),function( response, status, xhr ){
 			//loading icon hide
-			if(e.relatedTarget!=null){$('#loadingmessage').hide();}
+			$('#loadingmessage').hide();
 			if ( status == "error" ) {
 				var msg = "Sorry but there was an error.";
 				alert(msg);
@@ -220,3 +240,11 @@ function tableLoaded() {
   </div>
   
 
+<style>
+	table.dt-rowReorder-float{position:absolute !important;opacity:0.8;table-layout:fixed;outline:2px solid #888;outline-offset:-2px;z-index:2001}
+	tr.dt-rowReorder-moving{outline:2px solid #555;outline-offset:-2px}body.dt-rowReorder-noOverflow{overflow-x:hidden}
+	table.dataTable td.reorder{text-align:center;cursor:move}
+	
+	
+	table.dataTable thead .sorting,table.dataTable thead .sorting_asc,table.dataTable thead .sorting_desc{cursor:pointer;*cursor:hand}
+</style>
