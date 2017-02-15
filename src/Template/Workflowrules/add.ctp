@@ -123,7 +123,7 @@ $this->Html->script([
           "autoWidth": false,
           "scrollX":true,
           colReorder: false,
-          rowReorder: { update:false },
+          rowReorder: { selector: 'tr td.move-event',update:false },
           stateSave:false,
           responsive: true,
           "drawCallback": function( settings ) {
@@ -140,10 +140,11 @@ $this->Html->script([
          "ajax": {url:""}, 
          'columnDefs': [{
         'targets': 0,
-        'className': 'text-center',
+        'className': 'text-center move-event',
         'render': function (data, type, full, meta){
             return '<input type="checkbox" class="mptl-lst-chkbox" name="chk-' + data + '" value="' + $('<div/>').text(data).html() + '">';
-        },}]
+        }},{ targets:6, 'className': 'reorderable' },
+         { targets: '_all', 'className': 'move-event' }]
     });
 
 
@@ -219,7 +220,7 @@ $('#createwr').click(function(){
 function tableLoaded() {
 	//delete confirm
     $(".delete-btn").click(function(){
-       $("#ajax_button").html("<a href='/<?php echo $this->request->params['controller'] ?>/delete/"+ $(this).attr("data-id")+"' class='btn btn-outline'>Confirm</a>");
+       $("#ajax_button").html("<a href='/Workflowactions/delete/"+ $(this).attr("data-id")+"' class='btn btn-outline'>Confirm</a>");
       $("#trigger").click();
     });
  

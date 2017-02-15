@@ -23,7 +23,7 @@
     </fieldset>
     <div class="box-footer">
     <?=$this->Html->link(__('Cancel'), ['action' => 'index'], ['escape' => false])?>
-    <?=$this->Html->link(__('Edit workflowrule'), ['action' => 'edit', $workflowrule['id']],['class'=>'btn btn-primary label-info pull-right submit'], ['escape' => false])?>
+    <?=$this->Html->link(__('Edit workflowrule'), ['action' => 'edit', $workflowrule['id']],['class'=>'btn btn-primary label-info pull-right submit','id'=>'editbtn'], ['escape' => false])?>
      <!-- <?= $this->Form->button(__('Update'),['title'=>'Update','class'=>'pull-right submit']) ?> -->
     </div>
     <?= $this->Form->end() ?>
@@ -35,7 +35,7 @@
       <div class="box-body">
     <table id="mptlindextbl" class="table table-hover  table-bordered ">
         <thead>
-            <tr>
+            <tr >
            	
                 <th data-orderable="false"><input type="checkbox" name="select_all" value="1" id="select-all" ></th>
            		<?php
@@ -102,7 +102,7 @@ $this->Html->script([
   }
   $(function () {
   	
-  $(".submit").click(function (){
+  $("#editbtn").click(function (){
          //save all rows on submit button
 		var postdata=[]; 		
     	var tbl = $("#mptlindextbl tbody");
@@ -134,7 +134,7 @@ $this->Html->script([
           "autoWidth": false,
           "scrollX":true,
           colReorder: false,
-          rowReorder: { update:false },
+          rowReorder: { selector: 'tr td.move-event',update:false },
           stateSave:false,
           responsive: true,
           "drawCallback": function( settings ) {
@@ -150,12 +150,26 @@ $this->Html->script([
          "ajax": "/Workflowactions/ajaxData?workflowrule="+<?php echo $ruleid ?>,
          'columnDefs': [{
          'targets': 0,
-         'className': 'text-center',
-         'render': function (data, type, full, meta){
+         'className': 'text-center move-event',
+        'render': function (data, type, full, meta){
             return '<input type="checkbox" class="mptl-lst-chkbox" name="chk-' + data + '" value="' + $('<div/>').text(data).html() + '">';
-         },}]
+        }},{ targets:6, 'className': 'reorderable' },
+         { targets: '_all', 'className': 'move-event' }]
     });
 
+
+//row reorder
+table.on( 'row-reorder', function ( e, diff, edit ) {
+ 
+	for ( var i=0, ien=diff.length ; i<ien ; i++ ) {
+			
+		var cell = table.cell(table.row(diff[i].node),1);
+		cell.data(diff[i].newPosition+1);
+		
+		
+	}
+	
+});
 
  $("#actionspopover").on("show.bs.modal", function(e) {
 		//loading icon show
@@ -199,7 +213,7 @@ $this->Html->script([
 function tableLoaded() {
 	//delete confirm
     $(".delete-btn").click(function(){
-       $("#ajax_button").html("<a href='/<?php echo $this->request->params['controller'] ?>/delete/"+ $(this).attr("data-id")+"' class='btn btn-outline'>Confirm</a>");
+       $("#ajax_button").html("<a href='/Workflowactions/delete/"+ $(this).attr("data-id")+"' class='btn btn-outline'>Confirm</a>");
       $("#trigger").click();
     });
  
