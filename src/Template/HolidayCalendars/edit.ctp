@@ -119,8 +119,21 @@ $this->Html->script([
         }
   }
   $(function () {
+  	//set weekly off selected days
+  	var woffdata=[];
+  	var days = { '0': 'Sunday',  '1': 'Monday', '2': 'Tuesday', '3': 'Wednesday', '4': 'Thursday', '5': 'Friday', '6': 'Saturday'};
+  	var woffarr=<?php echo $holidayarr ?>;
+  	for (i=0; i<woffarr.length; i++) {	
+		
+		for(var k in days){
+			
+			if(woffarr[i] === days[k]){
+				woffdata.push(k);
+			}
+		}
+	}
   	
- 
+ 	$("#weekoff-ids").val(woffdata);
 
   	$('.mptldphc').datepicker({
 	    			format:"yyyy/mm/dd",autoclose: true,clearBtn: true
@@ -318,7 +331,7 @@ function formatDate(date) {
 function tableLoaded() {
 	//delete confirm
     $(".delete-btn").click(function(){
-       $("#ajax_button").html("<a href='/<?php echo $this->request->params['controller'] ?>/delete/"+ $(this).attr("data-id")+"' class='btn btn-outline'>Confirm</a>");
+       $("#ajax_button").html("<a href='/Holidays/delete/"+ $(this).attr("data-id")+"' class='btn btn-outline'>Confirm</a>");
       $("#trigger").click();
     });
  

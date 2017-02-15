@@ -193,6 +193,16 @@ class HolidayCalendarsController extends AppController
         $configs=$this->CreateConfigs->find('all')->where(['table_name' => 'Holidays'])->order(['"id"' => 'ASC'])->toArray();
         $this->set('configs',$configs);	
 		
+		$this->loadModel('Holidays');
+        $distinctweekoffs=$this->Holidays->find('All')->select(['woffname' => 'Holidays.name'])->distinct(['Holidays.name'])->where(['holiday_calendar_id'=>$id])->andwhere(['holiday_class'=>'2'])->toArray();
+    	
+		$arr=array();
+    	for ($x = 0; $x < sizeof($distinctweekoffs); $x++) {
+    		array_push($arr,$distinctweekoffs[$x]['woffname']);
+    		
+		} 
+		$this->set('holidayarr', json_encode($arr));
+
 		
         $holidayCalendar = $this->HolidayCalendars->get($id, [
             'contain' => []
