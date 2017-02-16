@@ -146,6 +146,5 @@ class HolidaysController extends AppController
             $this->Flash->error(__('The holiday could not be deleted. Please, try again.'));
         }
 	return $this->redirect($this->referer());
-        // return $this->redirect(['action' => 'index']);
     }
 }

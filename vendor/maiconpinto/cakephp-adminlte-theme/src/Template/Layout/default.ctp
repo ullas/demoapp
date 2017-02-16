@@ -145,6 +145,9 @@ div.dataTables_filter input {
 #myinfopic{
 	max-width:100%;max-height:100%;margin:auto;
 }
+.move-event{
+	cursor: move;
+}
 </style>
 
 </head>

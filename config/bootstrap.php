@@ -117,13 +117,13 @@ mb_internal_encoding(Configure::read('App.encoding'));
 // \Cake\I18n\Time::setToStringFormat('HH:mm:ss');
 // Cake\I18n\Date::setToStringFormat('dd.MM.yyyy');
 // // Cake\I18n\FrozenDate::setToStringFormat('yyyy/MM/dd');
-// 
+//
 // \Cake\Database\Type::build('date')
     // ->useImmutable()
     // ->useLocaleParser()
     // ->setLocaleFormat('dd.MM.yyyy');
-    
-  
+
+
 ini_set('intl.default_locale', 'fr-FR');
 Cake\I18n\Date::setToStringFormat('yyyy/MM/dd');
 Cake\I18n\FrozenDate::setToStringFormat('yyyy/MM/dd');
@@ -131,7 +131,7 @@ Cake\I18n\FrozenDate::setToStringFormat('yyyy/MM/dd');
     ->useImmutable()
     ->useLocaleParser()
     ->setLocaleFormat('yyyy/MM/dd');
-    
+
 // ini_set('intl.default_locale', Configure::read('App.defaultLocale'));
 
 /**
@@ -247,17 +247,17 @@ Type::build('date')
     ->useLocaleParser();
 Type::build('datetime')
     ->useImmutable();
-// Type :: build ( 'date' ) 
- // -> useLocaleParser ( ) 
- // -> setLocaleFormat ( 'dd/mm/yyyy' ) ; 
-        
-	
-	
+// Type :: build ( 'date' )
+ // -> useLocaleParser ( )
+ // -> setLocaleFormat ( 'dd/mm/yyyy' ) ;
+
+
+
 	Configure::write('Theme', [
-    'title' => 'PeopleHR',
+    'title' => 'MayHaw',
     'logo' => [
-        'mini' => '<b>P</b>HR',
-        'large' => '<b>People</b>HR'
+        'mini' => '<b>M</b>HR',
+        'large' => '<b>May</b>Haw'
     ],
     'login' => [
         'show_remember' => true,
@@ -265,4 +265,3 @@ Type::build('datetime')
         'show_social' => false
     ]
 ]);
-
