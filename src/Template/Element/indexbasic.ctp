@@ -4,12 +4,12 @@
     <small>List</small>
   </h1>
   <ol class="breadcrumb">
-    <li><?= $this->Html->link('<i class="fa fa-angle-right"></i> '.__('Add'), ['action' => 'add'], ['escape' => false]) ?></li> 
+    <li><?= $this->Html->link('<i class="fa fa-angle-right"></i> '.__('Add'), ['action' => 'add'], ['escape' => false]) ?></li>
   </ol>
 </section>
 <section class="content">
    <input type="hidden" value="1"  id="basicfilter"/>
-  
+
   <div class="row">
         <div class="col-md-12">
   <div class="box box-primary">
@@ -17,11 +17,11 @@
     <table id="mptlindextbl" class="table table-hover  table-bordered ">
         <thead>
             <tr>
-           	
+
                 <th data-orderable="false"><input type="checkbox" name="select_all" value="1" id="select-all" ></th>
            		<?php
                   for($i=1;$i<count($configs);$i++){
-                  		
+
                   	echo "<th>". $configs[$i]['title'] ."</th>";
                   }
                 ?>
@@ -50,7 +50,7 @@
   </div>
 </div>
 <?php
-$this->Html->css([ 'AdminLTE./plugins/datatables/dataTables.bootstrap', 
+$this->Html->css([ 'AdminLTE./plugins/datatables/dataTables.bootstrap',
   'AdminLTE./plugins/iCheck/all',
    'AdminLTE./plugins/datatables/extensions/ColReorder/css/dataTables.colReorder.min',
  ], ['block' => 'css']);
@@ -66,20 +66,20 @@ $this->Html->script([
 
 <?php $this->start('scriptBotton'); ?>
 <script>
-  var table; var order; 
+  var table; var order;
    function deleteRecord(btn){
-  	
+
   	    if (btn == 'yes') {
-            
+
             jQuery("form")[0].submit();
         }
   }
   $(function () {
-  	
+
   	 updateFilterActiveFlag();
-    
+
      $("#delete").click(function(){
-  		
+
   	   if($(".mptl-lst-chkbox:checked").length==0){
       	alert("No item selected. Please select at least one item ");
       	return;
@@ -88,19 +88,19 @@ $this->Html->script([
 	   	deleteRecord('yes');
 	   }
   	});
-      
+
     $('#settings').on('shown.bs.modal', function() {
        setOrder();
-    })  
-      
+    })
+
     //Flat blue color scheme for iCheck
     $('input[type="checkbox"].flat-blue, input[type="radio"].flat-blue').iCheck({
       checkboxClass: 'icheckbox_flat-blue',
       radioClass: 'iradio_flat-blue'
     });
-    
-    
-      
+
+
+
      table= $('#mptlindextbl').DataTable({
           "paging": true,
           //disable 0th column checkbox default sort order
@@ -134,24 +134,24 @@ $this->Html->script([
         'render': function (data, type, full, meta){
             return '<input type="checkbox" class="mptl-lst-chkbox" name="chk-' + data + '" value="' + $('<div/>').text(data).html() + '">';
         },
-           
+
      },
-     
+
      ]
     });
-    
-    
-     
+
+
+
      $('<a href="#" class="btn btn-sm btn-success" data-toggle="modal" data-target="#settings" style="margin-left:15px;" title="Table Settings"><i class="fa fa-gear" aria-hidden="true"></i></a>').appendTo('div.dataTables_filter');
-     
+
        $('.dataTables_filter input').unbind().on('keyup', function() {
-	 
+
 	var searchTerm = this.value.toLowerCase();
 	$.fn.dataTable.ext.search.push(function(settings, data, dataIndex) {
        //search only the following columns
-	   
-	   
-	  
+
+
+
        return true;
    })
    console.log(searchTerm);
@@ -161,16 +161,16 @@ $this->Html->script([
 
 //col reorder
  order= new $.fn.dataTable.ColReorder( table );
- 
- 
+
+
   // Handle click on "Select all" control
    $('#select-all').on('click', function(){
       // Get all rows with search applied
-     
+
       var rows = table.rows({ 'search': 'applied' }).nodes();
       // Check/uncheck checkboxes for all rows in the table
       $('input[type="checkbox"]', rows).prop('checked', this.checked);
-      
+
    });
    // Handle click on checkbox to set state of "Select all" control
    $('#mptlindextbl tbody').on('change', 'input[type="checkbox"]', function(){
@@ -185,15 +185,15 @@ $this->Html->script([
          }
       }
       setTurben();
-        
-       
-       
+
+
+
    });
    // Handle click on " Settings Select all" control
    $('#mptl_settings_chk_all').on('click', function(){
       // Check/uncheck checkboxes for all rows in the table
-      
-      
+
+
       if( $(this).is(':checked') ){
          $('.mptl_settings_chk').prop('checked', true);
       }else{
@@ -201,38 +201,38 @@ $this->Html->script([
       }
    });
    // Handle click on checkbox to set state of "Settings Select all" control
-  
+
    $('mptl-tbl-settings tbody').on('change', 'input[type="checkbox"]', function(){
       // If checkbox is not checked
-      
+
       if(!this.checked){
          var el = $('#mptl_settings_chk_all').get(0);
-         
-         
+
+
          // If "Select all" control is checked and has 'indeterminate' property
          if(el && el.checked && ('indeterminate' in el)){
             // Set visual state of "Select all" control
             // as 'indeterminate'
             el.indeterminate = true;
          }
-      
+
       }
-     
+
    });
    $(".mptl-settings-save").click(function(){
        var hiddencols="";
        var c=<?php echo count($configs) ?> ;
-	   
+
        $('.mptl_settings_chk').each(function () {
 		    var sThisVal = (this.checked ? $(this).val() : "");
 		    var id=$(this).attr("id");
 		    var col=id.split("_")[3];
-		    
+
 		    if(col !=0 && c!=col){
 			    if(sThisVal){
-		    	
+
 			    	table.column(col).visible(true);
-			    	
+
 			    }else{
 			    	hiddencols.length>0? hiddencols+="," :hiddencols;
 			    	hiddencols+=col;
@@ -240,29 +240,29 @@ $this->Html->script([
 			    }
 		    }
 	   });
-	   
-	   
-	   
+
+
+
 	   $.post("/<?php echo $this->request->params['controller'] ?>/updateSettings",
    		 {
        		 columns: hiddencols
-       		 
+
    		 },
 	    function(data, status){
 	        $('#settings').modal('hide');
 	    });
-	  
+
 	     $('#settings').modal('hide');
-  
+
    });
     $('.mptl-daterange').change(function(){
     	// var ordr=table.colReorder.order();
     	 table.ajax.reload(null,false);
     	// table.colReorder.order(ordr);
     	 table.draw();
-    	
+
     });
-  
+
         //jQuery UI sortable for the settings modal
     $(".column-list").sortable({
         placeholder: "sort-highlight",
@@ -270,27 +270,27 @@ $this->Html->script([
         forcePlaceholderSize: true,
         zIndex: 999999
     });
-    
+
      $(".mptl-daterange").change(function(){
           updateFilterActiveFlag();
      });
-     
+
      setTurben();
   });
-  
+
 function tableLoaded() {
 	//delete confirm
     $(".delete-btn").click(function(){
        $("#ajax_button").html("<a href='/<?php echo $this->request->params['controller'] ?>/delete/"+ $(this).attr("data-id")+"' class='btn btn-outline'>Confirm</a>");
       $("#trigger").click();
     });
- 
+
     $("#mptlindextbl tbody").find('tr').each(function () {
     	$(this).find('td').each (function() {
         var innerHtml=$(this).find('div.mptldtbool').html();
         // true/false instead of 1/0
-        (innerHtml=="1") ? $(this).find('div.mptldtbool').html("True") : $(this).find('div.mptldtbool').html("False");      
-        });    
+        (innerHtml=="1") ? $(this).find('div.mptldtbool').html("True") : $(this).find('div.mptldtbool').html("False");
+        });
     });
 }
 
@@ -307,80 +307,80 @@ function setTurben()
 		    // Animation complete.
 		  });
       }
-}  
-  
+}
+
 function updateFilterActiveFlag()
 {
-	  
+
 	    var flagActive=false;
-	    
+
 	    $('.mptl-daterange').each(function () {
 		    var l= $(this).val().length;
 		    if(l>3){
 		    	flagActive=true;
-		    	
+
 		    }
 	   });
 	 	$('.mptl-filter-base').each(function (){
-    		
-    		
-    		
+
+
+
     		if(this.checked  && !($(this).is(':disabled'))){
     			flagActive=true;
-    			
+
     		}
     	});
-    	
-    	
+
+
     	  flagActive  ? $("#filterstatus").show() : 	$("#filterstatus").hide();
-    	
-    	
-    
+
+
+
 }
-$('.mptl-filter-base').on('ifChecked', function(event){ 
-	
+$('.mptl-filter-base').on('ifChecked', function(event){
+
 	setBasicFilter();
 });
-$('.mptl-filter-base').on('ifUnchecked', function(event){ 
-	
+$('.mptl-filter-base').on('ifUnchecked', function(event){
+
 	setBasicFilter();
 });
-  
+
  function setBasicFilter()
   {
   	  var filter="";
-  	 
+
        $('.mptl-filter-base').each(function () {
 		    var sThisVal = (this.checked ? $(this).val() : "");
 		    var id=$(this).attr("id");
 		    var col=id.split("_")[3];
 		    if(sThisVal){
-	    	
+
 		    	filter.length>0? filter+="," :filter;
 		    	filter+=col;
-		    	
+
 		    }
 	   });
   	  $("#basicfilter").val(filter);
-  	 
+
   	  updateFilterActiveFlag();
-  	 
-  	    
-  	  
+
+
+
     	 table.ajax.reload(null,true);
-    	
-    	 
+
+
     	 table.draw();
   }
-  
-  
+
+
   function setOrder()
   {
-  	
+
   }
-  
-  
-  
+
+
+
 </script>
 <?php $this->end(); ?>
 
@@ -392,7 +392,7 @@ $('.mptl-filter-base').on('ifUnchecked', function(event){
           <div class="modal-content">
               <div class="modal-header">
                   <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                  <h4 class="modal-title" id="myModalLabel"> PeopleHR</h4>
+                  <h4 class="modal-title" id="myModalLabel"> MayHaw</h4>
               </div>
               <div class="modal-body">
                   Do you  really want  to delete the element(s)?
