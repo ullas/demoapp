@@ -211,7 +211,7 @@ table.on( 'row-reorder', function ( e, diff, edit ) {
     	// table.draw();
 	})
 
-	$('<a href="/Workflowactions/add?wrid=<?php echo $ruleid ?>"  id="adddt" class="open-Popup btn btn-sm btn-success" data-toggle="modal" data-target="#actionspopover" style="margin-left:15px;" title="Add"><i class="fa fa-plus" aria-hidden="true"></i></a>').appendTo('div.dataTables_filter');
+	$('<a href="/Workflowactions/add?wrid=<?php echo $ruleid ?>"  id="adddt" class="open-Popup btn btn-sm btn-success" data-remote="false" data-toggle="modal" data-target="#actionspopover" style="margin-left:15px;" title="Add"><i class="fa fa-plus" aria-hidden="true"></i></a>').appendTo('div.dataTables_filter');
 
 });
 

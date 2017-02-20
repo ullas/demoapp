@@ -212,7 +212,7 @@ $('#createwr').click(function(){
 	})
 
 	var holidaycalendarid=$("#holidaycalendarid").val();
-	$('<a href="/Workflowactions/add" id="adddt" class="open-Popup btn btn-sm btn-success disabled" data-toggle="modal" data-target="#actionspopover" style="margin-left:15px;" title="Add"><i class="fa fa-plus" aria-hidden="true"></i></a>').appendTo('div.dataTables_filter');
+	$('<a href="/Workflowactions/add" id="adddt" class="open-Popup btn btn-sm btn-success disabled" data-remote="false" data-toggle="modal" data-target="#actionspopover" style="margin-left:15px;" title="Add"><i class="fa fa-plus" aria-hidden="true"></i></a>').appendTo('div.dataTables_filter');
 
 });
 

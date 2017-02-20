@@ -73,7 +73,7 @@ class HolidaysTable extends Table
         $validator
             ->requirePresence('holiday_code', 'create')
             ->notEmpty('holiday_code')
-            ->add('holiday_code', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
+            ->add('holiday_code', 'unique', ['rule' => 'validateUnique', 'provider' => 'table','message' => 'Holiday Code should be unique.']);
 
         return $validator;
     }

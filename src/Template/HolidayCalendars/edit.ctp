@@ -23,7 +23,7 @@
             echo $this->Form->input('valid_to', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
 
 
-			echo $this->Form->input('weekoff._ids', ['label'=>'Weekly Off','options' => array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'),'class'=>'select2']);
+			// echo $this->Form->input('weekoff._ids', ['label'=>'Weekly Off','options' => array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'),'class'=>'select2']);
 
         ?>
 
@@ -36,15 +36,15 @@
     </div>
     <?= $this->Form->end() ?>
 </div></div>
-<!-- <div class="box box-primary"><div class="box-body">
-	<table id="weeklyofftable" border="1">
-        <thead><tr>
-            <th>Date</th>
-        </tr>
-        </thead>
-        <tbody></tbody>
-    </table>
-</div></div> -->
+
+
+<div class="box box-primary"><div class="box-body">
+	<?php
+		echo $this->Form->input('weekoff._ids', ['label'=>'Weekly Off','options' => array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'),'class'=>'select2']);
+    ?>
+</div></div>
+
+
  <div class="box box-primary">
  	<div class="box-header"><h3 class="box-title">Holidays</h3></div>
       <div class="box-body">
@@ -113,7 +113,8 @@ $this->Html->script([
             jQuery("form")[0].submit();
         }
   }
-  $(function () {
+  $(document).ready(function(){  
+  	  	 
   	//set weekly off selected days
   	var woffdata=[];
   	var days = { '0': 'Sunday',  '1': 'Monday', '2': 'Tuesday', '3': 'Wednesday', '4': 'Thursday', '5': 'Friday', '6': 'Saturday'};
@@ -132,6 +133,7 @@ $this->Html->script([
 	    			format:"yyyy/mm/dd",autoclose: true,clearBtn: true
 	    		}).on('changeDate', function (e) {
            					dateChanged();
+           					weeklyOffProcess();
     					});
 	//select 2
     $(".select2").select2({ width: '100%',allowClear: false,placeholder: "Select" });
@@ -181,8 +183,11 @@ $this->Html->script([
  //get weekly off dates
  // $('#getweeklyoffdates').click(function(){
 $("#weekoff-ids").change(weeklyOffProcess);
-$("#valid-from").change(weeklyOffProcess);
-$("#valid-to").change(weeklyOffProcess);
+// $("#valid-from").change(weeklyOffProcess);
+// $("#valid-to").change(weeklyOffProcess);
+$("#valid-to").on("changeDate", function() {
+          weeklyOffProcess();
+});
 
 $("#hc-update").click(function(){
   if(document.getElementById('valid-from').value!="" && document.getElementById('valid-from').value!=undefined && document.getElementById('valid-to').value!="" && document.getElementById('valid-to').value!=undefined){
@@ -207,7 +212,8 @@ $("#hc-update").click(function(){
 		var link = $(e.relatedTarget);
 		$(this).find(".modal-body").load(link.attr("href"),function( response, status, xhr ){
 			//loading icon hide
-			if(e.relatedTarget!=null){$('#loadingmessage').hide();}
+			if(e.relatedTarget!=null){
+				$('#loadingmessage').hide();}
 			if ( status == "error" ) {
 				var msg = "Sorry but there was an error.";
 				alert(msg);
@@ -217,6 +223,10 @@ $("#hc-update").click(function(){
 	    		$('.mptldp').datepicker({
 	    			format:"yyyy/mm/dd",autoclose: true,clearBtn: true
 	    		});
+ //set mandatory * after required label	
+    $( ':input[required]' ).each( function () {
+        $("label[for='" + this.id + "']").addClass('mandatory');
+    });
 
 	    		//select 2
     			$(".select2").select2({ width: '100%',allowClear: true,placeholder: "Select" });
@@ -236,7 +246,7 @@ $("#hc-update").click(function(){
     	// table.draw();
 	})
 
-	$('<a href="/Holidays/add?hcid=<?php echo $calid ?>" class="open-Popup btn btn-sm btn-success" data-toggle="modal" data-target="#actionspopover" style="margin-left:15px;" title="Add"><i class="fa fa-plus" aria-hidden="true"></i></a>').appendTo('div.dataTables_filter');
+	$('<a href="/Holidays/add?hcid=<?php echo $calid ?>" class="open-Popup btn btn-sm btn-success" data-remote="false" data-toggle="modal" data-target="#actionspopover" style="margin-left:15px;" title="Add"><i class="fa fa-plus" aria-hidden="true"></i></a>').appendTo('div.dataTables_filter');
 }
 );
 //validfrom datepicker changed
@@ -317,7 +327,8 @@ function weeklyOffProcess(){
  	var d1 = new Date(validfrom);
 	var d2 = new Date(validtill);
   if (d1 > d2){
-    alert("The Valid From date is higher than Valid To date.");
+    // alert("The Valid From date is higher than Valid To date.");
+    showflash("failure","The Valid From date is higher than Valid To date.");
     return false;
   }
 	if(document.getElementById('valid-from').value!="" && document.getElementById('valid-from').value!=undefined && document.getElementById('valid-to').value!="" && document.getElementById('valid-to').value!=undefined){
@@ -349,7 +360,6 @@ function weeklyOffProcess(){
    		return false;
    }
  }
-
 
 </script>
 <?php $this->end(); ?>

@@ -224,6 +224,7 @@ $this->Html->script([ '/js/dropzone' ], ['block' => 'script']);
 <script type="text/javascript">
     $(document).ready(function(){
 
+
 // jQuery("[required]").after("<span class='required'>*</span>");
    
 //popover resize    	
@@ -309,6 +310,42 @@ $(window).off("resize").on("resize", function() {
 			})
 
 });
+
+
+function showflash(type,data) {
+
+        var output = '';
+        // if the flash message is not empty
+        if(data) {
+        // switch depending on flash type
+        switch(type) {
+            case 'success':
+                // print out a div with a success class
+                output += '<div class="alert alert-success alert-dismissible mptlalert"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>';
+                output += '<h4><i class="icon fa fa-check"></i> Alert!</h4>';
+                break;
+            case 'failure':
+                // print out a div with a failure class
+                output += '<div class="alert alert-danger alert-dismissible mptlalert"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>';
+                output += '<h4><i class="icon fa fa-ban"></i> Alert!</h4>';
+                break;
+            default:
+                // print out a default flash class
+                output += '<div class="alert alert-info alert-dismissible mptlalert"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>';
+                output += '<h4><i class="icon fa fa-info"></i> Alert!</h4>';
+                break;
+        	}
+			// save the flash message with the closing div
+        	output += data+'</div>';
+        }
+    // $(".content-header").append(output);
+    $(".content-header").prepend(output);
+    
+    
+    //hide flash alert message
+$('.mptlalert').delay(1500).hide('highlight', {color: '#66cc66'}, 1500);
+
+}
 </script>
 <?php echo $this->Html->script('AdminLTE.AdminLTE.min'); ?><script src="https://cdn.datatables.net/rowreorder/1.2.0/js/dataTables.rowReorder.min.js"></script>
 </body>

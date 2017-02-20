@@ -20,8 +20,7 @@
             echo $this->Form->input('valid_to', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled'=>true]);
 
 
-			echo $this->Form->input('weekoff._ids', ['label'=>'Weekly Off','options' => array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'),'class'=>'select2','disabled'=>true]);
-
+			
         ?>
 
         <!-- <div class="col-md-4 pull-right"><div class="form-group"><input type="button" value="Get Weekly Off Dates" class="btn btn-xs btn-default" id="getweeklyoffdates"/></div></div> -->
@@ -36,15 +35,11 @@
 
 
 
-<!-- <div class="box box-primary"><div class="box-body">
-	<table id="weeklyofftable" border="1">
-        <thead><tr>
-            <th>Date</th>
-        </tr>
-        </thead>
-        <tbody></tbody>
-    </table>
-</div></div> -->
+<div class="box box-primary"><div class="box-body">
+	<?php
+		echo $this->Form->input('weekoff._ids', ['label'=>'Weekly Off','options' => array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'),'class'=>'select2','disabled'=>true]);
+    ?>
+</div></div>
 
 
  <div class="box box-primary">
@@ -116,6 +111,20 @@ $this->Html->script([
         }
   }
   $(function () {
+  	
+  	//set weekly off selected days
+  	var woffdata=[];
+  	var days = { '0': 'Sunday',  '1': 'Monday', '2': 'Tuesday', '3': 'Wednesday', '4': 'Thursday', '5': 'Friday', '6': 'Saturday'};
+  	var woffarr=<?php echo $holidayarr ?>;
+  	for (i=0; i<woffarr.length; i++) {
+		for(var k in days){
+			if(woffarr[i] === days[k]){
+				woffdata.push(k);
+			}
+		}
+	}
+
+ 	$("#weekoff-ids").val(woffdata);
 
       $('.mptldphc').datepicker({
 	    			format:"yyyy/mm/dd",autoclose: true,clearBtn: true
@@ -244,6 +253,12 @@ $("#weekoff-ids").change(function(){
 	    		$('.mptldp').datepicker({
 	    			format:"yyyy/mm/dd",autoclose: true,clearBtn: true
 	    		});
+	    		//set mandatory * after required label	
+    $( ':input[required]' ).each( function () {
+        $("label[for='" + this.id + "']").addClass('mandatory');
+    });
+    
+
 	    		//select 2
     			$(".select2").select2({ width: '100%',allowClear: true,placeholder: "Select" });
 				//hide popover on button click
@@ -263,7 +278,7 @@ $("#weekoff-ids").change(function(){
 	})
 
 
-	$('<a href="/Holidays/add?hcid=<?php echo $calid ?>" class="open-Popup btn btn-sm btn-success" data-toggle="modal" data-target="#actionspopover" style="margin-left:15px;" title="Add"><i class="fa fa-plus" aria-hidden="true"></i></a>').appendTo('div.dataTables_filter');
+	$('<a href="/Holidays/add?hcid=<?php echo $calid ?>" class="open-Popup btn btn-sm btn-success" data-remote="false" data-toggle="modal" data-target="#actionspopover" style="margin-left:15px;" title="Add"><i class="fa fa-plus" aria-hidden="true"></i></a>').appendTo('div.dataTables_filter');
 
 });
 
