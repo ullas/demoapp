@@ -18,14 +18,14 @@
             echo $this->Form->input('country',['options' => $this->Country->get_countries(), 'empty' => true,'disabled'=>true]);
             echo $this->Form->input('valid_from', ['class' => 'mptldphc','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled'=>true]);
             echo $this->Form->input('valid_to', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled'=>true]);
-			
-			
+
+
 			echo $this->Form->input('weekoff._ids', ['label'=>'Weekly Off','options' => array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'),'class'=>'select2','disabled'=>true]);
-			
+
         ?>
-        
+
         <!-- <div class="col-md-4 pull-right"><div class="form-group"><input type="button" value="Get Weekly Off Dates" class="btn btn-xs btn-default" id="getweeklyoffdates"/></div></div> -->
-        
+
     </fieldset>
     <div class="box-footer">
     <?=$this->Html->link(__('Cancel'), ['action' => 'index'], ['escape' => false])?>
@@ -46,18 +46,18 @@
     </table>
 </div></div> -->
 
-              
+
  <div class="box box-primary">
  	<div class="box-header"><h3 class="box-title">Holidays</h3></div>
       <div class="box-body">
     <table id="mptlindextbl" class="table table-hover  table-bordered ">
         <thead>
             <tr>
-           	
+
                 <th data-orderable="false"><input type="checkbox" name="select_all" value="1" id="select-all" ></th>
            		<?php
                   for($i=1;$i<count($configs);$i++){
-                  		
+
                   	echo "<th>". $configs[$i]['title'] ."</th>";
                   }
                 ?>
@@ -91,7 +91,7 @@
 <?php echo $this->element('popoverelmnt'); ?>
 
 <?php
-$this->Html->css([ 'AdminLTE./plugins/datatables/dataTables.bootstrap', 
+$this->Html->css([ 'AdminLTE./plugins/datatables/dataTables.bootstrap',
   'AdminLTE./plugins/iCheck/all',
    'AdminLTE./plugins/datatables/extensions/ColReorder/css/dataTables.colReorder.min',
  ], ['block' => 'css']);
@@ -107,22 +107,22 @@ $this->Html->script([
 
 <?php $this->start('scriptBotton'); ?>
 <script>
-  var table; var order; 
+  var table; var order;
    function deleteRecord(btn){
-  	
+
   	    if (btn == 'yes') {
-            
+
             jQuery("form")[0].submit();
         }
   }
   $(function () {
-    
+
       $('.mptldphc').datepicker({
 	    			format:"yyyy/mm/dd",autoclose: true,clearBtn: true
 	    		}).on('changeDate', function (e) {
            					dateChanged();
     					});
-    					
+
      table= $('#mptlindextbl').DataTable({
           "paging": true,
           //disable 0th column checkbox default sort order
@@ -156,35 +156,35 @@ $this->Html->script([
         'render': function (data, type, full, meta){
             return '<input type="checkbox" class="mptl-lst-chkbox" name="chk-' + data + '" value="' + $('<div/>').text(data).html() + '">';
         },
-           
+
      },
-     
+
      ]
-    
-    
-	
+
+
+
 });
 
 //col reorder
  order= new $.fn.dataTable.ColReorder( table );
- 
+
  //get weekly off dates
  // $('#getweeklyoffdates').click(function(){
 $("#weekoff-ids").change(function(){
- 	
+
  	var validfrom = document.getElementById('valid-from').value;
  	var validtill = document.getElementById('valid-to').value;
  	var d1 = new Date(validfrom);
 	var d2 = new Date(validtill);
-	
+
 	if(document.getElementById('valid-from').value!="" && document.getElementById('valid-from').value!=undefined && document.getElementById('valid-to').value!="" && document.getElementById('valid-to').value!=undefined){
 		var weekoffdate = $("#weekoff-ids").val();
-	
+
 	var offdates = '';
 	if(weekoffdate!=null){offdates =weekoffdate.toString().split(',');}
  	var result=calcWeekOffDays(d1,d2,offdates);
- 	
- 	
+
+
  	// var name=$("#name").val();
     // var name="test";
     // var date="2017-01-26";
@@ -193,31 +193,31 @@ $("#weekoff-ids").change(function(){
     	// table.ajax.reload(null,false);
     	// table.draw();
     // });
- 	
- 	
- 	//iniitially delete all 
+
+
+ 	//iniitially delete all
  	$.get('/HolidayCalendars/deleteWeekOff?holidaycalendar=<?php echo $calid ?>', function(d) {
     	// alert(d);
     });
-    		
-   var postdata=[]; 		
+
+   var postdata=[];
  	if(result!=null){
 		for(t = 0; t < result.length; t++){
 			var resArr = result[t].toString().split('^');
 			var holidaycode = resArr[0].replace(/-/g, "");
-			
+
 		    postdata.push(result[t]+"^"+<?php echo $calid ?>+"^"+holidaycode);
 			// $.get('/HolidayCalendars/addWeekOff?name='+resArr[1]+"&date="+resArr[0]+"&holidaycode="+holidaycode+"&holidaycalendar="+"1"+"&holidayclass="+"2", function(d) {
     			// alert(d);
     		// });
-    		
+
   		}
-  		
+
   		$.get('/HolidayCalendars/addWeekOff?content='+JSON.stringify(postdata), function(d) {
     		// alert(d);
     	});
   	}
-  	
+
   	//reload table
   	table.ajax.reload(null,false);
     // table.draw();
@@ -226,8 +226,8 @@ $("#weekoff-ids").change(function(){
    		return false;
    }
  });
- 
- 
+
+
  $("#actionspopover").on("show.bs.modal", function(e) {
 		//loading icon show
 		if(e.relatedTarget!=null){$('#loadingmessage').show();}
@@ -239,12 +239,12 @@ $("#weekoff-ids").change(function(){
 				var msg = "Sorry but there was an error.";
 				alert(msg);
 			}else{
-				
+
 				//datepicker
 	    		$('.mptldp').datepicker({
 	    			format:"yyyy/mm/dd",autoclose: true,clearBtn: true
 	    		});
-	    		//select 2 
+	    		//select 2
     			$(".select2").select2({ width: '100%',allowClear: true,placeholder: "Select" });
 				//hide popover on button click
 				$( ".popoverDelete" ).click(function() {
@@ -261,16 +261,16 @@ $("#weekoff-ids").change(function(){
   		table.ajax.reload(null,false);
     	// table.draw();
 	})
-	
-	
+
+
 	$('<a href="/Holidays/add?hcid=<?php echo $calid ?>" class="open-Popup btn btn-sm btn-success" data-toggle="modal" data-target="#actionspopover" style="margin-left:15px;" title="Add"><i class="fa fa-plus" aria-hidden="true"></i></a>').appendTo('div.dataTables_filter');
-     
+
 });
 
 //validfrom datepicker changed
 function dateChanged() {
 	var validfrom = document.getElementById('valid-from').value;
- 	
+
 	var d = new Date(validfrom);
 	var year = d.getFullYear();
 	var month = d.getMonth();
@@ -296,17 +296,17 @@ function calcWeekOffDays(dDate1, dDate2, dArr) {
 	weekday[4] = "Thursday";
 	weekday[5] = "Friday";
 	weekday[6] = "Saturday";
-	
+
     while (date < dDate2) {
     	for (i = 0; i < dArr.length; i++) {
     		if (date.getDay().toString() === dArr[i].toString()){//console.log(formatDate(new Date(date)));
          		dates.push(formatDate(new Date(date))+"^"+weekday[date.getDay()]);
         	}
     	}
-        
+
         date.setDate( date.getDate() + 1 );
     }
-    
+
     return dates;
 }
 function formatDate(date) {
@@ -319,27 +319,27 @@ function formatDate(date) {
     if (day.length < 2) day = '0' + day;
 
     return [year, month, day].join('-');
-} 
+}
 function tableLoaded() {
 	//delete confirm
     $(".delete-btn").click(function(){
        $("#ajax_button").html("<a href='/Holidays/delete/"+ $(this).attr("data-id")+"' class='btn btn-outline'>Confirm</a>");
       $("#trigger").click();
     });
- 
+
     $("#mptlindextbl tbody").find('tr').each(function () {
     	$(this).find('td').each (function() {
         var innerHtml=$(this).find('div.mptldtbool').html();
         // true/false instead of 1/0
-        (innerHtml=="1") ? $(this).find('div.mptldtbool').html("True") : $(this).find('div.mptldtbool').html("False");      
-        });    
+        (innerHtml=="1") ? $(this).find('div.mptldtbool').html("True") : $(this).find('div.mptldtbool').html("False");
+        });
     });
 }
 
 
-  
-  
-  
+
+
+
 </script>
 <?php $this->end(); ?>
 
@@ -350,7 +350,7 @@ function tableLoaded() {
           <div class="modal-content">
               <div class="modal-header">
                   <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                  <h4 class="modal-title" id="myModalLabel"> PeopleHR</h4>
+                  <h4 class="modal-title" id="myModalLabel"> MayHaw</h4>
               </div>
               <div class="modal-body">
                   Do you  really want  to delete the element(s)?
@@ -362,10 +362,10 @@ function tableLoaded() {
           </div>
       </div>
   </div>
- 
- 
+
+
 <!-- remove clear button for weekly selection dates  -->
-<style>	
+<style>
 .select2-selection--multiple .select2-selection__rendered .select2-selection__clear{
 	display:none;
 }
