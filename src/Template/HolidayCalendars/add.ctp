@@ -23,7 +23,7 @@
             echo $this->Form->input('valid_to', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
 
 
-			echo $this->Form->input('weekoff._ids', ['label'=>'Weekly Off','options' => array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'),'class'=>'select2']);
+			// echo $this->Form->input('weekoff._ids', ['label'=>'Weekly Off','options' => array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'),'class'=>'select2']);
 
         ?>
 
@@ -42,15 +42,11 @@
 
 
 
-<!-- <div class="box box-primary"><div class="box-body">
-	<table id="weeklyofftable" border="1">
-        <thead><tr>
-            <th>Date</th>
-        </tr>
-        </thead>
-        <tbody></tbody>
-    </table>
-</div></div> -->
+<div class="box box-primary"><div class="box-body">
+	<?php
+		echo $this->Form->input('weekoff._ids', ['label'=>'Weekly Off','options' => array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'),'class'=>'select2']);
+    ?>
+</div></div>
 
 
  <div class="box box-primary">
@@ -275,6 +271,11 @@ $("#weekoff-ids").change(function(){
 	    		$('.mptldp').datepicker({
 	    			format:"yyyy/mm/dd",autoclose: true,clearBtn: true
 	    		});
+	    		//set mandatory * after required label	
+    $( ':input[required]' ).each( function () {
+        $("label[for='" + this.id + "']").addClass('mandatory');
+    });
+    
 	    		//select 2
     			$(".select2").select2({ width: '100%',allowClear: true,placeholder: "Select" });
 				//hide popover on button click
@@ -294,7 +295,7 @@ $("#weekoff-ids").change(function(){
 	})
 
 	var holidaycalendarid=$("#holidaycalendarid").val();
-	$('<a href="/Holidays/add" id="adddt" class="open-Popup btn btn-sm btn-success disabled" data-toggle="modal" data-target="#actionspopover" style="margin-left:15px;" title="Add"><i class="fa fa-plus" aria-hidden="true"></i></a>').appendTo('div.dataTables_filter');
+	$('<a href="/Holidays/add" id="adddt" class="open-Popup btn btn-sm btn-success disabled" data-remote="false" data-toggle="modal" data-target="#actionspopover" style="margin-left:15px;" title="Add"><i class="fa fa-plus" aria-hidden="true"></i></a>').appendTo('div.dataTables_filter');
 
 });
 
