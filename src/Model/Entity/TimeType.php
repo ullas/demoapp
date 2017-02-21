@@ -14,14 +14,18 @@ use Cake\ORM\Entity;
  * @property float $perm_fractions_hours
  * @property string $calc_base
  * @property bool $flex_req_allow
- * @property string $time_acc_type
  * @property string $take_rule
  * @property string $code
  * @property string $name
  * @property int $customer_id
+ * @property bool $iscarryforward
+ * @property bool $isleavewithoutpay
+ * @property bool $allow_negative_balance
+ * @property bool $includeholidayswithinleaveasleaves
+ * @property int $time_account_type_id
  *
  * @property \App\Model\Entity\Customer $customer
- * @property \App\Model\Entity\Workflow $workflow
+ * @property \App\Model\Entity\TimeAccountType $time_account_type
  * @property \App\Model\Entity\TimeTypeProfile[] $time_type_profiles
  */
 class TimeType extends Entity

@@ -133,8 +133,12 @@ class WorkflowactionsController extends AppController
             }
 			return $this->redirect($this->referer());
         }
+		
+		$positionarr = $this->Workflowactions->find('all')->select(['position_id'])->where(['workflowrule_id'=>$this->request->query['wrid']]);
+		
+
         $workflowrules = $this->Workflowactions->Workflowrules->find('list', ['limit' => 200]);
-        $positions = $this->Workflowactions->Positions->find('list', ['limit' => 200]);
+        $positions = $this->Workflowactions->Positions->find('list', ['limit' => 200])->where(['Positions.id NOT IN'=>$positionarr]);
         $customers = $this->Workflowactions->Customers->find('list', ['limit' => 200]);
         $this->set(compact('workflowaction', 'workflowrules', 'positions', 'nextactions', 'onfailureactions', 'customers'));
         $this->set('_serialize', ['workflowaction']);
@@ -163,8 +167,11 @@ class WorkflowactionsController extends AppController
             }
 			return $this->redirect($this->referer());
         }
+        $positionarr = $this->Workflowactions->find('all')->select(['position_id'])->where(['workflowrule_id'=>$id]);
+		
+
         $workflowrules = $this->Workflowactions->Workflowrules->find('list', ['limit' => 200]);
-        $positions = $this->Workflowactions->Positions->find('list', ['limit' => 200]);
+        $positions = $this->Workflowactions->Positions->find('list', ['limit' => 200])->where(['Positions.id NOT IN'=>$positionarr]);
         $customers = $this->Workflowactions->Customers->find('list', ['limit' => 200]);
         $this->set(compact('workflowaction', 'workflowrules', 'positions', 'nextactions', 'onfailureactions', 'customers'));
         $this->set('_serialize', ['workflowaction']);
