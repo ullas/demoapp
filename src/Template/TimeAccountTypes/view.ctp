@@ -1,110 +1,51 @@
+<?= $this->element('templateelmnt'); ?>
 <section class="content-header">
-  <h1>
-    Time Account Type
-    <small>View</small>
-  </h1>
-  <ol class="breadcrumb">
-    <li>
-    <?= $this->Html->link('<i class="fa fa-mail-reply"></i> '.__('Back'), ['action' => 'index'], ['escape' => false]) ?>
-    </li>
-  </ol>
-</section>
-
-<!-- Main content -->
+      <h1>
+        Time Account Type
+        <small>View</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><?= $this->Html->link('<i class="fa fa-mail-reply"></i> '.__('Back'), ['action' => 'index'], ['escape' => false]) ?></li>
+      </ol>
+    </section>
 <section class="content">
-  <div class="box box-primary"><div class="box-body">
-    <table class="table table-hover">
-        <tr>
-            <th><?= __('Name') ?></th>
-            <td><?= h($timeAccountType->name) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Unit') ?></th>
-            <td><?= h($timeAccountType->unit) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Perm Reccur') ?></th>
-            <td><?= h($timeAccountType->perm_reccur) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Freq Period') ?></th>
-            <td><?= h($timeAccountType->freq_period) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Accrual Base') ?></th>
-            <td><?= h($timeAccountType->accrual_base) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Posting Order') ?></th>
-            <td><?= h($timeAccountType->posting_order) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Update Rule') ?></th>
-            <td><?= h($timeAccountType->update_rule) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Payout Eligiblity') ?></th>
-            <td><?= h($timeAccountType->payout_eligiblity) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Code') ?></th>
-            <td><?= h($timeAccountType->code) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Pay Component') ?></th>
-            <td><?= $timeAccountType->has('pay_component') ? $this->Html->link($timeAccountType->pay_component->name, ['controller' => 'PayComponents', 'action' => 'view', $timeAccountType->pay_component->id]) : '' ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Time To Actual Unit') ?></th>
-            <td><?= h($timeAccountType->time_to_actual_unit) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Pay Component Group') ?></th>
-            <td><?= $timeAccountType->has('pay_component_group') ? $this->Html->link($timeAccountType->pay_component_group->name, ['controller' => 'PayComponentGroups', 'action' => 'view', $timeAccountType->pay_component_group->id]) : '' ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Id') ?></th>
-            <td><?= $this->Number->format($timeAccountType->id) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Account Booking Off') ?></th>
-            <td><?= $this->Number->format($timeAccountType->account_booking_off) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('First Offset') ?></th>
-            <td><?= $this->Number->format($timeAccountType->first_offset) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Start Accrual') ?></th>
-            <td><?= $this->Number->format($timeAccountType->start_accrual) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Min Balance') ?></th>
-            <td><?= $this->Number->format($timeAccountType->min_balance) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Time To Accrual') ?></th>
-            <td><?= $this->Number->format($timeAccountType->time_to_accrual) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Start Date') ?></th>
-            <td><?= h($timeAccountType->start_date) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Valid From') ?></th>
-            <td><?= h($timeAccountType->valid_from) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Valid From Day') ?></th>
-            <td><?= h($timeAccountType->valid_from_day) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Proration Used') ?></th>
-            <td><?= $timeAccountType->proration_used ? __('Yes') : __('No'); ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Rounding Used') ?></th>
-            <td><?= $timeAccountType->rounding_used ? __('Yes') : __('No'); ?></td>
-        </tr>
-    </table>
-</div></div></section>
+	<div class="box box-primary"><div class="box-body">
+    <?= $this->Form->create($timeAccountType) ?>
+    <fieldset>
+        <?php
+            echo $this->Form->input('name',['disabled' => true]);
+            echo $this->Form->input('unit',['label'=>'Permitted Fractions for Unit Hours','class'=>'select2','options' => array('Hour(s)', 'Day(s)'), 'empty' => 'Choose','disabled' => true]);
+            echo $this->Form->input('perm_reccur',['label'=>'Permanent / Recurring','disabled' => true]);
+            echo $this->Form->input('start_date',['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
+            echo $this->Form->input('valid_from',['label'=>'Account Valid From (month) for account creation on a fix date','class'=>'select2','options' => array('1', '2','3','4','5','6','7','8','9','10','11','12'), 'empty' => 'Choose','disabled' => true]);
+            echo $this->Form->input('valid_from_day',['label'=>'Account Valid From (day)','disabled' => true]);
+            echo $this->Form->input('account_booking_off',['label'=>'Account Booking Offset (Months)','disabled' => true]);
+            echo $this->Form->input('freq_period',['label'=>'Frequency Period','class'=>'select2','options' => array('Weekly','bi Weekly','Monthly','Annually'), 'empty' => 'Choose','disabled' => true]);
+            echo $this->Form->input('first_offset',['label'=>'First Accrual Offset (Days)','disabled' => true]);
+            echo $this->Form->input('start_accrual',['label'=>'Start of accrual period','disabled' => true]);
+            echo $this->Form->input('accrual_base',['label'=>'Accruals Based On','disabled' => true]);
+            echo $this->Form->input('min_balance',['label'=>'Balance Cannot Fall Below','disabled' => true]);
+            echo $this->Form->input('posting_order',['class'=>'select2','options' => array('Oldest First' , 'Newest First'), 'empty' => 'Choose','disabled' => true]);
+            echo $this->Form->input('time_to_accrual',['label'=>'Time From Hire to First Accrual','disabled' => true]);
+			echo $this->Form->input('time_to_accrual_unit' ,['label'=>'Time Unit From Hire to First Accrual','class'=>'select2','options' => array('Days' , 'Weeks ', 'Months', 'Years'), 'empty' => 'Choose','disabled' => true]);
+            echo $this->Form->input('proration_used',['label'=>'Are Prorations used for New Hire Accruals','disabled' => true]);
+            echo $this->Form->input('rounding_used',['label'=>'Are rounding values included for New Hires','disabled' => true]);
+            echo $this->Form->input('update_rule',['label'=>'Period End Processing or Interim Update Rule','disabled' => true]);
+            echo $this->Form->input('payout_eligiblity',['disabled' => true]);
+            echo $this->Form->input('code',['disabled' => true]);
+            echo $this->Form->input('pay_component_id', ['options' => $payComponents, 'empty' => true,'disabled' => true]);
+            echo $this->Form->input('pay_component_group_id', ['options' => $payComponentGroups, 'empty' => true,'disabled' => true]);
+            echo $this->Form->input('iscarryforward',['label'=>'Is Carry Forward','disabled' => true]);
+            echo $this->Form->input('isleavewithoutpay',['label'=>'Is Leave Without Pay','disabled' => true]);
+            echo $this->Form->input('allownegativebalance',['label'=>'Allow Negative Balance','disabled' => true]);
+            echo $this->Form->input('includeholidayswithinleaveasleaves',['label'=>'Include Holidays within leave as leaves','disabled' => true]);
+            
+        ?>
+    </fieldset>
+    <div class="box-footer">
+    <?=$this->Html->link(__('Cancel'), ['action' => 'index'], ['escape' => false])?>
+    <?=$this->Html->link(__('Edit'), ['action' => 'edit', $timeAccountType['id']],['class'=>'btn btn-primary label-info pull-right'], ['escape' => false])?>
+    </div>
+    <?= $this->Form->end() ?>
+</div></div>
+</section>

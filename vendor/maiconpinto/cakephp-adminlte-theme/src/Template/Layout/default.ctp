@@ -347,6 +347,7 @@ $('.mptlalert').delay(1500).hide('highlight', {color: '#66cc66'}, 1500);
 
 }
 </script>
+<?php echo $this->fetch('scriptIndexBottom'); ?>
 <?php echo $this->Html->script('AdminLTE.AdminLTE.min'); ?><script src="https://cdn.datatables.net/rowreorder/1.2.0/js/dataTables.rowReorder.min.js"></script>
 </body>
 </html>

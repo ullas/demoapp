@@ -98,22 +98,6 @@ class TimeTypesTable extends Table
             ->notEmpty('name')
             ->add('name', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
 
-        $validator
-            ->boolean('iscarryforward')
-            ->allowEmpty('iscarryforward');
-
-        $validator
-            ->boolean('isleavewithoutpay')
-            ->allowEmpty('isleavewithoutpay');
-
-        $validator
-            ->boolean('allow_negative_balance')
-            ->allowEmpty('allow_negative_balance');
-
-        $validator
-            ->boolean('includeholidayswithinleaveasleaves')
-            ->allowEmpty('includeholidayswithinleaveasleaves');
-
         return $validator;
     }
 
