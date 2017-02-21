@@ -11,8 +11,6 @@ use Cake\ORM\Entity;
  * @property string $unit
  * @property string $perm_reccur
  * @property \Cake\I18n\Time $start_date
- * @property \Cake\I18n\Time $valid_from
- * @property \Cake\I18n\Time $valid_from_day
  * @property float $account_booking_off
  * @property string $freq_period
  * @property float $first_offset
@@ -27,12 +25,20 @@ use Cake\ORM\Entity;
  * @property string $payout_eligiblity
  * @property string $code
  * @property int $pay_component_id
- * @property string $time_to_actual_unit
+ * @property string $time_to_accrual_unit
  * @property int $pay_component_group_id
  * @property int $customer_id
+ * @property bool $iscarryforward
+ * @property bool $isleavewithoutpay
+ * @property bool $allownegativebalance
+ * @property bool $includeholidayswithinleaveasleaves
+ * @property int $valid_from
+ * @property int $valid_from_day
  *
  * @property \App\Model\Entity\PayComponent $pay_component
  * @property \App\Model\Entity\PayComponentGroup $pay_component_group
+ * @property \App\Model\Entity\Customer $customer
+ * @property \App\Model\Entity\TimeType[] $time_types
  */
 class TimeAccountType extends Entity
 {

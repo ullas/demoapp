@@ -1,6 +1,14 @@
 <section class="content-header">
   <h1>
-    <?php echo $this->request->params['controller'] ?>
+    <?php 
+    if(isset($title)){
+    	
+		echo $title;
+    }else{
+
+    	echo $this->request->params['controller'] ;
+    }
+?>
     <small>List</small>
   </h1>
   <ol class="breadcrumb">

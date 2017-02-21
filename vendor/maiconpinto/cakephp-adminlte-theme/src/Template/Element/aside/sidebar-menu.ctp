@@ -37,7 +37,7 @@ if (file_exists($file)) {
     <a href="#"> <i class="fa fa-calendar-times-o"></i> <span>Leave</span> <i class="fa fa-angle-left pull-right"></i>  </a>
     <ul class="treeview-menu">
     	<li><a href="<?php echo $this -> Url -> build('/TimeTypes'); ?>"><i class="fa fa-circle-o"></i> Leave Type</a></li>
-		<li><a href="<?php echo $this -> Url -> build('/TimeAccountTypes'); ?>"><i class="fa fa-circle-o"></i> Leave Application</a></li>
+		<li><a href="<?php echo $this -> Url -> build('/TimeAccountTypes'); ?>"><i class="fa fa-circle-o"></i> Time Account Type</a></li>
 	
     </ul>
     </li>

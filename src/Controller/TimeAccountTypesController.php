@@ -10,7 +10,8 @@ use App\Controller\AppController;
  */
 class TimeAccountTypesController extends AppController
 {
-var $components = array('Datatable');
+
+    var $components = array('Datatable');
 	
 	public function ajaxData() {
 		$this->autoRender= False;
@@ -27,6 +28,7 @@ var $components = array('Datatable');
 		$output =$this->Datatable->getView($fields,$contains);
 		echo json_encode($output);		
     }
+	
     /**
      * Index method
      *
@@ -57,8 +59,13 @@ var $components = array('Datatable');
     public function view($id = null)
     {
         $timeAccountType = $this->TimeAccountTypes->get($id, [
-            'contain' => ['PayComponents', 'PayComponentGroups', 'Customers']
+            'contain' => ['PayComponents', 'PayComponentGroups', 'Customers', 'TimeTypes']
         ]);
+		
+		$payComponents = $this->TimeAccountTypes->PayComponents->find('list', ['limit' => 200]);
+		$this->set('payComponents', $payComponents);
+		$payComponentGroups = $this->TimeAccountTypes->PayComponentGroups->find('list', ['limit' => 200]);
+		$this->set('payComponentGroups', $payComponentGroups);
 
         $this->set('timeAccountType', $timeAccountType);
         $this->set('_serialize', ['timeAccountType']);
