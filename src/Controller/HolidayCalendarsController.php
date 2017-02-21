@@ -173,7 +173,7 @@ class HolidayCalendarsController extends AppController
         $this->set('configs',$configs);	
         
         if ($this->request->is(['patch', 'post', 'put'])) {
-			// $id=$this->request->data['holidaycalendarid'];
+			$id=$this->request->data['holidaycalendarid'];
 			$holidayCalendar = $this->HolidayCalendars->get($id, [
            	 	'contain' => []
         	]);

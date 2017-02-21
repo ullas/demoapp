@@ -10,6 +10,7 @@ use Cake\Validation\Validator;
  * TimeTypes Model
  *
  * @property \Cake\ORM\Association\BelongsTo $Customers
+ * @property \Cake\ORM\Association\BelongsTo $TimeAccountTypes
  * @property \Cake\ORM\Association\HasMany $TimeTypeProfiles
  *
  * @method \App\Model\Entity\TimeType get($primaryKey, $options = [])
@@ -39,6 +40,9 @@ class TimeTypesTable extends Table
 
         $this->belongsTo('Customers', [
             'foreignKey' => 'customer_id'
+        ]);
+        $this->belongsTo('TimeAccountTypes', [
+            'foreignKey' => 'time_account_type_id'
         ]);
         $this->hasMany('TimeTypeProfiles', [
             'foreignKey' => 'time_type_id'
@@ -82,9 +86,6 @@ class TimeTypesTable extends Table
             ->allowEmpty('flex_req_allow');
 
         $validator
-            ->allowEmpty('time_acc_type');
-
-        $validator
             ->allowEmpty('take_rule');
 
         $validator
@@ -96,6 +97,22 @@ class TimeTypesTable extends Table
             ->requirePresence('name', 'create')
             ->notEmpty('name')
             ->add('name', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
+
+        $validator
+            ->boolean('iscarryforward')
+            ->allowEmpty('iscarryforward');
+
+        $validator
+            ->boolean('isleavewithoutpay')
+            ->allowEmpty('isleavewithoutpay');
+
+        $validator
+            ->boolean('allow_negative_balance')
+            ->allowEmpty('allow_negative_balance');
+
+        $validator
+            ->boolean('includeholidayswithinleaveasleaves')
+            ->allowEmpty('includeholidayswithinleaveasleaves');
 
         return $validator;
     }
@@ -112,6 +129,7 @@ class TimeTypesTable extends Table
         $rules->add($rules->isUnique(['code']));
         $rules->add($rules->isUnique(['name']));
         $rules->add($rules->existsIn(['customer_id'], 'Customers'));
+        $rules->add($rules->existsIn(['time_account_type_id'], 'TimeAccountTypes'));
 
         return $rules;
     }

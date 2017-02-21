@@ -11,9 +11,9 @@ use App\Controller\AppController;
 class TimeTypesController extends AppController
 {
 
-   var $components = array('Datatable');
+    var $components = array('Datatable');
 	
-	 public function ajaxData() {
+	public function ajaxData() {
 		$this->autoRender= False;
 		  
 		$this->loadModel('CreateConfigs');
@@ -23,11 +23,12 @@ class TimeTypesController extends AppController
 			$fields[] = array("name" => $value['field_name'] , "type" => $value['datatype'] );
 		}
 		
-		$contains=['Customers'];
+		$contains=['Customers', 'TimeAccountTypes'];
 									  
 		$output =$this->Datatable->getView($fields,$contains);
-		echo json_encode($output);			
+		echo json_encode($output);		
     }
+	
     /**
      * Index method
      *
@@ -35,12 +36,12 @@ class TimeTypesController extends AppController
      */
     public function index()
     {
-		$this->loadModel('CreateConfigs');
+    	$this->loadModel('CreateConfigs');
         $configs=$this->CreateConfigs->find('all')->where(['table_name' => $this->request->params['controller']])->order(['"id"' => 'ASC'])->toArray();
         $this->set('configs',$configs);	
 		
         $this->paginate = [
-            'contain' => ['Customers']
+            'contain' => ['Customers', 'TimeAccountTypes']
         ];
         $timeTypes = $this->paginate($this->TimeTypes);
 
@@ -58,9 +59,11 @@ class TimeTypesController extends AppController
     public function view($id = null)
     {
         $timeType = $this->TimeTypes->get($id, [
-            'contain' => ['Customers', 'TimeTypeProfiles']
+            'contain' => ['Customers', 'TimeAccountTypes', 'TimeTypeProfiles']
         ]);
 
+		$timeAccountTypes = $this->TimeTypes->TimeAccountTypes->find('list', ['limit' => 200]);
+		$this->set('timeAccountTypes', $timeAccountTypes);	
         $this->set('timeType', $timeType);
         $this->set('_serialize', ['timeType']);
     }
@@ -84,7 +87,8 @@ class TimeTypesController extends AppController
             }
         }
         $customers = $this->TimeTypes->Customers->find('list', ['limit' => 200]);
-        $this->set(compact('timeType', 'customers'));
+        $timeAccountTypes = $this->TimeTypes->TimeAccountTypes->find('list', ['limit' => 200]);
+        $this->set(compact('timeType', 'customers', 'timeAccountTypes'));
         $this->set('_serialize', ['timeType']);
     }
 
@@ -111,7 +115,8 @@ class TimeTypesController extends AppController
             }
         }
         $customers = $this->TimeTypes->Customers->find('list', ['limit' => 200]);
-        $this->set(compact('timeType', 'customers'));
+        $timeAccountTypes = $this->TimeTypes->TimeAccountTypes->find('list', ['limit' => 200]);
+        $this->set(compact('timeType', 'customers', 'timeAccountTypes'));
         $this->set('_serialize', ['timeType']);
     }
 
