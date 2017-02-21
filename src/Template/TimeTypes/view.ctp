@@ -17,16 +17,13 @@
             echo $this->Form->input('country',['options' => $this->Country->get_countries(), 'empty' => true,'disabled' => true]);
             echo $this->Form->input('classification',['disabled' => true]);
             echo $this->Form->input('unit',['class'=>'select2','options' => array('Hour(s)', 'Day(s)'), 'empty' => 'Choose','disabled' => true]);
-            echo $this->Form->input('perm_fractions_hours',['disabled' => true]);
-            echo $this->Form->input('perm_fractions_days',['class'=>'select2','options' => array('Quarter of a Day', 'Half a Day','3 Quarters of a Day','Full Day'),'empty'=>'Choose','disabled' => true]);
+            echo $this->Form->input('perm_fractions_hours',['disabled' => true,'label'=>'Permitted Fractions for Unit Hours']);
+            echo $this->Form->input('perm_fractions_days',['class'=>'select2','options' => array('Quarter of a Day', 'Half a Day','3 Quarters of a Day','Full Day'),'empty'=>'Choose','disabled' => true,'label'=>'Permitted Fractions for Unit Days']);
             echo $this->Form->input('calc_base',['disabled' => true]);
             echo $this->Form->input('code',['disabled' => true]);
 			echo $this->Form->input('time_account_type_id', ['options' => $timeAccountTypes, 'empty' => true,'disabled' => true]);
 			echo $this->Form->input('flex_req_allow',['disabled' => true]);
-            echo $this->Form->input('iscarryforward',['label'=>'Is Carry Forward','disabled' => true]);
-            echo $this->Form->input('isleavewithoutpay',['label'=>'Is Leave Without Pay','disabled' => true]);
-            echo $this->Form->input('allow_negative_balance',['label'=>'Allow Negative Balance','disabled' => true]);
-            echo $this->Form->input('includeholidayswithinleaveasleaves',['label'=>'Include Holidays within leave as leaves','disabled' => true]);
+
             
         ?>
     </fieldset>

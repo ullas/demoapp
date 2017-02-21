@@ -12,6 +12,7 @@ use Cake\Validation\Validator;
  * @property \Cake\ORM\Association\BelongsTo $PayComponents
  * @property \Cake\ORM\Association\BelongsTo $PayComponentGroups
  * @property \Cake\ORM\Association\BelongsTo $Customers
+ * @property \Cake\ORM\Association\HasMany $TimeTypes
  *
  * @method \App\Model\Entity\TimeAccountType get($primaryKey, $options = [])
  * @method \App\Model\Entity\TimeAccountType newEntity($data = null, array $options = [])
@@ -47,6 +48,9 @@ class TimeAccountTypesTable extends Table
         $this->belongsTo('Customers', [
             'foreignKey' => 'customer_id'
         ]);
+        $this->hasMany('TimeTypes', [
+            'foreignKey' => 'time_account_type_id'
+        ]);
     }
 
     /**
@@ -72,14 +76,6 @@ class TimeAccountTypesTable extends Table
         $validator
             ->date('start_date')
             ->allowEmpty('start_date');
-
-        $validator
-            ->date('valid_from')
-            ->allowEmpty('valid_from');
-
-        $validator
-            ->date('valid_from_day')
-            ->allowEmpty('valid_from_day');
 
         $validator
             ->decimal('account_booking_off')
@@ -130,7 +126,29 @@ class TimeAccountTypesTable extends Table
             ->add('code', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
 
         $validator
-            ->allowEmpty('time_to_actual_unit');
+            ->allowEmpty('time_to_accrual_unit');
+
+        $validator
+            ->boolean('iscarryforward')
+            ->allowEmpty('iscarryforward');
+
+        $validator
+            ->boolean('isleavewithoutpay')
+            ->allowEmpty('isleavewithoutpay');
+
+        $validator
+            ->boolean('allownegativebalance')
+            ->allowEmpty('allownegativebalance');
+
+        $validator
+            ->boolean('includeholidayswithinleaveasleaves')
+            ->allowEmpty('includeholidayswithinleaveasleaves');
+
+        $validator
+            ->allowEmpty('valid_from');
+
+        $validator
+            ->allowEmpty('valid_from_day');
 
         return $validator;
     }

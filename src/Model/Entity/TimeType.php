@@ -18,10 +18,6 @@ use Cake\ORM\Entity;
  * @property string $code
  * @property string $name
  * @property int $customer_id
- * @property bool $iscarryforward
- * @property bool $isleavewithoutpay
- * @property bool $allow_negative_balance
- * @property bool $includeholidayswithinleaveasleaves
  * @property int $time_account_type_id
  *
  * @property \App\Model\Entity\Customer $customer
