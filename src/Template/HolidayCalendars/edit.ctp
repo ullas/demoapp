@@ -196,11 +196,11 @@ $("#hc-update").click(function(){
     var d1 = new Date(validfrom);
   	var d2 = new Date(validto);
     if(d1>d2){
-      alert("The Valid From date is higher than Valid To date.");
+      showflash("failure","The Valid From date is higher than Valid To date.");
       return false;
     }
   }else{
-     alert("Please select a Valid From/Valid To date.");
+     showflash("failure","Please select a Valid From/Valid To date.");
      return false;
   }
   })
@@ -216,7 +216,7 @@ $("#hc-update").click(function(){
 				$('#loadingmessage').hide();}
 			if ( status == "error" ) {
 				var msg = "Sorry but there was an error.";
-				alert(msg);
+				showflash("failure",msg);
 			}else{
 
 				//datepicker
@@ -356,7 +356,7 @@ function weeklyOffProcess(){
   		table.ajax.reload(null,false);
     	// table.draw();
    }else{
-   		alert("Please select a Valid From/Valid To date.");
+   		showflash("failure","Please select a Valid From/Valid To date.");
    		return false;
    }
  }

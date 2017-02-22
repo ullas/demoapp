@@ -231,7 +231,7 @@ $("#weekoff-ids").change(function(){
   	table.ajax.reload(null,false);
     // table.draw();
     }else{
-   		alert("Please select the Valid From/Valid To date.");
+   		showflash("failure","Please select the Valid From/Valid To date.");
    		return false;
    }
  });
@@ -246,7 +246,7 @@ $("#weekoff-ids").change(function(){
 			if(e.relatedTarget!=null){$('#loadingmessage').hide();}
 			if ( status == "error" ) {
 				var msg = "Sorry but there was an error.";
-				alert(msg);
+				showflash("failure",msg);
 			}else{
 
 				//datepicker

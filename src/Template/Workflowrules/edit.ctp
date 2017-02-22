@@ -186,7 +186,7 @@ table.on( 'row-reorder', function ( e, diff, edit ) {
 			if(e.relatedTarget!=null){$('#loadingmessage').hide();}
 			if ( status == "error" ) {
 				var msg = "Sorry but there was an error.";
-				alert(msg);
+				showflash("failure",msg);
 			}else{
 
 				//datepicker
