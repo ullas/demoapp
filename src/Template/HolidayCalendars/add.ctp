@@ -295,7 +295,8 @@ $("#valid-to").on("changeDate", function() {
 	$('#actionspopover').on('hidden.bs.modal', function (e) {
 	  $('.modal-body', this).empty();
 	  	//reload table
-  		table.ajax.reload(null,false);
+	  	var holidaycalendarid=$("#holidaycalendarid").val();
+  		table.ajax.url('/Holidays/ajaxData?holidaycalendar='+holidaycalendarid).load();
     	// table.draw();
 	})
 
@@ -385,6 +386,10 @@ function weeklyOffProcess(){
   }
   
   var holidaycalendarid=$("#holidaycalendarid").val();
+  //retuurn if holidaycalendarid is null to stop loading datatable
+  if(holidaycalendarid == 'undefined' || holidaycalendarid == null || holidaycalendarid == ""){
+  	return false;
+  }
   
 	if(document.getElementById('valid-from').value!="" && document.getElementById('valid-from').value!=undefined && document.getElementById('valid-to').value!="" && document.getElementById('valid-to').value!=undefined){
     var weekoffdate = $("#weekoff-ids").val();
