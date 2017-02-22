@@ -90,7 +90,14 @@ class HolidaysController extends AppController
             } else {
                 $this->Flash->error(__('The holiday could not be saved. Please, try again.'));
             }
-			return $this->redirect($this->referer());
+			$actionstring = substr($this->referer(), -3);
+			if($actionstring==="add"){
+				$urlstr = str_replace('add', 'edit/'.$holiday['holiday_calendar_id'], $this->referer());
+				return $this->redirect($urlstr);
+			}else{
+				return $this->redirect($this->referer());
+			}
+			
         }
         $customers = $this->Holidays->Customers->find('list', ['limit' => 200]);
         $holidayCalendars = $this->Holidays->HolidayCalendars->find('list', ['limit' => 200]);
@@ -121,7 +128,13 @@ class HolidaysController extends AppController
                 $this->Flash->error(__('The holiday could not be saved. Please, try again.'.$holiday));
 				// return $this->redirect($this->referer());
             }
-			return $this->redirect($this->referer());
+			$actionstring = substr($this->referer(), -3);
+			if($actionstring==="add"){
+				$urlstr = str_replace('add', 'edit/'.$holiday['holiday_calendar_id'], $this->referer());
+				return $this->redirect($urlstr);
+			}else{
+				return $this->redirect($this->referer());
+			}
         }
         $customers = $this->Holidays->Customers->find('list', ['limit' => 200]);
         $holidayCalendars = $this->Holidays->HolidayCalendars->find('list', ['limit' => 200]);
