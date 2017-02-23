@@ -131,7 +131,13 @@ class WorkflowactionsController extends AppController
             } else {
                 $this->Flash->error(__('The workflowaction could not be saved. Please, try again.'));
             }
-			return $this->redirect($this->referer());
+			$actionstring = substr($this->referer(), -3);
+			if($actionstring==="add"){
+				$urlstr = str_replace('add', 'edit/'.$workflowaction['workflowrule_id'] , $this->referer());
+				return $this->redirect($urlstr);
+			}else{
+				return $this->redirect($this->referer());
+			}
         }
 		
 		$positionarr = $this->Workflowactions->find('all')->select(['position_id'])->where(['workflowrule_id'=>$this->request->query['wrid']]);
@@ -165,7 +171,13 @@ class WorkflowactionsController extends AppController
             } else {
                 $this->Flash->error(__('The workflowaction could not be saved. Please, try again.'));
             }
-			return $this->redirect($this->referer());
+			$actionstring = substr($this->referer(), -3);
+			if($actionstring==="add"){
+				$urlstr = str_replace('add', 'edit/'.$workflowaction['workflowrule_id'] , $this->referer());
+				return $this->redirect($urlstr);
+			}else{
+				return $this->redirect($this->referer());
+			}
         }
         $positionarr = $this->Workflowactions->find('all')->select(['position_id'])->where(['workflowrule_id'=>$id]);
 		

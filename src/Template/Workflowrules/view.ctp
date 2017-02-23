@@ -70,7 +70,10 @@
     	font-size: 45px;
 	}
 
-
+	.disLink{
+           pointer-events: none;
+           cursor: default;
+    }
 </style>
 <!-- add actions popover -->
 <?php echo $this->element('popoverelmnt'); ?>
@@ -152,7 +155,7 @@ $this->Html->script([
          'targets': 0,
          'className': 'text-center move-event',
         'render': function (data, type, full, meta){
-            return '<input type="checkbox" class="mptl-lst-chkbox" name="chk-' + data + '" value="' + $('<div/>').text(data).html() + '">';
+            return '<input type="checkbox" class="disLink mptl-lst-chkbox" name="chk-' + data + '" value="' + $('<div/>').text(data).html() + '">';
         }},{ targets:6, 'className': 'reorderable' },
          { targets: '_all', 'className': 'move-event' }]
     });
@@ -180,7 +183,7 @@ table.on( 'row-reorder', function ( e, diff, edit ) {
 			$('#loadingmessage').hide();
 			if ( status == "error" ) {
 				var msg = "Sorry but there was an error.";
-				alert(msg);
+				showflash("failure",msg);
 			}else{
 
 				//datepicker
@@ -205,7 +208,7 @@ table.on( 'row-reorder', function ( e, diff, edit ) {
     	// table.draw();
 	})
 
-	$('<a href="/Workflowactions/add?wrid=<?php echo $ruleid ?>"  id="adddt" class="open-Popup btn btn-sm btn-success" data-remote="false" data-toggle="modal" data-target="#actionspopover" style="margin-left:15px;" title="Add"><i class="fa fa-plus" aria-hidden="true"></i></a>').appendTo('div.dataTables_filter');
+	// $('<a href="/Workflowactions/add?wrid=<?php echo $ruleid ?>"  id="adddt" class="open-Popup btn btn-sm btn-success" data-remote="false" data-toggle="modal" data-target="#actionspopover" style="margin-left:15px;" title="Add"><i class="fa fa-plus" aria-hidden="true"></i></a>').appendTo('div.dataTables_filter');
 
 });
 
