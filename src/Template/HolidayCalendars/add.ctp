@@ -19,8 +19,8 @@
             echo $this->Form->input('calendar');
             echo $this->Form->input('name',['required' => true,'label'=>['text'=>'Name of Calendar','class'=>'mandatory']]);
             echo $this->Form->input('country',['options' => $this->Country->get_countries(), 'empty' => true]);
-            echo $this->Form->input('valid_from', ['class' => 'mptldphc','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
-            echo $this->Form->input('valid_to', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+            echo $this->Form->input('valid_from', ['required' => true,'class' => 'mptldphc','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+            echo $this->Form->input('valid_to', ['required' => true,'class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
 
 
 			// echo $this->Form->input('weekoff._ids', ['label'=>'Weekly Off','options' => array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'),'class'=>'select2']);
@@ -175,7 +175,7 @@ $('#createhc').click(function(){
 		var validfrom = document.getElementById("valid-from").value;
 		var validto = document.getElementById("valid-to").value;
 
-    	if (name != "" && name!=null) {
+    	if (name != "" && name!=null && validfrom != "" && validfrom!=null && validto != "" && validto!=null) {
 
     		$.get('/HolidayCalendars/createajax_data?calendar='+calendar+'&name='+name+'&country='+country+'&validfrom='+validfrom+'&validto='+validto, function(d) {
    		 		if(d!="error"){
@@ -192,7 +192,9 @@ $('#createhc').click(function(){
    		 		}
     		});
     	}else{
-    		showflash("failure","Please enter name for the holiday calendar.");
+    		if(name == "" || name==null){showflash("failure","Please enter name for the holiday calendar.");}
+    		else if(validfrom == "" || validfrom==null){showflash("failure","Please select a Valid From date.");}
+    		else if(validto == "" || validto==null){showflash("failure","Please select a Valid To date.");}
     		return false;
     	}
 

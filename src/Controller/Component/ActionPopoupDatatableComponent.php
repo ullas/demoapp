@@ -37,9 +37,9 @@ use Cake\Utility\Inflector;
             	'db' => 'id', 
             	'dt' => $length++,
             	'formatter' => function( $d, $row ,$modalname) {
-                	$buttons='<a href="/'.   $modalname  . '/view/'.$d.'" data-remote="false" data-toggle="modal" data-target="#actionspopover" class="open-Popup fa fa-file-text-o p3"></a>
-                					<a href="/'.   $modalname  . '/edit/'.$d.'" data-remote="false" data-toggle="modal" data-target="#actionspopover" class="open-Popup fa fa-pencil p3 text-aqua"></a>
-									<a href="#" class="delete-btn fa fa-trash text-red" data-id="'.$d.'"></a>';
+                	$buttons='<a href="/'.   $modalname  . '/view/'.$d.'" data-remote="false" data-toggle="modal" data-target="#actionspopover" class="disLink open-Popup fa fa-file-text-o p3"></a>
+                					<a href="/'.   $modalname  . '/edit/'.$d.'" data-remote="false" data-toggle="modal" data-target="#actionspopover" class="disLink open-Popup fa fa-pencil p3 text-aqua"></a>
+									<a href="#" class="disLink delete-btn fa fa-trash text-red" data-id="'.$d.'"></a>';
 						
                 	return $buttons;
             	}

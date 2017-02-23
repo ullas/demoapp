@@ -81,6 +81,11 @@
     	padding: 3px 9px 0 10px;
     	font-size: 45px;
 	}
+	
+	.disLink{
+           pointer-events: none;
+           cursor: default;
+    }
 </style>
 <!-- add actions popover -->
 <?php echo $this->element('popoverelmnt'); ?>
@@ -163,7 +168,7 @@ $this->Html->script([
         'targets': 0,
         'className': 'text-center',
         'render': function (data, type, full, meta){
-            return '<input type="checkbox" class="mptl-lst-chkbox" name="chk-' + data + '" value="' + $('<div/>').text(data).html() + '">';
+            return '<input type="checkbox" class="disLink mptl-lst-chkbox" name="chk-' + data + '" value="' + $('<div/>').text(data).html() + '">';
         },
 
      },
@@ -173,6 +178,7 @@ $this->Html->script([
 
 
 });
+
 
 //col reorder
  order= new $.fn.dataTable.ColReorder( table );
@@ -278,7 +284,7 @@ $("#weekoff-ids").change(function(){
 	})
 
 
-	$('<a href="/Holidays/add?hcid=<?php echo $calid ?>" class="open-Popup btn btn-sm btn-success" data-remote="false" data-toggle="modal" data-target="#actionspopover" style="margin-left:15px;" title="Add"><i class="fa fa-plus" aria-hidden="true"></i></a>').appendTo('div.dataTables_filter');
+	// $('<a href="/Holidays/add?hcid=<?php echo $calid ?>" disabled="disabled" class="open-Popup btn btn-sm btn-success" data-remote="false" data-toggle="modal" data-target="#actionspopover" style="margin-left:15px;" title="Add"><i class="fa fa-plus" aria-hidden="true"></i></a>').appendTo('div.dataTables_filter');
 
 });
 
