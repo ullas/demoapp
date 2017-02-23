@@ -17,10 +17,10 @@
         	echo $this->Form->input('holidaycalendarid', array('type' => 'hidden'));
 
             echo $this->Form->input('calendar');
-            echo $this->Form->input('name');
+            echo $this->Form->input('name',['required' => true,'label'=>['text'=>'Name of Calendar','class'=>'mandatory']]);
             echo $this->Form->input('country',['options' => $this->Country->get_countries(), 'empty' => true]);
-            echo $this->Form->input('valid_from', ['class' => 'mptldphc','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
-            echo $this->Form->input('valid_to', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+            echo $this->Form->input('valid_from', ['required' => true,'class' => 'mptldphc','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+            echo $this->Form->input('valid_to', ['required' => true,'class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
 
 
 			// echo $this->Form->input('weekoff._ids', ['label'=>'Weekly Off','options' => array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'),'class'=>'select2']);
@@ -190,7 +190,14 @@ $("#valid-to").on("changeDate", function() {
 });
 
 $("#hc-update").click(function(){
-  if(document.getElementById('valid-from').value!="" && document.getElementById('valid-from').value!=undefined && document.getElementById('valid-to').value!="" && document.getElementById('valid-to').value!=undefined){
+	
+  //get input value
+  var name = document.getElementById("name").value;
+  var validfrom = document.getElementById("valid-from").value;
+  var validto = document.getElementById("valid-to").value;
+
+  if (name != "" && name!=null && validfrom != "" && validfrom!=null && validto != "" && validto!=null) {
+    		
     var validfrom = document.getElementById('valid-from').value;
     var validto = document.getElementById('valid-to').value;
     var d1 = new Date(validfrom);
@@ -200,10 +207,12 @@ $("#hc-update").click(function(){
       return false;
     }
   }else{
-     showflash("failure","Please select a Valid From/Valid To date.");
-     return false;
+     if(name == "" || name==null){showflash("failure","Please enter name for the holiday calendar.");}
+    		else if(validfrom == "" || validfrom==null){showflash("failure","Please select a Valid From date.");}
+    		else if(validto == "" || validto==null){showflash("failure","Please select a Valid To date.");}
+    		return false;
   }
-  })
+})
 
  //popover
  $("#actionspopover").on("show.bs.modal", function(e) {
