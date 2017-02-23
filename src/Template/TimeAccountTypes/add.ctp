@@ -17,7 +17,7 @@
             echo $this->Form->input('unit',['label'=>'Permitted Fractions for Unit Hours','class'=>'select2','options' => array('Hour(s)', 'Day(s)'), 'empty' => 'Choose']);
             echo $this->Form->input('perm_reccur',['label'=>'Permanent / Recurring']);
             echo $this->Form->input('start_date',['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
-            echo $this->Form->input('valid_from',['label'=>'Account Valid From (month) for account creation on a fix date','class'=>'select2','options' => array('1', '2','3','4','5','6','7','8','9','10','11','12'), 'empty' => 'Choose']);
+            echo $this->Form->input('valid_from',['label'=>'Account Valid From (month)','class'=>'select2','options' => array('1', '2','3','4','5','6','7','8','9','10','11','12'), 'empty' => 'Choose']);
             echo $this->Form->input('valid_from_day',['label'=>'Account Valid From (day)']);
             echo $this->Form->input('account_booking_off',['label'=>'Account Booking Offset (Months)']);
             echo $this->Form->input('freq_period',['label'=>'Frequency Period','class'=>'select2','options' => array('Weekly','bi Weekly','Monthly','Annually'), 'empty' => 'Choose']);
@@ -30,7 +30,7 @@
 			echo $this->Form->input('time_to_accrual_unit' ,['label'=>'Time Unit From Hire to First Accrual','class'=>'select2','options' => array('Days' , 'Weeks ', 'Months', 'Years'), 'empty' => 'Choose']);
             echo $this->Form->input('proration_used',['label'=>'Are Prorations used for New Hire Accruals']);
             echo $this->Form->input('rounding_used',['label'=>'Are rounding values included for New Hires']);
-            echo $this->Form->input('update_rule',['label'=>'Period End Processing or Interim Update Rule']);
+            echo $this->Form->input('update_rule',['label'=>'Period End Processing/Interim Update Rule']);
             echo $this->Form->input('payout_eligiblity');
             echo $this->Form->input('code');
             echo $this->Form->input('pay_component_id', ['options' => $payComponents, 'empty' => true]);
