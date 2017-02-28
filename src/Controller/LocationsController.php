@@ -1,6 +1,11 @@
 <?php
 namespace App\Controller;
-
+use Cake\Event\Event;
+use Cake\I18n\Time;
+use Cake\I18n\FrozenDate;
+use Cake\I18n\FrozenTime;
+use Cake\I18n\Date;
+use Cake\Database\Type;
 use App\Controller\AppController;
 
 /**
@@ -11,6 +16,22 @@ use App\Controller\AppController;
 class LocationsController extends AppController
 {
 	var $components = array('Datatable');
+	
+	
+	public function initialize()
+	{
+    	parent::initialize();
+
+    	// Time::setDefaultLocale('fr_FR'); // For any mutable DateTime
+		// FrozenTime::setDefaultLocale('fr_FR'); // For any immutable DateTime
+		// Date::setDefaultLocale('fr_FR'); // For any mutable Date
+		// FrozenDate::setDefaultLocale('fr_FR'); // For any immutable Date
+
+		// Time::setToStringFormat("dd/MM/YYYY"); // For any mutable DateTime
+		// FrozenTime::setToStringFormat("dd/MM/YYYY"); // For any immutable DateTime
+		// Date::setToStringFormat("dd/MM/YYYY"); // For any mutable Date
+		// FrozenDate::setToStringFormat("dd/MM/YYYY"); // For any immutable Date
+	}
 	
 	public function ajaxData() {
 		$this->autoRender= False;
@@ -98,8 +119,9 @@ class LocationsController extends AppController
         $location = $this->Locations->get($id, [
             'contain' => []
         ]);
-        if ($this->request->is(['patch', 'post', 'put'])) {
+        if ($this->request->is(['patch', 'post', 'put'])) {   
             $location = $this->Locations->patchEntity($location, $this->request->data);
+			
             if ($this->Locations->save($location)) {
                 $this->Flash->success(__('The location has been saved.'));
 

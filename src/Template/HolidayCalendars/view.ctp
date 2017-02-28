@@ -18,9 +18,7 @@
             echo $this->Form->input('country',['options' => $this->Country->get_countries(), 'empty' => true,'disabled'=>true]);
             echo $this->Form->input('valid_from', ['class' => 'mptldphc','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled'=>true]);
             echo $this->Form->input('valid_to', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled'=>true]);
-
-
-			
+	
         ?>
 
         <!-- <div class="col-md-4 pull-right"><div class="form-group"><input type="button" value="Get Weekly Off Dates" class="btn btn-xs btn-default" id="getweeklyoffdates"/></div></div> -->
@@ -131,11 +129,18 @@ $this->Html->script([
 
  	$("#weekoff-ids").val(woffdata);
 
-      $('.mptldphc').datepicker({
-	    			format:"yyyy/mm/dd",autoclose: true,clearBtn: true
-	    		}).on('changeDate', function (e) {
+      var userdfp=<?php echo $this->request->session()->read('sessionuser')['dateformat'];?>;
+		if(userdfp==1){
+			$('.mptldphc').datepicker({ format:"dd/mm/yyyy",autoclose: true,clearBtn: true }).on('changeDate', function (e) {
            					dateChanged();
+           					weeklyOffProcess();
     					});
+		}else{
+			$('.mptldphc').datepicker({ format:"yyyy/mm/dd",autoclose: true,clearBtn: true }).on('changeDate', function (e) {
+           					dateChanged();
+           					weeklyOffProcess();
+    					});
+		}
 
      table= $('#mptlindextbl').DataTable({
           "paging": true,
@@ -255,14 +260,16 @@ $("#weekoff-ids").change(function(){
 				showflash("failure",msg);
 			}else{
 
-				//datepicker
-	    		$('.mptldp').datepicker({
-	    			format:"yyyy/mm/dd",autoclose: true,clearBtn: true
-	    		});
+				var userdf=<?php echo $this->request->session()->read('sessionuser')['dateformat'];?>;
+				if(userdf==1){
+					$('.mptldp').datepicker({ format:"dd/mm/yyyy",autoclose: true,clearBtn: true });
+				}else{
+					$('.mptldp').datepicker({ format:"yyyy/mm/dd",autoclose: true,clearBtn: true });
+				}
 	    		//set mandatory * after required label	
-    $( ':input[required]' ).each( function () {
-        $("label[for='" + this.id + "']").addClass('mandatory');
-    });
+    			$( ':input[required]' ).each( function () {
+        			$("label[for='" + this.id + "']").addClass('mandatory');
+    			});
     
 
 	    		//select 2

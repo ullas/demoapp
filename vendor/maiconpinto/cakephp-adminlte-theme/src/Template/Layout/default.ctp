@@ -83,6 +83,10 @@
     padding: 5px 0px 4px;
     z-index: 90;
 }
+.mptlalert{
+	position: relative;
+	z-index: 1900;
+}
 .icon-improve {
     color: #bdbdb5;
     padding: 3px 9px 0 10px;
@@ -250,9 +254,13 @@ $(window).off("resize").on("resize", function() {
     		format:"yyyy", viewMode: "years", minViewMode: "years", autoclose: true, clearBtn: true
     	});
 		//date picker
-    	$('.mptldp').datepicker({
-    		format:"yyyy/mm/dd",autoclose: true,clearBtn: true
-    	});
+		var userdf=<?php echo $this->request->session()->read('sessionuser')['dateformat'];?>;
+		if(userdf==1){
+			$('.mptldp').datepicker({ format:"dd/mm/yyyy",autoclose: true,clearBtn: true });
+		}else{
+			$('.mptldp').datepicker({ format:"yyyy/mm/dd",autoclose: true,clearBtn: true });
+		}
+    	
 		$(".mptltp").timepicker({
       		showInputs: false,autoclose: true,maxHours:24,showMeridian:false
     	});

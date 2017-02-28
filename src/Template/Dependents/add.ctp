@@ -53,19 +53,4 @@
     </div>
     <?= $this->Form->end() ?>
 </div></div></section>
-<!-- Date picker -->
-<?php
-$this->Html->css([  'AdminLTE./plugins/datepicker/datepicker3' ], ['block' => 'css']);
-$this->Html->script([ 'AdminLTE./plugins/datepicker/bootstrap-datepicker' ], ['block' => 'script']); ?>
-<?php $this->start('scriptBotton'); ?>
-<script>
-  $(function () { 
-     $('#date_of_birth').datepicker({ autoclose: true }); 
-     $('#visa_issue').datepicker({ autoclose: true }); 
-     $('#visa_expiry').datepicker({ autoclose: true }); 
-     $('#pass_issue').datepicker({ autoclose: true }); 
-     $('#pass_expiry').datepicker({ autoclose: true }); 
-     $('#emp_since').datepicker({ autoclose: true }); 
-  });
-</script>
-<?php $this->end(); ?>
+

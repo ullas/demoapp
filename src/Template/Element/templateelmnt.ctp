@@ -3,6 +3,7 @@
  	// 'checkbox' => '<input class="col-sm-6" type="checkbox" name="{{name}}" value="{{value}}"{{attrs}}>',
     // 'checkboxFormGroup' => '{{label}}<div class="col-sm-6">{{input}}</div>',
   	// 'nestingLabel' => '<label class="col-sm-3 control-label"{{attrs}}>{{text}}</label>',
+    'passwordContainer' => '<div class="col-md-4"><div class="form-group {{type}}">{{content}}</div></div>',
     
     'inputContainerError' => '<div class="col-md-4"><div class="form-group {{type}}{{required}} has-error">{{content}}</div></div>',
     

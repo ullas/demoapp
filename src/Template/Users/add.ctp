@@ -15,9 +15,8 @@
         <?php
             echo $this->Form->input('email');
             echo $this->Form->input('password');
-            echo $this->Form->input('role',[
-            'options' => ['admin' => 'Admin', 'employee' => 'Employee']
-        ]);
+            echo $this->Form->input('role',['class'=>'select2','options' => ['admin' => 'Admin', 'employee' => 'Employee'], 'empty' => 'Choose']);
+			echo $this->Form->input('dateformat',['class'=>'select2','options' => array('yyyy/mm/dd', 'dd/mm/yyyy'), 'empty' => 'Choose']);
             echo $this->Form->input('username');
             echo $this->Form->input('name');
             echo $this->Form->input('customer_id', ['options' => $customers]);

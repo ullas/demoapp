@@ -123,12 +123,20 @@ $this->Html->script([
   }
   $(function () {
 
-  	$('.mptldphc').datepicker({
-	    			format:"yyyy/mm/dd",autoclose: true,clearBtn: true
-	    		}).on('changeDate', function (e) {
+		var userdf=<?php echo $this->request->session()->read('sessionuser')['dateformat'];?>;
+		if(userdf==1){
+			$('.mptldphc').datepicker({ format:"dd/mm/yyyy",autoclose: true,clearBtn: true }).on('changeDate', function (e) {
            					dateChanged();
            					weeklyOffProcess();
     					});
+		}else{
+			$('.mptldphc').datepicker({ format:"yyyy/mm/dd",autoclose: true,clearBtn: true }).on('changeDate', function (e) {
+           					dateChanged();
+           					weeklyOffProcess();
+    					});
+		}
+		
+  	
   	//disable weeklyoff select initially
   	$('#weekoff-ids').attr("disabled", true);
 
@@ -274,10 +282,11 @@ $("#valid-to").on("changeDate", function() {
 				showflash("failure",msg);
 			}else{
 
-				//datepicker
-	    		$('.mptldp').datepicker({
-	    			format:"yyyy/mm/dd",autoclose: true,clearBtn: true
-	    		});
+		if(userdf==1){
+			$('.mptldp').datepicker({ format:"dd/mm/yyyy",autoclose: true,clearBtn: true });
+		}else{
+			$('.mptldp').datepicker({ format:"yyyy/mm/dd",autoclose: true,clearBtn: true });
+		}
 	    		//set mandatory * after required label	
     $( ':input[required]' ).each( function () {
         $("label[for='" + this.id + "']").addClass('mandatory');
@@ -311,13 +320,16 @@ $("#valid-to").on("changeDate", function() {
 function dateChanged() {
 	var validfrom = document.getElementById('valid-from').value;
 
-	var d = new Date(validfrom);
+	var userdf=<?php echo $this->request->session()->read('sessionuser')['dateformat'];?>;
+	
+    var d ="";
+    (userdf==1) ? d= new Date(validfrom.replace( /(\d{2})[-/](\d{2})[-/](\d{4})/, "$2/$1/$3")) : d= new Date(validfrom);
 	var year = d.getFullYear();
 	var month = d.getMonth();
 	var day = d.getDate();
 	var c = new Date(year, "11", "31");
 	var fdate = formatDate(c).replace(/-/g, "/");
-	console.log(fdate);
+	console.log(validfrom+"--"+fdate);
 	if (document.getElementById('valid-to').value=="" || document.getElementById('valid-to').value==undefined)
     {
          $('#valid-to').val(fdate);
@@ -328,19 +340,12 @@ function calcWeekOffDays(dDate1, dDate2, dArr) {
     var date  = dDate1;
     var dates = [];
 
-	var weekday = new Array(7);
-	weekday[0] =  "Sunday";
-	weekday[1] = "Monday";
-	weekday[2] = "Tuesday";
-	weekday[3] = "Wednesday";
-	weekday[4] = "Thursday";
-	weekday[5] = "Friday";
-	weekday[6] = "Saturday";
+	var weekday = { '0': 'Sunday',  '1': 'Monday', '2': 'Tuesday', '3': 'Wednesday', '4': 'Thursday', '5': 'Friday', '6': 'Saturday'};
 
     while (date < dDate2) {
     	for (i = 0; i < dArr.length; i++) {
     		if (date.getDay().toString() === dArr[i].toString()){//console.log(formatDate(new Date(date)));
-         		dates.push(formatDate(new Date(date))+"^"+weekday[date.getDay()]);
+         		dates.push(toYMD(new Date(date))+"^"+weekday[date.getDay()]);
         	}
     	}
 
@@ -349,9 +354,31 @@ function calcWeekOffDays(dDate1, dDate2, dArr) {
 
     return dates;
 }
-function formatDate(date) {
-    var d = new Date(date),
-        month = '' + (d.getMonth() + 1),
+//format utc date to yyyy/mm/dd
+function formatDate(fdate) {
+	var userdf=<?php echo $this->request->session()->read('sessionuser')['dateformat'];?>;
+	
+    var d ="";
+    // (userdf==1) ? d= new Date(fdate.replace( /(\d{2})[-/](\d{2})[-/](\d{4})/, "$2/$1/$3")) : d= new Date(fdate);
+   d= new Date(fdate);
+   
+    var month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
+
+    if (month.length < 2) month = '0' + month;
+    if (day.length < 2) day = '0' + day;
+
+	var res="";
+	(userdf==1) ? res = [day, month, year].join('-') : res = [year, month, day].join('-'); 
+	
+    return res;
+}
+//format utc date to yyyy/mm/dd
+function toYMD(fdate) {
+	
+    var d = new Date(fdate);
+    var month = '' + (d.getMonth() + 1),
         day = '' + d.getDate(),
         year = d.getFullYear();
 
@@ -377,10 +404,19 @@ function tableLoaded() {
 }
 
 function weeklyOffProcess(){
+	
+ 	var userdf=<?php echo $this->request->session()->read('sessionuser')['dateformat'];?>;
  	var validfrom = document.getElementById('valid-from').value;
  	var validtill = document.getElementById('valid-to').value;
- 	var d1 = new Date(validfrom);
-	var d2 = new Date(validtill);
+ 	var d1 = "";var d2 = "";
+ 	if(userdf==1){ 
+ 		d1= new Date(validfrom.replace( /(\d{2})[-/](\d{2})[-/](\d{4})/, "$2/$1/$3"));
+ 		d2= new Date(validtill.replace( /(\d{2})[-/](\d{2})[-/](\d{4})/, "$2/$1/$3"));
+	}else{
+		d1= new Date(validfrom);
+		d2= new Date(validtill);
+	} 
+	
   if (d1 > d2){
     // alert("The Valid From date is higher than Valid To date.");
     showflash("failure","The Valid From date is higher than Valid To date.");
