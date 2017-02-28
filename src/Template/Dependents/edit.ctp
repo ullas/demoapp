@@ -29,18 +29,13 @@
             echo $this->Form->input('is_add_same_as_employee');
             echo $this->Form->input('address_number');
             echo $this->Form->input('visa');
-			echo "<div class='form-group'><label>Visa issue:</label><div class='input-group'>";
-            echo "<div class='input-group-addon''><i class='fa fa-calendar'></i></div><input type='text' class='form-control' id='visa_issue'></div></div>";
-			echo "<div class='form-group'><label>Visa Expiry:</label><div class='input-group'>";
-            echo "<div class='input-group-addon''><i class='fa fa-calendar'></i></div><input type='text' class='form-control' id='visa_expiry'></div></div>";
+			echo $this->Form->input('visa_issue', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+            echo $this->Form->input('visa_expiry', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
             echo $this->Form->input('passport');
-            echo "<div class='form-group'><label>Passport Issue:</label><div class='input-group'>";
-            echo "<div class='input-group-addon''><i class='fa fa-calendar'></i></div><input type='text' class='form-control' id='pass_issue'></div></div>";
-			echo "<div class='form-group'><label>Passport Expiry:</label><div class='input-group'>";
-            echo "<div class='input-group-addon''><i class='fa fa-calendar'></i></div><input type='text' class='form-control' id='pass_expiry'></div></div>";
+            echo $this->Form->input('pass_issue', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+            echo $this->Form->input('pass_expiry', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
             echo $this->Form->input('employed');
-            echo "<div class='form-group'><label>Emp Since:</label><div class='input-group'>";
-            echo "<div class='input-group-addon''><i class='fa fa-calendar'></i></div><input type='text' class='form-control' id='emp_since'></div></div>";
+            echo $this->Form->input('emp_since', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
             echo $this->Form->input('employer');
             echo $this->Form->input('acco_entitlement');
             echo $this->Form->input('legal_nominee');
@@ -55,19 +50,4 @@
     <?= $this->Form->button(__('Submit')) ?>
     <?= $this->Form->end() ?>
 </div></div></section>
-<!-- Date picker -->
-<?php
-$this->Html->css([  'AdminLTE./plugins/datepicker/datepicker3' ], ['block' => 'css']);
-$this->Html->script([ 'AdminLTE./plugins/datepicker/bootstrap-datepicker' ], ['block' => 'script']); ?>
-<?php $this->start('scriptBotton'); ?>
-<script>
-  $(function () { 
-     $('#date_of_birth').datepicker({ autoclose: true }); 
-     $('#visa_issue').datepicker({ autoclose: true }); 
-     $('#visa_expiry').datepicker({ autoclose: true }); 
-     $('#pass_issue').datepicker({ autoclose: true }); 
-     $('#pass_expiry').datepicker({ autoclose: true }); 
-     $('#emp_since').datepicker({ autoclose: true }); 
-  });
-</script>
-<?php $this->end(); ?>
+

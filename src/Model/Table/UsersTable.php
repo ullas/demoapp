@@ -10,7 +10,9 @@ use Cake\Validation\Validator;
  * Users Model
  *
  * @property \Cake\ORM\Association\BelongsTo $Customers
+ * @property \Cake\ORM\Association\BelongsTo $Employees
  * @property \Cake\ORM\Association\HasMany $CalendarAssignments
+ * @property \Cake\ORM\Association\HasMany $Notes
  *
  * @method \App\Model\Entity\User get($primaryKey, $options = [])
  * @method \App\Model\Entity\User newEntity($data = null, array $options = [])
@@ -42,10 +44,15 @@ class UsersTable extends Table
         $this->addBehavior('Timestamp');
 
         $this->belongsTo('Customers', [
-            'foreignKey' => 'customer_id',
-            'joinType' => 'INNER'
+            'foreignKey' => 'customer_id'
+        ]);
+        $this->belongsTo('Employees', [
+            'foreignKey' => 'employee_id'
         ]);
         $this->hasMany('CalendarAssignments', [
+            'foreignKey' => 'user_id'
+        ]);
+        $this->hasMany('Notes', [
             'foreignKey' => 'user_id'
         ]);
     }
@@ -82,6 +89,12 @@ class UsersTable extends Table
         $validator
             ->allowEmpty('name');
 
+        $validator
+            ->allowEmpty('dateformat');
+
+        $validator
+            ->allowEmpty('timezone');
+
         return $validator;
     }
 
@@ -97,6 +110,7 @@ class UsersTable extends Table
         $rules->add($rules->isUnique(['email']));
         $rules->add($rules->isUnique(['username']));
         $rules->add($rules->existsIn(['customer_id'], 'Customers'));
+        $rules->add($rules->existsIn(['employee_id'], 'Employees'));
 
         return $rules;
     }

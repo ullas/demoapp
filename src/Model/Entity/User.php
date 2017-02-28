@@ -16,6 +16,9 @@ use Cake\Auth\DefaultPasswordHasher;
  * @property int $id
  * @property string $name
  * @property int $customer_id
+ * @property int $employee_id
+ * @property int $dateformat
+ * @property int $timezone
  *
  * @property \App\Model\Entity\Customer $customer
  * @property \App\Model\Entity\CalendarAssignment[] $calendar_assignments

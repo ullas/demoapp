@@ -57,18 +57,4 @@
     <?= $this->Form->button(__('Submit')) ?>
     <?= $this->Form->end() ?>
 </div></div></section>
-<!-- Date picker -->
-<?php
-$this->Html->css([  'AdminLTE./plugins/datepicker/datepicker3' ], ['block' => 'css']);
-$this->Html->script([ 'AdminLTE./plugins/datepicker/bootstrap-datepicker' ], ['block' => 'script']); ?>
-<?php $this->start('scriptBotton'); ?>
-<script>
-  $(function () { 
-     $('#start_date').datepicker({ autoclose: true }); 
-     $('#start_time').datepicker({ autoclose: true });
-     $('#end_time').datepicker({ autoclose: true }); 
-     $('#planned_hours_minutes').datepicker({ autoclose: true });
-     $('#starting_date').datepicker({ autoclose: true }); 
-  });
-</script>
-<?php $this->end(); ?>
+

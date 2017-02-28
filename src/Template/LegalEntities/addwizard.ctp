@@ -12,50 +12,18 @@
     <?= $this->Form->create($legalEntity) ?>
     <fieldset>
 			<?php
-					echo "<div class='row'>";
-					echo "<div class='col-md-6'>";
-					echo $this->Form->input('name',['label'=>['text'=>'Name','class'=>'mandatory']]);
-					echo "</div>";
-					echo "<div class='col-md-6'>";
-					echo $this->Form->input('description');
-					echo "</div>";
-					echo "<div class='col-md-6'>";
-					echo $this->Form->input('effective_status');
-					echo "</div>";
-					echo "</div>";
-					echo "<div class='row'>";
-					echo "<div class='col-md-6'>";
-					echo "<div class='form-group'><label>Effective Start Date:</label><div class='input-group'>";
-					echo "<div class='input-group-addon''><i class='fa fa-calendar'></i></div><input type='text' class='form-control' id='effective_start_date'></div></div>";
-					echo "</div>";
-					echo "<div class='col-md-6'>";
-					echo "<div class='form-group'><label>Effective End Date:</label><div class='input-group'>";
-					echo "<div class='input-group-addon''><i class='fa fa-calendar'></i></div><input type='text' class='form-control' id='effective_end_date'></div></div>";
-					echo "</div>";
-					echo "<div class='col-md-6'>";
-					echo $this->Form->input('country_of_registration',['class'=>'select2','options' => $this->Country->get_countries(), 'empty' => true]);
-					echo "</div>";
-					echo "<div class='col-md-6'>";
-					echo $this->Form->input('standard_weekly_hours');
-					echo "</div>";
-					echo "<div class='col-md-6'>";
-					echo $this->Form->input('currency',['class'=>'select2','options' => $this->Currency->get_currencies(), 'empty' => true]);
-					echo "</div>";
-					echo "<div class='col-md-6'>";
-					echo $this->Form->input('official_language',['class'=>'select2','options' => $this->Language->get_languages(), 'empty' => true]);
-					echo "</div>";
-					echo "<div class='col-md-6'>";
-					echo $this->Form->input('external_code',['label'=>['text'=>'External Code','class'=>'mandatory']]);
-					echo "</div>";
-					echo "<div class='col-md-6'>";
-					echo $this->Form->input('location_id', ['class'=>'select2','options' => $locations, 'empty' => true]);
-					echo "</div>";
-					echo "</div>";
-					echo "<div class='row'>";
-					echo "<div class='col-md-6'>";
-					echo $this->Form->input('paygroup_id', ['class'=>'select2','label'=>['text'=>'Pay Group'],'options' => $payGroups, 'empty' => true]);
-					echo "</div>";
-					echo "</div>";
+				echo $this->Form->input('name',['label'=>['text'=>'Name','class'=>'mandatory']]);
+            echo $this->Form->input('description');
+            echo $this->Form->input('effective_status');
+            echo $this->Form->input('effective_start_date', ['class' => 'mptldp','type' => 'text']);
+            echo $this->Form->input('effective_end_date', ['class' => 'mptldp','type' => 'text']);
+            echo $this->Form->input('country_of_registration',['class'=>'select2','options' => $this->Country->get_countries(), 'empty' => true]);
+            echo $this->Form->input('standard_weekly_hours');
+            echo $this->Form->input('currency',['class'=>'select2','options' => $this->Currency->get_currencies(), 'empty' => true]);
+            echo $this->Form->input('official_language',['class'=>'select2','options' => $this->Language->get_languages(), 'empty' => true]);
+            echo $this->Form->input('external_code',['label'=>['text'=>'External Code','class'=>'mandatory']]);
+            echo $this->Form->input('location_id', ['class'=>'select2','options' => $locations, 'empty' => true]);
+            echo $this->Form->input('paygroup_id', ['class'=>'select2','label'=>['text'=>'Pay Group'],'options' => $payGroups, 'empty' => true]);
 			?>
     </fieldset>
 		<div class="box-footer">
@@ -63,31 +31,4 @@
     </div>
     <?= $this->Form->end() ?>
 </div></div></section>
-<!-- Date picker -->
-<?php
-$this->Html->css([
-    'AdminLTE./plugins/datepicker/datepicker3',
-    'AdminLTE./plugins/select2/select2.min',
-  ],
-  ['block' => 'css']);
 
-$this->Html->script([
-  'AdminLTE./plugins/datepicker/bootstrap-datepicker',
-  'AdminLTE./plugins/select2/select2.full.min',
-],
-['block' => 'script']);
-?>
-<?php $this->start('scriptBotton'); ?>
-<script>
-  $(function () {
-    $(".select2").select2({ width: '100%' });
-    $('#effective_start_date').datepicker({
-      autoclose: true
-    });
-     $('#effective_end_date').datepicker({
-      autoclose: true
-    });
-    // var sidebar_height = $(".sidebar").height();alert("sidebar:"+sidebar_height);
-  });
-</script>
-<?php $this->end(); ?>

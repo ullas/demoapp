@@ -6,6 +6,9 @@ use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
 
+use Cake\Event\Event;
+use Cake\Event\ArrayObject;
+use Cake\Core\Configure;
 /**
  * ContactInfos Model
  *
@@ -76,7 +79,7 @@ class ContactInfosTable extends Table
 
         return $validator;
     }
-
+	
     /**
      * Returns a rules checker object that will be used for validating
      * application integrity.

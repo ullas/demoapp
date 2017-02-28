@@ -39,7 +39,7 @@ return [
     'App' => [
         'namespace' => 'App',
         'encoding' => env('APP_ENCODING', 'UTF-8'),
-        'defaultLocale' => env('APP_DEFAULT_LOCALE', 'eS_US'),
+        'defaultLocale' => env('APP_DEFAULT_LOCALE', 'en_US'),
         'base' => false,
         'dir' => 'src',
         'webroot' => 'webroot',
@@ -242,7 +242,7 @@ return [
             'flags' => [],
             'cacheMetadata' => true,
             'log' => false,
-            'init' => ['SET datestyle TO ISO, DMY '],
+            // 'init' => ['SET datestyle TO ISO, DMY '],
 
             /**
              * Set identifier quoting to true if you are using reserved words or

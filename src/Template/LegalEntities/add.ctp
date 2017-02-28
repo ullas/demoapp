@@ -50,17 +50,3 @@ label.mandatory:after {
   </div>
 </section>
 
-<?php $this->start('scriptBotton'); ?>
-<script>
-  $(function () {
-    $(".select2").select2({ width: '100%' });
-    $('#effective_start_date').datepicker({
-      autoclose: true
-    });
-     $('#effective_end_date').datepicker({
-      autoclose: true
-    });
-    // var sidebar_height = $(".sidebar").height();alert("sidebar:"+sidebar_height);
-  });
-</script>
-<?php $this->end(); ?>

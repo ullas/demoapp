@@ -186,10 +186,12 @@ table.on( 'row-reorder', function ( e, diff, edit ) {
 				showflash("failure",msg);
 			}else{
 
-				//datepicker
-	    		$('.mptldp').datepicker({
-	    			format:"yyyy/mm/dd",autoclose: true,clearBtn: true
-	    		});
+				var userdf=<?php echo $this->request->session()->read('sessionuser')['dateformat'];?>;
+		if(userdf==1){
+			$('.mptldp').datepicker({ format:"dd/mm/yyyy",autoclose: true,clearBtn: true });
+		}else{
+			$('.mptldp').datepicker({ format:"yyyy/mm/dd",autoclose: true,clearBtn: true });
+		}
 	    		//select 2
     			$(".select2").select2({ width: '100%',allowClear: true,placeholder: "Select" });
 				//hide popover on button click
