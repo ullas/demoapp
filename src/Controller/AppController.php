@@ -56,6 +56,7 @@ class AppController extends Controller
     		$this->set('name', $user['name']);
 			$this->set('userid', $user['id']);   
 			$this->set('empid', $user['employee_id']);      
+			$this->set('dateformat', $user['dateformat']);      
 			$this->request->session()->write('sessionuser', $user);
 			$this->loggedinuser=$user;
 			
@@ -112,20 +113,20 @@ class AppController extends Controller
      * @return void
      */
      public function initialize()
-    {
+	{
     	parent::initialize();
-		
+
 		// $this->set('form_templates', Configure::read('Templates'));
 		
     	$this->loadComponent('RequestHandler');
         $this->loadComponent('Flash');
 		
-		
-		
-		// Type::build('datetime')->useLocaleParser()->setLocaleFormat('dd-mm-yyyy');
-        // Time::setToStringFormat('dd/MM/YYYY');
-		
-
+		Configure::write('userdf', $this->request->session()->read('sessionuser')['dateformat']);
+		$userdf = $this->request->session()->read('sessionuser')['dateformat'];
+		if(isset($userdf)  & $userdf===1){
+			Date::setToStringFormat("dd/MM/YYYY"); 
+			FrozenDate::setToStringFormat("dd/MM/YYYY"); 
+		}
 		
 		$userrole=$this->request->session()->read('sessionuser')['role'];
 		
@@ -154,6 +155,8 @@ class AppController extends Controller
         	]
     	]);
 		}
+		
+		
     }
 
     public function beforeFilter(Event $event)
@@ -162,6 +165,7 @@ class AppController extends Controller
     	// $this->set('hours', $hours);
 		
 		parent::beforeFilter($event);
+		
 		$this->Auth->deny(['add', 'edit']);	
 		
 		$userrole=$this->request->session()->read('sessionuser')['role'];

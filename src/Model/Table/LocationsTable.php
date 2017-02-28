@@ -5,6 +5,14 @@ use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
+use Cake\I18n\FrozenDate;
+use Cake\I18n\Date;
+use Cake\I18n\Time;
+use Cake\Event\Event;
+use Cake\Event\ArrayObject;
+use App\Model\Table\EntityInterface;
+use Cake\Database\Type;
+use Cake\Core\Configure;
 
 /**
  * Locations Model
@@ -43,6 +51,16 @@ class LocationsTable extends Table
         $this->hasMany('LegalEntities', [
             'foreignKey' => 'location_id'
         ]);
+		
+
+
+		/*$userdf = Configure::read('userdf');
+		if(isset($userdf)  & $userdf===1){
+    		//format time
+			Date::setToStringFormat("dd/MM/YYYY"); // For any mutable Date
+			FrozenDate::setToStringFormat("dd/MM/YYYY"); // For any immutable Date
+		}*/
+	
     }
 
     /**
@@ -106,4 +124,31 @@ class LocationsTable extends Table
 
         return $rules;
     }
+
+
+	public function beforeMarshal(Event $event, $data, $options)
+	{
+
+		$userdf = Configure::read('userdf');
+		if(isset($userdf)  & $userdf===1){
+
+			foreach (["start_date", "end_date"] as $value) {		
+				if($data[$value]!=null && strpos($data[$value], '/') !== false){
+					$data[$value] = str_replace('/', '-', $data[$value]);
+					$data[$value]=date('Y/m/d', strtotime($data[$value]));
+				}
+			}
+		}
+   		// debug($data['start_date']);
+	}
+
+	public function beforeRules(Event $event, $entity,  $options, $operation)
+	{
+	 	debug("test");$entity->dateField = date('YYYY/MM/dd', strtotime($entity->dateField));
+		Date::setToStringFormat("Y/m/d"); // For any mutable Date
+		FrozenDate::setToStringFormat("Y/m/d");
+		
+		Type::build('datetime')->useLocaleParser()->setLocaleFormat('yyyy/MM/dd');
+		Type::build('date')->useLocaleParser()->setLocaleFormat('yyyy/MM/dd');
+	}  
 }

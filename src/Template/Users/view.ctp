@@ -43,6 +43,10 @@
             <td><?= $this->Number->format($user->id) ?></td>
         </tr>
         <tr>
+            <th><?= __('DateFormat') ?></th>
+            <td><?= $this->Number->format($user->dateformat) ?></td>
+        </tr>
+        <tr>
             <th><?= __('Created') ?></th>
             <td><?= h($user->created) ?></td>
         </tr>

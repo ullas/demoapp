@@ -6,6 +6,9 @@ use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
 
+use Cake\Event\Event;
+use Cake\Event\ArrayObject;
+use Cake\Core\Configure;
 /**
  * Customers Model
  *
@@ -176,7 +179,20 @@ class CustomersTable extends Table
             'foreignKey' => 'customer_id'
         ]);
     }
+	public function beforeMarshal(Event $event, $data, $options)
+	{
+		
+		$userdf = Configure::read('userdf');
+		if(isset($userdf)  & $userdf===1){
 
+			foreach (["expirydate"] as $value) {		
+				if($data[$value]!=null && strpos($data[$value], '/') !== false){
+					$data[$value] = str_replace('/', '-', $data[$value]);
+					$data[$value]=date('Y/m/d', strtotime($data[$value]));
+				}
+			}
+		}
+	}
     /**
      * Default validation rules.
      *

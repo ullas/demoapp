@@ -17,16 +17,8 @@ if (file_exists($file)) {
                 <h3 class="control-sidebar-heading">Account Settings</h3>
 
                 <div class="form-group">
-					<p>Allow the user to change his display name/account credentials</p>
-					<a>Manage your account</a><br/>
-					<a>Change or reset your password</a>
-                </div>
-                
-                <h3 class="control-sidebar-heading">General Settings</h3>
-                
-                <div class="form-group">
-					<p>Allow the user to change his date format</p>
-					<a>Date Format</a>
+					<p>Allow the user to change his preferences.</p>
+					 <a href="/Users/edit/<?php echo $this->request->session()->read('sessionuser')['id']; ?>">Manage your account</a>
                 </div>
                 
             </form>
