@@ -12,7 +12,6 @@
 	<div class="box box-primary"><div class="box-body">
     <?= $this->Form->create($payrollRecord) ?>
     <fieldset>
-        <legend><?= __('Edit Payroll Record') ?></legend>
         <?php
             echo $this->Form->input('code');
             echo $this->Form->input('payroll_area_id', ['options' => $payrollArea, 'empty' => true]);

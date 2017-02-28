@@ -58,7 +58,12 @@ class PayrollAreaController extends AppController
             'contain' => ['LegalEntities', 'BusinessUnits', 'Divisions', 'Locations', 'Customers', 'PayrollRecord', 'PayrollStatus']
         ]);
 
-        $this->set('payrollArea', $payrollArea);
+        $legalEntities = $this->PayrollArea->LegalEntities->find('list', ['limit' => 200]);
+        $businessUnits = $this->PayrollArea->BusinessUnits->find('list', ['limit' => 200]);
+        $divisions = $this->PayrollArea->Divisions->find('list', ['limit' => 200]);
+        $locations = $this->PayrollArea->Locations->find('list', ['limit' => 200]);
+        $customers = $this->PayrollArea->Customers->find('list', ['limit' => 200]);
+        $this->set(compact('payrollArea', 'legalEntities', 'businessUnits', 'divisions', 'locations', 'customers'));
         $this->set('_serialize', ['payrollArea']);
     }
 
@@ -129,7 +134,7 @@ class PayrollAreaController extends AppController
      */
     public function delete($id = null)
     {
-        $this->request->allowMethod(['post', 'delete']);
+        // $this->request->allowMethod(['post', 'delete']);
         $payrollArea = $this->PayrollArea->get($id);
         if ($this->PayrollArea->delete($payrollArea)) {
             $this->Flash->success(__('The payroll area has been deleted.'));

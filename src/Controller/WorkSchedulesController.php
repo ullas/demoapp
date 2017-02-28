@@ -14,18 +14,17 @@ var $components = array('Datatable');
 	
 	public function ajaxData() {
 		$this->autoRender= False;
-
-		$fields = array(array('name'=>'id','type'=>'int'),'ws_name ',array('name'=>'flex_request_allowed','type'=>'bool'),
-									  'country',array('name'=>'hours_day','type'=>'int'),array('name'=>'hours_week','type'=>'int'),array('name'=>'hours_month','type'=>'int'),array('name'=>'hours_year','type'=>'int'),
-									  array('name'=>'days_week','type'=>'int'),array('name'=>'ws_days','type'=>'int'),'model',array('name'=>'start_date','type'=>'date'),array('name'=>'day1_planhours','type'=>'numeric'),
-									  array('name'=>'day2_planhours','type'=>'numeric'),array('name'=>'day3_planhours','type'=>'numeric'),array('name'=>'day4_planhours','type'=>'numeric'),array('name'=>'day5_planhours','type'=>'numeric'),
-									  array('name'=>'day5_planhours','type'=>'numeric'),array('name'=>'day7_planhours','type'=>'numeric'),array('name'=>'day_n_hours','type'=>'numeric'),
-									  'employee','time_rec_variant_1','category',array('name'=>'day','type'=>'numeric'),array('name'=>'start_time time','type'=>'time'),
-									  array('name'=>'end_time','type'=>'time'),'shift_class',array('name'=>'planned_hours','type'=>'numeric'),array('name'=>'planned_hours_minutes','type'=>'time'),
-									  'day_model','time_rec_variant_2','search_field',array('name'=>'starting_date','type'=>'date'),'period_model','time_rec_variant_3',
-									  'ws_code');
+		  
+		$this->loadModel('CreateConfigs');
+		$dbout=$this->CreateConfigs->find()->select(['field_name', 'datatype'])->where(['table_name' => $this->request->params['controller']])->order(['id' => 'ASC'])->toArray();
+		$fields = array();
+		foreach($dbout as $value){
+			$fields[] = array("name" => $value['field_name'] , "type" => $value['datatype'] );
+		}
+		
+		$contains=['Customers'];
 									  
-		$output =$this->Datatable->getView($fields);
+		$output =$this->Datatable->getView($fields,$contains);
 		echo json_encode($output);			
     }
     /**
@@ -35,6 +34,10 @@ var $components = array('Datatable');
      */
     public function index()
     {
+    	$this->loadModel('CreateConfigs');
+        $configs=$this->CreateConfigs->find('all')->where(['table_name' => $this->request->params['controller']])->order(['"id"' => 'ASC'])->toArray();
+        $this->set('configs',$configs);	
+		
         $this->paginate = [
             'contain' => ['Customers']
         ];
