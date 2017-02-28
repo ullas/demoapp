@@ -18,7 +18,7 @@ if (file_exists($file)) {
 
                 <div class="form-group">
 					<p>Allow the user to change his preferences.</p>
-					 <a href="/Users/edit/<?php echo $this->request->session()->read('sessionuser')['id']; ?>">Manage your account</a>
+					 <a class="text-green" href="/Users/edit/<?php echo $this->request->session()->read('sessionuser')['id']; ?>">Manage your account</a>
                 </div>
                 
             </form>

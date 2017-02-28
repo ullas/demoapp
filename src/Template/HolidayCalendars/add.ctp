@@ -20,7 +20,7 @@
             echo $this->Form->input('name',['required' => true,'label'=>['text'=>'Name of Calendar','class'=>'mandatory']]);
             echo $this->Form->input('country',['options' => $this->Country->get_countries(), 'empty' => true]);
             echo $this->Form->input('valid_from', ['required' => true,'class' => 'mptldphc','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
-            echo $this->Form->input('valid_to', ['required' => true,'class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+            echo $this->Form->input('valid_to', ['required' => true,'class' => 'mptldpvt','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
 
 
 			// echo $this->Form->input('weekoff._ids', ['label'=>'Weekly Off','options' => array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'),'class'=>'select2']);
@@ -129,9 +129,15 @@ $this->Html->script([
            					dateChanged();
            					weeklyOffProcess();
     					});
+    		$('.mptldpvt').datepicker({ format:"dd/mm/yyyy",autoclose: true,clearBtn: true }).on('changeDate', function (e) {
+           					weeklyOffProcess();
+    					});
 		}else{
 			$('.mptldphc').datepicker({ format:"yyyy/mm/dd",autoclose: true,clearBtn: true }).on('changeDate', function (e) {
            					dateChanged();
+           					weeklyOffProcess();
+    					});
+    		$('.mptldpvt').datepicker({ format:"yyyy/mm/dd",autoclose: true,clearBtn: true }).on('changeDate', function (e) {
            					weeklyOffProcess();
     					});
 		}
@@ -214,9 +220,9 @@ $('#createhc').click(function(){
  // order= new $.fn.dataTable.ColReorder( table );
 $("#weekoff-ids").change(weeklyOffProcess);
 
-$("#valid-to").on("changeDate", function() {
-          weeklyOffProcess();
-});
+// $("#valid-to").on("changeDate", function() {
+          // weeklyOffProcess();
+// });
  //get weekly off dates
  // $('#getweeklyoffdates').click(function(){
 // $("#weekoff-ids").change(function(){
@@ -434,12 +440,14 @@ function weeklyOffProcess(){
 		var offdates = '';
 		if(weekoffdate!=null){offdates =weekoffdate.toString().split(',');}
  		var result=calcWeekOffDays(d1,d2,offdates);
- 		//iniitially delete all
- 		$.get('/HolidayCalendars/deleteWeekOff?holidaycalendar='+holidaycalendarid, function(d) {
-    		// alert(d);
-    	});
+ 		
    		var postdata=[];
  		 if(result!=null){
+ 		 	//iniitially delete all
+ 			$.get('/HolidayCalendars/deleteWeekOff?holidaycalendar='+holidaycalendarid, function(d) {
+    			// alert(d);
+    		});
+    	
 			for(t = 0; t < result.length; t++){
 				var resArr = result[t].toString().split('^');
 				var holidaycode = resArr[0].replace(/-/g, "");
