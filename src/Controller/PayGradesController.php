@@ -12,8 +12,12 @@ class PayGradesController extends AppController
 {
 
 var $components = array('Datatable');
-	
-	public function ajaxData() {
+    /**
+     * Index method
+     *
+     * @return \Cake\Network\Response|null
+     */
+     public function ajaxData() {
 		$this->autoRender= False;
 		  
 		$this->loadModel('CreateConfigs');
@@ -22,20 +26,17 @@ var $components = array('Datatable');
 		foreach($dbout as $value){
 			$fields[] = array("name" => $value['field_name'] , "type" => $value['datatype'] );
 		}
-		
 		$contains=['Customers'];
 									  
 		$output =$this->Datatable->getView($fields,$contains);
-		echo json_encode($output);				
+		echo json_encode($output);			
     }
-
-    /**
-     * Index method
-     *
-     * @return \Cake\Network\Response|null
-     */
     public function index()
     {
+    	$this->loadModel('CreateConfigs');
+        $configs=$this->CreateConfigs->find('all')->where(['table_name' => $this->request->params['controller']])->order(['"id"' => 'ASC'])->toArray();
+        $this->set('configs',$configs);	
+		
         $this->paginate = [
             'contain' => ['Customers']
         ];
@@ -125,7 +126,7 @@ var $components = array('Datatable');
      */
     public function delete($id = null)
     {
-        $this->request->allowMethod(['post', 'delete']);
+        // $this->request->allowMethod(['post', 'delete']);
         $payGrade = $this->PayGrades->get($id);
         if ($this->PayGrades->delete($payGrade)) {
             $this->Flash->success(__('The pay grade has been deleted.'));

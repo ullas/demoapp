@@ -1,3 +1,4 @@
+<?= $this->element('templateelmnt'); ?>
 <section class="content-header">
   <h1>
     Payroll Status
@@ -13,18 +14,20 @@
 <!-- Main content -->
 <section class="content">
   <div class="box box-primary"><div class="box-body">
-    <?= $this->Form->create($payRange, array('role' => 'form')) ?>
+    <?= $this->Form->create($payrollStatus, array('role' => 'form')) ?>
+    <fieldset>
     <?php
-            echo $this->Form->input('code',['disabled' => true);
-            echo $this->Form->input('payroll_area_id', ['options' => $payrollArea, 'disabled' => true);
+            echo $this->Form->input('code',['disabled' => true]);
+            echo $this->Form->input('payroll_area_id', ['options' => $payrollArea, 'disabled' => true]);
             echo $this->Form->input('current_period',['disabled' => true]);
-            echo $this->Form->input('earliest_retro_date', ['disabled' => true]);
+            echo $this->Form->input('earliest_retro_date',['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
             echo $this->Form->input('payroll_lock',['disabled' => true]);
-            echo $this->Form->input('lock_date', ['disabled' => true]);
-            echo $this->Form->input('lock_time', ['disabled' => true]);
-        ?>
+            echo $this->Form->input('lock_date',['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
+            echo $this->Form->input('lock_time',['label'=>'Lock Time','class' => 'mptltp','type' => 'text','templateVars' => ['opentag' => '<div class="bootstrap-timepicker">','closetag' => '</div>','icon' => '<div class="input-group-addon"><i class="fa fa-clock-o"></i></div>'],'disabled' => true]);
+        ?></fieldset>
 <div class="box-footer">
           	<?=$this->Html->link(__('Cancel'), ['action' => 'index'], ['escape' => false])?>
-            <?=$this->Html->link(__('Edit PayrollStatus'), ['action' => 'edit', $payRange['id']],['class'=>'btn btn-primary label-info pull-right'], ['escape' => false])?>
-          </div><?= $this->Form->end() ?>
+            <?=$this->Html->link(__('Edit PayrollStatus'), ['action' => 'edit', $payrollStatus['id']],['class'=>'btn btn-primary label-info pull-right'], ['escape' => false])?>
+          </div>
+          <?= $this->Form->end() ?>
 </div></div></section>

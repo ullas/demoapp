@@ -12,8 +12,12 @@ class PayGroupsController extends AppController
 {
 
 var $components = array('Datatable');
-	
-	public function ajaxData() {
+    /**
+     * Index method
+     *
+     * @return \Cake\Network\Response|null
+     */
+     public function ajaxData() {
 		$this->autoRender= False;
 		  
 		$this->loadModel('CreateConfigs');
@@ -22,19 +26,17 @@ var $components = array('Datatable');
 		foreach($dbout as $value){
 			$fields[] = array("name" => $value['field_name'] , "type" => $value['datatype'] );
 		}
-		
 		$contains=['Customers'];
 									  
 		$output =$this->Datatable->getView($fields,$contains);
-		echo json_encode($output);				
+		echo json_encode($output);			
     }
-    /**
-     * Index method
-     *
-     * @return \Cake\Network\Response|null
-     */
     public function index()
     {
+    	$this->loadModel('CreateConfigs');
+        $configs=$this->CreateConfigs->find('all')->where(['table_name' => $this->request->params['controller']])->order(['"id"' => 'ASC'])->toArray();
+        $this->set('configs',$configs);	
+		
         $this->paginate = [
             'contain' => ['Customers']
         ];
@@ -57,12 +59,12 @@ var $components = array('Datatable');
             'contain' => ['Customers', 'PayRanges']
         ]);
 		
-		if($payGroup['customer_id']==$this->loggedinuser['customer_id']){
+		// if($payGroup['customer_id']==$this->loggedinuser['customer_id']){
  			$this->set('payGroup', $payGroup);
         	$this->set('_serialize', ['payGroup']);
- 		}else{
-		   $this->redirect(['action' => 'logout','controller'=>'users']);
-        } 
+ 		// }else{
+		   // $this->redirect(['action' => 'logout','controller'=>'users']);
+        // } 
     }
 
     /**

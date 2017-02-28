@@ -11,8 +11,12 @@ use App\Controller\AppController;
 class PayComponentsController extends AppController
 {
 	var $components = array('Datatable');
-	
-	public function ajaxData() {
+    /**
+     * Index method
+     *
+     * @return \Cake\Network\Response|null
+     */
+     public function ajaxData() {
 		$this->autoRender= False;
 		  
 		$this->loadModel('CreateConfigs');
@@ -21,19 +25,16 @@ class PayComponentsController extends AppController
 		foreach($dbout as $value){
 			$fields[] = array("name" => $value['field_name'] , "type" => $value['datatype'] );
 		}
-		
-		$contains=['Frequencies','Customers'];
+		$contains=['Frequencies', 'Customers'];
 									  
 		$output =$this->Datatable->getView($fields,$contains);
 		echo json_encode($output);			
     }
-    /**
-     * Index method
-     *
-     * @return \Cake\Network\Response|null
-     */
     public function index()
     {
+    	$this->loadModel('CreateConfigs');
+        $configs=$this->CreateConfigs->find('all')->where(['table_name' => $this->request->params['controller']])->order(['"id"' => 'ASC'])->toArray();
+        $this->set('configs',$configs);
         $this->paginate = [
             'contain' => ['Frequencies', 'Customers']
         ];
@@ -56,14 +57,14 @@ class PayComponentsController extends AppController
             'contain' => ['Frequencies', 'Customers', 'TimeAccountTypes']
         ]);
 		
-		if($payComponent['customer_id']==$this->loggedinuser['customer_id']){
+		// if($payComponent['customer_id']==$this->loggedinuser['customer_id']){
  			$frequencies = $this->PayComponents->Frequencies->find('list', ['limit' => 200])->where("customer_id=".$this->loggedinuser['customer_id']);
 			$this->set('frequencies', $frequencies);
         	$this->set('payComponent', $payComponent);
         	$this->set('_serialize', ['payComponent']);
- 		}else{
-		   $this->redirect(['action' => 'logout','controller'=>'users']);
-        } 
+ 		// }else{
+		   // $this->redirect(['action' => 'logout','controller'=>'users']);
+        // } 
     }
 
     /**
@@ -127,7 +128,7 @@ class PayComponentsController extends AppController
      */
     public function delete($id = null)
     {
-        $this->request->allowMethod(['post', 'delete']);
+        // $this->request->allowMethod(['post', 'delete']);
         $payComponent = $this->PayComponents->get($id);
         if ($this->PayComponents->delete($payComponent)) {
             $this->Flash->success(__('The pay component has been deleted.'));

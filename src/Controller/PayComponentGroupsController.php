@@ -11,8 +11,12 @@ use App\Controller\AppController;
 class PayComponentGroupsController extends AppController
 {
 var $components = array('Datatable');
-	
-	public function ajaxData() {
+    /**
+     * Index method
+     *
+     * @return \Cake\Network\Response|null
+     */
+     public function ajaxData() {
 		$this->autoRender= False;
 		  
 		$this->loadModel('CreateConfigs');
@@ -21,19 +25,17 @@ var $components = array('Datatable');
 		foreach($dbout as $value){
 			$fields[] = array("name" => $value['field_name'] , "type" => $value['datatype'] );
 		}
-		
 		$contains=['Customers'];
 									  
 		$output =$this->Datatable->getView($fields,$contains);
-		echo json_encode($output);				
+		echo json_encode($output);			
     }
-    /**
-     * Index method
-     *
-     * @return \Cake\Network\Response|null
-     */
     public function index()
     {
+    	$this->loadModel('CreateConfigs');
+        $configs=$this->CreateConfigs->find('all')->where(['table_name' => $this->request->params['controller']])->order(['"id"' => 'ASC'])->toArray();
+        $this->set('configs',$configs);
+		
         $this->paginate = [
             'contain' => ['Customers']
         ];
@@ -56,12 +58,12 @@ var $components = array('Datatable');
             'contain' => ['Customers', 'TimeAccountTypes']
         ]);
 		
-		if($payComponentGroup['customer_id']==$this->loggedinuser['customer_id']){
+		// if($payComponentGroup['customer_id']==$this->loggedinuser['customer_id']){
  			$this->set('payComponentGroup', $payComponentGroup);
         	$this->set('_serialize', ['payComponentGroup']);
- 		}else{
-		   $this->redirect(['action' => 'logout','controller'=>'users']);
-        } 
+ 		// }else{
+		   // $this->redirect(['action' => 'logout','controller'=>'users']);
+        // } 
     }
 
     /**
@@ -123,7 +125,7 @@ var $components = array('Datatable');
      */
     public function delete($id = null)
     {
-        $this->request->allowMethod(['post', 'delete']);
+        // $this->request->allowMethod(['post', 'delete']);
         $payComponentGroup = $this->PayComponentGroups->get($id);
         if ($this->PayComponentGroups->delete($payComponentGroup)) {
             $this->Flash->success(__('The pay component group has been deleted.'));

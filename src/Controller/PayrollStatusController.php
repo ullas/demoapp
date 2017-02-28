@@ -59,7 +59,8 @@ var $components = array('Datatable');
             'contain' => ['PayrollArea']
         ]);
 
-        $this->set('payrollStatus', $payrollStatus);
+        $payrollArea = $this->PayrollStatus->PayrollArea->find('list', ['limit' => 200]);
+        $this->set(compact('payrollStatus', 'payrollArea'));
         $this->set('_serialize', ['payrollStatus']);
     }
 

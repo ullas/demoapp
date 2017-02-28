@@ -108,7 +108,7 @@ class WorkflowrulesController extends AppController
         $this->set('configs',$configs);	
 		
 		if ($this->request->is(['patch', 'post', 'put'])) {
-			// $id=$this->request->data['holidaycalendarid'];
+			$id=$this->request->data['workflowruleid'];
 			$workflowrule = $this->Workflowrules->get($id, [
            	 	'contain' => []
         	]);
