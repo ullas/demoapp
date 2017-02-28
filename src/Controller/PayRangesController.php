@@ -12,8 +12,12 @@ class PayRangesController extends AppController
 {
 
 var $components = array('Datatable');
-	
-	public function ajaxData() {
+    /**
+     * Index method
+     *
+     * @return \Cake\Network\Response|null
+     */
+     public function ajaxData() {
 		$this->autoRender= False;
 		  
 		$this->loadModel('CreateConfigs');
@@ -22,20 +26,17 @@ var $components = array('Datatable');
 		foreach($dbout as $value){
 			$fields[] = array("name" => $value['field_name'] , "type" => $value['datatype'] );
 		}
-		
 		$contains=['LegalEntities', 'PayGroups', 'Customers'];
 									  
 		$output =$this->Datatable->getView($fields,$contains);
 		echo json_encode($output);			
     }
-
-    /**
-     * Index method
-     *
-     * @return \Cake\Network\Response|null
-     */
     public function index()
     {
+    	$this->loadModel('CreateConfigs');
+        $configs=$this->CreateConfigs->find('all')->where(['table_name' => $this->request->params['controller']])->order(['"id"' => 'ASC'])->toArray();
+        $this->set('configs',$configs);	
+		
         $this->paginate = [
             'contain' => ['LegalEntities', 'PayGroups', 'Customers']
         ];
@@ -58,16 +59,16 @@ var $components = array('Datatable');
             'contain' => ['LegalEntities', 'PayGroups', 'Customers']
         ]);
 		
-		if($payRange['customer_id']==$this->loggedinuser['customer_id']){
+		// if($payRange['customer_id']==$this->loggedinuser['customer_id']){
  			$legalEntities = $this->PayRanges->LegalEntities->find('list', ['limit' => 200])->where("customer_id=".$this->loggedinuser['customer_id']);
         	$payGroups = $this->PayRanges->PayGroups->find('list', ['limit' => 200])->where("customer_id=".$this->loggedinuser['customer_id']);
         	$customers = $this->PayRanges->Customers->find('list', ['limit' => 200]);
         	$this->set(compact('payRange', 'legalEntities', 'payGroups', 'customers'));
         	$this->set('payRange', $payRange);
         	$this->set('_serialize', ['payRange']);
- 		}else{
-		   $this->redirect(['action' => 'logout','controller'=>'users']);
-        } 
+ 		// }else{
+		   // $this->redirect(['action' => 'logout','controller'=>'users']);
+        // } 
     }
 
     /**

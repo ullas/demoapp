@@ -7,20 +7,20 @@ use Cake\ORM\Table;
 use Cake\Validation\Validator;
 
 /**
- * WorkSchedules Model
+ * Work-schedules Model
  *
  * @property \Cake\ORM\Association\BelongsTo $Customers
  * @property \Cake\ORM\Association\BelongsTo $Employees
  *
- * @method \App\Model\Entity\WorkSchedule get($primaryKey, $options = [])
- * @method \App\Model\Entity\WorkSchedule newEntity($data = null, array $options = [])
- * @method \App\Model\Entity\WorkSchedule[] newEntities(array $data, array $options = [])
- * @method \App\Model\Entity\WorkSchedule|bool save(\Cake\Datasource\EntityInterface $entity, $options = [])
- * @method \App\Model\Entity\WorkSchedule patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
- * @method \App\Model\Entity\WorkSchedule[] patchEntities($entities, array $data, array $options = [])
- * @method \App\Model\Entity\WorkSchedule findOrCreate($search, callable $callback = null)
+ * @method \App\Model\Entity\Work-schedule get($primaryKey, $options = [])
+ * @method \App\Model\Entity\Work-schedule newEntity($data = null, array $options = [])
+ * @method \App\Model\Entity\Work-schedule[] newEntities(array $data, array $options = [])
+ * @method \App\Model\Entity\Work-schedule|bool save(\Cake\Datasource\EntityInterface $entity, $options = [])
+ * @method \App\Model\Entity\Work-schedule patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
+ * @method \App\Model\Entity\Work-schedule[] patchEntities($entities, array $data, array $options = [])
+ * @method \App\Model\Entity\Work-schedule findOrCreate($search, callable $callback = null)
  */
-class WorkSchedulesTable extends Table
+class Work-schedulesTable extends Table
 {
 
     /**

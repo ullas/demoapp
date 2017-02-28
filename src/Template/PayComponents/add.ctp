@@ -13,7 +13,6 @@
 	<div class="box box-primary"><div class="box-body">
     <?= $this->Form->create($payComponent) ?>
     <fieldset>
-        <legend><?= __('Add Pay Component') ?></legend>
         <?php
             echo $this->Form->input('name');
             echo $this->Form->input('description');
