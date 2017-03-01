@@ -219,4 +219,5 @@ class CustomersTable extends Table
 
         return $validator;
     }
+	
 }

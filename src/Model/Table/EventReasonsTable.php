@@ -5,7 +5,9 @@ use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
-
+use Cake\Event\Event;
+use Cake\Event\ArrayObject;
+use Cake\Core\Configure;
 /**
  * EventReasons Model
  *
@@ -86,7 +88,20 @@ class EventReasonsTable extends Table
 
         return $validator;
     }
+	public function beforeMarshal(Event $event, $data, $options)
+	{
+		
+		$userdf = Configure::read('userdf');
+		if(isset($userdf)  & $userdf===1){
 
+			foreach (["start_date","end_date"] as $value) {		
+				if($data[$value]!=null && strpos($data[$value], '/') !== false){
+					$data[$value] = str_replace('/', '-', $data[$value]);
+					$data[$value]=date('Y/m/d', strtotime($data[$value]));
+				}
+			}
+		}
+	}
     /**
      * Returns a rules checker object that will be used for validating
      * application integrity.

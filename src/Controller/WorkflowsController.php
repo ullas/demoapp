@@ -103,7 +103,7 @@ class WorkflowsController extends AppController
      */
     public function delete($id = null)
     {
-        $this->request->allowMethod(['post', 'delete']);
+        // $this->request->allowMethod(['post', 'delete']);
         $workflow = $this->Workflows->get($id);
         if ($this->Workflows->delete($workflow)) {
             $this->Flash->success(__('The workflow has been deleted.'));
