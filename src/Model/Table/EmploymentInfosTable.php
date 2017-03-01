@@ -5,7 +5,9 @@ use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
-
+use Cake\Event\Event;
+use Cake\Event\ArrayObject;
+use Cake\Core\Configure;
 /**
  * EmploymentInfos Model
  *
@@ -158,7 +160,20 @@ class EmploymentInfosTable extends Table
 
         return $validator;
     }
+	public function beforeMarshal(Event $event, $data, $options)
+	{
+		
+		$userdf = Configure::read('userdf');
+		if(isset($userdf)  & $userdf===1){
 
+			foreach (["stock_end_date","salary_end_date","benefits_end_date","start_date","first_date_worked","original_start_date","seniority_date","benefits_eligibility_start_date","service_date","end_date","pay_roll_end_date","last_date_worked","bonus_pay_expiration_date"] as $value) {		
+				if($data[$value]!=null && strpos($data[$value], '/') !== false){
+					$data[$value] = str_replace('/', '-', $data[$value]);
+					$data[$value]=date('Y/m/d', strtotime($data[$value]));
+				}
+			}
+		}
+	}
     /**
      * Returns a rules checker object that will be used for validating
      * application integrity.
