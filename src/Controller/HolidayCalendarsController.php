@@ -255,7 +255,7 @@ class HolidayCalendarsController extends AppController
 				}
 			}
 		}
-        // $this->request->allowMethod(['post', 'delete']);
+        $this->request->allowMethod(['post', 'delete']);
         $this->loadModel('HolidayCalendars');
         $holidayCalendar = $this->HolidayCalendars->get($id);
         if ($this->HolidayCalendars->delete($holidayCalendar)) {

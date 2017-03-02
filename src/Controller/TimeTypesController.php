@@ -129,7 +129,7 @@ class TimeTypesController extends AppController
      */
     public function delete($id = null)
     {
-        // $this->request->allowMethod(['post', 'delete']);
+        $this->request->allowMethod(['post', 'delete']);
         $timeType = $this->TimeTypes->get($id);
         if ($this->TimeTypes->delete($timeType)) {
             $this->Flash->success(__('The time type has been deleted.'));

@@ -288,8 +288,8 @@ $this->Html->script([
 
 function tableLoaded() {
 	//delete confirm
-    $(".delete-btn").click(function(){
-       $("#ajax_button").html("<a href='/<?php echo $this->request->params['controller'] ?>/delete/"+ $(this).attr("data-id")+"' class='btn btn-outline'>Confirm</a>");
+    $(".delete-btn").click(function(){var dataid=$(this).attr('data-id');
+       $("#ajax_button").html("<form name='formdelete' id='formdelete"+dataid+"' method='post'  action='/<?php echo $this->request->params['controller'] ?>/delete/"+dataid+"' style='display:none;'><input type='hidden' name='_method' value='POST'></form><a href='#' onclick='document.getElementById(&quot;formdelete"+dataid+"&quot;).submit();' class='btn btn-outline'>Confirm</a>");
       $("#trigger").click();
     });
 
@@ -403,7 +403,7 @@ $('.mptl-filter-base').on('ifUnchecked', function(event){
                   <h4 class="modal-title" id="myModalLabel"> MayHaw</h4>
               </div>
               <div class="modal-body">
-                  Do you  really want  to delete the element(s)?
+                  Are you sure, you  really want to delete the element(s)?
               </div>
               <div class="modal-footer">
                   <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Cancel</button>
