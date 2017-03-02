@@ -101,7 +101,7 @@ class CategoriesController extends AppController
      */
     public function delete($id = null)
     {
-        // $this->request->allowMethod(['post', 'delete']);
+        $this->request->allowMethod(['post', 'delete']);
         $category = $this->Categories->get($id);
         if ($this->Categories->delete($category)) {
             $this->Flash->success(__('The {0} has been deleted.', 'Category'));

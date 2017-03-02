@@ -128,7 +128,7 @@ class PayComponentsController extends AppController
      */
     public function delete($id = null)
     {
-        // $this->request->allowMethod(['post', 'delete']);
+        $this->request->allowMethod(['post', 'delete']);
         $payComponent = $this->PayComponents->get($id);
         if ($this->PayComponents->delete($payComponent)) {
             $this->Flash->success(__('The pay component has been deleted.'));

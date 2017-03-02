@@ -482,7 +482,7 @@ function weeklyOffProcess(){
                   <h4 class="modal-title" id="myModalLabel"> MayHaw</h4>
               </div>
               <div class="modal-body">
-                  Do you  really want  to delete the element(s)?
+                  Are you sure, you really want to delete the element(s)?
               </div>
               <div class="modal-footer">
                   <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Cancel</button>

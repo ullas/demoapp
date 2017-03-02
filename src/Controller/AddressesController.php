@@ -130,7 +130,7 @@ var $components = array('Datatable');
      */
     public function delete($id = null)
     {
-        // $this->request->allowMethod(['post', 'delete']);
+        $this->request->allowMethod(['post', 'delete']);
         $address = $this->Addresses->get($id);
         if ($this->Addresses->delete($address)) {
             $this->Flash->success(__('The address has been deleted.'));

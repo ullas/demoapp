@@ -125,7 +125,7 @@ var $components = array('Datatable');
      */
     public function delete($id = null)
     {
-        // $this->request->allowMethod(['post', 'delete']);
+        $this->request->allowMethod(['post', 'delete']);
         $payComponentGroup = $this->PayComponentGroups->get($id);
         if ($this->PayComponentGroups->delete($payComponentGroup)) {
             $this->Flash->success(__('The pay component group has been deleted.'));

@@ -134,7 +134,7 @@ class PayrollAreaController extends AppController
      */
     public function delete($id = null)
     {
-        // $this->request->allowMethod(['post', 'delete']);
+        $this->request->allowMethod(['post', 'delete']);
         $payrollArea = $this->PayrollArea->get($id);
         if ($this->PayrollArea->delete($payrollArea)) {
             $this->Flash->success(__('The payroll area has been deleted.'));
