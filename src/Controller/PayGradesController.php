@@ -126,7 +126,7 @@ var $components = array('Datatable');
      */
     public function delete($id = null)
     {
-        // $this->request->allowMethod(['post', 'delete']);
+        $this->request->allowMethod(['post', 'delete']);
         $payGrade = $this->PayGrades->get($id);
         if ($this->PayGrades->delete($payGrade)) {
             $this->Flash->success(__('The pay grade has been deleted.'));
