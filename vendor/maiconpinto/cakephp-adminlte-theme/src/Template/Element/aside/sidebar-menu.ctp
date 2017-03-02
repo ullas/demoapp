@@ -49,16 +49,16 @@ if (file_exists($file)) {
     		<li><a href="<?php echo $this -> Url -> build('/JobClasses'); ?>"><i class="fa fa-circle-o"></i> Job Class</a></li>
 			<li><a href="<?php echo $this -> Url -> build('/Regions'); ?>"><i class="fa fa-circle-o"></i> Region</a></li>
     		<li><a href="<?php echo $this -> Url -> build('/Locations'); ?>"><i class="fa fa-circle-o"></i> Location</a></li>
-    		<li><a href="<?php echo $this -> Url -> build('/PayrollArea'); ?>"><i class="fa fa-circle-o"></i> Pay Roll Area</a></li>
+    		<li><a href="<?php echo $this -> Url -> build('/PayrollArea'); ?>"><i class="fa fa-circle-o"></i> Payroll Area</a></li>
     		<li><a href="<?php echo $this -> Url -> build('/PayGroups'); ?>"><i class="fa fa-circle-o"></i> Pay Group</a></li>
     		<li><a href="<?php echo $this -> Url -> build('/PayGrades'); ?>"><i class="fa fa-circle-o"></i> Pay Grade</a></li>
     		<li><a href="<?php echo $this -> Url -> build('/PayRanges'); ?>"><i class="fa fa-circle-o"></i> Pay Range</a></li>
     		<li><a href="<?php echo $this -> Url -> build('/PayComponents'); ?>"><i class="fa fa-circle-o"></i> Pay Component</a></li>
     		<li><a href="<?php echo $this -> Url -> build('/PayComponentGroups'); ?>"><i class="fa fa-circle-o"></i> Pay Component Group</a></li>
-    		<li><a href="<?php echo $this -> Url -> build('/PayrollData'); ?>"><i class="fa fa-circle-o"></i> Pay Roll Data</a></li>
-    		<li><a href="<?php echo $this -> Url -> build('/PayrollStatus'); ?>"><i class="fa fa-circle-o"></i> Pay Roll Status</a></li>
-    		<li><a href="<?php echo $this -> Url -> build('/PayrollRecord'); ?>"><i class="fa fa-circle-o"></i> Pay Roll Record</a></li>
-    		<li><a href="<?php echo $this -> Url -> build('/PayrollResult'); ?>"><i class="fa fa-circle-o"></i> Pay Roll Result</a></li>
+    		<li><a href="<?php echo $this -> Url -> build('/PayrollData'); ?>"><i class="fa fa-circle-o"></i> Payroll Data</a></li>
+    		<li><a href="<?php echo $this -> Url -> build('/PayrollStatus'); ?>"><i class="fa fa-circle-o"></i> Payroll Status</a></li>
+    		<li><a href="<?php echo $this -> Url -> build('/PayrollRecord'); ?>"><i class="fa fa-circle-o"></i> Payroll Record</a></li>
+    		<li><a href="<?php echo $this -> Url -> build('/PayrollResult'); ?>"><i class="fa fa-circle-o"></i> Payroll Result</a></li>
     		
     		<li><a href="<?php echo $this -> Url -> build('/HolidayCalendars'); ?>"><i class="fa fa-circle-o"></i> Holiday Calendars</a></li>
     		
