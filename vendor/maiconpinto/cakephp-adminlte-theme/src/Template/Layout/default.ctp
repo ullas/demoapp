@@ -152,6 +152,9 @@ div.dataTables_filter input {
 .move-event{
 	cursor: move;
 }
+.mptlboldtxt{
+	font-weight: bold;
+}
 </style>
 
 </head>

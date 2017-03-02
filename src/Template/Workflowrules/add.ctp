@@ -244,12 +244,12 @@ function tableLoaded() {
 
 <!-- confirm delete -->
 <a data-target="#ConfirmDelete" role="button" data-toggle="modal" id="trigger"></a>
-<div class="modal fade" id="ConfirmDelete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade mptlboldtxt" id="ConfirmDelete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-danger">
           <div class="modal-content">
               <div class="modal-header">
                   <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                  <h4 class="modal-title" id="myModalLabel"> MayHaw</h4>
+                  <h4 class="modal-title mptlboldtxt" id="myModalLabel"> MayHaw</h4>
               </div>
               <div class="modal-body">
                   Are you sure, you really want to delete the element(s)?

@@ -1,1 +1,1 @@
-<?php echo $this->element('indexbasic'); ?>
+<?php echo $this->element('indexbasic', array('title' => 'Payroll Data')); ?>
