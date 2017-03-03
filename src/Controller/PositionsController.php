@@ -24,7 +24,8 @@ class PositionsController extends AppController
 		
 		$contains=['Customers', 'LegalEntities', 'Departments', 'CostCentres', 'Locations', 'Divisions', 'PayGrades', 'PayRanges', 'ParentPositions', 'Parents'];
 									  
-		$output =$this->Datatable->getView($fields,$contains);
+		$usrfilter="";						  
+		$output =$this->Datatable->getView($fields,$contains,$usrfilter);
 		echo json_encode($output);		
     }
     /**

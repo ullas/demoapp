@@ -28,7 +28,8 @@ var $components = array('Datatable');
 		}
 		$contains=['Customers'];
 									  
-		$output =$this->Datatable->getView($fields,$contains);
+		$usrfilter="";						  
+		$output =$this->Datatable->getView($fields,$contains,$usrfilter);
 		echo json_encode($output);			
     }
     public function index()
@@ -60,7 +61,8 @@ var $components = array('Datatable');
         ]);
 		
 		// if($payGroup['customer_id']==$this->loggedinuser['customer_id']){
- 			$this->set('payGroup', $payGroup);
+			$frequencies = $this->PayGroups->Frequencies->find('list', ['limit' => 200])->where("customer_id=".$this->loggedinuser['customer_id']);
+        	$this->set(compact('payGroup','frequencies'));
         	$this->set('_serialize', ['payGroup']);
  		// }else{
 		   // $this->redirect(['action' => 'logout','controller'=>'users']);
@@ -86,7 +88,8 @@ var $components = array('Datatable');
             }
         }
         $customers = $this->PayGroups->Customers->find('list', ['limit' => 200]);
-        $this->set(compact('payGroup', 'customers'));
+		$frequencies = $this->PayGroups->Frequencies->find('list', ['limit' => 200])->where("customer_id=".$this->loggedinuser['customer_id']);
+        $this->set(compact('payGroup', 'customers','frequencies'));
         $this->set('_serialize', ['payGroup']);
     }
 
@@ -113,7 +116,8 @@ var $components = array('Datatable');
             }
         }
         $customers = $this->PayGroups->Customers->find('list', ['limit' => 200]);
-        $this->set(compact('payGroup', 'customers'));
+        $frequencies = $this->PayGroups->Frequencies->find('list', ['limit' => 200])->where("customer_id=".$this->loggedinuser['customer_id']);
+        $this->set(compact('payGroup', 'customers','frequencies'));
         $this->set('_serialize', ['payGroup']);
     }
 

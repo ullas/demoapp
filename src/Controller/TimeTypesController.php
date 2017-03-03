@@ -23,9 +23,10 @@ class TimeTypesController extends AppController
 			$fields[] = array("name" => $value['field_name'] , "type" => $value['datatype'] );
 		}
 		
-		$contains=['Customers', 'TimeAccountTypes'];
+		$contains=['Customers', 'TimeAccountTypes','Workflowrules'];
 									  
-		$output =$this->Datatable->getView($fields,$contains);
+		$usrfilter="";						  
+		$output =$this->Datatable->getView($fields,$contains,$usrfilter);
 		echo json_encode($output);		
     }
 	
@@ -63,8 +64,8 @@ class TimeTypesController extends AppController
         ]);
 
 		$timeAccountTypes = $this->TimeTypes->TimeAccountTypes->find('list', ['limit' => 200]);
-		$this->set('timeAccountTypes', $timeAccountTypes);	
-        $this->set('timeType', $timeType);
+		$workflowrules = $this->TimeTypes->Workflowrules->find('list', ['limit' => 200]);
+        $this->set(compact('timeType', 'timeAccountTypes','workflowrules'));
         $this->set('_serialize', ['timeType']);
     }
 
@@ -88,7 +89,8 @@ class TimeTypesController extends AppController
         }
         $customers = $this->TimeTypes->Customers->find('list', ['limit' => 200]);
         $timeAccountTypes = $this->TimeTypes->TimeAccountTypes->find('list', ['limit' => 200]);
-        $this->set(compact('timeType', 'customers', 'timeAccountTypes'));
+		$workflowrules = $this->TimeTypes->Workflowrules->find('list', ['limit' => 200]);
+        $this->set(compact('timeType', 'customers', 'timeAccountTypes','workflowrules'));
         $this->set('_serialize', ['timeType']);
     }
 
@@ -116,7 +118,8 @@ class TimeTypesController extends AppController
         }
         $customers = $this->TimeTypes->Customers->find('list', ['limit' => 200]);
         $timeAccountTypes = $this->TimeTypes->TimeAccountTypes->find('list', ['limit' => 200]);
-        $this->set(compact('timeType', 'customers', 'timeAccountTypes'));
+        $workflowrules = $this->TimeTypes->Workflowrules->find('list', ['limit' => 200]);
+        $this->set(compact('timeType', 'customers', 'timeAccountTypes','workflowrules'));
         $this->set('_serialize', ['timeType']);
     }
 

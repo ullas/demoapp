@@ -23,7 +23,7 @@
             echo $this->Form->input('code',['disabled' => true]);
 			echo $this->Form->input('time_account_type_id', ['options' => $timeAccountTypes, 'empty' => true,'disabled' => true]);
 			echo $this->Form->input('flex_req_allow',['disabled' => true]);
-
+			echo $this->Form->input('workflowrule_id',['class'=>'select2', 'empty' => 'Choose', 'disabled' => true]);
             
         ?>
     </fieldset>

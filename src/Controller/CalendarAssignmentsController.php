@@ -28,7 +28,8 @@ class CalendarAssignmentsController extends AppController
 		}
 		$contains=['Users', 'Holidays', 'Customers','HolidayCalendars'];
 									  
-		$output =$this->Datatable->getView($fields,$contains);
+		$usrfilter="";						  
+		$output =$this->Datatable->getView($fields,$contains,$usrfilter);
 		echo json_encode($output);			
     }
     public function index()

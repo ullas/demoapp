@@ -28,7 +28,8 @@ class PayrollResultController extends AppController
 		}
 		$contains=['PayrollArea', 'PayComponents'];
 									  
-		$output =$this->Datatable->getView($fields,$contains);
+		$usrfilter="";						  
+		$output =$this->Datatable->getView($fields,$contains,$usrfilter);
 		echo json_encode($output);			
     }
     public function index()
