@@ -12,6 +12,7 @@ use Cake\Core\Configure;
  * PayGroups Model
  *
  * @property \Cake\ORM\Association\BelongsTo $Customers
+ * @property \Cake\ORM\Association\BelongsTo $Frequencies
  * @property \Cake\ORM\Association\HasMany $PayRanges
  *
  * @method \App\Model\Entity\PayGroup get($primaryKey, $options = [])
@@ -41,6 +42,9 @@ class PayGroupsTable extends Table
 
         $this->belongsTo('Customers', [
             'foreignKey' => 'customer_id'
+        ]);
+        $this->belongsTo('Frequencies', [
+            'foreignKey' => 'frequency_id'
         ]);
         $this->hasMany('PayRanges', [
             'foreignKey' => 'pay_group_id'
@@ -79,9 +83,6 @@ class PayGroupsTable extends Table
         $validator
             ->date('earliest_change_date')
             ->allowEmpty('earliest_change_date');
-
-        $validator
-            ->allowEmpty('payment_frequency');
 
         $validator
             ->allowEmpty('primary_contactid');
@@ -147,6 +148,7 @@ class PayGroupsTable extends Table
     {
         $rules->add($rules->isUnique(['external_code']));
         $rules->add($rules->existsIn(['customer_id'], 'Customers'));
+        $rules->add($rules->existsIn(['frequency_id'], 'Frequencies'));
 
         return $rules;
     }

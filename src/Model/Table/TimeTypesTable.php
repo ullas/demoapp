@@ -5,14 +5,14 @@ use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
-use Cake\Event\Event;
-use Cake\Event\ArrayObject;
-use Cake\Core\Configure;
+
 /**
  * TimeTypes Model
  *
  * @property \Cake\ORM\Association\BelongsTo $Customers
  * @property \Cake\ORM\Association\BelongsTo $TimeAccountTypes
+ * @property \Cake\ORM\Association\BelongsTo $Workflowrules
+ * @property \Cake\ORM\Association\HasMany $EmployeeAbsencerecords
  * @property \Cake\ORM\Association\HasMany $TimeTypeProfiles
  *
  * @method \App\Model\Entity\TimeType get($primaryKey, $options = [])
@@ -45,6 +45,12 @@ class TimeTypesTable extends Table
         ]);
         $this->belongsTo('TimeAccountTypes', [
             'foreignKey' => 'time_account_type_id'
+        ]);
+        $this->belongsTo('Workflowrules', [
+            'foreignKey' => 'workflowrule_id'
+        ]);
+        $this->hasMany('EmployeeAbsencerecords', [
+            'foreignKey' => 'time_type_id'
         ]);
         $this->hasMany('TimeTypeProfiles', [
             'foreignKey' => 'time_type_id'
@@ -116,6 +122,7 @@ class TimeTypesTable extends Table
         $rules->add($rules->isUnique(['name']));
         $rules->add($rules->existsIn(['customer_id'], 'Customers'));
         $rules->add($rules->existsIn(['time_account_type_id'], 'TimeAccountTypes'));
+        $rules->add($rules->existsIn(['workflowrule_id'], 'Workflowrules'));
 
         return $rules;
     }

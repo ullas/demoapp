@@ -16,20 +16,20 @@
         <?php
             echo $this->Form->input('name');
             echo $this->Form->input('description');
-            echo $this->Form->input('status');
+            echo $this->Form->input('status',['class'=>'select2','options' => array('Active', 'Inactive'), 'empty' => 'Choose']);
 			echo $this->Form->input('start_date',['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
             echo $this->Form->input('end_date',['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
-            echo $this->Form->input('pay_component_type');
-            echo $this->Form->input('is_earning');
+            echo $this->Form->input('pay_component_type',['class'=>'select2','options' => array('Amount', 'Percentage'), 'empty' => 'Choose']);
+            echo $this->Form->input('is_earning',['class'=>'select2','options' => array('Yes', 'No'), 'empty' => 'Choose']);
             echo $this->Form->input('currency',['options' => $this->Currency->get_currencies(), 'empty' => true]);
             echo $this->Form->input('pay_component_value');
             echo $this->Form->input('recurring');
-            echo $this->Form->input('base_pay_component_group');
-            echo $this->Form->input('tax_treatment');
-            echo $this->Form->input('can_override');
+            echo $this->Form->input('pay_component_group_id',['class'=>'select2', 'empty' => 'Choose']);
+            echo $this->Form->input('tax_treatment',['class'=>'select2','options' => array('No Tax', 'Regular','Gross Up'), 'empty' => 'Choose']);
+            echo $this->Form->input('can_override',['class'=>'select2','options' => array('Yes', 'No'), 'empty' => 'Choose']);
             echo $this->Form->input('self_service_description');
-            echo $this->Form->input('display_on_self_service');
-            echo $this->Form->input('used_for_comp_planning');
+            echo $this->Form->input('display_on_self_service',['class'=>'select2','options' => array('Yes', 'No'), 'empty' => 'Choose']);
+            echo $this->Form->input('used_for_comp_planning',['class'=>'select2','options' => array('None' ,'Comp ',' Varpay',' Both'), 'empty' => 'Choose']);
             echo $this->Form->input('target');
             echo $this->Form->input('is_relevant_for_advance_payment');
             echo $this->Form->input('max_fraction_digits');

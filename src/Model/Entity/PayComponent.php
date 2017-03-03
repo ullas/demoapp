@@ -17,7 +17,6 @@ use Cake\ORM\Entity;
  * @property string $currency
  * @property float $pay_component_value
  * @property bool $recurring
- * @property string $base_pay_component_group
  * @property string $tax_treatment
  * @property string $can_override
  * @property string $self_service_description
@@ -32,8 +31,11 @@ use Cake\ORM\Entity;
  * @property string $external_code
  * @property int $frequency_id
  * @property int $customer_id
+ * @property int $pay_component_group_id
  *
  * @property \App\Model\Entity\Frequency $frequency
+ * @property \App\Model\Entity\Customer $customer
+ * @property \App\Model\Entity\TimeAccountType[] $time_account_types
  */
 class PayComponent extends Entity
 {

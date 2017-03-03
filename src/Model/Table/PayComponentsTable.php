@@ -13,6 +13,9 @@ use Cake\Core\Configure;
  *
  * @property \Cake\ORM\Association\BelongsTo $Frequencies
  * @property \Cake\ORM\Association\BelongsTo $Customers
+ * @property \Cake\ORM\Association\BelongsTo $PayComponentGroups
+ * @property \Cake\ORM\Association\HasMany $PayrollData
+ * @property \Cake\ORM\Association\HasMany $PayrollResult
  * @property \Cake\ORM\Association\HasMany $TimeAccountTypes
  *
  * @method \App\Model\Entity\PayComponent get($primaryKey, $options = [])
@@ -45,6 +48,15 @@ class PayComponentsTable extends Table
         ]);
         $this->belongsTo('Customers', [
             'foreignKey' => 'customer_id'
+        ]);
+        $this->belongsTo('PayComponentGroups', [
+            'foreignKey' => 'pay_component_group_id'
+        ]);
+        $this->hasMany('PayrollData', [
+            'foreignKey' => 'pay_component_id'
+        ]);
+        $this->hasMany('PayrollResult', [
+            'foreignKey' => 'pay_component_id'
         ]);
         $this->hasMany('TimeAccountTypes', [
             'foreignKey' => 'pay_component_id'
@@ -96,9 +108,6 @@ class PayComponentsTable extends Table
         $validator
             ->boolean('recurring')
             ->allowEmpty('recurring');
-
-        $validator
-            ->allowEmpty('base_pay_component_group');
 
         $validator
             ->allowEmpty('tax_treatment');
@@ -171,6 +180,7 @@ class PayComponentsTable extends Table
         $rules->add($rules->isUnique(['external_code']));
         $rules->add($rules->existsIn(['frequency_id'], 'Frequencies'));
         $rules->add($rules->existsIn(['customer_id'], 'Customers'));
+        $rules->add($rules->existsIn(['pay_component_group_id'], 'PayComponentGroups'));
 
         return $rules;
     }

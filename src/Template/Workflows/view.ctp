@@ -7,6 +7,10 @@
         <li><?= $this->Html->link(__('New Workflow'), ['action' => 'add']) ?> </li>
         <li><?= $this->Html->link(__('List Workflowrules'), ['controller' => 'Workflowrules', 'action' => 'index']) ?> </li>
         <li><?= $this->Html->link(__('New Workflowrule'), ['controller' => 'Workflowrules', 'action' => 'add']) ?> </li>
+        <li><?= $this->Html->link(__('List Customers'), ['controller' => 'Customers', 'action' => 'index']) ?> </li>
+        <li><?= $this->Html->link(__('New Customer'), ['controller' => 'Customers', 'action' => 'add']) ?> </li>
+        <li><?= $this->Html->link(__('List Emp Data Biographies'), ['controller' => 'EmpDataBiographies', 'action' => 'index']) ?> </li>
+        <li><?= $this->Html->link(__('New Emp Data Biography'), ['controller' => 'EmpDataBiographies', 'action' => 'add']) ?> </li>
         <li><?= $this->Html->link(__('List Time Type Profiles'), ['controller' => 'TimeTypeProfiles', 'action' => 'index']) ?> </li>
         <li><?= $this->Html->link(__('New Time Type Profile'), ['controller' => 'TimeTypeProfiles', 'action' => 'add']) ?> </li>
     </ul>
@@ -23,16 +27,20 @@
             <td><?= h($workflow->lastaction) ?></td>
         </tr>
         <tr>
+            <th><?= __('Customer') ?></th>
+            <td><?= $workflow->has('customer') ? $this->Html->link($workflow->customer->name, ['controller' => 'Customers', 'action' => 'view', $workflow->customer->id]) : '' ?></td>
+        </tr>
+        <tr>
+            <th><?= __('Emp Data Biography') ?></th>
+            <td><?= $workflow->has('emp_data_biography') ? $this->Html->link($workflow->emp_data_biography->id, ['controller' => 'EmpDataBiographies', 'action' => 'view', $workflow->emp_data_biography->id]) : '' ?></td>
+        </tr>
+        <tr>
             <th><?= __('Id') ?></th>
             <td><?= $this->Number->format($workflow->id) ?></td>
         </tr>
         <tr>
             <th><?= __('Currentstep') ?></th>
             <td><?= $this->Number->format($workflow->currentstep) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Customer Id') ?></th>
-            <td><?= $this->Number->format($workflow->customer_id) ?></td>
         </tr>
         <tr>
             <th><?= __('Updatetime') ?></th>

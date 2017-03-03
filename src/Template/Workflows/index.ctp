@@ -4,6 +4,10 @@
         <li><?= $this->Html->link(__('New Workflow'), ['action' => 'add']) ?></li>
         <li><?= $this->Html->link(__('List Workflowrules'), ['controller' => 'Workflowrules', 'action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('New Workflowrule'), ['controller' => 'Workflowrules', 'action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('List Customers'), ['controller' => 'Customers', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New Customer'), ['controller' => 'Customers', 'action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('List Emp Data Biographies'), ['controller' => 'EmpDataBiographies', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New Emp Data Biography'), ['controller' => 'EmpDataBiographies', 'action' => 'add']) ?></li>
         <li><?= $this->Html->link(__('List Time Type Profiles'), ['controller' => 'TimeTypeProfiles', 'action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('New Time Type Profile'), ['controller' => 'TimeTypeProfiles', 'action' => 'add']) ?></li>
     </ul>
@@ -19,6 +23,7 @@
                 <th><?= $this->Paginator->sort('lastaction') ?></th>
                 <th><?= $this->Paginator->sort('updatetime') ?></th>
                 <th><?= $this->Paginator->sort('customer_id') ?></th>
+                <th><?= $this->Paginator->sort('emp_data_biographies_id') ?></th>
                 <th class="actions"><?= __('Actions') ?></th>
             </tr>
         </thead>
@@ -30,7 +35,8 @@
                 <td><?= $workflow->has('workflowrule') ? $this->Html->link($workflow->workflowrule->name, ['controller' => 'Workflowrules', 'action' => 'view', $workflow->workflowrule->id]) : '' ?></td>
                 <td><?= h($workflow->lastaction) ?></td>
                 <td><?= h($workflow->updatetime) ?></td>
-                <td><?= $this->Number->format($workflow->customer_id) ?></td>
+                <td><?= $workflow->has('customer') ? $this->Html->link($workflow->customer->name, ['controller' => 'Customers', 'action' => 'view', $workflow->customer->id]) : '' ?></td>
+                <td><?= $workflow->has('emp_data_biography') ? $this->Html->link($workflow->emp_data_biography->id, ['controller' => 'EmpDataBiographies', 'action' => 'view', $workflow->emp_data_biography->id]) : '' ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $workflow->id]) ?>
                     <?= $this->Html->link(__('Edit'), ['action' => 'edit', $workflow->id]) ?>

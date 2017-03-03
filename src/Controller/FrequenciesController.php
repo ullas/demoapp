@@ -24,7 +24,8 @@ class FrequenciesController extends AppController
 		
 		$contains=['Customers'];
 									  
-		$output =$this->Datatable->getView($fields,$contains);
+		$usrfilter="";						  
+		$output =$this->Datatable->getView($fields,$contains,$usrfilter);
 		echo json_encode($output);		
     }
     /**

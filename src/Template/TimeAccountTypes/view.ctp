@@ -14,7 +14,7 @@
     <fieldset>
         <?php
             echo $this->Form->input('name',['disabled' => true]);
-            echo $this->Form->input('unit',['label'=>'Permitted Fractions for Unit Hours','class'=>'select2','options' => array('Hour(s)', 'Day(s)'), 'empty' => 'Choose','disabled' => true]);
+            echo $this->Form->input('unit',['label'=>'Unit','class'=>'select2','options' => array('Hour(s)', 'Day(s)'), 'empty' => 'Choose','disabled' => true]);
             echo $this->Form->input('perm_reccur',['label'=>'Permanent / Recurring','disabled' => true]);
             echo $this->Form->input('start_date',['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
             echo $this->Form->input('valid_from',['label'=>'Account Valid From (month)','class'=>'select2','options' => array('1', '2','3','4','5','6','7','8','9','10','11','12'), 'empty' => 'Choose','disabled' => true]);
