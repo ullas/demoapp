@@ -19,7 +19,7 @@ class WorkflowsController extends AppController
     public function index()
     {
         $this->paginate = [
-            'contain' => ['Workflowrules']
+            'contain' => ['Workflowrules', 'Customers', 'EmpDataBiographies']
         ];
         $workflows = $this->paginate($this->Workflows);
 
@@ -37,7 +37,7 @@ class WorkflowsController extends AppController
     public function view($id = null)
     {
         $workflow = $this->Workflows->get($id, [
-            'contain' => ['Workflowrules', 'TimeTypeProfiles']
+            'contain' => ['Workflowrules', 'Customers', 'EmpDataBiographies', 'TimeTypeProfiles']
         ]);
 
         $this->set('workflow', $workflow);
@@ -63,7 +63,9 @@ class WorkflowsController extends AppController
             }
         }
         $workflowrules = $this->Workflows->Workflowrules->find('list', ['limit' => 200]);
-        $this->set(compact('workflow', 'workflowrules'));
+        $customers = $this->Workflows->Customers->find('list', ['limit' => 200]);
+        $empDataBiographies = $this->Workflows->EmpDataBiographies->find('list', ['limit' => 200]);
+        $this->set(compact('workflow', 'workflowrules', 'customers', 'empDataBiographies'));
         $this->set('_serialize', ['workflow']);
     }
 
@@ -90,7 +92,9 @@ class WorkflowsController extends AppController
             }
         }
         $workflowrules = $this->Workflows->Workflowrules->find('list', ['limit' => 200]);
-        $this->set(compact('workflow', 'workflowrules'));
+        $customers = $this->Workflows->Customers->find('list', ['limit' => 200]);
+        $empDataBiographies = $this->Workflows->EmpDataBiographies->find('list', ['limit' => 200]);
+        $this->set(compact('workflow', 'workflowrules', 'customers', 'empDataBiographies'));
         $this->set('_serialize', ['workflow']);
     }
 

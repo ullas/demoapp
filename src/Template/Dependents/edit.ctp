@@ -1,3 +1,4 @@
+<?= $this->element('templateelmnt'); ?>
 <section class="content-header">
       <h1>
         Dependents
@@ -11,7 +12,6 @@
 	<div class="box box-primary"><div class="box-body">
     <?= $this->Form->create($dependent) ?>
     <fieldset>
-        <legend><?= __('Edit Dependent') ?></legend>
         <?php
             echo $this->Form->input('relationship_type');
             echo $this->Form->input('is_accompanying_dependent');
@@ -20,8 +20,7 @@
             echo $this->Form->input('last_name');
             echo $this->Form->input('middle_name');
             echo $this->Form->input('salutation');
-			echo "<div class='form-group'><label>Date of Birth:</label><div class='input-group'>";
-            echo "<div class='input-group-addon''><i class='fa fa-calendar'></i></div><input type='text' class='form-control' id='date_of_birth'></div></div>";
+			echo $this->Form->input('date_of_birth', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
             echo $this->Form->input('country_of_birth',['options' => $this->Country->get_countries(), 'empty' => true]);
             echo $this->Form->input('country',['options' => $this->Country->get_countries(), 'empty' => true]);
             echo $this->Form->input('card_type');
@@ -44,10 +43,12 @@
             echo $this->Form->input('spouse_emplid');
             echo $this->Form->input('leave_passage');
             echo $this->Form->input('leave_passage_entitle');
-            echo $this->Form->input('emp_data_biographies_id');
         ?>
     </fieldset>
-    <?= $this->Form->button(__('Submit')) ?>
+    <div class="box-footer">
+    <?=$this->Html->link(__('Cancel'), ['action' => 'index'], ['escape' => false])?>
+    <?= $this->Form->button(__('Update Dependent'),['title'=>'Save Dependent','class'=>'pull-right']) ?>
+    </div>
     <?= $this->Form->end() ?>
 </div></div></section>
 

@@ -44,7 +44,7 @@
             echo $this->Form->input('spouse_emplid');
             echo $this->Form->input('leave_passage');
             echo $this->Form->input('leave_passage_entitle');
-            echo $this->Form->input('emp_data_biographies_id');
+            // echo $this->Form->input('emp_data_biographies_id');
         ?>
     </fieldset>
     <div class="box-footer">

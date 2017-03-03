@@ -25,7 +25,8 @@ class LegalEntitiesController extends AppController
 		
 		$contains=[];
 									  
-		$output =$this->Datatable->getView($fields,$contains);
+		$usrfilter="";						  
+		$output =$this->Datatable->getView($fields,$contains,$usrfilter);
 		echo json_encode($output);			
     }
     /**

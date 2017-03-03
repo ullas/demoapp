@@ -27,7 +27,8 @@ class EmployeesController extends AppController
 		}
 		$contains=['Empdatabiographies', 'Empdatapersonals', 'Employmentinfos'];
 									  
-		$output =$this->Datatable->getView($fields,$contains);
+		$usrfilter="";						  
+		$output =$this->Datatable->getView($fields,$contains,$usrfilter);
 		echo json_encode($output);			
     }
     public function index()

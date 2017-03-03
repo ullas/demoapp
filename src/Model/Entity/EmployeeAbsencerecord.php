@@ -4,22 +4,25 @@ namespace App\Model\Entity;
 use Cake\ORM\Entity;
 
 /**
- * Workflow Entity
+ * EmployeeAbsencerecord Entity
  *
- * @property int $id
- * @property int $currentstep
- * @property int $workflowrule_id
- * @property string $lastaction
- * @property \Cake\I18n\Time $updatetime
- * @property int $customer_id
  * @property int $emp_data_biographies_id
+ * @property int $time_type_id
+ * @property int $status
+ * @property \Cake\I18n\Time $start_date
+ * @property \Cake\I18n\Time $end_date
+ * @property int $created_by
+ * @property int $user_id
+ * @property \Cake\I18n\Time $created
+ * @property \Cake\I18n\Time $modified
+ * @property int $id
+ * @property int $modified_by
  *
- * @property \App\Model\Entity\Workflowrule $workflowrule
- * @property \App\Model\Entity\Customer $customer
- * @property \App\Model\Entity\EmpDataBiography $emp_data_biography
- * @property \App\Model\Entity\TimeTypeProfile[] $time_type_profiles
+ * @property \App\Model\Entity\EmpDataBiography $empdatabiography
+ * @property \App\Model\Entity\TimeType $time_type
+ * @property \App\Model\Entity\User $user
  */
-class Workflow extends Entity
+class EmployeeAbsencerecord extends Entity
 {
 
     /**

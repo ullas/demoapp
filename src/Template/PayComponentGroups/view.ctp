@@ -18,13 +18,13 @@
     <fieldset><?php
             echo $this->Form->input('name',['disabled' => true]);
             echo $this->Form->input('description',['disabled' => true]);
-            echo $this->Form->input('status',['disabled' => true]);
+            echo $this->Form->input('status',['disabled' => true,'class'=>'select2','options' => array('Active', 'Inactive'), 'empty' => 'Choose']);
             echo $this->Form->input('start_date',['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
             echo $this->Form->input('end_date',['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
             echo $this->Form->input('currency',['options' => $this->Currency->get_currencies(), 'empty' => true,'disabled' => true]);
-            echo $this->Form->input('show_on_comp_ui',['disabled' => true]);
-            echo $this->Form->input('use_for_comparatio_calc',['disabled' => true]);
-            echo $this->Form->input('use_for_range_penetration',['disabled' => true]);
+            echo $this->Form->input('show_on_comp_ui',['label'=>'Display on Comp UI','disabled' => true,'class'=>'select2','options' => array('Yes', 'No'), 'empty' => 'Choose']);
+            echo $this->Form->input('use_for_comparatio_calc',['label'=>'Use for Comparatio Calculation','disabled' => true,'class'=>'select2','options' => array('Yes', 'No'), 'empty' => 'Choose']);
+            echo $this->Form->input('use_for_range_penetration',['disabled' => true,'class'=>'select2','options' => array('Yes', 'No'), 'empty' => 'Choose']);
             echo $this->Form->input('sort_order',['disabled' => true]);
             echo $this->Form->input('system_defined',['disabled' => true]);
             echo $this->Form->input('external_code',['disabled' => true]);

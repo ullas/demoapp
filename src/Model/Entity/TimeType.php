@@ -19,6 +19,7 @@ use Cake\ORM\Entity;
  * @property string $name
  * @property int $customer_id
  * @property int $time_account_type_id
+ * @property int $workflowrule_id
  *
  * @property \App\Model\Entity\Customer $customer
  * @property \App\Model\Entity\TimeAccountType $time_account_type

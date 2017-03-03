@@ -22,7 +22,7 @@
 			echo $this->Form->input('effective_start_date',['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
             echo $this->Form->input('effective_end_date',['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
             echo $this->Form->input('earliest_change_date',['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
-            echo $this->Form->input('payment_frequency',['disabled' => true]);
+			echo $this->Form->input('frequency_id', ['options' => $frequencies, 'empty' => true,'disabled' => true,'label'=>'Pay Frequency']);
             echo $this->Form->input('primary_contactid',['disabled' => true]);
             echo $this->Form->input('primary_contact_email',['templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-envelope"></i></div>'],'disabled' => true]);
             echo $this->Form->input('primary_contact_name',['disabled' => true]);

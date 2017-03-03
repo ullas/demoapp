@@ -28,7 +28,8 @@ class JobsController extends AppController
 		}
 		$contains=['Jobclasses', 'Jobfunctions', 'Jobinfos'];
 									  
-		$output =$this->Datatable->getView($fields,$contains);
+		$usrfilter="";						  
+		$output =$this->Datatable->getView($fields,$contains,$usrfilter);
 		echo json_encode($output);			
     }
     public function index()

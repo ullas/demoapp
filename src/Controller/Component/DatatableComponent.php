@@ -5,7 +5,7 @@ use Cake\Utility\Inflector;
 
 	class DatatableComponent extends Component {
 										  
-		public function getView($fields,$contains) 
+		public function getView($fields,$contains,$usrFilter) 
 		{
 			
 			$length = count($fields);
@@ -64,7 +64,16 @@ use Cake\Utility\Inflector;
 				if($wherestr != ''){$wherestr.=" OR ";}
 				$wherestr.=$key. " '". $value. "'";
 			}
-						
+				
+				
+			if(strlen($wherestr)>3 && strlen($usrFilter)>3){
+           	 	$wherestr.= " and ".$usrFilter;
+           	}else{
+           	  	if(strlen($usrFilter)>3){
+           	    	$wherestr=$usrFilter;
+           	  	}
+           	}
+		   		
 			$data = $model->find('all')->where($wherestr)/*->where($wherecustomer)*/->contain($contains)->order($order)->limit($limit)->page($page)->toArray();
 			
 			//getting totalcount

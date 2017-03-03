@@ -13,7 +13,6 @@ use Cake\ORM\Entity;
  * @property \Cake\I18n\Time $effective_start_date
  * @property \Cake\I18n\Time $effective_end_date
  * @property \Cake\I18n\Time $earliest_change_date
- * @property string $payment_frequency
  * @property string $primary_contactid
  * @property string $primary_contact_email
  * @property string $primary_contact_name
@@ -26,6 +25,11 @@ use Cake\ORM\Entity;
  * @property float $lag
  * @property string $external_code
  * @property int $customer_id
+ * @property int $frequency_id
+ *
+ * @property \App\Model\Entity\Customer $customer
+ * @property \App\Model\Entity\Frequency $frequency
+ * @property \App\Model\Entity\PayRange[] $pay_ranges
  */
 class PayGroup extends Entity
 {

@@ -5,14 +5,13 @@ use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
-use Cake\Event\Event;
-use Cake\Event\ArrayObject;
-use Cake\Core\Configure;
+
 /**
  * Workflows Model
  *
  * @property \Cake\ORM\Association\BelongsTo $Workflowrules
  * @property \Cake\ORM\Association\BelongsTo $Customers
+ * @property \Cake\ORM\Association\BelongsTo $EmpDataBiographies
  * @property \Cake\ORM\Association\HasMany $TimeTypeProfiles
  *
  * @method \App\Model\Entity\Workflow get($primaryKey, $options = [])
@@ -45,6 +44,9 @@ class WorkflowsTable extends Table
         ]);
         $this->belongsTo('Customers', [
             'foreignKey' => 'customer_id'
+        ]);
+        $this->belongsTo('EmpDataBiographies', [
+            'foreignKey' => 'emp_data_biographies_id'
         ]);
         $this->hasMany('TimeTypeProfiles', [
             'foreignKey' => 'workflow_id'
@@ -87,6 +89,7 @@ class WorkflowsTable extends Table
     {
         $rules->add($rules->existsIn(['workflowrule_id'], 'Workflowrules'));
         $rules->add($rules->existsIn(['customer_id'], 'Customers'));
+        $rules->add($rules->existsIn(['emp_data_biographies_id'], 'EmpDataBiographies'));
 
         return $rules;
     }
