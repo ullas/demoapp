@@ -1,4 +1,8 @@
-		<div class="box"><?= $this->element('stepformwizardelmnt', array('wcontent' => 'Department','wid' => '4')); ?></div>
+<?= $this->element('templateelmnt'); ?>
+
+<section class="content" style="padding: 1px;min-height:150px;">
+	<?= $this->element('stepformwizardelmnt', array('wcontent' => 'Department','wid' => '4')); ?>
+</section>
 
     <section class="content-header">
       <h1>
@@ -10,7 +14,6 @@
 	<div class="box box-primary"><div class="box-body">
     <?= $this->Form->create($department) ?>
     <fieldset>
-        <legend><?= __('Add Department') ?></legend>
         <?php
             echo $this->Form->input('name');
             echo $this->Form->input('description');
@@ -23,6 +26,6 @@
             echo $this->Form->input('cost_center_id', ['options' => $costCentres, 'empty' => true]);
         ?>
     </fieldset>
-    <?= $this->Form->button(__('Submit')) ?>
+    <?= $this->Form->button(__('Submit'),['class'=>'pull-right']) ?>
     <?= $this->Form->end() ?>
 </div></div></section>

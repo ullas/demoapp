@@ -1,16 +1,4 @@
-<style>
-label.mandatory:after {
-    content: ' *';
-    color: #ff5a4d;
-    display: inline;
-}
-[class^='select2'] {
-  border-radius: 0px !important;
-}
-.select2-container--default .select2-selection--single{
-  border:1px solid #D2D6DE;
-}
-</style>
+
 <?= $this->element('templateelmnt'); ?>
 <section class="content-header">
       <h1>
@@ -18,7 +6,7 @@ label.mandatory:after {
         <small>Edit</small>
       </h1>
       <ol class="breadcrumb">
-        <?= $this->Html->link('<i class="fa fa-mail-reply"></i> '.__('Back'), ['action' => 'index'], ['escape' => false]) ?>
+        <li><?= $this->Html->link('<i class="fa fa-mail-reply"></i> '.__('Back'), ['action' => 'index'], ['escape' => false]) ?></li>
       </ol>
     </section>
 <section class="content">

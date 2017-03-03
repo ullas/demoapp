@@ -1,3 +1,4 @@
+<?= $this->element('templateelmnt'); ?>
 <section class="content-header">
       <h1>
         Frequency
@@ -11,7 +12,6 @@
 	<div class="box box-primary"><div class="box-body">
     <?= $this->Form->create($frequency) ?>
     <fieldset>
-        <legend><?= __('Edit Frequency') ?></legend>
         <?php
             echo $this->Form->input('name');
             echo $this->Form->input('description');
@@ -19,6 +19,9 @@
             echo $this->Form->input('external_code');
         ?>
     </fieldset>
-    <?= $this->Form->button(__('Submit')) ?>
+    <div class="box-footer">
+    <?=$this->Html->link(__('Cancel'), ['action' => 'index'], ['escape' => false])?>
+    <?= $this->Form->button(__('Update Frequency'),['title'=>'Save Frequency','class'=>'pull-right']) ?>
+    </div>
     <?= $this->Form->end() ?>
 </div></div></section>

@@ -1,4 +1,8 @@
-<div class="box"><?= $this->element('stepformwizardelmnt', array('wcontent' => 'CostCenter','wid' => '3')); ?></div>
+<?= $this->element('templateelmnt'); ?>
+
+<section class="content" style="padding: 1px;min-height:150px;">
+	<?= $this->element('stepformwizardelmnt', array('wcontent' => 'CostCenter','wid' => '3')); ?>
+</section>
 
     <section class="content-header">
       <h1>
@@ -10,7 +14,6 @@
 	<div class="box box-primary"><div class="box-body">
     <?= $this->Form->create($costCentre) ?>
     <fieldset>
-        <legend><?= __('Add Cost Centre') ?></legend>
         <?php
             echo $this->Form->input('name');
             echo $this->Form->input('description');
@@ -22,6 +25,8 @@
             echo $this->Form->input('cost_center_manager');
         ?>
     </fieldset>
-    <?= $this->Form->button(__('Submit')) ?>
+    <div class="box-footer">
+    <?= $this->Form->button(__('Submit'),['title' => 'Save CostCentre', 'class' => 'pull-right']) ?>
+    </div>
     <?= $this->Form->end() ?>
 </div></div></section>

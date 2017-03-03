@@ -51,10 +51,7 @@
             echo $this->Form->input('parent_id', ['options' => $parents, 'empty' => true]);
             echo $this->Form->input('lft');
             echo $this->Form->input('rght');
-			
-			
-			echo $this->Html->link( 'Add', 'Divisions', ['label'=>'Add more', 'class' => 'button', 'target' => '_blank', 'data-toggle'=>'modal', 'data-remote'=>'false', 'data-target'=>'#actionspopover'] );
-		
+					
         ?>
           
     </fieldset>
