@@ -1,4 +1,8 @@
-<div class="box"><?= $this->element('stepformwizardelmnt', array('wcontent' => 'Division','wid' => '3')); ?></div>
+<?= $this->element('templateelmnt'); ?>
+
+<section class="content" style="padding: 1px;min-height:150px;">
+	<?= $this->element('stepformwizardelmnt', array('wcontent' => 'Division','wid' => '3')); ?>
+</section>
 
 <section class="content-header">
       <h1>
@@ -21,6 +25,8 @@
             echo $this->Form->input('head_of_unit');
         ?>
     </fieldset>
-    <?= $this->Form->button(__('Submit')) ?>
+    <div class="box-footer">
+       <?= $this->Form->button(__('Submit'),['class'=>'pull-right']) ?>
+    </div>
     <?= $this->Form->end() ?>
 </div></div></section>

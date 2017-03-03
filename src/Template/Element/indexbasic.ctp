@@ -83,6 +83,8 @@ $this->Html->script([
         }
   }
   $(function () {
+  	//throw javascript console error,instead of throwing alert
+  	$.fn.dataTable.ext.errMode='throw';
 
   	 updateFilterActiveFlag();
 
@@ -107,7 +109,7 @@ $this->Html->script([
       radioClass: 'iradio_flat-blue'
     });
 
-
+	
 
      table= $('#mptlindextbl').DataTable({
           "paging": true,
@@ -120,7 +122,7 @@ $this->Html->script([
           "autoWidth": false,
           "scrollX":true,
           colReorder: true,
-          rowReorder: { update:false },
+          // rowReorder: { update:false },
           stateSave:false,
           responsive: true,
           // "initComplete": function(settings, json) {
@@ -152,13 +154,11 @@ $this->Html->script([
 
      $('<a href="#" class="btn btn-sm btn-success" data-toggle="modal" data-target="#settings" style="margin-left:15px;" title="Table Settings"><i class="fa fa-gear" aria-hidden="true"></i></a>').appendTo('div.dataTables_filter');
 
-       $('.dataTables_filter input').unbind().on('keyup', function() {
+      $('.dataTables_filter input').unbind().on('keyup', function() {
 
 	var searchTerm = this.value.toLowerCase();
 	$.fn.dataTable.ext.search.push(function(settings, data, dataIndex) {
        //search only the following columns
-
-
 
        return true;
    })

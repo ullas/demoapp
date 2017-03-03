@@ -1,3 +1,4 @@
+<?= $this->element('templateelmnt'); ?>
 <section class="content-header">
   <h1>
     Frequency
@@ -13,26 +14,19 @@
 <!-- Main content -->
 <section class="content">
   <div class="box box-primary"><div class="box-body">
-    <table class="table table-hover">
-        <tr>
-            <th><?= __('Name') ?></th>
-            <td><?= h($frequency->name) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Description') ?></th>
-            <td><?= h($frequency->description) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('External Code') ?></th>
-            <td><?= h($frequency->external_code) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Id') ?></th>
-            <td><?= $this->Number->format($frequency->id) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Annualization Factor') ?></th>
-            <td><?= $this->Number->format($frequency->annualization_factor) ?></td>
-        </tr>
-    </table>
-</div></div></section>
+        <?= $this->Form->create($frequency, array('role' => 'form')) ?>
+        <fieldset>
+          <?php
+            echo $this->Form->input('name',['disabled' => true]);
+            echo $this->Form->input('description',['disabled' => true]);
+            echo $this->Form->input('annualization_factor',['disabled' => true]);
+            echo $this->Form->input('external_code',['disabled' => true]);
+          ?></fieldset>
+          <!-- /.box-body -->
+          <div class="box-footer">
+          	<?=$this->Html->link(__('Cancel'), ['action' => 'index'], ['escape' => false])?>
+            <?=$this->Html->link(__('Edit Frequency'), ['action' => 'edit', $frequency['id']],['class'=>'btn btn-primary label-info pull-right'], ['escape' => false])?>
+          </div>
+        <?= $this->Form->end() ?>
+      </div>
+  </div></section>

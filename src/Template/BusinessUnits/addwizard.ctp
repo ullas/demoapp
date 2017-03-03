@@ -1,11 +1,9 @@
-<style>
-label.mandatory:after {
-    content: ' *';
-    color: #ff5a4d;
-    display: inline;
-}
-</style>
-		<div class="box"><?= $this->element('stepformwizardelmnt', array('wcontent' => 'BusinessUnit','wid' => '2')); ?></div>
+<?= $this->element('templateelmnt'); ?>
+
+<section class="content" style="padding: 1px;min-height:150px;">
+	<?= $this->element('stepformwizardelmnt', array('wcontent' => 'BusinessUnit','wid' => '2')); ?>
+</sction>
+	
     <section class="content-header">
       <h1>
         Business Unit
@@ -25,7 +23,10 @@ label.mandatory:after {
             echo $this->Form->input('head_of_unit');
         ?>
     </fieldset>
-    <?= $this->Form->button(__('Save Business Unit'),['class'=>'pull-right']) ?>
+    <div class="box-footer">
+    	<?= $this->Form->button(__('Save Business Unit'),['class'=>'pull-right']) ?>
+    </div>
+    
     <?= $this->Form->end() ?>
 </div></div></section>
 

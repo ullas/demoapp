@@ -13,12 +13,13 @@
     <?= $this->Form->create($payrollArea) ?>
     <fieldset>
         <?php
+        echo $this->Form->input('name');
             echo $this->Form->input('code');
             echo $this->Form->input('legal_entity_id', ['options' => $legalEntities, 'empty' => true]);
             echo $this->Form->input('business_unit_id', ['options' => $businessUnits, 'empty' => true]);
             echo $this->Form->input('division_id', ['options' => $divisions, 'empty' => true]);
             echo $this->Form->input('location_id', ['options' => $locations, 'empty' => true]);
-            echo $this->Form->input('name');
+            
         ?>
     </fieldset>
     <div class="box-footer">
