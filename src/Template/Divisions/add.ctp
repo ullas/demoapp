@@ -29,15 +29,4 @@
     </div>
     <?= $this->Form->end() ?>
 </div></div></section>
-<!-- Date picker -->
-<?php
-$this->Html->css([
-    'AdminLTE./plugins/datepicker/datepicker3'
-  ],
-  ['block' => 'css']);
 
-$this->Html->script([
-  'AdminLTE./plugins/datepicker/bootstrap-datepicker'
-],
-['block' => 'script']);
-?>

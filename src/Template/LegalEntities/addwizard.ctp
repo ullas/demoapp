@@ -1,6 +1,8 @@
-<div class="box bgwhite">
+<?= $this->element('templateelmnt'); ?>
+
+<section class="content" style="padding: 1px;min-height:150px;">
 	<?= $this->element('stepformwizardelmnt', array('wcontent' => 'LegalEntity','wid' => '1')); ?>
-</div>
+</section>
     <section class="content-header">
       <h1>
         Legal Entity
@@ -26,8 +28,8 @@
             echo $this->Form->input('paygroup_id', ['class'=>'select2','label'=>['text'=>'Pay Group'],'options' => $payGroups, 'empty' => true]);
 			?>
     </fieldset>
-		<div class="box-footer">
-    <?= $this->Form->button(__('Save Legal Entity'),['title'=>'Save Legal Entity','class'=>'pull-right']) ?>
+	<div class="box-footer">
+    	<?= $this->Form->button(__('Save Legal Entity'),['title'=>'Save Legal Entity','class'=>'pull-right']) ?>
     </div>
     <?= $this->Form->end() ?>
 </div></div></section>

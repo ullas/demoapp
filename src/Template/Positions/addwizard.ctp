@@ -1,4 +1,8 @@
-<div class="box"><?= $this->element('stepformwizardelmnt', array('wcontent' => 'Position','wid' => '5')); ?></div>
+<?= $this->element('templateelmnt'); ?>
+
+<section class="content" style="padding: 1px;min-height:150px;">
+	<?= $this->element('stepformwizardelmnt', array('wcontent' => 'Position','wid' => '5')); ?>
+</section>
 
 <section class="content-header">
       <h1>
@@ -12,10 +16,8 @@
     <fieldset>
         <?php
             echo $this->Form->input('name');
-            echo "<div class='form-group'><label>Effective Start Date:</label><div class='input-group'>";
-            echo "<div class='input-group-addon''><i class='fa fa-calendar'></i></div><input type='text' class='form-control' id='effective_start_date'></div></div>";
-            echo "<div class='form-group'><label>Effective End Date:</label><div class='input-group'>";
-            echo "<div class='input-group-addon''><i class='fa fa-calendar'></i></div><input type='text' class='form-control' id='effective_end_date'></div></div>";
+            echo $this->Form->input('effective_start_date',['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+            echo $this->Form->input('effective_end_date',['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
             echo $this->Form->input('positiontype');
             echo $this->Form->input('position_criticality');
             echo $this->Form->input('position_controlled');
@@ -33,11 +35,9 @@
             echo $this->Form->input('vacant');
             echo $this->Form->input('standard_hours');
             echo $this->Form->input('created_by');
-            echo "<div class='form-group'><label>Created Date:</label><div class='input-group'>";
-            echo "<div class='input-group-addon''><i class='fa fa-calendar'></i></div><input type='text' class='form-control' id='created_date'></div></div>";
+            echo $this->Form->input('created_date',['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
             echo $this->Form->input('last_modified_by');
-            echo "<div class='form-group'><label>Last Modified Date:</label><div class='input-group'>";
-            echo "<div class='input-group-addon''><i class='fa fa-calendar'></i></div><input type='text' class='form-control' id='last_modified_date'></div></div>";
+            echo $this->Form->input('last_modified_date',['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
             echo $this->Form->input('position_matrix_relationship');
             echo $this->Form->input('right_to_return');
             echo $this->Form->input('position_code');
@@ -50,9 +50,11 @@
             echo $this->Form->input('division_id', ['options' => $divisions, 'empty' => true]);
             echo $this->Form->input('pay_grade_id', ['options' => $payGrades, 'empty' => true]);
             echo $this->Form->input('pay_range_id', ['options' => $payRanges, 'empty' => true]);
-            echo $this->Form->input('parent_position_id');
+            echo $this->Form->input('parent_id', ['options' => $parents, 'empty' => true]);
+            echo $this->Form->input('lft');
+            echo $this->Form->input('rght');
         ?>
     </fieldset>
-    <?= $this->Form->button(__('Submit')) ?>
+    <?= $this->Form->button(__('Submit'),['class'=>'pull-right']) ?>
     <?= $this->Form->end() ?>
 </div></div></section>
