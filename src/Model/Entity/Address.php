@@ -20,10 +20,11 @@ use Cake\ORM\Entity;
  * @property string $city
  * @property string $county
  * @property string $state
- * @property int $emp_data_biographies_id
  * @property int $customer_id
+ * @property int $employee_id
  *
  * @property \App\Model\Entity\EmpDataBiography $emp_data_biography
+ * @property \App\Model\Entity\Customer $customer
  */
 class Address extends Entity
 {

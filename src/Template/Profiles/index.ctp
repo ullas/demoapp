@@ -71,7 +71,8 @@
            <li><a href="#empinfo" data-toggle="tab">Employment Information</a></li>
            <li><a href="#profile" data-toggle="tab">Profile</a></li>  
            <li><a href="#social" data-toggle="tab">Social</a></li>
-           <li><a href="#others" data-toggle="tab">Others</a></li>
+           <li><a href="#address" data-toggle="tab">Address</a></li>
+           <li><a href="#ids" data-toggle="tab">ID's</a></li>
         </ul>
         
         <div class=" tab-content">
@@ -195,15 +196,40 @@
           </div>
           <!-- Tab Pane-->
           
-          <div class="tab-pane" id="others">
+          <div class="tab-pane" id="address">
              <!-- <div class="form-horizontal"> -->
              <fieldset>
-             		
+             	<?php
+            		echo $this->Form->input('address.address_no',['label' => 'Adress Number']);
+            		echo $this->Form->input('address.address1',['label' => 'Care Of']);
+            		echo $this->Form->input('address.address2',['label' => 'Street']);
+            		echo $this->Form->input('address.address3',['label' => 'House Number']);
+            		echo $this->Form->input('address.address4',['label' => 'Apartment']);
+           	 		echo $this->Form->input('address.address5',['label' => 'Second Address Line']);
+            		echo $this->Form->input('address.address6',['label' => 'POBOX']);
+            		echo $this->Form->input('address.address7',['label' => 'Camp']);
+            		echo $this->Form->input('address.address8',['label' => 'Bed Number']);
+            		echo $this->Form->input('address.zip_code',['label' => 'Postal Code']);
+            		echo $this->Form->input('address.city',['label' => 'City']);
+            		echo $this->Form->input('address.county',['label' => 'District']);
+            		echo $this->Form->input('address.state',['label' => 'Region']);
+        		?>
+     		</fieldset>
+          </div>
+          <!-- Tab Pane-->
+           <div class="tab-pane" id="ids">
+             <!-- <div class="form-horizontal"> -->
+             	<fieldset>
+             		<?php
+             			echo $this->Form->input('identity.country',['class'=>'select2','options' => $this->Country->get_countries(), 'empty' => true]);
+            			echo $this->Form->input('identity.card_type',['label' => 'National ID Card Type']);
+            			echo $this->Form->input('identity.nationalid',['label' => 'National ID']);
+            			echo $this->Form->input('identity.is_primary');
+        			?>
             <!-- </div> -->
      		</fieldset>
           </div>
           <!-- Tab Pane-->
-          
         </div>
         <!-- /.tab-content -->
       </div>
