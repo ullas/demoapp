@@ -25,7 +25,7 @@ class WorkflowrulesController extends AppController
 		
 		$contains=['Customers', 'Workflowactions', 'Workflows'];
 									  
-		$usrfilter="";						  
+		$usrfilter="Workflowrules.customer_id ='".$this->loggedinuser['customer_id'] . "'";	  
 		$output =$this->Datatable->getView($fields,$contains,$usrfilter);
 		echo json_encode($output);		
     }
@@ -45,6 +45,7 @@ class WorkflowrulesController extends AppController
             $this->request->data['modified_by']=$this->request->session()->read('sessionuser')['id'];
 			
             $workflowrule=$this->Workflowrules->patchEntity($workflowrule,$this->request->data);
+			$workflowrule['customer_id']=$this->loggedinuser['customer_id'];
 			if ($this->Workflowrules->save($workflowrule)) {
 
                 $this->response->body($workflowrule['id']);
@@ -91,10 +92,17 @@ class WorkflowrulesController extends AppController
         $workflowrule = $this->Workflowrules->get($id, [
             'contain' => ['Customers', 'Workflowactions', 'Workflows']
         ]);
-
-        $this->set('workflowrule', $workflowrule);
-		$this->set('ruleid', $id);
-        $this->set('_serialize', ['workflowrule']);
+		
+		if($workflowrule['customer_id']==$this->loggedinuser['customer_id'])
+		{
+       	    $this->set('workflowrule', $workflowrule);
+			$this->set('ruleid', $id);
+        	$this->set('_serialize', ['workflowrule']);
+        }else{
+			$this->Flash->error(__('You are not Authorized.'));
+			return $this->redirect(['action' => 'index']);
+       } 
+        
     }
 
     /**
@@ -114,6 +122,7 @@ class WorkflowrulesController extends AppController
            	 	'contain' => []
         	]);
             $workflowrule = $this->Workflowrules->patchEntity($workflowrule, $this->request->data);
+			$workflowrule['customer_id']=$this->loggedinuser['customer_id'];
 			$workflowrule['modified_by']=$this->request->session()->read('sessionuser')['id'];
             if ($this->Workflowrules->save($workflowrule)) {
                 $this->Flash->success(__('The workflow rule has been saved.'));
@@ -145,6 +154,12 @@ class WorkflowrulesController extends AppController
         $workflowrule = $this->Workflowrules->get($id, [
             'contain' => []
         ]);
+		if($workflowrule['customer_id'] != $this->loggedinuser['customer_id'])
+		{
+			 $this->Flash->error(__('You are not Authorized.'));
+			 return $this->redirect(['action' => 'index']);
+		}
+		
         if ($this->request->is(['patch', 'post', 'put'])) {
             $workflowrule = $this->Workflowrules->patchEntity($workflowrule, $this->request->data);
             if ($this->Workflowrules->save($workflowrule)) {
@@ -172,11 +187,18 @@ class WorkflowrulesController extends AppController
     {
         $this->request->allowMethod(['post', 'delete']);
         $workflowrule = $this->Workflowrules->get($id);
-        if ($this->Workflowrules->delete($workflowrule)) {
-            $this->Flash->success(__('The workflowrule has been deleted.'));
-        } else {
-            $this->Flash->error(__('The workflowrule could not be deleted. Please, try again.'));
-        }
+        if($dependent['customer_id'] == $this->loggedinuser['customer_id']) 
+		{
+        	if ($this->Workflowrules->delete($workflowrule)) {
+            	$this->Flash->success(__('The workflowrule has been deleted.'));
+        	} else {
+            	$this->Flash->error(__('The workflowrule could not be deleted. Please, try again.'));
+        	}
+		}
+	    else
+	    {
+	   	    $this->Flash->error(__('You are not authorized'));
+	    }
 
         return $this->redirect(['action' => 'index']);
     }

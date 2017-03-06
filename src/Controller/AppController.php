@@ -53,11 +53,17 @@ class AppController extends Controller
    		 // Admin can access every action
     	// if (isset($user['role']) && $user['role'] === 'admin') {
     	if (isset($user['role'])) {  
+			
+			//get empdatabiographyid from employeeid
+			$this->loadModel('EmpDataBiographies');
+			$emparr=$this->EmpDataBiographies->find('all',['conditions' => array('employee_id' => $user['employee_id']),'contain' => []])->toArray();
+			isset($emparr[0]) ? $empdatabiographyid = $emparr[0]['id'] : $empdatabiographyid = "" ; 
 		
     		$this->set('name', $user['name']);
 			$this->set('userid', $user['id']);   
 			$this->set('empid', $user['employee_id']);      
-			$this->set('dateformat', $user['dateformat']);      
+			$this->set('dateformat', $user['dateformat']);     
+			$user["empdatabiographyid"] = $empdatabiographyid;
 			$this->request->session()->write('sessionuser', $user);
 			$this->loggedinuser=$user;
 			

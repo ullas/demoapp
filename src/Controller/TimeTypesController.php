@@ -25,7 +25,7 @@ class TimeTypesController extends AppController
 		
 		$contains=['Customers', 'TimeAccountTypes','Workflowrules'];
 									  
-		$usrfilter="";						  
+		$usrfilter="TimeTypes.customer_id ='".$this->loggedinuser['customer_id'] . "'";				  		  
 		$output =$this->Datatable->getView($fields,$contains,$usrfilter);
 		echo json_encode($output);		
     }
@@ -65,8 +65,15 @@ class TimeTypesController extends AppController
 
 		$timeAccountTypes = $this->TimeTypes->TimeAccountTypes->find('list', ['limit' => 200]);
 		$workflowrules = $this->TimeTypes->Workflowrules->find('list', ['limit' => 200]);
-        $this->set(compact('timeType', 'timeAccountTypes','workflowrules'));
-        $this->set('_serialize', ['timeType']);
+		
+		if($timeType['customer_id']==$this->loggedinuser['customer_id'])
+		{
+	       	$this->set(compact('timeType', 'timeAccountTypes','workflowrules'));
+        	$this->set('_serialize', ['timeType']);
+        }else{
+			$this->Flash->error(__('You are not Authorized.'));
+			return $this->redirect(['action' => 'index']);
+       }   
     }
 
     /**
@@ -79,6 +86,7 @@ class TimeTypesController extends AppController
         $timeType = $this->TimeTypes->newEntity();
         if ($this->request->is('post')) {
             $timeType = $this->TimeTypes->patchEntity($timeType, $this->request->data);
+			$timeType['customer_id']=$this->loggedinuser['customer_id'];
             if ($this->TimeTypes->save($timeType)) {
                 $this->Flash->success(__('The time type has been saved.'));
 
@@ -88,8 +96,8 @@ class TimeTypesController extends AppController
             }
         }
         $customers = $this->TimeTypes->Customers->find('list', ['limit' => 200]);
-        $timeAccountTypes = $this->TimeTypes->TimeAccountTypes->find('list', ['limit' => 200]);
-		$workflowrules = $this->TimeTypes->Workflowrules->find('list', ['limit' => 200]);
+        $timeAccountTypes = $this->TimeTypes->TimeAccountTypes->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+		$workflowrules = $this->TimeTypes->Workflowrules->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         $this->set(compact('timeType', 'customers', 'timeAccountTypes','workflowrules'));
         $this->set('_serialize', ['timeType']);
     }
@@ -106,6 +114,13 @@ class TimeTypesController extends AppController
         $timeType = $this->TimeTypes->get($id, [
             'contain' => []
         ]);
+		
+		if($timeType['customer_id'] != $this->loggedinuser['customer_id'])
+		{
+			 $this->Flash->error(__('You are not Authorized.'));
+			 return $this->redirect(['action' => 'index']);
+		}
+		
         if ($this->request->is(['patch', 'post', 'put'])) {
             $timeType = $this->TimeTypes->patchEntity($timeType, $this->request->data);
             if ($this->TimeTypes->save($timeType)) {
@@ -117,8 +132,8 @@ class TimeTypesController extends AppController
             }
         }
         $customers = $this->TimeTypes->Customers->find('list', ['limit' => 200]);
-        $timeAccountTypes = $this->TimeTypes->TimeAccountTypes->find('list', ['limit' => 200]);
-        $workflowrules = $this->TimeTypes->Workflowrules->find('list', ['limit' => 200]);
+        $timeAccountTypes = $this->TimeTypes->TimeAccountTypes->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        $workflowrules = $this->TimeTypes->Workflowrules->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         $this->set(compact('timeType', 'customers', 'timeAccountTypes','workflowrules'));
         $this->set('_serialize', ['timeType']);
     }
@@ -134,11 +149,18 @@ class TimeTypesController extends AppController
     {
         $this->request->allowMethod(['post', 'delete']);
         $timeType = $this->TimeTypes->get($id);
-        if ($this->TimeTypes->delete($timeType)) {
-            $this->Flash->success(__('The time type has been deleted.'));
-        } else {
-            $this->Flash->error(__('The time type could not be deleted. Please, try again.'));
-        }
+        if($timeType['customer_id'] == $this->loggedinuser['customer_id']) 
+		{
+        	if ($this->TimeTypes->delete($timeType)) {
+            	$this->Flash->success(__('The time type has been deleted.'));
+        	} else {
+            	$this->Flash->error(__('The time type could not be deleted. Please, try again.'));
+        	}
+		}
+	    else
+	    {
+	   	    $this->Flash->error(__('You are not authorized'));
+	    }
 
         return $this->redirect(['action' => 'index']);
     }

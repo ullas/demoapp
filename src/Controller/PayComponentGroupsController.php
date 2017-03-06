@@ -27,7 +27,7 @@ var $components = array('Datatable');
 		}
 		$contains=['Customers'];
 									  
-		$usrfilter="";						  
+		$usrfilter="PayComponentGroups.customer_id ='".$this->loggedinuser['customer_id'] . "'";						  
 		$output =$this->Datatable->getView($fields,$contains,$usrfilter);
 		echo json_encode($output);			
     }
@@ -59,12 +59,13 @@ var $components = array('Datatable');
             'contain' => ['Customers', 'TimeAccountTypes']
         ]);
 		
-		// if($payComponentGroup['customer_id']==$this->loggedinuser['customer_id']){
+		if($payComponentGroup['customer_id']==$this->loggedinuser['customer_id']){
  			$this->set('payComponentGroup', $payComponentGroup);
         	$this->set('_serialize', ['payComponentGroup']);
- 		// }else{
-		   // $this->redirect(['action' => 'logout','controller'=>'users']);
-        // } 
+ 		}else{
+		    $this->Flash->error(__('You are not Authorized.'));
+			return $this->redirect(['action' => 'index']);
+        } 
     }
 
     /**
@@ -77,6 +78,7 @@ var $components = array('Datatable');
         $payComponentGroup = $this->PayComponentGroups->newEntity();
         if ($this->request->is('post')) {
             $payComponentGroup = $this->PayComponentGroups->patchEntity($payComponentGroup, $this->request->data);
+			$payComponentGroup['customer_id']=$this->loggedinuser['customer_id'];
             if ($this->PayComponentGroups->save($payComponentGroup)) {
                 $this->Flash->success(__('The pay component group has been saved.'));
 
@@ -102,6 +104,13 @@ var $components = array('Datatable');
         $payComponentGroup = $this->PayComponentGroups->get($id, [
             'contain' => []
         ]);
+		
+		if($payComponentGroup['customer_id'] != $this->loggedinuser['customer_id'])
+		{
+			 $this->Flash->error(__('You are not Authorized.'));
+			 return $this->redirect(['action' => 'index']);
+		}
+		
         if ($this->request->is(['patch', 'post', 'put'])) {
             $payComponentGroup = $this->PayComponentGroups->patchEntity($payComponentGroup, $this->request->data);
             if ($this->PayComponentGroups->save($payComponentGroup)) {
@@ -128,12 +137,18 @@ var $components = array('Datatable');
     {
         $this->request->allowMethod(['post', 'delete']);
         $payComponentGroup = $this->PayComponentGroups->get($id);
-        if ($this->PayComponentGroups->delete($payComponentGroup)) {
-            $this->Flash->success(__('The pay component group has been deleted.'));
-        } else {
-            $this->Flash->error(__('The pay component group could not be deleted. Please, try again.'));
-        }
-
+        if($payComponentGroup['customer_id'] == $this->loggedinuser['customer_id']) 
+		{
+        	if ($this->PayComponentGroups->delete($payComponentGroup)) {
+            	$this->Flash->success(__('The pay component group has been deleted.'));
+        	} else {
+            	$this->Flash->error(__('The pay component group could not be deleted. Please, try again.'));
+        	}
+		}
+	    else
+	    {
+	   	    $this->Flash->error(__('You are not authorized'));
+	    }
         return $this->redirect(['action' => 'index']);
     }
 }

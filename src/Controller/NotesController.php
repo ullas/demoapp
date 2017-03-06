@@ -24,7 +24,7 @@ class NotesController extends AppController
 		
 		$contains=['Users','Empdatabiographies', 'Customers'];
 									  
-		$usrfilter="";						  
+		$usrfilter="Notes.customer_id ='".$this->loggedinuser['customer_id'] . "'";						  
 		$output =$this->Datatable->getView($fields,$contains,$usrfilter);
 		echo json_encode($output);			
     }
@@ -60,9 +60,16 @@ class NotesController extends AppController
         $note = $this->Notes->get($id, [
             'contain' => ['Users', 'Empdatabiographies', 'Customers']
         ]);
-
-        $this->set('note', $note);
-        $this->set('_serialize', ['note']);
+		
+		if($note['customer_id']==$this->loggedinuser['customer_id'])
+		{
+       	    $this->set('note', $note);
+        	$this->set('_serialize', ['note']);
+        }else{
+		    // $this->redirect(['action' => 'logout','controller'=>'users']);
+			$this->Flash->error(__('You are not Authorized.'));
+			return $this->redirect(['action' => 'index']);
+        }
     }
 
     /**
@@ -93,8 +100,8 @@ class NotesController extends AppController
                 $this->Flash->error(__('The note could not be saved. Please, try again.'));
             }
         }
-        $users = $this->Notes->Users->find('list', ['limit' => 200]);
-        $empdatabiographies = $this->Notes->Empdatabiographies->find('list', ['limit' => 200]);
+        $users = $this->Notes->Users->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        $empdatabiographies = $this->Notes->Empdatabiographies->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         $customers = $this->Notes->Customers->find('list', ['limit' => 200]);
         $this->set(compact('note', 'users', 'empdatabiographies', 'customers'));
         $this->set('_serialize', ['note']);
@@ -112,6 +119,13 @@ class NotesController extends AppController
         $note = $this->Notes->get($id, [
             'contain' => []
         ]);
+		
+		if($note['customer_id'] != $this->loggedinuser['customer_id'])
+		{
+			 $this->Flash->error(__('You are not Authorized.'));
+			 return $this->redirect(['action' => 'index']);
+		}
+
         if ($this->request->is(['patch', 'post', 'put'])) {
             $note = $this->Notes->patchEntity($note, $this->request->data);
 			$note['customer_id']=$this->loggedinuser['customer_id'];
@@ -123,8 +137,8 @@ class NotesController extends AppController
                 $this->Flash->error(__('The note could not be saved. Please, try again.'));
             }
         }
-        $users = $this->Notes->Users->find('list', ['limit' => 200]);
-        $empdatabiographies = $this->Notes->Empdatabiographies->find('list', ['limit' => 200]);
+        $users = $this->Notes->Users->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        $empdatabiographies = $this->Notes->Empdatabiographies->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         $customers = $this->Notes->Customers->find('list', ['limit' => 200]);
         $this->set(compact('note', 'users', 'empdatabiographies', 'customers'));
         $this->set('_serialize', ['note']);
@@ -141,12 +155,19 @@ class NotesController extends AppController
     {
         $this->request->allowMethod(['post', 'delete']);
         $note = $this->Notes->get($id);
-        if ($this->Notes->delete($note)) {
-            $this->Flash->success(__('The note has been deleted.'));
-        } else {
-            $this->Flash->error(__('The note could not be deleted. Please, try again.'));
-        }
-
+		
+		if($note['customer_id'] == $this->loggedinuser['customer_id']) 
+		{
+        	if ($this->Notes->delete($note)) {
+            	$this->Flash->success(__('The note has been deleted.'));
+        	} else {
+            	$this->Flash->error(__('The note could not be deleted. Please, try again.'));
+        	}
+		}
+	    else
+	    {
+	   	    $this->Flash->error(__('You are not authorized'));
+	    }
         return $this->redirect(['action' => 'index']);
     }
 }

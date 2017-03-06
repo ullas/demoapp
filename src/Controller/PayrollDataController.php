@@ -28,7 +28,7 @@ class PayrollDataController extends AppController
 		}
 		$contains=['PayComponents'];
 									  
-		$usrfilter="";						  
+		$usrfilter="PayrollData.customer_id ='".$this->loggedinuser['customer_id'] . "'";			  
 		$output =$this->Datatable->getView($fields,$contains,$usrfilter);
 		echo json_encode($output);			
     }
@@ -60,9 +60,16 @@ class PayrollDataController extends AppController
             'contain' => ['PayComponents']
         ]);
 		$payComponents = $this->PayrollData->PayComponents->find('list', ['limit' => 200]);
-		$this->set('payComponents', $payComponents);
-        $this->set('payrollData', $payrollData);
-        $this->set('_serialize', ['payrollData']);
+		
+		if($payrollData['customer_id']==$this->loggedinuser['customer_id'])
+		{
+       	    $this->set('payComponents', $payComponents);
+        	$this->set('payrollData', $payrollData);
+        	$this->set('_serialize', ['payrollData']);
+        }else{
+			$this->Flash->error(__('You are not Authorized.'));
+			return $this->redirect(['action' => 'index']);
+       } 
     }
 
     /**
@@ -75,6 +82,7 @@ class PayrollDataController extends AppController
         $payrollData = $this->PayrollData->newEntity();
         if ($this->request->is('post')) {
             $payrollData = $this->PayrollData->patchEntity($payrollData, $this->request->data);
+			$payrollData['customer_id']=$this->loggedinuser['customer_id'];
             if ($this->PayrollData->save($payrollData)) {
                 $this->Flash->success(__('The payroll data has been saved.'));
 
@@ -83,7 +91,7 @@ class PayrollDataController extends AppController
                 $this->Flash->error(__('The payroll data could not be saved. Please, try again.'));
             }
         }
-        $payComponents = $this->PayrollData->PayComponents->find('list', ['limit' => 200]);
+        $payComponents = $this->PayrollData->PayComponents->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         $this->set(compact('payrollData', 'payComponents'));
         $this->set('_serialize', ['payrollData']);
     }
@@ -100,6 +108,13 @@ class PayrollDataController extends AppController
         $payrollData = $this->PayrollData->get($id, [
             'contain' => []
         ]);
+		
+		if($payrollData['customer_id'] != $this->loggedinuser['customer_id'])
+		{
+			 $this->Flash->error(__('You are not Authorized.'));
+			 return $this->redirect(['action' => 'index']);
+		}
+		
         if ($this->request->is(['patch', 'post', 'put'])) {
             $payrollData = $this->PayrollData->patchEntity($payrollData, $this->request->data);
             if ($this->PayrollData->save($payrollData)) {
@@ -110,7 +125,7 @@ class PayrollDataController extends AppController
                 $this->Flash->error(__('The payroll data could not be saved. Please, try again.'));
             }
         }
-        $payComponents = $this->PayrollData->PayComponents->find('list', ['limit' => 200]);
+        $payComponents = $this->PayrollData->PayComponents->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         $this->set(compact('payrollData', 'payComponents'));
         $this->set('_serialize', ['payrollData']);
     }
@@ -126,12 +141,18 @@ class PayrollDataController extends AppController
     {
         $this->request->allowMethod(['post', 'delete']);
         $payrollData = $this->PayrollData->get($id);
-        if ($this->PayrollData->delete($payrollData)) {
-            $this->Flash->success(__('The payroll data has been deleted.'));
-        } else {
-            $this->Flash->error(__('The payroll data could not be deleted. Please, try again.'));
-        }
-
+        if($payrollData['customer_id'] == $this->loggedinuser['customer_id']) 
+		{
+        	if ($this->PayrollData->delete($payrollData)) {
+            	$this->Flash->success(__('The payroll data has been deleted.'));
+        	} else {
+            	$this->Flash->error(__('The payroll data could not be deleted. Please, try again.'));
+        	}
+		}
+	    else
+	    {
+	   	    $this->Flash->error(__('You are not authorized'));
+	    }
         return $this->redirect(['action' => 'index']);
     }
 }

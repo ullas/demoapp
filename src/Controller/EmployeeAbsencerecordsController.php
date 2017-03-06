@@ -23,20 +23,17 @@ class EmployeeAbsencerecordsController extends AppController
 			$fields[] = array("name" => $value['field_name'] , "type" => $value['datatype'] );
 		}
 		
-		//get empid from session var
-		$empid=$this->request->session()->read('sessionuser')['employee_id'];
-		
-		$this->loadModel('EmpDataBiographies');
-		$emparr=$this->EmpDataBiographies->find('all',['conditions' => array('employee_id' => $empid),'contain' => []])->toArray();
-		isset($emparr[0]) ? $empdatabiographyid = $emparr[0]['id'] : $empdatabiographyid = "" ; 
 		$usrfilter="";
-        if( isset($empdatabiographyid) && ($empdatabiographyid)!=null ){
+        if( isset($this->request->session()->read('sessionuser')['empdatabiographyid']) && ($this->request->session()->read('sessionuser')['empdatabiographyid'])!=null ){
       
-			$usrfilter.="emp_data_biographies_id ='" .$empdatabiographyid. "'";
+			$usrfilter.="emp_data_biographies_id ='" .$this->request->session()->read('sessionuser')['empdatabiographyid']. "' and EmployeeAbsencerecords.customer_id ='".$this->loggedinuser['customer_id'] . "'";
+		}else{
+			$usrfilter="EmployeeAbsencerecords.customer_id ='".$this->loggedinuser['customer_id'] . "'";
 		}
 		
-		$contains=['Empdatabiographies', 'TimeTypes', 'Users'];
-
+		$contains=['Empdatabiographies', 'TimeTypes', 'Users','Customers'];
+		
+		
 		$output =$this->Datatable->getView($fields,$contains,$usrfilter);
 		echo json_encode($output);			
     }
@@ -52,7 +49,7 @@ class EmployeeAbsencerecordsController extends AppController
         $this->set('configs',$configs);	
 		
         $this->paginate = [
-            'contain' => ['Empdatabiographies', 'TimeTypes', 'Users']
+            'contain' => ['Empdatabiographies', 'TimeTypes', 'Users','Customers']
         ];
         $employeeAbsencerecords = $this->paginate($this->EmployeeAbsencerecords);
 
@@ -70,12 +67,18 @@ class EmployeeAbsencerecordsController extends AppController
     public function view($id = null)
     {
         $employeeAbsencerecord = $this->EmployeeAbsencerecords->get($id, [
-            'contain' => ['Empdatabiographies', 'TimeTypes', 'Users']
+            'contain' => ['Empdatabiographies', 'TimeTypes', 'Users','Customers']
         ]);
-		$timeTypes = $this->EmployeeAbsencerecords->TimeTypes->find('list', ['limit' => 200]);
-		$this->set(compact('employeeAbsencerecord', 'timeTypes'));
-        $this->set('employeeAbsencerecord', $employeeAbsencerecord);
-        $this->set('_serialize', ['employeeAbsencerecord']);
+		if($address['customer_id']==$this->loggedinuser['customer_id'])
+		{
+			$timeTypes = $this->EmployeeAbsencerecords->TimeTypes->find('list', ['limit' => 200]);
+			$this->set(compact('employeeAbsencerecord', 'timeTypes'));
+        	$this->set('employeeAbsencerecord', $employeeAbsencerecord);
+        	$this->set('_serialize', ['employeeAbsencerecord']);
+		}else{
+			$this->Flash->error(__('You are not Authorized.'));
+			return $this->redirect(['action' => 'index']);
+       }
     }
 
     /**
@@ -88,15 +91,9 @@ class EmployeeAbsencerecordsController extends AppController
         $employeeAbsencerecord = $this->EmployeeAbsencerecords->newEntity();
         if ($this->request->is('post')) {
         	
-			//get empid from session var
-			$empid=$this->request->session()->read('sessionuser')['employee_id'];
-			$this->loadModel('EmpDataBiographies');
-			$emparr=$this->EmpDataBiographies->find('all',['conditions' => array('employee_id' => $empid),'contain' => []])->toArray();
-			isset($emparr[0]) ? $empdatabiographyid = $emparr[0]['id'] : $empdatabiographyid = "" ; 
-		
-			$this->loadModel('EmployeeAbsencerecords');
             $employeeAbsencerecord = $this->EmployeeAbsencerecords->patchEntity($employeeAbsencerecord, $this->request->data);
-			$employeeAbsencerecord["emp_data_biographies_id"] = $empdatabiographyid ; 
+			$employeeAbsencerecord['customer_id']=$this->loggedinuser['customer_id'];
+			$employeeAbsencerecord["emp_data_biographies_id"] = $this->request->session()->read('sessionuser')['empdatabiographyid'] ; 
 			$employeeAbsencerecord["created_by"] = $this->request->session()->read('sessionuser')['id'];
 			$employeeAbsencerecord["status"] = "0";
             if ($this->EmployeeAbsencerecords->save($employeeAbsencerecord)) {
@@ -107,9 +104,9 @@ class EmployeeAbsencerecordsController extends AppController
                 $this->Flash->error(__('The employee absencerecord could not be saved. Please, try again.'));
             }
         }
-        $empdatabiographies = $this->EmployeeAbsencerecords->Empdatabiographies->find('list', ['limit' => 200]);
-        $timeTypes = $this->EmployeeAbsencerecords->TimeTypes->find('list', ['limit' => 200]);
-        $users = $this->EmployeeAbsencerecords->Users->find('list', ['limit' => 200]);
+        $empdatabiographies = $this->EmployeeAbsencerecords->Empdatabiographies->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        $timeTypes = $this->EmployeeAbsencerecords->TimeTypes->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        $users = $this->EmployeeAbsencerecords->Users->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         $this->set(compact('employeeAbsencerecord', 'empdatabiographies', 'timeTypes', 'users'));
         $this->set('_serialize', ['employeeAbsencerecord']);
     }
@@ -126,6 +123,13 @@ class EmployeeAbsencerecordsController extends AppController
         $employeeAbsencerecord = $this->EmployeeAbsencerecords->get($id, [
             'contain' => []
         ]);
+		
+		if($employeeAbsencerecord['customer_id'] != $this->loggedinuser['customer_id'])
+		{
+			 $this->Flash->error(__('You are not Authorized.'));
+			 return $this->redirect(['action' => 'index']);
+		}
+		
         if ($this->request->is(['patch', 'post', 'put'])) {
             $employeeAbsencerecord = $this->EmployeeAbsencerecords->patchEntity($employeeAbsencerecord, $this->request->data);
 			$employeeAbsencerecord["modified_by"] = $this->request->session()->read('sessionuser')['id'] ; 
@@ -137,9 +141,9 @@ class EmployeeAbsencerecordsController extends AppController
                 $this->Flash->error(__('The employee absencerecord could not be saved. Please, try again.'));
             }
         }
-        $empdatabiographies = $this->EmployeeAbsencerecords->Empdatabiographies->find('list', ['limit' => 200]);
-        $timeTypes = $this->EmployeeAbsencerecords->TimeTypes->find('list', ['limit' => 200]);
-        $users = $this->EmployeeAbsencerecords->Users->find('list', ['limit' => 200]);
+        $empdatabiographies = $this->EmployeeAbsencerecords->Empdatabiographies->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        $timeTypes = $this->EmployeeAbsencerecords->TimeTypes->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        $users = $this->EmployeeAbsencerecords->Users->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         $this->set(compact('employeeAbsencerecord', 'empdatabiographies', 'timeTypes', 'users'));
         $this->set('_serialize', ['employeeAbsencerecord']);
     }
@@ -155,12 +159,18 @@ class EmployeeAbsencerecordsController extends AppController
     {
         $this->request->allowMethod(['post', 'delete']);
         $employeeAbsencerecord = $this->EmployeeAbsencerecords->get($id);
-        if ($this->EmployeeAbsencerecords->delete($employeeAbsencerecord)) {
-            $this->Flash->success(__('The employee absencerecord has been deleted.'));
-        } else {
-            $this->Flash->error(__('The employee absencerecord could not be deleted. Please, try again.'));
-        }
-
+		if($employeeAbsencerecord['customer_id'] == $this->loggedinuser['customer_id']) 
+		{
+        	if ($this->EmployeeAbsencerecords->delete($employeeAbsencerecord)) {
+            	$this->Flash->success(__('The employee absencerecord has been deleted.'));
+        	} else {
+            	$this->Flash->error(__('The employee absencerecord could not be deleted. Please, try again.'));
+        	}
+		}
+	    else
+	    {
+	   	    $this->Flash->error(__('You are not authorized'));
+	    }
         return $this->redirect(['action' => 'index']);
     }
 }

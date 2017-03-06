@@ -20,6 +20,8 @@ use Cake\Validation\Validator;
  * @method \App\Model\Entity\Note patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
  * @method \App\Model\Entity\Note[] patchEntities($entities, array $data, array $options = [])
  * @method \App\Model\Entity\Note findOrCreate($search, callable $callback = null)
+ *
+ * @mixin \Cake\ORM\Behavior\TimestampBehavior
  */
 class NotesTable extends Table
 {
@@ -37,6 +39,8 @@ class NotesTable extends Table
         $this->table('notes');
         $this->displayField('title');
         $this->primaryKey('id');
+
+        $this->addBehavior('Timestamp');
 
         $this->belongsTo('Users', [
             'foreignKey' => 'user_id'
@@ -65,14 +69,6 @@ class NotesTable extends Table
 
         $validator
             ->allowEmpty('description');
-
-        $validator
-            ->date('created_at')
-            ->allowEmpty('created_at');
-
-        $validator
-            ->date('modified_at')
-            ->allowEmpty('modified_at');
 
         $validator
             ->allowEmpty('visibleto');

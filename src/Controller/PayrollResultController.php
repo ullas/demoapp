@@ -28,7 +28,7 @@ class PayrollResultController extends AppController
 		}
 		$contains=['PayrollArea', 'PayComponents'];
 									  
-		$usrfilter="";						  
+		$usrfilter="PayrollResult.customer_id ='".$this->loggedinuser['customer_id'] . "'";			  
 		$output =$this->Datatable->getView($fields,$contains,$usrfilter);
 		echo json_encode($output);			
     }
@@ -62,8 +62,14 @@ class PayrollResultController extends AppController
 
         $payrollArea = $this->PayrollResult->PayrollArea->find('list', ['limit' => 200]);
         $payComponents = $this->PayrollResult->PayComponents->find('list', ['limit' => 200]);
-        $this->set(compact('payrollResult', 'payrollArea', 'payComponents'));
-        $this->set('_serialize', ['payrollResult']);
+        if($payrollResult['customer_id']==$this->loggedinuser['customer_id'])
+		{
+       	    $this->set(compact('payrollResult', 'payrollArea', 'payComponents'));
+       		$this->set('_serialize', ['payrollResult']);
+        }else{
+			$this->Flash->error(__('You are not Authorized.'));
+			return $this->redirect(['action' => 'index']);
+       }   
     }
 
     /**
@@ -76,6 +82,7 @@ class PayrollResultController extends AppController
         $payrollResult = $this->PayrollResult->newEntity();
         if ($this->request->is('post')) {
             $payrollResult = $this->PayrollResult->patchEntity($payrollResult, $this->request->data);
+			$payrollResult['customer_id']=$this->loggedinuser['customer_id'];
             if ($this->PayrollResult->save($payrollResult)) {
                 $this->Flash->success(__('The payroll result has been saved.'));
 
@@ -84,8 +91,8 @@ class PayrollResultController extends AppController
                 $this->Flash->error(__('The payroll result could not be saved. Please, try again.'));
             }
         }
-        $payrollArea = $this->PayrollResult->PayrollArea->find('list', ['limit' => 200]);
-        $payComponents = $this->PayrollResult->PayComponents->find('list', ['limit' => 200]);
+        $payrollArea = $this->PayrollResult->PayrollArea->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        $payComponents = $this->PayrollResult->PayComponents->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         $this->set(compact('payrollResult', 'payrollArea', 'payComponents'));
         $this->set('_serialize', ['payrollResult']);
     }
@@ -102,6 +109,13 @@ class PayrollResultController extends AppController
         $payrollResult = $this->PayrollResult->get($id, [
             'contain' => []
         ]);
+		
+		if($payrollResult['customer_id'] != $this->loggedinuser['customer_id'])
+		{
+			 $this->Flash->error(__('You are not Authorized.'));
+			 return $this->redirect(['action' => 'index']);
+		}
+
         if ($this->request->is(['patch', 'post', 'put'])) {
             $payrollResult = $this->PayrollResult->patchEntity($payrollResult, $this->request->data);
             if ($this->PayrollResult->save($payrollResult)) {
@@ -112,8 +126,8 @@ class PayrollResultController extends AppController
                 $this->Flash->error(__('The payroll result could not be saved. Please, try again.'));
             }
         }
-        $payrollArea = $this->PayrollResult->PayrollArea->find('list', ['limit' => 200]);
-        $payComponents = $this->PayrollResult->PayComponents->find('list', ['limit' => 200]);
+        $payrollArea = $this->PayrollResult->PayrollArea->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        $payComponents = $this->PayrollResult->PayComponents->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         $this->set(compact('payrollResult', 'payrollArea', 'payComponents'));
         $this->set('_serialize', ['payrollResult']);
     }
@@ -129,12 +143,18 @@ class PayrollResultController extends AppController
     {
         $this->request->allowMethod(['post', 'delete']);
         $payrollResult = $this->PayrollResult->get($id);
-        if ($this->PayrollResult->delete($payrollResult)) {
-            $this->Flash->success(__('The payroll result has been deleted.'));
-        } else {
-            $this->Flash->error(__('The payroll result could not be deleted. Please, try again.'));
-        }
-
+        if($payrollResult['customer_id'] == $this->loggedinuser['customer_id']) 
+		{
+        	if ($this->PayrollResult->delete($payrollResult)) {
+            	$this->Flash->success(__('The payroll result has been deleted.'));
+        	} else {
+            	$this->Flash->error(__('The payroll result could not be deleted. Please, try again.'));
+        	}
+		}
+	    else
+	    {
+	   	    $this->Flash->error(__('You are not authorized'));
+	    }
         return $this->redirect(['action' => 'index']);
     }
 }

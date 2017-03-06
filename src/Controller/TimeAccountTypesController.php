@@ -25,7 +25,7 @@ class TimeAccountTypesController extends AppController
 		
 		$contains=['PayComponents', 'PayComponentGroups', 'Customers'];
 									  
-		$usrfilter="";						  
+		$usrfilter="TimeAccountTypes.customer_id ='".$this->loggedinuser['customer_id'] . "'";				  
 		$output =$this->Datatable->getView($fields,$contains,$usrfilter);
 		echo json_encode($output);		
     }
@@ -66,10 +66,16 @@ class TimeAccountTypesController extends AppController
 		$payComponents = $this->TimeAccountTypes->PayComponents->find('list', ['limit' => 200]);
 		$this->set('payComponents', $payComponents);
 		$payComponentGroups = $this->TimeAccountTypes->PayComponentGroups->find('list', ['limit' => 200]);
-		$this->set('payComponentGroups', $payComponentGroups);
+		if($timeAccountType['customer_id']==$this->loggedinuser['customer_id'])
+		{
+			$this->set('payComponentGroups', $payComponentGroups);
 
-        $this->set('timeAccountType', $timeAccountType);
-        $this->set('_serialize', ['timeAccountType']);
+        	$this->set('timeAccountType', $timeAccountType);
+        	$this->set('_serialize', ['timeAccountType']);
+		}else{
+			$this->Flash->error(__('You are not Authorized.'));
+			return $this->redirect(['action' => 'index']);
+       } 
     }
 
     /**
@@ -82,6 +88,7 @@ class TimeAccountTypesController extends AppController
         $timeAccountType = $this->TimeAccountTypes->newEntity();
         if ($this->request->is('post')) {
             $timeAccountType = $this->TimeAccountTypes->patchEntity($timeAccountType, $this->request->data);
+			$timeAccountType['customer_id']=$this->loggedinuser['customer_id'];
             if ($this->TimeAccountTypes->save($timeAccountType)) {
                 $this->Flash->success(__('The time account type has been saved.'));
 
@@ -90,8 +97,8 @@ class TimeAccountTypesController extends AppController
                 $this->Flash->error(__('The time account type could not be saved. Please, try again.'));
             }
         }
-        $payComponents = $this->TimeAccountTypes->PayComponents->find('list', ['limit' => 200]);
-        $payComponentGroups = $this->TimeAccountTypes->PayComponentGroups->find('list', ['limit' => 200]);
+        $payComponents = $this->TimeAccountTypes->PayComponents->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        $payComponentGroups = $this->TimeAccountTypes->PayComponentGroups->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         $customers = $this->TimeAccountTypes->Customers->find('list', ['limit' => 200]);
         $this->set(compact('timeAccountType', 'payComponents', 'payComponentGroups', 'customers'));
         $this->set('_serialize', ['timeAccountType']);
@@ -109,6 +116,13 @@ class TimeAccountTypesController extends AppController
         $timeAccountType = $this->TimeAccountTypes->get($id, [
             'contain' => []
         ]);
+		
+		if($timeAccountType['customer_id'] != $this->loggedinuser['customer_id'])
+		{
+			 $this->Flash->error(__('You are not Authorized.'));
+			 return $this->redirect(['action' => 'index']);
+		}
+		
         if ($this->request->is(['patch', 'post', 'put'])) {
             $timeAccountType = $this->TimeAccountTypes->patchEntity($timeAccountType, $this->request->data);
             if ($this->TimeAccountTypes->save($timeAccountType)) {
@@ -119,8 +133,8 @@ class TimeAccountTypesController extends AppController
                 $this->Flash->error(__('The time account type could not be saved. Please, try again.'));
             }
         }
-        $payComponents = $this->TimeAccountTypes->PayComponents->find('list', ['limit' => 200]);
-        $payComponentGroups = $this->TimeAccountTypes->PayComponentGroups->find('list', ['limit' => 200]);
+        $payComponents = $this->TimeAccountTypes->PayComponents->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        $payComponentGroups = $this->TimeAccountTypes->PayComponentGroups->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         $customers = $this->TimeAccountTypes->Customers->find('list', ['limit' => 200]);
         $this->set(compact('timeAccountType', 'payComponents', 'payComponentGroups', 'customers'));
         $this->set('_serialize', ['timeAccountType']);
@@ -137,11 +151,19 @@ class TimeAccountTypesController extends AppController
     {
         $this->request->allowMethod(['post', 'delete']);
         $timeAccountType = $this->TimeAccountTypes->get($id);
-        if ($this->TimeAccountTypes->delete($timeAccountType)) {
-            $this->Flash->success(__('The time account type has been deleted.'));
-        } else {
-            $this->Flash->error(__('The time account type could not be deleted. Please, try again.'));
-        }
+        if($timeAccountType['customer_id'] == $this->loggedinuser['customer_id']) 
+		{
+        	if ($this->TimeAccountTypes->delete($timeAccountType)) {
+            	$this->Flash->success(__('The time account type has been deleted.'));
+        	} else {
+            	$this->Flash->error(__('The time account type could not be deleted. Please, try again.'));
+        	}
+		}
+	    else
+	    {
+	   	    $this->Flash->error(__('You are not authorized'));
+	    }
+	    
 
         return $this->redirect(['action' => 'index']);
     }

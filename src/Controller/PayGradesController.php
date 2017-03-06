@@ -28,7 +28,7 @@ var $components = array('Datatable');
 		}
 		$contains=['Customers'];
 									  
-		$usrfilter="";						  
+		$usrfilter="PayGrades.customer_id ='".$this->loggedinuser['customer_id'] . "'";						  
 		$output =$this->Datatable->getView($fields,$contains,$usrfilter);
 		echo json_encode($output);			
     }
@@ -64,7 +64,8 @@ var $components = array('Datatable');
  			$this->set('payGrade', $payGrade);
         	$this->set('_serialize', ['payGrade']);
  		}else{
-		   $this->redirect(['action' => 'logout','controller'=>'users']);
+		    $this->Flash->error(__('You are not Authorized.'));
+			return $this->redirect(['action' => 'index']);
         } 
     }
 
@@ -78,6 +79,7 @@ var $components = array('Datatable');
         $payGrade = $this->PayGrades->newEntity();
         if ($this->request->is('post')) {
             $payGrade = $this->PayGrades->patchEntity($payGrade, $this->request->data);
+			$payGrade['customer_id']=$this->loggedinuser['customer_id'];
             if ($this->PayGrades->save($payGrade)) {
                 $this->Flash->success(__('The pay grade has been saved.'));
 
@@ -103,6 +105,13 @@ var $components = array('Datatable');
         $payGrade = $this->PayGrades->get($id, [
             'contain' => []
         ]);
+		
+		if($payGrade['customer_id'] != $this->loggedinuser['customer_id'])
+		{
+			 $this->Flash->error(__('You are not Authorized.'));
+			 return $this->redirect(['action' => 'index']);
+		}
+		
         if ($this->request->is(['patch', 'post', 'put'])) {
             $payGrade = $this->PayGrades->patchEntity($payGrade, $this->request->data);
             if ($this->PayGrades->save($payGrade)) {
@@ -129,11 +138,19 @@ var $components = array('Datatable');
     {
         $this->request->allowMethod(['post', 'delete']);
         $payGrade = $this->PayGrades->get($id);
-        if ($this->PayGrades->delete($payGrade)) {
-            $this->Flash->success(__('The pay grade has been deleted.'));
-        } else {
-            $this->Flash->error(__('The pay grade could not be deleted. Please, try again.'));
-        }
+        if($payGrade['customer_id'] == $this->loggedinuser['customer_id']) 
+		{
+        	if ($this->PayGrades->delete($payGrade)) {
+            	$this->Flash->success(__('The pay grade has been deleted.'));
+        	} else {
+            	$this->Flash->error(__('The pay grade could not be deleted. Please, try again.'));
+        	}
+		}
+	    else
+	    {
+	   	    $this->Flash->error(__('You are not authorized'));
+	    }
+		
 
         return $this->redirect(['action' => 'index']);
     }

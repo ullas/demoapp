@@ -28,7 +28,7 @@ class JobClassesController extends AppController
 		}
 		$contains=['PayGrades', 'JobFunctions', 'Customers', 'Jobs'];
 									  
-		$usrfilter="";						  
+		$usrfilter="JobClasses.customer_id ='".$this->loggedinuser['customer_id'] . "'";								  
 		$output =$this->Datatable->getView($fields,$contains,$usrfilter);
 		echo json_encode($output);			
     }
@@ -59,13 +59,18 @@ class JobClassesController extends AppController
         $jobclass = $this->JobClasses->get($id, [
             'contain' => ['PayGrades', 'JobFunctions', 'Customers', 'Jobs']
         ]);
-
-        $payGrades = $this->JobClasses->PayGrades->find('list', ['limit' => 200]);
-        $jobFunctions = $this->JobClasses->JobFunctions->find('list', ['limit' => 200]);
-        $customers = $this->JobClasses->Customers->find('list', ['limit' => 200]);
-        $jobs = $this->JobClasses->Jobs->find('list', ['limit' => 200]);
-        $this->set(compact('jobclass', 'payGrades', 'jobFunctions', 'customers', 'jobs'));
-        $this->set('_serialize', ['jobclass']);
+		if($jobclass['customer_id']==$this->loggedinuser['customer_id'])
+		{
+       	    $payGrades = $this->JobClasses->PayGrades->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        	$jobFunctions = $this->JobClasses->JobFunctions->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        	$customers = $this->JobClasses->Customers->find('list', ['limit' => 200]);
+        	$jobs = $this->JobClasses->Jobs->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        	$this->set(compact('jobclass', 'payGrades', 'jobFunctions', 'customers', 'jobs'));
+        	$this->set('_serialize', ['jobclass']);
+        }else{
+			$this->Flash->error(__('You are not Authorized.'));
+			return $this->redirect(['action' => 'index']);
+        }  
     }
 
     /**
@@ -78,6 +83,7 @@ class JobClassesController extends AppController
         $jobclass = $this->JobClasses->newEntity();
         if ($this->request->is('post')) {
             $jobclass = $this->Jobclasses->patchEntity($jobclass, $this->request->data);
+			$jobclass['customer_id']=$this->loggedinuser['customer_id'];
             if ($this->Jobclasses->save($jobclass)) {
                 $this->Flash->success(__('The jobclass has been saved.'));
 
@@ -86,10 +92,10 @@ class JobClassesController extends AppController
                 $this->Flash->error(__('The jobclass could not be saved. Please, try again.'));
             }
         }
-        $payGrades = $this->JobClasses->PayGrades->find('list', ['limit' => 200]);
-        $jobFunctions = $this->JobClasses->JobFunctions->find('list', ['limit' => 200]);
+        $payGrades = $this->JobClasses->PayGrades->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        $jobFunctions = $this->JobClasses->JobFunctions->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         $customers = $this->JobClasses->Customers->find('list', ['limit' => 200]);
-        $jobs = $this->JobClasses->Jobs->find('list', ['limit' => 200]);
+        $jobs = $this->JobClasses->Jobs->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         $this->set(compact('jobclass', 'payGrades', 'jobFunctions', 'customers', 'jobs'));
         $this->set('_serialize', ['jobclass']);
     }
@@ -106,6 +112,13 @@ class JobClassesController extends AppController
         $jobclass = $this->JobClasses->get($id, [
             'contain' => []
         ]);
+		
+		if($jobclass['customer_id'] != $this->loggedinuser['customer_id'])
+		{
+			 $this->Flash->error(__('You are not Authorized.'));
+			 return $this->redirect(['action' => 'index']);
+		}
+		
         if ($this->request->is(['patch', 'post', 'put'])) {
             $jobclass = $this->JobClasses->patchEntity($jobclass, $this->request->data);
             if ($this->Jobclasses->save($jobclass)) {
@@ -116,10 +129,10 @@ class JobClassesController extends AppController
                 $this->Flash->error(__('The jobclass could not be saved. Please, try again.'));
             }
         }
-        $payGrades = $this->JobClasses->PayGrades->find('list', ['limit' => 200]);
-        $jobFunctions = $this->JobClasses->JobFunctions->find('list', ['limit' => 200]);
+        $payGrades = $this->JobClasses->PayGrades->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        $jobFunctions = $this->JobClasses->JobFunctions->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         $customers = $this->JobClasses->Customers->find('list', ['limit' => 200]);
-        $jobs = $this->JobClasses->Jobs->find('list', ['limit' => 200]);
+        $jobs = $this->JobClasses->Jobs->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         $this->set(compact('jobclass', 'payGrades', 'jobFunctions', 'customers', 'jobs'));
         $this->set('_serialize', ['jobclass']);
     }
@@ -135,12 +148,18 @@ class JobClassesController extends AppController
     {
         $this->request->allowMethod(['post', 'delete']);
         $jobclass = $this->JobClasses->get($id);
-        if ($this->JobClasses->delete($jobclass)) {
-            $this->Flash->success(__('The jobclass has been deleted.'));
-        } else {
-            $this->Flash->error(__('The jobclass could not be deleted. Please, try again.'));
-        }
-
+        if($jobclass['customer_id'] == $this->loggedinuser['customer_id']) 
+		{
+        	if ($this->JobClasses->delete($jobclass)) {
+            	$this->Flash->success(__('The jobclass has been deleted.'));
+        	} else {
+            	$this->Flash->error(__('The jobclass could not be deleted. Please, try again.'));
+        	}
+		}
+	    else
+	    {
+	   	    $this->Flash->error(__('You are not authorized'));
+	    }
         return $this->redirect(['action' => 'index']);
     }
 }
