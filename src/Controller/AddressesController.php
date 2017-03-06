@@ -22,7 +22,7 @@ var $components = array('Datatable');
 			$fields[] = array("name" => $value['field_name'] , "type" => $value['datatype'] );
 		}
 		
-		$contains=['EmpDataBiographies', 'Customers'];
+		$contains=['Employees', 'Customers'];
 									  
 		$usrfilter="";						  
 		$output =$this->Datatable->getView($fields,$contains,$usrfilter);
@@ -40,7 +40,7 @@ var $components = array('Datatable');
         $this->set('configs',$configs);	
 		
         $this->paginate = [
-            'contain' => ['EmpDataBiographies', 'Customers']
+            'contain' => ['Employees', 'Customers']
         ];
         $addresses = $this->paginate($this->Addresses);
 
@@ -58,11 +58,11 @@ var $components = array('Datatable');
     public function view($id = null)
     {
         $address = $this->Addresses->get($id, [
-            'contain' => ['EmpDataBiographies', 'Customers']
+            'contain' => ['Employees', 'Customers']
         ]);
 		if($address['customer_id']==$this->loggedinuser['customer_id']){
  			$empDataBiographies = $this->Addresses->EmpDataBiographies->find('list', ['limit' => 200])->where("customer_id=".$this->loggedinuser['customer_id']);
-			$this->set(compact('address', 'empDataBiographies'));
+			$this->set(compact('address', 'employees'));
         	// $this->set('address', $address);
         	$this->set('_serialize', ['address']);
  		}else{
@@ -90,7 +90,7 @@ var $components = array('Datatable');
         }
         $empDataBiographies = $this->Addresses->EmpDataBiographies->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         $customers = $this->Addresses->Customers->find('list', ['limit' => 200]);
-        $this->set(compact('address', 'empDataBiographies', 'customers'));
+        $this->set(compact('address', 'employees', 'customers'));
         $this->set('_serialize', ['address']);
     }
 
@@ -118,7 +118,7 @@ var $components = array('Datatable');
         }
         $empDataBiographies = $this->Addresses->EmpDataBiographies->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         $customers = $this->Addresses->Customers->find('list', ['limit' => 200]);
-        $this->set(compact('address', 'empDataBiographies', 'customers'));
+        $this->set(compact('address', 'employees', 'customers'));
         $this->set('_serialize', ['address']);
     }
 

@@ -11,8 +11,8 @@
     <?php echo $this->Html->css('AdminLTE./plugins/select2/select2.min'); ?>
     <?php echo $this->Html->css('AdminLTE./plugins/datepicker/datepicker3'); ?>
     <?php echo $this->Html->css('AdminLTE./plugins/timepicker/bootstrap-timepicker.min'); ?>
-    <!-- <?php echo $this->Html->css('AdminLTE./plugins/datatables/extensions/ColReorder/css/dataTables.colReorder.min'); ?>
-    <?php echo $this->Html->css('/css/dropzone'); ?> -->
+    <!-- <?php echo $this->Html->css('AdminLTE./plugins/datatables/extensions/ColReorder/css/dataTables.colReorder.min'); ?> -->
+    <?php echo $this->Html->css('/css/dropzone'); ?> 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="/css/font-awesome.min.css">
     <!-- Ionicons -->

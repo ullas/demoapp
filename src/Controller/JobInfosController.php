@@ -62,7 +62,7 @@ class JobInfosController extends AppController
 
 		$positions = $this->JobInfos->Positions->find('list', ['limit' => 200]);
         $this->set(compact('positions',$positions));
-		if($dependent['customer_id']==$this->loggedinuser['customer_id'])
+		if($jobInfo['customer_id']==$this->loggedinuser['customer_id'])
 		{
        	    $this->set('jobInfo', $jobInfo);
         	$this->set('_serialize', ['jobInfo']);

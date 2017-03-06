@@ -11,10 +11,11 @@ use Cake\ORM\Entity;
  * @property string $profilepicture
  *
  * @property \App\Model\Entity\Customer $customer
+ * @property \App\Model\Entity\ContactInfo $contact_info
  * @property \App\Model\Entity\EmpDataBiography $empdatabiography
  * @property \App\Model\Entity\EmpDataPersonal $empdatapersonal
  * @property \App\Model\Entity\EmploymentInfo $employmentinfo
- * @property \App\Model\Entity\ContactInfo $contactinfo
+ * @property \App\Model\Entity\User $user
  */
 class Employee extends Entity
 {

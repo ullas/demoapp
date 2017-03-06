@@ -25,7 +25,7 @@ class ProfilesController extends AppController
 		$empid=$this->request->session()->read('sessionuser')['employee_id'];
 
 		$this->loadModel('Employees');
-		$profiles = $this->Employees->get($empid, ['contain' => ['Empdatabiographies', 'Empdatapersonals', 'Employmentinfos', 'ContactInfos']]);
+		$profiles = $this->Employees->get($empid, ['contain' => ['Empdatabiographies', 'Empdatapersonals', 'Employmentinfos', 'ContactInfos', 'Addresses','Identities']]);
 		
         $this->set(compact('profiles'));
         $this->set('_serialize', ['profiles']);
@@ -51,16 +51,18 @@ class ProfilesController extends AppController
 
 		$this->loadModel('Employees');
 		$employee = $this->Employees->get($empid, [
-            'contain' => ['Empdatabiographies', 'Empdatapersonals', 'Employmentinfos', 'ContactInfos']
+            'contain' => ['Empdatabiographies', 'Empdatapersonals', 'Employmentinfos', 'ContactInfos', 'Addresses','Identities']
         ]);
 		
+		$this->set(compact('profiles','employee'));
+        $this->set('_serialize', ['profiles']);
 		
-		if ($this->request->is(['patch', 'post', 'put'])) {$this->log($this->request->data);
+		if ($this->request->is(['patch', 'post', 'put'])) {
 			$this->loadModel('Employees');
             $employee = $this->Employees->patchEntity($employee, $this->request->data);
 			$employee['customer_id']=$this->loggedinuser['customer_id'];
 			
-			$this->loadModel('Employees');$this->log($employee);
+			$this->loadModel('Employees');
             if ($this->Employees->save($employee)) {
             		//associated EmpDataBiographies
             		$this->loadModel('EmpDataBiographies');
@@ -68,6 +70,7 @@ class ProfilesController extends AppController
 					isset($arr[0]) ? $empDataBiography = $arr[0] : $empDataBiography = $this->EmpDataBiographies->newEntity();  		
 						$empDataBiography = $arr[0];
 						$empDataBiography = $this->EmpDataBiographies->patchEntity($empDataBiography, $this->request->data['empdatabiography']);
+						$empDataBiography['customer_id']=$this->loggedinuser['customer_id'];
             			if ($this->Employees->EmpDataBiographies->save($empDataBiography)) {
                 			
                 		}
@@ -78,6 +81,7 @@ class ProfilesController extends AppController
 					isset($arr[0]) ? $empDataPersonal = $arr[0] : $empDataPersonal = $this->EmpDataPersonals->newEntity();  
 						$empDataPersonal = $arr[0];
 						$empDataPersonal = $this->EmpDataPersonals->patchEntity($empDataPersonal, $this->request->data['empdatapersonal']);
+						$empDataPersonal['customer_id']=$this->loggedinuser['customer_id'];
             			if ($this->Employees->EmpDataPersonals->save($empDataPersonal)) {
                 			
                 		}
@@ -88,6 +92,7 @@ class ProfilesController extends AppController
 					isset($arr[0]) ? $employmentinfo = $arr[0] : $employmentinfo = $this->EmploymentInfos->newEntity();  						
 					$employmentinfo = $arr[0];
 						$employmentinfo = $this->EmploymentInfos->patchEntity($employmentinfo, $this->request->data['employmentinfo']);
+						$employmentinfo['customer_id']=$this->loggedinuser['customer_id'];
             			if ($this->Employees->EmploymentInfos->save($employmentinfo)) {
                 			
                 		}
@@ -102,6 +107,28 @@ class ProfilesController extends AppController
             			if ($this->Employees->ContactInfos->save($contactinfo)) {
                 			
                 		}
+						
+					// associated Address
+            		$this->loadModel('Addresses');
+					$arr = $this->Addresses->find('all',['conditions' => array('employee_id' => $empid), 'contain' => []])->toArray();
+					isset($arr[0]) ? $address = $arr[0] : $address = $this->Addresses->newEntity();  
+						$address = $this->Addresses->patchEntity($address, $this->request->data['address']);
+						$address['employee_id']=$empid;
+						$address['customer_id']=$this->loggedinuser['customer_id'];
+            			if ($this->Employees->Addresses->save($address)) {
+                			
+                		}
+						
+					// associated ids
+            		$this->loadModel('Identities');
+					$arr = $this->Identities->find('all',['conditions' => array('employee_id' => $empid), 'contain' => []])->toArray();
+					isset($arr[0]) ? $ids = $arr[0] : $ids = $this->Identities->newEntity();  
+						$ids = $this->Identities->patchEntity($ids, $this->request->data['identity']);
+						$ids['employee_id']=$empid;
+						$ids['customer_id']=$this->loggedinuser['customer_id'];
+            			if ($this->Employees->Identities->save($ids)) {
+                			
+                		}
 					
 				
                 $this->Flash->success(__('The profile has been saved.'));
@@ -111,8 +138,7 @@ class ProfilesController extends AppController
             }
         }
 		
-		$this->set(compact('profiles','employee'));
-        $this->set('_serialize', ['profiles']);
+		
 	}
     /**
      * View method

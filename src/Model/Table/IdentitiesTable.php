@@ -7,19 +7,20 @@ use Cake\ORM\Table;
 use Cake\Validation\Validator;
 
 /**
- * Ids Model
+ * Identities Model
  *
  * @property \Cake\ORM\Association\BelongsTo $Customers
+ * @property \Cake\ORM\Association\BelongsTo $Employees
  *
- * @method \App\Model\Entity\Id get($primaryKey, $options = [])
- * @method \App\Model\Entity\Id newEntity($data = null, array $options = [])
- * @method \App\Model\Entity\Id[] newEntities(array $data, array $options = [])
- * @method \App\Model\Entity\Id|bool save(\Cake\Datasource\EntityInterface $entity, $options = [])
- * @method \App\Model\Entity\Id patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
- * @method \App\Model\Entity\Id[] patchEntities($entities, array $data, array $options = [])
- * @method \App\Model\Entity\Id findOrCreate($search, callable $callback = null)
+ * @method \App\Model\Entity\Identity get($primaryKey, $options = [])
+ * @method \App\Model\Entity\Identity newEntity($data = null, array $options = [])
+ * @method \App\Model\Entity\Identity[] newEntities(array $data, array $options = [])
+ * @method \App\Model\Entity\Identity|bool save(\Cake\Datasource\EntityInterface $entity, $options = [])
+ * @method \App\Model\Entity\Identity patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
+ * @method \App\Model\Entity\Identity[] patchEntities($entities, array $data, array $options = [])
+ * @method \App\Model\Entity\Identity findOrCreate($search, callable $callback = null)
  */
-class IdsTable extends Table
+class IdentitiesTable extends Table
 {
 
     /**
@@ -32,12 +33,15 @@ class IdsTable extends Table
     {
         parent::initialize($config);
 
-        $this->table('ids');
+        $this->table('identities');
         $this->displayField('id');
         $this->primaryKey('id');
 
         $this->belongsTo('Customers', [
             'foreignKey' => 'customer_id'
+        ]);
+        $this->belongsTo('Employees', [
+            'foreignKey' => 'employee_id'
         ]);
     }
 
@@ -78,6 +82,7 @@ class IdsTable extends Table
     public function buildRules(RulesChecker $rules)
     {
         $rules->add($rules->existsIn(['customer_id'], 'Customers'));
+        $rules->add($rules->existsIn(['employee_id'], 'Employees'));
 
         return $rules;
     }

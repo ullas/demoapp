@@ -4,7 +4,7 @@ namespace App\Model\Entity;
 use Cake\ORM\Entity;
 
 /**
- * Id Entity
+ * Identity Entity
  *
  * @property int $id
  * @property string $country
@@ -12,8 +12,12 @@ use Cake\ORM\Entity;
  * @property string $nationalid
  * @property bool $is_primary
  * @property int $customer_id
+ * @property int $employee_id
+ *
+ * @property \App\Model\Entity\Customer $customer
+ * @property \App\Model\Entity\Employee $employee
  */
-class Id extends Entity
+class Identity extends Entity
 {
 
     /**
