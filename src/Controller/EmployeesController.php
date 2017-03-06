@@ -27,7 +27,7 @@ class EmployeesController extends AppController
 		}
 		$contains=['Empdatabiographies', 'Empdatapersonals', 'Employmentinfos'];
 									  
-		$usrfilter="";						  
+		$usrfilter="Employees.customer_id ='".$this->loggedinuser['customer_id'] . "'";						  
 		$output =$this->Datatable->getView($fields,$contains,$usrfilter);
 		echo json_encode($output);			
     }
@@ -60,7 +60,8 @@ class EmployeesController extends AppController
         	$this->set('employee', $employee);
         	$this->set('_serialize', ['employee']);
 		}else{
-		   $this->redirect(['action' => 'logout','controller'=>'users']);
+		    $this->Flash->error(__('You are not Authorized.'));
+			return $this->redirect(['action' => 'index']);
        }
     }
 
@@ -110,6 +111,13 @@ class EmployeesController extends AppController
         $employee = $this->Employees->get($id, [
             'contain' => ['Empdatabiographies', 'Empdatapersonals', 'Employmentinfos']
         ]);
+		
+		if($employee['customer_id'] != $this->loggedinuser['customer_id'])
+		{
+			 $this->Flash->error(__('You are not Authorized.'));
+			 return $this->redirect(['action' => 'index']);
+		}
+		
         if ($this->request->is(['patch', 'post', 'put'])) {
         	
             $employee = $this->Employees->patchEntity($employee, $this->request->data);
@@ -180,12 +188,18 @@ class EmployeesController extends AppController
     {
         $this->request->allowMethod(['post', 'delete']);
         $employee = $this->Employees->get($id);
-        if ($this->Employees->delete($employee)) {
-            $this->Flash->success(__('The employee has been deleted.'));
-        } else {
-            $this->Flash->error(__('The employee could not be deleted. Please, try again.'));
-        }
-
+        if($employee['customer_id'] == $this->loggedinuser['customer_id']) 
+		{
+        	if ($this->Employees->delete($employee)) {
+            	$this->Flash->success(__('The employee has been deleted.'));
+        	} else {
+            	$this->Flash->error(__('The employee could not be deleted. Please, try again.'));
+        	}
+		}
+	    else
+	    {
+	   	    $this->Flash->error(__('You are not authorized'));
+	    }
         return $this->redirect(['action' => 'index']);
     }
 }

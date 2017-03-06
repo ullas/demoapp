@@ -10,8 +10,8 @@ use Cake\ORM\Entity;
  * @property int $user_id
  * @property string $title
  * @property string $description
- * @property \Cake\I18n\Time $created_at
- * @property \Cake\I18n\Time $modified_at
+ * @property \Cake\I18n\Time $created
+ * @property \Cake\I18n\Time $modified
  * @property int $visibleto
  * @property int $emp_data_biographies_id
  * @property int $customer_id

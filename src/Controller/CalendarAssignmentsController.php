@@ -28,7 +28,7 @@ class CalendarAssignmentsController extends AppController
 		}
 		$contains=['Users', 'Holidays', 'Customers','HolidayCalendars'];
 									  
-		$usrfilter="";						  
+		$usrfilter="CalendarAssignments.customer_id ='".$this->loggedinuser['customer_id'] . "'";						  
 		$output =$this->Datatable->getView($fields,$contains,$usrfilter);
 		echo json_encode($output);			
     }
@@ -60,11 +60,18 @@ class CalendarAssignmentsController extends AppController
             'contain' => ['Users', 'Holidays', 'Customers','HolidayCalendars']
         ]);
 
-        $holidays = $this->CalendarAssignments->Holidays->find('list', ['limit' => 200]);
-		$holidayCalendars = $this->CalendarAssignments->HolidayCalendars->find('list', ['limit' => 200]);
+        $holidays = $this->CalendarAssignments->Holidays->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+		$holidayCalendars = $this->CalendarAssignments->HolidayCalendars->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         $customers = $this->CalendarAssignments->Customers->find('list', ['limit' => 200]);
-        $this->set(compact('calendarAssignment', 'holidays', 'customers','holidayCalendars'));
-        $this->set('_serialize', ['calendarAssignment']);
+        
+		if($calendarAssignment['customer_id']==$this->loggedinuser['customer_id'])
+		{
+       	    $this->set(compact('calendarAssignment', 'holidays', 'customers','holidayCalendars'));
+        	$this->set('_serialize', ['calendarAssignment']);
+        }else{
+			$this->Flash->error(__('You are not Authorized.'));
+			return $this->redirect(['action' => 'index']);
+        }
     }
 
     /**
@@ -77,6 +84,7 @@ class CalendarAssignmentsController extends AppController
         $calendarAssignment = $this->CalendarAssignments->newEntity();
         if ($this->request->is('post')) {
             $calendarAssignment = $this->CalendarAssignments->patchEntity($calendarAssignment, $this->request->data);
+			$calendarAssignment['customer_id']=$this->loggedinuser['customer_id'];
             if ($this->CalendarAssignments->save($calendarAssignment)) {
                 $this->Flash->success(__('The calendar assignment has been saved.'));
 
@@ -85,9 +93,9 @@ class CalendarAssignmentsController extends AppController
                 $this->Flash->error(__('The calendar assignment could not be saved. Please, try again.'));
             }
         }
-        $users = $this->CalendarAssignments->Users->find('list', ['limit' => 200]);
-        $holidays = $this->CalendarAssignments->Holidays->find('list', ['limit' => 200]);
-		$holidayCalendars = $this->CalendarAssignments->HolidayCalendars->find('list', ['limit' => 200]);
+        $users = $this->CalendarAssignments->Users->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        $holidays = $this->CalendarAssignments->Holidays->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+		$holidayCalendars = $this->CalendarAssignments->HolidayCalendars->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         $customers = $this->CalendarAssignments->Customers->find('list', ['limit' => 200]);
         $this->set(compact('calendarAssignment', 'users', 'holidays', 'customers','holidayCalendars'));
         $this->set('_serialize', ['calendarAssignment']);
@@ -105,6 +113,13 @@ class CalendarAssignmentsController extends AppController
         $calendarAssignment = $this->CalendarAssignments->get($id, [
             'contain' => []
         ]);
+		
+		if($calendarAssignment['customer_id'] != $this->loggedinuser['customer_id'])
+		{
+			 $this->Flash->error(__('You are not Authorized.'));
+			 return $this->redirect(['action' => 'index']);
+		}
+		
         if ($this->request->is(['patch', 'post', 'put'])) {
             $calendarAssignment = $this->CalendarAssignments->patchEntity($calendarAssignment, $this->request->data);
             if ($this->CalendarAssignments->save($calendarAssignment)) {
@@ -115,9 +130,9 @@ class CalendarAssignmentsController extends AppController
                 $this->Flash->error(__('The calendar assignment could not be saved. Please, try again.'));
             }
         }
-        $users = $this->CalendarAssignments->Users->find('list', ['limit' => 200]);
-        $holidays = $this->CalendarAssignments->Holidays->find('list', ['limit' => 200]);
-        $holidayCalendars = $this->CalendarAssignments->HolidayCalendars->find('list', ['limit' => 200]);
+        $users = $this->CalendarAssignments->Users->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        $holidays = $this->CalendarAssignments->Holidays->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        $holidayCalendars = $this->CalendarAssignments->HolidayCalendars->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         $customers = $this->CalendarAssignments->Customers->find('list', ['limit' => 200]);
         $this->set(compact('calendarAssignment', 'users', 'holidays', 'customers','holidayCalendars'));
         $this->set('_serialize', ['calendarAssignment']);
@@ -134,12 +149,18 @@ class CalendarAssignmentsController extends AppController
     {
         $this->request->allowMethod(['post', 'delete']);
         $calendarAssignment = $this->CalendarAssignments->get($id);
-        if ($this->CalendarAssignments->delete($calendarAssignment)) {
-            $this->Flash->success(__('The calendar assignment has been deleted.'));
-        } else {
-            $this->Flash->error(__('The calendar assignment could not be deleted. Please, try again.'));
-        }
-
+		if($calendarAssignment['customer_id'] == $this->loggedinuser['customer_id']) 
+		{
+        	if ($this->CalendarAssignments->delete($calendarAssignment)) {
+            	$this->Flash->success(__('The calendar assignment has been deleted.'));
+        	} else {
+            	$this->Flash->error(__('The calendar assignment could not be deleted. Please, try again.'));
+        	}
+		}
+	    else
+	    {
+	   	    $this->Flash->error(__('You are not authorized'));
+	    }
         return $this->redirect(['action' => 'index']);
     }
 }

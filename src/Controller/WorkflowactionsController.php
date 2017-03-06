@@ -25,14 +25,15 @@ class WorkflowactionsController extends AppController
 		
 		
 		$usrfilter="";
-        //msgdtime filter
         if( isset($this->request->query['workflowrule']) && ($this->request->query['workflowrule'])!=null ){
         	
 			$usrfilter.="workflowrule_id ='" .$this->request->query['workflowrule']. "'";
 		}
 																	
 		$contains= ['Workflowrules', 'Positions', 'Customers'];
-									  
+		( strlen($usrfilter)>3 ) ? $usrfilter.=" and " : $usrfilter.= "";
+			
+		$usrfilter.="Workflowactions.customer_id ='".$this->loggedinuser['customer_id'] . "'";								  
 		$output =$this->ActionPopoupDatatable->getView($fields,$contains,$usrfilter);
 		echo json_encode($output);		
     }
@@ -99,9 +100,16 @@ class WorkflowactionsController extends AppController
         ]);
 
 		$positions = $this->Workflowactions->Positions->find('list', ['limit' => 200]);
-		$this->set('positions', $positions);
-        $this->set('workflowaction', $workflowaction);
-        $this->set('_serialize', ['workflowaction']);
+		if($workflowaction['customer_id']==$this->loggedinuser['customer_id'])
+		{
+       	    $this->set('positions', $positions);
+        	$this->set('workflowaction', $workflowaction);
+        	$this->set('_serialize', ['workflowaction']);
+        }else{
+			$this->Flash->error(__('You are not Authorized.'));
+			return $this->redirect(['action' => 'index']);
+       }  
+		
     }
 
     /**
@@ -123,6 +131,7 @@ class WorkflowactionsController extends AppController
 	
             $workflowaction = $this->Workflowactions->patchEntity($workflowaction, $this->request->data);
 			$workflowaction['workflowrule_id'] = $this->request->query['wrid'];
+			$workflowaction['customer_id']=$this->loggedinuser['customer_id'];
 			$workflowaction['stepid'] = $maxstepid+1;
             if ($this->Workflowactions->save($workflowaction)) {
                 $this->Flash->success(__('The workflowaction has been saved.'));
@@ -143,8 +152,8 @@ class WorkflowactionsController extends AppController
 		$positionarr = $this->Workflowactions->find('all')->select(['position_id'])->where(['workflowrule_id'=>$this->request->query['wrid']]);
 		
 
-        $workflowrules = $this->Workflowactions->Workflowrules->find('list', ['limit' => 200]);
-        $positions = $this->Workflowactions->Positions->find('list', ['limit' => 200])->where(['Positions.id NOT IN'=>$positionarr]);
+        $workflowrules = $this->Workflowactions->Workflowrules->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        $positions = $this->Workflowactions->Positions->find('list', ['limit' => 200])->where(['Positions.id NOT IN'=>$positionarr])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         $customers = $this->Workflowactions->Customers->find('list', ['limit' => 200]);
         $this->set(compact('workflowaction', 'workflowrules', 'positions', 'nextactions', 'onfailureactions', 'customers'));
         $this->set('_serialize', ['workflowaction']);
@@ -162,6 +171,12 @@ class WorkflowactionsController extends AppController
         $workflowaction = $this->Workflowactions->get($id, [
             'contain' => []
         ]);
+		if($workflowaction['customer_id'] != $this->loggedinuser['customer_id'])
+		{
+			 $this->Flash->error(__('You are not Authorized.'));
+			 return $this->redirect(['action' => 'index']);
+		}
+		
         if ($this->request->is(['patch', 'post', 'put'])) {
             $workflowaction = $this->Workflowactions->patchEntity($workflowaction, $this->request->data);
             if ($this->Workflowactions->save($workflowaction)) {
@@ -182,8 +197,8 @@ class WorkflowactionsController extends AppController
         $positionarr = $this->Workflowactions->find('all')->select(['position_id'])->where(['workflowrule_id'=>$id]);
 		
 
-        $workflowrules = $this->Workflowactions->Workflowrules->find('list', ['limit' => 200]);
-        $positions = $this->Workflowactions->Positions->find('list', ['limit' => 200])->where(['Positions.id NOT IN'=>$positionarr]);
+        $workflowrules = $this->Workflowactions->Workflowrules->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        $positions = $this->Workflowactions->Positions->find('list', ['limit' => 200])->where(['Positions.id NOT IN'=>$positionarr])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         $customers = $this->Workflowactions->Customers->find('list', ['limit' => 200]);
         $this->set(compact('workflowaction', 'workflowrules', 'positions', 'nextactions', 'onfailureactions', 'customers'));
         $this->set('_serialize', ['workflowaction']);
@@ -200,11 +215,18 @@ class WorkflowactionsController extends AppController
     {
         $this->request->allowMethod(['post', 'delete']);
         $workflowaction = $this->Workflowactions->get($id);
-        if ($this->Workflowactions->delete($workflowaction)) {
-            $this->Flash->success(__('The workflowaction has been deleted.'));
-        } else {
-            $this->Flash->error(__('The workflowaction could not be deleted. Please, try again.'));
-        }
+        if($workflowaction['customer_id'] == $this->loggedinuser['customer_id']) 
+		{
+        	if ($this->Workflowactions->delete($workflowaction)) {
+            	$this->Flash->success(__('The workflowaction has been deleted.'));
+        	} else {
+            	$this->Flash->error(__('The workflowaction could not be deleted. Please, try again.'));
+        	}
+		}
+	    else
+	    {
+	   	    $this->Flash->error(__('You are not authorized'));
+	    }
 
         return $this->redirect($this->referer());
     }

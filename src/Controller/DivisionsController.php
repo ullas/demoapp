@@ -25,7 +25,7 @@ var $components = array('Datatable');
 		
 		$contains=['Customers'];
 									  
-		$usrfilter="";						  
+		$usrfilter="Divisions.customer_id ='".$this->loggedinuser['customer_id'] . "'";							  
 		$output =$this->Datatable->getView($fields,$contains,$usrfilter);
 		echo json_encode($output);				
     }
@@ -68,7 +68,8 @@ var $components = array('Datatable');
         	$this->set('_serialize', ['division']); 
 		
        }else{
-		   $this->redirect(['action' => 'logout','controller'=>'users']);
+		   $this->Flash->error(__('You are not Authorized.'));
+			return $this->redirect(['action' => 'index']);
        } 
     }
 
@@ -82,6 +83,7 @@ var $components = array('Datatable');
         $division = $this->Divisions->newEntity();
         if ($this->request->is('post')) {
             $division = $this->Divisions->patchEntity($division, $this->request->data);
+			$division['customer_id']=$this->loggedinuser['customer_id'];
             if ($this->Divisions->save($division)) {
                 $this->Flash->success(__('The division has been saved.'));
 
@@ -124,6 +126,13 @@ var $components = array('Datatable');
         $division = $this->Divisions->get($id, [
             'contain' => []
         ]);
+		
+		if($division['customer_id'] != $this->loggedinuser['customer_id'])
+		{
+			 $this->Flash->error(__('You are not Authorized.'));
+			 return $this->redirect(['action' => 'index']);
+		}
+		
         if ($this->request->is(['patch', 'post', 'put'])) {
             $division = $this->Divisions->patchEntity($division, $this->request->data);
             if ($this->Divisions->save($division)) {
@@ -150,11 +159,19 @@ var $components = array('Datatable');
     {
         $this->request->allowMethod(['post', 'delete']);
         $division = $this->Divisions->get($id);
-        if ($this->Divisions->delete($division)) {
-            $this->Flash->success(__('The division has been deleted.'));
-        } else {
-            $this->Flash->error(__('The division could not be deleted. Please, try again.'));
-        }
+        
+		if($division['customer_id'] == $this->loggedinuser['customer_id']) 
+		{
+        	if ($this->Divisions->delete($division)) {
+            	$this->Flash->success(__('The division has been deleted.'));
+        	} else {
+            	$this->Flash->error(__('The division could not be deleted. Please, try again.'));
+        	}
+		}
+	    else
+	    {
+	   	    $this->Flash->error(__('You are not authorized'));
+	    }
 
         return $this->redirect(['action' => 'index']);
     }

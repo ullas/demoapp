@@ -41,9 +41,10 @@ use Cake\ORM\Entity;
  * @property string $time_rec_variant_3
  * @property string $ws_code
  * @property int $customer_id
- * @property int $employee_id
+ * @property int $emp_data_biographies_id
  *
  * @property \App\Model\Entity\Customer $customer
+ * @property \App\Model\Entity\Employee $employee
  */
 class WorkSchedule extends Entity
 {

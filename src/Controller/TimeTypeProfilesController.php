@@ -25,7 +25,7 @@ class TimeTypeProfilesController extends AppController
 		
 		$contains=['TimeTypes', 'Customers'];
 									  
-		$usrfilter="";						  
+		$usrfilter="TimeTypeProfiles.customer_id ='".$this->loggedinuser['customer_id'] . "'";							  
 		$output =$this->Datatable->getView($fields,$contains,$usrfilter);
 		echo json_encode($output);			
     }
@@ -61,9 +61,15 @@ class TimeTypeProfilesController extends AppController
         $timeTypeProfile = $this->TimeTypeProfiles->get($id, [
             'contain' => ['TimeTypes', 'Customers']
         ]);
-
-        $this->set('timeTypeProfile', $timeTypeProfile);
-        $this->set('_serialize', ['timeTypeProfile']);
+		
+		if($timeTypeProfile['customer_id']==$this->loggedinuser['customer_id'])
+		{
+        	$this->set('timeTypeProfile', $timeTypeProfile);
+        	$this->set('_serialize', ['timeTypeProfile']);
+		}else{
+			$this->Flash->error(__('You are not Authorized.'));
+			return $this->redirect(['action' => 'index']);
+       } 
     }
 
     /**
@@ -76,6 +82,7 @@ class TimeTypeProfilesController extends AppController
         $timeTypeProfile = $this->TimeTypeProfiles->newEntity();
         if ($this->request->is('post')) {
             $timeTypeProfile = $this->TimeTypeProfiles->patchEntity($timeTypeProfile, $this->request->data);
+			$timeTypeProfile['customer_id']=$this->loggedinuser['customer_id'];
             if ($this->TimeTypeProfiles->save($timeTypeProfile)) {
                 $this->Flash->success(__('The time type profile has been saved.'));
 
@@ -84,7 +91,7 @@ class TimeTypeProfilesController extends AppController
                 $this->Flash->error(__('The time type profile could not be saved. Please, try again.'));
             }
         }
-        $timeTypes = $this->TimeTypeProfiles->TimeTypes->find('list', ['limit' => 200]);
+        $timeTypes = $this->TimeTypeProfiles->TimeTypes->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         $customers = $this->TimeTypeProfiles->Customers->find('list', ['limit' => 200]);
         $this->set(compact('timeTypeProfile', 'timeTypes', 'customers'));
         $this->set('_serialize', ['timeTypeProfile']);
@@ -102,6 +109,13 @@ class TimeTypeProfilesController extends AppController
         $timeTypeProfile = $this->TimeTypeProfiles->get($id, [
             'contain' => []
         ]);
+		
+		if($timeTypeProfile['customer_id'] != $this->loggedinuser['customer_id'])
+		{
+			 $this->Flash->error(__('You are not Authorized.'));
+			 return $this->redirect(['action' => 'index']);
+		}
+
         if ($this->request->is(['patch', 'post', 'put'])) {
             $timeTypeProfile = $this->TimeTypeProfiles->patchEntity($timeTypeProfile, $this->request->data);
             if ($this->TimeTypeProfiles->save($timeTypeProfile)) {
@@ -112,7 +126,7 @@ class TimeTypeProfilesController extends AppController
                 $this->Flash->error(__('The time type profile could not be saved. Please, try again.'));
             }
         }
-        $timeTypes = $this->TimeTypeProfiles->TimeTypes->find('list', ['limit' => 200]);
+        $timeTypes = $this->TimeTypeProfiles->TimeTypes->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         $customers = $this->TimeTypeProfiles->Customers->find('list', ['limit' => 200]);
         $this->set(compact('timeTypeProfile', 'timeTypes', 'customers'));
         $this->set('_serialize', ['timeTypeProfile']);
@@ -129,11 +143,18 @@ class TimeTypeProfilesController extends AppController
     {
         $this->request->allowMethod(['post', 'delete']);
         $timeTypeProfile = $this->TimeTypeProfiles->get($id);
-        if ($this->TimeTypeProfiles->delete($timeTypeProfile)) {
-            $this->Flash->success(__('The time type profile has been deleted.'));
-        } else {
-            $this->Flash->error(__('The time type profile could not be deleted. Please, try again.'));
-        }
+        if($timeTypeProfile['customer_id'] == $this->loggedinuser['customer_id']) 
+		{
+        	if ($this->TimeTypeProfiles->delete($timeTypeProfile)) {
+            	$this->Flash->success(__('The time type profile has been deleted.'));
+        	} else {
+            	$this->Flash->error(__('The time type profile could not be deleted. Please, try again.'));
+        	}
+		}
+	    else
+	    {
+	   	    $this->Flash->error(__('You are not authorized'));
+	    }
 
         return $this->redirect(['action' => 'index']);
     }

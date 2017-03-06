@@ -14,6 +14,7 @@ use Cake\Core\Configure;
  * @property \Cake\ORM\Association\BelongsTo $Empdatabiographies
  * @property \Cake\ORM\Association\BelongsTo $TimeTypes
  * @property \Cake\ORM\Association\BelongsTo $Users
+ * @property \Cake\ORM\Association\BelongsTo $Customers
  *
  * @method \App\Model\Entity\EmployeeAbsencerecord get($primaryKey, $options = [])
  * @method \App\Model\Entity\EmployeeAbsencerecord newEntity($data = null, array $options = [])
@@ -52,6 +53,9 @@ class EmployeeAbsencerecordsTable extends Table
         ]);
         $this->belongsTo('Users', [
             'foreignKey' => 'user_id'
+        ]);
+        $this->belongsTo('Customers', [
+            'foreignKey' => 'customer_id'
         ]);
     }
 
@@ -111,6 +115,7 @@ class EmployeeAbsencerecordsTable extends Table
         $rules->add($rules->existsIn(['emp_data_biographies_id'], 'Empdatabiographies'));
         $rules->add($rules->existsIn(['time_type_id'], 'TimeTypes'));
         $rules->add($rules->existsIn(['user_id'], 'Users'));
+        $rules->add($rules->existsIn(['customer_id'], 'Customers'));
 
         return $rules;
     }

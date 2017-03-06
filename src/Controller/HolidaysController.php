@@ -12,7 +12,7 @@ class HolidaysController extends AppController
 {
 	var $components = array('ActionPopoupDatatable');
 	
-	public function ajaxData() {
+	public function ajaxData(){
 		$this->autoRender= False;
 		  
 		$this->loadModel('CreateConfigs');
@@ -22,14 +22,16 @@ class HolidaysController extends AppController
 			$fields[] = array("name" => $value['field_name'] , "type" => $value['datatype'] );
 		}
 		
-		
 		$usrfilter="";
         //msgdtime filter
         if( isset($this->request->query['holidaycalendar']) && ($this->request->query['holidaycalendar'])!=null ){
         	
 			$usrfilter.="holiday_calendar_id ='" .$this->request->query['holidaycalendar']. "'";
 		}
-																	
+		
+		( strlen($usrfilter)>3 ) ? $usrfilter.=" and " : $usrfilter.= "";
+			
+		$usrfilter.="Holidays.customer_id ='".$this->loggedinuser['customer_id'] . "'";												
 		$contains= ['Customers', 'HolidayCalendars'];
 									  
 		$output =$this->ActionPopoupDatatable->getView($fields,$contains,$usrfilter);
@@ -67,8 +69,14 @@ class HolidaysController extends AppController
             'contain' => ['Customers', 'HolidayCalendars', 'CalendarAssignments']
         ]);
 
-        $this->set('holiday', $holiday);
-        $this->set('_serialize', ['holiday']);
+        if($holiday['customer_id']==$this->loggedinuser['customer_id'])
+		{
+       	   $this->set('holiday', $holiday);
+        	$this->set('_serialize', ['holiday']);
+        }else{
+			$this->Flash->error(__('You are not Authorized.'));
+			return $this->redirect(['action' => 'index']);
+        } 
     }
 
     /**
@@ -83,6 +91,7 @@ class HolidaysController extends AppController
         if ($this->request->is('post')) {
             $holiday = $this->Holidays->patchEntity($holiday, $this->request->data);
 			$holiday['holiday_calendar_id'] = $this->request->query['hcid'];
+			$holiday['customer_id']=$this->loggedinuser['customer_id'];
             if ($this->Holidays->save($holiday)) {
                 $this->Flash->success(__('The holiday has been saved.'));
 
@@ -100,7 +109,7 @@ class HolidaysController extends AppController
 			
         }
         $customers = $this->Holidays->Customers->find('list', ['limit' => 200]);
-        $holidayCalendars = $this->Holidays->HolidayCalendars->find('list', ['limit' => 200]);
+        $holidayCalendars = $this->Holidays->HolidayCalendars->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         $this->set(compact('holiday', 'customers', 'holidayCalendars'));
         $this->set('_serialize', ['holiday']);
     }
@@ -118,6 +127,13 @@ class HolidaysController extends AppController
         $holiday = $this->Holidays->get($id, [
             'contain' => []
         ]);
+		
+		if($holiday['customer_id'] != $this->loggedinuser['customer_id'])
+		{
+			 $this->Flash->error(__('You are not Authorized.'));
+			 return $this->redirect(['action' => 'index']);
+		}
+		
         if ($this->request->is(['patch', 'post', 'put'])) {
             $holiday = $this->Holidays->patchEntity($holiday, $this->request->data);
             if ($this->Holidays->save($holiday)) {
@@ -137,7 +153,7 @@ class HolidaysController extends AppController
 			}
         }
         $customers = $this->Holidays->Customers->find('list', ['limit' => 200]);
-        $holidayCalendars = $this->Holidays->HolidayCalendars->find('list', ['limit' => 200]);
+        $holidayCalendars = $this->Holidays->HolidayCalendars->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         $this->set(compact('holiday', 'customers', 'holidayCalendars'));
         $this->set('_serialize', ['holiday']);
     }
@@ -153,11 +169,18 @@ class HolidaysController extends AppController
     {
         // $this->request->allowMethod(['post', 'delete']);
         $holiday = $this->Holidays->get($id);
-        if ($this->Holidays->delete($holiday)) {
-            $this->Flash->success(__('The holiday has been deleted.'));
-        } else {
-            $this->Flash->error(__('The holiday could not be deleted. Please, try again.'));
-        }
-	return $this->redirect($this->referer());
+        if($holiday['customer_id'] == $this->loggedinuser['customer_id']) 
+		{
+        	if ($this->Holidays->delete($holiday)) {
+            	$this->Flash->success(__('The holiday has been deleted.'));
+        	} else {
+            	$this->Flash->error(__('The holiday could not be deleted. Please, try again.'));
+        	}
+		}
+	    else
+	    {
+	   	    $this->Flash->error(__('You are not authorized'));
+	    }
+		return $this->redirect($this->referer());
     }
 }

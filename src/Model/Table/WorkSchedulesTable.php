@@ -12,7 +12,7 @@ use Cake\Core\Configure;
  * WorkSchedules Model
  *
  * @property \Cake\ORM\Association\BelongsTo $Customers
- * @property \Cake\ORM\Association\BelongsTo $Employees
+ * @property \Cake\ORM\Association\BelongsTo $EmpDataBiographies
  *
  * @method \App\Model\Entity\WorkSchedule get($primaryKey, $options = [])
  * @method \App\Model\Entity\WorkSchedule newEntity($data = null, array $options = [])
@@ -42,8 +42,8 @@ class WorkSchedulesTable extends Table
         $this->belongsTo('Customers', [
             'foreignKey' => 'customer_id'
         ]);
-        $this->belongsTo('Employees', [
-            'foreignKey' => 'employee_id'
+        $this->belongsTo('EmpDataBiographies', [
+            'foreignKey' => 'emp_data_biographies_id'
         ]);
     }
 
@@ -207,7 +207,7 @@ class WorkSchedulesTable extends Table
     {
         $rules->add($rules->isUnique(['ws_code']));
         $rules->add($rules->existsIn(['customer_id'], 'Customers'));
-        $rules->add($rules->existsIn(['employee_id'], 'Employees'));
+        $rules->add($rules->existsIn(['emp_data_biographies_id'], 'EmpDataBiographies'));
 
         return $rules;
     }

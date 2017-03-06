@@ -66,7 +66,7 @@ class BusinessUnitsController extends AppController
             'contain' => ['Customers']
         ]);
 
-		if($legalEntity['customer_id']==$this->loggedinuser['customer_id']){
+		if($businessUnit['customer_id']==$this->loggedinuser['customer_id']){
        	    $this->set('businessUnit', $businessUnit);
         	$this->set('_serialize', ['businessUnit']);
        }else{

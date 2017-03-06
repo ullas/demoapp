@@ -24,7 +24,7 @@ class DependentsController extends AppController
 		
 		$contains=['EmpDataBiographies', 'Customers'];
 									  
-		$usrfilter="";						  
+		$usrfilter="Dependents.customer_id ='".$this->loggedinuser['customer_id'] . "'";				  
 		$output =$this->Datatable->getView($fields,$contains,$usrfilter);
 		echo json_encode($output);			
     }
@@ -61,8 +61,14 @@ class DependentsController extends AppController
             'contain' => ['EmpDataBiographies', 'Customers']
         ]);
 
-        $this->set('dependent', $dependent);
-        $this->set('_serialize', ['dependent']);
+		if($dependent['customer_id']==$this->loggedinuser['customer_id'])
+		{
+       	    $this->set('dependent', $dependent);
+        	$this->set('_serialize', ['dependent']);
+        }else{
+			$this->Flash->error(__('You are not Authorized.'));
+			return $this->redirect(['action' => 'index']);
+       }   
     }
 
     /**
@@ -75,6 +81,8 @@ class DependentsController extends AppController
         $dependent = $this->Dependents->newEntity();
         if ($this->request->is('post')) {
             $dependent = $this->Dependents->patchEntity($dependent, $this->request->data);
+			$dependent['customer_id']=$this->loggedinuser['customer_id'];
+			$dependent['emp_data_biographies_id']=$this->request->session()->read('sessionuser')['empdatabiographyid'];
             if ($this->Dependents->save($dependent)) {
                 $this->Flash->success(__('The dependent has been saved.'));
 
@@ -83,7 +91,7 @@ class DependentsController extends AppController
                 $this->Flash->error(__('The dependent could not be saved. Please, try again.'));
             }
         }
-        $empDataBiographies = $this->Dependents->EmpDataBiographies->find('list', ['limit' => 200]);
+        $empDataBiographies = $this->Dependents->EmpDataBiographies->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         $customers = $this->Dependents->Customers->find('list', ['limit' => 200]);
         $this->set(compact('dependent', 'empDataBiographies', 'customers'));
         $this->set('_serialize', ['dependent']);
@@ -101,17 +109,23 @@ class DependentsController extends AppController
         $dependent = $this->Dependents->get($id, [
             'contain' => []
         ]);
+		
+		if($dependent['customer_id'] != $this->loggedinuser['customer_id'])
+		{
+			 $this->Flash->error(__('You are not Authorized.'));
+			 return $this->redirect(['action' => 'index']);
+		}
+		
         if ($this->request->is(['patch', 'post', 'put'])) {
             $dependent = $this->Dependents->patchEntity($dependent, $this->request->data);
             if ($this->Dependents->save($dependent)) {
                 $this->Flash->success(__('The dependent has been saved.'));
-
                 return $this->redirect(['action' => 'index']);
             } else {
                 $this->Flash->error(__('The dependent could not be saved. Please, try again.'));
             }
         }
-        $empDataBiographies = $this->Dependents->EmpDataBiographies->find('list', ['limit' => 200]);
+        $empDataBiographies = $this->Dependents->EmpDataBiographies->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         $customers = $this->Dependents->Customers->find('list', ['limit' => 200]);
         $this->set(compact('dependent', 'empDataBiographies', 'customers'));
         $this->set('_serialize', ['dependent']);
@@ -128,12 +142,18 @@ class DependentsController extends AppController
     {
         $this->request->allowMethod(['post', 'delete']);
         $dependent = $this->Dependents->get($id);
-        if ($this->Dependents->delete($dependent)) {
-            $this->Flash->success(__('The dependent has been deleted.'));
-        } else {
-            $this->Flash->error(__('The dependent could not be deleted. Please, try again.'));
-        }
-
+		if($dependent['customer_id'] == $this->loggedinuser['customer_id']) 
+		{
+        	if ($this->Dependents->delete($dependent)) {
+            	$this->Flash->success(__('The dependent has been deleted.'));
+        	} else {
+            	$this->Flash->error(__('The dependent could not be deleted. Please, try again.'));
+        	}
+		}
+	    else
+	    {
+	   	    $this->Flash->error(__('You are not authorized'));
+	    }
         return $this->redirect(['action' => 'index']);
     }
 }

@@ -28,7 +28,7 @@ var $components = array('Datatable');
 		}
 		$contains=['Customers'];
 									  
-		$usrfilter="";						  
+		$usrfilter="PayGroups.customer_id ='".$this->loggedinuser['customer_id'] . "'";				  
 		$output =$this->Datatable->getView($fields,$contains,$usrfilter);
 		echo json_encode($output);			
     }
@@ -60,13 +60,14 @@ var $components = array('Datatable');
             'contain' => ['Customers', 'PayRanges']
         ]);
 		
-		// if($payGroup['customer_id']==$this->loggedinuser['customer_id']){
+		if($payGroup['customer_id']==$this->loggedinuser['customer_id']){
 			$frequencies = $this->PayGroups->Frequencies->find('list', ['limit' => 200])->where("customer_id=".$this->loggedinuser['customer_id']);
         	$this->set(compact('payGroup','frequencies'));
         	$this->set('_serialize', ['payGroup']);
- 		// }else{
-		   // $this->redirect(['action' => 'logout','controller'=>'users']);
-        // } 
+ 		}else{
+		    $this->Flash->error(__('You are not Authorized.'));
+			return $this->redirect(['action' => 'index']);
+        } 
     }
 
     /**
@@ -79,6 +80,7 @@ var $components = array('Datatable');
         $payGroup = $this->PayGroups->newEntity();
         if ($this->request->is('post')) {
             $payGroup = $this->PayGroups->patchEntity($payGroup, $this->request->data);
+			$payGroup['customer_id']=$this->loggedinuser['customer_id'];
             if ($this->PayGroups->save($payGroup)) {
                 $this->Flash->success(__('The pay group has been saved.'));
 
@@ -88,7 +90,7 @@ var $components = array('Datatable');
             }
         }
         $customers = $this->PayGroups->Customers->find('list', ['limit' => 200]);
-		$frequencies = $this->PayGroups->Frequencies->find('list', ['limit' => 200])->where("customer_id=".$this->loggedinuser['customer_id']);
+		$frequencies = $this->PayGroups->Frequencies->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         $this->set(compact('payGroup', 'customers','frequencies'));
         $this->set('_serialize', ['payGroup']);
     }
@@ -105,6 +107,13 @@ var $components = array('Datatable');
         $payGroup = $this->PayGroups->get($id, [
             'contain' => []
         ]);
+		
+		if($payGroup['customer_id'] != $this->loggedinuser['customer_id'])
+		{
+			 $this->Flash->error(__('You are not Authorized.'));
+			 return $this->redirect(['action' => 'index']);
+		}
+		
         if ($this->request->is(['patch', 'post', 'put'])) {
             $payGroup = $this->PayGroups->patchEntity($payGroup, $this->request->data);
             if ($this->PayGroups->save($payGroup)) {
@@ -116,7 +125,7 @@ var $components = array('Datatable');
             }
         }
         $customers = $this->PayGroups->Customers->find('list', ['limit' => 200]);
-        $frequencies = $this->PayGroups->Frequencies->find('list', ['limit' => 200])->where("customer_id=".$this->loggedinuser['customer_id']);
+        $frequencies = $this->PayGroups->Frequencies->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         $this->set(compact('payGroup', 'customers','frequencies'));
         $this->set('_serialize', ['payGroup']);
     }
@@ -132,12 +141,18 @@ var $components = array('Datatable');
     {
         $this->request->allowMethod(['post', 'delete']);
         $payGroup = $this->PayGroups->get($id);
-        if ($this->PayGroups->delete($payGroup)) {
-            $this->Flash->success(__('The pay group has been deleted.'));
-        } else {
-            $this->Flash->error(__('The pay group could not be deleted. Please, try again.'));
-        }
-
+        if($payGroup['customer_id'] == $this->loggedinuser['customer_id']) 
+		{
+        	if ($this->PayGroups->delete($payGroup)) {
+            	$this->Flash->success(__('The pay group has been deleted.'));
+        	} else {
+            	$this->Flash->error(__('The pay group could not be deleted. Please, try again.'));
+        	}
+		}
+	    else
+	    {
+	   	    $this->Flash->error(__('You are not authorized'));
+	    }
         return $this->redirect(['action' => 'index']);
     }
 }

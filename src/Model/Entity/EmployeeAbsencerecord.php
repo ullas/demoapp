@@ -17,6 +17,7 @@ use Cake\ORM\Entity;
  * @property \Cake\I18n\Time $modified
  * @property int $id
  * @property int $modified_by
+ * @property int $customer_id
  *
  * @property \App\Model\Entity\EmpDataBiography $empdatabiography
  * @property \App\Model\Entity\TimeType $time_type

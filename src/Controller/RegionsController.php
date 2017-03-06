@@ -24,7 +24,7 @@ class RegionsController extends AppController
 		
 		$contains=['Customers'];
 									  
-		$usrfilter="";						  
+		$usrfilter="Regions.customer_id ='".$this->loggedinuser['customer_id'] . "'";				  
 		$output =$this->Datatable->getView($fields,$contains,$usrfilter);
 		echo json_encode($output);			
     }
@@ -57,11 +57,12 @@ class RegionsController extends AppController
         $region = $this->Regions->get($id, [
             'contain' => []
         ]);
-		if($regions['customer_id']==$this->loggedinuser['customer_id']){
+		if($region['customer_id']==$this->loggedinuser['customer_id']){
  			$this->set('region', $region);
         	$this->set('_serialize', ['region']);
  		}else{
-		   $this->redirect(['action' => 'logout','controller'=>'users']);
+		   $this->Flash->error(__('You are not Authorized.'));
+			return $this->redirect(['action' => 'index']);
         }   
     }
 
@@ -75,6 +76,7 @@ class RegionsController extends AppController
         $region = $this->Regions->newEntity();
         if ($this->request->is('post')) {
             $region = $this->Regions->patchEntity($region, $this->request->data);
+			$region['customer_id']=$this->loggedinuser['customer_id'];
             if ($this->Regions->save($region)) {
                 $this->Flash->success(__('The region has been saved.'));
 
@@ -99,6 +101,13 @@ class RegionsController extends AppController
         $region = $this->Regions->get($id, [
             'contain' => []
         ]);
+		
+		if($region['customer_id'] != $this->loggedinuser['customer_id'])
+		{
+			 $this->Flash->error(__('You are not Authorized.'));
+			 return $this->redirect(['action' => 'index']);
+		}
+
         if ($this->request->is(['patch', 'post', 'put'])) {
             $region = $this->Regions->patchEntity($region, $this->request->data);
             if ($this->Regions->save($region)) {
@@ -124,12 +133,18 @@ class RegionsController extends AppController
     {
         $this->request->allowMethod(['post', 'delete']);
         $region = $this->Regions->get($id);
-        if ($this->Regions->delete($region)) {
-            $this->Flash->success(__('The region has been deleted.'));
-        } else {
-            $this->Flash->error(__('The region could not be deleted. Please, try again.'));
-        }
-
+        if($region['customer_id'] == $this->loggedinuser['customer_id']) 
+		{
+        	if ($this->Regions->delete($region)) {
+            	$this->Flash->success(__('The region has been deleted.'));
+        	} else {
+            	$this->Flash->error(__('The region could not be deleted. Please, try again.'));
+        	}
+		}
+	    else
+	    {
+	   	    $this->Flash->error(__('You are not authorized'));
+	    }
         return $this->redirect(['action' => 'index']);
     }
 }
