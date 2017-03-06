@@ -11,10 +11,12 @@ use Cake\Datasource\ConnectionManager;
  * Employees Model
  *
  * @property \Cake\ORM\Association\BelongsTo $Customers
+ * @property \Cake\ORM\Association\HasMany $Addresses
  * @property \Cake\ORM\Association\HasMany $ContactInfos
  * @property \Cake\ORM\Association\HasMany $Empdatabiographies
  * @property \Cake\ORM\Association\HasMany $Empdatapersonals
  * @property \Cake\ORM\Association\HasMany $Employmentinfos
+ * @property \Cake\ORM\Association\HasMany $Identities
  * @property \Cake\ORM\Association\HasMany $Users
  *
  * @method \App\Model\Entity\Employee get($primaryKey, $options = [])
@@ -27,7 +29,6 @@ use Cake\Datasource\ConnectionManager;
  */
 class EmployeesTable extends Table
 {
-
 	public function getExcludedPositions()
 	{
 		$conn = ConnectionManager::get('default');
@@ -57,6 +58,9 @@ class EmployeesTable extends Table
         $this->belongsTo('Customers', [
             'foreignKey' => 'customer_id'
         ]);
+        $this->hasOne('Addresses', [
+            'foreignKey' => 'employee_id'
+        ]);
         $this->hasOne('ContactInfos', [
             'foreignKey' => 'employee_id'
         ]);
@@ -67,6 +71,9 @@ class EmployeesTable extends Table
             'foreignKey' => 'employee_id'
         ]);
         $this->hasOne('Employmentinfos', [
+            'foreignKey' => 'employee_id'
+        ]);
+        $this->hasOne('Identities', [
             'foreignKey' => 'employee_id'
         ]);
         $this->hasOne('Users', [

@@ -34,7 +34,7 @@ if (file_exists($file)) {
 	<li><a href="<?php echo $this -> Url -> build('/JobInfos'); ?>"><i class="fa fa-briefcase "></i><span> Job</span></a></li>
 	
 	 <li class="treeview">
-    <a href="#"> <i class="fa fa-calendar-times-o"></i> <span>Leave</span> <i class="fa fa-angle-left pull-right"></i>  </a>
+    <a href="#"> <i class="fa fa-calendar-times-o"></i> <span>Leave Type</span> <i class="fa fa-angle-left pull-right"></i>  </a>
     <ul class="treeview-menu">
     	<li><a href="<?php echo $this -> Url -> build('/TimeTypes'); ?>"><i class="fa fa-circle-o"></i> Leave Type</a></li>
 		<li><a href="<?php echo $this -> Url -> build('/TimeAccountTypes'); ?>"><i class="fa fa-circle-o"></i> Time Account Type</a></li>
@@ -96,7 +96,7 @@ if (file_exists($file)) {
      	</li>
     </ul>
     </li>
-	<li><a href="<?php echo $this -> Url -> build('/EmployeeAbsencerecords'); ?>"><i class="fa fa-calendar "></i> Leaves</a></li>
+	<li><a href="<?php echo $this -> Url -> build('/EmployeeAbsencerecords'); ?>"><i class="fa fa-calendar "></i> Leave Requests</a></li>
     <li><a href="<?php echo $this -> Url -> build('/Positions/orgchart'); ?>"><i class="fa fa-sitemap"></i><span> Organizational Chart </span></a></li>
 
     <?php
@@ -141,7 +141,7 @@ if (file_exists($file)) {
 	<li><a href="<?php echo $this -> Url -> build('/Dependents'); ?>"><i class="fa fa-users"></i><span> Dependents </span></a></li>
     <li><a href="<?php echo $this -> Url -> build('/Notes'); ?>"><i class="fa fa-file-text-o"></i><span> Notes </span></a></li>
     <li><a href="<?php echo $this -> Url -> build('/Positions/orgchart'); ?>"><i class="fa fa-sitemap"></i><span> Organizational Chart </span></a></li>
-    <li><a href="<?php echo $this -> Url -> build('/EmployeeAbsencerecords'); ?>"><i class="fa fa-calendar "></i> Leaves</a></li>
+    <li><a href="<?php echo $this -> Url -> build('/EmployeeAbsencerecords'); ?>"><i class="fa fa-calendar "></i> Leave Requests</a></li>
 
    
     <?php

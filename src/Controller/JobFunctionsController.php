@@ -59,7 +59,7 @@ var $components = array('Datatable');
         $jobFunction = $this->JobFunctions->get($id, [
             'contain' => ['Customers']
         ]);
-		if($dependent['customer_id']==$this->loggedinuser['customer_id'])
+		if($jobFunction['customer_id']==$this->loggedinuser['customer_id'])
 		{
        	    $this->set('jobFunction', $jobFunction);
         	$this->set('_serialize', ['jobFunction']);
