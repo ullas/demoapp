@@ -23,7 +23,7 @@ var $components = array('Datatable');
 		}
 		$contains=['Customers'];
 									  
-		$usrfilter="";						  
+		$usrfilter="JobFunctions.customer_id ='".$this->loggedinuser['customer_id'] . "'";					  
 		$output =$this->Datatable->getView($fields,$contains,$usrfilter);
 		echo json_encode($output);			
     }
@@ -59,9 +59,14 @@ var $components = array('Datatable');
         $jobFunction = $this->JobFunctions->get($id, [
             'contain' => ['Customers']
         ]);
-
-        $this->set('jobFunction', $jobFunction);
-        $this->set('_serialize', ['jobFunction']);
+		if($dependent['customer_id']==$this->loggedinuser['customer_id'])
+		{
+       	    $this->set('jobFunction', $jobFunction);
+        	$this->set('_serialize', ['jobFunction']);
+        }else{
+			$this->Flash->error(__('You are not Authorized.'));
+			return $this->redirect(['action' => 'index']);
+        }  
     }
 
     /**
@@ -74,6 +79,7 @@ var $components = array('Datatable');
         $jobFunction = $this->JobFunctions->newEntity();
         if ($this->request->is('post')) {
             $jobFunction = $this->JobFunctions->patchEntity($jobFunction, $this->request->data);
+			$jobFunction['customer_id']=$this->loggedinuser['customer_id'];
             if ($this->JobFunctions->save($jobFunction)) {
                 $this->Flash->success(__('The job function has been saved.'));
 
@@ -99,6 +105,13 @@ var $components = array('Datatable');
         $jobFunction = $this->JobFunctions->get($id, [
             'contain' => []
         ]);
+		
+		if($jobFunction['customer_id'] != $this->loggedinuser['customer_id'])
+		{
+			 $this->Flash->error(__('You are not Authorized.'));
+			 return $this->redirect(['action' => 'index']);
+		}
+		
         if ($this->request->is(['patch', 'post', 'put'])) {
             $jobFunction = $this->JobFunctions->patchEntity($jobFunction, $this->request->data);
             if ($this->JobFunctions->save($jobFunction)) {
@@ -125,12 +138,18 @@ var $components = array('Datatable');
     {
         $this->request->allowMethod(['post', 'delete']);
         $jobFunction = $this->JobFunctions->get($id);
-        if ($this->JobFunctions->delete($jobFunction)) {
-            $this->Flash->success(__('The job function has been deleted.'));
-        } else {
-            $this->Flash->error(__('The job function could not be deleted. Please, try again.'));
-        }
-
+        if($jobFunction['customer_id'] == $this->loggedinuser['customer_id']) 
+		{
+        	if ($this->JobFunctions->delete($jobFunction)) {
+            	$this->Flash->success(__('The job function has been deleted.'));
+        	} else {
+            	$this->Flash->error(__('The job function could not be deleted. Please, try again.'));
+        	}
+		}
+	    else
+	    {
+	   	    $this->Flash->error(__('You are not authorized'));
+	    }
         return $this->redirect(['action' => 'index']);
     }
 }

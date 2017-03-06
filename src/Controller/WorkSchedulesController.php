@@ -23,7 +23,7 @@ var $components = array('Datatable');
 		}
 		
 		$contains=['Customers'];
-		$usrfilter="";						  
+		$usrfilter="WorkSchedules.customer_id ='".$this->loggedinuser['customer_id'] . "'";							  
 		$output =$this->Datatable->getView($fields,$contains,$usrfilter);							  
 		echo json_encode($output);			
     }
@@ -60,8 +60,14 @@ var $components = array('Datatable');
             'contain' => ['Customers']
         ]);
 
-        $this->set('workSchedule', $workSchedule);
-        $this->set('_serialize', ['workSchedule']);
+		if($workSchedule['customer_id']==$this->loggedinuser['customer_id'])
+		{
+       	    $this->set('workSchedule', $workSchedule);
+        	$this->set('_serialize', ['workSchedule']);
+        }else{
+			$this->Flash->error(__('You are not Authorized.'));
+			return $this->redirect(['action' => 'index']);
+        }
     }
 
     /**
@@ -74,6 +80,8 @@ var $components = array('Datatable');
         $workSchedule = $this->WorkSchedules->newEntity();
         if ($this->request->is('post')) {
             $workSchedule = $this->WorkSchedules->patchEntity($workSchedule, $this->request->data);
+			$workSchedule['customer_id']=$this->loggedinuser['customer_id'];
+			$workSchedule['emp_data_biographies_id']=$this->request->session()->read('sessionuser')['empdatabiographyid'];
             if ($this->WorkSchedules->save($workSchedule)) {
                 $this->Flash->success(__('The work schedule has been saved.'));
 
@@ -99,6 +107,13 @@ var $components = array('Datatable');
         $workSchedule = $this->WorkSchedules->get($id, [
             'contain' => []
         ]);
+		
+		if($workSchedule['customer_id'] != $this->loggedinuser['customer_id'])
+		{
+			 $this->Flash->error(__('You are not Authorized.'));
+			 return $this->redirect(['action' => 'index']);
+		}
+		
         if ($this->request->is(['patch', 'post', 'put'])) {
             $workSchedule = $this->WorkSchedules->patchEntity($workSchedule, $this->request->data);
             if ($this->WorkSchedules->save($workSchedule)) {
@@ -125,11 +140,18 @@ var $components = array('Datatable');
     {
         $this->request->allowMethod(['post', 'delete']);
         $workSchedule = $this->WorkSchedules->get($id);
-        if ($this->WorkSchedules->delete($workSchedule)) {
-            $this->Flash->success(__('The work schedule has been deleted.'));
-        } else {
-            $this->Flash->error(__('The work schedule could not be deleted. Please, try again.'));
-        }
+        if($workSchedule['customer_id'] == $this->loggedinuser['customer_id']) 
+		{
+        	if ($this->WorkSchedules->delete($workSchedule)) {
+            	$this->Flash->success(__('The work schedule has been deleted.'));
+        	} else {
+            	$this->Flash->error(__('The work schedule could not be deleted. Please, try again.'));
+        	}
+		}
+	    else
+	    {
+	   	    $this->Flash->error(__('You are not authorized'));
+	    }
 
         return $this->redirect(['action' => 'index']);
     }

@@ -28,7 +28,7 @@ class JobInfosController extends AppController
 		}
 		$contains=['Users', 'Customers', 'Jobs', 'Positions'];
 									  
-		$usrfilter="";						  
+		$usrfilter="JobInfos.customer_id ='".$this->loggedinuser['customer_id'] . "'";							  
 		$output =$this->Datatable->getView($fields,$contains,$usrfilter);
 		echo json_encode($output);			
     }
@@ -62,9 +62,14 @@ class JobInfosController extends AppController
 
 		$positions = $this->JobInfos->Positions->find('list', ['limit' => 200]);
         $this->set(compact('positions',$positions));
-		
-        $this->set('jobInfo', $jobInfo);
-        $this->set('_serialize', ['jobInfo']);
+		if($dependent['customer_id']==$this->loggedinuser['customer_id'])
+		{
+       	    $this->set('jobInfo', $jobInfo);
+        	$this->set('_serialize', ['jobInfo']);
+        }else{
+			$this->Flash->error(__('You are not Authorized.'));
+			return $this->redirect(['action' => 'index']);
+       }  
     }
 
     /**
@@ -77,6 +82,7 @@ class JobInfosController extends AppController
         $jobInfo = $this->JobInfos->newEntity();
         if ($this->request->is('post')) {
             $jobInfo = $this->JobInfos->patchEntity($jobInfo, $this->request->data);
+			$jobInfo['customer_id']=$this->loggedinuser['customer_id'];
             if ($this->JobInfos->save($jobInfo)) {
                 $this->Flash->success(__('The job info has been saved.'));
 
@@ -85,17 +91,17 @@ class JobInfosController extends AppController
                 $this->Flash->error(__('The job info could not be saved. Please, try again.'));
             }
         }
-        $users = $this->JobInfos->Users->find('list', ['limit' => 200]);
+        $users = $this->JobInfos->Users->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         $customers = $this->JobInfos->Customers->find('list', ['limit' => 200]);
-        $jobs = $this->JobInfos->Jobs->find('list', ['limit' => 200]);
-        $positions = $this->JobInfos->Positions->find('list', ['limit' => 200]);
-        $businessUnits = $this->JobInfos->BusinessUnits->find('list', ['limit' => 200]);
-        $divisions = $this->JobInfos->Divisions->find('list', ['limit' => 200]);
-        $costCentres = $this->JobInfos->CostCentres->find('list', ['limit' => 200]);
-        $payGrades = $this->JobInfos->PayGrades->find('list', ['limit' => 200]);
-        $locations = $this->JobInfos->Locations->find('list', ['limit' => 200]);
-        $departments = $this->JobInfos->Departments->find('list', ['limit' => 200]);
-        $legalEntities = $this->JobInfos->LegalEntities->find('list', ['limit' => 200]);
+        $jobs = $this->JobInfos->Jobs->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        $positions = $this->JobInfos->Positions->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        $businessUnits = $this->JobInfos->BusinessUnits->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        $divisions = $this->JobInfos->Divisions->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        $costCentres = $this->JobInfos->CostCentres->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        $payGrades = $this->JobInfos->PayGrades->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        $locations = $this->JobInfos->Locations->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        $departments = $this->JobInfos->Departments->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        $legalEntities = $this->JobInfos->LegalEntities->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         $this->set(compact('jobInfo', 'users', 'customers', 'jobs', 'positions', 'businessUnits', 'divisions', 'costCentres', 'payGrades', 'locations', 'departments', 'legalEntities'));
         $this->set('_serialize', ['jobInfo']);
     }
@@ -112,6 +118,13 @@ class JobInfosController extends AppController
         $jobInfo = $this->JobInfos->get($id, [
             'contain' => []
         ]);
+		
+		if($jobInfo['customer_id'] != $this->loggedinuser['customer_id'])
+		{
+			 $this->Flash->error(__('You are not Authorized.'));
+			 return $this->redirect(['action' => 'index']);
+		}
+		
         if ($this->request->is(['patch', 'post', 'put'])) {
             $jobInfo = $this->JobInfos->patchEntity($jobInfo, $this->request->data);
             if ($this->JobInfos->save($jobInfo)) {
@@ -122,17 +135,17 @@ class JobInfosController extends AppController
                 $this->Flash->error(__('The job info could not be saved. Please, try again.'));
             }
         }
-        $users = $this->JobInfos->Users->find('list', ['limit' => 200]);
+        $users = $this->JobInfos->Users->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         $customers = $this->JobInfos->Customers->find('list', ['limit' => 200]);
-        $jobs = $this->JobInfos->Jobs->find('list', ['limit' => 200]);
-        $positions = $this->JobInfos->Positions->find('list', ['limit' => 200]);
-        $businessUnits = $this->JobInfos->BusinessUnits->find('list', ['limit' => 200]);
-        $divisions = $this->JobInfos->Divisions->find('list', ['limit' => 200]);
-        $costCentres = $this->JobInfos->CostCentres->find('list', ['limit' => 200]);
-        $payGrades = $this->JobInfos->PayGrades->find('list', ['limit' => 200]);
-        $locations = $this->JobInfos->Locations->find('list', ['limit' => 200]);
-        $departments = $this->JobInfos->Departments->find('list', ['limit' => 200]);
-        $legalEntities = $this->JobInfos->LegalEntities->find('list', ['limit' => 200]);
+        $jobs = $this->JobInfos->Jobs->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        $positions = $this->JobInfos->Positions->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        $businessUnits = $this->JobInfos->BusinessUnits->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        $divisions = $this->JobInfos->Divisions->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        $costCentres = $this->JobInfos->CostCentres->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        $payGrades = $this->JobInfos->PayGrades->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        $locations = $this->JobInfos->Locations->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        $departments = $this->JobInfos->Departments->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        $legalEntities = $this->JobInfos->LegalEntities->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         $this->set(compact('jobInfo', 'users', 'customers', 'jobs', 'positions', 'businessUnits', 'divisions', 'costCentres', 'payGrades', 'locations', 'departments', 'legalEntities'));
         $this->set('_serialize', ['jobInfo']);
     }
@@ -148,12 +161,18 @@ class JobInfosController extends AppController
     {
         $this->request->allowMethod(['post', 'delete']);
         $jobInfo = $this->JobInfos->get($id);
-        if ($this->JobInfos->delete($jobInfo)) {
-            $this->Flash->success(__('The job info has been deleted.'));
-        } else {
-            $this->Flash->error(__('The job info could not be deleted. Please, try again.'));
-        }
-
-        return $this->redirect(['action' => 'index']);
+        if($jobInfo['customer_id'] == $this->loggedinuser['customer_id']) 
+		{
+        	if ($this->JobInfos->delete($jobInfo)) {
+            	$this->Flash->success(__('The job info has been deleted.'));
+        	} else {
+            	$this->Flash->error(__('The job info could not be deleted. Please, try again.'));
+        	}
+		}
+	    else
+	    {
+	   	    $this->Flash->error(__('You are not authorized'));
+	    }
+	    return $this->redirect(['action' => 'index']);
     }
 }

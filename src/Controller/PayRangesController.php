@@ -28,7 +28,7 @@ var $components = array('Datatable');
 		}
 		$contains=['LegalEntities', 'PayGroups', 'Customers'];
 									  
-		$usrfilter="";						  
+		$usrfilter="PayRanges.customer_id ='".$this->loggedinuser['customer_id'] . "'";		  
 		$output =$this->Datatable->getView($fields,$contains,$usrfilter);
 		echo json_encode($output);			
     }
@@ -60,16 +60,17 @@ var $components = array('Datatable');
             'contain' => ['LegalEntities', 'PayGroups', 'Customers']
         ]);
 		
-		// if($payRange['customer_id']==$this->loggedinuser['customer_id']){
- 			$legalEntities = $this->PayRanges->LegalEntities->find('list', ['limit' => 200])->where("customer_id=".$this->loggedinuser['customer_id']);
-        	$payGroups = $this->PayRanges->PayGroups->find('list', ['limit' => 200])->where("customer_id=".$this->loggedinuser['customer_id']);
+		if($payRange['customer_id']==$this->loggedinuser['customer_id']){
+ 			$legalEntities = $this->PayRanges->LegalEntities->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        	$payGroups = $this->PayRanges->PayGroups->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         	$customers = $this->PayRanges->Customers->find('list', ['limit' => 200]);
         	$this->set(compact('payRange', 'legalEntities', 'payGroups', 'customers'));
         	$this->set('payRange', $payRange);
         	$this->set('_serialize', ['payRange']);
- 		// }else{
-		   // $this->redirect(['action' => 'logout','controller'=>'users']);
-        // } 
+ 		}else{
+		    $this->Flash->error(__('You are not Authorized.'));
+			return $this->redirect(['action' => 'index']);
+        } 
     }
 
     /**
@@ -82,6 +83,7 @@ var $components = array('Datatable');
         $payRange = $this->PayRanges->newEntity();
         if ($this->request->is('post')) {
             $payRange = $this->PayRanges->patchEntity($payRange, $this->request->data);
+			$payRange['customer_id']=$this->loggedinuser['customer_id'];
             if ($this->PayRanges->save($payRange)) {
                 $this->Flash->success(__('The pay range has been saved.'));
 
@@ -90,8 +92,8 @@ var $components = array('Datatable');
                 $this->Flash->error(__('The pay range could not be saved. Please, try again.'));
             }
         }
-        $legalEntities = $this->PayRanges->LegalEntities->find('list', ['limit' => 200])->where("customer_id=".$this->loggedinuser['customer_id']);
-        $payGroups = $this->PayRanges->PayGroups->find('list', ['limit' => 200])->where("customer_id=".$this->loggedinuser['customer_id']);
+        $legalEntities = $this->PayRanges->LegalEntities->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        $payGroups = $this->PayRanges->PayGroups->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         $customers = $this->PayRanges->Customers->find('list', ['limit' => 200]);
         $this->set(compact('payRange', 'legalEntities', 'payGroups', 'customers'));
         $this->set('_serialize', ['payRange']);
@@ -109,6 +111,13 @@ var $components = array('Datatable');
         $payRange = $this->PayRanges->get($id, [
             'contain' => []
         ]);
+		
+		if($payRange['customer_id'] != $this->loggedinuser['customer_id'])
+		{
+			 $this->Flash->error(__('You are not Authorized.'));
+			 return $this->redirect(['action' => 'index']);
+		}
+		
         if ($this->request->is(['patch', 'post', 'put'])) {
             $payRange = $this->PayRanges->patchEntity($payRange, $this->request->data);
             if ($this->PayRanges->save($payRange)) {
@@ -119,8 +128,8 @@ var $components = array('Datatable');
                 $this->Flash->error(__('The pay range could not be saved. Please, try again.'));
             }
         }
-        $legalEntities = $this->PayRanges->LegalEntities->find('list', ['limit' => 200])->where("customer_id=".$this->loggedinuser['customer_id']);
-        $payGroups = $this->PayRanges->PayGroups->find('list', ['limit' => 200])->where("customer_id=".$this->loggedinuser['customer_id']);
+        $legalEntities = $this->PayRanges->LegalEntities->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        $payGroups = $this->PayRanges->PayGroups->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         $customers = $this->PayRanges->Customers->find('list', ['limit' => 200]);
         $this->set(compact('payRange', 'legalEntities', 'payGroups', 'customers'));
         $this->set('_serialize', ['payRange']);
@@ -137,12 +146,18 @@ var $components = array('Datatable');
     {
         $this->request->allowMethod(['post', 'delete']);
         $payRange = $this->PayRanges->get($id);
-        if ($this->PayRanges->delete($payRange)) {
-            $this->Flash->success(__('The pay range has been deleted.'));
-        } else {
-            $this->Flash->error(__('The pay range could not be deleted. Please, try again.'));
-        }
-
+        if($payRange['customer_id'] == $this->loggedinuser['customer_id']) 
+		{
+        	if ($this->PayRanges->delete($payRange)) {
+            	$this->Flash->success(__('The pay range has been deleted.'));
+        	} else {
+            	$this->Flash->error(__('The pay range could not be deleted. Please, try again.'));
+        	}
+		}
+	    else
+	    {
+	   	    $this->Flash->error(__('You are not authorized'));
+	    }
         return $this->redirect(['action' => 'index']);
     }
 }

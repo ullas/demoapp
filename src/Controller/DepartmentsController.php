@@ -24,7 +24,7 @@ var $components = array('Datatable');
 		
 		$contains=['CostCentres','Customers'];
 									  
-		$usrfilter="";						  
+		$usrfilter="Departments.customer_id ='".$this->loggedinuser['customer_id'] . "'";		  
 		$output =$this->Datatable->getView($fields,$contains,$usrfilter);
 		echo json_encode($output);			
     }
@@ -67,7 +67,8 @@ var $components = array('Datatable');
         	$this->set('department', $department);
         	$this->set('_serialize', ['department']);
        }else{
-		   $this->redirect(['action' => 'logout','controller'=>'users']);
+		   $this->Flash->error(__('You are not Authorized.'));
+			return $this->redirect(['action' => 'index']);
        }
     }
 
@@ -81,6 +82,7 @@ var $components = array('Datatable');
         $department = $this->Departments->newEntity();
         if ($this->request->is('post')) {
             $department = $this->Departments->patchEntity($department, $this->request->data);
+			$department['customer_id']=$this->loggedinuser['customer_id'];
             if ($this->Departments->save($department)) {
                 $this->Flash->success(__('The department has been saved.'));
 
@@ -89,7 +91,7 @@ var $components = array('Datatable');
                 $this->Flash->error(__('The department could not be saved. Please, try again.'));
             }
         }
-        $costCentres = $this->Departments->CostCentres->find('list', ['limit' => 200])->where("customer_id=".$this->loggedinuser['customer_id']);
+        $costCentres = $this->Departments->CostCentres->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         $customers = $this->Departments->Customers->find('list', ['limit' => 200]);
         $this->set(compact('department', 'costCentres', 'customers'));
         $this->set('_serialize', ['department']);
@@ -107,7 +109,7 @@ var $components = array('Datatable');
                 $this->Flash->error(__('The department could not be saved. Please, try again.'));
             }
         }
-        $costCentres = $this->Departments->CostCentres->find('list', ['limit' => 200])->where("customer_id=".$this->loggedinuser['customer_id']);
+        $costCentres = $this->Departments->CostCentres->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         $customers = $this->Departments->Customers->find('list', ['limit' => 200]);
         $this->set(compact('department', 'costCentres', 'customers'));
         $this->set('_serialize', ['department']);
@@ -124,6 +126,13 @@ var $components = array('Datatable');
         $department = $this->Departments->get($id, [
             'contain' => []
         ]);
+		
+		if($department['customer_id'] != $this->loggedinuser['customer_id'])
+		{
+			 $this->Flash->error(__('You are not Authorized.'));
+			 return $this->redirect(['action' => 'index']);
+		}
+
         if ($this->request->is(['patch', 'post', 'put'])) {
             $department = $this->Departments->patchEntity($department, $this->request->data);
             if ($this->Departments->save($department)) {
@@ -134,7 +143,7 @@ var $components = array('Datatable');
                 $this->Flash->error(__('The department could not be saved. Please, try again.'));
             }
         }
-        $costCentres = $this->Departments->CostCentres->find('list', ['limit' => 200])->where("customer_id=".$this->loggedinuser['customer_id']);
+        $costCentres = $this->Departments->CostCentres->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         $customers = $this->Departments->Customers->find('list', ['limit' => 200]);
         $this->set(compact('department', 'costCentres', 'customers'));
         $this->set('_serialize', ['department']);
@@ -151,11 +160,18 @@ var $components = array('Datatable');
     {
         $this->request->allowMethod(['post', 'delete']);
         $department = $this->Departments->get($id);
-        if ($this->Departments->delete($department)) {
-            $this->Flash->success(__('The department has been deleted.'));
-        } else {
-            $this->Flash->error(__('The department could not be deleted. Please, try again.'));
-        }
+        if($department['customer_id'] == $this->loggedinuser['customer_id']) 
+		{
+        	if ($this->Departments->delete($department)) {
+            	$this->Flash->success(__('The department has been deleted.'));
+        	} else {
+            	$this->Flash->error(__('The department could not be deleted. Please, try again.'));
+        	}
+		}
+	    else
+	    {
+	   	    $this->Flash->error(__('You are not authorized'));
+	    }
 
         return $this->redirect(['action' => 'index']);
     }

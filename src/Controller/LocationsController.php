@@ -16,23 +16,7 @@ use App\Controller\AppController;
 class LocationsController extends AppController
 {
 	var $components = array('Datatable');
-	
-	
-	public function initialize()
-	{
-    	parent::initialize();
 
-    	// Time::setDefaultLocale('fr_FR'); // For any mutable DateTime
-		// FrozenTime::setDefaultLocale('fr_FR'); // For any immutable DateTime
-		// Date::setDefaultLocale('fr_FR'); // For any mutable Date
-		// FrozenDate::setDefaultLocale('fr_FR'); // For any immutable Date
-
-		// Time::setToStringFormat("dd/MM/YYYY"); // For any mutable DateTime
-		// FrozenTime::setToStringFormat("dd/MM/YYYY"); // For any immutable DateTime
-		// Date::setToStringFormat("dd/MM/YYYY"); // For any mutable Date
-		// FrozenDate::setToStringFormat("dd/MM/YYYY"); // For any immutable Date
-	}
-	
 	public function ajaxData() {
 		$this->autoRender= False;
 		  
@@ -45,7 +29,7 @@ class LocationsController extends AppController
 		
 		$contains=['Customers'];
 									  
-		$usrfilter="";						  
+		$usrfilter="Locations.customer_id ='".$this->loggedinuser['customer_id'] . "'";						  
 		$output =$this->Datatable->getView($fields,$contains,$usrfilter);
 		echo json_encode($output);			
     }
@@ -77,11 +61,12 @@ class LocationsController extends AppController
         $location = $this->Locations->get($id, [
             'contain' => ['Customers', 'LegalEntities']
         ]);
-		if($regions['customer_id']==$this->loggedinuser['customer_id']){
+		if($location['customer_id']==$this->loggedinuser['customer_id']){
  			$this->set('location', $location);
         	$this->set('_serialize', ['location']);
  		}else{
-		   $this->redirect(['action' => 'logout','controller'=>'users']);
+		    $this->Flash->error(__('You are not Authorized.'));
+			return $this->redirect(['action' => 'index']);
         } 
     }
 
@@ -95,6 +80,7 @@ class LocationsController extends AppController
         $location = $this->Locations->newEntity();
         if ($this->request->is('post')) {
             $location = $this->Locations->patchEntity($location, $this->request->data);
+			$location['customer_id']=$this->loggedinuser['customer_id'];
             if ($this->Locations->save($location)) {
                 $this->Flash->success(__('The location has been saved.'));
 
@@ -120,6 +106,13 @@ class LocationsController extends AppController
         $location = $this->Locations->get($id, [
             'contain' => []
         ]);
+		
+		if($location['customer_id'] != $this->loggedinuser['customer_id'])
+		{
+			 $this->Flash->error(__('You are not Authorized.'));
+			 return $this->redirect(['action' => 'index']);
+		}
+		
         if ($this->request->is(['patch', 'post', 'put'])) {   
             $location = $this->Locations->patchEntity($location, $this->request->data);
 			
@@ -147,12 +140,18 @@ class LocationsController extends AppController
     {
         $this->request->allowMethod(['post', 'delete']);
         $location = $this->Locations->get($id);
-        if ($this->Locations->delete($location)) {
-            $this->Flash->success(__('The location has been deleted.'));
-        } else {
-            $this->Flash->error(__('The location could not be deleted. Please, try again.'));
-        }
-
+        if($location['customer_id'] == $this->loggedinuser['customer_id']) 
+		{
+        	if ($this->Locations->delete($location)) {
+            	$this->Flash->success(__('The location has been deleted.'));
+        	} else {
+            	$this->Flash->error(__('The location could not be deleted. Please, try again.'));
+        	}
+		}
+	    else
+	    {
+	   	    $this->Flash->error(__('You are not authorized'));
+	    }
         return $this->redirect(['action' => 'index']);
     }
 }

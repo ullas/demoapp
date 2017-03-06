@@ -10,7 +10,7 @@ use App\Controller\AppController;
  */
 class CostCentresController extends AppController
 {
-var $components = array('Datatable');
+	var $components = array('Datatable');
 	
 	public function ajaxData() {
 		$this->autoRender= False;
@@ -24,7 +24,7 @@ var $components = array('Datatable');
 		
 		$contains=['Customers'];
 									  
-		$usrfilter="";						  
+		$usrfilter="CostCentres.customer_id ='".$this->loggedinuser['customer_id'] . "'";					  
 		$output =$this->Datatable->getView($fields,$contains,$usrfilter);
 		echo json_encode($output);		
     }
@@ -65,7 +65,8 @@ var $components = array('Datatable');
        	    $this->set('costCentre', $costCentre);
        		$this->set('_serialize', ['costCentre']);
        }else{
-		   $this->redirect(['action' => 'logout','controller'=>'users']);
+		   $this->Flash->error(__('You are not Authorized.'));
+			return $this->redirect(['action' => 'index']);
        }
 	   
     }
@@ -80,6 +81,7 @@ var $components = array('Datatable');
         $costCentre = $this->CostCentres->newEntity();
         if ($this->request->is('post')) {
             $costCentre = $this->CostCentres->patchEntity($costCentre, $this->request->data);
+			$costCentre['customer_id']=$this->loggedinuser['customer_id'];
             if ($this->CostCentres->save($costCentre)) {
                 $this->Flash->success(__('The cost centre has been saved.'));
 
@@ -122,6 +124,13 @@ var $components = array('Datatable');
         $costCentre = $this->CostCentres->get($id, [
             'contain' => []
         ]);
+		
+		if($costCentre['customer_id'] != $this->loggedinuser['customer_id'])
+		{
+			 $this->Flash->error(__('You are not Authorized.'));
+			 return $this->redirect(['action' => 'index']);
+		}
+		
         if ($this->request->is(['patch', 'post', 'put'])) {
             $costCentre = $this->CostCentres->patchEntity($costCentre, $this->request->data);
             if ($this->CostCentres->save($costCentre)) {
@@ -148,11 +157,18 @@ var $components = array('Datatable');
     {
         $this->request->allowMethod(['post', 'delete']);
         $costCentre = $this->CostCentres->get($id);
-        if ($this->CostCentres->delete($costCentre)) {
-            $this->Flash->success(__('The cost centre has been deleted.'));
-        } else {
-            $this->Flash->error(__('The cost centre could not be deleted. Please, try again.'));
-        }
+        if($costCentre['customer_id'] == $this->loggedinuser['customer_id']) 
+		{
+        	if ($this->CostCentres->delete($costCentre)) {
+            	$this->Flash->success(__('The cost centre has been deleted.'));
+        	} else {
+            	$this->Flash->error(__('The cost centre could not be deleted. Please, try again.'));
+        	}
+		}
+	    else
+	    {
+	   	    $this->Flash->error(__('You are not authorized'));
+	    }
 
         return $this->redirect(['action' => 'index']);
     }

@@ -28,7 +28,7 @@ var $components = array('Datatable');
 		}
 		$contains=['PayrollArea'];
 									  
-		$usrfilter="";						  
+		$usrfilter="PayrollRecord.customer_id ='".$this->loggedinuser['customer_id'] . "'";		  
 		$output =$this->Datatable->getView($fields,$contains,$usrfilter);
 		echo json_encode($output);			
     }
@@ -61,8 +61,14 @@ var $components = array('Datatable');
         ]);
 
         $payrollArea = $this->PayrollRecord->PayrollArea->find('list', ['limit' => 200]);
-        $this->set(compact('payrollRecord', 'payrollArea'));
-        $this->set('_serialize', ['payrollRecord']);
+        if($payrollRecord['customer_id']==$this->loggedinuser['customer_id'])
+		{
+       	    $this->set(compact('payrollRecord', 'payrollArea'));
+        	$this->set('_serialize', ['payrollRecord']);
+        }else{
+			$this->Flash->error(__('You are not Authorized.'));
+			return $this->redirect(['action' => 'index']);
+       }   
     }
 
     /**
@@ -75,6 +81,7 @@ var $components = array('Datatable');
         $payrollRecord = $this->PayrollRecord->newEntity();
         if ($this->request->is('post')) {
             $payrollRecord = $this->PayrollRecord->patchEntity($payrollRecord, $this->request->data);
+			$payrollRecord['customer_id']=$this->loggedinuser['customer_id'];
             if ($this->PayrollRecord->save($payrollRecord)) {
                 $this->Flash->success(__('The payroll record has been saved.'));
 
@@ -83,7 +90,7 @@ var $components = array('Datatable');
                 $this->Flash->error(__('The payroll record could not be saved. Please, try again.'));
             }
         }
-        $payrollArea = $this->PayrollRecord->PayrollArea->find('list', ['limit' => 200]);
+        $payrollArea = $this->PayrollRecord->PayrollArea->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         $this->set(compact('payrollRecord', 'payrollArea'));
         $this->set('_serialize', ['payrollRecord']);
     }
@@ -100,6 +107,13 @@ var $components = array('Datatable');
         $payrollRecord = $this->PayrollRecord->get($id, [
             'contain' => []
         ]);
+		
+		if($payrollRecord['customer_id'] != $this->loggedinuser['customer_id'])
+		{
+			 $this->Flash->error(__('You are not Authorized.'));
+			 return $this->redirect(['action' => 'index']);
+		}
+		
         if ($this->request->is(['patch', 'post', 'put'])) {
             $payrollRecord = $this->PayrollRecord->patchEntity($payrollRecord, $this->request->data);
             if ($this->PayrollRecord->save($payrollRecord)) {
@@ -110,7 +124,7 @@ var $components = array('Datatable');
                 $this->Flash->error(__('The payroll record could not be saved. Please, try again.'));
             }
         }
-        $payrollArea = $this->PayrollRecord->PayrollArea->find('list', ['limit' => 200]);
+        $payrollArea = $this->PayrollRecord->PayrollArea->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         $this->set(compact('payrollRecord', 'payrollArea'));
         $this->set('_serialize', ['payrollRecord']);
     }
@@ -126,12 +140,18 @@ var $components = array('Datatable');
     {
         $this->request->allowMethod(['post', 'delete']);
         $payrollRecord = $this->PayrollRecord->get($id);
-        if ($this->PayrollRecord->delete($payrollRecord)) {
-            $this->Flash->success(__('The payroll record has been deleted.'));
-        } else {
-            $this->Flash->error(__('The payroll record could not be deleted. Please, try again.'));
-        }
-
-        return $this->redirect(['action' => 'index']);
+        if($payrollRecord['customer_id'] == $this->loggedinuser['customer_id']) 
+		{
+        	if ($this->PayrollRecord->delete($payrollRecord)) {
+            	$this->Flash->success(__('The payroll record has been deleted.'));
+        	} else {
+            	$this->Flash->error(__('The payroll record could not be deleted. Please, try again.'));
+        	}
+		}
+	    else
+	    {
+	   	    $this->Flash->error(__('You are not authorized'));
+	    }
+	   	return $this->redirect(['action' => 'index']);
     }
 }

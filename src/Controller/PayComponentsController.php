@@ -27,7 +27,7 @@ class PayComponentsController extends AppController
 		}
 		$contains=['Frequencies', 'Customers'];
 									  
-		$usrfilter="";						  
+		$usrfilter="PayComponents.customer_id ='".$this->loggedinuser['customer_id'] . "'";	  
 		$output =$this->Datatable->getView($fields,$contains,$usrfilter);
 		echo json_encode($output);			
     }
@@ -58,14 +58,15 @@ class PayComponentsController extends AppController
             'contain' => ['Frequencies', 'Customers', 'TimeAccountTypes']
         ]);
 		
-		// if($payComponent['customer_id']==$this->loggedinuser['customer_id']){
- 			$frequencies = $this->PayComponents->Frequencies->find('list', ['limit' => 200])->where("customer_id=".$this->loggedinuser['customer_id']);
-			$payComponentGroups = $this->PayComponents->PayComponentGroups->find('list', ['limit' => 200]);
+		if($payComponent['customer_id']==$this->loggedinuser['customer_id']){
+ 			$frequencies = $this->PayComponents->Frequencies->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+			$payComponentGroups = $this->PayComponents->PayComponentGroups->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         	$this->set(compact('payComponent', 'frequencies', 'customers','payComponentGroups'));
         	$this->set('_serialize', ['payComponent']);
- 		// }else{
-		   // $this->redirect(['action' => 'logout','controller'=>'users']);
-        // } 
+ 		}else{
+		   	$this->Flash->error(__('You are not Authorized.'));
+			return $this->redirect(['action' => 'index']);
+        } 
     }
 
     /**
@@ -78,6 +79,7 @@ class PayComponentsController extends AppController
         $payComponent = $this->PayComponents->newEntity();
         if ($this->request->is('post')) {
             $payComponent = $this->PayComponents->patchEntity($payComponent, $this->request->data);
+			$payComponent['customer_id']=$this->loggedinuser['customer_id'];
             if ($this->PayComponents->save($payComponent)) {
                 $this->Flash->success(__('The pay component has been saved.'));
 
@@ -86,9 +88,9 @@ class PayComponentsController extends AppController
                 $this->Flash->error(__('The pay component could not be saved. Please, try again.'));
             }
         }
-        $frequencies = $this->PayComponents->Frequencies->find('list', ['limit' => 200])->where("customer_id=".$this->loggedinuser['customer_id']);
+        $frequencies = $this->PayComponents->Frequencies->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         $customers = $this->PayComponents->Customers->find('list', ['limit' => 200]);
-		$payComponentGroups = $this->PayComponents->PayComponentGroups->find('list', ['limit' => 200]);
+		$payComponentGroups = $this->PayComponents->PayComponentGroups->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         $this->set(compact('payComponent', 'frequencies', 'customers','payComponentGroups'));
         $this->set('_serialize', ['payComponent']);
     }
@@ -105,6 +107,13 @@ class PayComponentsController extends AppController
         $payComponent = $this->PayComponents->get($id, [
             'contain' => []
         ]);
+		
+		if($payComponent['customer_id'] != $this->loggedinuser['customer_id'])
+		{
+			 $this->Flash->error(__('You are not Authorized.'));
+			 return $this->redirect(['action' => 'index']);
+		}
+		
         if ($this->request->is(['patch', 'post', 'put'])) {
             $payComponent = $this->PayComponents->patchEntity($payComponent, $this->request->data);
             if ($this->PayComponents->save($payComponent)) {
@@ -115,9 +124,9 @@ class PayComponentsController extends AppController
                 $this->Flash->error(__('The pay component could not be saved. Please, try again.'));
             }
         }
-        $frequencies = $this->PayComponents->Frequencies->find('list', ['limit' => 200])->where("customer_id=".$this->loggedinuser['customer_id']);
+        $frequencies = $this->PayComponents->Frequencies->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         $customers = $this->PayComponents->Customers->find('list', ['limit' => 200]);
-        $payComponentGroups = $this->PayComponents->PayComponentGroups->find('list', ['limit' => 200]);
+        $payComponentGroups = $this->PayComponents->PayComponentGroups->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         $this->set(compact('payComponent', 'frequencies', 'customers','payComponentGroups'));
         $this->set('_serialize', ['payComponent']);
     }
@@ -133,12 +142,18 @@ class PayComponentsController extends AppController
     {
         $this->request->allowMethod(['post', 'delete']);
         $payComponent = $this->PayComponents->get($id);
-        if ($this->PayComponents->delete($payComponent)) {
-            $this->Flash->success(__('The pay component has been deleted.'));
-        } else {
-            $this->Flash->error(__('The pay component could not be deleted. Please, try again.'));
-        }
-
+        if($payComponent['customer_id'] == $this->loggedinuser['customer_id']) 
+		{
+        	if ($this->PayComponents->delete($payComponent)) {
+            	$this->Flash->success(__('The pay component has been deleted.'));
+        	} else {
+            	$this->Flash->error(__('The pay component could not be deleted. Please, try again.'));
+        	}
+		}
+	    else
+	    {
+	   	    $this->Flash->error(__('You are not authorized'));
+	    }
         return $this->redirect(['action' => 'index']);
     }
 }

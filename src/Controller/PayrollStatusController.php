@@ -28,7 +28,7 @@ var $components = array('Datatable');
 		}
 		$contains=['PayrollArea'];
 									  
-		$usrfilter="";						  
+		$usrfilter="PayrollStatus.customer_id ='".$this->loggedinuser['customer_id'] . "'";	 
 		$output =$this->Datatable->getView($fields,$contains,$usrfilter);
 		echo json_encode($output);			
     }
@@ -61,8 +61,14 @@ var $components = array('Datatable');
         ]);
 
         $payrollArea = $this->PayrollStatus->PayrollArea->find('list', ['limit' => 200]);
-        $this->set(compact('payrollStatus', 'payrollArea'));
+        if($payrollStatus['customer_id']==$this->loggedinuser['customer_id'])
+		{
+       	    $this->set(compact('payrollStatus', 'payrollArea'));
         $this->set('_serialize', ['payrollStatus']);
+        }else{
+			$this->Flash->error(__('You are not Authorized.'));
+			return $this->redirect(['action' => 'index']);
+       }    
     }
 
     /**
@@ -75,6 +81,7 @@ var $components = array('Datatable');
         $payrollStatus = $this->PayrollStatus->newEntity();
         if ($this->request->is('post')) {
             $payrollStatus = $this->PayrollStatus->patchEntity($payrollStatus, $this->request->data);
+			$payrollStatus['customer_id']=$this->loggedinuser['customer_id'];
             if ($this->PayrollStatus->save($payrollStatus)) {
                 $this->Flash->success(__('The payroll status has been saved.'));
 
@@ -83,7 +90,7 @@ var $components = array('Datatable');
                 $this->Flash->error(__('The payroll status could not be saved. Please, try again.'));
             }
         }
-        $payrollArea = $this->PayrollStatus->PayrollArea->find('list', ['limit' => 200]);
+        $payrollArea = $this->PayrollStatus->PayrollArea->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         $this->set(compact('payrollStatus', 'payrollArea'));
         $this->set('_serialize', ['payrollStatus']);
     }
@@ -101,7 +108,11 @@ var $components = array('Datatable');
             'contain' => []
         ]);
 		
-			
+		if($payrollStatus['customer_id'] != $this->loggedinuser['customer_id'])
+		{
+			 $this->Flash->error(__('You are not Authorized.'));
+			 return $this->redirect(['action' => 'index']);
+		}	
 
         if ($this->request->is(['patch', 'post', 'put'])) {
             $payrollStatus = $this->PayrollStatus->patchEntity($payrollStatus, $this->request->data);
@@ -113,7 +124,7 @@ var $components = array('Datatable');
                 $this->Flash->error(__('The payroll status could not be saved. Please, try again.'));
             }
         }
-        $payrollArea = $this->PayrollStatus->PayrollArea->find('list', ['limit' => 200]);
+        $payrollArea = $this->PayrollStatus->PayrollArea->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         $this->set(compact('payrollStatus', 'payrollArea'));
         $this->set('_serialize', ['payrollStatus']);
     }
@@ -129,12 +140,18 @@ var $components = array('Datatable');
     {
         $this->request->allowMethod(['post', 'delete']);
         $payrollStatus = $this->PayrollStatus->get($id);
-        if ($this->PayrollStatus->delete($payrollStatus)) {
-            $this->Flash->success(__('The payroll status has been deleted.'));
-        } else {
-            $this->Flash->error(__('The payroll status could not be deleted. Please, try again.'));
-        }
-
+        if($payrollStatus['customer_id'] == $this->loggedinuser['customer_id']) 
+		{
+        	if ($this->PayrollStatus->delete($payrollStatus)) {
+            	$this->Flash->success(__('The payroll status has been deleted.'));
+        	} else {
+            	$this->Flash->error(__('The payroll status could not be deleted. Please, try again.'));
+        	}
+		}
+	    else
+	    {
+	   	    $this->Flash->error(__('You are not authorized'));
+	    }
         return $this->redirect(['action' => 'index']);
     }
 }

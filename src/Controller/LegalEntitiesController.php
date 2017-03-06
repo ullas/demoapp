@@ -25,7 +25,7 @@ class LegalEntitiesController extends AppController
 		
 		$contains=[];
 									  
-		$usrfilter="";						  
+		$usrfilter="LegalEntities.customer_id ='".$this->loggedinuser['customer_id'] . "'";					  
 		$output =$this->Datatable->getView($fields,$contains,$usrfilter);
 		echo json_encode($output);			
     }
@@ -64,13 +64,14 @@ class LegalEntitiesController extends AppController
 
         if($legalEntity['customer_id']==$this->loggedinuser['customer_id']){
        	    $this->set('legalEntity', $legalEntity);
-			$locations = $this->LegalEntities->Locations->find('list', ['limit' => 200])->where("customer_id=".$this->loggedinuser['customer_id']);
-        	$payGroups = $this->LegalEntities->PayGroups->find('list', ['limit' => 200])->where("customer_id=".$this->loggedinuser['customer_id']);
+			$locations = $this->LegalEntities->Locations->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        	$payGroups = $this->LegalEntities->PayGroups->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         	$customers = $this->LegalEntities->Customers->find('list', ['limit' => 200]);
         	$this->set(compact('legalEntity', 'locations', 'payGroups'));
 		
        }else{
-		   $this->redirect(['action' => 'logout','controller'=>'users']);
+		    $this->Flash->error(__('You are not Authorized.'));
+			return $this->redirect(['action' => 'index']);
        }    
     }
 
@@ -93,8 +94,8 @@ class LegalEntitiesController extends AppController
                 $this->Flash->error(__('The legal entity could not be saved. Please, try again.'));
             }
         }
-        $locations = $this->LegalEntities->Locations->find('list', ['limit' => 200])->where("customer_id=".$this->loggedinuser['customer_id']);
-        $payGroups = $this->LegalEntities->PayGroups->find('list', ['limit' => 200])->where("customer_id=".$this->loggedinuser['customer_id']);
+        $locations = $this->LegalEntities->Locations->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        $payGroups = $this->LegalEntities->PayGroups->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         $customers = $this->LegalEntities->Customers->find('list', ['limit' => 200]);
         $this->set(compact('legalEntity', 'locations', 'payGroups', 'customers'));
         $this->set('_serialize', ['legalEntity']);
@@ -114,8 +115,8 @@ class LegalEntitiesController extends AppController
             }
 
         }
-        $locations = $this->LegalEntities->Locations->find('list', ['limit' => 200])->where("customer_id=".$this->loggedinuser['customer_id']);
-        $payGroups = $this->LegalEntities->PayGroups->find('list', ['limit' => 200])->where("customer_id=".$this->loggedinuser['customer_id']);
+        $locations = $this->LegalEntities->Locations->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        $payGroups = $this->LegalEntities->PayGroups->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         $customers = $this->LegalEntities->Customers->find('list', ['limit' => 200]);
         $this->set(compact('legalEntity', 'locations', 'payGroups', 'customers'));
         $this->set('_serialize', ['legalEntity']);
@@ -133,6 +134,13 @@ class LegalEntitiesController extends AppController
         $legalEntity = $this->LegalEntities->get($id, [
             'contain' => []
         ]);
+		
+		if($legalEntity['customer_id'] != $this->loggedinuser['customer_id'])
+		{
+			 $this->Flash->error(__('You are not Authorized.'));
+			 return $this->redirect(['action' => 'index']);
+		}
+		
         if ($this->request->is(['patch', 'post', 'put'])) {
             $legalEntity = $this->LegalEntities->patchEntity($legalEntity, $this->request->data);
             if ($this->LegalEntities->save($legalEntity)) {
@@ -143,8 +151,8 @@ class LegalEntitiesController extends AppController
                 $this->Flash->error(__('The legal entity could not be saved. Please, try again.'));
             }
         }
-        $locations = $this->LegalEntities->Locations->find('list', ['limit' => 200])->where("customer_id=".$this->loggedinuser['customer_id']);
-        $payGroups = $this->LegalEntities->PayGroups->find('list', ['limit' => 200])->where("customer_id=".$this->loggedinuser['customer_id']);
+        $locations = $this->LegalEntities->Locations->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        $payGroups = $this->LegalEntities->PayGroups->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         $customers = $this->LegalEntities->Customers->find('list', ['limit' => 200]);
         $this->set(compact('legalEntity', 'locations', 'payGroups', 'customers'));
         $this->set('_serialize', ['legalEntity']);
@@ -161,12 +169,18 @@ class LegalEntitiesController extends AppController
     {
         $this->request->allowMethod(['post', 'delete']);
         $legalEntity = $this->LegalEntities->get($id);
-        if ($this->LegalEntities->delete($legalEntity)) {
-            $this->Flash->success(__('The legal entity has been deleted.'));
-        } else {
-            $this->Flash->error(__('The legal entity could not be deleted. Please, try again.'));
-        }
-
+        if($legalEntity['customer_id'] == $this->loggedinuser['customer_id']) 
+		{
+        	if ($this->LegalEntities->delete($legalEntity)) {
+            	$this->Flash->success(__('The legal entity has been deleted.'));
+        	} else {
+            	$this->Flash->error(__('The legal entity could not be deleted. Please, try again.'));
+        	}
+		}
+	    else
+	    {
+	   	    $this->Flash->error(__('You are not authorized'));
+	    }
         return $this->redirect(['action' => 'index']);
     }
 }

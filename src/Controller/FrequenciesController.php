@@ -24,7 +24,7 @@ class FrequenciesController extends AppController
 		
 		$contains=['Customers'];
 									  
-		$usrfilter="";						  
+		$usrfilter="Frequencies.customer_id ='".$this->loggedinuser['customer_id'] . "'";		  
 		$output =$this->Datatable->getView($fields,$contains,$usrfilter);
 		echo json_encode($output);		
     }
@@ -61,8 +61,16 @@ class FrequenciesController extends AppController
             'contain' => ['Customers', 'PayComponents']
         ]);
 
-        $this->set('frequency', $frequency);
-        $this->set('_serialize', ['frequency']);
+		if($address['customer_id']==$this->loggedinuser['customer_id'])
+		{
+       	    $this->set('frequency', $frequency);
+       		$this->set('_serialize', ['frequency']);
+        }else{
+		    // $this->redirect(['action' => 'logout','controller'=>'users']);
+			$this->Flash->error(__('You are not Authorized.'));
+			return $this->redirect(['action' => 'index']);
+        }
+	   
     }
 
     /**
@@ -71,10 +79,11 @@ class FrequenciesController extends AppController
      * @return \Cake\Network\Response|void Redirects on successful add, renders view otherwise.
      */
     public function add()
-    {
+    {	
         $frequency = $this->Frequencies->newEntity();
         if ($this->request->is('post')) {
             $frequency = $this->Frequencies->patchEntity($frequency, $this->request->data);
+			$frequency['customer_id']=$this->loggedinuser['customer_id'];
             if ($this->Frequencies->save($frequency)) {
                 $this->Flash->success(__('The frequency has been saved.'));
 
@@ -100,6 +109,13 @@ class FrequenciesController extends AppController
         $frequency = $this->Frequencies->get($id, [
             'contain' => []
         ]);
+		
+		if($frequency['customer_id'] != $this->loggedinuser['customer_id'])
+		{
+			 $this->Flash->error(__('You are not Authorized.'));
+			 return $this->redirect(['action' => 'index']);
+		}
+
         if ($this->request->is(['patch', 'post', 'put'])) {
             $frequency = $this->Frequencies->patchEntity($frequency, $this->request->data);
             if ($this->Frequencies->save($frequency)) {
@@ -126,12 +142,19 @@ class FrequenciesController extends AppController
     {
         $this->request->allowMethod(['post', 'delete']);
         $frequency = $this->Frequencies->get($id);
-        if ($this->Frequencies->delete($frequency)) {
-            $this->Flash->success(__('The frequency has been deleted.'));
-        } else {
-            $this->Flash->error(__('The frequency could not be deleted. Please, try again.'));
-        }
-
+		if($frequency['customer_id'] == $this->loggedinuser['customer_id']) 
+		{
+        	if ($this->Frequencies->delete($frequency)) 
+        	{
+            	$this->Flash->success(__('The frequency has been deleted.'));
+        	} else {
+            	$this->Flash->error(__('The frequency could not be deleted. Please, try again.'));
+        	}
+		}
+	    else
+	    {
+	   	    $this->Flash->error(__('You are not authorized'));
+	    }
         return $this->redirect(['action' => 'index']);
     }
 }

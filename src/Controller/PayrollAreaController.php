@@ -27,7 +27,7 @@ class PayrollAreaController extends AppController
 		}
 		$contains=['LegalEntities', 'BusinessUnits', 'Divisions', 'Locations', 'Customers'];
 									  
-		$usrfilter="";						  
+		$usrfilter="PayrollArea.customer_id ='".$this->loggedinuser['customer_id'] . "'";				  
 		$output =$this->Datatable->getView($fields,$contains,$usrfilter);
 		echo json_encode($output);			
     }
@@ -59,13 +59,19 @@ class PayrollAreaController extends AppController
             'contain' => ['LegalEntities', 'BusinessUnits', 'Divisions', 'Locations', 'Customers', 'PayrollRecord', 'PayrollStatus']
         ]);
 
-        $legalEntities = $this->PayrollArea->LegalEntities->find('list', ['limit' => 200]);
-        $businessUnits = $this->PayrollArea->BusinessUnits->find('list', ['limit' => 200]);
-        $divisions = $this->PayrollArea->Divisions->find('list', ['limit' => 200]);
-        $locations = $this->PayrollArea->Locations->find('list', ['limit' => 200]);
+        $legalEntities = $this->PayrollArea->LegalEntities->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        $businessUnits = $this->PayrollArea->BusinessUnits->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        $divisions = $this->PayrollArea->Divisions->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        $locations = $this->PayrollArea->Locations->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         $customers = $this->PayrollArea->Customers->find('list', ['limit' => 200]);
-        $this->set(compact('payrollArea', 'legalEntities', 'businessUnits', 'divisions', 'locations', 'customers'));
-        $this->set('_serialize', ['payrollArea']);
+        if($payrollArea['customer_id']==$this->loggedinuser['customer_id'])
+		{
+       	    $this->set(compact('payrollArea', 'legalEntities', 'businessUnits', 'divisions', 'locations', 'customers'));
+        	$this->set('_serialize', ['payrollArea']);
+        }else{
+			$this->Flash->error(__('You are not Authorized.'));
+			return $this->redirect(['action' => 'index']);
+       } 
     }
 
     /**
@@ -78,6 +84,7 @@ class PayrollAreaController extends AppController
         $payrollArea = $this->PayrollArea->newEntity();
         if ($this->request->is('post')) {
             $payrollArea = $this->PayrollArea->patchEntity($payrollArea, $this->request->data);
+			$payrollArea['customer_id']=$this->loggedinuser['customer_id'];
             if ($this->PayrollArea->save($payrollArea)) {
                 $this->Flash->success(__('The payroll area has been saved.'));
 
@@ -86,10 +93,10 @@ class PayrollAreaController extends AppController
                 $this->Flash->error(__('The payroll area could not be saved. Please, try again.'));
             }
         }
-        $legalEntities = $this->PayrollArea->LegalEntities->find('list', ['limit' => 200]);
-        $businessUnits = $this->PayrollArea->BusinessUnits->find('list', ['limit' => 200]);
-        $divisions = $this->PayrollArea->Divisions->find('list', ['limit' => 200]);
-        $locations = $this->PayrollArea->Locations->find('list', ['limit' => 200]);
+        $legalEntities = $this->PayrollArea->LegalEntities->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        $businessUnits = $this->PayrollArea->BusinessUnits->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        $divisions = $this->PayrollArea->Divisions->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        $locations = $this->PayrollArea->Locations->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         $customers = $this->PayrollArea->Customers->find('list', ['limit' => 200]);
         $this->set(compact('payrollArea', 'legalEntities', 'businessUnits', 'divisions', 'locations', 'customers'));
         $this->set('_serialize', ['payrollArea']);
@@ -107,6 +114,13 @@ class PayrollAreaController extends AppController
         $payrollArea = $this->PayrollArea->get($id, [
             'contain' => []
         ]);
+		
+		if($payrollArea['customer_id'] != $this->loggedinuser['customer_id'])
+		{
+			 $this->Flash->error(__('You are not Authorized.'));
+			 return $this->redirect(['action' => 'index']);
+		}
+		
         if ($this->request->is(['patch', 'post', 'put'])) {
             $payrollArea = $this->PayrollArea->patchEntity($payrollArea, $this->request->data);
             if ($this->PayrollArea->save($payrollArea)) {
@@ -117,10 +131,10 @@ class PayrollAreaController extends AppController
                 $this->Flash->error(__('The payroll area could not be saved. Please, try again.'));
             }
         }
-        $legalEntities = $this->PayrollArea->LegalEntities->find('list', ['limit' => 200]);
-        $businessUnits = $this->PayrollArea->BusinessUnits->find('list', ['limit' => 200]);
-        $divisions = $this->PayrollArea->Divisions->find('list', ['limit' => 200]);
-        $locations = $this->PayrollArea->Locations->find('list', ['limit' => 200]);
+        $legalEntities = $this->PayrollArea->LegalEntities->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        $businessUnits = $this->PayrollArea->BusinessUnits->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        $divisions = $this->PayrollArea->Divisions->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        $locations = $this->PayrollArea->Locations->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         $customers = $this->PayrollArea->Customers->find('list', ['limit' => 200]);
         $this->set(compact('payrollArea', 'legalEntities', 'businessUnits', 'divisions', 'locations', 'customers'));
         $this->set('_serialize', ['payrollArea']);
@@ -137,12 +151,18 @@ class PayrollAreaController extends AppController
     {
         $this->request->allowMethod(['post', 'delete']);
         $payrollArea = $this->PayrollArea->get($id);
-        if ($this->PayrollArea->delete($payrollArea)) {
-            $this->Flash->success(__('The payroll area has been deleted.'));
-        } else {
-            $this->Flash->error(__('The payroll area could not be deleted. Please, try again.'));
-        }
-
+        if($payrollArea['customer_id'] == $this->loggedinuser['customer_id']) 
+		{
+        	if ($this->PayrollArea->delete($payrollArea)) {
+            	$this->Flash->success(__('The payroll area has been deleted.'));
+        	} else {
+            	$this->Flash->error(__('The payroll area could not be deleted. Please, try again.'));
+        	}
+		}
+	    else
+	    {
+	   	    $this->Flash->error(__('You are not authorized'));
+	    }
         return $this->redirect(['action' => 'index']);
     }
 }

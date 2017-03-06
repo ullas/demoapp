@@ -96,7 +96,7 @@ if (file_exists($file)) {
      	</li>
     </ul>
     </li>
-	
+	<li><a href="<?php echo $this -> Url -> build('/EmployeeAbsencerecords'); ?>"><i class="fa fa-calendar "></i> Leaves</a></li>
     <li><a href="<?php echo $this -> Url -> build('/Positions/orgchart'); ?>"><i class="fa fa-sitemap"></i><span> Organizational Chart </span></a></li>
 
     <?php
