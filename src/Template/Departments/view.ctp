@@ -17,16 +17,16 @@
         <?= $this->Form->create($department, array('role' => 'form')) ?>
           <fieldset>
           	<?php
-            echo $this->Form->input('name',['disabled' => true]);
-            echo $this->Form->input('description',['disabled' => true]);
-            echo $this->Form->input('effective_status',['disabled' => true]);
-            echo $this->Form->input('effective_start_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
-            echo $this->Form->input('effective_end_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
-            echo $this->Form->input('parent_department',['disabled' => true]);
-            echo $this->Form->input('external_code',['disabled' => true]);
-            echo $this->Form->input('head_of_unit',['disabled' => true]);
-            echo $this->Form->input('cost_center_id', ['options' => $costCentres, 'empty' => true,'disabled' => true]);
-          ?></fieldset>
+            	echo $this->Form->input('external_code',['disabled' => true]);
+            	echo $this->Form->input('name',['disabled' => true]);
+            	echo $this->Form->input('description',['disabled' => true]);
+            	echo $this->Form->input('effective_status',['disabled' => true]);
+            	echo $this->Form->input('effective_start_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
+            	echo $this->Form->input('effective_end_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
+            	echo $this->Form->input('parent_department',['disabled' => true]);
+            	echo $this->Form->input('head_of_unit',['disabled' => true]);
+            	echo $this->Form->input('cost_center_id', ['options' => $costCentres, 'empty' => true,'disabled' => true]);
+          	?></fieldset>
           <!-- /.box-body -->
           <div class="box-footer">
           	<?=$this->Html->link(__('Cancel'), ['action' => 'index'], ['escape' => false])?>

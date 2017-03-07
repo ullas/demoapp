@@ -13,7 +13,8 @@
     <?= $this->Form->create($workSchedule) ?>
     <fieldset>
         <?php
-        	echo $this->Form->input('ws_name',['label'=>'Workschedule Name','disabled' => true]);
+        	echo $this->Form->input('ws_code',['label'=>'Workschedule External Code','disabled' => true]);
+            echo $this->Form->input('ws_name',['label'=>'Workschedule Name','disabled' => true]);
             echo $this->Form->input('flex_request_allowed',['label'=>'Flexible Requesting Allowed','disabled' => true]);
             echo $this->Form->input('country',['options' => $this->Country->get_countries(), 'empty' => true,'disabled' => true]);
             echo $this->Form->input('hours_day',['label'=>'Average Hours Per Day','disabled' => true]);
@@ -47,7 +48,6 @@
 			echo $this->Form->input('starting_date',['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
             echo $this->Form->input('period_model',['disabled' => true]);
             echo $this->Form->input('time_rec_variant_3',['label'=>'Time Recording Variant','disabled' => true]);
-            echo $this->Form->input('ws_code',['label'=>'Workschedule External Code','disabled' => true]);
             
         ?>
     </fieldset>

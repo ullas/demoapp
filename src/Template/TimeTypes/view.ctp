@@ -13,15 +13,15 @@
     <?= $this->Form->create($timeType) ?>
     <fieldset>
         <?php
-        	echo $this->Form->input('name',['disabled' => true]);
+        	echo $this->Form->input('code',['disabled' => true]);
+			echo $this->Form->input('name',['disabled' => true]);
             echo $this->Form->input('country',['options' => $this->Country->get_countries(), 'empty' => true,'disabled' => true]);
             echo $this->Form->input('classification',['disabled' => true]);
             echo $this->Form->input('unit',['class'=>'select2','options' => array('Hour(s)', 'Day(s)'), 'empty' => 'Choose','disabled' => true]);
             echo $this->Form->input('perm_fractions_hours',['disabled' => true,'label'=>'Permitted Fractions for Unit Hours']);
             echo $this->Form->input('perm_fractions_days',['class'=>'select2','options' => array('Quarter of a Day', 'Half a Day','3 Quarters of a Day','Full Day'),'empty'=>'Choose','disabled' => true,'label'=>'Permitted Fractions for Unit Days']);
             echo $this->Form->input('calc_base',['disabled' => true]);
-            echo $this->Form->input('code',['disabled' => true]);
-			echo $this->Form->input('time_account_type_id', ['options' => $timeAccountTypes, 'empty' => true,'disabled' => true]);
+            echo $this->Form->input('time_account_type_id', ['options' => $timeAccountTypes, 'empty' => true,'disabled' => true]);
 			echo $this->Form->input('flex_req_allow',['disabled' => true]);
 			echo $this->Form->input('workflowrule_id',['class'=>'select2', 'empty' => 'Choose', 'disabled' => true]);
             

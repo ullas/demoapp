@@ -14,6 +14,7 @@
     <?= $this->Form->create($payComponent) ?>
     <fieldset>
         <?php
+            echo $this->Form->input('external_code');
             echo $this->Form->input('name');
             echo $this->Form->input('description');
             echo $this->Form->input('status',['class'=>'select2','options' => array('Active', 'Inactive'), 'empty' => 'Choose']);
@@ -36,7 +37,6 @@
             echo $this->Form->input('unit_of_measure');
             echo $this->Form->input('rate');
             echo $this->Form->input('number');
-            echo $this->Form->input('external_code');
             echo $this->Form->input('frequency_id', ['options' => $frequencies, 'empty' => true]);
         ?>
     </fieldset>

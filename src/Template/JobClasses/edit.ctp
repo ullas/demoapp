@@ -13,6 +13,7 @@
     <?= $this->Form->create($jobclass) ?>
     <fieldset>
         <?php
+            echo $this->Form->input('external_code',['disabled'=>true]);
             echo $this->Form->input('name');
             echo $this->Form->input('description');
             echo $this->Form->input('effective_status');
@@ -25,7 +26,6 @@
             echo $this->Form->input('default_employee_class');
             echo $this->Form->input('full_time_employee');
             echo $this->Form->input('default_supervisor_level');
-            echo $this->Form->input('external_code',['disabled'=>true]);
             echo $this->Form->input('pay_grade_id', ['class' => 'select2','options' => $payGrades, 'empty' => true]);
             echo $this->Form->input('job_function_id', ['class' => 'select2','options' => $jobFunctions, 'empty' => true]);
         ?>

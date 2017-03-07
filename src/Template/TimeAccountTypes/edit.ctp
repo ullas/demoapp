@@ -13,6 +13,7 @@
     <?= $this->Form->create($timeAccountType) ?>
     <fieldset>
         <?php
+            echo $this->Form->input('code');
             echo $this->Form->input('name');
             echo $this->Form->input('unit',['label'=>'Unit','class'=>'select2','options' => array('Hour(s)', 'Day(s)'), 'empty' => 'Choose']);
             echo $this->Form->input('perm_reccur',['label'=>'Permanent / Recurring','class'=>'select2','options' => array('Permanent', 'Recurring'), 'empty' => true]);
@@ -32,7 +33,6 @@
             echo $this->Form->input('rounding_used',['label'=>'Are rounding values included for New Hires']);
             echo $this->Form->input('update_rule',['label'=>'Period End Processing/Interim Update Rule']);
             echo $this->Form->input('payout_eligiblity');
-            echo $this->Form->input('code');
             echo $this->Form->input('pay_component_id', ['options' => $payComponents, 'empty' => true]);
             echo $this->Form->input('pay_component_group_id', ['options' => $payComponentGroups, 'empty' => true]);
             echo $this->Form->input('iscarryforward',['label'=>'Is Carry Forward']);

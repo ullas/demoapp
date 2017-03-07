@@ -32,7 +32,7 @@
             echo $this->Form->input('job_title',['disabled' => true]);
             echo $this->Form->input('local_job_title',['disabled' => true]);
             echo $this->Form->input('employee_class',['disabled' => true]);
-            echo $this->Form->input('regular_temp',['disabled' => true]);
+            echo $this->Form->input('regular_temp',['disabled' => true,'label'=>'Regular/Temporary','class'=>'select2','options' => array('Regular', 'Temporary'), 'empty' => true]);
             echo $this->Form->input('standard_hours',['disabled' => true]);
             echo $this->Form->input('working_days_per_week',['disabled' => true]);
             echo $this->Form->input('work_period',['disabled' => true]);
@@ -53,7 +53,7 @@
 		    echo $this->Form->input('is_cross_border_worker',['disabled' => true]);
             echo $this->Form->input('is_competition_clause_active',['disabled' => true]);
             echo $this->Form->input('probation_period_end_date', ['disabled' => true,'class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
-            echo $this->Form->input('notes',['disabled' => true]);
+            echo $this->Form->input('notes',['disabled' => true,'type'=>'textArea']);
             echo $this->Form->input('attachmentid',['disabled' => true]);
             echo $this->Form->input('custom_string1',['disabled' => true]);
             echo $this->Form->input('eeo_class',['disabled' => true]);
@@ -72,9 +72,9 @@
             echo $this->Form->input('sick_pay_supplement',['disabled' => true]);
             echo $this->Form->input('company_leaving_for',['disabled' => true]);
             echo $this->Form->input('is_side_line_job_allowed',['disabled' => true]);
-            echo $this->Form->input('holiday_calendar_code',['disabled' => true]);
-            echo $this->Form->input('work_schedule_code',['disabled' => true]);
-            echo $this->Form->input('time_type_profile_code',['disabled' => true]);
+            echo $this->Form->input('holiday_calendar_id',['disabled' => true,'class'=>'select2', 'empty' => true]);
+            echo $this->Form->input('work_schedule_id',['disabled' => true,'class'=>'select2', 'empty' => true]);
+            echo $this->Form->input('time_type_profile_id',['disabled' => true,'class'=>'select2', 'empty' => true]);
             echo $this->Form->input('time_recording_profile_code',['disabled' => true]);
             echo $this->Form->input('time_recording_admissibility_code',['disabled' => true]);
             echo $this->Form->input('time_recording_variant',['disabled' => true]);

@@ -15,13 +15,13 @@
         <?= $this->Form->create($costCentre, array('role' => 'form')) ?>
         <fieldset>
           <?php
+            echo $this->Form->input('external_code',['disabled' => true]);
             echo $this->Form->input('name',['disabled' => true]);
             echo $this->Form->input('description',['disabled' => true]);
             echo $this->Form->input('effective_status',['disabled' => true]);
             echo $this->Form->input('effective_start_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
             echo $this->Form->input('effective_end_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
             echo $this->Form->input('parent_cost_center',['disabled' => true]);
-            echo $this->Form->input('external_code',['disabled' => true]);
             echo $this->Form->input('cost_center_manager',['disabled' => true]);
           ?></fieldset>
           <!-- /.box-body -->

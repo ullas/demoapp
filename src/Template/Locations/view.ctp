@@ -17,6 +17,7 @@
   	<?= $this->Form->create($location, array('role' => 'form')) ?>
   	<fieldset>
     <?php  
+            echo $this->Form->input('external_code',['disabled' => true]);
             echo $this->Form->input('name',['disabled' => true]);
             echo $this->Form->input('description',['disabled' => true]);
 			echo $this->Form->input('start_date',['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
@@ -25,7 +26,8 @@
             echo $this->Form->input('time_zone',['templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-clock-o"></i></div>'],'disabled' => true]);
             echo $this->Form->input('standard_hours',['templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-clock-o"></i></div>'],'disabled' => true]);
             echo $this->Form->input('status',['disabled' => true]);
-            echo $this->Form->input('external_code',['disabled' => true]);
+			echo $this->Form->input('holiday_calendar_id',['disabled' => true,'class'=>'select2', 'empty' => true]);
+            
           ?></fieldset>
           <div class="box-footer">
           	<?=$this->Html->link(__('Cancel'), ['action' => 'index'], ['escape' => false])?>

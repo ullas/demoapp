@@ -17,7 +17,8 @@
       <?= $this->Form->create($payComponent, array('role' => 'form')) ?>
       <fieldset>
 		<?php
-    		echo $this->Form->input('name',['disabled' => true]);
+    		echo $this->Form->input('external_code',['disabled' => true]);
+            echo $this->Form->input('name',['disabled' => true]);
             echo $this->Form->input('description',['disabled' => true]);
             echo $this->Form->input('status',['disabled' => true,'class'=>'select2','options' => array('Active', 'Inactive'), 'empty' => 'Choose']);
 			echo $this->Form->input('start_date',['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
@@ -39,7 +40,6 @@
             echo $this->Form->input('unit_of_measure',['disabled' => true]);
             echo $this->Form->input('rate',['disabled' => true]);
             echo $this->Form->input('number',['disabled' => true]);
-            echo $this->Form->input('external_code',['disabled' => true]);
             echo $this->Form->input('frequency_id', ['options' => $frequencies, 'empty' => true,'disabled' => true]);
 			?>
 	</fieldset>
