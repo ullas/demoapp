@@ -19,12 +19,12 @@ label.mandatory:after {
 	<div class="box box-primary"><div class="box-body">
 		<?= $this->Form->create($businessUnit) ?>
     <fieldset>
-        <?php
+        <?php            
+        	echo $this->Form->input('external_code',['label'=>['text'=>'External Code','class'=>'mandatory']]);
             echo $this->Form->input('name',['label'=>['text'=>'Name','class'=>'mandatory']]);
             echo $this->Form->input('description');
             echo $this->Form->input('effective_start_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
             echo $this->Form->input('effective_end_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
-            echo $this->Form->input('external_code',['label'=>['text'=>'External Code','class'=>'mandatory']]);
             echo $this->Form->input('head_of_unit');
         ?>
     </fieldset>

@@ -16,6 +16,7 @@
   <div class="box box-primary"><div class="box-body">
   	<?= $this->Form->create($jobclass, array('role' => 'form')) ?>
     <fieldset><?php
+            echo $this->Form->input('external_code',['disabled'=>true]);
             echo $this->Form->input('name',['disabled'=>true]);
             echo $this->Form->input('description',['disabled'=>true]);
             echo $this->Form->input('effective_status',['disabled'=>true]);
@@ -28,7 +29,6 @@
             echo $this->Form->input('default_employee_class',['disabled'=>true]);
             echo $this->Form->input('full_time_employee',['disabled'=>true]);
             echo $this->Form->input('default_supervisor_level',['disabled'=>true]);
-            echo $this->Form->input('external_code',['disabled'=>true]);
             echo $this->Form->input('pay_grade_id', ['class' => 'select2','options' => $payGrades, 'empty' => true,'disabled'=>true]);
             echo $this->Form->input('job_function_id', ['class' => 'select2','options' => $jobFunctions, 'empty' => true,'disabled'=>true]);
         ?></fieldset>

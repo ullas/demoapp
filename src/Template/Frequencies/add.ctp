@@ -13,10 +13,11 @@
     <?= $this->Form->create($frequency) ?>
     <fieldset>
         <?php
+            echo $this->Form->input('external_code');
             echo $this->Form->input('name');
             echo $this->Form->input('description');
             echo $this->Form->input('annualization_factor');
-            echo $this->Form->input('external_code');
+            
         ?>
     </fieldset>
     <div class="box-footer">

@@ -13,6 +13,7 @@
     <?= $this->Form->create($workSchedule) ?>
     <fieldset>
         <?php
+        	echo $this->Form->input('ws_code',['label'=>'Workschedule External Code']);
             echo $this->Form->input('ws_name',['label'=>'Workschedule Name']);
             echo $this->Form->input('flex_request_allowed',['label'=>'Flexible Requesting Allowed']);
             echo $this->Form->input('country',['options' => $this->Country->get_countries(), 'empty' => true]);
@@ -47,7 +48,7 @@
 			echo $this->Form->input('starting_date',['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
             echo $this->Form->input('period_model');
             echo $this->Form->input('time_rec_variant_3',['label'=>'Time Recording Variant']);
-            echo $this->Form->input('ws_code',['label'=>'Workschedule External Code']);
+            
         ?>
     </fieldset>
     <div class="box-footer">

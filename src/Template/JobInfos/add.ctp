@@ -66,9 +66,9 @@
             echo $this->Form->input('sick_pay_supplement');
             echo $this->Form->input('company_leaving_for');
             echo $this->Form->input('is_side_line_job_allowed');
-            echo $this->Form->input('holiday_calendar_code');
-            echo $this->Form->input('work_schedule_code');
-            echo $this->Form->input('time_type_profile_code');
+            echo $this->Form->input('holiday_calendar_id',['class'=>'select2', 'empty' => true]);
+            echo $this->Form->input('work_schedule_id',['class'=>'select2', 'empty' => true]);
+            echo $this->Form->input('time_type_profile_id',['class'=>'select2', 'empty' => true]);
             echo $this->Form->input('time_recording_profile_code');
             echo $this->Form->input('time_recording_admissibility_code');
             echo $this->Form->input('time_recording_variant');

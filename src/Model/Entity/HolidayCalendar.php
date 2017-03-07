@@ -15,6 +15,7 @@ use Cake\ORM\Entity;
  * @property int $customer_id
  *
  * @property \App\Model\Entity\Customer $customer
+ * @property \App\Model\Entity\CalendarAssignment[] $calendar_assignments
  */
 class HolidayCalendar extends Entity
 {

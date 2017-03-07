@@ -13,6 +13,7 @@
     <?= $this->Form->create($payRange) ?>
     <fieldset>
         <?php
+            echo $this->Form->input('external_code');
             echo $this->Form->input('name');
             echo $this->Form->input('description');
             echo $this->Form->input('status',['class'=>'select2','options' => array('Active', 'Inactive'), 'empty' => 'Choose']);
@@ -26,7 +27,6 @@
             echo $this->Form->input('incr_percentage');
             echo $this->Form->input('mid_point');
             echo $this->Form->input('geo_zone');
-            echo $this->Form->input('external_code');
             echo $this->Form->input('legal_entity_id', ['options' => $legalEntities, 'empty' => true]);
             echo $this->Form->input('pay_group_id', ['options' => $payGroups, 'empty' => true]);
         ?>

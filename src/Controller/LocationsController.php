@@ -90,7 +90,8 @@ class LocationsController extends AppController
             }
         }
         $customers = $this->Locations->Customers->find('list', ['limit' => 200]);
-        $this->set(compact('location', 'customers'));
+        $holidayCalendars = $this->Locations->HolidayCalendars->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        $this->set(compact('location', 'customers','holidayCalendars'));
         $this->set('_serialize', ['location']);
     }
 
@@ -125,7 +126,8 @@ class LocationsController extends AppController
             }
         }
         $customers = $this->Locations->Customers->find('list', ['limit' => 200]);
-        $this->set(compact('location', 'customers'));
+		$holidayCalendars = $this->Locations->HolidayCalendars->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        $this->set(compact('location', 'customers','holidayCalendars'));
         $this->set('_serialize', ['location']);
     }
 

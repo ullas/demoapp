@@ -13,6 +13,7 @@
     <?= $this->Form->create($timeTypeProfile) ?>
     <fieldset>
         <?php
+            echo $this->Form->input('external_code');
             echo $this->Form->input('code');
             echo $this->Form->input('name');
             echo $this->Form->input('country',['options' => $this->Country->get_countries(), 'empty' => true]);
@@ -20,7 +21,6 @@
             echo $this->Form->input('time_rec_variant');
             echo $this->Form->input('status');
             echo $this->Form->input('enable_ess');
-            echo $this->Form->input('external_code');
             echo $this->Form->input('time_type_id', ['options' => $timeTypes, 'empty' => true]);
         ?>
     </fieldset>

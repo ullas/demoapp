@@ -5,20 +5,18 @@ use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
-use Cake\I18n\FrozenDate;
-use Cake\I18n\Date;
-use Cake\I18n\Time;
 use Cake\Event\Event;
 use Cake\Event\ArrayObject;
-use App\Model\Table\EntityInterface;
-use Cake\Database\Type;
 use Cake\Core\Configure;
-
 /**
  * Locations Model
  *
  * @property \Cake\ORM\Association\BelongsTo $Customers
+ * @property \Cake\ORM\Association\BelongsTo $HolidayCalendars
+ * @property \Cake\ORM\Association\HasMany $Jobinfos
  * @property \Cake\ORM\Association\HasMany $LegalEntities
+ * @property \Cake\ORM\Association\HasMany $PayrollArea
+ * @property \Cake\ORM\Association\HasMany $Positions
  *
  * @method \App\Model\Entity\Location get($primaryKey, $options = [])
  * @method \App\Model\Entity\Location newEntity($data = null, array $options = [])
@@ -48,19 +46,21 @@ class LocationsTable extends Table
         $this->belongsTo('Customers', [
             'foreignKey' => 'customer_id'
         ]);
+        $this->belongsTo('HolidayCalendars', [
+            'foreignKey' => 'holiday_calendar_id'
+        ]);
+        $this->hasMany('Jobinfos', [
+            'foreignKey' => 'location_id'
+        ]);
         $this->hasMany('LegalEntities', [
             'foreignKey' => 'location_id'
         ]);
-		
-
-
-		/*$userdf = Configure::read('userdf');
-		if(isset($userdf)  & $userdf===1){
-    		//format time
-			Date::setToStringFormat("dd/MM/YYYY"); // For any mutable Date
-			FrozenDate::setToStringFormat("dd/MM/YYYY"); // For any immutable Date
-		}*/
-	
+        $this->hasMany('PayrollArea', [
+            'foreignKey' => 'location_id'
+        ]);
+        $this->hasMany('Positions', [
+            'foreignKey' => 'location_id'
+        ]);
     }
 
     /**
@@ -109,23 +109,6 @@ class LocationsTable extends Table
 
         return $validator;
     }
-
-    /**
-     * Returns a rules checker object that will be used for validating
-     * application integrity.
-     *
-     * @param \Cake\ORM\RulesChecker $rules The rules object to be modified.
-     * @return \Cake\ORM\RulesChecker
-     */
-    public function buildRules(RulesChecker $rules)
-    {
-        $rules->add($rules->isUnique(['external_code']));
-        $rules->add($rules->existsIn(['customer_id'], 'Customers'));
-
-        return $rules;
-    }
-
-
 	public function beforeMarshal(Event $event, $data, $options)
 	{
 
@@ -141,14 +124,19 @@ class LocationsTable extends Table
 		}
    		// debug($data['start_date']);
 	}
+    /**
+     * Returns a rules checker object that will be used for validating
+     * application integrity.
+     *
+     * @param \Cake\ORM\RulesChecker $rules The rules object to be modified.
+     * @return \Cake\ORM\RulesChecker
+     */
+    public function buildRules(RulesChecker $rules)
+    {
+        $rules->add($rules->isUnique(['external_code']));
+        $rules->add($rules->existsIn(['customer_id'], 'Customers'));
+        $rules->add($rules->existsIn(['holiday_calendar_id'], 'HolidayCalendars'));
 
-	public function beforeRules(Event $event, $entity,  $options, $operation)
-	{
-	 	debug("test");$entity->dateField = date('YYYY/MM/dd', strtotime($entity->dateField));
-		Date::setToStringFormat("Y/m/d"); // For any mutable Date
-		FrozenDate::setToStringFormat("Y/m/d");
-		
-		Type::build('datetime')->useLocaleParser()->setLocaleFormat('yyyy/MM/dd');
-		Type::build('date')->useLocaleParser()->setLocaleFormat('yyyy/MM/dd');
-	}  
+        return $rules;
+    }
 }

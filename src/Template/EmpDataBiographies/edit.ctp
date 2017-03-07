@@ -19,13 +19,13 @@
     <fieldset>
         <legend><?= __('Edit Emp Data Biography') ?></legend>
         <?php
+            echo $this->Form->input('person_id_external');
+            echo $this->Form->input('birth_name');
             echo $this->Form->input('date_of_birth', ['empty' => true]);
             echo $this->Form->input('country_of_birth');
             echo $this->Form->input('region_of_birth');
             echo $this->Form->input('place_of_birth');
-            echo $this->Form->input('birth_name');
             echo $this->Form->input('date_of_death', ['empty' => true]);
-            echo $this->Form->input('person_id_external');
             echo $this->Form->input('customer_id', ['options' => $customers, 'empty' => true]);
             echo $this->Form->input('employee_id', ['options' => $employees, 'empty' => true]);
             echo $this->Form->input('position_id');

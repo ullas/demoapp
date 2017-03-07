@@ -20,9 +20,15 @@ use Cake\ORM\Entity;
  * @property int $paygroup_id
  * @property string $currency
  * @property int $customer_id
+ * @property int $holiday_calendar_id
  *
  * @property \App\Model\Entity\Location $location
  * @property \App\Model\Entity\PayGroup $pay_group
+ * @property \App\Model\Entity\Customer $customer
+ * @property \App\Model\Entity\JobInfo[] $jobinfos
+ * @property \App\Model\Entity\PayRange[] $pay_ranges
+ * @property \App\Model\Entity\PayrollArea[] $payroll_area
+ * @property \App\Model\Entity\Position[] $positions
  */
 class LegalEntity extends Entity
 {

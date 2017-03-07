@@ -17,6 +17,10 @@ use Cake\ORM\Entity;
  * @property bool $status
  * @property string $external_code
  * @property int $customer_id
+ * @property int $holiday_calendar_id
+ *
+ * @property \App\Model\Entity\Customer $customer
+ * @property \App\Model\Entity\LegalEntity[] $legal_entities
  */
 class Location extends Entity
 {

@@ -14,7 +14,11 @@ use Cake\Core\Configure;
  * @property \Cake\ORM\Association\BelongsTo $Locations
  * @property \Cake\ORM\Association\BelongsTo $PayGroups
  * @property \Cake\ORM\Association\BelongsTo $Customers
+ * @property \Cake\ORM\Association\BelongsTo $HolidayCalendars
+ * @property \Cake\ORM\Association\HasMany $Jobinfos
  * @property \Cake\ORM\Association\HasMany $PayRanges
+ * @property \Cake\ORM\Association\HasMany $PayrollArea
+ * @property \Cake\ORM\Association\HasMany $Positions
  *
  * @method \App\Model\Entity\LegalEntity get($primaryKey, $options = [])
  * @method \App\Model\Entity\LegalEntity newEntity($data = null, array $options = [])
@@ -50,7 +54,19 @@ class LegalEntitiesTable extends Table
         $this->belongsTo('Customers', [
             'foreignKey' => 'customer_id'
         ]);
+        $this->belongsTo('HolidayCalendars', [
+            'foreignKey' => 'holiday_calendar_id'
+        ]);
+        $this->hasMany('Jobinfos', [
+            'foreignKey' => 'legal_entity_id'
+        ]);
         $this->hasMany('PayRanges', [
+            'foreignKey' => 'legal_entity_id'
+        ]);
+        $this->hasMany('PayrollArea', [
+            'foreignKey' => 'legal_entity_id'
+        ]);
+        $this->hasMany('Positions', [
             'foreignKey' => 'legal_entity_id'
         ]);
     }
@@ -67,7 +83,8 @@ class LegalEntitiesTable extends Table
             ->allowEmpty('id', 'create');
 
         $validator
-            ->allowEmpty('name');
+            ->requirePresence('name', 'create')
+            ->notEmpty('name');
 
         $validator
             ->allowEmpty('description');
@@ -131,6 +148,7 @@ class LegalEntitiesTable extends Table
         $rules->add($rules->existsIn(['location_id'], 'Locations'));
         $rules->add($rules->existsIn(['paygroup_id'], 'PayGroups'));
         $rules->add($rules->existsIn(['customer_id'], 'Customers'));
+        $rules->add($rules->existsIn(['holiday_calendar_id'], 'HolidayCalendars'));
 
         return $rules;
     }

@@ -50,9 +50,6 @@ use Cake\ORM\Entity;
  * @property string $sick_pay_supplement
  * @property string $company_leaving_for
  * @property bool $is_side_line_job_allowed
- * @property string $holiday_calendar_code
- * @property string $work_schedule_code
- * @property string $time_type_profile_code
  * @property string $time_recording_profile_code
  * @property string $time_recording_admissibility_code
  * @property string $time_recording_variant
@@ -94,6 +91,9 @@ use Cake\ORM\Entity;
  * @property string $manager_id3
  * @property string $manager_id4
  * @property string $manager_id5
+ * @property int $holiday_calendar_id
+ * @property int $time_type_profile_id
+ * @property int $work_schedule_id
  *
  * @property \App\Model\Entity\User $user
  * @property \App\Model\Entity\Customer $customer

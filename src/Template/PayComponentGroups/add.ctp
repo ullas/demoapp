@@ -13,6 +13,7 @@
     <?= $this->Form->create($payComponentGroup) ?>
     <fieldset>
         <?php
+            echo $this->Form->input('external_code');
             echo $this->Form->input('name');
             echo $this->Form->input('description');
             echo $this->Form->input('status',['class'=>'select2','options' => array('Active', 'Inactive'), 'empty' => 'Choose']);
@@ -24,7 +25,7 @@
             echo $this->Form->input('use_for_range_penetration',['class'=>'select2','options' => array('Yes', 'No'), 'empty' => 'Choose']);
             echo $this->Form->input('sort_order');
             echo $this->Form->input('system_defined');
-            echo $this->Form->input('external_code');
+            
         ?>
     </fieldset>
    <div class="box-footer">
