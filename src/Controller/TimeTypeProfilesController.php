@@ -64,7 +64,8 @@ class TimeTypeProfilesController extends AppController
 		
 		if($timeTypeProfile['customer_id']==$this->loggedinuser['customer_id'])
 		{
-        	$this->set('timeTypeProfile', $timeTypeProfile);
+        	$timeTypes = $this->TimeTypeProfiles->TimeTypes->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        	$this->set(compact('timeTypeProfile', 'timeTypes'));
         	$this->set('_serialize', ['timeTypeProfile']);
 		}else{
 			$this->Flash->error(__('You are not Authorized.'));

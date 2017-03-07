@@ -105,6 +105,7 @@ class PositionsController extends AppController
         if ($this->request->is('post')) {
             $position = $this->Positions->patchEntity($position, $this->request->data);
 			$position['customer_id']=$this->loggedinuser['customer_id'];
+			$position['created_by']=$this->request->session()->read('sessionuser')['id'];
             if ($this->Positions->save($position)) {
                 $this->Flash->success(__('The position has been saved.'));
 
@@ -132,6 +133,7 @@ class PositionsController extends AppController
         if ($this->request->is('post')) {
             $position = $this->Positions->patchEntity($position, $this->request->data);
 			$position['customer_id']=$this->loggedinuser['customer_id'];
+			$position['created_by']=$this->request->session()->read('sessionuser')['id'];
             if ($this->Positions->save($position)) {
                 $this->Flash->success(__('The position has been saved.'));
 				return $this->redirect(array('controller' => 'Homes', 'action' => 'index'));
@@ -175,6 +177,7 @@ class PositionsController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $position = $this->Positions->patchEntity($position, $this->request->data);
 			$position['customer_id']=$this->loggedinuser['customer_id'];
+			$position['last_modified_by']=$this->request->session()->read('sessionuser')['id'];
             if ($this->Positions->save($position)) {
                 $this->Flash->success(__('The position has been saved.'));
 

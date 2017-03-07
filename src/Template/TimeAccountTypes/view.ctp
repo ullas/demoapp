@@ -15,9 +15,9 @@
         <?php
             echo $this->Form->input('name',['disabled' => true]);
             echo $this->Form->input('unit',['label'=>'Unit','class'=>'select2','options' => array('Hour(s)', 'Day(s)'), 'empty' => 'Choose','disabled' => true]);
-            echo $this->Form->input('perm_reccur',['label'=>'Permanent / Recurring','disabled' => true]);
+            echo $this->Form->input('perm_reccur',['label'=>'Permanent / Recurring','disabled' => true,'class'=>'select2','options' => array('Permanent', 'Recurring'), 'empty' => true]);
             echo $this->Form->input('start_date',['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
-            echo $this->Form->input('valid_from',['label'=>'Account Valid From (month)','class'=>'select2','options' => array('1', '2','3','4','5','6','7','8','9','10','11','12'), 'empty' => 'Choose','disabled' => true]);
+            echo $this->Form->input('valid_from',['label'=>'Account Valid From (month)','class'=>'select2','options' => array("January","February","March","April","May","June","July","August","September","October","November","December"), 'empty' => 'Choose','disabled' => true]);
             echo $this->Form->input('valid_from_day',['label'=>'Account Valid From (day)','disabled' => true]);
             echo $this->Form->input('account_booking_off',['label'=>'Account Booking Offset (Months)','disabled' => true]);
             echo $this->Form->input('freq_period',['label'=>'Frequency Period','class'=>'select2','options' => array('Weekly','bi Weekly','Monthly','Annually'), 'empty' => 'Choose','disabled' => true]);

@@ -25,6 +25,7 @@ use Cake\Core\Configure;
  * @property \Cake\ORM\Association\HasMany $Empdatabiographies
  * @property \Cake\ORM\Association\HasMany $Jobinfos
  * @property \Cake\ORM\Association\HasMany $ChildPositions
+ * @property \Cake\ORM\Association\HasMany $Workflowactions
  *
  * @method \App\Model\Entity\Position get($primaryKey, $options = [])
  * @method \App\Model\Entity\Position newEntity($data = null, array $options = [])
@@ -33,6 +34,8 @@ use Cake\Core\Configure;
  * @method \App\Model\Entity\Position patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
  * @method \App\Model\Entity\Position[] patchEntities($entities, array $data, array $options = [])
  * @method \App\Model\Entity\Position findOrCreate($search, callable $callback = null)
+ *
+ * @mixin \Cake\ORM\Behavior\TimestampBehavior
  */
 class PositionsTable extends Table
 {
@@ -59,11 +62,11 @@ class PositionsTable extends Table
     {
         parent::initialize($config);
 
-$this->addBehavior('Tree');
-
         $this->table('positions');
         $this->displayField('name');
         $this->primaryKey('id');
+
+        $this->addBehavior('Timestamp');
 
         $this->belongsTo('Customers', [
             'foreignKey' => 'customer_id'
@@ -102,14 +105,18 @@ $this->addBehavior('Tree');
         $this->hasOne('Jobinfos', [
             'foreignKey' => 'position_id'
         ]);
-        // $this->hasMany('ChildPositions', [
+        // $this->hasOne('ChildPositions', [
             // 'className' => 'Positions',
             // 'foreignKey' => 'parent_id'
         // ]);
+        $this->hasOne('Workflowactions', [
+            'foreignKey' => 'position_id'
+        ]);
+		
+		
 		$this->belongsTo('Parents', [
             'className' => 'Positions','foreignKey' => 'parent_id'
         ]);
-
     }
 
     /**
@@ -191,15 +198,11 @@ $this->addBehavior('Tree');
             ->allowEmpty('created_by');
 
         $validator
-            ->date('created_date')
+            ->dateTime('created_date')
             ->allowEmpty('created_date');
 
         $validator
             ->allowEmpty('last_modified_by');
-
-        $validator
-            ->date('last_modified_date')
-            ->allowEmpty('last_modified_date');
 
         $validator
             ->allowEmpty('position_matrix_relationship');
