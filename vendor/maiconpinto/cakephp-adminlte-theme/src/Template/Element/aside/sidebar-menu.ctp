@@ -38,6 +38,7 @@ if (file_exists($file)) {
     <ul class="treeview-menu">
     	<li><a href="<?php echo $this -> Url -> build('/TimeTypes'); ?>"><i class="fa fa-circle-o"></i> Leave Type</a></li>
 		<li><a href="<?php echo $this -> Url -> build('/TimeAccountTypes'); ?>"><i class="fa fa-circle-o"></i> Time Account Type</a></li>
+		<li><a href="<?php echo $this -> Url -> build('/TimeTypeProfiles'); ?>"><i class="fa fa-circle-o"></i> Time Type Profiles</a></li>
 	
     </ul>
     </li>

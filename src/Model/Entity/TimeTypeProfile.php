@@ -17,10 +17,10 @@ use Cake\ORM\Entity;
  * @property string $external_code
  * @property int $time_type_id
  * @property int $customer_id
- * @property int $workflow_id
  *
  * @property \App\Model\Entity\TimeType $time_type
  * @property \App\Model\Entity\Customer $customer
+ * @property \App\Model\Entity\Workflow $workflow
  */
 class TimeTypeProfile extends Entity
 {

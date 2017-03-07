@@ -12,7 +12,7 @@
     <small>List</small>
   </h1>
   <ol class="breadcrumb">
-    <li><?= $this->Html->link('<i class="fa fa-angle-right"></i> '.__('Add'), ['action' => 'add'], ['escape' => false]) ?></li>
+    <?= $this->Html->link('<b>Add</b> &nbsp;&nbsp;'.__('<i class="fa fa-plus"></i>'), ['action' => 'add'],['class' => 'btn bg-olive btn-sm btn-flat','escape' => false]) ?>
   </ol>
 </section>
 <section class="content">

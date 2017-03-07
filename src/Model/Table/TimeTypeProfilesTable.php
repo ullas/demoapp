@@ -13,7 +13,6 @@ use Cake\Core\Configure;
  *
  * @property \Cake\ORM\Association\BelongsTo $TimeTypes
  * @property \Cake\ORM\Association\BelongsTo $Customers
- * @property \Cake\ORM\Association\BelongsTo $Workflow
  *
  * @method \App\Model\Entity\TimeTypeProfile get($primaryKey, $options = [])
  * @method \App\Model\Entity\TimeTypeProfile newEntity($data = null, array $options = [])
@@ -45,9 +44,6 @@ class TimeTypeProfilesTable extends Table
         ]);
         $this->belongsTo('Customers', [
             'foreignKey' => 'customer_id'
-        ]);
-        $this->belongsTo('Workflow', [
-            'foreignKey' => 'workflow_id'
         ]);
     }
 
@@ -118,7 +114,6 @@ class TimeTypeProfilesTable extends Table
         $rules->add($rules->isUnique(['external_code']));
         $rules->add($rules->existsIn(['time_type_id'], 'TimeTypes'));
         $rules->add($rules->existsIn(['customer_id'], 'Customers'));
-        $rules->add($rules->existsIn(['workflow_id'], 'Workflow'));
 
         return $rules;
     }

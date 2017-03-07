@@ -29,7 +29,7 @@ use Cake\ORM\Entity;
  * @property string $created_by
  * @property \Cake\I18n\Time $created_date
  * @property string $last_modified_by
- * @property \Cake\I18n\Time $last_modified_date
+ * @property \Cake\I18n\Time $modified
  * @property string $position_matrix_relationship
  * @property string $right_to_return
  * @property string $position_code
@@ -56,7 +56,9 @@ use Cake\ORM\Entity;
  * @property \App\Model\Entity\PayGrade $pay_grade
  * @property \App\Model\Entity\PayRange $pay_range
  * @property \App\Model\Entity\Position $parent_position
- * @property \App\Model\Entity\Jobinfo $job_info
+ * @property \App\Model\Entity\BusinessUnit $business_unit
+ * @property \App\Model\Entity\EmpDataBiography $empdatabiography
+ * @property \App\Model\Entity\JobInfo $jobinfo
  * @property \App\Model\Entity\Position $parent
  */
 class Position extends Entity
