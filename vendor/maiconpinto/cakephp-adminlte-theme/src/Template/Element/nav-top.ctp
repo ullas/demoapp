@@ -44,14 +44,16 @@ if (file_exists($file)) {
             <!-- User Account: style can be found in dropdown.less -->
             <li class="dropdown user user-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                    <?php echo $this->Html->image('sree.png', array('class' => 'user-image', 'alt' => 'User Image')); ?>
+                    <?php $picturename='/img/uploadedpics/'.$this->request->session()->read('sessionuser')['profilepic'];
+          					echo $this->Html->image($picturename, array('class' => 'user-image', 'alt' => 'User profile picture')); ?>
                     <span class="hidden-xs"><?php echo $name ?></span>
                 </a>
                 <ul class="dropdown-menu">
                     <!-- User image -->
                     <li class="user-header">
-                        <?php echo $this->Html->image('sree.png', array('class' => 'img-circle', 'alt' => 'User Image')); ?>
-
+                    	<?php $picturename='/img/uploadedpics/'.$this->request->session()->read('sessionuser')['profilepic'];
+          					echo $this->Html->image($picturename, array('class' => 'img-circle', 'alt' => 'User profile picture')); ?>
+                        <!-- <?php echo $this->Html->image('sree.png', array('class' => 'img-circle', 'alt' => 'User Image')); ?> -->
                         <p>
                             <?php echo $name ?> - Web Developer
                             <small>Member since Nov. 2012</small>

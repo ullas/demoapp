@@ -58,12 +58,19 @@ class AppController extends Controller
 			$this->loadModel('EmpDataBiographies');
 			$emparr=$this->EmpDataBiographies->find('all',['conditions' => array('employee_id' => $user['employee_id']),'contain' => []])->toArray();
 			isset($emparr[0]) ? $empdatabiographyid = $emparr[0]['id'] : $empdatabiographyid = "" ; 
+			
+			//get profilepicture from employeeid
+			$this->loadModel('Employees');
+			$employeearr=$this->Employees->find('all',['conditions' => array('id' => $user['employee_id']),'contain' => []])->toArray();
+			isset($employeearr[0]) ? $pic = $employeearr[0]['profilepicture'] : $pic = "" ; 
+
 		
     		$this->set('name', $user['name']);
 			$this->set('userid', $user['id']);   
 			$this->set('empid', $user['employee_id']);      
 			$this->set('dateformat', $user['dateformat']);     
 			$user["empdatabiographyid"] = $empdatabiographyid;
+			$user["profilepic"] = $pic;
 			$this->request->session()->write('sessionuser', $user);
 			$this->loggedinuser=$user;
 			

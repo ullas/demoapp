@@ -9,7 +9,8 @@ if (file_exists($file)) {
 ?>
 <div class="user-panel">
     <div class="pull-left image">
-        <?php echo $this->Html->image('sree.png', array('class' => 'img-circle', 'alt' => 'User Image')); ?>
+        <?php $picturename='/img/uploadedpics/'.$this->request->session()->read('sessionuser')['profilepic'];
+          					echo $this->Html->image($picturename, array('class' => 'img-circle', 'alt' => 'User profile picture')); ?>
         
     </div>
     <div class="pull-left info">

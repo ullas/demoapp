@@ -9,21 +9,21 @@ use Cake\Event\Event;
 use Cake\Event\ArrayObject;
 use Cake\Core\Configure;
 /**
- * EmpDataBiographies Model
+ * Empdatabiographies Model
  *
  * @property \Cake\ORM\Association\BelongsTo $Customers
  * @property \Cake\ORM\Association\BelongsTo $Employees
  * @property \Cake\ORM\Association\BelongsTo $Positions
  *
- * @method \App\Model\Entity\EmpDataBiography get($primaryKey, $options = [])
- * @method \App\Model\Entity\EmpDataBiography newEntity($data = null, array $options = [])
- * @method \App\Model\Entity\EmpDataBiography[] newEntities(array $data, array $options = [])
- * @method \App\Model\Entity\EmpDataBiography|bool save(\Cake\Datasource\EntityInterface $entity, $options = [])
- * @method \App\Model\Entity\EmpDataBiography patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
- * @method \App\Model\Entity\EmpDataBiography[] patchEntities($entities, array $data, array $options = [])
- * @method \App\Model\Entity\EmpDataBiography findOrCreate($search, callable $callback = null)
+ * @method \App\Model\Entity\Empdatabiography get($primaryKey, $options = [])
+ * @method \App\Model\Entity\Empdatabiography newEntity($data = null, array $options = [])
+ * @method \App\Model\Entity\Empdatabiography[] newEntities(array $data, array $options = [])
+ * @method \App\Model\Entity\Empdatabiography|bool save(\Cake\Datasource\EntityInterface $entity, $options = [])
+ * @method \App\Model\Entity\Empdatabiography patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
+ * @method \App\Model\Entity\Empdatabiography[] patchEntities($entities, array $data, array $options = [])
+ * @method \App\Model\Entity\Empdatabiography findOrCreate($search, callable $callback = null)
  */
-class EmpDataBiographiesTable extends Table
+class EmpdatabiographiesTable extends Table
 {
 
     /**

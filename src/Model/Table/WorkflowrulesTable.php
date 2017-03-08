@@ -5,13 +5,12 @@ use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
-use Cake\Event\Event;
-use Cake\Event\ArrayObject;
-use Cake\Core\Configure;
+
 /**
  * Workflowrules Model
  *
  * @property \Cake\ORM\Association\BelongsTo $Customers
+ * @property \Cake\ORM\Association\HasMany $TimeTypes
  * @property \Cake\ORM\Association\HasMany $Workflowactions
  * @property \Cake\ORM\Association\HasMany $Workflows
  *
@@ -46,6 +45,9 @@ class WorkflowrulesTable extends Table
 
         $this->belongsTo('Customers', [
             'foreignKey' => 'customer_id'
+        ]);
+        $this->hasMany('TimeTypes', [
+            'foreignKey' => 'workflowrule_id','dependent' => true
         ]);
         $this->hasMany('Workflowactions', [
             'foreignKey' => 'workflowrule_id','dependent' => true

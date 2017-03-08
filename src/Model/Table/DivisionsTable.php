@@ -12,6 +12,9 @@ use Cake\Core\Configure;
  * Divisions Model
  *
  * @property \Cake\ORM\Association\BelongsTo $Customers
+ * @property \Cake\ORM\Association\HasMany $Jobinfos
+ * @property \Cake\ORM\Association\HasMany $PayrollArea
+ * @property \Cake\ORM\Association\HasMany $Positions
  *
  * @method \App\Model\Entity\Division get($primaryKey, $options = [])
  * @method \App\Model\Entity\Division newEntity($data = null, array $options = [])
@@ -40,6 +43,15 @@ class DivisionsTable extends Table
 
         $this->belongsTo('Customers', [
             'foreignKey' => 'customer_id'
+        ]);
+        $this->hasMany('Jobinfos', [
+            'foreignKey' => 'division_id','dependent' => true
+        ]);
+        $this->hasMany('PayrollArea', [
+            'foreignKey' => 'division_id','dependent' => true
+        ]);
+        $this->hasMany('Positions', [
+            'foreignKey' => 'division_id','dependent' => true
         ]);
     }
 
