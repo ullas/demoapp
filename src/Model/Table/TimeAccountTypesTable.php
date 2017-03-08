@@ -51,7 +51,7 @@ class TimeAccountTypesTable extends Table
             'foreignKey' => 'customer_id'
         ]);
         $this->hasMany('TimeTypes', [
-            'foreignKey' => 'time_account_type_id'
+            'foreignKey' => 'time_account_type_id','dependent' => true
         ]);
     }
 

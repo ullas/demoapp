@@ -74,109 +74,109 @@ class CustomersTable extends Table
         $this->primaryKey('id');
 
         $this->hasMany('Addresses', [
-            'foreignKey' => 'customer_id'
+            'foreignKey' => 'customer_id','dependent' => true
         ]);
         $this->hasMany('BusinessUnits', [
-            'foreignKey' => 'customer_id'
+            'foreignKey' => 'customer_id','dependent' => true
         ]);
         $this->hasMany('CalendarAssignments', [
-            'foreignKey' => 'customer_id'
+            'foreignKey' => 'customer_id','dependent' => true
         ]);
         $this->hasMany('ContactInfos', [
-            'foreignKey' => 'customer_id'
+            'foreignKey' => 'customer_id','dependent' => true
         ]);
         $this->hasMany('CorporateAddresses', [
-            'foreignKey' => 'customer_id'
+            'foreignKey' => 'customer_id','dependent' => true
         ]);
         $this->hasMany('CostCentres', [
-            'foreignKey' => 'customer_id'
+            'foreignKey' => 'customer_id','dependent' => true
         ]);
         $this->hasMany('Departments', [
-            'foreignKey' => 'customer_id'
+            'foreignKey' => 'customer_id','dependent' => true
         ]);
         $this->hasMany('Dependents', [
-            'foreignKey' => 'customer_id'
+            'foreignKey' => 'customer_id','dependent' => true
         ]);
         $this->hasMany('Divisions', [
-            'foreignKey' => 'customer_id'
+            'foreignKey' => 'customer_id','dependent' => true
         ]);
         $this->hasMany('EmpDataBiographies', [
-            'foreignKey' => 'customer_id'
+            'foreignKey' => 'customer_id','dependent' => true
         ]);
         $this->hasMany('EmpDataPersonals', [
-            'foreignKey' => 'customer_id'
+            'foreignKey' => 'customer_id','dependent' => true
         ]);
         $this->hasMany('EmploymentInfos', [
-            'foreignKey' => 'customer_id'
+            'foreignKey' => 'customer_id','dependent' => true
         ]);
         $this->hasMany('EventReasons', [
-            'foreignKey' => 'customer_id'
+            'foreignKey' => 'customer_id','dependent' => true
         ]);
         $this->hasMany('Frequencies', [
-            'foreignKey' => 'customer_id'
+            'foreignKey' => 'customer_id','dependent' => true
         ]);
         $this->hasMany('HolidayCalendars', [
-            'foreignKey' => 'customer_id'
+            'foreignKey' => 'customer_id','dependent' => true
         ]);
         $this->hasMany('Holidays', [
-            'foreignKey' => 'customer_id'
+            'foreignKey' => 'customer_id','dependent' => true
         ]);
         $this->hasMany('Ids', [
-            'foreignKey' => 'customer_id'
+            'foreignKey' => 'customer_id','dependent' => true
         ]);
         $this->hasMany('JobClasses', [
-            'foreignKey' => 'customer_id'
+            'foreignKey' => 'customer_id','dependent' => true
         ]);
         $this->hasMany('JobFunctions', [
-            'foreignKey' => 'customer_id'
+            'foreignKey' => 'customer_id','dependent' => true
         ]);
         $this->hasMany('JobInfos', [
-            'foreignKey' => 'customer_id'
+            'foreignKey' => 'customer_id','dependent' => true
         ]);
         $this->hasMany('LegalEntities', [
-            'foreignKey' => 'customer_id'
+            'foreignKey' => 'customer_id','dependent' => true
         ]);
         $this->hasMany('Locations', [
-            'foreignKey' => 'customer_id'
+            'foreignKey' => 'customer_id','dependent' => true
         ]);
         $this->hasMany('PayComponentGroups', [
-            'foreignKey' => 'customer_id'
+            'foreignKey' => 'customer_id','dependent' => true
         ]);
         $this->hasMany('PayComponents', [
-            'foreignKey' => 'customer_id'
+            'foreignKey' => 'customer_id','dependent' => true
         ]);
         $this->hasMany('PayGrades', [
-            'foreignKey' => 'customer_id'
+            'foreignKey' => 'customer_id','dependent' => true
         ]);
         $this->hasMany('PayGroups', [
-            'foreignKey' => 'customer_id'
+            'foreignKey' => 'customer_id','dependent' => true
         ]);
         $this->hasMany('PayRanges', [
-            'foreignKey' => 'customer_id'
+            'foreignKey' => 'customer_id','dependent' => true
         ]);
         $this->hasMany('Picklists', [
-            'foreignKey' => 'customer_id'
+            'foreignKey' => 'customer_id','dependent' => true
         ]);
         $this->hasMany('Positions', [
-            'foreignKey' => 'customer_id'
+            'foreignKey' => 'customer_id','dependent' => true
         ]);
         $this->hasMany('Regions', [
-            'foreignKey' => 'customer_id'
+            'foreignKey' => 'customer_id','dependent' => true
         ]);
         $this->hasMany('TimeAccountTypes', [
-            'foreignKey' => 'customer_id'
+            'foreignKey' => 'customer_id','dependent' => true
         ]);
         $this->hasMany('TimeTypeProfiles', [
-            'foreignKey' => 'customer_id'
+            'foreignKey' => 'customer_id','dependent' => true
         ]);
         $this->hasMany('TimeTypes', [
-            'foreignKey' => 'customer_id'
+            'foreignKey' => 'customer_id','dependent' => true
         ]);
         $this->hasMany('Users', [
-            'foreignKey' => 'customer_id'
+            'foreignKey' => 'customer_id','dependent' => true
         ]);
         $this->hasMany('WorkSchedules', [
-            'foreignKey' => 'customer_id'
+            'foreignKey' => 'customer_id','dependent' => true
         ]);
     }
 	public function beforeMarshal(Event $event, $data, $options)

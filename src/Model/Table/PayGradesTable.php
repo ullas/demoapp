@@ -43,7 +43,7 @@ class PayGradesTable extends Table
             'foreignKey' => 'customer_id'
         ]);
         $this->hasMany('JobClasses', [
-            'foreignKey' => 'pay_grade_id'
+            'foreignKey' => 'pay_grade_id','dependent' => true
         ]);
     }
 

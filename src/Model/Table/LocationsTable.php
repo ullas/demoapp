@@ -50,16 +50,16 @@ class LocationsTable extends Table
             'foreignKey' => 'holiday_calendar_id'
         ]);
         $this->hasMany('Jobinfos', [
-            'foreignKey' => 'location_id'
+            'foreignKey' => 'location_id','dependent' => true
         ]);
         $this->hasMany('LegalEntities', [
-            'foreignKey' => 'location_id'
+            'foreignKey' => 'location_id','dependent' => true
         ]);
         $this->hasMany('PayrollArea', [
-            'foreignKey' => 'location_id'
+            'foreignKey' => 'location_id','dependent' => true
         ]);
         $this->hasMany('Positions', [
-            'foreignKey' => 'location_id'
+            'foreignKey' => 'location_id','dependent' => true
         ]);
     }
 

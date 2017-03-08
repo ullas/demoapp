@@ -47,7 +47,7 @@ class PayGroupsTable extends Table
             'foreignKey' => 'frequency_id'
         ]);
         $this->hasMany('PayRanges', [
-            'foreignKey' => 'pay_group_id'
+            'foreignKey' => 'pay_group_id','dependent' => true
         ]);
     }
 
