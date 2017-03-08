@@ -52,10 +52,10 @@ class UsersTable extends Table
             'foreignKey' => 'employee_id'
         ]);
         $this->hasMany('CalendarAssignments', [
-            'foreignKey' => 'user_id'
+            'foreignKey' => 'user_id','dependent' => true
         ]);
         $this->hasMany('Notes', [
-            'foreignKey' => 'user_id'
+            'foreignKey' => 'user_id','dependent' => true
         ]);
     }
 

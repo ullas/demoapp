@@ -62,6 +62,8 @@ class PositionsTable extends Table
     {
         parent::initialize($config);
 
+		$this->addBehavior('Tree');
+
         $this->table('positions');
         $this->displayField('name');
         $this->primaryKey('id');
@@ -100,17 +102,17 @@ class PositionsTable extends Table
             'foreignKey' => 'business_unit_id'
         ]);
         $this->hasOne('Empdatabiographies', [
-            'foreignKey' => 'position_id'
+            'foreignKey' => 'position_id','dependent' => true
         ]);
         $this->hasOne('Jobinfos', [
-            'foreignKey' => 'position_id'
+            'foreignKey' => 'position_id','dependent' => true
         ]);
         // $this->hasOne('ChildPositions', [
             // 'className' => 'Positions',
             // 'foreignKey' => 'parent_id'
         // ]);
         $this->hasOne('Workflowactions', [
-            'foreignKey' => 'position_id'
+            'foreignKey' => 'position_id','dependent' => true
         ]);
 		
 		

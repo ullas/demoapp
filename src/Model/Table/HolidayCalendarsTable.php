@@ -43,7 +43,7 @@ class HolidayCalendarsTable extends Table
             'foreignKey' => 'customer_id'
         ]);
         $this->hasMany('CalendarAssignments', [
-            'foreignKey' => 'holiday_calendar_id'
+            'foreignKey' => 'holiday_calendar_id','dependent' => true
         ]);
     }
 

@@ -58,16 +58,16 @@ class LegalEntitiesTable extends Table
             'foreignKey' => 'holiday_calendar_id'
         ]);
         $this->hasMany('Jobinfos', [
-            'foreignKey' => 'legal_entity_id'
+            'foreignKey' => 'legal_entity_id','dependent' => true
         ]);
         $this->hasMany('PayRanges', [
-            'foreignKey' => 'legal_entity_id'
+            'foreignKey' => 'legal_entity_id','dependent' => true
         ]);
         $this->hasMany('PayrollArea', [
-            'foreignKey' => 'legal_entity_id'
+            'foreignKey' => 'legal_entity_id','dependent' => true
         ]);
         $this->hasMany('Positions', [
-            'foreignKey' => 'legal_entity_id'
+            'foreignKey' => 'legal_entity_id','dependent' => true
         ]);
     }
 

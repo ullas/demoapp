@@ -50,10 +50,10 @@ class TimeTypesTable extends Table
             'foreignKey' => 'workflowrule_id'
         ]);
         $this->hasMany('EmployeeAbsencerecords', [
-            'foreignKey' => 'time_type_id'
+            'foreignKey' => 'time_type_id','dependent' => true
         ]);
         $this->hasMany('TimeTypeProfiles', [
-            'foreignKey' => 'time_type_id'
+            'foreignKey' => 'time_type_id','dependent' => true
         ]);
     }
 

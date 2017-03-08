@@ -59,25 +59,25 @@ class EmployeesTable extends Table
             'foreignKey' => 'customer_id'
         ]);
         $this->hasOne('Addresses', [
-            'foreignKey' => 'employee_id'
+            'foreignKey' => 'employee_id','dependent' => true
         ]);
         $this->hasOne('ContactInfos', [
-            'foreignKey' => 'employee_id'
+            'foreignKey' => 'employee_id','dependent' => true
         ]);
         $this->hasOne('Empdatabiographies', [
-            'foreignKey' => 'employee_id'
+            'foreignKey' => 'employee_id','dependent' => true
         ]);
         $this->hasOne('Empdatapersonals', [
-            'foreignKey' => 'employee_id'
+            'foreignKey' => 'employee_id','dependent' => true
         ]);
         $this->hasOne('Employmentinfos', [
-            'foreignKey' => 'employee_id'
+            'foreignKey' => 'employee_id','dependent' => true
         ]);
         $this->hasOne('Identities', [
-            'foreignKey' => 'employee_id'
+            'foreignKey' => 'employee_id','dependent' => true
         ]);
         $this->hasOne('Users', [
-            'foreignKey' => 'employee_id'
+            'foreignKey' => 'employee_id','dependent' => true
         ]);
     }
 

@@ -41,7 +41,7 @@ class FrequenciesTable extends Table
             'foreignKey' => 'customer_id'
         ]);
         $this->hasMany('PayComponents', [
-            'foreignKey' => 'frequency_id'
+            'foreignKey' => 'frequency_id','dependent' => true
         ]);
     }
 

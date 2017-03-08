@@ -47,7 +47,7 @@ class EmpDataPersonalsTable extends Table
             'foreignKey' => 'employee_id'
         ]);
         $this->hasMany('Employees', [
-            'foreignKey' => 'emp_data_personal_id'
+            'foreignKey' => 'emp_data_personal_id','dependent' => true
         ]);
     }
 
