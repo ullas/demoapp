@@ -43,8 +43,8 @@ div#myDropZone {
           		<?php $picturename='/img/uploadedpics/'.$employee->profilepicture;
           			echo $this->Html->image($picturename, array('class' => 'profile-user-img img-responsive img-circle', 'id'=>'profilepic', 'alt' => 'User profile picture')); ?>
             	<!-- <?php echo $this->Html->image('sree.png', array('class' => 'profile-user-img img-responsive img-circle', 'alt' => 'User profile picture','title'=>'text')); ?> -->
-				<a href="#" class="open-Popup pull-right" data-toggle="modal" data-remote="false" data-target="#editpicpopover" style="margin-top:-50px;"><i class="fa fa-pencil"></i> Change Picture</a>
-  
+				<a href="#" class="open-Popup pull-right" data-toggle="modal" data-remote="false" data-target="#editpicpopover" style="font-size:20px;margin-top:-100px;"><i class="fa fa-camera"></i> <!-- Change Picture --></a>
+             
              <h3 class="profile-username text-center" ><?php echo $name ?></h3>
           
 			 <ul class="list-group list-group-unbordered">
@@ -63,35 +63,35 @@ div#myDropZone {
       <!-- /.box -->
 
 
-      <!-- Notes Box -->
-      <div class="box box-primary" style="border-color:transparent;">
-        <div class="box-header with-border">
-              <h3 class="box-title">About Me</h3>
+      <div class="info-box">
+            <span class="info-box-icon bg-teal-gradient"><i class="fa fa-users"></i></span>
+
+            <div class="info-box-content">
+              <span class="info-box-text">Dependents</span>
+              <span class="info-box-number"><?php echo $dependentcount; ?></span>
             </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-     
-			  <strong><i class="fa fa-briefcase margin-r-5"></i> Position</strong>
+            <!-- /.info-box-content -->
+	</div>
+	
+<div class="info-box">
+            <span class="info-box-icon bg-aqua-gradient"><i class="fa fa-file-text-o"></i></span>
 
-              <p class="text-muted">
-                Manager
-              </p>
-              <hr>
-              <strong><i class="fa fa-bank margin-r-5"></i> Legal Entity</strong>
-
-              <p class="text-muted">
-                Maptell 
-              </p>
-
-              <hr>
-              <strong><i class="fa fa-map-marker margin-r-5"></i> Location</strong>
-
-              <p class="text-muted">Malibu, California</p>
-
+            <div class="info-box-content">
+              <span class="info-box-text">Notes</span>
+              <span class="info-box-number"><?php echo $notecount; ?></span>
             </div>
-            <!-- /.box-body -->
-      </div>
-      <!-- /.box -->
+            <!-- /.info-box-content -->
+	</div>
+  
+      <div class="info-box">
+            <span class="info-box-icon bg-green-gradient"><i class="fa fa-calendar-check-o"></i></span>
+
+            <div class="info-box-content">
+              <span class="info-box-text">Leaves</span>
+              <span class="info-box-number"><?php echo $leavecount; ?></span>
+            </div>
+            <!-- /.info-box-content -->
+	</div>
       
       
     </div>

@@ -4,7 +4,7 @@ namespace App\Model\Entity;
 use Cake\ORM\Entity;
 
 /**
- * EmpDataBiography Entity
+ * Empdatabiography Entity
  *
  * @property int $id
  * @property \Cake\I18n\Time $date_of_birth
@@ -17,11 +17,12 @@ use Cake\ORM\Entity;
  * @property int $customer_id
  * @property int $employee_id
  * @property int $position_id
- 
+ *
  * @property \App\Model\Entity\Customer $customer
  * @property \App\Model\Entity\Employee $employee
+ * @property \App\Model\Entity\Position $position
  */
-class EmpDataBiography extends Entity
+class Empdatabiography extends Entity
 {
 
     /**

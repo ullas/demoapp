@@ -129,6 +129,9 @@ div.dataTables_filter input {
 .profile-user-img {
 	height:100px;	
 }
+.user-panel > .image > img {
+    height: 45px;
+}
 /*dashboard myinfo*/
 .myinfo-footer {
 	position: absolute;

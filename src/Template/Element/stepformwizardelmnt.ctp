@@ -65,7 +65,7 @@
       		echo '<a type="button" class="btn btn-success btn-circle"><i class="fa fa-bank"></i></a>';
       		echo '<dd class="text-success"><i class="icon fa fa-check-square"></i> Legal Entity</dt>';
       	}else{
-      		$btntype="default";$disabledstr='disabled="disabled"';$texttype='';
+      		$btntype="danger";$disabledstr='disabled="disabled"';$texttype='';
       		if($wcontent=="LegalEntity"){$btntype="primary";$disabledstr='';$texttype=' class="text-blue"';}
       		echo '<a type="button" class="btn btn-'.$btntype.' btn-circle" '.$disabledstr.'><i class="fa fa-bank"></i></a>';
       		echo '<dd'.$texttype.'>Legal Entity</dd>';
@@ -78,7 +78,7 @@
       		echo '<a type="button" class="btn btn-success btn-circle"><i class="fa fa-cube"></i></a>';
       		echo '<dd class="text-success"><i class="icon fa fa-check-square"></i> Business Unit</dt>';
       	}else{
-      		$btntype="default";$disabledstr='disabled="disabled"';$texttype='';
+      		$btntype="danger";$disabledstr='disabled="disabled"';$texttype='';
       		if($wcontent=="BusinessUnit"){$btntype="primary";$disabledstr='';$texttype=' class="text-blue"';}
       		echo '<a type="button" class="btn btn-'.$btntype.' btn-circle" '.$disabledstr.'><i class="fa fa-cube"></i></a>';
       		echo '<dd'.$texttype.'>Business Unit</dd>';
@@ -91,7 +91,7 @@
       		echo '<a type="button" class="btn btn-success btn-circle"><i class="fa fa-database"></i></a>';
       		echo '<dd class="text-success"><i class="icon fa fa-check-square"></i> Division</dt>';
       	}else{
-      		$btntype="default";$disabledstr='disabled="disabled"';$texttype='';
+      		$btntype="danger";$disabledstr='disabled="disabled"';$texttype='';
       		if($wcontent=="Division"){$btntype="primary";$disabledstr='';$texttype=' class="text-blue"';}
       		echo '<a type="button" class="btn btn-'.$btntype.' btn-circle" '.$disabledstr.'><i class="fa fa-database"></i></a>';
       		echo '<dd'.$texttype.'>Division</dd>';
@@ -104,7 +104,7 @@
       		echo '<a type="button" class="btn btn-success btn-circle"><i class="fa fa-creative-commons"></i></a>';
       		echo '<dt class="text-success"><i class="icon fa fa-check-square"></i> Cost Center</dt>';
       	}else{
-      		$btntype="default";$disabledstr='disabled="disabled"';$texttype='';
+      		$btntype="danger";$disabledstr='disabled="disabled"';$texttype='';
       		if($wcontent=="CostCenter"){$btntype="primary";$disabledstr='';$texttype=' class="text-blue"';}
       		echo '<a type="button" class="btn btn-'.$btntype.' btn-circle" '.$disabledstr.'><i class="fa fa-creative-commons"></i></a>';
       		echo '<dd'.$texttype.'>Cost Center</dd>';
@@ -117,7 +117,7 @@
       		echo '<a type="button" class="btn btn-success btn-circle"><i class="fa fa-cubes"></i></a>';
       		echo '<dd class="text-success"><i class="icon fa fa-check-square"></i> Department</dt>';
       	}else{
-      		$btntype="default";$disabledstr='disabled="disabled"';$texttype='';
+      		$btntype="danger";$disabledstr='disabled="disabled"';$texttype='';
       		if($wcontent=="Department"){$btntype="primary";$disabledstr='';$texttype=' class="text-blue"';}
       		echo '<a type="button" class="btn btn-'.$btntype.' btn-circle" '.$disabledstr.'><i class="fa fa-cubes"></i></a>';
       		echo '<dd'.$texttype.'>Department</dd>';
@@ -129,7 +129,7 @@
       		echo '<a type="button" class="btn btn-success btn-circle"><i class="fa fa-tasks"></i></a>';
       		echo '<dd class="text-success"><i class="icon fa fa-check-square"></i> Position</dt>';
       	}else{
-      		$btntype="default";$disabledstr='disabled="disabled"';$texttype='';
+      		$btntype="danger";$disabledstr='disabled="disabled"';$texttype='';
       		if($wcontent=="Position"){$btntype="primary";$disabledstr='';$texttype=' class="text-blue"';}
       		echo '<a type="button" class="btn btn-'.$btntype.' btn-circle" '.$disabledstr.'><i class="fa fa-tasks"></i></a>';
       		echo '<dd'.$texttype.'>Position</dd>';

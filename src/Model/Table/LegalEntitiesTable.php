@@ -66,6 +66,7 @@ class LegalEntitiesTable extends Table
         $this->hasMany('PayrollArea', [
             'foreignKey' => 'legal_entity_id','dependent' => true
         ]);
+		
         $this->hasMany('Positions', [
             'foreignKey' => 'legal_entity_id','dependent' => true
         ]);
