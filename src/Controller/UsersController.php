@@ -85,10 +85,10 @@ class UsersController extends AppController
         		$email->transport('webmail');
 
 				$mailop ="and the confirmation mail sent.";
-				$msg="Hello,\n\n    Thank you for registering at HRMaptell. \n\nYour account: \n\n Username:" .$user['username']. " \n Password:" .$user['password']. " \n\nBest, \nHRMaptell Team.";
+				$msg="Hello,\n\n    Thank you for registering at MayHaw. \n\nYour account: \n\n Username:" .$user['username']. " \n Password:" .$user['password']. " \n\nBest, \nMayHaw Team.";
         		try {
-            		$res = $email->to(['renjith@maptell.com' => 'noreply@hrmaptell.com'])
-                  		->subject('HR')                   
+            		$res = $email->to(['renjith@maptell.com' => 'noreply@mayhaw.com'])
+                  		->subject('MayHaw')                   
                  		 ->send($msg);
 
        		 	} catch (Exception $e) {

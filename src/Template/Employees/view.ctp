@@ -20,13 +20,16 @@
     <div class="col-md-12">
       <div class="nav-tabs-custom">
         <ul class="nav nav-tabs">
-          	<li  class="active"><a href="#EmpDataBiography" data-toggle="tab">Employee Data Biography</a></li>	
-            <li><a href="#EmpDataPersonal" data-toggle="tab">Employee Data Personals</a></li>
-           <li><a href="#EmploymentInfo" data-toggle="tab">Employment Infos</a></li>  
+          	<li class="active"><a href="#EmpDataPersonal" data-toggle="tab">Personal Information</a></li>
+            <li><a href="#EmploymentInfo" data-toggle="tab">Employment Information</a></li>
+            <li><a href="#EmpDataBiography" data-toggle="tab">Profile</a></li>	  
+           	<li><a href="#social" data-toggle="tab">Social</a></li>
+           	<li><a href="#address" data-toggle="tab">Address</a></li>
+           	<li><a href="#ids" data-toggle="tab">ID's</a></li> 
         </ul>
         
         <div class=" tab-content">
-          <div class="active tab-pane" id="EmpDataBiography">
+          <div class="tab-pane" id="EmpDataBiography">
              <!-- <div class="form-horizontal"> -->
              	<fieldset>
                 <?php
@@ -46,7 +49,7 @@
           <!-- /.tab-pane -->
           
           
-          <div class="tab-pane" id="EmpDataPersonal">
+          <div class="active tab-pane" id="EmpDataPersonal">
              <!-- <div class="form-horizontal"> -->
              	<fieldset>
              		<?php
@@ -129,6 +132,58 @@
            </div>
           <!-- Tab Pane-->
           
+          <div class="tab-pane" id="social">
+             <!-- <div class="form-horizontal"> -->
+             	<fieldset>
+             		<?php
+            		echo $this->Form->input('contact_info.phone',['templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-mobile"></i></div>'],'disabled' => true]);
+            		echo $this->Form->input('contact_info.mobile',['templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-phone"></i></div>'],'disabled' => true]);
+            		echo $this->Form->input('contact_info.email_address1',['templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa  fa-envelope"></i></div>'],'disabled' => true]);
+            		echo $this->Form->input('contact_info.email_address2',['templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa  fa-envelope"></i></div>'],'disabled' => true]);
+            		echo $this->Form->input('contact_info.facebook',['templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-facebook"></i></div>'],'disabled' => true]);
+            		echo $this->Form->input('contact_info.linkedin',['templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-linkedin"></i></div>'],'disabled' => true]);
+        			?>
+        			
+        			<?php echo $this->Form->input('profilepicture', array('type' => 'hidden')); ?>
+            <!-- </div> -->
+     		</fieldset>
+          </div>
+          <!-- Tab Pane-->
+          
+          <div class="tab-pane" id="address">
+             <!-- <div class="form-horizontal"> -->
+             <fieldset>
+             	<?php
+            		echo $this->Form->input('address.address_no',['label' => 'Adress Number','disabled' => true]);
+            		echo $this->Form->input('address.address1',['label' => 'Care Of','disabled' => true]);
+            		echo $this->Form->input('address.address2',['label' => 'Street','disabled' => true]);
+            		echo $this->Form->input('address.address3',['label' => 'House Number','disabled' => true]);
+            		echo $this->Form->input('address.address4',['label' => 'Apartment','disabled' => true]);
+           	 		echo $this->Form->input('address.address5',['label' => 'Second Address Line','disabled' => true]);
+            		echo $this->Form->input('address.address6',['label' => 'POBOX','disabled' => true]);
+            		echo $this->Form->input('address.address7',['label' => 'Camp','disabled' => true]);
+            		echo $this->Form->input('address.address8',['label' => 'Bed Number','disabled' => true]);
+            		echo $this->Form->input('address.zip_code',['label' => 'Postal Code','disabled' => true]);
+            		echo $this->Form->input('address.city',['label' => 'City','disabled' => true]);
+            		echo $this->Form->input('address.county',['label' => 'District','disabled' => true]);
+            		echo $this->Form->input('address.state',['label' => 'Region','disabled' => true]);
+        		?>	
+     		 </fieldset>
+          </div>
+          <!-- Tab Pane-->
+          <div class="tab-pane" id="ids">
+             <!-- <div class="form-horizontal"> -->
+             	<fieldset>
+             		<?php
+             			echo $this->Form->input('identity.country',['templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-flag"></i></div>'],'class'=>'select2','options' => $this->Country->get_countries(), 'empty' => true,'disabled' => true]);
+            			echo $this->Form->input('identity.card_type',['label' => 'National ID Card Type','disabled' => true]);
+            			echo $this->Form->input('identity.nationalid',['label' => 'National ID','disabled' => true]);
+            			echo $this->Form->input('identity.is_primary',['disabled' => true]);
+        			?>
+            <!-- </div> -->
+     		</fieldset>
+          </div>
+          <!-- Tab Pane-->
           
           
         </div>

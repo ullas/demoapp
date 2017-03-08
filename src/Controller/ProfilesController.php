@@ -85,6 +85,16 @@ class ProfilesController extends AppController
 		$this->set(compact('profiles','employee','dependentcount','notecount','leavecount'));
         $this->set('_serialize', ['profiles']);
 		
+		//to get position name
+		$this->loadModel('EmpDataBiographies');
+		$emparr=$this->EmpDataBiographies->find('all',['conditions' => array('employee_id' => $empid),'contain' => []])->toArray();
+		(isset($emparr[0]))? $posid = $emparr[0]['position_id'] : $posid = "" ;
+		$this->loadModel('Positions');
+		$posarr=$this->Positions->find('all',['conditions' => array('id' => $posid),'contain' => []])->toArray();
+		if(isset($posarr[0])){
+			$this->set('position',$posarr[0]);
+		}
+		
 		if ($this->request->is(['patch', 'post', 'put'])) {
 			$this->loadModel('Employees');
             $employee = $this->Employees->patchEntity($employee, $this->request->data);
