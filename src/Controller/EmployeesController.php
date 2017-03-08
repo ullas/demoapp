@@ -54,7 +54,7 @@ class EmployeesController extends AppController
     public function view($id = null)
     {
         $employee = $this->Employees->get($id, [
-            'contain' => ['Empdatabiographies', 'Empdatapersonals', 'Employmentinfos']
+            'contain' => ['Empdatabiographies', 'Empdatapersonals', 'Employmentinfos', 'ContactInfos', 'Addresses','Identities']
         ]);
 		if($employee['customer_id']==$this->loggedinuser['customer_id']){
         	$this->set('employee', $employee);
@@ -74,12 +74,15 @@ class EmployeesController extends AppController
     {
         $employee = $this->Employees->newEntity();
         if ($this->request->is('post')) {
-            $employee = $this->Employees->patchEntity($employee, $this->request->data,['associated' => ['Empdatabiographies', 'Empdatapersonals', 'Employmentinfos', 'Customers']]);
+            $employee = $this->Employees->patchEntity($employee, $this->request->data,['associated' => ['Empdatabiographies', 'Empdatapersonals', 'Employmentinfos', 'Customers', 'ContactInfos', 'Addresses','Identities']]);
 			//saving customer_id to all associated models
 			$employee['customer_id']=$this->loggedinuser['customer_id'];
 			$employee['empdatabiography']['customer_id']=$this->loggedinuser['customer_id'];
 			$employee['empdatapersonal']['customer_id']=$this->loggedinuser['customer_id'];
 			$employee['employmentinfo']['customer_id']=$this->loggedinuser['customer_id'];
+			$employee['contact_info']['customer_id']=$this->loggedinuser['customer_id'];
+			$employee['address']['customer_id']=$this->loggedinuser['customer_id'];
+			$employee['identity']['customer_id']=$this->loggedinuser['customer_id'];
 			
             if ($this->Employees->save($employee)) {
                 	
@@ -109,7 +112,7 @@ class EmployeesController extends AppController
     public function edit($id = null)
     {
         $employee = $this->Employees->get($id, [
-            'contain' => ['Empdatabiographies', 'Empdatapersonals', 'Employmentinfos']
+            'contain' => ['Empdatabiographies', 'Empdatapersonals', 'Employmentinfos', 'ContactInfos', 'Addresses','Identities']
         ]);
 		
 		if($employee['customer_id'] != $this->loggedinuser['customer_id'])
@@ -139,21 +142,52 @@ class EmployeesController extends AppController
             		$this->loadModel('EmpDataPersonals');
 					$arr = $this->EmpDataPersonals->find('all',['conditions' => array('employee_id' => $id), 'contain' => []])->toArray();
 					isset($arr[0]) ? $empDataPersonal = $arr[0] : $empDataPersonal = $this->EmpDataPersonals->newEntity();  
-						$empDataPersonal = $arr[0];
-						$empDataPersonal = $this->EmpDataPersonals->patchEntity($empDataPersonal, $this->request->data['empdatapersonal']);
-            			if ($this->Employees->EmpDataPersonals->save($empDataPersonal)) {
+					// $empDataPersonal = $arr[0];
+					$empDataPersonal = $this->EmpDataPersonals->patchEntity($empDataPersonal, $this->request->data['empdatapersonal']);
+            		if ($this->Employees->EmpDataPersonals->save($empDataPersonal)) {
                 			
-                		}
+                	}
 
 					//associated EmpDataBiographies
             		$this->loadModel('EmploymentInfos');
 					$arr = $this->EmploymentInfos->find('all',['conditions' => array('employee_id' => $id), 'contain' => []])->toArray();
 					isset($arr[0]) ? $employmentinfo = $arr[0] : $employmentinfo = $this->EmploymentInfos->newEntity();  						
-					$employmentinfo = $arr[0];
-						$employmentinfo = $this->EmploymentInfos->patchEntity($employmentinfo, $this->request->data['employmentinfo']);
-            			if ($this->Employees->EmploymentInfos->save($employmentinfo)) {
+					// $employmentinfo = $arr[0];
+					$employmentinfo = $this->EmploymentInfos->patchEntity($employmentinfo, $this->request->data['employmentinfo']);
+            		if ($this->Employees->EmploymentInfos->save($employmentinfo)) {
                 			
-                		}
+               		}	
+						
+					//associated Contact Infos
+            		$this->loadModel('ContactInfos');
+					$arr = $this->ContactInfos->find('all',['conditions' => array('employee_id' => $id), 'contain' => []])->toArray();
+					isset($arr[0]) ? $contactinfo = $arr[0] : $contactinfo = $this->ContactInfos->newEntity();  						
+					// $contactinfo = $arr[0];
+					$contactinfo = $this->ContactInfos->patchEntity($contactinfo, $this->request->data['contact_info']);
+					$contactinfo['customer_id']=$this->loggedinuser['customer_id'];
+    				if ($this->Employees->ContactInfos->save($contactinfo)) {
+                			
+            		}
+					
+					//associated Addresses
+            		$this->loadModel('Addresses');
+					$arr = $this->Addresses->find('all',['conditions' => array('employee_id' => $id), 'contain' => []])->toArray();
+					isset($arr[0]) ? $address = $arr[0] : $address = $this->Addresses->newEntity();  						
+					$address = $this->Addresses->patchEntity($address, $this->request->data['address']);
+					$address['customer_id']=$this->loggedinuser['customer_id'];
+    				if ($this->Employees->Addresses->save($address)) {
+                			
+            		}
+					//associated Identities
+            		$this->loadModel('Identities');
+					$arr = $this->Identities->find('all',['conditions' => array('employee_id' => $id), 'contain' => []])->toArray();
+					isset($arr[0]) ? $identity = $arr[0] : $identity = $this->Identities->newEntity();  						
+					// $identity = $arr[0];
+					$identity = $this->Identities->patchEntity($identity, $this->request->data['identity']);
+					$identity['customer_id']=$this->loggedinuser['customer_id'];
+    				if ($this->Employees->Identities->save($identity)) {
+                			
+            		}
 						
 				$this->Flash->success(__('The employee has been saved.'));
 				return $this->redirect(['action' => 'index']);

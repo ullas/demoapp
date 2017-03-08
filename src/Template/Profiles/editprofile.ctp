@@ -46,15 +46,7 @@ div#myDropZone {
 				<a href="#" class="open-Popup pull-right" data-toggle="modal" data-remote="false" data-target="#editpicpopover" style="font-size:20px;margin-top:-100px;"><i class="fa fa-camera"></i> <!-- Change Picture --></a>
              
              <h3 class="profile-username text-center" ><?php echo $name ?></h3>
-          
-			 <ul class="list-group list-group-unbordered">
-                <li class="list-group-item">
-                  <b>Notes</b> <a class="pull-right">0</a>
-                </li>
-                <li class="list-group-item">
-                  <b>Dependents</b> <a class="pull-right">0</a>
-                </li>
-             </ul>
+          <p class="text-muted text-center"><i class="fa fa-briefcase"></i> <?php if(isset($position)){echo $position['name'];} ?></p>
 
           <button type="submit" class="btn btn-primary btn-block"> Save Changes</button>
         </div>
