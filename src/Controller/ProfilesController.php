@@ -2,7 +2,7 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
-
+use Cake\ORM\TableRegistry;
 /**
  * Profiles Controller
  *
@@ -21,13 +21,27 @@ class ProfilesController extends AppController
      }
     public function index()
     {
+    	$dependentTable = TableRegistry::get('Dependents');
+		$noteTable = TableRegistry::get('Notes');
+		$leaveTable = TableRegistry::get('EmployeeAbsencerecords');
+		
+		$query=$dependentTable->find('All')->where(['emp_data_biographies_id'=>$this->request->session()->read('sessionuser')['empdatabiographyid']])->andwhere(['customer_id'=>$this->loggedinuser['customer_id']]);
+		(isset($query)) ? $dependentcount=$query->count() : $dependentcount="";
+		
+		$query=$noteTable->find('All')->where(['emp_data_biographies_id'=>$this->request->session()->read('sessionuser')['empdatabiographyid']])->andwhere(['customer_id'=>$this->loggedinuser['customer_id']]);
+		(isset($query)) ? $notecount=$query->count() : $notecount="";
+		
+		$query=$leaveTable->find('All')->where(['emp_data_biographies_id'=>$this->request->session()->read('sessionuser')['empdatabiographyid']])->andwhere(['customer_id'=>$this->loggedinuser['customer_id']]);
+		(isset($query)) ? $leavecount=$query->count() : $leavecount="";
+
+		  
     	//get empid from session var
 		$empid=$this->request->session()->read('sessionuser')['employee_id'];
 
 		$this->loadModel('Employees');
 		$profiles = $this->Employees->get($empid, ['contain' => ['Empdatabiographies', 'Empdatapersonals', 'Employmentinfos', 'ContactInfos', 'Addresses','Identities']]);
 		
-        $this->set(compact('profiles'));
+        $this->set(compact('profiles','dependentcount','notecount','leavecount'));
         $this->set('_serialize', ['profiles']);
 		
 		//to get position name
@@ -46,6 +60,20 @@ class ProfilesController extends AppController
     }
 	public function editprofile()
     {
+    	
+		$dependentTable = TableRegistry::get('Dependents');
+		$noteTable = TableRegistry::get('Notes');
+		$leaveTable = TableRegistry::get('EmployeeAbsencerecords');
+		
+		$query=$dependentTable->find('All')->where(['emp_data_biographies_id'=>$this->request->session()->read('sessionuser')['empdatabiographyid']])->andwhere(['customer_id'=>$this->loggedinuser['customer_id']]);
+		(isset($query)) ? $dependentcount=$query->count() : $dependentcount="";
+		
+		$query=$noteTable->find('All')->where(['emp_data_biographies_id'=>$this->request->session()->read('sessionuser')['empdatabiographyid']])->andwhere(['customer_id'=>$this->loggedinuser['customer_id']]);
+		(isset($query)) ? $notecount=$query->count() : $notecount="";
+		
+		$query=$leaveTable->find('All')->where(['emp_data_biographies_id'=>$this->request->session()->read('sessionuser')['empdatabiographyid']])->andwhere(['customer_id'=>$this->loggedinuser['customer_id']]);
+		(isset($query)) ? $leavecount=$query->count() : $leavecount="";
+		
     	//get empid from session var
 		$empid=$this->request->session()->read('sessionuser')['employee_id'];
 
@@ -54,7 +82,7 @@ class ProfilesController extends AppController
             'contain' => ['Empdatabiographies', 'Empdatapersonals', 'Employmentinfos', 'ContactInfos', 'Addresses','Identities']
         ]);
 		
-		$this->set(compact('profiles','employee'));
+		$this->set(compact('profiles','employee','dependentcount','notecount','leavecount'));
         $this->set('_serialize', ['profiles']);
 		
 		if ($this->request->is(['patch', 'post', 'put'])) {

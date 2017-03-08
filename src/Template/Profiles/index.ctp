@@ -35,7 +35,7 @@
 
             <div class="info-box-content">
               <span class="info-box-text">Dependents</span>
-              <span class="info-box-number">2</span>
+              <span class="info-box-number"><?php echo $dependentcount; ?></span>
             </div>
             <!-- /.info-box-content -->
 	</div>
@@ -45,7 +45,7 @@
 
             <div class="info-box-content">
               <span class="info-box-text">Notes</span>
-              <span class="info-box-number">2</span>
+              <span class="info-box-number"><?php echo $notecount; ?></span>
             </div>
             <!-- /.info-box-content -->
 	</div>
@@ -55,7 +55,7 @@
 
             <div class="info-box-content">
               <span class="info-box-text">Leaves</span>
-              <span class="info-box-number">2</span>
+              <span class="info-box-number"><?php echo $leavecount; ?></span>
             </div>
             <!-- /.info-box-content -->
 	</div>
