@@ -67,6 +67,7 @@ class LegalEntitiesController extends AppController
 			$locations = $this->LegalEntities->Locations->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         	$payGroups = $this->LegalEntities->PayGroups->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         	$customers = $this->LegalEntities->Customers->find('list', ['limit' => 200]);
+        	$holidayCalendars = $this->LegalEntities->HolidayCalendars->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         	$this->set(compact('legalEntity', 'locations', 'payGroups'));
 		
        }else{
@@ -97,7 +98,8 @@ class LegalEntitiesController extends AppController
         $locations = $this->LegalEntities->Locations->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         $payGroups = $this->LegalEntities->PayGroups->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         $customers = $this->LegalEntities->Customers->find('list', ['limit' => 200]);
-        $this->set(compact('legalEntity', 'locations', 'payGroups', 'customers'));
+        $holidayCalendars = $this->LegalEntities->HolidayCalendars->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        $this->set(compact('legalEntity', 'locations', 'payGroups', 'customers','holidayCalendars'));
         $this->set('_serialize', ['legalEntity']);
     }
 	
@@ -118,7 +120,8 @@ class LegalEntitiesController extends AppController
         $locations = $this->LegalEntities->Locations->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         $payGroups = $this->LegalEntities->PayGroups->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         $customers = $this->LegalEntities->Customers->find('list', ['limit' => 200]);
-        $this->set(compact('legalEntity', 'locations', 'payGroups', 'customers'));
+        $holidayCalendars = $this->LegalEntities->HolidayCalendars->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        $this->set(compact('legalEntity', 'locations', 'payGroups', 'customers','holidayCalendars'));
         $this->set('_serialize', ['legalEntity']);
     }
 
@@ -154,7 +157,8 @@ class LegalEntitiesController extends AppController
         $locations = $this->LegalEntities->Locations->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         $payGroups = $this->LegalEntities->PayGroups->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         $customers = $this->LegalEntities->Customers->find('list', ['limit' => 200]);
-        $this->set(compact('legalEntity', 'locations', 'payGroups', 'customers'));
+        $holidayCalendars = $this->LegalEntities->HolidayCalendars->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        $this->set(compact('legalEntity', 'locations', 'payGroups', 'customers','holidayCalendars'));
         $this->set('_serialize', ['legalEntity']);
     }
 

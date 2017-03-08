@@ -33,10 +33,10 @@
             echo $this->Form->input('target_fte',['disabled' => true]);
             echo $this->Form->input('vacant',['disabled' => true]);
             echo $this->Form->input('standard_hours',['disabled' => true]);
-            echo $this->Form->input('created_by',['disabled' => true]);
-            echo $this->Form->input('created_date',['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
-            echo $this->Form->input('last_modified_by',['disabled' => true]);
-            echo $this->Form->input('last_modified_date',['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
+            // echo $this->Form->input('created_by',['disabled' => true]);
+            // echo $this->Form->input('created_date',['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
+            // echo $this->Form->input('last_modified_by',['disabled' => true]);
+            // echo $this->Form->input('last_modified_date',['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
             echo $this->Form->input('position_matrix_relationship',['disabled' => true]);
             echo $this->Form->input('right_to_return',['disabled' => true]);
             echo $this->Form->input('position_code',['disabled' => true]);
@@ -50,8 +50,8 @@
             echo $this->Form->input('pay_grade_id', ['options' => $payGrades, 'empty' => true,'disabled' => true]);
             echo $this->Form->input('pay_range_id', ['options' => $payRanges, 'empty' => true,'disabled' => true]);
             echo $this->Form->input('parent_id', ['options' => $parents, 'empty' => true,'disabled' => true]);
-            echo $this->Form->input('lft',['disabled' => true]);
-            echo $this->Form->input('rght',['disabled' => true]);
+            // echo $this->Form->input('lft',['disabled' => true]);
+            // echo $this->Form->input('rght',['disabled' => true]);
           ?></fieldset>
           <!-- /.box-body -->
           <div class="box-footer">

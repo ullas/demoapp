@@ -18,14 +18,14 @@
         <?= $this->Form->create($businessUnit, array('role' => 'form')) ?>
           <fieldset>
           	<?php
-            echo $this->Form->input('name',['label'=>['text'=>'Name','class'=>'mandatory'],'disabled' => true]);
-          echo $this->Form->input('description',['disabled' => true]);
-          echo $this->Form->input('effective_status',['disabled' => true]);
-          echo $this->Form->input('effective_start_date',['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
-		  echo $this->Form->input('effective_end_date',['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
-          echo $this->Form->input('external_code',['label'=>['text'=>'External Code','class'=>'mandatory'],'disabled' => true]);
-          echo $this->Form->input('head_of_unit',['disabled' => true]);
-          ?></fieldset>
+            	echo $this->Form->input('external_code',['label'=>['text'=>'External Code','class'=>'mandatory'],'disabled' => true]);
+          		echo $this->Form->input('name',['label'=>['text'=>'Name','class'=>'mandatory'],'disabled' => true]);
+          		echo $this->Form->input('description',['disabled' => true]);
+          		echo $this->Form->input('effective_status',['disabled' => true]);
+          		echo $this->Form->input('effective_start_date',['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
+		  		echo $this->Form->input('effective_end_date',['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
+          		echo $this->Form->input('head_of_unit',['disabled' => true]);
+          	?></fieldset>
           <!-- /.box-body -->
           <div class="box-footer">
           	<?=$this->Html->link(__('Cancel'), ['action' => 'index'], ['escape' => false])?>

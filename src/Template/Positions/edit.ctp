@@ -32,10 +32,6 @@
             echo $this->Form->input('target_fte');
             echo $this->Form->input('vacant');
             echo $this->Form->input('standard_hours');
-            echo $this->Form->input('created_by');
-            echo $this->Form->input('created_date',['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
-            echo $this->Form->input('last_modified_by');
-            echo $this->Form->input('last_modified_date',['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
             echo $this->Form->input('position_matrix_relationship');
             echo $this->Form->input('right_to_return');
             echo $this->Form->input('position_code');
@@ -49,8 +45,8 @@
             echo $this->Form->input('pay_grade_id', ['options' => $payGrades, 'empty' => true]);
             echo $this->Form->input('pay_range_id', ['options' => $payRanges, 'empty' => true]);
             echo $this->Form->input('parent_id', ['options' => $parents, 'empty' => true]);
-            echo $this->Form->input('lft');
-            echo $this->Form->input('rght');
+            // echo $this->Form->input('lft');
+            // echo $this->Form->input('rght');
         ?>
     </fieldset>
     <div class="box-footer">

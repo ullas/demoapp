@@ -13,6 +13,7 @@
     <?= $this->Form->create($location) ?>
     <fieldset>
         <?php
+            echo $this->Form->input('external_code');
             echo $this->Form->input('name');
             echo $this->Form->input('description');
 			echo $this->Form->input('start_date',['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
@@ -21,7 +22,8 @@
             echo $this->Form->input('time_zone',['templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-clock-o"></i></div>']]);
             echo $this->Form->input('standard_hours',['templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-clock-o"></i></div>']]);
             echo $this->Form->input('status');
-            echo $this->Form->input('external_code');
+			echo $this->Form->input('holiday_calendar_id',['class'=>'select2', 'empty' => true]);
+            
         ?>
     </fieldset>
     <div class="box-footer">

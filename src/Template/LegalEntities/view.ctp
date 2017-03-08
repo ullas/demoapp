@@ -14,6 +14,7 @@
         <?= $this->Form->create($legalEntity, array('role' => 'form')) ?>
         <fieldset>
           <?php
+            echo $this->Form->input('external_code',['label'=>['text'=>'External Code','class'=>'mandatory'],'disabled' => true]);
             echo $this->Form->input('name',['label'=>['text'=>'Name','class'=>'mandatory'],'disabled' => true]);
             echo $this->Form->input('description',['disabled' => true]);
             echo $this->Form->input('effective_status',['disabled' => true]);
@@ -23,9 +24,9 @@
             echo $this->Form->input('standard_weekly_hours',['disabled' => true]);
             echo $this->Form->input('currency',['class'=>'select2','options' => $this->Currency->get_currencies(), 'empty' => true,'disabled' => true]);
             echo $this->Form->input('official_language',['class'=>'select2','options' => $this->Language->get_languages(), 'empty' => true,'disabled' => true]);
-            echo $this->Form->input('external_code',['label'=>['text'=>'External Code','class'=>'mandatory'],'disabled' => true]);
             echo $this->Form->input('location_id', ['class'=>'select2','options' => $locations, 'empty' => true,'disabled' => true]);
             echo $this->Form->input('paygroup_id', ['class'=>'select2','label'=>['text'=>'Pay Group'],'options' => $payGroups, 'empty' => true,'disabled' => true]);
+			echo $this->Form->input('holiday_calendar_id', ['class'=>'select2', 'empty' => true,'disabled' => true]);
           ?></fieldset>
           <!-- /.box-body -->
           <div class="box-footer">

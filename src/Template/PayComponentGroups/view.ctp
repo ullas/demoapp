@@ -16,6 +16,7 @@
   <div class="box box-primary"><div class="box-body">
     <?= $this->Form->create($payComponentGroup, array('role' => 'form')) ?>
     <fieldset><?php
+            echo $this->Form->input('external_code',['disabled' => true]);
             echo $this->Form->input('name',['disabled' => true]);
             echo $this->Form->input('description',['disabled' => true]);
             echo $this->Form->input('status',['disabled' => true,'class'=>'select2','options' => array('Active', 'Inactive'), 'empty' => 'Choose']);
@@ -27,7 +28,7 @@
             echo $this->Form->input('use_for_range_penetration',['disabled' => true,'class'=>'select2','options' => array('Yes', 'No'), 'empty' => 'Choose']);
             echo $this->Form->input('sort_order',['disabled' => true]);
             echo $this->Form->input('system_defined',['disabled' => true]);
-            echo $this->Form->input('external_code',['disabled' => true]);
+            
         ?></fieldset>
 <div class="box-footer">
           	<?=$this->Html->link(__('Cancel'), ['action' => 'index'], ['escape' => false])?>

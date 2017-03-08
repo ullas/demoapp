@@ -1,31 +1,33 @@
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('List Time Type Profiles'), ['action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('List Time Types'), ['controller' => 'TimeTypes', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Time Type'), ['controller' => 'TimeTypes', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Customers'), ['controller' => 'Customers', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Customer'), ['controller' => 'Customers', 'action' => 'add']) ?></li>
-    </ul>
-</nav>
-<div class="timeTypeProfiles form large-9 medium-8 columns content">
+<?= $this->element('templateelmnt'); ?>
+<section class="content-header">
+      <h1>
+        Time Type Profile
+        <small>Add</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><?= $this->Html->link('<i class="fa fa-mail-reply"></i> '.__('Back'), ['action' => 'index'], ['escape' => false]) ?></li>
+      </ol>
+    </section>
+<section class="content">
+	<div class="box box-primary"><div class="box-body">
     <?= $this->Form->create($timeTypeProfile) ?>
     <fieldset>
-        <legend><?= __('Add Time Type Profile') ?></legend>
         <?php
+            echo $this->Form->input('external_code');
             echo $this->Form->input('code');
             echo $this->Form->input('name');
-            echo $this->Form->input('country');
-            echo $this->Form->input('start_date', ['empty' => true]);
+            echo $this->Form->input('country',['options' => $this->Country->get_countries(), 'empty' => true]);
+            echo $this->Form->input('start_date',['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
             echo $this->Form->input('time_rec_variant');
             echo $this->Form->input('status');
             echo $this->Form->input('enable_ess');
-            echo $this->Form->input('external_code');
             echo $this->Form->input('time_type_id', ['options' => $timeTypes, 'empty' => true]);
-            echo $this->Form->input('customer_id', ['options' => $customers, 'empty' => true]);
-            echo $this->Form->input('workflow_id');
         ?>
     </fieldset>
-    <?= $this->Form->button(__('Submit')) ?>
+    <div class="box-footer">
+    <?=$this->Html->link(__('Cancel'), ['action' => 'index'], ['escape' => false])?>
+    <?= $this->Form->button(__('Save'),['title'=>'Save','class'=>'pull-right']) ?>
+    </div>
     <?= $this->Form->end() ?>
-</div>
+</div></div>
+</section>

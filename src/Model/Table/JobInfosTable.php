@@ -22,6 +22,9 @@ use Cake\Core\Configure;
  * @property \Cake\ORM\Association\BelongsTo $Locations
  * @property \Cake\ORM\Association\BelongsTo $Departments
  * @property \Cake\ORM\Association\BelongsTo $LegalEntities
+ * @property \Cake\ORM\Association\BelongsTo $HolidayCalendars
+ * @property \Cake\ORM\Association\BelongsTo $TimeTypeProfiles
+ * @property \Cake\ORM\Association\BelongsTo $WorkSchedules
  *
  * @method \App\Model\Entity\JobInfo get($primaryKey, $options = [])
  * @method \App\Model\Entity\JobInfo newEntity($data = null, array $options = [])
@@ -80,6 +83,15 @@ class JobInfosTable extends Table
         ]);
         $this->belongsTo('LegalEntities', [
             'foreignKey' => 'legal_entity_id'
+        ]);
+        $this->belongsTo('HolidayCalendars', [
+            'foreignKey' => 'holiday_calendar_id'
+        ]);
+        $this->belongsTo('TimeTypeProfiles', [
+            'foreignKey' => 'time_type_profile_id'
+        ]);
+        $this->belongsTo('WorkSchedules', [
+            'foreignKey' => 'work_schedule_id'
         ]);
     }
 
@@ -242,15 +254,6 @@ class JobInfosTable extends Table
             ->allowEmpty('is_side_line_job_allowed');
 
         $validator
-            ->allowEmpty('holiday_calendar_code');
-
-        $validator
-            ->allowEmpty('work_schedule_code');
-
-        $validator
-            ->allowEmpty('time_type_profile_code');
-
-        $validator
             ->allowEmpty('time_recording_profile_code');
 
         $validator
@@ -386,6 +389,9 @@ class JobInfosTable extends Table
         $rules->add($rules->existsIn(['location_id'], 'Locations'));
         $rules->add($rules->existsIn(['department_id'], 'Departments'));
         $rules->add($rules->existsIn(['legal_entity_id'], 'LegalEntities'));
+        $rules->add($rules->existsIn(['holiday_calendar_id'], 'HolidayCalendars'));
+        $rules->add($rules->existsIn(['time_type_profile_id'], 'TimeTypeProfiles'));
+        $rules->add($rules->existsIn(['work_schedule_id'], 'WorkSchedules'));
 
         return $rules;
     }

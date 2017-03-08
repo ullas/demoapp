@@ -13,6 +13,7 @@
     <?= $this->Form->create($payGroup) ?>
     <fieldset>
         <?php
+            echo $this->Form->input('external_code');
             echo $this->Form->input('name');
             echo $this->Form->input('description');
             echo $this->Form->input('effective_status');
@@ -30,7 +31,7 @@
             echo $this->Form->input('data_delimiter');
             echo $this->Form->input('decimal_point');
             echo $this->Form->input('lag');
-            echo $this->Form->input('external_code');
+            
         ?>
     </fieldset>
     <div class="box-footer">
