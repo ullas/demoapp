@@ -48,10 +48,10 @@ class WorkflowrulesTable extends Table
             'foreignKey' => 'customer_id'
         ]);
         $this->hasMany('Workflowactions', [
-            'foreignKey' => 'workflowrule_id'
+            'foreignKey' => 'workflowrule_id','dependent' => true
         ]);
         $this->hasMany('Workflows', [
-            'foreignKey' => 'workflowrule_id'
+            'foreignKey' => 'workflowrule_id','dependent' => true
         ]);
     }
 

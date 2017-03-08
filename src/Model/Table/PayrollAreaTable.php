@@ -45,25 +45,25 @@ class PayrollAreaTable extends Table
         $this->primaryKey('id');
 
         $this->belongsTo('LegalEntities', [
-            'foreignKey' => 'legal_entity_id'
+            'foreignKey' => 'legal_entity_id','dependent' => true
         ]);
         $this->belongsTo('BusinessUnits', [
-            'foreignKey' => 'business_unit_id'
+            'foreignKey' => 'business_unit_id','dependent' => true
         ]);
         $this->belongsTo('Divisions', [
-            'foreignKey' => 'division_id'
+            'foreignKey' => 'division_id','dependent' => true
         ]);
         $this->belongsTo('Locations', [
-            'foreignKey' => 'location_id'
+            'foreignKey' => 'location_id','dependent' => true
         ]);
         $this->belongsTo('Customers', [
-            'foreignKey' => 'customer_id'
+            'foreignKey' => 'customer_id','dependent' => true
         ]);
         $this->hasMany('PayrollRecord', [
-            'foreignKey' => 'payroll_area_id'
+            'foreignKey' => 'payroll_area_id','dependent' => true
         ]);
         $this->hasMany('PayrollStatus', [
-            'foreignKey' => 'payroll_area_id'
+            'foreignKey' => 'payroll_area_id','dependent' => true
         ]);
     }
 

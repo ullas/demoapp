@@ -47,7 +47,7 @@ class EmploymentInfosTable extends Table
             'foreignKey' => 'employee_id'
         ]);
         $this->hasMany('Employees', [
-            'foreignKey' => 'employment_info_id'
+            'foreignKey' => 'employment_info_id','dependent' => true
         ]);
     }
 

@@ -83,8 +83,7 @@ if (file_exists($file)) {
     <li><a href="<?php echo $this -> Url -> build('/Divisions'); ?>"><i class="fa fa-circle-o"></i> Divisions</a></li>
     <li><a href="<?php echo $this -> Url -> build('/CostCentres'); ?>"><i class="fa fa-circle-o"></i> Cost Centres</a></li>
     <li><a href="<?php echo $this->Url->build('/Positions'); ?>"><i class="fa fa-circle-o"></i> Position</a></li>
-    <li><a href="<?php echo $this -> Url -> build('/CalendarAssignments'); ?>"><i class="fa fa-circle-o"></i> Calendar Assignments</a></li>
-    
+    <!-- <li><a href="<?php echo $this -> Url -> build('/CalendarAssignments'); ?>"><i class="fa fa-circle-o"></i> Calendar Assignments</a></li> -->    
     <li><a href="<?php echo $this -> Url -> build('/Workflowrules'); ?>"><i class="fa fa-circle-o"></i> Workflow</a></li>
     <li class="treeview">
  		<a href="#"><i class="fa fa-circle-o"></i> Payroll<span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>
@@ -97,8 +96,7 @@ if (file_exists($file)) {
      	</li>
     </ul>
     </li>
-	<li><a href="<?php echo $this -> Url -> build('/EmployeeAbsencerecords'); ?>"><i class="fa fa-calendar "></i> Leave Requests</a></li>
-    <li><a href="<?php echo $this -> Url -> build('/Positions/orgchart'); ?>"><i class="fa fa-sitemap"></i><span> Organizational Chart </span></a></li>
+	
 
     <?php
 		}
@@ -123,7 +121,7 @@ if (file_exists($file)) {
     
 
     <li><a href="<?php echo $this -> Url -> build('/Addresses'); ?>"><i class="fa fa-circle-o"></i> Addresses</a></li>
-    <li><a href="<?php echo $this -> Url -> build('/CalendarAssignments'); ?>"><i class="fa fa-circle-o"></i> Calendar Assignments</a></li>
+    <!-- <li><a href="<?php echo $this -> Url -> build('/CalendarAssignments'); ?>"><i class="fa fa-circle-o"></i> Calendar Assignments</a></li> -->
     <li><a href="<?php echo $this -> Url -> build('/ContactInfos'); ?>"><i class="fa fa-circle-o"></i> Contact Infos</a></li>
     <li><a href="<?php echo $this -> Url -> build('/CorporateAddresses'); ?>"><i class="fa fa-circle-o"></i> Corporate Addresses</a></li>
     <li><a href="<?php echo $this -> Url -> build('/Dependents'); ?>"><i class="fa fa-circle-o"></i> Dependents</a></li>
@@ -142,16 +140,18 @@ if (file_exists($file)) {
 	<li><a href="<?php echo $this -> Url -> build('/Dependents'); ?>"><i class="fa fa-users"></i><span> Dependents </span></a></li>
     <li><a href="<?php echo $this -> Url -> build('/Notes'); ?>"><i class="fa fa-file-text-o"></i><span> Notes </span></a></li>
     <li><a href="<?php echo $this -> Url -> build('/Positions/orgchart'); ?>"><i class="fa fa-sitemap"></i><span> Organizational Chart </span></a></li>
-    <li><a href="<?php echo $this -> Url -> build('/EmployeeAbsencerecords'); ?>"><i class="fa fa-calendar "></i> Leave Requests</a></li>
 
    
     <?php
 	break;
 	default:
     ?>
-
-    <li><a href="#"><i class="fa fa-question-circle"></i> <span>Help</span></a></li>
+	
 
     <?php } ?>
+    
+    <li><a href="<?php echo $this -> Url -> build('/EmployeeAbsencerecords'); ?>"><i class="fa fa-calendar "></i> Leave Requests</a></li>
+    <li><a href="<?php echo $this -> Url -> build('/Positions/orgchart'); ?>"><i class="fa fa-sitemap"></i><span> Organizational Chart </span></a></li>
+    <li><a href="#"><i class="fa fa-question-circle"></i> <span>Help</span></a></li>
 </ul>
 <?php } ?>

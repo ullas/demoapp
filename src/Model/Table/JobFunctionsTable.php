@@ -43,7 +43,7 @@ class JobFunctionsTable extends Table
             'foreignKey' => 'customer_id'
         ]);
         $this->hasMany('JobClasses', [
-            'foreignKey' => 'job_function_id'
+            'foreignKey' => 'job_function_id','dependent' => true
         ]);
 		$this->belongsTo('Jobs', [
             'foreignKey' => 'job_id'

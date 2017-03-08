@@ -43,7 +43,7 @@ class PayComponentGroupsTable extends Table
             'foreignKey' => 'customer_id'
         ]);
         $this->hasMany('TimeAccountTypes', [
-            'foreignKey' => 'pay_component_group_id'
+            'foreignKey' => 'pay_component_group_id','dependent' => true
         ]);
     }
 

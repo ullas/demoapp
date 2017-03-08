@@ -49,7 +49,7 @@ class WorkflowsTable extends Table
             'foreignKey' => 'emp_data_biographies_id'
         ]);
         $this->hasMany('TimeTypeProfiles', [
-            'foreignKey' => 'workflow_id'
+            'foreignKey' => 'workflow_id','dependent' => true
         ]);
     }
 
