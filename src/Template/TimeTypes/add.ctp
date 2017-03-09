@@ -1,7 +1,7 @@
 <?= $this->element('templateelmnt'); ?>
 <section class="content-header">
       <h1>
-        Leave Type
+        Time Type
         <small>Add</small>
       </h1>
       <ol class="breadcrumb">
@@ -24,7 +24,7 @@
             echo $this->Form->input('time_account_type_id', ['options' => $timeAccountTypes, 'empty' => true]);
 			echo $this->Form->input('flex_req_allow');
             echo $this->Form->input('workflowrule_id',['class'=>'select2', 'empty' => 'Choose']);
-            
+
         ?>
     </fieldset>
     <div class="box-footer">

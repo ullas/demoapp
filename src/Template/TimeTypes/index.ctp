@@ -1,1 +1,1 @@
-<?php echo $this->element('indexbasic', array('title' => 'Leave Types')); ?>
+<?php echo $this->element('indexbasic', array('title' => 'Time Types')); ?>
