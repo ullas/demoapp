@@ -82,6 +82,9 @@ class WorkflowactionsController extends AppController
         ];
         $workflowactions = $this->paginate($this->Workflowactions);
 
+		$actions =[ ['name'=>'delete','title'=>'Delete','class'=>' label-danger'] ];
+        $this->set('actions',$actions);	
+		
         $this->set(compact('workflowactions'));
         $this->set('_serialize', ['workflowactions']);
     }

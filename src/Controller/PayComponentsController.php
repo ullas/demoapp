@@ -41,6 +41,9 @@ class PayComponentsController extends AppController
         ];
         $payComponents = $this->paginate($this->PayComponents);
 
+		$actions =[ ['name'=>'delete','title'=>'Delete','class'=>' label-danger'] ];
+        $this->set('actions',$actions);	
+		
         $this->set(compact('payComponents'));
         $this->set('_serialize', ['payComponents']);
     }

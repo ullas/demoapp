@@ -43,6 +43,9 @@ class CalendarAssignmentsController extends AppController
         ];
         $calendarAssignments = $this->paginate($this->CalendarAssignments);
 
+		$actions =[ ['name'=>'delete','title'=>'Delete','class'=>' label-danger'] ];
+        $this->set('actions',$actions);	
+		
         $this->set(compact('calendarAssignments'));
         $this->set('_serialize', ['calendarAssignments']);
     }

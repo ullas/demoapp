@@ -16,8 +16,15 @@
   </ol>
 </section>
 <section class="content">
-   <input type="hidden" value="1"  id="basicfilter"/>
-
+   <?php echo $this->Form->create($this->request->params['controller'],array('url' => array('controller' => $this->request->params['controller'], 'action' => 'deleteAll')));?>
+   	<input type="hidden" value="1"  id="basicfilter"/>
+	<div class="fmactionbtn"></div>
+	<div>
+      <?php
+      $title="Manage ". $this->request->params['controller'] ;
+      echo $this->element('actions',[$actions,'title'=>$title]);
+	  ?>
+     </div>
   <div class="row">
         <div class="col-md-12">
   <div class="box box-primary">
@@ -82,21 +89,38 @@ $this->Html->script([
             jQuery("form")[0].submit();
         }
   }
+  
+  function bootbox_confirm(msg, callback_success, callback_cancel) {
+    var d = bootbox.confirm({title:"MayHaw",message:msg, show:false, buttons: { 'cancel': { label: 'Cancel', className: 'btn btn-outline pull-left' }, 
+    									'confirm': { label: 'Delete', className: 'btn btn-outline pull-right' } },callback:function(result) {
+        if (result)
+            callback_success();
+        else if(typeof(callback_cancel) == 'function')
+            callback_cancel();
+    }});
+    return d;
+  }
+
   $(function () {
-  	//throw javascript console error,instead of throwing alert
-  	$.fn.dataTable.ext.errMode='throw';
+  	
+  	  //throw javascript console error,instead of throwing alert
+  	  $.fn.dataTable.ext.errMode='throw';
 
-  	 updateFilterActiveFlag();
+  	  updateFilterActiveFlag();
 
-     $("#delete").click(function(){
+      $("#delete").click(function(){
 
   	   if($(".mptl-lst-chkbox:checked").length==0){
-      	alert("No item selected. Please select at least one item ");
-      	return;
+      		alert("No item selected. Please select at least one item ");
+      		return;
       }
-       if (confirm("Do you want to delete the record?")) {
-	   	deleteRecord('yes');
-	   }
+
+		if($(".mptl-lst-chkbox:checked").length==1){
+			bootbox_confirm("Do you want to delete the record?", function(){deleteRecord('yes');}).modal('show');
+		}
+		else if($(".mptl-lst-chkbox:checked").length>1){
+			bootbox_confirm("Do you want to delete " + $(".mptl-lst-chkbox:checked").length + " records?", function(){deleteRecord('yes');}).modal('show');
+		}
   	});
 
     $('#settings').on('shown.bs.modal', function() {
@@ -151,8 +175,11 @@ $this->Html->script([
     });
 
 
-
-     $('<a href="#" class="btn btn-sm btn-success" data-toggle="modal" data-target="#settings" style="margin-left:15px;" title="Table Settings"><i class="fa fa-gear" aria-hidden="true"></i></a>').appendTo('div.dataTables_filter');
+	// fmactions are added through setTurben. btn-group div is added separately.
+	$('div.fmactionbtn').appendTo('div.dataTables_length');
+	$('div.btn-group').appendTo('div.fmactionbtn');
+	
+     // $('<a href="#" class="btn btn-sm btn-success" data-toggle="modal" data-target="#settings" style="margin-left:15px;" title="Table Settings"><i class="fa fa-gear" aria-hidden="true"></i></a>').appendTo('div.dataTables_filter');
 
       $('.dataTables_filter input').unbind().on('keyup', function() {
 
@@ -178,7 +205,7 @@ $this->Html->script([
       var rows = table.rows({ 'search': 'applied' }).nodes();
       // Check/uncheck checkboxes for all rows in the table
       $('input[type="checkbox"]', rows).prop('checked', this.checked);
-
+	  setTurben();
    });
    // Handle click on checkbox to set state of "Select all" control
    $('#mptlindextbl tbody').on('change', 'input[type="checkbox"]', function(){
@@ -307,10 +334,13 @@ function setTurben()
 	var c=$(".mptl-lst-chkbox:checked").length;
       $(".mptl-itemsel").html(c);
       if(c==0){
+				   $('div.fmactions').hide();
       	   $( ".mptl-itemsel" ).fadeTo( "slow" , 0, function() {
 		    // Animation complete.
 		  });
       }else{
+				 $('div.fmactions').appendTo('div.fmactionbtn');
+				 $('div.fmactions').show()
       	  $( ".mptl-itemsel" ).fadeTo( "slow" , 1, function() {
 		    // Animation complete.
 		  });

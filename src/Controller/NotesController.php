@@ -44,6 +44,9 @@ class NotesController extends AppController
         ];
         $notes = $this->paginate($this->Notes);
 
+		$actions =[ ['name'=>'delete','title'=>'Delete','class'=>' label-danger'] ];
+        $this->set('actions',$actions);	
+		
         $this->set(compact('notes'));
         $this->set('_serialize', ['notes']);
     }

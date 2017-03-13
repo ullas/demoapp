@@ -44,6 +44,9 @@ class CostCentresController extends AppController
         ];
         $costCentres = $this->paginate($this->CostCentres);
 
+		$actions =[ ['name'=>'delete','title'=>'Delete','class'=>' label-danger'] ];
+        $this->set('actions',$actions);	
+		
         $this->set(compact('costCentres'));
         $this->set('_serialize', ['costCentres']);
     }

@@ -44,6 +44,9 @@ class PositionsController extends AppController
         ];
         $positions = $this->paginate($this->Positions);
 
+		$actions =[ ['name'=>'delete','title'=>'Delete','class'=>' label-danger'] ];
+        $this->set('actions',$actions);	
+		
         $this->set(compact('positions'));
         $this->set('_serialize', ['positions']);
 	}

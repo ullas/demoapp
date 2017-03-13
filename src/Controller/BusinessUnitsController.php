@@ -49,6 +49,9 @@ class BusinessUnitsController extends AppController
         ];
         $businessUnits = $this->paginate($this->BusinessUnits);
 
+		$actions =[ ['name'=>'delete','title'=>'Delete','class'=>' label-danger'] ];
+        $this->set('actions',$actions);	
+		
         $this->set(compact('businessUnits'));
         $this->set('_serialize', ['businessUnits']);
     }
