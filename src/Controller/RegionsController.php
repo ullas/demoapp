@@ -41,6 +41,9 @@ class RegionsController extends AppController
 		
         $regions = $this->paginate($this->Regions);
 
+		$actions =[ ['name'=>'delete','title'=>'Delete','class'=>' label-danger'] ];
+        $this->set('actions',$actions);	
+		
         $this->set(compact('regions'));
         $this->set('_serialize', ['regions']);
     }

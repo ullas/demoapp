@@ -15,12 +15,12 @@
     <div class="col-md-12">
       <div class="nav-tabs-custom">
         <ul class="nav nav-tabs">
-        	<li class="active"><a href="#EmpDataPersonal" data-toggle="tab">Personal Information</a></li>
-            <li><a href="#EmploymentInfo" data-toggle="tab">Employment Information</a></li>
-            <li><a href="#EmpDataBiography" data-toggle="tab">Profile</a></li>	  
-           	<li><a href="#social" data-toggle="tab">Social</a></li>
-           	<li><a href="#address" data-toggle="tab">Address</a></li>
-           	<li><a href="#ids" data-toggle="tab">ID's</a></li>
+        	<li id="li1" class="active"><a href="#EmpDataPersonal" data-toggle="tab">Personal Information</a></li>
+            <li id="li2"><a href="#EmploymentInfo" data-toggle="tab">Employment Information</a></li>
+            <li id="li3"><a href="#EmpDataBiography" data-toggle="tab">Profile</a></li>	  
+           	<li id="li4"><a href="#social" data-toggle="tab">Social</a></li>
+           	<li id="li5"><a href="#address" data-toggle="tab">Address</a></li>
+           	<li id="li6"><a href="#ids" data-toggle="tab">ID's</a></li>
              
         </ul>
         
@@ -196,27 +196,33 @@
 
 <div class="box-footer">
     <a href="/employees">Cancel</a>    
-    <button id="butn" class="pull-right btn btn-primary" type="submit">Save</button>  
+    <button id="saveempbtn" class="pull-right btn btn-primary" type="submit">Save</button>  
 </div>
     
     </div>
 
-<!-- <div class="row">
-   <div class="form-group">
-                <div class="col-sm-offset-6 col-sm-12">
-                  <button type="submit" class="btn btn-primary pull-right">Save</button>
-                </div>
-   </div>
-   </div> -->
-  <?= $this->Form->end() ?></section>
+<?= $this->Form->end() ?></section>
   
-   <?php $this->start('scriptBotton'); ?>
- <script>
+<?php $this->start('scriptBotton'); ?>
+<script>
 $(function () {
-	 // $( "#butn" ).click(function( ) {
- 		 // $("#EmpDataBiography").addClass("active");$("#EmploymentInfo").removeClass("active");
-//  
-	 // });
+	 $( "#saveempbtn" ).click(function( ) {
+ 		 //get input value
+		var externalid = document.getElementById("empdatabiography-person-id-external").value;
+    	if (externalid != "" && externalid!=null) {
+    		return true;
+    	}else{
+    		$("#EmpDataBiography").addClass("active");
+    		$("#EmploymentInfo").removeClass("active");$("#EmpDataPersonal").removeClass("active");$("#social").removeClass("active");$("#address").removeClass("active");$("#ids").removeClass("active");
+    		
+    		
+    		$("#li3").addClass("active");
+    		$("#li1").removeClass("active");$("#li2").removeClass("active");$("#li4").removeClass("active");$("#li5").removeClass("active");$("#li6").removeClass("active");
+    		
+    		showflash("failure","Please enter the Person Id External.");
+    		return false;
+    	}
+	 });
  });
 </script>
  <?php $this->end(); ?>

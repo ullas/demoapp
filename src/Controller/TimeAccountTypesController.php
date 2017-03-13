@@ -46,6 +46,9 @@ class TimeAccountTypesController extends AppController
         ];
         $timeAccountTypes = $this->paginate($this->TimeAccountTypes);
 
+		$actions =[ ['name'=>'delete','title'=>'Delete','class'=>' label-danger'] ];
+        $this->set('actions',$actions);	
+		
         $this->set(compact('timeAccountTypes'));
         $this->set('_serialize', ['timeAccountTypes']);
     }

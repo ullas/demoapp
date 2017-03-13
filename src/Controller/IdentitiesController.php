@@ -23,6 +23,9 @@ class IdentitiesController extends AppController
         ];
         $identities = $this->paginate($this->Identities);
 
+		$actions =[ ['name'=>'delete','title'=>'Delete','class'=>' label-danger'] ];
+        $this->set('actions',$actions);	
+		
         $this->set(compact('identities'));
         $this->set('_serialize', ['identities']);
     }

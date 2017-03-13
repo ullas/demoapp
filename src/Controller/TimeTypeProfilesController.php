@@ -45,6 +45,9 @@ class TimeTypeProfilesController extends AppController
         ];
         $timeTypeProfiles = $this->paginate($this->TimeTypeProfiles);
 
+		$actions =[ ['name'=>'delete','title'=>'Delete','class'=>' label-danger'] ];
+        $this->set('actions',$actions);	
+		
         $this->set(compact('timeTypeProfiles'));
         $this->set('_serialize', ['timeTypeProfiles']);
     }

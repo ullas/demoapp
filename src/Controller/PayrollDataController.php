@@ -43,6 +43,9 @@ class PayrollDataController extends AppController
         ];
         $payrollData = $this->paginate($this->PayrollData);
 
+		$actions =[ ['name'=>'delete','title'=>'Delete','class'=>' label-danger'] ];
+        $this->set('actions',$actions);	
+		
         $this->set(compact('payrollData'));
         $this->set('_serialize', ['payrollData']);
     }

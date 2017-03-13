@@ -45,6 +45,9 @@ class LegalEntitiesController extends AppController
         ];
         $legalEntities = $this->paginate($this->LegalEntities);   
 
+		$actions =[ ['name'=>'delete','title'=>'Delete','class'=>' label-danger'] ];
+        $this->set('actions',$actions);	
+		
         $this->set(compact('legalEntities'));
         $this->set('_serialize', ['legalEntities']);
     }

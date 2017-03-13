@@ -43,6 +43,9 @@ var $components = array('Datatable');
         ];
         $jobFunctions = $this->paginate($this->JobFunctions);
 
+		$actions =[ ['name'=>'delete','title'=>'Delete','class'=>' label-danger'] ];
+        $this->set('actions',$actions);	
+		
         $this->set(compact('jobFunctions'));
         $this->set('_serialize', ['jobFunctions']);
     }

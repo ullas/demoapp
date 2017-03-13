@@ -40,6 +40,9 @@ class EmployeesController extends AppController
 		 
         $employees = $this->paginate($this->Employees);
 
+		$actions =[ ['name'=>'delete','title'=>'Delete','class'=>' label-danger'] ];
+        $this->set('actions',$actions);	
+		 
         $this->set(compact('employees'));
         $this->set('_serialize', ['employees']);
     }
@@ -236,4 +239,42 @@ class EmployeesController extends AppController
 	    }
         return $this->redirect(['action' => 'index']);
     }
+	
+	public function deleteAll($id=null){
+    	
+		$this->request->allowMethod(['post', 'deleteall']);
+        $sucess=false;$failure=false;
+        $data=$this->request->data;
+			
+		if(isset($data)){
+		   foreach($data as $key =>$value){
+		   	   		
+		   	   	$itemna=explode("-",$key);
+			    
+			    if(count($itemna)== 2 && $itemna[0]=='chk'){
+			    	
+					$record = $this->Employees->get($value);
+					
+					 if($record['customer_id']== $this->loggedinuser['customer_id']) {
+					 	
+						   if ($this->Employees->delete($record)) {
+					           $sucess= $sucess | true;
+					        } else {
+					           $failure= $failure | true;
+					        }
+					}
+				}  	  
+			}
+		   		        
+		
+				if($sucess){
+					$this->Flash->success(__('Selected Employees has been deleted.'));
+				}
+		        if($failure){
+					$this->Flash->error(__('The Employees could not be deleted. Please, try again.'));
+				}
+		
+		   }
+             return $this->redirect(['action' => 'index']);	
+     }
 }

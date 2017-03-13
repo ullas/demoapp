@@ -44,6 +44,9 @@ class DependentsController extends AppController
         ];
         $dependents = $this->paginate($this->Dependents);
 
+		$actions =[ ['name'=>'delete','title'=>'Delete','class'=>' label-danger'] ];
+        $this->set('actions',$actions);	
+		
         $this->set(compact('dependents'));
         $this->set('_serialize', ['dependents']);
     }
