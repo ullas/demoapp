@@ -44,8 +44,19 @@ class UsersController extends AppController
         if ($this->request->is('post')) {
             $user = $this->Auth->identify();
             if ($user) {
-                $this->Auth->setUser($user);
-                return $this->redirect($this->Auth->redirectUrl());
+            	
+				//to check if the employee is visible or not
+				$this->loadModel('Employees');
+				$emparr=$this->Employees->find('all',['conditions' => array('id' => $user['employee_id']),'contain' => []])->toArray();
+				(isset($emparr[0])) ? $visible = $emparr[0]['visible'] : $visible = "" ;
+				
+				if($visible=="1"){
+					$this->Auth->setUser($user);
+                	return $this->redirect($this->Auth->redirectUrl());
+				}else{
+					$this->Flash->error(__('Employee has been deleted !'));
+				}
+                
             }
             $this->Flash->error(__('Invalid username or password, try again'));
         }

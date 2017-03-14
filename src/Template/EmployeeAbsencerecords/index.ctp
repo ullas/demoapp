@@ -4,10 +4,6 @@
     <small>List</small>
   </h1>
   <ol class="breadcrumb">
-  	
-  	<button id="togglebutton" type="button" class="btn btn-primary btn-circle" data-toggle="collapse" data-target="#infobar">
-      <span class="fa fa-chevron-up fs20"></span>
-	</button>
 
     <?= $this->Html->link('<b>Add</b> &nbsp;&nbsp;'.__('<i class="fa fa-plus"></i>'), ['action' => 'add'],['class' => 'btn btn-sm btn-success btn-flat','escape' => false]) ?>
   </ol>
@@ -19,7 +15,7 @@
 		<div class="col-md-3 col-sm-6 col-xs-12">
           <div class="info-box bg-aqua">
           	<span class="info-box-icon"><i class="fa fa-list"></i></span>
-            <div class="info-box-content">
+            <div class=" infodiv info-box-content">
               <span class="info-box-text dd">Requested</span>
               <span class="info-box-number">0</span>
             </div>
@@ -29,7 +25,7 @@
         <div class="col-md-3 col-sm-6 col-xs-12">
           <div class="info-box  bg-green">
             <span class="info-box-icon"><i class="fa fa-check"></i></span>
-            <div class="info-box-content">
+            <div class="info-box-content infodiv">
               <span class="info-box-text">Approved</span>
               <span class="info-box-number">0</span>
             </div>
@@ -39,7 +35,7 @@
         <div class="col-md-3 col-sm-6 col-xs-12">
           <div class="info-box  bg-red">
             <span class="info-box-icon"><i class="fa fa-times"></i></span>
-            <div class="info-box-content">
+            <div class="info-box-content infodiv">
               <span class="info-box-text">Rejected</span>
               <span class="info-box-number">0</span>
             </div>

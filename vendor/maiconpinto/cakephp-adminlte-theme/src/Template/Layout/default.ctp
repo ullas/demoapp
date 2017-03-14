@@ -199,6 +199,9 @@ div.dataTables_wrapper {
 .fs20{
 	font-size:20px;
 }
+.infodiv:hover > .info-box-number{ 
+	font-size:24px;
+}
 </style>
 
 </head>
@@ -232,7 +235,7 @@ $this->Html->script([ '/js/dropzone' ], ['block' => 'script']);
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
         	<!-- support -->
-			<a id="back-to-contents" href="#"><i class="glyphicon glyphicon-earphone icon-improve" title="Support"></i></a>
+			<!-- <a id="back-to-contents" href="#"><i class="glyphicon glyphicon-earphone icon-improve" title="Support"></i></a> -->
 
             <?php echo $this->Flash->render(); ?>
             <?php echo $this->Flash->render('auth'); ?>
