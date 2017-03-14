@@ -219,7 +219,7 @@ $(function () {
     		$("#li3").addClass("active");
     		$("#li1").removeClass("active");$("#li2").removeClass("active");$("#li4").removeClass("active");$("#li5").removeClass("active");$("#li6").removeClass("active");
     		
-    		showflash("failure","Please enter the Person Id External.");
+    		sweet_alert("Please enter the Person Id External.");
     		return false;
     	}
 	 });

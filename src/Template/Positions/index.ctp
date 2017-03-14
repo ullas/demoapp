@@ -1,72 +1,16 @@
-<!--<section class="content-header">
+<section class="content-header">
   <h1>
     Positions
     <small>List</small>
   </h1>
   <ol class="breadcrumb">
-    <li>
-    <li><a href="<?php echo $this->Url->build(array('controller' => 'Positions', 'action' => 'add')); ?>">Add</a></li>
-    </li>
+  	
+  	<button id="togglebutton" type="button" class="btn btn-primary btn-circle" data-toggle="collapse" data-target="#infobar">
+      <span class="fa fa-chevron-up fs20"></span>
+	</button>
+
+    <?= $this->Html->link('<b>Add</b> &nbsp;&nbsp;'.__('<i class="fa fa-plus"></i>'), ['action' => 'add'],['class' => 'btn btn-sm btn-success btn-flat','escape' => false]) ?>
   </ol>
 </section>
-            	
-
-<section class="content">
-	<div class="row">
-        <div class="col-xs-12">
-  <div class="box box-primary">
-  	<div class="box-body">
-    <table id="mptlindextbl" class="table table-hover  table-bordered ">
-        <thead>
-            <tr>
-                <th><?= $this->Paginator->sort('id') ?></th>
-                <th><?= $this->Paginator->sort('name') ?></th>
-                <th><?= $this->Paginator->sort('effective_start_date') ?></th>
-                <th><?= $this->Paginator->sort('effective_end_date') ?></th>
-                <th><?= $this->Paginator->sort('positiontype') ?></th>
-                <th>Position Controlled</th>
-                <th>Effective Status</th>
-                <th class="actions" data-orderable="false"><?= __('Actions') ?></th>
-            </tr>
-        </thead>
-        <tbody>
-        </tbody>
-    </table></div></div>
-    </div></div>
-   
-</section>
-<?php
-$this->Html->css([
-    'AdminLTE./plugins/datatables/dataTables.bootstrap',
-  ],
-  ['block' => 'css']);
-
-$this->Html->script([
-  'AdminLTE./plugins/datatables/jquery.dataTables.min',
-  'AdminLTE./plugins/datatables/dataTables.bootstrap.min',
-],
-['block' => 'script']);
-?> 
-
-<?php $this->start('scriptBotton'); ?>
-<script>
-  $(function () {
-    $('#mptlindextbl').DataTable({
-      	"paging": true,
-      	"lengthChange": true,
-      	"searching": true,
-      	"ordering": true,
-      	"info": true,
-      	"autoWidth": false,
-     
-      	//server side processing
-      	"processing": true,
-     	 "serverSide": true,
-      	"ajax": "/<?php echo $this->request->params['controller'] ?>/ajaxData"
-     
-    });
-  });
-</script>
-<?php $this->end(); ?>  -->
 
 <?php echo $this->element('indexbasic'); ?>

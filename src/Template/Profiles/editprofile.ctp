@@ -317,7 +317,9 @@ div#myDropZone {
       		});
       
       		this.on("maxfilesexceeded", function(file){
-        		alert("You can not upload any more files.");this.removeFile(file);
+        		// bootbox_alert("You can not upload any more files.!").modal('show');
+        		sweet_alert("You can not upload any more files.!");
+        		this.removeFile(file);
     		});
     	},
        
