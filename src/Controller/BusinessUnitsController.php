@@ -87,6 +87,7 @@ class BusinessUnitsController extends AppController
         $businessUnit = $this->BusinessUnits->newEntity();
         if ($this->request->is('post')) {
             $businessUnit = $this->BusinessUnits->patchEntity($businessUnit, $this->request->data);
+			$businessUnit['customer_id']=$this->loggedinuser['customer_id'];
             if ($this->BusinessUnits->save($businessUnit)) {
                 $this->Flash->success(__('The business unit has been saved.'));
 

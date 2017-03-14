@@ -183,6 +183,8 @@ class ActionsController extends AppController
 		
         if ($this->request->is(['patch', 'post', 'put'])) {
             $note = $this->Notes->patchEntity($note, $this->request->data);
+			$note['customer_id']=$this->loggedinuser['customer_id'];
+			$note['emp_data_biographies_id']=$empid;
             if ($this->Notes->save($note)) {
                 $this->Flash->success(__('The note has been saved.'));
                 return $this->redirect(['action' => 'edit',$id,'controller'=>'Employees']);

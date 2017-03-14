@@ -176,25 +176,8 @@ div.dataTables_filter input {
 div.dataTables_wrapper {
      clear: both;margin-top:5px;
 }
-/*bootbox confirmation window*/
-.bootbox .modal-dialog .modal-content{
-	background-color:#d33724 !important;color:#FFFFFF;font-weight: bold;
-}
-.bootbox .modal-dialog .modal-content .modal-body{
-	background-color:#dd4b39 !important;
-}
-.bootbox .modal-dialog .modal-content .modal-header{
-	border-bottom:0px;
-}
-.bootbox .modal-dialog .modal-content .modal-footer{
-	border-top:0px;
-}
-.btn-circle {
-  width: 30px;
-  height: 30px;
-  line-height: 30px; /* adjust line height to align vertically*/
-  padding:0;
-  border-radius: 50%;
+.mptlform{
+	margin-top:33px;
 }
 .fs20{
 	font-size:20px;
@@ -202,6 +185,11 @@ div.dataTables_wrapper {
 .infodiv:hover > .info-box-number{ 
 	font-size:24px;
 }
+/*datatable header responsive*/
+/*.dataTables_scrollHeadInner{width:100%;}
+.table{width:100%;}*/
+.dataTables_wrapper{ overflow-y: auto; clear:both; }
+
 </style>
 
 </head>
@@ -276,9 +264,9 @@ $this->Html->script([ '/js/dropzone' ], ['block' => 'script']);
 <?php echo $this->fetch('script'); ?>
 <?php echo $this->fetch('scriptBotton'); ?>
 <script type="text/javascript">
-    $(document).ready(function(){
+$(document).ready(function(){
 
-
+	//toggle infobar
   $('#infobar').on('hide.bs.collapse', function () {
     	$('#togglebutton').html('<span class="fa fa-chevron-down fs20"></span>');
   })
