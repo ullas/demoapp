@@ -20,7 +20,7 @@
       <span class="fa fa-chevron-up fs20"></span>
 </button>
 
-   <?php echo $this->Form->create($this->request->params['controller'],array('url' => array('controller' => $this->request->params['controller'], 'action' => 'deleteAll')));?>
+   <?php echo $this->Form->create($this->request->params['controller'],array('class'=>'mptlform','url' => array('controller' => $this->request->params['controller'], 'action' => 'deleteAll')));?>
    	<input type="hidden" value="1"  id="basicfilter"/>
 	<div class="fmactionbtn"></div>
 	<div>
@@ -107,6 +107,8 @@ $this->Html->script([
 
   $(function () {
   	
+  	 
+
   	  //throw javascript console error,instead of throwing alert
   	  $.fn.dataTable.ext.errMode='throw';
 
@@ -151,7 +153,7 @@ $this->Html->script([
           "ordering": true,
           "info": true,
           "autoWidth": false,
-          "scrollX":true,
+          // "scrollX":true,
           colReorder: true,
           // rowReorder: { update:false },
           stateSave:false,
@@ -180,7 +182,6 @@ $this->Html->script([
 
      ]
     });
-
 
 	// fmactions are added through setTurben. btn-group div is added separately.
 	$('div.fmactionbtn').appendTo('div.dataTables_length');
