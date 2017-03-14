@@ -138,8 +138,8 @@ class AppController extends Controller
 		Configure::write('userdf', $this->request->session()->read('sessionuser')['dateformat']);
 		$userdf = $this->request->session()->read('sessionuser')['dateformat'];
 		if(isset($userdf)  & $userdf===1){
-			Date::setToStringFormat("dd/MM/YYYY"); 
-			FrozenDate::setToStringFormat("dd/MM/YYYY"); 
+			Date::setToStringFormat("dd/MM/yyyy"); 
+			FrozenDate::setToStringFormat("dd/MM/yyyy"); 
 		}
 		
 		$userrole=$this->request->session()->read('sessionuser')['role'];

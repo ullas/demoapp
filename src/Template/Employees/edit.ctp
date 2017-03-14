@@ -262,7 +262,8 @@ $(document).ready(function(){
 			if(e.relatedTarget!=null){$('#loadingmessage').hide();}
 			if ( status == "error" ) {
 				var msg = "Sorry but there was an error.";
-				alert(msg);
+				// bootbox_alert(msg).modal('show');
+				sweet_alert(msg);
 			}else{
 				
 				var userdf=<?php echo $this->request->session()->read('sessionuser')['dateformat'];?>;

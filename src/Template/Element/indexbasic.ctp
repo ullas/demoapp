@@ -1,4 +1,4 @@
-<section class="content-header">
+<!-- <section class="content-header">
   <h1>
     <?php 
     if(isset($title)){
@@ -14,7 +14,7 @@
   <ol class="breadcrumb">
     <?= $this->Html->link('<b>Add</b> &nbsp;&nbsp;'.__('<i class="fa fa-plus"></i>'), ['action' => 'add'],['class' => 'btn btn-sm btn-success btn-flat','escape' => false]) ?>
   </ol>
-</section>
+</section> -->
 <section class="content">
    <?php echo $this->Form->create($this->request->params['controller'],array('url' => array('controller' => $this->request->params['controller'], 'action' => 'deleteAll')));?>
    	<input type="hidden" value="1"  id="basicfilter"/>
@@ -111,15 +111,18 @@ $this->Html->script([
       $("#delete").click(function(){
 
   	   if($(".mptl-lst-chkbox:checked").length==0){
-      		alert("No item selected. Please select at least one item ");
+  	   		sweet_alert("No item selected. Please select at least one item!");
+      		// bootbox_alert("No item selected. Please select at least one item!").modal('show');
       		return;
       }
 
 		if($(".mptl-lst-chkbox:checked").length==1){
-			bootbox_confirm("Do you want to delete the record?", function(){deleteRecord('yes');}).modal('show');
+			// bootbox_confirm("Do you want to delete the record?", function(){deleteRecord('yes');}).modal('show');
+			sweet_confirm("MayHaw","Do you want to delete the record?", function(){deleteRecord('yes');});
 		}
 		else if($(".mptl-lst-chkbox:checked").length>1){
-			bootbox_confirm("Do you want to delete " + $(".mptl-lst-chkbox:checked").length + " records?", function(){deleteRecord('yes');}).modal('show');
+			// bootbox_confirm("Do you want to delete " + $(".mptl-lst-chkbox:checked").length + " records?", function(){deleteRecord('yes');}).modal('show');
+			sweet_confirm("MayHaw","Do you want to delete " + $(".mptl-lst-chkbox:checked").length + " records?", function(){deleteRecord('yes');});
 		}
   	});
 

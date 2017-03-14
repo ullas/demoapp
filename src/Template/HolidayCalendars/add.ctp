@@ -206,9 +206,9 @@ $('#createhc').click(function(){
    		 		}
     		});
     	}else{
-    		if(name == "" || name==null){showflash("failure","Please enter name for the holiday calendar.");}
-    		else if(validfrom == "" || validfrom==null){showflash("failure","Please select a Valid From date.");}
-    		else if(validto == "" || validto==null){showflash("failure","Please select a Valid To date.");}
+    		if(name == "" || name==null){sweet_alert("Please enter name for the holiday calendar.");}
+    		else if(validfrom == "" || validfrom==null){sweet_alert("Please select a Valid From date.");}
+    		else if(validto == "" || validto==null){sweet_alert("Please select a Valid To date.");}
     		return false;
     	}
 
@@ -285,7 +285,7 @@ $("#weekoff-ids").change(weeklyOffProcess);
 			if(e.relatedTarget!=null){$('#loadingmessage').hide();}
 			if ( status == "error" ) {
 				var msg = "Sorry but there was an error.";
-				showflash("failure",msg);
+				sweet_alert(msg);
 			}else{
 
 		if(userdf==1){
@@ -425,7 +425,7 @@ function weeklyOffProcess(){
 	
   if (d1 > d2){
     // alert("The Valid From date is higher than Valid To date.");
-    showflash("failure","The Valid From date is higher than Valid To date.");
+    sweet_alert("The Valid From date is higher than Valid To date.");
     return false;
   }
   
@@ -462,7 +462,7 @@ function weeklyOffProcess(){
   		table.ajax.url('/Holidays/ajaxData?holidaycalendar='+holidaycalendarid).load();
     	// table.draw();
    }else{
-   		showflash("failure","Please select a Valid From/Valid To date.");
+   		sweet_alert("Please select a Valid From/Valid To date.");
    		return false;
    }
  }

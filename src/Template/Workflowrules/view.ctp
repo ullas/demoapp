@@ -183,7 +183,7 @@ table.on( 'row-reorder', function ( e, diff, edit ) {
 			$('#loadingmessage').hide();
 			if ( status == "error" ) {
 				var msg = "Sorry but there was an error.";
-				showflash("failure",msg);
+				sweet_alert(msg);
 			}else{
 
 				var userdf=<?php echo $this->request->session()->read('sessionuser')['dateformat'];?>;

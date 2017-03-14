@@ -1,19 +1,34 @@
-<div class="box-body" >
-	<div class="row">
+<section class="content-header">
+  <h1>
+    Leave Requests
+    <small>List</small>
+  </h1>
+  <ol class="breadcrumb">
+  	
+  	<button id="togglebutton" type="button" class="btn btn-primary btn-circle" data-toggle="collapse" data-target="#infobar">
+      <span class="fa fa-chevron-up fs20"></span>
+	</button>
+
+    <?= $this->Html->link('<b>Add</b> &nbsp;&nbsp;'.__('<i class="fa fa-plus"></i>'), ['action' => 'add'],['class' => 'btn btn-sm btn-success btn-flat','escape' => false]) ?>
+  </ol>
+</section>
+
+<section class="collapse in" id="infobar" style="margin-top:20px;" aria-expanded="true">
+	<div class="clearfix">
 	
 		<div class="col-md-3 col-sm-6 col-xs-12">
-          <div class="info-box">
-            <span class="info-box-icon bg-aqua"><i class="fa fa-list"></i></span>
+          <div class="info-box bg-aqua">
+          	<span class="info-box-icon"><i class="fa fa-list"></i></span>
             <div class="info-box-content">
-              <span class="info-box-text">Requested</span>
+              <span class="info-box-text dd">Requested</span>
               <span class="info-box-number">0</span>
             </div>
           </div>
         </div>
 
         <div class="col-md-3 col-sm-6 col-xs-12">
-          <div class="info-box">
-            <span class="info-box-icon bg-green"><i class="fa fa-check"></i></span>
+          <div class="info-box  bg-green">
+            <span class="info-box-icon"><i class="fa fa-check"></i></span>
             <div class="info-box-content">
               <span class="info-box-text">Approved</span>
               <span class="info-box-number">0</span>
@@ -22,8 +37,8 @@
         </div>
         
         <div class="col-md-3 col-sm-6 col-xs-12">
-          <div class="info-box">
-            <span class="info-box-icon bg-red"><i class="fa fa-times"></i></span>
+          <div class="info-box  bg-red">
+            <span class="info-box-icon"><i class="fa fa-times"></i></span>
             <div class="info-box-content">
               <span class="info-box-text">Rejected</span>
               <span class="info-box-number">0</span>
@@ -31,14 +46,17 @@
           </div>
         </div>
         
+        <!-- <div class="col-md-3 col-sm-6 col-xs-12">
+          <div class="small-box bg-red">
+            <div class="inner">
+              <h3>0</h3>
+              <p>Rejected</p>
+            </div>
+          </div>
+        </div> -->
+        
 	</div>
-</div>     
-
-<style>
-.border-right {
-    border-right: 1px solid #FFFFFF;
-}
-</style>
-
+</section>
+	
 
 <?php echo $this->element('indexbasic', array('title' => 'Leave Requests')); ?>

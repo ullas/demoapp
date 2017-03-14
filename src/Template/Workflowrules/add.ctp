@@ -170,7 +170,7 @@ $('#createwr').click(function(){
    		 		}
     		});
     	}else{
-    		showflash("failure","Please enter the name.");
+    		sweet_alert("Please enter the name.");
     		return false;
     	}
 
@@ -185,7 +185,7 @@ $('#createwr').click(function(){
 			if(e.relatedTarget!=null){$('#loadingmessage').hide();}
 			if ( status == "error" ) {
 				var msg = "Sorry but there was an error.";
-				showflash("failure",msg);
+				sweet_alert(msg);
 			}else{
 
 				var userdf=<?php echo $this->request->session()->read('sessionuser')['dateformat'];?>;
