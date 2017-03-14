@@ -39,7 +39,10 @@ use Cake\Utility\Inflector;
             	'formatter' => function( $d, $row ,$modalname) {
                 	$buttons='<a href="/'.   $modalname  . '/view/'.$d.'" class="fa fa-file-text-o p3"></a>
                 					<a href="/'.   $modalname  . '/edit/'.$d.'" class="fa fa-pencil p3 text-aqua"></a>
-									<a href="#" class="delete-btn fa fa-trash text-red" data-id="'.$d.'"></a>';
+									<form name="formdelete" id="formdelete' .$d. '" method="post" action="/'.   $modalname  . '/delete/'.$d.'" style="display:none;" >
+                                   <input type="hidden" name="_method" value="POST"></form>
+                                   <a href="#" onclick="sweet_confirm(&quot;MayHaw&quot;,&quot;Are you sure you want to delete # '.$d.'?&quot; , function(){ document.getElementById(&quot;formdelete'.$d.'&quot;).submit(); })
+                                    event.returnValue = false; return false;" class="fa fa-trash text-red" style= "padding:3px"></a>';
 						
                 	return $buttons;
             	}

@@ -95,6 +95,9 @@ class EmployeesTable extends Table
         $validator
             ->allowEmpty('profilepicture');
 
+        $validator
+            ->allowEmpty('visible');
+
         return $validator;
     }
 

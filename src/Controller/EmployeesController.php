@@ -27,7 +27,7 @@ class EmployeesController extends AppController
 		}
 		$contains=['Empdatabiographies', 'Empdatapersonals', 'Employmentinfos'];
 									  
-		$usrfilter="Employees.customer_id ='".$this->loggedinuser['customer_id'] . "'";						  
+		$usrfilter="Employees.customer_id ='".$this->loggedinuser['customer_id'] . "' and Employees.visible='1'";						  
 		$output =$this->Datatable->getView($fields,$contains,$usrfilter);
 		echo json_encode($output);			
     }
@@ -59,7 +59,7 @@ class EmployeesController extends AppController
         $employee = $this->Employees->get($id, [
             'contain' => ['Empdatabiographies', 'Empdatapersonals', 'Employmentinfos', 'ContactInfos', 'Addresses','Identities']
         ]);
-		if($employee['customer_id']==$this->loggedinuser['customer_id']){
+		if($employee['customer_id']==$this->loggedinuser['customer_id'] && $employee['visible']=='1'){
         	$this->set('employee', $employee);
         	$this->set('_serialize', ['employee']);
 		}else{
@@ -78,6 +78,7 @@ class EmployeesController extends AppController
         $employee = $this->Employees->newEntity();
         if ($this->request->is('post')) {
             $employee = $this->Employees->patchEntity($employee, $this->request->data,['associated' => ['Empdatabiographies', 'Empdatapersonals', 'Employmentinfos', 'Customers', 'ContactInfos', 'Addresses','Identities']]);
+			$employee['visible']="1";
 			//saving customer_id to all associated models
 			$employee['customer_id']=$this->loggedinuser['customer_id'];
 			$employee['empdatabiography']['customer_id']=$this->loggedinuser['customer_id'];
@@ -118,7 +119,7 @@ class EmployeesController extends AppController
             'contain' => ['Empdatabiographies', 'Empdatapersonals', 'Employmentinfos', 'ContactInfos', 'Addresses','Identities']
         ]);
 		
-		if($employee['customer_id'] != $this->loggedinuser['customer_id'])
+		if($employee['customer_id'] != $this->loggedinuser['customer_id'] || $employee['visible'] != '1')
 		{
 			 $this->Flash->error(__('You are not Authorized.'));
 			 return $this->redirect(['action' => 'index']);
@@ -225,9 +226,12 @@ class EmployeesController extends AppController
     {
         $this->request->allowMethod(['post', 'delete']);
         $employee = $this->Employees->get($id);
+
         if($employee['customer_id'] == $this->loggedinuser['customer_id']) 
 		{
-        	if ($this->Employees->delete($employee)) {
+			$employee = $this->Employees->patchEntity($employee, $this->request->data);
+			$employee['visible'] = "0" ;
+            if ($this->Employees->save($employee)) {
             	$this->Flash->success(__('The employee has been deleted.'));
         	} else {
             	$this->Flash->error(__('The employee could not be deleted. Please, try again.'));
@@ -254,10 +258,10 @@ class EmployeesController extends AppController
 			    if(count($itemna)== 2 && $itemna[0]=='chk'){
 			    	
 					$record = $this->Employees->get($value);
-					
+					// $record = $this->Employees->patchEntity($record, $this->request->data);
 					 if($record['customer_id']== $this->loggedinuser['customer_id']) {
-					 	
-						   if ($this->Employees->delete($record)) {
+					 	   $record['visible'] = "0" ;
+						   if ($this->Employees->save($record)) {
 					           $sucess= $sucess | true;
 					        } else {
 					           $failure= $failure | true;
