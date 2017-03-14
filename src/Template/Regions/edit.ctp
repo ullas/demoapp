@@ -13,8 +13,8 @@
     <?= $this->Form->create($region) ?>
     <fieldset>
         <?php
-            echo $this->Form->input('external_code');
-            echo $this->Form->input('name');
+            echo $this->Form->input('external_code',['label' => 'Region Code']);
+            echo $this->Form->input('name',['label' => 'Region Name']);
             echo $this->Form->input('description');
 			echo $this->Form->input('start_date',['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
             echo $this->Form->input('end_date',['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
@@ -27,4 +27,3 @@
     </div>
     <?= $this->Form->end() ?>
 </div></div></section>
-

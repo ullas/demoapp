@@ -16,17 +16,16 @@
   <div class="box box-primary"><div class="box-body">
   	<?= $this->Form->create($region, array('role' => 'form')) ?>
     <fieldset><?php
-            echo $this->Form->input('external_code',['disabled' => true]);
-            echo $this->Form->input('name',['disabled' => true]);
+            echo $this->Form->input('external_code',['label' => 'Region Code','disabled' => true]);
+            echo $this->Form->input('name',['label' => 'Region Name','disabled' => true]);
             echo $this->Form->input('description',['disabled' => true]);
-			echo $this->Form->input('start_date',['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
+			      echo $this->Form->input('start_date',['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
             echo $this->Form->input('end_date',['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
             echo $this->Form->input('status',['disabled' => true]);
-            
+
         ?></fieldset>
 <div class="box-footer">
           	<?=$this->Html->link(__('Cancel'), ['action' => 'index'], ['escape' => false])?>
             <?=$this->Html->link(__('Edit Region'), ['action' => 'edit', $region['id']],['class'=>'btn btn-primary label-info pull-right'], ['escape' => false])?>
           </div><?= $this->Form->end() ?>
 </div></div></section>
-
