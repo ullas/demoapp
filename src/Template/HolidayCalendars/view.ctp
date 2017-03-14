@@ -242,7 +242,7 @@ $("#weekoff-ids").change(function(){
   	table.ajax.reload(null,false);
     // table.draw();
     }else{
-   		showflash("failure","Please select the Valid From/Valid To date.");
+   		sweet_alert("failure","Please select the Valid From/Valid To date.");
    		return false;
    }
  });
@@ -257,7 +257,7 @@ $("#weekoff-ids").change(function(){
 			if(e.relatedTarget!=null){$('#loadingmessage').hide();}
 			if ( status == "error" ) {
 				var msg = "Sorry but there was an error.";
-				showflash("failure",msg);
+				sweet_alert(msg);
 			}else{
 
 				var userdf=<?php echo $this->request->session()->read('sessionuser')['dateformat'];?>;

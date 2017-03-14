@@ -218,13 +218,13 @@ $("#hc-update").click(function(){
 	} 
 	
     if(d1>d2){
-      showflash("failure","The Valid From date is higher than Valid To date.");
+      sweet_alert("The Valid From date is higher than Valid To date.");
       return false;
     }
   }else{
-     if(name == "" || name==null){showflash("failure","Please enter name for the holiday calendar.");}
-    		else if(validfrom == "" || validfrom==null){showflash("failure","Please select a Valid From date.");}
-    		else if(validto == "" || validto==null){showflash("failure","Please select a Valid To date.");}
+     if(name == "" || name==null){sweet_alert("Please enter name for the holiday calendar.");}
+    		else if(validfrom == "" || validfrom==null){sweet_alert("Please select a Valid From date.");}
+    		else if(validto == "" || validto==null){sweet_alert("Please select a Valid To date.");}
     		return false;
   }
 })
@@ -240,7 +240,7 @@ $("#hc-update").click(function(){
 				$('#loadingmessage').hide();}
 			if ( status == "error" ) {
 				var msg = "Sorry but there was an error.";
-				showflash("failure",msg);
+				sweet_alert(msg);
 			}else{
 
 				if(userdf==1){
@@ -380,7 +380,7 @@ function weeklyOffProcess(){
 	
   if (d1 > d2){
     // alert("The Valid From date is higher than Valid To date.");
-    showflash("failure","The Valid From date is higher than Valid To date.");
+    sweet_alert("The Valid From date is higher than Valid To date.");
     return false;
   }
 	if(document.getElementById('valid-from').value!="" && document.getElementById('valid-from').value!=undefined && document.getElementById('valid-to').value!="" && document.getElementById('valid-to').value!=undefined){
@@ -411,7 +411,7 @@ function weeklyOffProcess(){
   		table.ajax.reload(null,false);
     	// table.draw();
    }else{
-   		showflash("failure","Please select a Valid From/Valid To date.");
+   		sweet_alert("Please select a Valid From/Valid To date.");
    		return false;
    }
  }

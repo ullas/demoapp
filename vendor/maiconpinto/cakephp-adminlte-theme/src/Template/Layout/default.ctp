@@ -44,7 +44,12 @@
 <!-- FastClick -->
 <?php echo $this->Html->script('AdminLTE./plugins/fastclick/fastclick'); ?>
 <!-- AdminLTE App -->
- <?= $this->Html->script('jquery.jOrgChart.js'); ?><script src="http://bootboxjs.com/bootbox.js"></script>
+ <?= $this->Html->script('jquery.jOrgChart.js'); ?>
+ 
+ <!-- <script src="http://bootboxjs.com/bootbox.js"></script> -->
+  <script src="http://t4t5.github.io/sweetalert/dist/sweetalert-dev.js"></script>
+  <link rel="stylesheet" href="http://t4t5.github.io/sweetalert/dist/sweetalert.css">
+  <!-- <link rel="stylesheet" href="http://t4t5.github.io/sweetalert/themes/google/google.css"> -->
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -184,6 +189,16 @@ div.dataTables_wrapper {
 .bootbox .modal-dialog .modal-content .modal-footer{
 	border-top:0px;
 }
+.btn-circle {
+  width: 30px;
+  height: 30px;
+  line-height: 30px; /* adjust line height to align vertically*/
+  padding:0;
+  border-radius: 50%;
+}
+.fs20{
+	font-size:20px;
+}
 </style>
 
 </head>
@@ -261,6 +276,15 @@ $this->Html->script([ '/js/dropzone' ], ['block' => 'script']);
     $(document).ready(function(){
 
 
+  $('#infobar').on('hide.bs.collapse', function () {
+    	$('#togglebutton').html('<span class="fa fa-chevron-down fs20"></span>');
+  })
+  $('#infobar').on('show.bs.collapse', function () {
+    	$('#togglebutton').html('<span class="fa fa-chevron-up fs20"></span>');
+  })
+// $( "#togglebutton" ).click(function() {
+    // $( "#infobar" ).slideToggle();
+// });
 // jQuery("[required]").after("<span class='required'>*</span>");
    
 //popover resize    	
@@ -350,8 +374,31 @@ $(window).off("resize").on("resize", function() {
 			})
 
 });
-
-
+function bootbox_alert(msg, callback_success, callback_cancel) {
+    var d = bootbox.alert({title:"MayHaw",message:msg, show:false, buttons: { 'ok': { label: 'OK', className: 'btn btn-outline pull-right' } },callback:function(result) {
+ 
+    }});
+    return d;
+}
+function sweet_alert(msg, callback_success, callback_cancel) {
+    var d = swal("MayHaw",msg);
+    return d;
+}
+function sweet_confirm(titl,msg, callback_success, callback_cancel) {
+  var d = swal({
+  		title: titl,
+  		text: msg,
+  		type: "warning",
+  		showCancelButton: true,
+  		confirmButtonColor: "#DD6B55",
+  		confirmButtonText: "Confirm !",
+  		closeOnConfirm: true
+	},
+	function(){
+  		callback_success();
+	});
+    return d;
+}
 function showflash(type,data) {
 
         var output = '';
