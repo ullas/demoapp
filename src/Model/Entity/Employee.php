@@ -9,12 +9,15 @@ use Cake\ORM\Entity;
  * @property int $id
  * @property int $customer_id
  * @property string $profilepicture
+ * @property int $visible
  *
  * @property \App\Model\Entity\Customer $customer
+ * @property \App\Model\Entity\Address $address
  * @property \App\Model\Entity\ContactInfo $contact_info
- * @property \App\Model\Entity\EmpDataBiography $empdatabiography
+ * @property \App\Model\Entity\Empdatabiography $empdatabiography
  * @property \App\Model\Entity\EmpDataPersonal $empdatapersonal
  * @property \App\Model\Entity\EmploymentInfo $employmentinfo
+ * @property \App\Model\Entity\Identity $identity
  * @property \App\Model\Entity\User $user
  */
 class Employee extends Entity
