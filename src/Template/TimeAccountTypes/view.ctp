@@ -17,20 +17,20 @@
             echo $this->Form->input('name',['disabled' => true]);
             echo $this->Form->input('unit',['label'=>'Unit','class'=>'select2','options' => array('Hour(s)', 'Day(s)'), 'empty' => 'Choose','disabled' => true]);
             echo $this->Form->input('perm_reccur',['label'=>'Permanent / Recurring','disabled' => true,'class'=>'select2','options' => array('Permanent', 'Recurring'), 'empty' => true]);
-            echo $this->Form->input('start_date',['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
+            echo $this->Form->input('start_date',['label'=>'Account Creation Start Date','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
             echo $this->Form->input('valid_from',['label'=>'Account Valid From (month)','class'=>'select2','options' => array("January","February","March","April","May","June","July","August","September","October","November","December"), 'empty' => 'Choose','disabled' => true]);
             echo $this->Form->input('valid_from_day',['label'=>'Account Valid From (day)','disabled' => true]);
             echo $this->Form->input('account_booking_off',['label'=>'Account Booking Offset (Months)','disabled' => true]);
             echo $this->Form->input('freq_period',['label'=>'Frequency Period','class'=>'select2','options' => array('Weekly','bi Weekly','Monthly','Annually'), 'empty' => 'Choose','disabled' => true]);
             echo $this->Form->input('first_offset',['label'=>'First Accrual Offset (Days)','disabled' => true]);
-            echo $this->Form->input('start_accrual',['label'=>'Start of accrual period','disabled' => true]);
+            echo $this->Form->input('start_accrual',['label'=>'Start of Accrual Period','disabled' => true]);
             echo $this->Form->input('accrual_base',['label'=>'Accruals Based On','disabled' => true]);
             echo $this->Form->input('min_balance',['label'=>'Balance Cannot Fall Below','disabled' => true]);
             echo $this->Form->input('posting_order',['class'=>'select2','options' => array('Oldest First' , 'Newest First'), 'empty' => 'Choose','disabled' => true]);
             echo $this->Form->input('time_to_accrual',['label'=>'Time From Hire to First Accrual','disabled' => true]);
-			echo $this->Form->input('time_to_accrual_unit' ,['label'=>'Time Unit From Hire to First Accrual','class'=>'select2','options' => array('Days' , 'Weeks ', 'Months', 'Years'), 'empty' => 'Choose','disabled' => true]);
-            echo $this->Form->input('proration_used',['label'=>'Are Prorations used for New Hire Accruals','disabled' => true]);
-            echo $this->Form->input('rounding_used',['label'=>'Are rounding values included for New Hires','disabled' => true]);
+			      echo $this->Form->input('time_to_accrual_unit' ,['label'=>'Time Unit From Hire to First Accrual','class'=>'select2','options' => array('Days' , 'Weeks ', 'Months', 'Years'), 'empty' => 'Choose','disabled' => true]);
+            echo $this->Form->input('proration_used',['label'=>'Are Prorations Used for New Hire Accruals','disabled' => true]);
+            echo $this->Form->input('rounding_used',['label'=>'Are Rounding Values Included for New Hires','disabled' => true]);
             echo $this->Form->input('update_rule',['label'=>'Period End Processing/Interim Update Rule','disabled' => true]);
             echo $this->Form->input('payout_eligiblity',['disabled' => true]);
             echo $this->Form->input('pay_component_id', ['options' => $payComponents, 'empty' => true,'disabled' => true]);
@@ -39,7 +39,7 @@
             echo $this->Form->input('isleavewithoutpay',['label'=>'Is Leave Without Pay','disabled' => true]);
             echo $this->Form->input('allownegativebalance',['label'=>'Allow Negative Balance','disabled' => true]);
             echo $this->Form->input('includeholidayswithinleaveasleaves',['label'=>'Include Holidays within leave as leaves','disabled' => true]);
-            
+
         ?>
     </fieldset>
     <div class="box-footer">

@@ -17,20 +17,20 @@
             echo $this->Form->input('name');
             echo $this->Form->input('unit',['label'=>'Unit','class'=>'select2','options' => array('Hour(s)', 'Day(s)'), 'empty' => 'Choose']);
             echo $this->Form->input('perm_reccur',['label'=>'Permanent / Recurring','class'=>'select2','options' => array('Permanent', 'Recurring'), 'empty' => true]);
-            echo $this->Form->input('start_date',['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+            echo $this->Form->input('start_date',['label'=>'Account Creation Start Date','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
             echo $this->Form->input('valid_from',['label'=>'Account Valid From (month)','class'=>'select2','options' => array("January","February","March","April","May","June","July","August","September","October","November","December"), 'empty' => 'Choose']);
             echo $this->Form->input('valid_from_day',['label'=>'Account Valid From (day)']);
             echo $this->Form->input('account_booking_off',['label'=>'Account Booking Offset (Months)']);
             echo $this->Form->input('freq_period',['label'=>'Frequency Period','class'=>'select2','options' => array('Weekly','bi Weekly','Monthly','Annually'), 'empty' => 'Choose']);
             echo $this->Form->input('first_offset',['label'=>'First Accrual Offset (Days)']);
-            echo $this->Form->input('start_accrual',['label'=>'Start of accrual period']);
+            echo $this->Form->input('start_accrual',['label'=>'Start of Accrual Period']);
             echo $this->Form->input('accrual_base',['label'=>'Accruals Based On']);
             echo $this->Form->input('min_balance',['label'=>'Balance Cannot Fall Below']);
             echo $this->Form->input('posting_order',['class'=>'select2','options' => array('Oldest First' , 'Newest First'), 'empty' => 'Choose']);
             echo $this->Form->input('time_to_accrual',['label'=>'Time From Hire to First Accrual']);
-			echo $this->Form->input('time_to_accrual_unit' ,['label'=>'Time Unit From Hire to First Accrual','class'=>'select2','options' => array('Days' , 'Weeks ', 'Months', 'Years'), 'empty' => 'Choose']);
-            echo $this->Form->input('proration_used',['label'=>'Are Prorations used for New Hire Accruals']);
-            echo $this->Form->input('rounding_used',['label'=>'Are rounding values included for New Hires']);
+			      echo $this->Form->input('time_to_accrual_unit' ,['label'=>'Time Unit From Hire to First Accrual','class'=>'select2','options' => array('Days' , 'Weeks ', 'Months', 'Years'), 'empty' => 'Choose']);
+            echo $this->Form->input('proration_used',['label'=>'Are Prorations Used for New Hire Accruals']);
+            echo $this->Form->input('rounding_used',['label'=>'Are Rounding Values Included for New Hires']);
             echo $this->Form->input('update_rule',['label'=>'Period End Processing/Interim Update Rule']);
             echo $this->Form->input('payout_eligiblity');
             echo $this->Form->input('pay_component_id', ['options' => $payComponents, 'empty' => true]);
@@ -39,7 +39,7 @@
             echo $this->Form->input('isleavewithoutpay',['label'=>'Is Leave Without Pay']);
             echo $this->Form->input('allownegativebalance',['label'=>'Allow Negative Balance']);
             echo $this->Form->input('includeholidayswithinleaveasleaves',['label'=>'Include Holidays within leave as leaves']);
-            
+
         ?>
     </fieldset>
     <div class="box-footer">
