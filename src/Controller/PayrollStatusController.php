@@ -43,6 +43,9 @@ var $components = array('Datatable');
         ];
         $payrollStatus = $this->paginate($this->PayrollStatus);
 
+		$actions =[ ['name'=>'delete','title'=>'Delete','class'=>' label-danger'] ];
+        $this->set('actions',$actions);	
+		
         $this->set(compact('payrollStatus'));
         $this->set('_serialize', ['payrollStatus']);
     }

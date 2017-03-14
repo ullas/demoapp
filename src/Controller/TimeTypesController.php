@@ -46,6 +46,9 @@ class TimeTypesController extends AppController
         ];
         $timeTypes = $this->paginate($this->TimeTypes);
 
+		$actions =[ ['name'=>'delete','title'=>'Delete','class'=>' label-danger'] ];
+        $this->set('actions',$actions);	
+		
         $this->set(compact('timeTypes'));
         $this->set('_serialize', ['timeTypes']);
     }

@@ -42,6 +42,9 @@ class PayrollAreaController extends AppController
         ];
         $payrollArea = $this->paginate($this->PayrollArea);
 
+		$actions =[ ['name'=>'delete','title'=>'Delete','class'=>' label-danger'] ];
+        $this->set('actions',$actions);	
+		
         $this->set(compact('payrollArea'));
         $this->set('_serialize', ['payrollArea']);
     }

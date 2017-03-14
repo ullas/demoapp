@@ -48,7 +48,10 @@ class LocationsController extends AppController
             'contain' => ['Customers']
         ];
         $locations = $this->paginate($this->Locations);
-
+		
+		$actions =[ ['name'=>'delete','title'=>'Delete','class'=>' label-danger'] ];
+        $this->set('actions',$actions);	
+		
         $this->set(compact('locations'));
         $this->set('_serialize', ['locations']);
     }
@@ -160,4 +163,41 @@ class LocationsController extends AppController
 	    }
         return $this->redirect(['action' => 'index']);
     }
+	public function deleteAll($id=null){
+    	
+		$this->request->allowMethod(['post', 'deleteall']);
+        $sucess=false;$failure=false;
+        $data=$this->request->data;
+			
+		if(isset($data)){
+		   foreach($data as $key =>$value){
+		   	   		
+		   	   	$itemna=explode("-",$key);
+			    
+			    if(count($itemna)== 2 && $itemna[0]=='chk'){
+			    	
+					$record = $this->Locations->get($value);
+					
+					 if($record['customer_id']== $this->loggedinuser['customer_id']) {
+					 	
+						   if ($this->Locations->delete($record)) {
+					           $sucess= $sucess | true;
+					        } else {
+					           $failure= $failure | true;
+					        }
+					}
+				}  	  
+			}
+		   		        
+		
+				if($sucess){
+					$this->Flash->success(__('Selected Locations has been deleted.'));
+				}
+		        if($failure){
+					$this->Flash->error(__('The Locations could not be deleted. Please, try again.'));
+				}
+		
+		   }
+             return $this->redirect(['action' => 'index']);	
+     }
 }

@@ -71,7 +71,10 @@ class WorkflowrulesController extends AppController
             'contain' => ['Customers']
         ];
         $workflowrules = $this->paginate($this->Workflowrules);
-
+		
+		$actions =[ ['name'=>'delete','title'=>'Delete','class'=>' label-danger'] ];
+        $this->set('actions',$actions);	
+		
         $this->set(compact('workflowrules'));
         $this->set('_serialize', ['workflowrules']);
     }

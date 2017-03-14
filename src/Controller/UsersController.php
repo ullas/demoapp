@@ -25,6 +25,9 @@ class UsersController extends AppController
         ];
         $users = $this->paginate($this->Users);
 
+		$actions =[ ['name'=>'delete','title'=>'Delete','class'=>' label-danger'] ];
+        $this->set('actions',$actions);	
+		
         $this->set(compact('users'));
         $this->set('_serialize', ['users']);
     }

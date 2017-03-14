@@ -44,6 +44,9 @@ var $components = array('Datatable');
         ];
         $addresses = $this->paginate($this->Addresses);
 
+		$actions =[ ['name'=>'delete','title'=>'Delete','class'=>' label-danger'] ];
+        $this->set('actions',$actions);	
+		
         $this->set(compact('addresses'));
         $this->set('_serialize', ['addresses']);
     }

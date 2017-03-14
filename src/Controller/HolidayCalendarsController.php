@@ -71,6 +71,9 @@ class HolidayCalendarsController extends AppController
         ];
         $holidayCalendars = $this->paginate($this->HolidayCalendars);
 
+		$actions =[ ['name'=>'delete','title'=>'Delete','class'=>' label-danger'] ];
+        $this->set('actions',$actions);	
+		
         $this->set(compact('holidayCalendars'));
         $this->set('_serialize', ['holidayCalendars']);
     }

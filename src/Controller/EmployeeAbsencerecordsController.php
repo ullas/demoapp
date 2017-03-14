@@ -53,6 +53,9 @@ class EmployeeAbsencerecordsController extends AppController
         ];
         $employeeAbsencerecords = $this->paginate($this->EmployeeAbsencerecords);
 
+		$actions =[ ['name'=>'delete','title'=>'Delete','class'=>' label-danger'] ];
+        $this->set('actions',$actions);	
+		
         $this->set(compact('employeeAbsencerecords'));
         $this->set('_serialize', ['employeeAbsencerecords']);
     }

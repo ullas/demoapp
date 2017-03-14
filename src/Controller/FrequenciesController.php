@@ -44,6 +44,9 @@ class FrequenciesController extends AppController
         ];
         $frequencies = $this->paginate($this->Frequencies);
 
+		$actions =[ ['name'=>'delete','title'=>'Delete','class'=>' label-danger'] ];
+        $this->set('actions',$actions);	
+		
         $this->set(compact('frequencies'));
         $this->set('_serialize', ['frequencies']);
     }

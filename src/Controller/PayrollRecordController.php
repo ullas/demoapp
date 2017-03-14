@@ -43,6 +43,9 @@ var $components = array('Datatable');
         ];
         $payrollRecord = $this->paginate($this->PayrollRecord);
 
+		$actions =[ ['name'=>'delete','title'=>'Delete','class'=>' label-danger'] ];
+        $this->set('actions',$actions);	
+		
         $this->set(compact('payrollRecord'));
         $this->set('_serialize', ['payrollRecord']);
     }

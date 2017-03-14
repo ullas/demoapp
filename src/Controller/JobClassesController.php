@@ -43,6 +43,9 @@ class JobClassesController extends AppController
         ];
         $jobclasses = $this->paginate($this->JobClasses);
 
+		$actions =[ ['name'=>'delete','title'=>'Delete','class'=>' label-danger'] ];
+        $this->set('actions',$actions);	
+		
         $this->set(compact('jobclasses'));
         $this->set('_serialize', ['jobclasses']);
     }

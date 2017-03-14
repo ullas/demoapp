@@ -42,6 +42,9 @@ var $components = array('Datatable');
         ];
         $payComponentGroups = $this->paginate($this->PayComponentGroups);
 
+		$actions =[ ['name'=>'delete','title'=>'Delete','class'=>' label-danger'] ];
+        $this->set('actions',$actions);	
+		
         $this->set(compact('payComponentGroups'));
         $this->set('_serialize', ['payComponentGroups']);
     }

@@ -44,7 +44,7 @@
 <!-- FastClick -->
 <?php echo $this->Html->script('AdminLTE./plugins/fastclick/fastclick'); ?>
 <!-- AdminLTE App -->
- <?= $this->Html->script('jquery.jOrgChart.js'); ?>
+ <?= $this->Html->script('jquery.jOrgChart.js'); ?><script src="http://bootboxjs.com/bootbox.js"></script>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -157,6 +157,32 @@ div.dataTables_filter input {
 }
 .mptlboldtxt{
 	font-weight: bold;
+}
+.fmactionbtn {
+    float: right;
+}
+.fmactions .fmaction span {
+    position: relative;
+    top: -20px;
+    right: 10px;
+    font-size: 10px;
+    font-weight: bold;opacity:1;
+}
+div.dataTables_wrapper {
+     clear: both;margin-top:5px;
+}
+/*bootbox confirmation window*/
+.bootbox .modal-dialog .modal-content{
+	background-color:#d33724 !important;color:#FFFFFF;font-weight: bold;
+}
+.bootbox .modal-dialog .modal-content .modal-body{
+	background-color:#dd4b39 !important;
+}
+.bootbox .modal-dialog .modal-content .modal-header{
+	border-bottom:0px;
+}
+.bootbox .modal-dialog .modal-content .modal-footer{
+	border-top:0px;
 }
 </style>
 

@@ -42,7 +42,10 @@ var $components = array('Datatable');
             'contain' => ['Customers']
         ];
         $workSchedules = $this->paginate($this->WorkSchedules);
-
+		
+		$actions =[ ['name'=>'delete','title'=>'Delete','class'=>' label-danger'] ];
+        $this->set('actions',$actions);	
+		
         $this->set(compact('workSchedules'));
         $this->set('_serialize', ['workSchedules']);
     }
