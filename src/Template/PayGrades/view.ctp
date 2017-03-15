@@ -17,14 +17,14 @@
       <?= $this->Form->create($payGrade, array('role' => 'form')) ?>
       <fieldset>
 		<?php
-            echo $this->Form->input('external_code',['disabled' => true]);
-            echo $this->Form->input('name',['disabled' => true]);
+            echo $this->Form->input('external_code',['label' => 'Pay Grade Code','disabled' => true]);
+            echo $this->Form->input('name',['label' => 'Pay Grade Name''disabled' => true]);
             echo $this->Form->input('description',['disabled' => true]);
             echo $this->Form->input('status',['disabled' => true]);
-			echo $this->Form->input('start_date',['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
+			      echo $this->Form->input('start_date',['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
             echo $this->Form->input('end_date',['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
             echo $this->Form->input('pay_grade_level',['disabled' => true]);
-            
+
         ?>
         </fieldset>
         </div><div class="box-footer">
