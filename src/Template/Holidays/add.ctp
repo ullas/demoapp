@@ -14,19 +14,17 @@
         <?= $this->Form->create($holiday) ?>
           <div class="box-body">
           <?php
-
-            echo $this->Form->input('holiday_class', ['options' => array('Half day', 'Full day'),'class'=>'select2', 'empty' => true]);
-            echo $this->Form->input('name');
-            echo $this->Form->input('date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
             echo $this->Form->input('holiday_code');
+            echo $this->Form->input('holiday_class', ['options' => array('Half day', 'Full day'),'class'=>'select2', 'empty' => true]);
+            echo $this->Form->input('name',['label' => 'Name of Holiday']);
+            echo $this->Form->input('date', ['label' => 'Date of the Holiday','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
             // echo $this->Form->input('holiday_calendar_id');
-            
+
 		?>
 		</div>
 		<div class="box-footer">
     <!-- <?=$this->Html->link(__('Cancel'), ['action' => 'index'], ['escape' => false])?> -->
-    <?= $this->Form->button(__('Save Holidays'),['title'=>'Save Holidays','class'=>'pull-right']) ?> 
+    <?= $this->Form->button(__('Save Holidays'),['title'=>'Save Holidays','class'=>'pull-right']) ?>
 </div>
 	<?= $this->Form->end() ?>
 </div>
-	  

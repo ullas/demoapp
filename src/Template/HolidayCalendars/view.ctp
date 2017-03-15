@@ -13,12 +13,12 @@
     <?= $this->Form->create($holidayCalendar) ?>
     <fieldset>
         <?php
-            echo $this->Form->input('calendar',['disabled'=>true]);
-            echo $this->Form->input('name',['disabled'=>true]);
+            echo $this->Form->input('calendar',['label' => 'Calendar Code','disabled'=>true]);
+            echo $this->Form->input('name',['label' => 'Calendar Name','disabled'=>true]);
             echo $this->Form->input('country',['options' => $this->Country->get_countries(), 'empty' => true,'disabled'=>true]);
-            echo $this->Form->input('valid_from', ['class' => 'mptldphc','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled'=>true]);
-            echo $this->Form->input('valid_to', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled'=>true]);
-	
+            echo $this->Form->input('valid_from', ['label' => 'Valid From Date','class' => 'mptldphc','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled'=>true]);
+            echo $this->Form->input('valid_to', ['label' => 'Valid To Date','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled'=>true]);
+
         ?>
 
         <!-- <div class="col-md-4 pull-right"><div class="form-group"><input type="button" value="Get Weekly Off Dates" class="btn btn-xs btn-default" id="getweeklyoffdates"/></div></div> -->
@@ -79,7 +79,7 @@
     	padding: 3px 9px 0 10px;
     	font-size: 45px;
 	}
-	
+
 	.disLink{
            pointer-events: none;
            cursor: default;
@@ -114,7 +114,7 @@ $this->Html->script([
         }
   }
   $(function () {
-  	
+
   	//set weekly off selected days
   	var woffdata=[];
   	var days = { '0': 'Sunday',  '1': 'Monday', '2': 'Tuesday', '3': 'Wednesday', '4': 'Thursday', '5': 'Friday', '6': 'Saturday'};
@@ -266,11 +266,11 @@ $("#weekoff-ids").change(function(){
 				}else{
 					$('.mptldp').datepicker({ format:"yyyy/mm/dd",autoclose: true,clearBtn: true });
 				}
-	    		//set mandatory * after required label	
+	    		//set mandatory * after required label
     			$( ':input[required]' ).each( function () {
         			$("label[for='" + this.id + "']").addClass('mandatory');
     			});
-    
+
 
 	    		//select 2
     			$(".select2").select2({ width: '100%',allowClear: true,placeholder: "Select" });
