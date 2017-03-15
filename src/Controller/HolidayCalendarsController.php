@@ -142,6 +142,8 @@ class HolidayCalendarsController extends AppController
      */
     public function view($id = null)
     {
+    	$actions =[ ['name'=>'delete','title'=>'Delete','class'=>' label-danger'] ];
+        $this->set('actions',$actions);	
 		$this->loadModel('CreateConfigs');
         $configs=$this->CreateConfigs->find('all')->where(['table_name' => 'Holidays'])->order(['"id"' => 'ASC'])->toArray();
         $this->set('configs',$configs);	
@@ -179,6 +181,8 @@ class HolidayCalendarsController extends AppController
      */
     public function add()
     {
+		$actions =[ ['name'=>'delete','title'=>'Delete','class'=>' label-danger'] ];
+        $this->set('actions',$actions);	
 		
 		$this->loadModel('CreateConfigs');
         $configs=$this->CreateConfigs->find('all')->where(['table_name' => 'Holidays'])->order(['"id"' => 'ASC'])->toArray();
@@ -213,7 +217,9 @@ class HolidayCalendarsController extends AppController
      */
     public function edit($id = null)
     {
-    	
+    	$actions =[ ['name'=>'delete','title'=>'Delete','class'=>' label-danger'] ];
+        $this->set('actions',$actions);	
+		
     	$this->loadModel('CreateConfigs');
         $configs=$this->CreateConfigs->find('all')->where(['table_name' => 'Holidays'])->order(['"id"' => 'ASC'])->toArray();
         $this->set('configs',$configs);	
@@ -331,5 +337,53 @@ class HolidayCalendarsController extends AppController
 		
 		   }
              return $this->redirect(['action' => 'index']);	
+     }
+	public function deleteAllActions($id=null){
+    	
+		$this->request->allowMethod(['post', 'deleteall']);
+        $sucess=false;$failure=false;
+        $data=$this->request->data;
+		
+		$this->loadModel('Holidays');
+			
+		if(isset($data)){
+		   foreach($data as $key =>$value){
+		   	   		
+		   	   	$itemna=explode("-",$key);
+			    
+			    if(count($itemna)== 2 && $itemna[0]=='chk'){
+			    	
+					$record = $this->Holidays->get($value);
+					
+					 if($record['customer_id']== $this->loggedinuser['customer_id']) {
+					 	
+						   if ($this->Holidays->delete($record)) {
+					           $sucess= $sucess | true;
+					        } else {
+					           $failure= $failure | true;
+					        }
+					}
+				}  	  
+			}
+		   		        
+		
+				if($sucess){
+					$this->Flash->success(__('Selected Holidays has been deleted.'));
+				}
+		        if($failure){
+					$this->Flash->error(__('The Holidays could not be deleted. Please, try again.'));
+				}
+		
+		   }
+		
+			$actionstring = substr($this->referer(), -3);
+			if($actionstring==="add"){
+				return $this->redirect(['action' => 'index']);	
+			}else{
+				return $this->redirect($this->referer());
+			}
+			
+              // return $this->redirect($this->referer());
+           //return $this->redirect(['action' => 'index']);	
      }
 }

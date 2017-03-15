@@ -22,9 +22,6 @@
             echo $this->Form->input('valid_from', ['label' => 'Valid From Date','required' => true,'class' => 'mptldphc','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
             echo $this->Form->input('valid_to', ['label' => 'Valid To Date','required' => true,'class' => 'mptldpvt','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
 
-
-			// echo $this->Form->input('weekoff._ids', ['label'=>'Weekly Off','options' => array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'),'class'=>'select2']);
-
         ?>
 
         <!-- <div class="col-md-4 pull-right"><div class="form-group"><input type="button" value="Get Weekly Off Dates" class="btn btn-xs btn-default" id="getweeklyoffdates"/></div></div> -->
@@ -40,7 +37,13 @@
     <?= $this->Form->end() ?>
 </div></div>
 
-
+<div class="fmactionbtn"></div>
+<div>
+      <?php
+      $title="Manage ". $this->request->params['controller'] ;
+      echo $this->element('actions',[$actions,'title'=>$title]);
+	  ?>
+</div>
 
 <div class="box box-primary"><div class="box-body">
 	<?php
@@ -49,8 +52,9 @@
 </div></div>
 
 
+<?php echo $this->Form->create($this->request->params['controller'],array('class'=>'mptlform','url' => array('controller' => $this->request->params['controller'], 'action' => 'deleteAllActions')));?>
  <div class="box box-primary">
- 	<div class="box-header"><h3 class="box-title">Holidays</h3></div>
+ 	<div class="box-header with-border"><h3 class="box-title">Holidays</h3></div>
       <div class="box-body">
     <table id="mptlindextbl" class="table table-hover  table-bordered ">
         <thead>
@@ -69,6 +73,7 @@
         <tbody></tbody>
     </table></div></div>
 
+<?= $this->Form->end() ?>
 </section>
 
 <div id='loadingmessage' style='display:none;'>
@@ -118,7 +123,7 @@ $this->Html->script([
 
   	    if (btn == 'yes') {
 
-            jQuery("form")[0].submit();
+            jQuery("form")[1].submit();
         }
   }
   $(function () {
@@ -141,8 +146,8 @@ $this->Html->script([
            					weeklyOffProcess();
     					});
 		}
-
-
+		
+  	
   	//disable weeklyoff select initially
   	$('#weekoff-ids').attr("disabled", true);
 
@@ -215,7 +220,50 @@ $('#createhc').click(function(){
 });
 
 
+// Handle click on "Select all" control
+   $('#select-all').on('click', function(){
+      // Get all rows with search applied
 
+      var rows = table.rows({ 'search': 'applied' }).nodes();
+      // Check/uncheck checkboxes for all rows in the table
+      $('input[type="checkbox"]', rows).prop('checked', this.checked);
+	  setTurben();
+   });
+   // Handle click on checkbox to set state of "Select all" control
+   $('#mptlindextbl tbody').on('change', 'input[type="checkbox"]', function(){
+      // If checkbox is not checked
+      if(!this.checked){
+         var el = $('#select-all').get(0);
+         // If "Select all" control is checked and has 'indeterminate' property
+         if(el && el.checked && ('indeterminate' in el)){
+            // Set visual state of "Select all" control
+            // as 'indeterminate'
+            el.indeterminate = true;
+         }
+      }
+      setTurben();
+
+
+
+   });
+   
+   $("#delete").click(function(){
+
+  	   if($(".mptl-lst-chkbox:checked").length==0){
+  	   		sweet_alert("No item selected. Please select at least one item!");
+      		// bootbox_alert("No item selected. Please select at least one item!").modal('show');
+      		return;
+      }
+
+		if($(".mptl-lst-chkbox:checked").length==1){
+			// bootbox_confirm("Do you want to delete the record?", function(){deleteRecord('yes');}).modal('show');
+			sweet_confirm("MayHaw","Do you want to delete the record?", function(){deleteRecord('yes');});
+		}
+		else if($(".mptl-lst-chkbox:checked").length>1){
+			// bootbox_confirm("Do you want to delete " + $(".mptl-lst-chkbox:checked").length + " records?", function(){deleteRecord('yes');}).modal('show');
+			sweet_confirm("MayHaw","Do you want to delete " + $(".mptl-lst-chkbox:checked").length + " records?", function(){deleteRecord('yes');});
+		}
+  	});
 //col reorder
  // order= new $.fn.dataTable.ColReorder( table );
 $("#weekoff-ids").change(weeklyOffProcess);
@@ -226,45 +274,45 @@ $("#weekoff-ids").change(weeklyOffProcess);
  //get weekly off dates
  // $('#getweeklyoffdates').click(function(){
 // $("#weekoff-ids").change(function(){
-//
+// 
  	// var validfrom = document.getElementById('valid-from').value;
  	// var validtill = document.getElementById('valid-to').value;
  	// var d1 = new Date(validfrom);
 	// var d2 = new Date(validtill);
-//
+// 
 	// if(document.getElementById('valid-from').value!="" && document.getElementById('valid-from').value!=undefined && document.getElementById('valid-to').value!="" && document.getElementById('valid-to').value!=undefined){
 		// var weekoffdate = $("#weekoff-ids").val();
-//
+// 
 		// var offdates = '';
 		// if(weekoffdate!=null){offdates =weekoffdate.toString().split(',');}
  		// var result=calcWeekOffDays(d1,d2,offdates);
-//
-//
+// 
+// 
  	// //iniitially delete all
  	// var holidaycalendarid=$("#holidaycalendarid").val();
  	// $.get('/HolidayCalendars/deleteWeekOff?holidaycalendar='+holidaycalendarid, function(d) {
     	// // alert(d);
     // });
-//
-//
+// 
+// 
  	// var postdata=[];
  	// if(result!=null){
 		// for(t = 0; t < result.length; t++){
 			// var resArr = result[t].toString().split('^');
 			// var holidaycode = resArr[0].replace(/-/g, "");
-//
+// 
 		    // postdata.push(result[t]+"^"+holidaycalendarid+"^"+holidaycode);
 			// // $.get('/HolidayCalendars/addWeekOff?name='+resArr[1]+"&date="+resArr[0]+"&holidaycode="+holidaycode+"&holidaycalendar="+"1"+"&holidayclass="+"2", function(d) {
     			// // alert(d);
     		// // });
-//
+// 
   		// }
-//
+// 
   		// $.get('/HolidayCalendars/addWeekOff?content='+JSON.stringify(postdata), function(d) {
     		// // alert(d);
     	// });
   	// }
-//
+// 
   	// //reload table
   	// // table.ajax.reload(null,false);
   	// table.ajax.url('/Holidays/ajaxData?holidaycalendar='+holidaycalendarid).load();
@@ -293,11 +341,11 @@ $("#weekoff-ids").change(weeklyOffProcess);
 		}else{
 			$('.mptldp').datepicker({ format:"yyyy/mm/dd",autoclose: true,clearBtn: true });
 		}
-	    		//set mandatory * after required label
+	    		//set mandatory * after required label	
     $( ':input[required]' ).each( function () {
         $("label[for='" + this.id + "']").addClass('mandatory');
     });
-
+    
 	    		//select 2
     			$(".select2").select2({ width: '100%',allowClear: true,placeholder: "Select" });
 				//hide popover on button click
@@ -317,6 +365,10 @@ $("#weekoff-ids").change(weeklyOffProcess);
     	// table.draw();
 	})
 
+	// fmactions are added through setTurben. btn-group div is added separately.
+	$('div.fmactionbtn').appendTo('div.dataTables_length');
+	$('div.btn-group').appendTo('div.fmactionbtn');
+	
 	var holidaycalendarid=$("#holidaycalendarid").val();
 	$('<a href="/Holidays/add" id="adddt" class="open-Popup btn btn-sm btn-success disabled" data-remote="false" data-toggle="modal" data-target="#actionspopover" style="margin-left:15px;" title="Add"><i class="fa fa-plus" aria-hidden="true"></i></a>').appendTo('div.dataTables_filter');
 
@@ -327,7 +379,7 @@ function dateChanged() {
 	var validfrom = document.getElementById('valid-from').value;
 
 	var userdf=<?php echo $this->request->session()->read('sessionuser')['dateformat'];?>;
-
+	
     var d ="";
     (userdf==1) ? d= new Date(validfrom.replace( /(\d{2})[-/](\d{2})[-/](\d{4})/, "$2/$1/$3")) : d= new Date(validfrom);
 	var year = d.getFullYear();
@@ -363,11 +415,11 @@ function calcWeekOffDays(dDate1, dDate2, dArr) {
 //format utc date to yyyy/mm/dd
 function formatDate(fdate) {
 	var userdf=<?php echo $this->request->session()->read('sessionuser')['dateformat'];?>;
-
+	
     var d ="";
     // (userdf==1) ? d= new Date(fdate.replace( /(\d{2})[-/](\d{2})[-/](\d{4})/, "$2/$1/$3")) : d= new Date(fdate);
    d= new Date(fdate);
-
+   
     var month = '' + (d.getMonth() + 1),
         day = '' + d.getDate(),
         year = d.getFullYear();
@@ -376,13 +428,13 @@ function formatDate(fdate) {
     if (day.length < 2) day = '0' + day;
 
 	var res="";
-	(userdf==1) ? res = [day, month, year].join('-') : res = [year, month, day].join('-');
-
+	(userdf==1) ? res = [day, month, year].join('-') : res = [year, month, day].join('-'); 
+	
     return res;
 }
 //format utc date to yyyy/mm/dd
 function toYMD(fdate) {
-
+	
     var d = new Date(fdate);
     var month = '' + (d.getMonth() + 1),
         day = '' + d.getDate(),
@@ -410,44 +462,44 @@ function tableLoaded() {
 }
 
 function weeklyOffProcess(){
-
+	
  	var userdf=<?php echo $this->request->session()->read('sessionuser')['dateformat'];?>;
  	var validfrom = document.getElementById('valid-from').value;
  	var validtill = document.getElementById('valid-to').value;
  	var d1 = "";var d2 = "";
- 	if(userdf==1){
+ 	if(userdf==1){ 
  		d1= new Date(validfrom.replace( /(\d{2})[-/](\d{2})[-/](\d{4})/, "$2/$1/$3"));
  		d2= new Date(validtill.replace( /(\d{2})[-/](\d{2})[-/](\d{4})/, "$2/$1/$3"));
 	}else{
 		d1= new Date(validfrom);
 		d2= new Date(validtill);
-	}
-
+	} 
+	
   if (d1 > d2){
     // alert("The Valid From date is higher than Valid To date.");
     sweet_alert("The Valid From date is higher than Valid To date.");
     return false;
   }
-
+  
   var holidaycalendarid=$("#holidaycalendarid").val();
   //retuurn if holidaycalendarid is null to stop loading datatable
   if(holidaycalendarid == 'undefined' || holidaycalendarid == null || holidaycalendarid == ""){
   	return false;
   }
-
+  
 	if(document.getElementById('valid-from').value!="" && document.getElementById('valid-from').value!=undefined && document.getElementById('valid-to').value!="" && document.getElementById('valid-to').value!=undefined){
     var weekoffdate = $("#weekoff-ids").val();
 		var offdates = '';
 		if(weekoffdate!=null){offdates =weekoffdate.toString().split(',');}
  		var result=calcWeekOffDays(d1,d2,offdates);
-
+ 		
    		var postdata=[];
  		 if(result!=null){
  		 	//iniitially delete all
  			$.get('/HolidayCalendars/deleteWeekOff?holidaycalendar='+holidaycalendarid, function(d) {
     			// alert(d);
     		});
-
+    	
 			for(t = 0; t < result.length; t++){
 				var resArr = result[t].toString().split('^');
 				var holidaycode = resArr[0].replace(/-/g, "");
@@ -466,7 +518,23 @@ function weeklyOffProcess(){
    		return false;
    }
  }
-
+function setTurben()
+{
+	var c=$(".mptl-lst-chkbox:checked").length;
+      $(".mptl-itemsel").html(c);
+      if(c==0){
+				   $('div.fmactions').hide();
+      	   $( ".mptl-itemsel" ).fadeTo( "slow" , 0, function() {
+		    // Animation complete.
+		  });
+      }else{
+				 $('div.fmactions').appendTo('div.fmactionbtn');
+				 $('div.fmactions').show()
+      	  $( ".mptl-itemsel" ).fadeTo( "slow" , 1, function() {
+		    // Animation complete.
+		  });
+      }
+}
 
 
 </script>

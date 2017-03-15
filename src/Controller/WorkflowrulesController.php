@@ -115,6 +115,9 @@ class WorkflowrulesController extends AppController
      */
     public function add()
     {
+    	$actions =[ ['name'=>'delete','title'=>'Delete','class'=>' label-danger'] ];
+        $this->set('actions',$actions);	
+		
     	$this->loadModel('CreateConfigs');
         $configs=$this->CreateConfigs->find('all')->where(['table_name' => 'Workflowactions'])->order(['"id"' => 'ASC'])->toArray();
         $this->set('configs',$configs);	
@@ -150,6 +153,9 @@ class WorkflowrulesController extends AppController
      */
     public function edit($id = null)
     {
+    	$actions =[ ['name'=>'delete','title'=>'Delete','class'=>' label-danger'] ];
+        $this->set('actions',$actions);	
+		
     	$this->loadModel('CreateConfigs');
         $configs=$this->CreateConfigs->find('all')->where(['table_name' => 'Workflowactions'])->order(['"id"' => 'ASC'])->toArray();
         $this->set('configs',$configs);	
@@ -241,5 +247,45 @@ class WorkflowrulesController extends AppController
 		
 		   }
              return $this->redirect(['action' => 'index']);	
+     }
+	 public function deleteAllActions($id=null){
+    	
+		$this->request->allowMethod(['post', 'deleteall']);
+        $sucess=false;$failure=false;
+        $data=$this->request->data;
+		
+		$this->loadModel('Workflowactions');
+			
+		if(isset($data)){
+		   foreach($data as $key =>$value){
+		   	   		
+		   	   	$itemna=explode("-",$key);
+			    
+			    if(count($itemna)== 2 && $itemna[0]=='chk'){
+			    	
+					$record = $this->Workflowactions->get($value);
+					
+					 if($record['customer_id']== $this->loggedinuser['customer_id']) {
+					 	
+						   if ($this->Workflowactions->delete($record)) {
+					           $sucess= $sucess | true;
+					        } else {
+					           $failure= $failure | true;
+					        }
+					}
+				}  	  
+			}
+		   		        
+		
+				if($sucess){
+					$this->Flash->success(__('Selected Workflowactions has been deleted.'));
+				}
+		        if($failure){
+					$this->Flash->error(__('The Workflowactions could not be deleted. Please, try again.'));
+				}
+		
+		   }
+             return $this->redirect($this->referer());
+             // return $this->redirect(['action' => 'index']);	
      }
 }

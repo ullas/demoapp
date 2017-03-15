@@ -31,7 +31,7 @@
 
 
  <div class="box box-primary">
- 	<div class="box-header"><h3 class="box-title">Actions</h3></div>
+ 	<div class="box-header with-border"><h3 class="box-title">Actions</h3></div>
       <div class="box-body">
     <table id="mptlindextbl" class="table table-hover  table-bordered ">
         <thead>
