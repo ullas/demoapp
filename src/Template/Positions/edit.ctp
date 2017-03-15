@@ -40,7 +40,7 @@
             // echo $this->Form->input('last_modified_date',['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
             echo $this->Form->input('position_matrix_relationship');
             echo $this->Form->input('right_to_return');
-            echo $this->Form->input('customer_id', ['options' => $customers, 'empty' => true]);
+            echo $this->Form->input('business_unit_id', ['options' => $businessUnits, 'empty' => true]);
             echo $this->Form->input('legal_entity_id', ['options' => $legalEntities, 'empty' => true]);
             echo $this->Form->input('division_id', ['label' => 'Division','options' => $divisions, 'empty' => true]);
             echo $this->Form->input('department_id', ['label' => 'Department','options' => $departments, 'empty' => true]);

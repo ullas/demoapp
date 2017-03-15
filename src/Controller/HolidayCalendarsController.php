@@ -342,16 +342,16 @@ class HolidayCalendarsController extends AppController
     	
 		$this->request->allowMethod(['post', 'deleteall']);
         $sucess=false;$failure=false;
-        $data=$this->request->data;
+        $data=explode(",",$this->request->data["rowsselectedid"]);
 		
 		$this->loadModel('Holidays');
 			
 		if(isset($data)){
-		   foreach($data as $key =>$value){
+		   foreach($data as $value){
 		   	   		
-		   	   	$itemna=explode("-",$key);
+		   	   	// $itemna=explode("-",$key);
 			    
-			    if(count($itemna)== 2 && $itemna[0]=='chk'){
+			    // if(count($itemna)== 2 && $itemna[0]=='chk'){
 			    	
 					$record = $this->Holidays->get($value);
 					
@@ -363,7 +363,7 @@ class HolidayCalendarsController extends AppController
 					           $failure= $failure | true;
 					        }
 					}
-				}  	  
+				// }  	  
 			}
 		   		        
 		
