@@ -19,13 +19,14 @@ label.mandatory:after {
 	<div class="box box-primary"><div class="box-body">
 		<?= $this->Form->create($businessUnit) ?>
     <fieldset>
-        <?php            
-        	echo $this->Form->input('external_code',['label'=>['text'=>'External Code','class'=>'mandatory']]);
-            echo $this->Form->input('name',['label'=>['text'=>'Name','class'=>'mandatory']]);
+        <?php
+        	  echo $this->Form->input('external_code',['label'=>['text'=>'Business Unit Code','class'=>'mandatory']]);
+            echo $this->Form->input('name',['label'=>['text'=>'Business Unit Name','class'=>'mandatory']]);
             echo $this->Form->input('description');
-            echo $this->Form->input('effective_start_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
-            echo $this->Form->input('effective_end_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
-            echo $this->Form->input('head_of_unit');
+            echo $this->Form->input('effective_status',['label' =>'Status']);
+            echo $this->Form->input('effective_start_date', ['label' =>'Start Date','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+            echo $this->Form->input('effective_end_date', ['label' =>'End Date','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+            echo $this->Form->input('head_of_unit',['label' =>'Head of Unit']);
         ?>
     </fieldset>
     <div class="box-footer">
@@ -34,4 +35,3 @@ label.mandatory:after {
   </div>
     <?= $this->Form->end() ?>
 </div></div></section>
-

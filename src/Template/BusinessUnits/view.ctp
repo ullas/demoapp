@@ -18,13 +18,13 @@
         <?= $this->Form->create($businessUnit, array('role' => 'form')) ?>
           <fieldset>
           	<?php
-            	echo $this->Form->input('external_code',['label'=>['text'=>'External Code','class'=>'mandatory'],'disabled' => true]);
-          		echo $this->Form->input('name',['label'=>['text'=>'Name','class'=>'mandatory'],'disabled' => true]);
+            	echo $this->Form->input('external_code',['label'=>['text'=>'Business Unit Code','class'=>'mandatory'],'disabled' => true]);
+          		echo $this->Form->input('name',['label'=>['text'=>'Business Unit Name','class'=>'mandatory'],'disabled' => true]);
           		echo $this->Form->input('description',['disabled' => true]);
-          		echo $this->Form->input('effective_status',['disabled' => true]);
-          		echo $this->Form->input('effective_start_date',['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
-		  		echo $this->Form->input('effective_end_date',['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
-          		echo $this->Form->input('head_of_unit',['disabled' => true]);
+          		echo $this->Form->input('effective_status',['label' =>'Status','disabled' => true]);
+          		echo $this->Form->input('effective_start_date',['label' =>'Start Date','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
+		  		    echo $this->Form->input('effective_end_date',['label' =>'End Date','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
+          		echo $this->Form->input('head_of_unit',['label' =>'Head of Unit','disabled' => true]);
           	?></fieldset>
           <!-- /.box-body -->
           <div class="box-footer">
