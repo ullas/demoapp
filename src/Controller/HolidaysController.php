@@ -191,6 +191,7 @@ class HolidaysController extends AppController
 		$this->request->allowMethod(['post', 'deleteall']);
         $sucess=false;$failure=false;
         $data=$this->request->data;
+		
 			
 		if(isset($data)){
 		   foreach($data as $key =>$value){
@@ -221,6 +222,7 @@ class HolidaysController extends AppController
 				}
 		
 		   }
-             return $this->redirect(['action' => 'index']);	
+             return $this->redirect($this->referer());
+           // return $this->redirect(['action' => 'index']);	
      }
 }

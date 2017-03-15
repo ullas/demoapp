@@ -43,6 +43,9 @@ var $components = array('Datatable');
         ];
         $payGrades = $this->paginate($this->PayGrades);
 
+		$actions =[ ['name'=>'delete','title'=>'Delete','class'=>' label-danger'] ];
+        $this->set('actions',$actions);	
+		
         $this->set(compact('payGrades'));
         $this->set('_serialize', ['payGrades']);
     }

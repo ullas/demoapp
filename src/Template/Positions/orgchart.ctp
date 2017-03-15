@@ -35,6 +35,8 @@ function RecursiveCategories($array) {
 <style>
 .popover-content  a{font-size:12px;}
 .popover{ min-width: 200px; }
+/*.jOrgChart .left { width:50%; }
+.jOrgChart .right{ width:50%; }*/
 </style>
 
 <section class="content-header">
@@ -65,6 +67,7 @@ function RecursiveCategories($array) {
     	padding: 3px 9px 0 10px;
     	font-size: 45px;
 	}
+	
 </style>
 
     <script>

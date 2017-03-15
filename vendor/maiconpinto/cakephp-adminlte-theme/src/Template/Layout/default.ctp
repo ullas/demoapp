@@ -188,7 +188,7 @@ div.dataTables_wrapper {
 /*datatable header responsive*/
 /*.dataTables_scrollHeadInner{width:100%;}
 .table{width:100%;}*/
-.dataTables_wrapper{ overflow-y: auto; clear:both; }
+.dataTables_wrapper{ overflow-y: auto; clear:both;padding-top:15px; }
 
 </style>
 
