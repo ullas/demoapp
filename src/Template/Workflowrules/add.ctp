@@ -35,11 +35,19 @@
     <?= $this->Form->end() ?>
 </div></div>
 
-
+<div class="fmactionbtn"></div>
+	<div>
+      <?php
+      $title="Manage ". $this->request->params['controller'] ;
+      echo $this->element('actions',[$actions,'title'=>$title]);
+	  ?>
+     </div>
+     
+ <?php echo $this->Form->create($this->request->params['controller'],array('class'=>'mptlform','url' => array('controller' => $this->request->params['controller'], 'action' => 'deleteAllActions')));?>
  <div class="box box-primary">
- 	<div class="box-header"><h3 class="box-title">Actions</h3></div>
+ 	<div class="box-header with-border"><h3 class="box-title">Actions</h3></div>
       <div class="box-body">
-    <table id="mptlindextbl" class="table table-hover  table-bordered ">
+    	<table id="mptlindextbl" class="table table-hover  table-bordered ">
         <thead>
             <tr>
 
@@ -56,6 +64,7 @@
         <tbody></tbody>
     </table></div></div>
 
+<?= $this->Form->end() ?>
 </section>
 
 <div id='loadingmessage' style='display:none;'>
@@ -105,7 +114,7 @@ $this->Html->script([
 
   	    if (btn == 'yes') {
 
-            jQuery("form")[0].submit();
+            jQuery("form")[1].submit();
         }
   }
   $(function () {
@@ -143,10 +152,54 @@ $this->Html->script([
         'className': 'text-center move-event',
         'render': function (data, type, full, meta){
             return '<input type="checkbox" class="mptl-lst-chkbox" name="chk-' + data + '" value="' + $('<div/>').text(data).html() + '">';
-        }},{ targets:6, 'className': 'reorderable' },
+        },'className': 'reorderable'},{ targets:6, 'className': 'reorderable' },
          { targets: '_all', 'className': 'move-event' }]
     });
 
+ // Handle click on "Select all" control
+   $('#select-all').on('click', function(){
+      // Get all rows with search applied
+
+      var rows = table.rows({ 'search': 'applied' }).nodes();
+      // Check/uncheck checkboxes for all rows in the table
+      $('input[type="checkbox"]', rows).prop('checked', this.checked);
+	  setTurben();
+   });
+   // Handle click on checkbox to set state of "Select all" control
+   $('#mptlindextbl tbody').on('change', 'input[type="checkbox"]', function(){
+      // If checkbox is not checked
+      if(!this.checked){
+         var el = $('#select-all').get(0);
+         // If "Select all" control is checked and has 'indeterminate' property
+         if(el && el.checked && ('indeterminate' in el)){
+            // Set visual state of "Select all" control
+            // as 'indeterminate'
+            el.indeterminate = true;
+         }
+      }
+      setTurben();
+
+
+
+   });
+   
+   $("#delete").click(function(){
+
+  	   if($(".mptl-lst-chkbox:checked").length==0){
+  	   		sweet_alert("No item selected. Please select at least one item!");
+      		// bootbox_alert("No item selected. Please select at least one item!").modal('show');
+      		return;
+      }
+
+		if($(".mptl-lst-chkbox:checked").length==1){
+			// bootbox_confirm("Do you want to delete the record?", function(){deleteRecord('yes');}).modal('show');
+			sweet_confirm("MayHaw","Do you want to delete the record?", function(){deleteRecord('yes');});
+		}
+		else if($(".mptl-lst-chkbox:checked").length>1){
+			// bootbox_confirm("Do you want to delete " + $(".mptl-lst-chkbox:checked").length + " records?", function(){deleteRecord('yes');}).modal('show');
+			sweet_confirm("MayHaw","Do you want to delete " + $(".mptl-lst-chkbox:checked").length + " records?", function(){deleteRecord('yes');});
+		}
+  	});
 
 //create btn onclick
 $('#createwr').click(function(){
@@ -213,12 +266,32 @@ $('#createwr').click(function(){
     	// table.draw();
 	})
 
+// fmactions are added through setTurben. btn-group div is added separately.
+	$('div.fmactionbtn').appendTo('div.dataTables_length');
+	$('div.btn-group').appendTo('div.fmactionbtn');
+	
 	var holidaycalendarid=$("#holidaycalendarid").val();
 	$('<a href="/Workflowactions/add" id="adddt" class="open-Popup btn btn-sm btn-success disabled" data-remote="false" data-toggle="modal" data-target="#actionspopover" style="margin-left:15px;" title="Add"><i class="fa fa-plus" aria-hidden="true"></i></a>').appendTo('div.dataTables_filter');
 
 });
 
-
+function setTurben()
+{
+	var c=$(".mptl-lst-chkbox:checked").length;
+      $(".mptl-itemsel").html(c);
+      if(c==0){
+				   $('div.fmactions').hide();
+      	   $( ".mptl-itemsel" ).fadeTo( "slow" , 0, function() {
+		    // Animation complete.
+		  });
+      }else{
+				 $('div.fmactions').appendTo('div.fmactionbtn');
+				 $('div.fmactions').show()
+      	  $( ".mptl-itemsel" ).fadeTo( "slow" , 1, function() {
+		    // Animation complete.
+		  });
+      }
+}
 function tableLoaded() {
 	//delete confirm
     $(".delete-btn").click(function(){

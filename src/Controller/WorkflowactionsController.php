@@ -268,6 +268,7 @@ class WorkflowactionsController extends AppController
 				}
 		
 		   }
-             return $this->redirect(['action' => 'index']);	
+           return $this->redirect($this->referer());
+           // return $this->redirect(['action' => 'index']);	
      }
 }

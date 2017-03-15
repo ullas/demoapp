@@ -13,6 +13,10 @@ use Cake\Core\Configure;
  *
  * @property \Cake\ORM\Association\BelongsTo $Customers
  * @property \Cake\ORM\Association\HasMany $CalendarAssignments
+ * @property \Cake\ORM\Association\HasMany $Holidays
+ * @property \Cake\ORM\Association\HasMany $Jobinfos
+ * @property \Cake\ORM\Association\HasMany $LegalEntities
+ * @property \Cake\ORM\Association\HasMany $Locations
  *
  * @method \App\Model\Entity\HolidayCalendar get($primaryKey, $options = [])
  * @method \App\Model\Entity\HolidayCalendar newEntity($data = null, array $options = [])
@@ -43,6 +47,18 @@ class HolidayCalendarsTable extends Table
             'foreignKey' => 'customer_id'
         ]);
         $this->hasMany('CalendarAssignments', [
+            'foreignKey' => 'holiday_calendar_id','dependent' => true
+        ]);
+        $this->hasMany('Holidays', [
+            'foreignKey' => 'holiday_calendar_id','dependent' => true
+        ]);
+        $this->hasMany('Jobinfos', [
+            'foreignKey' => 'holiday_calendar_id','dependent' => true
+        ]);
+        $this->hasMany('LegalEntities', [
+            'foreignKey' => 'holiday_calendar_id','dependent' => true
+        ]);
+        $this->hasMany('Locations', [
             'foreignKey' => 'holiday_calendar_id','dependent' => true
         ]);
     }
