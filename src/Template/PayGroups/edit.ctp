@@ -13,24 +13,24 @@
     <?= $this->Form->create($payGroup) ?>
     <fieldset>
         <?php
-            echo $this->Form->input('external_code');
-            echo $this->Form->input('name');
-            echo $this->Form->input('description');
-            echo $this->Form->input('effective_status');
-			echo $this->Form->input('effective_start_date',['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
-            echo $this->Form->input('effective_end_date',['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
-            echo $this->Form->input('earliest_change_date',['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
-			echo $this->Form->input('frequency_id', ['options' => $frequencies, 'empty' => true,'label'=>'Pay Frequency']);
-            echo $this->Form->input('primary_contactid');
-            echo $this->Form->input('primary_contact_email',['templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-envelope"></i></div>']]);
-            echo $this->Form->input('primary_contact_name');
-            echo $this->Form->input('secondary_contactid');
-            echo $this->Form->input('secondary_contact_email',['templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-envelope"></i></div>']]);
-            echo $this->Form->input('secondary_contact_name');
-            echo $this->Form->input('weeks_in_pay_period');
-            echo $this->Form->input('data_delimiter');
-            echo $this->Form->input('decimal_point');
-            echo $this->Form->input('lag');
+        echo $this->Form->input('external_code',['label' => 'Pay Group Code']);
+        echo $this->Form->input('name',['label' => 'Pay Group Name']);
+        echo $this->Form->input('description');
+        echo $this->Form->input('effective_status',['label' => 'Status']);
+        echo $this->Form->input('effective_start_date',['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+        echo $this->Form->input('effective_end_date',['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+        echo $this->Form->input('earliest_change_date',['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+        echo $this->Form->input('frequency_id', ['label' => 'Pay Frequency','options' => $frequencies, 'empty' => true,'label'=>'Pay Frequency']);
+        echo $this->Form->input('primary_contactid',['label' => 'Primary Contact ID']);
+        echo $this->Form->input('primary_contact_email',['templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-envelope"></i></div>']]);
+        echo $this->Form->input('primary_contact_name');
+        echo $this->Form->input('secondary_contactid',['label' => 'Secondary Contact ID']);
+        echo $this->Form->input('secondary_contact_email',['templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-envelope"></i></div>']]);
+        echo $this->Form->input('secondary_contact_name');
+        echo $this->Form->input('weeks_in_pay_period',['label' => 'Weeks in Pay Period']);
+        echo $this->Form->input('data_delimiter');
+        echo $this->Form->input('decimal_point');
+        echo $this->Form->input('lag');
         ?>
     </fieldset>
     <div class="box-footer">

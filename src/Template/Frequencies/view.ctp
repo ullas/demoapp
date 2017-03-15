@@ -17,11 +17,11 @@
         <?= $this->Form->create($frequency, array('role' => 'form')) ?>
         <fieldset>
           <?php
-          	echo $this->Form->input('external_code',['disabled' => true]);
-            echo $this->Form->input('name',['disabled' => true]);
+          	echo $this->Form->input('external_code',['label' => 'Frequency Code','disabled' => true]);
+            echo $this->Form->input('name',['label' => 'Frequency Name','disabled' => true]);
             echo $this->Form->input('description',['disabled' => true]);
             echo $this->Form->input('annualization_factor',['disabled' => true]);
-            
+
           ?></fieldset>
           <!-- /.box-body -->
           <div class="box-footer">
