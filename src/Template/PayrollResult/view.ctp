@@ -16,18 +16,18 @@
   <div class="box box-primary"><div class="box-body">
     <?= $this->Form->create($payrollResult, array('role' => 'form')) ?>
     <?php
-             echo $this->Form->input('employee_code',['disabled' => true]);
+            echo $this->Form->input('employee_code',['disabled' => true]);
             echo $this->Form->input('payroll_area_id', ['options' => $payrollArea, 'disabled' => true]);
-            echo $this->Form->input('period',['disabled' => true]);
+            echo $this->Form->input('period',['label'=>'Payroll Period','disabled' => true]);
             echo $this->Form->input('pay_component_id', ['options' => $payComponents, 'disabled' => true]);
             echo $this->Form->input('pay_component_value',['disabled' => true]);
-            echo $this->Form->input('paid_salary',['disabled' => true]);
+            echo $this->Form->input('paid_salary',['label'=>'Salary Paid','disabled' => true]);
             echo $this->Form->input('run_date',['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
             echo $this->Form->input('run_time',['label'=>'Run Time','class' => 'mptltp','type' => 'text','templateVars' => ['opentag' => '<div class="bootstrap-timepicker">','closetag' => '</div>','icon' => '<div class="input-group-addon"><i class="fa fa-clock-o"></i></div>'],'disabled' => true]);
-            
+
             ?></div>
 <div class="box-footer">
           	<?=$this->Html->link(__('Cancel'), ['action' => 'index'], ['escape' => false])?>
-            <?=$this->Html->link(__('Edit PayrollResult'), ['action' => 'edit', $payrollResult['id']],['class'=>'btn btn-primary label-info pull-right'], ['escape' => false])?>
+            <?=$this->Html->link(__('Edit Payroll Result'), ['action' => 'edit', $payrollResult['id']],['class'=>'btn btn-primary label-info pull-right'], ['escape' => false])?>
           </div><?= $this->Form->end() ?>
 </div></section>
