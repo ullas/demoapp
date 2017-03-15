@@ -13,8 +13,8 @@
     <?= $this->Form->create($frequency) ?>
     <fieldset>
         <?php
-            echo $this->Form->input('external_code');
-            echo $this->Form->input('name');
+            echo $this->Form->input('external_code',['label' => 'Frequency Code']);
+            echo $this->Form->input('name',['label' => 'Frequency Name']);
             echo $this->Form->input('description');
             echo $this->Form->input('annualization_factor');
         ?>

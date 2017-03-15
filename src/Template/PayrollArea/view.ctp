@@ -16,13 +16,13 @@
   <div class="box box-primary"><div class="box-body">
     <?= $this->Form->create($payrollArea, array('role' => 'form')) ?>
     	<fieldset><?php
-    		echo $this->Form->input('code',['disabled' => true]);
-            echo $this->Form->input('name',['disabled' => true]);
+    		echo $this->Form->input('code',['label' => 'Payroll Area Code','disabled' => true]);
+            echo $this->Form->input('name',['label' => 'Payroll Area Name','disabled' => true]);
             echo $this->Form->input('legal_entity_id', ['options' => $legalEntities, 'empty' => true,'disabled' => true]);
             echo $this->Form->input('business_unit_id', ['options' => $businessUnits, 'empty' => true,'disabled' => true]);
             echo $this->Form->input('division_id', ['options' => $divisions, 'empty' => true,'disabled' => true]);
             echo $this->Form->input('location_id', ['options' => $locations, 'empty' => true,'disabled' => true]);
-            
+
         ?></fieldset></div>
 <div class="box-footer">
           	<?=$this->Html->link(__('Cancel'), ['action' => 'index'], ['escape' => false])?>

@@ -14,13 +14,12 @@
         <?= $this->Form->create($holiday) ?>
           <div class="box-body">
           <?php
-
-            echo $this->Form->input('holiday_class', ['options' => array('Half day', 'Full day'),'class'=>'select2','disabled'=>true, 'empty' => true]);
-            echo $this->Form->input('name',['disabled'=>true]);
-            echo $this->Form->input('date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled'=>true]);
             echo $this->Form->input('holiday_code',['disabled'=>true]);
-            // echo $this->Form->input('holiday_calendar_id',['disabled'=>true]);
-            
+            echo $this->Form->input('holiday_class', ['options' => array('Half day', 'Full day'),'class'=>'select2','disabled'=>true, 'empty' => true]);
+            echo $this->Form->input('name',['label' => 'Name of Holiday','disabled'=>true]);
+            echo $this->Form->input('date', ['label' => 'Date of the Holiday','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled'=>true]);
+            //echo $this->Form->input('holiday_calendar_id',['disabled'=>true]);
+
 		?>
 		</div>
 		<!-- <div class="box-footer">
@@ -29,4 +28,3 @@
           </div> -->
 	<?= $this->Form->end() ?>
 </div>
-	  

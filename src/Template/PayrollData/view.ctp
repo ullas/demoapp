@@ -24,6 +24,6 @@
         ?></div>
 <div class="box-footer">
           	<?=$this->Html->link(__('Cancel'), ['action' => 'index'], ['escape' => false])?>
-            <?=$this->Html->link(__('Edit PayrollData'), ['action' => 'edit', $payrollData['id']],['class'=>'btn btn-primary label-info pull-right'], ['escape' => false])?>
+            <?=$this->Html->link(__('Edit Payroll Data'), ['action' => 'edit', $payrollData['id']],['class'=>'btn btn-primary label-info pull-right'], ['escape' => false])?>
           </div><?= $this->Form->end() ?>
 </div></section>
