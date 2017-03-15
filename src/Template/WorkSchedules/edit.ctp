@@ -1,7 +1,7 @@
 <?= $this->element('templateelmnt'); ?>
 <section class="content-header">
       <h1>
-        Work Schedule
+        Workschedule
         <small>Edit</small>
       </h1>
       <ol class="breadcrumb">
@@ -13,7 +13,7 @@
     <?= $this->Form->create($workSchedule) ?>
     <fieldset>
         <?php
-            echo $this->Form->input('ws_code',['label'=>'Workschedule External Code']);
+            echo $this->Form->input('ws_code',['label'=>'Workschedule Code']);
             echo $this->Form->input('ws_name',['label'=>'Workschedule Name']);
             echo $this->Form->input('flex_request_allowed',['label'=>'Flexible Requesting Allowed']);
             echo $this->Form->input('country',['options' => $this->Country->get_countries(), 'empty' => true]);
@@ -30,7 +30,7 @@
             echo $this->Form->input('day3_planhours',['label'=>'Day 3 Planned Hours']);
             echo $this->Form->input('day4_planhours',['label'=>'Day 4 Planned Hours']);
             echo $this->Form->input('day5_planhours',['label'=>'Day 5 Planned Hours']);
-			echo $this->Form->input('day6_planhours',['label'=>'Day 6 Planned Hours']);
+			      echo $this->Form->input('day6_planhours',['label'=>'Day 6 Planned Hours']);
             echo $this->Form->input('day7_planhours',['label'=>'Day 7 Planned Hours']);
             echo $this->Form->input('day_n_hours',['label'=>'Day N Hours']);
             echo $this->Form->input('employee_id',['label'=>'Individual Employee']);
@@ -41,14 +41,13 @@
             echo $this->Form->input('end_time',['label'=>'Segment Clock End Time','class' => 'mptltp','type' => 'text','templateVars' => ['opentag' => '<div class="bootstrap-timepicker">','closetag' => '</div>','icon' => '<div class="input-group-addon"><i class="fa fa-clock-o"></i></div>']]);
             echo $this->Form->input('shift_class',['label'=>'Shift Classification']);
             echo $this->Form->input('planned_hours',['label'=>'Segment Planned Hours']);
-			echo $this->Form->input('planned_hours_minutes',['label'=>'Segment Planned Hours and Minutes','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+			      echo $this->Form->input('planned_hours_minutes',['label'=>'Segment Planned Hours and Minutes','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
             echo $this->Form->input('day_model',['label'=>'Day 6 Planned Hours']);
             echo $this->Form->input('time_rec_variant_2',['label'=>'Time Recording Variant']);
             echo $this->Form->input('search_field');
-			echo $this->Form->input('starting_date',['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+			      echo $this->Form->input('starting_date',['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
             echo $this->Form->input('period_model');
             echo $this->Form->input('time_rec_variant_3',['label'=>'Time Recording Variant']);
-            
         ?>
     </fieldset>
     <div class="box-footer">
@@ -60,7 +59,7 @@
 
 <?php $this->start('scriptBotton'); ?>
 <script>
- 
+
 $(function () {
   	//initially hide all on page load
   	showHideSimple("none");
@@ -77,8 +76,8 @@ $(function () {
     }else if (selval === '3'){
         showHideDay("block");
     }
-     
-    //model onchange   	
+
+    //model onchange
   	$('#model').on('change', function () {
 		//initially hide all
   		showHideSimple("none");
