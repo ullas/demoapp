@@ -49,10 +49,11 @@
 </div></div>
 
 
- <?php echo $this->Form->create($this->request->params['controller'],array('class'=>'mptlform','url' => array('controller' => $this->request->params['controller'], 'action' => 'deleteAllActions')));?>
-<div class="box box-primary">
+ <div class="box box-primary">
  	<div class="box-header with-border"><h3 class="box-title">Holidays</h3></div>
       <div class="box-body">
+      	<?php echo $this->Form->create($this->request->params['controller'],array('class'=>'mptlform','url' => array('controller' => $this->request->params['controller'], 'action' => 'deleteAllActions')));
+		echo $this->Form->input('rowsselectedid', array('type' => 'hidden')); ?>
     <table id="mptlindextbl" class="table table-hover  table-bordered ">
         <thead>
             <tr>
@@ -68,9 +69,10 @@
             </tr>
         </thead>
         <tbody></tbody>
-    </table></div></div>
+    </table><?= $this->Form->end() ?>
+    </div></div>
 
-<?= $this->Form->end() ?>
+
 </section>
 
 <div id='loadingmessage' style='display:none;'>
@@ -111,9 +113,9 @@ $this->Html->script([
 
 <?php $this->start('scriptBotton'); ?>
 <script>
-  var table; var order;
+  var table; var order; var rows_selected = [];
    function deleteRecord(btn){
-
+		$("#rowsselectedid").val(rows_selected);
   	    if (btn == 'yes') {
 
             jQuery("form")[1].submit();
@@ -170,6 +172,16 @@ $this->Html->script([
           rowReorder: { update:false },
           stateSave:false,
           responsive: true,
+          'rowCallback': function(row, data, dataIndex){
+         // Get row ID
+         var rowId = data[0];
+
+         // If row ID is in the list of selected row IDs
+         if($.inArray(rowId, rows_selected) !== -1){
+            $(row).find('input[type="checkbox"]').prop('checked', true);
+            $(row).addClass('selected');
+         }
+      },
           // "initComplete": function(settings, json) {
           // },
           "drawCallback": function( settings ) {
@@ -198,14 +210,36 @@ $this->Html->script([
 // Handle click on "Select all" control
    $('#select-all').on('click', function(){
       // Get all rows with search applied
-
       var rows = table.rows({ 'search': 'applied' }).nodes();
       // Check/uncheck checkboxes for all rows in the table
-      $('input[type="checkbox"]', rows).prop('checked', this.checked);
+      
+       // $('input[type="checkbox"]', rows).prop('checked', this.checked);
+	  
+	  if(this.checked){
+         $('#mptlindextbl tbody input[type="checkbox"]:not(:checked)').trigger('click');
+      } else {
+         $('#mptlindextbl tbody input[type="checkbox"]:checked').trigger('click');
+      }
+	  
 	  setTurben();
+	   
    });
    // Handle click on checkbox to set state of "Select all" control
    $('#mptlindextbl tbody').on('change', 'input[type="checkbox"]', function(){
+   		// Get row ID
+      var rowId = this.value;
+      // Determine whether row ID is in the list of selected row IDs 
+      var index = $.inArray(rowId, rows_selected);
+
+      // If checkbox is checked and row ID is not in list of selected row IDs
+      if(this.checked && index === -1){
+         rows_selected.push(rowId);
+
+      // Otherwise, if checkbox is not checked and row ID is in list of selected row IDs
+      } else if (!this.checked && index !== -1){
+         rows_selected.splice(index, 1);
+      }
+      
       // If checkbox is not checked
       if(!this.checked){
          var el = $('#select-all').get(0);
@@ -216,27 +250,28 @@ $this->Html->script([
             el.indeterminate = true;
          }
       }
-      setTurben();
+      	  setTurben();
 
-
+	//uncheck checkbox if none in the page checked
+	($(".mptl-lst-chkbox:checked").length==0) ? $("#select-all").prop('checked', false) : $("#select-all").prop('checked', true) ;
 
    });
    
    $("#delete").click(function(){
 
-  	   if($(".mptl-lst-chkbox:checked").length==0){
+  	   if(rows_selected.length==0){
   	   		sweet_alert("No item selected. Please select at least one item!");
       		// bootbox_alert("No item selected. Please select at least one item!").modal('show');
       		return;
       }
 
-		if($(".mptl-lst-chkbox:checked").length==1){
+		if(rows_selected.length==1){
 			// bootbox_confirm("Do you want to delete the record?", function(){deleteRecord('yes');}).modal('show');
 			sweet_confirm("MayHaw","Do you want to delete the record?", function(){deleteRecord('yes');});
 		}
-		else if($(".mptl-lst-chkbox:checked").length>1){
-			// bootbox_confirm("Do you want to delete " + $(".mptl-lst-chkbox:checked").length + " records?", function(){deleteRecord('yes');}).modal('show');
-			sweet_confirm("MayHaw","Do you want to delete " + $(".mptl-lst-chkbox:checked").length + " records?", function(){deleteRecord('yes');});
+		else if(rows_selected.length>1){
+			// bootbox_confirm("Do you want to delete " + rows_selected.length + " records?", function(){deleteRecord('yes');}).modal('show');
+			sweet_confirm("MayHaw","Do you want to delete " + rows_selected.length + " records?", function(){deleteRecord('yes');});
 		}
   	});
 
@@ -409,7 +444,10 @@ function tableLoaded() {
        $("#ajax_button").html("<a href='/Holidays/delete/"+ $(this).attr("data-id")+"' class='btn btn-outline'>Confirm</a>");
       $("#trigger").click();
     });
-
+	//uncheck checkbox if none in the page checked
+	($(".mptl-lst-chkbox:checked").length==0) ? $("#select-all").prop('checked', false) : $("#select-all").prop('checked', true) ;
+	
+	
     $("#mptlindextbl tbody").find('tr').each(function () {
     	$(this).find('td').each (function() {
         var innerHtml=$(this).find('div.mptldtbool').html();
@@ -472,9 +510,9 @@ function weeklyOffProcess(){
  }
 function setTurben()
 {
-	var c=$(".mptl-lst-chkbox:checked").length;
-      $(".mptl-itemsel").html(c);
-      if(c==0){
+	  var c=$(".mptl-lst-chkbox:checked").length;
+      $(".mptl-itemsel").html(rows_selected.length);
+      if(rows_selected.length==0){
 				   $('div.fmactions').hide();
       	   $( ".mptl-itemsel" ).fadeTo( "slow" , 0, function() {
 		    // Animation complete.
@@ -487,6 +525,7 @@ function setTurben()
 		  });
       }
 }
+
 </script>
 <?php $this->end(); ?>
 

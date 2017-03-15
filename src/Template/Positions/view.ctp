@@ -41,7 +41,7 @@
             // echo $this->Form->input('last_modified_date',['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
             echo $this->Form->input('position_matrix_relationship',['disabled' => true]);
             echo $this->Form->input('right_to_return',['disabled' => true]);
-            echo $this->Form->input('customer_id', ['options' => $customers, 'empty' => true,'disabled' => true]);
+            echo $this->Form->input('business_unit_id', ['options' => $businessUnits, 'empty' => true,'disabled' => true]);
             echo $this->Form->input('legal_entity_id', ['options' => $legalEntities, 'empty' => true,'disabled' => true]);
             echo $this->Form->input('division_id', ['label' => 'Division','options' => $divisions, 'empty' => true,'disabled' => true]);
             echo $this->Form->input('department_id', ['options' => $departments, 'empty' => true,'disabled' => true]);

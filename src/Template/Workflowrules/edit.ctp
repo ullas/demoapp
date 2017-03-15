@@ -39,7 +39,9 @@
  
  	<?php echo $this->Form->create($this->request->params['controller'],array('class'=>'mptlform','url' => array('controller' => $this->request->params['controller'], 'action' => 'deleteAllActions')));?>
  <div class="box box-primary">  
- 	<div class="box-header with-border"><h3 class="box-title">Actions</h3></div>
+ 	<div class="box-header with-border"><h3 class="box-title">Actions</h3>
+ 		<small class="text-bold text-olive"> (Change the priority of actions, either by moving up/down.)</small>
+ 	</div>
       <div class="box-body">
       	
     <table id="mptlindextbl" class="table table-hover  table-bordered ">
