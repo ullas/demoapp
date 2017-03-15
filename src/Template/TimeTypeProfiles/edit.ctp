@@ -14,14 +14,14 @@
     <fieldset>
         <?php
             echo $this->Form->input('external_code');
-            echo $this->Form->input('code');
-            echo $this->Form->input('name');
+            echo $this->Form->input('code',['label' => 'Time Type Profile Code']);
+            echo $this->Form->input('name',['label' => 'Time Type Profile Name']);
             echo $this->Form->input('country',['options' => $this->Country->get_countries(), 'empty' => true]);
-            echo $this->Form->input('start_date',['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
-            echo $this->Form->input('time_rec_variant');
-            echo $this->Form->input('status');
-            echo $this->Form->input('enable_ess');
+            echo $this->Form->input('start_date',['label' => 'Time Type Profile Start Date','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+            echo $this->Form->input('time_rec_variant',['label' => 'Time Recording Variant']);
             echo $this->Form->input('time_type_id', ['options' => $timeTypes, 'empty' => true]);
+            echo $this->Form->input('status');
+            echo $this->Form->input('enable_ess',['label' => 'Enable for ESS']);
         ?>
     </fieldset>
     <div class="box-footer">

@@ -20,11 +20,11 @@
              	echo $this->Form->input('external_code',['disabled' => true]);
              	echo $this->Form->input('name',['disabled' => true]);
             	echo $this->Form->input('description',['disabled' => true]);
-            	echo $this->Form->input('effective_status',['disabled' => true]);
-				echo $this->Form->input('effective_start_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
-				echo $this->Form->input('effective_end_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
+            	echo $this->Form->input('effective_status',['label' => 'Status','disabled' => true]);
+				      echo $this->Form->input('effective_start_date', ['label' => 'Start Date','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
+				      echo $this->Form->input('effective_end_date', ['label' => 'End Date','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
             	echo $this->Form->input('job_function_type',['disabled' => true]);
-            
+
         	?>
         </fieldset>
         <div class="box-footer">

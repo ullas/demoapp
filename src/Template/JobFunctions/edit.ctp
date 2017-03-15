@@ -17,16 +17,16 @@
             echo $this->Form->input('external_code');
             echo $this->Form->input('name');
             echo $this->Form->input('description');
-            echo $this->Form->input('effective_status');
-			echo $this->Form->input('effective_start_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
-			echo $this->Form->input('effective_end_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+            echo $this->Form->input('effective_status',['label' => 'Status']);
+			      echo $this->Form->input('effective_start_date', ['label' => 'Start Date','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+			      echo $this->Form->input('effective_end_date', ['label' => 'End Date','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
             echo $this->Form->input('job_function_type');
-            
+
         ?>
     </fieldset>
     <div class="box-footer">
     <?=$this->Html->link(__('Cancel'), ['action' => 'index'], ['escape' => false])?>
-    <?= $this->Form->button(__('Update JobFunction'),['title'=>'Update JobFunction','class'=>'pull-right']) ?> 
+    <?= $this->Form->button(__('Update JobFunction'),['title'=>'Update JobFunction','class'=>'pull-right']) ?>
 </div>
     <?= $this->Form->end() ?>
 </div></div></section>

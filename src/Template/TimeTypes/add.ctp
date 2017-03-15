@@ -20,10 +20,10 @@
             echo $this->Form->input('unit',['class'=>'select2','options' => array('Hour(s)', 'Day(s)'), 'empty' => 'Choose']);
             echo $this->Form->input('perm_fractions_hours',['label'=>'Permitted Fractions for Unit Hours']);
             echo $this->Form->input('perm_fractions_days',['class'=>'select2','options' => array('Quarter of a Day', 'Half a Day','3 Quarters of a Day','Full Day'),'empty'=>'Choose','label'=>'Permitted Fractions for Unit Days']);
-            echo $this->Form->input('calc_base');
+            echo $this->Form->input('calc_base',['label' => 'Calculation Based On']);
             echo $this->Form->input('time_account_type_id', ['options' => $timeAccountTypes, 'empty' => true]);
-			echo $this->Form->input('flex_req_allow');
-            echo $this->Form->input('workflowrule_id',['class'=>'select2', 'empty' => 'Choose']);
+			echo $this->Form->input('flex_req_allow',['label'=>'Flexible Requesting Allowed']);
+            echo $this->Form->input('workflowrule_id',['label'=>'Workflow','class'=>'select2', 'empty' => 'Choose']);
 
         ?>
     </fieldset>

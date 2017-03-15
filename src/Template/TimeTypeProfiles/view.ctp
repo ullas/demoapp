@@ -14,15 +14,14 @@
     <fieldset>
         <?php
             echo $this->Form->input('external_code',['disabled' => true]);
-            echo $this->Form->input('code',['disabled' => true]);
-            echo $this->Form->input('name',['disabled' => true]);
+            echo $this->Form->input('code',['label' => 'Time Type Profile Code','disabled' => true]);
+            echo $this->Form->input('name',['label' => 'Time Type Profile Name','disabled' => true]);
             echo $this->Form->input('country',['options' => $this->Country->get_countries(), 'empty' => true,'disabled' => true]);
-            echo $this->Form->input('start_date',['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
-            echo $this->Form->input('time_rec_variant',['disabled' => true]);
-            echo $this->Form->input('status',['disabled' => true]);
-            echo $this->Form->input('enable_ess',['disabled' => true]);
+            echo $this->Form->input('start_date',['label' => 'Time Type Profile Start Date','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
+            echo $this->Form->input('label' => 'Time Recording Variant','time_rec_variant',['disabled' => true]);
             echo $this->Form->input('time_type_id', ['options' => $timeTypes, 'empty' => true,'disabled' => true]);
-            
+            echo $this->Form->input('status',['disabled' => true]);
+            echo $this->Form->input('enable_ess',['label' => 'Enable for ESS','disabled' => true]);
         ?>
     </fieldset>
     <div class="box-footer">
