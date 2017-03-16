@@ -16,9 +16,9 @@
   </ol>
 </section> -->
 <section class="content">
-	<button id="togglebutton" type="button" class="btn btn-primary bg-gray btn-sm pull-right" data-toggle="collapse" data-target="#infobar">
+	<button id="togglebutton" type="button" class="btn btn-primary bg-gray btn-sm pull-right" data-toggle="collapse" data-target="#infobar" style="display: none;">
       <span class="fa fa-chevron-up fs20"></span>
-</button>
+	</button>
 
    <?php echo $this->Form->create($this->request->params['controller'],array('class'=>'mptlform','url' => array('controller' => $this->request->params['controller'], 'action' => 'deleteAll')));?>
    	<input type="hidden" value="1"  id="basicfilter"/>

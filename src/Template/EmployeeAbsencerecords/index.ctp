@@ -56,3 +56,10 @@
 	
 
 <?php echo $this->element('indexbasic', array('title' => 'Leave Requests')); ?>
+<?php $this->start('scriptIndexBottom'); ?>
+<script>
+$(function () {
+	$('#togglebutton').show();
+});
+</script>
+<?php $this->end(); ?>
