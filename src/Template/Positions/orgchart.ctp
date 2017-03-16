@@ -18,8 +18,15 @@ function RecursiveCategories($array) {
                     		<li><a href="/Orgchartactions/retirement/'.$vals['EmpDataBiographies']['employee_id'].'" data-remote="false" class="open-Popup" data-toggle="modal" data-target="#actionspopover">Retirement</a></li>
 	                    	</ul></div>';
                     echo "<li id=\"".$vals['id']."\"><div class='node-title'><a href='#' tabindex='0' id='".$vals['id']."' class='popoverbtn' data-trigger='focus' data-html='true' data-toggle='popover' title='".$vals['EmpDataBiographies']['birth_name']."'
- 							data-content='".$htmlstr."'>".$vals['EmpDataBiographies']['birth_name']."</a></div><div class='node-pic'><img class='node-profile-img' src='https://almsaeedstudio.com/themes/AdminLTE/dist/img/user1-128x128.jpg'></div>
- 							<div class='node-position'>".$vals['name']."</div>";
+ 							data-content='".$htmlstr."'>".$vals['EmpDataBiographies']['birth_name']."</a></div>";
+ 					if($vals['Employees']['profilepicture'] == "" || $vals['Employees']['profilepicture'] == null){
+ 						echo "<div class='node-pic'><img class='node-profile-img' src='/img/circle-512.png'></div>";
+ 					}else{
+ 						echo "<div class='node-pic'><img class='node-profile-img' src='/img/uploadedpics/".$vals['Employees']['profilepicture']."'></div>";	
+ 					}
+ 					
+ 					echo "<div class='node-position'>".$vals['name']."</div>";
+ 					
                     if (count($vals['children'])) {
                             RecursiveCategories($vals['children']);
                     }
