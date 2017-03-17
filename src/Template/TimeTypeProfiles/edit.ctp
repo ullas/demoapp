@@ -13,7 +13,6 @@
     <?= $this->Form->create($timeTypeProfile) ?>
     <fieldset>
         <?php
-            echo $this->Form->input('external_code');
             echo $this->Form->input('code',['label' => 'Time Type Profile Code']);
             echo $this->Form->input('name',['label' => 'Time Type Profile Name']);
             echo $this->Form->input('country',['options' => $this->Country->get_countries(), 'empty' => true]);
