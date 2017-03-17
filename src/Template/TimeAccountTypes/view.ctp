@@ -13,8 +13,8 @@
     <?= $this->Form->create($timeAccountType) ?>
     <fieldset>
         <?php
-            echo $this->Form->input('code',['disabled' => true]);
-            echo $this->Form->input('name',['disabled' => true]);
+            echo $this->Form->input('code',['label' => 'Time Account Code','disabled' => true]);
+            echo $this->Form->input('name',['label' => 'Time Account Name','disabled' => true]);
             echo $this->Form->input('unit',['label'=>'Unit','class'=>'select2','options' => array('Hour(s)', 'Day(s)'), 'empty' => 'Choose','disabled' => true]);
             echo $this->Form->input('perm_reccur',['label'=>'Permanent / Recurring','disabled' => true,'class'=>'select2','options' => array('Permanent', 'Recurring'), 'empty' => true]);
             echo $this->Form->input('start_date',['label'=>'Account Creation Start Date','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);

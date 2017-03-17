@@ -13,8 +13,8 @@
     <?= $this->Form->create($timeType) ?>
     <fieldset>
         <?php
-        	  echo $this->Form->input('code');
-			      echo $this->Form->input('name');
+            echo $this->Form->input('code',['label' => 'Time Type Code']);
+            echo $this->Form->input('name',['label' => 'Time Type Name']);
             echo $this->Form->input('country',['options' => $this->Country->get_countries(), 'empty' => true]);
             echo $this->Form->input('classification');
             echo $this->Form->input('unit',['class'=>'select2','options' => array('Hour(s)', 'Day(s)'), 'empty' => 'Choose']);
