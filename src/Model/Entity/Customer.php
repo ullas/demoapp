@@ -11,6 +11,8 @@ use Cake\ORM\Entity;
  * @property string $contactno
  * @property string $noofusers
  * @property \Cake\I18n\Time $expirydate
+ * @property \Cake\I18n\Time $created
+ * @property \Cake\I18n\Time $modified
  *
  * @property \App\Model\Entity\Address[] $addresses
  * @property \App\Model\Entity\BusinessUnit[] $business_units
@@ -21,7 +23,7 @@ use Cake\ORM\Entity;
  * @property \App\Model\Entity\Department[] $departments
  * @property \App\Model\Entity\Dependent[] $dependents
  * @property \App\Model\Entity\Division[] $divisions
- * @property \App\Model\Entity\EmpDataBiography[] $emp_data_biographies
+ * @property \App\Model\Entity\Empdatabiography[] $emp_data_biographies
  * @property \App\Model\Entity\EmpDataPersonal[] $emp_data_personals
  * @property \App\Model\Entity\EmploymentInfo[] $employment_infos
  * @property \App\Model\Entity\EventReason[] $event_reasons
@@ -29,7 +31,7 @@ use Cake\ORM\Entity;
  * @property \App\Model\Entity\HolidayCalendar[] $holiday_calendars
  * @property \App\Model\Entity\Holiday[] $holidays
  * @property \App\Model\Entity\Id[] $ids
- * @property \App\Model\Entity\JobClass[] $job_classes
+ * @property \App\Model\Entity\Jobclass[] $job_classes
  * @property \App\Model\Entity\JobFunction[] $job_functions
  * @property \App\Model\Entity\JobInfo[] $job_infos
  * @property \App\Model\Entity\LegalEntity[] $legal_entities

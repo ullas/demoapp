@@ -16,6 +16,20 @@ if (file_exists($file)) {
 	switch ($userrole) {
 	case "root":
     ?>
+    <li><a href="<?php echo $this -> Url -> build('/Homes'); ?>"><i class="fa fa-dashboard"></i><span> Dashboard </span></a></li>
+    <li><a href="<?php echo $this -> Url -> build('/Employees'); ?>"><i class="fa fa-user"></i><span> Employee</span></a></li>
+    <li class="treeview">
+    <a href="#"> <i class="fa fa-lock"></i> <span>Admin</span> <i class="fa fa-angle-left pull-right"></i>  </a>
+    <ul class="treeview-menu">
+
+	<li><a href="<?php echo $this -> Url -> build('/LegalEntities'); ?>"><i class="fa fa-circle-o"></i> Legal Entity</a></li>
+    <li><a href="<?php echo $this -> Url -> build('/BusinessUnits'); ?>"><i class="fa fa-circle-o"></i> Business Unit</a></li>
+    <li><a href="<?php echo $this -> Url -> build('/Departments'); ?>"><i class="fa fa-circle-o"></i> Departments</a></li>
+    <li><a href="<?php echo $this -> Url -> build('/Divisions'); ?>"><i class="fa fa-circle-o"></i> Divisions</a></li>
+    <li><a href="<?php echo $this -> Url -> build('/CostCentres'); ?>"><i class="fa fa-circle-o"></i> Cost Centers</a></li>
+   
+    </ul>
+    </li>
     <li><a href="<?php echo $this -> Url -> build('/Customers'); ?>"><i class="glyphicon glyphicon-king"></i><span> Customer </span></a></li>
     <?php if ($counts['customer'] > 0): ?>
     <li><a href="<?php echo $this -> Url -> build('/Users'); ?>"><i class="fa fa-user-plus"></i><span> Users </span></a></li>
@@ -96,42 +110,12 @@ if (file_exists($file)) {
      	</li>
     </ul>
     </li>
-
-
-    <?php
-		}
-	break;
-	case "manager":
-    ?>
-    <li><a href="<?php echo $this -> Url -> build('/Homes'); ?>"><i class="fa fa-dashboard"></i><span> Dashboard </span></a></li>
-
-    <li class="treeview">
-    <a href="#"> <i class="fa fa-home"></i> <span>Admin</span> <i class="fa fa-angle-left pull-right"></i>  </a>
-    <ul class="treeview-menu">
-
-    <li><a href="<?php echo $this -> Url -> build('/LegalEntities'); ?>"><i class="fa fa-circle-o"></i> Legal Entity</a></li>
-    <li><a href="<?php echo $this -> Url -> build('/BusinessUnits'); ?>"><i class="fa fa-circle-o"></i> Business Unit</a></li>
-    <li><a href="<?php echo $this -> Url -> build('/Departments'); ?>"><i class="fa fa-circle-o"></i> Departments</a></li>
-    <li><a href="<?php echo $this -> Url -> build('/CostCentres'); ?>"><i class="fa fa-circle-o"></i> Cost Centers</a></li>
-    <li><a href="<?php echo $this -> Url -> build('/Positions'); ?>"><i class="fa fa-circle-o"></i> Position</a></li>
-    <li><a href="<?php echo $this -> Url -> build('/EmpDataBiographies'); ?>"><i class="fa fa-circle-o"></i> Emp Data Biography</a></li>
-
-
-    <li><a href="<?php echo $this -> Url -> build('/Divisions'); ?>"><i class="fa fa-circle-o"></i> Divisions</a></li>
-
-
-    <li><a href="<?php echo $this -> Url -> build('/Addresses'); ?>"><i class="fa fa-circle-o"></i> Addresses</a></li>
-    <!-- <li><a href="<?php echo $this -> Url -> build('/CalendarAssignments'); ?>"><i class="fa fa-circle-o"></i> Calendar Assignments</a></li> -->
-    <li><a href="<?php echo $this -> Url -> build('/ContactInfos'); ?>"><i class="fa fa-circle-o"></i> Contact Infos</a></li>
-    <li><a href="<?php echo $this -> Url -> build('/CorporateAddresses'); ?>"><i class="fa fa-circle-o"></i> Corporate Addresses</a></li>
-    <li><a href="<?php echo $this -> Url -> build('/Dependents'); ?>"><i class="fa fa-circle-o"></i> Dependents</a></li>
-    </ul>
-    </li>
-    <li><a href="<?php echo $this -> Url -> build('/Profiles'); ?>"><i class="glyphicon glyphicon-user"></i><span> Profile </span></a></li>
-    <li><a href="<?php echo $this -> Url -> build('/OrgCharts'); ?>"><i class="fa fa-sitemap"></i><span> Organizational Chart </span></a></li>
-    <li><a href="#"><i class="fa fa-question-circle"></i> <span>Help</span></a></li>
+	<li><a href="<?php echo $this -> Url -> build('/EmployeeAbsencerecords'); ?>"><i class="fa fa-calendar-minus-o"></i><span> Leave Requests</span></a></li>
+    <li><a href="<?php echo $this -> Url -> build('/Positions/orgchart'); ?>"><i class="fa fa-sitemap"></i><span> Organizational Chart </span></a></li>
+    
 
     <?php
+    }
 	break;
 	case "employee":
     ?>
@@ -139,7 +123,9 @@ if (file_exists($file)) {
 	<li><a href="<?php echo $this -> Url -> build('/Profiles'); ?>"><i class="glyphicon glyphicon-user"></i><span> Profile </span></a></li>
 	<li><a href="<?php echo $this -> Url -> build('/Dependents'); ?>"><i class="fa fa-users"></i><span> Dependents </span></a></li>
     <li><a href="<?php echo $this -> Url -> build('/Notes'); ?>"><i class="fa fa-file-text-o"></i><span> Notes </span></a></li>
-
+	<li><a href="<?php echo $this -> Url -> build('/EmployeeAbsencerecords'); ?>"><i class="fa fa-calendar-minus-o"></i><span> Leave Requests</span></a></li>
+    <li><a href="<?php echo $this -> Url -> build('/Positions/orgchart'); ?>"><i class="fa fa-sitemap"></i><span> Organizational Chart </span></a></li>
+    
 
     <?php
 	break;
@@ -149,8 +135,6 @@ if (file_exists($file)) {
 
     <?php } ?>
 
-    <li><a href="<?php echo $this -> Url -> build('/EmployeeAbsencerecords'); ?>"><i class="fa fa-calendar-minus-o"></i><span> Leave Requests</span></a></li>
-    <li><a href="<?php echo $this -> Url -> build('/Positions/orgchart'); ?>"><i class="fa fa-sitemap"></i><span> Organizational Chart </span></a></li>
     <li><a href="#"><i class="fa fa-question-circle"></i> <span>Help</span></a></li>
 </ul>
 <?php } ?>

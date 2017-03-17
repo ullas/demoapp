@@ -1,6 +1,7 @@
+<?= $this->element('templateelmnt'); ?>
 <section class="content-header">
   <h1>
-    Customer
+    Customers
     <small>View</small>
   </h1>
   <ol class="breadcrumb">
@@ -13,28 +14,20 @@
 <!-- Main content -->
 <section class="content">
   <div class="box box-primary"><div class="box-body">
-    <table class="table table-hover">
-        <tr>
-            <th><?= __('Name') ?></th>
-            <td><?= h($customer->name) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Contactno') ?></th>
-            <td><?= h($customer->contactno) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Noofusers') ?></th>
-            <td><?= h($customer->noofusers) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Id') ?></th>
-            <td><?= $this->Number->format($customer->id) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Expirydate') ?></th>
-            <td><?= h($customer->expirydate) ?></td>
-        </tr>
-    </table>
-   
-    
-</div></div></section>
+        <?= $this->Form->create($customer, array('role' => 'form')) ?>
+        <fieldset>
+          <?php
+            echo $this->Form->input('name',['disabled' => true]);
+            echo $this->Form->input('contactno',['disabled' => true]);
+            echo $this->Form->input('noofusers',['disabled' => true]);
+            echo $this->Form->input('expirydate', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
+         ?>
+        </fieldset>
+          <!-- /.box-body -->
+          <div class="box-footer">
+          	<?=$this->Html->link(__('Cancel'), ['action' => 'index'], ['escape' => false])?>
+            <?=$this->Html->link(__('Edit Customer'), ['action' => 'edit', $customer['id']],['class'=>'btn btn-primary label-info pull-right'], ['escape' => false])?>
+          </div>
+        <?= $this->Form->end() ?>
+      </div>
+  </div></section>

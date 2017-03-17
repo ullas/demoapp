@@ -49,7 +49,8 @@ class HomesController extends AppController
 		// $this->set('myteam',$myteam);
 		// $this->loadModel('Positions');
 		// $myteam = $this->Positions->find('all')->where(['id >=' => $posid])->toArray();
-		$this->log(json_encode($myteam));
+		
+		// $this->log(json_encode($myteam));
         
 		//homes
         $homes = $this->paginate($this->Homes);

@@ -12,6 +12,25 @@ use Cake\Mailer\Email;
 class UsersController extends AppController
 {
 
+    var $components = array('Datatable');
+	
+	public function ajaxData() {
+		$this->autoRender= False;
+		  
+		$this->loadModel('CreateConfigs');
+		$dbout=$this->CreateConfigs->find()->select(['field_name', 'datatype'])->where(['table_name' => $this->request->params['controller']])->order(['id' => 'ASC'])->toArray();
+		$fields = array();
+		foreach($dbout as $value){
+			$fields[] = array("name" => $value['field_name'] , "type" => $value['datatype'] );
+		}
+		
+		$contains=['Customers'];
+									  
+		$usrfilter="Users.customer_id ='".$this->loggedinuser['customer_id'] . "'";				  		  
+		$output =$this->Datatable->getView($fields,$contains,$usrfilter);
+		echo json_encode($output);		
+    }
+	
     /**
      * Index method
      *
@@ -19,7 +38,13 @@ class UsersController extends AppController
      */
     public function index()
     {
-    	
+    	$this->loadModel('CreateConfigs');
+        $configs=$this->CreateConfigs->find('all')->where(['table_name' => $this->request->params['controller']])->order(['"id"' => 'ASC'])->toArray();
+        $this->set('configs',$configs);	
+		
+    	$actions =[ ['name'=>'delete','title'=>'Delete','class'=>' label-danger'] ];
+        $this->set('actions',$actions);	
+		
         $this->paginate = [
             'contain' => ['Customers']
         ];
@@ -50,7 +75,7 @@ class UsersController extends AppController
 				$emparr=$this->Employees->find('all',['conditions' => array('id' => $user['employee_id']),'contain' => []])->toArray();
 				(isset($emparr[0])) ? $visible = $emparr[0]['visible'] : $visible = "" ;
 				
-				if($visible=="1"){
+				if($visible=="1" || ($user['role']=='root')){
 					$this->Auth->setUser($user);
                 	return $this->redirect($this->Auth->redirectUrl());
 				}else{
@@ -79,7 +104,8 @@ class UsersController extends AppController
             'contain' => ['Customers', 'CalendarAssignments']
         ]);
 
-        $this->set('user', $user);
+        $customers = $this->Users->Customers->find('list', ['limit' => 200]);
+        $this->set(compact('user', 'customers'));
         $this->set('_serialize', ['user']);
     }
 
