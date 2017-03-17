@@ -57,12 +57,12 @@ class AppController extends Controller
 			//get empdatabiographyid from employeeid
 			$this->loadModel('EmpDataBiographies');
 			$emparr=$this->EmpDataBiographies->find('all',['conditions' => array('employee_id' => $user['employee_id']),'contain' => []])->toArray();
-			isset($emparr[0]) ? $empdatabiographyid = $emparr[0]['id'] : $empdatabiographyid = "" ; 
+			isset($emparr[0]) ? $empdatabiographyid = $emparr[0]['id'] : $empdatabiographyid = "0" ; 
 			
 			//get profilepicture from employeeid
 			$this->loadModel('Employees');
 			$employeearr=$this->Employees->find('all',['conditions' => array('id' => $user['employee_id']),'contain' => []])->toArray();
-			isset($employeearr[0]) ? $pic = $employeearr[0]['profilepicture'] : $pic = "" ; 
+			isset($employeearr[0]) ? $pic = $employeearr[0]['profilepicture'] : $pic = "defaultuser.png" ; 
 
 		
     		$this->set('name', $user['name']);

@@ -16,7 +16,75 @@
     
     <section class="content">
     <div id="draggablePanelList" class="list-unstyled row">
-			
+		
+	<?php $userrole=$this->request->session()->read('sessionuser')['role'];
+	switch ($userrole) {
+	case "root":
+    ?>
+    
+    <div class="row">
+        <div class="col-md-3 col-sm-6 col-xs-12">
+          <div class="info-box">
+            <span class="info-box-icon bg-aqua"><i class="glyphicon glyphicon-king"></i></span>
+
+            <div class="info-box-content">
+              <span class="info-box-text">Customers</span>
+              <span class="info-box-number">1</span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+        </div>
+        <!-- /.col -->
+        <div class="col-md-3 col-sm-6 col-xs-12">
+          <div class="info-box">
+            <span class="info-box-icon bg-red"><i class="ion ion-ios-people-outline"></i></span>
+
+            <div class="info-box-content">
+              <span class="info-box-text">Users</span>
+              <span class="info-box-number">2</span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+        </div>
+        <!-- /.col -->
+
+        <!-- fix for small devices only -->
+        <div class="clearfix visible-sm-block"></div>
+
+        <div class="col-md-3 col-sm-6 col-xs-12">
+          <div class="info-box">
+            <span class="info-box-icon bg-green"><i class="ion user-image"></i></span>
+
+            <div class="info-box-content">
+              <span class="info-box-text">Employees</span>
+              <span class="info-box-number">7</span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+        </div>
+        <!-- /.col -->
+        <div class="col-md-3 col-sm-6 col-xs-12">
+          <div class="info-box">
+            <span class="info-box-icon bg-yellow"><i class="ion ion-ios-people-outline"></i></span>
+
+            <div class="info-box-content">
+              <span class="info-box-text">New Members</span>
+              <span class="info-box-number">20</span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+        </div>
+        <!-- /.col -->
+      </div>
+      
+    <?php
+	break;
+	default:
+    ?>	
     <div class="col-sm-3">
     	<div class="box box-primary direct-chat direct-chat-primary">
         	<div class="box-header with-border">My Info</div>
@@ -63,6 +131,7 @@
         </div>
     </div>
 
+	<?php } ?>
 </div>
 
   

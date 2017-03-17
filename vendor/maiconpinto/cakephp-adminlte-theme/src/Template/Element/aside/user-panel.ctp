@@ -14,7 +14,16 @@ if (file_exists($file)) {
         
     </div>
     <div class="pull-left info">
-    	        <p><a href="<?php echo $this->Url->build('/Profiles'); ?>"><?php echo $name ?></a></p>
+    	
+    	<?php $userrole=$this->request->session()->read('sessionuser')['role'];
+    		if ($userrole=="admin" || $userrole=="employee") {
+				echo "<p><a href='/Profiles'>".$name."</a></p>";
+			}else{
+				echo "<p>".$name."</p>";
+			}
+		?>
+							
+    	        
         <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
     </div>
 </div>

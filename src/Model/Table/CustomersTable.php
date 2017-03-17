@@ -5,7 +5,6 @@ use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
-
 use Cake\Event\Event;
 use Cake\Event\ArrayObject;
 use Cake\Core\Configure;
@@ -21,32 +20,45 @@ use Cake\Core\Configure;
  * @property \Cake\ORM\Association\HasMany $Departments
  * @property \Cake\ORM\Association\HasMany $Dependents
  * @property \Cake\ORM\Association\HasMany $Divisions
- * @property \Cake\ORM\Association\HasMany $EmpDataBiographies
- * @property \Cake\ORM\Association\HasMany $EmpDataPersonals
- * @property \Cake\ORM\Association\HasMany $EmploymentInfos
+ * @property \Cake\ORM\Association\HasMany $Empdatabiographies
+ * @property \Cake\ORM\Association\HasMany $Empdatapersonals
+ * @property \Cake\ORM\Association\HasMany $EmployeeAbsencerecords
+ * @property \Cake\ORM\Association\HasMany $Employees
+ * @property \Cake\ORM\Association\HasMany $Employmentinfos
  * @property \Cake\ORM\Association\HasMany $EventReasons
  * @property \Cake\ORM\Association\HasMany $Frequencies
  * @property \Cake\ORM\Association\HasMany $HolidayCalendars
  * @property \Cake\ORM\Association\HasMany $Holidays
- * @property \Cake\ORM\Association\HasMany $Ids
- * @property \Cake\ORM\Association\HasMany $JobClasses
- * @property \Cake\ORM\Association\HasMany $JobFunctions
- * @property \Cake\ORM\Association\HasMany $JobInfos
+ * @property \Cake\ORM\Association\HasMany $Identities
+ * @property \Cake\ORM\Association\HasMany $Jobclasses
+ * @property \Cake\ORM\Association\HasMany $Jobfunctions
+ * @property \Cake\ORM\Association\HasMany $Jobinfos
+ * @property \Cake\ORM\Association\HasMany $Jobs
  * @property \Cake\ORM\Association\HasMany $LegalEntities
  * @property \Cake\ORM\Association\HasMany $Locations
+ * @property \Cake\ORM\Association\HasMany $Notes
  * @property \Cake\ORM\Association\HasMany $PayComponentGroups
  * @property \Cake\ORM\Association\HasMany $PayComponents
  * @property \Cake\ORM\Association\HasMany $PayGrades
  * @property \Cake\ORM\Association\HasMany $PayGroups
  * @property \Cake\ORM\Association\HasMany $PayRanges
+ * @property \Cake\ORM\Association\HasMany $PayrollArea
+ * @property \Cake\ORM\Association\HasMany $PayrollData
+ * @property \Cake\ORM\Association\HasMany $PayrollRecord
+ * @property \Cake\ORM\Association\HasMany $PayrollResult
+ * @property \Cake\ORM\Association\HasMany $PayrollStatus
  * @property \Cake\ORM\Association\HasMany $Picklists
  * @property \Cake\ORM\Association\HasMany $Positions
+ * @property \Cake\ORM\Association\HasMany $Profiles
  * @property \Cake\ORM\Association\HasMany $Regions
  * @property \Cake\ORM\Association\HasMany $TimeAccountTypes
  * @property \Cake\ORM\Association\HasMany $TimeTypeProfiles
  * @property \Cake\ORM\Association\HasMany $TimeTypes
  * @property \Cake\ORM\Association\HasMany $Users
  * @property \Cake\ORM\Association\HasMany $WorkSchedules
+ * @property \Cake\ORM\Association\HasMany $Workflowactions
+ * @property \Cake\ORM\Association\HasMany $Workflowrules
+ * @property \Cake\ORM\Association\HasMany $Workflows
  *
  * @method \App\Model\Entity\Customer get($primaryKey, $options = [])
  * @method \App\Model\Entity\Customer newEntity($data = null, array $options = [])
@@ -55,6 +67,8 @@ use Cake\Core\Configure;
  * @method \App\Model\Entity\Customer patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
  * @method \App\Model\Entity\Customer[] patchEntities($entities, array $data, array $options = [])
  * @method \App\Model\Entity\Customer findOrCreate($search, callable $callback = null)
+ *
+ * @mixin \Cake\ORM\Behavior\TimestampBehavior
  */
 class CustomersTable extends Table
 {
@@ -72,6 +86,8 @@ class CustomersTable extends Table
         $this->table('customers');
         $this->displayField('name');
         $this->primaryKey('id');
+
+        $this->addBehavior('Timestamp');
 
         $this->hasMany('Addresses', [
             'foreignKey' => 'customer_id','dependent' => true
@@ -100,13 +116,19 @@ class CustomersTable extends Table
         $this->hasMany('Divisions', [
             'foreignKey' => 'customer_id','dependent' => true
         ]);
-        $this->hasMany('EmpDataBiographies', [
+        $this->hasMany('Empdatabiographies', [
             'foreignKey' => 'customer_id','dependent' => true
         ]);
-        $this->hasMany('EmpDataPersonals', [
+        $this->hasMany('Empdatapersonals', [
             'foreignKey' => 'customer_id','dependent' => true
         ]);
-        $this->hasMany('EmploymentInfos', [
+        $this->hasMany('EmployeeAbsencerecords', [
+            'foreignKey' => 'customer_id','dependent' => true
+        ]);
+        $this->hasMany('Employees', [
+            'foreignKey' => 'customer_id','dependent' => true
+        ]);
+        $this->hasMany('Employmentinfos', [
             'foreignKey' => 'customer_id','dependent' => true
         ]);
         $this->hasMany('EventReasons', [
@@ -121,22 +143,28 @@ class CustomersTable extends Table
         $this->hasMany('Holidays', [
             'foreignKey' => 'customer_id','dependent' => true
         ]);
-        $this->hasMany('Ids', [
+        $this->hasMany('Identities', [
             'foreignKey' => 'customer_id','dependent' => true
         ]);
-        $this->hasMany('JobClasses', [
+        $this->hasMany('Jobclasses', [
             'foreignKey' => 'customer_id','dependent' => true
         ]);
-        $this->hasMany('JobFunctions', [
+        $this->hasMany('Jobfunctions', [
             'foreignKey' => 'customer_id','dependent' => true
         ]);
-        $this->hasMany('JobInfos', [
+        $this->hasMany('Jobinfos', [
+            'foreignKey' => 'customer_id','dependent' => true
+        ]);
+        $this->hasMany('Jobs', [
             'foreignKey' => 'customer_id','dependent' => true
         ]);
         $this->hasMany('LegalEntities', [
             'foreignKey' => 'customer_id','dependent' => true
         ]);
         $this->hasMany('Locations', [
+            'foreignKey' => 'customer_id','dependent' => true
+        ]);
+        $this->hasMany('Notes', [
             'foreignKey' => 'customer_id','dependent' => true
         ]);
         $this->hasMany('PayComponentGroups', [
@@ -154,10 +182,28 @@ class CustomersTable extends Table
         $this->hasMany('PayRanges', [
             'foreignKey' => 'customer_id','dependent' => true
         ]);
+        $this->hasMany('PayrollArea', [
+            'foreignKey' => 'customer_id','dependent' => true
+        ]);
+        $this->hasMany('PayrollData', [
+            'foreignKey' => 'customer_id','dependent' => true
+        ]);
+        $this->hasMany('PayrollRecord', [
+            'foreignKey' => 'customer_id','dependent' => true
+        ]);
+        $this->hasMany('PayrollResult', [
+            'foreignKey' => 'customer_id','dependent' => true
+        ]);
+        $this->hasMany('PayrollStatus', [
+            'foreignKey' => 'customer_id','dependent' => true
+        ]);
         $this->hasMany('Picklists', [
             'foreignKey' => 'customer_id','dependent' => true
         ]);
         $this->hasMany('Positions', [
+            'foreignKey' => 'customer_id','dependent' => true
+        ]);
+        $this->hasMany('Profiles', [
             'foreignKey' => 'customer_id','dependent' => true
         ]);
         $this->hasMany('Regions', [
@@ -176,6 +222,15 @@ class CustomersTable extends Table
             'foreignKey' => 'customer_id','dependent' => true
         ]);
         $this->hasMany('WorkSchedules', [
+            'foreignKey' => 'customer_id','dependent' => true
+        ]);
+        $this->hasMany('Workflowactions', [
+            'foreignKey' => 'customer_id','dependent' => true
+        ]);
+        $this->hasMany('Workflowrules', [
+            'foreignKey' => 'customer_id','dependent' => true
+        ]);
+        $this->hasMany('Workflows', [
             'foreignKey' => 'customer_id','dependent' => true
         ]);
     }
@@ -219,5 +274,4 @@ class CustomersTable extends Table
 
         return $validator;
     }
-	
 }

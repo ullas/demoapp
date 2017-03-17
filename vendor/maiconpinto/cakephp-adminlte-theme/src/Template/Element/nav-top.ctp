@@ -63,7 +63,12 @@ if (file_exists($file)) {
                     <!-- Menu Footer-->
                     <li class="user-footer">
                         <div class="pull-left">
-                            <a href="<?php echo $this->Url->build('/Profiles'); ?>" class="btn btn-default btn-flat">Profile</a>
+                        	<?php $userrole=$this->request->session()->read('sessionuser')['role'];
+								if ($userrole=="admin" || $userrole=="employee") {
+									echo "<a href='/Profiles' class='btn btn-default btn-flat'>Profile</a>";
+								}
+							?>
+                            
                         </div>
                         <div class="pull-right">
                             <!-- <a href="#" class="btn btn-default btn-flat">Sign out</a> -->
