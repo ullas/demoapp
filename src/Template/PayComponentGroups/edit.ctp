@@ -29,7 +29,7 @@
     </fieldset>
     <div class="box-footer">
     <?=$this->Html->link(__('Cancel'), ['action' => 'index'], ['escape' => false])?>
-    <?= $this->Form->button(__('Update PayComponentGroup'),['title'=>'Update PayComponentGroup','class'=>'pull-right']) ?>
+    <?= $this->Form->button(__('Update Pay Component Group'),['title'=>'Update Pay Component Group','class'=>'pull-right']) ?>
     </div>
     <?= $this->Form->end() ?>
 </div></div></section>

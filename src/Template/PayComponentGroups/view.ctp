@@ -32,6 +32,6 @@
         ?></fieldset>
 <div class="box-footer">
           	<?=$this->Html->link(__('Cancel'), ['action' => 'index'], ['escape' => false])?>
-            <?=$this->Html->link(__('Edit PayComponentGroup'), ['action' => 'edit', $payComponentGroup['id']],['class'=>'btn btn-primary label-info pull-right'], ['escape' => false])?>
+            <?=$this->Html->link(__('Edit Pay Component Group'), ['action' => 'edit', $payComponentGroup['id']],['class'=>'btn btn-primary label-info pull-right'], ['escape' => false])?>
           </div><?= $this->Form->end() ?>
 </div></div></section>
