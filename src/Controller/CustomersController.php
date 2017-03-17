@@ -11,6 +11,24 @@ use App\Controller\AppController;
 class CustomersController extends AppController
 {
 
+  var $components = array('Datatable');
+	
+	public function ajaxData() {
+		$this->autoRender= False;
+		  
+		$this->loadModel('CreateConfigs');
+		$dbout=$this->CreateConfigs->find()->select(['field_name', 'datatype'])->where(['table_name' => $this->request->params['controller']])->order(['id' => 'ASC'])->toArray();
+		$fields = array();
+		foreach($dbout as $value){
+			$fields[] = array("name" => $value['field_name'] , "type" => $value['datatype'] );
+		}
+		
+		$contains=[];
+									  
+		$usrfilter="";							  
+		$output =$this->Datatable->getView($fields,$contains,$usrfilter);
+		echo json_encode($output);				
+    }
     /**
      * Index method
      *
@@ -18,6 +36,13 @@ class CustomersController extends AppController
      */
     public function index()
     {
+    	$this->loadModel('CreateConfigs');
+        $configs=$this->CreateConfigs->find('all')->where(['table_name' => $this->request->params['controller']])->order(['"id"' => 'ASC'])->toArray();
+        $this->set('configs',$configs);	
+		
+		$actions =[ ['name'=>'delete','title'=>'Delete','class'=>' label-danger'] ];
+        $this->set('actions',$actions);	
+		
         $customers = $this->paginate($this->Customers);
 
         $this->set(compact('customers'));
@@ -34,7 +59,7 @@ class CustomersController extends AppController
     public function view($id = null)
     {
         $customer = $this->Customers->get($id, [
-            'contain' => ['Addresses', 'BusinessUnits', 'CalendarAssignments', 'ContactInfos', 'CorporateAddresses', 'CostCentres', 'Departments', 'Dependents', 'Divisions', 'EmpDataBiographies', 'EmpDataPersonals', 'EmploymentInfos', 'EventReasons', 'Frequencies', 'HolidayCalendars', 'Holidays', 'Ids', 'JobClasses', 'JobFunctions', 'JobInfos', 'LegalEntities', 'Locations', 'PayComponentGroups', 'PayComponents', 'PayGrades', 'PayGroups', 'PayRanges', 'Picklists', 'Positions', 'Regions', 'TimeAccountTypes', 'TimeTypeProfiles', 'TimeTypes', 'Users', 'WorkSchedules']
+            'contain' => ['Addresses', 'BusinessUnits', 'CalendarAssignments', 'ContactInfos', 'CorporateAddresses', 'CostCentres', 'Departments', 'Dependents', 'Divisions', 'Empdatabiographies', 'Empdatapersonals', 'Employmentinfos', 'EventReasons', 'Frequencies', 'HolidayCalendars', 'Holidays', 'Identities', 'Jobclasses', 'Jobfunctions', 'Jobinfos', 'LegalEntities', 'Locations', 'PayComponentGroups', 'PayComponents', 'PayGrades', 'PayGroups', 'PayRanges', 'Picklists', 'Positions', 'Regions', 'TimeAccountTypes', 'TimeTypeProfiles', 'TimeTypes', 'Users', 'WorkSchedules']
         ]);
 
         $this->set('customer', $customer);

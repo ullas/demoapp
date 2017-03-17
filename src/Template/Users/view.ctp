@@ -1,6 +1,7 @@
+<?= $this->element('templateelmnt'); ?>
 <section class="content-header">
   <h1>
-    User
+    Users
     <small>View</small>
   </h1>
   <ol class="breadcrumb">
@@ -13,47 +14,23 @@
 <!-- Main content -->
 <section class="content">
   <div class="box box-primary"><div class="box-body">
-    <table class="table table-hover">
-        <tr>
-            <th><?= __('Email') ?></th>
-            <td><?= h($user->email) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Password') ?></th>
-            <td><?= h($user->password) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Role') ?></th>
-            <td><?= h($user->role) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Username') ?></th>
-            <td><?= h($user->username) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Name') ?></th>
-            <td><?= h($user->name) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Customer') ?></th>
-            <td><?= $user->has('customer') ? $this->Html->link($user->customer->name, ['controller' => 'Customers', 'action' => 'view', $user->customer->id]) : '' ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Id') ?></th>
-            <td><?= $this->Number->format($user->id) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('DateFormat') ?></th>
-            <td><?= $this->Number->format($user->dateformat) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Created') ?></th>
-            <td><?= h($user->created) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Modified') ?></th>
-            <td><?= h($user->modified) ?></td>
-        </tr>
-    </table>
-
-</div></div></section>
+        <?= $this->Form->create($user, array('role' => 'form')) ?>
+        <fieldset>
+          <?php
+           echo $this->Form->input('email',['disabled' => true]);
+            echo $this->Form->input('password',['disabled' => true]);
+            echo $this->Form->input('role',['class'=>'select2','options' => ['admin' => 'Admin', 'employee' => 'Employee'], 'empty' => 'Choose','disabled' => true]);
+            echo $this->Form->input('username',['disabled'=>true]);
+            echo $this->Form->input('name',['disabled' => true]);
+			echo $this->Form->input('dateformat',['class'=>'select2','options' => array('yyyy/mm/dd [2017/01/01]', 'dd/mm/yyyy [01/01/2017]'), 'empty' => 'Choose','disabled' => true]);
+            echo $this->Form->input('customer_id', ['options' => $customers,'disabled' => true]);
+			
+          ?></fieldset>
+          <!-- /.box-body -->
+          <div class="box-footer">
+          	<?=$this->Html->link(__('Cancel'), ['action' => 'index'], ['escape' => false])?>
+            <?=$this->Html->link(__('Edit User'), ['action' => 'edit', $user['id']],['class'=>'btn btn-primary label-info pull-right'], ['escape' => false])?>
+          </div>
+        <?= $this->Form->end() ?>
+      </div>
+  </div></section>
