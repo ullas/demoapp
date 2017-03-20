@@ -1,145 +1,156 @@
 <style>
-.stepwizard-step p {
-    margin-top: 10px;
-}
-.stepwizard-row {
-    display: table-row;
-}
+
 .stepwizard {
     display: table;
-    width: 50%;
+    width: 100%;
     position: relative;
 }
-.stepwizard-step button[disabled] {
-    opacity: 1 !important;
-    filter: alpha(opacity=100) !important;color:#333;
-    te
-}
-.stepwizard-row:before {
-    top: 25px;
-    bottom: 0;
-    position: absolute;
-    content: " ";
+
+/*newlyadded colorlib*/
+.wizard_horizontal ul.wizard_steps {
+    display: table;
+    list-style: none;
+    position: relative;
     width: 100%;
-    height: 4px;
-    background-color: #ccc;
-    z-order: 0;
+    margin: 0 0 20px;
 }
-.stepwizard-step {
+.wizard_horizontal ul.wizard_steps li {
     display: table-cell;
     text-align: center;
+}
+.wizard_horizontal ul.wizard_steps li a, .wizard_horizontal ul.wizard_steps li:hover {
+    display: block;
     position: relative;
+    -moz-opacity: 1;
+    filter: alpha(opacity=100);
+    opacity: 1;
+    color: #666;
 }
-.btn-circle {
-	/*color:#FFFFFF;*/
-    width: 50px;
-    height: 50px;
+.wizard_horizontal ul.wizard_steps li a .step_no {
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    border-radius: 100px;
+    display: block;
+    margin: 0 auto 5px;
+    font-size: 16px;
     text-align: center;
-    padding: 4px 0;
-    font-size: 30px;
-    line-height: 1.428571429;
-    border-radius: 25px;
+    position: relative;
+    z-index: 5;
 }
-.lt{
-	text-align: left;
+.danger .step_no{
+    background: #34495E;
+    color: #fff;
 }
-.rt{
-	text-align: right;
-}	
+.wizard_horizontal ul.wizard_steps li a.done .step_no, .wizard_horizontal ul.wizard_steps li a.done:before {
+    background: #1ABB9C;
+    color: #fff;
+}
+.wizard_horizontal ul.wizard_steps li a:before {
+    content: "";
+    position: absolute;
+    height: 4px;
+    background: #3498DB;
+    top: 20px;
+    width: 100%;
+    z-index: 4;
+    left: 0;
+}
+.wizard_horizontal ul.wizard_steps li a, .wizard_horizontal ul.wizard_steps li:hover {
+    display: block;
+    position: relative;
+    -moz-opacity: 1;
+    filter: alpha(opacity=100);
+    opacity: 1;
+    color: #666;
+}
+.wizard_horizontal ul.wizard_steps li:first-child a:before {
+    left: 50%;
+}
+.wizard_horizontal ul.wizard_steps li:last-child a:before {
+    right: 50%;
+    width: 50%;
+    left: auto;
+}
+.step_no, .wizard_horizontal ul.wizard_steps li a.danger:before {
+    background: #34495E;
+    color: #fff;
+}
+.selected .step_no{
+    background: #3498DB;
+    color: #fff;
+}
 </style>
+
+
 <div class="margin no-print">
       <div class="callout callout-warning">
         <i class="fa fa-info-circle"></i> To begin, please fill out the following forms.
       </div>
-    </div>
+</div>
      
-<div class="stepwizard col-md-offset-3" style="background: #ecf0f5;">
-    <div class="stepwizard-row setup-panel">
+<div class="stepwizard wizard_horizontal">
+	<ul class="wizard_steps anchor no-padding">
 		
 		
 		
-      <div class="stepwizard-step lt">
       	<?php  
       	
        	if($counts['legalentity'] > 0){	
-      		echo '<a type="button" class="btn btn-success btn-circle"><i class="fa fa-bank"></i></a>';
-      		echo '<dd class="text-success"><i class="icon fa fa-check-square"></i> Legal Entity</dt>';
+      		echo '<li><a class="done" isdone="1" rel="1"><span class="step_no fa fa-bank"></span><span class="step_descr">Legal Entity<br><small>Step 1 description</small></span></a></li>';
       	}else{
-      		$btntype="danger";$disabledstr='disabled="disabled"';$texttype='';
-      		if($wcontent=="LegalEntity"){$btntype="primary";$disabledstr='';$texttype=' class="text-blue"';}
-      		echo '<a type="button" class="btn btn-'.$btntype.' btn-circle" '.$disabledstr.'><i class="fa fa-bank"></i></a>';
-      		echo '<dd'.$texttype.'>Legal Entity</dd>';
+      		$btntype="danger";
+      		if($wcontent=="LegalEntity"){$btntype="selected";}
+      		echo '<li><a class="'.$btntype.'" isdone="1" rel="1"><span class="step_no fa fa-bank"></span><span class="step_descr">Legal Entity<br><small>Step 1 description</small></span></a></li>';
       	}
         ?>
-      </div>
-      <div class="stepwizard-step">
       	<?php  
        	if($counts['businessunit'] > 0){	
-      		echo '<a type="button" class="btn btn-success btn-circle"><i class="fa fa-cube"></i></a>';
-      		echo '<dd class="text-success"><i class="icon fa fa-check-square"></i> Business Unit</dt>';
+      		echo '<li><a class="done" isdone="1" rel="2"><span class="step_no fa fa-cube"></span><span class="step_descr">Business Unit<br><small>Step 2 description</small></span></a></li>';
       	}else{
-      		$btntype="danger";$disabledstr='disabled="disabled"';$texttype='';
-      		if($wcontent=="BusinessUnit"){$btntype="primary";$disabledstr='';$texttype=' class="text-blue"';}
-      		echo '<a type="button" class="btn btn-'.$btntype.' btn-circle" '.$disabledstr.'><i class="fa fa-cube"></i></a>';
-      		echo '<dd'.$texttype.'>Business Unit</dd>';
+      		$btntype="danger";
+      		if($wcontent=="BusinessUnit"){$btntype="selected";}
+      		echo '<li><a class="'.$btntype.'" isdone="1" rel="2"><span class="step_no fa fa-cube"></span><span class="step_descr">Business Unit<br><small>Step 2 description</small></span></a></li>';
       	}
         ?>
-      </div>
-      <div class="stepwizard-step">
       	<?php
       	if($counts['division'] > 0){	
-      		echo '<a type="button" class="btn btn-success btn-circle"><i class="fa fa-database"></i></a>';
-      		echo '<dd class="text-success"><i class="icon fa fa-check-square"></i> Division</dt>';
+      		echo '<li><a class="done" isdone="1" rel="3"><span class="step_no fa fa-database"></span><span class="step_descr">Division<br><small>Step 3 description</small></span></a></li>';
       	}else{
-      		$btntype="danger";$disabledstr='disabled="disabled"';$texttype='';
-      		if($wcontent=="Division"){$btntype="primary";$disabledstr='';$texttype=' class="text-blue"';}
-      		echo '<a type="button" class="btn btn-'.$btntype.' btn-circle" '.$disabledstr.'><i class="fa fa-database"></i></a>';
-      		echo '<dd'.$texttype.'>Division</dd>';
+      		$btntype="danger";
+      		if($wcontent=="Division"){$btntype="selected";}
+      		echo '<li><a class="'.$btntype.'" isdone="1" rel="3"><span class="step_no fa fa-database"></span><span class="step_descr">Division<br><small>Step 3 description</small></span></a></li>';
       	}
         ?>
-      </div>
-      <div class="stepwizard-step">
       	<?php  
        	if($counts['costcenter'] > 0){	
-      		echo '<a type="button" class="btn btn-success btn-circle"><i class="fa fa-creative-commons"></i></a>';
-      		echo '<dt class="text-success"><i class="icon fa fa-check-square"></i> Cost Center</dt>';
+      		echo '<li><a class="done" isdone="1" rel="4"><span class="step_no fa fa-creative-commons"></span><span class="step_descr">Cost Center<br><small>Step 4 description</small></span></a></li>';
       	}else{
-      		$btntype="danger";$disabledstr='disabled="disabled"';$texttype='';
-      		if($wcontent=="CostCenter"){$btntype="primary";$disabledstr='';$texttype=' class="text-blue"';}
-      		echo '<a type="button" class="btn btn-'.$btntype.' btn-circle" '.$disabledstr.'><i class="fa fa-creative-commons"></i></a>';
-      		echo '<dd'.$texttype.'>Cost Center</dd>';
+      		$btntype="danger";
+      		if($wcontent=="CostCenter"){$btntype="selected";}
+      		echo '<li><a class="'.$btntype.'" isdone="1" rel="4"><span class="step_no fa fa-creative-commons"></span><span class="step_descr">Cost Center<br><small>Step 4 description</small></span></a></li>';
       	}
         ?>
-      </div>
-      <div class="stepwizard-step">
       	<?php
       	if($counts['department'] > 0){	
-      		echo '<a type="button" class="btn btn-success btn-circle"><i class="fa fa-cubes"></i></a>';
-      		echo '<dd class="text-success"><i class="icon fa fa-check-square"></i> Department</dt>';
+      		echo '<li><a class="done" isdone="1" rel="5"><span class="step_no fa fa-cubes"></span><span class="step_descr">Department<br><small>Step 5 description</small></span></a></li>';
       	}else{
-      		$btntype="danger";$disabledstr='disabled="disabled"';$texttype='';
-      		if($wcontent=="Department"){$btntype="primary";$disabledstr='';$texttype=' class="text-blue"';}
-      		echo '<a type="button" class="btn btn-'.$btntype.' btn-circle" '.$disabledstr.'><i class="fa fa-cubes"></i></a>';
-      		echo '<dd'.$texttype.'>Department</dd>';
+      		$btntype="danger";
+      		if($wcontent=="Department"){$btntype="selected";}
+      		echo '<li><a class="'.$btntype.'" isdone="1" rel="5"><span class="step_no fa fa-cubes"></span><span class="step_descr">Department<br><small>Step 5 description</small></span></a></li>';
       	}
         ?>
-      </div>
-      <div class="stepwizard-step rt">
       	<?php if($counts['position'] > 0){
-      		echo '<a type="button" class="btn btn-success btn-circle"><i class="fa fa-tasks"></i></a>';
-      		echo '<dd class="text-success"><i class="icon fa fa-check-square"></i> Position</dt>';
+      		echo '<li><a class="done" isdone="1" rel="6"><span class="step_no fa fa-tasks"></span><span class="step_descr">Position<br><small>Step 6 description</small></span></a></li>';
       	}else{
-      		$btntype="danger";$disabledstr='disabled="disabled"';$texttype='';
-      		if($wcontent=="Position"){$btntype="primary";$disabledstr='';$texttype=' class="text-blue"';}
-      		echo '<a type="button" class="btn btn-'.$btntype.' btn-circle" '.$disabledstr.'><i class="fa fa-tasks"></i></a>';
-      		echo '<dd'.$texttype.'>Position</dd>';
+      		$btntype="danger";
+      		if($wcontent=="Position"){$btntype="selected";}
+      		echo '<li><a class="'.$btntype.'" isdone="1" rel="6"><span class="step_no fa fa-tasks"></span><span class="step_descr">Position<br><small>Step 6 description</small></span></a></li>';
       	}
         ?>
-      </div>
       
+      </ul>
       
-      
-    </div>
 </div>
 
 
