@@ -17,9 +17,6 @@
 <script>
 function tableLoaded() {
 	
-	
-	
-	
 	//delete confirm
     $(".delete-btn").click(function(){var dataid=$(this).attr('data-id');
        $("#ajax_button").html("<form name='formdelete' id='formdelete"+dataid+"' method='post'  action='/<?php echo $this->request->params['controller'] ?>/delete/"+dataid+"' style='display:none;'><input type='hidden' name='_method' value='POST'></form><a href='#' onclick='document.getElementById(&quot;formdelete"+dataid+"&quot;).submit();' class='btn btn-outline'>Confirm</a>");
@@ -28,7 +25,8 @@ function tableLoaded() {
 
     $("#mptlindextbl tbody").find('tr').each(function () {
     	
-    	$(this).find('td:eq(5)').html("<?php echo $this->Country->get_country_name("DZ"); ?>");
+   	// var dfcode=$(this).find('td:eq(5)').html();
+     // 	$(this).find('td:eq(5)').html(""");
     	
     	$(this).find('td').each (function() {
         	var innerHtml=$(this).find('div.mptldtbool').html();
