@@ -65,7 +65,11 @@ if (file_exists($file)) {
                         <div class="pull-left">
                         	<?php $userrole=$this->request->session()->read('sessionuser')['role'];
 								if ($userrole=="admin" || $userrole=="employee") {
-									echo "<a href='/Profiles' class='btn btn-default btn-flat'>Profile</a>";
+									if( (isset($counts['legalentity']) && $counts['legalentity'] >0) && (isset($counts['businessunit']) && $counts['businessunit'] >0) &&
+										(isset($counts['division']) && $counts['division'] >0) && (isset($counts['department']) && $counts['department'] >0) &&
+										(isset($counts['costcenter']) && $counts['costcenter'] >0) && (isset($counts['position']) && $counts['position'] >0) ){
+											echo "<a href='/Profiles' class='btn btn-default btn-flat'>Profile</a>";
+									}
 								}
 							?>
                             

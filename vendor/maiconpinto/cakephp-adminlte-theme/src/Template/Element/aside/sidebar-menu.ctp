@@ -112,8 +112,10 @@ if (file_exists($file)) {
     </li>
 	<li><a href="<?php echo $this -> Url -> build('/EmployeeAbsencerecords'); ?>"><i class="fa fa-calendar-minus-o"></i><span> Leave Requests</span></a></li>
     <li><a href="<?php echo $this -> Url -> build('/Positions/orgchart'); ?>"><i class="fa fa-sitemap"></i><span> Organizational Chart </span></a></li>
-    
-
+    <?php
+    }else{
+    ?>
+	<li><a href="<?php echo $this -> Url -> build('/LegalEntities/addwizard'); ?>"><i class="fa fa-circle-o"></i>Form Wizard</a></li>
     <?php
     }
 	break;
