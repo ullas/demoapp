@@ -166,17 +166,17 @@ $this->Html->script([
           oLanguage        : {
         		sSearch: '<div class="input-group"><span class="input-group-addon"><span class="fa fa-search"></span></span>',
             	sSearchPlaceholder: 'Search here...',
-		},
-        //server side processing
-          "processing": true,
-          "serverSide": true,
-          "ajax": "/<?php echo $this->request->params['controller'] ?>/ajaxData",
-          'columnDefs': [{
-        'targets': 0,
-        'className': 'dt-body-center',
-        'render': function (data, type, full, meta){
-            return '<input type="checkbox" class="mptl-lst-chkbox" name="chk-' + data + '" value="' + $('<div/>').text(data).html() + '">';
-        },
+			},
+        	//server side processing
+          	"processing": true,
+          	"serverSide": true,
+          	"ajax": "/<?php echo $this->request->params['controller'] ?>/ajaxData",
+          	'columnDefs': [{
+        	'targets': 0,
+        	'className': 'dt-body-center',
+        	'render': function (data, type, full, meta){
+            	return '<input type="checkbox" class="mptl-lst-chkbox" name="chk-' + data + '" value="' + $('<div/>').text(data).html() + '">';
+        	},
 
      },
 

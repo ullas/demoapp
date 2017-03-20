@@ -197,7 +197,7 @@ class WorkflowactionsController extends AppController
 				return $this->redirect($this->referer());
 			}
         }
-        $positionarr = $this->Workflowactions->find('all')->select(['position_id'])->where(['workflowrule_id'=>$id]);
+        $positionarr = $this->Workflowactions->find('all')->select(['position_id'])->where(['workflowrule_id'=>$workflowaction['workflowrule_id']])->where(['Workflowactions.position_id NOT IN'=>$workflowaction['position_id']]);
 		
 
         $workflowrules = $this->Workflowactions->Workflowrules->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
