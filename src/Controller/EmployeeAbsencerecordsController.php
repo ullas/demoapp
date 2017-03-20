@@ -28,12 +28,17 @@ class EmployeeAbsencerecordsController extends AppController
       
 			$usrfilter.="emp_data_biographies_id ='" .$this->request->session()->read('sessionuser')['empdatabiographyid']. "' and EmployeeAbsencerecords.customer_id ='".$this->loggedinuser['customer_id'] . "'";
 		}else{
-			$usrfilter="EmployeeAbsencerecords.customer_id ='".$this->loggedinuser['customer_id'] . "'";
+			$usrfilter.="EmployeeAbsencerecords.customer_id ='".$this->loggedinuser['customer_id'] . "'";
+		}
+		
+		if( isset($this->request->query['filter']) && ($this->request->query['filter'])!=null && strlen($usrfilter)>3){
+      
+			if($this->request->query['filter'] == "pending"){$usrfilter.=" and EmployeeAbsencerecords.status = '0' ";}
+			else if($this->request->query['filter'] == "approved"){$usrfilter.=" and EmployeeAbsencerecords.status = '1' ";}
+			else if($this->request->query['filter'] == "denied"){$usrfilter.=" and EmployeeAbsencerecords.status = '2' ";}
 		}
 		
 		$contains=['Empdatabiographies', 'TimeTypes', 'Users','Customers'];
-		
-		
 		$output =$this->Datatable->getView($fields,$contains,$usrfilter);
 		echo json_encode($output);			
     }
@@ -58,6 +63,18 @@ class EmployeeAbsencerecordsController extends AppController
 		
         $this->set(compact('employeeAbsencerecords'));
         $this->set('_serialize', ['employeeAbsencerecords']);
+        
+		$query=$this->EmployeeAbsencerecords->find('All')->where(['emp_data_biographies_id'=>$this->request->session()->read('sessionuser')['empdatabiographyid']])->andwhere(['status'=>'0'])->andwhere(['customer_id'=>$this->loggedinuser['customer_id']]);
+		(isset($query)) ? $reqcount=$query->count() : $reqcount="";
+		
+		$query=$this->EmployeeAbsencerecords->find('All')->where(['emp_data_biographies_id'=>$this->request->session()->read('sessionuser')['empdatabiographyid']])->andwhere(['status'=>'1'])->andwhere(['customer_id'=>$this->loggedinuser['customer_id']]);
+		(isset($query)) ? $approvedcount=$query->count() : $approvedcount="";
+		
+		$query=$this->EmployeeAbsencerecords->find('All')->where(['emp_data_biographies_id'=>$this->request->session()->read('sessionuser')['empdatabiographyid']])->andwhere(['status'=>'2'])->andwhere(['customer_id'=>$this->loggedinuser['customer_id']]);
+		(isset($query)) ? $rejcount=$query->count() : $rejcount="";
+		
+		$this->set(compact('reqcount','approvedcount','rejcount'));
+		
     }
 
     /**
