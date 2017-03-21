@@ -212,11 +212,11 @@ $this->Html->script([
 
 		if($(".mptl-lst-chkbox:checked").length==1){
 			// bootbox_confirm("Do you want to delete the record?", function(){deleteRecord('yes');}).modal('show');
-			sweet_confirm("MayHaw","Do you want to delete the record?", function(){deleteRecord('yes');});
+			sweet_confirmdelete("MayHaw","Do you want to delete the record?", function(){deleteRecord('yes');});
 		}
 		else if($(".mptl-lst-chkbox:checked").length>1){
 			// bootbox_confirm("Do you want to delete " + $(".mptl-lst-chkbox:checked").length + " records?", function(){deleteRecord('yes');}).modal('show');
-			sweet_confirm("MayHaw","Do you want to delete " + $(".mptl-lst-chkbox:checked").length + " records?", function(){deleteRecord('yes');});
+			sweet_confirmdelete("MayHaw","Do you want to delete " + $(".mptl-lst-chkbox:checked").length + " records?", function(){deleteRecord('yes');});
 		}
   	});
 
