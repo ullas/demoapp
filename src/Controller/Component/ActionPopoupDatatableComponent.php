@@ -41,7 +41,7 @@ use Cake\Utility\Inflector;
                 					<a href="/'.   $modalname  . '/edit/'.$d.'" data-remote="false" data-toggle="modal" data-target="#actionspopover" class="disLink open-Popup fa fa-pencil p3 text-aqua"></a>
 									<form name="formdelete" id="formdelete' .$d. '" method="post" action="/'.   $modalname  . '/delete/'.$d.'" style="display:none;" >
                                    <input type="hidden" name="_method" value="POST"></form>
-                                   <a href="#" onclick="sweet_confirm(&quot;MayHaw&quot;,&quot;Are you sure you want to delete # '.$d.'?&quot; , function(){ document.getElementById(&quot;formdelete'.$d.'&quot;).submit(); })
+                                   <a href="#" onclick="sweet_confirmdelete(&quot;MayHaw&quot;,&quot;Are you sure you want to delete # '.$d.'?&quot; , function(){ document.getElementById(&quot;formdelete'.$d.'&quot;).submit(); })
                                     event.returnValue = false; return false;" class="disLink fa fa-trash text-red" style= "padding:3px"></a>';
 						
                 	return $buttons;
@@ -63,18 +63,19 @@ use Cake\Utility\Inflector;
 			$model=$controller->loadModel($controller->modelClass);
 
 			$wherestr="";
+			
+			if(strlen($usrFilter)>3){
+           	    $wherestr=$usrFilter;
+           	}
+           	
+           	$filterstr="";
 			foreach($where  as $key => $value){
-				if($wherestr != ''){$wherestr.=" OR ";}
-				$wherestr.=$key. " '". $value. "'";
+				if($filterstr != ''){$filterstr.=" OR ";}
+				$filterstr.=$key. " '". $value. "'";
 			}
 				
-			if(strlen($wherestr)>3 && strlen($usrFilter)>3){
-           	 $wherestr.= " and ".$usrFilter;
-           }else{
-           	  if(strlen($usrFilter)>3){
-           	    $wherestr=$usrFilter;
-           	  }
-           }
+			if($filterstr != ''){$wherestr.= " and (".$filterstr .")" ; }
+				
 		   		
 			$data = $model->find('all')->where($wherestr)/*->where($wherecustomer)*/->contain($contains)->order($order)->limit($limit)->page($page)->toArray();
 			
