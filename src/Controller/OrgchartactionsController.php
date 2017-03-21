@@ -150,8 +150,13 @@ class OrgchartactionsController extends AppController
 	}
 	
 	public function addresschange($id = null) {
+		
+		$this->loadModel('EmpDataBiographies');
+		$emparr=$this->EmpDataBiographies->find('all',['conditions' => array('id' => $id),'contain' => []])->toArray();
+		isset($emparr[0]) ? $empid = $emparr[0]['employee_id'] : $empid = "" ;  
+		
 		$this->loadModel('Addresses');
-		$arr = $this->Addresses->find('all',[ 'conditions' => array('emp_data_biographies_id' => $id),
+		$arr = $this->Addresses->find('all',[ 'conditions' => array('employee_id' => $empid),
             'contain' => []
         ])->toArray();
 		

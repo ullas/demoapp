@@ -23,8 +23,14 @@ class NotesController extends AppController
 		}
 		
 		$contains=['Users','Empdatabiographies', 'Customers'];
-									  
-		$usrfilter="Notes.customer_id ='".$this->loggedinuser['customer_id'] . "'";						  
+		$usrfilter="";
+		if( isset($this->request->session()->read('sessionuser')['empdatabiographyid']) && ($this->request->session()->read('sessionuser')['empdatabiographyid'])!=null ){
+      
+			$usrfilter.="Notes.emp_data_biographies_id ='" .$this->request->session()->read('sessionuser')['empdatabiographyid']. "' and Notes.customer_id ='".$this->loggedinuser['customer_id'] . "'";
+		}else{							  
+			$usrfilter="Notes.customer_id ='".$this->loggedinuser['customer_id'] . "'";						  
+		}
+		
 		$output =$this->Datatable->getView($fields,$contains,$usrfilter);
 		echo json_encode($output);			
     }
@@ -49,6 +55,7 @@ class NotesController extends AppController
 		
         $this->set(compact('notes'));
         $this->set('_serialize', ['notes']);
+        
     }
 
     /**

@@ -267,11 +267,11 @@ $this->Html->script([
 
 		if(rows_selected.length==1){
 			// bootbox_confirm("Do you want to delete the record?", function(){deleteRecord('yes');}).modal('show');
-			sweet_confirm("MayHaw","Do you want to delete the record?", function(){deleteRecord('yes');});
+			sweet_confirmdelete("MayHaw","Do you want to delete the record?", function(){deleteRecord('yes');});
 		}
 		else if(rows_selected.length>1){
 			// bootbox_confirm("Do you want to delete " + rows_selected.length + " records?", function(){deleteRecord('yes');}).modal('show');
-			sweet_confirm("MayHaw","Do you want to delete " + rows_selected.length + " records?", function(){deleteRecord('yes');});
+			sweet_confirmdelete("MayHaw","Do you want to delete " + rows_selected.length + " records?", function(){deleteRecord('yes');});
 		}
   	});
 

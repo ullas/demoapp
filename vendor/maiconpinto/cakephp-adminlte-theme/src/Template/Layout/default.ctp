@@ -390,6 +390,21 @@ function sweet_confirm(titl,msg, callback_success, callback_cancel) {
 	});
     return d;
 }
+function sweet_confirmdelete(titl,msg, callback_success, callback_cancel) {
+  var d = swal({
+  		title: titl,
+  		text: msg,
+  		type: "error",
+  		showCancelButton: true,
+  		confirmButtonColor: "#d9534f",
+  		confirmButtonText: "Yes, delete it!",
+  		closeOnConfirm: true
+	},
+	function(){
+  		callback_success();
+	});
+    return d;
+}
 function showflash(type,data) {
 
         var output = '';
