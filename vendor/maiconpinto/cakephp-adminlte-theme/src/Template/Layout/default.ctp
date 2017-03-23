@@ -190,6 +190,20 @@ div.dataTables_wrapper {
 .table{width:100%;}*/
 .dataTables_wrapper{ overflow-y: auto; clear:both;padding-top:15px; }
 
+
+/*.form-control{
+	border:0px;
+	border-bottom: 1px solid #ccc;
+}
+.input-group .input-group-addon {
+    border:0px;
+	border-bottom: 1px solid #ccc;
+	border-right: 1px solid #ccc;
+}
+.select2-container--default .select2-selection--single, .select2-selection .select2-selection--single {
+    border:0px;
+	border-bottom: 1px solid #ccc;
+}*/
 </style>
 
 </head>
