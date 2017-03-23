@@ -20,8 +20,6 @@ use Cake\ORM\Entity;
  *
  * @property \App\Model\Entity\Workflowrule $workflowrule
  * @property \App\Model\Entity\Position $position
- * @property \App\Model\Entity\Nextaction $nextaction
- * @property \App\Model\Entity\Onfailureaction $onfailureaction
  * @property \App\Model\Entity\Customer $customer
  */
 class Workflowaction extends Entity

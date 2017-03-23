@@ -12,8 +12,9 @@ use Cake\Validation\Validator;
  * @property \Cake\ORM\Association\BelongsTo $Customers
  * @property \Cake\ORM\Association\BelongsTo $TimeAccountTypes
  * @property \Cake\ORM\Association\BelongsTo $Workflowrules
+ * @property \Cake\ORM\Association\BelongsTo $TimeTypeProfiles
  * @property \Cake\ORM\Association\HasMany $EmployeeAbsencerecords
- * @property \Cake\ORM\Association\HasMany $TimeTypeProfiles
+ * @property \Cake\ORM\Association\HasMany $TimeTypeProfileTimeTypes
  *
  * @method \App\Model\Entity\TimeType get($primaryKey, $options = [])
  * @method \App\Model\Entity\TimeType newEntity($data = null, array $options = [])
@@ -49,11 +50,14 @@ class TimeTypesTable extends Table
         $this->belongsTo('Workflowrules', [
             'foreignKey' => 'workflowrule_id'
         ]);
-        $this->hasMany('EmployeeAbsencerecords', [
-            'foreignKey' => 'time_type_id','dependent' => true
+        $this->belongsTo('TimeTypeProfiles', [
+            'foreignKey' => 'time_type_profile_id'
         ]);
-        $this->hasMany('TimeTypeProfiles', [
-            'foreignKey' => 'time_type_id','dependent' => true
+        $this->hasMany('EmployeeAbsencerecords', [
+            'foreignKey' => 'time_type_id'
+        ]);
+        $this->hasMany('TimeTypeProfileTimeTypes', [
+            'foreignKey' => 'time_type_id'
         ]);
     }
 
@@ -123,6 +127,7 @@ class TimeTypesTable extends Table
         $rules->add($rules->existsIn(['customer_id'], 'Customers'));
         $rules->add($rules->existsIn(['time_account_type_id'], 'TimeAccountTypes'));
         $rules->add($rules->existsIn(['workflowrule_id'], 'Workflowrules'));
+        $rules->add($rules->existsIn(['time_type_profile_id'], 'TimeTypeProfiles'));
 
         return $rules;
     }

@@ -5,14 +5,14 @@ use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
-use Cake\Event\Event;
-use Cake\Event\ArrayObject;
-use Cake\Core\Configure;
+
 /**
  * TimeTypeProfiles Model
  *
- * @property \Cake\ORM\Association\BelongsTo $TimeTypes
  * @property \Cake\ORM\Association\BelongsTo $Customers
+ * @property \Cake\ORM\Association\HasMany $Jobinfos
+ * @property \Cake\ORM\Association\HasMany $TimeTypeProfileTimeTypes
+ * @property \Cake\ORM\Association\HasMany $TimeTypes
  *
  * @method \App\Model\Entity\TimeTypeProfile get($primaryKey, $options = [])
  * @method \App\Model\Entity\TimeTypeProfile newEntity($data = null, array $options = [])
@@ -39,12 +39,25 @@ class TimeTypeProfilesTable extends Table
         $this->displayField('name');
         $this->primaryKey('id');
 
-        $this->belongsTo('TimeTypes', [
-            'foreignKey' => 'time_type_id'
-        ]);
         $this->belongsTo('Customers', [
             'foreignKey' => 'customer_id'
         ]);
+        $this->hasMany('Jobinfos', [
+            'foreignKey' => 'time_type_profile_id'
+        ]);
+        // $this->hasMany('TimeTypeProfileTimeTypes', [
+            // 'foreignKey' => 'time_type_profile_id'
+        // ]);
+        // $this->hasMany('TimeTypes', [
+            // 'foreignKey' => 'time_type_profile_id'
+        // ]);
+		
+		$this->belongsToMany('TimeTypes', [
+            'foreignKey' => 'time_type_profile_id',
+            'targetForeignKey' => 'time_type_id',
+            'joinTable' => 'time_type_profile_time_types'
+        ]);
+		
     }
 
     /**
@@ -88,20 +101,7 @@ class TimeTypeProfilesTable extends Table
 
         return $validator;
     }
-	public function beforeMarshal(Event $event, $data, $options)
-	{
-		
-		$userdf = Configure::read('userdf');
-		if(isset($userdf)  & $userdf===1){
 
-			foreach (["start_date"] as $value) {		
-				if($data[$value]!=null && strpos($data[$value], '/') !== false){
-					$data[$value] = str_replace('/', '-', $data[$value]);
-					$data[$value]=date('Y/m/d', strtotime($data[$value]));
-				}
-			}
-		}
-	}
     /**
      * Returns a rules checker object that will be used for validating
      * application integrity.
@@ -112,7 +112,6 @@ class TimeTypeProfilesTable extends Table
     public function buildRules(RulesChecker $rules)
     {
         $rules->add($rules->isUnique(['external_code']));
-        $rules->add($rules->existsIn(['time_type_id'], 'TimeTypes'));
         $rules->add($rules->existsIn(['customer_id'], 'Customers'));
 
         return $rules;

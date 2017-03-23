@@ -8,8 +8,9 @@ use Cake\Validation\Validator;
 use Cake\Event\Event;
 use Cake\Event\ArrayObject;
 use Cake\Core\Configure;
+
 /**
- * JobInfos Model
+ * Jobinfos Model
  *
  * @property \Cake\ORM\Association\BelongsTo $Users
  * @property \Cake\ORM\Association\BelongsTo $Customers
@@ -25,16 +26,17 @@ use Cake\Core\Configure;
  * @property \Cake\ORM\Association\BelongsTo $HolidayCalendars
  * @property \Cake\ORM\Association\BelongsTo $TimeTypeProfiles
  * @property \Cake\ORM\Association\BelongsTo $WorkSchedules
+ * @property \Cake\ORM\Association\BelongsTo $Employees
  *
- * @method \App\Model\Entity\JobInfo get($primaryKey, $options = [])
- * @method \App\Model\Entity\JobInfo newEntity($data = null, array $options = [])
- * @method \App\Model\Entity\JobInfo[] newEntities(array $data, array $options = [])
- * @method \App\Model\Entity\JobInfo|bool save(\Cake\Datasource\EntityInterface $entity, $options = [])
- * @method \App\Model\Entity\JobInfo patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
- * @method \App\Model\Entity\JobInfo[] patchEntities($entities, array $data, array $options = [])
- * @method \App\Model\Entity\JobInfo findOrCreate($search, callable $callback = null)
+ * @method \App\Model\Entity\Jobinfo get($primaryKey, $options = [])
+ * @method \App\Model\Entity\Jobinfo newEntity($data = null, array $options = [])
+ * @method \App\Model\Entity\Jobinfo[] newEntities(array $data, array $options = [])
+ * @method \App\Model\Entity\Jobinfo|bool save(\Cake\Datasource\EntityInterface $entity, $options = [])
+ * @method \App\Model\Entity\Jobinfo patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
+ * @method \App\Model\Entity\Jobinfo[] patchEntities($entities, array $data, array $options = [])
+ * @method \App\Model\Entity\Jobinfo findOrCreate($search, callable $callback = null)
  */
-class JobInfosTable extends Table
+class JobinfosTable extends Table
 {
 
     /**
@@ -92,6 +94,9 @@ class JobInfosTable extends Table
         ]);
         $this->belongsTo('WorkSchedules', [
             'foreignKey' => 'work_schedule_id'
+        ]);
+        $this->belongsTo('Employees', [
+            'foreignKey' => 'employee_id'
         ]);
     }
 
@@ -392,6 +397,7 @@ class JobInfosTable extends Table
         $rules->add($rules->existsIn(['holiday_calendar_id'], 'HolidayCalendars'));
         $rules->add($rules->existsIn(['time_type_profile_id'], 'TimeTypeProfiles'));
         $rules->add($rules->existsIn(['work_schedule_id'], 'WorkSchedules'));
+        $rules->add($rules->existsIn(['employee_id'], 'Employees'));
 
         return $rules;
     }
