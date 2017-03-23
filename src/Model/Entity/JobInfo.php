@@ -4,7 +4,7 @@ namespace App\Model\Entity;
 use Cake\ORM\Entity;
 
 /**
- * JobInfo Entity
+ * Jobinfo Entity
  *
  * @property int $id
  * @property \Cake\I18n\Time $position_entry_date
@@ -94,6 +94,7 @@ use Cake\ORM\Entity;
  * @property int $holiday_calendar_id
  * @property int $time_type_profile_id
  * @property int $work_schedule_id
+ * @property int $employee_id
  *
  * @property \App\Model\Entity\User $user
  * @property \App\Model\Entity\Customer $customer
@@ -106,8 +107,11 @@ use Cake\ORM\Entity;
  * @property \App\Model\Entity\Location $location
  * @property \App\Model\Entity\Department $department
  * @property \App\Model\Entity\LegalEntity $legal_entity
+ * @property \App\Model\Entity\HolidayCalendar $holiday_calendar
+ * @property \App\Model\Entity\TimeTypeProfile $time_type_profile
+ * @property \App\Model\Entity\WorkSchedule $work_schedule
  */
-class JobInfo extends Entity
+class Jobinfo extends Entity
 {
 
     /**

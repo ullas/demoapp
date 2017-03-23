@@ -23,7 +23,7 @@ class TimeTypeProfilesController extends AppController
 			$fields[] = array("name" => $value['field_name'] , "type" => $value['datatype'] );
 		}
 		
-		$contains=['TimeTypes', 'Customers'];
+		$contains=[ 'Customers'];
 									  
 		$usrfilter="TimeTypeProfiles.customer_id ='".$this->loggedinuser['customer_id'] . "'";							  
 		$output =$this->Datatable->getView($fields,$contains,$usrfilter);
@@ -41,7 +41,7 @@ class TimeTypeProfilesController extends AppController
         $this->set('configs',$configs);	
 		
         $this->paginate = [
-            'contain' => ['TimeTypes', 'Customers']
+            'contain' => [ 'Customers']
         ];
         $timeTypeProfiles = $this->paginate($this->TimeTypeProfiles);
 
@@ -62,7 +62,7 @@ class TimeTypeProfilesController extends AppController
     public function view($id = null)
     {
         $timeTypeProfile = $this->TimeTypeProfiles->get($id, [
-            'contain' => ['TimeTypes', 'Customers']
+            'contain' => [ 'TimeTypes','Customers']
         ]);
 		
 		if($timeTypeProfile['customer_id']==$this->loggedinuser['customer_id'])
@@ -85,7 +85,8 @@ class TimeTypeProfilesController extends AppController
     {
         $timeTypeProfile = $this->TimeTypeProfiles->newEntity();
         if ($this->request->is('post')) {
-            $timeTypeProfile = $this->TimeTypeProfiles->patchEntity($timeTypeProfile, $this->request->data);
+            $timeTypeProfile = $this->TimeTypeProfiles->patchEntity($timeTypeProfile, $this->request->data,
+            					['associated' => ['TimeTypes','Customers']]);
 			$timeTypeProfile['customer_id']=$this->loggedinuser['customer_id'];
             if ($this->TimeTypeProfiles->save($timeTypeProfile)) {
                 $this->Flash->success(__('The time type profile has been saved.'));
@@ -111,7 +112,7 @@ class TimeTypeProfilesController extends AppController
     public function edit($id = null)
     {
         $timeTypeProfile = $this->TimeTypeProfiles->get($id, [
-            'contain' => []
+            'contain' => ['TimeTypes']
         ]);
 		
 		if($timeTypeProfile['customer_id'] != $this->loggedinuser['customer_id'])

@@ -38,12 +38,17 @@ class EmployeesController extends AppController
         $this->set('configs',$configs);	
         // $this->set('_serialize', ['configs']);
 		 
+		$this->paginate = [
+            'contain' => ['Empdatabiographies', 'Empdatapersonals', 'Employmentinfos','Customers','Jobinfos']
+        ];
+		
         $employees = $this->paginate($this->Employees);
 
 		$actions =[ ['name'=>'delete','title'=>'Delete','class'=>' label-danger'] ];
         $this->set('actions',$actions);	
-		 
-        $this->set(compact('employees'));
+		$positions = $this->Employees->JobInfos->Positions->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        	 
+        $this->set(compact('employees','positions'));
         $this->set('_serialize', ['employees']);
     }
 
@@ -57,10 +62,23 @@ class EmployeesController extends AppController
     public function view($id = null)
     {
         $employee = $this->Employees->get($id, [
-            'contain' => ['Empdatabiographies', 'Empdatapersonals', 'Employmentinfos', 'ContactInfos', 'Addresses','Identities']
+            'contain' => ['Empdatabiographies', 'Empdatapersonals', 'Employmentinfos', 'ContactInfos', 'Addresses','Identities','Jobinfos']
         ]);
 		if($employee['customer_id']==$this->loggedinuser['customer_id'] && $employee['visible']=='1'){
-        	$this->set('employee', $employee);
+        	$positions = $this->Employees->JobInfos->Positions->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        	$businessUnits = $this->Employees->JobInfos->BusinessUnits->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        	$divisions = $this->Employees->JobInfos->Divisions->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        	$costCentres = $this->Employees->JobInfos->CostCentres->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        	$payGrades = $this->Employees->JobInfos->PayGrades->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        	$locations = $this->Employees->JobInfos->Locations->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        	$departments = $this->Employees->JobInfos->Departments->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        	$legalEntities = $this->Employees->JobInfos->LegalEntities->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        	$holidayCalendars = $this->Employees->JobInfos->HolidayCalendars->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+			$workSchedules = $this->Employees->JobInfos->WorkSchedules->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+			$timeTypeProfiles = $this->Employees->JobInfos->TimeTypeProfiles->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        
+        	$this->set(compact('positions', 'employee', 'customers', 'businessUnits', 'divisions', 'costCentres', 'payGrades', 'locations', 'departments', 'legalEntities','timeTypeProfiles','workSchedules','holidayCalendars'));
+        
         	$this->set('_serialize', ['employee']);
 		}else{
 		    $this->Flash->error(__('You are not Authorized.'));
@@ -77,13 +95,14 @@ class EmployeesController extends AppController
     {
         $employee = $this->Employees->newEntity();
         if ($this->request->is('post')) {
-            $employee = $this->Employees->patchEntity($employee, $this->request->data,['associated' => ['Empdatabiographies', 'Empdatapersonals', 'Employmentinfos', 'Customers', 'ContactInfos', 'Addresses','Identities']]);
+            $employee = $this->Employees->patchEntity($employee, $this->request->data,['associated' => ['Empdatabiographies', 'Empdatapersonals', 'Employmentinfos','Jobinfos', 'Customers', 'ContactInfos', 'Addresses','Identities']]);
 			$employee['visible']="1";
 			//saving customer_id to all associated models
 			$employee['customer_id']=$this->loggedinuser['customer_id'];
 			$employee['empdatabiography']['customer_id']=$this->loggedinuser['customer_id'];
 			$employee['empdatapersonal']['customer_id']=$this->loggedinuser['customer_id'];
 			$employee['employmentinfo']['customer_id']=$this->loggedinuser['customer_id'];
+			$employee['jobinfo']['customer_id']=$this->loggedinuser['customer_id'];
 			$employee['contact_info']['customer_id']=$this->loggedinuser['customer_id'];
 			$employee['address']['customer_id']=$this->loggedinuser['customer_id'];
 			$employee['identity']['customer_id']=$this->loggedinuser['customer_id'];
@@ -101,8 +120,20 @@ class EmployeesController extends AppController
 		foreach($rslt as $key =>$value){
 			$positions[$value['id']]=$value['name'];
 		}
-		// $positions = $this->Employees->EmpDataBiographies->Positions->find('list', ['limit' => 200])->where("customer_id=".$this->loggedinuser['customer_id']);
-        $this->set(compact('positions', 'employee'));
+
+        // $positions = $this->Employees->JobInfos->Positions->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        $businessUnits = $this->Employees->JobInfos->BusinessUnits->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        $divisions = $this->Employees->JobInfos->Divisions->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        $costCentres = $this->Employees->JobInfos->CostCentres->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        $payGrades = $this->Employees->JobInfos->PayGrades->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        $locations = $this->Employees->JobInfos->Locations->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        $departments = $this->Employees->JobInfos->Departments->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        $legalEntities = $this->Employees->JobInfos->LegalEntities->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        $holidayCalendars = $this->Employees->JobInfos->HolidayCalendars->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+		$workSchedules = $this->Employees->JobInfos->WorkSchedules->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+		$timeTypeProfiles = $this->Employees->JobInfos->TimeTypeProfiles->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        
+        $this->set(compact('positions', 'employee', 'customers', 'businessUnits', 'divisions', 'costCentres', 'payGrades', 'locations', 'departments', 'legalEntities','timeTypeProfiles','workSchedules','holidayCalendars'));
         $this->set('_serialize', ['employee']);
     }
 
@@ -116,7 +147,7 @@ class EmployeesController extends AppController
     public function edit($id = null)
     {
         $employee = $this->Employees->get($id, [
-            'contain' => ['Empdatabiographies', 'Empdatapersonals', 'Employmentinfos', 'ContactInfos', 'Addresses','Identities']
+            'contain' => ['Empdatabiographies', 'Empdatapersonals', 'Employmentinfos', 'ContactInfos', 'Addresses','Identities', 'Jobinfos']
         ]);
 		
 		if($employee['customer_id'] != $this->loggedinuser['customer_id'] || $employee['visible'] != '1')
@@ -172,7 +203,16 @@ class EmployeesController extends AppController
     				if ($this->Employees->ContactInfos->save($contactinfo)) {
                 			
             		}
-					
+					//associated JobInfos
+            		$this->loadModel('JobInfos');
+					$arr = $this->JobInfos->find('all',['conditions' => array('employee_id' => $id), 'contain' => []])->toArray();
+					isset($arr[0]) ? $jobinfo = $arr[0] : $jobinfo = $this->JobInfos->newEntity();  						
+					// $jobinfo = $arr[0];
+					$jobinfo = $this->JobInfos->patchEntity($jobinfo, $this->request->data['jobinfo']);
+					$jobinfo['customer_id']=$this->loggedinuser['customer_id'];
+    				if ($this->Employees->JobInfos->save($jobinfo)) {
+                			
+            		}
 					//associated Addresses
             		$this->loadModel('Addresses');
 					$arr = $this->Addresses->find('all',['conditions' => array('employee_id' => $id), 'contain' => []])->toArray();
@@ -208,10 +248,20 @@ class EmployeesController extends AppController
 		}
 		// $this->log($positions);
 		
-        // $positions = $this->Employees->EmpDataBiographies->Positions->find('list', ['limit' => 200])->where("customer_id=".$this->loggedinuser['customer_id']);$this->log($positions);
 		
-		
-        $this->set(compact('positions', 'employee'));
+		// $positions = $this->Employees->JobInfos->Positions->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        $businessUnits = $this->Employees->JobInfos->BusinessUnits->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        $divisions = $this->Employees->JobInfos->Divisions->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        $costCentres = $this->Employees->JobInfos->CostCentres->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        $payGrades = $this->Employees->JobInfos->PayGrades->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        $locations = $this->Employees->JobInfos->Locations->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        $departments = $this->Employees->JobInfos->Departments->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        $legalEntities = $this->Employees->JobInfos->LegalEntities->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        $holidayCalendars = $this->Employees->JobInfos->HolidayCalendars->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+		$workSchedules = $this->Employees->JobInfos->WorkSchedules->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+		$timeTypeProfiles = $this->Employees->JobInfos->TimeTypeProfiles->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        
+        $this->set(compact('positions', 'employee', 'customers', 'businessUnits', 'divisions', 'costCentres', 'payGrades', 'locations', 'departments', 'legalEntities','timeTypeProfiles','workSchedules','holidayCalendars'));
         $this->set('_serialize', ['employee']);
     }
 

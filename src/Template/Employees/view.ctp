@@ -23,6 +23,7 @@
           	<li class="active"><a href="#EmpDataPersonal" data-toggle="tab">Personal Information</a></li>
             <li><a href="#EmploymentInfo" data-toggle="tab">Employment Information</a></li>
             <li><a href="#EmpDataBiography" data-toggle="tab">Profile</a></li>
+           	<li><a href="#jobinfo" data-toggle="tab">Job Info</a></li>
            	<li><a href="#social" data-toggle="tab">Social</a></li>
            	<li><a href="#address" data-toggle="tab">Address</a></li>
            	<li><a href="#ids" data-toggle="tab">ID's</a></li>
@@ -132,6 +133,98 @@
            </div>
           <!-- Tab Pane-->
 
+			<div class="tab-pane" id="jobinfo">
+             <!-- <div class="form-horizontal"> --><fieldset>
+              <?php
+              echo $this->Form->input('jobinfo.position_id', ['templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-briefcase"></i></div>'],'class'=>'select2','options' => $positions, 'empty' => true,'disabled' => true]);
+            echo $this->Form->input('jobinfo.position_entry_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
+            echo $this->Form->input('jobinfo.time_in_position',['disabled' => true]);
+            echo $this->Form->input('jobinfo.legal_entity_id',['class'=>'select2','disabled' => true]);
+			      echo $this->Form->input('jobinfo.business_unit_id',['class'=>'select2','disabled' => true]);
+            echo $this->Form->input('jobinfo.division_id',['class'=>'select2','disabled' => true]);
+            echo $this->Form->input('jobinfo.department_id',['class'=>'select2','disabled' => true]);
+            echo $this->Form->input('jobinfo.cost_centre_id',['label' => 'Cost Center','class'=>'select2','disabled' => true]);
+            echo $this->Form->input('jobinfo.location_id',['class'=>'select2','disabled' => true]);
+            echo $this->Form->input('jobinfo.country_of_company',['templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-flag"></i></div>'],'class'=>'select2','options' => $this->Country->get_countries(), 'empty' => true,'disabled' => true]);
+            echo $this->Form->input('jobinfo.timezone',['disabled' => true]);
+            echo $this->Form->input('jobinfo.job_code',['label' => 'Job Classification','disabled' => true]);
+            echo $this->Form->input('jobinfo.job_title',['disabled' => true]);
+            echo $this->Form->input('jobinfo.local_job_title',['disabled' => true]);
+            echo $this->Form->input('jobinfo.employee_class',['disabled' => true]);
+            echo $this->Form->input('jobinfo.pay_grade_id',['class'=>'select2','disabled' => true]);
+            echo $this->Form->input('jobinfo.regular_temp',['label'=>'Regular/Temporary','class'=>'select2','options' => array('Regular', 'Temporary'), 'empty' => true,'disabled' => true]);
+            echo $this->Form->input('jobinfo.standard_hours',['label' => 'Standard Weekly Hours','disabled' => true]);
+            echo $this->Form->input('jobinfo.working_days_per_week',['disabled' => true]);
+            echo $this->Form->input('jobinfo.work_period',['disabled' => true]);
+            echo $this->Form->input('jobinfo.fte',['label' => 'FTE','disabled' => true]);
+            echo $this->Form->input('jobinfo.is_full_time_employee',['disabled' => true]);
+            echo $this->Form->input('jobinfo.is_shift_employee',['disabled' => true]);
+            echo $this->Form->input('jobinfo.shift_code',['disabled' => true]);
+            echo $this->Form->input('jobinfo.shift_rate',['disabled' => true]);
+            echo $this->Form->input('jobinfo.shift_factor',['label'=>'Shift Percent','disabled' => true]);
+            echo $this->Form->input('jobinfo.employee_type',['disabled' => true]);
+            echo $this->Form->input('jobinfo.manager_id1',['label'=>'Manager 1','disabled' => true]);
+			      echo $this->Form->input('jobinfo.manager_id2',['label'=>'Manager 2','disabled' => true]);
+			      echo $this->Form->input('jobinfo.manager_id3',['label'=>'Manager 3','disabled' => true]);
+			      echo $this->Form->input('jobinfo.manager_id4',['label'=>'Manager 4','disabled' => true]);
+			      echo $this->Form->input('jobinfo.manager_id5',['label'=>'Manager 5','disabled' => true]);
+            echo $this->Form->input('jobinfo.is_cross_border_worker',['disabled' => true]);
+            echo $this->Form->input('jobinfo.is_competition_clause_active',['disabled' => true]);
+            echo $this->Form->input('jobinfo.probation_period_end_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
+            echo $this->Form->input('jobinfo.attachmentid',['label'=>'Attachment','disabled' => true]);
+            echo $this->Form->input('jobinfo.custom_string1',['label'=>'Custom String 1','disabled' => true]);
+            echo $this->Form->input('jobinfo.eeo_class',['label'=>'EEO Class','disabled' => true]);
+            echo $this->Form->input('jobinfo.change_reason_external',['label'=>'Event Reason External','disabled' => true]);
+            echo $this->Form->input('jobinfo.radford_jobcode',['disabled' => true]);
+            echo $this->Form->input('jobinfo.is_primary',['disabled' => true]);
+            echo $this->Form->input('jobinfo.trackid',['label'=>'Track Id','disabled' => true]);
+            echo $this->Form->input('jobinfo.employment_type',['disabled' => true]);
+            echo $this->Form->input('jobinfo.is_eligible_for_car',['disabled' => true]);
+            echo $this->Form->input('jobinfo.is_eligible_for_benefit',['disabled' => true]);
+            echo $this->Form->input('jobinfo.international_org_code',['disabled' => true]);
+            echo $this->Form->input('jobinfo.is_eligible_for_financial_plan',['disabled' => true]);
+            echo $this->Form->input('jobinfo.amount_of_financial_plan',['disabled' => true]);
+            echo $this->Form->input('jobinfo.supervisor_level',['disabled' => true,'disabled' => true]);
+            echo $this->Form->input('jobinfo.ern_number',['label'=>'Employee Record Number','disabled' => true]);
+            echo $this->Form->input('jobinfo.sick_pay_supplement',['disabled' => true,'disabled' => true]);
+            echo $this->Form->input('jobinfo.company_leaving_for',['disabled' => true,'disabled' => true]);
+            echo $this->Form->input('jobinfo.is_side_line_job_allowed',['label'=>'Sideline Job Allowed','disabled' => true]);
+            echo $this->Form->input('jobinfo.holiday_calendar_id',['class'=>'select2', 'empty' => true,'disabled' => true]);
+            echo $this->Form->input('jobinfo.work_schedule_id',['class'=>'select2', 'empty' => true,'disabled' => true]);
+            echo $this->Form->input('jobinfo.time_type_profile_id',['label'=>'Time Profile','class'=>'select2', 'empty' => true,'disabled' => true]);
+            echo $this->Form->input('jobinfo.time_recording_profile_code',['label'=>'Time Recording Profile','disabled' => true]);
+            echo $this->Form->input('jobinfo.time_recording_admissibility_code',['label'=>'Time Recording Admissibility','disabled' => true]);
+            echo $this->Form->input('jobinfo.time_recording_variant',['disabled' => true]);
+            echo $this->Form->input('jobinfo.default_overtime_compensation_variant',['disabled' => true]);
+            echo $this->Form->input('jobinfo.event',['disabled' => true]);
+            echo $this->Form->input('jobinfo.event_reason',['disabled' => true]);
+            echo $this->Form->input('jobinfo.notice_period',['disabled' => true]);
+            echo $this->Form->input('jobinfo.expected_return_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
+            echo $this->Form->input('jobinfo.pay_scale_area',['disabled' => true]);
+            echo $this->Form->input('jobinfo.pay_scale_type',['disabled' => true]);
+            echo $this->Form->input('jobinfo.pay_scale_group',['disabled' => true]);
+            echo $this->Form->input('jobinfo.pay_scale_level',['disabled' => true]);
+            echo $this->Form->input('jobinfo.job_entry_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
+            echo $this->Form->input('jobinfo.time_in_job',['disabled' => true]);
+            echo $this->Form->input('jobinfo.company_entry_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
+            echo $this->Form->input('jobinfo.time_in_company',['disabled' => true]);
+            echo $this->Form->input('jobinfo.location_entry_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
+            echo $this->Form->input('jobinfo.time_in_location',['disabled' => true]);
+            echo $this->Form->input('jobinfo.department_entry_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
+            echo $this->Form->input('jobinfo.time_in_department',['disabled' => true]);
+            echo $this->Form->input('jobinfo.pay_scale_level_entry_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
+            echo $this->Form->input('jobinfo.time_in_pay_scale_level',['disabled' => true]);
+            echo $this->Form->input('jobinfo.hire_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
+            echo $this->Form->input('jobinfo.termination_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
+            echo $this->Form->input('jobinfo.leave_of_absence_start_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
+            echo $this->Form->input('jobinfo.leave_of_absence_return_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
+
+			echo $this->Form->input('jobinfo.notes',['type'=>'textArea','disabled' => true]);
+			 ?></fieldset>
+            <!-- </div> -->
+           </div>
+          <!-- Tab Pane-->
+          
           <div class="tab-pane" id="social">
              <!-- <div class="form-horizontal"> -->
              	<fieldset>
