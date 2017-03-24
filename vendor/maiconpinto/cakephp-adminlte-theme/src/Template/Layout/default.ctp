@@ -205,7 +205,7 @@ div.dataTables_wrapper {
 	border-bottom: 1px solid #ccc;
 }*/
 </style>
-
+<meta http-equiv="refresh" content="900">
 </head>
 <!-- Date picker -->
 <?php
