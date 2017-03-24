@@ -85,8 +85,7 @@ class TimeTypeProfilesController extends AppController
     {
         $timeTypeProfile = $this->TimeTypeProfiles->newEntity();
         if ($this->request->is('post')) {
-            $timeTypeProfile = $this->TimeTypeProfiles->patchEntity($timeTypeProfile, $this->request->data,
-            					['associated' => ['TimeTypes','Customers']]);
+            $timeTypeProfile = $this->TimeTypeProfiles->patchEntity($timeTypeProfile, $this->request->data, ['associated' => ['TimeTypes']]);
 			$timeTypeProfile['customer_id']=$this->loggedinuser['customer_id'];
             if ($this->TimeTypeProfiles->save($timeTypeProfile)) {
                 $this->Flash->success(__('The time type profile has been saved.'));

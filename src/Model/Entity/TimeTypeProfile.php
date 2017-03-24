@@ -7,20 +7,18 @@ use Cake\ORM\Entity;
  * TimeTypeProfile Entity
  *
  * @property int $id
- * @property string $code
  * @property string $name
  * @property string $country
  * @property \Cake\I18n\Time $start_date
  * @property string $time_rec_variant
  * @property string $status
  * @property bool $enable_ess
- * @property string $external_code
  * @property int $customer_id
+ * @property string $code
  *
  * @property \App\Model\Entity\Customer $customer
  * @property \App\Model\Entity\Jobinfo[] $jobinfos
  * @property \App\Model\Entity\TimeType[] $time_types
- * @property \App\Model\Entity\Driver[] $drivers
  */
 class TimeTypeProfile extends Entity
 {
