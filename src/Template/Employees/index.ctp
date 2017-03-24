@@ -1,10 +1,10 @@
 <style>	
 .griddiv {
     position: relative;
-    background: #fff;
-    border: 1px solid #f4f4f4;
+    /*background: #fff;*/
+    /*border: 1px solid #f4f4f4;*/
     padding: 20px;
-    margin: 10px 25px;
+    /*margin: 10px 25px;*/
     clear:both;
     display: inline-block;
 }
@@ -54,14 +54,17 @@
     <small>List</small>
   </h1>
   <ol class="breadcrumb">
-  	
+  	<a class="btn btn-sm btn-success btn-flat gridbtn"><i class="fa fa-th"></i> </a>
+  	<a class="btn btn-sm btn-success btn-flat dtbtn"><i class="fa fa-list"></i> </a>
+  	<!-- <?= $this->Html->link('<b></b>'.__('<i class="fa fa-th"></i>'), ['action' => ''],['class' => 'btn btn-sm btn-success btn-flat gridbtn','escape' => false]) ?>
+  	<?= $this->Html->link('<b></b>'.__('<i class="fa fa-list"></i>'), ['action' => ''],['class' => 'btn btn-sm btn-success btn-flat dtbtn','escape' => false]) ?> -->
     <?= $this->Html->link('<b>Add</b> &nbsp;&nbsp;'.__('<i class="fa fa-plus"></i>'), ['action' => 'add'],['class' => 'btn btn-sm btn-success btn-flat','escape' => false]) ?>
   </ol>
 </section>
 
 
-<section class="content">
-	<div id="contentdiv" class="griddiv">
+<section class="content" id="gridsection" >
+	<div id="contentdiv" class="griddiv box box-primary">
 		<?php foreach ($employees as $employee): ?>
 			<div class="col-md-4 col-sm-4 col-xs-12 profile_details">
                         <div class="well profile_view">
@@ -94,3 +97,28 @@
 		<?php endforeach; ?>
 	</div>
 </section>
+
+
+<div id="dtsection" style="display: none;">
+	<?php echo $this->element('indexbasic'); ?>
+</div>
+
+
+<?php $this->start('scriptIndexBottom'); ?>
+<script>
+$(function () {
+	
+	$('.gridbtn').click(function(){
+		$('#gridsection').show();
+		$('#dtsection').hide();
+	});
+	$('.dtbtn').click(function(){
+		$('#gridsection').hide();
+    	$('#dtsection').show();
+	});
+	
+});
+
+
+</script>
+<?php $this->end(); ?>
