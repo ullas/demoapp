@@ -38,3 +38,5 @@ tmp/cache/persistent/myapp_cake_core_translations_debug_kit_en__u_s
 tmp/cache/persistent/myapp_cake_core_translations_default_en__u_s
 
 tmp/debug_kit.sqlite
+
+webroot/img/uploadedpics/me.jpg
