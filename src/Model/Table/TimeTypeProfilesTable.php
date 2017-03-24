@@ -5,6 +5,9 @@ use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
+use Cake\Event\Event;
+use Cake\Event\ArrayObject;
+use Cake\Core\Configure;
 
 /**
  * TimeTypeProfiles Model
@@ -45,19 +48,17 @@ class TimeTypeProfilesTable extends Table
         $this->hasMany('Jobinfos', [
             'foreignKey' => 'time_type_profile_id'
         ]);
-        // $this->hasMany('TimeTypeProfileTimeTypes', [
-            // 'foreignKey' => 'time_type_profile_id'
-        // ]);
-        // $this->hasMany('TimeTypes', [
-            // 'foreignKey' => 'time_type_profile_id'
-        // ]);
+        $this->hasMany('TimeTypeProfileTimeTypes', [
+            'foreignKey' => 'time_type_profile_id'
+        ]);
+        $this->hasMany('TimeTypes', [
+            'foreignKey' => 'time_type_profile_id'
+        ]);
 		
 		$this->belongsToMany('TimeTypes', [
             'foreignKey' => 'time_type_profile_id',
             'targetForeignKey' => 'time_type_id',
-            'joinTable' => 'time_type_profile_time_types'
-        ]);
-		
+            'joinTable' => 'time_type_profile_time_types']);
     }
 
     /**
@@ -70,9 +71,6 @@ class TimeTypeProfilesTable extends Table
     {
         $validator
             ->allowEmpty('id', 'create');
-
-        $validator
-            ->allowEmpty('code');
 
         $validator
             ->allowEmpty('name');
@@ -95,13 +93,26 @@ class TimeTypeProfilesTable extends Table
             ->allowEmpty('enable_ess');
 
         $validator
-            ->requirePresence('external_code', 'create')
-            ->notEmpty('external_code')
-            ->add('external_code', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
+            ->requirePresence('code', 'create')
+            ->notEmpty('code')
+            ->add('code', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
 
         return $validator;
     }
+	public function beforeMarshal(Event $event, $data, $options)
+	{
+		
+		$userdf = Configure::read('userdf');
+		if(isset($userdf)  & $userdf===1){
 
+			foreach (["start_date"] as $value) {		
+				if($data[$value]!=null && strpos($data[$value], '/') !== false){
+					$data[$value] = str_replace('/', '-', $data[$value]);
+					$data[$value]=date('Y/m/d', strtotime($data[$value]));
+				}
+			}
+		}
+	}
     /**
      * Returns a rules checker object that will be used for validating
      * application integrity.
@@ -111,7 +122,7 @@ class TimeTypeProfilesTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
-        $rules->add($rules->isUnique(['external_code']));
+        $rules->add($rules->isUnique(['code']));
         $rules->add($rules->existsIn(['customer_id'], 'Customers'));
 
         return $rules;
