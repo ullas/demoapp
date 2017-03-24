@@ -107,6 +107,8 @@ class EmployeesController extends AppController
 			$employee['address']['customer_id']=$this->loggedinuser['customer_id'];
 			$employee['identity']['customer_id']=$this->loggedinuser['customer_id'];
 			
+			$employee['empdatabiography']['position_id']=$employee['jobinfo']['position_id'];
+			
             if ($this->Employees->save($employee)) {
                 	
                 $this->Flash->success(__('The employee has been saved.'));
@@ -162,16 +164,7 @@ class EmployeesController extends AppController
 			$employee['customer_id']=$this->loggedinuser['customer_id'];
 			
             if ($this->Employees->save($employee)) {
-            	//associated EmpDataBiographies
-            	$this->loadModel('EmpDataBiographies');
-				$arr = $this->EmpDataBiographies->find('all',['conditions' => array('employee_id' => $id), 'contain' => []])->toArray();
-				if(isset($arr[0])){
-					$empDataBiography = $arr[0];
-					$empDataBiography = $this->EmpDataBiographies->patchEntity($empDataBiography, $this->request->data['empdatabiography']);
-            		if ($this->Employees->EmpDataBiographies->save($empDataBiography)) {
-              
-					}
-				}
+            	
 				
 				//associated Empdatapersonals
             		$this->loadModel('EmpDataPersonals');
@@ -213,6 +206,17 @@ class EmployeesController extends AppController
     				if ($this->Employees->JobInfos->save($jobinfo)) {
                 			
             		}
+					
+					//associated EmpDataBiographies
+            		$this->loadModel('EmpDataBiographies');
+					$arr = $this->EmpDataBiographies->find('all',['conditions' => array('employee_id' => $id), 'contain' => []])->toArray();
+					isset($arr[0]) ? $empDataBiography = $arr[0] : $empDataBiography = $this->EmpDataBiographies->newEntity();  			
+					$empDataBiography = $this->EmpDataBiographies->patchEntity($empDataBiography, $this->request->data['empdatabiography']);
+					$empDataBiography['position_id']=$jobinfo['position_id'];
+            		if ($this->Employees->EmpDataBiographies->save($empDataBiography)) {
+              
+					}
+				
 					//associated Addresses
             		$this->loadModel('Addresses');
 					$arr = $this->Addresses->find('all',['conditions' => array('employee_id' => $id), 'contain' => []])->toArray();
