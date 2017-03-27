@@ -59,21 +59,16 @@ class ActionsController extends AppController
 	}
 	public function transfer($id = null) {
 		
-		$this->loadModel('EmpDataBiographies');
-		$posarr=$this->EmpDataBiographies->find('all',['conditions' => array('employee_id' => $id),'contain' => []])->toArray();
-		isset($posarr[0]) ? $posid = $posarr[0]['position_id'] : $posid = "" ;  
-		
 		$this->loadModel('JobInfos');
-		$arr = $this->JobInfos->find('all',[ 'conditions' => array('position_id' => $posid),'contain' => []])->toArray();
-
-		isset($arr[0]) ? $jobInfo = $arr[0] : $jobInfo = $this->JobInfos->newEntity();  
-		
+		$arr=$this->JobInfos->find('all',['conditions' => array('employee_id' => $id),'contain' => []])->toArray();
+		isset($arr[0]) ? $jobInfo = $arr[0] : $jobInfo = $this->JobInfos->newEntity(); 
+				
 		if ($this->request->is(['patch', 'post', 'put'])) {
            $jobInfo = $this->JobInfos->patchEntity($jobInfo, $this->request->data);
             if ($this->JobInfos->save($jobInfo)) {
                //associated EmpDataBiographies
             	$this->loadModel('EmpDataBiographies');
-				$empdataarr = $this->EmpDataBiographies->find('all',[ 'conditions' => array('position_id' => $posid),'contain' => []])->toArray();
+				$empdataarr = $this->EmpDataBiographies->find('all',[ 'conditions' => array('employee_id' => $id),'contain' => []])->toArray();
 				isset($empdataarr[0]) ? $empDataBiography = $empdataarr[0] : $empDataBiography = $this->EmpDataBiographies->newEntity(); 
 				$empDataBiography = $this->EmpDataBiographies->patchEntity($empDataBiography, $this->request->data);
             	if ($this->EmpDataBiographies->save($empDataBiography)) {
@@ -105,13 +100,8 @@ class ActionsController extends AppController
 	}
 	public function promotion($id = null) {
 		
-		$this->loadModel('EmpDataBiographies');
-		$posarr=$this->EmpDataBiographies->find('all',['conditions' => array('employee_id' => $id),'contain' => []])->toArray();
-		isset($posarr[0]) ? $posid = $posarr[0]['position_id'] : $posid = "" ;   
-		
 		$this->loadModel('JobInfos');
-		$arr = $this->JobInfos->find('all',[ 'conditions' => array('position_id' => $posid),'contain' => []])->toArray();
-
+		$arr=$this->JobInfos->find('all',['conditions' => array('employee_id' => $id),'contain' => []])->toArray();
 		isset($arr[0]) ? $jobInfo = $arr[0] : $jobInfo = $this->JobInfos->newEntity();  
 		
 		if ($this->request->is(['patch', 'post', 'put'])) {
@@ -119,7 +109,7 @@ class ActionsController extends AppController
             if ($this->JobInfos->save($jobInfo)) {
                 //associated EmpDataBiographies
             	$this->loadModel('EmpDataBiographies');
-				$empdataarr = $this->EmpDataBiographies->find('all',[ 'conditions' => array('position_id' => $id),'contain' => []])->toArray();
+				$empdataarr = $this->EmpDataBiographies->find('all',[ 'conditions' => array('employee_id' => $id),'contain' => []])->toArray();
 				isset($empdataarr[0]) ? $empDataBiography = $empdataarr[0] : $empDataBiography = $this->EmpDataBiographies->newEntity(); 
 				$empDataBiography = $this->EmpDataBiographies->patchEntity($empDataBiography, $this->request->data);
             	if ($this->EmpDataBiographies->save($empDataBiography)) {

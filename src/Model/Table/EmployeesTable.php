@@ -38,7 +38,7 @@ class EmployeesTable extends Table
 	public function getIncludedPositions($id=null)
 	{
 		$conn = ConnectionManager::get('default');
-		$arrayTemp1 = $conn->execute('select id,name from positions where id not in(select position_id from jobinfos where position_id >0 AND employee_id!='.$id.') ;')->fetchAll('assoc');
+		$arrayTemp1 = $conn->execute('select id,name from positions where id not in(select position_id from empdatabiographies where position_id >0 AND employee_id!='.$id.') ')->fetchAll('assoc');
 		return $arrayTemp1; 
 	}
     /**
