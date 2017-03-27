@@ -23,18 +23,19 @@ if (file_exists($file)) {
             <li class="dropdown notifications-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                     <i class="fa fa-bell-o"></i>
-                    <span class="label label-warning">1</span>
+                    <span class="label label-warning"><?php if($notificationcontent!=''){echo count($notificationcontent);}  ?></span>
                 </a>
                 <ul class="dropdown-menu">
-                    <li class="header">You have 1 notifications</li>
+                    <li class="header">You have <?php if($notificationcontent!=''){echo count($notificationcontent);}else{echo "no";}  ?> notifications</li>
                     <li>
                         <!-- inner menu: contains the actual data -->
                         <ul class="menu">
-                            <li>
-                                <a href="#">
-                                    <i class="fa fa-users text-aqua"></i> 5 new members joined today
-                                </a>
-                            </li>
+                        	<?php for ($x = 0; $x < count($notificationcontent); $x++) { 
+                        		if(isset($notificationcontent[$x])){
+                        		?>
+                            <li><a href="/EmployeeAbsencerecords/leaveapproval/<?php echo $notificationcontent[$x]['id']; ?>">
+                            	<i class="fa fa-calendar-minus-o text-aqua"></i><b><?php echo $notificationcontent[$x]['emp_data_biography']['birth_name'] ?></b> requests a leave</a></li>
+                            <?php } } ?>
                         </ul>
                     </li>
                     <li class="footer"><a href="#">View all</a></li>
@@ -44,14 +45,16 @@ if (file_exists($file)) {
             <!-- User Account: style can be found in dropdown.less -->
             <li class="dropdown user user-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                    <?php $picturename='/img/uploadedpics/'.$this->request->session()->read('sessionuser')['profilepic'];
-          					echo $this->Html->image($picturename, array('class' => 'user-image', 'alt' => 'User profile picture')); ?>
+                	<?php if($this->request->session()->read('sessionuser')['profilepic']!=''){$picturename='/img/uploadedpics/'.$this->request->session()->read('sessionuser')['profilepic'];}
+                            				else{$picturename='/img/uploadedpics/defaultuser.png';}
+	                    		echo $this->Html->image($picturename, array('class' => 'user-image', 'alt' => 'User profile picture')); ?>
                     <span class="hidden-xs"><?php echo $name ?></span>
                 </a>
                 <ul class="dropdown-menu">
                     <!-- User image -->
                     <li class="user-header">
-                    	<?php $picturename='/img/uploadedpics/'.$this->request->session()->read('sessionuser')['profilepic'];
+                    	<?php if($this->request->session()->read('sessionuser')['profilepic']!=''){$picturename='/img/uploadedpics/'.$this->request->session()->read('sessionuser')['profilepic'];}
+                            				else{$picturename='/img/uploadedpics/defaultuser.png';}
           					echo $this->Html->image($picturename, array('class' => 'img-circle', 'alt' => 'User profile picture')); ?>
                         <!-- <?php echo $this->Html->image('sree.png', array('class' => 'img-circle', 'alt' => 'User Image')); ?> -->
                         <p>
@@ -89,3 +92,6 @@ if (file_exists($file)) {
     </div>
 </nav>
 <?php } ?>
+
+
+

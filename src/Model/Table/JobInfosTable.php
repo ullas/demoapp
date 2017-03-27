@@ -366,10 +366,12 @@ class JobinfosTable extends Table
 		$userdf = Configure::read('userdf');
 		if(isset($userdf)  & $userdf===1){
 
-			foreach (["leave_of_absence_return_date","hire_date","termination_date","leave_of_absence_start_date","position_entry_date","probation_period_end_date","expected_return_date","job_entry_date","company_entry_date","location_entry_date","department_entry_date","pay_scale_level_entry_date"] as $value) {		
-				if($data[$value]!=null && strpos($data[$value], '/') !== false){
-					$data[$value] = str_replace('/', '-', $data[$value]);
-					$data[$value]=date('Y/m/d', strtotime($data[$value]));
+			foreach (["leave_of_absence_return_date","hire_date","termination_date","leave_of_absence_start_date","position_entry_date","probation_period_end_date","expected_return_date","job_entry_date","company_entry_date","location_entry_date","department_entry_date","pay_scale_level_entry_date"] as $value) {
+				if(isset($data[$value])){			
+						if($data[$value]!=null && $data[$value]!='' && strpos($data[$value], '/') !== false){
+						$data[$value] = str_replace('/', '-', $data[$value]);
+						$data[$value]=date('Y/m/d', strtotime($data[$value]));
+					}
 				}
 			}
 		}

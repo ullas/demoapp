@@ -107,17 +107,17 @@ class OrgchartactionsController extends AppController
 	public function promotion($id = null) {
 
 		$this->loadModel('JobInfos');
-		$arr = $this->JobInfos->find('all',[ 'conditions' => array('position_id' => $id),'contain' => []])->toArray();
+		$arr = $this->JobInfos->find('all',[ 'conditions' => array('employee_id' => $id),'contain' => []])->toArray();
 
 		isset($arr[0]) ? $jobInfo = $arr[0] : $jobInfo = $this->JobInfos->newEntity();  
 	
 		if ($this->request->is(['patch', 'post', 'put'])) {
-           $jobInfo = $this->JobInfos->patchEntity($jobInfo, $this->request->data);
+           	$jobInfo = $this->JobInfos->patchEntity($jobInfo, $this->request->data);
 			$jobInfo['customer_id']=$this->loggedinuser['customer_id'];
             if ($this->JobInfos->save($jobInfo)) {
             	//associated EmpDataBiographies
             	$this->loadModel('EmpDataBiographies');
-				$empdataarr = $this->EmpDataBiographies->find('all',[ 'conditions' => array('position_id' => $id),'contain' => []])->toArray();
+				$empdataarr = $this->EmpDataBiographies->find('all',[ 'conditions' => array('employee_id' => $id),'contain' => []])->toArray();
 				isset($empdataarr[0]) ? $empDataBiography = $empdataarr[0] : $empDataBiography = $this->EmpDataBiographies->newEntity();	
 				$empDataBiography = $this->EmpDataBiographies->patchEntity($empDataBiography, $this->request->data);
             	if ($this->EmpDataBiographies->save($empDataBiography)) {
@@ -136,7 +136,7 @@ class OrgchartactionsController extends AppController
 		isset($emparr[0]) ? $empid = $emparr[0]['employee_id'] : $empid = "" ;  
 		
 		$this->loadModel('Employees');
-		$rslt=$this->Employees->getIncludedPositions($empid);  
+		$rslt=$this->Employees->getIncludedPositions($id);  
 		foreach($rslt as $key =>$value){
 			$positions[$value['id']]=$value['name'];
 		}

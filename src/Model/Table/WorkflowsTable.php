@@ -12,7 +12,6 @@ use Cake\Validation\Validator;
  * @property \Cake\ORM\Association\BelongsTo $Workflowrules
  * @property \Cake\ORM\Association\BelongsTo $Customers
  * @property \Cake\ORM\Association\BelongsTo $EmpDataBiographies
- * @property \Cake\ORM\Association\HasMany $TimeTypeProfiles
  *
  * @method \App\Model\Entity\Workflow get($primaryKey, $options = [])
  * @method \App\Model\Entity\Workflow newEntity($data = null, array $options = [])
@@ -21,6 +20,8 @@ use Cake\Validation\Validator;
  * @method \App\Model\Entity\Workflow patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
  * @method \App\Model\Entity\Workflow[] patchEntities($entities, array $data, array $options = [])
  * @method \App\Model\Entity\Workflow findOrCreate($search, callable $callback = null)
+ *
+ * @mixin \Cake\ORM\Behavior\TimestampBehavior
  */
 class WorkflowsTable extends Table
 {
@@ -39,6 +40,8 @@ class WorkflowsTable extends Table
         $this->displayField('id');
         $this->primaryKey('id');
 
+        $this->addBehavior('Timestamp');
+
         $this->belongsTo('Workflowrules', [
             'foreignKey' => 'workflowrule_id'
         ]);
@@ -47,9 +50,6 @@ class WorkflowsTable extends Table
         ]);
         $this->belongsTo('EmpDataBiographies', [
             'foreignKey' => 'emp_data_biographies_id'
-        ]);
-        $this->hasMany('TimeTypeProfiles', [
-            'foreignKey' => 'workflow_id','dependent' => true
         ]);
     }
 

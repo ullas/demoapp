@@ -13,10 +13,12 @@ use Cake\ORM\Entity;
  * @property \Cake\I18n\Time $updatetime
  * @property int $customer_id
  * @property int $emp_data_biographies_id
+ * @property \Cake\I18n\Time $created
+ * @property \Cake\I18n\Time $modified
  *
  * @property \App\Model\Entity\Workflowrule $workflowrule
  * @property \App\Model\Entity\Customer $customer
- * @property \App\Model\Entity\EmpDataBiography $emp_data_biography
+ * @property \App\Model\Entity\Empdatabiography $emp_data_biography
  * @property \App\Model\Entity\TimeTypeProfile[] $time_type_profiles
  */
 class Workflow extends Entity

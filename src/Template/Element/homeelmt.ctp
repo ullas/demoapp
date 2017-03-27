@@ -6,6 +6,9 @@ switch (strtolower($title)) {
 		if($mypic!=""){
         	$picturename='/img/uploadedpics/'.$mypic;
         	echo $this->Html->image($picturename, array('class' => 'img-responsive', 'id'=>'myinfopic', 'alt' => 'User profile picture')); 
+		}else{
+			$picturename='/img/uploadedpics/defaultuser.png';
+        	echo $this->Html->image($picturename, array('class' => 'img-responsive', 'id'=>'myinfopic', 'alt' => 'User profile picture')); 
 		}
         break;
     case "myteam":
