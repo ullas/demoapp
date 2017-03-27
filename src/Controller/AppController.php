@@ -22,6 +22,7 @@ use Cake\I18n\FrozenDate;
 use Cake\I18n\FrozenTime;
 use Cake\I18n\Date;
 use Cake\Database\Type;
+use Cake\ORM\TableRegistry;
 
 
 /**
@@ -175,8 +176,6 @@ class AppController extends Controller
 
     public function beforeFilter(Event $event)
     {
-    	// $hours=['1'=>'1','2'=>'2','3'=>'3','4'=>'4','5'=>'5','6'=>'6'];
-    	// $this->set('hours', $hours);
 		
 		parent::beforeFilter($event);
 		
@@ -205,8 +204,28 @@ class AppController extends Controller
      */
     public function beforeRender(Event $event)
     {
-    	
-		// print_r($this);
+    	//get position id 
+    	$jobinfosTable = TableRegistry::get('JobInfos');	
+		$query=$jobinfosTable->find('All')->where(['employee_id'=>$this->request->session()->read('sessionuser')['employee_id']])->toArray();
+		(isset($query[0])) ? $myposition=$query[0]['position_id'] : $myposition="0";
+		
+		//get distinct workflowruleid having the particular position id
+		$workflowactionsTable = TableRegistry::get('Workflowactions');
+		$query = $workflowactionsTable->find('All')->where(['position_id'=>$myposition])->andwhere(['customer_id'=>$this->loggedinuser['customer_id']]) ->distinct(['workflowrule_id']);
+		
+		// Iterating the query.
+		$ncontent="";
+		foreach ($query as $row) {
+			$workflowsTable = TableRegistry::get('Workflows');
+			$execquery = $workflowsTable->find('All')->where(['workflowrule_id'=>$row['workflowrule_id']])->where(['currentstep'=>$row['stepid']])
+								->andwhere(['Workflows.customer_id'=>$this->loggedinuser['customer_id']])->contain(['EmpDataBiographies'])->toArray();
+			(isset($execquery)) ? $ncontent=$execquery : $ncontent="";
+			
+		}
+		$this->set('notificationcontent', $ncontent);  
+		  	
+		  
+
     	$this->viewBuilder()->theme('AdminLTE');
 		$this->set('theme', Configure::read('Theme'));
 			

@@ -47,7 +47,7 @@ class PositionsTable extends Table
 	}
 	public function getIncludedPositions( $id = null)
 	{
-		$querystr='select id,name from positions where id not in(select position_id from empdatabiographies where position_id >0 AND employee_id!='.'40'.') ;';
+		$querystr='select id,name from positions where id not in(select position_id from empdatabiographies where position_id >0 AND employee_id!='.$id.') ;';
 		$conn = ConnectionManager::get('default');
 		$arrayTemp1 = $conn->execute($querystr)->fetchAll('assoc');
 		return $arrayTemp1; 

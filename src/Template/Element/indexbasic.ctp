@@ -432,7 +432,7 @@ $('.mptl-filter-base').on('ifUnchecked', function(event){
 
 
 <!-- confirm delete -->
-<a data-target="#ConfirmDelete" role="button" data-toggle="modal" id="trigger"></a>
+<!-- <a data-target="#ConfirmDelete" role="button" data-toggle="modal" id="trigger"></a>
 <div class="modal fade mptlboldtxt" id="ConfirmDelete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-danger">
           <div class="modal-content">
@@ -449,4 +449,4 @@ $('.mptl-filter-base').on('ifUnchecked', function(event){
               </div>
           </div>
       </div>
-  </div>
+  </div> -->

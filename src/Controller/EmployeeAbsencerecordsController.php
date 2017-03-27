@@ -100,7 +100,10 @@ class EmployeeAbsencerecordsController extends AppController
 			return $this->redirect(['action' => 'index']);
        }
     }
-
+	public function leaveapproval($id = null)
+    {
+    	
+	}
     /**
      * Add method
      *
@@ -117,9 +120,24 @@ class EmployeeAbsencerecordsController extends AppController
 			$employeeAbsencerecord["created_by"] = $this->request->session()->read('sessionuser')['id'];
 			$employeeAbsencerecord["status"] = "0";
             if ($this->EmployeeAbsencerecords->save($employeeAbsencerecord)) {
-                $this->Flash->success(__('The employee absencerecord has been saved.'));
-
-                return $this->redirect(['action' => 'index']);
+                
+				$this->loadModel('TimeTypes');
+				$arr = $this->TimeTypes->find('all',['conditions' => array('id' => $employeeAbsencerecord["time_type_id"] ), 'contain' => []])->toArray();
+				isset($arr[0]) ? $workflowruleid = $arr[0]['workflowrule_id'] : $workflowruleid = "0";  
+				//associated Workflows 
+            	$this->loadModel('Workflows');
+				$workflow = $this->Workflows->newEntity();  
+				$workflow = $this->Workflows->patchEntity($workflow, $this->request->data);
+				$workflow['workflowrule_id']=$workflowruleid;
+				$workflow['currentstep']='1';				
+				$workflow['customer_id']=$this->loggedinuser['customer_id'];
+				$workflow["emp_data_biographies_id"] = $this->request->session()->read('sessionuser')['empdatabiographyid'] ; 
+            	if ($this->Workflows->save($workflow)) {
+                	$this->Flash->success(__('The employee absencerecord has been saved.'));	
+                	return $this->redirect(['action' => 'index']);	
+                } else {
+                	$this->Flash->error(__('The employee absencerecord could not be saved. Please, try again.'));
+            	}	
             } else {
                 $this->Flash->error(__('The employee absencerecord could not be saved. Please, try again.'));
             }
