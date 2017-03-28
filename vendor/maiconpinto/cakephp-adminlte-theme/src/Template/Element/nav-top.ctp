@@ -33,7 +33,7 @@ if (file_exists($file)) {
                         	<?php for ($x = 0; $x < count($notificationcontent); $x++) { 
                         		if(isset($notificationcontent[$x])){
                         		?>
-                            <li><a href="/EmployeeAbsencerecords/leaveapproval/<?php echo $notificationcontent[$x]['id']; ?>">
+                            <li><a href="/EmployeeAbsencerecords">
                             	<i class="fa fa-calendar-minus-o text-aqua"></i><b><?php echo $notificationcontent[$x]['emp_data_biography']['birth_name'] ?></b> requests a leave</a></li>
                             <?php } } ?>
                         </ul>

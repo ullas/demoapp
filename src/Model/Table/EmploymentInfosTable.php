@@ -167,9 +167,11 @@ class EmploymentInfosTable extends Table
 		if(isset($userdf)  & $userdf===1){
 
 			foreach (["stock_end_date","salary_end_date","benefits_end_date","start_date","first_date_worked","original_start_date","seniority_date","benefits_eligibility_start_date","service_date","end_date","pay_roll_end_date","last_date_worked","bonus_pay_expiration_date"] as $value) {		
-				if($data[$value]!=null && strpos($data[$value], '/') !== false){
-					$data[$value] = str_replace('/', '-', $data[$value]);
-					$data[$value]=date('Y/m/d', strtotime($data[$value]));
+				if(isset($data[$value])){			
+						if($data[$value]!=null && $data[$value]!='' && strpos($data[$value], '/') !== false){
+						$data[$value] = str_replace('/', '-', $data[$value]);
+						$data[$value]=date('Y/m/d', strtotime($data[$value]));
+					}
 				}
 			}
 		}

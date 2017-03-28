@@ -125,7 +125,7 @@ mb_internal_encoding(Configure::read('App.encoding'));
 
 
 ini_set('intl.default_locale', 'fr_FR');
-Cake\I18n\Time::setToStringFormat('HH:mm:ss');
+// Cake\I18n\Time::setToStringFormat('HH:mm:ss');
 Cake\I18n\Date::setToStringFormat('yyyy/MM/dd');
 Cake\I18n\FrozenDate::setToStringFormat('yyyy/MM/dd');
 \Cake\Database\Type::build('date')

@@ -167,9 +167,7 @@ class ActionsController extends AppController
 		isset($emparr[0]) ? $empid = $emparr[0]['id'] : $empid = "" ;  
 		
 		$this->loadModel('Notes');
-		$arr = $this->Notes->find('all',[ 'conditions' => array('emp_data_biographies_id' => $empid), 'contain' => [] ])->toArray();
-		
-		isset($arr[0]) ? $note = $arr[0] : $note = $this->Notes->newEntity();  
+		$note = $this->Notes->newEntity();  
 		
         if ($this->request->is(['patch', 'post', 'put'])) {
             $note = $this->Notes->patchEntity($note, $this->request->data);

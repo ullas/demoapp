@@ -11,7 +11,7 @@ function RecursiveCategories($array) {
                     		<li><a href="/Orgchartactions/transfer/'.$vals['EmpDataBiographies']['employee_id'].'" data-remote="false" class="open-Popup" data-toggle="modal" data-target="#actionspopover">Transfer</a></li>
                     		<li><a href="/Orgchartactions/promotion/'.$vals['EmpDataBiographies']['employee_id'].'" data-remote="false" class="open-Popup" data-toggle="modal" data-target="#actionspopover">Promotion</a></li>
                     		<li class="divider"></li>
-                    		<li><a href="/Orgchartactions/addresschange/'.$vals['EmpDataBiographies']['id'].'" data-remote="false" class="open-Popup" data-toggle="modal" data-target="#actionspopover">Address Change</a></li>
+                    		<li><a href="/Orgchartactions/addresschange/'.$vals['EmpDataBiographies']['employee_id'].'" data-remote="false" class="open-Popup" data-toggle="modal" data-target="#actionspopover">Address Change</a></li>
                     		<li><a href="#" class="open-Popup" data-toggle="modal" data-remote="false" data-target="#actionspopover">Global Assignment</a></li>
                     		<li><a href="/Orgchartactions/addnote/'.$vals['EmpDataBiographies']['id'].'" data-remote="false" class="open-Popup" data-toggle="modal" data-target="#actionspopover">Add Note</a></li>
                     		<li><a href="/Orgchartactions/terminate/'.$vals['EmpDataBiographies']['id'].'" data-remote="false" class="open-Popup" data-toggle="modal" data-target="#actionspopover">Termination</a></li>
@@ -76,10 +76,22 @@ function RecursiveCategories($array) {
 	}
 	
 </style>
-
+<?php $this->start('scriptIndexBottom'); ?>
     <script>
         jQuery(document).ready(function() {
 
+		var action='<?php echo $this->request->params['action'] ?>';
+		if(action=="orgchart"){
+			var atag = $('a[href="/Positions/orgchart"]');
+			atag.parent().addClass('active');
+			var a = $('a[href="/<?php echo $this->request->params['controller'] ?>"]');
+        	if (!a.parent().hasClass('treeview')) {
+            	a.parent().removeClass('active').parents('.treeview').removeClass('active');
+        	}
+		}
+		
+        
+        
         	$("#org").jOrgChart({
             chartElement : '#chart',
             dragAndDrop  : false
@@ -162,6 +174,7 @@ $(document).on("click", ".open-Popup", function () {
 });
 
     </script>
+<?php $this->end(); ?>
  <!-- hidden field -->
 <input type="hidden" id="UID">
 
