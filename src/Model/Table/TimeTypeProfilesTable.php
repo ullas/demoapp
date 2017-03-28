@@ -106,9 +106,11 @@ class TimeTypeProfilesTable extends Table
 		if(isset($userdf)  & $userdf===1){
 
 			foreach (["start_date"] as $value) {		
-				if($data[$value]!=null && strpos($data[$value], '/') !== false){
-					$data[$value] = str_replace('/', '-', $data[$value]);
-					$data[$value]=date('Y/m/d', strtotime($data[$value]));
+				if(isset($data[$value])){			
+						if($data[$value]!=null && $data[$value]!='' && strpos($data[$value], '/') !== false){
+						$data[$value] = str_replace('/', '-', $data[$value]);
+						$data[$value]=date('Y/m/d', strtotime($data[$value]));
+					}
 				}
 			}
 		}

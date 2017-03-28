@@ -42,6 +42,76 @@ class EmployeeAbsencerecordsController extends AppController
 		$output =$this->Datatable->getView($fields,$contains,$usrfilter);
 		echo json_encode($output);			
     }
+	public function denyLeaveRequest()
+	{
+    	$this->loadModel('Workflows');
+		if($this->request->is('ajax')) {
+				
+			$this->autoRender=false;
+			
+			$workflow = $this->Workflows->get($this->request->query['id'], [
+            	'contain' => []
+        	]);
+			
+            $workflow=$this->Workflows->patchEntity($workflow,$this->request->data);
+			$workflow['active']=FALSE;
+			if ($this->Workflows->save($workflow)) {
+
+                $this->loadModel('EmployeeAbsencerecords');
+				$employeeAbsencerecord = $this->EmployeeAbsencerecords->get($workflow['id'], [
+            		'contain' => []
+        		]);
+				$employeeAbsencerecord = $this->EmployeeAbsencerecords->patchEntity($employeeAbsencerecord, $this->request->data);
+				$employeeAbsencerecord["status"] = "2"; 
+           	 	if ($this->EmployeeAbsencerecords->save($employeeAbsencerecord)) {
+					$this->response->body("success");
+	    			return $this->response;
+				}
+            } else {
+                $this->response->body("error");
+	    		return $this->response;
+            }
+		}  
+    }
+	public function approveLeaveRequest()
+	{
+    	$this->loadModel('Workflows');
+		if($this->request->is('ajax')) {
+				
+			$this->autoRender=false;
+			
+			$workflow = $this->Workflows->get($this->request->query['id'], [
+            	'contain' => []
+        	]);
+			
+            $workflow=$this->Workflows->patchEntity($workflow,$this->request->data);
+			
+			if($workflow['currentstep']==$workflow['lastaction']){
+				$this->loadModel('EmployeeAbsencerecords');
+				$employeeAbsencerecord = $this->EmployeeAbsencerecords->get($workflow['id'], [
+            		'contain' => []
+        		]);
+				$employeeAbsencerecord = $this->EmployeeAbsencerecords->patchEntity($employeeAbsencerecord, $this->request->data);
+				$employeeAbsencerecord["status"] = "1"; 
+           	 	if ($this->EmployeeAbsencerecords->save($employeeAbsencerecord)) {
+					
+				}
+				$workflow['active']=FALSE;				
+			}else{
+				$workflow['currentstep']+=1;	
+			}
+			
+			$this->loadModel('Workflows');
+			if ($this->Workflows->save($workflow)) {
+                $this->response->body("success");
+	    		return $this->response;
+            } else {
+                $this->response->body("error");
+	    		return $this->response;
+            }
+		}
+		  
+    }
     /**
      * Index method
      *
@@ -100,10 +170,7 @@ class EmployeeAbsencerecordsController extends AppController
 			return $this->redirect(['action' => 'index']);
        }
     }
-	public function leaveapproval($id = null)
-    {
-    	
-	}
+	
     /**
      * Add method
      *
@@ -114,25 +181,34 @@ class EmployeeAbsencerecordsController extends AppController
         $employeeAbsencerecord = $this->EmployeeAbsencerecords->newEntity();
         if ($this->request->is('post')) {
         	
-            $employeeAbsencerecord = $this->EmployeeAbsencerecords->patchEntity($employeeAbsencerecord, $this->request->data);
-			$employeeAbsencerecord['customer_id']=$this->loggedinuser['customer_id'];
-			$employeeAbsencerecord["emp_data_biographies_id"] = $this->request->session()->read('sessionuser')['empdatabiographyid'] ; 
-			$employeeAbsencerecord["created_by"] = $this->request->session()->read('sessionuser')['id'];
-			$employeeAbsencerecord["status"] = "0";
-            if ($this->EmployeeAbsencerecords->save($employeeAbsencerecord)) {
-                
-				$this->loadModel('TimeTypes');
-				$arr = $this->TimeTypes->find('all',['conditions' => array('id' => $employeeAbsencerecord["time_type_id"] ), 'contain' => []])->toArray();
-				isset($arr[0]) ? $workflowruleid = $arr[0]['workflowrule_id'] : $workflowruleid = "0";  
-				//associated Workflows 
-            	$this->loadModel('Workflows');
-				$workflow = $this->Workflows->newEntity();  
-				$workflow = $this->Workflows->patchEntity($workflow, $this->request->data);
-				$workflow['workflowrule_id']=$workflowruleid;
-				$workflow['currentstep']='1';				
-				$workflow['customer_id']=$this->loggedinuser['customer_id'];
-				$workflow["emp_data_biographies_id"] = $this->request->session()->read('sessionuser')['empdatabiographyid'] ; 
-            	if ($this->Workflows->save($workflow)) {
+            $this->loadModel('TimeTypes');
+			$arr = $this->TimeTypes->find('all',['conditions' => array('id' => $this->request->data["time_type_id"] ), 'contain' => []])->toArray();
+			isset($arr[0]) ? $workflowruleid = $arr[0]['workflowrule_id'] : $workflowruleid = "0";  
+				
+			$this->loadModel('Workflowactions');
+			$query=$this->Workflowactions->find('All')->where (['workflowrule_id' => $workflowruleid])->andwhere(['customer_id'=>$this->loggedinuser['customer_id']]);
+			(isset($query)) ? $workflowactioncount=$query->count() : $workflowactioncount="0";
+		  
+			//associated Workflows 
+         	$this->loadModel('Workflows');
+			$workflow = $this->Workflows->newEntity();  
+			$workflow = $this->Workflows->patchEntity($workflow, $this->request->data);
+			$workflow['workflowrule_id']=$workflowruleid;
+			$workflow['currentstep']='1';	
+			$workflow['lastaction']=$workflowactioncount;		
+			$workflow['active']=TRUE;				
+			$workflow['customer_id']=$this->loggedinuser['customer_id'];
+			$workflow["emp_data_biographies_id"] = $this->request->session()->read('sessionuser')['empdatabiographyid'] ; 
+            if ($this->Workflows->save($workflow)) {
+            	
+				$this->loadModel('Workflowactions');
+            	$employeeAbsencerecord = $this->EmployeeAbsencerecords->patchEntity($employeeAbsencerecord, $this->request->data);
+				$employeeAbsencerecord['customer_id']=$this->loggedinuser['customer_id'];
+				$employeeAbsencerecord["emp_data_biographies_id"] = $this->request->session()->read('sessionuser')['empdatabiographyid'] ; 
+				$employeeAbsencerecord["created_by"] = $this->request->session()->read('sessionuser')['id'];
+				$employeeAbsencerecord["status"] = "0";
+				$employeeAbsencerecord["workflow_id"] = $workflow['id'];
+            	if ($this->EmployeeAbsencerecords->save($employeeAbsencerecord)) {
                 	$this->Flash->success(__('The employee absencerecord has been saved.'));	
                 	return $this->redirect(['action' => 'index']);	
                 } else {

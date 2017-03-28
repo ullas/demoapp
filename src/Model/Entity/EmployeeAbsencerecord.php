@@ -18,6 +18,7 @@ use Cake\ORM\Entity;
  * @property int $id
  * @property int $modified_by
  * @property int $customer_id
+ * @property int $workflow_id
  *
  * @property \App\Model\Entity\Empdatabiography $empdatabiography
  * @property \App\Model\Entity\TimeType $time_type
