@@ -29,6 +29,6 @@
         </fieldset>
         <div class="box-footer">
           	<?=$this->Html->link(__('Cancel'), ['action' => 'index'], ['escape' => false])?>
-            <?=$this->Html->link(__('Edit JobFunction'), ['action' => 'edit', $jobFunction['id']],['class'=>'btn btn-primary label-info pull-right'], ['escape' => false])?>
+            <?=$this->Html->link(__('Edit Job Function'), ['action' => 'edit', $jobFunction['id']],['class'=>'btn btn-primary label-info pull-right'], ['escape' => false])?>
           </div><?= $this->Form->end() ?>
 </div></div></section>
