@@ -17,20 +17,19 @@ if (file_exists($file)) {
 	case "root":
     ?>
     <li><a href="<?php echo $this -> Url -> build('/Homes'); ?>"><i class="fa fa-dashboard"></i><span> Dashboard </span></a></li>
-    <li><a href="<?php echo $this -> Url -> build('/Employees'); ?>"><i class="fa fa-user"></i><span> Employee</span></a></li>
+    <li><a href="<?php echo $this -> Url -> build('/Employees'); ?>"><i class="fa fa-user"></i><span> Employee Administration</span></a></li>
     <li class="treeview">
     <a href="#"> <i class="fa fa-lock"></i> <span>Admin</span> <i class="fa fa-angle-left pull-right"></i>  </a>
     <ul class="treeview-menu">
 
 	<li><a href="<?php echo $this -> Url -> build('/LegalEntities'); ?>"><i class="fa fa-circle-o"></i> Legal Entity</a></li>
     <li><a href="<?php echo $this -> Url -> build('/BusinessUnits'); ?>"><i class="fa fa-circle-o"></i> Business Unit</a></li>
-    <li><a href="<?php echo $this -> Url -> build('/Departments'); ?>"><i class="fa fa-circle-o"></i> Departments</a></li>
-    <li><a href="<?php echo $this -> Url -> build('/Divisions'); ?>"><i class="fa fa-circle-o"></i> Divisions</a></li>
-    <li><a href="<?php echo $this -> Url -> build('/CostCentres'); ?>"><i class="fa fa-circle-o"></i> Cost Centers</a></li>
-   
+    <li><a href="<?php echo $this -> Url -> build('/Departments'); ?>"><i class="fa fa-circle-o"></i> Department</a></li>
+    <li><a href="<?php echo $this -> Url -> build('/Divisions'); ?>"><i class="fa fa-circle-o"></i> Division</a></li>
+    <li><a href="<?php echo $this -> Url -> build('/CostCentres'); ?>"><i class="fa fa-circle-o"></i> Cost Center</a></li>
     </ul>
     </li>
-    <li><a href="<?php echo $this -> Url -> build('/Customers'); ?>"><i class="glyphicon glyphicon-king"></i><span> Customer </span></a></li>
+    <li><a href="<?php echo $this -> Url -> build('/Customers'); ?>"><i class="glyphicon glyphicon-king"></i><span> Customers </span></a></li>
     <?php if ($counts['customer'] > 0): ?>
     <li><a href="<?php echo $this -> Url -> build('/Users'); ?>"><i class="fa fa-user-plus"></i><span> Users </span></a></li>
 
@@ -44,74 +43,74 @@ if (file_exists($file)) {
 
     ?>
     <li><a href="<?php echo $this -> Url -> build('/Homes'); ?>"><i class="fa fa-dashboard"></i><span> Dashboard </span></a></li>
-	<li><a href="<?php echo $this -> Url -> build('/Employees'); ?>"><i class="fa fa-user"></i><span> Employee</span></a></li>
-	<!-- // <li><a href="<?php echo $this -> Url -> build('/JobInfos'); ?>"><i class="fa fa-briefcase "></i><span> Job</span></a></li> -->
-
+    <li><a href="<?php echo $this -> Url -> build('/Positions/orgchart'); ?>"><i class="fa fa-sitemap"></i><span> Organization Structure </span></a></li>
+	<li><a href="<?php echo $this -> Url -> build('/Employees'); ?>"><i class="fa fa-user"></i><span> Employee Administration</span></a></li>
 	 <li class="treeview">
-    <a href="#"> <i class="fa fa-calendar"></i> <span>Time Type</span> <i class="fa fa-angle-left pull-right"></i>  </a>
+    <a href="#"> <i class="fa fa-calendar"></i> <span>Time Management</span> <i class="fa fa-angle-left pull-right"></i>  </a>
     <ul class="treeview-menu">
-		<li><a href="<?php echo $this -> Url -> build('/TimeAccountTypes'); ?>"><i class="fa fa-circle-o"></i> Time Account Type</a></li>
-    <li><a href="<?php echo $this -> Url -> build('/TimeTypes'); ?>"><i class="fa fa-circle-o"></i> Time Type</a></li>
-		<li><a href="<?php echo $this -> Url -> build('/TimeTypeProfiles'); ?>"><i class="fa fa-circle-o"></i> Time Type Profiles</a></li>
-
+		<li><a href="<?php echo $this -> Url -> build('/EmployeeAbsencerecords'); ?>"><i class="fa fa-calendar-minus-o"></i><span> Leave Request</span></a></li>
     </ul>
     </li>
-
     <li class="treeview">
-    	<a href="#"> <i class="fa fa-puzzle-piece"></i> <span>Master</span> <i class="fa fa-angle-left pull-right"></i>  </a>
-    	<ul class="treeview-menu">
-    		<li><a href="<?php echo $this -> Url -> build('/JobFunctions'); ?>"><i class="fa fa-circle-o"></i> Job Function</a></li>
-    		<li><a href="<?php echo $this -> Url -> build('/JobClasses'); ?>"><i class="fa fa-circle-o"></i> Job Class</a></li>
-			<li><a href="<?php echo $this -> Url -> build('/Regions'); ?>"><i class="fa fa-circle-o"></i> Region</a></li>
-    		<li><a href="<?php echo $this -> Url -> build('/Locations'); ?>"><i class="fa fa-circle-o"></i> Location</a></li>
-
-
-    		<li><a href="<?php echo $this -> Url -> build('/HolidayCalendars'); ?>"><i class="fa fa-circle-o"></i> Holiday Calendars</a></li>
-
-    		<li><a href="<?php echo $this -> Url -> build('/WorkSchedules'); ?>"><i class="fa fa-circle-o"></i> WorkSchedules</a></li>
-
-    		<li class="treeview">
-    			<a href="#"><i class="fa fa-circle-o"></i> Payroll<span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>
-            	<ul class="treeview-menu">
-                	<li><a href="<?php echo $this -> Url -> build('/PayrollArea'); ?>"><i class="fa fa-circle-o"></i> Payroll Area</a></li>
-    				<li><a href="<?php echo $this -> Url -> build('/Frequencies'); ?>"><i class="fa fa-circle-o"></i> Frequency</a></li>
-    				<li><a href="<?php echo $this -> Url -> build('/PayGroups'); ?>"><i class="fa fa-circle-o"></i> Pay Group</a></li>
-    				<li><a href="<?php echo $this -> Url -> build('/PayGrades'); ?>"><i class="fa fa-circle-o"></i> Pay Grade</a></li>
-    				<li><a href="<?php echo $this -> Url -> build('/PayRanges'); ?>"><i class="fa fa-circle-o"></i> Pay Range</a></li>
-    				<li><a href="<?php echo $this -> Url -> build('/PayComponents'); ?>"><i class="fa fa-circle-o"></i> Pay Component</a></li>
-    				<li><a href="<?php echo $this -> Url -> build('/PayComponentGroups'); ?>"><i class="fa fa-circle-o"></i> Pay Component Group</a></li>
-
-              	</ul>
-            </li>
-
-
-    	</ul>
-    </li>
+     <a href="#"> <i class="fa fa-money"></i> <span>Payroll</span> <i class="fa fa-angle-left pull-right"></i>  </a>
+     <ul class="treeview-menu">
+         <li><a href="<?php echo $this -> Url -> build('/PayrollData'); ?>"><i class="fa fa-circle-o"></i> Payroll Data</a></li>
+         <li><a href="<?php echo $this -> Url -> build('/PayrollStatus'); ?>"><i class="fa fa-circle-o"></i> Payroll Status</a></li>
+         <li><a href="<?php echo $this -> Url -> build('/PayrollRecord'); ?>"><i class="fa fa-circle-o"></i> Payroll Record</a></li>
+         <li><a href="<?php echo $this -> Url -> build('/PayrollResult'); ?>"><i class="fa fa-circle-o"></i> Payroll Result</a></li>
+     </ul>
+     </li>
+     <li><a href="#"><i class="fa fa-line-chart"></i><span> Performance</span></a></li>
+     <li><a href="#"><i class="fa fa-key"></i><span>Compensation Management</span></a></li>
     <li class="treeview">
-    <a href="#"> <i class="fa fa-lock"></i> <span>Admin</span> <i class="fa fa-angle-left pull-right"></i>  </a>
+    <a href="#"> <i class="fa fa-cubes"></i> <span>Admin</span> <i class="fa fa-angle-left pull-right"></i>  </a>
     <ul class="treeview-menu">
 
-	<li><a href="<?php echo $this -> Url -> build('/LegalEntities'); ?>"><i class="fa fa-circle-o"></i> Legal Entity</a></li>
-    <li><a href="<?php echo $this -> Url -> build('/BusinessUnits'); ?>"><i class="fa fa-circle-o"></i> Business Unit</a></li>
-    <li><a href="<?php echo $this -> Url -> build('/Departments'); ?>"><i class="fa fa-circle-o"></i> Departments</a></li>
-    <li><a href="<?php echo $this -> Url -> build('/Divisions'); ?>"><i class="fa fa-circle-o"></i> Divisions</a></li>
-    <li><a href="<?php echo $this -> Url -> build('/CostCentres'); ?>"><i class="fa fa-circle-o"></i> Cost Centers</a></li>
-    <li><a href="<?php echo $this->Url->build('/Positions'); ?>"><i class="fa fa-circle-o"></i> Position</a></li>
-    <!-- <li><a href="<?php echo $this -> Url -> build('/CalendarAssignments'); ?>"><i class="fa fa-circle-o"></i> Calendar Assignments</a></li> -->
-    <li><a href="<?php echo $this -> Url -> build('/Workflowrules'); ?>"><i class="fa fa-circle-o"></i> Workflow</a></li>
+      <li class="treeview">
+        <a href="#"> <i class="fa fa-group"></i> <span>Company</span> <i class="fa fa-angle-left pull-right"></i>  </a>
+          <ul class="treeview-menu">
+            <li><a href="<?php echo $this -> Url -> build('/LegalEntities'); ?>"><i class="fa fa-circle-o"></i> Legal Entity</a></li>
+            <li><a href="<?php echo $this -> Url -> build('/BusinessUnits'); ?>"><i class="fa fa-circle-o"></i> Business Unit</a></li>
+            <li><a href="<?php echo $this -> Url -> build('/Departments'); ?>"><i class="fa fa-circle-o"></i> Department</a></li>
+            <li><a href="<?php echo $this -> Url -> build('/Divisions'); ?>"><i class="fa fa-circle-o"></i> Division</a></li>
+            <li><a href="<?php echo $this -> Url -> build('/CostCentres'); ?>"><i class="fa fa-circle-o"></i> Cost Center</a></li>
+            <li><a href="<?php echo $this -> Url -> build('/Regions'); ?>"><i class="fa fa-circle-o"></i> Region</a></li>
+            <li><a href="<?php echo $this -> Url -> build('/Locations'); ?>"><i class="fa fa-circle-o"></i> Location</a></li>
+          </ul>
+       </li>
+       <li class="treeview">
+         <a href="#"> <i class="fa fa-graduation-cap"></i> <span>Job</span> <i class="fa fa-angle-left pull-right"></i>  </a>
+           <ul class="treeview-menu">
+             <li><a href="<?php echo $this -> Url -> build('/JobFunctions'); ?>"><i class="fa fa-circle-o"></i> Job Function</a></li>
+             <li><a href="<?php echo $this -> Url -> build('/JobClasses'); ?>"><i class="fa fa-circle-o"></i> Job Class</a></li>
+             <li><a href="<?php echo $this-> Url ->build('/Positions'); ?>"><i class="fa fa-circle-o"></i> Position</a></li>
+             <li><a href="<?php echo $this -> Url -> build('/WorkSchedules'); ?>"><i class="fa fa-circle-o"></i> Work Schedule</a></li>
+             <li><a href="<?php echo $this -> Url -> build('/HolidayCalendars'); ?>"><i class="fa fa-circle-o"></i> Holiday Calendar</a></li>
+           </ul>
+        </li>
     <li class="treeview">
- 		<a href="#"><i class="fa fa-circle-o"></i> Payroll<span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>
-			<ul class="treeview-menu">
-				<li><a href="<?php echo $this -> Url -> build('/PayrollData'); ?>"><i class="fa fa-circle-o"></i> Payroll Data</a></li>
-    			<li><a href="<?php echo $this -> Url -> build('/PayrollStatus'); ?>"><i class="fa fa-circle-o"></i> Payroll Status</a></li>
-    			<li><a href="<?php echo $this -> Url -> build('/PayrollRecord'); ?>"><i class="fa fa-circle-o"></i> Payroll Record</a></li>
-    			<li><a href="<?php echo $this -> Url -> build('/PayrollResult'); ?>"><i class="fa fa-circle-o"></i> Payroll Result</a></li>
-			</ul>
-     	</li>
+      <a href="#"> <i class="fa fa-calendar"></i> <span>Time Type</span> <i class="fa fa-angle-left pull-right"></i>  </a>
+        <ul class="treeview-menu">
+ 		       <li><a href="<?php echo $this -> Url -> build('/TimeAccountTypes'); ?>"><i class="fa fa-circle-o"></i> Time Account Type</a></li>
+           <li><a href="<?php echo $this -> Url -> build('/TimeTypes'); ?>"><i class="fa fa-circle-o"></i> Time Type</a></li>
+ 		       <li><a href="<?php echo $this -> Url -> build('/TimeTypeProfiles'); ?>"><i class="fa fa-circle-o"></i> Time Type Profiles</a></li>
+        </ul>
+     </li>
+     <li class="treeview">
+       <a href="#"> <i class="fa fa-dollar"></i> <span>Payroll Master</span> <i class="fa fa-angle-left pull-right"></i>  </a>
+       <ul class="treeview-menu">
+         <li><a href="<?php echo $this -> Url -> build('/PayrollArea'); ?>"><i class="fa fa-circle-o"></i> Payroll Area</a></li>
+         <li><a href="<?php echo $this -> Url -> build('/Frequencies'); ?>"><i class="fa fa-circle-o"></i> Frequency</a></li>
+         <li><a href="<?php echo $this -> Url -> build('/PayGroups'); ?>"><i class="fa fa-circle-o"></i> Pay Group</a></li>
+         <li><a href="<?php echo $this -> Url -> build('/PayGrades'); ?>"><i class="fa fa-circle-o"></i> Pay Grade</a></li>
+         <li><a href="<?php echo $this -> Url -> build('/PayRanges'); ?>"><i class="fa fa-circle-o"></i> Pay Range</a></li>
+         <li><a href="<?php echo $this -> Url -> build('/PayComponents'); ?>"><i class="fa fa-circle-o"></i> Pay Component</a></li>
+         <li><a href="<?php echo $this -> Url -> build('/PayComponentGroups'); ?>"><i class="fa fa-circle-o"></i> Pay Component Group</a></li>
+       </ul>
+      </li>
+    <li><a href="<?php echo $this -> Url -> build('/Workflowrules'); ?>"><i class="fa fa-arrow-up"></i> Workflow</a></li>
     </ul>
     </li>
-	<li><a href="<?php echo $this -> Url -> build('/EmployeeAbsencerecords'); ?>"><i class="fa fa-calendar-minus-o"></i><span> Leave Requests</span></a></li>
-    <li><a href="<?php echo $this -> Url -> build('/Positions/orgchart'); ?>"><i class="fa fa-sitemap"></i><span> Organizational Chart </span></a></li>
     <?php
     }else{
     ?>
@@ -122,21 +121,21 @@ if (file_exists($file)) {
 	case "employee":
     ?>
     <li><a href="<?php echo $this -> Url -> build('/Homes'); ?>"><i class="fa fa-dashboard"></i><span> Dashboard </span></a></li>
-	<li><a href="<?php echo $this -> Url -> build('/Profiles'); ?>"><i class="glyphicon glyphicon-user"></i><span> Profile </span></a></li>
-	<li><a href="<?php echo $this -> Url -> build('/Dependents'); ?>"><i class="fa fa-users"></i><span> Dependents </span></a></li>
+    <li><a href="<?php echo $this -> Url -> build('/Positions/orgchart'); ?>"><i class="fa fa-sitemap"></i><span> Organization Structure </span></a></li>
+	  <li><a href="<?php echo $this -> Url -> build('/Profiles'); ?>"><i class="glyphicon glyphicon-user"></i><span> Profile </span></a></li>
+	  <li><a href="<?php echo $this -> Url -> build('/Dependents'); ?>"><i class="fa fa-child"></i><span> Dependents </span></a></li>
+    <li class="treeview">
+     <a href="#"> <i class="fa fa-calendar"></i> <span>Time Management</span> <i class="fa fa-angle-left pull-right"></i>  </a>
+     <ul class="treeview-menu">
+ 		<li><a href="<?php echo $this -> Url -> build('/EmployeeAbsencerecords'); ?>"><i class="fa fa-calendar-minus-o"></i><span> Leave Requests</span></a></li>
+     </ul>
+     </li>
     <li><a href="<?php echo $this -> Url -> build('/Notes'); ?>"><i class="fa fa-file-text-o"></i><span> Notes </span></a></li>
-	<li><a href="<?php echo $this -> Url -> build('/EmployeeAbsencerecords'); ?>"><i class="fa fa-calendar-minus-o"></i><span> Leave Requests</span></a></li>
-    <li><a href="<?php echo $this -> Url -> build('/Positions/orgchart'); ?>"><i class="fa fa-sitemap"></i><span> Organizational Chart </span></a></li>
-    
-
     <?php
 	break;
 	default:
     ?>
-
-
     <?php } ?>
-
     <li><a href="#"><i class="fa fa-question-circle"></i> <span>Help</span></a></li>
 </ul>
 <?php } ?>
