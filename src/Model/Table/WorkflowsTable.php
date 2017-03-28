@@ -75,6 +75,10 @@ class WorkflowsTable extends Table
             ->dateTime('updatetime')
             ->allowEmpty('updatetime');
 
+        $validator
+            ->boolean('active')
+            ->allowEmpty('active');
+
         return $validator;
     }
 

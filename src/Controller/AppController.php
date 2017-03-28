@@ -217,13 +217,14 @@ class AppController extends Controller
 		$ncontent="";
 		foreach ($query as $row) {
 			$workflowsTable = TableRegistry::get('Workflows');
-			$execquery = $workflowsTable->find('All')->where(['workflowrule_id'=>$row['workflowrule_id']])->where(['currentstep'=>$row['stepid']])
-								->andwhere(['Workflows.customer_id'=>$this->loggedinuser['customer_id']])->contain(['EmpDataBiographies'])->toArray();
+			$execquery = $workflowsTable->find('All')->where(['workflowrule_id'=>$row['workflowrule_id']])->andwhere(['currentstep'=>$row['stepid']])->andwhere(['Workflows.active'=>TRUE])
+								->andwhere(['Workflows.customer_id'=>$this->loggedinuser['customer_id']])->contain(['EmpDataBiographies'=> ['Employees'],'Workflowrules'=> ['TimeTypes'=> ['EmployeeAbsencerecords']] ])->toArray();
 			(isset($execquery)) ? $ncontent=$execquery : $ncontent="";
 			
 		}
 		$this->set('notificationcontent', $ncontent);  
-		  	
+
+
 		  
 
     	$this->viewBuilder()->theme('AdminLTE');

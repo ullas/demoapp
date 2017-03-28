@@ -16,6 +16,7 @@ use Cake\Core\Configure;
  * @property \Cake\ORM\Association\BelongsTo $TimeTypes
  * @property \Cake\ORM\Association\BelongsTo $Users
  * @property \Cake\ORM\Association\BelongsTo $Customers
+ * @property \Cake\ORM\Association\BelongsTo $Workflows
  *
  * @method \App\Model\Entity\EmployeeAbsencerecord get($primaryKey, $options = [])
  * @method \App\Model\Entity\EmployeeAbsencerecord newEntity($data = null, array $options = [])
@@ -58,6 +59,9 @@ class EmployeeAbsencerecordsTable extends Table
         $this->belongsTo('Customers', [
             'foreignKey' => 'customer_id'
         ]);
+        $this->belongsTo('Workflows', [
+            'foreignKey' => 'workflow_id'
+        ]);
     }
 
     /**
@@ -97,9 +101,11 @@ class EmployeeAbsencerecordsTable extends Table
 		if(isset($userdf)  & $userdf===1){
 
 			foreach (["start_date","end_date"] as $value) {		
-				if($data[$value]!=null && strpos($data[$value], '/') !== false){
-					$data[$value] = str_replace('/', '-', $data[$value]);
-					$data[$value]=date('Y/m/d', strtotime($data[$value]));
+				if(isset($data[$value])){			
+						if($data[$value]!=null && $data[$value]!='' && strpos($data[$value], '/') !== false){
+						$data[$value] = str_replace('/', '-', $data[$value]);
+						$data[$value]=date('Y/m/d', strtotime($data[$value]));
+					}
 				}
 			}
 		}
@@ -117,6 +123,7 @@ class EmployeeAbsencerecordsTable extends Table
         $rules->add($rules->existsIn(['time_type_id'], 'TimeTypes'));
         $rules->add($rules->existsIn(['user_id'], 'Users'));
         $rules->add($rules->existsIn(['customer_id'], 'Customers'));
+        $rules->add($rules->existsIn(['workflow_id'], 'Workflows'));
 
         return $rules;
     }

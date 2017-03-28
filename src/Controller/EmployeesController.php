@@ -25,11 +25,11 @@ class EmployeesController extends AppController
 		foreach($dbout as $value){
 			$fields[] = array("name" => $value['field_name'] , "type" => $value['datatype'] );
 		}
-		$contains=['Empdatabiographies', 'Empdatapersonals', 'Employmentinfos'];
+		$contains=['Empdatabiographies'=> ['Positions'], 'Empdatapersonals', 'Employmentinfos', 'ContactInfos', 'Addresses','Identities','Jobinfos'];
 									  
 		$usrfilter="Employees.customer_id ='".$this->loggedinuser['customer_id'] . "' and Employees.visible='1'";						  
 		$output =$this->Datatable->getView($fields,$contains,$usrfilter);
-		echo json_encode($output);			
+		echo json_encode($output);	
     }
     public function index()
     {
@@ -39,7 +39,7 @@ class EmployeesController extends AppController
         // $this->set('_serialize', ['configs']);
 		 
 		$this->paginate = [
-            'contain' => ['Empdatabiographies', 'Empdatapersonals', 'Employmentinfos','Customers','Jobinfos']
+            'contain' => ['Empdatabiographies'=> ['Positions'], 'Empdatapersonals', 'Employmentinfos','Customers', 'ContactInfos', 'Addresses','Identities','Jobinfos']
         ];
 		
         $employees = $this->paginate($this->Employees);

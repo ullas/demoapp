@@ -63,7 +63,7 @@ class OrgchartactionsController extends AppController
 	public function transfer($id = null) {
 		
 		$this->loadModel('JobInfos');
-		$arr = $this->JobInfos->find('all',[ 'conditions' => array('position_id' => $id),'contain' => []])->toArray();
+		$arr = $this->JobInfos->find('all',[ 'conditions' => array('employee_id' => $id),'contain' => []])->toArray();
 
 		if(isset($arr[0])){ $jobInfo = $arr[0]; }else{ $jobInfo = $this->JobInfos->newEntity();}  
 				
@@ -73,7 +73,7 @@ class OrgchartactionsController extends AppController
             if ($this->JobInfos->save($jobInfo)) {
                 //associated EmpDataBiographies
             	$this->loadModel('EmpDataBiographies');
-				$empdataarr = $this->EmpDataBiographies->find('all',[ 'conditions' => array('position_id' => $id),'contain' => []])->toArray();
+				$empdataarr = $this->EmpDataBiographies->find('all',[ 'conditions' => array('employee_id' => $id),'contain' => []])->toArray();
 				isset($empdataarr[0]) ? $empDataBiography = $empdataarr[0] : $empDataBiography = $this->EmpDataBiographies->newEntity(); 
 				$empDataBiography = $this->EmpDataBiographies->patchEntity($empDataBiography, $this->request->data);
             	if ($this->EmpDataBiographies->save($empDataBiography)) {
@@ -87,12 +87,8 @@ class OrgchartactionsController extends AppController
 		
 		$customers = $this->JobInfos->Customers->find('list', ['limit' => 200]);
 		
-		$this->loadModel('EmpDataBiographies');
-		$emparr=$this->EmpDataBiographies->find('all',['conditions' => array('position_id' => $id),'contain' => []])->toArray();
-		isset($emparr[0]) ? $empid = $emparr[0]['employee_id'] : $empid = "" ;  
-		
 		$this->loadModel('Employees');
-		$rslt=$this->Employees->getIncludedPositions($empid);  
+		$rslt=$this->Employees->getIncludedPositions($id);  
 		foreach($rslt as $key =>$value){
 			$positions[$value['id']]=$value['name'];
 		}
@@ -131,9 +127,6 @@ class OrgchartactionsController extends AppController
 		
 		$customers = $this->JobInfos->Customers->find('list', ['limit' => 200]);
 		
-		$this->loadModel('EmpDataBiographies');
-		$emparr=$this->EmpDataBiographies->find('all',['conditions' => array('position_id' => $id),'contain' => []])->toArray();
-		isset($emparr[0]) ? $empid = $emparr[0]['employee_id'] : $empid = "" ;  
 		
 		$this->loadModel('Employees');
 		$rslt=$this->Employees->getIncludedPositions($id);  
@@ -151,12 +144,8 @@ class OrgchartactionsController extends AppController
 	
 	public function addresschange($id = null) {
 		
-		$this->loadModel('EmpDataBiographies');
-		$emparr=$this->EmpDataBiographies->find('all',['conditions' => array('id' => $id),'contain' => []])->toArray();
-		isset($emparr[0]) ? $empid = $emparr[0]['employee_id'] : $empid = "" ;  
-		
 		$this->loadModel('Addresses');
-		$arr = $this->Addresses->find('all',[ 'conditions' => array('employee_id' => $empid),
+		$arr = $this->Addresses->find('all',[ 'conditions' => array('employee_id' => $id),
             'contain' => []
         ])->toArray();
 		
@@ -179,11 +168,7 @@ class OrgchartactionsController extends AppController
 	
 	public function addnote($id = null) {
 		$this->loadModel('Notes');
-		$arr = $this->Notes->find('all',[ 'conditions' => array('emp_data_biographies_id' => $id),
-            'contain' => []
-        ])->toArray();
-		
-		isset($arr[0]) ? $note = $arr[0] : $note = $this->Notes->newEntity();  
+		$note = $this->Notes->newEntity();  
 		
         if ($this->request->is(['patch', 'post', 'put'])) {
             $note = $this->Notes->patchEntity($note, $this->request->data);
