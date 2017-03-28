@@ -32,7 +32,7 @@
     </fieldset>
      <div class="box-footer">
     <?=$this->Html->link(__('Cancel'), ['action' => 'index'], ['escape' => false])?>
-    <?= $this->Form->button(__('Update JobClass'),['title'=>'Update JobClass','class'=>'pull-right']) ?>
+    <?= $this->Form->button(__('Update Job Class'),['title'=>'Update Job Class','class'=>'pull-right']) ?>
 </div>
     <?= $this->Form->end() ?>
 </div></div></section>
