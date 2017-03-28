@@ -11,7 +11,6 @@ if (file_exists($file)) {
     <li class="header">
         MAIN NAVIGATION
     </li>
-
     <?php $userrole=$this->request->session()->read('sessionuser')['role'];
 	switch ($userrole) {
 	case "root":
@@ -22,7 +21,7 @@ if (file_exists($file)) {
     <a href="#"> <i class="fa fa-lock"></i> <span>Admin</span> <i class="fa fa-angle-left pull-right"></i>  </a>
     <ul class="treeview-menu">
 
-	<li><a href="<?php echo $this -> Url -> build('/LegalEntities'); ?>"><i class="fa fa-circle-o"></i> Legal Entity</a></li>
+	  <li><a href="<?php echo $this -> Url -> build('/LegalEntities'); ?>"><i class="fa fa-circle-o"></i> Legal Entity</a></li>
     <li><a href="<?php echo $this -> Url -> build('/BusinessUnits'); ?>"><i class="fa fa-circle-o"></i> Business Unit</a></li>
     <li><a href="<?php echo $this -> Url -> build('/Departments'); ?>"><i class="fa fa-circle-o"></i> Department</a></li>
     <li><a href="<?php echo $this -> Url -> build('/Divisions'); ?>"><i class="fa fa-circle-o"></i> Division</a></li>
@@ -40,7 +39,6 @@ if (file_exists($file)) {
 		if( (isset($counts['legalentity']) && $counts['legalentity'] >0) && (isset($counts['businessunit']) && $counts['businessunit'] >0) &&
 			(isset($counts['division']) && $counts['division'] >0) && (isset($counts['department']) && $counts['department'] >0) &&
 			(isset($counts['costcenter']) && $counts['costcenter'] >0) && (isset($counts['position']) && $counts['position'] >0) ){
-
     ?>
     <li><a href="<?php echo $this -> Url -> build('/Homes'); ?>"><i class="fa fa-dashboard"></i><span> Dashboard </span></a></li>
     <li><a href="<?php echo $this -> Url -> build('/Positions/orgchart'); ?>"><i class="fa fa-sitemap"></i><span> Organization Structure </span></a></li>
@@ -61,9 +59,9 @@ if (file_exists($file)) {
      </ul>
      </li>
      <li><a href="#"><i class="fa fa-line-chart"></i><span> Performance</span></a></li>
-     <li><a href="#"><i class="fa fa-key"></i><span>Compensation Management</span></a></li>
+     <li><a href="#"><i class="fa fa-trophy"></i><span>Compensation Management</span></a></li>
     <li class="treeview">
-    <a href="#"> <i class="fa fa-cubes"></i> <span>Admin</span> <i class="fa fa-angle-left pull-right"></i>  </a>
+    <a href="#"> <i class="fa fa-user-secret"></i> <span>Admin</span> <i class="fa fa-angle-left pull-right"></i>  </a>
     <ul class="treeview-menu">
 
       <li class="treeview">
@@ -108,7 +106,7 @@ if (file_exists($file)) {
          <li><a href="<?php echo $this -> Url -> build('/PayComponentGroups'); ?>"><i class="fa fa-circle-o"></i> Pay Component Group</a></li>
        </ul>
       </li>
-    <li><a href="<?php echo $this -> Url -> build('/Workflowrules'); ?>"><i class="fa fa-arrow-up"></i> Workflow</a></li>
+    <li><a href="<?php echo $this -> Url -> build('/Workflowrules'); ?>"><i class="fa fa-list-ol"></i> Workflow</a></li>
     </ul>
     </li>
     <?php
