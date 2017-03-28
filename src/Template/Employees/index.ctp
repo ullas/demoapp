@@ -1,4 +1,4 @@
-<style>	
+<style>
 .griddiv {
     position: relative;
     /*background: #fff;*/
@@ -45,7 +45,9 @@
     margin-right: 5px;
 }
 
-.
+#gridsection{
+  margin-top:33px
+}
 </style>
 
 <section class="content-header">
@@ -89,23 +91,21 @@
                               <a href="/Employees/edit/<?php echo $employee['id']; ?>" class="btn btn-success btn-xs"><i class="fa fa-pencil"></i> </a>
                               <a href="/Employees/view/<?php echo $employee['id']; ?>" class="btn btn-primary btn-xs"><i class="fa fa-user"> </i> View Profile</a>
                             </div>
-                          </div>                          
+                          </div>
                         </div>
                       </div>
 		<?php endforeach; ?>
 	</div>
 </section>
-
-
 <div id="dtsection" style="display: none;">
 	<?php echo $this->element('indexbasic'); ?>
 </div>
 
-
 <?php $this->start('scriptIndexBottom'); ?>
+
 <script>
 $(function () {
-	
+
 	$('.gridbtn').click(function(){
 		$('#gridsection').show();
 		$('#dtsection').hide();
@@ -114,9 +114,8 @@ $(function () {
 		$('#gridsection').hide();
     	$('#dtsection').show();
 	});
-	
-});
 
+});
 
 </script>
 <?php $this->end(); ?>
