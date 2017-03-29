@@ -42,14 +42,14 @@ class EmployeesController extends AppController
             'contain' => ['Empdatabiographies'=> ['Positions'], 'Empdatapersonals', 'Employmentinfos','Customers', 'ContactInfos', 'Addresses','Identities','Jobinfos']
         ];
 		
-        $employees = $this->paginate($this->Employees);
+        $employees = $this->paginate($this->Employees->find('all')->where(['Employees.visible' => 1])->andwhere(['Employees.customer_id' => $this->loggedinuser['customer_id'] ]));
 
 		$actions =[ ['name'=>'delete','title'=>'Delete','class'=>' label-danger'] ];
         $this->set('actions',$actions);	
 		$positions = $this->Employees->JobInfos->Positions->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         	 
         $this->set(compact('employees','positions'));
-        $this->set('_serialize', ['employees']);
+        $this->set('_serialize', ['employees']);//$this->Flash->success(__('The ---'.json_encode($employees)));
     }
 
     /**

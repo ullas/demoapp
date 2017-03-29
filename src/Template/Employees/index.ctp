@@ -70,8 +70,8 @@
                         <div class="well profile_view" style="width:100%;">
                           <div class="col-sm-12" style="height: 160px;">
                             <div class="left col-xs-8 text-muted">
-                              <h3><?php if(isset($employee['empdatabiography']['birth_name'])){ echo $employee['empdatabiography']['birth_name']; }else{ echo "Birth Name"; } ?></h3>
-                              <p> <?php if(isset($employee['jobinfo']['position_id'])){ echo $employee['jobinfo']['position_id']; }else{ echo "Software Engineer"; } ?> </p>
+                              <h3><?php echo $employee['empdatapersonal']['first_name']." ".$employee['empdatapersonal']['middle_name']." ".$employee['empdatapersonal']['last_name']; ?></h3>
+                              <p> <?php if(isset($employee['empdatabiography']['position_id'])){ echo $employee['empdatabiography']['position']['name']; }else{ echo "Position"; } ?> </p>
                               <ul class="list-unstyled">
                                 <li><i class="fa fa-building"></i> Address: </li>
                                 <li><i class="fa fa-phone"></i> Phone #: </li>
@@ -85,7 +85,12 @@
                           </div>
                           <div class="col-xs-12 bottom text-center">
                             <div class="col-xs-12 col-sm-6 emphasis">
-                            	<a href="#" class="btn btn-danger btn-xs pull-left"><i class="fa fa-trash bg-red"></i> </a>
+                            	
+                            	<form name="formdelete" id="formdelete<?php echo $employee['id']; ?>" method="post" action="/Employees/delete/<?php echo $employee['id']; ?>" style="display:none;" >
+                                   <input type="hidden" name="_method" value="POST"></form>
+                               	<a href="#" onclick="sweet_confirmdelete(&quot;MayHaw&quot;,&quot;Are you sure you want to delete # '<?php echo $employee['id']; ?>'?&quot; , function(){ document.getElementById(&quot;formdelete<?php echo $employee['id']; ?>&quot;).submit(); })
+                                    event.returnValue = false; return false;" class="btn btn-danger btn-xs pull-left"><i class="fa fa-trash"></i> </a>
+                                    
                             </div>
                             <div class="col-xs-12 col-sm-6 emphasis">
                               <a href="/Employees/edit/<?php echo $employee['id']; ?>" class="btn btn-success btn-xs"><i class="fa fa-pencil"></i> </a>

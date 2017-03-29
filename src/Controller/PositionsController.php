@@ -52,17 +52,20 @@ class PositionsController extends AppController
 	}
 	public function orgchart()
     {
+    	$userrole=$this->request->session()->read('sessionuser')['role'];
+		$this->set('userrole', $userrole);
+		 
 		$list = $this->Positions->find('treeList');
 		$orgpositions = $this->Positions->find('threaded', array('order' => array('Positions.lft')) )
-		 ->select(['Employees.profilepicture','EmpDataBiographies.id','EmpDataBiographies.birth_name','EmpDataBiographies.country_of_birth','EmpDataBiographies.employee_id'])
+		 ->select(['Employees.profilepicture','EmpDataBiographies.id','EmpDataBiographies.birth_name','EmpDataBiographies.country_of_birth','EmpDataBiographies.employee_id',
+		 				'EmpDataPersonals.first_name','EmpDataPersonals.middle_name','EmpDataPersonals.last_name'])
     	 ->select($this->Positions)
 		 ->leftJoin('EmpDataBiographies', 'EmpDataBiographies.position_id = Positions.id')
-         ->leftJoin('Employees', 'EmpDataBiographies.employee_id = Employees.id');
+         ->leftJoin('Employees', 'EmpDataBiographies.employee_id = Employees.id')->leftJoin('EmpDataPersonals', 'EmpDataPersonals.employee_id = Employees.id');
             
-		$this->log($orgpositions);
+		// $this->log($orgpositions);
            
 		$this->set('orgpositions', $orgpositions);
-		
     }
 
     /**
