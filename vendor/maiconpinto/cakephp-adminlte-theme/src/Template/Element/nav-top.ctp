@@ -23,7 +23,7 @@ if (file_exists($file)) {
             <li class="dropdown notifications-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                     <i class="fa fa-bell-o"></i>
-                    <span class="label label-warning"><?php if($notificationcontent!=''){echo count($notificationcontent);}  ?></span>
+                    <span class="label label-warning"><?php if($notificationcontent!='' && $notificationcontent!=null){echo count($notificationcontent);}  ?></span>
                 </a>
                 <ul class="dropdown-menu">
                     <li class="header">You have <?php if($notificationcontent!=''){echo count($notificationcontent);}else{echo "no";}  ?> notifications</li>

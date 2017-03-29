@@ -1,12 +1,13 @@
 <?php
-function RecursiveCategories($array) {
+function RecursiveCategories($array,$userrole) {
 
     if (count($array)) {
             echo "\n<ul id='org' style='display:none'>\n";
         foreach ($array as $vals) {
 
-            $htmlstr='<div id=mptl><i class="fa fa-briefcase"></i> <small class="text-muted">'.$vals['name'].'</small>
-            				<br/><i class="fa fa-flag"></i> <small class="text-muted">'.$vals['EmpDataBiographies']['country_of_birth'].'</small>
+			if($userrole=="admin"){
+
+            	$htmlstr='<div id=mptl><i class="fa fa-briefcase"></i> <small class="text-muted">'.$vals['name'].'</small>
             				<hr/><b>Take Action</b><ul class=list-unstyled>
                     		<li><a href="/Orgchartactions/transfer/'.$vals['EmpDataBiographies']['employee_id'].'" data-remote="false" class="open-Popup" data-toggle="modal" data-target="#actionspopover">Transfer</a></li>
                     		<li><a href="/Orgchartactions/promotion/'.$vals['EmpDataBiographies']['employee_id'].'" data-remote="false" class="open-Popup" data-toggle="modal" data-target="#actionspopover">Promotion</a></li>
@@ -17,8 +18,28 @@ function RecursiveCategories($array) {
                     		<li><a href="/Orgchartactions/terminate/'.$vals['EmpDataBiographies']['id'].'" data-remote="false" class="open-Popup" data-toggle="modal" data-target="#actionspopover">Termination</a></li>
                     		<li><a href="/Orgchartactions/retirement/'.$vals['EmpDataBiographies']['employee_id'].'" data-remote="false" class="open-Popup" data-toggle="modal" data-target="#actionspopover">Retirement</a></li>
 	                    	</ul></div>';
-                    echo "<li id=\"".$vals['id']."\"><div class='node-title'><a href='#' tabindex='0' id='".$vals['id']."' class='popoverbtn' data-trigger='focus' data-html='true' data-toggle='popover' title='".$vals['EmpDataBiographies']['birth_name']."'
- 							data-content='".$htmlstr."'>".$vals['EmpDataBiographies']['birth_name']."</a></div>";
+							
+			}else if($userrole=="employee"){
+								
+					$htmlstr='<div id=mptl><i class="fa fa-briefcase"></i> <small class="text-muted">'.$vals['name'].'</small>
+            				<hr/><b>Take Action</b><ul class=list-unstyled>
+                    		<li><a href="/Orgchartactions/addresschange/'.$vals['EmpDataBiographies']['employee_id'].'" data-remote="false" class="open-Popup" data-toggle="modal" data-target="#actionspopover">Address Change</a></li>
+                    		<li><a href="#" class="open-Popup" data-toggle="modal" data-remote="false" data-target="#actionspopover">Global Assignment</a></li>
+                    		<li><a href="/Orgchartactions/addnote/'.$vals['EmpDataBiographies']['id'].'" data-remote="false" class="open-Popup" data-toggle="modal" data-target="#actionspopover">Add Note</a></li>
+                    		<li><a href="/Orgchartactions/retirement/'.$vals['EmpDataBiographies']['employee_id'].'" data-remote="false" class="open-Popup" data-toggle="modal" data-target="#actionspopover">Retirement</a></li>
+	                    	</ul></div>';			
+			}else{
+								
+					$htmlstr='<div id=mptl><i class="fa fa-briefcase"></i> <small class="text-muted">'.$vals['name'].'</small>
+            				<hr/><b>Take Action</b><ul class=list-unstyled>
+                    		<li><a href="#" class="open-Popup" data-toggle="modal" data-remote="false" data-target="#actionspopover">Global Assignment</a></li>
+                    		</ul></div>';			
+			}
+							
+							
+                    echo "<li id=\"".$vals['id']."\"><div class='node-title'><a href='#' tabindex='0' id='".$vals['id']."' class='popoverbtn' data-trigger='focus' data-html='true' data-toggle='popover'
+                    		 title='".$vals['EmpDataPersonals']['first_name']." ".$vals['EmpDataPersonals']['middle_name']." ".$vals['EmpDataPersonals']['last_name']."'
+ 							data-content='".$htmlstr."'>".$vals['EmpDataPersonals']['first_name']." ".$vals['EmpDataPersonals']['middle_name']." ".$vals['EmpDataPersonals']['last_name']."</a></div>";
  					if($vals['Employees']['profilepicture'] == "" || $vals['Employees']['profilepicture'] == null){
  						echo "<div class='node-pic'><img class='node-profile-img' src='/img/circle-512.png'></div>";
  					}else{
@@ -28,7 +49,7 @@ function RecursiveCategories($array) {
  					echo "<div class='node-position'>".$vals['name']."</div>";
  					
                     if (count($vals['children'])) {
-                            RecursiveCategories($vals['children']);
+                            RecursiveCategories($vals['children'],$userrole);
                     }
                     echo "</li>\n";
         }
@@ -36,7 +57,7 @@ function RecursiveCategories($array) {
     }
 } ?>
 
-<?= RecursiveCategories($orgpositions); 
+<?= RecursiveCategories($orgpositions,$userrole); 
 // foreach ($orgpositions as $vals) {echo '<a>'.$vals.'</a>';}?> 
 
 <style>
@@ -161,7 +182,10 @@ $(".topbar").fadeTo('fast',1);
 		});
 	});
 
-
+			$('.node-title').click(function(event) {
+				event.stopPropagation();
+			});
+			
 	$('#actionspopover').on('hidden.bs.modal', function (e) {
 	  $('.modal-body', this).empty();
 	})

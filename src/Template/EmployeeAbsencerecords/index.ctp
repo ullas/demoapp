@@ -6,7 +6,7 @@
 
 
 
-<?php if($notificationcontent!=''){ ?>
+<?php if($notificationcontent!='' && $notificationcontent!=null){  ?>
 <section class="content-header">
 	<h1>Leave Management</h1>	
 </section>
@@ -27,8 +27,10 @@
                  <ul class="products-list product-list-in-box">
                         	<?php $cnt=0; for ($x = 0; $x < count($notificationcontent); $x++) { 
                         		if(isset($notificationcontent[$x])){
+                        			
+									
                         	?>
-                        	
+                        	<div class="jumbotron" style="overflow:auto;"><?php echo $notificationcontent[$x] ?></div>
                         	<?php for ($y = 0; $y < count($notificationcontent[$x]['workflowrule']['time_types']); $y++) { 
        							if(isset($notificationcontent[$x]['workflowrule']['time_types'][$y])){
                         	?>
@@ -36,7 +38,7 @@
                         	<?php for ($t = 0; $t < count($notificationcontent[$x]['workflowrule']['time_types'][$y]['employee_absencerecords']); $t++) { 
        							if(isset($notificationcontent[$x]['workflowrule']['time_types'][$y]['employee_absencerecords'][$t])){
        								
-									if($cnt<count($notificationcontent)){
+									// if($cnt<count($notificationcontent)){
                         	?>
                         	
                         	<li class="item" style="padding:10px;">
@@ -59,7 +61,7 @@
                             	</div>
                             </li>
                             
-                        	<?php $cnt++; }  }  } ?>
+                        	<?php $cnt++; }  }   ?>
                         	
                         	<?php }  } ?>
                         	<!-- <div class="jumbotron" style="overflow: auto;"><?php echo json_encode($notificationcontent[$x]); ?></div> -->
