@@ -54,7 +54,7 @@ div#myDropZone {
              <!-- <div class="form-horizontal"> -->
              	<fieldset>
                 <?php
-            	echo $this->Form->input('empdatabiography.person_id_external');
+            	echo $this->Form->input('empdatabiography.person_id_external',['label' => 'Employee Number']);
 				echo $this->Form->input('empdatabiography.birth_name',['templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-user"></i></div>']]);
 				echo $this->Form->input('empdatabiography.date_of_birth', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
             	echo $this->Form->input('empdatabiography.country_of_birth',['templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-flag"></i></div>'],'class'=>'select2','label'=>['text'=>'Country of birth'],'options' => $this->Country->get_countries(), 'empty' => true]);
