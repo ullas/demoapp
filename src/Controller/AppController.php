@@ -207,11 +207,11 @@ class AppController extends Controller
     	//get position id 
     	$jobinfosTable = TableRegistry::get('JobInfos');	
 		$query=$jobinfosTable->find('All')->where(['employee_id'=>$this->request->session()->read('sessionuser')['employee_id']])->toArray();
-		(isset($query[0])) ? $myposition=$query[0]['position_id'] : $myposition="0";
+		(isset($query[0])) ? $mypositionid=$query[0]['position_id'] : $mypositionid="0";
 		
 		//get distinct workflowruleid having the particular position id
 		$workflowactionsTable = TableRegistry::get('Workflowactions');
-		$query = $workflowactionsTable->find('All')->where(['position_id'=>$myposition])->andwhere(['customer_id'=>$this->loggedinuser['customer_id']]) ->distinct(['workflowrule_id']);
+		$query = $workflowactionsTable->find('All')->where(['position_id'=>$mypositionid])->andwhere(['customer_id'=>$this->loggedinuser['customer_id']]) ->distinct(['workflowrule_id']);
 		
 		// Iterating the query.
 		$lcontent=array();
@@ -227,6 +227,11 @@ class AppController extends Controller
 		}
 		$this->set('notificationcontent', $lcontent);
 		 
+		 
+		$positionsTable = TableRegistry::get('Positions');	
+		$query=$positionsTable->find('All')->where(['id'=>$mypositionid])->toArray();
+		(isset($query[0])) ? $myposition=$query[0]['name'] : $myposition="0";
+		$this->set('myposition', $myposition);
 
     	$this->viewBuilder()->theme('AdminLTE');
 		$this->set('theme', Configure::read('Theme'));

@@ -66,7 +66,8 @@ if (file_exists($file)) {
 								
                         	?>
                             <li><a href="/EmployeeAbsencerecords">
-                            	<i class="fa fa-calendar-minus-o text-aqua"></i><b><?php echo $leavenotificationarr[$k]; ?>
+                            	<i class="fa fa-calendar-minus-o text-aqua"></i><b>
+                            		<?php $empname = str_replace('"', '',$leavenotificationarr[$k]); echo $empname; ?>
                             		</b> requests a leave</a></li>
                             <?php } } ?>
                         </ul>
@@ -91,8 +92,8 @@ if (file_exists($file)) {
           					echo $this->Html->image($picturename, array('class' => 'img-circle', 'alt' => 'User profile picture')); ?>
                         <!-- <?php echo $this->Html->image('sree.png', array('class' => 'img-circle', 'alt' => 'User Image')); ?> -->
                         <p>
-                            <?php echo $name ?> - Web Developer
-                            <small>Member since Nov. 2012</small>
+                            <?php echo $name ?>
+                            <small><?php echo $myposition; ?></small>
                         </p>
                     </li>
                     

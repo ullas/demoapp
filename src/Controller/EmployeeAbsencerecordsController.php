@@ -249,8 +249,15 @@ class EmployeeAbsencerecordsController extends AppController
                 $this->Flash->error(__('The employee absencerecord could not be saved. Please, try again.'));
             }
         }
+		$this->loadModel('JobInfos');
+		$arr = $this->JobInfos->find('all',['conditions' => array('employee_id' => $this->request->session()->read('sessionuser')['employee_id'] ), 'contain' => []])->toArray();
+		isset($arr[0]) ? $timetypeprofileid = $arr[0]['time_type_profile_id'] : $timetypeprofileid = "0";  
+		
+		$timeTypes = $this->EmployeeAbsencerecords->TimeTypes->find('list', ['limit' => 200])->where(['time_type_profile_id' => $timetypeprofileid])->andwhere(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        
+		$this->Flash->success(__('The o/p:.'.$timetypeprofileid));	
+			
         $empdatabiographies = $this->EmployeeAbsencerecords->Empdatabiographies->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
-        $timeTypes = $this->EmployeeAbsencerecords->TimeTypes->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         $users = $this->EmployeeAbsencerecords->Users->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         $this->set(compact('employeeAbsencerecord', 'empdatabiographies', 'timeTypes', 'users'));
         $this->set('_serialize', ['employeeAbsencerecord']);
