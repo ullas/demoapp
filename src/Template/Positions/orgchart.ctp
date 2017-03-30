@@ -9,6 +9,7 @@ function RecursiveCategories($array,$userrole) {
 
             	$htmlstr='<div id=mptl><i class="fa fa-briefcase"></i> <small class="text-muted">'.$vals['name'].'</small>
             				<hr/><b>Take Action</b><ul class=list-unstyled>
+                    		<li><a href="/Employees/view/'.$vals['EmpDataBiographies']['employee_id'].'" data-remote="false">View Profile</a></li>
                     		<li><a href="/Orgchartactions/transfer/'.$vals['EmpDataBiographies']['employee_id'].'" data-remote="false" class="open-Popup" data-toggle="modal" data-target="#actionspopover">Transfer</a></li>
                     		<li><a href="/Orgchartactions/promotion/'.$vals['EmpDataBiographies']['employee_id'].'" data-remote="false" class="open-Popup" data-toggle="modal" data-target="#actionspopover">Promotion</a></li>
                     		<li class="divider"></li>
@@ -22,18 +23,11 @@ function RecursiveCategories($array,$userrole) {
 			}else if($userrole=="employee"){
 								
 					$htmlstr='<div id=mptl><i class="fa fa-briefcase"></i> <small class="text-muted">'.$vals['name'].'</small>
-            				<hr/><b>Take Action</b><ul class=list-unstyled>
-                    		<li><a href="/Orgchartactions/addresschange/'.$vals['EmpDataBiographies']['employee_id'].'" data-remote="false" class="open-Popup" data-toggle="modal" data-target="#actionspopover">Address Change</a></li>
-                    		<li><a href="#" class="open-Popup" data-toggle="modal" data-remote="false" data-target="#actionspopover">Global Assignment</a></li>
-                    		<li><a href="/Orgchartactions/addnote/'.$vals['EmpDataBiographies']['id'].'" data-remote="false" class="open-Popup" data-toggle="modal" data-target="#actionspopover">Add Note</a></li>
-                    		<li><a href="/Orgchartactions/retirement/'.$vals['EmpDataBiographies']['employee_id'].'" data-remote="false" class="open-Popup" data-toggle="modal" data-target="#actionspopover">Retirement</a></li>
-	                    	</ul></div>';			
+            				<hr/></div>';			
 			}else{
 								
 					$htmlstr='<div id=mptl><i class="fa fa-briefcase"></i> <small class="text-muted">'.$vals['name'].'</small>
-            				<hr/><b>Take Action</b><ul class=list-unstyled>
-                    		<li><a href="#" class="open-Popup" data-toggle="modal" data-remote="false" data-target="#actionspopover">Global Assignment</a></li>
-                    		</ul></div>';			
+            				<hr/></div>';			
 			}
 							
 							

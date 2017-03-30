@@ -7,6 +7,21 @@ if (file_exists($file)) {
     echo ob_get_clean();
 } else {
 ?>
+
+<?php $cnt=0;$leavenotificationarr=array();
+	 for ($x = 0; $x < count($notificationcontent); $x++) { 
+     if(isset($notificationcontent[$x]) && $notificationcontent[$x]!=null){                        		
+								
+		for ($y = 0; $y < count($notificationcontent[$x]); $y++) {
+		if(isset($notificationcontent[$x][$y]) && $notificationcontent[$x][$y]!=null){
+									
+			for ($t = 0; $t < count($notificationcontent[$x][$y]['employee_absencerecords']); $t++) {
+			if(isset($notificationcontent[$x][$y]['employee_absencerecords'][$t]) && $notificationcontent[$x][$y]['employee_absencerecords'][$t]!=null){
+									 
+				array_push($leavenotificationarr, $this->Country->get_employeename($notificationcontent[$x][$y]['employee_absencerecords'][$t]['emp_data_biographies_id']));					 
+	} }  } }  } } 
+?>
+                            
 <nav class="navbar navbar-static-top" role="navigation">
     <!-- Sidebar toggle button-->
     <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
@@ -23,18 +38,20 @@ if (file_exists($file)) {
             <li class="dropdown notifications-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                     <i class="fa fa-bell-o"></i>
-                    <span class="label label-warning"><?php if($notificationcontent!='' && $notificationcontent!=null){echo count($notificationcontent);}  ?></span>
+                    <span class="label label-warning"><?php if($leavenotificationarr!='' && $leavenotificationarr!=null){echo count($leavenotificationarr);}  ?></span>
                 </a>
                 <ul class="dropdown-menu">
-                    <li class="header">You have <?php if($notificationcontent!=''){echo count($notificationcontent);}else{echo "no";}  ?> notifications</li>
+                    <li class="header">You have <?php if($leavenotificationarr!=''){echo count($leavenotificationarr);}else{echo "no";}  ?> notifications</li>
                     <li>
                         <!-- inner menu: contains the actual data -->
                         <ul class="menu">
-                        	<?php for ($x = 0; $x < count($notificationcontent); $x++) { 
-                        		if(isset($notificationcontent[$x])){
-                        		?>
+                        	<?php for ($k = 0; $k < count($leavenotificationarr); $k++) { 
+                        		if(isset($leavenotificationarr[$k]) && $leavenotificationarr[$k]!=null){                        		
+								
+                        	?>
                             <li><a href="/EmployeeAbsencerecords">
-                            	<i class="fa fa-calendar-minus-o text-aqua"></i><b><?php echo $notificationcontent[$x]['emp_data_biography']['birth_name'] ?></b> requests a leave</a></li>
+                            	<i class="fa fa-calendar-minus-o text-aqua"></i><b><?php echo $leavenotificationarr[$k]; ?>
+                            		</b> requests a leave</a></li>
                             <?php } } ?>
                         </ul>
                     </li>
