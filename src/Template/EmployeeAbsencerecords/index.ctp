@@ -45,10 +45,21 @@
                     				<i class="fa fa-3x fa-calendar-minus-o text-aqua"></i>
                   				</div>
                             	<div class="product-info">
-                            		<a href="javascript:void(0)" class="product-title"><?php echo $this->Country->get_employeename($notificationcontent[$x][$y]['employee_absencerecords'][$t]['emp_data_biographies_id']); ?>
+                            		<a href="javascript:void(0)" class="product-title"><?php $empname = str_replace('"', '',$this->Country->get_employeename($notificationcontent[$x][$y]['employee_absencerecords'][$t]['emp_data_biographies_id']));
+                            		echo $empname; ?>
                             			<!-- <span class="label label-warning pull-right"><?php echo $notificationcontent[$x]['created'] ?></span> -->
                             		</a>
-                            		<span class="product-description">Applied for <b><?php echo json_encode($notificationcontent[$x][$y]['employee_absencerecords'][$t]['time_type']['name']); ?></b> from 
+                            		<span class="product-description">Applied <b><?php $timetype = str_replace('"', '', json_encode($notificationcontent[$x][$y]['employee_absencerecords'][$t]['time_type']['name'])); echo  $timetype; ?></b> for
+                            			<?php  $startdate = $notificationcontent[$x][$y]['employee_absencerecords'][$t]['start_date'];
+                            						$enddate = $notificationcontent[$x][$y]['employee_absencerecords'][$t]['end_date'];
+                            						if($startdate!="" && $startdate!=null && $enddate!="" && $enddate!=null){
+                            					    	$date1 = new DateTime($startdate);
+												    	$date2 = new DateTime($enddate);	
+												    	$diff = $date2->diff($date1)->format("%a"); 
+												    	echo $diff; 
+													} 
+										?>
+                            			 day(s) from 
                             			<?php echo $notificationcontent[$x][$y]['employee_absencerecords'][$t]['start_date']; ?> to 
 										<?php echo $notificationcontent[$x][$y]['employee_absencerecords'][$t]['end_date']; ?>
                             			<div class="pull-right">

@@ -8,10 +8,11 @@
 <section class="content">
 	<div class="box box-primary">
 		<div class="box-body">
-
-			<!-- THE CALENDAR -->
-            <div id="calendar"></div>
-              
+			<div class="col-md-3"></div>
+			<div class="col-md-6">
+				<!-- THE CALENDAR -->
+            	<div id="calendar"></div>
+            </div> 
 		</div>
 	</div>
 </section>

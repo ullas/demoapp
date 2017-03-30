@@ -119,6 +119,7 @@ class EmployeesController extends AppController
             }
         }
 		
+		$positions="";
 		$rslt=$this->Employees->getExcludedPositions();  
 		foreach($rslt as $key =>$value){
 			$positions[$value['id']]=$value['name'];
