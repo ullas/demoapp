@@ -13,7 +13,9 @@ class EmployeeAbsencerecordsController extends AppController
 {
 
    var $components = array('Datatable');
-	
+	public function timesheet()
+	{
+	}
 	public function ajaxData() {
 		$this->autoRender= False;
 		  
