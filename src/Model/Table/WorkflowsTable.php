@@ -12,6 +12,7 @@ use Cake\Validation\Validator;
  * @property \Cake\ORM\Association\BelongsTo $Workflowrules
  * @property \Cake\ORM\Association\BelongsTo $Customers
  * @property \Cake\ORM\Association\BelongsTo $EmpDataBiographies
+ * @property \Cake\ORM\Association\HasMany $EmployeeAbsencerecords
  *
  * @method \App\Model\Entity\Workflow get($primaryKey, $options = [])
  * @method \App\Model\Entity\Workflow newEntity($data = null, array $options = [])
@@ -50,6 +51,9 @@ class WorkflowsTable extends Table
         ]);
         $this->belongsTo('EmpDataBiographies', [
             'foreignKey' => 'emp_data_biographies_id'
+        ]);
+        $this->hasMany('EmployeeAbsencerecords', [
+            'foreignKey' => 'workflow_id'
         ]);
     }
 

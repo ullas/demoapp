@@ -214,18 +214,19 @@ class AppController extends Controller
 		$query = $workflowactionsTable->find('All')->where(['position_id'=>$myposition])->andwhere(['customer_id'=>$this->loggedinuser['customer_id']]) ->distinct(['workflowrule_id']);
 		
 		// Iterating the query.
-		$ncontent="";
-		foreach ($query as $row) {
+		$lcontent=array();
+		foreach ($query as $row) {	
 			$workflowsTable = TableRegistry::get('Workflows');
 			$execquery = $workflowsTable->find('All')->where(['workflowrule_id'=>$row['workflowrule_id']])->andwhere(['currentstep'=>$row['stepid']])->andwhere(['Workflows.active'=>TRUE])
-								->andwhere(['Workflows.customer_id'=>$this->loggedinuser['customer_id']])->contain(['EmpDataBiographies'=> ['Employees'],'Workflowrules'=> ['TimeTypes'=> ['EmployeeAbsencerecords']] ])->toArray();
-			(isset($execquery)) ? $ncontent=$execquery : $ncontent="";
+								->andwhere(['Workflows.customer_id'=>$this->loggedinuser['customer_id']])->contain(['EmpDataBiographies'=> ['Employees'],'EmployeeAbsencerecords'=> ['TimeTypes'],'Workflowrules'])
+								->leftJoin('EmpDataBiographies', 'EmpDataBiographies.workflow_id = Workflows.id')
+         						->leftJoin('EmpDataPersonals', 'EmpDataPersonals.employee_id = EmpDataBiographies.employee_id')
+         						->toArray();
+			if(isset($execquery) && $execquery!=null ) { array_push($lcontent,$execquery); };
 			
 		}
-		$this->set('notificationcontent', $ncontent);  
-
-
-		  
+		$this->set('notificationcontent', $lcontent);
+		 
 
     	$this->viewBuilder()->theme('AdminLTE');
 		$this->set('theme', Configure::read('Theme'));

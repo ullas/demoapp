@@ -1,3 +1,32 @@
+<style>
+div#myDropZone {
+    width: 100%;
+    min-height: 500px;
+    border : 1.9px dashed #008FE2;display: table;
+}
+.dz-message {
+	color:#333;
+	font-size:26px;
+    font-weight: 400;
+  	display: table-cell;
+   vertical-align: middle;
+}
+.dz-clickable {
+    cursor: pointer;
+}
+.dz-max-files-reached {
+          /*pointer-events: none;*/          cursor: default;
+}
+.upload-btn{
+	font-size:16px;font-weight: 400;padding:8px;
+}
+.emp-profilepic{
+    width: 100px;
+    height:100px;
+    padding: 3px;
+    border: 3px solid #d2d6de;
+}
+</style>
 <?= $this->element('templateelmnt'); ?>
 <section class="content-header">
       <h1>
@@ -61,6 +90,18 @@
             	echo $this->Form->input('empdatabiography.place_of_birth',['templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-location-arrow"></i></div>']]);
 				echo $this->Form->input('empdatabiography.date_of_death', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
         		?>
+        		
+        		<?php echo $this->Form->input('employee.profilepicture', array('type' => 'hidden')); ?>
+        		<div class="col-md-4">
+        			<div class="form-group">
+            			<label class="control-label" for="employee-profilepicture" style="margin-bottom: 5px;">Profile Picture</label> 
+            			<a href="#" class="open-Popup" data-toggle="modal" data-remote="false" data-target="#editpicpopover">&nbsp;<i class="fa fa-2x fa-camera"></i></a>
+                        		
+        				<?php $picturename='/img/uploadedpics/'.$employee['profilepicture'];
+          				echo $this->Html->image($picturename, array('class' => 'emp-profilepic img-responsive', 'id'=>'profilepic', 'alt' => 'User profile picture')); ?>
+          			</div>	
+          		</div>	
+            	
              	 </fieldset>
             <!-- </div> -->
 
@@ -344,7 +385,45 @@
 <?php $this->start('scriptBotton'); ?>
 <script>
 $(document).ready(function(){
-
+	
+	 //dropzone
+	Dropzone.autoDiscover = false;
+	var myDropzone = $("div#myDropZone").dropzone({
+         url : "/Uploads/upload",
+         maxFiles: 1,
+         addRemoveLinks: true, 
+         dictRemoveFileConfirmation : 'Are you sure you want to remove the particular file ?' ,
+         init: function() {
+     		this.on("complete", function (file) {
+      			if (this.getUploadingFiles().length === 0 && this.getQueuedFiles().length === 0) {
+					//alert(file);      
+				}
+    		});
+    		this.on("removedfile", function (file) {
+          		$("#profilepicture").val("");
+      		});
+    		this.on("queuecomplete", function (file) {
+          // alert("All files have uploaded ");
+      		});
+      
+      		this.on("success", function (file) {
+          		$("#profilepicture").val(file['name']);console.log(file['name']); //alert("Success ");
+          		$('#profilepic').attr("src", "/img/uploadedpics/"+file['name']);
+      		});
+      
+      		this.on("error", function (file) {
+          		// alert("Error in uploading ");
+      		});
+      
+      		this.on("maxfilesexceeded", function(file){
+        		// bootbox_alert("You can not upload any more files.!").modal('show');
+        		sweet_alert("You can not upload any more files.!");
+        		this.removeFile(file);
+    		});
+    	},
+       
+    });
+    
 	$("#actionspopover").on("show.bs.modal", function(e) {
 		//loading icon show
 		if(e.relatedTarget!=null){$('#loadingmessage').show();}
@@ -382,3 +461,35 @@ $(document).ready(function(){
 });
 </script>
 <?php $this->end(); ?>
+
+
+
+<div class="modal fade" id="editpicpopover" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+          <div class="modal-content">
+          	  <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Edit Employee's Profile Picture</h4>
+      </div>
+              <div class="modal-body" >
+            <div class="form-horizontal">
+            	
+            	
+            	
+            	
+			    <!-- upload component -->
+            	<div class="form-group" style="margin:20px;"><div id="myDropZone" class="dropzone"><div class="dz-message text-center"><i class="fa fa-cloud-upload text-light-blue fa-5x"></i>
+            		<br/><span>Drag and Drop the picture Here to upload.</span>
+            		<br/><span class="upload-btn bg-info">or select the picture to Upload</span></div></div>
+            	</div>
+            	
+            	
+            	
+            </div>
+			  </div>
+			  
+			  
+
+          </div>
+      </div>
+</div>
