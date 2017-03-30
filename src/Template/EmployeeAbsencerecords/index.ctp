@@ -5,7 +5,6 @@
 </style>
 
 
-
 <?php if($notificationcontent!='' && $notificationcontent!=null){  ?>
 <section class="content-header">
 	<h1>Leave Management</h1>	
@@ -25,48 +24,43 @@
 			</section>
 			<section class="content">
                  <ul class="products-list product-list-in-box">
+                 	
+
+                 	
                         	<?php $cnt=0; for ($x = 0; $x < count($notificationcontent); $x++) { 
-                        		if(isset($notificationcontent[$x])){
-                        			
+                        		if(isset($notificationcontent[$x]) && $notificationcontent[$x]!=null){
+                        		
+								
+								for ($y = 0; $y < count($notificationcontent[$x]); $y++) {
+								if(isset($notificationcontent[$x][$y]) && $notificationcontent[$x][$y]!=null){
 									
+								for ($t = 0; $t < count($notificationcontent[$x][$y]['employee_absencerecords']); $t++) {
+								if(isset($notificationcontent[$x][$y]['employee_absencerecords'][$t]) && $notificationcontent[$x][$y]['employee_absencerecords'][$t]!=null){
+									 
                         	?>
-                        	<div class="jumbotron" style="overflow:auto;"><?php echo $notificationcontent[$x] ?></div>
-                        	<?php for ($y = 0; $y < count($notificationcontent[$x]['workflowrule']['time_types']); $y++) { 
-       							if(isset($notificationcontent[$x]['workflowrule']['time_types'][$y])){
-                        	?>
-                        	
-                        	<?php for ($t = 0; $t < count($notificationcontent[$x]['workflowrule']['time_types'][$y]['employee_absencerecords']); $t++) { 
-       							if(isset($notificationcontent[$x]['workflowrule']['time_types'][$y]['employee_absencerecords'][$t])){
-       								
-									// if($cnt<count($notificationcontent)){
-                        	?>
-                        	
+                        	                 	<!-- <div class="jumbotron" style="overflow: auto;"><?php echo json_encode($notificationcontent[$x][$y]); ?></div> -->
+                        	                 	
                         	<li class="item" style="padding:10px;">
                             	<div class="product-img">
-                    				<?php $picturename='/img/uploadedpics/'.$notificationcontent[$x]['emp_data_biography']['employee']['profilepicture'];
-          								echo $this->Html->image($picturename, array('alt' => 'Employee picture')); ?>
+                    				<i class="fa fa-3x fa-calendar-minus-o text-aqua"></i>
                   				</div>
                             	<div class="product-info">
-                            		<a href="javascript:void(0)" class="product-title"><?php echo $notificationcontent[$x]['emp_data_biography']['birth_name'] ?>
+                            		<a href="javascript:void(0)" class="product-title"><?php echo $this->Country->get_employeename($notificationcontent[$x][$y]['employee_absencerecords'][$t]['emp_data_biographies_id']); ?>
                             			<!-- <span class="label label-warning pull-right"><?php echo $notificationcontent[$x]['created'] ?></span> -->
                             		</a>
-                            		<span class="product-description">Applied for <?php echo json_encode($notificationcontent[$x]['workflowrule']['time_types'][$y]['name']); ?> from 
-                            			<?php echo $notificationcontent[$x]['workflowrule']['time_types'][$y]['employee_absencerecords'][$t]['start_date']; ?> to 
-										<?php echo $notificationcontent[$x]['workflowrule']['time_types'][$y]['employee_absencerecords'][$t]['end_date']; ?>
+                            		<span class="product-description">Applied for <b><?php echo json_encode($notificationcontent[$x][$y]['employee_absencerecords'][$t]['time_type']['name']); ?></b> from 
+                            			<?php echo $notificationcontent[$x][$y]['employee_absencerecords'][$t]['start_date']; ?> to 
+										<?php echo $notificationcontent[$x][$y]['employee_absencerecords'][$t]['end_date']; ?>
                             			<div class="pull-right">
-                            				<input type="button" value="Reject" class="mptlreject btn btn-danger" id=<?php echo $notificationcontent[$x]['id'] ?>>
-                            				<input type="button" value="Approve" class="mptlapprove btn btn-success" id=<?php echo $notificationcontent[$x]['id'] ?>>
+                            				<input type="button" value="Reject" class="mptlreject btn btn-danger" id=<?php echo $notificationcontent[$x][$y]['employee_absencerecords'][$t]['workflow_id'] ?>>
+                            				<input type="button" value="Approve" class="mptlapprove btn btn-success" id=<?php echo $notificationcontent[$x][$y]['employee_absencerecords'][$t]['workflow_id'] ?>>
                             			</div>
                             		</span>
                             	</div>
                             </li>
+
                             
-                        	<?php $cnt++; }  }   ?>
-                        	
-                        	<?php }  } ?>
-                        	<!-- <div class="jumbotron" style="overflow: auto;"><?php echo json_encode($notificationcontent[$x]); ?></div> -->
-                            
-                            <?php } } ?>
+                            <?php } }  } }  } } ?>
         		</ul>
         	</section>
   		</div>
@@ -119,7 +113,7 @@
 			</section>
 			<?php echo $this->element('indexbasic', array('title' => 'Leave Requests')); ?>
 			
-<?php if($notificationcontent!=''){ ?>
+<?php if($notificationcontent!='' && $notificationcontent!=null){ ?>
   		</div>
               <!-- /.tab-pane -->
   		

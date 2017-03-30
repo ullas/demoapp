@@ -1,4 +1,14 @@
+<style>
+.emp-profilepic{
+    width: 100px;
+    height:100px;
+    padding: 3px;
+    border: 3px solid #d2d6de;
+}	
+</style>
+
 <?= $this->element('templateelmnt'); ?>
+
 <section class="content-header">
   <h1>
     Employee
@@ -43,6 +53,12 @@
             	echo $this->Form->input('empdatabiography.date_of_death', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
 
         		?>
+        		<div class="form-group" style="margin:20px;">
+            		<label class="control-label" for="employee-profilepicture" style="margin-bottom: 5px;">Profile Picture</label>            		
+        			<?php $picturename='/img/uploadedpics/'.$employee['profilepicture'];
+          			echo $this->Html->image($picturename, array('class' => 'emp-profilepic img-responsive', 'id'=>'profilepic', 'alt' => 'User profile picture')); ?>
+          		</div>	
+          			
              	 </fieldset>
             <!-- </div> -->
 

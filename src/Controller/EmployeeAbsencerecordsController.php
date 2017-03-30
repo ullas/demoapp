@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use Cake\ORM\TableRegistry;
 
 /**
  * EmployeeAbsencerecords Controller
@@ -56,9 +57,13 @@ class EmployeeAbsencerecordsController extends AppController
             $workflow=$this->Workflows->patchEntity($workflow,$this->request->data);
 			$workflow['active']=FALSE;
 			if ($this->Workflows->save($workflow)) {
-
-                $this->loadModel('EmployeeAbsencerecords');
-				$employeeAbsencerecord = $this->EmployeeAbsencerecords->get($workflow['id'], [
+				
+				$this->loadModel('EmployeeAbsencerecords');
+				//get employeeabsencerecord primary key value
+				$arr = $this->EmployeeAbsencerecords->find('all',[ 'conditions' => array('workflow_id' => $workflow['id'])])->toArray();
+				if(isset($arr[0])){ $empabsrecid = $arr[0]['id']; }
+                
+				$employeeAbsencerecord = $this->EmployeeAbsencerecords->get($empabsrecid, [
             		'contain' => []
         		]);
 				$employeeAbsencerecord = $this->EmployeeAbsencerecords->patchEntity($employeeAbsencerecord, $this->request->data);
@@ -135,15 +140,39 @@ class EmployeeAbsencerecordsController extends AppController
         $this->set('_serialize', ['employeeAbsencerecords']);
         
 		$query=$this->EmployeeAbsencerecords->find('All')->where(['emp_data_biographies_id'=>$this->request->session()->read('sessionuser')['empdatabiographyid']])->andwhere(['status'=>'0'])->andwhere(['customer_id'=>$this->loggedinuser['customer_id']]);
-		(isset($query)) ? $reqcount=$query->count() : $reqcount="";
-		
+		(isset($query)) ? $reqcount=$query->count() : $reqcount="";		
 		$query=$this->EmployeeAbsencerecords->find('All')->where(['emp_data_biographies_id'=>$this->request->session()->read('sessionuser')['empdatabiographyid']])->andwhere(['status'=>'1'])->andwhere(['customer_id'=>$this->loggedinuser['customer_id']]);
-		(isset($query)) ? $approvedcount=$query->count() : $approvedcount="";
-		
+		(isset($query)) ? $approvedcount=$query->count() : $approvedcount="";		
 		$query=$this->EmployeeAbsencerecords->find('All')->where(['emp_data_biographies_id'=>$this->request->session()->read('sessionuser')['empdatabiographyid']])->andwhere(['status'=>'2'])->andwhere(['customer_id'=>$this->loggedinuser['customer_id']]);
 		(isset($query)) ? $rejcount=$query->count() : $rejcount="";
-		
 		$this->set(compact('reqcount','approvedcount','rejcount'));
+		
+		
+		
+		//get position id 
+    	// $jobinfosTable = TableRegistry::get('JobInfos');	
+		// $query=$jobinfosTable->find('All')->where(['employee_id'=>$this->request->session()->read('sessionuser')['employee_id']])->toArray();
+		// (isset($query[0])) ? $myposition=$query[0]['position_id'] : $myposition="0";
+// 		
+		// //get distinct workflowruleid having the particular position id
+		// $workflowactionsTable = TableRegistry::get('Workflowactions');
+		// $query = $workflowactionsTable->find('All')->where(['position_id'=>$myposition])->andwhere(['customer_id'=>$this->loggedinuser['customer_id']]) ->distinct(['workflowrule_id']);
+// 		
+		// // Iterating the query.
+		// $lcontent=array();
+		// foreach ($query as $row) {	
+			// $workflowsTable = TableRegistry::get('Workflows');
+			// $execquery = $workflowsTable->find('All')->where(['workflowrule_id'=>$row['workflowrule_id']])->andwhere(['currentstep'=>$row['stepid']])->andwhere(['Workflows.active'=>TRUE])
+								// ->andwhere(['Workflows.customer_id'=>$this->loggedinuser['customer_id']])->contain(['EmpDataBiographies'=> ['Employees'],'EmployeeAbsencerecords'=> ['TimeTypes'],'Workflowrules'])
+								// ->leftJoin('EmpDataBiographies', 'EmpDataBiographies.workflow_id = Workflows.id')
+         						// ->leftJoin('EmpDataPersonals', 'EmpDataPersonals.employee_id = EmpDataBiographies.employee_id')
+         						// ->toArray();
+			// if(isset($execquery) && $execquery!=null ) { array_push($lcontent,$execquery); };
+// 			
+		// }
+		// $this->set('leaveapprovalcontent', $lcontent);  
+		
+		
 		
     }
 

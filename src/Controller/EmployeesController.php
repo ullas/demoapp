@@ -97,6 +97,7 @@ class EmployeesController extends AppController
         if ($this->request->is('post')) {
             $employee = $this->Employees->patchEntity($employee, $this->request->data,['associated' => ['Empdatabiographies', 'Empdatapersonals', 'Employmentinfos','Jobinfos', 'Customers', 'ContactInfos', 'Addresses','Identities']]);
 			$employee['visible']="1";
+			$employee['profilepicture']=$employee['employee']['profilepicture'];
 			//saving customer_id to all associated models
 			$employee['customer_id']=$this->loggedinuser['customer_id'];
 			$employee['empdatabiography']['customer_id']=$this->loggedinuser['customer_id'];
