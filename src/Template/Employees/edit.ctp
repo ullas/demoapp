@@ -81,8 +81,17 @@ div#myDropZone {
           <div class="tab-pane" id="EmpDataBiography">
              <!-- <div class="form-horizontal"> -->
              	<fieldset>
+             		<div class="col-md-4">
+        			<div class="form-group">
+            			<label class="control-label" for="employee-profilepicture" style="margin-bottom: 5px;">Profile Picture</label> 
+            			<a href="#" class="open-Popup" data-toggle="modal" data-remote="false" data-target="#editpicpopover" style="font-size:20px;">&nbsp;<i class="fa fa-camera"></i></a>
+                        		
+        				<?php $picturename='/img/uploadedpics/'.$employee['profilepicture'];
+          				echo $this->Html->image($picturename, array('class' => 'emp-profilepic img-responsive', 'id'=>'profilepic', 'alt' => 'User profile picture')); ?>
+          			</div>	
+          		</div>	
                 <?php
-                echo $this->Form->input('empdatabiography.person_id_external',['disabled'=>true]);
+                echo $this->Form->input('empdatabiography.person_id_external',['disabled'=>true,'label' => 'Employee Number']);
 				echo $this->Form->input('empdatabiography.birth_name',['templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-user"></i></div>']]);
 				echo $this->Form->input('empdatabiography.date_of_birth', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
             	echo $this->Form->input('empdatabiography.country_of_birth',['class'=>'select2','label'=>['text'=>'Country of birth'],'options' => $this->Country->get_countries(), 'empty' => true]);
@@ -92,15 +101,7 @@ div#myDropZone {
         		?>
         		
         		<?php echo $this->Form->input('employee.profilepicture', array('type' => 'hidden')); ?>
-        		<div class="col-md-4">
-        			<div class="form-group">
-            			<label class="control-label" for="employee-profilepicture" style="margin-bottom: 5px;">Profile Picture</label> 
-            			<a href="#" class="open-Popup" data-toggle="modal" data-remote="false" data-target="#editpicpopover">&nbsp;<i class="fa fa-2x fa-camera"></i></a>
-                        		
-        				<?php $picturename='/img/uploadedpics/'.$employee['profilepicture'];
-          				echo $this->Html->image($picturename, array('class' => 'emp-profilepic img-responsive', 'id'=>'profilepic', 'alt' => 'User profile picture')); ?>
-          			</div>	
-          		</div>	
+        		
             	
              	 </fieldset>
             <!-- </div> -->

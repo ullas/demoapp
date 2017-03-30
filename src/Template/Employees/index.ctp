@@ -77,7 +77,7 @@
                                 <li><i class="fa fa-phone"></i> Phone #: </li>
                               </ul>
                             </div>
-                            <div class="right col-xs-4 text-center" style="">
+                            <div class="right col-xs-4 text-center">
                             	<?php if(isset($employee['profilepicture']) && ($employee['profilepicture']!='')){$picturename='/img/uploadedpics/'.$employee['profilepicture'];}
                             				else{$picturename='/img/uploadedpics/defaultuser.png';}
           					echo $this->Html->image($picturename, array('class' => 'img-responsive img-circle emppic', 'alt' => 'Employee picture')); ?>

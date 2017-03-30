@@ -5,7 +5,7 @@
 </style>
 
 
-<?php if($notificationcontent!='' && $notificationcontent!=null){  ?>
+<?php if($notificationcontent!='' && $notificationcontent!=null && isset($notificationcontent)){  ?>
 <section class="content-header">
 	<h1>Leave Management</h1>	
 </section>
@@ -16,9 +16,9 @@
 		<li class="active"><a href="#leaveapproval" data-toggle="tab" aria-expanded="true">Leave Approval</a></li>
    		<li class=""><a href="#myleaves" data-toggle="tab" aria-expanded="false">My Leaves</a></li>
 	</ul>
-    <div class="tab-content" style="background: #ddd;">
+    <div class="tab-content" >
     	
-    	<div class="tab-pane active" id="leaveapproval">
+    	<div class="tab-pane active" id="leaveapproval" style="border: 1px solid #ddd;">
     		<section class="content-header">
   				<h1>Leave Approval</h1>
 			</section>
@@ -65,7 +65,7 @@
         	</section>
   		</div>
   		
-    	<div class="tab-pane" id="myleaves">
+    	<div class="tab-pane" id="myleaves" style="border: 1px solid #ddd;">
 <?php } ?>
         	<section class="content-header">
   				<h1>Leave Requests

@@ -43,8 +43,17 @@
           <div class="tab-pane" id="EmpDataBiography">
              <!-- <div class="form-horizontal"> -->
              	<fieldset>
+             		
+             	<div class="col-md-4">
+        			<div class="form-group">
+            		<label class="control-label" for="employee-profilepicture" style="margin-bottom: 5px;">Profile Picture</label>            		
+        			<?php $picturename='/img/uploadedpics/'.$employee['profilepicture'];
+          			echo $this->Html->image($picturename, array('class' => 'emp-profilepic img-responsive', 'id'=>'profilepic', 'alt' => 'User profile picture')); ?>
+          			</div>
+          		</div>
+          		
                 <?php
-            	echo $this->Form->input('empdatabiography.person_id_external',['disabled' => true]);
+            	echo $this->Form->input('empdatabiography.person_id_external',['disabled' => true,'label' => 'Employee Number']);
             	echo $this->Form->input('empdatabiography.birth_name',['templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-user"></i></div>'],'disabled' => true]);
 				echo $this->Form->input('empdatabiography.date_of_birth', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
             	echo $this->Form->input('empdatabiography.country_of_birth',['class'=>'select2','label'=>['text'=>'Country of birth'],'options' => $this->Country->get_countries(), 'empty' => true,'disabled' => true]);
@@ -53,11 +62,7 @@
             	echo $this->Form->input('empdatabiography.date_of_death', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
 
         		?>
-        		<div class="form-group" style="margin:20px;">
-            		<label class="control-label" for="employee-profilepicture" style="margin-bottom: 5px;">Profile Picture</label>            		
-        			<?php $picturename='/img/uploadedpics/'.$employee['profilepicture'];
-          			echo $this->Html->image($picturename, array('class' => 'emp-profilepic img-responsive', 'id'=>'profilepic', 'alt' => 'User profile picture')); ?>
-          		</div>	
+        			
           			
              	 </fieldset>
             <!-- </div> -->
