@@ -35,7 +35,7 @@ class TimeTypeProfileTimeTypesTable extends Table
         parent::initialize($config);
 
         $this->table('time_type_profile_time_types');
-        $this->displayField('id');
+        $this->displayField('name');
         $this->primaryKey('id');
 
         $this->belongsTo('TimeTypeProfiles', [

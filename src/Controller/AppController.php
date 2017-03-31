@@ -220,7 +220,6 @@ class AppController extends Controller
 			$execquery = $workflowsTable->find('All')->where(['workflowrule_id'=>$row['workflowrule_id']])->andwhere(['currentstep'=>$row['stepid']])->andwhere(['Workflows.active'=>TRUE])
 								->andwhere(['Workflows.customer_id'=>$this->loggedinuser['customer_id']])->contain(['EmpDataBiographies'=> ['Employees'],'EmployeeAbsencerecords'=> ['TimeTypes'],'Workflowrules'])
 								->leftJoin('EmpDataBiographies', 'EmpDataBiographies.workflow_id = Workflows.id')
-         						->leftJoin('EmpDataPersonals', 'EmpDataPersonals.employee_id = EmpDataBiographies.employee_id')
          						->toArray();
 			if(isset($execquery) && $execquery!=null ) { array_push($lcontent,$execquery); };
 			
