@@ -6,15 +6,38 @@
       
     </section>
 <section class="content">
-	<div class="box box-primary">
-		<div class="box-body">
-			<div class="col-md-3"></div>
-			<div class="col-md-6">
-				<!-- THE CALENDAR -->
-            	<div id="calendar"></div>
-            </div> 
+	<div class="row">
+		
+        <div class="col-md-3">
+          <div class="box box-solid">
+            <div class="box-header with-border">
+              <h4 class="box-title">Draggable Events</h4>
+            </div>
+            <div class="box-body">
+              <!-- the events -->
+              <div id="external-events">
+                <div class="external-event bg-green ui-draggable ui-draggable-handle" style="position: relative;">Lunch</div>
+                <div class="external-event bg-yellow ui-draggable ui-draggable-handle" style="position: relative;">Go home</div>
+                <div class="external-event bg-aqua ui-draggable ui-draggable-handle" style="position: relative;">Do homework</div>
+                <div class="external-event bg-light-blue ui-draggable ui-draggable-handle" style="position: relative;">Work on UI design</div>
+                <div class="external-event bg-red ui-draggable ui-draggable-handle" style="position: relative;">Sleep tight</div>
+              </div>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /. box -->          
+        </div>
+
+        <div class="col-md-9">
+			<div class="box box-primary">
+				<div class="box-body no-padding">
+					<!-- THE CALENDAR -->
+            		<div id="calendar"></div>
+				</div>
+			</div>
 		</div>
 	</div>
+	
 </section>
 
 <?php

@@ -66,7 +66,7 @@
 <section class="content" id="gridsection" >
 	<div id="contentdiv" class="griddiv box box-primary">
 		<?php foreach ($employees as $employee): ?>
-			<div class="col-md-4 col-sm-4 col-xs-12 profile_details">
+			<div class="col-md-4 col-sm-4 col-xs-12 profile_details" style="display:none;">
                         <div class="well profile_view" style="width:100%;">
                           <div class="col-sm-12" style="height: 160px;">
                             <div class="left col-xs-8 text-muted">
@@ -118,6 +118,17 @@ $(function () {
 	$('.dtbtn').click(function(){
 		$('#gridsection').hide();
     	$('#dtsection').show();
+	});
+
+	$(window).on('beforeunload', function(){
+  $(window).scrollTop(0);
+});
+	
+	$(".profile_details").slice(0, 10).show();
+	$(window).bind('scroll', function() {
+    	if($(window).scrollTop() >= $('.griddiv').offset().top + $('.griddiv').outerHeight() - window.innerHeight) {
+        	$(".profile_details:hidden").slice(0, 10).slideDown();
+    	}
 	});
 
 });
