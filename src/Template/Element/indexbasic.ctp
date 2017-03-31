@@ -1,8 +1,8 @@
 <!-- <section class="content-header">
   <h1>
-    <?php 
+    <?php
     if(isset($title)){
-    	
+
 		echo $title;
     }else{
 
@@ -16,10 +16,6 @@
   </ol>
 </section> -->
 <section class="content">
-	<button id="togglebutton" type="button" class="btn btn-primary bg-gray btn-sm pull-right" data-toggle="collapse" data-target="#infobar" style="display: none;">
-      <span class="fa fa-chevron-up fs20"></span>
-	</button>
-
    <?php echo $this->Form->create($this->request->params['controller'],array('class'=>'mptlform','url' => array('controller' => $this->request->params['controller'], 'action' => 'deleteAll')));?>
    	<input type="hidden" value="1"  id="basicfilter"/>
 	<div class="fmactionbtn"></div>
@@ -33,6 +29,9 @@
         <div class="col-md-12">
   <div class="box box-primary">
       <div class="box-body">
+				<button id="togglebutton" type="button" class="btn btn-primary bg-olive btn-sm pull-right" data-toggle="collapse" data-toggle="tooltip" data-target="#infobar" title="Hello World" style="display: none;">
+			      <span class="fa fa-chevron-up"></span>
+				</button>
     <table id="mptlindextbl" class="table table-hover  table-bordered ">
         <thead>
             <tr>
@@ -93,9 +92,9 @@ $this->Html->script([
             jQuery("form")[0].submit();
         }
   }
-  
+
   function bootbox_confirm(msg, callback_success, callback_cancel) {
-    var d = bootbox.confirm({title:"MayHaw",message:msg, show:false, buttons: { 'cancel': { label: 'Cancel', className: 'btn btn-outline pull-left' }, 
+    var d = bootbox.confirm({title:"MayHaw",message:msg, show:false, buttons: { 'cancel': { label: 'Cancel', className: 'btn btn-outline pull-left' },
     									'confirm': { label: 'Delete', className: 'btn btn-outline pull-right' } },callback:function(result) {
         if (result)
             callback_success();
@@ -106,8 +105,8 @@ $this->Html->script([
   }
 
   $(function () {
-  	
-  	 
+
+
 
   	  //throw javascript console error,instead of throwing alert
   	  $.fn.dataTable.ext.errMode='throw';
@@ -142,7 +141,7 @@ $this->Html->script([
       radioClass: 'iradio_flat-blue'
     });
 
-	
+
 
      table= $('#mptlindextbl').DataTable({
           "paging": true,
@@ -186,7 +185,7 @@ $this->Html->script([
 	// fmactions are added through setTurben. btn-group div is added separately.
 	$('div.fmactionbtn').appendTo('div.dataTables_length');
 	$('div.btn-group').appendTo('div.fmactionbtn');
-	
+
      // $('<a href="#" class="btn btn-sm btn-success" data-toggle="modal" data-target="#settings" style="margin-left:15px;" title="Table Settings"><i class="fa fa-gear" aria-hidden="true"></i></a>').appendTo('div.dataTables_filter');
 
       $('.dataTables_filter input').unbind().on('keyup', function() {
