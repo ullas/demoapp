@@ -70,7 +70,7 @@
                             					    	$date1 = new DateTime($startdate);
 												    	$date2 = new DateTime($enddate);
 												    	$diff = $date2->diff($date1)->format("%a");
-												    	echo $diff;
+												    	echo $diff+1;
 													}
 										?>
                             			 day(s) from
