@@ -219,7 +219,7 @@ class EmployeeAbsencerecordsController extends AppController
 				
 			$this->loadModel('Workflowactions');
 			$query=$this->Workflowactions->find('All')->where (['workflowrule_id' => $workflowruleid])->andwhere(['customer_id'=>$this->loggedinuser['customer_id']]);
-			(isset($query)) ? $workflowactioncount=$query->count() : $workflowactioncount="0";
+			(isset($query)) ? $workflowactioncount=$query->count() : $workflowactioncount="";
 		  
 			//associated Workflows 
          	$this->loadModel('Workflows');
@@ -227,7 +227,7 @@ class EmployeeAbsencerecordsController extends AppController
 			$workflow = $this->Workflows->patchEntity($workflow, $this->request->data);
 			$workflow['workflowrule_id']=$workflowruleid;
 			$workflow['currentstep']='1';	
-			$workflow['lastaction']=$workflowactioncount;		
+			if($workflowactioncount!=""){ $workflow['lastaction']=$workflowactioncount; }
 			$workflow['active']=TRUE;				
 			$workflow['customer_id']=$this->loggedinuser['customer_id'];
 			$workflow["emp_data_biographies_id"] = $this->request->session()->read('sessionuser')['empdatabiographyid'] ; 
@@ -254,9 +254,11 @@ class EmployeeAbsencerecordsController extends AppController
 		$arr = $this->JobInfos->find('all',['conditions' => array('employee_id' => $this->request->session()->read('sessionuser')['employee_id'] ), 'contain' => []])->toArray();
 		isset($arr[0]) ? $timetypeprofileid = $arr[0]['time_type_profile_id'] : $timetypeprofileid = "0";  
 		
-		$timeTypes = $this->EmployeeAbsencerecords->TimeTypes->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
-        
-		// $this->Flash->success(__('The o/p:.'.$timetypeprofileid));	
+        $timeTypes = $this->EmployeeAbsencerecords->TimeTypes->TimeTypeProfileTimeTypes
+        					->find('list', array('fields' => array('id'=>'TimeTypeProfileTimeTypes.time_type_id','name'=> 'TimeTypes.name'),
+    						'contain' => array('TimeTypes'), 'limit' => 200))->where(['time_type_profile_id' => $timetypeprofileid]);
+							
+		
 			
         $empdatabiographies = $this->EmployeeAbsencerecords->Empdatabiographies->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         $users = $this->EmployeeAbsencerecords->Users->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
@@ -287,15 +289,44 @@ class EmployeeAbsencerecordsController extends AppController
             $employeeAbsencerecord = $this->EmployeeAbsencerecords->patchEntity($employeeAbsencerecord, $this->request->data);
 			$employeeAbsencerecord["modified_by"] = $this->request->session()->read('sessionuser')['id'] ; 
             if ($this->EmployeeAbsencerecords->save($employeeAbsencerecord)) {
-                $this->Flash->success(__('The employee absencerecord has been saved.'));
-
-                return $this->redirect(['action' => 'index']);
+            	
+				$this->loadModel('TimeTypes');
+				$arr = $this->TimeTypes->find('all',['conditions' => array('id' => $this->request->data["time_type_id"] ), 'contain' => []])->toArray();
+				isset($arr[0]) ? $workflowruleid = $arr[0]['workflowrule_id'] : $workflowruleid = "0";  
+				
+				$this->loadModel('Workflowactions');
+				$query=$this->Workflowactions->find('All')->where (['workflowrule_id' => $workflowruleid])->andwhere(['customer_id'=>$this->loggedinuser['customer_id']]);
+				(isset($query)) ? $workflowactioncount=$query->count() : $workflowactioncount="";
+			
+				//associated Workflows 
+         		$this->loadModel('Workflows');
+				$workflow = $this->Workflows->get($employeeAbsencerecord["workflow_id"], ['contain' => []]);
+				$workflow = $this->Workflows->patchEntity($workflow, $this->request->data);
+				$workflow['workflowrule_id']=$workflowruleid;
+				if($workflowactioncount!=""){ $workflow['lastaction']=$workflowactioncount; }	
+				$workflow['active']=TRUE;	
+				// $workflow["emp_data_biographies_id"] = $this->request->session()->read('sessionuser')['empdatabiographyid'] ; 
+            	if ($this->Workflows->save($workflow)) {
+                	$this->Flash->success(__('The employee absencerecord has been saved.'));
+                	return $this->redirect(['action' => 'index']);
+				}else {
+                	$this->Flash->error(__('The employee absencerecord could not be saved. Please, try again.'));
+            	}
             } else {
                 $this->Flash->error(__('The employee absencerecord could not be saved. Please, try again.'));
             }
         }
+		
+		$this->loadModel('JobInfos');
+		$arr = $this->JobInfos->find('all',['conditions' => array('employee_id' => $this->request->session()->read('sessionuser')['employee_id'] ), 'contain' => []])->toArray();
+		isset($arr[0]) ? $timetypeprofileid = $arr[0]['time_type_profile_id'] : $timetypeprofileid = "0";  
+		
+        $timeTypes = $this->EmployeeAbsencerecords->TimeTypes->TimeTypeProfileTimeTypes
+        					->find('list', array('fields' => array('id'=>'TimeTypeProfileTimeTypes.time_type_id','name'=> 'TimeTypes.name'),
+    						'contain' => array('TimeTypes'), 'limit' => 200))->where(['time_type_profile_id' => $timetypeprofileid]);
+							
         $empdatabiographies = $this->EmployeeAbsencerecords->Empdatabiographies->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
-        $timeTypes = $this->EmployeeAbsencerecords->TimeTypes->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        // $timeTypes = $this->EmployeeAbsencerecords->TimeTypes->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         $users = $this->EmployeeAbsencerecords->Users->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         $this->set(compact('employeeAbsencerecord', 'empdatabiographies', 'timeTypes', 'users'));
         $this->set('_serialize', ['employeeAbsencerecord']);
