@@ -7,7 +7,7 @@
 
 <?php if($notificationcontent!='' && $notificationcontent!=null && isset($notificationcontent)){  ?>
 <section class="content-header">
-	<h1>Leave Management</h1>	
+	<h1>Leave Management</h1>
 </section>
 
 <section class="content">
@@ -17,30 +17,31 @@
    		<li class=""><a href="#myleaves" data-toggle="tab" aria-expanded="false">My Leaves</a></li>
 	</ul>
     <div class="tab-content" >
-    	
+
     	<div class="tab-pane active" id="leaveapproval" style="border: 1px solid #ddd;">
     		<section class="content-header">
   				<h1>Leave Approval</h1>
 			</section>
 			<section class="content">
                  <ul class="products-list product-list-in-box">
-                 	
 
-                 	
-                        	<?php $cnt=0; for ($x = 0; $x < count($notificationcontent); $x++) { 
+
+
+                        	<?php $cnt=0; for ($x = 0; $x < count($notificationcontent); $x++) {
                         		if(isset($notificationcontent[$x]) && $notificationcontent[$x]!=null){
-                        		
-								
+
+
 								for ($y = 0; $y < count($notificationcontent[$x]); $y++) {
 								if(isset($notificationcontent[$x][$y]) && $notificationcontent[$x][$y]!=null){
-									
+
 								for ($t = 0; $t < count($notificationcontent[$x][$y]['employee_absencerecords']); $t++) {
 								if(isset($notificationcontent[$x][$y]['employee_absencerecords'][$t]) && $notificationcontent[$x][$y]['employee_absencerecords'][$t]!=null){
-									 
+
                         	?>
                         	                 	<!-- <div class="jumbotron" style="overflow: auto;"><?php echo json_encode($notificationcontent[$x][$y]); ?></div> -->
-                        	                 	
+
                         	<li class="item" style="padding:10px;">
+                              <div class="col-sm-9">
                             	<div class="product-img">
                     				<i class="fa fa-3x fa-calendar-minus-o text-aqua"></i>
                   				</div>
@@ -49,33 +50,34 @@
                             		echo $empname; ?>
                             			<!-- <span class="label label-warning pull-right"><?php echo $notificationcontent[$x]['created'] ?></span> -->
                             		</a>
-                            		<span class="product-description">Applied <b><?php $timetype = str_replace('"', '', json_encode($notificationcontent[$x][$y]['employee_absencerecords'][$t]['time_type']['name'])); echo  $timetype; ?></b> for
+                              </br>
+                            		<span style="color:#333">Applied <b><?php $timetype = str_replace('"', '', json_encode($notificationcontent[$x][$y]['employee_absencerecords'][$t]['time_type']['name'])); echo  $timetype; ?></b> for
                             			<?php  $startdate = $notificationcontent[$x][$y]['employee_absencerecords'][$t]['start_date'];
                             						$enddate = $notificationcontent[$x][$y]['employee_absencerecords'][$t]['end_date'];
                             						if($startdate!="" && $startdate!=null && $enddate!="" && $enddate!=null){
                             					    	$date1 = new DateTime($startdate);
-												    	$date2 = new DateTime($enddate);	
-												    	$diff = $date2->diff($date1)->format("%a"); 
-												    	echo $diff; 
-													} 
+												    	$date2 = new DateTime($enddate);
+												    	$diff = $date2->diff($date1)->format("%a");
+												    	echo $diff;
+													}
 										?>
-                            			 day(s) from 
-                            			<?php echo $notificationcontent[$x][$y]['employee_absencerecords'][$t]['start_date']; ?> to 
+                            			 day(s) from
+                            			<?php echo $notificationcontent[$x][$y]['employee_absencerecords'][$t]['start_date']; ?> to
 										<?php echo $notificationcontent[$x][$y]['employee_absencerecords'][$t]['end_date']; ?>
-                            			<div class="pull-right">
-                            				<input type="button" value="Reject" class="mptlreject btn btn-danger" id=<?php echo $notificationcontent[$x][$y]['employee_absencerecords'][$t]['workflow_id'] ?>>
-                            				<input type="button" value="Approve" class="mptlapprove btn btn-success" id=<?php echo $notificationcontent[$x][$y]['employee_absencerecords'][$t]['workflow_id'] ?>>
-                            			</div>
+
                             		</span>
                             	</div>
+                            </div>
+                            <div class="col-sm-3" style="margin-top:10px">
+                              <input type="button" value="Reject" class="mptlreject btn btn-danger" id=<?php echo $notificationcontent[$x][$y]['employee_absencerecords'][$t]['workflow_id'] ?>>
+                              <input type="button" value="Approve" class="mptlapprove btn btn-success" id=<?php echo $notificationcontent[$x][$y]['employee_absencerecords'][$t]['workflow_id'] ?>>
+                            </div>
                             </li>
-
-                            
                             <?php } }  } }  } } ?>
         		</ul>
         	</section>
   		</div>
-  		
+
     	<div class="tab-pane" id="myleaves" style="border: 1px solid #ddd;">
 <?php } ?>
         	<section class="content-header">
@@ -89,7 +91,7 @@
 
 			<section class="collapse in" id="infobar" style="margin-top:20px;" aria-expanded="true">
 	<div class="clearfix">
-	
+
 		<div class="col-md-3 col-sm-6 col-xs-12">
           <div class="info-box bg-yellow pendingdiv" style="cursor: pointer;">
           	<span class="info-box-icon"><i class="fa fa-list"></i></span>
@@ -109,7 +111,7 @@
             </div>
           </div>
         </div>
-        
+
         <div class="col-md-3 col-sm-6 col-xs-12">
           <div class="info-box  bg-red denieddiv" style="cursor: pointer;">
             <span class="info-box-icon"><i class="fa fa-times"></i></span>
@@ -119,31 +121,31 @@
             </div>
           </div>
         </div>
-        
+
 				</div>
 			</section>
 			<?php echo $this->element('indexbasic', array('title' => 'Leave Requests')); ?>
-			
+
 <?php if($notificationcontent!='' && $notificationcontent!=null){ ?>
   		</div>
               <!-- /.tab-pane -->
-  		
+
 	</div>
    	<!-- /.tab-content -->
 </div>
-          
-          
-          
-          
 
-</section>	
+
+
+
+
+</section>
 <?php } ?>
 
 <?php $this->start('scriptIndexBottom'); ?>
 <script>
 $(function () {
 	$('#togglebutton').show();
-	
+
 	$('div.pendingdiv').click(function(){$(".info-box").removeClass("blurdiv");$(this).addClass("blurdiv");
     	table.ajax.url('/EmployeeAbsencerecords/ajaxData?filter=pending').load();
     	$('a#filterclear').show();
@@ -162,8 +164,8 @@ $(function () {
     	$('a#filterclear').hide();
     	$(".info-box").removeClass("blurdiv");
 	});
-	
-	
+
+
 	//reject btn onclick
 	$('.mptlreject').click(function(){
     	//get input value
@@ -175,7 +177,7 @@ $(function () {
    		 	}
     	});
 	});
-	
+
 	//reject btn onclick
 	$('.mptlapprove').click(function(){
     	//get input value
@@ -197,7 +199,7 @@ function tableLoaded() {
     });
 
     $("#mptlindextbl tbody").find('tr').each(function () {
-    	
+
     	if($(this).find('td:eq(1)').html()=="0"){
     		$(this).find('td:eq(1)').html('<span class="label label-warning">Pending</span>');
     	}else if($(this).find('td:eq(1)').html()=="1"){
@@ -205,7 +207,7 @@ function tableLoaded() {
     	}else if($(this).find('td:eq(1)').html()=="2"){
     		$(this).find('td:eq(1)').html('<span class="label label-danger">Denied</span>');
     	}
-    	
+
     	$(this).find('td').each (function() {
         var innerHtml=$(this).find('div.mptldtbool').html();
         // true/false instead of 1/0
