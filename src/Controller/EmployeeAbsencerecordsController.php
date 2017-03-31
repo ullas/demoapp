@@ -3,6 +3,7 @@ namespace App\Controller;
 
 use App\Controller\AppController;
 use Cake\ORM\TableRegistry;
+use Cake\Core\Configure;
 
 /**
  * EmployeeAbsencerecords Controller
@@ -150,7 +151,7 @@ class EmployeeAbsencerecordsController extends AppController
 		$this->set(compact('reqcount','approvedcount','rejcount'));
 		
 		
-		
+		$this->set('userdateformat', Configure::read('userdf'));
 		//get position id 
     	// $jobinfosTable = TableRegistry::get('JobInfos');	
 		// $query=$jobinfosTable->find('All')->where(['employee_id'=>$this->request->session()->read('sessionuser')['employee_id']])->toArray();

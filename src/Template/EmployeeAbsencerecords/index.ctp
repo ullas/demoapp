@@ -54,6 +54,18 @@
                             		<span style="color:#333">Applied <b><?php $timetype = str_replace('"', '', json_encode($notificationcontent[$x][$y]['employee_absencerecords'][$t]['time_type']['name'])); echo  $timetype; ?></b> for
                             			<?php  $startdate = $notificationcontent[$x][$y]['employee_absencerecords'][$t]['start_date'];
                             						$enddate = $notificationcontent[$x][$y]['employee_absencerecords'][$t]['end_date'];
+													
+													
+													
+													if(isset($userdateformat)  && $userdateformat===1){
+                            							$startdate = str_replace('/', '-', $startdate);
+														$startdate = date('Y/m/d', strtotime($startdate));
+													                           					
+														$enddate = str_replace('/', '-', $enddate);
+														$enddate = date('Y/m/d', strtotime($enddate));
+													}
+													
+													
                             						if($startdate!="" && $startdate!=null && $enddate!="" && $enddate!=null){
                             					    	$date1 = new DateTime($startdate);
 												    	$date2 = new DateTime($enddate);
