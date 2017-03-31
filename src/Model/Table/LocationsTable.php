@@ -113,7 +113,7 @@ class LocationsTable extends Table
 	{
 
 		$userdf = Configure::read('userdf');
-		if(isset($userdf)  & $userdf===1){
+		if(isset($userdf)  && $userdf===1){
 
 			foreach (["start_date", "end_date"] as $value) {		
 				if(isset($data[$value])){			
