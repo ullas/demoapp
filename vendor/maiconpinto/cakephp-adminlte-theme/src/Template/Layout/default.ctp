@@ -12,7 +12,7 @@
     <?php echo $this->Html->css('AdminLTE./plugins/datepicker/datepicker3'); ?>
     <?php echo $this->Html->css('AdminLTE./plugins/timepicker/bootstrap-timepicker.min'); ?>
     <!-- <?php echo $this->Html->css('AdminLTE./plugins/datatables/extensions/ColReorder/css/dataTables.colReorder.min'); ?> -->
-    <?php echo $this->Html->css('/css/dropzone'); ?> 
+    <?php echo $this->Html->css('/css/dropzone'); ?>
     <!-- Font Awesome -->
     <link rel="stylesheet" href="/css/font-awesome.min.css">
     <!-- Ionicons -->
@@ -45,7 +45,7 @@
 <?php echo $this->Html->script('AdminLTE./plugins/fastclick/fastclick'); ?>
 <!-- AdminLTE App -->
  <?= $this->Html->script('jquery.jOrgChart.js'); ?>
- 
+
  <!-- <script src="http://bootboxjs.com/bootbox.js"></script> -->
   <script src="http://t4t5.github.io/sweetalert/dist/sweetalert-dev.js"></script>
   <link rel="stylesheet" href="http://t4t5.github.io/sweetalert/dist/sweetalert.css">
@@ -132,7 +132,7 @@ div.dataTables_filter input {
 }
 /*profile page pic*/
 .profile-user-img {
-	height:100px;	
+	height:100px;
 }
 .user-panel > .image > img {
     height: 45px;
@@ -145,13 +145,13 @@ div.dataTables_filter input {
     width: 100%;
     text-align: center;
     padding: 3px 0;
-    color: rgba(255,255,255,0.8); 
-    display: none; 
-    z-index: 10; 
-    background: rgba(0,0,0,0.1); 
-    text-decoration: none; 
+    color: rgba(255,255,255,0.8);
+    display: none;
+    z-index: 10;
+    background: rgba(0,0,0,0.1);
+    text-decoration: none;
 }
-#mptlmyinfo:hover > .myinfo-footer { 
+#mptlmyinfo:hover > .myinfo-footer {
 	background-color:#21A57E;display:block;
 }
 #myinfopic{
@@ -182,7 +182,7 @@ div.dataTables_wrapper {
 .fs20{
 	font-size:20px;
 }
-.infodiv:hover > .info-box-number{ 
+.infodiv:hover > .info-box-number{
 	font-size:24px;
 }
 /*datatable header responsive*/
@@ -282,17 +282,17 @@ $(document).ready(function(){
 
 	//toggle infobar
   $('#infobar').on('hide.bs.collapse', function () {
-    	$('#togglebutton').html('<span class="fa fa-chevron-down fs20"></span>');
+    	$('#togglebutton').html('<span class="fa fa-chevron-down"></span>');
   })
   $('#infobar').on('show.bs.collapse', function () {
-    	$('#togglebutton').html('<span class="fa fa-chevron-up fs20"></span>');
+    	$('#togglebutton').html('<span class="fa fa-chevron-up"></span>');
   })
 // $( "#togglebutton" ).click(function() {
     // $( "#infobar" ).slideToggle();
 // });
 // jQuery("[required]").after("<span class='required'>*</span>");
-   
-//popover resize    	
+
+//popover resize
 $(window).off("resize").on("resize", function() {
     $(".popover").each(function() {
         var popover = $(this);
@@ -301,14 +301,14 @@ $(window).off("resize").on("resize", function() {
             ctrl.popover('show');
         }
     });
-}); 
+});
 
-    //set mandatory * after required label	
+    //set mandatory * after required label
     $( ':input[required]' ).each( function () {
         $("label[for='" + this.id + "']").addClass('mandatory');
     });
 
-		//select 2 
+		//select 2
     	$(".select2").select2({ width: '100%',allowClear: true,placeholder: "Select" });
 		//year picker
     	$('.mptlyp').datepicker({
@@ -321,12 +321,12 @@ $(window).off("resize").on("resize", function() {
 		}else{
 			$('.mptldp').datepicker({ format:"yyyy/mm/dd",autoclose: true,clearBtn: true });
 		}
-    	
+
 		$(".mptltp").timepicker({
       		showInputs: false,autoclose: true,maxHours:24,showMeridian:false
     	});
-    	
-    	
+
+
         $(".navbar .menu").slimscroll({
             height: "200px",
             alwaysVisible: false,
@@ -372,7 +372,7 @@ $(window).off("resize").on("resize", function() {
 				  	$(this).text("");
 				  }
 			});
-    
+
 			//disable div onclick if (title)anchor tag clicked org chart
     		$(".node-title").click(function(event){
 		  		event.stopPropagation();
@@ -381,7 +381,7 @@ $(window).off("resize").on("resize", function() {
 });
 function bootbox_alert(msg, callback_success, callback_cancel) {
     var d = bootbox.alert({title:"MayHaw",message:msg, show:false, buttons: { 'ok': { label: 'OK', className: 'btn btn-outline pull-right' } },callback:function(result) {
- 
+
     }});
     return d;
 }
@@ -447,8 +447,8 @@ function showflash(type,data) {
         }
     // $(".content-header").append(output);
     $(".content-header").prepend(output);
-    
-    
+
+
     //hide flash alert message
 $('.mptlalert').delay(1500).hide('highlight', {color: '#66cc66'}, 1500);
 
