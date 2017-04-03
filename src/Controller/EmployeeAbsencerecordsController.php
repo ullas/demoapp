@@ -59,6 +59,8 @@ class EmployeeAbsencerecordsController extends AppController
 			
             $workflow=$this->Workflows->patchEntity($workflow,$this->request->data);
 			$workflow['active']=FALSE;
+			$workflow['user_id']=$this->request->session()->read('sessionuser')['id'];
+			
 			if ($this->Workflows->save($workflow)) {
 				
 				$this->loadModel('EmployeeAbsencerecords');
@@ -93,6 +95,7 @@ class EmployeeAbsencerecordsController extends AppController
         	]);
 			
             $workflow=$this->Workflows->patchEntity($workflow,$this->request->data);
+			$workflow['user_id']=$this->request->session()->read('sessionuser')['id'];
 			
 			if($workflow['currentstep']==$workflow['lastaction']){
 				$this->loadModel('EmployeeAbsencerecords');
@@ -102,9 +105,9 @@ class EmployeeAbsencerecordsController extends AppController
 				$employeeAbsencerecord = $this->EmployeeAbsencerecords->patchEntity($employeeAbsencerecord, $this->request->data);
 				$employeeAbsencerecord["status"] = "1"; 
            	 	if ($this->EmployeeAbsencerecords->save($employeeAbsencerecord)) {
-					
+					$workflow['active']=FALSE;
 				}
-				$workflow['active']=FALSE;				
+								
 			}else{
 				$workflow['currentstep']+=1;	
 			}
@@ -191,8 +194,16 @@ class EmployeeAbsencerecordsController extends AppController
         $employeeAbsencerecord = $this->EmployeeAbsencerecords->get($id, [
             'contain' => ['Empdatabiographies', 'TimeTypes', 'Users','Customers']
         ]);
-		if($address['customer_id']==$this->loggedinuser['customer_id'])
-		{
+		if($employeeAbsencerecord['customer_id']==$this->loggedinuser['customer_id'])
+		{			
+			//associated Workflows 
+         	$this->loadModel('WorkflowsHistory');
+			$arr = $this->WorkflowsHistory->find('All')->where(['workflow_id' => $employeeAbsencerecord["workflow_id"]])->order(['updatetime' => 'ASC'])->contain(['Users']) ;
+
+			// $this->Flash->success(__('The data------'.json_encode($arr)));	
+			$this->set('workflowhistory',$arr);
+
+				
 			$timeTypes = $this->EmployeeAbsencerecords->TimeTypes->find('list', ['limit' => 200]);
 			$this->set(compact('employeeAbsencerecord', 'timeTypes'));
         	$this->set('employeeAbsencerecord', $employeeAbsencerecord);
@@ -214,7 +225,7 @@ class EmployeeAbsencerecordsController extends AppController
         if ($this->request->is('post')) {
         	
             $this->loadModel('TimeTypes');
-			$arr = $this->TimeTypes->find('all',['conditions' => array('id' => $this->request->data["time_type_id"] ), 'contain' => []])->toArray();
+			$arr = $this->TimeTypes->find('all',['conditions' => array('id' => $this->request->data["time_type_id"]), 'contain' => []])->toArray();
 			isset($arr[0]) ? $workflowruleid = $arr[0]['workflowrule_id'] : $workflowruleid = "0";  
 				
 			$this->loadModel('Workflowactions');
@@ -228,6 +239,7 @@ class EmployeeAbsencerecordsController extends AppController
 			$workflow['workflowrule_id']=$workflowruleid;
 			$workflow['currentstep']='1';	
 			if($workflowactioncount!=""){ $workflow['lastaction']=$workflowactioncount; }
+			$workflow['user_id']=$this->request->session()->read('sessionuser')['id'];
 			$workflow['active']=TRUE;				
 			$workflow['customer_id']=$this->loggedinuser['customer_id'];
 			$workflow["emp_data_biographies_id"] = $this->request->session()->read('sessionuser')['empdatabiographyid'] ; 
@@ -303,6 +315,7 @@ class EmployeeAbsencerecordsController extends AppController
 				$workflow = $this->Workflows->get($employeeAbsencerecord["workflow_id"], ['contain' => []]);
 				$workflow = $this->Workflows->patchEntity($workflow, $this->request->data);
 				$workflow['workflowrule_id']=$workflowruleid;
+				$workflow['user_id']=$this->request->session()->read('sessionuser')['id'];
 				if($workflowactioncount!=""){ $workflow['lastaction']=$workflowactioncount; }	
 				$workflow['active']=TRUE;	
 				// $workflow["emp_data_biographies_id"] = $this->request->session()->read('sessionuser')['empdatabiographyid'] ; 
@@ -346,7 +359,19 @@ class EmployeeAbsencerecordsController extends AppController
 		if($employeeAbsencerecord['customer_id'] == $this->loggedinuser['customer_id']) 
 		{
         	if ($this->EmployeeAbsencerecords->delete($employeeAbsencerecord)) {
-            	$this->Flash->success(__('The employee absencerecord has been deleted.'));
+        						
+				//associated Workflows 
+         		$this->loadModel('Workflows');
+				$workflow = $this->Workflows->get($employeeAbsencerecord["workflow_id"], ['contain' => []]);
+				$workflow = $this->Workflows->patchEntity($workflow, $this->request->data);
+				$workflow['active']=FALSE;	
+            	if ($this->Workflows->save($workflow)) {
+                	$this->Flash->success(__('The employee absencerecord has been deleted.'));
+                	return $this->redirect($this->referer());
+				}else {
+                	$this->Flash->error(__('The employee absencerecord could not be deleted. Please, try again.'));
+            	}
+				            	
         	} else {
             	$this->Flash->error(__('The employee absencerecord could not be deleted. Please, try again.'));
         	}

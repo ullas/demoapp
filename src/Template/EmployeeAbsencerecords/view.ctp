@@ -28,4 +28,39 @@
     <?=$this->Html->link(__('Edit LeaveRequest'), ['action' => 'edit', $employeeAbsencerecord['id']],['class'=>'btn btn-primary label-info pull-right'], ['escape' => false])?>
     </div>
     <?= $this->Form->end() ?>
-</div></div></section>
+</div></div>
+
+<div class="row">
+
+<div class="col-md-9">
+<div class="box box-primary">
+	<div class="box-header with-border">
+    	<h3 class="box-title">Application Status</h3>
+    </div>
+	<div class="box-body">
+		<ul class="timeline timeline-inverse">
+			<!-- timeline time label -->
+    		<li class="time-label">
+        		<span class="bg-aqua-gradient"><?php echo $employeeAbsencerecord["start_date"] ;  ?></span>
+    		</li>
+    		<!-- status=0 for pending,1 for approved,2 for denied,3 for skipped by time    -->
+    		<?php  foreach ($workflowhistory as $value): ?>
+    			
+    			<?= $this->element('statuselement', array('title' => $value['user']['username'], 'subtitle'=>$value['status'], 'status' => "0", 'time' => $value['updatetime'] )); ?>
+    		
+    		<?php endforeach; ?>
+    		
+    		<!-- END timeline item -->
+    		<li class="time-label">
+        		<span class="bg-olive"><?php echo $employeeAbsencerecord["end_date"] ;  ?></span>
+    		</li>
+    	</ul>
+	</div>
+</div>
+</div>
+
+<div class="col-md-3">
+</div>
+	
+</div>
+</section>
