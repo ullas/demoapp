@@ -31,7 +31,8 @@ class ProfilesController extends AppController
 		$query=$noteTable->find('All')->where(['emp_data_biographies_id'=>$this->request->session()->read('sessionuser')['empdatabiographyid']])->andwhere(['customer_id'=>$this->loggedinuser['customer_id']]);
 		(isset($query)) ? $notecount=$query->count() : $notecount="";
 		
-		$query=$leaveTable->find('All')->where(['emp_data_biographies_id'=>$this->request->session()->read('sessionuser')['empdatabiographyid']])->andwhere(['customer_id'=>$this->loggedinuser['customer_id']]);
+		$query=$leaveTable->find('All')->where(['emp_data_biographies_id'=>$this->request->session()->read('sessionuser')['empdatabiographyid']])->andwhere(['customer_id'=>$this->loggedinuser['customer_id']])
+					->andwhere(['status'=>2]);
 		(isset($query)) ? $leavecount=$query->count() : $leavecount="";
 
 		  
@@ -71,7 +72,8 @@ class ProfilesController extends AppController
 		$query=$noteTable->find('All')->where(['emp_data_biographies_id'=>$this->request->session()->read('sessionuser')['empdatabiographyid']])->andwhere(['customer_id'=>$this->loggedinuser['customer_id']]);
 		(isset($query)) ? $notecount=$query->count() : $notecount="";
 		
-		$query=$leaveTable->find('All')->where(['emp_data_biographies_id'=>$this->request->session()->read('sessionuser')['empdatabiographyid']])->andwhere(['customer_id'=>$this->loggedinuser['customer_id']]);
+		$query=$leaveTable->find('All')->where(['emp_data_biographies_id'=>$this->request->session()->read('sessionuser')['empdatabiographyid']])->andwhere(['customer_id'=>$this->loggedinuser['customer_id']])
+					->andwhere(['status'=>2]);
 		(isset($query)) ? $leavecount=$query->count() : $leavecount="";
 		
     	//get empid from session var
