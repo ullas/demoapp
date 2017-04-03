@@ -126,7 +126,7 @@
           <div class="info-box  bg-red denieddiv" style="cursor: pointer;">
             <span class="info-box-icon"><i class="fa fa-times"></i></span>
             <div class="info-box-content infodiv">
-              <span class="info-box-text">Denied</span>
+              <span class="info-box-text">Rejected</span>
               <span class="info-box-number"><?php echo $rejcount; ?></span>
             </div>
           </div>
@@ -211,7 +211,7 @@ function tableLoaded() {
     	}else if($(this).find('td:eq(1)').html()=="1"){
     		$(this).find('td:eq(1)').html('<span class="label label-success">Approved</span>');
     	}else if($(this).find('td:eq(1)').html()=="2"){
-    		$(this).find('td:eq(1)').html('<span class="label label-danger">Denied</span>');
+    		$(this).find('td:eq(1)').html('<span class="label label-danger">Rejected</span>');
     	}
 
     	$(this).find('td').each (function() {
