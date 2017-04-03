@@ -182,6 +182,11 @@ div#myDropZone {
               echo $this->Form->input('employmentinfo.job_credit');
               echo $this->Form->input('employmentinfo.notes',['templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-sticky-note-o"></i></div>']]);
               echo $this->Form->input('employmentinfo.is_contingent_worker');
+			  ?>
+			  
+			  <div class="terminationcontent" style="display:none;">
+			  <div class="col-md-12"><hr/><h3 class="box-title"><u>Termination</u></h3></div>
+			  <?php
               echo $this->Form->input('employmentinfo.end_date', ['label' => 'Termination Date','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
               echo $this->Form->input('employmentinfo.ok_to_rehire',['label' => 'Ok to Rehire']);
   			  echo $this->Form->input('employmentinfo.pay_roll_end_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
@@ -192,7 +197,9 @@ div#myDropZone {
               echo $this->Form->input('employmentinfo.stock_end_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
               echo $this->Form->input('employmentinfo.salary_end_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
               echo $this->Form->input('employmentinfo.benefits_end_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
-        ?></fieldset>
+        	  ?>
+        	 </div>
+        	  </fieldset>
             <!-- </div> -->
            </div>
           <!-- Tab Pane-->
@@ -200,7 +207,7 @@ div#myDropZone {
 		  <div class="tab-pane" id="jobinfo">
              <!-- <div class="form-horizontal"> --><fieldset>
               <?php
-              echo $this->Form->input('jobinfo.position_id', ['templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-briefcase"></i></div>'],'class'=>'select2','options' => $positions, 'empty' => true]);
+             echo $this->Form->input('jobinfo.position_id', ['templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-briefcase"></i></div>'],'class'=>'select2','options' => $positions, 'empty' => true]);
             echo $this->Form->input('jobinfo.position_entry_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
             echo $this->Form->input('jobinfo.time_in_position');
             echo $this->Form->input('jobinfo.legal_entity_id',['class'=>'select2', 'empty' => true]);
@@ -463,6 +470,19 @@ $(document).ready(function(){
 	  $('.modal-body', this).empty();
 	})
 
+	$('#employmentinfo-start-date').on('changeDate', function (e) {
+		
+         if($('#employmentinfo-start-date').val()!="" && $('#employmentinfo-start-date').val()!=null){ 
+         	
+         	if($('#employmentinfo-first-date-worked').val()=="" || $('#employmentinfo-first-date-worked').val()==null){ $('#employmentinfo-first-date-worked').val($('#employmentinfo-start-date').val()); }
+         	if($('#employmentinfo-original-start-date').val()=="" || $('#employmentinfo-original-start-date').val()==null){ $('#employmentinfo-original-start-date').val($('#employmentinfo-start-date').val()); }
+         	if($('#employmentinfo-seniority-date').val()=="" || $('#employmentinfo-seniority-date').val()==null){ $('#employmentinfo-seniority-date').val($('#employmentinfo-start-date').val()); }
+         	if($('#employmentinfo-benefits-eligibility-start-date').val()=="" || $('#employmentinfo-benefits-eligibility-start-date').val()==null){ $('#employmentinfo-benefits-eligibility-start-date').val($('#employmentinfo-start-date').val()); }
+         	if($('#employmentinfo-service-date').val()=="" || $('#employmentinfo-service-date').val()==null){ $('#employmentinfo-service-date').val($('#employmentinfo-start-date').val()); }
+         	
+         } 					
+    });
+    					
 });
 </script>
 <?php $this->end(); ?>

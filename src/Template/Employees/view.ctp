@@ -143,6 +143,11 @@
               echo $this->Form->input('employmentinfo.job_credit',['disabled' => true]);
               echo $this->Form->input('employmentinfo.notes',['templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-sticky-note-o"></i></div>'],'disabled' => true]);
               echo $this->Form->input('employmentinfo.is_contingent_worker',['disabled' => true]);
+			   ?>
+			  
+			  <div class="terminationcontent" style="display:none;">
+			  <div class="col-md-12"><hr/><h3 class="box-title"><u>Termination</u></h3></div>
+			  <?php
               echo $this->Form->input('employmentinfo.end_date', ['label' => 'Termination Date','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
               echo $this->Form->input('employmentinfo.ok_to_rehire',['label' => 'Ok to Rehire','disabled' => true]);
   			      echo $this->Form->input('employmentinfo.pay_roll_end_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
@@ -153,7 +158,7 @@
               echo $this->Form->input('employmentinfo.stock_end_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
               echo $this->Form->input('employmentinfo.salary_end_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
               echo $this->Form->input('employmentinfo.benefits_end_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
-        ?></fieldset>
+        ?></div></fieldset>
             <!-- </div> -->
            </div>
           <!-- Tab Pane-->
