@@ -29,6 +29,6 @@
         </fieldset>
         </div><div class="box-footer">
           	<?=$this->Html->link(__('Cancel'), ['action' => 'index'], ['escape' => false])?>
-            <?=$this->Html->link(__('Edit Paygrade'), ['action' => 'edit', $payGrade['id']],['class'=>'btn btn-primary label-info pull-right'], ['escape' => false])?>
+            <?=$this->Html->link(__('Edit Pay Grade'), ['action' => 'edit', $payGrade['id']],['class'=>'btn btn-primary label-info pull-right'], ['escape' => false])?>
           </div><?= $this->Form->end() ?>
 </div></section>

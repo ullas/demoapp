@@ -24,7 +24,7 @@
     </fieldset>
     <div class="box-footer">
     <?=$this->Html->link(__('Cancel'), ['action' => 'index'], ['escape' => false])?>
-    <?= $this->Form->button(__('Save Payroll'),['title'=>'Save Payroll','class'=>'pull-right']) ?>
+    <?= $this->Form->button(__('Save Payroll Area'),['title'=>'Save Payroll Area','class'=>'pull-right']) ?>
     </div>
     <?= $this->Form->end() ?>
 </div></div></section>
