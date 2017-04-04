@@ -33,7 +33,7 @@
     </fieldset>
     <div class="box-footer">
     <?=$this->Html->link(__('Cancel'), ['action' => 'index'], ['escape' => false])?>
-    <?= $this->Form->button(__('Save Payrange'),['title'=>'Save PayRange','class'=>'pull-right']) ?>
+    <?= $this->Form->button(__('Save Pay Range'),['title'=>'Save Pay Range','class'=>'pull-right']) ?>
     </div>
 <?= $this->Form->end() ?>
 </div></div></section>
