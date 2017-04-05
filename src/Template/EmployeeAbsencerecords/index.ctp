@@ -8,6 +8,16 @@
   margin-right: -10px;
   margin-bottom:0px
 }
+.empimg{
+	width: 50px;
+    height: 50px;
+    border: 2px solid transparent;
+    border-radius: 50%;
+}
+.mptlreject,.mptlapprove{
+	height:35px;
+	margin-top:34px;
+}
 </style>
 <?php if($notificationcontent!='' && $notificationcontent!=null && isset($notificationcontent)){  ?>
 <section class="content-header">
@@ -27,7 +37,6 @@
   				<h1>Leave Approval</h1>
 			</section>
 			<section class="content">
-                 <ul class="products-list product-list-in-box">
                         	<?php $cnt=0; for ($x = 0; $x < count($notificationcontent); $x++) {
                         		if(isset($notificationcontent[$x]) && $notificationcontent[$x]!=null){
 
@@ -39,19 +48,18 @@
 								if(isset($notificationcontent[$x][$y]['employee_absencerecords'][$t]) && $notificationcontent[$x][$y]['employee_absencerecords'][$t]!=null){
 
                         	?>
+                        	<div style="border-bottom: 1px solid #f4f4f4;">
                         	                 	<!-- <div class="jumbotron" style="overflow: auto;"><?php echo json_encode($notificationcontent[$x][$y]); ?></div> -->
+							<div class="col-md-12">
+								
+								<?php $picname = str_replace('"', '',$this->Country->get_employeepicture($notificationcontent[$x][$y]['employee_absencerecords'][$t]['emp_data_biographies_id']));
+								 if(isset($picname) && ($picname!='')){$picturename='/img/uploadedpics/'.$picname;}
+                            				else{$picturename='/img/uploadedpics/defaultuser.png';}
+          							echo $this->Html->image($picturename, array('class' => 'img-circle empimg', 'alt' => 'Employee picture')); ?>
+								
+								<a href="javascript:void(0)" class="product-title"><?php $empname = str_replace('"', '',$this->Country->get_employeename($notificationcontent[$x][$y]['employee_absencerecords'][$t]['emp_data_biographies_id']));
+                            		echo $empname; ?></a>
 
-                        	<li class="item" style="padding:10px;">
-                              <div class="col-sm-9">
-                            	<div class="product-img">
-                    				<i class="fa fa-3x fa-calendar-minus-o text-aqua"></i>
-                  				</div>
-                            	<div class="product-info">
-                            		<a href="javascript:void(0)" class="product-title"><?php $empname = str_replace('"', '',$this->Country->get_employeename($notificationcontent[$x][$y]['employee_absencerecords'][$t]['emp_data_biographies_id']));
-                            		echo $empname; ?>
-                            			<!-- <span class="label label-warning pull-right"><?php echo $notificationcontent[$x]['created'] ?></span> -->
-                            		</a>
-                              </br>
                             		<span style="color:#333">Applied <b><?php $timetype = str_replace('"', '', json_encode($notificationcontent[$x][$y]['employee_absencerecords'][$t]['time_type']['name'])); echo  $timetype; ?></b> for
                             			<?php  $startdate = $notificationcontent[$x][$y]['employee_absencerecords'][$t]['start_date'];
                             						$enddate = $notificationcontent[$x][$y]['employee_absencerecords'][$t]['end_date'];
@@ -76,15 +84,71 @@
 										<?php echo $notificationcontent[$x][$y]['employee_absencerecords'][$t]['end_date']; ?>
 
                             		</span>
+								
+							</div>
+							<div class="row" style="margin-top:10px;margin-bottom:10px;">
+							<div class="col-md-12">
+								
+								<div class="form-group textarea">
+									<div class="col-md-12">
+									<label class="control-label" for="description">Comment:</label>
+									</div>
+									<div class="col-md-6">
+                            			<textarea name="comment" id="comment<?php echo $notificationcontent[$x][$y]['employee_absencerecords'][$t]['workflow_id'] ?>" style="height:70px;width:100%;"></textarea>
+                            		</div>
+                            		<div class="col-md-6" style="height:70px;">
+										<input type="button" value="Reject" class="mptlreject btn btn-danger" id=<?php echo $notificationcontent[$x][$y]['employee_absencerecords'][$t]['workflow_id'] ?>>
+                                		<input type="button" value="Approve" class="mptlapprove btn btn-success" id=<?php echo $notificationcontent[$x][$y]['employee_absencerecords'][$t]['workflow_id'] ?>>							
+									</div>
+                            	</div>								
+							</div>
+							</div>
+							</div>
+                       <!-- 	<li class="item" style="padding:10px;border-bottom: 1px solid #ddd;">
+                              <div class="col-sm-9">
+                            	<div class="product-img">
+                    				<i class="fa fa-3x fa-calendar-minus-o text-aqua"></i>
+                  				</div>
+                            	<div class="product-info">
+                            		<a href="javascript:void(0)" class="product-title"><?php $empname = str_replace('"', '',$this->Country->get_employeename($notificationcontent[$x][$y]['employee_absencerecords'][$t]['emp_data_biographies_id']));
+                            		echo $empname; ?>
+
+                            		<span style="color:#333">Applied <b><?php $timetype = str_replace('"', '', json_encode($notificationcontent[$x][$y]['employee_absencerecords'][$t]['time_type']['name'])); echo  $timetype; ?></b> for
+                            			<?php  $startdate = $notificationcontent[$x][$y]['employee_absencerecords'][$t]['start_date'];
+                            						$enddate = $notificationcontent[$x][$y]['employee_absencerecords'][$t]['end_date'];
+													if(isset($userdateformat)  && $userdateformat===1){
+                            							$startdate = str_replace('/', '-', $startdate);
+														$startdate = date('Y/m/d', strtotime($startdate));
+
+														$enddate = str_replace('/', '-', $enddate);
+														$enddate = date('Y/m/d', strtotime($enddate));
+													}
+
+
+                            						if($startdate!="" && $startdate!=null && $enddate!="" && $enddate!=null){
+                            					    	$date1 = new DateTime($startdate);
+												    	$date2 = new DateTime($enddate);
+												    	$diff = $date2->diff($date1)->format("%a");
+												    	echo $diff+1;
+													}
+										?>
+                            			 day(s) from
+                            			<?php echo $notificationcontent[$x][$y]['employee_absencerecords'][$t]['start_date']; ?> to
+										<?php echo $notificationcontent[$x][$y]['employee_absencerecords'][$t]['end_date']; ?>
+
+                            		</span>
+                            		
+                            		<div class="form-group textarea"><label class="control-label" for="description">Description</label>
+                            			<textarea name="description" id="description" class="form-control" rows="3"></textarea></div>
+                            	
                             	</div>
                             </div>
                             <div class="col-sm-3" style="margin-top:10px">
                               <input type="button" value="Reject" class="mptlreject btn btn-danger" id=<?php echo $notificationcontent[$x][$y]['employee_absencerecords'][$t]['workflow_id'] ?>>
                               <input type="button" value="Approve" class="mptlapprove btn btn-success" id=<?php echo $notificationcontent[$x][$y]['employee_absencerecords'][$t]['workflow_id'] ?>>
                             </div>
-                            </li>
+                            </li> -->
                             <?php } }  } }  } } ?>
-        		</ul>
         	</section>
   		</div>
 
@@ -176,8 +240,9 @@ $(function () {
 	$('.mptlreject').click(function(){
     	//get input value
 		var btnid = this.id;
+		var comnt = $('#comment'+btnid).val();
 
-    	$.get('/EmployeeAbsencerecords/denyLeaveRequest?id='+btnid, function(d) {
+    	$.get('/EmployeeAbsencerecords/denyLeaveRequest?id='+btnid + '&description='+comnt, function(d) {
    		 	if(d=="success"){
    		 		window.location.reload();
    		 	}
@@ -188,8 +253,9 @@ $(function () {
 	$('.mptlapprove').click(function(){
     	//get input value
 		var btnid = this.id;
+		var comnt = $('#comment'+btnid).val();
 
-    	$.get('/EmployeeAbsencerecords/approveLeaveRequest?id='+btnid, function(d) {
+    	$.get('/EmployeeAbsencerecords/approveLeaveRequest?id='+btnid + '&description='+comnt, function(d) {
    		 	if(d=="success"){
    		 		window.location.reload();
    		 	}

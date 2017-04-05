@@ -8,7 +8,7 @@
 				echo $time ; 
 				echo '</span><h3 class="timeline-header"><a>';
 				echo $title.'</a> ';
-				echo $subtitle.'</h3><div class="timeline-body"> Description. </div></div>' ;
+				echo $subtitle.'</h3><div class="timeline-body">'.$description. ' </div></div>' ;
         	break;
     		case "1":
         		echo '<i class="fa fa-check bg-olive"></i><div class="timeline-item">' ;

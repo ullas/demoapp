@@ -46,7 +46,7 @@
     		<!-- status=0 for pending,1 for approved,2 for denied,3 for skipped by time    -->
     		<?php  foreach ($workflowhistory as $value): ?>
     			
-    			<?= $this->element('statuselement', array('title' => $value['user']['username'], 'subtitle'=>$value['status'], 'status' => "0", 'time' => $value['updatetime'] )); ?>
+    			<?= $this->element('statuselement', array('title' => $value['user']['username'], 'subtitle'=>$value['status'], 'description'=>$value['description'], 'status' => "0", 'time' => $value['updatetime'] )); ?>
     		
     		<?php endforeach; ?>
     		
@@ -60,6 +60,24 @@
 </div>
 
 <div class="col-md-3">
+	<?php $leavereqstatus = $employeeAbsencerecord["status"] ;
+		switch ($leavereqstatus) {
+			case "0":
+				echo '<div class="small-box bg-orange"><div class="inner"><h3>Pending</h3><p>Pending for approval.</p>';
+            	echo '</div><div class="icon"><i class="fa fa-ellipsis-v"></i></div></div>' ;
+        	break;
+    		case "1":
+        		echo '<div class="small-box bg-green"><div class="inner"><h3>Approved</h3><p>Application Approved.</p>';
+            	echo '</div><div class="icon"><i class="fa fa-check"></i></div></div>' ;
+        	break;
+    		case "2":
+    			echo '<div class="small-box bg-red"><div class="inner"><h3>Rejected</h3><p>Application Rejected.</p>';
+            	echo '</div><div class="icon"><i class="fa fa-times"></i></div></div>' ;
+        	break;
+			default:
+        		echo "";
+        	}
+		?>       		
 </div>
 	
 </div>
