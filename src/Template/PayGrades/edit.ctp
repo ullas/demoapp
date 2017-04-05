@@ -24,7 +24,7 @@
     </fieldset>
     <div class="box-footer">
     <?=$this->Html->link(__('Cancel'), ['action' => 'index'], ['escape' => false])?>
-    <?= $this->Form->button(__('Update Paygrade'),['title'=>'Save paygrade','class'=>'pull-right']) ?>
+    <?= $this->Form->button(__('Update Pay Grade'),['title'=>'Save pay Grade','class'=>'pull-right']) ?>
     </div>
     <?= $this->Form->end() ?>
 </div></div></section>

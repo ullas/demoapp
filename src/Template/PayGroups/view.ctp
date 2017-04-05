@@ -38,6 +38,6 @@
         ?></fieldset></div>
 <div class="box-footer">
           	<?=$this->Html->link(__('Cancel'), ['action' => 'index'], ['escape' => false])?>
-            <?=$this->Html->link(__('Edit Paygroup'), ['action' => 'edit', $payGroup['id']],['class'=>'btn btn-primary label-info pull-right'], ['escape' => false])?>
+            <?=$this->Html->link(__('Edit Pay Group'), ['action' => 'edit', $payGroup['id']],['class'=>'btn btn-primary label-info pull-right'], ['escape' => false])?>
           </div><?= $this->Form->end() ?>
 </div></section>
