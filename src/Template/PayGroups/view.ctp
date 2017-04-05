@@ -19,7 +19,13 @@
             echo $this->Form->input('external_code',['label' => 'Pay Group Code','disabled' => true]);
             echo $this->Form->input('name',['label' => 'Pay Group Name','disabled' => true]);
             echo $this->Form->input('description',['disabled' => true]);
-            echo $this->Form->input('effective_status',['disabled' => true]);
+            
+			echo $this->Form->input('legal_entity_id', ['class' => 'select2','options' => $legalEntities, 'empty' => true,'disabled' => true]);
+            echo $this->Form->input('business_unit_id', ['class' => 'select2','options' => $businessUnits, 'empty' => true,'disabled' => true]);
+            echo $this->Form->input('division_id', ['class' => 'select2','options' => $divisions, 'empty' => true,'disabled' => true]);
+            echo $this->Form->input('location_id', ['class' => 'select2','options' => $locations, 'empty' => true,'disabled' => true]);
+			
+			echo $this->Form->input('effective_status',['disabled' => true]);
 			      echo $this->Form->input('effective_start_date',['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
             echo $this->Form->input('effective_end_date',['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
             echo $this->Form->input('earliest_change_date',['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);

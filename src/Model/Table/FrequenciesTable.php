@@ -11,6 +11,7 @@ use Cake\Validation\Validator;
  *
  * @property \Cake\ORM\Association\BelongsTo $Customers
  * @property \Cake\ORM\Association\HasMany $PayComponents
+ * @property \Cake\ORM\Association\HasMany $PayGroups
  *
  * @method \App\Model\Entity\Frequency get($primaryKey, $options = [])
  * @method \App\Model\Entity\Frequency newEntity($data = null, array $options = [])
@@ -41,7 +42,10 @@ class FrequenciesTable extends Table
             'foreignKey' => 'customer_id'
         ]);
         $this->hasMany('PayComponents', [
-            'foreignKey' => 'frequency_id','dependent' => true
+            'foreignKey' => 'frequency_id'
+        ]);
+        $this->hasMany('PayGroups', [
+            'foreignKey' => 'frequency_id'
         ]);
     }
 
@@ -70,6 +74,12 @@ class FrequenciesTable extends Table
             ->requirePresence('external_code', 'create')
             ->notEmpty('external_code')
             ->add('external_code', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
+
+        $validator
+            ->allowEmpty('startday');
+
+        $validator
+            ->allowEmpty('startdate');
 
         return $validator;
     }
