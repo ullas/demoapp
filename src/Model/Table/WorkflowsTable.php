@@ -12,7 +12,9 @@ use Cake\Validation\Validator;
  * @property \Cake\ORM\Association\BelongsTo $Workflowrules
  * @property \Cake\ORM\Association\BelongsTo $Customers
  * @property \Cake\ORM\Association\BelongsTo $EmpDataBiographies
+ * @property \Cake\ORM\Association\BelongsTo $Users
  * @property \Cake\ORM\Association\HasMany $EmployeeAbsencerecords
+ * @property \Cake\ORM\Association\HasMany $WorkflowsHistory
  *
  * @method \App\Model\Entity\Workflow get($primaryKey, $options = [])
  * @method \App\Model\Entity\Workflow newEntity($data = null, array $options = [])
@@ -52,7 +54,13 @@ class WorkflowsTable extends Table
         $this->belongsTo('EmpDataBiographies', [
             'foreignKey' => 'emp_data_biographies_id'
         ]);
+        $this->belongsTo('Users', [
+            'foreignKey' => 'user_id'
+        ]);
         $this->hasMany('EmployeeAbsencerecords', [
+            'foreignKey' => 'workflow_id'
+        ]);
+        $this->hasMany('WorkflowsHistory', [
             'foreignKey' => 'workflow_id'
         ]);
     }
@@ -83,6 +91,9 @@ class WorkflowsTable extends Table
             ->boolean('active')
             ->allowEmpty('active');
 
+        $validator
+            ->allowEmpty('description');
+
         return $validator;
     }
 
@@ -98,6 +109,7 @@ class WorkflowsTable extends Table
         $rules->add($rules->existsIn(['workflowrule_id'], 'Workflowrules'));
         $rules->add($rules->existsIn(['customer_id'], 'Customers'));
         $rules->add($rules->existsIn(['emp_data_biographies_id'], 'EmpDataBiographies'));
+        $rules->add($rules->existsIn(['user_id'], 'Users'));
 
         return $rules;
     }

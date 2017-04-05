@@ -27,4 +27,13 @@ class CountryHelper extends Helper {
 		}
 		return json_encode($arrayTemp1[0]['first_name']); 
 	}
+	public function get_employeepicture($empdatabiographyid = null) 
+	{
+		$conn = ConnectionManager::get('default');
+		$empid = $conn->execute('select employee_id from empdatabiographies where id='.$empdatabiographyid.'')->fetchAll('assoc');
+		if($empid!="" && $empid!=null && isset($empid[0]['employee_id']) ){
+			$arrayTemp1 = $conn->execute('select profilepicture from employees where id='.$empid[0]['employee_id'].'')->fetchAll('assoc');
+		}
+		return json_encode($arrayTemp1[0]['profilepicture']); 
+	}
 }
