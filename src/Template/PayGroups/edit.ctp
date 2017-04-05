@@ -16,7 +16,13 @@
         echo $this->Form->input('external_code',['label' => 'Pay Group Code']);
         echo $this->Form->input('name',['label' => 'Pay Group Name']);
         echo $this->Form->input('description');
-        echo $this->Form->input('effective_status',['label' => 'Status']);
+        
+			echo $this->Form->input('legal_entity_id', ['class' => 'select2','options' => $legalEntities, 'empty' => true]);
+            echo $this->Form->input('business_unit_id', ['class' => 'select2','options' => $businessUnits, 'empty' => true]);
+            echo $this->Form->input('division_id', ['class' => 'select2','options' => $divisions, 'empty' => true]);
+            echo $this->Form->input('location_id', ['class' => 'select2','options' => $locations, 'empty' => true]);
+			
+		echo $this->Form->input('effective_status',['label' => 'Status']);
         echo $this->Form->input('effective_start_date',['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
         echo $this->Form->input('effective_end_date',['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
         echo $this->Form->input('earliest_change_date',['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);

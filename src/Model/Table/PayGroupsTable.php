@@ -8,11 +8,16 @@ use Cake\Validation\Validator;
 use Cake\Event\Event;
 use Cake\Event\ArrayObject;
 use Cake\Core\Configure;
+
 /**
  * PayGroups Model
  *
  * @property \Cake\ORM\Association\BelongsTo $Customers
  * @property \Cake\ORM\Association\BelongsTo $Frequencies
+ * @property \Cake\ORM\Association\BelongsTo $LegalEntities
+ * @property \Cake\ORM\Association\BelongsTo $BusinessUnits
+ * @property \Cake\ORM\Association\BelongsTo $Divisions
+ * @property \Cake\ORM\Association\BelongsTo $Locations
  * @property \Cake\ORM\Association\HasMany $PayRanges
  *
  * @method \App\Model\Entity\PayGroup get($primaryKey, $options = [])
@@ -46,8 +51,20 @@ class PayGroupsTable extends Table
         $this->belongsTo('Frequencies', [
             'foreignKey' => 'frequency_id'
         ]);
+        $this->belongsTo('LegalEntities', [
+            'foreignKey' => 'legal_entity_id'
+        ]);
+        $this->belongsTo('BusinessUnits', [
+            'foreignKey' => 'business_unit_id'
+        ]);
+        $this->belongsTo('Divisions', [
+            'foreignKey' => 'division_id'
+        ]);
+        $this->belongsTo('Locations', [
+            'foreignKey' => 'location_id'
+        ]);
         $this->hasMany('PayRanges', [
-            'foreignKey' => 'pay_group_id','dependent' => true
+            'foreignKey' => 'pay_group_id'
         ]);
     }
 
@@ -151,6 +168,10 @@ class PayGroupsTable extends Table
         $rules->add($rules->isUnique(['external_code']));
         $rules->add($rules->existsIn(['customer_id'], 'Customers'));
         $rules->add($rules->existsIn(['frequency_id'], 'Frequencies'));
+        $rules->add($rules->existsIn(['legal_entity_id'], 'LegalEntities'));
+        $rules->add($rules->existsIn(['business_unit_id'], 'BusinessUnits'));
+        $rules->add($rules->existsIn(['division_id'], 'Divisions'));
+        $rules->add($rules->existsIn(['location_id'], 'Locations'));
 
         return $rules;
     }

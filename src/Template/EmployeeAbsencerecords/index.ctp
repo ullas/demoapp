@@ -94,7 +94,7 @@
 									<label class="control-label" for="description">Comment:</label>
 									</div>
 									<div class="col-md-6">
-                            			<textarea name="comment" id="comment<?php echo $notificationcontent[$x][$y]['employee_absencerecords'][$t]['workflow_id'] ?>" style="height:70px;width:100%;"></textarea>
+                            			<textarea class="form-control" name="comment" id="comment<?php echo $notificationcontent[$x][$y]['employee_absencerecords'][$t]['workflow_id'] ?>" style="height:70px;width:100%;"></textarea>
                             		</div>
                             		<div class="col-md-6" style="height:70px;">
 										<input type="button" value="Reject" class="mptlreject btn btn-danger" id=<?php echo $notificationcontent[$x][$y]['employee_absencerecords'][$t]['workflow_id'] ?>>

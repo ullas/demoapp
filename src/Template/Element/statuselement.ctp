@@ -1,8 +1,8 @@
 <li>
 	
 		<?php
-		switch ($status) {
-			case "0":
+		switch ($subtitle) {
+			case "Request Raised":
 				echo '<i class="fa fa-user bg-orange"></i><div class="timeline-item">' ;
         		echo '<span class="time"><i class="fa fa-clock-o"></i> ';
 				echo $time ; 
@@ -10,29 +10,29 @@
 				echo $title.'</a> ';
 				echo $subtitle.'</h3><div class="timeline-body">'.$description. ' </div></div>' ;
         	break;
-    		case "1":
-        		echo '<i class="fa fa-check bg-olive"></i><div class="timeline-item">' ;
-        		echo '<span class="time"><i class="fa fa-clock-o"></i>';
+    		case "Request Approved":
+        		echo '<i class="fa fa-check bg-green"></i><div class="timeline-item">' ;
+        		echo '<span class="time"><i class="fa fa-clock-o"></i> ';
 				echo $time ; 
 				echo '</span><h3 class="timeline-header"><a>';
-				echo $title;
-				echo '</a></h3><div class="timeline-body"> approved your request. </div></div>' ;
+				echo $title.'</a> ';
+				echo $subtitle.'</h3><div class="timeline-body">'.$description. ' </div></div>' ;
         	break;
-    		case "2":
+    		case "Request Rejected":
     			echo '<i class="fa fa-times bg-red"></i><div class="timeline-item">' ;
-        		echo '<span class="time"><i class="fa fa-clock-o"></i>';
+        		echo '<span class="time"><i class="fa fa-clock-o"></i> ';
 				echo $time ; 
 				echo '</span><h3 class="timeline-header"><a>';
-				echo $title;
-				echo '</a></h3><div class="timeline-body"> denied your request. </div></div>' ;
+				echo $title.'</a> ';
+				echo $subtitle.'</h3><div class="timeline-body">'.$description. ' </div></div>' ;
         	break;
-        	case "3":
-    			echo '<i class="fa fa-step-forward bg-olive"></i><div class="timeline-item">' ;
-        		echo '<span class="time"><i class="fa fa-clock-o"></i>';
+        	case "Request Modified":
+    			echo '<i class="fa fa-pencil bg-aqua"></i><div class="timeline-item">' ;
+        		echo '<span class="time"><i class="fa fa-clock-o"></i> ';
 				echo $time ; 
 				echo '</span><h3 class="timeline-header"><a>';
-				echo $title;
-				echo '</a></h3><div class="timeline-body"> skipped your request. </div></div>' ;
+				echo $title.'</a> ';
+				echo $subtitle.'</h3><div class="timeline-body">'.$description. ' </div></div>' ;
         	break;
 			default:
         		echo "";

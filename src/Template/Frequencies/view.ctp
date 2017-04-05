@@ -19,7 +19,9 @@
           <?php
           	echo $this->Form->input('external_code',['label' => 'Frequency Code','disabled' => true]);
             echo $this->Form->input('name',['label' => 'Frequency Name','disabled' => true]);
-            echo $this->Form->input('description',['disabled' => true]);
+            echo $this->Form->input('startday',['disabled' => true,'label' => 'Start Day','class'=>'select2','options' => ['1' => 'Sunday', '2' => 'Monday','3' => 'Tuesday','4' => 'Wednesday','5' => 'Thursday','6' => 'Friday','7' => 'Saturday'], 'empty' => 'Choose']);
+            echo $this->Form->input('startdate',['label' => 'Start Date','disabled' => true]);
+			echo $this->Form->input('description',['disabled' => true]);
             echo $this->Form->input('annualization_factor',['disabled' => true]);
 
           ?></fieldset>

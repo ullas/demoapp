@@ -26,6 +26,10 @@ use Cake\ORM\Entity;
  * @property string $external_code
  * @property int $customer_id
  * @property int $frequency_id
+ * @property int $legal_entity_id
+ * @property int $business_unit_id
+ * @property int $division_id
+ * @property int $location_id
  *
  * @property \App\Model\Entity\Customer $customer
  * @property \App\Model\Entity\Frequency $frequency
