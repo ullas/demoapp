@@ -16,10 +16,15 @@ use Cake\ORM\Entity;
  * @property \Cake\I18n\Time $created
  * @property \Cake\I18n\Time $modified
  * @property bool $active
+ * @property int $user_id
+ * @property string $description
  *
  * @property \App\Model\Entity\Workflowrule $workflowrule
  * @property \App\Model\Entity\Customer $customer
  * @property \App\Model\Entity\Empdatabiography $emp_data_biography
+ * @property \App\Model\Entity\User $user
+ * @property \App\Model\Entity\EmployeeAbsencerecord[] $employee_absencerecords
+ * @property \App\Model\Entity\WorkflowsHistory[] $workflows_history
  */
 class Workflow extends Entity
 {
