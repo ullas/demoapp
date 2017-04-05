@@ -64,8 +64,12 @@ var $components = array('Datatable');
         ]);
 		
 		if($payGroup['customer_id']==$this->loggedinuser['customer_id']){
-			$frequencies = $this->PayGroups->Frequencies->find('list', ['limit' => 200])->where("customer_id=".$this->loggedinuser['customer_id']);
-        	$this->set(compact('payGroup','frequencies'));
+			$legalEntities = $this->PayGroups->LegalEntities->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        	$businessUnits = $this->PayGroups->BusinessUnits->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        	$divisions = $this->PayGroups->Divisions->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        	$locations = $this->PayGroups->Locations->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        	$frequencies = $this->PayGroups->Frequencies->find('list', ['limit' => 200])->where("customer_id=".$this->loggedinuser['customer_id']);
+        	$this->set(compact('legalEntities', 'businessUnits', 'divisions', 'locations','payGroup','frequencies'));
         	$this->set('_serialize', ['payGroup']);
  		}else{
 		    $this->Flash->error(__('You are not Authorized.'));
@@ -92,9 +96,13 @@ var $components = array('Datatable');
                 $this->Flash->error(__('The pay group could not be saved. Please, try again.'));
             }
         }
+        $legalEntities = $this->PayGroups->LegalEntities->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        $businessUnits = $this->PayGroups->BusinessUnits->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        $divisions = $this->PayGroups->Divisions->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        $locations = $this->PayGroups->Locations->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         $customers = $this->PayGroups->Customers->find('list', ['limit' => 200]);
 		$frequencies = $this->PayGroups->Frequencies->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
-        $this->set(compact('payGroup', 'customers','frequencies'));
+        $this->set(compact('legalEntities', 'businessUnits', 'divisions', 'locations','payGroup', 'customers','frequencies'));
         $this->set('_serialize', ['payGroup']);
     }
 
@@ -127,9 +135,13 @@ var $components = array('Datatable');
                 $this->Flash->error(__('The pay group could not be saved. Please, try again.'));
             }
         }
+        $legalEntities = $this->PayGroups->LegalEntities->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        $businessUnits = $this->PayGroups->BusinessUnits->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        $divisions = $this->PayGroups->Divisions->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        $locations = $this->PayGroups->Locations->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         $customers = $this->PayGroups->Customers->find('list', ['limit' => 200]);
         $frequencies = $this->PayGroups->Frequencies->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
-        $this->set(compact('payGroup', 'customers','frequencies'));
+        $this->set(compact('legalEntities', 'businessUnits', 'divisions', 'locations','payGroup', 'customers','frequencies'));
         $this->set('_serialize', ['payGroup']);
     }
 

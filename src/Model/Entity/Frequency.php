@@ -12,6 +12,11 @@ use Cake\ORM\Entity;
  * @property float $annualization_factor
  * @property string $external_code
  * @property int $customer_id
+ * @property int $startday
+ * @property int $startdate
+ *
+ * @property \App\Model\Entity\Customer $customer
+ * @property \App\Model\Entity\PayComponent[] $pay_components
  */
 class Frequency extends Entity
 {

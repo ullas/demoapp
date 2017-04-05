@@ -15,7 +15,9 @@
         <?php
             echo $this->Form->input('external_code',['label' => 'Frequency Code']);
             echo $this->Form->input('name',['label' => 'Frequency Name']);
-            echo $this->Form->input('description');
+            echo $this->Form->input('startday',['label' => 'Start Day','class'=>'select2','options' => ['1' => 'Sunday', '2' => 'Monday','3' => 'Tuesday','4' => 'Wednesday','5' => 'Thursday','6' => 'Friday','7' => 'Saturday'], 'empty' => 'Choose']);
+            echo $this->Form->input('startdate',['label' => 'Start Date']);
+			echo $this->Form->input('description');
             echo $this->Form->input('annualization_factor');
 
         ?>
