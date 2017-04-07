@@ -217,7 +217,7 @@ class AppController extends Controller
 		$lcontent=array();
 		foreach ($query as $row) {	
 			$workflowsTable = TableRegistry::get('Workflows');
-			$execquery = $workflowsTable->find('All')->where(['workflowrule_id'=>$row['workflowrule_id']])->andwhere(['currentstep'=>$row['stepid']])->andwhere(['Workflows.active'=>TRUE])
+			$execquery = $workflowsTable->find('All')->where(['workflowrule_id'=>$row['workflowrule_id']])->andwhere(['currentstep'=>$row['stepid']])->andwhere(['Workflows.active'=>"0"])
 								->andwhere(['Workflows.customer_id'=>$this->loggedinuser['customer_id']])->contain(['EmpDataBiographies','EmployeeAbsencerecords'=> ['TimeTypes'],'Workflowrules'])
 								->leftJoin('EmpDataBiographies', 'EmpDataBiographies.workflow_id = Workflows.id')
          						->toArray();
