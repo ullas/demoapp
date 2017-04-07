@@ -101,7 +101,9 @@ class EmployeeAbsencerecordsController extends AppController
 			
 			if($workflow['currentstep']==$workflow['lastaction']){
 				$this->loadModel('EmployeeAbsencerecords');
-				$employeeAbsencerecord = $this->EmployeeAbsencerecords->get($workflow['id'], [
+				$arr = $this->EmployeeAbsencerecords->find('all',[ 'conditions' => array('workflow_id' => $workflow['id'])])->toArray();
+				if(isset($arr[0])){ $empabsrecid = $arr[0]['id']; }
+				$employeeAbsencerecord = $this->EmployeeAbsencerecords->get($empabsrecid, [
             		'contain' => []
         		]);
 				$employeeAbsencerecord = $this->EmployeeAbsencerecords->patchEntity($employeeAbsencerecord, $this->request->data);
