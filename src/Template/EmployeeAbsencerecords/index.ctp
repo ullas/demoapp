@@ -60,7 +60,7 @@
 								<a href="javascript:void(0)" class="product-title"><?php $empname = str_replace('"', '',$this->Country->get_employeename($notificationcontent[$x][$y]['employee_absencerecords'][$t]['emp_data_biographies_id']));
                             		echo $empname; ?></a>
 
-                            		<span style="color:#333">Applied <b><?php $timetype = str_replace('"', '', json_encode($notificationcontent[$x][$y]['employee_absencerecords'][$t]['time_type']['name'])); echo  $timetype; ?></b> for
+                            		<span style="color:#333"> Applied <b><?php $timetype = str_replace('"', '', json_encode($notificationcontent[$x][$y]['employee_absencerecords'][$t]['time_type']['name'])); echo  $timetype; ?></b> for
                             			<?php  $startdate = $notificationcontent[$x][$y]['employee_absencerecords'][$t]['start_date'];
                             						$enddate = $notificationcontent[$x][$y]['employee_absencerecords'][$t]['end_date'];
 													if(isset($userdateformat)  && $userdateformat===1){
