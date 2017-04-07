@@ -36,7 +36,10 @@
     		<section class="content-header">
   				<h1>Leave Approval</h1>
 			</section>
-			<section class="content">
+			<section class="content">                        	                 	
+				
+				<!-- <div class="jumbotron" style="overflow: auto;"><?php echo json_encode($notificationcontent); ?></div> -->
+				
                         	<?php $cnt=0; for ($x = 0; $x < count($notificationcontent); $x++) {
                         		if(isset($notificationcontent[$x]) && $notificationcontent[$x]!=null){
 
@@ -49,7 +52,7 @@
 
                         	?>
                         	<div style="border-bottom: 1px solid #f4f4f4;">
-                        	                 	<!-- <div class="jumbotron" style="overflow: auto;"><?php echo json_encode($notificationcontent[$x][$y]); ?></div> -->
+
 							<div class="col-md-12">
 								
 								<?php $picname = str_replace('"', '',$this->Country->get_employeepicture($notificationcontent[$x][$y]['employee_absencerecords'][$t]['emp_data_biographies_id']));
