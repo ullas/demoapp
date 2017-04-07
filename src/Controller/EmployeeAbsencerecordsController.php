@@ -58,7 +58,7 @@ class EmployeeAbsencerecordsController extends AppController
         	]);
 			
             $workflow=$this->Workflows->patchEntity($workflow,$this->request->data);
-			$workflow['active']=FALSE;
+			$workflow['active']="2";
 			$workflow['description']=$this->request->query['description'];
 			$workflow['user_id']=$this->request->session()->read('sessionuser')['id'];
 			
@@ -109,7 +109,7 @@ class EmployeeAbsencerecordsController extends AppController
 				$employeeAbsencerecord = $this->EmployeeAbsencerecords->patchEntity($employeeAbsencerecord, $this->request->data);
 				$employeeAbsencerecord["status"] = "1"; 
            	 	if ($this->EmployeeAbsencerecords->save($employeeAbsencerecord)) {
-					$workflow['active']=FALSE;
+					$workflow['active']="1";
 				}
 								
 			}else{
@@ -244,7 +244,7 @@ class EmployeeAbsencerecordsController extends AppController
 			$workflow['currentstep']='1';	
 			if($workflowactioncount!=""){ $workflow['lastaction']=$workflowactioncount; }
 			$workflow['user_id']=$this->request->session()->read('sessionuser')['id'];
-			$workflow['active']=TRUE;				
+			$workflow['active']="0";				
 			$workflow['customer_id']=$this->loggedinuser['customer_id'];
 			$workflow["emp_data_biographies_id"] = $this->request->session()->read('sessionuser')['empdatabiographyid'] ; 
             if ($this->Workflows->save($workflow)) {
@@ -321,7 +321,7 @@ class EmployeeAbsencerecordsController extends AppController
 				$workflow['workflowrule_id']=$workflowruleid;
 				$workflow['user_id']=$this->request->session()->read('sessionuser')['id'];
 				if($workflowactioncount!=""){ $workflow['lastaction']=$workflowactioncount; }	
-				$workflow['active']=TRUE;	
+				// $workflow['active']="0";	
 				// $workflow["emp_data_biographies_id"] = $this->request->session()->read('sessionuser')['empdatabiographyid'] ; 
             	if ($this->Workflows->save($workflow)) {
                 	$this->Flash->success(__('The employee absencerecord has been saved.'));
@@ -368,7 +368,7 @@ class EmployeeAbsencerecordsController extends AppController
          		$this->loadModel('Workflows');
 				$workflow = $this->Workflows->get($employeeAbsencerecord["workflow_id"], ['contain' => []]);
 				$workflow = $this->Workflows->patchEntity($workflow, $this->request->data);
-				$workflow['active']=FALSE;	
+				$workflow['active']="2";	
             	if ($this->Workflows->save($workflow)) {
                 	$this->Flash->success(__('The employee absencerecord has been deleted.'));
                 	return $this->redirect($this->referer());
