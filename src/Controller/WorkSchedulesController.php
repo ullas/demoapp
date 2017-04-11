@@ -93,9 +93,15 @@ var $components = array('Datatable');
                 $this->Flash->error(__('The work schedule could not be saved. Please, try again.'));
             }
         }
-        $customers = $this->WorkSchedules->Customers->find('list', ['limit' => 200]);
-        $this->set(compact('workSchedule', 'customers'));
-        $this->set('_serialize', ['workSchedule']);
+		
+		$empDataBiographies = $this->WorkSchedules->EmpDataBiographies->find('list',['limit' => 200])->where("EmpDataBiographies.customer_id=".$this->loggedinuser['customer_id'])
+						->select(['EmpDataBiographies.id','name' => 'EmpDataPersonals.first_name'])
+						->leftJoin('EmpDataPersonals', 'EmpDataPersonals.employee_id = EmpDataBiographies.employee_id');
+											
+																
+		$customers = $this->WorkSchedules->Customers->find('list', ['limit' => 200]);
+        $this->set(compact('workSchedule', 'customers','empDataBiographies'));
+        $this->set('_serialize', ['workSchedule']);$this->Flash->error(__('You are not Authorized.'.$empDataBiographies));
     }
 
     /**

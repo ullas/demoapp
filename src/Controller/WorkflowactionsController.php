@@ -125,12 +125,10 @@ class WorkflowactionsController extends AppController
     	
         $workflowaction = $this->Workflowactions->newEntity();
         if ($this->request->is('post')) {
-        		
-        	
+        		        	
 			$query=$this->Workflowactions->find('All')->where(['workflowrule_id'=>$this->request->query['wrid']]);
     		$maxID=$query->select(['maxstepid' => $query->func()->max('stepid')])->toArray();
     		(isset($maxID)) ? $maxstepid=intval($maxID[0]['maxstepid']) : $maxstepid=0;
-
 	
             $workflowaction = $this->Workflowactions->patchEntity($workflowaction, $this->request->data);
 			$workflowaction['workflowrule_id'] = $this->request->query['wrid'];
@@ -152,9 +150,7 @@ class WorkflowactionsController extends AppController
 			}
         }
 		
-		$positionarr = $this->Workflowactions->find('all')->select(['position_id'])->where(['workflowrule_id'=>$this->request->query['wrid']]);
-		
-
+		$positionarr = $this->Workflowactions->find('all')->select(['position_id'])->where(['workflowrule_id'=>$this->request->query['wrid']]);		
         $workflowrules = $this->Workflowactions->Workflowrules->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         $positions = $this->Workflowactions->Positions->find('list', ['limit' => 200])->where(['Positions.id NOT IN'=>$positionarr])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         $customers = $this->Workflowactions->Customers->find('list', ['limit' => 200]);

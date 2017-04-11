@@ -33,7 +33,7 @@
 			      echo $this->Form->input('day6_planhours',['label'=>'Day 6 Planned Hours']);
             echo $this->Form->input('day7_planhours',['label'=>'Day 7 Planned Hours']);
             echo $this->Form->input('day_n_hours',['label'=>'Day N Hours']);
-            echo $this->Form->input('employee_id',['label'=>'Individual Employee']);
+            echo $this->Form->input('emp_data_biographies_id',['options' => $empDataBiographies,'label'=>'Individual Employee','empty' => 'Choose']);
             echo $this->Form->input('time_rec_variant_1',['label'=>'Time Recording Variant']);
             echo $this->Form->input('category');
             echo $this->Form->input('day');
@@ -67,6 +67,11 @@ $(function () {
   	showHidePeriod("none");
   	showHideSchedule("none");
   	showHideDay("none");
+  	
+  	//for the time-being, load only the simple model and disable it
+  	showHideSimple("block");
+  	$('#model').prop('disabled', 'disabled');
+  	$('#model').val("0");
 
   	$('#model').on('change', function () {
 		//initially hide all

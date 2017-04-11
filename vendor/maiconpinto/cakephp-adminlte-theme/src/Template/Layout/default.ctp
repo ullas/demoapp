@@ -317,9 +317,9 @@ $(window).off("resize").on("resize", function() {
 		//date picker
 		var userdf=<?php echo $this->request->session()->read('sessionuser')['dateformat'];?>;
 		if(userdf==1){
-			$('.mptldp').datepicker({ format:"dd/mm/yyyy",autoclose: true,clearBtn: true });
+			$('.mptldp').datepicker({ format:"dd/mm/yyyy",autoclose: true,clearBtn: true,todayHighlight: true });
 		}else{
-			$('.mptldp').datepicker({ format:"yyyy/mm/dd",autoclose: true,clearBtn: true });
+			$('.mptldp').datepicker({ format:"yyyy/mm/dd",autoclose: true,clearBtn: true,todayHighlight: true });
 		}
 
 		$(".mptltp").timepicker({
