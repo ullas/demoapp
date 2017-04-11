@@ -24,7 +24,6 @@ use Cake\ORM\Entity;
  * @property float $day4_planhours
  * @property float $day5_planhours
  * @property float $day7_planhours
- * @property float $day_n_hours
  * @property string $time_rec_variant_1
  * @property string $category
  * @property float $day
@@ -42,9 +41,11 @@ use Cake\ORM\Entity;
  * @property string $ws_code
  * @property int $customer_id
  * @property int $emp_data_biographies_id
+ * @property string $day_n_hours
  *
  * @property \App\Model\Entity\Customer $customer
  * @property \App\Model\Entity\Empdatabiography $emp_data_biography
+ * @property \App\Model\Entity\Jobinfo[] $jobinfos
  */
 class WorkSchedule extends Entity
 {

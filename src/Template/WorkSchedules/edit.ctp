@@ -9,7 +9,7 @@
       </ol>
     </section>
 <section class="content">
-	<div class="box box-primary"><div class="box-body">
+	<div class="box box-primary"><div class="box-body" id="maindiv">
     <?= $this->Form->create($workSchedule) ?>
     <fieldset>
         <?php
@@ -32,7 +32,7 @@
             echo $this->Form->input('day5_planhours',['label'=>'Day 5 Planned Hours']);
 			      echo $this->Form->input('day6_planhours',['label'=>'Day 6 Planned Hours']);
             echo $this->Form->input('day7_planhours',['label'=>'Day 7 Planned Hours']);
-            echo $this->Form->input('day_n_hours',['label'=>'Day N Hours']);
+            // echo $this->Form->input('day_n_hours',['label'=>'Day N Hours']);
             echo $this->Form->input('emp_data_biographies_id',['options' => $empDataBiographies,'label'=>'Individual Employee','empty' => 'Choose']);
             echo $this->Form->input('time_rec_variant_1',['label'=>'Time Recording Variant']);
             echo $this->Form->input('category');
@@ -49,18 +49,60 @@
             echo $this->Form->input('period_model');
             echo $this->Form->input('time_rec_variant_3',['label'=>'Time Recording Variant']);
         ?>
+		
+		<?php	
+			echo $this->Form->input('day_n_hours',['label'=>'Day N Hours','type'=>'hidden']);
+        ?>
+        
+        <input type="button" class="btn btn-flat btn-primary" id="btnAddControl" value="Day N Hours  +" />
     </fieldset>
+    </div>
     <div class="box-footer">
     	<?=$this->Html->link(__('Cancel'), ['action' => 'index'], ['escape' => false])?>
-    	<?= $this->Form->button(__('Update'),['title'=>'Update','class'=>'pull-right']) ?>
+    	<?= $this->Form->button(__('Update'),['title'=>'Update','class'=>'pull-right','id'=>'wssave']) ?>
     </div>
     <?= $this->Form->end() ?>
-</div></div></section>
+</div></section>
 
 <?php $this->start('scriptBotton'); ?>
 <script>
 
 $(function () {
+	
+	var daynhours=$('#day-n-hours').val();
+	daynhours=daynhours.split("^");
+	if(daynhours!="" && daynhours!=null){
+	for(var l=0;l<daynhours.length;l++){
+		var numItems = $('.mptlcntrl').length+1;
+		$("#maindiv").append("<div class='col-md-4 mptldiv'><label>Day " + "N" +" Hours:</label><input type='number' name='day_n_hours"+numItems+"' class='mptlcntrl form-control inputpart' value='"+daynhours[l]+"' id='day_n_hours"+numItems+"'/></div>");
+		
+	}
+	}
+	
+	$("#wssave").click(function(){
+			
+		var numItems = $('.mptlcntrl').length;
+    	var partcount="";
+		for(count = 1; count <= numItems; count++){
+			var tempval=$('#day_n_hours'+count).val();
+			if(tempval!="" && tempval!=null){
+				if(partcount!=""){ partcount+="^"+tempval; }else{ partcount+= tempval; }
+			}
+		}
+		//set text
+		$('#day-n-hours').val(partcount);
+		
+		return true;
+	});
+	$("#btnAddControl").click(function (event) {
+				
+		event.preventDefault();
+		var numItems = $('.mptlcntrl').length+1;
+		var strcount=$('.mptlcntrl').length+7;
+		$("#maindiv").append("<div class='col-md-4 mptldiv'><label>Day " + "N" +" Hours:</label><input type='number' name='day_n_hours"+numItems+"' class='mptlcntrl form-control inputpart' id='day_n_hours"+numItems+"'/></div>");
+		
+	});
+	
   	//initially hide all on page load
   	showHideSimple("none");
   	showHidePeriod("none");
@@ -106,7 +148,7 @@ function showHideSimple(prop){
 	$("#day6-planhours").parents('.col-md-4').css({'display' : prop});
 	$("#day7-planhours").parents('.col-md-4').css({'display' : prop});
 	$("#day-n-hours").parents('.col-md-4').css({'display' : prop});
-	$("#employee-id").parents('.col-md-4').css({'display' : prop});
+	$("#emp-data-biographies-id").parents('.col-md-4').css({'display' : prop});
 }
 function showHidePeriod(prop){
 	$("#time-rec-variant-1").parents('.col-md-4').css({'display' : prop});
