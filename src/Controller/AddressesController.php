@@ -91,9 +91,8 @@ var $components = array('Datatable');
                 $this->Flash->error(__('The address could not be saved. Please, try again.'));
             }
         }
-        $empDataBiographies = $this->Addresses->EmpDataBiographies->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         $customers = $this->Addresses->Customers->find('list', ['limit' => 200]);
-        $this->set(compact('address', 'employees', 'customers'));
+        $this->set(compact('address', 'customers'));
         $this->set('_serialize', ['address']);
     }
 
@@ -119,9 +118,8 @@ var $components = array('Datatable');
                 $this->Flash->error(__('The address could not be saved. Please, try again.'));
             }
         }
-        $empDataBiographies = $this->Addresses->EmpDataBiographies->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         $customers = $this->Addresses->Customers->find('list', ['limit' => 200]);
-        $this->set(compact('address', 'employees', 'customers'));
+        $this->set(compact('address', 'customers'));
         $this->set('_serialize', ['address']);
     }
 

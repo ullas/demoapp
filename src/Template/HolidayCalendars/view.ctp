@@ -131,12 +131,12 @@ $this->Html->script([
 
       var userdfp=<?php echo $this->request->session()->read('sessionuser')['dateformat'];?>;
 		if(userdfp==1){
-			$('.mptldphc').datepicker({ format:"dd/mm/yyyy",autoclose: true,clearBtn: true }).on('changeDate', function (e) {
+			$('.mptldphc').datepicker({ format:"dd/mm/yyyy",autoclose: true,clearBtn: true,todayHighlight: true }).on('changeDate', function (e) {
            					dateChanged();
            					weeklyOffProcess();
     					});
 		}else{
-			$('.mptldphc').datepicker({ format:"yyyy/mm/dd",autoclose: true,clearBtn: true }).on('changeDate', function (e) {
+			$('.mptldphc').datepicker({ format:"yyyy/mm/dd",autoclose: true,clearBtn: true,todayHighlight: true }).on('changeDate', function (e) {
            					dateChanged();
            					weeklyOffProcess();
     					});
@@ -262,9 +262,9 @@ $("#weekoff-ids").change(function(){
 
 				var userdf=<?php echo $this->request->session()->read('sessionuser')['dateformat'];?>;
 				if(userdf==1){
-					$('.mptldp').datepicker({ format:"dd/mm/yyyy",autoclose: true,clearBtn: true });
+					$('.mptldp').datepicker({ format:"dd/mm/yyyy",autoclose: true,clearBtn: true,todayHighlight: true });
 				}else{
-					$('.mptldp').datepicker({ format:"yyyy/mm/dd",autoclose: true,clearBtn: true });
+					$('.mptldp').datepicker({ format:"yyyy/mm/dd",autoclose: true,clearBtn: true,todayHighlight: true });
 				}
 	    		//set mandatory * after required label
     			$( ':input[required]' ).each( function () {

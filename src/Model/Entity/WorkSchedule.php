@@ -44,7 +44,7 @@ use Cake\ORM\Entity;
  * @property int $emp_data_biographies_id
  *
  * @property \App\Model\Entity\Customer $customer
- * @property \App\Model\Entity\Employee $employee
+ * @property \App\Model\Entity\Empdatabiography $emp_data_biography
  */
 class WorkSchedule extends Entity
 {
