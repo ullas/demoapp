@@ -40,3 +40,9 @@ tmp/cache/persistent/myapp_cake_core_translations_default_en__u_s
 tmp/debug_kit.sqlite
 
 webroot/img/uploadedpics/me.jpg
+
+nbproject/private/config.properties
+
+nbproject/private/private.properties
+
+nbproject/private/private.xml
