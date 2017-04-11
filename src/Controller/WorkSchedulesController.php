@@ -65,7 +65,12 @@ var $components = array('Datatable');
 
 		if($workSchedule['customer_id']==$this->loggedinuser['customer_id'])
 		{
-       	    $this->set('workSchedule', $workSchedule);
+			$empDataBiographies = $this->WorkSchedules->EmpDataBiographies->find('list',['limit' => 200])->where("EmpDataBiographies.customer_id=".$this->loggedinuser['customer_id'])
+						->select(['EmpDataBiographies.id','name' => 'EmpDataPersonals.first_name'])
+						->leftJoin('EmpDataPersonals', 'EmpDataPersonals.employee_id = EmpDataBiographies.employee_id');
+											
+       	    $this->set('empDataBiographies', $empDataBiographies);
+			$this->set('workSchedule', $workSchedule);
         	$this->set('_serialize', ['workSchedule']);
         }else{
 			$this->Flash->error(__('You are not Authorized.'));
@@ -85,6 +90,7 @@ var $components = array('Datatable');
             $workSchedule = $this->WorkSchedules->patchEntity($workSchedule, $this->request->data);
 			$workSchedule['customer_id']=$this->loggedinuser['customer_id'];
 			$workSchedule['emp_data_biographies_id']=$this->request->session()->read('sessionuser')['empdatabiographyid'];
+			$workSchedule['model']="0";
             if ($this->WorkSchedules->save($workSchedule)) {
                 $this->Flash->success(__('The work schedule has been saved.'));
 
@@ -101,7 +107,7 @@ var $components = array('Datatable');
 																
 		$customers = $this->WorkSchedules->Customers->find('list', ['limit' => 200]);
         $this->set(compact('workSchedule', 'customers','empDataBiographies'));
-        $this->set('_serialize', ['workSchedule']);$this->Flash->error(__('You are not Authorized.'.$empDataBiographies));
+        $this->set('_serialize', ['workSchedule']);
     }
 
     /**
@@ -133,8 +139,12 @@ var $components = array('Datatable');
                 $this->Flash->error(__('The work schedule could not be saved. Please, try again.'));
             }
         }
+		$empDataBiographies = $this->WorkSchedules->EmpDataBiographies->find('list',['limit' => 200])->where("EmpDataBiographies.customer_id=".$this->loggedinuser['customer_id'])
+						->select(['EmpDataBiographies.id','name' => 'EmpDataPersonals.first_name'])
+						->leftJoin('EmpDataPersonals', 'EmpDataPersonals.employee_id = EmpDataBiographies.employee_id');
+											
         $customers = $this->WorkSchedules->Customers->find('list', ['limit' => 200]);
-        $this->set(compact('workSchedule', 'customers'));
+        $this->set(compact('workSchedule', 'customers','empDataBiographies'));
         $this->set('_serialize', ['workSchedule']);
     }
 
