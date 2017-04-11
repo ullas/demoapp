@@ -9,7 +9,7 @@
       </ol>
     </section>
 <section class="content">
-	<div class="box box-primary"><div class="box-body">
+	<div class="box box-primary"><div class="box-body" id="maindiv">
     <?= $this->Form->create($workSchedule) ?>
     <fieldset>
         <?php
@@ -32,7 +32,7 @@
             echo $this->Form->input('day5_planhours',['label'=>'Day 5 Planned Hours','disabled' => true]);
 			      echo $this->Form->input('day6_planhours',['label'=>'Day 6 Planned Hours','disabled' => true]);
             echo $this->Form->input('day7_planhours',['label'=>'Day 7 Planned Hours','disabled' => true]);
-            echo $this->Form->input('day_n_hours',['label'=>'Day N Hours','disabled' => true]);
+            
             echo $this->Form->input('emp_data_biographies_id',['options' => $empDataBiographies,'label'=>'Individual Employee','empty' => 'Choose','disabled' => true]);
             echo $this->Form->input('time_rec_variant_1',['label'=>'Time Recording Variant','disabled' => true]);
             echo $this->Form->input('category',['disabled' => true]);
@@ -48,21 +48,33 @@
 			      echo $this->Form->input('starting_date',['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
             echo $this->Form->input('period_model',['disabled' => true]);
             echo $this->Form->input('time_rec_variant_3',['label'=>'Time Recording Variant','disabled' => true]);
+			echo $this->Form->input('day_n_hours',['label'=>'Day N Hours','disabled' => true,'type'=>'hidden']);
         ?>
     </fieldset>
-
+	</div>
     <div class="box-footer">
           	<?=$this->Html->link(__('Cancel'), ['action' => 'index'], ['escape' => false])?>
             <?=$this->Html->link(__('Edit WorkSchedule'), ['action' => 'edit', $workSchedule['id']],['class'=>'btn btn-primary label-info pull-right'], ['escape' => false])?>
     </div>
     <?= $this->Form->end() ?>
-</div></div>
+</div>
 </section>
 
 <?php $this->start('scriptBotton'); ?>
 <script>
 
 $(function () {
+	
+	var daynhours=$('#day-n-hours').val();
+	daynhours=daynhours.split("^");
+	if(daynhours!="" && daynhours!=null){
+	for(var l=0;l<daynhours.length;l++){
+		var numItems = $('.mptlcntrl').length+1;
+		$("#maindiv").append("<div class='col-md-4 mptldiv'><label>Day " + "N" +" Hours:</label><input type='number' disabled='disabled' name='day_n_hours"+numItems+"' class='mptlcntrl form-control inputpart' value='"+daynhours[l]+"' id='day_n_hours"+numItems+"'/></div>");
+		
+	}
+	}
+	
   	//initially hide all on page load
   	showHideSimple("none");
   	showHidePeriod("none");
@@ -79,6 +91,9 @@ $(function () {
         showHideDay("block");
     }
 
+	//for the time-being, load only the simple model and disable it
+  	showHideSimple("block");
+  	
     //model onchange
   	$('#model').on('change', function () {
 		//initially hide all
@@ -108,7 +123,7 @@ function showHideSimple(prop){
 	$("#day6-planhours").parents('.col-md-4').css({'display' : prop});
 	$("#day7-planhours").parents('.col-md-4').css({'display' : prop});
 	$("#day-n-hours").parents('.col-md-4').css({'display' : prop});
-	$("#employee-id").parents('.col-md-4').css({'display' : prop});
+	$("#emp-data-biographies-id").parents('.col-md-4').css({'display' : prop});
 }
 function showHidePeriod(prop){
 	$("#time-rec-variant-1").parents('.col-md-4').css({'display' : prop});

@@ -8,6 +8,7 @@ use Cake\Validation\Validator;
 use Cake\Event\Event;
 use Cake\Event\ArrayObject;
 use Cake\Core\Configure;
+
 /**
  * WorkSchedules Model
  *
@@ -128,10 +129,6 @@ class WorkSchedulesTable extends Table
             ->allowEmpty('day7_planhours');
 
         $validator
-            ->decimal('day_n_hours')
-            ->allowEmpty('day_n_hours');
-
-        $validator
             ->allowEmpty('time_rec_variant_1');
 
         $validator
@@ -183,6 +180,9 @@ class WorkSchedulesTable extends Table
             ->requirePresence('ws_code', 'create')
             ->notEmpty('ws_code')
             ->add('ws_code', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
+
+        $validator
+            ->allowEmpty('day_n_hours');
 
         return $validator;
     }
