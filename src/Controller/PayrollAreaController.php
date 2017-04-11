@@ -16,6 +16,16 @@ class PayrollAreaController extends AppController
      *
      * @return \Cake\Network\Response|null
      */
+     // public function beforeFilter() {
+// 
+        // if($this->Auth->user('role')=='root'){
+           // parent::beforeFilter();
+           // $this->Auth->allow(array('view', 'index','edit','add','delete','deleteAll'));
+        // } else {
+           // $this->Auth->deny(array('view', 'index','edit','add','delete','deleteAll'));
+           // $this->redirect(array('controller' => 'Homes' , 'action' => 'index'));
+        // }
+    // }
      public function ajaxData() {
 		$this->autoRender= False;
 		  

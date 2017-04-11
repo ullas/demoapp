@@ -13,6 +13,7 @@ use Cake\Core\Configure;
  *
  * @property \Cake\ORM\Association\BelongsTo $Customers
  * @property \Cake\ORM\Association\BelongsTo $EmpDataBiographies
+ * @property \Cake\ORM\Association\HasMany $Jobinfos
  *
  * @method \App\Model\Entity\WorkSchedule get($primaryKey, $options = [])
  * @method \App\Model\Entity\WorkSchedule newEntity($data = null, array $options = [])
@@ -44,6 +45,9 @@ class WorkSchedulesTable extends Table
         ]);
         $this->belongsTo('EmpDataBiographies', [
             'foreignKey' => 'emp_data_biographies_id'
+        ]);
+        $this->hasMany('Jobinfos', [
+            'foreignKey' => 'work_schedule_id'
         ]);
     }
 
