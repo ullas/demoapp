@@ -33,7 +33,7 @@
 			      echo $this->Form->input('day6_planhours',['label'=>'Day 6 Planned Hours','disabled' => true]);
             echo $this->Form->input('day7_planhours',['label'=>'Day 7 Planned Hours','disabled' => true]);
             echo $this->Form->input('day_n_hours',['label'=>'Day N Hours','disabled' => true]);
-            echo $this->Form->input('employee_id',['label'=>'Individual Employee','disabled' => true]);
+            echo $this->Form->input('emp_data_biographies_id',['options' => $empDataBiographies,'label'=>'Individual Employee','empty' => 'Choose','disabled' => true]);
             echo $this->Form->input('time_rec_variant_1',['label'=>'Time Recording Variant','disabled' => true]);
             echo $this->Form->input('category',['disabled' => true]);
             echo $this->Form->input('day',['disabled' => true]);
