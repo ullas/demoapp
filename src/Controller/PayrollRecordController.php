@@ -17,6 +17,18 @@ var $components = array('Datatable');
      *
      * @return \Cake\Network\Response|null
      */
+     public function processpayroll()
+    {
+    	$this->paginate = [
+            'contain' => ['PayGroups']
+        ];
+        $payrollRecord = $this->paginate($this->PayrollRecord);
+
+		$payGroups = $this->PayrollRecord->PayGroups->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        
+        $this->set(compact('payrollRecord','payGroups'));
+        $this->set('_serialize', ['payrollRecord']);
+	}
     public function ajaxData() {
 		$this->autoRender= False;
 		  
@@ -26,7 +38,7 @@ var $components = array('Datatable');
 		foreach($dbout as $value){
 			$fields[] = array("name" => $value['field_name'] , "type" => $value['datatype'] );
 		}
-		$contains=['PayrollArea'];
+		$contains=['PayGroups'];
 									  
 		$usrfilter="PayrollRecord.customer_id ='".$this->loggedinuser['customer_id'] . "'";		  
 		$output =$this->Datatable->getView($fields,$contains,$usrfilter);
@@ -39,7 +51,7 @@ var $components = array('Datatable');
         $this->set('configs',$configs);	
 		
         $this->paginate = [
-            'contain' => ['PayrollArea']
+            'contain' => ['PayGroups']
         ];
         $payrollRecord = $this->paginate($this->PayrollRecord);
 
