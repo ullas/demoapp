@@ -8,10 +8,11 @@ use Cake\ORM\Entity;
  *
  * @property int $id
  * @property string $code
- * @property int $payroll_area_id
  * @property string $period
  * @property \Cake\I18n\Time $run_date
  * @property \Cake\I18n\Time $run_time
+ * @property int $customer_id
+ * @property int $pay_group_id
  *
  * @property \App\Model\Entity\PayrollArea $payroll_area
  */

@@ -8,13 +8,14 @@ use Cake\ORM\Entity;
  *
  * @property int $id
  * @property string $employee_code
- * @property int $payroll_area_id
  * @property string $period
  * @property int $pay_component_id
  * @property float $pay_component_value
  * @property float $paid_salary
  * @property \Cake\I18n\Time $run_date
  * @property \Cake\I18n\Time $run_time
+ * @property int $customer_id
+ * @property int $pay_group_id
  *
  * @property \App\Model\Entity\PayrollArea $payroll_area
  * @property \App\Model\Entity\PayComponent $pay_component

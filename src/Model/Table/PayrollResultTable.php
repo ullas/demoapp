@@ -5,14 +5,13 @@ use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
-use Cake\Event\Event;
-use Cake\Event\ArrayObject;
-use Cake\Core\Configure;
+
 /**
  * PayrollResult Model
  *
- * @property \Cake\ORM\Association\BelongsTo $PayrollArea
  * @property \Cake\ORM\Association\BelongsTo $PayComponents
+ * @property \Cake\ORM\Association\BelongsTo $Customers
+ * @property \Cake\ORM\Association\BelongsTo $PayGroups
  *
  * @method \App\Model\Entity\PayrollResult get($primaryKey, $options = [])
  * @method \App\Model\Entity\PayrollResult newEntity($data = null, array $options = [])
@@ -39,11 +38,14 @@ class PayrollResultTable extends Table
         $this->displayField('id');
         $this->primaryKey('id');
 
-        $this->belongsTo('PayrollArea', [
-            'foreignKey' => 'payroll_area_id'
-        ]);
         $this->belongsTo('PayComponents', [
             'foreignKey' => 'pay_component_id'
+        ]);
+        $this->belongsTo('Customers', [
+            'foreignKey' => 'customer_id'
+        ]);
+        $this->belongsTo('PayGroups', [
+            'foreignKey' => 'pay_group_id'
         ]);
     }
 
@@ -82,22 +84,7 @@ class PayrollResultTable extends Table
 
         return $validator;
     }
-	public function beforeMarshal(Event $event, $data, $options)
-	{
-		
-		$userdf = Configure::read('userdf');
-		if(isset($userdf)  & $userdf===1){
 
-			foreach (["run_date"] as $value) {		
-				if(isset($data[$value])){			
-						if($data[$value]!=null && $data[$value]!='' && strpos($data[$value], '/') !== false){
-						$data[$value] = str_replace('/', '-', $data[$value]);
-						$data[$value]=date('Y/m/d', strtotime($data[$value]));
-					}
-				}
-			}
-		}
-	}
     /**
      * Returns a rules checker object that will be used for validating
      * application integrity.
@@ -107,8 +94,9 @@ class PayrollResultTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
-        $rules->add($rules->existsIn(['payroll_area_id'], 'PayrollArea'));
         $rules->add($rules->existsIn(['pay_component_id'], 'PayComponents'));
+        $rules->add($rules->existsIn(['customer_id'], 'Customers'));
+        $rules->add($rules->existsIn(['pay_group_id'], 'PayGroups'));
 
         return $rules;
     }
