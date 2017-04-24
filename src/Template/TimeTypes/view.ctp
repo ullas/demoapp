@@ -19,7 +19,7 @@
             echo $this->Form->input('classification',['disabled' => true]);
             echo $this->Form->input('unit',['class'=>'select2','options' => array('Hour(s)', 'Day(s)'), 'empty' => 'Choose','disabled' => true]);
             echo $this->Form->input('perm_fractions_hours',['disabled' => true,'label'=>'Permitted Fractions for Unit Hours']);
-            echo $this->Form->input('perm_fractions_days',['class'=>'select2','options' => array('Quarter of a Day', 'Half a Day','3 Quarters of a Day','Full Day'),'empty'=>'Choose','disabled' => true,'label'=>'Permitted Fractions for Unit Days']);
+            echo $this->Form->input('perm_fractions_days',['disabled' => true,'class'=>'select2','options' => ['1' => 'Quarter of a Day', '2' => 'Half a Day','3'=>'3 Quarters of a Day','4'=>'Full Day'],'empty'=>'Choose','label'=>'Permitted Fractions for Unit Days']);
             echo $this->Form->input('calc_base',['label' => 'Calculation Based On','disabled' => true]);
             echo $this->Form->input('time_account_type_id', ['options' => $timeAccountTypes, 'empty' => true,'disabled' => true]);
 			      echo $this->Form->input('flex_req_allow',['label'=>'Flexible Requesting Allowed','disabled' => true]);

@@ -63,7 +63,7 @@ class TimeTypesController extends AppController
     public function view($id = null)
     {
         $timeType = $this->TimeTypes->get($id, [
-            'contain' => ['Customers', 'TimeAccountTypes', 'TimeTypeProfiles']
+            'contain' => ['Customers', 'TimeAccountTypes']
         ]);
 
 		$timeAccountTypes = $this->TimeTypes->TimeAccountTypes->find('list', ['limit' => 200]);

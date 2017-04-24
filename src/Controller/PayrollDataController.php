@@ -17,6 +17,7 @@ class PayrollDataController extends AppController
      *
      * @return \Cake\Network\Response|null
      */
+     
      public function ajaxData() {
 		$this->autoRender= False;
 		  
