@@ -33,6 +33,10 @@ use Cake\ORM\Entity;
  *
  * @property \App\Model\Entity\Customer $customer
  * @property \App\Model\Entity\Frequency $frequency
+ * @property \App\Model\Entity\LegalEntity $legal_entity
+ * @property \App\Model\Entity\BusinessUnit $business_unit
+ * @property \App\Model\Entity\Division $division
+ * @property \App\Model\Entity\Location $location
  * @property \App\Model\Entity\PayRange[] $pay_ranges
  */
 class PayGroup extends Entity

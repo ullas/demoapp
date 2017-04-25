@@ -5,9 +5,6 @@ use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
-use Cake\Event\Event;
-use Cake\Event\ArrayObject;
-use Cake\Core\Configure;
 
 /**
  * Jobinfos Model
@@ -27,6 +24,7 @@ use Cake\Core\Configure;
  * @property \Cake\ORM\Association\BelongsTo $TimeTypeProfiles
  * @property \Cake\ORM\Association\BelongsTo $WorkSchedules
  * @property \Cake\ORM\Association\BelongsTo $Employees
+ * @property \Cake\ORM\Association\BelongsTo $PayGroups
  *
  * @method \App\Model\Entity\Jobinfo get($primaryKey, $options = [])
  * @method \App\Model\Entity\Jobinfo newEntity($data = null, array $options = [])
@@ -97,6 +95,9 @@ class JobinfosTable extends Table
         ]);
         $this->belongsTo('Employees', [
             'foreignKey' => 'employee_id'
+        ]);
+        $this->belongsTo('PayGroups', [
+            'foreignKey' => 'pay_group_id'
         ]);
     }
 
@@ -360,22 +361,7 @@ class JobinfosTable extends Table
 
         return $validator;
     }
-	public function beforeMarshal(Event $event, $data, $options)
-	{
-		
-		$userdf = Configure::read('userdf');
-		if(isset($userdf)  & $userdf===1){
 
-			foreach (["leave_of_absence_return_date","hire_date","termination_date","leave_of_absence_start_date","position_entry_date","probation_period_end_date","expected_return_date","job_entry_date","company_entry_date","location_entry_date","department_entry_date","pay_scale_level_entry_date"] as $value) {
-				if(isset($data[$value])){			
-						if($data[$value]!=null && $data[$value]!='' && strpos($data[$value], '/') !== false){
-						$data[$value] = str_replace('/', '-', $data[$value]);
-						$data[$value]=date('Y/m/d', strtotime($data[$value]));
-					}
-				}
-			}
-		}
-	}
     /**
      * Returns a rules checker object that will be used for validating
      * application integrity.
@@ -400,6 +386,7 @@ class JobinfosTable extends Table
         $rules->add($rules->existsIn(['time_type_profile_id'], 'TimeTypeProfiles'));
         $rules->add($rules->existsIn(['work_schedule_id'], 'WorkSchedules'));
         $rules->add($rules->existsIn(['employee_id'], 'Employees'));
+        $rules->add($rules->existsIn(['pay_group_id'], 'PayGroups'));
 
         return $rules;
     }

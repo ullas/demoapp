@@ -5,9 +5,6 @@ use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
-use Cake\Event\Event;
-use Cake\Event\ArrayObject;
-use Cake\Core\Configure;
 
 /**
  * PayGroups Model
@@ -18,7 +15,11 @@ use Cake\Core\Configure;
  * @property \Cake\ORM\Association\BelongsTo $BusinessUnits
  * @property \Cake\ORM\Association\BelongsTo $Divisions
  * @property \Cake\ORM\Association\BelongsTo $Locations
+ * @property \Cake\ORM\Association\HasMany $Jobinfos
  * @property \Cake\ORM\Association\HasMany $PayRanges
+ * @property \Cake\ORM\Association\HasMany $PayrollRecord
+ * @property \Cake\ORM\Association\HasMany $PayrollResult
+ * @property \Cake\ORM\Association\HasMany $PayrollStatus
  *
  * @method \App\Model\Entity\PayGroup get($primaryKey, $options = [])
  * @method \App\Model\Entity\PayGroup newEntity($data = null, array $options = [])
@@ -63,7 +64,19 @@ class PayGroupsTable extends Table
         $this->belongsTo('Locations', [
             'foreignKey' => 'location_id'
         ]);
+        $this->hasMany('Jobinfos', [
+            'foreignKey' => 'pay_group_id'
+        ]);
         $this->hasMany('PayRanges', [
+            'foreignKey' => 'pay_group_id'
+        ]);
+        $this->hasMany('PayrollRecord', [
+            'foreignKey' => 'pay_group_id'
+        ]);
+        $this->hasMany('PayrollResult', [
+            'foreignKey' => 'pay_group_id'
+        ]);
+        $this->hasMany('PayrollStatus', [
             'foreignKey' => 'pay_group_id'
         ]);
     }
@@ -140,22 +153,7 @@ class PayGroupsTable extends Table
 
         return $validator;
     }
-	public function beforeMarshal(Event $event, $data, $options)
-	{
-		
-		$userdf = Configure::read('userdf');
-		if(isset($userdf)  & $userdf===1){
 
-			foreach (["effective_start_date","effective_end_date"] as $value) {		
-				if(isset($data[$value])){			
-						if($data[$value]!=null && $data[$value]!='' && strpos($data[$value], '/') !== false){
-						$data[$value] = str_replace('/', '-', $data[$value]);
-						$data[$value]=date('Y/m/d', strtotime($data[$value]));
-					}
-				}
-			}
-		}
-	}
     /**
      * Returns a rules checker object that will be used for validating
      * application integrity.
