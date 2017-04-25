@@ -166,6 +166,7 @@
 			<div class="tab-pane" id="jobinfo">
              <!-- <div class="form-horizontal"> --><fieldset>
               <?php
+              echo $this->Form->input('jobinfo.pay_group_id', ['disabled' => true,'label' => 'Select Paygroup','options'=>$payGroups, 'class'=>'select2', 'empty' => true]);
               echo $this->Form->input('jobinfo.position_id', ['templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-briefcase"></i></div>'],'class'=>'select2','options' => $positions, 'empty' => true,'disabled' => true]);
             echo $this->Form->input('jobinfo.position_entry_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
             echo $this->Form->input('jobinfo.time_in_position',['disabled' => true]);

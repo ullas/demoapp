@@ -95,6 +95,7 @@ use Cake\ORM\Entity;
  * @property int $time_type_profile_id
  * @property int $work_schedule_id
  * @property int $employee_id
+ * @property int $pay_group_id
  *
  * @property \App\Model\Entity\User $user
  * @property \App\Model\Entity\Customer $customer
@@ -110,6 +111,7 @@ use Cake\ORM\Entity;
  * @property \App\Model\Entity\HolidayCalendar $holiday_calendar
  * @property \App\Model\Entity\TimeTypeProfile $time_type_profile
  * @property \App\Model\Entity\WorkSchedule $work_schedule
+ * @property \App\Model\Entity\Employee $employee
  */
 class Jobinfo extends Entity
 {

@@ -27,6 +27,14 @@ class CountryHelper extends Helper {
 		}
 		return json_encode($arrayTemp1[0]['first_name']); 
 	}
+	public function get_empname($empid = null) 
+	{
+		$conn = ConnectionManager::get('default');
+		if($empid!="" && $empid!=null && isset($empid)){
+			$arrayTemp1 = $conn->execute('select first_name from empdatapersonals where employee_id='.$empid.'')->fetchAll('assoc');
+		}
+		return json_encode($arrayTemp1[0]['first_name']); 
+	}
 	public function get_employeepicture($empdatabiographyid = null) 
 	{
 		$conn = ConnectionManager::get('default');
