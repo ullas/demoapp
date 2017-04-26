@@ -8,10 +8,13 @@ use Cake\Validation\Validator;
 use Cake\Event\Event;
 use Cake\Event\ArrayObject;
 use Cake\Core\Configure;
+
 /**
  * PayrollData Model
  *
  * @property \Cake\ORM\Association\BelongsTo $PayComponents
+ * @property \Cake\ORM\Association\BelongsTo $Customers
+ * @property \Cake\ORM\Association\BelongsTo $Empdatabiographies
  *
  * @method \App\Model\Entity\PayrollData get($primaryKey, $options = [])
  * @method \App\Model\Entity\PayrollData newEntity($data = null, array $options = [])
@@ -41,6 +44,12 @@ class PayrollDataTable extends Table
         $this->belongsTo('PayComponents', [
             'foreignKey' => 'pay_component_id'
         ]);
+        $this->belongsTo('Customers', [
+            'foreignKey' => 'customer_id'
+        ]);
+        $this->belongsTo('Empdatabiographies', [
+            'foreignKey' => 'empdatabiographies_id'
+        ]);
     }
 
     /**
@@ -53,9 +62,6 @@ class PayrollDataTable extends Table
     {
         $validator
             ->allowEmpty('id', 'create');
-
-        $validator
-            ->allowEmpty('employee_code');
 
         $validator
             ->allowEmpty('pay_component_value');
@@ -96,6 +102,8 @@ class PayrollDataTable extends Table
     public function buildRules(RulesChecker $rules)
     {
         $rules->add($rules->existsIn(['pay_component_id'], 'PayComponents'));
+        $rules->add($rules->existsIn(['customer_id'], 'Customers'));
+        $rules->add($rules->existsIn(['empdatabiographies_id'], 'Empdatabiographies'));
 
         return $rules;
     }

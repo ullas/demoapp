@@ -95,8 +95,11 @@ class PayrollDataController extends AppController
                 $this->Flash->error(__('The payroll data could not be saved. Please, try again.'));
             }
         }
-        $payComponents = $this->PayrollData->PayComponents->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
-        $this->set(compact('payrollData', 'payComponents'));
+        $empDataBiographies = $this->PayrollData->EmpDataBiographies->find('list',['limit' => 200])->select(['id'=>'EmpDataBiographies.id','name' => 'EmpDataPersonals.first_name'])
+						->leftJoin('EmpDataPersonals', 'EmpDataPersonals.employee_id = EmpDataBiographies.employee_id')->where("EmpDataBiographies.customer_id=".$this->loggedinuser['customer_id']);
+						
+		$payComponents = $this->PayrollData->PayComponents->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        $this->set(compact('payrollData', 'payComponents','empDataBiographies'));
         $this->set('_serialize', ['payrollData']);
     }
 

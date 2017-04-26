@@ -8,6 +8,7 @@ use Cake\Validation\Validator;
 use Cake\Event\Event;
 use Cake\Event\ArrayObject;
 use Cake\Core\Configure;
+
 /**
  * PayComponents Model
  *
@@ -53,13 +54,13 @@ class PayComponentsTable extends Table
             'foreignKey' => 'pay_component_group_id'
         ]);
         $this->hasMany('PayrollData', [
-            'foreignKey' => 'pay_component_id','dependent' => true
+            'foreignKey' => 'pay_component_id'
         ]);
         $this->hasMany('PayrollResult', [
-            'foreignKey' => 'pay_component_id','dependent' => true
+            'foreignKey' => 'pay_component_id'
         ]);
         $this->hasMany('TimeAccountTypes', [
-            'foreignKey' => 'pay_component_id','dependent' => true
+            'foreignKey' => 'pay_component_id'
         ]);
     }
 
@@ -102,7 +103,7 @@ class PayComponentsTable extends Table
             ->allowEmpty('currency');
 
         $validator
-            ->decimal('pay_component_value')
+            ->numeric('pay_component_value')
             ->allowEmpty('pay_component_value');
 
         $validator
@@ -151,6 +152,9 @@ class PayComponentsTable extends Table
             ->requirePresence('external_code', 'create')
             ->notEmpty('external_code')
             ->add('external_code', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
+
+        $validator
+            ->allowEmpty('base_pay_component_group');
 
         return $validator;
     }
