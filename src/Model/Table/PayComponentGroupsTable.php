@@ -8,10 +8,12 @@ use Cake\Validation\Validator;
 use Cake\Event\Event;
 use Cake\Event\ArrayObject;
 use Cake\Core\Configure;
+
 /**
  * PayComponentGroups Model
  *
  * @property \Cake\ORM\Association\BelongsTo $Customers
+ * @property \Cake\ORM\Association\HasMany $PayComponents
  * @property \Cake\ORM\Association\HasMany $TimeAccountTypes
  *
  * @method \App\Model\Entity\PayComponentGroup get($primaryKey, $options = [])
@@ -42,8 +44,11 @@ class PayComponentGroupsTable extends Table
         $this->belongsTo('Customers', [
             'foreignKey' => 'customer_id'
         ]);
+        $this->hasOne('PayComponents', [
+            'foreignKey' => 'pay_component_group_id'
+        ]);
         $this->hasMany('TimeAccountTypes', [
-            'foreignKey' => 'pay_component_group_id','dependent' => true
+            'foreignKey' => 'pay_component_group_id'
         ]);
     }
 

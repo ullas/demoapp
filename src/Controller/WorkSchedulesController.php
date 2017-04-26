@@ -66,7 +66,7 @@ var $components = array('Datatable');
 		if($workSchedule['customer_id']==$this->loggedinuser['customer_id'])
 		{
 			$empDataBiographies = $this->WorkSchedules->EmpDataBiographies->find('list',['limit' => 200])->where("EmpDataBiographies.customer_id=".$this->loggedinuser['customer_id'])
-						->select(['EmpDataBiographies.id','name' => 'EmpDataPersonals.first_name'])
+						->select(['id'=>'EmpDataBiographies.id','name' => 'EmpDataPersonals.first_name'])
 						->leftJoin('EmpDataPersonals', 'EmpDataPersonals.employee_id = EmpDataBiographies.employee_id');
 											
        	    $this->set('empDataBiographies', $empDataBiographies);
@@ -101,7 +101,7 @@ var $components = array('Datatable');
         }
 		
 		$empDataBiographies = $this->WorkSchedules->EmpDataBiographies->find('list',['limit' => 200])->where("EmpDataBiographies.customer_id=".$this->loggedinuser['customer_id'])
-						->select(['EmpDataBiographies.id','name' => 'EmpDataPersonals.first_name'])
+						->select(['id'=>'EmpDataBiographies.id','name' => 'EmpDataPersonals.first_name'])
 						->leftJoin('EmpDataPersonals', 'EmpDataPersonals.employee_id = EmpDataBiographies.employee_id');
 											
 																
@@ -140,7 +140,7 @@ var $components = array('Datatable');
             }
         }
 		$empDataBiographies = $this->WorkSchedules->EmpDataBiographies->find('list',['limit' => 200])->where("EmpDataBiographies.customer_id=".$this->loggedinuser['customer_id'])
-						->select(['EmpDataBiographies.id','name' => 'EmpDataPersonals.first_name'])
+						->select(['id'=>'EmpDataBiographies.id','name' => 'EmpDataPersonals.first_name'])
 						->leftJoin('EmpDataPersonals', 'EmpDataPersonals.employee_id = EmpDataBiographies.employee_id');
 											
         $customers = $this->WorkSchedules->Customers->find('list', ['limit' => 200]);

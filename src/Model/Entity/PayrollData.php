@@ -7,13 +7,16 @@ use Cake\ORM\Entity;
  * PayrollData Entity
  *
  * @property int $id
- * @property string $employee_code
  * @property int $pay_component_id
  * @property string $pay_component_value
  * @property \Cake\I18n\Time $start_date
  * @property \Cake\I18n\Time $end_date
+ * @property int $customer_id
+ * @property int $empdatabiographies_id
  *
  * @property \App\Model\Entity\PayComponent $pay_component
+ * @property \App\Model\Entity\Customer $customer
+ * @property \App\Model\Entity\Empdatabiography $empdatabiography
  */
 class PayrollData extends Entity
 {
