@@ -32,9 +32,13 @@ use Cake\ORM\Entity;
  * @property int $frequency_id
  * @property int $customer_id
  * @property int $pay_component_group_id
+ * @property int $base_pay_component_group
  *
  * @property \App\Model\Entity\Frequency $frequency
  * @property \App\Model\Entity\Customer $customer
+ * @property \App\Model\Entity\PayComponentGroup $pay_component_group
+ * @property \App\Model\Entity\PayrollData[] $payroll_data
+ * @property \App\Model\Entity\PayrollResult[] $payroll_result
  * @property \App\Model\Entity\TimeAccountType[] $time_account_types
  */
 class PayComponent extends Entity

@@ -20,6 +20,9 @@ use Cake\ORM\Entity;
  * @property bool $system_defined
  * @property string $external_code
  * @property int $customer_id
+ *
+ * @property \App\Model\Entity\Customer $customer
+ * @property \App\Model\Entity\TimeAccountType[] $time_account_types
  */
 class PayComponentGroup extends Entity
 {

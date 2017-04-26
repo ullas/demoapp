@@ -127,10 +127,21 @@ class PayComponentsController extends AppController
                 $this->Flash->error(__('The pay component could not be saved. Please, try again.'));
             }
         }
+        
         $frequencies = $this->PayComponents->Frequencies->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         $customers = $this->PayComponents->Customers->find('list', ['limit' => 200]);
-        $payComponentGroups = $this->PayComponents->PayComponentGroups->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
-        $this->set(compact('payComponent', 'frequencies', 'customers','payComponentGroups'));
+        $payComponentGroups = $this->PayComponents->PayComponentGroups->find('list', ['limit' => 200])
+        									 // ->leftJoin('PayComponents', 'PayComponents.pay_component_group_id=PayComponentGroups.id')
+        									 ->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']);
+        
+		$payComponents = $this->PayComponents->find('list', ['limit' => 200])
+					->leftJoin('PayComponentGroups', 'PayComponents.pay_component_group_id=PayComponentGroups.id')
+					->where(['PayComponents.id != '=>$id])->andwhere(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        
+       
+		$this->log($payComponentGroups);
+		
+		$this->set(compact('payComponent', 'frequencies', 'customers','payComponentGroups','payComponents'));
         $this->set('_serialize', ['payComponent']);
     }
 
