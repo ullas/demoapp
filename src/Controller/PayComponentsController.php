@@ -135,7 +135,7 @@ class PayComponentsController extends AppController
         									 ->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']);
         
 		$payComponents = $this->PayComponents->find('list', ['limit' => 200])
-					->leftJoin('PayComponentGroups', 'PayComponents.pay_component_group_id=PayComponentGroups.id')
+					// ->leftJoin('PayComponentGroups', 'PayComponents.pay_component_group_id=PayComponentGroups.id')
 					->where(['PayComponents.id != '=>$id])->andwhere(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         
        
