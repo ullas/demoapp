@@ -17,13 +17,14 @@
 			 	
 			 	<div class="box-header with-border">
 	            	<input type="button" value="Process All" class="btn btn-primary"/>
+	            	<input type="button" value="Process Selected" class="processselected btn btn-primary"/>
             	</div>
             
-				<div class="box-body">
+				<div class="box-body" style="height:500px;overflow-y:scroll;">
 				 <?php foreach ($paygrouplist as $vals) {
 			
 					echo '<div class="box box-solid collapsed-box" style="margin-bottom:0px;"><div class="box-header">';
-					echo '<input type="checkbox">'.' '.'<b>'.$vals['parent'].'</b>';
+					echo '<input type="checkbox" class="paygroup_filter" id="'.$vals['parentid'].'"/>'.' '.'<b>'.$vals['parent'].'</b>';
 					echo '<div class="box-tools" style="background:#dbdde0;"><button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button></div></div>';
 			
 					if(isset($vals['child'])){
@@ -34,8 +35,8 @@
 							$empname = str_replace('"', '',$this->Country->get_empname($childval['employee_id']));
 							echo $empname ;
 							
-							echo "<input type='button' value='Status' class='btn btn-sm btn-success pull-right p3' style='margin-left:5px;'/>";
-							echo " <input type='button' value='Process' class='btn btn-sm btn-warning pull-right p3 dd'/></a> </li>";
+							echo "<input type='button' value='Status' class='stausbtn btn btn-sm btn-success pull-right p3' style='margin-left:5px;' id='".$childval['employee_id']."'/>";
+							echo " <input type='button' value='Process' class='processbutton btn btn-sm btn-warning pull-right p3 dd' id='".$childval['employee_id']."'/></a> </li>";
 						}
 						echo "</ul></div></div>";
 					}
@@ -87,6 +88,30 @@
 			atag.parent().removeClass('active');
 
 		}
+		
+		setpaygroupfilter();
+	   
+	   $('.paygroup_filter').change(function() {
+        	setpaygroupfilter();
+    	});
+    
 	});
+	
+	
+	function setpaygroupfilter(){
+		
+		var paygroupflagActive=false;
+		 
+		$('.paygroup_filter').each(function () {
+		    var sThisVal = (this.checked ? $(this).val() : "");
+		    var id=$(this).attr("id");
+		    var col=id.split("_")[3];
+		    if(sThisVal){	
+				paygroupflagActive=true;
+		    }
+	   });
+	   
+	   paygroupflagActive  ? $(".processselected").show() : 	$(".processselected").hide();
+	}
 		</script>
  <?php $this->end(); ?>

@@ -38,7 +38,7 @@ var $components = array('Datatable');
 				$jobinfolist[] = array("employee_id" => $childval['JobInfos']['employee_id'] );
 			}
 			
-			$paygrouplist[] = array("parent" => $value['name'] , "child" => $jobinfolist );
+			$paygrouplist[] = array("parentid" => $value['id'] , "parent" => $value['name'] , "child" => $jobinfolist );
 			// $this->Flash->error(__('DATA__.').json_encode($paygrouplist));
 			
         	
