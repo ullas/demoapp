@@ -134,14 +134,15 @@ class PayComponentsController extends AppController
         									 // ->leftJoin('PayComponents', 'PayComponents.pay_component_group_id=PayComponentGroups.id')
         									 ->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']);
         
-		$payComponents = $this->PayComponents->find('list', ['limit' => 200])
-					// ->leftJoin('PayComponentGroups', 'PayComponents.pay_component_group_id=PayComponentGroups.id')
-					->where(['PayComponents.id != '=>$id])->andwhere(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+		$payComponents = $this->PayComponents->find('list', ['limit' => 200])->contain(['PayComponentGroups'])->select(['PayComponents.id', 'PayComponents.name',])
+					// ->leftJoin('pay_component_groups', 'PayComponents.pay_component_group_id=pay_component_groups.id')
+					->where(['PayComponents.id != '=>$id])->andwhere(['PayComponents.customer_id' => $this->loggedinuser['customer_id']])->orwhere(['PayComponents.customer_id' => '0']) ;
         
        
-		$this->log($payComponentGroups);
+	   
+		// $this->log($basepaycomponents);
 		
-		$this->set(compact('payComponent', 'frequencies', 'customers','payComponentGroups','payComponents'));
+		$this->set(compact('payComponent', 'frequencies', 'customers','payComponentGroups','payComponents','basepaycomponents'));
         $this->set('_serialize', ['payComponent']);
     }
 
