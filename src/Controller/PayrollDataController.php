@@ -101,6 +101,11 @@ class PayrollDataController extends AppController
 		$payComponents = $this->PayrollData->PayComponents->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         $this->set(compact('payrollData', 'payComponents','empDataBiographies'));
         $this->set('_serialize', ['payrollData']);
+		
+		$payComponentGroups = $this->PayrollData->PayComponents->PayComponentGroups->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        
+		$this->set('paycomponentarr', json_encode($payComponents));
+		$this->set('paycomponentgrouparr', json_encode($payComponentGroups));
     }
 
     /**
