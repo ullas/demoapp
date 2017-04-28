@@ -1,8 +1,3 @@
-<style>
-	.w100{
-		/*width:100%;*/
-	}
-</style>
 
 <?= $this->element('templateelmnt'); ?>
 <section class="content-header">
@@ -30,13 +25,13 @@
         
         <div class="col-md-4"><div class="form-group">
         	<div class="input-group">
-        		<input type="button" class="btn btn-flat btn-info w100" id="btnAddControl" value="Add Pay Component" />
+        		<input type="button" class="btn btn-flat btn-info" id="btnAddControl" value="Add Pay Component" />
         	</div>
         </div></div>
         
-        <div class="col-md-4"><div class="form-group">
+        <div class="col-md-4 pull-right"><div class="form-group">
         	<div class="input-group" >        		
-        		<input type="button" class="btn btn-flat btn-info w100" id="btnAddControl" value="Add Pay Component Group" />
+        		<input type="button" class="btn btn-flat btn-info pull-right" id="btnAddControl" value="Add Pay Component Group" />
         	</div>
         </div></div>
         

@@ -35,7 +35,7 @@
             echo $this->Form->input('pay_component_type',['disabled' => true,'class'=>'select2','options' => array('Amount', 'Percentage'), 'empty' => 'Choose']);
             echo $this->Form->input('is_earning',['disabled' => true,'class'=>'select2','options' => array('Yes', 'No'), 'empty' => 'Choose']);
             echo $this->Form->input('currency',['options' => $this->Currency->get_currencies(), 'empty' => true,'disabled' => true]);
-            echo $this->Form->input('pay_component_value',['disabled' => true]);
+            echo $this->Form->input('recurring',['disabled' => true]);
             echo $this->Form->input('frequency_id', ['label' => 'Frequency','options' => $frequencies, 'empty' => true,'disabled' => true]);
             echo $this->Form->input('pay_component_group_id',['disabled' => true,'options' => $payComponentGroups,'label' => 'Pay Component Group','class'=>'select2', 'empty' => 'Choose']);
             ?>
@@ -64,7 +64,7 @@
               
 			<?php
 			//echo $this->Form->input('pay_component_group_id',['label' => 'Base Pay Component Group','disabled' => true]);
-            echo $this->Form->input('recurring',['disabled' => true]);
+            echo $this->Form->input('pay_component_value',['disabled' => true]);
             echo $this->Form->input('tax_treatment',['disabled' => true,'class'=>'select2','options' => array('No Tax', 'Regular','Gross Up'), 'empty' => 'Choose']);
             echo $this->Form->input('can_override',['disabled' => true,'class'=>'select2','options' => array('Yes', 'No'), 'empty' => 'Choose']);
             echo $this->Form->input('self_service_description',['disabled' => true]);
