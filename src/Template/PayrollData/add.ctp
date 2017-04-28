@@ -1,3 +1,9 @@
+<style>
+	.w100{
+		/*width:100%;*/
+	}
+</style>
+
 <?= $this->element('templateelmnt'); ?>
 <section class="content-header">
       <h1>
@@ -17,14 +23,20 @@
 			echo $this->Form->input('start_date',['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
             echo $this->Form->input('end_date',['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
 			
-            echo $this->Form->input('pay_component_id', ['options' => $payComponents, 'empty' => true, 'class'=>'select2 mptldynamic']);
-            echo $this->Form->input('pay_component_value', ['class'=>'mptldynamic']);
+            // echo $this->Form->input('pay_component_id', ['options' => $payComponents, 'empty' => true, 'class'=>'select2 mptldynamic']);
+            // echo $this->Form->input('pay_component_value', ['class'=>'mptldynamic']);
             
         ?>
         
-        <div class="col-md-4"><div class="form-group" style="margin-top:22px;">
+        <div class="col-md-4"><div class="form-group">
         	<div class="input-group">
-        		<input type="button" class="btn btn-flat btn-info" id="btnAddControl" value="Add Pay Component  +" />
+        		<input type="button" class="btn btn-flat btn-info w100" id="btnAddControl" value="Add Pay Component" />
+        	</div>
+        </div></div>
+        
+        <div class="col-md-4"><div class="form-group">
+        	<div class="input-group" >        		
+        		<input type="button" class="btn btn-flat btn-info w100" id="btnAddControl" value="Add Pay Component Group" />
         	</div>
         </div></div>
         
