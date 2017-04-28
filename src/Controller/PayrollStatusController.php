@@ -26,7 +26,7 @@ var $components = array('Datatable');
 		foreach($dbout as $value){
 			$fields[] = array("name" => $value['field_name'] , "type" => $value['datatype'] );
 		}
-		$contains=['PayrollArea'];
+		$contains=['PayGroups'];
 									  
 		$usrfilter="PayrollStatus.customer_id ='".$this->loggedinuser['customer_id'] . "'";	 
 		$output =$this->Datatable->getView($fields,$contains,$usrfilter);
@@ -39,7 +39,7 @@ var $components = array('Datatable');
         $this->set('configs',$configs);	
 		
         $this->paginate = [
-            'contain' => ['PayrollArea']
+            'contain' => ['PayGroups']
         ];
         $payrollStatus = $this->paginate($this->PayrollStatus);
 
@@ -60,13 +60,12 @@ var $components = array('Datatable');
     public function view($id = null)
     {
         $payrollStatus = $this->PayrollStatus->get($id, [
-            'contain' => ['PayrollArea']
+            'contain' => ['PayGroups']
         ]);
 
-        $payrollArea = $this->PayrollStatus->PayrollArea->find('list', ['limit' => 200]);
         if($payrollStatus['customer_id']==$this->loggedinuser['customer_id'])
 		{
-       	    $this->set(compact('payrollStatus', 'payrollArea'));
+       	    $this->set(compact('payrollStatus'));
         $this->set('_serialize', ['payrollStatus']);
         }else{
 			$this->Flash->error(__('You are not Authorized.'));
@@ -93,8 +92,7 @@ var $components = array('Datatable');
                 $this->Flash->error(__('The payroll status could not be saved. Please, try again.'));
             }
         }
-        $payrollArea = $this->PayrollStatus->PayrollArea->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
-        $this->set(compact('payrollStatus', 'payrollArea'));
+        $this->set(compact('payrollStatus'));
         $this->set('_serialize', ['payrollStatus']);
     }
 
@@ -127,8 +125,7 @@ var $components = array('Datatable');
                 $this->Flash->error(__('The payroll status could not be saved. Please, try again.'));
             }
         }
-        $payrollArea = $this->PayrollStatus->PayrollArea->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
-        $this->set(compact('payrollStatus', 'payrollArea'));
+        $this->set(compact('payrollStatus'));
         $this->set('_serialize', ['payrollStatus']);
     }
 
