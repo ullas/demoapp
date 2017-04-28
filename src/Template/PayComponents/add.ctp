@@ -1,3 +1,13 @@
+<style>
+	.pctype .selection .select2-selection {
+    	background-color: #337ab7;
+	}
+	.pctype .selection .select2-selection .select2-selection__rendered{
+		color:#fff;
+	}
+</style>
+
+
 <?= $this->element('templateelmnt'); ?>
 
 <section class="content-header">
@@ -26,7 +36,24 @@
             echo $this->Form->input('pay_component_value');
             echo $this->Form->input('frequency_id', ['label' => 'Frequency','options' => $frequencies, 'empty' => true]);
             echo $this->Form->input('recurring');
-            echo $this->Form->input('pay_component_group_id',['label' => 'Base Pay Component Group','class'=>'select2', 'empty' => 'Choose']);
+            ?>
+			
+			<div class="col-md-4">
+				<label class="control-label">Base Pay Component</label>
+				<div class="input-group">
+					<input class="form-control basepcgroup" name="base_pay_component_group" id="base-pay-component-group"/>
+                	<div class="input-group-btn pctype" style="width:40%;font-size:14px;color:#fff;">
+                  		<select class="select2" name="base_pay_component_type" id="base-pay-component-type">
+        					<option value="1">Pay Component Group</option>
+        					<option value="2">Pay Component</option>
+      					</select>
+                	</div>                
+              </div>
+           </div>
+              
+			<?php
+            // echo $this->Form->input('pay_component_group_id',['label' => 'Base Pay Component Group','class'=>'select2', 'empty' => 'Choose']);
+            echo $this->Form->input('pay_component_group_id',['options' => $payComponentGroups,'label' => 'Pay Component Group','class'=>'select2', 'empty' => 'Choose']);
             echo $this->Form->input('tax_treatment',['class'=>'select2','options' => array('No Tax', 'Regular','Gross Up'), 'empty' => 'Choose']);
             echo $this->Form->input('can_override',['class'=>'select2','options' => array('Yes', 'No'), 'empty' => 'Choose']);
             echo $this->Form->input('self_service_description');
@@ -46,3 +73,45 @@
     </div>
     <?= $this->Form->end() ?>
 </div></div></section>
+
+
+<?php $this->start('scriptBotton'); ?>
+<script>
+
+	var paycomponentdata=[];
+	var paycomponentarr=<?php echo $paycomponentarr ?>;
+	$.each(paycomponentarr, function(key, value) {
+    	paycomponentdata.push({'id':key, "text":value});
+	});
+	
+	var paycomponentgroupdata=[];
+	var paycomponentgrouparr=<?php echo $paycomponentgrouparr ?>;
+	$.each(paycomponentgrouparr, function(key, value) {
+    	paycomponentgroupdata.push({'id':key, "text":value});
+	});
+
+
+	window.onload = function () { 
+    	 $('.basepcgroup').select2({
+    		width: '100%',allowClear: true,placeholder: "Select",data: paycomponentgroupdata
+		});
+	}
+	
+    $(function () {
+    	
+    	$( "#base-pay-component-type" ).change(function() {
+    		var selectedVal = this.value;
+    		if(selectedVal=="2"){
+    			 $('.basepcgroup').select2({
+    				width: '100%',allowClear: true,placeholder: "Select",data: paycomponentdata
+				});
+    		}else{
+    			$('.basepcgroup').select2({
+    				width: '100%',allowClear: true,placeholder: "Select",data: paycomponentgroupdata
+				});
+    		}
+  			
+		});	
+    });
+   </script>
+<?php $this->end(); ?> 

@@ -36,8 +36,6 @@ class PayComponentsTable extends Table
      * @param array $config The configuration for the Table.
      * @return void
      */
-   
-
     public function initialize(array $config)
     {
         parent::initialize($config);
@@ -157,6 +155,9 @@ class PayComponentsTable extends Table
 
         $validator
             ->allowEmpty('base_pay_component_group');
+
+        $validator
+            ->allowEmpty('base_pay_component_type');
 
         return $validator;
     }
