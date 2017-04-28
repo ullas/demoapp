@@ -134,6 +134,7 @@ class PayrollDataController extends AppController
         }
         $payComponents = $this->PayrollData->PayComponents->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         $this->set(compact('payrollData', 'payComponents'));
+		
         $this->set('_serialize', ['payrollData']);
     }
 
