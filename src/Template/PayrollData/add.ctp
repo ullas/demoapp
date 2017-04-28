@@ -31,7 +31,7 @@
         
         <div class="col-md-4 pull-right"><div class="form-group">
         	<div class="input-group" >        		
-        		<input type="button" class="btn btn-flat btn-info pull-right" id="btnAddControl" value="Add Pay Component Group" />
+        		<input type="button" class="btn btn-flat btn-info pull-right" id="btnAddPCG" value="Add Pay Component Group" />
         	</div>
         </div></div>
         
@@ -46,17 +46,66 @@
 
 <?php $this->start('scriptBotton'); ?>
 <script>
-
+	var paycomponentdata=[];
+	var paycomponentarr=<?php echo $paycomponentarr ?>;
+	$.each(paycomponentarr, function(key, value) {
+    	paycomponentdata.push({'id':key, "text":value});
+	});
+	
+	var paycomponentgroupdata=[];
+	var paycomponentgrouparr=<?php echo $paycomponentgrouparr ?>;
+	$.each(paycomponentgrouparr, function(key, value) {
+    	paycomponentgroupdata.push({'id':key, "text":value});
+	});
+	
+    
 $(function () {
+	
+	$('.maindiv').on('change', 'input.pcgroup', function() {
+		var selectedVal = this.value;
+		$(this).parent().closest('div .groupclass').find('.pcgcol').remove();
+		// var cnt=$(this).closest(".groupclass").find('.col-sm-4').length;
+		// if(cnt<2){
+			$(this).closest(".groupclass").append("<div class='col-sm-4 pcgcol'><div class='form-group'><label>Pay Component:</label><input type='text' class='form-control'></div><div class='form-group'><label>Pay Component:</label><input type='text' class='form-control'></div></div><div class='col-sm-4 pcgcol'><div class='form-group'><label>Pay Component Value:</label><input type='text' class='form-control'></div><div class='form-group'><label>Pay Component Value:</label><input type='text' class='form-control'></div></div>");
+		// }
+	});
 	
 	$("#btnAddControl").click(function (event) {
 		
-		
 		event.preventDefault();
 		var numItems = $('.classname').length+1;
-		$(".maindiv").append("<div class='classname' 	id='contentDiv"+numItems+"'><div class='clearfix'><div class='col-sm-4'><label>Pay Component:</label><input type='text' 	class='form-control' id='type"+numItems+"'/></div><div class='col-sm-4'><label>Pay Component Value:</label><input id='test' class='form-control test' name='test'/></div></div><hr/></div>");
+		$(".maindiv").append("<div class='classname'	id='contentDiv"+numItems+"'><div class='clearfix'><div class='col-sm-4'><label>Pay Component:</label><input type='text' class='pcomp form-control' id='type"+numItems+"'/></div><div class='col-sm-4'><label>Pay Component Value:</label><input id='test' class='form-control test' name='test'/></div></div><hr/></div>");
+		
+		$('.pcomp').select2({
+    		width: '100%',allowClear: true,placeholder: "Select",data: paycomponentdata
+		});
+		
+	});
+	
+	$("#btnAddPCG").click(function (event) {
+		
+		event.preventDefault();
+		
+		var numItems = $('.groupclass').length+1;
+		$(".maindiv").append("<div class='clearfix'><div class='groupclass' id='groupDiv"+numItems+"'><div class='col-sm-4'><div class='form-group'><label>Pay Component Group:</label><div class='input-group'><div class='input-group-btn'><a class='groupdelete btn btn-danger btn-flat' id='delete1'><i class='fa fa-trash'></i></a></div><input type='text' class='pcgroup form-control' id='type"+numItems+"'/></div></div></div></div></div>");
+		
+		$('.pcgroup').select2({
+    		width: '100%',allowClear: true,placeholder: "Select",data: paycomponentgroupdata
+		});
+		
 	});	
-
+	
+	//delete btn onclick
+	$('.maindiv').on('click', 'a.groupdelete', function() {
+		if (confirm("Are you sure you want to delete the particular Pay Component Group ?")) {
+			$(this).parent().closest('div .groupclass').remove();
+    		return true;
+  		} else {
+    		return false;
+  		}
+   
+	});
+	
 });
 
 </script>
