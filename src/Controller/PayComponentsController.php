@@ -66,6 +66,13 @@ class PayComponentsController extends AppController
 			$payComponentGroups = $this->PayComponents->PayComponentGroups->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         	$this->set(compact('payComponent', 'frequencies', 'customers','payComponentGroups'));
         	$this->set('_serialize', ['payComponent']);
+			
+			$payComponents = $this->PayComponents->find('list', ['limit' => 200])->contain(['PayComponentGroups'])->select(['PayComponents.id', 'PayComponents.name',])
+					->where(['PayComponents.id != '=>$id])->andwhere(['PayComponents.customer_id' => $this->loggedinuser['customer_id']])->orwhere(['PayComponents.customer_id' => '0']) ;
+					
+			$this->set('paycomponentarr', json_encode($payComponents));
+			$this->set('paycomponentgrouparr', json_encode($payComponentGroups));
+		
  		}else{
 		   	$this->Flash->error(__('You are not Authorized.'));
 			return $this->redirect(['action' => 'index']);
@@ -96,6 +103,12 @@ class PayComponentsController extends AppController
 		$payComponentGroups = $this->PayComponents->PayComponentGroups->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         $this->set(compact('payComponent', 'frequencies', 'customers','payComponentGroups'));
         $this->set('_serialize', ['payComponent']);
+		
+		$payComponents = $this->PayComponents->find('list', ['limit' => 200])->contain(['PayComponentGroups'])->select(['PayComponents.id', 'PayComponents.name',])
+					->where(['PayComponents.customer_id' => $this->loggedinuser['customer_id']])->orwhere(['PayComponents.customer_id' => '0']) ;
+					
+		$this->set('paycomponentarr', json_encode($payComponents));
+		$this->set('paycomponentgrouparr', json_encode($payComponentGroups));
     }
 
     /**
@@ -131,18 +144,18 @@ class PayComponentsController extends AppController
         $frequencies = $this->PayComponents->Frequencies->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         $customers = $this->PayComponents->Customers->find('list', ['limit' => 200]);
         $payComponentGroups = $this->PayComponents->PayComponentGroups->find('list', ['limit' => 200])
-        									 // ->leftJoin('PayComponents', 'PayComponents.pay_component_group_id=PayComponentGroups.id')
         									 ->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']);
         
 		$payComponents = $this->PayComponents->find('list', ['limit' => 200])->contain(['PayComponentGroups'])->select(['PayComponents.id', 'PayComponents.name',])
-					// ->leftJoin('pay_component_groups', 'PayComponents.pay_component_group_id=pay_component_groups.id')
 					->where(['PayComponents.id != '=>$id])->andwhere(['PayComponents.customer_id' => $this->loggedinuser['customer_id']])->orwhere(['PayComponents.customer_id' => '0']) ;
         
        
-	   
+        
+		$this->set('paycomponentarr', json_encode($payComponents));
+		$this->set('paycomponentgrouparr', json_encode($payComponentGroups));
 		// $this->log($basepaycomponents);
 		
-		$this->set(compact('payComponent', 'frequencies', 'customers','payComponentGroups','payComponents','basepaycomponents'));
+		$this->set(compact('payComponent', 'frequencies', 'customers','payComponentGroups'));
         $this->set('_serialize', ['payComponent']);
     }
 

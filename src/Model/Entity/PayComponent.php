@@ -33,6 +33,7 @@ use Cake\ORM\Entity;
  * @property int $customer_id
  * @property int $pay_component_group_id
  * @property int $base_pay_component_group
+ * @property int $base_pay_component_type
  *
  * @property \App\Model\Entity\Frequency $frequency
  * @property \App\Model\Entity\Customer $customer
