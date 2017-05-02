@@ -13,6 +13,7 @@ use Cake\ORM\Entity;
  * @property \Cake\I18n\Time $end_date
  * @property int $customer_id
  * @property int $empdatabiographies_id
+ * @property int $pay_component_type
  *
  * @property \App\Model\Entity\PayComponent $pay_component
  * @property \App\Model\Entity\Customer $customer
