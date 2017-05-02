@@ -11,7 +11,7 @@ use App\Controller\AppController;
 class PayrollDataController extends AppController
 {
 
-   var $components = array('Datatable');
+   var $components = array('PayrollDatatable');
     /**
      * Index method
      *
@@ -27,10 +27,10 @@ class PayrollDataController extends AppController
 		foreach($dbout as $value){
 			$fields[] = array("name" => $value['field_name'] , "type" => $value['datatype'] );
 		}
-		$contains=['PayComponents'];
+		$contains=['PayComponents','Empdatabiographies'];
 									  
 		$usrfilter="PayrollData.customer_id ='".$this->loggedinuser['customer_id'] . "'";			  
-		$output =$this->Datatable->getView($fields,$contains,$usrfilter);
+		$output =$this->PayrollDatatable->getView($fields,$contains,$usrfilter);
 		echo json_encode($output);			
     }
     public function index()
@@ -50,7 +50,19 @@ class PayrollDataController extends AppController
         $this->set(compact('payrollData'));
         $this->set('_serialize', ['payrollData']);
     }
-
+	public function getPayComponentGroupData(){
+		
+		if($this->request->is('ajax')) {
+				
+			$this->autoRender=false;
+			$this->loadModel('PayComponents');
+			
+			$payComponents=$this->PayComponents->find('all')->where(['pay_component_group_id' => $this->request->query['pcgid']])
+									->andwhere(['can_override' => '0'])->order(['"id"' => 'ASC'])->toArray();
+			$this->response->body(json_encode($payComponents));
+	    	return $this->response;
+		}
+	}
     /**
      * View method
      *
@@ -75,7 +87,30 @@ class PayrollDataController extends AppController
 			return $this->redirect(['action' => 'index']);
        } 
     }
+	public function addData()
+	{
+		if($this->request->is('ajax')) {
+				
+			$this->autoRender=false;
+			$payrollData = $this->PayrollData->newEntity();
+            $this->request->data['empdatabiographies_id']=$this->request->query['employee'];
+           	$this->request->data['start_date']=$this->request->query['startdate'];
+			$this->request->data['end_date']=$this->request->query['enddate'];
+            $this->request->data['pay_component_id']=$this->request->query['paycomponent'];
+			$this->request->data['pay_component_value']=$this->request->query['paycomponentvalue'];
+			$this->request->data['pay_component_type']=$this->request->query['type'];
+            $payrollData=$this->PayrollData->patchEntity($payrollData,$this->request->data);
+			$payrollData['customer_id']=$this->loggedinuser['customer_id'];
+			if ($this->PayrollData->save($payrollData)) {
 
+               	 	$this->response->body("success");
+	    			return $this->response;
+            } else {
+                	$this->response->body("error");
+	    			return $this->response;
+            }			
+		}
+	}
     /**
      * Add method
      *
@@ -95,10 +130,11 @@ class PayrollDataController extends AppController
                 $this->Flash->error(__('The payroll data could not be saved. Please, try again.'));
             }
         }
-        $empDataBiographies = $this->PayrollData->EmpDataBiographies->find('list',['limit' => 200])->select(['id'=>'EmpDataBiographies.id','name' => 'EmpDataPersonals.first_name'])
+        $empDataBiographies = $this->PayrollData->EmpDataBiographies->find('list',['limit' => 200])
+        				->select(['id'=>'EmpDataBiographies.id','name' => 'CONCAT(EmpDataPersonals.first_name, \' \',EmpDataPersonals.last_name,\'(\', EmpDataBiographies.employee_id, \')\' )'])
 						->leftJoin('EmpDataPersonals', 'EmpDataPersonals.employee_id = EmpDataBiographies.employee_id')->where("EmpDataBiographies.customer_id=".$this->loggedinuser['customer_id']);
 						
-		$payComponents = $this->PayrollData->PayComponents->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+		$payComponents = $this->PayrollData->PayComponents->find('list', ['limit' => 200])->where(['can_override' => '0'])->andwhere(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         $this->set(compact('payrollData', 'payComponents','empDataBiographies'));
         $this->set('_serialize', ['payrollData']);
 		

@@ -74,6 +74,9 @@ class PayrollDataTable extends Table
             ->date('end_date')
             ->allowEmpty('end_date');
 
+        $validator
+            ->allowEmpty('pay_component_type');
+
         return $validator;
     }
 	public function beforeMarshal(Event $event, $data, $options)
