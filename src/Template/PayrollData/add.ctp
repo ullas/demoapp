@@ -38,7 +38,8 @@
     </fieldset></div>
     <div class="box-footer">
     <?=$this->Html->link(__('Cancel'), ['action' => 'index'], ['escape' => false])?>
-    <?= $this->Form->button(__('Save Payroll Data'),['title'=>'Save Payroll Data','class'=>'pull-right']) ?>
+    <!-- <?= $this->Form->button(__('Save Payroll Data'),['title'=>'Save Payroll Data','class'=>'pull-right']) ?> -->
+    <input type="button" value="Save Payroll Data" class="mptlsave btn btn-success pull-right" id="mptlsave"/>
     </div>
     <?= $this->Form->end() ?>
 </div></section>
@@ -58,40 +59,154 @@
     	paycomponentgroupdata.push({'id':key, "text":value});
 	});
 	
+	function changePayComponentData(){
+		
+		// paycomponentdata=[];
+// 		
+		// var pccount = $('.componentclass').length;
+		// var pcarr=[];
+		// for (i = 0; i < pccount; i++) {
+    		// var paycomp=$("#paycomponent"+i).val();
+    		// pcarr.push(paycomp);
+    	// }
+//     	
+    	// $.each(paycomponentarr, function(key, value) {
+    		// if (!(pcarr.indexOf(key) > -1)) {
+				// paycomponentdata.push({'id':key, "text":value});
+			// }
+		// });
+// 		
+    	// console.log(paycomponentdata);
+	}
     
 $(function () {
 	
+	//save btn onclick
+	$('#mptlsave').click(function(){
+    	//get input value
+		var emp = $("#empdatabiographies-id").val();
+		var startdate = $("#start-date").val();
+		var enddate = $("#end-date").val();
+		
+		var pccount = $('.componentclass').length;
+		var pcgcount = $('.groupclass').length;
+
+    	if (emp!="" && emp!=null && (pccount>0 || pcgcount>0)) {
+    		
+    		//add paycomponent
+    		var pcerrcount=0;
+    		for (i = 1; i <= pccount; i++) {
+    			var paycomp=$("#paycomponent"+i).val();
+    			var paycompval=$("#paycomponentvalue"+i).val();
+    			if(paycomp!="" && paycomp!=null && paycompval!="" && paycompval!=null){
+					$.get('/PayrollData/addData?employee='+emp+'&startdate='+startdate+'&enddate='+enddate+'&paycomponent='+paycomp+'&paycomponentvalue='+paycompval+'&type=1', function(result) {
+						if(result=="Error"){
+							pcerrcount++;
+						}
+					});
+				}
+    		}	
+    		if(pcerrcount>0){
+    			sweet_alert("Error while adding Pay Component.");
+				return false;
+    		}
+    		
+    		//add paycomponent group
+    		var pcgerrcount=0;
+    		for (i = 1; i <= pcgcount; i++) {
+    			var paycomp=$("#pcgroup"+i).val();
+    			
+    			var postdata="";
+    			$("#pcgroup"+i).closest(".groupclass").children('.pcgcol').each(function(i, obj) {
+    				postdata+=$(this).children('.col-sm-4').children('.form-group').children('.paycompnt').attr('name')+"^";
+    				postdata+=$(this).children('.col-sm-4').children('.form-group').children('.paycompntval').val()+"|";console.log($(this).children('.col-sm-4').children('.form-group').children('.paycompnt').attr('name'));
+				});
+    			
+    			
+    			if(paycomp!="" && paycomp!=null && postdata!="" && postdata!=null){
+					$.get('/PayrollData/addData?employee='+emp+'&startdate='+startdate+'&enddate='+enddate+'&paycomponent='+paycomp+'&paycomponentvalue='+postdata+'&type=2', function(result) {
+						if(result=="Error"){
+							pcgerrcount++;
+						}
+					});
+				}
+    		}	
+    		if(pcgerrcount>0){
+    			sweet_alert("Error while adding Pay Component Group.");
+				return false;
+    		}
+    		
+    		window.location = '/payroll-data'; 
+    		
+    	}else{
+    		if(emp == "" || emp==null){sweet_alert("Please select a Employee.");}
+    		else {sweet_alert("Please add a pay Component/Pay Component Group for the particular Employee.");}
+    		return false;
+    	}
+  });
+    
+    	$('.maindiv').on('change', 'input.pcomp', function() {
+		
+			changePayComponentData();
+		
+		});		
+
+    		
 	$('.maindiv').on('change', 'input.pcgroup', function() {
+		$(this).parent().closest('div .groupclass').find('.groupcol').remove();
+		
+		var selectedCtrl = $(this);
+		
 		var selectedVal = this.value;
-		$(this).parent().closest('div .groupclass').find('.pcgcol').remove();
-		// var cnt=$(this).closest(".groupclass").find('.col-sm-4').length;
-		// if(cnt<2){
-			$(this).closest(".groupclass").append("<div class='col-sm-4 pcgcol'><div class='form-group'><label>Pay Component:</label><input type='text' class='form-control'></div><div class='form-group'><label>Pay Component:</label><input type='text' class='form-control'></div></div><div class='col-sm-4 pcgcol'><div class='form-group'><label>Pay Component Value:</label><input type='text' class='form-control'></div><div class='form-group'><label>Pay Component Value:</label><input type='text' class='form-control'></div></div>");
-		// }
+		$.get('/PayrollData/getPayComponentGroupData?pcgid='+selectedVal, function(result) {
+			var obj = JSON.parse(result);
+				var numItems = $('.groupclass').length+1;
+    			for(t = 0; t < obj.length; t++){
+    				
+    				if(t>0){
+    					selectedCtrl.closest(".groupclass").append("<div class='col-sm-4'></div>");
+    				}
+    				selectedCtrl.closest(".groupclass").append("<div class='pcgcol'><div class='col-sm-4 groupcol'><div class='form-group'><label>Pay Component:</label><input id='paycomp' disabled type='text' value='"+obj[t]['name']+"' class='form-control paycompnt' name='"+obj[t]['id']+"'></div></div><div class='col-sm-4 groupcol'><div class='form-group'><label>Pay Component Value:</label><input id='paycompval' type='text' class='form-control paycompntval'></div></div></div>");
+    			}
+    	});
+    		
+			// $(this).closest(".groupclass").append("<div class='col-sm-4 pcgcol'><div class='form-group'><label>Pay Component:</label><input type='text' class='form-control'></div><div class='form-group'><label>Pay Component:</label><input type='text' class='form-control'></div></div><div class='col-sm-4 pcgcol'><div class='form-group'><label>Pay Component Value:</label><input type='text' class='form-control'></div><div class='form-group'><label>Pay Component Value:</label><input type='text' class='form-control'></div></div>");
 	});
 	
 	$("#btnAddControl").click(function (event) {
+
+		var emp = $("#empdatabiographies-id").val();
+		if(emp!="" && emp!=null){
+			event.preventDefault();
+			var numItems = $('.componentclass').length+1;
+			$(".maindiv").append("<div class='componentclass' id='contentDiv"+numItems+"'><div class='clearfix'><div class='col-sm-4'><label>Pay Component:</label><input type='text' class='pcomp form-control' id='paycomponent"+numItems+"'/></div><div class='col-sm-4'><label>Pay Component Value:</label><input class='form-control'  id='paycomponentvalue"+numItems+"'/></div></div><hr/></div>");
 		
-		event.preventDefault();
-		var numItems = $('.classname').length+1;
-		$(".maindiv").append("<div class='classname'	id='contentDiv"+numItems+"'><div class='clearfix'><div class='col-sm-4'><label>Pay Component:</label><input type='text' class='pcomp form-control' id='type"+numItems+"'/></div><div class='col-sm-4'><label>Pay Component Value:</label><input id='test' class='form-control test' name='test'/></div></div><hr/></div>");
-		
-		$('.pcomp').select2({
-    		width: '100%',allowClear: true,placeholder: "Select",data: paycomponentdata
-		});
+			$('.pcomp').select2({
+    			width: '100%',allowClear: true,placeholder: "Select",data: paycomponentdata
+			});
+		}else{
+			sweet_alert("Please select a Employee.");
+   			return false;
+		}
 		
 	});
 	
 	$("#btnAddPCG").click(function (event) {
 		
-		event.preventDefault();
+		var emp = $("#empdatabiographies-id").val();
+		if(emp!="" && emp!=null){
+			event.preventDefault();
 		
-		var numItems = $('.groupclass').length+1;
-		$(".maindiv").append("<div class='clearfix'><div class='groupclass' id='groupDiv"+numItems+"'><div class='col-sm-4'><div class='form-group'><label>Pay Component Group:</label><div class='input-group'><div class='input-group-btn'><a class='groupdelete btn btn-danger btn-flat' id='delete1'><i class='fa fa-trash'></i></a></div><input type='text' class='pcgroup form-control' id='type"+numItems+"'/></div></div></div></div></div>");
+			var numItems = $('.groupclass').length+1;
+			$(".maindiv").append("<div class='clearfix'><div class='groupclass' id='groupDiv"+numItems+"'><div class='col-sm-4'><div class='form-group'><label>Pay Component Group:</label><div class='input-group'><div class='input-group-btn'><a class='groupdelete btn btn-danger btn-flat' id='delete1'><i class='fa fa-trash'></i></a></div><input type='text' class='pcgroup form-control' id='pcgroup"+numItems+"'/></div></div></div></div></div>");
 		
-		$('.pcgroup').select2({
-    		width: '100%',allowClear: true,placeholder: "Select",data: paycomponentgroupdata
-		});
+			$('.pcgroup').select2({
+    			width: '100%',allowClear: true,placeholder: "Select",data: paycomponentgroupdata
+			});
+		}else{
+			sweet_alert("Please select a Employee.");
+   			return false;
+		}
 		
 	});	
 	
