@@ -33,7 +33,7 @@ class CountryHelper extends Helper {
 		if($empid!="" && $empid!=null && isset($empid)){
 			$arrayTemp1 = $conn->execute('select first_name,last_name from empdatapersonals where employee_id='.$empid.'')->fetchAll('assoc');
 		}
-		return json_encode($arrayTemp1[0]['first_name']); 
+		return json_encode($arrayTemp1[0]['first_name']." ".$arrayTemp1[0]['last_name']." (".$empid.")"); 
 	}
 	public function get_employeepicture($empdatabiographyid = null) 
 	{

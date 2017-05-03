@@ -47,8 +47,13 @@
              	<div class="col-md-4">
         			<div class="form-group">
             		<label class="control-label" for="employee-profilepicture" style="margin-bottom: 5px;">Profile Picture</label>            		
-        			<?php $picturename='/img/uploadedpics/'.$employee['profilepicture'];
-          			echo $this->Html->image($picturename, array('class' => 'emp-profilepic img-responsive', 'id'=>'profilepic', 'alt' => 'User profile picture')); ?>
+        			<?php $picturename=$employee['profilepicture'];
+								if (file_exists(WWW_ROOT.'img'.DS.'uploadedpics'.DS.$picturename)){
+									echo $this->Html->image('/img/uploadedpics/'.$picturename, array('class' => 'emp-profilepic img-responsive', 'id'=>'profilepic', 'alt' => 'User profile picture'));
+								}else{
+									echo $this->Html->image('/img/uploadedpics/defaultuser.png', array('class' => 'emp-profilepic img-responsive', 'id'=>'profilepic', 'alt' => 'User profile picture'));
+								}
+					?>
           			</div>
           		</div>
           		
