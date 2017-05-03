@@ -179,7 +179,7 @@ $(function () {
 		if(emp!="" && emp!=null){
 			event.preventDefault();
 			var numItems = $('.componentclass').length+1;
-			$(".maindiv").append("<div class='componentclass' id='contentDiv"+numItems+"'><div class='clearfix'><div class='col-sm-4'><label>Pay Component:</label><input type='text' class='pcomp form-control' id='paycomponent"+numItems+"'/></div><div class='col-sm-4'><label>Pay Component Value:</label><input class='form-control'  id='paycomponentvalue"+numItems+"'/></div></div><hr/></div>");
+			$(".maindiv").append("<div class='componentclass' id='contentDiv"+numItems+"'><div class='clearfix'><div class='col-sm-4'><label>Pay Component:</label><div class='input-group'><div class='input-group-btn'><a class='compdelete btn btn-danger btn-flat'><i class='fa fa-trash'></i></a></div><input type='text' class='pcomp form-control' id='paycomponent"+numItems+"'/></div></div><div class='col-sm-4'><label>Pay Component Value:</label><input class='form-control'  id='paycomponentvalue"+numItems+"'/></div></div></div>");
 		
 			$('.pcomp').select2({
     			width: '100%',allowClear: true,placeholder: "Select",data: paycomponentdata
@@ -214,6 +214,16 @@ $(function () {
 	$('.maindiv').on('click', 'a.groupdelete', function() {
 		if (confirm("Are you sure you want to delete the particular Pay Component Group ?")) {
 			$(this).parent().closest('div .groupclass').remove();
+    		return true;
+  		} else {
+    		return false;
+  		}
+   
+	});
+	
+	$('.maindiv').on('click', 'a.compdelete', function() {
+		if (confirm("Are you sure you want to delete the particular Pay Component ?")) {
+			$(this).parent().closest('div .componentclass').remove();
     		return true;
   		} else {
     		return false;

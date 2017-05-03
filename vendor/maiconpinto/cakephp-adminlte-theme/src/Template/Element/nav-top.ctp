@@ -79,17 +79,27 @@ if (file_exists($file)) {
             <!-- User Account: style can be found in dropdown.less -->
             <li class="dropdown user user-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                	<?php if($this->request->session()->read('sessionuser')['profilepic']!=''){$picturename='/img/uploadedpics/'.$this->request->session()->read('sessionuser')['profilepic'];}
+                	<?php if($this->request->session()->read('sessionuser')['profilepic']!=''){$picturename=$this->request->session()->read('sessionuser')['profilepic'];}
                             				else{$picturename='/img/uploadedpics/defaultuser.png';}
-	                    		echo $this->Html->image($picturename, array('class' => 'user-image', 'alt' => 'User profile picture')); ?>
+                            				
+                            				if (file_exists(WWW_ROOT.'img'.DS.'uploadedpics'.DS.$picturename)){
+												echo $this->Html->image('/img/uploadedpics/'.$picturename, array('class' => 'user-image', 'alt' => 'User profile picture'));
+											}else{
+												echo $this->Html->image('/img/uploadedpics/defaultuser.png', array('class' => 'user-image', 'alt' => 'User profile picture'));
+											}?>
                     <span class="hidden-xs"><?php echo $name ?></span>
                 </a>
                 <ul class="dropdown-menu">
                     <!-- User image -->
                     <li class="user-header">
-                    	<?php if($this->request->session()->read('sessionuser')['profilepic']!=''){$picturename='/img/uploadedpics/'.$this->request->session()->read('sessionuser')['profilepic'];}
-                            				else{$picturename='/img/uploadedpics/defaultuser.png';}
-          					echo $this->Html->image($picturename, array('class' => 'img-circle', 'alt' => 'User profile picture')); ?>
+                    	<?php if($this->request->session()->read('sessionuser')['profilepic']!=''){$picturename=$this->request->session()->read('sessionuser')['profilepic'];}
+                            				else{$picturename='defaultuser.png';}
+          					
+          									if (file_exists(WWW_ROOT.'img'.DS.'uploadedpics'.DS.$picturename)){
+												echo $this->Html->image('/img/uploadedpics/'.$picturename, array('class' => 'img-circle', 'alt' => 'User profile picture'));
+											}else{
+												echo $this->Html->image('/img/uploadedpics/defaultuser.png', array('class' => 'img-circle', 'alt' => 'User profile picture'));
+											} ?>
                         <!-- <?php echo $this->Html->image('sree.png', array('class' => 'img-circle', 'alt' => 'User Image')); ?> -->
                         <p>
                             <?php echo $name ?>
