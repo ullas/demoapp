@@ -78,9 +78,14 @@
                               </ul>
                             </div>
                             <div class="right col-xs-4 text-center">
-                            	<?php if(isset($employee['profilepicture']) && ($employee['profilepicture']!='')){$picturename='/img/uploadedpics/'.$employee['profilepicture'];}
+                            	<?php if(isset($employee['profilepicture']) && ($employee['profilepicture']!='')){$picturename=$employee['profilepicture'];}
                             				else{$picturename='/img/uploadedpics/defaultuser.png';}
-          					echo $this->Html->image($picturename, array('class' => 'img-responsive img-circle emppic', 'alt' => 'Employee picture')); ?>
+											if (file_exists(WWW_ROOT.'img'.DS.'uploadedpics'.DS.$picturename)){
+												echo $this->Html->image('/img/uploadedpics/'.$picturename, array('class' => 'img-responsive img-circle emppic', 'id'=>'profilepic', 'alt' => 'User profile picture'));
+											}else{
+												echo $this->Html->image('/img/uploadedpics/defaultuser.png', array('class' => 'img-responsive img-circle emppic', 'alt' => 'User profile picture'));
+											}
+							   ?>
                             </div>
                           </div>
                           <div class="col-xs-12 bottom text-center">

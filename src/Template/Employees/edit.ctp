@@ -87,7 +87,12 @@ div#myDropZone {
             			<a href="#" class="open-Popup" data-toggle="modal" data-remote="false" data-target="#editpicpopover" style="font-size:20px;">&nbsp;<i class="fa fa-camera"></i></a>
                         		
         				<?php $picturename='/img/uploadedpics/'.$employee['profilepicture'];
-          				echo $this->Html->image($picturename, array('class' => 'emp-profilepic img-responsive', 'id'=>'profilepic', 'alt' => 'User profile picture')); ?>
+          						if (file_exists(WWW_ROOT.'img'.DS.'uploadedpics'.DS.$picturename)){
+									echo $this->Html->image('/img/uploadedpics/'.$picturename, array('class' => 'emp-profilepic img-responsive', 'id'=>'profilepic', 'alt' => 'User profile picture'));
+								}else{
+									echo $this->Html->image('/img/uploadedpics/defaultuser.png', array('class' => 'emp-profilepic img-responsive', 'id'=>'profilepic', 'alt' => 'User profile picture'));
+								}
+						 ?>
           			</div>	
           		</div>	
                 <?php

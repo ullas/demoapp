@@ -9,9 +9,14 @@ if (file_exists($file)) {
 ?>
 <div class="user-panel">
     <div class="pull-left image">
-        <?php if($this->request->session()->read('sessionuser')['profilepic']!=''){$picturename='/img/uploadedpics/'.$this->request->session()->read('sessionuser')['profilepic'];}
-                            				else{$picturename='/img/uploadedpics/defaultuser.png';}
-          					echo $this->Html->image($picturename, array('class' => 'img-circle', 'alt' => 'User profile picture')); ?>
+        <?php if($this->request->session()->read('sessionuser')['profilepic']!=''){$picturename=$this->request->session()->read('sessionuser')['profilepic'];}
+                            				else{$picturename='/img/uploadedpics/defaultuser.png';} 
+											
+											if (file_exists(WWW_ROOT.'img'.DS.'uploadedpics'.DS.$picturename)){
+												echo $this->Html->image('/img/uploadedpics/'.$picturename, array('class' => 'img-circle', 'alt' => 'User profile picture'));
+											}else{
+												echo $this->Html->image('/img/uploadedpics/defaultuser.png', array('class' => 'img-circle', 'alt' => 'User profile picture'));
+											} ?>
         
     </div>
     <div class="pull-left info">
