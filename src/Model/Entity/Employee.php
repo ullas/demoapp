@@ -18,6 +18,7 @@ use Cake\ORM\Entity;
  * @property \App\Model\Entity\EmpDataPersonal $empdatapersonal
  * @property \App\Model\Entity\EmploymentInfo $employmentinfo
  * @property \App\Model\Entity\Identity $identity
+ * @property \App\Model\Entity\Jobinfo $jobinfo
  * @property \App\Model\Entity\User $user
  */
 class Employee extends Entity

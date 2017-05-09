@@ -32,7 +32,7 @@ div#myDropZone {
         <li><?= $this->Html->link('<i class="fa fa-mail-reply"></i> '.__('Back'), ['action' => 'index'], ['escape' => false]) ?></li>
       </ol>
     </section>
-<section class="content"><?= $this->Form->create($employee) ?>
+<section class="content"><?= $this->Form->create($employee,['id'=>'empform']) ?>
 	<div class="box box-primary" style="border-color:transparent;"><div class="box-body">
 		<div class="row">
 
@@ -310,12 +310,24 @@ div#myDropZone {
           <div class="tab-pane" id="ids">
              <!-- <div class="form-horizontal"> -->
              	<fieldset>
+             		<div class="idfieldset">
              		<?php
-             			echo $this->Form->input('identity.country',['templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-flag"></i></div>'],'class'=>'select2','options' => $this->Country->get_countries(), 'empty' => true]);
-            			echo $this->Form->input('identity.card_type',['label' => 'National ID Card Type']);
+             			echo $this->Form->input('identity.card_type',['label' => 'National ID Card Type']);
+            			echo $this->Form->input('identity.country',['templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-flag"></i></div>'],'class'=>'select2','options' => $this->Country->get_countries(), 'empty' => true]);
             			echo $this->Form->input('identity.nationalid',['label' => 'National ID']);
             			echo $this->Form->input('identity.is_primary');
+						echo $this->Form->input('identity.issuedate', ['label' => 'Issue Date','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+            			echo $this->Form->input('identity.expirydate', ['label' => 'Expiry Date','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+            
         			?>
+        			<div class="col-md-12"><hr/></div>
+        			</div>
+        			
+        			<div class="col-md-4 pull-left"><div class="form-group">
+        				<div class="input-group" >        		
+        					<input type="button" class="btn btn-flat btn-info pull-left" id="btnAddIDCtrls" value="Add More" />
+        				</div>
+        			</div></div>
             <!-- </div> -->
      		</fieldset>
           </div>
@@ -336,7 +348,8 @@ div#myDropZone {
 
 <div class="box-footer">
     <a href="/employees">Cancel</a>
-    <button id="saveempbtn" class="pull-right btn btn-primary" type="submit">Save</button>
+    <input type="button" id="saveempbtn"  value="Add Employee" class="pull-right btn btn-primary"  onclick="return updateEmployee()" />
+    <!-- <button id="saveempbtn" class="pull-right btn btn-primary" type="submit">Save</button> -->
 </div>
 
     </div>
@@ -345,6 +358,73 @@ div#myDropZone {
 
 <?php $this->start('scriptBotton'); ?>
 <script>
+var countrydata=[];
+	var countryarr=<?php echo $countryarr ?>;
+	$.each(countryarr, function(key, value) {
+    	countrydata.push({'id':key, "text":value});
+	});
+	
+	
+	function updateEmployee(){
+
+var post_data =  $('#empform').serialize();
+// console.log(post_data);
+var empid='';
+
+	$.ajax({
+        type: "POST",
+        url: '/Employees/addEmployee',
+        data: $('#empform').serialize(),
+        success : function(data) {
+           
+           empid=data;
+
+        
+    
+		// $.get('/Employees/addEmployee?formdata='+post_data, function(d) {
+    		// // if(d=="Error"){
+// 
+			// // }
+		// });
+				
+    	var errcount=0;
+    	// var empid=$("#idtype"+i).val();
+    	var idclasscount = $('.idclass').length;
+    	for (i = 1; i <= idclasscount; i++) {
+    		var idtype=$("#idtype"+i).val();
+    		var country=$("#country"+i).val();
+    		var nationalid=$("#nationalid"+i).val();
+    		var isprimary=0;
+    		if($("#isprimary"+i).is(":checked")){isprimary=1;}
+    		var issuedate=$("#issuedate"+i).val();
+    		var expirydate=$("#expirydate"+i).val();
+    		
+    		if(empid!="" && empid!=null && idtype!="" && idtype!=null && nationalid!="" && nationalid!=null){
+    			$.get('/Employees/addIds?empid='+empid+'&idtype='+idtype+'&country='+country+'&nationalid='+nationalid+'&isprimary='+'0'+'&issuedate='+issuedate+'&expirydate='+expirydate, function(d) {
+    				if(d=="error"){
+						errcount++;
+					}
+				});
+			}else{
+				sweet_alert("Please enter ID Card type/national Id.");
+				return false;
+			}
+    	}	
+    	if(errcount>0){
+    		sweet_alert("Error while adding Id's.");
+			return false;
+    	}
+    	
+    	},
+        error : function() {
+           alert("Error while adding Employee.");
+           return false;
+        }
+    });
+    	// alert("true");
+		window.location = '/employees'; 
+	}			
+		
 $(function () {
 	
 	 //dropzone
@@ -416,6 +496,42 @@ $(function () {
          } 					
     });
     
+    
+    $("#btnAddIDCtrls").click(function (event) {
+    		
+    		event.preventDefault();
+			var numItems = $('.idclass').length+1;
+    		$(".idfieldset").append("<div class='idclass' id='contentDiv"+numItems+"'><div class='clearfix'><div class='col-sm-4'><div class='form-group'><label>National ID Card Type</label><div class='input-group'><div class='input-group-btn'><a class='compdelete btn btn-danger btn-flat'><i class='fa fa-trash'></i></a></div><input type='text' class='idtype form-control' id='idtype"+numItems+"'/></div></div></div><div class='col-sm-4'><div class='form-group'><label>Country</label><div class='input-group'><div class='input-group-addon'><i class='fa fa-flag'></i></div><input class='form-control idcountry'  id='country"+numItems+"'/></div></div></div><div class='col-sm-4'><div class='form-group'><label>National ID</label><input class='form-control nationalid'  id='nationalid"+numItems+"'/></div></div><div class='col-sm-4'><div class='form-group checkbox'><label><input type='checkbox' class='isprimary'  id='isprimary"+numItems+"'/>Is Primary</label></div></div><div class='col-sm-4'><label>Issue Date</label><div class='input-group'><div class='input-group-addon'><i class='fa fa-calendar'></i></div><input type='text' class='issuedate mptldp form-control' id='issuedate"+numItems+"'/></div></div><div class='col-sm-4'><label>Expiry Date</label><div class='input-group'><div class='input-group-addon'><i class='fa fa-calendar'></i></div><input type='text' class='expirydate mptldp form-control' id='expirydate"+numItems+"'/></div></div></div></div>");
+			$(".idfieldset").append("<div class='col-md-12'><hr/></div>");
+			
+			//load country dropdown
+			$('.idcountry').select2({
+    			width: '100%',allowClear: true,placeholder: "Select",data: countrydata
+			});
+			
+			//initialise datepicker
+			//date picker
+			var userdf='<?php echo $this->request->session()->read('sessionuser')['dateformat'];?>';
+			if(userdf==1){
+				$('.mptldp').datepicker({ format:"dd/mm/yyyy",autoclose: true,clearBtn: true,todayHighlight: true });
+			}else{
+				$('.mptldp').datepicker({ format:"yyyy/mm/dd",autoclose: true,clearBtn: true,todayHighlight: true });
+			}
+			
+    	});	
+    
+    
+    //delete btn onclick
+	$('.idfieldset').on('click', 'a.compdelete', function() {
+		if (confirm("Are you sure you want to delete the particular ID ?")) {
+			$(this).parent().closest('div .idclass').remove();
+    		return true;
+  		} else {
+    		return false;
+  		}
+   
+	});
+	
  });
 
 

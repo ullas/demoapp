@@ -163,9 +163,12 @@ class PayrollDataController extends AppController
                 $this->Flash->error(__('The payroll data could not be saved. Please, try again.'));
             }
         }
+		$emparr = $this->PayrollData->find('all')->select(['empdatabiographies_id'])->where(['PayrollData.customer_id='.$this->loggedinuser['customer_id']]);
+        
         $empDataBiographies = $this->PayrollData->EmpDataBiographies->find('list',['limit' => 200])
         				->select(['id'=>'EmpDataBiographies.id','name' => 'CONCAT(EmpDataPersonals.first_name, \' \',EmpDataPersonals.last_name,\' (\', EmpDataBiographies.employee_id, \')\' )'])
-						->leftJoin('EmpDataPersonals', 'EmpDataPersonals.employee_id = EmpDataBiographies.employee_id')->where("EmpDataBiographies.customer_id=".$this->loggedinuser['customer_id']);
+						->leftJoin('EmpDataPersonals', 'EmpDataPersonals.employee_id = EmpDataBiographies.employee_id')
+						->where(['EmpDataBiographies.id NOT IN'=>$emparr])->andwhere("EmpDataBiographies.customer_id=".$this->loggedinuser['customer_id']);
 						
 		$payComponents = $this->PayrollData->PayComponents->find('list', ['limit' => 200])->where(['can_override' => '0'])->andwhere(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         $this->set(compact('payrollData', 'payComponents','empDataBiographies'));
@@ -205,9 +208,13 @@ class PayrollDataController extends AppController
             }
         }
 		
+        $emparr = $this->PayrollData->find('all')->select(['empdatabiographies_id'])->where(['PayrollData.empdatabiographies_id!='.$id])
+        				->andwhere(['PayrollData.customer_id='.$this->loggedinuser['customer_id']]);
+        
         $empDataBiographies = $this->PayrollData->EmpDataBiographies->find('list',['limit' => 200])
         				->select(['id'=>'EmpDataBiographies.id','name' => 'CONCAT(EmpDataPersonals.first_name, \' \',EmpDataPersonals.last_name,\' (\', EmpDataBiographies.employee_id, \')\' )'])
-						->leftJoin('EmpDataPersonals', 'EmpDataPersonals.employee_id = EmpDataBiographies.employee_id')->where("EmpDataBiographies.customer_id=".$this->loggedinuser['customer_id']);
+						->leftJoin('EmpDataPersonals', 'EmpDataPersonals.employee_id = EmpDataBiographies.employee_id')
+						->where(['EmpDataBiographies.id NOT IN'=>$emparr])->andwhere("EmpDataBiographies.customer_id=".$this->loggedinuser['customer_id']);
 						
 		$payComps = $this->PayrollData->find('all')->where("PayrollData.empdatabiographies_id=".$id)->andwhere("PayrollData.pay_component_type=1")
 							->andwhere("PayrollData.customer_id=".$this->loggedinuser['customer_id']);

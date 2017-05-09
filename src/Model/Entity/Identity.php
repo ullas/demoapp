@@ -13,6 +13,8 @@ use Cake\ORM\Entity;
  * @property bool $is_primary
  * @property int $customer_id
  * @property int $employee_id
+ * @property \Cake\I18n\Time $issuedate
+ * @property \Cake\I18n\Time $expirydate
  *
  * @property \App\Model\Entity\Customer $customer
  * @property \App\Model\Entity\Employee $employee
