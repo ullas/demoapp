@@ -303,12 +303,18 @@
           <div class="tab-pane" id="ids">
              <!-- <div class="form-horizontal"> -->
              	<fieldset>
+             		<div class="idfieldset">
              		<?php
-             			echo $this->Form->input('identity.country',['templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-flag"></i></div>'],'class'=>'select2','options' => $this->Country->get_countries(), 'empty' => true,'disabled' => true]);
-            			echo $this->Form->input('identity.card_type',['label' => 'National ID Card Type','disabled' => true]);
+             			echo $this->Form->input('identity.card_type',['label' => 'National ID Card Type','disabled' => true]);
+            			echo $this->Form->input('identity.country',['templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-flag"></i></div>'],'class'=>'select2','options' => $this->Country->get_countries(), 'empty' => true,'disabled' => true]);
             			echo $this->Form->input('identity.nationalid',['label' => 'National ID','disabled' => true]);
             			echo $this->Form->input('identity.is_primary',['disabled' => true]);
+						echo $this->Form->input('identity.issuedate', ['disabled' => true,'label' => 'Issue Date','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+            			echo $this->Form->input('identity.expirydate', ['disabled' => true,'label' => 'Expiry Date','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+            
         			?>
+        			<div class="col-md-12"><hr/></div>
+        			</div>
             <!-- </div> -->
      		</fieldset>
           </div>
@@ -335,3 +341,33 @@
       </div>
 
 </section>
+
+
+<?php $this->start('scriptBotton'); ?>
+<script>
+	var countrydata=[];
+	var countryarr=<?php echo $countryarr ?>;
+	$.each(countryarr, function(key, value) {
+    	countrydata.push({'id':key, "text":value});
+	});
+
+	$(function () {
+	
+		var idsarr='<?php echo $ids ?>';
+		var idobj = JSON.parse(idsarr);
+		
+		for (i = 1; i <= idobj.length; i++) {
+			var numItems = $('.idclass').length+1;
+			$(".idfieldset").append("<div class='idclass' id='contentDiv"+numItems+"'><div class='clearfix'><div class='col-sm-4'><div class='form-group'><label>National ID Card Type</label><div class='input-group'><input disabled type='text' class='idtype form-control' id='idtype"+numItems+"' value='"+ idobj[i-1]['card_type'] +"'/></div></div></div><div class='col-sm-4'><div class='form-group'><label>Country</label><div class='input-group'><div class='input-group-addon'><i class='fa fa-flag'></i></div><input class='form-control idcountry'  id='country"+numItems+"' disabled value='"+ countryarr[idobj[i-1]['country']] +"'/></div></div></div><div class='col-sm-4'><div class='form-group'><label>National ID</label><input disabled value='"+ idobj[i-1]['nationalid'] +"' class='form-control nationalid'  id='nationalid"+numItems+"'/></div></div><div class='col-sm-4'><div class='form-group checkbox'><label><input type='checkbox' class='isprimary'  id='isprimary"+numItems+"' disabled value='"+ idobj[i-1]['is_primary'] +"'/>Is Primary</label></div></div><div class='col-sm-4'><label>Issue Date</label><div class='input-group'><div class='input-group-addon'><i class='fa fa-calendar'></i></div><input type='text' class='issuedate mptldp form-control' id='issuedate"+numItems+"' disabled value='"+ idobj[i-1]['issuedate'] +"'/></div></div><div class='col-sm-4'><label>Expiry Date</label><div class='input-group'><div class='input-group-addon'><i class='fa fa-calendar'></i></div><input value='"+ idobj[i-1]['expirydate'] +"' disabled type='text' class='expirydate mptldp form-control' id='expirydate"+numItems+"'/></div></div></div></div>");
+			$(".idfieldset").append("<div class='col-md-12'><hr/></div>");
+			if(idobj[i-1]['is_primary']="true"){
+				$("#isprimary"+i).prop('checked', true);
+			}console.log(idobj);
+		}
+	
+	
+    });
+
+
+</script>
+ <?php $this->end(); ?>
