@@ -7,7 +7,7 @@ use Cake\ORM\Entity;
  * Address Entity
  *
  * @property int $id
- * @property string $address_no
+ * @property string $address_type
  * @property string $address1
  * @property string $address2
  * @property string $address3
@@ -23,8 +23,8 @@ use Cake\ORM\Entity;
  * @property int $customer_id
  * @property int $employee_id
  *
- * @property \App\Model\Entity\EmpDataBiography $emp_data_biography
  * @property \App\Model\Entity\Customer $customer
+ * @property \App\Model\Entity\Employee $employee
  */
 class Address extends Entity
 {

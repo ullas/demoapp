@@ -57,7 +57,7 @@ class AddressesTable extends Table
             ->allowEmpty('id', 'create');
 
         $validator
-            ->allowEmpty('address_no');
+            ->allowEmpty('address_type');
 
         $validator
             ->allowEmpty('address1');

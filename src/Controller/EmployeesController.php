@@ -62,7 +62,8 @@ class EmployeesController extends AppController
     public function view($id = null)
     {
         $employee = $this->Employees->get($id, [
-            'contain' => ['Empdatabiographies', 'Empdatapersonals', 'Employmentinfos', 'ContactInfos', 'Addresses','Identities','Jobinfos']
+            'contain' => ['Empdatabiographies', 'Empdatapersonals', 'Employmentinfos', 'ContactInfos', 'Addresses' => function ($q) {
+       							return $q->where(['Addresses.address_type' => '1']); },'Identities','Jobinfos']
         ]);
 		if($employee['customer_id']==$this->loggedinuser['customer_id'] && $employee['visible']=='1'){
         	$payGroups = $this->Employees->JobInfos->PayGroups->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
@@ -82,15 +83,21 @@ class EmployeesController extends AppController
         
         	$this->set('_serialize', ['employee']);
 			
+						
 			
 			$identityid=0;
 			if(isset($employee['identity']['id'])){
 				$identityid=$employee['identity']['id'];
 			}
 
-			$ids = $this->Employees->Identities->find('all')->where("Identities.employee_id=".$id)->andwhere("Identities.id!=".$identityid)
+			$idcontents = $this->Employees->Identities->find('all')->where("Identities.employee_id=".$id)->andwhere("Identities.id!=".$identityid)
 							->andwhere("Identities.customer_id=".$this->loggedinuser['customer_id']);
-			$this->set('ids', json_encode($ids));
+			$this->set('ids', json_encode($idcontents));
+			
+			$this->loadModel('Addresses');
+        	$address = $this->Addresses->find('all')->where("Addresses.employee_id=".$id)->andwhere("Addresses.address_type='2'")
+							->andwhere("Addresses.customer_id=".$this->loggedinuser['customer_id']);
+			$this->set('addresses',  json_encode($address));	
 			
 		}else{
 		    $this->Flash->error(__('You are not Authorized.'));
@@ -121,12 +128,13 @@ class EmployeesController extends AppController
 			$employee['contact_info']['customer_id']=$this->loggedinuser['customer_id'];
 			$employee['address']['customer_id']=$this->loggedinuser['customer_id'];
 			$employee['identity']['customer_id']=$this->loggedinuser['customer_id'];
+			$employee['address']['address_type']="1";
 			
 			$employee['empdatabiography']['position_id']=$employee['jobinfo']['position_id'];
 			
             if ($this->Employees->save($employee)) {
                 	
-                $this->Flash->success(__('The employee has been saved.'));
+                $this->Flash->success(__('The employee has been saved.'.json_encode($employee['address'])));
                 return $this->redirect(['action' => 'index']);
             } else {
                 $this->Flash->error(__('The employee could not be saved. Please, try again.'));
@@ -172,8 +180,23 @@ class EmployeesController extends AppController
 				
 			$this->autoRender=false;	
 			$this->loadModel('Identities');		
-			//initially delete the particular employees data
-			$this->Identities->deleteAll(['employee_id' => $this->request->query['employee']]);
+			
+			$query = $this->Identities->find()->where(['employee_id' => $this->request->query['employee']]); 
+			
+			if ($query->isEmpty()) {
+    			$this->response->body("notexists");
+	    		return $this->response;
+			}else{
+			
+				//initially delete the particular employees data
+				if ($this->Identities->deleteAll(['employee_id' => $this->request->query['employee']])){
+					$this->response->body("success");
+	    			return $this->response;
+				}else{
+					$this->response->body("error");
+	    			return $this->response;
+				}
+			}
 			
 		}
 	}
@@ -209,6 +232,42 @@ class EmployeesController extends AppController
             }
 		}
 	}
+	public function addAddress(){
+    	
+    	if($this->request->is('ajax')) {
+				
+			$this->autoRender=false;		
+			
+			$this->loadModel('Addresses');		
+			$address = $this->Addresses->newEntity();
+			$address=$this->Addresses->patchEntity($address,$this->request->data);
+			$address['address_type']="2";
+			$address['customer_id']=$this->loggedinuser['customer_id'];
+			
+            $address['address1']=$this->request->data['address1'];
+			$address['address2']=$this->request->data['address2'];
+           	$address['address3']=$this->request->data['address3'];
+			$address['address4']=$this->request->data['address4'];
+			$address['address5']=$this->request->data['address5'];
+			$address['address6']=$this->request->data['address6'];
+			$address['address7']=$this->request->data['address7'];
+			$address['address8']=$this->request->data['address8'];
+			$address['city']=$this->request->data['city'];
+			$address['county']=$this->request->data['county'];
+			$address['state']=$this->request->data['state'];
+			$address['zip_code']=$this->request->data['zipcode'];
+			$address['employee_id']=$this->request->data['empid'];
+				
+			if ($this->Addresses->save($address)) {
+
+               	 	$this->response->body("success");
+	    			return $this->response;
+            } else {
+                	$this->response->body("error");
+	    			return $this->response;
+            }			
+		}
+    }
     public function addIds(){
     	
     	if($this->request->is('ajax')) {
@@ -219,20 +278,34 @@ class EmployeesController extends AppController
 			$identity = $this->Identities->newEntity();
 			$identity=$this->Identities->patchEntity($identity,$this->request->data);
             $identity['customer_id']=$this->loggedinuser['customer_id'];
-			$identity['employee_id']=$this->request->query['empid'];
-           	$identity['card_type']=$this->request->query['idtype'];
-			$identity['country']=$this->request->query['country'];
-            $identity['nationalid']=$this->request->query['nationalid'];
-			$identity['is_primary']=$this->request->query['isprimary'];
-			$identity['issuedate']=$this->request->query['issuedate'];
-			$identity['expirydate']=$this->request->query['expirydate'];
-            
+			$identity['employee_id']=$this->request->data['empid'];
+           	$identity['card_type']=$this->request->data['idtype'];
+			$identity['country']=$this->request->data['country'];
+            $identity['nationalid']=$this->request->data['nationalid'];
+			$identity['is_primary']=$this->request->data['isprimary'];
+			$identity['issuedate']=$this->request->data['issuedate'];
+			$identity['expirydate']=$this->request->data['expirydate'];
+			
+			$userdf = $this->request->session()->read('sessionuser')['dateformat'];
+            if(isset($userdf)  & $userdf===1){
+				foreach (["issuedate", "expirydate"] as $value) {		
+					if(isset($identity[$value])){			
+						if($identity[$value]!=null && $identity[$value]!='' && strpos($identity[$value], '/') !== false){
+							$identity[$value] = str_replace('/', '-', $identity[$value]);
+							$identity[$value]=date('Y/m/d', strtotime($identity[$value]));
+						}
+					}
+				}
+
+			}
+			
+				// $this->Flash->error(__('o/p:::.'.json_encode($identity)));
 			
 			
-			
+				
 			if ($this->Identities->save($identity)) {
 
-               	 	$this->response->body("success");$this->Flash->success(__('o/p::.'.json_encode($identity)));
+               	 	$this->response->body("success");
 	    			return $this->response;
             } else {
                 	$this->response->body("errormp");
@@ -317,6 +390,7 @@ class EmployeesController extends AppController
 					isset($arr[0]) ? $address = $arr[0] : $address = $this->Addresses->newEntity();  						
 					$address = $this->Addresses->patchEntity($address, $this->request->data['address']);
 					$address['customer_id']=$this->loggedinuser['customer_id'];
+					$address['address_type']="1";
     				if ($this->Employees->Addresses->save($address)) {
                 			
             		}
@@ -340,6 +414,7 @@ class EmployeesController extends AppController
 		
 		$this->set('id', $id);
 		
+		$positions="";
 		$rslt=$this->Employees->getIncludedPositions($id);  
 		foreach($rslt as $key =>$value){
 			$positions[$value['id']]=$value['name'];
