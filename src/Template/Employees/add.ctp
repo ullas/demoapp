@@ -289,8 +289,12 @@ div#myDropZone {
           <div class="tab-pane" id="address">
              <!-- <div class="form-horizontal"> -->
              <fieldset>
+             	<div class="box box-solid box-default">
+             	<div class="box-header with-border">
+          			<h3 class="box-title"><i class="fa fa-map-marker"></i> Current Address</h3>
+        		</div>
+        		<div class="box-body">
              	<?php
-            		echo $this->Form->input('address.address_no',['label' => 'Adress Number']);
             		echo $this->Form->input('address.address1',['label' => 'Care Of']);
             		echo $this->Form->input('address.address2',['label' => 'Street']);
             		echo $this->Form->input('address.address3',['label' => 'House Number']);
@@ -304,6 +308,45 @@ div#myDropZone {
             		echo $this->Form->input('address.county',['label' => 'District']);
             		echo $this->Form->input('address.state',['label' => 'Region']);
         		?>
+        		</div>
+     		 	</div>
+        		
+        		<!-- permanent address -->
+        		<div class="box box-solid box-default">
+             	<div class="box-header with-border">
+          			<h3 class="box-title"><i class="fa fa-home"></i> Permanent Address</h3>
+          			<div class="box-tools pull-right">
+                  			<label class="checkbox no-padding"><input type="checkbox" value="1" id="copypaddress" class="control-form">Same as current address</label>
+              		</div>
+        		</div>
+        		 <div class="box-body">
+             	<div class="col-md-4"><div class="form-group text"><label class="control-label">Care Of</label>
+             		<div class="input-group"><input type="text" maxlength="256" id="paaddress1" class="form-control" value=""></div></div></div>
+             	<div class="col-md-4"><div class="form-group text"><label class="control-label">Street</label>
+             		<div class="input-group"><input type="text" maxlength="256" id="paaddress2" class="form-control" value=""></div></div></div>
+             	<div class="col-md-4"><div class="form-group text"><label class="control-label">House Number</label>
+             		<div class="input-group"><input type="text" maxlength="256" id="paaddress3" class="form-control" value=""></div></div></div>
+             	<div class="col-md-4"><div class="form-group text"><label class="control-label">Apartment</label>
+             		<div class="input-group"><input type="text"  maxlength="256" id="paaddress4" class="form-control" value=""></div></div></div>
+             	<div class="col-md-4"><div class="form-group text"><label class="control-label">Second Address Line</label>
+             		<div class="input-group"><input type="text" maxlength="256" id="paaddress5" class="form-control" value=""></div></div></div>
+             	<div class="col-md-4"><div class="form-group text"><label class="control-label">POBOX</label>
+             		<div class="input-group"><input type="text" maxlength="256" id="paaddress6" class="form-control" value=""></div></div></div>
+             	<div class="col-md-4"><div class="form-group text"><label class="control-label">Camp</label>
+             		<div class="input-group"><input type="text" maxlength="256" id="paaddress7" class="form-control" value=""></div></div></div>
+             	<div class="col-md-4"><div class="form-group text"><label class="control-label">Bed Number</label>
+             		<div class="input-group"><input type="text" maxlength="256" id="paaddress8" class="form-control" value=""></div></div></div>
+             	<div class="col-md-4"><div class="form-group text"><label class="control-label">Postal Code</label>
+             		<div class="input-group"><input type="text" maxlength="256" id="pazipcode" class="form-control" value=""></div></div></div>
+             	<div class="col-md-4"><div class="form-group text"><label class="control-label">City</label>
+             		<div class="input-group"><input type="text" maxlength="256" id="pacity" class="form-control" value=""></div></div></div>
+             	<div class="col-md-4"><div class="form-group text"><label class="control-label">District</label>
+             		<div class="input-group"><input type="text" maxlength="256" id="pacounty" class="form-control" value=""></div></div></div>
+             	<div class="col-md-4"><div class="form-group text"><label class="control-label">Region</label>
+             		<div class="input-group"><input type="text" maxlength="256" id="pastate" class="form-control" value=""></div></div></div> 		
+     		 	</div>
+     		 	</div>
+     		 	
      		 </fieldset>
           </div>
           <!-- Tab Pane-->
@@ -358,6 +401,7 @@ div#myDropZone {
 
 <?php $this->start('scriptBotton'); ?>
 <script>
+var empid='';
 var countrydata=[];
 	var countryarr=<?php echo $countryarr ?>;
 	$.each(countryarr, function(key, value) {
@@ -369,7 +413,7 @@ var countrydata=[];
 
 var post_data =  $('#empform').serialize();
 // console.log(post_data);
-var empid='';
+
 
 	$.ajax({
         type: "POST",
@@ -378,9 +422,47 @@ var empid='';
         success : function(data) {
            
            empid=data;
-
         
-    
+    		//add permanent address
+    		var address1=$("#paaddress1").val();
+    		var address2=$("#paaddress2").val();
+    		var address3=$("#paaddress3").val();
+    		var address4=$("#paaddress4").val();
+    		var address5=$("#paaddress5").val();
+    		var address6=$("#paaddress6").val();
+    		var address7=$("#paaddress7").val();
+    		var address8=$("#paaddress8").val();
+    		var city=$("#pacity").val();
+    		var state=$("#pastate").val();
+    		var county=$("#pacounty").val();
+    		var zipcode=$("#pazipcode").val();
+    		
+    		
+    		if(empid!="" && empid!=null && address1!="" && address1!=null && address2!="" && address2!=null){
+    			$.ajax({
+        type: "POST",
+        url: '/Employees/addAddress',
+        data: 'empid='+empid+'&address1='+address1+'&address2='+address2+'&address3='+address3+'&address4='+address4+'&address5='+address5+'&address6='+address6
+        			+'&address7='+address7+'&address8='+address8+'&county='+county+'&state='+state+'&zipcode='+zipcode+'&city='+city,
+        success : function(data) {
+    		
+        },error: function(data) {
+        	    	 	
+    		sweet_alert("Error while adding Addresses.");
+			return false;   			
+
+        },statusCode: {
+        500: function() {
+          		sweet_alert("Error while adding Addresses.");
+				return false;
+        }
+      }
+      
+        });
+			}else{
+				sweet_alert("Please enter Address1/Address2.");
+				return false;
+			}
 		// $.get('/Employees/addEmployee?formdata='+post_data, function(d) {
     		// // if(d=="Error"){
 // 
@@ -400,11 +482,28 @@ var empid='';
     		var expirydate=$("#expirydate"+i).val();
     		
     		if(empid!="" && empid!=null && idtype!="" && idtype!=null && nationalid!="" && nationalid!=null){
-    			$.get('/Employees/addIds?empid='+empid+'&idtype='+idtype+'&country='+country+'&nationalid='+nationalid+'&isprimary='+'0'+'&issuedate='+issuedate+'&expirydate='+expirydate, function(d) {
-    				if(d=="error"){
-						errcount++;
-					}
-				});
+    			$.ajax({
+        type: "POST",
+        url: '/Employees/addIds',
+        data: 'empid='+empid+'&idtype='+idtype+'&country='+country+'&nationalid='+nationalid+'&isprimary='+'0'+'&issuedate='+issuedate+'&expirydate='+expirydate,
+        success : function(data) {
+    		if(i==idclasscount){
+    			window.location='/employees';
+    		}
+        },error: function(data) {
+        	    	 	
+    		errcount++;
+    		sweet_alert("Error while adding Id's.");
+			return false;   			
+
+        },statusCode: {
+        500: function() {
+          		sweet_alert("Error while adding Id's.");
+				return false;
+        }
+      }
+      
+        });	
 			}else{
 				sweet_alert("Please enter ID Card type/national Id.");
 				return false;
@@ -422,7 +521,9 @@ var empid='';
         }
     });
     	// alert("true");
-		window.location = '/employees'; 
+		if(idclasscount<1){
+    			window.location='/employees';
+    		}
 	}			
 		
 $(function () {
