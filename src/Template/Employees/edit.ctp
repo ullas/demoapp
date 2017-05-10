@@ -37,7 +37,7 @@ div#myDropZone {
         <li><?= $this->Html->link('<i class="fa fa-mail-reply"></i> '.__('Back'), ['action' => 'index'], ['escape' => false]) ?></li>
       </ol>
     </section>
-<section class="content"><?= $this->Form->create($employee) ?>
+<section class="content"><?= $this->Form->create($employee,['id'=>'empform']) ?>
 	<div class="box box-primary" style="border-color:transparent;"><div class="box-body">
 		<div class="row">
 
@@ -323,8 +323,12 @@ div#myDropZone {
           <div class="tab-pane" id="address">
              <!-- <div class="form-horizontal"> -->
              <fieldset>
+             	<div class="box box-solid box-default">
+             	<div class="box-header with-border">
+          			<h3 class="box-title"><i class="fa fa-map-marker"></i> Current Address</h3>
+        		</div>
+        		<div class="box-body">
              	<?php
-            		echo $this->Form->input('address.address_no',['label' => 'Adress Number']);
             		echo $this->Form->input('address.address1',['label' => 'Care Of']);
             		echo $this->Form->input('address.address2',['label' => 'Street']);
             		echo $this->Form->input('address.address3',['label' => 'House Number']);
@@ -338,9 +342,49 @@ div#myDropZone {
             		echo $this->Form->input('address.county',['label' => 'District']);
             		echo $this->Form->input('address.state',['label' => 'Region']);
         		?>
+        		</div>
+     		 	</div>
+     		 	
+        		<!-- permanent address -->
+        		<div class="box box-solid box-default">
+             	<div class="box-header with-border">
+          			<h3 class="box-title"><i class="fa fa-home"></i> Permanent Address</h3>
+          			<div class="box-tools pull-right">
+                  			<label class="checkbox no-padding"><input type="checkbox" value="1" id="copypaddress" class="control-form">Same as current address</label>
+              		</div>
+        		</div>
+        		<div class="box-body">
+             	<div class="col-md-4"><div class="form-group text"><label class="control-label">Care Of</label>
+             		<div class="input-group"><input type="text" maxlength="256" id="paaddress1" class="form-control" value=""></div></div></div>
+             	<div class="col-md-4"><div class="form-group text"><label class="control-label">Street</label>
+             		<div class="input-group"><input type="text" maxlength="256" id="paaddress2" class="form-control" value=""></div></div></div>
+             	<div class="col-md-4"><div class="form-group text"><label class="control-label">House Number</label>
+             		<div class="input-group"><input type="text" maxlength="256" id="paaddress3" class="form-control" value=""></div></div></div>
+             	<div class="col-md-4"><div class="form-group text"><label class="control-label" for="address-address4">Apartment</label>
+             		<div class="input-group"><input type="text"  maxlength="256" id="paaddress4" class="form-control" value=""></div></div></div>
+             	<div class="col-md-4"><div class="form-group text"><label class="control-label" for="address-address5">Second Address Line</label>
+             		<div class="input-group"><input type="text" maxlength="256" id="paaddress5" class="form-control" value=""></div></div></div>
+             	<div class="col-md-4"><div class="form-group text"><label class="control-label" for="address-address6">POBOX</label>
+             		<div class="input-group"><input type="text" maxlength="256" id="paaddress6" class="form-control" value=""></div></div></div>
+             	<div class="col-md-4"><div class="form-group text"><label class="control-label" for="address-address7">Camp</label>
+             		<div class="input-group"><input type="text" maxlength="256" id="paaddress7" class="form-control" value=""></div></div></div>
+             	<div class="col-md-4"><div class="form-group text"><label class="control-label" for="address-address8">Bed Number</label>
+             		<div class="input-group"><input type="text" maxlength="256" id="paaddress8" class="form-control" value=""></div></div></div>
+             	<div class="col-md-4"><div class="form-group text"><label class="control-label" for="address-zip-code">Postal Code</label>
+             		<div class="input-group"><input type="text" maxlength="256" id="pazip-code" class="form-control" value=""></div></div></div>
+             	<div class="col-md-4"><div class="form-group text"><label class="control-label" for="address-city">City</label>
+             		<div class="input-group"><input type="text" maxlength="256" id="pacity" class="form-control" value=""></div></div></div>
+             	<div class="col-md-4"><div class="form-group text"><label class="control-label" for="address-county">District</label
+             		<div class="input-group"><input type="text" maxlength="256" id="pacounty" class="form-control" value=""></div></div></div>
+             	<div class="col-md-4"><div class="form-group text"><label class="control-label" for="address-state">Region</label>
+             		<div class="input-group"><input type="text" maxlength="256" id="pastate" class="form-control" value=""></div></div></div>        		
+     		 	</div>
+     		 	</div>
+     		 
      		 </fieldset>
           </div>
           <!-- Tab Pane-->
+          
           <div class="tab-pane" id="ids">
              <!-- <div class="form-horizontal"> -->
              	<fieldset >
@@ -465,12 +509,45 @@ $(document).ready(function(){
     	},
        
     });
-    
+    var userdf='<?php echo $this->request->session()->read('sessionuser')['dateformat'];?>';
     var idsarr='<?php echo $ids ?>';
 		var idobj = JSON.parse(idsarr);
 		
 		for (i = 1; i <= idobj.length; i++) {
 			var numItems = $('.idclass').length+1;
+			
+			//change dateformat
+			if(userdf==1){
+				if(idobj[i-1]['issuedate']){
+					if(idobj[i-1]['issuedate'].length>11){
+						idobj[i-1]['issuedate']=idobj[i-1]['issuedate'].substring(0 , 10);
+						idobj[i-1]['issuedate']=formattodmy(idobj[i-1]['issuedate']);
+					}
+				}
+				
+				if(idobj[i-1]['expirydate']){
+					if(idobj[i-1]['expirydate'].length>11){
+						idobj[i-1]['expirydate']=idobj[i-1]['expirydate'].substring(0 , 10);
+						idobj[i-1]['expirydate']=formattodmy(idobj[i-1]['expirydate']);
+					}
+				}
+				
+			}else if(userdf==0){
+				if(idobj[i-1]['issuedate']){
+					if(idobj[i-1]['issuedate'].length>11){
+						idobj[i-1]['issuedate']=idobj[i-1]['issuedate'].substring(0 , 10);
+						idobj[i-1]['issuedate']=formattoymd(idobj[i-1]['issuedate']);
+					}
+				}
+				
+				if(idobj[i-1]['expirydate']){
+					if(idobj[i-1]['expirydate'].length>11){
+						idobj[i-1]['expirydate']=idobj[i-1]['expirydate'].substring(0 , 10);
+						idobj[i-1]['expirydate']=formattoymd(idobj[i-1]['expirydate']);
+					}
+				}
+			}
+			
 			$(".idfieldset").append("<div class='idclass' id='contentDiv"+numItems+"'><div class='clearfix'><div class='col-sm-4'><div class='form-group'><label>National ID Card Type</label><div class='input-group'><div class='input-group-btn'><a class='compdelete btn btn-danger btn-flat'><i class='fa fa-trash'></i></a></div><input type='text' class='idtype form-control' id='idtype"+numItems+"' value='"+ idobj[i-1]['card_type'] +"'/></div></div></div><div class='col-sm-4'><div class='form-group'><label>Country</label><div class='input-group'><div class='input-group-addon'><i class='fa fa-flag'></i></div><input class='form-control idcountry'  id='country"+numItems+"' value='"+ idobj[i-1]['country'] +"'/></div></div></div><div class='col-sm-4'><div class='form-group'><label>National ID</label><input value='"+ idobj[i-1]['nationalid'] +"' class='form-control nationalid'  id='nationalid"+numItems+"'/></div></div><div class='col-sm-4'><div class='form-group checkbox'><label><input type='checkbox' class='isprimary'  id='isprimary"+numItems+"' value='"+ idobj[i-1]['is_primary'] +"'/>Is Primary</label></div></div><div class='col-sm-4'><label>Issue Date</label><div class='input-group'><div class='input-group-addon'><i class='fa fa-calendar'></i></div><input type='text' class='issuedate mptldp form-control' id='issuedate"+numItems+"' value='"+ idobj[i-1]['issuedate'] +"'/></div></div><div class='col-sm-4'><label>Expiry Date</label><div class='input-group'><div class='input-group-addon'><i class='fa fa-calendar'></i></div><input value='"+ idobj[i-1]['expirydate'] +"'  type='text' class='expirydate mptldp form-control' id='expirydate"+numItems+"'/></div></div></div></div>");
 			$(".idfieldset").append("<div class='col-md-12'><hr/></div>");
 			if(idobj[i-1]['is_primary']="true"){
@@ -562,25 +639,51 @@ $(document).ready(function(){
 	});
 		
     });
-    
+    function formattodmy(inputDate) {
+    var date = new Date(inputDate);
+    if (!isNaN(date.getTime())) {
+        var day = date.getDate().toString();
+        var month = (date.getMonth() + 1).toString();
+        // Months use 0 index.
+
+        return (day[1] ? day : '0' + day[0]) + '/' + 
+        	(month[1] ? month : '0' + month[0]) + '/' +           
+           date.getFullYear();
+    }
+}
+
+function formattoymd(inputDate) {
+    var date = new Date(inputDate);
+    if (!isNaN(date.getTime())) {
+        var day = date.getDate().toString();
+        var month = (date.getMonth() + 1).toString();
+        // Months use 0 index.
+
+        return date.getFullYear()  + '/' +
+        (month[1] ? month : '0' + month[0]) + '/' +
+        (day[1] ? day : '0' + day[0]) ;
+    }
+}
     function updateEmployee()
     {		
 
 		var post_data =  $('#empform').serialize();
 		// console.log(post_data);
 		var empid='<?php echo $employee['id'] ?>';
-   
+   var idclasscount = $('.idclass').length;
+   if(idclasscount>0){
+		
 		$.get('/Employees/deleteAllIds?employee='+empid, function(result) {
-    		// if(d=="Error"){
+    		if(result=="success" || result=="notexists"){
 
 			// }
 		
 				
-    	var errcount=0;
+    	var errcount=0;var idcount=0;
     	// var empid=$("#idtype"+i).val();
-    	var idclasscount = $('.idclass').length;
     	
-    if(idclasscount>0){
+    	
+    
     		
     	for (i = 1; i <= idclasscount; i++) {
     		var idtype=$("#idtype"+i).val();
@@ -592,38 +695,73 @@ $(document).ready(function(){
     		var expirydate=$("#expirydate"+i).val();
     		
     		if(empid!="" && empid!=null && idtype!="" && idtype!=null && nationalid!="" && nationalid!=null){
-    			$.get('/Employees/addIds?empid='+empid+'&idtype='+idtype+'&country='+country+'&nationalid='+nationalid+'&isprimary='+'0'+'&issuedate='+issuedate+'&expirydate='+expirydate, function(d) {
-    				if(d!="success"){
-						errcount++;
-					}
-				});
+    			idcount++;
+    			$.ajax({
+        type: "POST",
+        url: '/Employees/addIds',
+        data: 'empid='+empid+'&idtype='+idtype+'&country='+country+'&nationalid='+nationalid+'&isprimary='+'0'+'&issuedate='+issuedate+'&expirydate='+expirydate,
+        success : function(data) {
+        	idcount--; 
+			if(idcount==0){
+        	 	if(errcount>0){
+    				sweet_alert("Error while adding Id's.");
+					return false;
+    			}else{
+    				document.getElementById("empform").submit();
+    			}
+    		}
+    		
+        },error: function(data) {
+        	errcount++;idcount--;
+        	
+        	 if(idcount==0){        	 	
+    			sweet_alert("Error while adding Id's.");
+				return false;   			
+    		}
+    		
+        },statusCode: {
+        500: function() {
+          errcount++;
+        }
+      }
+      
+        });	
+    			// $.get('/Employees/addIds?empid='+empid+'&idtype='+idtype+'&country='+country+'&nationalid='+nationalid+'&isprimary='+'0'+'&issuedate='+issuedate+'&expirydate='+expirydate, function(d) {
+    				// console.log(d);if(d!="success"){
+						// errcount++;
+					// }
+				// });
 			}else{
 				sweet_alert("Please enter ID Card type/national Id.");
 				return false;
 			}
+			// console.log(errcount+"--"+i+"--"+idclasscount+"--"+idcount);
+			
+			// if(i==idclasscount){console.log(errcount);
+    		// if(errcount>0){
+    			// sweet_alert("Error while adding Id's.");
+				// return false;
+    		// }else{
+    			// return false;
+    		// }
+    		// }
+    		
     	}	
     	
     	
     	
-    	if(i==idclasscount){
-    		if(errcount>0){
-    			sweet_alert("Error while adding Id's.");
-				return false;
-    		}else{
-    			return true;
-    		}
-    	}
     	
-    }else{
+    		
+   
+    	
+    	}
+    	});
+    	 }else{
     	return true;
     }
-    	
-    	
-    	});
-    	
     	// alert("true");
 		
-return false;
+// return false;
 		}			
 
 

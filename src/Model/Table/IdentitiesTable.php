@@ -87,7 +87,7 @@ class IdentitiesTable extends Table
 		
 		$userdf = Configure::read('userdf');
 		if(isset($userdf)  & $userdf===1){
-
+// 
 			foreach (["issuedate", "expirydate"] as $value) {		
 				if(isset($data[$value])){			
 						if($data[$value]!=null && $data[$value]!='' && strpos($data[$value], '/') !== false){
@@ -97,7 +97,6 @@ class IdentitiesTable extends Table
 				}
 			}
 		}
-   		// debug($data['start_date']);
 	}
     /**
      * Returns a rules checker object that will be used for validating

@@ -282,8 +282,12 @@
           <div class="tab-pane" id="address">
              <!-- <div class="form-horizontal"> -->
              <fieldset>
+             	<div class="box box-solid box-default">
+             	<div class="box-header with-border">
+          			<h3 class="box-title"><i class="fa fa-map-marker"></i> Current Address</h3>
+        		</div>
+        		<div class="box-body">
              	<?php
-            		echo $this->Form->input('address.address_no',['label' => 'Adress Number','disabled' => true]);
             		echo $this->Form->input('address.address1',['label' => 'Care Of','disabled' => true]);
             		echo $this->Form->input('address.address2',['label' => 'Street','disabled' => true]);
             		echo $this->Form->input('address.address3',['label' => 'House Number','disabled' => true]);
@@ -297,6 +301,42 @@
             		echo $this->Form->input('address.county',['label' => 'District','disabled' => true]);
             		echo $this->Form->input('address.state',['label' => 'Region','disabled' => true]);
         		?>
+        		</div>
+     		 	</div>
+        		
+        		<!-- permanent address -->
+        		<div class="box box-solid box-default">
+             	<div class="box-header with-border">
+          			<h3 class="box-title"><i class="fa fa-home"></i> Permanent Address</h3>
+        		</div>
+        		 <div class="box-body">
+             	<div class="col-md-4"><div class="form-group text"><label class="control-label">Care Of</label>
+             		<div class="input-group"><input disabled type="text" maxlength="256" id="paaddress1" class="form-control"></div></div></div>
+             	<div class="col-md-4"><div class="form-group text"><label class="control-label">Street</label>
+             		<div class="input-group"><input disabled type="text" maxlength="256" id="paaddress2" class="form-control"></div></div></div>
+             	<div class="col-md-4"><div class="form-group text"><label class="control-label">House Number</label>
+             		<div class="input-group"><input disabled type="text" maxlength="256" id="paaddress3" class="form-control"></div></div></div>
+             	<div class="col-md-4"><div class="form-group text"><label class="control-label">Apartment</label>
+             		<div class="input-group"><input disabled type="text"  maxlength="256" id="paaddress4" class="form-control"></div></div></div>
+             	<div class="col-md-4"><div class="form-group text"><label class="control-label">Second Address Line</label>
+             		<div class="input-group"><input disabled type="text" maxlength="256" id="paaddress5" class="form-control" value=""></div></div></div>
+             	<div class="col-md-4"><div class="form-group text"><label class="control-label">POBOX</label>
+             		<div class="input-group"><input disabled type="text" maxlength="256" id="paaddress6" class="form-control" value=""></div></div></div>
+             	<div class="col-md-4"><div class="form-group text"><label class="control-label">Camp</label>
+             		<div class="input-group"><input disabled type="text" maxlength="256" id="paaddress7" class="form-control" value=""></div></div></div>
+             	<div class="col-md-4"><div class="form-group text"><label class="control-label">Bed Number</label>
+             		<div class="input-group"><input disabled type="text" maxlength="256" id="paaddress8" class="form-control" value=""></div></div></div>
+             	<div class="col-md-4"><div class="form-group text"><label class="control-label">Postal Code</label>
+             		<div class="input-group"><input disabled type="text" maxlength="256" id="pazip-code" class="form-control" value=""></div></div></div>
+             	<div class="col-md-4"><div class="form-group text"><label class="control-label">City</label>
+             		<div class="input-group"><input disabled type="text" maxlength="256" id="pacity" class="form-control" value=""></div></div></div>
+             	<div class="col-md-4"><div class="form-group text"><label class="control-label">District</label>
+             		<div class="input-group"><input disabled type="text" maxlength="256" id="pacounty" class="form-control" value=""></div></div></div>
+             	<div class="col-md-4"><div class="form-group text"><label class="control-label">Region</label>
+             		<div class="input-group"><input disabled type="text" maxlength="256" id="pastate" class="form-control" value=""></div></div></div> 		
+     		 	</div>
+     		 	</div>
+     		 	
      		 </fieldset>
           </div>
           <!-- Tab Pane-->
@@ -351,13 +391,95 @@
     	countrydata.push({'id':key, "text":value});
 	});
 
+function formattodmy(inputDate) {
+    var date = new Date(inputDate);
+    if (!isNaN(date.getTime())) {
+        var day = date.getDate().toString();
+        var month = (date.getMonth() + 1).toString();
+        // Months use 0 index.
+
+        return (day[1] ? day : '0' + day[0]) + '/' + 
+        	(month[1] ? month : '0' + month[0]) + '/' +           
+           date.getFullYear();
+    }
+}
+
+function formattoymd(inputDate) {
+    var date = new Date(inputDate);
+    if (!isNaN(date.getTime())) {
+        var day = date.getDate().toString();
+        var month = (date.getMonth() + 1).toString();
+        // Months use 0 index.
+
+        return date.getFullYear()  + '/' +
+        (month[1] ? month : '0' + month[0]) + '/' +
+        (day[1] ? day : '0' + day[0]) ;
+    }
+}
+
 	$(function () {
-	
+		
+		//address
+		var addressarr='<?php echo $addresses; ?>';
+		var addressobj = JSON.parse(addressarr);
+
+		for (i = 1; i <= addressobj.length; i++) {
+			$("#paaddress1").val(addressobj[i-1]['address1']);
+			$("#paaddress2").val(addressobj[i-1]['address2']);
+			$("#paaddress3").val(addressobj[i-1]['address3']);
+			$("#paaddress4").val(addressobj[i-1]['address4']);
+			$("#paaddress5").val(addressobj[i-1]['address5']);
+			$("#paaddress6").val(addressobj[i-1]['address6']);
+			$("#paaddress7").val(addressobj[i-1]['address7']);
+			$("#paaddress8").val(addressobj[i-1]['address8']);
+			$("#pcity").val(addressobj[i-1]['city']);
+			$("#pstate").val(addressobj[i-1]['state']);
+			$("#pcounty").val(addressobj[i-1]['county']);
+			$("#pzipcode").val(addressobj[i-1]['zip_code']);
+
+		}
+		//id's
 		var idsarr='<?php echo $ids ?>';
 		var idobj = JSON.parse(idsarr);
 		
+		var userdf='<?php echo $this->request->session()->read('sessionuser')['dateformat'];?>';
+		
 		for (i = 1; i <= idobj.length; i++) {
 			var numItems = $('.idclass').length+1;
+			
+			//change dateformat
+			if(userdf==1){
+				if(idobj[i-1]['issuedate']){
+					if(idobj[i-1]['issuedate'].length>11){
+						idobj[i-1]['issuedate']=idobj[i-1]['issuedate'].substring(0 , 10);
+						idobj[i-1]['issuedate']=formattodmy(idobj[i-1]['issuedate']);
+					}
+				}
+				
+				if(idobj[i-1]['expirydate']){
+					if(idobj[i-1]['expirydate'].length>11){
+						idobj[i-1]['expirydate']=idobj[i-1]['expirydate'].substring(0 , 10);
+						idobj[i-1]['expirydate']=formattodmy(idobj[i-1]['expirydate']);
+					}
+				}
+				
+			}else if(userdf==0){
+				if(idobj[i-1]['issuedate']){
+					if(idobj[i-1]['issuedate'].length>11){
+						idobj[i-1]['issuedate']=idobj[i-1]['issuedate'].substring(0 , 10);
+						idobj[i-1]['issuedate']=formattoymd(idobj[i-1]['issuedate']);
+					}
+				}
+				
+				if(idobj[i-1]['expirydate']){
+					if(idobj[i-1]['expirydate'].length>11){
+						idobj[i-1]['expirydate']=idobj[i-1]['expirydate'].substring(0 , 10);
+						idobj[i-1]['expirydate']=formattoymd(idobj[i-1]['expirydate']);
+					}
+				}
+			}
+			
+			
 			$(".idfieldset").append("<div class='idclass' id='contentDiv"+numItems+"'><div class='clearfix'><div class='col-sm-4'><div class='form-group'><label>National ID Card Type</label><div class='input-group'><input disabled type='text' class='idtype form-control' id='idtype"+numItems+"' value='"+ idobj[i-1]['card_type'] +"'/></div></div></div><div class='col-sm-4'><div class='form-group'><label>Country</label><div class='input-group'><div class='input-group-addon'><i class='fa fa-flag'></i></div><input class='form-control idcountry'  id='country"+numItems+"' disabled value='"+ countryarr[idobj[i-1]['country']] +"'/></div></div></div><div class='col-sm-4'><div class='form-group'><label>National ID</label><input disabled value='"+ idobj[i-1]['nationalid'] +"' class='form-control nationalid'  id='nationalid"+numItems+"'/></div></div><div class='col-sm-4'><div class='form-group checkbox'><label><input type='checkbox' class='isprimary'  id='isprimary"+numItems+"' disabled value='"+ idobj[i-1]['is_primary'] +"'/>Is Primary</label></div></div><div class='col-sm-4'><label>Issue Date</label><div class='input-group'><div class='input-group-addon'><i class='fa fa-calendar'></i></div><input type='text' class='issuedate mptldp form-control' id='issuedate"+numItems+"' disabled value='"+ idobj[i-1]['issuedate'] +"'/></div></div><div class='col-sm-4'><label>Expiry Date</label><div class='input-group'><div class='input-group-addon'><i class='fa fa-calendar'></i></div><input value='"+ idobj[i-1]['expirydate'] +"' disabled type='text' class='expirydate mptldp form-control' id='expirydate"+numItems+"'/></div></div></div></div>");
 			$(".idfieldset").append("<div class='col-md-12'><hr/></div>");
 			if(idobj[i-1]['is_primary']="true"){
