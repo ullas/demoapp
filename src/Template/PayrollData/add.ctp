@@ -61,24 +61,95 @@
 	
 	function changePayComponentData(){
 		
-		// paycomponentdata=[];
-// 		
-		// var pccount = $('.componentclass').length;
-		// var pcarr=[];
-		// for (i = 0; i < pccount; i++) {
-    		// var paycomp=$("#paycomponent"+i).val();
-    		// pcarr.push(paycomp);
-    	// }
-//     	
-    	// $.each(paycomponentarr, function(key, value) {
-    		// if (!(pcarr.indexOf(key) > -1)) {
-				// paycomponentdata.push({'id':key, "text":value});
-			// }
-		// });
-// 		
-    	// console.log(paycomponentdata);
+		var paydata=[];
+		
+		var pccount = $('.componentclass').length;
+		var pcarr=[];
+		for (i = 1; i <= pccount; i++) {
+    		var paycomp=$("#paycomponent"+i).val();
+    		pcarr.push(paycomp);
+    	}
+    	
+    	$.each(paycomponentarr, function(key, value) {
+    		if ((!(pcarr.indexOf(key) > -1))  ) {
+				paydata.push({'id':key, "text":value});
+			}
+		});
+		
+		console.log(pccount);
+		console.log(paydata);
+		
+    	$('input.pcomp').each(function(i, obj) {
+				
+			var selectedCtrl = $(this);
+			var selectedVal = this.value;
+
+			if(selectedVal!=null && selectedVal!=""){
+				
+				var pcdata=[];
+				pcdata==paydata;
+				$.each(paycomponentarr, function(key, value) {
+    				if (key==selectedVal) {
+						pcdata.push({'id':key, "text":value});
+					}
+					selectedCtrl.select2({
+    					width: '100%',allowClear: true,placeholder: "Select",data: pcdata
+					});
+				});
+				
+			}else{
+				selectedCtrl.select2({
+    				width: '100%',allowClear: true,placeholder: "Select",data: paydata
+				});
+			}
+		});
+		
 	}
     
+    function changePayComponentGroupData(){
+		
+		var paygroupdata=[];
+		
+		var pcgcount = $('.groupclass').length;
+		var pcgarr=[];
+		for (i = 1; i <= pcgcount; i++) {
+    		var paycompgroup=$("#pcgroup"+i).val();
+    		pcgarr.push(paycompgroup);
+    	}
+    	
+    	$.each(paycomponentgrouparr, function(key, value) {
+    		if ((!(pcgarr.indexOf(key) > -1))  ) {
+				paygroupdata.push({'id':key, "text":value});
+			}
+		});
+		
+		
+    	$('input.pcgroup').each(function(i, obj) {
+				
+			var selectedCtrl = $(this);
+			var selectedVal = this.value;
+
+			if(selectedVal!=null && selectedVal!=""){
+				
+				var pcgdata=[];
+				pcgdata==paygroupdata;
+				$.each(paycomponentgrouparr, function(key, value) {
+    				if (key==selectedVal) {
+						pcgdata.push({'id':key, "text":value});
+					}
+					selectedCtrl.select2({
+    					width: '100%',allowClear: true,placeholder: "Select",data: pcgdata
+					});
+				});
+				
+			}else{
+				selectedCtrl.select2({
+    				width: '100%',allowClear: true,placeholder: "Select",data: paygroupdata
+				});
+			}
+		});
+		
+	}
 $(function () {
 	
 	//save btn onclick
@@ -147,12 +218,28 @@ $(function () {
     
     	$('.maindiv').on('change', 'input.pcomp', function() {
 		
-			changePayComponentData();
+			
+			
+			// $('input.pcomp').each(function(i, obj) {
+// 				
+				// var selectedCtrl = $(this);
+				// var selectedVal = this.value;
+				changePayComponentData();
+    			// console.log(selectedVal);
+				// if(selectedVal!=null && selectedVal!=""){
+// 				
+				// }else{
+// 				
+				// }
+			// });
 		
 		});		
 
     		
 	$('.maindiv').on('change', 'input.pcgroup', function() {
+		
+		changePayComponentGroupData();
+		
 		$(this).parent().closest('div .groupclass').find('.groupcol').remove();
 		
 		var selectedCtrl = $(this);
@@ -180,10 +267,13 @@ $(function () {
 			event.preventDefault();
 			var numItems = $('.componentclass').length+1;
 			$(".maindiv").append("<div class='componentclass' id='contentDiv"+numItems+"'><div class='clearfix'><div class='col-sm-4'><label>Pay Component:</label><div class='input-group'><div class='input-group-btn'><a class='compdelete btn btn-danger btn-flat'><i class='fa fa-trash'></i></a></div><input type='text' class='pcomp form-control' id='paycomponent"+numItems+"'/></div></div><div class='col-sm-4'><label>Pay Component Value:</label><input class='form-control'  id='paycomponentvalue"+numItems+"'/></div></div></div>");
-		
-			$('.pcomp').select2({
-    			width: '100%',allowClear: true,placeholder: "Select",data: paycomponentdata
-			});
+			if(numItems<1){
+				$('.pcomp').select2({
+    				width: '100%',allowClear: true,placeholder: "Select",data: paycomponentdata
+				});
+			}else{
+				changePayComponentData();
+			}	
 		}else{
 			sweet_alert("Please select a Employee.");
    			return false;
@@ -199,10 +289,14 @@ $(function () {
 		
 			var numItems = $('.groupclass').length+1;
 			$(".maindiv").append("<div class='clearfix'><div class='groupclass' id='groupDiv"+numItems+"'><div class='col-sm-4'><div class='form-group'><label>Pay Component Group:</label><div class='input-group'><div class='input-group-btn'><a class='groupdelete btn btn-danger btn-flat' id='delete1'><i class='fa fa-trash'></i></a></div><input type='text' class='pcgroup form-control' id='pcgroup"+numItems+"'/></div></div></div></div></div>");
-		
-			$('.pcgroup').select2({
-    			width: '100%',allowClear: true,placeholder: "Select",data: paycomponentgroupdata
-			});
+			if(numItems<1){
+				$('.pcgroup').select2({
+    				width: '100%',allowClear: true,placeholder: "Select",data: paycomponentgroupdata
+				});
+			}else{
+				changePayComponentGroupData();
+			}
+			
 		}else{
 			sweet_alert("Please select a Employee.");
    			return false;

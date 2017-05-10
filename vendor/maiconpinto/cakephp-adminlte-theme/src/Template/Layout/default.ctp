@@ -189,7 +189,9 @@ div.dataTables_wrapper {
 /*.dataTables_scrollHeadInner{width:100%;}
 .table{width:100%;}*/
 .dataTables_wrapper{ overflow-y: auto; clear:both;padding-top:15px; }
-
+.input-group .select2-hidden-accessible{
+	display:none;
+}
 
 /*.form-control{
 	border:0px;

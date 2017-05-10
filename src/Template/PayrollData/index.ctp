@@ -9,3 +9,31 @@
   </ol>
 </section>
 <?php echo $this->element('indexbasic', array('title' => 'Payroll Data')); ?>
+
+
+<?php $this->start('scriptIndexBottom'); ?>
+<script>
+function tableLoaded() {
+	
+	//delete confirm
+    $(".delete-btn").click(function(){var dataid=$(this).attr('data-id');
+       $("#ajax_button").html("<form name='formdelete' id='formdelete"+dataid+"' method='post'  action='/<?php echo $this->request->params['controller'] ?>/delete/"+dataid+"' style='display:none;'><input type='hidden' name='_method' value='POST'></form><a href='#' onclick='document.getElementById(&quot;formdelete"+dataid+"&quot;).submit();' class='btn btn-outline'>Confirm</a>");
+      $("#trigger").click();
+    });
+
+    $("#mptlindextbl tbody").find('tr').each(function () {
+    	
+   		// var empdatabiographyid=$(this).find('td:eq(2)').html();
+   		// $empname = $this->Country->get_employeename($temp);
+							// echo $empname ; ?>';
+     	// $(this).find('td:eq(2)').html(empname);
+    	
+    	$(this).find('td').each (function() {
+        	var innerHtml=$(this).find('div.mptldtbool').html();
+        	// true/false instead of 1/0
+        	(innerHtml=="1") ? $(this).find('div.mptldtbool').html("True") : $(this).find('div.mptldtbool').html("False");
+        });
+    });
+}
+</script>
+<?php $this->end(); ?>
