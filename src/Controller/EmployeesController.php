@@ -174,30 +174,29 @@ class EmployeesController extends AppController
      * @return \Cake\Network\Response|void Redirects on successful edit, renders view otherwise.
      * @throws \Cake\Network\Exception\NotFoundException When record not found.
      */
-    public function deleteAllIds()
+    public function deleteIds()
 	{
 		if($this->request->is('ajax')) {
 				
 			$this->autoRender=false;	
 			$this->loadModel('Identities');		
-			
-			$query = $this->Identities->find()->where(['employee_id' => $this->request->query['employee']]); 
-			
-			if ($query->isEmpty()) {
-    			$this->response->body("notexists");
-	    		return $this->response;
+						
+			$identity = $this->Identities->get($this->request->data['identityid']);
+
+        	if($identity['customer_id'] == $this->loggedinuser['customer_id']  && $identity['employee_id'] == $this->request->data['empid']) 
+			{
+				$identity = $this->Identities->patchEntity($identity, $this->request->data);
+            	if ($this->Identities->delete($identity)) {
+            		$this->response->body("success");
+	    			return $this->response;
+        		} else {
+            		$this->response->body("error");
+	    			return $this->response;
+        		}
 			}else{
-			
-				//initially delete the particular employees data
-				if ($this->Identities->deleteAll(['employee_id' => $this->request->query['employee']])){
-					$this->response->body("success");
-	    			return $this->response;
-				}else{
-					$this->response->body("error");
-	    			return $this->response;
-				}
-			}
-			
+				$this->response->body("error");
+	    		return $this->response;
+			}			
 		}
 	}
 	public function addEmployee(){
@@ -219,16 +218,18 @@ class EmployeesController extends AppController
 			$employee['contact_info']['customer_id']=$this->loggedinuser['customer_id'];
 			$employee['address']['customer_id']=$this->loggedinuser['customer_id'];
 			$employee['identity']['customer_id']=$this->loggedinuser['customer_id'];
+			$employee['address']['address_type']="1";
 			
 			$employee['empdatabiography']['position_id']=$employee['jobinfo']['position_id'];
 			
             if ($this->Employees->save($employee)) {
                 	
-                $this->Flash->success(__('The employee has been saved.'));
+                // $this->Flash->success(__('The employee has been saved.'));
                 $this->response->body($employee['id']);
 	    		return $this->response;
             } else {
-                $this->Flash->error(__('The employee could not be saved. Please, try again.'));
+                $this->response->body("error");
+	    		return $this->response;
             }
 		}
 	}
@@ -238,8 +239,14 @@ class EmployeesController extends AppController
 				
 			$this->autoRender=false;		
 			
-			$this->loadModel('Addresses');		
-			$address = $this->Addresses->newEntity();
+			$this->loadModel('Addresses');
+			
+			$arr = $this->Addresses->find('all',[ 'conditions' => array('employee_id' => $this->request->data['empid'],'address_type'=>'2'),
+            	'contain' => []
+        	])->toArray();
+		
+			isset($arr[0]) ? $address = $arr[0] : $address = $this->Addresses->newEntity();
+				
 			$address=$this->Addresses->patchEntity($address,$this->request->data);
 			$address['address_type']="2";
 			$address['customer_id']=$this->loggedinuser['customer_id'];
@@ -275,7 +282,13 @@ class EmployeesController extends AppController
 			$this->autoRender=false;		
 			
 			$this->loadModel('Identities');		
-			$identity = $this->Identities->newEntity();
+			
+			if($this->request->data['identityid']!="" && $this->request->data['identityid']!="0"){
+				$identity = $this->Identities->get($this->request->data['identityid'], []);
+			}else{
+				$identity = $this->Identities->newEntity();
+			}
+			
 			$identity=$this->Identities->patchEntity($identity,$this->request->data);
             $identity['customer_id']=$this->loggedinuser['customer_id'];
 			$identity['employee_id']=$this->request->data['empid'];
@@ -296,12 +309,7 @@ class EmployeesController extends AppController
 						}
 					}
 				}
-
-			}
-			
-				// $this->Flash->error(__('o/p:::.'.json_encode($identity)));
-			
-			
+			}						
 				
 			if ($this->Identities->save($identity)) {
 
@@ -316,7 +324,8 @@ class EmployeesController extends AppController
     public function edit($id = null)
     {
         $employee = $this->Employees->get($id, [
-            'contain' => ['Empdatabiographies', 'Empdatapersonals', 'Employmentinfos', 'ContactInfos', 'Addresses','Identities', 'Jobinfos']
+            'contain' => ['Empdatabiographies', 'Empdatapersonals', 'Employmentinfos', 'ContactInfos', 'Addresses'=> function ($q) {
+       							return $q->where(['Addresses.address_type' => '1']); },'Identities', 'Jobinfos']
         ]);
 		
 		if($employee['customer_id'] != $this->loggedinuser['customer_id'] || $employee['visible'] != '1')
@@ -329,10 +338,11 @@ class EmployeesController extends AppController
         	
             $employee = $this->Employees->patchEntity($employee, $this->request->data);
 			$employee['customer_id']=$this->loggedinuser['customer_id'];
+			$employee['address']['customer_id']=$this->loggedinuser['customer_id'];
+			$employee['address']['address_type']="1";
 			
             if ($this->Employees->save($employee)) {
             	
-				
 				//associated Empdatapersonals
             		$this->loadModel('EmpDataPersonals');
 					$arr = $this->EmpDataPersonals->find('all',['conditions' => array('employee_id' => $id), 'contain' => []])->toArray();
@@ -386,7 +396,7 @@ class EmployeesController extends AppController
 				
 					//associated Addresses
             		$this->loadModel('Addresses');
-					$arr = $this->Addresses->find('all',['conditions' => array('employee_id' => $id), 'contain' => []])->toArray();
+					$arr = $this->Addresses->find('all',['conditions' => array('employee_id' => $id,'address_type' => '1'), 'contain' => []])->toArray();
 					isset($arr[0]) ? $address = $arr[0] : $address = $this->Addresses->newEntity();  						
 					$address = $this->Addresses->patchEntity($address, $this->request->data['address']);
 					$address['customer_id']=$this->loggedinuser['customer_id'];
@@ -449,6 +459,11 @@ class EmployeesController extends AppController
 		$ids = $this->Employees->Identities->find('all')->where("Identities.employee_id=".$id)->andwhere("Identities.id!=".$identityid)
 							->andwhere("Identities.customer_id=".$this->loggedinuser['customer_id']);
 		$this->set('ids', json_encode($ids));
+		
+		$this->loadModel('Addresses');
+        $address = $this->Addresses->find('all')->where("Addresses.employee_id=".$id)->andwhere("Addresses.address_type='2'")
+							->andwhere("Addresses.customer_id=".$this->loggedinuser['customer_id']);
+		$this->set('addresses',  json_encode($address));	
     }
 
     /**
