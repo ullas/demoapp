@@ -316,7 +316,7 @@ div#myDropZone {
              	<div class="box-header with-border">
           			<h3 class="box-title"><i class="fa fa-home"></i> Permanent Address</h3>
           			<div class="box-tools pull-right">
-                  			<label class="checkbox no-padding"><input type="checkbox" value="1" id="copypaddress" class="control-form">Same as current address</label>
+                  			<label class="checkbox no-padding"><input type="checkbox" value="1" id="copyaddress" class="control-form">Same as current address</label>
               		</div>
         		</div>
         		 <div class="box-body">
@@ -408,22 +408,8 @@ var countrydata=[];
     	countrydata.push({'id':key, "text":value});
 	});
 	
-	
-	function updateEmployee(){
-
-var post_data =  $('#empform').serialize();
-// console.log(post_data);
-
-
-	$.ajax({
-        type: "POST",
-        url: '/Employees/addEmployee',
-        data: $('#empform').serialize(),
-        success : function(data) {
-           
-           empid=data;
-        
-    		//add permanent address
+	function addmultiContents(empid){
+		//add permanent address
     		var address1=$("#paaddress1").val();
     		var address2=$("#paaddress2").val();
     		var address3=$("#paaddress3").val();
@@ -440,91 +426,105 @@ var post_data =  $('#empform').serialize();
     		
     		if(empid!="" && empid!=null && address1!="" && address1!=null && address2!="" && address2!=null){
     			$.ajax({
-        type: "POST",
-        url: '/Employees/addAddress',
-        data: 'empid='+empid+'&address1='+address1+'&address2='+address2+'&address3='+address3+'&address4='+address4+'&address5='+address5+'&address6='+address6
-        			+'&address7='+address7+'&address8='+address8+'&county='+county+'&state='+state+'&zipcode='+zipcode+'&city='+city,
-        success : function(data) {
-    		
-        },error: function(data) {
+        			type: "POST",
+        			url: '/Employees/addAddress',
+        			data: 'empid='+empid+'&address1='+address1+'&address2='+address2+'&address3='+address3+'&address4='+address4+'&address5='+address5+'&address6='+address6
+        					+'&address7='+address7+'&address8='+address8+'&county='+county+'&state='+state+'&zipcode='+zipcode+'&city='+city,
+        			success : function(data) {
+    					if(idclasscount<1){
+    						window.location='/employees';
+    					}
+        			},error: function(data) {
         	    	 	
-    		sweet_alert("Error while adding Addresses.");
-			return false;   			
+    				sweet_alert("Error while adding Addresses.");
+						sweet_alert("Error while adding Addresses.");
+						return false;   			
 
-        },statusCode: {
-        500: function() {
-          		sweet_alert("Error while adding Addresses.");
-				return false;
-        }
-      }
-      
-        });
+        			}
+        		});
 			}else{
 				sweet_alert("Please enter Address1/Address2.");
 				return false;
 			}
-		// $.get('/Employees/addEmployee?formdata='+post_data, function(d) {
-    		// // if(d=="Error"){
-// 
-			// // }
-		// });
-				
-    	var errcount=0;
-    	// var empid=$("#idtype"+i).val();
-    	var idclasscount = $('.idclass').length;
-    	for (i = 1; i <= idclasscount; i++) {
-    		var idtype=$("#idtype"+i).val();
-    		var country=$("#country"+i).val();
-    		var nationalid=$("#nationalid"+i).val();
-    		var isprimary=0;
-    		if($("#isprimary"+i).is(":checked")){isprimary=1;}
-    		var issuedate=$("#issuedate"+i).val();
-    		var expirydate=$("#expirydate"+i).val();
+		
+    		var errcount=0;
+    		// var empid=$("#idtype"+i).val();
+    		var idclasscount = $('.idclass').length;
+    		for (k = 1; k <= idclasscount; k++) {
+    			var idtype=$("#idtype"+k).val();
+    			var country=$("#country"+k).val();
+    			var nationalid=$("#nationalid"+k).val();
+    			var isprimary=0;
+    			if($("#isprimary"+k).is(":checked")){isprimary=1;}
+    			var issuedate=$("#issuedate"+k).val();
+    			var expirydate=$("#expirydate"+k).val();
     		
-    		if(empid!="" && empid!=null && idtype!="" && idtype!=null && nationalid!="" && nationalid!=null){
-    			$.ajax({
-        type: "POST",
-        url: '/Employees/addIds',
-        data: 'empid='+empid+'&idtype='+idtype+'&country='+country+'&nationalid='+nationalid+'&isprimary='+'0'+'&issuedate='+issuedate+'&expirydate='+expirydate,
-        success : function(data) {
-    		if(i==idclasscount){
-    			window.location='/employees';
-    		}
-        },error: function(data) {
+    			if(empid!="" && empid!=null && idtype!="" && idtype!=null && nationalid!="" && nationalid!=null){
+    				$.ajax({
+        				type: "POST",
+        				url: '/Employees/addIds',
+        				data: 'empid='+empid+'&identityid='+'0'+'&idtype='+idtype+'&country='+country+'&nationalid='+nationalid+'&isprimary='+'0'+'&issuedate='+issuedate+'&expirydate='+expirydate,
+        				success : function(data) {
+    						if(k==idclasscount || k>idclasscount){
+    							window.location='/employees';
+    						}
+        				},error: function(data) {
         	    	 	
-    		errcount++;
-    		sweet_alert("Error while adding Id's.");
-			return false;   			
+    						errcount++;
+    						sweet_alert("Error while adding Id's.");
+							return false;   			
 
-        },statusCode: {
-        500: function() {
-          		sweet_alert("Error while adding Id's.");
-				return false;
-        }
-      }
+        				},statusCode: {
+        					500: function() {
+          						sweet_alert("Error while adding Id's.");
+								return false;
+        					}
+      					}
       
-        });	
-			}else{
-				sweet_alert("Please enter ID Card type/national Id.");
-				return false;
-			}
-    	}	
-    	if(errcount>0){
-    		sweet_alert("Error while adding Id's.");
-			return false;
-    	}
+        			});	
+				}else{
+					sweet_alert("Please enter ID Card type/national Id.");
+					return false;
+				}
+    		}	
     	
-    	},
-        error : function() {
-           alert("Error while adding Employee.");
-           return false;
-        }
-    });
-    	// alert("true");
-		if(idclasscount<1){
-    			window.location='/employees';
+    		if(errcount>0){
+    			sweet_alert("Error while adding Id's.");
+				return false;
     		}
+    		console.log();
+    		// alert("true");
+		
+	}
+	function updateEmployee(){
+
+		var post_data =  $('#empform').serialize();
+		// console.log(post_data);
+
+	if(empid==""){
+		$.ajax({
+        	type: "POST",
+        	url: '/Employees/addEmployee',
+        	data: $('#empform').serialize(),
+        	success : function(data) {
+           
+            	if(data!="error"){
+            		empid=data;
+        			addmultiContents(empid);
+        		}
+    		},
+        	error : function() {
+            	alert("Error while adding Employee.");
+            	return false;
+        	}
+    	});
+    }else{
+    	addmultiContents(empid);
+    }
+    	
 	}			
+	
+	
 		
 $(function () {
 	
@@ -597,7 +597,23 @@ $(function () {
          } 					
     });
     
-    
+    //copyaddress checkbox clicked
+    	$('#copyaddress').change(function() {
+        	if($(this).is(":checked")) {
+	            $("#paaddress1").val($("#address-address1").val());
+				$("#paaddress2").val($("#address-address2").val());
+				$("#paaddress3").val($("#address-address3").val());
+				$("#paaddress4").val($("#address-address4").val());
+				$("#paaddress5").val($("#address-address5").val());
+				$("#paaddress6").val($("#address-address6").val());
+				$("#paaddress7").val($("#address-address7").val());
+				$("#paaddress8").val($("#address-address8").val());
+				$("#pacity").val($("#address-city").val());
+				$("#pastate").val($("#address-state").val());
+				$("#pacounty").val($("#address-county").val());
+				$("#pazipcode").val($("#address-zip-code").val());
+        	}
+    	});
     $("#btnAddIDCtrls").click(function (event) {
     		
     		event.preventDefault();

@@ -350,7 +350,7 @@ div#myDropZone {
              	<div class="box-header with-border">
           			<h3 class="box-title"><i class="fa fa-home"></i> Permanent Address</h3>
           			<div class="box-tools pull-right">
-                  			<label class="checkbox no-padding"><input type="checkbox" value="1" id="copypaddress" class="control-form">Same as current address</label>
+                  			<label class="checkbox no-padding"><input type="checkbox" value="1" id="copyaddress" class="control-form">Same as current address</label>
               		</div>
         		</div>
         		<div class="box-body">
@@ -371,10 +371,10 @@ div#myDropZone {
              	<div class="col-md-4"><div class="form-group text"><label class="control-label" for="address-address8">Bed Number</label>
              		<div class="input-group"><input type="text" maxlength="256" id="paaddress8" class="form-control" value=""></div></div></div>
              	<div class="col-md-4"><div class="form-group text"><label class="control-label" for="address-zip-code">Postal Code</label>
-             		<div class="input-group"><input type="text" maxlength="256" id="pazip-code" class="form-control" value=""></div></div></div>
+             		<div class="input-group"><input type="text" maxlength="256" id="pazipcode" class="form-control" value=""></div></div></div>
              	<div class="col-md-4"><div class="form-group text"><label class="control-label" for="address-city">City</label>
              		<div class="input-group"><input type="text" maxlength="256" id="pacity" class="form-control" value=""></div></div></div>
-             	<div class="col-md-4"><div class="form-group text"><label class="control-label" for="address-county">District</label
+             	<div class="col-md-4"><div class="form-group text"><label class="control-label" for="address-county">District</label>
              		<div class="input-group"><input type="text" maxlength="256" id="pacounty" class="form-control" value=""></div></div></div>
              	<div class="col-md-4"><div class="form-group text"><label class="control-label" for="address-state">Region</label>
              		<div class="input-group"><input type="text" maxlength="256" id="pastate" class="form-control" value=""></div></div></div>        		
@@ -509,6 +509,27 @@ $(document).ready(function(){
     	},
        
     });
+    
+    //address
+		var addressarr='<?php echo $addresses; ?>';
+		var addressobj = JSON.parse(addressarr);
+
+		for (i = 1; i <= addressobj.length; i++) {
+			$("#paaddress1").val(addressobj[i-1]['address1']);
+			$("#paaddress2").val(addressobj[i-1]['address2']);
+			$("#paaddress3").val(addressobj[i-1]['address3']);
+			$("#paaddress4").val(addressobj[i-1]['address4']);
+			$("#paaddress5").val(addressobj[i-1]['address5']);
+			$("#paaddress6").val(addressobj[i-1]['address6']);
+			$("#paaddress7").val(addressobj[i-1]['address7']);
+			$("#paaddress8").val(addressobj[i-1]['address8']);
+			$("#pacity").val(addressobj[i-1]['city']);
+			$("#pastate").val(addressobj[i-1]['state']);
+			$("#pacounty").val(addressobj[i-1]['county']);
+			$("#pazipcode").val(addressobj[i-1]['zip_code']);
+
+		}
+		
     var userdf='<?php echo $this->request->session()->read('sessionuser')['dateformat'];?>';
     var idsarr='<?php echo $ids ?>';
 		var idobj = JSON.parse(idsarr);
@@ -548,7 +569,7 @@ $(document).ready(function(){
 				}
 			}
 			
-			$(".idfieldset").append("<div class='idclass' id='contentDiv"+numItems+"'><div class='clearfix'><div class='col-sm-4'><div class='form-group'><label>National ID Card Type</label><div class='input-group'><div class='input-group-btn'><a class='compdelete btn btn-danger btn-flat'><i class='fa fa-trash'></i></a></div><input type='text' class='idtype form-control' id='idtype"+numItems+"' value='"+ idobj[i-1]['card_type'] +"'/></div></div></div><div class='col-sm-4'><div class='form-group'><label>Country</label><div class='input-group'><div class='input-group-addon'><i class='fa fa-flag'></i></div><input class='form-control idcountry'  id='country"+numItems+"' value='"+ idobj[i-1]['country'] +"'/></div></div></div><div class='col-sm-4'><div class='form-group'><label>National ID</label><input value='"+ idobj[i-1]['nationalid'] +"' class='form-control nationalid'  id='nationalid"+numItems+"'/></div></div><div class='col-sm-4'><div class='form-group checkbox'><label><input type='checkbox' class='isprimary'  id='isprimary"+numItems+"' value='"+ idobj[i-1]['is_primary'] +"'/>Is Primary</label></div></div><div class='col-sm-4'><label>Issue Date</label><div class='input-group'><div class='input-group-addon'><i class='fa fa-calendar'></i></div><input type='text' class='issuedate mptldp form-control' id='issuedate"+numItems+"' value='"+ idobj[i-1]['issuedate'] +"'/></div></div><div class='col-sm-4'><label>Expiry Date</label><div class='input-group'><div class='input-group-addon'><i class='fa fa-calendar'></i></div><input value='"+ idobj[i-1]['expirydate'] +"'  type='text' class='expirydate mptldp form-control' id='expirydate"+numItems+"'/></div></div></div></div>");
+			$(".idfieldset").append("<div class='idclass' id='contentDiv"+numItems+"'><div class='clearfix'><div class='col-sm-4'><div class='form-group'><label>National ID Card Type</label><div class='input-group'><div class='input-group-btn'><a id='"+ idobj[i-1]['id'] +"' class='compdelete btn btn-danger btn-flat'><i class='fa fa-trash'></i></a></div><input type='hidden' id='identityid"+numItems+"' value='"+ idobj[i-1]['id'] +"'/><input type='text' class='idtype form-control' id='idtype"+numItems+"' value='"+ idobj[i-1]['card_type'] +"'/></div></div></div><div class='col-sm-4'><div class='form-group'><label>Country</label><div class='input-group'><div class='input-group-addon'><i class='fa fa-flag'></i></div><input class='form-control idcountry'  id='country"+numItems+"' value='"+ idobj[i-1]['country'] +"'/></div></div></div><div class='col-sm-4'><div class='form-group'><label>National ID</label><input value='"+ idobj[i-1]['nationalid'] +"' class='form-control nationalid'  id='nationalid"+numItems+"'/></div></div><div class='col-sm-4'><div class='form-group checkbox'><label><input type='checkbox' class='isprimary'  id='isprimary"+numItems+"' value='"+ idobj[i-1]['is_primary'] +"'/>Is Primary</label></div></div><div class='col-sm-4'><label>Issue Date</label><div class='input-group'><div class='input-group-addon'><i class='fa fa-calendar'></i></div><input type='text' class='issuedate mptldp form-control' id='issuedate"+numItems+"' value='"+ idobj[i-1]['issuedate'] +"'/></div></div><div class='col-sm-4'><label>Expiry Date</label><div class='input-group'><div class='input-group-addon'><i class='fa fa-calendar'></i></div><input value='"+ idobj[i-1]['expirydate'] +"'  type='text' class='expirydate mptldp form-control' id='expirydate"+numItems+"'/></div></div></div></div>");
 			$(".idfieldset").append("<div class='col-md-12'><hr/></div>");
 			if(idobj[i-1]['is_primary']="true"){
 				$("#isprimary"+i).prop('checked', true);
@@ -608,7 +629,7 @@ $(document).ready(function(){
     		
     		event.preventDefault();
 			var numItems = $('.idclass').length+1;
-    		$(".idfieldset").append("<div class='idclass' id='contentDiv"+numItems+"'><div class='clearfix'><div class='col-sm-4'><label>National ID Card Type</label><div class='input-group'><div class='input-group-btn'><a class='compdelete btn btn-danger btn-flat'><i class='fa fa-trash'></i></a></div><input type='text' class='idtype form-control' id='idtype"+numItems+"'/></div></div><div class='col-sm-4'><div class='form-group'><label>Country</label><div class='input-group'><div class='input-group-addon'><i class='fa fa-flag'></i></div><input class='form-control idcountry'  id='country"+numItems+"'/></div></div></div><div class='col-sm-4'><div class='form-group'><label>National ID</label><input class='form-control nationalid'  id='nationalid"+numItems+"'/></div></div><div class='col-sm-4'><div class='form-group checkbox'><label><input type='checkbox' class='isprimary'  id='isprimary"+numItems+"'/>Is Primary</label></div></div><div class='col-sm-4'><label>Issue Date</label><div class='input-group'><div class='input-group-addon'><i class='fa fa-calendar'></i></div><input type='text' class='issuedate mptldp form-control' id='issuedate"+numItems+"'/></div></div><div class='col-sm-4'><label>Expiry Date</label><div class='input-group'><div class='input-group-addon'><i class='fa fa-calendar'></i></div><input type='text' class='expirydate mptldp form-control' id='expirydate"+numItems+"'/></div></div></div></div>");
+    		$(".idfieldset").append("<div class='idclass' id='contentDiv"+numItems+"'><div class='clearfix'><div class='col-sm-4'><label>National ID Card Type</label><div class='input-group'><div class='input-group-btn'><a id='newid' class='compdelete btn btn-danger btn-flat'><i class='fa fa-trash'></i></a></div><input type='hidden' id='identityid"+numItems+"' value='0'/><input type='text' class='idtype form-control' id='idtype"+numItems+"'/></div></div><div class='col-sm-4'><div class='form-group'><label>Country</label><div class='input-group'><div class='input-group-addon'><i class='fa fa-flag'></i></div><input class='form-control idcountry'  id='country"+numItems+"'/></div></div></div><div class='col-sm-4'><div class='form-group'><label>National ID</label><input class='form-control nationalid'  id='nationalid"+numItems+"'/></div></div><div class='col-sm-4'><div class='form-group checkbox'><label><input type='checkbox' class='isprimary'  id='isprimary"+numItems+"'/>Is Primary</label></div></div><div class='col-sm-4'><label>Issue Date</label><div class='input-group'><div class='input-group-addon'><i class='fa fa-calendar'></i></div><input type='text' class='issuedate mptldp form-control' id='issuedate"+numItems+"'/></div></div><div class='col-sm-4'><label>Expiry Date</label><div class='input-group'><div class='input-group-addon'><i class='fa fa-calendar'></i></div><input type='text' class='expirydate mptldp form-control' id='expirydate"+numItems+"'/></div></div></div></div>");
 			$(".idfieldset").append("<div class='col-md-12'><hr/></div>");
 			
 			//load country dropdown
@@ -627,11 +648,54 @@ $(document).ready(function(){
 			
     	});
     	
+    	
+    	//copyaddress checkbox clicked
+    	$('#copyaddress').change(function() {
+        	if($(this).is(":checked")) {
+	            $("#paaddress1").val($("#address-address1").val());
+				$("#paaddress2").val($("#address-address2").val());
+				$("#paaddress3").val($("#address-address3").val());
+				$("#paaddress4").val($("#address-address4").val());
+				$("#paaddress5").val($("#address-address5").val());
+				$("#paaddress6").val($("#address-address6").val());
+				$("#paaddress7").val($("#address-address7").val());
+				$("#paaddress8").val($("#address-address8").val());
+				$("#pacity").val($("#address-city").val());
+				$("#pastate").val($("#address-state").val());
+				$("#pacounty").val($("#address-county").val());
+				$("#pazipcode").val($("#address-zip-code").val());
+        	}
+    	});
+    	
     	//delete btn onclick
 	$('.idfieldset').on('click', 'a.compdelete', function() {
+		var selectedctrl=$(this);
+		var id = $(this).attr('id');
+		var empid='<?php echo $employee['id'] ?>';
 		if (confirm("Are you sure you want to delete the particular ID ?")) {
-			$(this).parent().closest('div .idclass').remove();
-    		return true;
+			if(id!="newid"){
+				$.ajax({
+        			type: "POST",
+        			url: '/Employees/deleteIds',
+        			data: 'empid='+empid+'&identityid='+id,
+        			success : function(data) {
+        				if(data=="success"){
+    						selectedctrl.parent().closest('div .idclass').remove();
+    						return true;
+    					}else{
+    						sweet_alert("Couldn't delete the particular id details.Please try again later.");
+							return false;
+    					}
+        			},error: function(data) {
+        	    		sweet_alert("Couldn't delete the particular id details.Please try again later.");
+						return false;
+        			}
+      
+        		});
+			}else{			
+				$(this).parent().closest('div .idclass').remove();
+    			return true;
+    		}
   		} else {
     		return false;
   		}
@@ -666,102 +730,95 @@ function formattoymd(inputDate) {
 }
     function updateEmployee()
     {		
-
-		var post_data =  $('#empform').serialize();
-		// console.log(post_data);
 		var empid='<?php echo $employee['id'] ?>';
-   var idclasscount = $('.idclass').length;
-   if(idclasscount>0){
 		
-		$.get('/Employees/deleteAllIds?employee='+empid, function(result) {
-    		if(result=="success" || result=="notexists"){
-
-			// }
-		
-				
-    	var errcount=0;var idcount=0;
-    	// var empid=$("#idtype"+i).val();
-    	
-    	
-    
+		//add permanent address
+    	var address1=$("#paaddress1").val();
+    	var address2=$("#paaddress2").val();
+    	var address3=$("#paaddress3").val();
+    	var address4=$("#paaddress4").val();
+    	var address5=$("#paaddress5").val();
+    	var address6=$("#paaddress6").val();
+    	var address7=$("#paaddress7").val();
+    	var address8=$("#paaddress8").val();
+    	var city=$("#pacity").val();
+    	var state=$("#pastate").val();
+    	var county=$("#pacounty").val();
+    	var zipcode=$("#pazipcode").val();
     		
-    	for (i = 1; i <= idclasscount; i++) {
-    		var idtype=$("#idtype"+i).val();
-    		var country=$("#country"+i).val();
-    		var nationalid=$("#nationalid"+i).val();
-    		var isprimary=0;
-    		if($("#isprimary"+i).is(":checked")){isprimary=1;}
-    		var issuedate=$("#issuedate"+i).val();
-    		var expirydate=$("#expirydate"+i).val();
     		
-    		if(empid!="" && empid!=null && idtype!="" && idtype!=null && nationalid!="" && nationalid!=null){
-    			idcount++;
+    	if(empid!="" && empid!=null && address1!="" && address1!=null && address2!="" && address2!=null){
     			$.ajax({
-        type: "POST",
-        url: '/Employees/addIds',
-        data: 'empid='+empid+'&idtype='+idtype+'&country='+country+'&nationalid='+nationalid+'&isprimary='+'0'+'&issuedate='+issuedate+'&expirydate='+expirydate,
-        success : function(data) {
-        	idcount--; 
-			if(idcount==0){
-        	 	if(errcount>0){
-    				sweet_alert("Error while adding Id's.");
-					return false;
-    			}else{
-    				document.getElementById("empform").submit();
-    			}
-    		}
+        			type: "POST",
+        			url: '/Employees/addAddress',
+        			data: 'empid='+empid+'&address1='+address1+'&address2='+address2+'&address3='+address3+'&address4='+address4+'&address5='+address5+'&address6='+address6
+        					+'&address7='+address7+'&address8='+address8+'&county='+county+'&state='+state+'&zipcode='+zipcode+'&city='+city,
+        			success : function(data) {
     		
-        },error: function(data) {
-        	errcount++;idcount--;
-        	
-        	 if(idcount==0){        	 	
-    			sweet_alert("Error while adding Id's.");
-				return false;   			
-    		}
-    		
-        },statusCode: {
-        500: function() {
-          errcount++;
-        }
-      }
-      
-        });	
-    			// $.get('/Employees/addIds?empid='+empid+'&idtype='+idtype+'&country='+country+'&nationalid='+nationalid+'&isprimary='+'0'+'&issuedate='+issuedate+'&expirydate='+expirydate, function(d) {
-    				// console.log(d);if(d!="success"){
-						// errcount++;
-					// }
-				// });
-			}else{
-				sweet_alert("Please enter ID Card type/national Id.");
-				return false;
-			}
-			// console.log(errcount+"--"+i+"--"+idclasscount+"--"+idcount);
+        			},error: function(data) {        	    	 	
+    					sweet_alert("Error while adding Addresses.");
+						return false;   			
+        			}     
+        	});
+		}else{
+			sweet_alert("Please enter Address1/Address2.");
+			return false;
+		}
 			
-			// if(i==idclasscount){console.log(errcount);
-    		// if(errcount>0){
-    			// sweet_alert("Error while adding Id's.");
-				// return false;
-    		// }else{
-    			// return false;
-    		// }
-    		// }
+   		var idclasscount = $('.idclass').length;
+   		if(idclasscount>0){
+			var errcount=0;
+    	
+    		for (i = 1; i <= idclasscount; i++) 
+    		{
+    			var identityid=$("#identityid"+i).val();
+    			var idtype=$("#idtype"+i).val();
+    			var country=$("#country"+i).val();
+    			var nationalid=$("#nationalid"+i).val();
+    			var isprimary=0;
+    			if($("#isprimary"+i).is(":checked")){isprimary=1;}
+    			var issuedate=$("#issuedate"+i).val();
+    			var expirydate=$("#expirydate"+i).val();
     		
-    	}	
-    	
-    	
-    	
-    	
-    		
-   
-    	
-    	}
-    	});
+    			if(empid!="" && empid!=null && idtype!="" && idtype!=null && nationalid!="" && nationalid!=null){
+    				$.ajax({
+        				type: "POST",
+        				url: '/Employees/addIds',
+        				data: 'empid='+empid+'&identityid='+identityid+'&idtype='+idtype+'&country='+country+'&nationalid='+nationalid+'&isprimary='+'0'+'&issuedate='+issuedate
+        						+'&expirydate='+expirydate,
+        				success : function(data) {
+							if(i==idclasscount){
+        	 					if(errcount>0){
+    								sweet_alert("Error while adding Id's.");
+									return false;
+    							}else{
+    								document.getElementById("empform").submit();
+    							}
+    						}    		
+        				},
+        				error: function(data) {
+        					errcount++;
+    						sweet_alert("Error while adding Id's.");
+							return false;   			    						
+    					},statusCode: {
+        					500: function() {
+          						errcount++;
+        					}
+      					}
+      
+        			});	
+    			
+				}else{
+					sweet_alert("Please enter ID Card type/national Id.");
+					return false;
+				}    		
+    		}	
     	 }else{
-    	return true;
-    }
-    	// alert("true");
-		
-// return false;
+    		return true;
+    	}
+    	
+			document.getElementById("empform").submit();
+			return false;
 		}			
 
 
