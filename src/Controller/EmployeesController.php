@@ -42,7 +42,7 @@ class EmployeesController extends AppController
             'contain' => ['Empdatabiographies'=> ['Positions'], 'Empdatapersonals', 'Employmentinfos','Customers', 'ContactInfos', 'Addresses','Identities','Jobinfos']
         ];
 		
-        $employees = $this->paginate($this->Employees->find('all')->where(['Employees.visible' => 1])->andwhere(['Employees.customer_id' => $this->loggedinuser['customer_id'] ]));
+        $employees = $this->Employees->find('all')->where(['Employees.visible' => 1])->andwhere(['Employees.customer_id' => $this->loggedinuser['customer_id'] ]);
 
 		$actions =[ ['name'=>'delete','title'=>'Delete','class'=>' label-danger'] ];
         $this->set('actions',$actions);	
@@ -62,7 +62,7 @@ class EmployeesController extends AppController
     public function view($id = null)
     {
         $employee = $this->Employees->get($id, [
-            'contain' => ['Empdatabiographies', 'Empdatapersonals', 'Employmentinfos', 'ContactInfos', 'Addresses' => function ($q) {
+            'contain' => ['Empdatabiographies', 'Empdatapersonals', 'Employmentinfos', 'ContactInfos','EducationalQualifications','Experiences', 'Addresses' => function ($q) {
        							return $q->where(['Addresses.address_type' => '1']); },'Identities','Jobinfos']
         ]);
 		if($employee['customer_id']==$this->loggedinuser['customer_id'] && $employee['visible']=='1'){
@@ -89,10 +89,17 @@ class EmployeesController extends AppController
 			if(isset($employee['identity']['id'])){
 				$identityid=$employee['identity']['id'];
 			}
-
 			$idcontents = $this->Employees->Identities->find('all')->where("Identities.employee_id=".$id)->andwhere("Identities.id!=".$identityid)
 							->andwhere("Identities.customer_id=".$this->loggedinuser['customer_id']);
 			$this->set('ids', json_encode($idcontents));
+			
+			$experienceid=0;
+			if(isset($employee['experience']['id'])){
+				$experienceid=$employee['experience']['id'];
+			}
+			$experiences = $this->Employees->Experiences->find('all')->where("Experiences.employee_id=".$id)->andwhere("Experiences.id!=".$experienceid)
+							->andwhere("Experiences.customer_id=".$this->loggedinuser['customer_id']);
+			$this->set('experiences', json_encode($experiences));
 			
 			$this->loadModel('Addresses');
         	$address = $this->Addresses->find('all')->where("Addresses.employee_id=".$id)->andwhere("Addresses.address_type='2'")
@@ -116,7 +123,7 @@ class EmployeesController extends AppController
     {
         $employee = $this->Employees->newEntity();
         if ($this->request->is('post')) {
-            $employee = $this->Employees->patchEntity($employee, $this->request->data,['associated' => ['Empdatabiographies', 'Empdatapersonals', 'Employmentinfos','Jobinfos', 'Customers', 'ContactInfos', 'Addresses','Identities']]);
+            $employee = $this->Employees->patchEntity($employee, $this->request->data,['associated' => ['EducationalQualifications','Experiences', 'Empdatabiographies', 'Empdatapersonals', 'Employmentinfos','Jobinfos', 'Customers', 'ContactInfos', 'Addresses','Identities']]);
 			$employee['visible']="1";
 			$employee['profilepicture']=$employee['employee']['profilepicture'];
 			//saving customer_id to all associated models
@@ -128,6 +135,8 @@ class EmployeesController extends AppController
 			$employee['contact_info']['customer_id']=$this->loggedinuser['customer_id'];
 			$employee['address']['customer_id']=$this->loggedinuser['customer_id'];
 			$employee['identity']['customer_id']=$this->loggedinuser['customer_id'];
+			$employee['educationalqualification']['customer_id']=$this->loggedinuser['customer_id'];
+			$employee['experience']['customer_id']=$this->loggedinuser['customer_id'];
 			$employee['address']['address_type']="1";
 			
 			$employee['empdatabiography']['position_id']=$employee['jobinfo']['position_id'];
@@ -206,7 +215,8 @@ class EmployeesController extends AppController
 			$this->autoRender=false;		
 			
 			$employee = $this->Employees->newEntity();
-        	$employee = $this->Employees->patchEntity($employee, $this->request->data,['associated' => ['Empdatabiographies', 'Empdatapersonals', 'Employmentinfos','Jobinfos', 'Customers', 'ContactInfos', 'Addresses','Identities']]);
+        	$employee = $this->Employees->patchEntity($employee, $this->request->data,['associated' => ['EducationalQualifications','Experiences','Empdatabiographies', 'Empdatapersonals',
+        						 'Employmentinfos','Jobinfos', 'Customers', 'ContactInfos', 'Addresses','Identities']]);
 			$employee['visible']="1";
 			$employee['profilepicture']=$employee['employee']['profilepicture'];
 			//saving customer_id to all associated models
@@ -220,6 +230,8 @@ class EmployeesController extends AppController
 			$employee['identity']['customer_id']=$this->loggedinuser['customer_id'];
 			$employee['address']['address_type']="1";
 			
+			$employee['educational_qualification']['customer_id']=$this->loggedinuser['customer_id'];
+			$employee['experience']['customer_id']=$this->loggedinuser['customer_id'];
 			$employee['empdatabiography']['position_id']=$employee['jobinfo']['position_id'];
 			
             if ($this->Employees->save($employee)) {
@@ -241,7 +253,7 @@ class EmployeesController extends AppController
 			
 			$this->loadModel('Addresses');
 			
-			$arr = $this->Addresses->find('all',[ 'conditions' => array('employee_id' => $this->request->data['empid'],'address_type'=>'2'),
+			$arr = $this->Addresses->find('all',['conditions' => array('employee_id' => $this->request->data['empid'],'address_type'=>'2'),
             	'contain' => []
         	])->toArray();
 		
@@ -316,7 +328,104 @@ class EmployeesController extends AppController
                	 	$this->response->body("success");
 	    			return $this->response;
             } else {
-                	$this->response->body("errormp");
+                	$this->response->body("error");
+	    			return $this->response;
+            }			
+		}
+    }
+	public function addExperiences(){
+    	
+    	if($this->request->is('ajax')) {
+				
+			$this->autoRender=false;		
+			
+			$this->loadModel('Experiences');		
+			
+			if($this->request->data['experienceid']!="" && $this->request->data['experienceid']!="0"){
+				$experience = $this->Experiences->get($this->request->data['experienceid'], []);
+			}else{
+				$experience = $this->Experiences->newEntity();
+			}
+			
+			$experience=$this->Experiences->patchEntity($experience,$this->request->data);
+            $experience['customer_id']=$this->loggedinuser['customer_id'];
+			$experience['employee_id']=$this->request->data['empid'];
+           	$experience['designation']=$this->request->data['designation'];
+			$experience['industry']=$this->request->data['industry'];
+			$experience['function']=$this->request->data['efunction'];
+			$experience['employer']=$this->request->data['employer'];
+			$experience['city']=$this->request->data['city'];
+			$experience['country']=$this->request->data['country'];
+            $experience['fromdate']=$this->request->data['fromdate'];
+			$experience['todate']=$this->request->data['todate'];
+			$experience['contract']=$this->request->data['contract'];
+			
+			$userdf = $this->request->session()->read('sessionuser')['dateformat'];
+            if(isset($userdf)  & $userdf===1){
+				foreach (["fromdate", "todate"] as $value) {		
+					if(isset($experience[$value])){			
+						if($experience[$value]!=null && $experience[$value]!='' && strpos($experience[$value], '/') !== false){
+							$experience[$value] = str_replace('/', '-', $experience[$value]);
+							$experience[$value]=date('Y/m/d', strtotime($experience[$value]));
+						}
+					}
+				}
+			}						
+				
+			if ($this->Experiences->save($experience)) {
+
+               	 	$this->response->body("success");
+	    			return $this->response;
+            } else {
+                	$this->response->body("error");
+	    			return $this->response;
+            }			
+		}
+    }
+	public function addQualifications(){
+    	
+    	if($this->request->is('ajax')) {
+				
+			$this->autoRender=false;		
+			
+			$this->loadModel('EducationalQualifications');		
+			
+			if($this->request->data['qualificationid']!="" && $this->request->data['qualificationid']!="0"){
+				$educationalQualification = $this->EducationalQualifications->get($this->request->data['qualificationid'], []);
+			}else{
+				$educationalQualification = $this->EducationalQualifications->newEntity();
+			}
+			
+			$educationalQualification=$this->EducationalQualifications->patchEntity($educationalQualification,$this->request->data);
+            $educationalQualification['customer_id']=$this->loggedinuser['customer_id'];
+			$educationalQualification['employee_id']=$this->request->data['empid'];
+           	$educationalQualification['qualification']=$this->request->data['qualification'];
+			$educationalQualification['subject']=$this->request->data['subject'];
+			$educationalQualification['subject2']=$this->request->data['secsubject'];
+            $educationalQualification['schoolcollege']=$this->request->data['schoolcollege'];
+            $educationalQualification['city']=$this->request->data['city'];
+			$educationalQualification['fromdate']=$this->request->data['fromdate'];
+			$educationalQualification['passdate']=$this->request->data['passdate'];
+			$educationalQualification['grade']=$this->request->data['grade'];
+			
+			$userdf = $this->request->session()->read('sessionuser')['dateformat'];
+            if(isset($userdf)  & $userdf===1){
+				foreach (["fromdate", "passdate"] as $value) {		
+					if(isset($educationalQualification[$value])){			
+						if($educationalQualification[$value]!=null && $educationalQualification[$value]!='' && strpos($educationalQualification[$value], '/') !== false){
+							$educationalQualification[$value] = str_replace('/', '-', $educationalQualification[$value]);
+							$educationalQualification[$value]=date('Y/m/d', strtotime($educationalQualification[$value]));
+						}
+					}
+				}
+			}						
+				
+			if ($this->EducationalQualifications->save($educationalQualification)) {
+
+               	 	$this->response->body("success");
+	    			return $this->response;
+            } else {
+                	$this->response->body("error");
 	    			return $this->response;
             }			
 		}
