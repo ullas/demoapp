@@ -12,9 +12,11 @@ use Cake\Datasource\ConnectionManager;
  * @property \Cake\ORM\Association\BelongsTo $Customers
  * @property \Cake\ORM\Association\HasMany $Addresses
  * @property \Cake\ORM\Association\HasMany $ContactInfos
+ * @property \Cake\ORM\Association\HasMany $EducationalQualifications
  * @property \Cake\ORM\Association\HasMany $Empdatabiographies
  * @property \Cake\ORM\Association\HasMany $Empdatapersonals
  * @property \Cake\ORM\Association\HasMany $Employmentinfos
+ * @property \Cake\ORM\Association\HasMany $Experiences
  * @property \Cake\ORM\Association\HasMany $Identities
  * @property \Cake\ORM\Association\HasMany $Jobinfos
  * @property \Cake\ORM\Association\HasMany $Users
@@ -41,6 +43,7 @@ class EmployeesTable extends Table
 		$arrayTemp1 = $conn->execute('select id,name from positions where id not in(select position_id from empdatabiographies where position_id >0 AND employee_id!='.$id.') ')->fetchAll('assoc');
 		return $arrayTemp1; 
 	}
+	
     /**
      * Initialize method
      *
@@ -64,6 +67,9 @@ class EmployeesTable extends Table
         $this->hasOne('ContactInfos', [
             'foreignKey' => 'employee_id','dependent' => true
         ]);
+        $this->hasOne('EducationalQualifications', [
+            'foreignKey' => 'employee_id','dependent' => true
+        ]);
         $this->hasOne('Empdatabiographies', [
             'foreignKey' => 'employee_id','dependent' => true
         ]);
@@ -71,6 +77,9 @@ class EmployeesTable extends Table
             'foreignKey' => 'employee_id','dependent' => true
         ]);
         $this->hasOne('Employmentinfos', [
+            'foreignKey' => 'employee_id','dependent' => true
+        ]);
+        $this->hasOne('Experiences', [
             'foreignKey' => 'employee_id','dependent' => true
         ]);
         $this->hasOne('Identities', [
