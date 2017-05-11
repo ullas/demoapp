@@ -46,7 +46,8 @@ div#myDropZone {
            	<li id="li4"><a href="#social" data-toggle="tab">Social</a></li>
            	<li id="li5"><a href="#address" data-toggle="tab">Address</a></li>
            	<li id="li6"><a href="#ids" data-toggle="tab">ID's</a></li>
-
+			<li id="li7"><a href="#qualification" data-toggle="tab">Educational Qualification</a></li>
+           	<li id="li8"><a href="#experience" data-toggle="tab">Experience</a></li>
         </ul>
 
         <div class=" tab-content">
@@ -376,6 +377,67 @@ div#myDropZone {
           </div>
           <!-- Tab Pane-->
 
+<div class="tab-pane" id="qualification">
+             <!-- <div class="form-horizontal"> -->
+             	<fieldset>
+        		<div class="qualificationfieldset">
+                <?php
+                	echo $this->Form->input('educational_qualification.qualification');
+            		echo $this->Form->input('educational_qualification.subject');
+            		echo $this->Form->input('educational_qualification.subject2');
+            		echo $this->Form->input('educational_qualification.schoolcollege', ['label' => 'School/College']);
+            		echo $this->Form->input('educational_qualification.city');
+            		echo $this->Form->input('educational_qualification.fromdate', ['label' => 'From Date','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+            		echo $this->Form->input('educational_qualification.passdate', ['label' => 'Pass Date','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+            		echo $this->Form->input('educational_qualification.grade', ['label' => 'Grade/Percentage']);
+			      ?>        		
+            		
+            		<div class="col-md-12"><hr/></div>
+        			</div>
+        			
+        			<div class="col-md-4 pull-left"><div class="form-group">
+        				<div class="input-group" >        		
+        					<input type="button" class="btn btn-flat btn-info pull-left" id="btnAddQualificationCtrls" value="Add More" />
+        				</div>
+        			</div></div>
+        			
+             	 </fieldset>
+            <!-- </div> -->
+
+          </div>
+          <!-- /.tab-pane -->
+          
+          <div class="tab-pane" id="experience">
+             <!-- <div class="form-horizontal"> -->
+             	<fieldset>
+        		<div class="experiencefieldset">
+                <?php
+                	echo $this->Form->input('experience.designation');
+            		echo $this->Form->input('experience.industry');
+            		echo $this->Form->input('experience.function');
+            		echo $this->Form->input('experience.employer');
+            		echo $this->Form->input('experience.city');
+            		echo $this->Form->input('experience.country');
+            		echo $this->Form->input('experience.fromdate', ['label' => 'From Date','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+            		echo $this->Form->input('experience.todate', ['label' => 'To Date','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+            		echo $this->Form->input('experience.contract');
+			      ?>        		
+            		
+            		<div class="col-md-12"><hr/></div>
+        			</div>
+        			
+        			<div class="col-md-4 pull-left"><div class="form-group">
+        				<div class="input-group" >        		
+        					<input type="button" class="btn btn-flat btn-info pull-left" id="btnAddExperienceCtrls" value="Add More" />
+        				</div>
+        			</div></div>
+        			
+             	 </fieldset>
+            <!-- </div> -->
+
+          </div>
+          <!-- /.tab-pane -->
+          
 
         </div>
         <!-- /.tab-content -->
@@ -402,13 +464,112 @@ div#myDropZone {
 <?php $this->start('scriptBotton'); ?>
 <script>
 var empid='';
+var idcounter=0;
+var expcounter=0;
+var qualcounter=0;
 var countrydata=[];
 	var countryarr=<?php echo $countryarr ?>;
 	$.each(countryarr, function(key, value) {
     	countrydata.push({'id':key, "text":value});
 	});
-	
+	function saveQualifications(empid){
+		
+		var qualclasscount = $('.qualificationclass').length;
+    	//saving multi qualification's
+    	for (t = 1; t <= qualclasscount; t++) 
+    	{
+    		var qualification=$("#qualification"+t).val();
+    		var subject=$("#subject"+t).val();
+    		var secsubject=$("#secsubject"+t).val();
+    		var schoolcollege=$("#schoolcollege"+t).val();
+    		var city=$("#city"+t).val();
+    		var fromdate=$("#fromdate"+t).val();
+    		var passdate=$("#passdate"+t).val();
+    		var grade=$("#grade"+t).val();
+    		
+    			if(empid!="" && empid!=null && qualification!="" && qualification!=null && fromdate!="" && fromdate!=null && passdate!="" && passdate!=null){
+    				$.ajax({
+        				type: "POST",
+        				url: '/Employees/addQualifications',
+        				data: 'empid='+empid+'&qualificationid='+'0'+'&qualification='+qualification+'&subject='+subject+'&secsubject='+secsubject+'&schoolcollege='+schoolcollege+'&city='+city
+        						+'&fromdate='+fromdate+'&passdate='+passdate +'&grade='+grade,
+        				success : function(data) {
+    						if(t==qualclasscount || t>qualclasscount){
+    							if(qualclasscount<1){
+    								window.location='/employees';
+    							}else{
+    								qualcounter++;
+    								saveExperiences(empid);
+    							}
+    						}
+        				},error: function(data) {
+    						sweet_alert("Error while adding Qualification's.");
+							return false;   			
+
+        				},statusCode: {
+        					500: function() {
+          						sweet_alert("Error while adding Qualification's.");
+								return false;
+        					}
+      					}
+      
+        			});	
+				}else{
+					sweet_alert("Please enter Qualification/From/Pass Date.");
+					return false;
+				}
+    		}
+	}
+	function saveExperiences(empid){
+		var expclasscount = $('.experienceclass').length;
+    	//saving multi experience's
+    	for (t = 1; t <= expclasscount; t++) 
+    	{
+    		var designation=$("#designation"+t).val();
+    		var industry=$("#industry"+t).val();
+    		var efunction=$("#function"+t).val();
+    		var employer=$("#employer"+t).val();
+    		var city=$("#city"+t).val();
+    		var country=$("#expcountry"+t).val();
+    		var fromdate=$("#expfromdate"+t).val();
+    		var todate=$("#exptodate"+t).val();
+    		var contract=$("#contract"+t).val();
+    		
+    			if(empid!="" && empid!=null && designation!="" && designation!=null && industry!="" && industry!=null && fromdate!="" && fromdate!=null && todate!="" && todate!=""){
+    				$.ajax({
+        				type: "POST",
+        				url: '/Employees/addExperiences',
+        				data: 'empid='+empid+'&experienceid='+'0'+'&designation='+designation+'&industry='+industry+'&efunction='+efunction+'&employer='+employer+'&city='+city
+        						+'&country='+country+'&fromdate='+fromdate+'&todate='+todate +'&contract='+contract,
+        				success : function(data) {
+    						if(t==expclasscount || t>expclasscount){
+    							expcounter++;    							
+    							window.location='/employees';    						
+    						}
+        				},error: function(data) {
+    						sweet_alert("Error while adding Experience.");
+							return false;   			
+
+        				},statusCode: {
+        					500: function() {
+          						sweet_alert("Error while adding Experience.");
+								return false;
+        					}
+      					}
+      
+        			});	
+				}else{
+					sweet_alert("Please enter Designation/Industry/From/Pass Date.");
+					return false;
+				}
+    		}
+	}
 	function addmultiContents(empid){
+		
+		var idclasscount = $('.idclass').length;
+		var qualclasscount = $('.qualificationclass').length;
+		var expclasscount = $('.experienceclass').length;
+		
 		//add permanent address
     		var address1=$("#paaddress1").val();
     		var address2=$("#paaddress2").val();
@@ -431,7 +592,7 @@ var countrydata=[];
         			data: 'empid='+empid+'&address1='+address1+'&address2='+address2+'&address3='+address3+'&address4='+address4+'&address5='+address5+'&address6='+address6
         					+'&address7='+address7+'&address8='+address8+'&county='+county+'&state='+state+'&zipcode='+zipcode+'&city='+city,
         			success : function(data) {
-    					if(idclasscount<1){
+    					if(idclasscount<1 &&  qualclasscount<1 && expclasscount<1){
     						window.location='/employees';
     					}
         			},error: function(data) {
@@ -447,9 +608,7 @@ var countrydata=[];
 				return false;
 			}
 		
-    		var errcount=0;
-    		// var empid=$("#idtype"+i).val();
-    		var idclasscount = $('.idclass').length;
+    		//saving multi id's
     		for (k = 1; k <= idclasscount; k++) {
     			var idtype=$("#idtype"+k).val();
     			var country=$("#country"+k).val();
@@ -466,12 +625,15 @@ var countrydata=[];
         				data: 'empid='+empid+'&identityid='+'0'+'&idtype='+idtype+'&country='+country+'&nationalid='+nationalid+'&isprimary='+'0'+'&issuedate='+issuedate+'&expirydate='+expirydate,
         				success : function(data) {
     						if(k==idclasscount || k>idclasscount){
-    							window.location='/employees';
+    							if(qualclasscount<1 && expclasscount<1){
+    								window.location='/employees';
+    							}else{
+    								idcounter++;
+    								saveQualifications(empid);
+    							}
     						}
         				},error: function(data) {
-        	    	 	
-    						errcount++;
-    						sweet_alert("Error while adding Id's.");
+       						sweet_alert("Error while adding Id's.");
 							return false;   			
 
         				},statusCode: {
@@ -486,15 +648,11 @@ var countrydata=[];
 					sweet_alert("Please enter ID Card type/national Id.");
 					return false;
 				}
-    		}	
-    	
-    		if(errcount>0){
-    			sweet_alert("Error while adding Id's.");
-				return false;
     		}
-    		console.log();
-    		// alert("true");
-		
+    		
+    		if(idclasscount<1){
+    			saveQualifications(empid);
+    		}
 	}
 	function updateEmployee(){
 
@@ -519,7 +677,20 @@ var countrydata=[];
         	}
     	});
     }else{
-    	addmultiContents(empid);
+    	//continue posting ajax from where it got error
+    	if(idcounter>0){
+    		if(qualcounter>0){
+    			if(expcounter>0){
+    				sweet_alert("No more data to save.");
+    			}else{
+    				saveExperiences(empid);
+    			}
+    		}else{
+    			saveQualifications(empid);
+    		}
+    	}else{
+    		addmultiContents(empid);
+    	}
     }
     	
 	}			
@@ -577,7 +748,7 @@ $(function () {
 
 
     		$("#li3").addClass("active");
-    		$("#li1").removeClass("active");$("#li2").removeClass("active");$("#li4").removeClass("active");$("#li5").removeClass("active");$("#li6").removeClass("active");
+    		$("#li1").removeClass("active");$("#li2").removeClass("active");$("#li4").removeClass("active");$("#li5").removeClass("active");$("#li6").removeClass("active");$("#li7").removeClass("active");$("#li8").removeClass("active");
 
     		sweet_alert("Please enter the Person Id External.");
     		return false;
@@ -597,7 +768,7 @@ $(function () {
          } 					
     });
     
-    //copyaddress checkbox clicked
+    	//copyaddress checkbox clicked
     	$('#copyaddress').change(function() {
         	if($(this).is(":checked")) {
 	            $("#paaddress1").val($("#address-address1").val());
@@ -614,7 +785,7 @@ $(function () {
 				$("#pazipcode").val($("#address-zip-code").val());
         	}
     	});
-    $("#btnAddIDCtrls").click(function (event) {
+    	$("#btnAddIDCtrls").click(function (event) {
     		
     		event.preventDefault();
 			var numItems = $('.idclass').length+1;
@@ -637,11 +808,71 @@ $(function () {
 			
     	});	
     
-    
+    	$("#btnAddExperienceCtrls").click(function (event) {
+    		
+    		event.preventDefault();
+			var numItems = $('.experienceclass').length+1;
+    		$(".experiencefieldset").append("<div class='experienceclass' id='contentDiv"+numItems+"'><div class='clearfix'><div class='col-sm-4'><label>Designation</label><div class='input-group'><div class='input-group-btn'><a id='newid' class='expdelete btn btn-danger btn-flat'><i class='fa fa-trash'></i></a></div><input type='hidden' id='experienceid"+numItems+"' value='0'/><input type='text' class='designation form-control' id='designation"+numItems+"'/></div></div><div class='col-sm-4'><div class='form-group'><label>Industry</label><input class='form-control industry'  id='industry"+numItems+"'/></div></div><div class='col-sm-4'><div class='form-group'><label>Function</label><input class='form-control function'  id='function"+numItems+"'/></div></div><div class='col-sm-4'><div class='form-group'><label>Employer</label><input class='form-control employer'  id='employer"+numItems+"'/></div></div><div class='col-sm-4'><div class='form-group'><label>City</label><input class='form-control city'  id='city"+numItems+"'/></div></div><div class='col-sm-4'><div class='form-group'><label>Country</label><input class='form-control country'  id='expcountry"+numItems+"'/></div></div><div class='col-sm-4'><div class='form-group'><label>From Date</label><div class='input-group'><div class='input-group-addon'><i class='fa fa-calendar'></i></div><input type='text' class='fromdate mptldp form-control' id='expfromdate"+numItems+"'/></div></div></div><div class='col-sm-4'><div class='form-group'><label>To Date</label><div class='input-group'><div class='input-group-addon'><i class='fa fa-calendar'></i></div><input type='text' class='exptodate mptldp form-control' id='exptodate"+numItems+"'/></div></div></div><div class='col-sm-4'><div class='form-group'><label>Contract</label><input class='form-control contract'  id='contract"+numItems+"'/></div></div></div></div>");
+			$(".experiencefieldset").append("<div class='col-md-12'><hr/></div>");
+			
+			//load country dropdown
+			$('.country').select2({
+    			width: '100%',allowClear: true,placeholder: "Select",data: countrydata
+			});
+			
+			//initialise datepicker
+			var userdf='<?php echo $this->request->session()->read('sessionuser')['dateformat'];?>';
+			if(userdf==1){
+				$('.mptldp').datepicker({ format:"dd/mm/yyyy",autoclose: true,clearBtn: true,todayHighlight: true });
+			}else{
+				$('.mptldp').datepicker({ format:"yyyy/mm/dd",autoclose: true,clearBtn: true,todayHighlight: true });
+			}
+			
+    	});
+    	
+    	$("#btnAddQualificationCtrls").click(function (event) {
+    		
+    		event.preventDefault();
+			var numItems = $('.qualificationclass').length+1;
+    		$(".qualificationfieldset").append("<div class='qualificationclass' id='contentDiv"+numItems+"'><div class='clearfix'><div class='col-sm-4'><label>Qualification</label><div class='input-group'><div class='input-group-btn'><a id='newid' class='qualdelete btn btn-danger btn-flat'><i class='fa fa-trash'></i></a></div><input type='hidden' id='qualificationid"+numItems+"' value='0'/><input type='text' class='qualification form-control' id='qualification"+numItems+"'/></div></div><div class='col-sm-4'><div class='form-group'><label>Subject</label><input class='form-control subject'  id='subject"+numItems+"'/></div></div><div class='col-sm-4'><div class='form-group'><label>Subject2</label><input class='form-control secsubject'  id='secsubject"+numItems+"'/></div></div><div class='col-sm-4'><div class='form-group'><label>School/College</label><input class='form-control schoolcollege'  id='schoolcollege"+numItems+"'/></div></div><div class='col-sm-4'><div class='form-group'><label>City</label><input class='form-control city'  id='city"+numItems+"'/></div></div><div class='col-sm-4'><div class='form-group'><label>From Date</label><div class='input-group'><div class='input-group-addon'><i class='fa fa-calendar'></i></div><input type='text' class='fromdate mptldp form-control' id='fromdate"+numItems+"'/></div></div></div><div class='col-sm-4'><div class='form-group'><label>Pass Date</label><div class='input-group'><div class='input-group-addon'><i class='fa fa-calendar'></i></div><input type='text' class='passdate mptldp form-control' id='passdate"+numItems+"'/></div></div></div><div class='col-sm-4'><div class='form-group'><label>Grade/Percentage</label><input class='form-control grade'  id='grade"+numItems+"'/></div></div></div></div>");
+			$(".qualificationfieldset").append("<div class='col-md-12'><hr/></div>");
+			
+			//initialise datepicker
+			var userdf='<?php echo $this->request->session()->read('sessionuser')['dateformat'];?>';
+			if(userdf==1){
+				$('.mptldp').datepicker({ format:"dd/mm/yyyy",autoclose: true,clearBtn: true,todayHighlight: true });
+			}else{
+				$('.mptldp').datepicker({ format:"yyyy/mm/dd",autoclose: true,clearBtn: true,todayHighlight: true });
+			}
+			
+    	});
+    	
     //delete btn onclick
 	$('.idfieldset').on('click', 'a.compdelete', function() {
 		if (confirm("Are you sure you want to delete the particular ID ?")) {
 			$(this).parent().closest('div .idclass').remove();
+    		return true;
+  		} else {
+    		return false;
+  		}
+   
+	});
+	
+	//qualification delete btn onclick
+	$('.qualificationfieldset').on('click', 'a.qualdelete', function() {
+		if (confirm("Are you sure you want to delete the particular Qualification ?")) {
+			$(this).parent().closest('div .qualificationclass').remove();
+    		return true;
+  		} else {
+    		return false;
+  		}
+   
+	});
+	
+	//experience delete btn onclick
+	$('.experiencefieldset').on('click', 'a.expdelete', function() {
+		if (confirm("Are you sure you want to delete the particular Experience ?")) {
+			$(this).parent().closest('div .experienceclass').remove();
     		return true;
   		} else {
     		return false;

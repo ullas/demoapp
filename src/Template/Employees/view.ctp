@@ -37,6 +37,8 @@
            	<li><a href="#social" data-toggle="tab">Social</a></li>
            	<li><a href="#address" data-toggle="tab">Address</a></li>
            	<li><a href="#ids" data-toggle="tab">ID's</a></li>
+           	<li><a href="#qualification" data-toggle="tab">Educational Qualification</a></li>
+           	<li><a href="#experience" data-toggle="tab">Experience</a></li>
         </ul>
 
         <div class=" tab-content">
@@ -359,7 +361,60 @@
      		</fieldset>
           </div>
           <!-- Tab Pane-->
+			
+			<div class="tab-pane" id="qualification">
+             <!-- <div class="form-horizontal"> -->
+             	<fieldset>
+        		<div class="qualificationfieldset">
+                <?php
+                	echo $this->Form->input('educational_qualification.qualification', ['disabled' => true]);
+            		echo $this->Form->input('educational_qualification.subject', ['disabled' => true]);
+            		echo $this->Form->input('educational_qualification.subject2', ['disabled' => true]);
+            		echo $this->Form->input('educational_qualification.schoolcollege', ['label' => 'School/College','disabled' => true]);
+            		echo $this->Form->input('educational_qualification.city', ['disabled' => true]);
+            		echo $this->Form->input('educational_qualification.fromdate', ['disabled' => true,'label' => 'From Date','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+            		echo $this->Form->input('educational_qualification.passdate', ['disabled' => true,'label' => 'Pass Date','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+            		echo $this->Form->input('educational_qualification.grade', ['disabled' => true,'label' => 'Grade/Percentage']);
+			      ?>        		
+            		
+            		<div class="col-md-12"><hr/></div>
+        			</div>
+        			
+        			
+        			
+             	 </fieldset>
+            <!-- </div> -->
 
+          </div>
+          <!-- /.tab-pane -->
+          
+          <div class="tab-pane" id="experience">
+             <!-- <div class="form-horizontal"> -->
+             	<fieldset>
+        		<div class="experiencefieldset">
+                <?php
+                	echo $this->Form->input('experience.designation', ['disabled' => true]);
+            		echo $this->Form->input('experience.industry', ['disabled' => true]);
+            		echo $this->Form->input('experience.function', ['disabled' => true]);
+            		echo $this->Form->input('experience.employer', ['disabled' => true]);
+            		echo $this->Form->input('experience.city', ['disabled' => true]);
+            		echo $this->Form->input('experience.country', ['disabled' => true]);
+            		echo $this->Form->input('experience.fromdate', ['disabled' => true,'label' => 'From Date','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+            		echo $this->Form->input('experience.todate', ['disabled' => true,'label' => 'To Date','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+            		echo $this->Form->input('experience.contract', ['disabled' => true]);
+			      ?>        		
+            		
+            		<div class="col-md-12"><hr/></div>
+        			</div>
+        			
+        			
+        			
+             	 </fieldset>
+            <!-- </div> -->
+
+          </div>
+          <!-- /.tab-pane -->
+          
 
         </div>
         <!-- /.tab-content -->
@@ -487,7 +542,55 @@ function formattoymd(inputDate) {
 			}console.log(idobj);
 		}
 	
-	
+		
+		//experience's
+		var exparr='<?php echo $experiences; ?>';
+		var expobj = JSON.parse(exparr);
+				
+		for (k = 1; k <= expobj.length; k++) {
+			var numItems = $('.experienceclass').length+1;
+			
+			//change dateformat
+			if(userdf==1){
+				if(expobj[k-1]['fromdate']){
+					if(expobj[k-1]['fromdate'].length>11){
+						expobj[k-1]['fromdate']=expobj[k-1]['fromdate'].substring(0 , 10);
+						expobj[k-1]['fromdate']=formattodmy(expobj[k-1]['fromdate']);
+					}
+				}
+				
+				if(expobj[k-1]['todate']){
+					if(expobj[k-1]['todate'].length>11){
+						expobj[k-1]['todate']=expobj[k-1]['todate'].substring(0 , 10);
+						expobj[k-1]['todate']=formattodmy(expobj[k-1]['todate']);
+					}
+				}
+				
+			}else if(userdf==0){
+				if(expobj[k-1]['fromdate']){
+					if(expobj[k-1]['fromdate'].length>11){
+						expobj[k-1]['fromdate']=expobj[k-1]['fromdate'].substring(0 , 10);
+						expobj[k-1]['fromdate']=formattoymd(expobj[k-1]['fromdate']);
+					}
+				}
+				
+				if(expobj[k-1]['todate']){
+					if(expobj[k-1]['todate'].length>11){
+						expobj[k-1]['todate']=expobj[k-1]['todate'].substring(0 , 10);
+						expobj[k-1]['todate']=formattoymd(expobj[k-1]['todate']);
+					}
+				}
+			}
+			
+			
+			$(".experiencefieldset").append("<div class='experienceclass' id='contentDiv"+numItems+"'><div class='clearfix'><div class='col-sm-4'><label>Designation</label><input type='hidden' id='experienceid"+numItems+"' value='0'/><input disabled type='text' class='designation form-control' id='designation"+numItems+"' value='"+expobj[k-1]['designation']+"'/></div><div class='col-sm-4'><div class='form-group'><label>Industry</label><input class='form-control industry'  id='industry"+numItems+"' disabled value='"+expobj[k-1]['industry']+"'/></div></div><div class='col-sm-4'><div class='form-group'><label>Function</label><input disabled value='"+expobj[k-1]['function']+"' class='form-control function'  id='function"+numItems+"'/></div></div><div class='col-sm-4'><div class='form-group'><label>Employer</label><input disabled value='"+expobj[k-1]['employer']+"' class='form-control employer'  id='employer"+numItems+"'/></div></div><div class='col-sm-4'><div class='form-group'><label>City</label><input disabled value='"+expobj[k-1]['city']+"' class='form-control city'  id='city"+numItems+"'/></div></div><div class='col-sm-4'><div class='form-group'><label>Country</label><input disabled value='"+expobj[k-1]['country']+"' class='form-control country'  id='expcountry"+numItems+"'/></div></div><div class='col-sm-4'><div class='form-group'><label>From Date</label><div class='input-group'><div class='input-group-addon'><i class='fa fa-calendar'></i></div><input disabled value='"+expobj[k-1]['fromdate']+"' type='text' class='fromdate mptldp form-control' id='expfromdate"+numItems+"'/></div></div></div><div class='col-sm-4'><div class='form-group'><label>To Date</label><div class='input-group'><div class='input-group-addon'><i class='fa fa-calendar'></i></div><input disabled value='"+expobj[k-1]['todate']+"' type='text' class='exptodate mptldp form-control' id='exptodate"+numItems+"'/></div></div></div><div class='col-sm-4'><div class='form-group'><label>Contract</label><input disabled value='"+expobj[k-1]['contract']+"' class='form-control contract'  id='contract"+numItems+"'/></div></div></div></div>");
+			$(".experiencefieldset").append("<div class='col-md-12'><hr/></div>");
+			
+		}
+		
+		//qualification's
+		
+		
     });
 
 

@@ -72,6 +72,8 @@ div#myDropZone {
            	<li><a href="#social" data-toggle="tab">Social</a></li>
            	<li><a href="#address" data-toggle="tab">Address</a></li>
            	<li><a href="#ids" data-toggle="tab">ID's</a></li>
+           	<li><a href="#qualification" data-toggle="tab">Educational Qualification</a></li>
+           	<li><a href="#experience" data-toggle="tab">Experience</a></li>
         </ul>
 
 
@@ -412,7 +414,67 @@ div#myDropZone {
           </div>
           <!-- Tab Pane-->
 
+		<div class="tab-pane" id="qualification">
+             <!-- <div class="form-horizontal"> -->
+             	<fieldset>
+        		<div class="qualificationfieldset">
+                <?php
+                	echo $this->Form->input('educationalqualification.qualification');
+            		echo $this->Form->input('educationalqualification.subject');
+            		echo $this->Form->input('educationalqualification.subject2');
+            		echo $this->Form->input('educationalqualification.schoolcollege', ['label' => 'School/College']);
+            		echo $this->Form->input('educationalqualification.city');
+            		echo $this->Form->input('educationalqualification.fromdate', ['label' => 'From Date','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+            		echo $this->Form->input('educationalqualification.passdate', ['label' => 'Pass Date','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+            		echo $this->Form->input('educationalqualification.grade', ['label' => 'Grade/Percentage']);
+			      ?>        		
+            		
+            		<div class="col-md-12"><hr/></div>
+        			</div>
+        			
+        			<div class="col-md-4 pull-left"><div class="form-group">
+        				<div class="input-group" >        		
+        					<input type="button" class="btn btn-flat btn-info pull-left" id="btnAddQualificationCtrls" value="Add More" />
+        				</div>
+        			</div></div>
+        			
+             	 </fieldset>
+            <!-- </div> -->
 
+          </div>
+          <!-- /.tab-pane -->
+          
+          <div class="tab-pane" id="experience">
+             <!-- <div class="form-horizontal"> -->
+             	<fieldset>
+        		<div class="experiencefieldset">
+                <?php
+                	echo $this->Form->input('experience.designation');
+            		echo $this->Form->input('experience.industry');
+            		echo $this->Form->input('experience.function');
+            		echo $this->Form->input('experience.employer');
+            		echo $this->Form->input('experience.city');
+            		echo $this->Form->input('experience.country');
+            		echo $this->Form->input('experience.fromdate', ['label' => 'From Date','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+            		echo $this->Form->input('experience.todate', ['label' => 'To Date','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+            		echo $this->Form->input('experience.contract');
+			      ?>        		
+            		
+            		<div class="col-md-12"><hr/></div>
+        			</div>
+        			
+        			<div class="col-md-4 pull-left"><div class="form-group">
+        				<div class="input-group" >        		
+        					<input type="button" class="btn btn-flat btn-info pull-left" id="btnAddExperienceCtrls" value="Add More" />
+        				</div>
+        			</div></div>
+        			
+             	 </fieldset>
+            <!-- </div> -->
+
+          </div>
+          <!-- /.tab-pane -->
+          
         </div>
         <!-- /.tab-content -->
       </div>
@@ -648,6 +710,39 @@ $(document).ready(function(){
 			
     	});
     	
+    	$("#btnAddQualificationCtrls").click(function (event) {
+    		
+    		event.preventDefault();
+			var numItems = $('.qualificationclass').length+1;
+    		$(".qualificationfieldset").append("<div class='qualificationclass' id='contentDiv"+numItems+"'><div class='clearfix'><div class='col-sm-4'><label>Qualification</label><div class='input-group'><div class='input-group-btn'><a id='newid' class='qualdelete btn btn-danger btn-flat'><i class='fa fa-trash'></i></a></div><input type='hidden' id='qualificationid"+numItems+"' value='0'/><input type='text' class='qualification form-control' id='qualification"+numItems+"'/></div></div><div class='col-sm-4'><div class='form-group'><label>Subject</label><input class='form-control subject'  id='subject"+numItems+"'/></div></div><div class='col-sm-4'><div class='form-group'><label>Subject2</label><input class='form-control secsubject'  id='secsubject"+numItems+"'/></div></div><div class='col-sm-4'><div class='form-group'><label>School/College</label><input class='form-control schoolcollege'  id='schoolcollege"+numItems+"'/></div></div><div class='col-sm-4'><div class='form-group'><label>City</label><input class='form-control city'  id='city"+numItems+"'/></div></div><div class='col-sm-4'><div class='form-group'><label>From Date</label><div class='input-group'><div class='input-group-addon'><i class='fa fa-calendar'></i></div><input type='text' class='fromdate mptldp form-control' id='fromdate"+numItems+"'/></div></div></div><div class='col-sm-4'><div class='form-group'><label>Pass Date</label><div class='input-group'><div class='input-group-addon'><i class='fa fa-calendar'></i></div><input type='text' class='passdate mptldp form-control' id='passdate"+numItems+"'/></div></div></div><div class='col-sm-4'><div class='form-group'><label>Grade/Percentage</label><input class='form-control grade'  id='grade"+numItems+"'/></div></div></div></div>");
+			$(".qualificationfieldset").append("<div class='col-md-12'><hr/></div>");
+			
+			//initialise datepicker
+			var userdf='<?php echo $this->request->session()->read('sessionuser')['dateformat'];?>';
+			if(userdf==1){
+				$('.mptldp').datepicker({ format:"dd/mm/yyyy",autoclose: true,clearBtn: true,todayHighlight: true });
+			}else{
+				$('.mptldp').datepicker({ format:"yyyy/mm/dd",autoclose: true,clearBtn: true,todayHighlight: true });
+			}
+			
+    	});
+    	
+    	$("#btnAddExperienceCtrls").click(function (event) {
+    		
+    		event.preventDefault();
+			var numItems = $('.experienceclass').length+1;
+    		$(".experiencefieldset").append("<div class='experienceclass' id='contentDiv"+numItems+"'><div class='clearfix'><div class='col-sm-4'><label>Designation</label><div class='input-group'><div class='input-group-btn'><a id='newid' class='expdelete btn btn-danger btn-flat'><i class='fa fa-trash'></i></a></div><input type='hidden' id='experienceid"+numItems+"' value='0'/><input type='text' class='designation form-control' id='designation"+numItems+"'/></div></div><div class='col-sm-4'><div class='form-group'><label>Industry</label><input class='form-control industry'  id='industry"+numItems+"'/></div></div><div class='col-sm-4'><div class='form-group'><label>Function</label><input class='form-control function'  id='function"+numItems+"'/></div></div><div class='col-sm-4'><div class='form-group'><label>Employer</label><input class='form-control employer'  id='employer"+numItems+"'/></div></div><div class='col-sm-4'><div class='form-group'><label>City</label><input class='form-control city'  id='city"+numItems+"'/></div></div><div class='col-sm-4'><div class='form-group'><label>Employer</label><input class='form-control employer'  id='employer"+numItems+"'/></div></div><div class='col-sm-4'><div class='form-group'><label>Country</label><input class='form-control country'  id='country"+numItems+"'/></div></div><div class='col-sm-4'><div class='form-group'><label>From Date</label><div class='input-group'><div class='input-group-addon'><i class='fa fa-calendar'></i></div><input type='text' class='fromdate mptldp form-control' id='fromdate"+numItems+"'/></div></div></div><div class='col-sm-4'><div class='form-group'><label>Pass Date</label><div class='input-group'><div class='input-group-addon'><i class='fa fa-calendar'></i></div><input type='text' class='passdate mptldp form-control' id='passdate"+numItems+"'/></div></div></div><div class='col-sm-4'><div class='form-group'><label>Contract</label><input class='form-control contract'  id='contract"+numItems+"'/></div></div></div></div>");
+			$(".experiencefieldset").append("<div class='col-md-12'><hr/></div>");
+			
+			//initialise datepicker
+			var userdf='<?php echo $this->request->session()->read('sessionuser')['dateformat'];?>';
+			if(userdf==1){
+				$('.mptldp').datepicker({ format:"dd/mm/yyyy",autoclose: true,clearBtn: true,todayHighlight: true });
+			}else{
+				$('.mptldp').datepicker({ format:"yyyy/mm/dd",autoclose: true,clearBtn: true,todayHighlight: true });
+			}
+			
+    	});
     	
     	//copyaddress checkbox clicked
     	$('#copyaddress').change(function() {
