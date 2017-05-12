@@ -519,6 +519,10 @@ var countrydata=[];
 					return false;
 				}
     		}
+    		
+    		if(qualclasscount<1){
+    			saveExperiences(empid);
+    		}
 	}
 	function saveExperiences(empid){
 		var expclasscount = $('.experienceclass').length;
@@ -562,6 +566,11 @@ var countrydata=[];
 					sweet_alert("Please enter Designation/Industry/From/Pass Date.");
 					return false;
 				}
+    		}
+    		
+    		if(expclasscount<1){
+    			expcounter++;    							
+    			window.location='/employees';    		
     		}
 	}
 	function addmultiContents(empid){
