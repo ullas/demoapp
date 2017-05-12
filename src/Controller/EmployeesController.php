@@ -101,6 +101,14 @@ class EmployeesController extends AppController
 							->andwhere("Experiences.customer_id=".$this->loggedinuser['customer_id']);
 			$this->set('experiences', json_encode($experiences));
 			
+			$qualificationid=0;
+			if(isset($employee['educational_qualification']['id'])){
+				$qualificationid=$employee['educational_qualification']['id'];
+			}
+			$qualifications = $this->Employees->EducationalQualifications->find('all')->where("EducationalQualifications.employee_id=".$id)->andwhere("EducationalQualifications.id!=".$qualificationid)
+							->andwhere("EducationalQualifications.customer_id=".$this->loggedinuser['customer_id']);
+			$this->set('qualifications', json_encode($qualifications));
+			
 			$this->loadModel('Addresses');
         	$address = $this->Addresses->find('all')->where("Addresses.employee_id=".$id)->andwhere("Addresses.address_type='2'")
 							->andwhere("Addresses.customer_id=".$this->loggedinuser['customer_id']);
@@ -143,7 +151,7 @@ class EmployeesController extends AppController
 			
             if ($this->Employees->save($employee)) {
                 	
-                $this->Flash->success(__('The employee has been saved.'.json_encode($employee['address'])));
+                $this->Flash->success(__('The employee has been saved.'));
                 return $this->redirect(['action' => 'index']);
             } else {
                 $this->Flash->error(__('The employee could not be saved. Please, try again.'));
@@ -433,8 +441,8 @@ class EmployeesController extends AppController
     public function edit($id = null)
     {
         $employee = $this->Employees->get($id, [
-            'contain' => ['Empdatabiographies', 'Empdatapersonals', 'Employmentinfos', 'ContactInfos', 'Addresses'=> function ($q) {
-       							return $q->where(['Addresses.address_type' => '1']); },'Identities', 'Jobinfos']
+            'contain' => ['Empdatabiographies', 'Empdatapersonals', 'Employmentinfos', 'ContactInfos','EducationalQualifications','Experiences', 'Addresses' => function ($q) {
+       							return $q->where(['Addresses.address_type' => '1']); },'Identities','Jobinfos']
         ]);
 		
 		if($employee['customer_id'] != $this->loggedinuser['customer_id'] || $employee['visible'] != '1')
@@ -523,8 +531,28 @@ class EmployeesController extends AppController
     				if ($this->Employees->Identities->save($identity)) {
                 			
             		}
+					
+					//associated Experiences
+            		$this->loadModel('Experiences');
+					$arr = $this->Experiences->find('all',['conditions' => array('employee_id' => $id), 'contain' => []])->toArray();
+					isset($arr[0]) ? $experience = $arr[0] : $experience = $this->Experiences->newEntity();  						
+					$experience = $this->Experiences->patchEntity($experience, $this->request->data['experience']);
+					$experience['customer_id']=$this->loggedinuser['customer_id'];
+    				if ($this->Employees->Experiences->save($experience)) {
+                			
+            		}
+					
+					//associated EducationalQualifications
+            		$this->loadModel('EducationalQualifications');
+					$arr = $this->EducationalQualifications->find('all',['conditions' => array('employee_id' => $id), 'contain' => []])->toArray();
+					isset($arr[0]) ? $qualification = $arr[0] : $qualification = $this->EducationalQualifications->newEntity();  						
+					$qualification = $this->EducationalQualifications->patchEntity($qualification, $this->request->data['educational_qualification']);
+					$qualification['customer_id']=$this->loggedinuser['customer_id'];
+    				if ($this->Employees->EducationalQualifications->save($qualification)) {
+                			
+            		}
 						
-				$this->Flash->success(__('The employee has been saved.'));
+				$this->Flash->success(__('The employee has been savedrrrr.'));
 				return $this->redirect(['action' => 'index']);
             } else {
                 $this->Flash->error(__('The employee could not be saved. Please, try again.'));
@@ -565,6 +593,22 @@ class EmployeesController extends AppController
 			$identityid=$employee['identity']['id'];
 		}
 
+		$experienceid=0;
+			if(isset($employee['experience']['id'])){
+				$experienceid=$employee['experience']['id'];
+			}
+			$experiences = $this->Employees->Experiences->find('all')->where("Experiences.employee_id=".$id)->andwhere("Experiences.id!=".$experienceid)
+							->andwhere("Experiences.customer_id=".$this->loggedinuser['customer_id']);
+			$this->set('experiences', json_encode($experiences));
+			
+			$qualificationid=0;
+			if(isset($employee['educational_qualification']['id'])){
+				$qualificationid=$employee['educational_qualification']['id'];
+			}
+			$qualifications = $this->Employees->EducationalQualifications->find('all')->where("EducationalQualifications.employee_id=".$id)->andwhere("EducationalQualifications.id!=".$qualificationid)
+							->andwhere("EducationalQualifications.customer_id=".$this->loggedinuser['customer_id']);
+			$this->set('qualifications', json_encode($qualifications));
+			
 		$ids = $this->Employees->Identities->find('all')->where("Identities.employee_id=".$id)->andwhere("Identities.id!=".$identityid)
 							->andwhere("Identities.customer_id=".$this->loggedinuser['customer_id']);
 		$this->set('ids', json_encode($ids));

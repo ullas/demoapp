@@ -589,7 +589,49 @@ function formattoymd(inputDate) {
 		}
 		
 		//qualification's
-		
+		var qualarr='<?php echo $qualifications; ?>';
+		var qualobj = JSON.parse(qualarr);
+				
+		for (j = 1; j <= qualobj.length; j++) {
+			var numItems = $('.qualificationclass').length+1;
+			
+			//change dateformat
+			if(userdf==1){
+				if(qualobj[j-1]['fromdate']){
+					if(qualobj[j-1]['fromdate'].length>11){
+						qualobj[j-1]['fromdate']=qualobj[j-1]['fromdate'].substring(0 , 10);
+						qualobj[j-1]['fromdate']=formattodmy(qualobj[j-1]['fromdate']);
+					}
+				}
+				
+				if(qualobj[j-1]['passdate']){
+					if(qualobj[j-1]['passdate'].length>11){
+						qualobj[j-1]['passdate']=qualobj[j-1]['passdate'].substring(0 , 10);
+						qualobj[j-1]['passdate']=formattodmy(qualobj[j-1]['passdate']);
+					}
+				}
+				
+			}else if(userdf==0){
+				if(qualobj[j-1]['fromdate']){
+					if(qualobj[j-1]['fromdate'].length>11){
+						qualobj[j-1]['fromdate']=qualobj[j-1]['fromdate'].substring(0 , 10);
+						qualobj[j-1]['fromdate']=formattoymd(qualobj[j-1]['fromdate']);
+					}
+				}
+				
+				if(qualobj[j-1]['passdate']){
+					if(qualobj[j-1]['passdate'].length>11){
+						qualobj[j-1]['passdate']=qualobj[j-1]['passdate'].substring(0 , 10);
+						qualobj[j-1]['passdate']=formattoymd(qualobj[j-1]['passdate']);
+					}
+				}
+			}
+			
+			
+			$(".qualificationfieldset").append("<div class='qualificationclass' id='contentDiv"+numItems+"'><div class='clearfix'><div class='col-sm-4'><label>Qualification</label><div class='input-group'><input type='hidden' id='qualificationid"+numItems+"' value='0'/><input type='text' class='qualification form-control' id='qualification"+numItems+"' disabled  value='"+qualobj[j-1]['qualification']+"'/></div></div><div class='col-sm-4'><div class='form-group'><label>Subject</label><input class='form-control subject'  id='subject"+numItems+"' disabled  value='"+qualobj[j-1]['subject']+"'/></div></div><div class='col-sm-4'><div class='form-group'><label>Subject2</label><input class='form-control secsubject' disabled  value='"+qualobj[j-1]['subject2']+"' id='secsubject"+numItems+"'/></div></div><div class='col-sm-4'><div class='form-group'><label>School/College</label><input class='form-control schoolcollege' disabled  value='"+qualobj[j-1]['schoolcollege']+"'  id='schoolcollege"+numItems+"'/></div></div><div class='col-sm-4'><div class='form-group'><label>City</label><input disabled  value='"+qualobj[j-1]['city']+"' class='form-control city'  id='city"+numItems+"'/></div></div><div class='col-sm-4'><div class='form-group'><label>From Date</label><div class='input-group'><div class='input-group-addon'><i class='fa fa-calendar'></i></div><input type='text' disabled  value='"+qualobj[j-1]['fromdate']+"' class='fromdate mptldp form-control' id='fromdate"+numItems+"'/></div></div></div><div class='col-sm-4'><div class='form-group'><label>Pass Date</label><div class='input-group'><div class='input-group-addon'><i class='fa fa-calendar'></i></div><input type='text' disabled  value='"+qualobj[j-1]['passdate']+"' class='passdate mptldp form-control' id='passdate"+numItems+"'/></div></div></div><div class='col-sm-4'><div class='form-group'><label>Grade/Percentage</label><input class='form-control grade' disabled  value='"+qualobj[j-1]['grade']+"'  id='grade"+numItems+"'/></div></div></div></div>");
+			$(".qualificationfieldset").append("<div class='col-md-12'><hr/></div>");
+			
+		}
 		
     });
 
