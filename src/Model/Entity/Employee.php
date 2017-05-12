@@ -14,9 +14,11 @@ use Cake\ORM\Entity;
  * @property \App\Model\Entity\Customer $customer
  * @property \App\Model\Entity\Address $address
  * @property \App\Model\Entity\ContactInfo $contact_info
+ * @property \App\Model\Entity\EducationalQualification $educational_qualification
  * @property \App\Model\Entity\Empdatabiography $empdatabiography
  * @property \App\Model\Entity\EmpDataPersonal $empdatapersonal
  * @property \App\Model\Entity\EmploymentInfo $employmentinfo
+ * @property \App\Model\Entity\Experience $experience
  * @property \App\Model\Entity\Identity $identity
  * @property \App\Model\Entity\Jobinfo $jobinfo
  * @property \App\Model\Entity\User $user

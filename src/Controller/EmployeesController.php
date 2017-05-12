@@ -131,7 +131,8 @@ class EmployeesController extends AppController
     {
         $employee = $this->Employees->newEntity();
         if ($this->request->is('post')) {
-            $employee = $this->Employees->patchEntity($employee, $this->request->data,['associated' => ['EducationalQualifications','Experiences', 'Empdatabiographies', 'Empdatapersonals', 'Employmentinfos','Jobinfos', 'Customers', 'ContactInfos', 'Addresses','Identities']]);
+            $employee = $this->Employees->patchEntity($employee, $this->request->data,['associated' => [ 'Skills','OfficeAssets',
+            					'EducationalQualifications','Experiences', 'Empdatabiographies', 'Empdatapersonals', 'Employmentinfos','Jobinfos', 'Customers', 'ContactInfos', 'Addresses','Identities']]);
 			$employee['visible']="1";
 			$employee['profilepicture']=$employee['employee']['profilepicture'];
 			//saving customer_id to all associated models
@@ -224,7 +225,7 @@ class EmployeesController extends AppController
 			
 			$employee = $this->Employees->newEntity();
         	$employee = $this->Employees->patchEntity($employee, $this->request->data,['associated' => ['EducationalQualifications','Experiences','Empdatabiographies', 'Empdatapersonals',
-        						 'Employmentinfos','Jobinfos', 'Customers', 'ContactInfos', 'Addresses','Identities']]);
+        						 'Employmentinfos','Jobinfos', 'Customers', 'ContactInfos', 'Addresses','Identities', 'Skills','OfficeAssets']]);
 			$employee['visible']="1";
 			$employee['profilepicture']=$employee['employee']['profilepicture'];
 			//saving customer_id to all associated models
@@ -240,6 +241,9 @@ class EmployeesController extends AppController
 			
 			$employee['educational_qualification']['customer_id']=$this->loggedinuser['customer_id'];
 			$employee['experience']['customer_id']=$this->loggedinuser['customer_id'];
+			$employee['office_asset']['customer_id']=$this->loggedinuser['customer_id'];
+			$employee['skill']['customer_id']=$this->loggedinuser['customer_id'];
+			
 			$employee['empdatabiography']['position_id']=$employee['jobinfo']['position_id'];
 			
             if ($this->Employees->save($employee)) {
@@ -332,6 +336,97 @@ class EmployeesController extends AppController
 			}						
 				
 			if ($this->Identities->save($identity)) {
+
+               	 	$this->response->body("success");
+	    			return $this->response;
+            } else {
+                	$this->response->body("error");
+	    			return $this->response;
+            }			
+		}
+    }
+	public function addOfficeAssets(){
+    	
+    	if($this->request->is('ajax')) {
+				
+			$this->autoRender=false;		
+			
+			$this->loadModel('OfficeAssets');		
+			
+			if($this->request->data['assetid']!="" && $this->request->data['assetid']!="0"){
+				$asset = $this->OfficeAssets->get($this->request->data['assetid'], []);
+			}else{
+				$asset = $this->OfficeAssets->newEntity();
+			}
+			
+			$asset=$this->OfficeAssets->patchEntity($asset,$this->request->data);
+            $asset['customer_id']=$this->loggedinuser['customer_id'];
+			$asset['employee_id']=$this->request->data['empid'];
+           	$asset['location']=$this->request->data['assetlocation'];
+			$asset['assettype']=$this->request->data['assettype'];
+			$asset['assetnumber']=$this->request->data['assetnumber'];
+			$asset['assetdescription']=$this->request->data['assetdescription'];
+			$asset['issuedate']=$this->request->data['assetissuedate'];
+			$asset['todate']=$this->request->data['assettodate'];
+			
+			$userdf = $this->request->session()->read('sessionuser')['dateformat'];
+            if(isset($userdf)  & $userdf===1){
+				foreach (["issuedate", "todate"] as $value) {		
+					if(isset($asset[$value])){			
+						if($asset[$value]!=null && $asset[$value]!='' && strpos($asset[$value], '/') !== false){
+							$asset[$value] = str_replace('/', '-', $asset[$value]);
+							$asset[$value]=date('Y/m/d', strtotime($asset[$value]));
+						}
+					}
+				}
+			}						
+				
+			if ($this->OfficeAssets->save($asset)) {
+
+               	 	$this->response->body("success");
+	    			return $this->response;
+            } else {
+                	$this->response->body("error");
+	    			return $this->response;
+            }			
+		}
+    }
+	public function addSkills(){
+    	
+    	if($this->request->is('ajax')) {
+				
+			$this->autoRender=false;		
+			
+			$this->loadModel('Skills');		
+			
+			if($this->request->data['skillid']!="" && $this->request->data['skillid']!="0"){
+				$skill = $this->Skills->get($this->request->data['skillid'], []);
+			}else{
+				$skill = $this->Skills->newEntity();
+			}
+			
+			$skill=$this->Skills->patchEntity($skill,$this->request->data);
+            $skill['customer_id']=$this->loggedinuser['customer_id'];
+			$skill['employee_id']=$this->request->data['empid'];
+           	$skill['skill']=$this->request->data['skill'];
+			$skill['skillgroup']=$this->request->data['skillgroup'];
+			$skill['proficiency']=$this->request->data['skillproficiency'];
+			$skill['fromdate']=$this->request->data['skillfromdate'];
+			$skill['todate']=$this->request->data['skilltodate'];
+			
+			$userdf = $this->request->session()->read('sessionuser')['dateformat'];
+            if(isset($userdf)  & $userdf===1){
+				foreach (["fromdate", "todate"] as $value) {		
+					if(isset($skill[$value])){			
+						if($skill[$value]!=null && $skill[$value]!='' && strpos($skill[$value], '/') !== false){
+							$skill[$value] = str_replace('/', '-', $skill[$value]);
+							$skill[$value]=date('Y/m/d', strtotime($skill[$value]));
+						}
+					}
+				}
+			}						
+				
+			if ($this->Skills->save($skill)) {
 
                	 	$this->response->body("success");
 	    			return $this->response;
@@ -552,7 +647,7 @@ class EmployeesController extends AppController
                 			
             		}
 						
-				$this->Flash->success(__('The employee has been savedrrrr.'));
+				$this->Flash->success(__('The employee has been saved.'));
 				return $this->redirect(['action' => 'index']);
             } else {
                 $this->Flash->error(__('The employee could not be saved. Please, try again.'));
