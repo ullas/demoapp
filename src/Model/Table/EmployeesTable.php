@@ -6,6 +6,7 @@ use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
 use Cake\Datasource\ConnectionManager;
+
 /**
  * Employees Model
  *
@@ -19,6 +20,8 @@ use Cake\Datasource\ConnectionManager;
  * @property \Cake\ORM\Association\HasMany $Experiences
  * @property \Cake\ORM\Association\HasMany $Identities
  * @property \Cake\ORM\Association\HasMany $Jobinfos
+ * @property \Cake\ORM\Association\HasMany $OfficeAssets
+ * @property \Cake\ORM\Association\HasMany $Skills
  * @property \Cake\ORM\Association\HasMany $Users
  *
  * @method \App\Model\Entity\Employee get($primaryKey, $options = [])
@@ -86,6 +89,12 @@ class EmployeesTable extends Table
             'foreignKey' => 'employee_id','dependent' => true
         ]);
         $this->hasOne('Jobinfos', [
+            'foreignKey' => 'employee_id','dependent' => true
+        ]);
+        $this->hasOne('OfficeAssets', [
+            'foreignKey' => 'employee_id','dependent' => true
+        ]);
+        $this->hasOne('Skills', [
             'foreignKey' => 'employee_id','dependent' => true
         ]);
         $this->hasOne('Users', [
