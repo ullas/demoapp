@@ -42,12 +42,14 @@ div#myDropZone {
         	<li id="li1" class="active"><a href="#EmpDataPersonal" data-toggle="tab">Personal Information</a></li>
             <li id="li2"><a href="#EmploymentInfo" data-toggle="tab">Employment Information</a></li>
             <li id="li3"><a href="#EmpDataBiography" data-toggle="tab">Profile</a></li>
-           	<li><a href="#jobinfo" data-toggle="tab">Job Info</a></li>
+           	<li id="lijobinfo"><a href="#jobinfo" data-toggle="tab">Job Info</a></li>
            	<li id="li4"><a href="#social" data-toggle="tab">Social</a></li>
            	<li id="li5"><a href="#address" data-toggle="tab">Address</a></li>
            	<li id="li6"><a href="#ids" data-toggle="tab">ID's</a></li>
 			<li id="li7"><a href="#qualification" data-toggle="tab">Educational Qualification</a></li>
            	<li id="li8"><a href="#experience" data-toggle="tab">Experience</a></li>
+           	<li id="li9"><a href="#skills" data-toggle="tab">Skills</a></li>
+           	<li id="li10"><a href="#officeassets" data-toggle="tab">Office Assets</a></li>
         </ul>
 
         <div class=" tab-content">
@@ -438,6 +440,62 @@ div#myDropZone {
           </div>
           <!-- /.tab-pane -->
           
+           <div class="tab-pane" id="officeassets">
+             <!-- <div class="form-horizontal"> -->
+             	<fieldset>
+        		<div class="officeassetfieldset">
+                <?php
+                	echo $this->Form->input('office_asset.location');
+            		echo $this->Form->input('office_asset.assettype', ['label' => 'Asset Type']);
+            		echo $this->Form->input('office_asset.assetnumber', ['label' => 'Asset Number']);
+            		echo $this->Form->input('office_asset.assetdescription', ['label' => 'Asset Description']);
+            		echo $this->Form->input('office_asset.issuedate', ['label' => 'Issue Date','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+            		echo $this->Form->input('office_asset.todate', ['label' => 'To Date','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+			      ?>        		
+            		
+            		<div class="col-md-12"><hr/></div>
+        			</div>
+        			
+        			<div class="col-md-4 pull-left"><div class="form-group">
+        				<div class="input-group" >        		
+        					<input type="button" class="btn btn-flat btn-info pull-left" id="btnAddAssetCtrls" value="Add More" />
+        				</div>
+        			</div></div>
+        			
+             	 </fieldset>
+            <!-- </div> -->
+
+          </div>
+          <!-- /.tab-pane -->
+          
+           <div class="tab-pane" id="skills">
+             <!-- <div class="form-horizontal"> -->
+             	<fieldset>
+        		<div class="skillfieldset">
+                <?php
+                	echo $this->Form->input('skill.skill');
+            		echo $this->Form->input('skill.skillgroup', ['label' => 'Skill Group']);
+            		echo $this->Form->input('skill.proficiency');
+            		echo $this->Form->input('skill.fromdate', ['label' => 'From Date','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+            		echo $this->Form->input('skill.todate', ['label' => 'To Date','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+
+			      ?>        		
+            		
+            		<div class="col-md-12"><hr/></div>
+        			</div>
+        			
+        			<div class="col-md-4 pull-left"><div class="form-group">
+        				<div class="input-group" >        		
+        					<input type="button" class="btn btn-flat btn-info pull-left" id="btnAddSkillCtrls" value="Add More" />
+        				</div>
+        			</div></div>
+        			
+             	 </fieldset>
+            <!-- </div> -->
+
+          </div>
+          <!-- /.tab-pane -->
+          
 
         </div>
         <!-- /.tab-content -->
@@ -467,11 +525,105 @@ var empid='';
 var idcounter=0;
 var expcounter=0;
 var qualcounter=0;
+var skillcounter=0;
+var assetcounter=0;
 var countrydata=[];
 	var countryarr=<?php echo $countryarr ?>;
 	$.each(countryarr, function(key, value) {
     	countrydata.push({'id':key, "text":value});
 	});
+	function saveofficeAssets(empid){
+		var assetclasscount = $('.assetclass').length;
+    	//saving multi asset's
+    	for (t = 1; t <= assetclasscount; t++) 
+    	{
+    		var assetlocation=$("#assetlocation"+t).val();
+    		var assettype=$("#assettype"+t).val();
+    		var assetnumber=$("#assetnumber"+t).val();
+    		var assetdescription=$("#assetdescription"+t).val();
+    		var assetissuedate=$("#assetissuedate"+t).val();
+    		var assettodate=$("#assettodate"+t).val();
+    		
+    			if(empid!="" && empid!=null && assetnumber!="" && assetnumber!=null && assetissuedate!="" && assetissuedate!=null && assettodate!="" && assettodate!=""){
+    				$.ajax({
+        				type: "POST",
+        				url: '/Employees/addOfficeAssets',
+        				data: 'empid='+empid+'&assetid='+'0'+'&assetlocation='+assetlocation+'&assettype='+assettype+'&assetnumber='+assetnumber+'&assetdescription='+assetdescription
+        						+'&assetissuedate='+assetissuedate+'&assettodate='+assettodate,
+        				success : function(data) {
+    						if(t==assetclasscount || t>assetclasscount){
+    							
+    								assetcounter++;
+    								saveSkills(empid);
+    										
+    						}
+        				},error: function(data) {
+    						sweet_alert("Error while adding Office Assets.");
+							return false;   			
+
+        				},statusCode: {
+        					500: function() {alert();console.log("enterd but not stopped");
+          						sweet_alert("Error while adding Office Assets.");
+								return false;
+        					}
+      					}
+      
+        			});	
+				}else{
+					sweet_alert("Please enter Asset Number/Issue/To Date.");break;
+					return false;
+				}
+    		}
+    		
+    		if(assetclasscount<1){
+    			assetcounter++;    							
+    			saveSkills(empid);   		
+    		}
+	}
+	function saveSkills(empid){
+		var skillclasscount = $('.skillclass').length;
+    	//saving multi skill's
+    	for (t = 1; t <= skillclasscount; t++) 
+    	{
+    		var skill=$("#skill"+t).val();
+    		var skillgroup=$("#skillgroup"+t).val();
+    		var skillproficiency=$("#skillproficiency"+t).val();
+    		var skillfromdate=$("#skillfromdate"+t).val();
+    		var skilltodate=$("#skilltodate"+t).val();
+    		
+    			if(empid!="" && empid!=null && skill!="" && skill!=null && skillfromdate!="" && skillfromdate!=null && skilltodate!="" && skilltodate!=""){
+    				$.ajax({
+        				type: "POST",
+        				url: '/Employees/addSkills',
+        				data: 'empid='+empid+'&skillid='+'0'+'&skill='+skill+'&skillgroup='+skillgroup+'&skillproficiency='+skillproficiency+'&skillfromdate='+skillfromdate+'&skilltodate='+skilltodate,
+        				success : function(data) {
+    						if(t==skillclasscount || t>skillclasscount){
+    							skillcounter++;    							
+    							window.location='/employees';    						
+    						}
+        				},error: function(data) {
+    						sweet_alert("Error while adding Skill.");
+							return false;   			
+
+        				},statusCode: {
+        					500: function() {
+          						sweet_alert("Error while adding Skill.");
+								return false;
+        					}
+      					}
+      
+        			});	
+				}else{
+					sweet_alert("Please enter Skill/From/To Date.");break;
+					return false;
+				}
+    		}
+    		
+    		if(skillclasscount<1){
+    			skillcounter++;    							
+    			window.location='/employees';    		
+    		}
+	}
 	function saveQualifications(empid){
 		
 		var qualclasscount = $('.qualificationclass').length;
@@ -495,12 +647,10 @@ var countrydata=[];
         						+'&fromdate='+fromdate+'&passdate='+passdate +'&grade='+grade,
         				success : function(data) {
     						if(t==qualclasscount || t>qualclasscount){
-    							if(qualclasscount<1){
-    								window.location='/employees';
-    							}else{
+    							
     								qualcounter++;
     								saveExperiences(empid);
-    							}
+    							
     						}
         				},error: function(data) {
     						sweet_alert("Error while adding Qualification's.");
@@ -515,12 +665,13 @@ var countrydata=[];
       
         			});	
 				}else{
-					sweet_alert("Please enter Qualification/From/Pass Date.");
+					sweet_alert("Please enter Qualification/From/Pass Date.");break;
 					return false;
 				}
     		}
     		
     		if(qualclasscount<1){
+    			qualcounter++;
     			saveExperiences(empid);
     		}
 	}
@@ -548,7 +699,7 @@ var countrydata=[];
         				success : function(data) {
     						if(t==expclasscount || t>expclasscount){
     							expcounter++;    							
-    							window.location='/employees';    						
+    							saveofficeAssets(empid);    						
     						}
         				},error: function(data) {
     						sweet_alert("Error while adding Experience.");
@@ -563,14 +714,14 @@ var countrydata=[];
       
         			});	
 				}else{
-					sweet_alert("Please enter Designation/Industry/From/Pass Date.");
+					sweet_alert("Please enter Designation/Industry/From/Pass Date.");break;
 					return false;
 				}
     		}
     		
     		if(expclasscount<1){
     			expcounter++;    							
-    			window.location='/employees';    		
+    			saveofficeAssets(empid);   		
     		}
 	}
 	function addmultiContents(empid){
@@ -578,6 +729,8 @@ var countrydata=[];
 		var idclasscount = $('.idclass').length;
 		var qualclasscount = $('.qualificationclass').length;
 		var expclasscount = $('.experienceclass').length;
+		var assetclasscount = $('.assetclass').length;
+		var skillclasscount = $('.skillclass').length;
 		
 		//add permanent address
     		var address1=$("#paaddress1").val();
@@ -601,7 +754,7 @@ var countrydata=[];
         			data: 'empid='+empid+'&address1='+address1+'&address2='+address2+'&address3='+address3+'&address4='+address4+'&address5='+address5+'&address6='+address6
         					+'&address7='+address7+'&address8='+address8+'&county='+county+'&state='+state+'&zipcode='+zipcode+'&city='+city,
         			success : function(data) {
-    					if(idclasscount<1 &&  qualclasscount<1 && expclasscount<1){
+    					if(idclasscount<1 &&  qualclasscount<1 && expclasscount<1 &&  assetclasscount<1 && skillclasscount<1){
     						window.location='/employees';
     					}
         			},error: function(data) {
@@ -634,7 +787,7 @@ var countrydata=[];
         				data: 'empid='+empid+'&identityid='+'0'+'&idtype='+idtype+'&country='+country+'&nationalid='+nationalid+'&isprimary='+'0'+'&issuedate='+issuedate+'&expirydate='+expirydate,
         				success : function(data) {
     						if(k==idclasscount || k>idclasscount){
-    							if(qualclasscount<1 && expclasscount<1){
+    							if(qualclasscount<1 && expclasscount<1 &&  assetclasscount<1 && skillclasscount<1){
     								window.location='/employees';
     							}else{
     								idcounter++;
@@ -659,14 +812,18 @@ var countrydata=[];
 				}
     		}
     		
-    		if(idclasscount<1){
+    		if(idclasscount<1){console.log("clicked");
+    			idcounter++;
     			saveQualifications(empid);
     		}
 	}
 	function updateEmployee(){
 
-		var post_data =  $('#empform').serialize();
-		// console.log(post_data);
+		var idclasscount = $('.idclass').length;
+		var qualclasscount = $('.qualificationclass').length;
+		var expclasscount = $('.experienceclass').length;
+		var assetclasscount = $('.assetclass').length;
+		var skillclasscount = $('.skillclass').length;
 
 	if(empid==""){
 		$.ajax({
@@ -680,17 +837,25 @@ var countrydata=[];
         			addmultiContents(empid);
         		}
     		},
-        	error : function() {
-            	alert("Error while adding Employee.");
+        	error : function(data) {console.log(data);
+            	sweet_alert("Error while adding Employee.");
             	return false;
         	}
     	});
     }else{
     	//continue posting ajax from where it got error
-    	if(idcounter>0){
-    		if(qualcounter>0){
-    			if(expcounter>0){
-    				sweet_alert("No more data to save.");
+    	if(idcounter>0 && idcounter==idclasscount){
+    		if(qualcounter>0 && qualcounter==qualclasscount){
+    			if(expcounter>0 && expcounter==expclasscount){
+    				if(assetcounter>0 && assetcounter==assetclasscount){
+    					if(skillcounter>0 && skillcounter==skillclasscount){
+    						sweet_alert("No more data to save.");
+    					}else{
+    						saveSkills(empid);
+    					}
+    				}else{
+    					saveofficeAssets(empid);
+    				}
     			}else{
     				saveExperiences(empid);
     			}
@@ -753,11 +918,13 @@ $(function () {
     		return true;
     	}else{
     		$("#EmpDataBiography").addClass("active");
-    		$("#EmploymentInfo").removeClass("active");$("#EmpDataPersonal").removeClass("active");$("#social").removeClass("active");$("#address").removeClass("active");$("#ids").removeClass("active");
+    		$("#EmploymentInfo").removeClass("active");$("#EmpDataPersonal").removeClass("active");$("#social").removeClass("active");$("#address").removeClass("active");$("#jobinfo").removeClass("active");
+    		$("#ids").removeClass("active");$("#experience").removeClass("active");$("#skills").removeClass("active");$("#officeassets").removeClass("active");$("#qualification").removeClass("active");
 
 
     		$("#li3").addClass("active");
-    		$("#li1").removeClass("active");$("#li2").removeClass("active");$("#li4").removeClass("active");$("#li5").removeClass("active");$("#li6").removeClass("active");$("#li7").removeClass("active");$("#li8").removeClass("active");
+    		$("#li1").removeClass("active");$("#li2").removeClass("active");$("#li4").removeClass("active");$("#li5").removeClass("active");$("#li6").removeClass("active");
+    		$("#li7").removeClass("active");$("#li8").removeClass("active");$("#li9").removeClass("active");$("#li10").removeClass("active");$("#lijobinfo").removeClass("active");
 
     		sweet_alert("Please enter the Person Id External.");
     		return false;
@@ -856,6 +1023,40 @@ $(function () {
 			
     	});
     	
+    	$("#btnAddSkillCtrls").click(function (event) {
+    		
+    		event.preventDefault();
+			var numItems = $('.skillclass').length+1;
+    		$(".skillfieldset").append("<div class='skillclass' id='contentDiv"+numItems+"'><div class='clearfix'><div class='col-sm-4'><label>Skill</label><div class='input-group'><div class='input-group-btn'><a id='newid' class='skilldelete btn btn-danger btn-flat'><i class='fa fa-trash'></i></a></div><input type='hidden' id='skillid"+numItems+"' value='0'/><input type='text' class='skill form-control' id='skill"+numItems+"'/></div></div><div class='col-sm-4'><div class='form-group'><label>Skill Group</label><input class='form-control skillgroup'  id='skillgroup"+numItems+"'/></div></div><div class='col-sm-4'><div class='form-group'><label>Proficiency</label><input class='form-control skillproficiency'  id='skillproficiency"+numItems+"'/></div></div><div class='col-sm-4'><div class='form-group'><label>From Date</label><div class='input-group'><div class='input-group-addon'><i class='fa fa-calendar'></i></div><input type='text' class='skillfromdate mptldp form-control' id='skillfromdate"+numItems+"'/></div></div></div><div class='col-sm-4'><div class='form-group'><label>To Date</label><div class='input-group'><div class='input-group-addon'><i class='fa fa-calendar'></i></div><input type='text' class='skilltodate mptldp form-control' id='skilltodate"+numItems+"'/></div></div></div></div></div>");
+			$(".skillfieldset").append("<div class='col-md-12'><hr/></div>");
+			
+			//initialise datepicker
+			var userdf='<?php echo $this->request->session()->read('sessionuser')['dateformat'];?>';
+			if(userdf==1){
+				$('.mptldp').datepicker({ format:"dd/mm/yyyy",autoclose: true,clearBtn: true,todayHighlight: true });
+			}else{
+				$('.mptldp').datepicker({ format:"yyyy/mm/dd",autoclose: true,clearBtn: true,todayHighlight: true });
+			}
+			
+    	});
+    	
+    	$("#btnAddAssetCtrls").click(function (event) {
+    		
+    		event.preventDefault();
+			var numItems = $('.assetclass').length+1;
+    		$(".officeassetfieldset").append("<div class='assetclass' id='contentDiv"+numItems+"'><div class='clearfix'><div class='col-sm-4'><label>Location</label><div class='input-group'><div class='input-group-btn'><a id='newid' class='assetdelete btn btn-danger btn-flat'><i class='fa fa-trash'></i></a></div><input type='hidden' id='assetid"+numItems+"' value='0'/><input type='text' class='location form-control' id='assetlocation"+numItems+"'/></div></div><div class='col-sm-4'><div class='form-group'><label>Asset Type</label><input class='form-control assettype'  id='assettype"+numItems+"'/></div></div><div class='col-sm-4'><div class='form-group'><label>Asset Number</label><input class='form-control assetnumber'  id='assetnumber"+numItems+"'/></div></div><div class='col-sm-4'><div class='form-group'><label>Asset Description</label><input class='form-control description'  id='assetdescription"+numItems+"'/></div></div><div class='col-sm-4'><div class='form-group'><label>Issue Date</label><div class='input-group'><div class='input-group-addon'><i class='fa fa-calendar'></i></div><input type='text' class='assetissuedate mptldp form-control' id='assetissuedate"+numItems+"'/></div></div></div><div class='col-sm-4'><div class='form-group'><label>To Date</label><div class='input-group'><div class='input-group-addon'><i class='fa fa-calendar'></i></div><input type='text' class='assettodate mptldp form-control' id='assettodate"+numItems+"'/></div></div></div></div></div>");
+			$(".officeassetfieldset").append("<div class='col-md-12'><hr/></div>");
+			
+			//initialise datepicker
+			var userdf='<?php echo $this->request->session()->read('sessionuser')['dateformat'];?>';
+			if(userdf==1){
+				$('.mptldp').datepicker({ format:"dd/mm/yyyy",autoclose: true,clearBtn: true,todayHighlight: true });
+			}else{
+				$('.mptldp').datepicker({ format:"yyyy/mm/dd",autoclose: true,clearBtn: true,todayHighlight: true });
+			}
+			
+    	});
+    	
     //delete btn onclick
 	$('.idfieldset').on('click', 'a.compdelete', function() {
 		if (confirm("Are you sure you want to delete the particular ID ?")) {
@@ -882,6 +1083,28 @@ $(function () {
 	$('.experiencefieldset').on('click', 'a.expdelete', function() {
 		if (confirm("Are you sure you want to delete the particular Experience ?")) {
 			$(this).parent().closest('div .experienceclass').remove();
+    		return true;
+  		} else {
+    		return false;
+  		}
+   
+	});
+	
+	//skill delete btn onclick
+	$('.skillfieldset').on('click', 'a.skilldelete', function() {
+		if (confirm("Are you sure you want to delete the particular Skill ?")) {
+			$(this).parent().closest('div .skillclass').remove();
+    		return true;
+  		} else {
+    		return false;
+  		}
+   
+	});
+	
+	//officeasset delete btn onclick
+	$('.officeassetfieldset').on('click', 'a.assetdelete', function() {
+		if (confirm("Are you sure you want to delete the particular Office Asset ?")) {
+			$(this).parent().closest('div .assetclass').remove();
     		return true;
   		} else {
     		return false;
