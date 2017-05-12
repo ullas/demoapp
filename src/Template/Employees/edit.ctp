@@ -419,14 +419,14 @@ div#myDropZone {
              	<fieldset>
         		<div class="qualificationfieldset">
                 <?php
-                	echo $this->Form->input('educationalqualification.qualification');
-            		echo $this->Form->input('educationalqualification.subject');
-            		echo $this->Form->input('educationalqualification.subject2');
-            		echo $this->Form->input('educationalqualification.schoolcollege', ['label' => 'School/College']);
-            		echo $this->Form->input('educationalqualification.city');
-            		echo $this->Form->input('educationalqualification.fromdate', ['label' => 'From Date','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
-            		echo $this->Form->input('educationalqualification.passdate', ['label' => 'Pass Date','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
-            		echo $this->Form->input('educationalqualification.grade', ['label' => 'Grade/Percentage']);
+                	echo $this->Form->input('educational_qualification.qualification');
+            		echo $this->Form->input('educational_qualification.subject');
+            		echo $this->Form->input('educational_qualification.subject2');
+            		echo $this->Form->input('educational_qualification.schoolcollege', ['label' => 'School/College']);
+            		echo $this->Form->input('educational_qualification.city');
+            		echo $this->Form->input('educational_qualification.fromdate', ['label' => 'From Date','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+            		echo $this->Form->input('educational_qualification.passdate', ['label' => 'Pass Date','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+            		echo $this->Form->input('educational_qualification.grade', ['label' => 'Grade/Percentage']);
 			      ?>        		
             		
             		<div class="col-md-12"><hr/></div>
@@ -521,6 +521,9 @@ div#myDropZone {
 
 <?php $this->start('scriptBotton'); ?>
 <script>
+	var idcounter=0;
+	var expcounter=0;
+	var qualcounter=0;
 	var countrydata=[];
 	var countryarr=<?php echo $countryarr ?>;
 	$.each(countryarr, function(key, value) {
@@ -638,7 +641,96 @@ $(document).ready(function(){
 			}
 		}
 		
+		
+		//experience's
+		var exparr='<?php echo $experiences; ?>';
+		var expobj = JSON.parse(exparr);
+				
+		for (k = 1; k <= expobj.length; k++) {
+			var numItems = $('.experienceclass').length+1;
 			
+			//change dateformat
+			if(userdf==1){
+				if(expobj[k-1]['fromdate']){
+					if(expobj[k-1]['fromdate'].length>11){
+						expobj[k-1]['fromdate']=expobj[k-1]['fromdate'].substring(0 , 10);
+						expobj[k-1]['fromdate']=formattodmy(expobj[k-1]['fromdate']);
+					}
+				}
+				
+				if(expobj[k-1]['todate']){
+					if(expobj[k-1]['todate'].length>11){
+						expobj[k-1]['todate']=expobj[k-1]['todate'].substring(0 , 10);
+						expobj[k-1]['todate']=formattodmy(expobj[k-1]['todate']);
+					}
+				}
+				
+			}else if(userdf==0){
+				if(expobj[k-1]['fromdate']){
+					if(expobj[k-1]['fromdate'].length>11){
+						expobj[k-1]['fromdate']=expobj[k-1]['fromdate'].substring(0 , 10);
+						expobj[k-1]['fromdate']=formattoymd(expobj[k-1]['fromdate']);
+					}
+				}
+				
+				if(expobj[k-1]['todate']){
+					if(expobj[k-1]['todate'].length>11){
+						expobj[k-1]['todate']=expobj[k-1]['todate'].substring(0 , 10);
+						expobj[k-1]['todate']=formattoymd(expobj[k-1]['todate']);
+					}
+				}
+			}
+			
+			
+			$(".experiencefieldset").append("<div class='experienceclass' id='contentDiv"+numItems+"'><div class='clearfix'><div class='col-sm-4'><div class='form-group'><label>Designation</label><div class='input-group'><div class='input-group-btn'><a id='"+ expobj[k-1]['id'] +"' class='expdelete btn btn-danger btn-flat'><i class='fa fa-trash'></i></a></div><input type='hidden' id='experienceid"+numItems+"' value='"+ expobj[k-1]['id'] +"'/><input  type='text' class='designation form-control' id='designation"+numItems+"' value='"+expobj[k-1]['designation']+"'/></div></div></div><div class='col-sm-4'><div class='form-group'><label>Industry</label><input class='form-control industry'  id='industry"+numItems+"'  value='"+expobj[k-1]['industry']+"'/></div></div><div class='col-sm-4'><div class='form-group'><label>Function</label><input  value='"+expobj[k-1]['function']+"' class='form-control function'  id='function"+numItems+"'/></div></div><div class='col-sm-4'><div class='form-group'><label>Employer</label><input  value='"+expobj[k-1]['employer']+"' class='form-control employer'  id='employer"+numItems+"'/></div></div><div class='col-sm-4'><div class='form-group'><label>City</label><input  value='"+expobj[k-1]['city']+"' class='form-control city'  id='city"+numItems+"'/></div></div><div class='col-sm-4'><div class='form-group'><label>Country</label><input  value='"+expobj[k-1]['country']+"' class='form-control country'  id='expcountry"+numItems+"'/></div></div><div class='col-sm-4'><div class='form-group'><label>From Date</label><div class='input-group'><div class='input-group-addon'><i class='fa fa-calendar'></i></div><input  value='"+expobj[k-1]['fromdate']+"' type='text' class='fromdate mptldp form-control' id='expfromdate"+numItems+"'/></div></div></div><div class='col-sm-4'><div class='form-group'><label>To Date</label><div class='input-group'><div class='input-group-addon'><i class='fa fa-calendar'></i></div><input  value='"+expobj[k-1]['todate']+"' type='text' class='exptodate mptldp form-control' id='exptodate"+numItems+"'/></div></div></div><div class='col-sm-4'><div class='form-group'><label>Contract</label><input  value='"+expobj[k-1]['contract']+"' class='form-control contract'  id='contract"+numItems+"'/></div></div></div></div>");
+			$(".experiencefieldset").append("<div class='col-md-12'><hr/></div>");
+			
+		}
+		
+		//qualification's
+		var qualarr='<?php echo $qualifications; ?>';
+		var qualobj = JSON.parse(qualarr);
+				
+		for (j = 1; j <= qualobj.length; j++) {
+			var numItems = $('.qualificationclass').length+1;
+			
+			//change dateformat
+			if(userdf==1){
+				if(qualobj[j-1]['fromdate']){
+					if(qualobj[j-1]['fromdate'].length>11){
+						qualobj[j-1]['fromdate']=qualobj[j-1]['fromdate'].substring(0 , 10);
+						qualobj[j-1]['fromdate']=formattodmy(qualobj[j-1]['fromdate']);
+					}
+				}
+				
+				if(qualobj[j-1]['passdate']){
+					if(qualobj[j-1]['passdate'].length>11){
+						qualobj[j-1]['passdate']=qualobj[j-1]['passdate'].substring(0 , 10);
+						qualobj[j-1]['passdate']=formattodmy(qualobj[j-1]['passdate']);
+					}
+				}
+				
+			}else if(userdf==0){
+				if(qualobj[j-1]['fromdate']){
+					if(qualobj[j-1]['fromdate'].length>11){
+						qualobj[j-1]['fromdate']=qualobj[j-1]['fromdate'].substring(0 , 10);
+						qualobj[j-1]['fromdate']=formattoymd(qualobj[j-1]['fromdate']);
+					}
+				}
+				
+				if(qualobj[j-1]['passdate']){
+					if(qualobj[j-1]['passdate'].length>11){
+						qualobj[j-1]['passdate']=qualobj[j-1]['passdate'].substring(0 , 10);
+						qualobj[j-1]['passdate']=formattoymd(qualobj[j-1]['passdate']);
+					}
+				}
+			}
+			
+			
+			$(".qualificationfieldset").append("<div class='qualificationclass' id='contentDiv"+numItems+"'><div class='clearfix'><div class='col-sm-4'><label>Qualification</label><div class='input-group'><div class='input-group-btn'><a id='"+ qualobj[j-1]['id'] +"' class='qualdelete btn btn-danger btn-flat'><i class='fa fa-trash'></i></a></div><input type='hidden' id='qualificationid"+numItems+"' value='"+ qualobj[j-1]['id'] +"'/><input type='text' class='qualification form-control' id='qualification"+numItems+"'   value='"+qualobj[j-1]['qualification']+"'/></div></div><div class='col-sm-4'><div class='form-group'><label>Subject</label><input class='form-control subject'  id='subject"+numItems+"'   value='"+qualobj[j-1]['subject']+"'/></div></div><div class='col-sm-4'><div class='form-group'><label>Subject2</label><input class='form-control secsubject'   value='"+qualobj[j-1]['subject2']+"' id='secsubject"+numItems+"'/></div></div><div class='col-sm-4'><div class='form-group'><label>School/College</label><input class='form-control schoolcollege'   value='"+qualobj[j-1]['schoolcollege']+"'  id='schoolcollege"+numItems+"'/></div></div><div class='col-sm-4'><div class='form-group'><label>City</label><input   value='"+qualobj[j-1]['city']+"' class='form-control city'  id='city"+numItems+"'/></div></div><div class='col-sm-4'><div class='form-group'><label>From Date</label><div class='input-group'><div class='input-group-addon'><i class='fa fa-calendar'></i></div><input type='text'   value='"+qualobj[j-1]['fromdate']+"' class='fromdate mptldp form-control' id='fromdate"+numItems+"'/></div></div></div><div class='col-sm-4'><div class='form-group'><label>Pass Date</label><div class='input-group'><div class='input-group-addon'><i class='fa fa-calendar'></i></div><input type='text'   value='"+qualobj[j-1]['passdate']+"' class='passdate mptldp form-control' id='passdate"+numItems+"'/></div></div></div><div class='col-sm-4'><div class='form-group'><label>Grade/Percentage</label><input class='form-control grade'   value='"+qualobj[j-1]['grade']+"'  id='grade"+numItems+"'/></div></div></div></div>");
+			$(".qualificationfieldset").append("<div class='col-md-12'><hr/></div>");
+			
+		}	
 		
 	$("#actionspopover").on("show.bs.modal", function(e) {
 		//loading icon show
@@ -731,7 +823,7 @@ $(document).ready(function(){
     		
     		event.preventDefault();
 			var numItems = $('.experienceclass').length+1;
-    		$(".experiencefieldset").append("<div class='experienceclass' id='contentDiv"+numItems+"'><div class='clearfix'><div class='col-sm-4'><label>Designation</label><div class='input-group'><div class='input-group-btn'><a id='newid' class='expdelete btn btn-danger btn-flat'><i class='fa fa-trash'></i></a></div><input type='hidden' id='experienceid"+numItems+"' value='0'/><input type='text' class='designation form-control' id='designation"+numItems+"'/></div></div><div class='col-sm-4'><div class='form-group'><label>Industry</label><input class='form-control industry'  id='industry"+numItems+"'/></div></div><div class='col-sm-4'><div class='form-group'><label>Function</label><input class='form-control function'  id='function"+numItems+"'/></div></div><div class='col-sm-4'><div class='form-group'><label>Employer</label><input class='form-control employer'  id='employer"+numItems+"'/></div></div><div class='col-sm-4'><div class='form-group'><label>City</label><input class='form-control city'  id='city"+numItems+"'/></div></div><div class='col-sm-4'><div class='form-group'><label>Employer</label><input class='form-control employer'  id='employer"+numItems+"'/></div></div><div class='col-sm-4'><div class='form-group'><label>Country</label><input class='form-control country'  id='country"+numItems+"'/></div></div><div class='col-sm-4'><div class='form-group'><label>From Date</label><div class='input-group'><div class='input-group-addon'><i class='fa fa-calendar'></i></div><input type='text' class='fromdate mptldp form-control' id='fromdate"+numItems+"'/></div></div></div><div class='col-sm-4'><div class='form-group'><label>Pass Date</label><div class='input-group'><div class='input-group-addon'><i class='fa fa-calendar'></i></div><input type='text' class='passdate mptldp form-control' id='passdate"+numItems+"'/></div></div></div><div class='col-sm-4'><div class='form-group'><label>Contract</label><input class='form-control contract'  id='contract"+numItems+"'/></div></div></div></div>");
+    		$(".experiencefieldset").append("<div class='experienceclass' id='contentDiv"+numItems+"'><div class='clearfix'><div class='col-sm-4'><label>Designation</label><div class='input-group'><div class='input-group-btn'><a id='newid' class='expdelete btn btn-danger btn-flat'><i class='fa fa-trash'></i></a></div><input type='hidden' id='experienceid"+numItems+"' value='0'/><input type='text' class='designation form-control' id='designation"+numItems+"'/></div></div><div class='col-sm-4'><div class='form-group'><label>Industry</label><input class='form-control industry'  id='industry"+numItems+"'/></div></div><div class='col-sm-4'><div class='form-group'><label>Function</label><input class='form-control function'  id='function"+numItems+"'/></div></div><div class='col-sm-4'><div class='form-group'><label>Employer</label><input class='form-control employer'  id='employer"+numItems+"'/></div></div><div class='col-sm-4'><div class='form-group'><label>City</label><input class='form-control city'  id='city"+numItems+"'/></div></div><div class='col-sm-4'><div class='form-group'><label>Country</label><input class='form-control country'  id='country"+numItems+"'/></div></div><div class='col-sm-4'><div class='form-group'><label>From Date</label><div class='input-group'><div class='input-group-addon'><i class='fa fa-calendar'></i></div><input type='text' class='fromdate mptldp form-control' id='fromdate"+numItems+"'/></div></div></div><div class='col-sm-4'><div class='form-group'><label>Pass Date</label><div class='input-group'><div class='input-group-addon'><i class='fa fa-calendar'></i></div><input type='text' class='passdate mptldp form-control' id='passdate"+numItems+"'/></div></div></div><div class='col-sm-4'><div class='form-group'><label>Contract</label><input class='form-control contract'  id='contract"+numItems+"'/></div></div></div></div>");
 			$(".experiencefieldset").append("<div class='col-md-12'><hr/></div>");
 			
 			//initialise datepicker
@@ -827,6 +919,10 @@ function formattoymd(inputDate) {
     {		
 		var empid='<?php echo $employee['id'] ?>';
 		
+		var idclasscount = $('.idclass').length;
+		var qualclasscount = $('.qualificationclass').length;
+		var expclasscount = $('.experienceclass').length;
+		
 		//add permanent address
     	var address1=$("#paaddress1").val();
     	var address2=$("#paaddress2").val();
@@ -849,7 +945,9 @@ function formattoymd(inputDate) {
         			data: 'empid='+empid+'&address1='+address1+'&address2='+address2+'&address3='+address3+'&address4='+address4+'&address5='+address5+'&address6='+address6
         					+'&address7='+address7+'&address8='+address8+'&county='+county+'&state='+state+'&zipcode='+zipcode+'&city='+city,
         			success : function(data) {
-    		
+    					if(idclasscount<1 &&  qualclasscount<1 && expclasscount<1){
+    						document.getElementById("empform").submit();
+    					}
         			},error: function(data) {        	    	 	
     					sweet_alert("Error while adding Addresses.");
 						return false;   			
@@ -860,8 +958,6 @@ function formattoymd(inputDate) {
 			return false;
 		}
 			
-   		var idclasscount = $('.idclass').length;
-   		if(idclasscount>0){
 			var errcount=0;
     	
     		for (i = 1; i <= idclasscount; i++) 
@@ -882,14 +978,14 @@ function formattoymd(inputDate) {
         				data: 'empid='+empid+'&identityid='+identityid+'&idtype='+idtype+'&country='+country+'&nationalid='+nationalid+'&isprimary='+'0'+'&issuedate='+issuedate
         						+'&expirydate='+expirydate,
         				success : function(data) {
-							if(i==idclasscount){
-        	 					if(errcount>0){
-    								sweet_alert("Error while adding Id's.");
-									return false;
-    							}else{
+        	 				if(i==idclasscount || i>idclasscount){
+    							if(qualclasscount<1 && expclasscount<1){
     								document.getElementById("empform").submit();
+    							}else{
+    								idcounter++;
+    								saveQualifications(empid);
     							}
-    						}    		
+    						}  		
         				},
         				error: function(data) {
         					errcount++;
@@ -904,19 +1000,120 @@ function formattoymd(inputDate) {
         			});	
     			
 				}else{
-					sweet_alert("Please enter ID Card type/national Id.");
+					sweet_alert("Please enter ID Card type/national Id.");break;
 					return false;
 				}    		
     		}	
-    	 }else{
-    		return true;
-    	}
-    	
-			document.getElementById("empform").submit();
+    	 
+    		if(idclasscount<1){
+    			saveQualifications(empid);
+    		}
+			// document.getElementById("empform").submit();
 			return false;
 		}			
 
+function saveQualifications(empid){
+		
+		var qualclasscount = $('.qualificationclass').length;
+    	//saving multi qualification's
+    	for (t = 1; t <= qualclasscount; t++) 
+    	{
+    		var qualificationid=$("#qualificationid"+i).val();
+    		var qualification=$("#qualification"+t).val();
+    		var subject=$("#subject"+t).val();
+    		var secsubject=$("#secsubject"+t).val();
+    		var schoolcollege=$("#schoolcollege"+t).val();
+    		var city=$("#city"+t).val();
+    		var fromdate=$("#fromdate"+t).val();
+    		var passdate=$("#passdate"+t).val();
+    		var grade=$("#grade"+t).val();
+    		
+    			if(empid!="" && empid!=null && qualification!="" && qualification!=null && fromdate!="" && fromdate!=null && passdate!="" && passdate!=null){
+    				$.ajax({
+        				type: "POST",
+        				url: '/Employees/addQualifications',
+        				data: 'empid='+empid+'&qualificationid='+qualificationid+'&qualification='+qualification+'&subject='+subject+'&secsubject='+secsubject+'&schoolcollege='+schoolcollege+'&city='+city
+        						+'&fromdate='+fromdate+'&passdate='+passdate +'&grade='+grade,
+        				success : function(data) {
+    						if(t==qualclasscount || t>qualclasscount){
+    							if(qualclasscount<1){
+    								document.getElementById("empform").submit();
+    							}else{
+    								qualcounter++;
+    								saveExperiences(empid);
+    							}
+    						}
+        				},error: function(data) {
+    						sweet_alert("Error while adding Qualification's.");
+							return false;   			
 
+        				},statusCode: {
+        					500: function() {
+          						sweet_alert("Error while adding Qualification's.");
+								return false;
+        					}
+      					}
+      
+        			});	
+				}else{
+					sweet_alert("Please enter Qualification/From/Pass Date.");break;
+					return false;
+				}
+    		}
+    		
+    		if(qualclasscount<1){
+    			saveExperiences(empid);
+    		}
+	}
+	function saveExperiences(empid){
+		var expclasscount = $('.experienceclass').length;
+    	//saving multi experience's
+    	for (t = 1; t <= expclasscount; t++) 
+    	{
+    		var experienceid=$("#experienceid"+i).val();
+    		var designation=$("#designation"+t).val();
+    		var industry=$("#industry"+t).val();
+    		var efunction=$("#function"+t).val();
+    		var employer=$("#employer"+t).val();
+    		var city=$("#city"+t).val();
+    		var country=$("#expcountry"+t).val();
+    		var fromdate=$("#expfromdate"+t).val();
+    		var todate=$("#exptodate"+t).val();
+    		var contract=$("#contract"+t).val();
+    		
+    			if(empid!="" && empid!=null && designation!="" && designation!=null && industry!="" && industry!=null && fromdate!="" && fromdate!=null && todate!="" && todate!=""){
+    				$.ajax({
+        				type: "POST",
+        				url: '/Employees/addExperiences',
+        				data: 'empid='+empid+'&experienceid='+experienceid+'&designation='+designation+'&industry='+industry+'&efunction='+efunction+'&employer='+employer+'&city='+city
+        						+'&country='+country+'&fromdate='+fromdate+'&todate='+todate +'&contract='+contract,
+        				success : function(data) {
+    						if(t==expclasscount || t>expclasscount){
+    							expcounter++;    							
+    							document.getElementById("empform").submit();    						
+    						}
+        				},error: function(data) {
+    						sweet_alert("Error while adding Experience.");
+							return false;   			
+
+        				},statusCode: {
+        					500: function() {
+          						sweet_alert("Error while adding Experience.");
+								return false;
+        					}
+      					}
+      
+        			});	
+				}else{
+					sweet_alert("Please enter Designation/Industry/From/To Date.");break;
+					return false;
+				}
+    		}
+    		
+    		if(expclasscount<1){
+    			document.getElementById("empform").submit();    		
+    		}
+	}
 </script>
 <?php $this->end(); ?>
 
