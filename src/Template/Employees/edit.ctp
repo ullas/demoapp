@@ -74,6 +74,8 @@ div#myDropZone {
            	<li><a href="#ids" data-toggle="tab">ID's</a></li>
            	<li><a href="#qualification" data-toggle="tab">Educational Qualification</a></li>
            	<li><a href="#experience" data-toggle="tab">Experience</a></li>
+           	<li id="li9"><a href="#skills" data-toggle="tab">Skills</a></li>
+           	<li id="li10"><a href="#officeassets" data-toggle="tab">Office Assets</a></li>
         </ul>
 
 
@@ -475,6 +477,64 @@ div#myDropZone {
           </div>
           <!-- /.tab-pane -->
           
+          
+           <div class="tab-pane" id="officeassets">
+             <!-- <div class="form-horizontal"> -->
+             	<fieldset>
+        		<div class="officeassetfieldset">
+                <?php
+                	echo $this->Form->input('office_asset.location');
+            		echo $this->Form->input('office_asset.assettype', ['label' => 'Asset Type']);
+            		echo $this->Form->input('office_asset.assetnumber', ['label' => 'Asset Number']);
+            		echo $this->Form->input('office_asset.assetdescription', ['label' => 'Asset Description']);
+            		echo $this->Form->input('office_asset.issuedate', ['label' => 'Issue Date','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+            		echo $this->Form->input('office_asset.todate', ['label' => 'To Date','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+			      ?>        		
+            		
+            		<div class="col-md-12"><hr/></div>
+        			</div>
+        			
+        			<div class="col-md-4 pull-left"><div class="form-group">
+        				<div class="input-group" >        		
+        					<input type="button" class="btn btn-flat btn-info pull-left" id="btnAddAssetCtrls" value="Add More" />
+        				</div>
+        			</div></div>
+        			
+             	 </fieldset>
+            <!-- </div> -->
+
+          </div>
+          <!-- /.tab-pane -->
+          
+           <div class="tab-pane" id="skills">
+             <!-- <div class="form-horizontal"> -->
+             	<fieldset>
+        		<div class="skillfieldset">
+                <?php
+                	echo $this->Form->input('skill.skill');
+            		echo $this->Form->input('skill.skillgroup', ['label' => 'Skill Group']);
+            		echo $this->Form->input('skill.proficiency');
+            		echo $this->Form->input('skill.fromdate', ['label' => 'From Date','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+            		echo $this->Form->input('skill.todate', ['label' => 'To Date','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+
+			      ?>        		
+            		
+            		<div class="col-md-12"><hr/></div>
+        			</div>
+        			
+        			<div class="col-md-4 pull-left"><div class="form-group">
+        				<div class="input-group" >        		
+        					<input type="button" class="btn btn-flat btn-info pull-left" id="btnAddSkillCtrls" value="Add More" />
+        				</div>
+        			</div></div>
+        			
+             	 </fieldset>
+            <!-- </div> -->
+
+          </div>
+          <!-- /.tab-pane -->
+          
+          
         </div>
         <!-- /.tab-content -->
       </div>
@@ -524,6 +584,8 @@ div#myDropZone {
 	var idcounter=0;
 	var expcounter=0;
 	var qualcounter=0;
+	var skillcounter=0;
+	var assetcounter=0;
 	var countrydata=[];
 	var countryarr=<?php echo $countryarr ?>;
 	$.each(countryarr, function(key, value) {
@@ -635,7 +697,7 @@ $(document).ready(function(){
 			}
 			
 			$(".idfieldset").append("<div class='idclass' id='contentDiv"+numItems+"'><div class='clearfix'><div class='col-sm-4'><div class='form-group'><label>National ID Card Type</label><div class='input-group'><div class='input-group-btn'><a id='"+ idobj[i-1]['id'] +"' class='compdelete btn btn-danger btn-flat'><i class='fa fa-trash'></i></a></div><input type='hidden' id='identityid"+numItems+"' value='"+ idobj[i-1]['id'] +"'/><input type='text' class='idtype form-control' id='idtype"+numItems+"' value='"+ idobj[i-1]['card_type'] +"'/></div></div></div><div class='col-sm-4'><div class='form-group'><label>Country</label><div class='input-group'><div class='input-group-addon'><i class='fa fa-flag'></i></div><input class='form-control idcountry'  id='country"+numItems+"' value='"+ idobj[i-1]['country'] +"'/></div></div></div><div class='col-sm-4'><div class='form-group'><label>National ID</label><input value='"+ idobj[i-1]['nationalid'] +"' class='form-control nationalid'  id='nationalid"+numItems+"'/></div></div><div class='col-sm-4'><div class='form-group checkbox'><label><input type='checkbox' class='isprimary'  id='isprimary"+numItems+"' value='"+ idobj[i-1]['is_primary'] +"'/>Is Primary</label></div></div><div class='col-sm-4'><label>Issue Date</label><div class='input-group'><div class='input-group-addon'><i class='fa fa-calendar'></i></div><input type='text' class='issuedate mptldp form-control' id='issuedate"+numItems+"' value='"+ idobj[i-1]['issuedate'] +"'/></div></div><div class='col-sm-4'><label>Expiry Date</label><div class='input-group'><div class='input-group-addon'><i class='fa fa-calendar'></i></div><input value='"+ idobj[i-1]['expirydate'] +"'  type='text' class='expirydate mptldp form-control' id='expirydate"+numItems+"'/></div></div></div></div>");
-			$(".idfieldset").append("<div class='col-md-12'><hr/></div>");
+			$(".idfieldset").append("<div class='col-md-12 hrclass'><hr/></div>");
 			if(idobj[i-1]['is_primary']="true"){
 				$("#isprimary"+i).prop('checked', true);
 			}
@@ -683,7 +745,7 @@ $(document).ready(function(){
 			
 			
 			$(".experiencefieldset").append("<div class='experienceclass' id='contentDiv"+numItems+"'><div class='clearfix'><div class='col-sm-4'><div class='form-group'><label>Designation</label><div class='input-group'><div class='input-group-btn'><a id='"+ expobj[k-1]['id'] +"' class='expdelete btn btn-danger btn-flat'><i class='fa fa-trash'></i></a></div><input type='hidden' id='experienceid"+numItems+"' value='"+ expobj[k-1]['id'] +"'/><input  type='text' class='designation form-control' id='designation"+numItems+"' value='"+expobj[k-1]['designation']+"'/></div></div></div><div class='col-sm-4'><div class='form-group'><label>Industry</label><input class='form-control industry'  id='industry"+numItems+"'  value='"+expobj[k-1]['industry']+"'/></div></div><div class='col-sm-4'><div class='form-group'><label>Function</label><input  value='"+expobj[k-1]['function']+"' class='form-control function'  id='function"+numItems+"'/></div></div><div class='col-sm-4'><div class='form-group'><label>Employer</label><input  value='"+expobj[k-1]['employer']+"' class='form-control employer'  id='employer"+numItems+"'/></div></div><div class='col-sm-4'><div class='form-group'><label>City</label><input  value='"+expobj[k-1]['city']+"' class='form-control city'  id='city"+numItems+"'/></div></div><div class='col-sm-4'><div class='form-group'><label>Country</label><input  value='"+expobj[k-1]['country']+"' class='form-control country'  id='expcountry"+numItems+"'/></div></div><div class='col-sm-4'><div class='form-group'><label>From Date</label><div class='input-group'><div class='input-group-addon'><i class='fa fa-calendar'></i></div><input  value='"+expobj[k-1]['fromdate']+"' type='text' class='fromdate mptldp form-control' id='expfromdate"+numItems+"'/></div></div></div><div class='col-sm-4'><div class='form-group'><label>To Date</label><div class='input-group'><div class='input-group-addon'><i class='fa fa-calendar'></i></div><input  value='"+expobj[k-1]['todate']+"' type='text' class='exptodate mptldp form-control' id='exptodate"+numItems+"'/></div></div></div><div class='col-sm-4'><div class='form-group'><label>Contract</label><input  value='"+expobj[k-1]['contract']+"' class='form-control contract'  id='contract"+numItems+"'/></div></div></div></div>");
-			$(".experiencefieldset").append("<div class='col-md-12'><hr/></div>");
+			$(".experiencefieldset").append("<div class='col-md-12 hrclass'><hr/></div>");
 			
 		}
 		
@@ -728,10 +790,102 @@ $(document).ready(function(){
 			
 			
 			$(".qualificationfieldset").append("<div class='qualificationclass' id='contentDiv"+numItems+"'><div class='clearfix'><div class='col-sm-4'><label>Qualification</label><div class='input-group'><div class='input-group-btn'><a id='"+ qualobj[j-1]['id'] +"' class='qualdelete btn btn-danger btn-flat'><i class='fa fa-trash'></i></a></div><input type='hidden' id='qualificationid"+numItems+"' value='"+ qualobj[j-1]['id'] +"'/><input type='text' class='qualification form-control' id='qualification"+numItems+"'   value='"+qualobj[j-1]['qualification']+"'/></div></div><div class='col-sm-4'><div class='form-group'><label>Subject</label><input class='form-control subject'  id='subject"+numItems+"'   value='"+qualobj[j-1]['subject']+"'/></div></div><div class='col-sm-4'><div class='form-group'><label>Subject2</label><input class='form-control secsubject'   value='"+qualobj[j-1]['subject2']+"' id='secsubject"+numItems+"'/></div></div><div class='col-sm-4'><div class='form-group'><label>School/College</label><input class='form-control schoolcollege'   value='"+qualobj[j-1]['schoolcollege']+"'  id='schoolcollege"+numItems+"'/></div></div><div class='col-sm-4'><div class='form-group'><label>City</label><input   value='"+qualobj[j-1]['city']+"' class='form-control city'  id='city"+numItems+"'/></div></div><div class='col-sm-4'><div class='form-group'><label>From Date</label><div class='input-group'><div class='input-group-addon'><i class='fa fa-calendar'></i></div><input type='text'   value='"+qualobj[j-1]['fromdate']+"' class='fromdate mptldp form-control' id='fromdate"+numItems+"'/></div></div></div><div class='col-sm-4'><div class='form-group'><label>Pass Date</label><div class='input-group'><div class='input-group-addon'><i class='fa fa-calendar'></i></div><input type='text'   value='"+qualobj[j-1]['passdate']+"' class='passdate mptldp form-control' id='passdate"+numItems+"'/></div></div></div><div class='col-sm-4'><div class='form-group'><label>Grade/Percentage</label><input class='form-control grade'   value='"+qualobj[j-1]['grade']+"'  id='grade"+numItems+"'/></div></div></div></div>");
-			$(".qualificationfieldset").append("<div class='col-md-12'><hr/></div>");
+			$(".qualificationfieldset").append("<div class='col-md-12 hrclass'><hr/></div>");
 			
 		}	
 		
+		//skill's
+		var skillarr='<?php echo $skills; ?>';
+		var skillobj = JSON.parse(skillarr);
+				
+		for (k = 1; k <= skillobj.length; k++) {
+			var numItems = $('.skillclass').length+1;
+			
+			//change dateformat
+			if(userdf==1){
+				if(skillobj[k-1]['fromdate']){
+					if(skillobj[k-1]['fromdate'].length>11){
+						skillobj[k-1]['fromdate']=skillobj[k-1]['fromdate'].substring(0 , 10);
+						skillobj[k-1]['fromdate']=formattodmy(skillobj[k-1]['fromdate']);
+					}
+				}
+				
+				if(skillobj[k-1]['todate']){
+					if(skillobj[k-1]['todate'].length>11){
+						skillobj[k-1]['todate']=skillobj[k-1]['todate'].substring(0 , 10);
+						skillobj[k-1]['todate']=formattodmy(skillobj[k-1]['todate']);
+					}
+				}
+				
+			}else if(userdf==0){
+				if(skillobj[k-1]['fromdate']){
+					if(skillobj[k-1]['fromdate'].length>11){
+						skillobj[k-1]['fromdate']=skillobj[k-1]['fromdate'].substring(0 , 10);
+						skillobj[k-1]['fromdate']=formattoymd(skillobj[k-1]['fromdate']);
+					}
+				}
+				
+				if(skillobj[k-1]['todate']){
+					if(skillobj[k-1]['todate'].length>11){
+						skillobj[k-1]['todate']=skillobj[k-1]['todate'].substring(0 , 10);
+						skillobj[k-1]['todate']=formattoymd(skillobj[k-1]['todate']);
+					}
+				}
+			}
+			
+			
+			$(".skillfieldset").append("<div class='skillclass' id='contentDiv"+numItems+"'><div class='clearfix'><div class='col-sm-4'><label>Skill</label><div class='input-group'><div class='input-group-btn'><a id='"+ skillobj[k-1]['id'] +"' class='skilldelete btn btn-danger btn-flat'><i class='fa fa-trash'></i></a></div><input type='hidden' id='skillid"+numItems+"' value='"+ skillobj[k-1]['id'] +"'/><input type='text' class='skill form-control' id='skill"+numItems+"' value='"+ skillobj[k-1]['skill'] +"'/></div></div><div class='col-sm-4'><div class='form-group'><label>Skill Group</label><input class='form-control skillgroup'  id='skillgroup"+numItems+"'  value='"+ skillobj[k-1]['skillgroup'] +"'/></div></div><div class='col-sm-4'><div class='form-group'><label>Proficiency</label><input class='form-control skillproficiency'  id='skillproficiency"+numItems+"'  value='"+ skillobj[k-1]['proficiency'] +"' /></div></div><div class='col-sm-4'><div class='form-group'><label>From Date</label><div class='input-group'><div class='input-group-addon'><i class='fa fa-calendar'></i></div><input type='text' class='skillfromdate mptldp form-control' id='skillfromdate"+numItems+"'  value='"+ skillobj[k-1]['fromdate'] +"'/></div></div></div><div class='col-sm-4'><div class='form-group'><label>To Date</label><div class='input-group'><div class='input-group-addon'><i class='fa fa-calendar'></i></div><input type='text' class='skilltodate mptldp form-control' id='skilltodate"+numItems+"'  value='"+ skillobj[k-1]['todate'] +"'/></div></div></div></div></div>");
+			$(".skillfieldset").append("<div class='col-md-12 hrclass'><hr/></div>");
+			
+		}
+		
+		
+		//office asset's
+		var assetarr='<?php echo $assets; ?>';
+		var assetobj = JSON.parse(assetarr);
+				
+		for (k = 1; k <= assetobj.length; k++) {
+			var numItems = $('.assetclass').length+1;
+			
+			//change dateformat
+			if(userdf==1){
+				if(assetobj[k-1]['issuedate']){
+					if(assetobj[k-1]['issuedate'].length>11){
+						assetobj[k-1]['issuedate']=assetobj[k-1]['issuedate'].substring(0 , 10);
+						assetobj[k-1]['issuedate']=formattodmy(assetobj[k-1]['issuedate']);
+					}
+				}
+				
+				if(assetobj[k-1]['todate']){
+					if(assetobj[k-1]['todate'].length>11){
+						assetobj[k-1]['todate']=assetobj[k-1]['todate'].substring(0 , 10);
+						assetobj[k-1]['todate']=formattodmy(assetobj[k-1]['todate']);
+					}
+				}
+				
+			}else if(userdf==0){
+				if(assetobj[k-1]['issuedate']){
+					if(assetobj[k-1]['issuedate'].length>11){
+						assetobj[k-1]['issuedate']=assetobj[k-1]['issuedate'].substring(0 , 10);
+						assetobj[k-1]['issuedate']=formattoymd(assetobj[k-1]['issuedate']);
+					}
+				}
+				
+				if(assetobj[k-1]['todate']){
+					if(assetobj[k-1]['todate'].length>11){
+						assetobj[k-1]['todate']=assetobj[k-1]['todate'].substring(0 , 10);
+						assetobj[k-1]['todate']=formattoymd(assetobj[k-1]['todate']);
+					}
+				}
+			}
+			
+			
+			$(".officeassetfieldset").append("<div class='assetclass' id='contentDiv"+numItems+"'><div class='clearfix'><div class='col-sm-4'><label>Location</label><div class='input-group'><div class='input-group-btn'><a id='"+ assetobj[k-1]['id'] +"' class='assetdelete btn btn-danger btn-flat'><i class='fa fa-trash'></i></a></div><input type='hidden' id='assetid"+numItems+"' value='"+ assetobj[k-1]['id'] +"'/><input type='text' value='"+assetobj[k-1]['location']+"' class='location form-control' id='assetlocation"+numItems+"'/></div></div><div class='col-sm-4'><div class='form-group'><label>Asset Type</label><input value='"+assetobj[k-1]['assettype']+"' class='form-control assettype'  id='assettype"+numItems+"'/></div></div><div class='col-sm-4'><div class='form-group'><label>Asset Number</label><input class='form-control assetnumber'  id='assetnumber"+numItems+"' value='"+assetobj[k-1]['assetnumber']+"' /></div></div><div class='col-sm-4'><div class='form-group'><label>Asset Description</label><input class='form-control description'  id='assetdescription"+numItems+"' value='"+assetobj[k-1]['assetdescription']+"' /></div></div><div class='col-sm-4'><div class='form-group'><label>Issue Date</label><div class='input-group'><div class='input-group-addon'><i class='fa fa-calendar'></i></div><input value='"+assetobj[k-1]['issuedate']+"' type='text' class='assetissuedate mptldp form-control' id='assetissuedate"+numItems+"'/></div></div></div><div class='col-sm-4'><div class='form-group'><label>To Date</label><div class='input-group'><div class='input-group-addon'><i class='fa fa-calendar'></i></div><input value='"+assetobj[k-1]['todate']+"' type='text' class='assettodate mptldp form-control' id='assettodate"+numItems+"'/></div></div></div></div></div>");
+			$(".officeassetfieldset").append("<div class='col-md-12 hrclass'><hr/></div>");
+			
+		}
+		
+
 	$("#actionspopover").on("show.bs.modal", function(e) {
 		//loading icon show
 		if(e.relatedTarget!=null){$('#loadingmessage').show();}
@@ -784,7 +938,7 @@ $(document).ready(function(){
     		event.preventDefault();
 			var numItems = $('.idclass').length+1;
     		$(".idfieldset").append("<div class='idclass' id='contentDiv"+numItems+"'><div class='clearfix'><div class='col-sm-4'><label>National ID Card Type</label><div class='input-group'><div class='input-group-btn'><a id='newid' class='compdelete btn btn-danger btn-flat'><i class='fa fa-trash'></i></a></div><input type='hidden' id='identityid"+numItems+"' value='0'/><input type='text' class='idtype form-control' id='idtype"+numItems+"'/></div></div><div class='col-sm-4'><div class='form-group'><label>Country</label><div class='input-group'><div class='input-group-addon'><i class='fa fa-flag'></i></div><input class='form-control idcountry'  id='country"+numItems+"'/></div></div></div><div class='col-sm-4'><div class='form-group'><label>National ID</label><input class='form-control nationalid'  id='nationalid"+numItems+"'/></div></div><div class='col-sm-4'><div class='form-group checkbox'><label><input type='checkbox' class='isprimary'  id='isprimary"+numItems+"'/>Is Primary</label></div></div><div class='col-sm-4'><label>Issue Date</label><div class='input-group'><div class='input-group-addon'><i class='fa fa-calendar'></i></div><input type='text' class='issuedate mptldp form-control' id='issuedate"+numItems+"'/></div></div><div class='col-sm-4'><label>Expiry Date</label><div class='input-group'><div class='input-group-addon'><i class='fa fa-calendar'></i></div><input type='text' class='expirydate mptldp form-control' id='expirydate"+numItems+"'/></div></div></div></div>");
-			$(".idfieldset").append("<div class='col-md-12'><hr/></div>");
+			$(".idfieldset").append("<div class='col-md-12 hrclass'><hr/></div>");
 			
 			//load country dropdown
 			$('.idcountry').select2({
@@ -807,7 +961,7 @@ $(document).ready(function(){
     		event.preventDefault();
 			var numItems = $('.qualificationclass').length+1;
     		$(".qualificationfieldset").append("<div class='qualificationclass' id='contentDiv"+numItems+"'><div class='clearfix'><div class='col-sm-4'><label>Qualification</label><div class='input-group'><div class='input-group-btn'><a id='newid' class='qualdelete btn btn-danger btn-flat'><i class='fa fa-trash'></i></a></div><input type='hidden' id='qualificationid"+numItems+"' value='0'/><input type='text' class='qualification form-control' id='qualification"+numItems+"'/></div></div><div class='col-sm-4'><div class='form-group'><label>Subject</label><input class='form-control subject'  id='subject"+numItems+"'/></div></div><div class='col-sm-4'><div class='form-group'><label>Subject2</label><input class='form-control secsubject'  id='secsubject"+numItems+"'/></div></div><div class='col-sm-4'><div class='form-group'><label>School/College</label><input class='form-control schoolcollege'  id='schoolcollege"+numItems+"'/></div></div><div class='col-sm-4'><div class='form-group'><label>City</label><input class='form-control city'  id='city"+numItems+"'/></div></div><div class='col-sm-4'><div class='form-group'><label>From Date</label><div class='input-group'><div class='input-group-addon'><i class='fa fa-calendar'></i></div><input type='text' class='fromdate mptldp form-control' id='fromdate"+numItems+"'/></div></div></div><div class='col-sm-4'><div class='form-group'><label>Pass Date</label><div class='input-group'><div class='input-group-addon'><i class='fa fa-calendar'></i></div><input type='text' class='passdate mptldp form-control' id='passdate"+numItems+"'/></div></div></div><div class='col-sm-4'><div class='form-group'><label>Grade/Percentage</label><input class='form-control grade'  id='grade"+numItems+"'/></div></div></div></div>");
-			$(".qualificationfieldset").append("<div class='col-md-12'><hr/></div>");
+			$(".qualificationfieldset").append("<div class='col-md-12 hrclass'><hr/></div>");
 			
 			//initialise datepicker
 			var userdf='<?php echo $this->request->session()->read('sessionuser')['dateformat'];?>';
@@ -824,7 +978,41 @@ $(document).ready(function(){
     		event.preventDefault();
 			var numItems = $('.experienceclass').length+1;
     		$(".experiencefieldset").append("<div class='experienceclass' id='contentDiv"+numItems+"'><div class='clearfix'><div class='col-sm-4'><label>Designation</label><div class='input-group'><div class='input-group-btn'><a id='newid' class='expdelete btn btn-danger btn-flat'><i class='fa fa-trash'></i></a></div><input type='hidden' id='experienceid"+numItems+"' value='0'/><input type='text' class='designation form-control' id='designation"+numItems+"'/></div></div><div class='col-sm-4'><div class='form-group'><label>Industry</label><input class='form-control industry'  id='industry"+numItems+"'/></div></div><div class='col-sm-4'><div class='form-group'><label>Function</label><input class='form-control function'  id='function"+numItems+"'/></div></div><div class='col-sm-4'><div class='form-group'><label>Employer</label><input class='form-control employer'  id='employer"+numItems+"'/></div></div><div class='col-sm-4'><div class='form-group'><label>City</label><input class='form-control city'  id='city"+numItems+"'/></div></div><div class='col-sm-4'><div class='form-group'><label>Country</label><input class='form-control country'  id='expcountry"+numItems+"'/></div></div><div class='col-sm-4'><div class='form-group'><label>From Date</label><div class='input-group'><div class='input-group-addon'><i class='fa fa-calendar'></i></div><input type='text' class='fromdate mptldp form-control' id='expfromdate"+numItems+"'/></div></div></div><div class='col-sm-4'><div class='form-group'><label>To Date</label><div class='input-group'><div class='input-group-addon'><i class='fa fa-calendar'></i></div><input type='text' class='passdate mptldp form-control' id='exptodate"+numItems+"'/></div></div></div><div class='col-sm-4'><div class='form-group'><label>Contract</label><input class='form-control contract'  id='contract"+numItems+"'/></div></div></div></div>");
-			$(".experiencefieldset").append("<div class='col-md-12'><hr/></div>");
+			$(".experiencefieldset").append("<div class='col-md-12 hrclass'><hr/></div>");
+			
+			//initialise datepicker
+			var userdf='<?php echo $this->request->session()->read('sessionuser')['dateformat'];?>';
+			if(userdf==1){
+				$('.mptldp').datepicker({ format:"dd/mm/yyyy",autoclose: true,clearBtn: true,todayHighlight: true });
+			}else{
+				$('.mptldp').datepicker({ format:"yyyy/mm/dd",autoclose: true,clearBtn: true,todayHighlight: true });
+			}
+			
+    	});
+    	
+    	$("#btnAddSkillCtrls").click(function (event) {
+    		
+    		event.preventDefault();
+			var numItems = $('.skillclass').length+1;
+    		$(".skillfieldset").append("<div class='skillclass' id='contentDiv"+numItems+"'><div class='clearfix'><div class='col-sm-4'><label>Skill</label><div class='input-group'><div class='input-group-btn'><a id='newid' class='skilldelete btn btn-danger btn-flat'><i class='fa fa-trash'></i></a></div><input type='hidden' id='skillid"+numItems+"' value='0'/><input type='text' class='skill form-control' id='skill"+numItems+"'/></div></div><div class='col-sm-4'><div class='form-group'><label>Skill Group</label><input class='form-control skillgroup'  id='skillgroup"+numItems+"'/></div></div><div class='col-sm-4'><div class='form-group'><label>Proficiency</label><input class='form-control skillproficiency'  id='skillproficiency"+numItems+"'/></div></div><div class='col-sm-4'><div class='form-group'><label>From Date</label><div class='input-group'><div class='input-group-addon'><i class='fa fa-calendar'></i></div><input type='text' class='skillfromdate mptldp form-control' id='skillfromdate"+numItems+"'/></div></div></div><div class='col-sm-4'><div class='form-group'><label>To Date</label><div class='input-group'><div class='input-group-addon'><i class='fa fa-calendar'></i></div><input type='text' class='skilltodate mptldp form-control' id='skilltodate"+numItems+"'/></div></div></div></div></div>");
+			$(".skillfieldset").append("<div class='col-md-12 hrclass'><hr/></div>");
+			
+			//initialise datepicker
+			var userdf='<?php echo $this->request->session()->read('sessionuser')['dateformat'];?>';
+			if(userdf==1){
+				$('.mptldp').datepicker({ format:"dd/mm/yyyy",autoclose: true,clearBtn: true,todayHighlight: true });
+			}else{
+				$('.mptldp').datepicker({ format:"yyyy/mm/dd",autoclose: true,clearBtn: true,todayHighlight: true });
+			}
+			
+    	});
+    	
+    	$("#btnAddAssetCtrls").click(function (event) {
+    		
+    		event.preventDefault();
+			var numItems = $('.assetclass').length+1;
+    		$(".officeassetfieldset").append("<div class='assetclass' id='contentDiv"+numItems+"'><div class='clearfix'><div class='col-sm-4'><label>Location</label><div class='input-group'><div class='input-group-btn'><a id='newid' class='assetdelete btn btn-danger btn-flat'><i class='fa fa-trash'></i></a></div><input type='hidden' id='assetid"+numItems+"' value='0'/><input type='text' class='location form-control' id='assetlocation"+numItems+"'/></div></div><div class='col-sm-4'><div class='form-group'><label>Asset Type</label><input class='form-control assettype'  id='assettype"+numItems+"'/></div></div><div class='col-sm-4'><div class='form-group'><label>Asset Number</label><input class='form-control assetnumber'  id='assetnumber"+numItems+"'/></div></div><div class='col-sm-4'><div class='form-group'><label>Asset Description</label><input class='form-control description'  id='assetdescription"+numItems+"'/></div></div><div class='col-sm-4'><div class='form-group'><label>Issue Date</label><div class='input-group'><div class='input-group-addon'><i class='fa fa-calendar'></i></div><input type='text' class='assetissuedate mptldp form-control' id='assetissuedate"+numItems+"'/></div></div></div><div class='col-sm-4'><div class='form-group'><label>To Date</label><div class='input-group'><div class='input-group-addon'><i class='fa fa-calendar'></i></div><input type='text' class='assettodate mptldp form-control' id='assettodate"+numItems+"'/></div></div></div></div></div>");
+			$(".officeassetfieldset").append("<div class='col-md-12 hrclass'><hr/></div>");
 			
 			//initialise datepicker
 			var userdf='<?php echo $this->request->session()->read('sessionuser')['dateformat'];?>';
@@ -854,7 +1042,7 @@ $(document).ready(function(){
         	}
     	});
     	
-    	//delete btn onclick
+    	//id delete btn onclick
 	$('.idfieldset').on('click', 'a.compdelete', function() {
 		var selectedctrl=$(this);
 		var id = $(this).attr('id');
@@ -867,7 +1055,8 @@ $(document).ready(function(){
         			data: 'empid='+empid+'&identityid='+id,
         			success : function(data) {
         				if(data=="success"){
-    						selectedctrl.parent().closest('div .idclass').remove();
+    						selectedctrl.parent().closest('div .idclass').next('div .hrclass').remove();
+							selectedctrl.parent().closest('div .idclass').remove();
     						return true;
     					}else{
     						sweet_alert("Couldn't delete the particular id details.Please try again later.");
@@ -880,6 +1069,7 @@ $(document).ready(function(){
       
         		});
 			}else{			
+				$(this).parent().closest('div .idclass').next('div .hrclass').remove();
 				$(this).parent().closest('div .idclass').remove();
     			return true;
     		}
@@ -889,6 +1079,155 @@ $(document).ready(function(){
    
 	});
 		
+	//experience delete btn onclick
+	$('.experiencefieldset').on('click', 'a.expdelete', function() {
+		var selectedctrl=$(this);
+		var id = $(this).attr('id');
+		var empid='<?php echo $employee['id'] ?>';
+		if (confirm("Are you sure you want to delete the particular Experience ?")) {
+			if(id!="newid"){
+				$.ajax({
+        			type: "POST",
+        			url: '/Employees/deleteExperiences',
+        			data: 'empid='+empid+'&experienceid='+id,
+        			success : function(data) {
+        				if(data=="success"){
+    						selectedctrl.parent().closest('div .experienceclass').next('div .hrclass').remove();
+							selectedctrl.parent().closest('div .experienceclass').remove();
+    						return true;
+    					}else{
+    						sweet_alert("Couldn't delete the particular Experience details.Please try again later.");
+							return false;
+    					}
+        			},error: function(data) {
+        	    		sweet_alert("Couldn't delete the particular Experience details.Please try again later.");
+						return false;
+        			}
+      
+        		});
+			}else{			
+				$(this).parent().closest('div .experienceclass').next('div .hrclass').remove();
+				$(this).parent().closest('div .experienceclass').remove();
+    			return true;
+    		}
+  		} else {
+    		return false;
+  		}
+   
+	});
+	
+	//educational qualifications delete btn onclick
+	$('.qualificationfieldset').on('click', 'a.qualdelete', function() {
+		var selectedctrl=$(this);
+		var id = $(this).attr('id');
+		var empid='<?php echo $employee['id'] ?>';
+		if (confirm("Are you sure you want to delete the particular Qualification ?")) {
+			if(id!="newid"){
+				$.ajax({
+        			type: "POST",
+        			url: '/Employees/deleteQualifications',
+        			data: 'empid='+empid+'&qualificationid='+id,
+        			success : function(data) {
+        				if(data=="success"){
+    						selectedctrl.parent().closest('div .qualificationclass').next('div .hrclass').remove();
+							selectedctrl.parent().closest('div .qualificationclass').remove();
+    						return true;
+    					}else{
+    						sweet_alert("Couldn't delete the particular qualification details.Please try again later.");
+							return false;
+    					}
+        			},error: function(data) {
+        	    		sweet_alert("Couldn't delete the particular qualification details.Please try again later.");
+						return false;
+        			}
+      
+        		});
+			}else{			
+				$(this).parent().closest('div .qualificationclass').next('div .hrclass').remove();
+				$(this).parent().closest('div .qualificationclass').remove();
+    			return true;
+    		}
+  		} else {
+    		return false;
+  		}
+   
+	});
+	
+		//skill delete btn onclick
+	$('.skillfieldset').on('click', 'a.skilldelete', function() {
+		var selectedctrl=$(this);
+		var id = $(this).attr('id');
+		var empid='<?php echo $employee['id'] ?>';
+		if (confirm("Are you sure you want to delete the particular Skill ?")) {
+			if(id!="newid"){
+				$.ajax({
+        			type: "POST",
+        			url: '/Employees/deleteSkills',
+        			data: 'empid='+empid+'&skillid='+id,
+        			success : function(data) {
+        				if(data=="success"){
+    						selectedctrl.parent().closest('div .skillclass').next('div .hrclass').remove();
+							selectedctrl.parent().closest('div .skillclass').remove();
+    						return true;
+    					}else{
+    						sweet_alert("Couldn't delete the particular skill details.Please try again later.");
+							return false;
+    					}
+        			},error: function(data) {
+        	    		sweet_alert("Couldn't delete the particular skill details.Please try again later.");
+						return false;
+        			}
+      
+        		});
+			}else{			
+				$(this).parent().closest('div .skillclass').next('div .hrclass').remove();
+				$(this).parent().closest('div .skillclass').remove();
+    			return true;
+    		}
+  		} else {
+    		return false;
+  		}
+   
+	});
+	
+	
+	//office asset delete btn onclick
+	$('.officeassetfieldset').on('click', 'a.assetdelete', function() {
+		var selectedctrl=$(this);
+		var id = $(this).attr('id');
+		var empid='<?php echo $employee['id'] ?>';
+		if (confirm("Are you sure you want to delete the particular Asset ?")) {
+			if(id!="newid"){
+				$.ajax({
+        			type: "POST",
+        			url: '/Employees/deleteAssets',
+        			data: 'empid='+empid+'&assetid='+id,
+        			success : function(data) {
+        				if(data=="success"){
+    						selectedctrl.parent().closest('div .assetclass').next('div .hrclass').remove();
+							selectedctrl.parent().closest('div .assetclass').remove();
+    						return true;
+    					}else{
+    						sweet_alert("Couldn't delete the particular asset details.Please try again later.");
+							return false;
+    					}
+        			},error: function(data) {
+        	    		sweet_alert("Couldn't delete the particular asset details.Please try again later.");
+						return false;
+        			}
+      
+        		});
+			}else{			
+				$(this).parent().closest('div .assetclass').next('div .hrclass').remove();
+				$(this).parent().closest('div .assetclass').remove();
+    			return true;
+    		}
+  		} else {
+    		return false;
+  		}
+   
+	});
+	
     });
     function formattodmy(inputDate) {
     var date = new Date(inputDate);
@@ -922,6 +1261,8 @@ function formattoymd(inputDate) {
 		var idclasscount = $('.idclass').length;
 		var qualclasscount = $('.qualificationclass').length;
 		var expclasscount = $('.experienceclass').length;
+		var assetclasscount = $('.assetclass').length;
+		var skillclasscount = $('.skillclass').length;
 		
 		//add permanent address
     	var address1=$("#paaddress1").val();
@@ -975,11 +1316,12 @@ function formattoymd(inputDate) {
     				$.ajax({
         				type: "POST",
         				url: '/Employees/addIds',
+        				indexValue: i,
         				data: 'empid='+empid+'&identityid='+identityid+'&idtype='+idtype+'&country='+country+'&nationalid='+nationalid+'&isprimary='+'0'+'&issuedate='+issuedate
         						+'&expirydate='+expirydate,
         				success : function(data) {
-        	 				if(i==idclasscount || i>idclasscount){
-    							if(qualclasscount<1 && expclasscount<1){
+        	 				if(this.indexValue==idclasscount || this.indexValue>idclasscount){
+    							if(qualclasscount<1 && expclasscount<1 && assetclasscount<1 && skillclasscount<1){
     								document.getElementById("empform").submit();
     							}else{
     								idcounter++;
@@ -1015,6 +1357,11 @@ function formattoymd(inputDate) {
 function saveQualifications(empid){
 		
 		var qualclasscount = $('.qualificationclass').length;
+		
+		var expclasscount = $('.experienceclass').length;
+		var assetclasscount = $('.assetclass').length;
+		var skillclasscount = $('.skillclass').length;
+		
     	//saving multi qualification's
     	for (t = 1; t <= qualclasscount; t++) 
     	{
@@ -1031,12 +1378,13 @@ function saveQualifications(empid){
     			if(empid!="" && empid!=null && qualification!="" && qualification!=null && fromdate!="" && fromdate!=null && passdate!="" && passdate!=null){
     				$.ajax({
         				type: "POST",
+        				indexValue: t,
         				url: '/Employees/addQualifications',
         				data: 'empid='+empid+'&qualificationid='+qualificationid+'&qualification='+qualification+'&subject='+subject+'&secsubject='+secsubject+'&schoolcollege='+schoolcollege+'&city='+city
         						+'&fromdate='+fromdate+'&passdate='+passdate +'&grade='+grade,
         				success : function(data) {
-    						if(t==qualclasscount || t>qualclasscount){
-    							if(qualclasscount<1){
+    						if(this.indexValue==qualclasscount || this.indexValue>qualclasscount){
+    							if(expclasscount<1 && assetclasscount<1 && skillclasscount<1){
     								document.getElementById("empform").submit();
     							}else{
     								qualcounter++;
@@ -1068,6 +1416,9 @@ function saveQualifications(empid){
 	}
 	function saveExperiences(empid){
 		var expclasscount = $('.experienceclass').length;
+		
+		var assetclasscount = $('.assetclass').length;
+		var skillclasscount = $('.skillclass').length;
     	//saving multi experience's
     	for (t = 1; t <= expclasscount; t++) 
     	{
@@ -1086,12 +1437,17 @@ function saveQualifications(empid){
     				$.ajax({
         				type: "POST",
         				url: '/Employees/addExperiences',
+        				indexValue: t,
         				data: 'empid='+empid+'&experienceid='+experienceid+'&designation='+designation+'&industry='+industry+'&efunction='+efunction+'&employer='+employer+'&city='+city
         						+'&country='+country+'&fromdate='+fromdate+'&todate='+todate +'&contract='+contract,
         				success : function(data) {
-    						if(t==expclasscount || t>expclasscount){
-    							expcounter++;    							
-    							document.getElementById("empform").submit();    						
+    						if(this.indexValue==expclasscount || this.indexValue>expclasscount){
+    							if(assetclasscount<1 && skillclasscount<1){
+    								document.getElementById("empform").submit();
+    							}else{
+    								expcounter++;   
+    								saveofficeAssets(empid);
+    							}					
     						}
         				},error: function(data) {
     						sweet_alert("Error while adding Experience.");
@@ -1115,6 +1471,106 @@ function saveQualifications(empid){
     			document.getElementById("empform").submit();    		
     		}
     		return false;
+	}
+	
+	
+	function saveofficeAssets(empid){
+		var assetclasscount = $('.assetclass').length;
+		var skillclasscount = $('.skillclass').length;
+    	//saving multi asset's
+    	for (t = 1; t <= assetclasscount; t++) 
+    	{
+    		var assetlocation=$("#assetlocation"+t).val();
+    		var assettype=$("#assettype"+t).val();
+    		var assetnumber=$("#assetnumber"+t).val();
+    		var assetdescription=$("#assetdescription"+t).val();
+    		var assetissuedate=$("#assetissuedate"+t).val();
+    		var assettodate=$("#assettodate"+t).val();
+    		
+    		
+    			if(empid!="" && empid!=null && assetnumber!="" && assetnumber!=null && assetissuedate!="" && assetissuedate!=null && assettodate!="" && assettodate!=""){
+    				$.ajax({
+        				type: "POST",
+        				url: '/Employees/addOfficeAssets',
+        				indexValue: t,
+        				data: 'empid='+empid+'&assetid='+'0'+'&assetlocation='+assetlocation+'&assettype='+assettype+'&assetnumber='+assetnumber+'&assetdescription='+assetdescription
+        						+'&assetissuedate='+assetissuedate+'&assettodate='+assettodate,
+        				success : function(data) {
+    						if(this.indexValue==assetclasscount || this.indexValue>assetclasscount){
+    							if(skillclasscount<1){
+    								document.getElementById("empform").submit();
+    							}else{
+    								assetcounter++;
+    								saveSkills(empid);
+    							}					
+    						}
+        				},error: function(data) {
+    						sweet_alert("Error while adding Office Assets.");
+							return false;   			
+
+        				},statusCode: {
+        					500: function() {
+          						sweet_alert("Error while adding Office Assets.");
+								return false;
+        					}
+      					}
+      
+        			});	
+				}else{
+					sweet_alert("Please enter Asset Number/Issue/To Date.");break;
+					return false;
+				}
+    		}
+    		
+    		if(assetclasscount<1){
+    			assetcounter++;    							
+    			saveSkills(empid);   		
+    		}
+	}
+	function saveSkills(empid){
+		var skillclasscount = $('.skillclass').length;
+    	//saving multi skill's
+    	for (t = 1; t <= skillclasscount; t++) 
+    	{
+    		var skill=$("#skill"+t).val();
+    		var skillgroup=$("#skillgroup"+t).val();
+    		var skillproficiency=$("#skillproficiency"+t).val();
+    		var skillfromdate=$("#skillfromdate"+t).val();
+    		var skilltodate=$("#skilltodate"+t).val();
+    		
+    			if(empid!="" && empid!=null && skill!="" && skill!=null && skillfromdate!="" && skillfromdate!=null && skilltodate!="" && skilltodate!=""){
+    				$.ajax({
+        				type: "POST",
+        				url: '/Employees/addSkills',
+        				indexValue: t,
+        				data: 'empid='+empid+'&skillid='+'0'+'&skill='+skill+'&skillgroup='+skillgroup+'&skillproficiency='+skillproficiency+'&skillfromdate='+skillfromdate+'&skilltodate='+skilltodate,
+        				success : function(data) {
+    						if(this.indexValue==skillclasscount || this.indexValue>skillclasscount){
+    							skillcounter++;    							
+    							window.location='/employees';    						
+    						}
+        				},error: function(data) {
+    						sweet_alert("Error while adding Skill.");
+							return false;   			
+
+        				},statusCode: {
+        					500: function() {
+          						sweet_alert("Error while adding Skill.");
+								return false;
+        					}
+      					}
+      
+        			});	
+				}else{
+					sweet_alert("Please enter Skill/From/To Date.");break;
+					return false;
+				}
+    		}
+    		
+    		if(skillclasscount<1){
+    			skillcounter++;    							
+    			window.location='/employees';    		
+    		}
 	}
 </script>
 <?php $this->end(); ?>
