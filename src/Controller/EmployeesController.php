@@ -63,7 +63,7 @@ class EmployeesController extends AppController
     {
         $employee = $this->Employees->get($id, [
             'contain' => ['Empdatabiographies', 'Empdatapersonals', 'Employmentinfos', 'ContactInfos','EducationalQualifications','Experiences', 'Addresses' => function ($q) {
-       							return $q->where(['Addresses.address_type' => '1']); },'Identities','Jobinfos']
+       							return $q->where(['Addresses.address_type' => '1']); },'Identities','Jobinfos','Skills','OfficeAssets']
         ]);
 		if($employee['customer_id']==$this->loggedinuser['customer_id'] && $employee['visible']=='1'){
         	$payGroups = $this->Employees->JobInfos->PayGroups->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
@@ -108,6 +108,23 @@ class EmployeesController extends AppController
 			$qualifications = $this->Employees->EducationalQualifications->find('all')->where("EducationalQualifications.employee_id=".$id)->andwhere("EducationalQualifications.id!=".$qualificationid)
 							->andwhere("EducationalQualifications.customer_id=".$this->loggedinuser['customer_id']);
 			$this->set('qualifications', json_encode($qualifications));
+			
+			$skillid=0;
+			if(isset($employee['skill']['id'])){
+				$skillid=$employee['skill']['id'];
+			}
+			$skills = $this->Employees->Skills->find('all')->where("Skills.employee_id=".$id)->andwhere("Skills.id!=".$skillid)
+							->andwhere("Skills.customer_id=".$this->loggedinuser['customer_id']);
+			$this->set('skills', json_encode($skills));
+			
+			$assetid=0;
+			if(isset($employee['office_asset']['id'])){
+				$assetid=$employee['office_asset']['id'];
+			}
+			$assets = $this->Employees->OfficeAssets->find('all')->where("OfficeAssets.employee_id=".$id)->andwhere("OfficeAssets.id!=".$assetid)
+							->andwhere("OfficeAssets.customer_id=".$this->loggedinuser['customer_id']);
+			$this->set('assets', json_encode($assets));
+			
 			
 			$this->loadModel('Addresses');
         	$address = $this->Addresses->find('all')->where("Addresses.employee_id=".$id)->andwhere("Addresses.address_type='2'")
@@ -205,6 +222,106 @@ class EmployeesController extends AppController
 			{
 				$identity = $this->Identities->patchEntity($identity, $this->request->data);
             	if ($this->Identities->delete($identity)) {
+            		$this->response->body("success");
+	    			return $this->response;
+        		} else {
+            		$this->response->body("error");
+	    			return $this->response;
+        		}
+			}else{
+				$this->response->body("error");
+	    		return $this->response;
+			}			
+		}
+	}
+	public function deleteQualifications()
+	{
+		if($this->request->is('ajax')) {
+				
+			$this->autoRender=false;	
+			$this->loadModel('EducationalQualifications');		
+						
+			$qualification = $this->EducationalQualifications->get($this->request->data['qualificationid']);
+
+        	if($qualification['customer_id'] == $this->loggedinuser['customer_id']  && $qualification['employee_id'] == $this->request->data['empid']) 
+			{
+				$qualification = $this->EducationalQualifications->patchEntity($qualification, $this->request->data);
+            	if ($this->EducationalQualifications->delete($qualification)) {
+            		$this->response->body("success");
+	    			return $this->response;
+        		} else {
+            		$this->response->body("error");
+	    			return $this->response;
+        		}
+			}else{
+				$this->response->body("error");
+	    		return $this->response;
+			}			
+		}
+	}
+	public function deleteExperiences()
+	{
+		if($this->request->is('ajax')) {
+				
+			$this->autoRender=false;	
+			$this->loadModel('Experiences');		
+						
+			$experience = $this->Experiences->get($this->request->data['experienceid']);
+
+        	if($experience['customer_id'] == $this->loggedinuser['customer_id']  && $experience['employee_id'] == $this->request->data['empid']) 
+			{
+				$experience = $this->Experiences->patchEntity($experience, $this->request->data);
+            	if ($this->Experiences->delete($experience)) {
+            		$this->response->body("success");
+	    			return $this->response;
+        		} else {
+            		$this->response->body("error");
+	    			return $this->response;
+        		}
+			}else{
+				$this->response->body("error");
+	    		return $this->response;
+			}			
+		}
+	}
+	public function deleteAssets()
+	{
+		if($this->request->is('ajax')) {
+				
+			$this->autoRender=false;	
+			$this->loadModel('OfficeAssets');		
+						
+			$asset = $this->OfficeAssets->get($this->request->data['assetid']);
+
+        	if($asset['customer_id'] == $this->loggedinuser['customer_id']  && $asset['employee_id'] == $this->request->data['empid']) 
+			{
+				$asset = $this->OfficeAssets->patchEntity($asset, $this->request->data);
+            	if ($this->OfficeAssets->delete($asset)) {
+            		$this->response->body("success");
+	    			return $this->response;
+        		} else {
+            		$this->response->body("error");
+	    			return $this->response;
+        		}
+			}else{
+				$this->response->body("error");
+	    		return $this->response;
+			}			
+		}
+	}
+	public function deleteSkills()
+	{
+		if($this->request->is('ajax')) {
+				
+			$this->autoRender=false;	
+			$this->loadModel('Skills');		
+						
+			$skill = $this->Skills->get($this->request->data['skillid']);
+
+        	if($skill['customer_id'] == $this->loggedinuser['customer_id']  && $skill['employee_id'] == $this->request->data['empid']) 
+			{
+				$skill = $this->Skills->patchEntity($skill, $this->request->data);
+            	if ($this->Skills->delete($skill)) {
             		$this->response->body("success");
 	    			return $this->response;
         		} else {
@@ -428,7 +545,7 @@ class EmployeesController extends AppController
 				
 			if ($this->Skills->save($skill)) {
 
-               	 	$this->response->body("success");
+               	 	$this->response->body("success");$this->Flash->success(__('Skills.'));
 	    			return $this->response;
             } else {
                 	$this->response->body("error");
@@ -537,7 +654,7 @@ class EmployeesController extends AppController
     {
         $employee = $this->Employees->get($id, [
             'contain' => ['Empdatabiographies', 'Empdatapersonals', 'Employmentinfos', 'ContactInfos','EducationalQualifications','Experiences', 'Addresses' => function ($q) {
-       							return $q->where(['Addresses.address_type' => '1']); },'Identities','Jobinfos']
+       							return $q->where(['Addresses.address_type' => '1']); },'Identities','Jobinfos','Skills','OfficeAssets']
         ]);
 		
 		if($employee['customer_id'] != $this->loggedinuser['customer_id'] || $employee['visible'] != '1')
@@ -696,6 +813,23 @@ class EmployeesController extends AppController
 							->andwhere("Experiences.customer_id=".$this->loggedinuser['customer_id']);
 			$this->set('experiences', json_encode($experiences));
 			
+			$skillid=0;
+			if(isset($employee['skill']['id'])){
+				$skillid=$employee['skill']['id'];
+			}
+			$skills = $this->Employees->Skills->find('all')->where("Skills.employee_id=".$id)->andwhere("Skills.id!=".$skillid)
+							->andwhere("Skills.customer_id=".$this->loggedinuser['customer_id']);
+			$this->set('skills', json_encode($skills));
+			
+			$assetid=0;
+			if(isset($employee['office_asset']['id'])){
+				$assetid=$employee['office_asset']['id'];
+			}
+			$assets = $this->Employees->OfficeAssets->find('all')->where("OfficeAssets.employee_id=".$id)->andwhere("OfficeAssets.id!=".$assetid)
+							->andwhere("OfficeAssets.customer_id=".$this->loggedinuser['customer_id']);
+			$this->set('assets', json_encode($assets));
+			
+
 			$qualificationid=0;
 			if(isset($employee['educational_qualification']['id'])){
 				$qualificationid=$employee['educational_qualification']['id'];
