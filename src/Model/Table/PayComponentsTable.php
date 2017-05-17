@@ -54,13 +54,13 @@ class PayComponentsTable extends Table
             'foreignKey' => 'pay_component_group_id'
         ]);
         $this->hasMany('PayrollData', [
-            'foreignKey' => 'pay_component_id'
+            'foreignKey' => 'pay_component_id','dependent' => true
         ]);
         $this->hasMany('PayrollResult', [
-            'foreignKey' => 'pay_component_id'
+            'foreignKey' => 'pay_component_id','dependent' => true
         ]);
         $this->hasMany('TimeAccountTypes', [
-            'foreignKey' => 'pay_component_id'
+            'foreignKey' => 'pay_component_id','dependent' => true
         ]);
     }
 
@@ -82,7 +82,6 @@ class PayComponentsTable extends Table
             ->allowEmpty('description');
 
         $validator
-            ->boolean('status')
             ->allowEmpty('status');
 
         $validator

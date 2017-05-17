@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use Cake\Datasource\ConnectionManager;
 
 /**
  * PayrollRecord Controller
@@ -65,6 +66,9 @@ var $components = array('Datatable');
     }
     public function index()
     {
+    	
+
+
     	$this->loadModel('CreateConfigs');
         $configs=$this->CreateConfigs->find('all')->where(['table_name' => $this->request->params['controller']])->order(['"id"' => 'ASC'])->toArray();
         $this->set('configs',$configs);	
@@ -80,7 +84,61 @@ var $components = array('Datatable');
         $this->set(compact('payrollRecord'));
         $this->set('_serialize', ['payrollRecord']);
     }
+	
+	public function validateEmployee(){
+			
+		if($this->request->is('ajax')) {
+				
+			$this->autoRender=false;	
+			
+			$this->loadModel('EmpDataBiographies');
+			$empdatabiographyarr=$this->EmpDataBiographies->find('all',['conditions' => array('employee_id' => $this->request->data['empid']),'contain' => []])->toArray();
+			isset($empdatabiographyarr[0]) ? $empdatabiographyid = $empdatabiographyarr[0]['id'] : $empdatabiographyid = "" ; 
+		
+			$this->loadModel('EmployeeAbsencerecords');		
+			$empabsencerecarr=$this->EmployeeAbsencerecords->find('all',['conditions' => array('emp_data_biographies_id' => $empdatabiographyid)])->where("EmployeeAbsencerecords.status=0")
+										 ->andwhere("EmployeeAbsencerecords.customer_id=".$this->loggedinuser['customer_id'])->toArray();
+			foreach ($empabsencerecarr as $k=>$data) {
 
+
+				$now = new \DateTime();
+				
+				$startdate = str_replace('/', '-', $empabsencerecarr[$k]['start_date']);
+				$enddate = str_replace('/', '-', $empabsencerecarr[$k]['end_date']);
+
+				$begin = new \DateTime( $startdate );
+				$end = new \DateTime( $enddate );
+
+				$interval = \DateInterval::createFromDateString('1 day');
+				$period = new \DatePeriod($begin, $interval, $end);
+
+				foreach ( $period as $dt ){
+	
+					$timestamp = strtotime($dt->format( "l Y-m-d H:i:s\n" )); 
+					$month = date('n', $timestamp);
+					if($now->format('n')==$month){
+  						$this->response->body("Leave approval for the employee ". $this->get_employeename($empdatabiographyid) . " From " . $empabsencerecarr[$k]['start_date']->format('d/m/Y') ." to " 
+  								. $empabsencerecarr[$k]['end_date']->format('d/m/Y') . " still pending.");
+						return $this->response;
+					}
+				}
+				
+			}
+			
+			$this->response->body("success");
+	    	return $this->response;
+				
+		}
+	}
+	public function get_employeename($empdatabiographyid = null) 
+	{
+		$conn = ConnectionManager::get('default');
+		$empid = $conn->execute('select employee_id from empdatabiographies where id='.$empdatabiographyid.'')->fetchAll('assoc');
+		if($empid!="" && $empid!=null && isset($empid[0]['employee_id']) ){
+			$arrayTemp1 = $conn->execute('select first_name,last_name from empdatapersonals where employee_id='.$empid[0]['employee_id'].'')->fetchAll('assoc');
+		}
+		return json_encode($arrayTemp1[0]['first_name']." ".$arrayTemp1[0]['last_name'].' ('.$empid[0]['employee_id'].')');  
+	}
     /**
      * View method
      *

@@ -9,7 +9,7 @@ use Cake\ORM\Entity;
  * @property int $id
  * @property string $name
  * @property string $description
- * @property bool $status
+ * @property string $status
  * @property \Cake\I18n\Time $start_date
  * @property \Cake\I18n\Time $end_date
  * @property string $pay_component_type

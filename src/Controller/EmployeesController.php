@@ -545,7 +545,7 @@ class EmployeesController extends AppController
 				
 			if ($this->Skills->save($skill)) {
 
-               	 	$this->response->body("success");$this->Flash->success(__('Skills.'));
+               	 	$this->response->body("success");
 	    			return $this->response;
             } else {
                 	$this->response->body("error");
