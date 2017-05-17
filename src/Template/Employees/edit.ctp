@@ -90,7 +90,7 @@ div#myDropZone {
             			<label class="control-label" for="employee-profilepicture" style="margin-bottom: 5px;">Profile Picture</label> 
             			<a href="#" class="open-Popup" data-toggle="modal" data-remote="false" data-target="#editpicpopover" style="font-size:20px;">&nbsp;<i class="fa fa-camera"></i></a>
                         		
-        				<?php $picturename='/img/uploadedpics/'.$employee['profilepicture'];
+        				<?php $picturename=$employee['profilepicture'];
           						if (file_exists(WWW_ROOT.'img'.DS.'uploadedpics'.DS.$picturename)){
 									echo $this->Html->image('/img/uploadedpics/'.$picturename, array('class' => 'emp-profilepic img-responsive', 'id'=>'profilepic', 'alt' => 'User profile picture'));
 								}else{
@@ -1279,7 +1279,7 @@ function formattoymd(inputDate) {
     	var zipcode=$("#pazipcode").val();
     		
     		
-    	if(empid!="" && empid!=null && address1!="" && address1!=null && address2!="" && address2!=null){
+    	if(empid!="" && empid!=null){
     			$.ajax({
         			type: "POST",
         			url: '/Employees/addAddress',
@@ -1295,7 +1295,7 @@ function formattoymd(inputDate) {
         			}     
         	});
 		}else{
-			sweet_alert("Please enter Address1/Address2.");
+			sweet_alert("Employee Id missing.");
 			return false;
 		}
 			
@@ -1321,11 +1321,15 @@ function formattoymd(inputDate) {
         						+'&expirydate='+expirydate,
         				success : function(data) {
         	 				if(this.indexValue==idclasscount || this.indexValue>idclasscount){
+        	 					if(errcount<1){
     							if(qualclasscount<1 && expclasscount<1 && assetclasscount<1 && skillclasscount<1){
     								document.getElementById("empform").submit();
     							}else{
     								idcounter++;
     								saveQualifications(empid);
+    							}
+    							}else{
+    								return false;
     							}
     						}  		
         				},
@@ -1362,6 +1366,7 @@ function saveQualifications(empid){
 		var assetclasscount = $('.assetclass').length;
 		var skillclasscount = $('.skillclass').length;
 		
+		var qualerrcount=0;
     	//saving multi qualification's
     	for (t = 1; t <= qualclasscount; t++) 
     	{
@@ -1384,14 +1389,19 @@ function saveQualifications(empid){
         						+'&fromdate='+fromdate+'&passdate='+passdate +'&grade='+grade,
         				success : function(data) {
     						if(this.indexValue==qualclasscount || this.indexValue>qualclasscount){
-    							if(expclasscount<1 && assetclasscount<1 && skillclasscount<1){
-    								document.getElementById("empform").submit();
+    							if(qualerrcount<1){
+    								if(expclasscount<1 && assetclasscount<1 && skillclasscount<1){
+    									document.getElementById("empform").submit();
+    								}else{
+    									qualcounter++;
+    									saveExperiences(empid);
+    								}
     							}else{
-    								qualcounter++;
-    								saveExperiences(empid);
+    								return false;
     							}
     						}
         				},error: function(data) {
+        					qualerrcount++;
     						sweet_alert("Error while adding Qualification's.");
 							return false;   			
 
@@ -1419,6 +1429,7 @@ function saveQualifications(empid){
 		
 		var assetclasscount = $('.assetclass').length;
 		var skillclasscount = $('.skillclass').length;
+		var experrcount=0;
     	//saving multi experience's
     	for (t = 1; t <= expclasscount; t++) 
     	{
@@ -1442,14 +1453,19 @@ function saveQualifications(empid){
         						+'&country='+country+'&fromdate='+fromdate+'&todate='+todate +'&contract='+contract,
         				success : function(data) {
     						if(this.indexValue==expclasscount || this.indexValue>expclasscount){
+    							if(experrcount<1){
     							if(assetclasscount<1 && skillclasscount<1){
     								document.getElementById("empform").submit();
     							}else{
     								expcounter++;   
     								saveofficeAssets(empid);
+    							}
+    							}else{
+    								return false;
     							}					
     						}
         				},error: function(data) {
+        					experrcount++
     						sweet_alert("Error while adding Experience.");
 							return false;   			
 
@@ -1462,7 +1478,7 @@ function saveQualifications(empid){
       
         			});	
 				}else{
-					sweet_alert("Please enter Designation/Industry/From/To Date."+designation);break;
+					sweet_alert("Please enter Designation/Industry/From/To Date.");break;
 					return false;
 				}
     		}
@@ -1477,6 +1493,8 @@ function saveQualifications(empid){
 	function saveofficeAssets(empid){
 		var assetclasscount = $('.assetclass').length;
 		var skillclasscount = $('.skillclass').length;
+		
+		var asseterrcount=0;
     	//saving multi asset's
     	for (t = 1; t <= assetclasscount; t++) 
     	{
@@ -1497,14 +1515,19 @@ function saveQualifications(empid){
         						+'&assetissuedate='+assetissuedate+'&assettodate='+assettodate,
         				success : function(data) {
     						if(this.indexValue==assetclasscount || this.indexValue>assetclasscount){
-    							if(skillclasscount<1){
+    							if(asseterrcount<1){
+    								if(skillclasscount<1){
     								document.getElementById("empform").submit();
     							}else{
     								assetcounter++;
     								saveSkills(empid);
-    							}					
+    							}	
+    							}else{
+    								return false;
+    							}				
     						}
         				},error: function(data) {
+        					asseterrcount++;
     						sweet_alert("Error while adding Office Assets.");
 							return false;   			
 
@@ -1529,6 +1552,8 @@ function saveQualifications(empid){
 	}
 	function saveSkills(empid){
 		var skillclasscount = $('.skillclass').length;
+		
+		var skillerrcount=0;
     	//saving multi skill's
     	for (t = 1; t <= skillclasscount; t++) 
     	{
@@ -1546,10 +1571,15 @@ function saveQualifications(empid){
         				data: 'empid='+empid+'&skillid='+'0'+'&skill='+skill+'&skillgroup='+skillgroup+'&skillproficiency='+skillproficiency+'&skillfromdate='+skillfromdate+'&skilltodate='+skilltodate,
         				success : function(data) {
     						if(this.indexValue==skillclasscount || this.indexValue>skillclasscount){
-    							skillcounter++;    							
-    							window.location='/employees';    						
+    							if(skillerrcount<1){
+    								skillcounter++;    							
+    								window.location='/employees'; 
+    							}else{
+    								return false;
+    							}   						
     						}
         				},error: function(data) {
+        					skillerrcount++;
     						sweet_alert("Error while adding Skill.");
 							return false;   			
 

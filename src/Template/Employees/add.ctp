@@ -751,7 +751,7 @@ var countrydata=[];
     		var zipcode=$("#pazipcode").val();
     		
     		
-    		if(empid!="" && empid!=null && address1!="" && address1!=null && address2!="" && address2!=null){
+    		if(empid!="" && empid!=null ){
     			$.ajax({
         			type: "POST",
         			url: '/Employees/addAddress',
@@ -770,7 +770,7 @@ var countrydata=[];
         			}
         		});
 			}else{
-				sweet_alert("Please enter Address1/Address2.");
+				sweet_alert("Employee Id missing.");
 				return false;
 			}
 		

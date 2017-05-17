@@ -29,7 +29,7 @@
     		    echo $this->Form->input('external_code',['label' => 'Pay Component Code','disabled' => true]);
             echo $this->Form->input('name',['label' => 'Pay Component Name','disabled' => true]);
             echo $this->Form->input('description',['disabled' => true]);
-            echo $this->Form->input('status',['disabled' => true,'class'=>'select2','options' => array('Active', 'Inactive'), 'empty' => 'Choose']);
+            echo $this->Form->input('status',['disabled' => true,'class'=>'select2','options' => ['Active' => 'Active', 'Inactive' => 'Inactive'], 'empty' => 'Choose']);
 			      echo $this->Form->input('start_date',['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
             echo $this->Form->input('end_date',['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
             echo $this->Form->input('pay_component_type',['disabled' => true,'class'=>'select2','options' => array('Amount', 'Percentage'), 'empty' => 'Choose']);
