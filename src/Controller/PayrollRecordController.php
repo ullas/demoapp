@@ -84,12 +84,37 @@ var $components = array('Datatable');
         $this->set(compact('payrollRecord'));
         $this->set('_serialize', ['payrollRecord']);
     }
-	
-	public function validateEmployee(){
+	public function checkEmployeePayComponent(){
 			
 		if($this->request->is('ajax')) {
 				
 			$this->autoRender=false;	
+			
+			$this->loadModel('EmpDataBiographies');
+			$empdatabiographyarr=$this->EmpDataBiographies->find('all',['conditions' => array('employee_id' => $this->request->data['empid']),'contain' => []])->toArray();
+			isset($empdatabiographyarr[0]) ? $empdatabiographyid = $empdatabiographyarr[0]['id'] : $empdatabiographyid = "" ; 
+		
+			$this->loadModel('PayrollData');		
+			$payrolldataarr=$this->PayrollData->find('all',['conditions' => array('PayrollData.empdatabiographies_id' => $empdatabiographyid)])->where("PayrollData.pay_component_value!="."''")
+										 ->where("PayrollData.pay_component_id!=NULL")->andwhere("PayrollData.customer_id=".$this->loggedinuser['customer_id'])->toArray();
+			if (empty($payrolldataarr)) {
+
+				$this->response->body("Pay Component/Component Group doesn't exist for the the employee". $this->get_employeename($empdatabiographyid) );
+	    		return $this->response;
+			}
+				
+			$this->response->body("success");
+	    	return $this->response;
+		}
+	}
+	public function checkEmployeeAbsencePending(){
+			
+		if($this->request->is('ajax')) {
+				
+			$this->autoRender=false;	
+			
+			$outputstr= array();
+			
 			
 			$this->loadModel('EmpDataBiographies');
 			$empdatabiographyarr=$this->EmpDataBiographies->find('all',['conditions' => array('employee_id' => $this->request->data['empid']),'contain' => []])->toArray();
@@ -117,17 +142,23 @@ var $components = array('Datatable');
 					$timestamp = strtotime($dt->format( "l Y-m-d H:i:s\n" )); 
 					$month = date('n', $timestamp);
 					if($now->format('n')==$month){
-  						$this->response->body("Leave approval for the employee ". $this->get_employeename($empdatabiographyid) . " From " . $empabsencerecarr[$k]['start_date']->format('d/m/Y') ." to " 
-  								. $empabsencerecarr[$k]['end_date']->format('d/m/Y') . " still pending.");
-						return $this->response;
+  						$outputstr[] ="Leave approval for the employee ". $this->get_employeename($empdatabiographyid) . " From " . $empabsencerecarr[$k]['start_date']->format('d/m/Y') ." to " 
+  								. $empabsencerecarr[$k]['end_date']->format('d/m/Y') . " still pending.";
+						break;
+						
 					}
 				}
 				
 			}
 			
+			
+			if(count($outputstr) > 0){
+				$this->response->body(json_encode($outputstr));
+	    		return $this->response;
+			}
+				
 			$this->response->body("success");
 	    	return $this->response;
-				
 		}
 	}
 	public function get_employeename($empdatabiographyid = null) 
