@@ -31,14 +31,14 @@
 				<div class="box-body" style="height:500px;overflow-y:scroll;">
 				 <?php foreach ($paygrouplist as $vals) {
 			
-					echo '<div class="box box-solid collapsed-box" style="margin-bottom:0px;"><div class="box-header">';
-					echo '<input type="checkbox" class="paygroup_filter" id="'.$vals['parentid'].'"/>'.' '.'<b>'.$vals['parent'].'</b>';
+					echo '<div class="box box-solid collapsed-box pg" style="margin-bottom:0px;"><div class="box-header">';
+					echo '<input type="checkbox" class="paygroup_filter" id="paygroupcheck_'.$vals['parentid'].'"/>'.' '.'<b>'.$vals['parent'].'</b>';
 					echo '<div class="box-tools" style="background:#dbdde0;"><button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button></div></div>';
 			
 					if(isset($vals['child'])){
 						echo "<div class='box-body no-padding'><ul class='nav nav-pills nav-stacked'>";
 						foreach ($vals['child'] as $childval) {
-							echo "<li><a class='emplist'><i class='fa fa-circle-o text-light-blue'></i> ";
+							echo "<li><a class='emplist'><input type='checkbox' class='emp_filter' id='empcheck_".$childval['employee_id']."'/> ";
 							
 							$empname = str_replace('"', '',$this->Country->get_empname($childval['employee_id']));
 							echo $empname ;
@@ -77,7 +77,7 @@
 			<div class="box box-primary">
 				<div class="box-header with-border">
               		<i class="fa fa-money"></i>
-			    	<h3 class="box-title">Payroll Progress</h3>
+			    	<h3 class="box-title">Payroll Output</h3>
             	</div>
 				<div class="box-body"  id="errordiv">
 					
@@ -98,6 +98,9 @@
 </section>	
 <?php $this->start('scriptIndexBottom'); ?>
 <script>
+var contentarr='<?php echo $content ?>';
+var contentobj = JSON.parse(contentarr);	
+	
  $(function () {
 
 		var action='<?php echo $this->request->params['action'] ?>';
@@ -109,10 +112,31 @@
 
 		}
 		
-		setpaygroupfilter();
+		setfilter();
 	   
-	   $('.paygroup_filter').change(function() {
-        	setpaygroupfilter();
+	    $('.paygroup_filter').change(function() {
+        	var paygroupid=$(this).attr('id');
+        	var colid=paygroupid.split("_")[1];
+        	
+        	if($(this).is(":checked")) {
+        		setempfilter(colid,"check");
+        	}else{
+        		setempfilter(colid,"uncheck");
+        	}
+        	setfilter();
+        	
+    	});
+    	
+    	$('.emp_filter').change(function() {
+        	var empid=$(this).attr('id');
+        	// var colid=empid.split("_")[1];
+        	
+        	if(!($(this).is(":checked"))){
+        		
+        		$(this).parents(".box-body").prev(".box-header").find(".paygroup_filter").prop('checked', false);
+        		// uncheckPaygroupfilter(colid);
+        	}
+        	setfilter();
     	});
     
     	$(".processbtn").click(function (event) {
@@ -125,32 +149,62 @@
    
     	});
     	
-    	$(".processselected").click(function (event) {
-    		
-    		// var empid=$(this).attr('id');
-    		// $(".progress-bar").css("width", "0%");
-    		// $("#errordiv").html("");
-//     			
-    		// validate(empid);
-   
+    	$(".processall").click(function (event) {
+    		$("#errordiv").html("");
+    		var resultarr=[];
+    		$('.emp_filter').each(function () {
+    			
+		    	var id=$(this).attr("id");
+		    	var colid=id.split("_")[1];
+				resultarr.push(colid);
+				validate(colid);
+	   		});
+   			// alert(resultarr);
     	});
     	
-    	$(".processsall").click(function (event) {
-    		
-    		// var empid=$(this).attr('id');
-    		// $(".progress-bar").css("width", "0%");
-    		// $("#errordiv").html("");
-//     			
-    		// validate(empid);
-   
+    	$(".processselected").click(function (event) {
+    		$("#errordiv").html("");
+    		var resultarr=[];
+    		$('.emp_filter').each(function () {
+    			
+		    	var sThisVal = (this.checked ? $(this).val() : "");
+		    	var id=$(this).attr("id");
+		    	var colid=id.split("_")[1];
+		    	if(sThisVal){	
+					resultarr.push(colid);
+					validate(colid);
+		    	}
+	   		});
+   			// alert(resultarr);
     	});
     	
 	});
 	
+	
+	function uncheckPaygroupfilter(empid){
+		
+	}
+	
+	function setempfilter(paygroupid,checkstatus){
+		
+		for(i=0;i<contentobj.length;i++) {
+			if(contentobj[i]['parentid']==paygroupid){
+				for(t=0;t<contentobj[i]['child'].length;t++) {
+					var empid=contentobj[i]['child'][t]['employee_id'];
+					if(checkstatus=="check"){
+						$('#empcheck_'+empid).prop('checked', true);
+					}else {
+						$('#empcheck_'+empid).prop('checked', false);
+					}
+				}
+			}
+		}
+	}
+	
 	function validate(empid){
 		
 		$(".payrollprogresstitle").html("Validating");
-    		
+    		$(".progress-bar").css("width", "0%");
     		$.ajax({
         		type: "POST",
         		url: '/PayrollRecord/checkEmployeeAbsencePending',
@@ -166,7 +220,7 @@
         				$(".progress-bar").removeClass("progress-bar-success");
         				$(".progress-bar").addClass("progress-bar-success");
         				
-        				$("#errordiv").append("<p class='text-green'>No exisiting Leave Request to be approved<p>");
+        				$("#errordiv").append("<p class='text-green'>No exisiting Leave Request to be approved("+empid+")<p>");
             			
             			// return false;
         			}else{var dataobj = JSON.parse(data);
@@ -227,19 +281,24 @@
 	}
 	
 	
-	function setpaygroupfilter(){
+	function setfilter(){
 		
 		var paygroupflagActive=false;
 		 
 		$('.paygroup_filter').each(function () {
 		    var sThisVal = (this.checked ? $(this).val() : "");
-		    var id=$(this).attr("id");
-		    var col=id.split("_")[3];
 		    if(sThisVal){	
 				paygroupflagActive=true;
 		    }
 	   });
-	   
+
+	   $('.emp_filter').each(function () {
+		    var sThisVal = (this.checked ? $(this).val() : "");
+		    if(sThisVal){	
+				paygroupflagActive=true;
+		    }
+	   });
+
 	   paygroupflagActive  ? $(".processselected").show() : 	$(".processselected").hide();
 	}
 		</script>
