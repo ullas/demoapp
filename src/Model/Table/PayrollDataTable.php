@@ -12,7 +12,6 @@ use Cake\Core\Configure;
 /**
  * PayrollData Model
  *
- * @property \Cake\ORM\Association\BelongsTo $PayComponents
  * @property \Cake\ORM\Association\BelongsTo $Customers
  * @property \Cake\ORM\Association\BelongsTo $Empdatabiographies
  *
@@ -41,9 +40,6 @@ class PayrollDataTable extends Table
         $this->displayField('id');
         $this->primaryKey('id');
 
-        $this->belongsTo('PayComponents', [
-            'foreignKey' => 'pay_component_id'
-        ]);
         $this->belongsTo('Customers', [
             'foreignKey' => 'customer_id'
         ]);
@@ -64,6 +60,9 @@ class PayrollDataTable extends Table
             ->allowEmpty('id', 'create');
 
         $validator
+            ->allowEmpty('paycomponent');
+
+        $validator
             ->allowEmpty('pay_component_value');
 
         $validator
@@ -81,7 +80,6 @@ class PayrollDataTable extends Table
     }
 	public function beforeMarshal(Event $event, $data, $options)
 	{
-		
 		$userdf = Configure::read('userdf');
 		if(isset($userdf)  & $userdf===1){
 
@@ -95,6 +93,7 @@ class PayrollDataTable extends Table
 			}
 		}
 	}
+	
     /**
      * Returns a rules checker object that will be used for validating
      * application integrity.
@@ -104,7 +103,6 @@ class PayrollDataTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
-        $rules->add($rules->existsIn(['pay_component_id'], 'PayComponents'));
         $rules->add($rules->existsIn(['customer_id'], 'Customers'));
         $rules->add($rules->existsIn(['empdatabiographies_id'], 'Empdatabiographies'));
 
