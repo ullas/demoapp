@@ -7,7 +7,7 @@ use Cake\ORM\Entity;
  * PayrollData Entity
  *
  * @property int $id
- * @property int $pay_component_id
+ * @property int $paycomponent
  * @property string $pay_component_value
  * @property \Cake\I18n\Time $start_date
  * @property \Cake\I18n\Time $end_date

@@ -169,18 +169,47 @@ $(function () {
     		for (i = 1; i <= pccount; i++) {
     			var paycomp=$("#paycomponent"+i).val();
     			var paycompval=$("#paycomponentvalue"+i).val();
-    			if(paycomp!="" && paycomp!=null && paycompval!="" && paycompval!=null){
-					$.get('/PayrollData/addData?employee='+emp+'&startdate='+startdate+'&enddate='+enddate+'&paycomponent='+paycomp+'&paycomponentvalue='+paycompval+'&type=1', function(result) {
-						if(result=="Error"){
-							pcerrcount++;
-						}
-					});
+    			
+				if(paycomp!="" && paycomp!=null && paycompval!="" && paycompval!=null && startdate!="" && startdate!=null && enddate!="" && enddate!=null){
+					
+					$.ajax({
+        				type: "POST",
+      					url: '/PayrollData/addData',
+        				indexValue: i,
+        				data: 'employee='+emp+'&startdate='+startdate+'&enddate='+enddate+'&paycomponent='+paycomp+'&paycomponentvalue='+paycompval+'&type=1',
+        				success : function(data) {
+        					if(result=="success"){
+    							if((this.indexValue==pccount || this.indexValue>pccount)  && pcerrcount<1){
+    								if(pcgcount<1){
+    									window.location='/payroll-data';
+    								}
+    							}
+    						}else{
+    							pcerrcount++;
+    							sweet_alert("Error while adding PayComponent's.");
+								return false;  
+    						}
+    						
+        				},error: function(data) {
+        					pcerrcount++;
+       						sweet_alert("Error while adding PayComponent's.");
+							return false;   			
+
+        				},statusCode: {
+        					500: function() {
+        						pcerrcount++;
+          						sweet_alert("Error while adding PayComponent's.");
+								return false;
+        					}
+      					}
+      
+        			});
+					
+				}else{
+					sweet_alert("Pay Component Value/Start/End Date missing.");break;
+					return false;
 				}
     		}	
-    		if(pcerrcount>0){
-    			sweet_alert("Error while adding Pay Component.");
-				return false;
-    		}
     		
     		//add paycomponent group
     		var pcgerrcount=0;
@@ -194,20 +223,64 @@ $(function () {
 				});
     			
     			
-    			if(paycomp!="" && paycomp!=null && postdata!="" && postdata!=null){
-					$.get('/PayrollData/addData?employee='+emp+'&startdate='+startdate+'&enddate='+enddate+'&paycomponent='+paycomp+'&paycomponentvalue='+postdata+'&type=2', function(result) {
-						if(result=="Error"){
-							pcgerrcount++;
-						}
-					});
+    			// if(paycomp!="" && paycomp!=null && postdata!="" && postdata!=null){
+					// $.get('/PayrollData/addData?employee='+emp+'&startdate='+startdate+'&enddate='+enddate+'&paycomponent='+paycomp+'&paycomponentvalue='+postdata+'&type=2', function(result) {
+						// if(result=="Error"){
+							// pcgerrcount++;
+						// }
+					// });
+				// }
+				
+				if(paycomp!="" && paycomp!=null && postdata!="" && postdata!=null){
+    				
+    				$.ajax({
+        				type: "POST",
+      					url: '/PayrollData/addData',
+        				indexValue: i,
+        				data: 'employee='+emp+'&startdate='+startdate+'&enddate='+enddate+'&paycomponent='+paycomp+'&paycomponentvalue='+postdata+'&type=2',
+        				success : function(result) {
+        					if(result=="success"){
+    							if(this.indexValue==pcgcount || this.indexValue>pcgcount){
+    								if(pcgerrcount<1){
+    									window.location='/payroll-data';
+    								}else{
+    									sweet_alert("Error while adding PayComponent Group's.");
+										return false; 
+    								}
+    							}
+    						}else{
+    							pcgerrcount++;
+    							sweet_alert("Error while adding PayComponent Group's.");
+								return false;  
+    						}
+    						
+        				},error: function(data) {
+        					pcgerrcount++;
+       						sweet_alert("Error while adding PayComponent Group's.");
+							return false;   			
+
+        				},statusCode: {
+        					500: function() {
+        						pcgerrcount++;
+          						sweet_alert("Error while adding PayComponent Group's.");
+								return false;
+        					}
+      					}
+      
+        			});
+  
+				}else{
+					sweet_alert("Pay Component Group missing.");break;
+					return false;
 				}
+				
     		}	
-    		if(pcgerrcount>0){
-    			sweet_alert("Error while adding Pay Component Group.");
-				return false;
-    		}
+    		// if(pcgerrcount>0){
+    			// sweet_alert("Error while adding Pay Component Group.");
+				// return false;
+    		// }
     		
-    		window.location = '/payroll-data'; 
+    		// window.location = '/payroll-data'; 
     		
     	}else{
     		if(emp == "" || emp==null){sweet_alert("Please select a Employee.");}
