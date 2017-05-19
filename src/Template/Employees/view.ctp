@@ -5,6 +5,12 @@
     padding: 3px;
     border: 3px solid #d2d6de;
 }	
+.widget-user-2 .widget-user-header {
+    padding: 5px;
+}
+.widget-user-2 .widget-user-image > img {
+    height: 65px;;
+}
 </style>
 
 <?= $this->element('templateelmnt'); ?>
@@ -24,6 +30,29 @@
 <!-- Main content -->
 <section class="content">
   	 <?= $this->Form->create($employee, array('role' => 'form')) ?>
+  	 
+  	 	<div class="box box-widget widget-user-2">
+            <!-- Add the bg color to the header using any of the bg-* classes -->
+            <div class="widget-user-header bg-gray" style="height:75px;">
+              <div class="widget-user-image">
+                <?php $picturename=$employee['profilepicture'];
+								if (file_exists(WWW_ROOT.'img'.DS.'uploadedpics'.DS.$picturename) && $picturename!=""){
+									echo $this->Html->image('/img/uploadedpics/'.$picturename, array('class' => 'img-circle img-responsive', 'alt' => 'User profile picture'));
+								}else{
+									echo $this->Html->image('/img/uploadedpics/defaultuser.png', array('class' => 'img-responsive', 'alt' => 'User profile picture'));
+								}
+					?>
+              </div>
+              <!-- /.widget-user-image -->
+              <h3 class="widget-user-username"><?php $dpname=$employee['empdatapersonal']['salutation'] . " ". $employee['empdatapersonal']['initials']. " "
+              									. $employee['empdatapersonal']['first_name']. " ". $employee['empdatapersonal']['last_name']; 
+              	echo $dpname; ?></h3>
+              <h5 class="widget-user-desc"><?php echo $employee['empdatabiography']['person_id_external']; ?></h5>
+            </div>
+          
+          </div>
+          
+          
   	<div class="box box-primary" style="border-color:transparent;"><div class="box-body">
 		<div class="row">
 

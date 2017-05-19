@@ -55,7 +55,7 @@ $(function () {
 	var pcobj = JSON.parse(paycomponentsarr);
 
 	for (i = 1; i <= pcobj.length; i++) {
-		$(".maindiv").append("<div class='componentclass' id='contentDiv"+i+"'><div class='clearfix'><div class='col-sm-4'><label>Pay Component:</label><input disabled type='text' class='pcomp form-control' id='paycomponent"+i+"' value='"+ pcobj[i-1]['pay_component_id'] +"'/></div><div class='col-sm-4'><label>Pay Component Value:</label><input disabled class='form-control'  id='paycomponentvalue"+i+"' value='"+ pcobj[i-1]['pay_component_value'] +"'/></div></div></div>");
+		$(".maindiv").append("<div class='componentclass' id='contentDiv"+i+"'><div class='clearfix'><div class='col-sm-4'><label>Pay Component:</label><input disabled type='text' class='pcomp form-control' id='paycomponent"+i+"' value='"+ pcobj[i-1]['paycomponent'] +"'/></div><div class='col-sm-4'><label>Pay Component Value:</label><input disabled class='form-control'  id='paycomponentvalue"+i+"' value='"+ pcobj[i-1]['pay_component_value'] +"'/></div></div></div>");
 	}
 	
 	
@@ -64,7 +64,7 @@ $(function () {
 	var pcgobj = JSON.parse(paycomponentgroupsarr);
 
 	for (i = 1; i <= pcgobj.length; i++) {
-		$(".maindiv").append("<div class='groupclass' id='groupDiv"+i+"'><div class='col-sm-4'><div class='form-group'><label>Pay Component Group:</label><input disabled type='text' class='pcgroup form-control' value='"+ pcgobj[i-1]['pay_component_id'] +"' id='pcgroup"+i+"'/></div></div></div></div>");
+		$(".maindiv").append("<div class='groupclass' id='groupDiv"+i+"'><div class='col-sm-4'><div class='form-group'><label>Pay Component Group:</label><input disabled type='text' class='pcgroup form-control' value='"+ pcgobj[i-1]['paycomponent'] +"' id='pcgroup"+i+"'/></div></div></div></div>");
 		
 		var resArr = pcgobj[i-1]['pay_component_value'].toString().split('|');
 		

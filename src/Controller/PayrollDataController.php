@@ -27,7 +27,7 @@ class PayrollDataController extends AppController
 		foreach($dbout as $value){
 			$fields[] = array("name" => $value['field_name'] , "type" => $value['datatype'] );
 		}
-		$contains=['PayComponents','Empdatabiographies'];
+		$contains=['Empdatabiographies'];
 									  
 		$usrfilter="PayrollData.customer_id ='".$this->loggedinuser['customer_id'] . "'";			  
 		$output =$this->PayrollDatatable->getView($fields,$contains,$usrfilter);
@@ -40,7 +40,7 @@ class PayrollDataController extends AppController
         $this->set('configs',$configs);	
 		
         $this->paginate = [
-            'contain' => ['PayComponents']
+            'contain' => []
         ];
         $payrollData = $this->paginate($this->PayrollData);
 
@@ -84,9 +84,10 @@ class PayrollDataController extends AppController
 		$payCompGroups = $this->PayrollData->find('all')->where("PayrollData.empdatabiographies_id=".$id)->andwhere("PayrollData.pay_component_type=2")
 							->andwhere("PayrollData.customer_id=".$this->loggedinuser['customer_id']);
 
-		$payComponents = $this->PayrollData->PayComponents->find('list', ['limit' => 200])->where(['can_override' => '0'])->andwhere(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+		$this->loadModel("PayComponents");
+		$payComponents = $this->PayComponents->find('list', ['limit' => 200])->where(['can_override' => '0'])->andwhere(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         		
-		$payComponentGroups = $this->PayrollData->PayComponents->PayComponentGroups->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+		$payComponentGroups = $this->PayComponents->PayComponentGroups->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         
 			
 		if($payrollData['customer_id']==$this->loggedinuser['customer_id'])
@@ -126,19 +127,37 @@ class PayrollDataController extends AppController
 			
 			$payrollData = $this->PayrollData->newEntity();
 			
-            $this->request->data['empdatabiographies_id']=$this->request->query['employee'];
-           	$this->request->data['start_date']=$this->request->query['startdate'];
-			$this->request->data['end_date']=$this->request->query['enddate'];
-            $this->request->data['pay_component_id']=$this->request->query['paycomponent'];
-			$this->request->data['pay_component_value']=$this->request->query['paycomponentvalue'];
-			$this->request->data['pay_component_type']=$this->request->query['type'];
             $payrollData=$this->PayrollData->patchEntity($payrollData,$this->request->data);
+			
+			$payrollData['empdatabiographies_id']=$this->request->data['employee'];
+           	$payrollData['start_date']=$this->request->data['startdate'];
+			$payrollData['end_date']=$this->request->data['enddate'];
+            $payrollData['pay_component_id']=$this->request->data['paycomponent'];
+			$payrollData['pay_component_value']=$this->request->data['paycomponentvalue'];
+			$payrollData['pay_component_type']=$this->request->data['type'];
+			
 			$payrollData['customer_id']=$this->loggedinuser['customer_id'];
+			
+			$userdf = $this->request->session()->read('sessionuser')['dateformat'];
+            if(isset($userdf)  & $userdf===1){
+				foreach (["start_date", "end_date"] as $value) {		
+					if(isset($payrollData[$value])){			
+						if($payrollData[$value]!=null && $payrollData[$value]!='' && strpos($payrollData[$value], '/') !== false){
+							$payrollData[$value] = str_replace('/', '-', $payrollData[$value]);
+							$payrollData[$value]=date('Y/m/d', strtotime($payrollData[$value]));
+						}
+					}
+				}
+			}
+			
+			
 			if ($this->PayrollData->save($payrollData)) {
 
                	 	$this->response->body("success");
 	    			return $this->response;
             } else {
+            	// debug($this->PayrollData->validationErrors);
+    // return false;
                 	$this->response->body("error");
 	    			return $this->response;
             }			
@@ -170,11 +189,12 @@ class PayrollDataController extends AppController
 						->leftJoin('EmpDataPersonals', 'EmpDataPersonals.employee_id = EmpDataBiographies.employee_id')
 						->where(['EmpDataBiographies.id NOT IN'=>$emparr])->andwhere("EmpDataBiographies.customer_id=".$this->loggedinuser['customer_id']);
 						
-		$payComponents = $this->PayrollData->PayComponents->find('list', ['limit' => 200])->where(['can_override' => '0'])->andwhere(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+		$this->loadModel("PayComponents");
+		$payComponents = $this->PayComponents->find('list', ['limit' => 200])->where(['can_override' => '0'])->andwhere(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         $this->set(compact('payrollData', 'payComponents','empDataBiographies'));
         $this->set('_serialize', ['payrollData']);
 		
-		$payComponentGroups = $this->PayrollData->PayComponents->PayComponentGroups->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+		$payComponentGroups = $this->PayComponents->PayComponentGroups->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         
 		$this->set('paycomponentarr', json_encode($payComponents));
 		$this->set('paycomponentgrouparr', json_encode($payComponentGroups));
@@ -221,10 +241,11 @@ class PayrollDataController extends AppController
 							
 		$payCompGroups = $this->PayrollData->find('all')->where("PayrollData.empdatabiographies_id=".$id)->andwhere("PayrollData.pay_component_type=2")
 							->andwhere("PayrollData.customer_id=".$this->loggedinuser['customer_id']);
-
-		$payComponents = $this->PayrollData->PayComponents->find('list', ['limit' => 200])->where(['can_override' => '0'])->andwhere(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+		
+		$this->loadModel("PayComponents");
+		$payComponents = $this->PayComponents->find('list', ['limit' => 200])->where(['can_override' => '0'])->andwhere(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         		
-		$payComponentGroups = $this->PayrollData->PayComponents->PayComponentGroups->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+		$payComponentGroups = $this->PayComponents->PayComponentGroups->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         
      
         $this->set('empDataBiographies', $empDataBiographies);
