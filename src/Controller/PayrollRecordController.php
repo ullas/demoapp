@@ -44,7 +44,7 @@ var $components = array('Datatable');
 			
         	
 		}
-        
+        $this->set('content', json_encode($paygrouplist));
 		 
         $this->set(compact('payrollRecord','paygrouplist'));
         $this->set('_serialize', ['payrollRecord']);
@@ -96,7 +96,7 @@ var $components = array('Datatable');
 		
 			$this->loadModel('PayrollData');		
 			$payrolldataarr=$this->PayrollData->find('all',['conditions' => array('PayrollData.empdatabiographies_id' => $empdatabiographyid)])->where("PayrollData.pay_component_value!="."''")
-										 ->where("PayrollData.pay_component_id!=NULL")->andwhere("PayrollData.customer_id=".$this->loggedinuser['customer_id'])->toArray();
+										 ->where("PayrollData.paycomponent!=NULL")->andwhere("PayrollData.customer_id=".$this->loggedinuser['customer_id'])->toArray();
 			if (empty($payrolldataarr)) {
 
 				$this->response->body("Pay Component/Component Group doesn't exist for the the employee". $this->get_employeename($empdatabiographyid) );
