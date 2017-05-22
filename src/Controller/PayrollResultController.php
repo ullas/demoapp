@@ -26,7 +26,7 @@ class PayrollResultController extends AppController
 		foreach($dbout as $value){
 			$fields[] = array("name" => $value['field_name'] , "type" => $value['datatype'] );
 		}
-		$contains=['PayrollArea', 'PayComponents'];
+		$contains=['PayGroups', 'PayComponents'];
 									  
 		$usrfilter="PayrollResult.customer_id ='".$this->loggedinuser['customer_id'] . "'";			  
 		$output =$this->Datatable->getView($fields,$contains,$usrfilter);
@@ -39,7 +39,7 @@ class PayrollResultController extends AppController
         $this->set('configs',$configs);	
 		
         $this->paginate = [
-            'contain' => ['PayrollArea', 'PayComponents']
+            'contain' => ['PayGroups', 'PayComponents']
         ];
         $payrollResult = $this->paginate($this->PayrollResult);
 
@@ -60,14 +60,14 @@ class PayrollResultController extends AppController
     public function view($id = null)
     {
         $payrollResult = $this->PayrollResult->get($id, [
-            'contain' => ['PayrollArea', 'PayComponents']
+            'contain' => ['PayGroups', 'PayComponents']
         ]);
 
-        $payrollArea = $this->PayrollResult->PayrollArea->find('list', ['limit' => 200]);
+       	$payGroups = $this->PayrollResult->PayGroups->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         $payComponents = $this->PayrollResult->PayComponents->find('list', ['limit' => 200]);
         if($payrollResult['customer_id']==$this->loggedinuser['customer_id'])
 		{
-       	    $this->set(compact('payrollResult', 'payrollArea', 'payComponents'));
+       	    $this->set(compact('payrollResult', 'payGroups', 'payComponents'));
        		$this->set('_serialize', ['payrollResult']);
         }else{
 			$this->Flash->error(__('You are not Authorized.'));
@@ -94,9 +94,9 @@ class PayrollResultController extends AppController
                 $this->Flash->error(__('The payroll result could not be saved. Please, try again.'));
             }
         }
-        $payrollArea = $this->PayrollResult->PayrollArea->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        $payGroups = $this->PayrollResult->PayGroups->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         $payComponents = $this->PayrollResult->PayComponents->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
-        $this->set(compact('payrollResult', 'payrollArea', 'payComponents'));
+        $this->set(compact('payrollResult', 'payGroups', 'payComponents'));
         $this->set('_serialize', ['payrollResult']);
     }
 
@@ -129,9 +129,9 @@ class PayrollResultController extends AppController
                 $this->Flash->error(__('The payroll result could not be saved. Please, try again.'));
             }
         }
-        $payrollArea = $this->PayrollResult->PayrollArea->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        $payGroups = $this->PayrollResult->PayGroups->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         $payComponents = $this->PayrollResult->PayComponents->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
-        $this->set(compact('payrollResult', 'payrollArea', 'payComponents'));
+        $this->set(compact('payrollResult', 'payGroups', 'payComponents'));
         $this->set('_serialize', ['payrollResult']);
     }
 

@@ -1,8 +1,8 @@
 <?= $this->element('templateelmnt'); ?>
 
 <style>
-	.emplist .stausbtn { display: none; }
-	.emplist:hover .stausbtn { display: block; }
+	.emplist .statusbtn { display: none; }
+	.emplist:hover .statusbtn { display: block; }
 	
 	
 	.emplist .processbtn { display: none; }
@@ -43,7 +43,7 @@
 							$empname = str_replace('"', '',$this->Country->get_empname($childval['employee_id']));
 							echo $empname ;
 							
-							echo "<input type='button' value='Status' class='stausbtn btn btn-sm btn-success pull-right p3' style='margin-left:5px;' id='".$childval['employee_id']."'/>";
+							echo "<input type='button' value='Status' class='statusbtn btn btn-sm btn-success pull-right p3' style='margin-left:5px;' id='".$childval['employee_id']."'/>";
 							echo " <input type='button' value='Process' class='processbtn btn btn-sm btn-warning pull-right p3 dd' id='".$childval['employee_id']."'/></a> </li>";
 						}
 						echo "</ul></div></div>";
@@ -139,6 +139,17 @@ var contentobj = JSON.parse(contentarr);
         	setfilter();
     	});
     
+    
+    	$(".statusbtn").click(function (event) {
+
+    		var empid=$(this).attr('id');
+    		$(".progress-bar").css("width", "0%");
+    		$("#errordiv").html("");
+    			
+    		processpayroll(empid);
+   
+    	});
+    	
     	$(".processbtn").click(function (event) {
 
     		var empid=$(this).attr('id');
@@ -244,7 +255,7 @@ var contentobj = JSON.parse(contentarr);
 					$(".payrollprogresstitle").html("Checking any pay component/group exists for the employee " + empid);
   				},
         		success : function(result) {
-        			$(".progress-bar").css("width", "100%");console.log(result);
+        			$(".progress-bar").css("width", "100%");
         			if(result=="success"){
             			
             			$(".progress-bar").removeClass("progress-bar-danger");
@@ -279,7 +290,28 @@ var contentobj = JSON.parse(contentarr);
         		}
     		});
 	}
-	
+	function processpayroll(empid){
+		
+		$(".payrollprogresstitle").html("Validating");
+    		$(".progress-bar").css("width", "0%");
+    		$.ajax({
+        		type: "POST",
+        		url: '/PayrollRecord/runPayroll',
+        		data: 'empid='+empid,
+        		beforeSend: function(){
+					$(".payrollprogresstitle").html("Processing payroll for the employee " + empid);
+  				},
+        		success : function(data) {
+        			$(".progress-bar").css("width", "100%");
+        			$("#errordiv").append("<p class='text-green'>Total Working days: "+data+"</div>");
+            		return false;			
+    			},
+        		error : function(data) {
+            		sweet_alert("Error while processing payroll for the employee ."+empid);
+            		return false;
+        		}
+    		});
+	}
 	
 	function setfilter(){
 		

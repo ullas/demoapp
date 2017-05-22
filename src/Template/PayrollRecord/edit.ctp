@@ -14,7 +14,7 @@
     <fieldset>
         <?php
             echo $this->Form->input('code');
-            echo $this->Form->input('payroll_area_id', ['options' => $payrollArea, 'empty' => true]);
+            echo $this->Form->input('pay_group_id', ['options' => $payGroups, 'empty' => true]);
             echo $this->Form->input('period',['label'=>'Payroll Period']);
             echo $this->Form->input('run_date',['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
             echo $this->Form->input('run_time',['label'=>'Run Time','class' => 'mptltp','type' => 'text','templateVars' => ['opentag' => '<div class="bootstrap-timepicker">','closetag' => '</div>','icon' => '<div class="input-group-addon"><i class="fa fa-clock-o"></i></div>']]);
