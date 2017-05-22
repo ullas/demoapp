@@ -23,11 +23,23 @@ function tableLoaded() {
 
     $("#mptlindextbl tbody").find('tr').each(function () {
     	
-   		// var empdatabiographyid=$(this).find('td:eq(2)').html();
-   		// $empname = $this->Country->get_employeename($temp);
-							// echo $empname ; ?>';
-     	// $(this).find('td:eq(2)').html(empname);
-    	
+   		var empdatabiographyid=$(this).find('td:eq(1)').html();
+   		var selectedctrl=$(this);
+   		//get employee name
+   		if(empdatabiographyid!="" && empdatabiographyid!=null){
+			$.ajax({
+        		type: "POST",
+      			url: '/Employees/getEmployeenamefromEmpDataBiographyId',
+        		data: 'empdatabiographyid='+empdatabiographyid,
+        		success : function(result) {
+        			if(result!="error"){
+    					selectedctrl.find('td:eq(1)').html(result);
+    				}
+        		}
+        	});
+		}
+				
+   		
     	$(this).find('td').each (function() {
         	var innerHtml=$(this).find('div.mptldtbool').html();
         	// true/false instead of 1/0

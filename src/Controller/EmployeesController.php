@@ -553,6 +553,30 @@ class EmployeesController extends AppController
             }			
 		}
     }
+	public function getEmployeenamefromEmpDataBiographyId(){
+			
+		if($this->request->is('ajax')) {
+				
+			$this->autoRender=false;		
+			
+			$this->loadModel('EmpDataBiographies');
+			$empdatabiographyarr=$this->EmpDataBiographies->find('all',['conditions' => array('id' => $this->request->data['empdatabiographyid'])])->toArray();
+			isset($empdatabiographyarr[0]) ? $empid = $empdatabiographyarr[0]['employee_id'] : $empid = "" ; 
+			
+			if($empdatabiographyarr!="" && $empdatabiographyarr!=null && isset($empdatabiographyarr[0]['employee_id']) ){
+				$this->loadModel('EmpDataPersonals');
+				$empDataPersonals = $this->EmpDataPersonals->find('all')->where(['employee_id' => $empdatabiographyarr[0]['employee_id']])
+												->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0'])->toArray();
+        
+				if(isset($empDataPersonals[0])){
+					$this->response->body($empDataPersonals[0]['first_name']." ".$empDataPersonals[0]['last_name']." (".$empDataPersonals[0]['employee_id'].")"); 
+					return $this->response;
+				}
+			}
+			$this->response->body($this->request->data['empdatabiographyid']);
+	    	return $this->response;
+		}
+	}
 	public function addExperiences(){
     	
     	if($this->request->is('ajax')) {
