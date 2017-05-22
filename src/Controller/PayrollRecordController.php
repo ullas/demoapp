@@ -64,11 +64,27 @@ var $components = array('Datatable');
 		$output =$this->Datatable->getView($fields,$contains,$usrfilter);
 		echo json_encode($output);			
     }
+    
+    public function runPayroll(){
+			
+		if($this->request->is('ajax')) {
+				
+			$this->autoRender=false;	
+			$empid=$this->request->data['empid'];
+			$conn = ConnectionManager::get('default');
+			$result = $conn->execute("SELECT public.calculate_workingdaysofemployee(".$empid.")")->fetchAll('assoc');
+			if(isset($result[0]['calculate_workingdaysofemployee'])){			
+				$this->response->body(json_encode($result[0]['calculate_workingdaysofemployee']));
+	    		return $this->response;
+			}else{
+				$this->response->body("error");
+	    		return $this->response;
+			}
+		}
+	}
+
     public function index()
     {
-    	
-
-
     	$this->loadModel('CreateConfigs');
         $configs=$this->CreateConfigs->find('all')->where(['table_name' => $this->request->params['controller']])->order(['"id"' => 'ASC'])->toArray();
         $this->set('configs',$configs);	
@@ -133,6 +149,7 @@ var $components = array('Datatable');
 
 				$begin = new \DateTime( $startdate );
 				$end = new \DateTime( $enddate );
+				$end->modify('+1 day');
 
 				$interval = \DateInterval::createFromDateString('1 day');
 				$period = new \DatePeriod($begin, $interval, $end);
@@ -143,8 +160,8 @@ var $components = array('Datatable');
 					$month = date('n', $timestamp);
 					if($now->format('n')==$month){
   						$outputstr[] ="Leave approval for the employee ". $this->get_employeename($empdatabiographyid) . " From " . $empabsencerecarr[$k]['start_date']->format('d/m/Y') ." to " 
-  								. $empabsencerecarr[$k]['end_date']->format('d/m/Y') . " still pending.";
-						break;
+  								. $dt->format('d/m/Y') . " still pending.";
+						// break;
 						
 					}
 				}
@@ -180,13 +197,13 @@ var $components = array('Datatable');
     public function view($id = null)
     {
         $payrollRecord = $this->PayrollRecord->get($id, [
-            'contain' => ['PayrollArea']
+            'contain' => ['PayGroups']
         ]);
 
-        $payrollArea = $this->PayrollRecord->PayrollArea->find('list', ['limit' => 200]);
         if($payrollRecord['customer_id']==$this->loggedinuser['customer_id'])
 		{
-       	    $this->set(compact('payrollRecord', 'payrollArea'));
+       	    $payGroups = $this->PayrollRecord->PayGroups->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        	$this->set(compact('payrollRecord', 'payGroups'));
         	$this->set('_serialize', ['payrollRecord']);
         }else{
 			$this->Flash->error(__('You are not Authorized.'));
@@ -213,8 +230,8 @@ var $components = array('Datatable');
                 $this->Flash->error(__('The payroll record could not be saved. Please, try again.'));
             }
         }
-        $payrollArea = $this->PayrollRecord->PayrollArea->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
-        $this->set(compact('payrollRecord', 'payrollArea'));
+        $payGroups = $this->PayrollRecord->PayGroups->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        $this->set(compact('payrollRecord', 'payGroups'));
         $this->set('_serialize', ['payrollRecord']);
     }
 
@@ -247,8 +264,8 @@ var $components = array('Datatable');
                 $this->Flash->error(__('The payroll record could not be saved. Please, try again.'));
             }
         }
-        $payrollArea = $this->PayrollRecord->PayrollArea->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
-        $this->set(compact('payrollRecord', 'payrollArea'));
+        $payGroups = $this->PayrollRecord->PayGroups->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        $this->set(compact('payrollRecord', 'payGroups'));
         $this->set('_serialize', ['payrollRecord']);
     }
 

@@ -59,12 +59,7 @@ class PayrollAreaTable extends Table
         $this->belongsTo('Customers', [
             'foreignKey' => 'customer_id','dependent' => true
         ]);
-        $this->hasMany('PayrollRecord', [
-            'foreignKey' => 'payroll_area_id','dependent' => true
-        ]);
-        $this->hasMany('PayrollStatus', [
-            'foreignKey' => 'payroll_area_id','dependent' => true
-        ]);
+       
     }
 
     /**

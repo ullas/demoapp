@@ -14,7 +14,7 @@
     <fieldset>
         <?php
             echo $this->Form->input('code');
-            echo $this->Form->input('payroll_area_id', ['options' => $payrollArea, 'empty' => true]);
+            echo $this->Form->input('pay_group_id', ['options' => $payGroups, 'empty' => true]);
             echo $this->Form->input('current_period',['label'=>'Payroll Period']);
             echo $this->Form->input('earliest_retro_date',['label'=>'Earliest Retroactive Date','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
             echo $this->Form->input('payroll_lock');

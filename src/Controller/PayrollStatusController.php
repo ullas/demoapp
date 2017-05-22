@@ -65,8 +65,9 @@ var $components = array('Datatable');
 
         if($payrollStatus['customer_id']==$this->loggedinuser['customer_id'])
 		{
-       	    $this->set(compact('payrollStatus'));
-        $this->set('_serialize', ['payrollStatus']);
+       	    $payGroups = $this->PayrollStatus->PayGroups->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        	$this->set(compact('payrollStatus','payGroups'));
+        	$this->set('_serialize', ['payrollStatus']);
         }else{
 			$this->Flash->error(__('You are not Authorized.'));
 			return $this->redirect(['action' => 'index']);
@@ -92,7 +93,8 @@ var $components = array('Datatable');
                 $this->Flash->error(__('The payroll status could not be saved. Please, try again.'));
             }
         }
-        $this->set(compact('payrollStatus'));
+        $payGroups = $this->PayrollStatus->PayGroups->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        $this->set(compact('payrollStatus','payGroups'));
         $this->set('_serialize', ['payrollStatus']);
     }
 
@@ -125,7 +127,8 @@ var $components = array('Datatable');
                 $this->Flash->error(__('The payroll status could not be saved. Please, try again.'));
             }
         }
-        $this->set(compact('payrollStatus'));
+        $payGroups = $this->PayrollStatus->PayGroups->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        $this->set(compact('payrollStatus','payGroups'));
         $this->set('_serialize', ['payrollStatus']);
     }
 
