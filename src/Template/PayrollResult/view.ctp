@@ -17,7 +17,7 @@
     <?= $this->Form->create($payrollResult, array('role' => 'form')) ?>
     <?php
             echo $this->Form->input('employee_code',['disabled' => true]);
-            echo $this->Form->input('payroll_area_id', ['options' => $payrollArea, 'disabled' => true]);
+            echo $this->Form->input('pay_group_id', ['options' => $payGroups, 'disabled' => true]);
             echo $this->Form->input('period',['label'=>'Payroll Period','disabled' => true]);
             echo $this->Form->input('pay_component_id', ['options' => $payComponents, 'disabled' => true]);
             echo $this->Form->input('pay_component_value',['disabled' => true]);

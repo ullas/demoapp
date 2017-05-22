@@ -33,7 +33,7 @@
   	 
   	 	<div class="box box-widget widget-user-2">
             <!-- Add the bg color to the header using any of the bg-* classes -->
-            <div class="widget-user-header bg-gray" style="height:75px;">
+            <div class="widget-user-header bg-olive" style="height:75px;">
               <div class="widget-user-image">
                 <?php $picturename=$employee['profilepicture'];
 								if (file_exists(WWW_ROOT.'img'.DS.'uploadedpics'.DS.$picturename) && $picturename!=""){
@@ -315,7 +315,7 @@
           <div class="tab-pane" id="address">
              <!-- <div class="form-horizontal"> -->
              <fieldset>
-             	<div class="box box-solid box-default">
+             	<div class="box box-solid box-success">
              	<div class="box-header with-border">
           			<h3 class="box-title"><i class="fa fa-map-marker"></i> Current Address</h3>
         		</div>
@@ -338,7 +338,7 @@
      		 	</div>
         		
         		<!-- permanent address -->
-        		<div class="box box-solid box-default">
+        		<div class="box box-solid box-success">
              	<div class="box-header with-border">
           			<h3 class="box-title"><i class="fa fa-home"></i> Permanent Address</h3>
         		</div>

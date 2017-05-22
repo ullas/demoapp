@@ -100,7 +100,7 @@ if (file_exists($file)) {
      <li class="treeview">
        <a href="#"> <i class="fa fa-dollar"></i> <span>Payroll Master</span> <i class="fa fa-angle-left pull-right"></i>  </a>
        <ul class="treeview-menu">
-         <li><a href="<?php echo $this -> Url -> build('/PayrollArea'); ?>"><i class="fa fa-circle-o"></i> Payroll Area</a></li>
+         <!-- <li><a href="<?php echo $this -> Url -> build('/PayrollArea'); ?>"><i class="fa fa-circle-o"></i> Payroll Area</a></li> -->
          <li><a href="<?php echo $this -> Url -> build('/Frequencies'); ?>"><i class="fa fa-circle-o"></i> Frequency</a></li>
          <li><a href="<?php echo $this -> Url -> build('/PayGroups'); ?>"><i class="fa fa-circle-o"></i> Pay Group</a></li>
          <li><a href="<?php echo $this -> Url -> build('/PayGrades'); ?>"><i class="fa fa-circle-o"></i> Pay Grade</a></li>
