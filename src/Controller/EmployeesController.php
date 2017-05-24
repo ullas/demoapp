@@ -36,7 +36,6 @@ class EmployeesController extends AppController
 		$this->loadModel('CreateConfigs');
         $configs=$this->CreateConfigs->find('all')->where(['table_name' => $this->request->params['controller']])->order(['"id"' => 'ASC'])->toArray();
         $this->set('configs',$configs);	
-        // $this->set('_serialize', ['configs']);
 		 
 		$this->paginate = [
             'contain' => ['Empdatabiographies'=> ['Positions'], 'Empdatapersonals', 'Employmentinfos','Customers', 'ContactInfos', 'Jobinfos']
@@ -51,7 +50,7 @@ class EmployeesController extends AppController
 		$positions = $this->Employees->JobInfos->Positions->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         	 
         $this->set(compact('employees','positions'));
-        $this->set('_serialize', ['employees']);//$this->Flash->success(__('The ---'.json_encode($employees)));
+        $this->set('_serialize', ['employees']);
     }
 
     /**
