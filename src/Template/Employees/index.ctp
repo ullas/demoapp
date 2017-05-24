@@ -73,8 +73,9 @@
                               <h3><?php echo $employee['empdatapersonal']['first_name']." ".$employee['empdatapersonal']['middle_name']." ".$employee['empdatapersonal']['last_name']; ?></h3>
                               <p> <?php if(isset($employee['empdatabiography']['position_id'])){ echo $employee['empdatabiography']['position']['name']; }else{ echo "Position"; } ?> </p>
                               <ul class="list-unstyled">
-                                <li><i class="fa fa-building"></i> Address: </li>
-                                <li><i class="fa fa-phone"></i> Phone #: </li>
+                                <li><i class="fa fa-building"></i> Address: <?php if(isset($employee['address'])){ echo $employee['address']['address1']; }?><br/>
+                                	 &nbsp;&nbsp;<?php if(isset($employee['address'])){ echo $employee['address']['state']; } ?></li>
+                                <li><i class="fa fa-phone"></i> Phone #: <?php if(isset($employee['contact_info']['phone'])){ echo $employee['contact_info']['phone']; } ?> </li>
                               </ul>
                             </div>
                             <div class="right col-xs-4 text-center">

@@ -315,7 +315,7 @@
           <div class="tab-pane" id="address">
              <!-- <div class="form-horizontal"> -->
              <fieldset>
-             	<div class="box box-solid box-success">
+             	<div class="box box-solid ">
              	<div class="box-header with-border">
           			<h3 class="box-title"><i class="fa fa-map-marker"></i> Current Address</h3>
         		</div>
@@ -338,7 +338,7 @@
      		 	</div>
         		
         		<!-- permanent address -->
-        		<div class="box box-solid box-success">
+        		<div class="box box-solid">
              	<div class="box-header with-border">
           			<h3 class="box-title"><i class="fa fa-home"></i> Permanent Address</h3>
         		</div>
