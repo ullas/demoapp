@@ -25,7 +25,7 @@ class EmployeesController extends AppController
 		foreach($dbout as $value){
 			$fields[] = array("name" => $value['field_name'] , "type" => $value['datatype'] );
 		}
-		$contains=['Empdatabiographies'=> ['Positions'], 'Empdatapersonals', 'Employmentinfos', 'ContactInfos', 'Addresses','Identities','Jobinfos'];
+		$contains=['Empdatabiographies'=> ['Positions'], 'Empdatapersonals', 'Employmentinfos', 'ContactInfos','Jobinfos'];
 									  
 		$usrfilter="Employees.customer_id ='".$this->loggedinuser['customer_id'] . "' and Employees.visible='1'";						  
 		$output =$this->Datatable->getView($fields,$contains,$usrfilter);
@@ -39,10 +39,12 @@ class EmployeesController extends AppController
         // $this->set('_serialize', ['configs']);
 		 
 		$this->paginate = [
-            'contain' => ['Empdatabiographies'=> ['Positions'], 'Empdatapersonals', 'Employmentinfos','Customers', 'ContactInfos', 'Addresses','Identities','Jobinfos']
+            'contain' => ['Empdatabiographies'=> ['Positions'], 'Empdatapersonals', 'Employmentinfos','Customers', 'ContactInfos', 'Jobinfos']
         ];
 		
-        $employees = $this->Employees->find('all')->where(['Employees.visible' => 1])->andwhere(['Employees.customer_id' => $this->loggedinuser['customer_id'] ]);
+        $employees = $this->Employees->find('all',['contain' => ['Empdatabiographies'=> ['Positions'],'Empdatapersonals','ContactInfos', 'Addresses'=> function($q) {
+        					 return $q->where(['Addresses.address_type' => '1']); }]])->where(['Employees.visible' => 1])
+        					->andwhere(['Employees.customer_id' => $this->loggedinuser['customer_id'] ]);
 
 		$actions =[ ['name'=>'delete','title'=>'Delete','class'=>' label-danger'] ];
         $this->set('actions',$actions);	
