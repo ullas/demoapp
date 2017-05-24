@@ -16,6 +16,46 @@ class EmployeeAbsencerecordsController extends AppController
    var $components = array('Datatable');
 	public function timesheet()
 	{
+		$this->loadModel('JobInfos');
+		$jobinfoarr=$this->JobInfos->find('all',['conditions' => array('employee_id' => $this->request->session()->read('sessionuser')['employee_id'])])->toArray();
+		isset($jobinfoarr[0]) ? $holidaycalid = $jobinfoarr[0]['holiday_calendar_id'] : $holidaycalid = "" ; 
+		
+		$fields = array();
+		if($holidaycalid!="" && $holidaycalid!=null){
+			$this->loadModel('Holidays');
+			$holidaysarr=$this->Holidays->find('all',['conditions' => array('holiday_calendar_id' => $holidaycalid)]);
+		}
+		foreach($holidaysarr as $value){
+            $fields[] = array($value['date']);
+			
+        }
+		$this->set('holidaysarr', json_encode($fields));	//$this->Flash->error(__('The '.json_encode($fields)));	
+		
+		
+		$absentfields = array();
+		$this->loadModel('EmployeeAbsencerecords');
+		$empabsencerecarr=$this->EmployeeAbsencerecords->find('all',['conditions' => array('emp_data_biographies_id' => $this->request->session()->read('sessionuser')['empdatabiographyid'])])
+										->where("EmployeeAbsencerecords.status=1")->andwhere("EmployeeAbsencerecords.customer_id=".$this->loggedinuser['customer_id'])->toArray();
+		foreach ($empabsencerecarr as $k=>$data) {
+				
+			$startdate = str_replace('/', '-', $empabsencerecarr[$k]['start_date']);
+			$enddate = str_replace('/', '-', $empabsencerecarr[$k]['end_date']);
+
+			$begin = new \DateTime( $startdate );
+			$end = new \DateTime( $enddate );
+			$end->modify('+1 day');
+
+			$interval = \DateInterval::createFromDateString('1 day');
+			$period = new \DatePeriod($begin, $interval, $end);
+
+			foreach ( $period as $dt ){
+				$dt->setTimezone(new \DateTimeZone('UTC'));
+				$absentfields[] = array($dt->format('Y-m-dTH:i:s'));	
+			}		
+		}
+			
+		$this->set('absentsarr', json_encode($absentfields));//$this->Flash->error(__('The'.json_encode(json_encode($absentfields))));
+		
 	}
 	public function ajaxData() {
 		$this->autoRender= False;

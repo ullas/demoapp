@@ -16,11 +16,8 @@
             <div class="box-body">
               <!-- the events -->
               <div id="external-events">
-                <div class="external-event bg-green ui-draggable ui-draggable-handle" style="position: relative;">Lunch</div>
-                <div class="external-event bg-yellow ui-draggable ui-draggable-handle" style="position: relative;">Go home</div>
-                <div class="external-event bg-aqua ui-draggable ui-draggable-handle" style="position: relative;">Do homework</div>
-                <div class="external-event bg-light-blue ui-draggable ui-draggable-handle" style="position: relative;">Work on UI design</div>
-                <div class="external-event bg-red ui-draggable ui-draggable-handle" style="position: relative;">Sleep tight</div>
+                <div class="external-event bg-yellow ui-draggable ui-draggable-handle" style="position: relative;">Holidays</div>
+                <div class="external-event bg-red ui-draggable ui-draggable-handle" style="position: relative;">Absent</div>
               </div>
             </div>
             <!-- /.box-body -->
@@ -54,6 +51,22 @@ $this->Html->script([
 
 <?php $this->start('scriptIndexBottom'); ?>
 <script>
+var holidaysarr=<?php echo $holidaysarr ?>;
+var holidayevents = [];
+var holidays = [];
+$.each(holidaysarr, function(key, value) {
+	holidays.push(new Date(value).toUTCString());
+});
+// console.log(holidays);
+
+var absentsarr=<?php echo $absentsarr ?>;
+var absents = [];
+$.each(absentsarr, function(key, value) {
+	absents.push(new Date(value).toUTCString());
+});
+// console.log(absents);
+	
+	
  $(function () {
 
 	var action='<?php echo $this->request->params['action'] ?>';
@@ -111,31 +124,7 @@ $this->Html->script([
         day: 'day'
       },
       //Random default events
-      events: [
-        {
-          title: 'Meeting',
-          start: new Date(y, m, d, 10, 30),
-          allDay: false,
-          backgroundColor: "#0073b7", //Blue
-          borderColor: "#0073b7" //Blue
-        },
-        {
-          title: 'Lunch',
-          start: new Date(y, m, d, 12, 0),
-          end: new Date(y, m, d, 14, 0),
-          allDay: false,
-          backgroundColor: "#00c0ef", //Info (aqua)
-          borderColor: "#00c0ef" //Info (aqua)
-        },
-        {
-          title: 'Birthday Party',
-          start: new Date(y, m, d + 1, 19, 0),
-          end: new Date(y, m, d + 1, 22, 30),
-          allDay: false,
-          backgroundColor: "#00a65a", //Success (green)
-          borderColor: "#00a65a" //Success (green)
-        }
-      ],
+      events: holidayevents,
       editable: true,
       droppable: true, // this allows things to be dropped onto the calendar !!!
       drop: function (date, allDay) { // this function is called when something is dropped
@@ -162,7 +151,16 @@ $this->Html->script([
           $(this).remove();
         }
 
-      }
+      },dayRender: function (date, cell) {
+      	var d = new Date(date);
+        if ((absents.indexOf(d.toUTCString()) > -1)) {
+            cell.css("background-color", "#dd4b39");
+        }
+        if ((holidays.indexOf(d.toUTCString()) > -1)) {
+            cell.css("background-color", "#f39c12");
+        }
+     } 
+
     });
 
     /* ADDING EVENTS */
@@ -196,6 +194,10 @@ $this->Html->script([
       //Remove event from text input
       $("#new-event").val("");
     });
+    
+    // var event={id:1 , title: 'New event', start:  new Date()};
+	// $('#calendar').fullCalendar( 'renderEvent', event, true);
+	
   });
 </script>
  <?php $this->end(); ?>
