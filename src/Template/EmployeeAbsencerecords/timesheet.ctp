@@ -16,13 +16,28 @@
             <div class="box-body">
               <!-- the events -->
               <div id="external-events">
-                <div class="external-event bg-yellow ui-draggable ui-draggable-handle" style="position: relative;">Holidays</div>
-                <div class="external-event bg-red ui-draggable ui-draggable-handle" style="position: relative;">Absent</div>
+                <div class="external-event bg-green ui-draggable ui-draggable-handle" style="position: relative;">Work Schedule</div>
               </div>
             </div>
             <!-- /.box-body -->
           </div>
-          <!-- /. box -->          
+          <!-- /. box -->   
+          
+          <div class="box box-solid">
+            <div class="box-header with-border">
+              <h4 class="box-title">Events</h4>
+            </div>
+            <div class="box-body">
+              <!-- the events -->
+              <div id="external-eventsd">
+                <div class="external-event bg-yellow" style="position: relative;">Holidays</div>
+                <div class="external-event bg-red" style="position: relative;">Absent</div>
+              </div>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /. box -->   
+                 
         </div>
 
         <div class="col-md-9">
