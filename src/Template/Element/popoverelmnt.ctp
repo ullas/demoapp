@@ -3,7 +3,6 @@
           <div class="modal-content">
           	
               <div class="modal-body" style="padding:0px;">
-
             
 			  </div>
 			  
