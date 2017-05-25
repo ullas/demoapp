@@ -45,6 +45,7 @@ if (file_exists($file)) {
                   <li><a href="/Profiles"> <i class="fa fa-user text-olive"></i> Profile </a></li>
                   <li><a href="/EmployeeAbsencerecords/timesheet"> <i class="fa fa-clock-o text-aqua"></i> Timesheet </a></li>
                   <li><a href="/EmployeeAbsencerecords"> <i class="fa fa-calendar-minus-o text-red"></i> Leave Requests </a></li>
+                  <li><a href="/WorkflowsHistory"> <i class="fa fa-calendar-minus-o text-green"></i> Leaves Granted </a></li>
                 </ul><div class="slimScrollBar" style="background: rgb(0, 0, 0); width: 3px; position: absolute; top: 0px; opacity: 0.4; display: none; border-radius: 7px; z-index: 99; right: 1px; height: 195.122px;"></div><div class="slimScrollRail" style="width: 3px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; background: rgb(51, 51, 51); opacity: 0.2; z-index: 90; right: 1px;"></div></div>
               </li>
             </ul>

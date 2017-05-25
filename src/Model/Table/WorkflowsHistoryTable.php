@@ -81,14 +81,16 @@ class WorkflowsHistoryTable extends Table
             ->allowEmpty('updatetime');
 
         $validator
-            ->boolean('active')
-            ->allowEmpty('active');
-
-        $validator
             ->allowEmpty('id', 'create');
 
         $validator
             ->allowEmpty('status');
+
+        $validator
+            ->allowEmpty('description');
+
+        $validator
+            ->allowEmpty('active');
 
         return $validator;
     }

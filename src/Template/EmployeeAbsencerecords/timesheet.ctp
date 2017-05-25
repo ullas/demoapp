@@ -174,7 +174,13 @@ $.each(absentsarr, function(key, value) {
         if ((holidays.indexOf(d.toUTCString()) > -1)) {
             cell.css("background-color", "#f39c12");
         }
-     } 
+     },
+      eventRender: function(event, element) {
+            element.append( "<div style='position:absolute;bottom:0px;right:0px;'><i class='closeon fa fa-1x fa-times'></i></div>" );
+            element.find(".closeon").click(function() {
+               $('#calendar').fullCalendar('removeEvents',event._id);
+            });
+        } 
 
     });
 
