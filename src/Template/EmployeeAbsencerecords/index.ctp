@@ -56,9 +56,15 @@
 							<div class="col-md-12">
 								
 								<?php $picname = str_replace('"', '',$this->Country->get_employeepicture($notificationcontent[$x][$y]['employee_absencerecords'][$t]['emp_data_biographies_id']));
-								 if(isset($picname) && ($picname!='')){$picturename='/img/uploadedpics/'.$picname;}
-                            				else{$picturename='/img/uploadedpics/defaultuser.png';}
-          							echo $this->Html->image($picturename, array('class' => 'img-circle empimg', 'alt' => 'Employee picture')); ?>
+								 		if(isset($picname) && ($picname!='')){$picturename=$picname;}
+                            				
+											
+											if (file_exists(WWW_ROOT.'img'.DS.'uploadedpics'.DS.$picturename)){
+												echo $this->Html->image('/img/uploadedpics/'.$picturename, array('class' => 'img-circle empimg', 'alt' => 'User profile picture'));
+											}else{
+												echo $this->Html->image('/img/uploadedpics/defaultuser.png', array('class' => 'img-circle empimg', 'alt' => 'User profile picture'));
+											}
+									?>
 								
 								<a href="javascript:void(0)" class="product-title"><?php $empname = str_replace('"', '',$this->Country->get_employeename($notificationcontent[$x][$y]['employee_absencerecords'][$t]['emp_data_biographies_id']));
                             		echo $empname; ?></a>

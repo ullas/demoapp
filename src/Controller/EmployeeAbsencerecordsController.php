@@ -199,33 +199,9 @@ class EmployeeAbsencerecordsController extends AppController
 		
 		
 		$this->set('userdateformat', Configure::read('userdf'));
-		//get position id 
-    	// $jobinfosTable = TableRegistry::get('JobInfos');	
-		// $query=$jobinfosTable->find('All')->where(['employee_id'=>$this->request->session()->read('sessionuser')['employee_id']])->toArray();
-		// (isset($query[0])) ? $myposition=$query[0]['position_id'] : $myposition="0";
-// 		
-		// //get distinct workflowruleid having the particular position id
-		// $workflowactionsTable = TableRegistry::get('Workflowactions');
-		// $query = $workflowactionsTable->find('All')->where(['position_id'=>$myposition])->andwhere(['customer_id'=>$this->loggedinuser['customer_id']]) ->distinct(['workflowrule_id']);
-// 		
-		// // Iterating the query.
-		// $lcontent=array();
-		// foreach ($query as $row) {	
-			// $workflowsTable = TableRegistry::get('Workflows');
-			// $execquery = $workflowsTable->find('All')->where(['workflowrule_id'=>$row['workflowrule_id']])->andwhere(['currentstep'=>$row['stepid']])->andwhere(['Workflows.active'=>TRUE])
-								// ->andwhere(['Workflows.customer_id'=>$this->loggedinuser['customer_id']])->contain(['EmpDataBiographies'=> ['Employees'],'EmployeeAbsencerecords'=> ['TimeTypes'],'Workflowrules'])
-								// ->leftJoin('EmpDataBiographies', 'EmpDataBiographies.workflow_id = Workflows.id')
-         						// ->leftJoin('EmpDataPersonals', 'EmpDataPersonals.employee_id = EmpDataBiographies.employee_id')
-         						// ->toArray();
-			// if(isset($execquery) && $execquery!=null ) { array_push($lcontent,$execquery); };
-// 			
-		// }
-		// $this->set('leaveapprovalcontent', $lcontent);  
-		
-		
-		
-    }
 
+    }
+	 
     /**
      * View method
      *
