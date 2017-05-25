@@ -261,6 +261,10 @@
 </section>
 <?php } ?>
 
+<!-- add popover -->
+<?php echo $this->element('popoverelmnt'); ?>
+
+
 <?php
 $this->Html->css('AdminLTE./plugins/fullcalendar/fullcalendar.min', ['block' => 'css']);
 $this->Html->css('AdminLTE./plugins/fullcalendar/fullcalendar.print', ['block' => 'css', 'media' => 'print']);
@@ -275,6 +279,11 @@ $this->Html->script([
 
 <?php $this->start('scriptIndexBottom'); ?>
 <script>
+var userdf=<?php echo $this->request->session()->read('sessionuser')['dateformat'];?>;
+		
+var startdate="";
+var enddate="";
+
 $(function () {
 	$('#togglebutton').show();
 	
@@ -315,13 +324,13 @@ $(function () {
       header: {
         left: 'prev,next today',
         center: 'title',
-        right: 'month,agendaWeek,agendaDay'
+        right: 'month'
       },
       buttonText: {
         today: 'today',
         month: 'month',
         week: 'week',
-        day: 'day'
+        // day: 'day'
       },
       //Random default events
       editable: true,
@@ -349,6 +358,30 @@ $(function () {
           // if so, remove the element from the "Draggable Events" list
           $(this).remove();
         }
+        
+        if(userdf==1){
+			startdate=date.format("DD/MM/YYYY");
+        	enddate=date.format("DD/MM/YYYY");
+		}else{
+			startdate=date.format("YYYY/MM/DD");
+        	enddate=date.format("YYYY/MM/DD");
+		}
+        
+		$('#actionspopover').modal();
+		// console.log(date.format()+"--"+allDay);
+		
+      },
+      eventDrop: function(event, delta, revertFunc) {
+
+ 		if(userdf==1){
+			startdate=event.start.format("DD/MM/YYYY");
+        	enddate=event.end.format("DD/MM/YYYY");
+		}else{
+			startdate=event.start.format("YYYY/MM/DD");
+        	enddate=event.end.format("YYYY/MM/DD");
+		}
+		
+        $('#actionspopover').modal();
 
       },
       eventRender: function(event, element) {
@@ -356,19 +389,25 @@ $(function () {
             element.find(".closeon").click(function() {
                $('#calendar').fullCalendar('removeEvents',event._id);
             });
-        },
-        events:[],
-    eventDrop: function(event, delta, revertFunc) {
-
-        alert(event.title + " was dropped on " + event.start.format());
-
-        if (!confirm("Are you sure about this change?")) {
-            revertFunc();
-        }
-
-    },
-    drop: function(date) {
-        alert("Dropped on " + date.format());
+      },
+      eventResize: function(event,dayDelta, delta, revertFunc) {
+		var tempdate=new Date();
+		tempdate=moment(event.end.format());
+		
+		if(userdf==1){
+			enddate=event.end.format("DD/MM/YYYY");
+		}else{
+			enddate=date.format("YYYY/MM/DD");
+		}
+		
+		$('#actionspopover').modal();
+		
+		// tempdate=tempdate.setDate(tempdate.getDate() - 1);
+        // alert(event.title + " end is now " + event.end.format());
+        // if (!confirm("is this okay?")) {
+            // revertFunc();
+        // }
+		// console.log(dayDelta);
     } 
 
     });
@@ -465,6 +504,45 @@ $(function () {
     	});
 	});
 
+
+	$("#actionspopover").on("show.bs.modal", function(e) {
+		//loading icon show
+		if(e.relatedTarget!=null){$('#loadingmessage').show();}
+		var link = $(e.relatedTarget);
+		$(this).find(".modal-body").load("/EmployeeAbsencerecords/add",function( response, status, xhr ){
+			//loading icon hide
+			if(e.relatedTarget!=null){$('#loadingmessage').hide();}
+			if ( status == "error" ) {
+				var msg = "Sorry but there was an error.";
+				// bootbox_alert(msg).modal('show');
+				sweet_alert(msg);
+			}else{
+				$("#start-date").val(startdate);
+    			$("#end-date").val(enddate);
+    			
+				// if(userdf==1){
+					// $('.mptldp').datepicker({ format:"dd/mm/yyyy",autoclose: true,clearBtn: true,todayHighlight: true });
+				// }else{
+					// $('.mptldp').datepicker({ format:"yyyy/mm/dd",autoclose: true,clearBtn: true,todayHighlight: true });
+				// }
+	    		//select 2
+    			$(".select2").select2({ width: '100%',allowClear: true,placeholder: "Select" });
+    			
+    			
+    			
+				//hide popover on button click
+				$( ".popoverDelete" ).click(function() {
+					$('#actionspopover').modal('hide');
+				});
+			}
+		});
+	});
+
+
+	$('#actionspopover').on('hidden.bs.modal', function (e) {
+	  $('.modal-body', this).empty();
+	})
+	
 });
 function tableLoaded() {
 	//delete confirm
