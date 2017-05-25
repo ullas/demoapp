@@ -18,9 +18,29 @@
 <section class="content">
 
 	
+	
 	<div class="row">
 		
 		<div class="col-md-6">
+			
+			<div class="box box-primary">
+			 	
+			 	<div class="box-header with-border">
+	            	<h3 class="box-title">Period</h3>
+            	</div>
+            
+				<div class="box-body">
+					<div class="row">
+						<div class="col-md-4"><div class="form-group text"><label class="control-label">Type</label>
+             			<div class="input-group"><input type="text" maxlength="256" id="paaddress1" class="form-control" value=""></div></div></div>
+             			<div class="col-md-4"><div class="form-group text"><label class="control-label">Period</label>
+             			<div class="input-group"><input type="text" maxlength="256" id="paaddress1" class="datePick form-control" value=""></div></div></div>
+					</div>
+					
+				</div>
+			</div>
+
+		
 			 <div class="box box-primary">
 			 	
 			 	<div class="box-header with-border">
@@ -188,6 +208,9 @@ var contentobj = JSON.parse(contentarr);
 	   		});
    			// alert(resultarr);
     	});
+    	
+    	
+    	$('.datePick').datepicker({ dateFormat: 'yy/mm/dd' });
     	
 	});
 	
