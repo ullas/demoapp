@@ -7,6 +7,9 @@
 	
 	.emplist .processbtn { display: none; }
 	.emplist:hover .processbtn { display: block; }
+	.weekClass:hover {
+    	background-color: #808080;
+	}
 </style>
 
     <section class="content-header">
@@ -22,28 +25,28 @@
 	<div class="row">
 		
 		<div class="col-md-6">
-			
-			<div class="box box-primary">
-			 	
-			 	<div class="box-header with-border">
-	            	<h3 class="box-title">Period</h3>
-            	</div>
-            
-				<div class="box-body">
-					<div class="row">
-						<div class="col-md-4"><div class="form-group text"><label class="control-label">Type</label>
-             			<div class="input-group"><input type="text" maxlength="256" id="paaddress1" class="form-control" value=""></div></div></div>
-             			<div class="col-md-4"><div class="form-group text"><label class="control-label">Period</label>
-             			<div class="input-group"><input type="text" maxlength="256" id="paaddress1" class="datePick form-control" value=""></div></div></div>
-					</div>
-					
-				</div>
-			</div>
 
 		
 			 <div class="box box-primary">
 			 	
 			 	<div class="box-header with-border">
+			 		
+			 		<div class="row">
+						<div class="col-md-4"><div class="form-group text"><label class="control-label">Type</label>
+             			<div class="input-group">
+             				<select class="form-control select2" id="type">
+  								<option value="daily">Daily</option>
+  								<option value="weekly">Weekly</option>
+  								<option value="monthly">Monthly</option>
+  								<option value="yearly">Yearly</option>
+							</select>
+             			</div></div></div>
+             			
+             			
+             			<div class="col-md-4"><div class="form-group text"><label class="control-label">Period</label>
+             			<div class="input-group"><input type="text" id="period" class="periodpicker form-control"></div></div></div>
+					</div>
+					
 	            	<input type="button" value="Process All" class="processall btn btn-primary"/>
 	            	<input type="button" value="Process Selected" class="processselected btn btn-primary"/>
             	</div>
@@ -113,7 +116,6 @@
 	
               
           
-	
    
 </section>	
 <?php $this->start('scriptIndexBottom'); ?>
@@ -121,7 +123,46 @@
 var contentarr='<?php echo $content ?>';
 var contentobj = JSON.parse(contentarr);	
 	
- $(function () {
+ $(function() {
+    
+  //initialize daily  
+  $("#period").datepicker({ autoclose: true,format: 'dd/mm/yyyy' });
+    
+  $('#type').on('change', function () {
+  	
+  	var selectedctrl=this;
+    $("#period").datepicker("remove");
+    $("#period").removeClass("weekpicker");
+   		
+    if (this.value === 'daily'){
+  		
+  		$("#period").datepicker({ autoclose: true,format: 'dd/mm/yyyy' }).on("show", function (date) {
+           	$('.datepicker-days .table tr').removeClass('weekClass');
+	    })
+  		
+  	}else if (this.value === 'weekly'){   
+  		
+    	//weekpicker
+  		$("#period").addClass("weekpicker");
+   		$(".weekpicker").datepicker({ format: 'dd/mm/yyyy' }).on("show", function (date) {
+           			$('.datepicker-days .table tbody tr').addClass('weekClass');
+       }).on('changeDate', function (e) { if(selectedctrl.value === 'weekly'){
+      		var value = $("#period").val();
+      		var firstDate = moment(value, "DD/MM/YYYY").day(0).format("DD/MM/YYYY");
+      		var lastDate =  moment(value, "DD/MM/YYYY").day(6).format("DD/MM/YYYY");
+      		//hide datepicker forcefully
+      		$(".datepicker").hide();
+      
+      		$("#period").val(firstDate + " - " + lastDate);  }
+  		});
+  	}else  if (this.value === 'monthly'){
+  		
+  		$('#period').datepicker({ autoclose: true, minViewMode: 1, format: 'mm' }).on("show", function (date) {
+           			$('.datepicker-days .table tr').removeClass('weekClass');
+           			$('.datepicker-months .table thead').css('display','none');
+	    })
+  	}
+  });
 
 		var action='<?php echo $this->request->params['action'] ?>';
 		if(action=="processpayroll"){
@@ -210,8 +251,39 @@ var contentobj = JSON.parse(contentarr);
     	});
     	
     	
-    	$('.datePick').datepicker({ dateFormat: 'yy/mm/dd' });
     	
+    	
+    	// $('#type').on('change', function () {
+    	// if (this.value === 'weekly'){
+    		// $("#txt").datepicker("remove");	
+//     		
+        	// $('#txt').datepicker({ format:"dd/mm/yyyy",autoclose: true,clearBtn: true,todayHighlight: true })
+        	// .on("show", function (date) {
+           			// $('.datepicker-days .table tr').addClass('weekClass');
+        	// }).on('changeDate', function (e) {
+    			// value = $("#txt").val();
+    			// firstDate = moment(value, "DD/mm/YYYY").day(-1).format("DD/mm/YYYY");
+    			// lastDate =  moment(value, "DD/mm/YYYY").day(5).format("DD/mm/YYYY");
+    			// $("#txt").val(firstDate + "   -   " + lastDate);console.log( $("#txt").val());
+			// });
+// 		
+    	// } else if (this.value === 'monthly'){
+//     		
+    		// $("#txt").datepicker("remove");
+//         	
+			// $('#txt').datepicker({ autoclose: true, minViewMode: 1, format: 'mm' }).on("show", function (date) {
+           			// $('.datepicker-days .table tr').removeClass('weekClass');
+           			// $('.datepicker-months .table thead').css('display','none');
+        	// })
+//         	
+    	// }else if (this.value === 'daily'){
+//         	
+        	// $("#txt").datepicker("remove");
+//         	
+//         	
+    	// }
+	// });
+	
 	});
 	
 	
