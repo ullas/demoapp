@@ -168,14 +168,14 @@
     				<small>List  &nbsp;&nbsp;<a id="filterclear" style="cursor: pointer;text-decoration: underline;display:none;">Clear filter</a></small>
   				</h1>
   				<ol class="breadcrumb">
-  					<a class="btn btn-sm btn-success btn-flat calbtn"><i class="fa fa-calendar-plus-o"></i> </a>
   					<a class="btn btn-sm btn-success btn-flat dtbtn"><i class="fa fa-list"></i> </a>
-					<?= $this->Html->link('<b>Add</b> &nbsp;&nbsp;'.__('<i class="fa fa-plus"></i>'), ['action' => 'add'],['class' => 'btn btn-sm btn-success btn-flat','escape' => false]) ?>
+					<a class="btn btn-sm btn-success btn-flat calbtn"><i class="fa fa-calendar-plus-o"></i> </a>
+  					<?= $this->Html->link('<b>Add</b> &nbsp;&nbsp;'.__('<i class="fa fa-plus"></i>'), ['action' => 'add'],['class' => 'btn btn-sm btn-success btn-flat','escape' => false]) ?>
   				</ol>
 			</section>
 			
 			
-			<section class="content" id="calendarsection">
+			<section class="content" id="calendarsection"  style="margin-top:20px; display: none;" aria-expanded="true">
 				<div class="row">
         <div class="col-md-3">
           <div class="box box-solid">
@@ -213,7 +213,7 @@
 			
 			
 			
-			<section class="collapse in" id="infobar" style="margin-top:20px; display: none;" aria-expanded="true">
+			<section class="collapse in" id="infobar" style="margin-top:20px; ">
 	<div class="clearfix">
 
 		<div class="col-md-3 col-sm-6 col-xs-12">
@@ -452,6 +452,9 @@ $(function () {
 	$('.calbtn').click(function(){
 		$('#calendarsection').show();
 		$('#infobar').hide();
+		
+		$('#calendar').fullCalendar('render');
+		
 	});
 	$('.dtbtn').click(function(){
 		$('#calendarsection').hide();
