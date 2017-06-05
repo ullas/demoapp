@@ -171,8 +171,37 @@ var contentobj = JSON.parse(contentarr);
     element = datepicker.picker;
 
 element.on('mouseover', 'td.day', function(e) {
-  var day = parseInt($(this).html(), 10);console.log(day);
-  // $(this).next().closest('.day').css("background-color", "yellow");
+  var hoverDate = new Date(datepicker.viewDate.getTime()),
+      day = $(this).html();
+
+  // Set the day to the hovered day
+  hoverDate.setDate(day);//console.log(hoverDate);
+
+  // If the previous month should be used, modify the month
+  if ( $(this).hasClass('old') ) {
+    // Check if we're trying to go back a month from Jan
+    if ( hoverDate.getMonth() == 0 ) {
+      hoverDate.setYear(hoverDate.getYear() - 1);
+      hoverDate.setMonth(11); 
+    } else {
+      hoverDate.setMonth(hoverDate.getMonth() - 1);
+    }
+  }
+  else if ( $(this).hasClass('new') ) {
+    // Check if we're trying to go forward a month from Dec
+    if ( hoverDate.getMonth == 11 ) {
+      hoverDate.setYear(hoverDate.getYear() + 1);
+      hoverDate.setMonth(0); 
+    } else {
+      hoverDate.setMonth(hoverDate.month + 1);
+    }
+  }
+
+
+var endDate=new Date(); 
+      		endDate.setDate(hoverDate.getDate()+6); 
+      		
+  console.log(endDate);
   	
 });
 
