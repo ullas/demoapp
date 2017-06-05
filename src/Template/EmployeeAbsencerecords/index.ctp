@@ -331,7 +331,7 @@ $(function () {
         month: 'month',
         week: 'week',
         // day: 'day'
-      },
+      },allDay: true,
       //Random default events
       editable: true,
       droppable: true, // this allows things to be dropped onto the calendar !!!
@@ -375,7 +375,13 @@ $(function () {
 
  		if(userdf==1){
 			startdate=event.start.format("DD/MM/YYYY");
-        	enddate=event.end.format("DD/MM/YYYY");
+			if(event.end!=null){
+				var tempdate=new Date(event.end.format());
+				tempdate.setDate(tempdate.getDate()-1);
+        		enddate=formattodmy(tempdate);
+        	}else{
+        		enddate=startdate;
+        	}
 		}else{
 			startdate=event.start.format("YYYY/MM/DD");
         	enddate=event.end.format("YYYY/MM/DD");
@@ -391,23 +397,25 @@ $(function () {
             });
       },
       eventResize: function(event,dayDelta, delta, revertFunc) {
-		var tempdate=new Date();
-		tempdate=moment(event.end.format());
+		
+		var tempdate=new Date(event.end.format());
+		tempdate.setDate(tempdate.getDate()-1);
+		// console.log(formattodmy(tempdate));
 		
 		if(userdf==1){
-			enddate=event.end.format("DD/MM/YYYY");
+			enddate=formattodmy(tempdate);
 		}else{
 			enddate=date.format("YYYY/MM/DD");
 		}
 		
 		$('#actionspopover').modal();
 		
-		// tempdate=tempdate.setDate(tempdate.getDate() - 1);
+		
         // alert(event.title + " end is now " + event.end.format());
         // if (!confirm("is this okay?")) {
             // revertFunc();
         // }
-		// console.log(dayDelta);
+		
     } 
 
     });
@@ -572,5 +580,17 @@ function tableLoaded() {
     });
 }
 
+function formattodmy(inputDate) {
+    	var date = new Date(inputDate);
+    	if (!isNaN(date.getTime())) {
+        var day = date.getDate().toString();
+        var month = (date.getMonth() + 1).toString();
+        // Months use 0 index.
+
+        return (day[1] ? day : '0' + day[0]) + '/' + 
+        	(month[1] ? month : '0' + month[0]) + '/' +           
+           date.getFullYear();
+    	}
+	}
 </script>
 <?php $this->end(); ?>

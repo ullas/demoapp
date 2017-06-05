@@ -126,9 +126,9 @@
 </section>	
 <?php $this->start('scriptIndexBottom'); ?>
 <script>
+var userdf=<?php echo $this->request->session()->read('sessionuser')['dateformat'];?>;
 var contentarr='<?php echo $content ?>';
 var contentobj = JSON.parse(contentarr);	
-	
 
  $(function() {
     
@@ -462,27 +462,73 @@ var endDate=new Date();
         		}
     		});
 	}
+	function convertdmytoymd(inputDate) {
+
+		var datearray = inputDate.split("/");
+
+		return datearray[2].trim() + '/' + datearray[1].trim() + '/' + datearray[0].trim(); 
+	}
 	function processpayroll(empid){
 		
-		$(".payrollprogresstitle").html("Validating");
-    		$(".progress-bar").css("width", "0%");
-    		$.ajax({
-        		type: "POST",
-        		url: '/PayrollRecord/runPayroll',
-        		data: 'empid='+empid,
-        		beforeSend: function(){
-					$(".payrollprogresstitle").html("Processing payroll for the employee " + empid);
-  				},
-        		success : function(data) {
-        			$(".progress-bar").css("width", "100%");
-        			$("#errordiv").append("<p class='text-green'>Total Working days: "+data+"</div>");
-            		return false;			
-    			},
-        		error : function(data) {
-            		sweet_alert("Error while processing payroll for the employee ."+empid);
-            		return false;
-        		}
-    		});
+	  $(".payrollprogresstitle").html("Validating");
+      $(".progress-bar").css("width", "0%");
+      var selectedmode = $('#type').find(":selected").text();
+    	
+      if(selectedmode!="" && selectedmode!=null){
+      	
+      	var period=$("#period").val();
+      	var dateparts ="";
+      	var fromdate="";
+    	var enddate="";
+    	if (selectedmode=="Weekly" || selectedmode=="BiWeekly"){ 
+      		dateparts = period.split("-");
+      		if(userdf==1){
+				fromdate=convertdmytoymd(dateparts[0]).trim(); enddate=convertdmytoymd(dateparts[1]).trim();
+			}else{
+				fromdate=dateparts[0]; enddate=dateparts[1];
+			} 
+      	}else if(selectedmode=="Daily"){
+      		if(userdf==1){
+				fromdate=convertdmytoymd(period).trim(); enddate=convertdmytoymd(period).trim();
+			}else{
+				fromdate=period; enddate=period;
+			}
+      	}
+    	
+		//set enddate as the same as start date for daily
+		// if(selectedmode=="Daily"){
+			// enddate=fromdate;
+		// }
+			
+    	if(selectedmode=="Weekly" || selectedmode=="BiWeekly" || selectedmode=="Daily"){
+    			
+    		if(period!=null && period!=""){
+    			
+    			$.ajax({
+        			type: "POST",
+        			url: '/PayrollRecord/runPayrollByWeekly',
+        			data: 'empid='+empid+"&fromdate="+fromdate+"&enddate="+enddate,
+        			beforeSend: function(){
+						$(".payrollprogresstitle").html("Processing payroll for the employee " + empid);
+  					},
+        			success : function(data) {
+        				$(".progress-bar").css("width", "100%");
+        				$("#errordiv").append("<p class='text-green'>Total Working days: "+data+"</div>");
+            				return false;			
+    				},
+        			error : function(data) {
+            			sweet_alert("Error while processing payroll for the employee ."+empid);
+            			return false;
+        			}
+    			});
+    		}else{
+    			sweet_alert("Please enter the period.");
+            	return false;
+    		}
+    	}else if(selectedmode=="Monthly"){
+    		
+    	}
+      }	
 	}
 	
 	function setfilter(){
