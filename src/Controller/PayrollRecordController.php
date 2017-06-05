@@ -82,7 +82,25 @@ var $components = array('Datatable');
 			}
 		}
 	}
-
+	public function runPayrollByWeekly(){
+			
+		if($this->request->is('ajax')) {
+				
+			$this->autoRender=false;	
+			$empid=$this->request->data['empid'];
+			$fromdate=$this->request->data['fromdate'];
+			$enddate=$this->request->data['enddate'];
+			$conn = ConnectionManager::get('default');
+			$result = $conn->execute("SELECT public.calculate_weeklyemployeeworkingdays(".$empid.",'".$fromdate."','".$enddate."')")->fetchAll('assoc');
+			if(isset($result[0]['calculate_weeklyemployeeworkingdays'])){			
+				$this->response->body(json_encode($result[0]['calculate_weeklyemployeeworkingdays']));
+	    		return $this->response;
+			}else{
+				$this->response->body("error");
+	    		return $this->response;
+			}
+		}
+	}
     public function index()
     {
     	$this->loadModel('CreateConfigs');
