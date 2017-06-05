@@ -10,6 +10,12 @@
 	.weekClass:hover {
     	background-color: #808080;
 	}
+	.datepicker table tr td.day:hover + td.day:tr{
+		background-color: #808080;
+	}
+	/*.datepicker table tr td.day:hover ~ td.day{
+    background-color: yellow;
+}*/
 </style>
 
     <section class="content-header">
@@ -37,14 +43,14 @@
              				<select class="form-control select2" id="type">
   								<option value="daily">Daily</option>
   								<option value="weekly">Weekly</option>
+  								<option value="biweekly">BiWeekly</option>
   								<option value="monthly">Monthly</option>
-  								<option value="yearly">Yearly</option>
 							</select>
              			</div></div></div>
              			
              			
              			<div class="col-md-4"><div class="form-group text"><label class="control-label">Period</label>
-             			<div class="input-group"><input type="text" id="period" class="periodpicker form-control"></div></div></div>
+             			<div class="input-group"><input type="text" name="period" id="period" class="periodpicker form-control"></div></div></div>
 					</div>
 					
 	            	<input type="button" value="Process All" class="processall btn btn-primary"/>
@@ -123,8 +129,12 @@
 var contentarr='<?php echo $content ?>';
 var contentobj = JSON.parse(contentarr);	
 	
+
  $(function() {
     
+   
+    
+
   //initialize daily  
   $("#period").datepicker({ autoclose: true,format: 'dd/mm/yyyy' });
     
@@ -133,6 +143,7 @@ var contentobj = JSON.parse(contentarr);
   	var selectedctrl=this;
     $("#period").datepicker("remove");
     $("#period").removeClass("weekpicker");
+    $("#period").val();
    		
     if (this.value === 'daily'){
   		
@@ -145,15 +156,41 @@ var contentobj = JSON.parse(contentarr);
     	//weekpicker
   		$("#period").addClass("weekpicker");
    		$(".weekpicker").datepicker({ format: 'dd/mm/yyyy' }).on("show", function (date) {
-           			$('.datepicker-days .table tbody tr').addClass('weekClass');
+           			// $('.datepicker-days .table tbody tr').addClass('weekClass');
        }).on('changeDate', function (e) { if(selectedctrl.value === 'weekly'){
-      		var value = $("#period").val();
-      		var firstDate = moment(value, "DD/MM/YYYY").day(0).format("DD/MM/YYYY");
-      		var lastDate =  moment(value, "DD/MM/YYYY").day(6).format("DD/MM/YYYY");
+      		var firstDate = $("#period").val();
+      		var lastDate = $('.weekpicker').datepicker('getDate'); 
+      		lastDate.setDate(lastDate.getDate()+6); 
       		//hide datepicker forcefully
       		$(".datepicker").hide();
       
-      		$("#period").val(firstDate + " - " + lastDate);  }
+      		$("#period").val(firstDate + " - " + formattodmy(lastDate));  }
+  		});
+  		
+  		 var datepicker = $('input[name="period"]').data('datepicker'),
+    element = datepicker.picker;
+
+element.on('mouseover', 'td.day', function(e) {
+  var day = parseInt($(this).html(), 10);console.log(day);
+  // $(this).next().closest('.day').css("background-color", "yellow");
+  	
+});
+
+  	}
+  	else if (this.value === 'biweekly'){   
+  		
+    	//weekpicker
+  		$("#period").addClass("weekpicker");
+   		$(".weekpicker").datepicker({ format: 'dd/mm/yyyy' }).on("show", function (date) {
+           			// $('.datepicker-days .table tbody tr').addClass('weekClass');
+       }).on('changeDate', function (e) { if(selectedctrl.value === 'biweekly'){
+      		var firstDate = $("#period").val();
+      		var lastDate = $('.weekpicker').datepicker('getDate'); 
+      		lastDate.setDate(lastDate.getDate()+13); 
+      		//hide datepicker forcefully
+      		$(".datepicker").hide();
+      
+      		$("#period").val(firstDate + " - " + formattodmy(lastDate));  }
   		});
   	}else  if (this.value === 'monthly'){
   		
@@ -286,7 +323,18 @@ var contentobj = JSON.parse(contentarr);
 	
 	});
 	
-	
+	function formattodmy(inputDate) {
+    	var date = new Date(inputDate);
+    	if (!isNaN(date.getTime())) {
+        var day = date.getDate().toString();
+        var month = (date.getMonth() + 1).toString();
+        // Months use 0 index.
+
+        return (day[1] ? day : '0' + day[0]) + '/' + 
+        	(month[1] ? month : '0' + month[0]) + '/' +           
+           date.getFullYear();
+    	}
+	}
 	function uncheckPaygroupfilter(empid){
 		
 	}
