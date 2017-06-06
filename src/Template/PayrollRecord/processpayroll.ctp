@@ -141,14 +141,18 @@ var contentobj = JSON.parse(contentarr);
   $('#type').on('change', function () {
   	
   	var selectedctrl=this;
-    $("#period").datepicker("destroy");
-    $("#period").val();
+    $("#period").datepicker("remove");
+    $("#period").val("");
    		
     if (this.value === 'daily' || this.value === 'weekly'|| this.value === 'biweekly'){   
   		
     	//weekpicker
-  		$("#period").datepicker({  autoclose: true,format: 'dd/mm/yyyy' })
-   		
+    	$("#period").datepicker({  format: 'dd/mm/yyyy' });
+    	
+   	}else  if (this.value === 'monthly'){
+  		$('.datepicker').datepicker('update');
+		$('#period').datepicker({ autoclose: true, minViewMode: 1, format: 'mm/yyyy' });
+  	}
   		
   		 // var datepicker = $('input[name="period"]').data('datepicker'),
     // element = datepicker.picker;
@@ -188,10 +192,7 @@ var contentobj = JSON.parse(contentarr);
 //   	
 // });
 
-  	}else  if (this.value === 'monthly'){
-  		
-  		$('#period').datepicker({ autoclose: true, minViewMode: 1, format: 'mm/yyyy' });
-  	}
+  	
   });
 
 		var action='<?php echo $this->request->params['action'] ?>';
@@ -287,8 +288,10 @@ var contentobj = JSON.parse(contentarr);
       if(selectedmode!="" && selectedmode!=null){
 		 if(selectedmode === 'Weekly'){
       		var firstDate = $("#period").val();
-      		var lastDate = $('#period').datepicker('getDate'); 
-      		lastDate.setDate(lastDate.getDate()+6); 
+      		var lastDate = "";
+      		if($('#period').data('datepicker')){ lastDate=$('#period').datepicker('getDate'); 
+      		lastDate.setDate(lastDate.getDate()+6);
+      		} 
       		//hide datepicker forcefully
       		$(".datepicker").hide();
       
@@ -296,8 +299,10 @@ var contentobj = JSON.parse(contentarr);
       		
       	}else if(selectedmode === 'BiWeekly'){
       		var firstDate = $("#period").val();
-      		var lastDate = $('#period').datepicker('getDate'); 
-      		lastDate.setDate(lastDate.getDate()+13); 
+      		var lastDate = "";
+      		if($('#period').data('datepicker')){ lastDate=$('#period').datepicker('getDate'); 
+      			lastDate.setDate(lastDate.getDate()+13);
+      		} 
       		//hide datepicker forcefully
       		$(".datepicker").hide();
       
