@@ -200,6 +200,34 @@ class EmployeeAbsencerecordsController extends AppController
 		
 		$this->set('userdateformat', Configure::read('userdf'));
 
+
+		$absentfields = array();
+		$this->loadModel('EmployeeAbsencerecords');
+		$empabsencerecarr=$this->EmployeeAbsencerecords->find('all',['conditions' => array('emp_data_biographies_id' => $this->request->session()->read('sessionuser')['empdatabiographyid'])])
+										->where("EmployeeAbsencerecords.status=0")->andwhere("EmployeeAbsencerecords.customer_id=".$this->loggedinuser['customer_id'])->toArray();
+		foreach ($empabsencerecarr as $k=>$data) {
+				
+			$startdate = $empabsencerecarr[$k]['start_date'];
+			$enddate = $empabsencerecarr[$k]['end_date'];
+	
+			$absid = $empabsencerecarr[$k]['id'];
+		
+			// $begin = new \DateTime( $startdate );
+			// $end = new \DateTime( $enddate );
+			// $end->modify('+1 day');
+// 
+			// $interval = \DateInterval::createFromDateString('1 day');
+			// $period = new \DatePeriod($begin, $interval, $end);
+// 
+			// foreach ( $period as $dt ){
+				// $dt->setTimezone(new \DateTimeZone('UTC'));
+				// $absentfields[] = array($dt->format('Y-m-dTH:i:s'));	
+			// }		
+			$absentfields[] = array('id'=>$absid,'startdate'=>$startdate, 'enddate'=>$enddate);	
+		}
+			
+		$this->set('absentsarr', json_encode($absentfields));
+		
     }
 	 
     /**

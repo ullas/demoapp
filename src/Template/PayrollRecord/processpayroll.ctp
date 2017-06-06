@@ -357,12 +357,46 @@ var contentobj = JSON.parse(contentarr);
 	
 	function validate(empid){
 		
+		if($("#period").val()=="" || $("#period").val()==null){
+			sweet_alert("Please enter the period for the employee ."+empid);
+            return false;	
+		}
+		
+		
+		var selectedmode = $('#type').find(":selected").text();
+    	var period=$("#period").val();
+      	var fromdate="";
+    	var enddate="";
+    	if(selectedmode!="" && selectedmode!=null){
+		 
+    	
+    	if (selectedmode=="Weekly" || selectedmode=="BiWeekly"){ 
+      		var dateparts = period.split("-");
+      		if(userdf==1){
+				fromdate=convertdmytoymd(dateparts[0]).trim(); enddate=convertdmytoymd(dateparts[1]).trim();
+			}else{
+				fromdate=dateparts[0]; enddate=dateparts[1];
+			} 
+      	}else if(selectedmode=="Daily"){
+      		if(userdf==1){
+				fromdate=convertdmytoymd(period).trim(); enddate=convertdmytoymd(period).trim();
+			}else{
+				fromdate=period; enddate=period;
+			}
+      	}else if(selectedmode=="Monthly"){
+      		var dateparts = period.split("/");
+			fromdate=(dateparts[1]+"/"+dateparts[0]+"/01").trim(); 
+			var lastDay = new Date(dateparts[1],parseInt(dateparts[0]), 0);
+			enddate=formattoymd(lastDay); 
+      	}
+      }
+      
 		$(".payrollprogresstitle").html("Validating");
     		$(".progress-bar").css("width", "0%");
     		$.ajax({
         		type: "POST",
         		url: '/PayrollRecord/checkEmployeeAbsencePending',
-        		data: 'empid='+empid,
+        		data: 'empid='+empid+"&firstdate="+fromdate+"&lastdate="+enddate,
         		beforeSend: function(){
 					$(".payrollprogresstitle").html("Checking any leave approval still pending for the employee " + empid);
   				},
