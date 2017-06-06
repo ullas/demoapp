@@ -149,6 +149,9 @@ var $components = array('Datatable');
 			
 			$outputstr= array();
 			
+			$firstdate=$this->request->data['firstdate'];
+			$lastdate=$this->request->data['lastdate'];
+			
 			
 			$this->loadModel('EmpDataBiographies');
 			$empdatabiographyarr=$this->EmpDataBiographies->find('all',['conditions' => array('employee_id' => $this->request->data['empid']),'contain' => []])->toArray();
@@ -174,12 +177,15 @@ var $components = array('Datatable');
 
 				foreach ( $period as $dt ){
 	
-					$timestamp = strtotime($dt->format( "l Y-m-d H:i:s\n" )); 
-					$month = date('n', $timestamp);
-					if($now->format('n')==$month){
+					// $timestamp = strtotime($dt->format( "Y m d T H:ss" )); 
+					// $month = date('n', $timestamp);
+					
+					
+					if(($dt->format( "Y/m/d"))>=$firstdate && ($dt->format( "Y/m/d" ))<=$lastdate){
+					// if($now->format('n')==$month){
   						$outputstr[] ="Leave approval for the employee ". $this->get_employeename($empdatabiographyid) . " From " . $empabsencerecarr[$k]['start_date']->format('d/m/Y') ." to " 
-  								. $dt->format('d/m/Y') . " still pending.";
-						// break;
+  								. $empabsencerecarr[$k]['end_date']->format('d/m/Y') . " still pending.";
+						break;
 						
 					}
 				}
