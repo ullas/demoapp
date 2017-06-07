@@ -136,98 +136,63 @@ var contentobj = JSON.parse(contentarr);
     
 
   //initialize daily  
-  $("#period").datepicker({ autoclose: true,format: 'dd/mm/yyyy' });
+  $("#period").datepicker({ autoclose: true,format: 'dd/mm/yyyy' }).on('changeDate', function (e) { dateChanged(); });
     
   $('#type').on('change', function () {
   	
   	var selectedctrl=this;
     $("#period").datepicker("remove");
-    $("#period").removeClass("weekpicker");
-    $("#period").val();
+    $("#period").val("");
    		
-    if (this.value === 'daily'){
-  		
-  		$("#period").datepicker({ autoclose: true,format: 'dd/mm/yyyy' }).on("show", function (date) {
-           	$('.datepicker-days .table tr').removeClass('weekClass');
-	    })
-  		
-  	}else if (this.value === 'weekly'){   
+    if (this.value === 'daily' || this.value === 'weekly'|| this.value === 'biweekly'){   
   		
     	//weekpicker
-  		$("#period").addClass("weekpicker");
-   		$(".weekpicker").datepicker({ format: 'dd/mm/yyyy' }).on("show", function (date) {
-           			// $('.datepicker-days .table tbody tr').addClass('weekClass');
-       }).on('changeDate', function (e) { if(selectedctrl.value === 'weekly'){
-      		var firstDate = $("#period").val();
-      		var lastDate = $('.weekpicker').datepicker('getDate'); 
-      		lastDate.setDate(lastDate.getDate()+6); 
-      		//hide datepicker forcefully
-      		$(".datepicker").hide();
-      
-      		$("#period").val(firstDate + " - " + formattodmy(lastDate));  }
-  		});
+    	$("#period").datepicker({  format: 'dd/mm/yyyy' });
+    	
+   	}else  if (this.value === 'monthly'){
+  		$('.datepicker').datepicker('update');
+		$('#period').datepicker({ autoclose: true, minViewMode: 1, format: 'mm/yyyy' });
+  	}
   		
-  		 var datepicker = $('input[name="period"]').data('datepicker'),
-    element = datepicker.picker;
+  		 // var datepicker = $('input[name="period"]').data('datepicker'),
+    // element = datepicker.picker;
+// 
+// element.on('mouseover', 'td.day', function(e) {
+  // var hoverDate = new Date(datepicker.viewDate.getTime()),
+      // day = $(this).html();
+// 
+  // // Set the day to the hovered day
+  // hoverDate.setDate(day);//console.log(hoverDate);
+// 
+  // // If the previous month should be used, modify the month
+  // if ( $(this).hasClass('old') ) {
+    // // Check if we're trying to go back a month from Jan
+    // if ( hoverDate.getMonth() == 0 ) {
+      // hoverDate.setYear(hoverDate.getYear() - 1);
+      // hoverDate.setMonth(11); 
+    // } else {
+      // hoverDate.setMonth(hoverDate.getMonth() - 1);
+    // }
+  // }
+  // else if ( $(this).hasClass('new') ) {
+    // // Check if we're trying to go forward a month from Dec
+    // if ( hoverDate.getMonth == 11 ) {
+      // hoverDate.setYear(hoverDate.getYear() + 1);
+      // hoverDate.setMonth(0); 
+    // } else {
+      // hoverDate.setMonth(hoverDate.month + 1);
+    // }
+  // }
+// 
+// 
+// var endDate=new Date(); 
+      		// endDate.setDate(hoverDate.getDate()+6); 
+//       		
+  // console.log(endDate);
+//   	
+// });
 
-element.on('mouseover', 'td.day', function(e) {
-  var hoverDate = new Date(datepicker.viewDate.getTime()),
-      day = $(this).html();
-
-  // Set the day to the hovered day
-  hoverDate.setDate(day);//console.log(hoverDate);
-
-  // If the previous month should be used, modify the month
-  if ( $(this).hasClass('old') ) {
-    // Check if we're trying to go back a month from Jan
-    if ( hoverDate.getMonth() == 0 ) {
-      hoverDate.setYear(hoverDate.getYear() - 1);
-      hoverDate.setMonth(11); 
-    } else {
-      hoverDate.setMonth(hoverDate.getMonth() - 1);
-    }
-  }
-  else if ( $(this).hasClass('new') ) {
-    // Check if we're trying to go forward a month from Dec
-    if ( hoverDate.getMonth == 11 ) {
-      hoverDate.setYear(hoverDate.getYear() + 1);
-      hoverDate.setMonth(0); 
-    } else {
-      hoverDate.setMonth(hoverDate.month + 1);
-    }
-  }
-
-
-var endDate=new Date(); 
-      		endDate.setDate(hoverDate.getDate()+6); 
-      		
-  console.log(endDate);
   	
-});
-
-  	}
-  	else if (this.value === 'biweekly'){   
-  		
-    	//weekpicker
-  		$("#period").addClass("weekpicker");
-   		$(".weekpicker").datepicker({ format: 'dd/mm/yyyy' }).on("show", function (date) {
-           			// $('.datepicker-days .table tbody tr').addClass('weekClass');
-       }).on('changeDate', function (e) { if(selectedctrl.value === 'biweekly'){
-      		var firstDate = $("#period").val();
-      		var lastDate = $('.weekpicker').datepicker('getDate'); 
-      		lastDate.setDate(lastDate.getDate()+13); 
-      		//hide datepicker forcefully
-      		$(".datepicker").hide();
-      
-      		$("#period").val(firstDate + " - " + formattodmy(lastDate));  }
-  		});
-  	}else  if (this.value === 'monthly'){
-  		
-  		$('#period').datepicker({ autoclose: true, minViewMode: 1, format: 'mm' }).on("show", function (date) {
-           			$('.datepicker-days .table tr').removeClass('weekClass');
-           			$('.datepicker-months .table thead').css('display','none');
-	    })
-  	}
   });
 
 		var action='<?php echo $this->request->params['action'] ?>';
@@ -315,43 +280,36 @@ var endDate=new Date();
 	   		});
    			// alert(resultarr);
     	});
-    	
-    	
-    	
-    	
-    	// $('#type').on('change', function () {
-    	// if (this.value === 'weekly'){
-    		// $("#txt").datepicker("remove");	
-//     		
-        	// $('#txt').datepicker({ format:"dd/mm/yyyy",autoclose: true,clearBtn: true,todayHighlight: true })
-        	// .on("show", function (date) {
-           			// $('.datepicker-days .table tr').addClass('weekClass');
-        	// }).on('changeDate', function (e) {
-    			// value = $("#txt").val();
-    			// firstDate = moment(value, "DD/mm/YYYY").day(-1).format("DD/mm/YYYY");
-    			// lastDate =  moment(value, "DD/mm/YYYY").day(5).format("DD/mm/YYYY");
-    			// $("#txt").val(firstDate + "   -   " + lastDate);console.log( $("#txt").val());
-			// });
-// 		
-    	// } else if (this.value === 'monthly'){
-//     		
-    		// $("#txt").datepicker("remove");
-//         	
-			// $('#txt').datepicker({ autoclose: true, minViewMode: 1, format: 'mm' }).on("show", function (date) {
-           			// $('.datepicker-days .table tr').removeClass('weekClass');
-           			// $('.datepicker-months .table thead').css('display','none');
-        	// })
-//         	
-    	// }else if (this.value === 'daily'){
-//         	
-        	// $("#txt").datepicker("remove");
-//         	
-//         	
-    	// }
-	// });
 	
 	});
-	
+	function dateChanged(){
+		var selectedmode = $('#type').find(":selected").text();
+    	
+      if(selectedmode!="" && selectedmode!=null){
+		 if(selectedmode === 'Weekly'){
+      		var firstDate = $("#period").val();
+      		var lastDate = "";
+      		if($('#period').data('datepicker')){ lastDate=$('#period').datepicker('getDate'); 
+      		lastDate.setDate(lastDate.getDate()+6);
+      		} 
+      		//hide datepicker forcefully
+      		$(".datepicker").hide();
+      
+      		$("#period").val(firstDate + " - " + formattodmy(lastDate)); 
+      		
+      	}else if(selectedmode === 'BiWeekly'){
+      		var firstDate = $("#period").val();
+      		var lastDate = "";
+      		if($('#period').data('datepicker')){ lastDate=$('#period').datepicker('getDate'); 
+      			lastDate.setDate(lastDate.getDate()+13);
+      		} 
+      		//hide datepicker forcefully
+      		$(".datepicker").hide();
+      
+      		$("#period").val(firstDate + " - " + formattodmy(lastDate)); 
+      	}
+      }
+	}
 	function formattodmy(inputDate) {
     	var date = new Date(inputDate);
     	if (!isNaN(date.getTime())) {
@@ -364,6 +322,19 @@ var endDate=new Date();
            date.getFullYear();
     	}
 	}
+	function formattoymd(inputDate) {
+    var date = new Date(inputDate);
+    if (!isNaN(date.getTime())) {
+        var day = date.getDate().toString();
+        var month = (date.getMonth() + 1).toString();
+        // Months use 0 index.
+
+        return date.getFullYear()  + '/' +
+        (month[1] ? month : '0' + month[0]) + '/' +
+        (day[1] ? day : '0' + day[0]) ;
+    }
+}
+  
 	function uncheckPaygroupfilter(empid){
 		
 	}
@@ -386,12 +357,46 @@ var endDate=new Date();
 	
 	function validate(empid){
 		
+		if($("#period").val()=="" || $("#period").val()==null){
+			sweet_alert("Please enter the period for the employee ."+empid);
+            return false;	
+		}
+		
+		
+		var selectedmode = $('#type').find(":selected").text();
+    	var period=$("#period").val();
+      	var fromdate="";
+    	var enddate="";
+    	if(selectedmode!="" && selectedmode!=null){
+		 
+    	
+    	if (selectedmode=="Weekly" || selectedmode=="BiWeekly"){ 
+      		var dateparts = period.split("-");
+      		if(userdf==1){
+				fromdate=convertdmytoymd(dateparts[0]).trim(); enddate=convertdmytoymd(dateparts[1]).trim();
+			}else{
+				fromdate=dateparts[0]; enddate=dateparts[1];
+			} 
+      	}else if(selectedmode=="Daily"){
+      		if(userdf==1){
+				fromdate=convertdmytoymd(period).trim(); enddate=convertdmytoymd(period).trim();
+			}else{
+				fromdate=period; enddate=period;
+			}
+      	}else if(selectedmode=="Monthly"){
+      		var dateparts = period.split("/");
+			fromdate=(dateparts[1]+"/"+dateparts[0]+"/01").trim(); 
+			var lastDay = new Date(dateparts[1],parseInt(dateparts[0]), 0);
+			enddate=formattoymd(lastDay); 
+      	}
+      }
+      
 		$(".payrollprogresstitle").html("Validating");
     		$(".progress-bar").css("width", "0%");
     		$.ajax({
         		type: "POST",
         		url: '/PayrollRecord/checkEmployeeAbsencePending',
-        		data: 'empid='+empid,
+        		data: 'empid='+empid+"&firstdate="+fromdate+"&lastdate="+enddate,
         		beforeSend: function(){
 					$(".payrollprogresstitle").html("Checking any leave approval still pending for the employee " + empid);
   				},
@@ -477,11 +482,11 @@ var endDate=new Date();
       if(selectedmode!="" && selectedmode!=null){
       	
       	var period=$("#period").val();
-      	var dateparts ="";
       	var fromdate="";
     	var enddate="";
+    	
     	if (selectedmode=="Weekly" || selectedmode=="BiWeekly"){ 
-      		dateparts = period.split("-");
+      		var dateparts = period.split("-");
       		if(userdf==1){
 				fromdate=convertdmytoymd(dateparts[0]).trim(); enddate=convertdmytoymd(dateparts[1]).trim();
 			}else{
@@ -493,6 +498,11 @@ var endDate=new Date();
 			}else{
 				fromdate=period; enddate=period;
 			}
+      	}else if(selectedmode=="Monthly"){
+      		var dateparts = period.split("/");
+			fromdate=(dateparts[1]+"/"+dateparts[0]+"/01").trim(); 
+			var lastDay = new Date(dateparts[1],parseInt(dateparts[0]), 0);
+			enddate=formattoymd(lastDay); 
       	}
     	
 		//set enddate as the same as start date for daily
@@ -500,7 +510,7 @@ var endDate=new Date();
 			// enddate=fromdate;
 		// }
 			
-    	if(selectedmode=="Weekly" || selectedmode=="BiWeekly" || selectedmode=="Daily"){
+    	if(selectedmode=="Weekly" || selectedmode=="BiWeekly" || selectedmode=="Daily"|| selectedmode=="Monthly"){
     			
     		if(period!=null && period!=""){
     			

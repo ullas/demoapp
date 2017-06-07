@@ -280,7 +280,24 @@ $this->Html->script([
 <?php $this->start('scriptIndexBottom'); ?>
 <script>
 var userdf=<?php echo $this->request->session()->read('sessionuser')['dateformat'];?>;
-		
+
+var absentsarr=<?php echo $absentsarr ?>;
+var getEvent = []; 
+$.each(absentsarr, function(key, value) {
+
+    // inserting data from database to getEvent array
+    var insertEvents = {};
+        insertEvents =
+        {
+        	id:value['id'],
+            title: "Leave Request",
+            start: new Date(value['startdate']),
+            end: new Date(value['enddate']),
+        }
+    getEvent.push(insertEvents);
+
+});
+// console.log(getEvent);	
 var startdate="";
 var enddate="";
 
@@ -390,6 +407,8 @@ $(function () {
         $('#actionspopover').modal();
 
       },
+      events:getEvent,
+      eventColor: '#f39c12',
       eventRender: function(event, element) {
             element.append( "<div style='position:absolute;bottom:0px;right:0px;'><i class='closeon fa fa-1x fa-times'></i></div>" );
             element.find(".closeon").click(function() {
@@ -452,10 +471,16 @@ $(function () {
       $("#new-event").val("");
     });
     
-    // var event={id:1 , title: 'New event', start:  new Date()};
+    //loading leave requests from db
+    // var event=[];
+    // $.each( absents, function( key, value ) {
+  		// event.push({id:key+1 , title: 'Leave Request', start:  new Date(value)});
+	// });
+
+    // {id:1 , title: 'Leave Request', start:  new Date()};
 	// $('#calendar').fullCalendar( 'renderEvent', event, true);
 	
- 
+
 	
 	$('.calbtn').click(function(){
 		$('#calendarsection').show();
