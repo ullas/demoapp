@@ -523,7 +523,7 @@ var contentobj = JSON.parse(contentarr);
   					},
         			success : function(data) {
         				$(".progress-bar").css("width", "100%");
-        				$("#errordiv").append("<p class='text-green'>Total Working days: "+data+"</div>");
+        				$("#errordiv").append("<p class='text-green'>Salary: "+data+"</div>");
             				return false;			
     				},
         			error : function(data) {
