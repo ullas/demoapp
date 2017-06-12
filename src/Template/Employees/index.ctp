@@ -68,13 +68,18 @@
 		<?php foreach ($employees as $employee): ?>
 			<div class="col-md-4 col-sm-4 col-xs-12 profile_details" style="display:none;">
                         <div class="well profile_view" style="width:100%;">
-                          <div class="col-sm-12" style="height: 160px;">
+                          <div class="col-sm-12" style="height: 160px; overflow-y:scroll;">
                             <div class="left col-xs-8 text-muted">
                               <h3><?php echo $employee['empdatapersonal']['first_name']." ".$employee['empdatapersonal']['middle_name']." ".$employee['empdatapersonal']['last_name']; ?></h3>
                               <p> <?php if(isset($employee['empdatabiography']['position_id'])){ echo $employee['empdatabiography']['position']['name']; }else{ echo "Position"; } ?> </p>
                               <ul class="list-unstyled">
-                                <li><i class="fa fa-building"></i> Address: <?php if(isset($employee['address'])){ echo $employee['address']['address1']; }?><br/>
-                                	 &nbsp;&nbsp;<?php if(isset($employee['address'])){ echo $employee['address']['state']; } ?></li>
+                                <li><i class="fa fa-building"></i> Address: <?php if(isset($employee['address'])){ echo $employee['address']['address1'];}?><br/>
+                                	 <?php
+                                          if(isset($employee['address'])){
+                                              echo ($employee['address']['city']);
+                                          }
+                                      ?>
+                                 </li>
                                 <li><i class="fa fa-phone"></i> Phone #: <?php if(isset($employee['contact_info']['phone'])){ echo $employee['contact_info']['phone']; } ?> </li>
                               </ul>
                             </div>
@@ -91,12 +96,12 @@
                           </div>
                           <div class="col-xs-12 bottom text-center">
                             <div class="col-xs-12 col-sm-6 emphasis">
-                            	
+
                             	<form name="formdelete" id="formdelete<?php echo $employee['id']; ?>" method="post" action="/Employees/delete/<?php echo $employee['id']; ?>" style="display:none;" >
                                    <input type="hidden" name="_method" value="POST"></form>
                                	<a href="#" onclick="sweet_confirmdelete(&quot;MayHaw&quot;,&quot;Are you sure you want to delete # '<?php echo $employee['id']; ?>'?&quot; , function(){ document.getElementById(&quot;formdelete<?php echo $employee['id']; ?>&quot;).submit(); })
                                     event.returnValue = false; return false;" class="btn btn-danger btn-xs pull-left"><i class="fa fa-trash"></i> </a>
-                                    
+
                             </div>
                             <div class="col-xs-12 col-sm-6 emphasis">
                               <a href="/Employees/edit/<?php echo $employee['id']; ?>" class="btn btn-success btn-xs"><i class="fa fa-pencil"></i> </a>
@@ -129,7 +134,7 @@ $(function () {
 	$(window).on('beforeunload', function(){
   $(window).scrollTop(0);
 });
-	
+
 	$(".profile_details").slice(0, 10).show();
 	$(window).bind('scroll', function() {
     	if($(window).scrollTop() >= $('.griddiv').offset().top + $('.griddiv').outerHeight() - window.innerHeight) {
