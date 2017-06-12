@@ -41,6 +41,7 @@
 						<div class="col-md-4"><div class="form-group text"><label class="control-label">Type</label>
              			<div class="input-group">
              				<select class="form-control select2" id="type">
+  								<option></option>
   								<option value="daily">Daily</option>
   								<option value="weekly">Weekly</option>
   								<option value="biweekly">BiWeekly</option>
@@ -53,11 +54,14 @@
              			<div class="input-group"><input type="text" name="period" id="period" class="periodpicker form-control"></div></div></div>
 					</div>
 					
-	            	<input type="button" value="Process All" class="processall btn btn-primary"/>
+	            	<input type="button" value="Process All" class="processall btn btn-primary" style="display:none;"/>
 	            	<input type="button" value="Process Selected" class="processselected btn btn-primary"/>
             	</div>
             
-				<div class="box-body" style="height:500px;overflow-y:scroll;">
+            	<div class="box-body" style="height:500px;overflow-y:scroll;" id="contentdiv">
+            		
+            	</div>
+				<!-- <div class="box-body" style="height:500px;overflow-y:scroll;">
 				 <?php foreach ($paygrouplist as $vals) {
 			
 					echo '<div class="box box-solid collapsed-box pg" style="margin-bottom:0px;"><div class="box-header">';
@@ -81,7 +85,7 @@
 					} 
 		
 					?>
-   				 </div>
+   				 </div> -->
 			</div>
 		</div>
 		
@@ -127,20 +131,35 @@
 <?php $this->start('scriptIndexBottom'); ?>
 <script>
 var userdf=<?php echo $this->request->session()->read('sessionuser')['dateformat'];?>;
-var contentarr='<?php echo $content ?>';
-var contentobj = JSON.parse(contentarr);	
+var contentarr;
+var contentobj;	
 
  $(function() {
     
-   
-    
-
   //initialize daily  
   $("#period").datepicker({ autoclose: true,format: 'dd/mm/yyyy' }).on('changeDate', function (e) { dateChanged(); });
     
   $('#type').on('change', function () {
   	
+  	$(".processall").show();
+  	
   	var selectedctrl=this;
+  	$( "#contentdiv" ).html("");
+  	//load paygroups for the paticular mode via ajax 
+  	$.ajax({
+        			type: "POST",
+        			url: '/PayrollRecord/loadPayGroup',
+        			data: 'type='+this.value,
+        			success : function(data) {
+        				loaddivContent(data);
+        			},error: function(data) {
+        	    		sweet_alert("Couldn't load the paygroups for the particular mode.Please try again later.");
+						return false;
+        			}
+      });
+  	
+  	
+  	
     $("#period").datepicker("remove");
     $("#period").val("");
    		
@@ -206,7 +225,7 @@ var contentobj = JSON.parse(contentarr);
 		
 		setfilter();
 	   
-	    $('.paygroup_filter').change(function() {
+	    $('#contentdiv').on('change', 'input.paygroup_filter', function() {   
         	var paygroupid=$(this).attr('id');
         	var colid=paygroupid.split("_")[1];
         	
@@ -219,7 +238,7 @@ var contentobj = JSON.parse(contentarr);
         	
     	});
     	
-    	$('.emp_filter').change(function() {
+    	$('#contentdiv').on('change', 'input.emp_filter', function() {   
         	var empid=$(this).attr('id');
         	// var colid=empid.split("_")[1];
         	
@@ -232,7 +251,7 @@ var contentobj = JSON.parse(contentarr);
     	});
     
     
-    	$(".statusbtn").click(function (event) {
+    	$('#contentdiv').on('click', 'input.statusbtn', function() {  
 
     		var empid=$(this).attr('id');
     		$(".progress-bar").css("width", "0%");
@@ -242,7 +261,7 @@ var contentobj = JSON.parse(contentarr);
    
     	});
     	
-    	$(".processbtn").click(function (event) {
+    	$('#contentdiv').on('click', 'input.processbtn', function() {  
 
     		var empid=$(this).attr('id');
     		$(".progress-bar").css("width", "0%");
@@ -282,6 +301,34 @@ var contentobj = JSON.parse(contentarr);
     	});
 	
 	});
+	function loaddivContent(data){
+		
+		contentobj = JSON.parse(data);	
+
+
+		var html="";//console.log(contentobj.length);
+		for (i = 0; i < contentobj.length; i++) { 
+			html+='<div class="box box-solid collapsed-box pg" style="margin-bottom:0px;"><div class="box-header">';
+			html+='<input type="checkbox" class="paygroup_filter" id="paygroupcheck_'+contentobj[i]['parentid']+'"/>'+' '+'<b>'+contentobj[i]['parent']+'</b>';
+			html+='<div class="box-tools" style="background:#dbdde0;"><button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button></div></div>';
+			if(contentobj[i]!=null && contentobj[i]!=""){
+				html+= "<div class='box-body no-padding'><ul class='nav nav-pills nav-stacked'>";
+				for (t = 0; t < contentobj[i]['child'].length; t++) { 
+					html+= "<li><a class='emplist'><input type='checkbox' class='emp_filter' id='empcheck_"+contentobj[i]['child'][t]['employee_id']+"'/> ";
+							
+					html+= contentobj[i]['child'][t]['employee_name'] ;
+							
+					html+= "<input type='button' value='Status' class='statusbtn btn btn-sm btn-success pull-right p3' style='margin-left:5px;' id='"+contentobj[i]['child'][t]['employee_id']+"'/>";
+					html+= " <input type='button' value='Process' class='processbtn btn btn-sm btn-warning pull-right p3 dd' id='"+contentobj[i]['child'][t]['employee_id']+"'/></a> </li>";
+				}
+				html+= "</ul></div></div>";
+			}
+			html+='</div>';
+			
+		}
+		
+		$( "#contentdiv" ).html( html );
+	}
 	function dateChanged(){
 		var selectedmode = $('#type').find(":selected").text();
     	
