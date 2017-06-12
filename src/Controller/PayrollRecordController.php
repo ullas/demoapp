@@ -91,12 +91,12 @@ var $components = array('Datatable');
 			$fromdate=$this->request->data['fromdate'];
 			$enddate=$this->request->data['enddate'];
 			$conn = ConnectionManager::get('default');
-			$result = $conn->execute("SELECT public.calculate_weeklyemployeeworkingdays(".$empid.",'".$fromdate."','".$enddate."')")->fetchAll('assoc');
-			if(isset($result[0]['calculate_weeklyemployeeworkingdays'])){			
-				$this->response->body(json_encode($result[0]['calculate_weeklyemployeeworkingdays']));
+			$result = $conn->execute("SELECT public.calculate_employeegrosssalary(".$empid.",'".$fromdate."','".$enddate."')")->fetchAll('assoc');
+			if(isset($result[0]['calculate_employeegrosssalary'])){			
+				$this->response->body(json_encode($result[0]['calculate_employeegrosssalary']));
 	    		return $this->response;
 			}else{
-				$this->response->body("error");
+				$this->response->body(json_encode($result));
 	    		return $this->response;
 			}
 		}

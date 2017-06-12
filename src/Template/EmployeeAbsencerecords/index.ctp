@@ -384,6 +384,7 @@ $(function () {
         	enddate=date.format("YYYY/MM/DD");
 		}
         
+		$("#actionspopover .modal-body #popoverid").val("alert");
 		$('#actionspopover').modal();
 		// console.log(date.format()+"--"+allDay);
 		
@@ -404,7 +405,8 @@ $(function () {
         	enddate=event.end.format("YYYY/MM/DD");
 		}
 		
-        $('#actionspopover').modal();
+        $(this).attr("data-id", "1");console.log($(this));
+		$('#actionspopover').modal();
 
       },
       events:getEvent,
@@ -427,6 +429,7 @@ $(function () {
 			enddate=date.format("YYYY/MM/DD");
 		}
 		
+		$("#actionspopover").attr("name", "2");
 		$('#actionspopover').modal();
 		
 		
@@ -543,7 +546,7 @@ $(function () {
 
 	$("#actionspopover").on("show.bs.modal", function(e) {
 		//loading icon show
-		if(e.relatedTarget!=null){$('#loadingmessage').show();}
+		if(e.relatedTarget!=null){$('#loadingmessage').show();}console.log($("#actionspopover .modal-body #popoverid").val());
 		var link = $(e.relatedTarget);
 		$(this).find(".modal-body").load("/EmployeeAbsencerecords/add",function( response, status, xhr ){
 			//loading icon hide
