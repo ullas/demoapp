@@ -8,14 +8,12 @@ use Cake\Validation\Validator;
 use Cake\Event\Event;
 use Cake\Event\ArrayObject;
 use Cake\Core\Configure;
-
 /**
  * PayComponents Model
  *
  * @property \Cake\ORM\Association\BelongsTo $Frequencies
  * @property \Cake\ORM\Association\BelongsTo $Customers
  * @property \Cake\ORM\Association\BelongsTo $PayComponentGroups
- * @property \Cake\ORM\Association\HasMany $PayrollData
  * @property \Cake\ORM\Association\HasMany $PayrollResult
  * @property \Cake\ORM\Association\HasMany $TimeAccountTypes
  *
@@ -52,9 +50,6 @@ class PayComponentsTable extends Table
         ]);
         $this->belongsTo('PayComponentGroups', [
             'foreignKey' => 'pay_component_group_id'
-        ]);
-        $this->hasMany('PayrollData', [
-            'foreignKey' => 'pay_component_id','dependent' => true
         ]);
         $this->hasMany('PayrollResult', [
             'foreignKey' => 'pay_component_id','dependent' => true
@@ -160,7 +155,7 @@ class PayComponentsTable extends Table
 
         return $validator;
     }
-	public function beforeMarshal(Event $event, $data, $options)
+		public function beforeMarshal(Event $event, $data, $options)
 	{
 		
 		$userdf = Configure::read('userdf');
