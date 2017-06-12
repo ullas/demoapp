@@ -25,29 +25,59 @@ var $components = array('Datatable');
         ];
         $payrollRecord = $this->paginate($this->PayrollRecord);
 
-		$dbout = $this->PayrollRecord->PayGroups->find()->select(['PayGroups.id', 'PayGroups.name',])
-					// ->leftJoin('JobInfos', 'JobInfos.pay_group_id = PayGroups.id')
-					->where(['PayGroups.customer_id' => $this->loggedinuser['customer_id']])->orwhere(['PayGroups.customer_id' => '0'])->toArray();
-        $paygrouplist = array();
-        foreach($dbout as $value){
-        		
-        	$jobinfos = $this->PayrollRecord->PayGroups->JobInfos->find()->select(['JobInfos.employee_id'])->where(['JobInfos.pay_group_id' => $value['id'] ])
-        					->andwhere(['JobInfos.customer_id' => $this->loggedinuser['customer_id']])->toArray();
-			$jobinfolist = array();
-        	foreach($jobinfos as $childval){
-        		
-				$jobinfolist[] = array("employee_id" => $childval['JobInfos']['employee_id'] );
-			}
+		// $dbout = $this->PayrollRecord->PayGroups->find()->select(['PayGroups.id', 'PayGroups.name',])
+					// // ->leftJoin('JobInfos', 'JobInfos.pay_group_id = PayGroups.id')
+					// ->where(['PayGroups.customer_id' => $this->loggedinuser['customer_id']])->orwhere(['PayGroups.customer_id' => '0'])->toArray();
+        // $paygrouplist = array();
+        // foreach($dbout as $value){
+//         		
+        	// $jobinfos = $this->PayrollRecord->PayGroups->JobInfos->find()->select(['JobInfos.employee_id'])->where(['JobInfos.pay_group_id' => $value['id'] ])
+        					// ->andwhere(['JobInfos.customer_id' => $this->loggedinuser['customer_id']])->toArray();
+			// $jobinfolist = array();
+        	// foreach($jobinfos as $childval){
+//         		
+				// $jobinfolist[] = array("employee_id" => $childval['JobInfos']['employee_id'] );
+			// }
+// 			
+			// $paygrouplist[] = array("parentid" => $value['id'] , "parent" => $value['name'] , "child" => $jobinfolist );
+			// // $this->Flash->error(__('DATA__.').json_encode($paygrouplist));
+// 			
+//         	
+		// }
+        // $this->set('content', json_encode($paygrouplist));
+		 
+        $this->set(compact('payrollRecord'));
+        $this->set('_serialize', ['payrollRecord']);
+	}
+	public function loadPayGroup() {
+		$this->autoRender= False;
+		if($this->request->is('ajax')) {
 			
-			$paygrouplist[] = array("parentid" => $value['id'] , "parent" => $value['name'] , "child" => $jobinfolist );
-			// $this->Flash->error(__('DATA__.').json_encode($paygrouplist));
+			$this->loadModel('PayGroups');
+			$dbout = $this->PayGroups->find()->select(['PayGroups.id', 'PayGroups.name',])
+					 ->leftJoin('Frequencies', 'Frequencies.id = PayGroups.frequency_id')
+					 ->where(['LOWER(Frequencies.name)' => $this->request->data['type']])
+					->andwhere(['PayGroups.customer_id' => $this->loggedinuser['customer_id']])->orwhere(['PayGroups.customer_id' => '0'])->toArray();
+        	$paygrouplist = array();
+        	foreach($dbout as $value){
+        		
+        		$jobinfos = $this->PayGroups->JobInfos->find()->select(['JobInfos.employee_id'])->where(['JobInfos.pay_group_id' => $value['id'] ])
+        					->andwhere(['JobInfos.customer_id' => $this->loggedinuser['customer_id']])->toArray();
+				$jobinfolist = array();
+        		foreach($jobinfos as $childval){
+        		
+					$jobinfolist[] = array("employee_id" => $childval['JobInfos']['employee_id'], "employee_name" => str_replace('"', '',$this->get_nameofemployee($childval['JobInfos']['employee_id'])));
+				}
+			
+				$paygrouplist[] = array("parentid" => $value['id'] , "parent" => $value['name'] , "child" => $jobinfolist );
+				// $this->Flash->error(__('DATA__.').json_encode($paygrouplist));
 			
         	
-		}
-        $this->set('content', json_encode($paygrouplist));
-		 
-        $this->set(compact('payrollRecord','paygrouplist'));
-        $this->set('_serialize', ['payrollRecord']);
+			}
+        	
+			$this->response->body(json_encode($paygrouplist));
+	    	return $this->response;
+		}		
 	}
     public function ajaxData() {
 		$this->autoRender= False;
@@ -210,6 +240,14 @@ var $components = array('Datatable');
 			$arrayTemp1 = $conn->execute('select first_name,last_name from empdatapersonals where employee_id='.$empid[0]['employee_id'].'')->fetchAll('assoc');
 		}
 		return json_encode($arrayTemp1[0]['first_name']." ".$arrayTemp1[0]['last_name'].' ('.$empid[0]['employee_id'].')');  
+	}
+	public function get_nameofemployee($empid = null) 
+	{
+		$conn = ConnectionManager::get('default');
+		if($empid!="" && $empid!=null && isset($empid)){
+			$arrayTemp1 = $conn->execute('select first_name,last_name from empdatapersonals where employee_id='.$empid.'')->fetchAll('assoc');
+		}
+		return json_encode($arrayTemp1[0]['first_name']." ".$arrayTemp1[0]['last_name']." (".$empid.")"); 
 	}
     /**
      * View method
