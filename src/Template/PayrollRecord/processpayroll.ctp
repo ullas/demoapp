@@ -2,6 +2,7 @@
 
 <style>
 	.emplist .statusbtn { display: none; }
+	/*.emplist .statustxt { display: none; }*/
 	/*.emplist:hover .statusbtn { display: block; }*/
 	
 	
@@ -326,7 +327,7 @@ var contentobj;
 					html+= contentobj[i]['child'][t]['employee_name'] ;
 							
 					html+= "<input type='button' value='Success' class='statusbtn btn btn-sm btn-success pull-right p3' style='margin-left:5px;' id='"+contentobj[i]['child'][t]['employee_id']+"'/>";
-					html+= " <input type='button' value='Process' class='processbtn btn btn-sm btn-warning pull-right p3 dd' id='"+contentobj[i]['child'][t]['employee_id']+"'/></a> </li>";
+					html+= " <span class='statustxt label label-warning' id='"+contentobj[i]['child'][t]['employee_id']+"'></span><input type='button' value='Process' class='processbtn btn btn-sm btn-warning pull-right p3 dd' id='"+contentobj[i]['child'][t]['employee_id']+"'/></a> </li>";
 				}
 				html+= "</ul></div></div>";
 			}
@@ -411,6 +412,10 @@ var contentobj;
 	
 	function validate(empid){
 		
+		
+		$("#"+empid+".statustxt").html("");
+		$("#"+empid+".statustxt").removeClass("label-success label-danger");
+		
 		if($("#period").val()=="" || $("#period").val()==null){
 			sweet_alert("Please enter the period for the employee ."+empid);
             return false;	
@@ -453,6 +458,9 @@ var contentobj;
         		data: 'empid='+empid+"&firstdate="+fromdate+"&lastdate="+enddate,
         		beforeSend: function(){
 					$(".payrollprogresstitle").html("Checking any leave approval still pending for the employee " + empid);
+					$("#"+empid+".statustxt").addClass("label-warning");
+					$("#"+empid+".statustxt").html("Validating Leave approval pending");	
+						
   				},
         		success : function(data) {
         			$(".progress-bar").css("width", "25%");
@@ -474,6 +482,7 @@ var contentobj;
         					data: 'empid='+empid,
         					beforeSend: function(){
 								$(".payrollprogresstitle").html("Checking any pay component/group exists for the employee " + empid);
+								$("#"+empid+".statustxt").html("Validating Pay Component ");
   							},
         					success : function(result) {
         						$(".progress-bar").css("width", "50%");
@@ -487,7 +496,11 @@ var contentobj;
             			
             						processpayroll(empid);
         						}else{
-
+									$("#"+empid+".statustxt").removeClass("label-warning");
+									$("#"+empid+".statustxt").addClass("label-danger");
+					
+									$("#"+empid+".statustxt").html("Validating Pay Component failed");
+									
         							$(".progress-bar").removeClass("progress-bar-success");
         							$(".progress-bar").removeClass("progress-bar-danger");
         							$(".progress-bar").addClass("progress-bar-danger");
@@ -497,12 +510,22 @@ var contentobj;
         						}
     						},
         					error : function(result) {
+        						$("#"+empid+".statustxt").removeClass("label-warning");
+								$("#"+empid+".statustxt").addClass("label-danger");
+					
+        						$("#"+empid+".statustxt").html("Validating Pay Component failed");
+        						
             					sweet_alert("Error while checking pay component/group existance for the employee ."+empid);
             					return false;
         					}
     					});
     		
-    				}else{var dataobj = JSON.parse(data);
+    				}else{
+    					$("#"+empid+".statustxt").removeClass("label-warning");
+						$("#"+empid+".statustxt").addClass("label-danger");
+						$("#"+empid+".statustxt").html("Validating leave approval pending failed");
+    				
+    					var dataobj = JSON.parse(data);
         				$(".progress-bar").removeClass("progress-bar-success");
         				$(".progress-bar").removeClass("progress-bar-danger");
         				$(".progress-bar").addClass("progress-bar-danger");
@@ -515,7 +538,7 @@ var contentobj;
         			}
         			
     			},
-        		error : function(data) {console.log(data);
+        		error : function(data) {$("#"+empid+".statustxt").html("Validating leave approval pending failed");
             		sweet_alert("Error while checking Absence approval pending for the employee ."+empid);
             		return false;
         		}
@@ -574,22 +597,36 @@ var contentobj;
         			data: 'empid='+empid+"&fromdate="+fromdate+"&enddate="+enddate,
         			beforeSend: function(){
 						$(".payrollprogresstitle").html("Processing payroll for the employee " + empid);
+						$("#"+empid+".statustxt").html("Payroll Processing");
   					},
         			success : function(data) {
+        				$("#"+empid+".statustxt").removeClass("label-warning label-danger");
+						$("#"+empid+".statustxt").addClass("label-success");
+						$("#"+empid+".statustxt").html("Payroll Processed");
+        				
         				$(".progress-bar").css("width", "100%");
         				$("#errordiv").append("<p class='text-green'>Salary for the employee "+empid+": "+data+"</div>");
         				
         				// console.log(empid);
-            			$("#"+empid+".statusbtn").show();	
+            			
             			return false;			
     				},
         			error : function(data) {
+        				
+        				$("#"+empid+".statustxt").removeClass("label-warning");
+						$("#"+empid+".statustxt").addClass("label-danger");
+						$("#"+empid+".statustxt").html("Payroll Processing error");
+        				
             			sweet_alert("Error while processing payroll for the employee ."+empid);
             			return false;
         			}
     			});
     		}else{
-    			sweet_alert("Please enter the period.");
+    			$("#"+empid+".statustxt").removeClass("label-warning");
+				$("#"+empid+".statustxt").addClass("label-danger");
+				$("#"+empid+".statustxt").html("Payroll Processing error");
+        				
+        		sweet_alert("Please enter the period.");
             	return false;
     		}
     	}
