@@ -505,7 +505,7 @@ var contentobj;
         							$(".progress-bar").removeClass("progress-bar-danger");
         							$(".progress-bar").addClass("progress-bar-danger");
       
-        							$("#errordiv").append("<div class='text-red'>"+result+"<div class='pull-right'><a href='/PayrollData'><i class='fa fa-arrow-circle-right'></i></a></div></div>");
+        							$("#errordiv").append("<div class='text-red' style='margin:0 0 10px;font-weight:bold;'>"+result+"<div class='pull-right'><a href='/PayrollData'><i class='fa fa-arrow-circle-right text-red'></i></a></div></div>");
         							return false;
         						}
     						},

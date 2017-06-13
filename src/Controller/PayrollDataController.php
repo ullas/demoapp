@@ -58,7 +58,8 @@ class PayrollDataController extends AppController
 			$this->loadModel('PayComponents');
 			
 			$payComponents=$this->PayComponents->find('all')->where(['pay_component_group_id' => $this->request->query['pcgid']])
-									->andwhere(['can_override' => '0'])->order(['"id"' => 'ASC'])->toArray();
+									->andwhere(['can_override' => '0'])
+									->order(['"id"' => 'ASC'])->toArray();
 			$this->response->body(json_encode($payComponents));
 	    	return $this->response;
 		}
@@ -85,7 +86,7 @@ class PayrollDataController extends AppController
 							->andwhere("PayrollData.customer_id=".$this->loggedinuser['customer_id']);
 
 		$this->loadModel("PayComponents");
-		$payComponents = $this->PayComponents->find('list', ['limit' => 200])->where(['can_override' => '0'])->andwhere(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+		$payComponents = $this->PayComponents->find('list', ['limit' => 200])->andwhere(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         		
 		$payComponentGroups = $this->PayComponents->PayComponentGroups->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         
@@ -190,7 +191,7 @@ class PayrollDataController extends AppController
 						->where(['EmpDataBiographies.id NOT IN'=>$emparr])->andwhere("EmpDataBiographies.customer_id=".$this->loggedinuser['customer_id']);
 						
 		$this->loadModel("PayComponents");
-		$payComponents = $this->PayComponents->find('list', ['limit' => 200])->where(['can_override' => '0'])->andwhere(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+		$payComponents = $this->PayComponents->find('list', ['limit' => 200])->andwhere(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         $this->set(compact('payrollData', 'payComponents','empDataBiographies'));
         $this->set('_serialize', ['payrollData']);
 		
@@ -243,7 +244,7 @@ class PayrollDataController extends AppController
 							->andwhere("PayrollData.customer_id=".$this->loggedinuser['customer_id']);
 		
 		$this->loadModel("PayComponents");
-		$payComponents = $this->PayComponents->find('list', ['limit' => 200])->where(['can_override' => '0'])->andwhere(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+		$payComponents = $this->PayComponents->find('list', ['limit' => 200])->andwhere(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         		
 		$payComponentGroups = $this->PayComponents->PayComponentGroups->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         

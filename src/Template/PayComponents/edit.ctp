@@ -34,7 +34,8 @@
 				<label class="control-label">Base Pay Component Type</label>
 				<div class="input-group">
                   		<select class="select2" name="base_pay_component_type" id="base-pay-component-type">
-        					<option value="1">Pay Component Group</option>
+        					<option></option>
+  							<option value="1">Pay Component Group</option>
         					<option value="2">Pay Component</option>
       					</select>
       			</div>

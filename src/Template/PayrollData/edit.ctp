@@ -89,7 +89,7 @@ $(function () {
     		for (i = 1; i <= pccount; i++) {
     			var paycomp=$("#paycomponent"+i).val();
     			var paycompval=$("#paycomponentvalue"+i).val();
-    			if(paycomp!="" && paycomp!=null && paycompval!="" && paycompval!=null && startdate!="" && startdate!=null && enddate!="" && enddate!=null){
+    			if(paycomp!="" && paycomp!=null && startdate!="" && startdate!=null && enddate!="" && enddate!=null){
 					
 					$.ajax({
         				type: "POST",
@@ -138,7 +138,7 @@ $(function () {
 					
 					
 				}else{
-					sweet_alert("Pay Component Value/Start/End Date missing.");break;
+					sweet_alert("Start/End Date missing.");break;
 					return false;
 				}
     		}	
@@ -161,7 +161,7 @@ $(function () {
     				
 				});
     			
-    			if(paycomp!="" && paycomp!=null && postdata!="" && postdata!=null){
+    			if(postdata!="" && postdata!=null){
     				
     				$.ajax({
         				type: "POST",
