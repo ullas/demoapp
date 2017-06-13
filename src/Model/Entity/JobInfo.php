@@ -112,6 +112,7 @@ use Cake\ORM\Entity;
  * @property \App\Model\Entity\TimeTypeProfile $time_type_profile
  * @property \App\Model\Entity\WorkSchedule $work_schedule
  * @property \App\Model\Entity\Employee $employee
+ * @property \App\Model\Entity\PayGroup $pay_group
  */
 class Jobinfo extends Entity
 {

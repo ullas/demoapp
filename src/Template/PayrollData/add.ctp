@@ -170,7 +170,7 @@ $(function () {
     			var paycomp=$("#paycomponent"+i).val();
     			var paycompval=$("#paycomponentvalue"+i).val();
     			
-				if(paycomp!="" && paycomp!=null && paycompval!="" && paycompval!=null && startdate!="" && startdate!=null && enddate!="" && enddate!=null){
+				if(paycomp!="" && paycomp!=null && startdate!="" && startdate!=null && enddate!="" && enddate!=null){
 					
 					$.ajax({
         				type: "POST",

@@ -938,9 +938,11 @@ $(function () {
 	 $( "#saveempbtn" ).click(function( ) {
  		 //get input value
 		var externalid = document.getElementById("empdatabiography-person-id-external").value;
-    	if (externalid != "" && externalid!=null) {
+
+    	if (externalid != "" && externalid!=null && $("#jobinfo-pay-group-id").val()!="" && $("#jobinfo-pay-group-id").val()!=null) {
     		return true;
-    	}else{
+    	}else if(externalid=="" || externalid==null){
+    		
     		$("#EmpDataBiography").addClass("active");
     		$("#EmploymentInfo").removeClass("active");$("#EmpDataPersonal").removeClass("active");$("#social").removeClass("active");$("#address").removeClass("active");$("#jobinfo").removeClass("active");
     		$("#ids").removeClass("active");$("#experience").removeClass("active");$("#skills").removeClass("active");$("#officeassets").removeClass("active");$("#qualification").removeClass("active");
@@ -951,6 +953,19 @@ $(function () {
     		$("#li7").removeClass("active");$("#li8").removeClass("active");$("#li9").removeClass("active");$("#li10").removeClass("active");$("#lijobinfo").removeClass("active");
 
     		sweet_alert("Please enter the Person Id External.");
+    		return false;
+    	}else{
+    		$("#jobinfo").addClass("active");
+    		$("#EmpDataBiography").removeClass("active");
+    		$("#EmploymentInfo").removeClass("active");$("#EmpDataPersonal").removeClass("active");$("#social").removeClass("active");$("#address").removeClass("active");
+    		$("#ids").removeClass("active");$("#experience").removeClass("active");$("#skills").removeClass("active");$("#officeassets").removeClass("active");$("#qualification").removeClass("active");
+
+
+    		$("#lijobinfo").addClass("active");
+    		$("#li1").removeClass("active");$("#li2").removeClass("active");$("#li4").removeClass("active");$("#li5").removeClass("active");$("#li6").removeClass("active");
+    		$("#li7").removeClass("active");$("#li8").removeClass("active");$("#li9").removeClass("active");$("#li10").removeClass("active");$("#li3").removeClass("active");
+
+    		sweet_alert("Please select the Pay group.");
     		return false;
     	}
 	 });

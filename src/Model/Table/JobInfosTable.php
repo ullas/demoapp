@@ -112,6 +112,9 @@ class JobinfosTable extends Table
      */
     public function validationDefault(Validator $validator)
     {
+    	$validator
+            ->notEmpty('pay_group_id');
+			
         $validator
             ->allowEmpty('id', 'create');
 
