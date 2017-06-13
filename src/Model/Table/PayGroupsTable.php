@@ -68,22 +68,22 @@ class PayGroupsTable extends Table
             'foreignKey' => 'location_id'
         ]);
         $this->hasMany('Jobinfos', [
-            'foreignKey' => 'pay_group_id'
+            'foreignKey' => 'pay_group_id','dependent'=>true
         ]);
         $this->hasMany('PayRanges', [
-            'foreignKey' => 'pay_group_id'
+            'foreignKey' => 'pay_group_id','dependent'=>true
         ]);
         $this->hasMany('PayrollRecord', [
-            'foreignKey' => 'pay_group_id'
+            'foreignKey' => 'pay_group_id','dependent'=>true
         ]);
         $this->hasMany('PayrollResult', [
-            'foreignKey' => 'pay_group_id'
+            'foreignKey' => 'pay_group_id','dependent'=>true
         ]);
         $this->hasMany('PayrollStatus', [
-            'foreignKey' => 'pay_group_id'
+            'foreignKey' => 'pay_group_id','dependent'=>true
         ]);
     }
-
+	
     /**
      * Default validation rules.
      *

@@ -2,7 +2,7 @@
 
 <style>
 	.emplist .statusbtn { display: none; }
-	.emplist:hover .statusbtn { display: block; }
+	/*.emplist:hover .statusbtn { display: block; }*/
 	
 	
 	.emplist .processbtn { display: none; }
@@ -251,27 +251,33 @@ var contentobj;
     	});
     
     
-    	$('#contentdiv').on('click', 'input.statusbtn', function() {  
+    	// $('#contentdiv').on('click', 'input.statusbtn', function() {  
 
-    		var empid=$(this).attr('id');
-    		$(".progress-bar").css("width", "0%");
-    		$("#errordiv").html("");
-    			
-    		processpayroll(empid);
+    		// var empid=$(this).attr('id');
+    		// $(".progress-bar").css("width", "0%");
+    		// $("#errordiv").html("");
+//     			
+    		// processpayroll(empid);
    
-    	});
+    	// });
     	
     	$('#contentdiv').on('click', 'input.processbtn', function() {  
 
+    		$(".statusbtn").hide();	
     		var empid=$(this).attr('id');
     		$(".progress-bar").css("width", "0%");
     		$("#errordiv").html("");
     			
+    		// if(validate(empid)){
+    			// processpayroll(empid);
+    		// }
+    		
     		validate(empid);
    
     	});
     	
     	$(".processall").click(function (event) {
+    		$(".statusbtn").hide();	
     		$("#errordiv").html("");
     		var resultarr=[];
     		$('.emp_filter').each(function () {
@@ -285,6 +291,7 @@ var contentobj;
     	});
     	
     	$(".processselected").click(function (event) {
+    		$(".statusbtn").hide();	
     		$("#errordiv").html("");
     		var resultarr=[];
     		$('.emp_filter').each(function () {
@@ -318,7 +325,7 @@ var contentobj;
 							
 					html+= contentobj[i]['child'][t]['employee_name'] ;
 							
-					html+= "<input type='button' value='Status' class='statusbtn btn btn-sm btn-success pull-right p3' style='margin-left:5px;' id='"+contentobj[i]['child'][t]['employee_id']+"'/>";
+					html+= "<input type='button' value='Success' class='statusbtn btn btn-sm btn-success pull-right p3' style='margin-left:5px;' id='"+contentobj[i]['child'][t]['employee_id']+"'/>";
 					html+= " <input type='button' value='Process' class='processbtn btn btn-sm btn-warning pull-right p3 dd' id='"+contentobj[i]['child'][t]['employee_id']+"'/></a> </li>";
 				}
 				html+= "</ul></div></div>";
@@ -448,17 +455,54 @@ var contentobj;
 					$(".payrollprogresstitle").html("Checking any leave approval still pending for the employee " + empid);
   				},
         		success : function(data) {
-        			$(".progress-bar").css("width", "50%");
+        			$(".progress-bar").css("width", "25%");
         			if(data=="success"){
             			
             			$(".progress-bar").removeClass("progress-bar-danger");
         				$(".progress-bar").removeClass("progress-bar-success");
         				$(".progress-bar").addClass("progress-bar-success");
         				
-        				$("#errordiv").append("<p class='text-green'>No exisiting Leave Request to be approved("+empid+")<p>");
+        				// $("#errordiv").append("<p class='text-green'>No exisiting Leave Request to be approved("+empid+")<p>");
             			
-            			// return false;
-        			}else{var dataobj = JSON.parse(data);
+            			// return true;	
+        			
+
+        				//call
+        				$.ajax({
+        					type: "POST",
+        					url: '/PayrollRecord/checkEmployeePayComponent',
+        					data: 'empid='+empid,
+        					beforeSend: function(){
+								$(".payrollprogresstitle").html("Checking any pay component/group exists for the employee " + empid);
+  							},
+        					success : function(result) {
+        						$(".progress-bar").css("width", "50%");
+        						if(result=="success"){
+            			
+            						$(".progress-bar").removeClass("progress-bar-danger");
+        							$(".progress-bar").removeClass("progress-bar-success");
+        							$(".progress-bar").addClass("progress-bar-success");
+        				
+        							// $("#errordiv").append("<p class='text-green'>Pay Component/Pay Component Group exists<p>");
+            			
+            						processpayroll(empid);
+        						}else{
+
+        							$(".progress-bar").removeClass("progress-bar-success");
+        							$(".progress-bar").removeClass("progress-bar-danger");
+        							$(".progress-bar").addClass("progress-bar-danger");
+      
+        							$("#errordiv").append("<div class='text-red'>"+result+"<div class='pull-right'><a href='/PayrollData'><i class='fa fa-arrow-circle-right'></i></a></div></div>");
+        							return false;
+        						}
+    						},
+        					error : function(result) {
+            					sweet_alert("Error while checking pay component/group existance for the employee ."+empid);
+            					return false;
+        					}
+    					});
+    		
+    				}else{var dataobj = JSON.parse(data);
         				$(".progress-bar").removeClass("progress-bar-success");
         				$(".progress-bar").removeClass("progress-bar-danger");
         				$(".progress-bar").addClass("progress-bar-danger");
@@ -467,45 +511,8 @@ var contentobj;
         					tempstr+="<p class='text-red'>"+dataobj[i]+"<p>";
         				}
         				$("#errordiv").append(tempstr);
-        				// return false;
-        			}
-
-        			//call
-        			$.ajax({
-        		type: "POST",
-        		url: '/PayrollRecord/checkEmployeePayComponent',
-        		data: 'empid='+empid,
-        		beforeSend: function(){
-					$(".payrollprogresstitle").html("Checking any pay component/group exists for the employee " + empid);
-  				},
-        		success : function(result) {
-        			$(".progress-bar").css("width", "100%");
-        			if(result=="success"){
-            			
-            			$(".progress-bar").removeClass("progress-bar-danger");
-        				$(".progress-bar").removeClass("progress-bar-success");
-        				$(".progress-bar").addClass("progress-bar-success");
-        				
-        				$("#errordiv").append("<p class='text-green'>Pay Component/Pay Component Group exists<p>");
-            			
-            			return false;
-        			}else{
-
-        				$(".progress-bar").removeClass("progress-bar-success");
-        				$(".progress-bar").removeClass("progress-bar-danger");
-        				$(".progress-bar").addClass("progress-bar-danger");
-      
-        				$("#errordiv").append("<div class='text-red'>"+result+"<div class='pull-right'><a href='/PayrollData'><i class='fa fa-arrow-circle-right'></i></a></div></div>");
         				return false;
         			}
-    			},
-        		error : function(result) {
-            		sweet_alert("Error while checking pay component/group existance for the employee ."+empid);
-            		return false;
-        		}
-    		});
-    		
-    		
         			
     			},
         		error : function(data) {console.log(data);
@@ -522,8 +529,8 @@ var contentobj;
 	}
 	function processpayroll(empid){
 		
-	  $(".payrollprogresstitle").html("Validating");
-      $(".progress-bar").css("width", "0%");
+	  // $(".payrollprogresstitle").html("Validating");
+      // $(".progress-bar").css("width", "0%");
       var selectedmode = $('#type').find(":selected").text();
     	
       if(selectedmode!="" && selectedmode!=null){
@@ -570,8 +577,11 @@ var contentobj;
   					},
         			success : function(data) {
         				$(".progress-bar").css("width", "100%");
-        				$("#errordiv").append("<p class='text-green'>Salary: "+data+"</div>");
-            				return false;			
+        				$("#errordiv").append("<p class='text-green'>Salary for the employee "+empid+": "+data+"</div>");
+        				
+        				// console.log(empid);
+            			$("#"+empid+".statusbtn").show();	
+            			return false;			
     				},
         			error : function(data) {
             			sweet_alert("Error while processing payroll for the employee ."+empid);
@@ -582,8 +592,6 @@ var contentobj;
     			sweet_alert("Please enter the period.");
             	return false;
     		}
-    	}else if(selectedmode=="Monthly"){
-    		
     	}
       }	
 	}
