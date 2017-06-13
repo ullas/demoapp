@@ -144,7 +144,10 @@ var $components = array('Datatable');
         $this->set(compact('legalEntities', 'businessUnits', 'divisions', 'locations','payGroup', 'customers','frequencies'));
         $this->set('_serialize', ['payGroup']);
     }
-
+	public function get_jobinfo($id = null) 
+	{
+	    return $this->PayGroups->Jobinfos->find('all', array('conditions' => array('Jobinfos.pay_group_id'  => $id) ))->count();
+	}
     /**
      * Delete method
      *
@@ -158,10 +161,18 @@ var $components = array('Datatable');
         $payGroup = $this->PayGroups->get($id);
         if($payGroup['customer_id'] == $this->loggedinuser['customer_id']) 
 		{
-        	if ($this->PayGroups->delete($payGroup)) {
-            	$this->Flash->success(__('The pay group has been deleted.'));
-        	} else {
-            	$this->Flash->error(__('The pay group could not be deleted. Please, try again.'));
+			$jobinfocount=$this->get_jobinfo($id);
+			if($jobinfocount>0){
+    				
+    			$this->Flash->error(__('PayGroup cannot be deleted as they have ' . $jobinfocount . ' number of jobinfos already linked.'));
+    			$this->redirect(array('controller' => 'PayGroups', 'action' => 'index'));
+
+			}else{
+        		if ($this->PayGroups->delete($payGroup)) {
+            		$this->Flash->success(__('The pay group has been deleted.'));
+        		} else {
+            		$this->Flash->error(__('The pay group could not be deleted. Please, try again.'));
+        		}
         	}
 		}
 	    else
