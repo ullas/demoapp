@@ -197,12 +197,19 @@ var $components = array('Datatable');
 					$record = $this->PayGroups->get($value);
 					
 					 if($record['customer_id']== $this->loggedinuser['customer_id']) {
-					 	
+					 	$jobinfocount=$this->get_jobinfo($record['id']);
+						if($jobinfocount>0){
+    				
+    						$this->Flash->error(__('PayGroup cannot be deleted as they have ' . $jobinfocount . ' number of jobinfos already linked.'));
+    						$this->redirect(array('controller' => 'PayGroups', 'action' => 'index'));
+
+						}else{
 						   if ($this->PayGroups->delete($record)) {
 					           $sucess= $sucess | true;
 					        } else {
 					           $failure= $failure | true;
 					        }
+						}
 					}
 				}  	  
 			}
