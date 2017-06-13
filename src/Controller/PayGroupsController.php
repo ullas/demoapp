@@ -19,7 +19,7 @@ var $components = array('Datatable');
      */
      public function ajaxData() {
 		$this->autoRender= False;
-		  
+
 		$this->loadModel('CreateConfigs');
 		$dbout=$this->CreateConfigs->find()->select(['field_name', 'datatype'])->where(['table_name' => $this->request->params['controller']])->order(['id' => 'ASC'])->toArray();
 		$fields = array();
@@ -27,25 +27,25 @@ var $components = array('Datatable');
 			$fields[] = array("name" => $value['field_name'] , "type" => $value['datatype'] );
 		}
 		$contains=['Customers'];
-									  
-		$usrfilter="PayGroups.customer_id ='".$this->loggedinuser['customer_id'] . "'";				  
+
+		$usrfilter="PayGroups.customer_id ='".$this->loggedinuser['customer_id'] . "'";
 		$output =$this->Datatable->getView($fields,$contains,$usrfilter);
-		echo json_encode($output);			
+		echo json_encode($output);
     }
     public function index()
     {
     	$this->loadModel('CreateConfigs');
         $configs=$this->CreateConfigs->find('all')->where(['table_name' => $this->request->params['controller']])->order(['"id"' => 'ASC'])->toArray();
-        $this->set('configs',$configs);	
-		
+        $this->set('configs',$configs);
+
         $this->paginate = [
             'contain' => ['Customers']
         ];
         $payGroups = $this->paginate($this->PayGroups);
 
 		$actions =[ ['name'=>'delete','title'=>'Delete','class'=>' label-danger'] ];
-        $this->set('actions',$actions);	
-		
+        $this->set('actions',$actions);
+
         $this->set(compact('payGroups'));
         $this->set('_serialize', ['payGroups']);
     }
@@ -62,7 +62,7 @@ var $components = array('Datatable');
         $payGroup = $this->PayGroups->get($id, [
             'contain' => ['Customers', 'PayRanges']
         ]);
-		
+
 		if($payGroup['customer_id']==$this->loggedinuser['customer_id']){
 			$legalEntities = $this->PayGroups->LegalEntities->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         	$businessUnits = $this->PayGroups->BusinessUnits->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
@@ -74,7 +74,7 @@ var $components = array('Datatable');
  		}else{
 		    $this->Flash->error(__('You are not Authorized.'));
 			return $this->redirect(['action' => 'index']);
-        } 
+        }
     }
 
     /**
@@ -118,13 +118,13 @@ var $components = array('Datatable');
         $payGroup = $this->PayGroups->get($id, [
             'contain' => []
         ]);
-		
+
 		if($payGroup['customer_id'] != $this->loggedinuser['customer_id'])
 		{
 			 $this->Flash->error(__('You are not Authorized.'));
 			 return $this->redirect(['action' => 'index']);
 		}
-		
+
         if ($this->request->is(['patch', 'post', 'put'])) {
             $payGroup = $this->PayGroups->patchEntity($payGroup, $this->request->data);
             if ($this->PayGroups->save($payGroup)) {
@@ -144,15 +144,15 @@ var $components = array('Datatable');
         $this->set(compact('legalEntities', 'businessUnits', 'divisions', 'locations','payGroup', 'customers','frequencies'));
         $this->set('_serialize', ['payGroup']);
     }
-	public function get_jobinfo($id = null) 
+	public function get_jobinfo($id = null)
 	{
 	    return $this->PayGroups->Jobinfos->find('all', array('conditions' => array('Jobinfos.pay_group_id'  => $id) ))->count();
 	}
-	public function get_legalentity($id = null) 
+	public function get_legalentity($id = null)
 	{
 	    return $this->PayGroups->LegalEntities->find('all', array('conditions' => array('LegalEntities.paygroup_id'  => $id) ))->count();
 	}
-	
+
     /**
      * Delete method
      *
@@ -164,14 +164,30 @@ var $components = array('Datatable');
     {
         $this->request->allowMethod(['post', 'delete']);
         $payGroup = $this->PayGroups->get($id);
-        if($payGroup['customer_id'] == $this->loggedinuser['customer_id']) 
+        $payGroupName = $payGroup['name'];
+        if($payGroup['customer_id'] == $this->loggedinuser['customer_id'])
 		{
 			$jobinfocount=$this->get_jobinfo($id);
 			$legalentitycount=$this->get_legalentity($id);
 			if($jobinfocount>0 || $legalentitycount>0){
-    				
-    			if($jobinfocount>0){ $this->Flash->error(__('PayGroup cannot be deleted as they have ' . $jobinfocount . ' number of jobinfos already linked.')); }
-				if($legalentitycount>0){ $this->Flash->error(__('PayGroup cannot be deleted as they have ' . $legalentitycount . ' number of legalentities already linked.')); }
+
+    		if($jobinfocount>0){
+          if ($jobinfocount<2){
+            $this->Flash->error(__('Pay Group '.$payGroupName. ' is linked to ' . $jobinfocount . ' Employee Job Info record. Please edit Employee record before deleting.'));
+          }
+          else{
+            $this->Flash->error(__('Pay Group '.$payGroupName. ' is linked to ' . $jobinfocount . ' Employee Job Info records. Please edit Employee records before deleting.'));
+          }
+        }
+				if($legalentitycount>0){
+          if ($legalentitycount<2){
+            $this->Flash->error(__('Pay Group '.$payGroupName. ' is linked to ' . $legalentitycount . ' Legal Entity. Please edit Legal Entity before deleting.'));
+          }
+          else{
+            $this->Flash->error(__('Pay Group '.$payGroupName. ' is linked to ' . $legalentitycount . ' Legal Entities. Please edit Legal Entities before deleting.'));
+          }
+
+        }
     			$this->redirect(array('controller' => 'PayGroups', 'action' => 'index'));
 
 			}else{
@@ -189,27 +205,41 @@ var $components = array('Datatable');
         return $this->redirect(['action' => 'index']);
     }
 	public function deleteAll($id=null){
-    	
+
 		$this->request->allowMethod(['post', 'deleteall']);
         $sucess=false;$failure=false;
         $data=$this->request->data;
-			
+
 		if(isset($data)){
 		   foreach($data as $key =>$value){
-		   	   		
+
 		   	   	$itemna=explode("-",$key);
-			    
+
 			    if(count($itemna)== 2 && $itemna[0]=='chk'){
-			    	
+
 					$record = $this->PayGroups->get($value);
-					
+           $payGroupName = $record['name'];
 					 if($record['customer_id']== $this->loggedinuser['customer_id']) {
 					 	$jobinfocount=$this->get_jobinfo($record['id']);
 						$legalentitycount=$this->get_legalentity($record['id']);
 						if($jobinfocount>0 || $legalentitycount>0){
-    				
-    						if($jobinfocount>0){ $this->Flash->error(__('PayGroup cannot be deleted as they have ' . $jobinfocount . ' number of jobinfos already linked.')); }
-							if($legalentitycount>0){ $this->Flash->error(__('PayGroup cannot be deleted as they have ' . $legalentitycount . ' number of legalentities already linked.')); }
+
+    					if($jobinfocount>0){
+                if ($jobinfocount<2){
+                  $this->Flash->error(__('Pay Group '.$payGroupName. '  is linked to ' . $jobinfocount . ' Employee Job Info record. Please edit Employee record before deleting.'));
+                }
+                else{
+                  $this->Flash->error(__('Pay Group '.$payGroupName. '  is linked to ' . $jobinfocount . ' Employee Job Info records. Please edit Employee records before deleting.'));
+                }
+              }
+							if($legalentitycount>0){
+                if ($legalentitycount<2){
+                  $this->Flash->error(__('Pay Group '.$payGroupName. '  is linked to ' . $legalentitycount . ' Legal Entity. Please edit Legal Entity before deleting.'));
+                }
+                else{
+                  $this->Flash->error(__('Pay Group '.$payGroupName. '  is linked to ' . $legalentitycount . ' Legal Entities. Please edit Legal Entities before deleting.'));
+                }
+              }
     						$this->redirect(array('controller' => 'PayGroups', 'action' => 'index'));
 
 						}else{
@@ -220,18 +250,18 @@ var $components = array('Datatable');
 					        }
 						}
 					}
-				}  	  
+				}
 			}
-		   		        
-		
+
+
 				if($sucess){
 					$this->Flash->success(__('Selected PayGroups has been deleted.'));
 				}
 		        if($failure){
 					$this->Flash->error(__('The PayGroups could not be deleted. Please, try again.'));
 				}
-		
+
 		   }
-             return $this->redirect(['action' => 'index']);	
+             return $this->redirect(['action' => 'index']);
      }
 }
