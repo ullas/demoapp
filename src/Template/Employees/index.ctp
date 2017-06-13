@@ -99,7 +99,7 @@
 
                             	<form name="formdelete" id="formdelete<?php echo $employee['id']; ?>" method="post" action="/Employees/delete/<?php echo $employee['id']; ?>" style="display:none;" >
                                    <input type="hidden" name="_method" value="POST"></form>
-                               	<a href="#" onclick="sweet_confirmdelete(&quot;MayHaw&quot;,&quot;Are you sure you want to delete # '<?php echo $employee['id']; ?>'?&quot; , function(){ document.getElementById(&quot;formdelete<?php echo $employee['id']; ?>&quot;).submit(); })
+                               	<a href="#" onclick="sweet_confirmdelete(&quot;MayHaw&quot;,&quot;Are you sure you want to delete employee # '<?php echo $employee['id']; ?>'?&quot; , function(){ document.getElementById(&quot;formdelete<?php echo $employee['id']; ?>&quot;).submit(); })
                                     event.returnValue = false; return false;" class="btn btn-danger btn-xs pull-left"><i class="fa fa-trash"></i> </a>
 
                             </div>
