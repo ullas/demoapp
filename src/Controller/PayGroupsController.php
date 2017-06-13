@@ -148,6 +148,11 @@ var $components = array('Datatable');
 	{
 	    return $this->PayGroups->Jobinfos->find('all', array('conditions' => array('Jobinfos.pay_group_id'  => $id) ))->count();
 	}
+	public function get_legalentity($id = null) 
+	{
+	    return $this->PayGroups->LegalEntities->find('all', array('conditions' => array('LegalEntities.paygroup_id'  => $id) ))->count();
+	}
+	
     /**
      * Delete method
      *
@@ -162,9 +167,11 @@ var $components = array('Datatable');
         if($payGroup['customer_id'] == $this->loggedinuser['customer_id']) 
 		{
 			$jobinfocount=$this->get_jobinfo($id);
-			if($jobinfocount>0){
+			$legalentitycount=$this->get_legalentity($id);
+			if($jobinfocount>0 || $legalentitycount>0){
     				
-    			$this->Flash->error(__('PayGroup cannot be deleted as they have ' . $jobinfocount . ' number of jobinfos already linked.'));
+    			if($jobinfocount>0){ $this->Flash->error(__('PayGroup cannot be deleted as they have ' . $jobinfocount . ' number of jobinfos already linked.')); }
+				if($legalentitycount>0){ $this->Flash->error(__('PayGroup cannot be deleted as they have ' . $legalentitycount . ' number of legalentities already linked.')); }
     			$this->redirect(array('controller' => 'PayGroups', 'action' => 'index'));
 
 			}else{
@@ -197,12 +204,21 @@ var $components = array('Datatable');
 					$record = $this->PayGroups->get($value);
 					
 					 if($record['customer_id']== $this->loggedinuser['customer_id']) {
-					 	
+					 	$jobinfocount=$this->get_jobinfo($record['id']);
+						$legalentitycount=$this->get_legalentity($record['id']);
+						if($jobinfocount>0 || $legalentitycount>0){
+    				
+    						if($jobinfocount>0){ $this->Flash->error(__('PayGroup cannot be deleted as they have ' . $jobinfocount . ' number of jobinfos already linked.')); }
+							if($legalentitycount>0){ $this->Flash->error(__('PayGroup cannot be deleted as they have ' . $legalentitycount . ' number of legalentities already linked.')); }
+    						$this->redirect(array('controller' => 'PayGroups', 'action' => 'index'));
+
+						}else{
 						   if ($this->PayGroups->delete($record)) {
 					           $sucess= $sucess | true;
 					        } else {
 					           $failure= $failure | true;
 					        }
+						}
 					}
 				}  	  
 			}

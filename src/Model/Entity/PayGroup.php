@@ -37,7 +37,11 @@ use Cake\ORM\Entity;
  * @property \App\Model\Entity\BusinessUnit $business_unit
  * @property \App\Model\Entity\Division $division
  * @property \App\Model\Entity\Location $location
+ * @property \App\Model\Entity\Jobinfo[] $jobinfos
  * @property \App\Model\Entity\PayRange[] $pay_ranges
+ * @property \App\Model\Entity\PayrollRecord[] $payroll_record
+ * @property \App\Model\Entity\PayrollResult[] $payroll_result
+ * @property \App\Model\Entity\PayrollStatus[] $payroll_status
  */
 class PayGroup extends Entity
 {
