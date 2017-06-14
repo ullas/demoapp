@@ -66,6 +66,15 @@ $(function () {
 	
 	//save btn onclick
 	$('#mptlupdate').click(function(){
+		
+		
+		
+		// var paycomponentids = $('.pcomp').map(function() {
+  			// return $(this).attr('id');
+		// });
+		// console.log(paycomponentids);$(element).is(":visible")
+		
+		
     	//get input value
 		var emp = $("#empdatabiographies-id").val();
 		var startdate = $("#start-date").val();
@@ -74,22 +83,20 @@ $(function () {
 		var pccount = $('.componentclass').length;
 		var pcgcount = $('.groupclass').length;
 
-    	if (emp!="" && emp!=null && (pccount>0 || pcgcount>0)) {
+    	if (emp!="" && emp!=null && (pccount>0 || pcgcount>0) && startdate!="" && startdate!=null && enddate!="" && enddate!=null) {
     		
     		
     		//initially deleteall payrolldata for the particular employee
     		$.get('/PayrollData/deleteAllData?employee='+emp, function(result) {
-				// if(result=="Error"){
-
-				// }
-			});
+				if(result=="success"){
 					
     		//add paycomponent
     		var pcerrcount=0;
     		for (i = 1; i <= pccount; i++) {
-    			var paycomp=$("#paycomponent"+i).val();
+    			if($("#paycomponent"+i).parent().closest('div .componentclass').is(":visible")){
+    			var paycomp=$("#paycomponent"+i).val();//console.log($("#paycomponent"+i).parent().closest('div .componentclass').is(":visible"));
     			var paycompval=$("#paycomponentvalue"+i).val();
-    			if(paycomp!="" && paycomp!=null && startdate!="" && startdate!=null && enddate!="" && enddate!=null){
+    			if(paycomp!="" && paycomp!=null){
 					
 					$.ajax({
         				type: "POST",
@@ -138,8 +145,13 @@ $(function () {
 					
 					
 				}else{
-					sweet_alert("Start/End Date missing.");break;
+					sweet_alert("Pay Component missing.");break;
 					return false;
+				}
+				}else{
+					if(pcgcount<1 && i==pccount && pcerrcount<1){
+    					window.location='/payroll-data';
+    				}
 				}
     		}	
     		if(pcerrcount>0){
@@ -150,6 +162,8 @@ $(function () {
     		//add paycomponent group
     		var pcgerrcount=0;
     		for (i = 1; i <= pcgcount; i++) {
+    			if($("#pcgroup"+i).parent().closest('div .groupclass').is(":visible")){
+    			
     			var paycomp=$("#pcgroup"+i).val();
     			
     			var postdata="";
@@ -210,6 +224,11 @@ $(function () {
 					sweet_alert("Pay Component Group missing.");break;
 					return false;
 				}
+				}else{
+					if( i==pcgcount && pcgerrcount<1 ){
+    					window.location='/payroll-data';
+    				}
+				}
     		}	
     		if(pcgerrcount>0){
     			sweet_alert("Error while adding Pay Component Group.");
@@ -217,9 +236,14 @@ $(function () {
     		}
     		
     		// window.location = '/payroll-data'; 
-    		
+    		}else{
+    			sweet_alert("Please try again later.");
+    			return false;
+    		}
+			});
     	}else{
     		if(emp == "" || emp==null){sweet_alert("Please select a Employee.");}
+    		else if(startdate=="" || startdate==null || enddate=="" || enddate==null){sweet_alert("Start/End Date missing.");}
     		else {sweet_alert("Please add a pay Component/Pay Component Group for the particular Employee.");}
     		return false;
     	}
@@ -318,22 +342,19 @@ $(function () {
 	
 	//delete btn onclick
 	$('.maindiv').on('click', 'a.groupdelete', function() {
-		if (confirm("Are you sure you want to delete the particular Pay Component Group ?")) {
-			$(this).parent().closest('div .groupclass').remove();
-    		return true;
-  		} else {
-    		return false;
-  		}
-   
+		var selectedcontrol=$(this);
+		sweet_confirmdelete("MayHaw","Are you sure you want to delete the particular Pay Component Group ?", function(){selectedcontrol.parent().closest('div .groupclass').hide(); return true;});   
 	});
 	
 	$('.maindiv').on('click', 'a.compdelete', function() {
-		if (confirm("Are you sure you want to delete the particular Pay Component ?")) {
-			$(this).parent().closest('div .componentclass').remove();
-    		return true;
-  		} else {
-    		return false;
-  		}
+		var selectedcontrol=$(this);
+		sweet_confirmdelete("MayHaw","Are you sure you want to delete the particular Pay Component ?", function(){selectedcontrol.parent().closest('div .componentclass').hide(); return true;});  
+		// if (confirm("Are you sure you want to delete the particular Pay Component ?")) {
+			// $(this).parent().closest('div .componentclass').hide();
+    		// return true;
+  		// } else {
+    		// return false;
+  		// }
    
 	});
 });
