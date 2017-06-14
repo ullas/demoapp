@@ -58,7 +58,7 @@ class PayrollDataController extends AppController
 			$this->loadModel('PayComponents');
 			
 			$payComponents=$this->PayComponents->find('all')->where(['pay_component_group_id' => $this->request->query['pcgid']])
-									->andwhere(['can_override' => '0'])
+									// ->andwhere(['can_override' => '0'])
 									->order(['"id"' => 'ASC'])->toArray();
 			$this->response->body(json_encode($payComponents));
 	    	return $this->response;
@@ -115,8 +115,20 @@ class PayrollDataController extends AppController
 		if($this->request->is('ajax')) {
 				
 			$this->autoRender=false;			
+			$count=$this->PayrollData->find('all', array('conditions' => array('empdatabiographies_id'  => $this->request->query['employee']) ))->count();
+			if($count>0){
 			//initially delete the particular employees data
-			$this->PayrollData->deleteAll(['empdatabiographies_id' => $this->request->query['employee']]);
+			if($this->PayrollData->deleteAll(['empdatabiographies_id' => $this->request->query['employee']])){
+				$this->response->body("success");
+	    		return $this->response;
+			}else{
+				$this->response->body("error");
+	    		return $this->response;
+			}
+			}else{
+				$this->response->body("success");
+	    		return $this->response;
+			}
 			
 		}
 	}
@@ -272,19 +284,21 @@ class PayrollDataController extends AppController
     public function delete($id = null)
     {
         $this->request->allowMethod(['post', 'delete']);
-        $payrollData = $this->PayrollData->get($id);
-        if($payrollData['customer_id'] == $this->loggedinuser['customer_id']) 
-		{
-        	if ($this->PayrollData->delete($payrollData)) {
+        // $payrollData = $this->PayrollData->get($id);
+        // if($payrollData['customer_id'] == $this->loggedinuser['customer_id']) 
+		// {
+			if($this->PayrollData->deleteAll(['empdatabiographies_id' => $id])){
+				
+        	// if ($this->PayrollData->deleteAll($payrollData)) {
             	$this->Flash->success(__('The payroll data has been deleted.'));
         	} else {
             	$this->Flash->error(__('The payroll data could not be deleted. Please, try again.'));
         	}
-		}
-	    else
-	    {
-	   	    $this->Flash->error(__('You are not authorized'));
-	    }
+		// }
+	    // else
+	    // {
+	   	    // $this->Flash->error(__('You are not authorized'));
+	    // }
         return $this->redirect(['action' => 'index']);
     }
 	public function deleteAll($id=null){
@@ -292,7 +306,7 @@ class PayrollDataController extends AppController
 		$this->request->allowMethod(['post', 'deleteall']);
         $sucess=false;$failure=false;
         $data=$this->request->data;
-			
+		/*	
 		if(isset($data)){
 		   foreach($data as $key =>$value){
 		   	   		
@@ -322,6 +336,9 @@ class PayrollDataController extends AppController
 				}
 		
 		   }
+		 * * 
+		 */
              return $this->redirect(['action' => 'index']);	
+		 
      }
 }
