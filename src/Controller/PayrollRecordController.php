@@ -159,8 +159,8 @@ var $components = array('Datatable');
 			isset($empdatabiographyarr[0]) ? $empdatabiographyid = $empdatabiographyarr[0]['id'] : $empdatabiographyid = "" ;
 
 			$this->loadModel('PayrollData');
-			$payrolldataarr=$this->PayrollData->find('all',['conditions' => array('PayrollData.empdatabiographies_id' => $empdatabiographyid)])->where("PayrollData.pay_component_value!="."''")
-									->andwhere("PayrollData.customer_id=".$this->loggedinuser['customer_id'])->toArray();
+			$payrolldataarr=$this->PayrollData->find('all',['conditions' => array('PayrollData.empdatabiographies_id' => $empdatabiographyid)])
+									->where("PayrollData.customer_id=".$this->loggedinuser['customer_id'])->toArray();
 
 			if (empty($payrolldataarr)) {
 
