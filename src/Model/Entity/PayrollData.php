@@ -7,15 +7,15 @@ use Cake\ORM\Entity;
  * PayrollData Entity
  *
  * @property int $id
- * @property int $paycomponent
  * @property string $pay_component_value
  * @property \Cake\I18n\Time $start_date
  * @property \Cake\I18n\Time $end_date
  * @property int $customer_id
  * @property int $empdatabiographies_id
  * @property int $pay_component_type
+ * @property int $paycomponent
+ * @property int $paycomponentgroup
  *
- * @property \App\Model\Entity\PayComponent $pay_component
  * @property \App\Model\Entity\Customer $customer
  * @property \App\Model\Entity\Empdatabiography $empdatabiography
  */
