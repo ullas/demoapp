@@ -56,7 +56,7 @@
             // echo $this->Form->input('base_pay_component_group',['options' => $payComponents,'label' => 'Base Pay Component','class'=>'select2', 'empty' => 'Choose']);
 			echo $this->Form->input('pay_component_value');
             echo $this->Form->input('tax_treatment',['class'=>'select2','options' => array('No Tax', 'Regular','Gross Up'), 'empty' => 'Choose']);
-            echo $this->Form->input('can_override',['class'=>'select2','options' => array('Yes', 'No'), 'empty' => 'Choose']);
+            echo $this->Form->input('can_override',['class'=>'select2','options' => array('Yes', 'No')]);
             echo $this->Form->input('self_service_description');
             echo $this->Form->input('display_on_self_service',['label' => 'Display on Self Service','class'=>'select2','options' => array('Yes', 'No'), 'empty' => 'Choose']);
             echo $this->Form->input('used_for_comp_planning',['label' => 'Used for Comp Planning','class'=>'select2','options' => array('None' ,'Comp ',' Varpay',' Both'), 'empty' => 'Choose']);
