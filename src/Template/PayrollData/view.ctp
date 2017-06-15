@@ -1,4 +1,9 @@
 <?= $this->element('templateelmnt'); ?>
+<style>
+	.pcaddbtn, .pcgroupaddbtn{
+		margin-top:25px;
+	}
+</style>
 <section class="content-header">
   <h1>
     Payroll Data
@@ -17,10 +22,24 @@
     <?= $this->Form->create($payrollData, array('role' => 'form')) ?>
     <?php 
             echo $this->Form->input('empdatabiographies_id',['options'=>$empDataBiographies,'label'=>'Employee','class' => 'select2', 'empty' => true,'disabled' => true]);
-			echo $this->Form->input('start_date',['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
-            echo $this->Form->input('end_date',['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
+			// echo $this->Form->input('start_date',['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
+            // echo $this->Form->input('end_date',['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
             
-        ?></div>
+        ?>
+        
+        <div class="col-md-8"><div class="form-group">
+        	<div class="input-group">
+        		<input type="button" disabled class="pcaddbtn btn btn-flat btn-info" id="btnAddControl" value="Add Pay Component" />
+        	</div>
+        </div></div>
+        	
+        <div class="col-md-4 pull-right"><div class="form-group">
+        	<div class="input-group" >        		
+        		<input type="button" disabled class="pcgroupaddbtn btn btn-flat btn-info" id="btnAddPCG" value="Add Pay Component Group" />
+        	</div>
+        </div></div>
+        	
+        </div>
 <div class="box-footer">
           	<?=$this->Html->link(__('Cancel'), ['action' => 'index'], ['escape' => false])?>
             <?=$this->Html->link(__('Edit Payroll Data'), ['action' => 'edit', $payrollData['empdatabiographies_id']],['class'=>'btn btn-primary label-info pull-right'], ['escape' => false])?>

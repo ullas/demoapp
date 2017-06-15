@@ -331,7 +331,7 @@ function tableLoaded() {
     	$(this).find('td').each (function() {
         var innerHtml=$(this).find('div.mptldtbool').html();
         // true/false instead of 1/0
-        (innerHtml=="1") ? $(this).find('div.mptldtbool').html("True") : $(this).find('div.mptldtbool').html("False");
+        ((innerHtml=="1") || (innerHtml=="true")) ? $(this).find('div.mptldtbool').html("True") : $(this).find('div.mptldtbool').html("False");
         });
     });
 }

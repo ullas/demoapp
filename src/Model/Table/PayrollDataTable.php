@@ -60,9 +60,6 @@ class PayrollDataTable extends Table
             ->allowEmpty('id', 'create');
 
         $validator
-            ->allowEmpty('paycomponent');
-
-        $validator
             ->allowEmpty('pay_component_value');
 
         $validator
@@ -75,6 +72,12 @@ class PayrollDataTable extends Table
 
         $validator
             ->allowEmpty('pay_component_type');
+
+        $validator
+            ->allowEmpty('paycomponent');
+
+        $validator
+            ->allowEmpty('paycomponentgroup');
 
         return $validator;
     }

@@ -145,9 +145,10 @@ class PayrollDataController extends AppController
 			$payrollData['empdatabiographies_id']=$this->request->data['employee'];
            	$payrollData['start_date']=$this->request->data['startdate'];
 			$payrollData['end_date']=$this->request->data['enddate'];
-            $payrollData['pay_component_id']=$this->request->data['paycomponent'];
+            $payrollData['paycomponent']=$this->request->data['paycomponent'];
 			$payrollData['pay_component_value']=$this->request->data['paycomponentvalue'];
 			$payrollData['pay_component_type']=$this->request->data['type'];
+			$payrollData['paycomponentgroup']=$this->request->data['paycomponentgroup'];
 			
 			$payrollData['customer_id']=$this->loggedinuser['customer_id'];
 			
@@ -164,13 +165,25 @@ class PayrollDataController extends AppController
 			}
 			
 			
+			//initiallly delete  
+			$query=$this->PayrollData->find('all', array('conditions' => array('empdatabiographies_id'  => $payrollData['empdatabiographies_id'],'pay_component_type'  => $payrollData['pay_component_type'],
+									'paycomponent'  =>$payrollData['paycomponent'],'paycomponentgroup'  => $payrollData['paycomponentgroup'],'customer_id'  => $this->loggedinuser['customer_id']) ));
+									
+			$querycount=$query->count();
+			if($querycount>0){
+				//initially delete the particular employees data
+				if($this->PayrollData->deleteAll(['empdatabiographies_id' => $payrollData['empdatabiographies_id'],'pay_component_type'  => $payrollData['pay_component_type'],
+									'paycomponent'  =>$payrollData['paycomponent'],'paycomponentgroup'  => $payrollData['paycomponentgroup'],'customer_id'  => $this->loggedinuser['customer_id']])){
+				
+				}
+			}
+			
 			if ($this->PayrollData->save($payrollData)) {
 
                	 	$this->response->body("success");
 	    			return $this->response;
             } else {
-            	// debug($this->PayrollData->validationErrors);
-    // return false;
+
                 	$this->response->body("error");
 	    			return $this->response;
             }			
@@ -195,15 +208,23 @@ class PayrollDataController extends AppController
                 $this->Flash->error(__('The payroll data could not be saved. Please, try again.'));
             }
         }
-		$emparr = $this->PayrollData->find('all')->select(['empdatabiographies_id'])->where(['PayrollData.customer_id='.$this->loggedinuser['customer_id']]);
+		// $emparr = $this->PayrollData->find('all')->select(['empdatabiographies_id'])->where(['PayrollData.customer_id='.$this->loggedinuser['customer_id']]);
         
         $empDataBiographies = $this->PayrollData->EmpDataBiographies->find('list',['limit' => 200])
         				->select(['id'=>'EmpDataBiographies.id','name' => 'CONCAT(EmpDataPersonals.first_name, \' \',EmpDataPersonals.last_name,\' (\', EmpDataBiographies.employee_id, \')\' )'])
 						->leftJoin('EmpDataPersonals', 'EmpDataPersonals.employee_id = EmpDataBiographies.employee_id')
-						->where(['EmpDataBiographies.id NOT IN'=>$emparr])->andwhere("EmpDataBiographies.customer_id=".$this->loggedinuser['customer_id']);
+						// ->where(['EmpDataBiographies.id NOT IN'=>$emparr])
+						->andwhere("EmpDataBiographies.customer_id=".$this->loggedinuser['customer_id']);
+		
+		// $componentarr = $this->PayrollData->find('all')->select(['paycomponent'])->where(['PayrollData.pay_component_type=1'])
+								 // ->andwhere(['PayrollData.empdatabiographies_id='.$this->loggedinuser['customer_id']])
+								 // ->andwhere(['PayrollData.customer_id='.$this->loggedinuser['customer_id']]);
 						
 		$this->loadModel("PayComponents");
-		$payComponents = $this->PayComponents->find('list', ['limit' => 200])->andwhere(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+		$payComponents = $this->PayComponents->find('all', ['limit' => 200])
+									// ->where(['PayComponents.id NOT IN'=>$componentarr])
+									->andwhere(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+		
         $this->set(compact('payrollData', 'payComponents','empDataBiographies'));
         $this->set('_serialize', ['payrollData']);
 		
@@ -262,6 +283,8 @@ class PayrollDataController extends AppController
         
      
         $this->set('empDataBiographies', $empDataBiographies);
+		
+		
 			
 		$this->set('payComps',  json_encode($payComps));
 		$this->set('payCompGroups',  json_encode($payCompGroups));

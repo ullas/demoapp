@@ -1,4 +1,9 @@
 <?= $this->element('templateelmnt'); ?>
+<style>
+	.pcaddbtn, .pcgroupaddbtn{
+		margin-top:25px;
+	}
+</style>
 <section class="content-header">
       <h1>
         Payroll Data
@@ -14,19 +19,19 @@
     <fieldset>
         <?php
             echo $this->Form->input('empdatabiographies_id',['options'=>$empDataBiographies,'label'=>'Employee','class' => 'select2', 'empty' => true]);
-			echo $this->Form->input('start_date',['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
-            echo $this->Form->input('end_date',['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+			// echo $this->Form->input('start_date',['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+            // echo $this->Form->input('end_date',['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
         ?>
         
         <div class="col-md-4"><div class="form-group">
         	<div class="input-group">
-        		<input type="button" class="btn btn-flat btn-info" id="btnAddControl" value="Add Pay Component" />
+        		<input type="button" class="pcaddbtn btn btn-flat btn-info" id="btnAddControl" value="Add Pay Component" />
         	</div>
         </div></div>
         
         <div class="col-md-4 pull-right"><div class="form-group">
         	<div class="input-group" >        		
-        		<input type="button" class="btn btn-flat btn-info pull-right" id="btnAddPCG" value="Add Pay Component Group" />
+        		<input type="button" class="pcgroupaddbtn btn btn-flat btn-info" id="btnAddPCG" value="Add Pay Component Group" />
         	</div>
         </div></div>
         
@@ -94,7 +99,7 @@ $(function () {
     		var pcerrcount=0;
     		for (i = 1; i <= pccount; i++) {
     			if($("#paycomponent"+i).parent().closest('div .componentclass').is(":visible")){
-    			var paycomp=$("#paycomponent"+i).val();//console.log($("#paycomponent"+i).parent().closest('div .componentclass').is(":visible"));
+    			var paycomp=$("#paycomponent"+i).val();console.log(paycomp);
     			var paycompval=$("#paycomponentvalue"+i).val();
     			if(paycomp!="" && paycomp!=null){
 					
@@ -254,9 +259,11 @@ $(function () {
 
 		var emp = $("#empdatabiographies-id").val();
 		if(emp!="" && emp!=null){
+			$(".pcaddbtn").hide();$(".pcgroupaddbtn").hide();
+		
 			event.preventDefault();
 			var numItems = $('.componentclass').length+1;
-			$(".maindiv").append("<div class='componentclass' id='contentDiv"+numItems+"'><div class='clearfix'><div class='col-sm-4'><label>Pay Component:</label><div class='input-group'><div class='input-group-btn'><a class='compdelete btn btn-danger btn-flat'><i class='fa fa-trash'></i></a></div><input type='text' class='pcomp form-control' id='paycomponent"+numItems+"'/></div></div><div class='col-sm-4'><label>Pay Component Value:</label><input class='form-control'  id='paycomponentvalue"+numItems+"'/></div></div></div>");
+			$(".maindiv").append("<div class='componentclass' id='contentDiv"+numItems+"'><div class='clearfix'><div class='col-sm-4'><label>Pay Component:</label><div class='input-group'><div class='input-group-btn'><a class='compdelete btn btn-danger btn-flat'><i class='fa fa-trash'></i></a></div><input type='text' class='pcomp form-control' id='paycomponent"+numItems+"'/></div></div><div class='col-sm-4'><label>Pay Component Value:</label><input class='form-control'  id='paycomponentvalue"+numItems+"'/></div><div class='col-sm-4 groupcol'><div class='form-group'><label>Start Date:</label><div class='input-group'><div class='input-group-addon'><i class='fa fa-calendar'></i></div><input id='startdate'"+numItems+"' type='text' class='form-control mptldp'></div></div></div><div class='col-sm-4 groupcol'><div class='form-group'><label>End Date:</label><div class='input-group'><div class='input-group-addon'><i class='fa fa-calendar'></i></div><input id='enddate'"+numItems+"' type='text' class='form-control mptldp'></div></div></div></div></div>");
 		
 			$('.pcomp').select2({
     			width: '100%',allowClear: true,placeholder: "Select",data: paycomponentdata
@@ -272,6 +279,9 @@ $(function () {
 		
 		var emp = $("#empdatabiographies-id").val();
 		if(emp!="" && emp!=null){
+			
+			$(".pcaddbtn").hide();$(".pcgroupaddbtn").hide();
+		
 			event.preventDefault();
 		
 			var numItems = $('.groupclass').length+1;
@@ -301,7 +311,7 @@ $(function () {
     				if(t>0){
     					selectedCtrl.closest(".groupclass").append("<div class='col-sm-4'></div>");
     				}
-    				selectedCtrl.closest(".groupclass").append("<div class='pcgcol'><div class='col-sm-4 groupcol'><div class='form-group'><label>Pay Component:</label><input id='paycomp' disabled type='text' value='"+obj[t]['name']+"' class='form-control paycompnt' name='"+obj[t]['id']+"'></div></div><div class='col-sm-4 groupcol'><div class='form-group'><label>Pay Component Value:</label><input id='paycompval' type='text' class='form-control paycompntval'></div></div></div>");
+    				selectedCtrl.closest(".groupclass").append("<div class='pcgcol'><div class='col-sm-2 groupcol'><div class='form-group'><label>Pay Component:</label><input id='paycomp' disabled type='text' value='"+obj[t]['name']+"' class='form-control paycompnt' name='"+obj[t]['id']+"'></div></div><div class='col-sm-2'><label>Pay Component Value:</label><input class='form-control'  id='paycomponentvalue"+numItems+"'/></div><div class='col-sm-2 groupcol'><div class='form-group'><label>Start Date:</label><div class='input-group'><div class='input-group-addon'><i class='fa fa-calendar'></i></div><input id='startdate'"+numItems+"' type='text' class='form-control mptldp'></div></div></div><div class='col-sm-2 groupcol'><div class='form-group'><label>End Date:</label><div class='input-group'><div class='input-group-addon'><i class='fa fa-calendar'></i></div><input id='enddate'"+numItems+"' type='text' class='form-control mptldp'></div></div></div></div>");
     			}
     	});
     		
@@ -314,7 +324,8 @@ $(function () {
 
 	// var numItems = $('.componentclass').length+1;
 	for (i = 1; i <= pcobj.length; i++) {
-		$(".maindiv").append("<div class='componentclass' id='contentDiv"+i+"'><div class='clearfix'><div class='col-sm-4'><label>Pay Component:</label><div class='input-group'><div class='input-group-btn'><a class='compdelete btn btn-danger btn-flat' id='delete1'><i class='fa fa-trash'></i></a></div><input type='text' class='pcomp form-control' id='paycomponent"+i+"' value='"+ pcobj[i-1]['paycomponent'] +"'/></div></div><div class='col-sm-4'><label>Pay Component Value:</label><input class='form-control'  id='paycomponentvalue"+i+"' value='"+ pcobj[i-1]['pay_component_value'] +"'/></div></div></div>");
+		// (pcobj[i-1]['paycomponent'])visibletype= :visibletype="";
+		$(".maindiv").append("<div class='componentclass' id='contentDiv"+i+"'><div class='clearfix'><div class='col-sm-4'><label>Pay Component:</label><div class='input-group'><div class='input-group-btn'><a class='compdelete btn btn-danger btn-flat' id='delete1'><i class='fa fa-trash'></i></a></div><input type='text' class='pcomp form-control' id='paycomponent"+i+"' value='"+ pcobj[i-1]['paycomponent'] +"'/></div></div><div class='col-sm-4'><label>Pay Component Value:</label><input class='form-control' id='paycomponentvalue"+i+"' value='"+ pcobj[i-1]['pay_component_value'] +"'/></div></div></div>");
 	}
 	
 
@@ -342,13 +353,19 @@ $(function () {
 	
 	//delete btn onclick
 	$('.maindiv').on('click', 'a.groupdelete', function() {
+		
+		$(".pcaddbtn").show();$(".pcgroupaddbtn").show();
+		
 		var selectedcontrol=$(this);
-		sweet_confirmdelete("MayHaw","Are you sure you want to delete the particular Pay Component Group ?", function(){selectedcontrol.parent().closest('div .groupclass').hide(); return true;});   
+		sweet_confirmdelete("MayHaw","Are you sure you want to delete the particular Pay Component Group ?", function(){selectedcontrol.parent().closest('div .groupclass').remove(); return true;});   
 	});
 	
 	$('.maindiv').on('click', 'a.compdelete', function() {
+		
+		$(".pcaddbtn").show();$(".pcgroupaddbtn").show();
+		
 		var selectedcontrol=$(this);
-		sweet_confirmdelete("MayHaw","Are you sure you want to delete the particular Pay Component ?", function(){selectedcontrol.parent().closest('div .componentclass').hide(); return true;});  
+		sweet_confirmdelete("MayHaw","Are you sure you want to delete the particular Pay Component ?", function(){selectedcontrol.parent().closest('div .componentclass').remove(); return true;});  
 		// if (confirm("Are you sure you want to delete the particular Pay Component ?")) {
 			// $(this).parent().closest('div .componentclass').hide();
     		// return true;
