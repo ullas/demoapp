@@ -363,7 +363,7 @@ $("#weekoff-ids").change(weeklyOffProcess);
 	  	var holidaycalendarid=$("#holidaycalendarid").val();
   		table.ajax.url('/Holidays/ajaxData?holidaycalendar='+holidaycalendarid).load();
     	// table.draw();
-	})
+	});
 
 	// fmactions are added through setTurben. btn-group div is added separately.
 	$('div.fmactionbtn').appendTo('div.dataTables_length');

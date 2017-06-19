@@ -36,17 +36,11 @@ class PayrollDataController extends AppController
     }
     public function index()
     {
-    	// $this->loadModel('CreateConfigs');
-        // $configs=$this->CreateConfigs->find('all')->where(['table_name' => $this->request->params['controller']])->order(['"id"' => 'ASC'])->toArray();
-        // $this->set('configs',$configs);	
 		
         $this->paginate = [
             'contain' => []
         ];
-        $payrollData = $this->paginate($this->PayrollData);
-
-		// $actions =[ ['name'=>'delete','title'=>'Delete','class'=>' label-danger'] ];
-        // $this->set('actions',$actions);	
+        $payrollData = $this->paginate($this->PayrollData);	
 		
         $this->set(compact('payrollData'));
         $this->set('_serialize', ['payrollData']);
@@ -77,29 +71,48 @@ class PayrollDataController extends AppController
 
 			
 			$this->loadModel('PayrollData');
-			$paycomponentgroups = $this->PayrollData->find('all')->where(['PayrollData.empdatabiographies_id' => $value['empdatabiographies_id'] ])
-							// ->leftJoin('PayComponents', 'PayComponents.id = PayrollData.paycomponent')
-        					->andwhere(['PayrollData.pay_component_type' => '2'])->andwhere(['PayrollData.customer_id' => $this->loggedinuser['customer_id']])->toArray();
+			$pcgroupout = $this->PayrollData->find()->select(['paycomponentgroup'])->where(['PayrollData.empdatabiographies_id' => $value['empdatabiographies_id'] ])
+					->andwhere(['PayrollData.pay_component_type' => '2'])
+					->andwhere(['PayrollData.customer_id' => $this->loggedinuser['customer_id']])->orwhere(['PayrollData.customer_id' => '0'])->distinct()->toArray();
 			$paycomponentgrouplist = array();
-        	foreach($paycomponentgroups as $childval){
-				
-				$this->loadModel('PayComponents');
-        	    $pcname=$this->PayComponents->find()->select('PayComponents.name')->where(['PayComponents.id' => $childval['paycomponent']])->first();
-				
+			foreach($pcgroupout as $groupchildval){
+						
+				$paycomponentgroups = $this->PayrollData->find('all')->where(['PayrollData.empdatabiographies_id' => $value['empdatabiographies_id'] ])
+							->andwhere(['PayrollData.paycomponentgroup' => $groupchildval['paycomponentgroup']])
+        					->andwhere(['PayrollData.pay_component_type' => '2'])->andwhere(['PayrollData.customer_id' => $this->loggedinuser['customer_id']])->toArray();
+				$componentlist = array();
+        		
 				$this->loadModel('PayComponentGroups');
-        	    $pcgroupname=$this->PayComponentGroups->find()->select('PayComponentGroups.name')->where(['PayComponentGroups.id' => $childval['paycomponentgroup']])->first();
+        	    $pcgroupname=$this->PayComponentGroups->find()->select('PayComponentGroups.name')->where(['PayComponentGroups.id' => $groupchildval['paycomponentgroup']])->first();
+					
+        		foreach($paycomponentgroups as $childval){
 				
-				// $this->Flash->error(__('DATA__.').json_encode($pcname));
+					$this->loadModel('PayComponents');
+        	    	$pcname=$this->PayComponents->find()->select('PayComponents.name')->where(['PayComponents.id' => $childval['paycomponent']])->first();
+				
+					// $this->loadModel('PayComponentGroups');
+        	    	// $pcgroupname=$this->PayComponentGroups->find()->select('PayComponentGroups.name')->where(['PayComponentGroups.id' => $childval['paycomponentgroup']])->first();
 		
-				$paycomponentgrouplist[] = array("id"=>$childval['id'],"paycomponent" => $pcname['name'],"startdate" => $childval['start_date'],"enddate" => $childval['end_date'],
+					$componentlist[] = array("compid"=>$childval['id'],"paycomponent" => $pcname['name'],"startdate" => $childval['start_date'],"enddate" => $childval['end_date'],
 														 "paycomponentvalue" => $childval['pay_component_value'], "paycomponentgroup" => $pcgroupname['name'] );
+				}
+				
+				$paycomponentgrouplist[] = array("groupid"=>$groupchildval['paycomponentgroup'], "groupname"=>$pcgroupname['name'], "grouplist" => $componentlist );
 			}
-
 			$payrolldatalist[] = array("empid" => $value['empdatabiographies_id'], "empname"=>str_replace('"', '',$this->get_employeename ($value['empdatabiographies_id'])),
 													 "pcchild" => $paycomponentlist, "pcgroupchild" => $paycomponentgrouplist  );
 		}
 
         $this->set('content', $payrolldatalist);
+		
+		$this->loadModel('PayComponents');
+        $payComponents = $this->PayComponents->find('all', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        $payComponentGroups = $this->PayComponents->PayComponentGroups->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        
+		$this->set('paycomponentarr', json_encode($payComponents));
+		$this->set('paycomponentgrouparr', json_encode($payComponentGroups));
+		
+		// $this->Flash->error(__('DATA__.').json_encode($payrolldatalist));
 		
     }
 	public function get_employeename($empdatabiographyid = null)
@@ -386,6 +399,34 @@ class PayrollDataController extends AppController
 	    {
 	   	    $this->Flash->error(__('You are not authorized'));
 	    }
+        return $this->redirect(['action' => 'index']);
+    }
+	public function deletegroup($id = null)
+    {
+        $this->request->allowMethod(['post', 'delete']);
+		
+		$splitarr = explode('^', $id);
+		if(isset($splitarr[0]) && isset($splitarr[1])){
+			if ($this->PayrollData->deleteAll(['paycomponentgroup' => $splitarr[0],'empdatabiographies_id'=>$splitarr[1],'customer_id'=>$this->loggedinuser['customer_id']])) {
+            	$this->Flash->success(__('The payroll data has been deleted.'));
+        	} else {
+            	$this->Flash->error(__('The payroll data could not be deleted. Please, try again.'));
+        	}
+		}
+		
+        // $payrollData = $this->PayrollData->get(['paycomponentgroup'=>$id]);
+        // if($payrollData['customer_id'] == $this->loggedinuser['customer_id']) 
+		// {				
+        	// if ($this->PayrollData->deleteAll(['paycomponentgroup' => $id,])) {
+            	// $this->Flash->success(__('The payroll data has been deleted.'));
+        	// } else {
+            	// $this->Flash->error(__('The payroll data could not be deleted. Please, try again.'));
+        	// }
+		// }
+	    // else
+	    // {
+	   	    // $this->Flash->error(__('You are not authorized'));
+	    // }
         return $this->redirect(['action' => 'index']);
     }
 	public function deleteAll($id=null){
