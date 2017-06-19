@@ -56,7 +56,7 @@
                 	
                 	<?php echo  '<form name="formdelete" id="formdelete' .$childval['id']. '" method="post" action="/PayrollData/delete/'.$childval['id'].'" style="display:none;" >
                     <input type="hidden" name="_method" value="POST"></form>
-                    <a href="#" onclick="sweet_confirmdelete(&quot;MayHaw&quot;,&quot;Are you sure you want to delete the pay component '.$childval['paycomponent'].'?&quot; , 
+                    <a href="#" onclick="sweet_confirmdelete(&quot;MayHaw&quot;,&quot;Are you sure you want to delete the pay component '.$childval['paycomponent'].' from '.$vals['empname'].'?&quot; , 
                     function(){ document.getElementById(&quot;formdelete'.$childval['id'].'&quot;).submit(); })
                     event.returnValue = false; return false;" class="deletelink fa fa-trash text-red" style= "padding:3px"></a>';   ?>
                 	
@@ -80,7 +80,7 @@
            
            	<?php echo  '<form name="formdelete" id="formdelete' .$childval['groupid'].'" method="post" action="/PayrollData/deletegroup/'.$childval['groupid'].'^'.$vals['empid'].'" style="display:none;" >
                     	<input type="hidden" name="_method" value="POST"></form>
-                    	<a href="#" onclick="sweet_confirmdelete(&quot;MayHaw&quot;,&quot;Are you sure you want to delete the pay component group '.$childval['groupname'].'?&quot; , 
+                    	<a href="#" onclick="sweet_confirmdelete(&quot;MayHaw&quot;,&quot;Are you sure you want to delete the pay component group '.$childval['groupname'].' from '.$vals['empname'].'?&quot; , 
                     	function(){ document.getElementById(&quot;formdelete'.$childval['groupid'].'&quot;).submit(); })
                     	event.returnValue = false; return false;" class="deletelink fa fa-trash text-red pull-right" style= "padding:3px"></a>';   ?>
            
@@ -163,7 +163,6 @@ $.each(paycomponentgrouparr, function(key, value) {
 	
 $(function () {
 	
-	
 	$("#actionspopover").on("show.bs.modal", function(e) {
 		//loading icon show
 		if(e.relatedTarget!=null){$('#loadingmessage').show();}
@@ -176,7 +175,15 @@ $(function () {
 				sweet_alert(msg);
 			}else{
 
-
+				
+				//disable paycomponent value textbox, if can_override==1(no)
+				for(var i = 0; i < paycomponentdata.length; i++) {
+					if(paycomponentdata[i]['id']==$('#paycomponent').val()){
+						(paycomponentdata[i]['canoverride']=="1") ? $('#pay-component-value').prop("disabled","true")  : $('#pay-component-value').removeAttr("disabled");
+					}
+    			}
+    				
+    				
 				$('#mptlupdate').click(function(){
     				//get input value
 					var emp = $("#empdatabiographies-id").val();
@@ -295,17 +302,17 @@ $(function () {
 		}
   });
   
+  				//enable/disable paycomponent value on pay component change against can_override
   				$('#paycomponent').change(function(){
 
   					$('#pay-component-value').attr("value",' ');
-
   					for(var i = 0; i < paycomponentdata.length; i++) {
         				if(paycomponentdata[i]['id'] == $(this).val()) {
             				(paycomponentdata[i]['canoverride']=="1") ? $('#pay-component-value').prop("disabled","true")  : $('#pay-component-value').removeAttr("disabled");
         				}
     				}
   				});
-  				
+  				//enable/disable paycomponent value on pay component change against can_override on pc group
 				$('.maindiv').on('change', 'input.pcomp', function() {
 			
 					for(var i = 0; i < paycomponentdata.length; i++) {
@@ -314,7 +321,7 @@ $(function () {
         				}
     				}
 				});		
-
+				//load pay components as well as value,start and end date for the particular pay component group
 				$('.maindiv').on('change', 'input.pcgroup', function() {
 				
 					$(this).parent().closest('div .groupclass').find('.pcgcol').remove();
@@ -347,7 +354,7 @@ $(function () {
     				});    		
 				});
 	
-				
+				//add pay component group button click
 				$("#btnAddPCG").click(function (event) {
 					var emp = $("#empdatabiographies-id").val();
 					if(emp!="" && emp!=null){
@@ -364,7 +371,7 @@ $(function () {
    							return false;
 						}
 				});
-				
+				//add pay component button click
 				$("#btnAddControl").click(function (event) {
 		
 					var emp = $("#empdatabiographies-id").val();
@@ -387,26 +394,26 @@ $(function () {
 		
 				});
 				
-				//delete btn onclick
+				//group delete btn onclick
 				$('.maindiv').on('click', 'a.groupdelete', function() {
 					$(".pcaddbtn").show();$(".pcgroupaddbtn").show();
 		
 					var selectedcontrol=$(this);
 					sweet_confirmdelete("MayHaw","Are you sure you want to delete the particular Pay Component Group ?", function(){selectedcontrol.parent().closest('div .groupclass').remove(); return true;});   
 				});
-	
+				//pay component delete btn onclick
 				$('.maindiv').on('click', 'a.compdelete', function() {
 					$(".pcaddbtn").show();$(".pcgroupaddbtn").show();
 		
 					var selectedcontrol=$(this);
 					sweet_confirmdelete("MayHaw","Are you sure you want to delete the particular Pay Component ?", function(){selectedcontrol.parent().closest('div .componentclass').remove(); return true;});     
 				});
-	
-				// if(userdf==1){
-					// $('.mptldp').datepicker({ format:"dd/mm/yyyy",autoclose: true,clearBtn: true,todayHighlight: true });
-				// }else{
-					// $('.mptldp').datepicker({ format:"yyyy/mm/dd",autoclose: true,clearBtn: true,todayHighlight: true });
-				// }
+				//initialise datepicker
+				if(userdf==1){
+					$('.mptldp').datepicker({ format:"dd/mm/yyyy",autoclose: true,clearBtn: true,todayHighlight: true });
+				}else{
+					$('.mptldp').datepicker({ format:"yyyy/mm/dd",autoclose: true,clearBtn: true,todayHighlight: true });
+				}
 	    		//set mandatory * after required label	
     			$( ':input[required]' ).each( function () {
         			$("label[for='" + this.id + "']").addClass('mandatory');
@@ -428,11 +435,11 @@ $(function () {
 	  	//reload table
 	});
 	
-	// $("[data-widget='collapse']").click(function() {
+	$("[data-widget='collapse']").click(function() {
 		// $(".box").addClass("collapsed-box");
-		
-		// $(".box-body").hide();
-	// });
+		// $('.box-body').not(this).hide();
+		// $(this).closest(".box-body").show();
+	});
     
 });
 
