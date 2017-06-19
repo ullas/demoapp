@@ -5,18 +5,20 @@
 		margin-top:25px;
 	}
 </style>
-<section class="content-header">
-      <h1>
-        Payroll Data
-        <small>Add</small>
-      </h1>
-      <ol class="breadcrumb">
-        <li><?= $this->Html->link('<i class="fa fa-mail-reply"></i> '.__('Back'), ['action' => 'index'], ['escape' => false]) ?></li>
-      </ol>
-    </section>
-<section class="content">
-	<div class="box box-primary"><div class="box-body maindiv">
+<div class="box box-success box-solid no-border">
+	<div class="box-header with-border text-center">
+        <h3 class="box-title">Add PayrollData</h3>
+
+        <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool popoverDelete">
+                <i class="fa fa-times"></i>
+            </button>
+        </div>
+        <!-- /.box-tools -->
+    </div>
+
     <?= $this->Form->create($payrollData) ?>
+    <div class="box-body maindiv">
     <fieldset>
         <?php
             echo $this->Form->input('empdatabiographies_id',['options'=>$empDataBiographies,'label'=>'Employee','class' => 'select2', 'empty' => true]);
@@ -41,13 +43,15 @@
         </div></div>
         
     </fieldset></div>
+    
     <div class="box-footer">
     <?=$this->Html->link(__('Cancel'), ['action' => 'index'], ['escape' => false])?>
     <!-- <?= $this->Form->button(__('Save Payroll Data'),['title'=>'Save Payroll Data','class'=>'pull-right']) ?> -->
     <input type="button" value="Save Payroll Data" class="mptlsave btn btn-success pull-right" id="mptlsave"/>
     </div>
     <?= $this->Form->end() ?>
-</div></section>
+
+</div>
 
 
 <?php $this->start('scriptBotton'); ?>

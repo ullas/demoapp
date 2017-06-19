@@ -246,7 +246,7 @@ $this->Html->script([ '/js/dropzone' ], ['block' => 'script']);
         <!-- =============================================== -->
 
         <!-- Content Wrapper. Contains page content -->
-        <div class="content-wrapper">
+        <div class="content-wrapper" style="overflow: auto;">
         	<!-- support -->
 			<!-- <a id="back-to-contents" href="#"><i class="glyphicon glyphicon-earphone icon-improve" title="Support"></i></a> -->
 
