@@ -56,6 +56,10 @@ class PayrollDataTable extends Table
      */
     public function validationDefault(Validator $validator)
     {
+    	
+		$validator
+            ->notEmpty('empdatabiographies_id');
+			
         $validator
             ->allowEmpty('id', 'create');
 
