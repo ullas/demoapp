@@ -20,8 +20,8 @@
     <?= $this->Form->create($payrollData) ?>
     <div class="box-body maindiv">
     <fieldset>
-        <?php
-            echo $this->Form->input('empdatabiographies_id',['options'=>$excludingempDataBiographies,'label'=>'Employee','class' => 'select2', 'empty' => true]);
+        <?php 
+            echo $this->Form->input('empdatabiographies_id',['options'=>$empDataBiographies,'label'=>'Employee','class' => 'select2', 'disabled' => true]);
 			// echo $this->Form->input('start_date',['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
             // echo $this->Form->input('end_date',['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
 			

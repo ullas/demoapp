@@ -266,6 +266,38 @@ class PayrollDataController extends AppController
             }			
 		}
 	}
+
+	public function addempdata($id = null)
+    {
+        $payrollData = $this->PayrollData->newEntity();
+		
+        if ($this->request->is('post')) {
+            $payrollData = $this->PayrollData->patchEntity($payrollData, $this->request->data);
+			$payrollData['customer_id']=$this->loggedinuser['customer_id'];
+            if ($this->PayrollData->save($payrollData)) {
+                $this->Flash->success(__('The payroll data has been saved.'));
+
+                return $this->redirect(['action' => 'index']);
+            } else {
+                $this->Flash->error(__('The payroll data could not be saved. Please, try again.'));
+            }
+        }
+		
+		$empDataBiographies[$id] = str_replace('"', '',$this->get_employeename ($id));						
+		
+		$this->loadModel("PayComponents");
+		$payComponents = $this->PayComponents->find('all', ['limit' => 200])
+									// ->where(['PayComponents.id NOT IN'=>$componentarr])
+									->andwhere(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+		
+        $this->set(compact('payrollData', 'payComponents','empDataBiographies'));
+        $this->set('_serialize', ['payrollData']);
+		
+		$payComponentGroups = $this->PayComponents->PayComponentGroups->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        
+		$this->set('paycomponentarr', json_encode($payComponents));
+		$this->set('paycomponentgrouparr', json_encode($payComponentGroups));
+    }
     /**
      * Add method
      *
@@ -285,12 +317,18 @@ class PayrollDataController extends AppController
                 $this->Flash->error(__('The payroll data could not be saved. Please, try again.'));
             }
         }
-		// $emparr = $this->PayrollData->find('all')->select(['empdatabiographies_id'])->where(['PayrollData.customer_id='.$this->loggedinuser['customer_id']]);
-        
-        $empDataBiographies = $this->PayrollData->EmpDataBiographies->find('list',['limit' => 200])
+		
+		$empDataBiographies = $this->PayrollData->EmpDataBiographies->find('list',['limit' => 200])
         				->select(['id'=>'EmpDataBiographies.id','name' => 'CONCAT(EmpDataPersonals.first_name, \' \',EmpDataPersonals.last_name,\' (\', EmpDataBiographies.employee_id, \')\' )'])
 						->leftJoin('EmpDataPersonals', 'EmpDataPersonals.employee_id = EmpDataBiographies.employee_id')
-						// ->where(['EmpDataBiographies.id NOT IN'=>$emparr])
+						->andwhere("EmpDataBiographies.customer_id=".$this->loggedinuser['customer_id']);
+						
+		$emparr = $this->PayrollData->find('all')->select(['empdatabiographies_id'])->where(['PayrollData.customer_id='.$this->loggedinuser['customer_id']]);
+        
+        $excludingempDataBiographies = $this->PayrollData->EmpDataBiographies->find('list',['limit' => 200])
+        				->select(['id'=>'EmpDataBiographies.id','name' => 'CONCAT(EmpDataPersonals.first_name, \' \',EmpDataPersonals.last_name,\' (\', EmpDataBiographies.employee_id, \')\' )'])
+						->leftJoin('EmpDataPersonals', 'EmpDataPersonals.employee_id = EmpDataBiographies.employee_id')
+						->where(['EmpDataBiographies.id NOT IN'=>$emparr])
 						->andwhere("EmpDataBiographies.customer_id=".$this->loggedinuser['customer_id']);
 		
 		// $componentarr = $this->PayrollData->find('all')->select(['paycomponent'])->where(['PayrollData.pay_component_type=1'])
@@ -302,7 +340,7 @@ class PayrollDataController extends AppController
 									// ->where(['PayComponents.id NOT IN'=>$componentarr])
 									->andwhere(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
 		
-        $this->set(compact('payrollData', 'payComponents','empDataBiographies'));
+        $this->set(compact('payrollData', 'payComponents','empDataBiographies','excludingempDataBiographies'));
         $this->set('_serialize', ['payrollData']);
 		
 		$payComponentGroups = $this->PayComponents->PayComponentGroups->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;

@@ -11,24 +11,29 @@
 </section>
 
 
-<section class="content" id="contentsection">
+<section class="content panel-group" id="contentsection">
 	
 	
 	<?php foreach ($content as $vals) { ?>
-	<div class="col-md-12">
-          <div class="box box-default collapsed-box">
+          <div class="panel box box-default">
             <div class="box-header with-border">
               <h3 class="box-title"><?php echo $vals['empname']; ?></h3>
               <small><?php echo "PayComponents: ".count($vals['pcchild']);echo ", Pay Component Groups: ".count($vals['pcgroupchild']);?></small>
 
               <div class="box-tools pull-right">
-                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus text-gray"></i>
-                </button>
+              	<a href="/PayrollData/addempdata/<?php echo $vals['empid']; ?>" class="open-Popup btn btn-xs btn-success" data-remote="false" data-toggle="modal" data-target="#actionspopover" style="margin-left:15px;" title="Add">Add</a>
+
+              	<a data-toggle="collapse" data-parent="#contentsection" href="#mainpanel<?php echo $vals['empid'];  ?>" aria-expanded="false" class="collapsed">
+              		<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="more-less fa fa-square-o text-navy"></i>
+                	</button>
+                </a>
+              	
+                
               </div>
               <!-- /.box-tools -->
             </div>
             <!-- /.box-header -->
-            <div class="box-body">
+            <div id="mainpanel<?php echo $vals['empid'];  ?>" class="emppanel panel-collapse collapse" aria-expanded="false"><!-- <div class="box-body"> -->
             <h4 style="background-color:#f7f7f7; font-size: 18px; text-align: center; padding: 7px 10px; margin-top: 0; margin-bottom: 0;"> PAY COMPONENTS </h4>
             	
             <table class="table table-hover table-bordered" cellspacing="0" width="100%">
@@ -91,7 +96,7 @@
 	<table class="table table-hover table-bordered" cellspacing="0" width="100%">
         <thead>
             <tr>
-            	<th>Pay Component Group</th>
+            	<!-- <th>Pay Component Group</th> -->
                 <th>Pay Component</th>
                 <th>Start Date</th>
                 <th>End Date</th>
@@ -104,7 +109,7 @@
               <?php  foreach ($childval['grouplist'] as $groupval) { ?>
 
             <tr>
-                <td><?php echo  $groupval['paycomponentgroup']; ?></td>
+                <!-- <td><?php echo  $groupval['paycomponentgroup']; ?></td> -->
                 <td><?php echo  $groupval['paycomponent']; ?></td>
                 <td><?php echo  $groupval['startdate']; ?></td>
                 <td><?php echo  $groupval['enddate']; ?></td>
@@ -131,7 +136,6 @@
             <!-- /.box-body -->
           </div>
           <!-- /.box -->
-        </div>
         
     <?php } ?>    
         
@@ -163,6 +167,11 @@ $.each(paycomponentgrouparr, function(key, value) {
 	
 $(function () {
 	
+	//check if last expanded emp panel exists,if so expand it
+	var lastemployeepanel = localStorage.getItem('lastemppanel');console.log(lastemployeepanel);
+	$("#"+lastemployeepanel).addClass("in");$("#"+lastemployeepanel).attr("aria-expanded","true");
+	
+	
 	$("#actionspopover").on("show.bs.modal", function(e) {
 		//loading icon show
 		if(e.relatedTarget!=null){$('#loadingmessage').show();}
@@ -184,14 +193,36 @@ $(function () {
     			}
     				
     				
-				$('#mptlupdate').click(function(){
+				$('.mptlupdate').click(function(){
+					
+					var lastemppanel=$('.emppanel.panel-collapse.collapse.in').attr('id');localStorage.setItem('lastemppanel', lastemppanel);
+					
     				//get input value
 					var emp = $("#empdatabiographies-id").val();
-					return false;
+					var paycomp=$("#paycomponent").val();
+    				var startdate = $("#start-date").val();
+					var enddate = $("#end-date").val();
+				
+					if (emp=="" || emp==null){
+						sweet_alert("Please select a Employee.");
+						return false;
+					}else if (paycomp=="" || paycomp==null){
+						sweet_alert("Please select a paycomponent.");
+						return false;
+					}else if (startdate=="" || startdate==null || enddate=="" || enddate==null){
+						sweet_alert("Please select Start/End Date.");
+						return false;
+					}else{
+						return true;
+					}
+					
 				});
 		
 				//save btn onclick
 	$('#mptlsave').click(function(){
+		
+		var lastemppanel=$('.emppanel.panel-collapse.collapse.in').attr('id');localStorage.setItem('lastemppanel', lastemppanel);
+					
     	//get input value
 		var emp = $("#empdatabiographies-id").val();
 		
@@ -396,6 +427,7 @@ $(function () {
 				
 				//group delete btn onclick
 				$('.maindiv').on('click', 'a.groupdelete', function() {
+					
 					$(".pcaddbtn").show();$(".pcgroupaddbtn").show();
 		
 					var selectedcontrol=$(this);
@@ -432,16 +464,29 @@ $(function () {
 
 	$('#actionspopover').on('hidden.bs.modal', function (e) {
 	  $('.modal-body', this).empty();
-	  	//reload table
 	});
 	
-	$("[data-widget='collapse']").click(function() {
+	// $("[data-widget='collapse']").click(function() {
 		// $(".box").addClass("collapsed-box");
 		// $('.box-body').not(this).hide();
 		// $(this).closest(".box-body").show();
-	});
+		// $(this.target)
+        // .prev('.panel-heading')
+        // .find(".more-less")
+        // .toggleClass('glyphicon-plus glyphicon-minus');console.log("entered");
+	// });
     
-});
+    
+    
+// $('.panel-group').on('hidden.bs.collapse', toggleIcon);
+// $('.panel-group').on('shown.bs.collapse', toggleIcon);
 
+});
+// function toggleIcon(e) {//console.log("entered");
+    // $(e.target)
+        // .prev('.box-header')
+        // .find(".more-less")
+        // .toggleClass(' fa-plus fa-minus ');
+// }
 </script>
 <?php $this->end(); ?>
