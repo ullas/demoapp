@@ -23,9 +23,10 @@
 			
 			if($payrollData['pay_component_type']=="2"){
 				echo $this->Form->input('paycomponentgroup',['options'=>$payComponentGroups,'class' => 'select2', 'empty' => true, 'disabled'=>true]);
+				echo $this->Form->input('paycomponent',['options'=>$payComponents,'class' => 'select2', 'empty' => true, 'disabled'=>true]);
+			}else{
+				echo $this->Form->input('paycomponent',['options'=>$payComponents,'class' => 'select2', 'empty' => true]);
 			}
-			
-			echo $this->Form->input('paycomponent',['options'=>$payComponents,'class' => 'select2', 'empty' => true]);
 			echo $this->Form->input('pay_component_value');
 			
 			echo $this->Form->input('start_date',['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
