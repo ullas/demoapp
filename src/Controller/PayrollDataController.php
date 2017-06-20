@@ -242,17 +242,29 @@ class PayrollDataController extends AppController
 			}
 			
 			
-			//initiallly delete  
-			$query=$this->PayrollData->find('all', array('conditions' => array('empdatabiographies_id'  => $payrollData['empdatabiographies_id'],'pay_component_type'  => $payrollData['pay_component_type'],
+			//initiallly query  
+			$groupquery=$this->PayrollData->find('all', array('conditions' => array('empdatabiographies_id'  => $payrollData['empdatabiographies_id'],'pay_component_type'  => 2,
 									'paycomponent'  =>$payrollData['paycomponent'],'paycomponentgroup'  => $payrollData['paycomponentgroup'],'customer_id'  => $this->loggedinuser['customer_id']) ));
 									
-			$querycount=$query->count();
-			if($querycount>0){
+			$groupquerycount=$groupquery->count();
+			if($groupquerycount>0){
 				//initially delete the particular employees data
-				if($this->PayrollData->deleteAll(['empdatabiographies_id' => $payrollData['empdatabiographies_id'],'pay_component_type'  => $payrollData['pay_component_type'],
-									'paycomponent'  =>$payrollData['paycomponent'],'paycomponentgroup'  => $payrollData['paycomponentgroup'],'customer_id'  => $this->loggedinuser['customer_id']])){
-				
+				$this->PayrollData->deleteAll(['empdatabiographies_id' => $payrollData['empdatabiographies_id'],'pay_component_type'  => 2,
+									'paycomponent'  =>$payrollData['paycomponent'],'paycomponentgroup'  => $payrollData['paycomponentgroup'],'customer_id'  => $this->loggedinuser['customer_id']]);
+			}
+
+			//initiallly query  
+			$compquery=$this->PayrollData->find('all', array('conditions' => array('empdatabiographies_id'  => $payrollData['empdatabiographies_id'],'pay_component_type'  => 1,
+									'paycomponent'  =>$payrollData['paycomponent'],'paycomponentgroup'  => $payrollData['paycomponentgroup'],'customer_id'  => $this->loggedinuser['customer_id']) ))->first();
+									
+			if($compquery['start_date']!="" || $compquery['start_date']!=null || $compquery['end_date']!="" || $compquery['end_date']!=null){				
+				if($compquery['start_date']>=$payrollData['end_date'] || $compquery['end_date']>=$payrollData['end_date']){
+					$this->response->body("exists already in the same period");
+	    			return $this->response;
 				}
+				//initially delete the particular employees data
+				// $this->PayrollData->deleteAll(['empdatabiographies_id' => $payrollData['empdatabiographies_id'],'pay_component_type'  => 2,
+									// 'paycomponent'  =>$payrollData['paycomponent'],'paycomponentgroup'  => $payrollData['paycomponentgroup'],'customer_id'  => $this->loggedinuser['customer_id']]);
 			}
 			
 			if ($this->PayrollData->save($payrollData)) {
