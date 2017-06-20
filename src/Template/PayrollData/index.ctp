@@ -1,3 +1,19 @@
+<style>
+@media (min-width: 768px) {
+  .modal-dialog {
+    width: 800px;
+    margin: 30px auto;
+  }
+  .modal-content {
+    -webkit-box-shadow: 0 5px 15px rgba(0, 0, 0, .5);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, .5);
+  }
+  .modal-sm {
+    width: 300px;
+  }
+}	
+</style>
+
 <section class="content-header">
   <h1>
     Payroll Data
@@ -62,7 +78,8 @@
                 	<?php echo  '<form name="formdelete" id="formdelete' .$childval['id']. '" method="post" action="/PayrollData/delete/'.$childval['id'].'" style="display:none;" >
                     <input type="hidden" name="_method" value="POST"></form>
                     <a href="#" onclick="sweet_confirmdelete(&quot;MayHaw&quot;,&quot;Are you sure you want to delete the pay component '.$childval['paycomponent'].' from '.$vals['empname'].'?&quot; , 
-                    function(){ document.getElementById(&quot;formdelete'.$childval['id'].'&quot;).submit(); })
+                    function(){ var lastemppanel=$(&quot;.emppanel.panel-collapse.collapse.in&quot;).attr(&quot;id&quot;);localStorage.setItem(&quot;lastemppanel&quot;, lastemppanel);
+					 document.getElementById(&quot;formdelete'.$childval['id'].'&quot;).submit(); })
                     event.returnValue = false; return false;" class="deletelink fa fa-trash text-red" style= "padding:3px"></a>';   ?>
                 	
                 </td>
@@ -79,19 +96,22 @@
               <!-- <h4><?php echo $childval['groupname'];  ?></h4>	 -->
             
             
-         <div class="panel box box-default" style="margin-bottom:0px;">
+         <div class="box box-default" style="margin-bottom:0px;">
            <div class="box-header">
-             <h4 class="box-title"><a data-toggle="collapse" data-parent="#accordion<?php echo $vals['empid']; ?>" href="#panel<?php echo $childval['groupid'];  ?>" aria-expanded="false" class="collapsed"><?php echo $childval['groupname'];  ?></a></h4>
+             <!-- <h4 class="box-title"><a data-toggle="collapse" data-parent="#accordion<?php echo $vals['empid']; ?>" href="#panel<?php echo $childval['groupid'];  ?>" aria-expanded="false" class="collapsed"> -->
+             	<?php echo $childval['groupname'];  ?>
+             	<!-- </a></h4> -->
            
-           	<?php echo  '<form name="formdelete" id="formdelete' .$childval['groupid'].'" method="post" action="/PayrollData/deletegroup/'.$childval['groupid'].'^'.$vals['empid'].'" style="display:none;" >
+           	<?php echo  '<form name="formdelete" id="formdelete' .$childval['groupid'].$vals['empid'].'" method="post" action="/PayrollData/deletegroup/'.$childval['groupid'].'^'.$vals['empid'].'" style="display:none;" >
                     	<input type="hidden" name="_method" value="POST"></form>
                     	<a href="#" onclick="sweet_confirmdelete(&quot;MayHaw&quot;,&quot;Are you sure you want to delete the pay component group '.$childval['groupname'].' from '.$vals['empname'].'?&quot; , 
-                    	function(){ document.getElementById(&quot;formdelete'.$childval['groupid'].'&quot;).submit(); })
+                    	function(){ var lastemppanel=$(&quot;.emppanel.panel-collapse.collapse.in&quot;).attr(&quot;id&quot;);localStorage.setItem(&quot;lastemppanel&quot;, lastemppanel);
+                    	document.getElementById(&quot;formdelete'.$childval['groupid'].$vals['empid'].'&quot;).submit(); })
                     	event.returnValue = false; return false;" class="deletelink fa fa-trash text-red pull-right" style= "padding:3px"></a>';   ?>
            
            
            </div>
-           <div id="panel<?php echo $childval['groupid'];  ?>" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
+           <div id="panel<?php echo $childval['groupid'];  ?>" >
                   	
 	<table class="table table-hover table-bordered" cellspacing="0" width="100%">
         <thead>
