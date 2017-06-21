@@ -108,13 +108,14 @@ class PayrollDataController extends AppController
 		$this->set('empgrouplist', json_encode($empgrouplist));
 					
 		$this->loadModel('PayComponents');
-        $payComponents = $this->PayComponents->find('all', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        $payComponents = $this->PayComponents->find('all', ['limit' => 200])->where(['end_date >=' => date("Y/m/d")])
+        							->andwhere(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         $payComponentGroups = $this->PayComponents->PayComponentGroups->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         
 		$this->set('paycomponentarr', json_encode($payComponents));
 		$this->set('paycomponentgrouparr', json_encode($payComponentGroups));
 		
-		// $this->Flash->error(__('DATA__.').json_encode($payrolldatalist));
+		// $this->Flash->error(__('DATA__.').date("Y/m/d"));
 		
     }
 	public function get_employeename($empdatabiographyid = null)
@@ -211,6 +212,44 @@ class PayrollDataController extends AppController
 			
 		}
 	}
+	public function checkPayComponentExistence(){
+		if($this->request->is('ajax')) {
+				
+			$this->autoRender=false;	
+			//initiallly query  
+			$compquery=$this->PayrollData->find('all', array('conditions' => array('empdatabiographies_id'  => $this->request->data['employee'],'pay_component_type'  => 1,
+									'paycomponent'  =>$this->request->data['paycomponent'],'customer_id'  => $this->loggedinuser['customer_id']) ))->first();
+									
+			$userdf = $this->request->session()->read('sessionuser')['dateformat'];
+            if($compquery['start_date']!="" || $compquery['start_date']!=null || $compquery['end_date']!="" || $compquery['end_date']!=null){
+						
+				if(isset($userdf)  & $userdf===1){
+					$startdate = \DateTime::createFromFormat('d/m/Y', $compquery['start_date']);
+					$startdate=date_format($startdate, 'Y/m/d');
+					$enddate = \DateTime::createFromFormat('d/m/Y', $compquery['end_date']);
+					$enddate=date_format($enddate, 'Y/m/d');
+				}else{
+					$enddate = $compquery['end_date'];
+					$startdate=$compquery['start_date'];
+				}
+				// $this->Flash->error(__('O/P:'.$payrollData['start_date'].'---'.$enddate));
+			
+							
+				if(($this->request->data['startdate']<=$startdate) || ($this->request->data['enddate']<=$startdate) || ($this->request->data['startdate']<=$enddate)
+								 || ($this->request->data['enddate']<=$enddate)){
+					$this->response->body("Pay Component exists already in the same period duration(".$startdate."-".$enddate.").Please check and try again.");
+	    			return $this->response;
+				}else{
+					$this->response->body("success");
+	    			return $this->response;
+				}
+		
+			}else{
+				$this->response->body("success");
+	    		return $this->response;
+			}
+		}
+	}
 	public function addData()
 	{
 		if($this->request->is('ajax')) {
@@ -279,13 +318,8 @@ class PayrollDataController extends AppController
 					$this->response->body("Pay Component exists already in the same period duration(".$startdate."-".$enddate.").Please check and try again.");
 	    			return $this->response;
 				}
-				//initially delete the particular employees data
-				// $this->PayrollData->deleteAll(['empdatabiographies_id' => $payrollData['empdatabiographies_id'],'pay_component_type'  => 2,
-									// 'paycomponent'  =>$payrollData['paycomponent'],'paycomponentgroup'  => $payrollData['paycomponentgroup'],'customer_id'  => $this->loggedinuser['customer_id']]);
+		
 			}
-			
-			
-			
 			
 			if ($this->PayrollData->save($payrollData)) {
 
@@ -426,7 +460,7 @@ class PayrollDataController extends AppController
 							->andwhere("PayrollData.customer_id=".$this->loggedinuser['customer_id']);
 		
 		$this->loadModel("PayComponents");
-		$payComponents = $this->PayComponents->find('list', ['limit' => 200])->andwhere(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+		$payComponents = $this->PayComponents->find('list', ['limit' => 200])->where(['end_date >= ' => date("Y/m/d")])->andwhere(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         		
 		$payComponentGroups = $this->PayComponents->PayComponentGroups->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         
