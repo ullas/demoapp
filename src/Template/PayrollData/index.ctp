@@ -183,7 +183,8 @@ $.each(paycomponentgrouparr, function(key, value) {
     paycomponentgroupdata.push({'id':key, "text":value});
 });
 
-
+var emppcgrouparr=<?php echo $empgrouplist ?>;
+// console.log(emppcgrouparr);
 	
 $(function () {
 	
@@ -276,12 +277,12 @@ $(function () {
         					if(data=="success"){
     							window.location='/payroll-data';
     						}else{
-    							sweet_alert("Error while adding PayComponent's.");
+    							sweet_alert(data);
 								return false;  
     						}
     						
         				},error: function(data) {
-       						sweet_alert("Error while adding PayComponent's.");
+       						sweet_alert("Error while adding PayComponents.");
 							return false;   			
 
         				},statusCode: {
@@ -415,12 +416,27 @@ $(function () {
 		
 						var numItems = $('.groupclass').length+1;
 						$(".maindiv").append("<div class='clearfix'><div class='groupclass' id='groupDiv"+numItems+"'><div class='col-sm-4'><div class='form-group'><label>Pay Component Group:</label><div class='input-group'><div class='input-group-btn'><a class='groupdelete btn btn-danger btn-flat' id='delete1'><i class='fa fa-trash'></i></a></div><input type='text' class='pcgroup form-control' id='pcgroup"+numItems+"'/></div></div></div></div></div>");
+						
+						// var groupdata=[];//console.log(emppcgrouparr);
+						// for(var p=0;p<paycomponentgroupdata.length;p++) {
+							// // console.log(paycomponentgroupdata[p]);
+							// $.each(emppcgrouparr, function(childkey, childvalue) {
+								// if(emp==value['empdatabiographies_id']){
+//     							
+    							// }else{
+    								// groupdata.push({'id':key, "text":value});
+    							// }
+							// });
+							// // console.log(emppcgrouparr[0]['empdatabiographies_id']+"--"+emp+"--"+key);
+//     						
+						// }
+						
 						$('.pcgroup').select2({ width: '100%',allowClear: true,placeholder: "Select",data: paycomponentgroupdata });			
-			
-						}else{
-							sweet_alert("Please select a Employee.");
-   							return false;
-						}
+						
+					}else{
+						sweet_alert("Please select a Employee.");
+   						return false;
+					}
 				});
 				//add pay component button click
 				$("#btnAddControl").click(function (event) {
