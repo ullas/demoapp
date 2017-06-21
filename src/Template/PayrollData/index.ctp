@@ -20,6 +20,14 @@
     <small>List</small>
   </h1>
   <ol class="breadcrumb">
+  	
+  	
+  	<div class="box-tools pull-right"style="margin-left:15px;" >
+                <div class="has-feedback">
+                  <input type="text" id="payrolldatasearch"  onkeyup="searchpayrolldata()"  class="form-control input-sm" placeholder="Search...">
+                  <span class="glyphicon glyphicon-search form-control-feedback"></span>
+                </div>
+              </div>
   	<a href="/PayrollData/add" id="addpayrolldata" class="open-Popup btn btn-sm btn-success" data-remote="false" data-toggle="modal" data-target="#actionspopover" style="margin-left:15px;" title="Add"><i class="fa fa-plus" aria-hidden="true"></i></a>
 
     <!-- <?= $this->Html->link('<b>Add</b> &nbsp;&nbsp;'.__('<i class="fa fa-plus"></i>'), ['action' => 'add'],['class' => 'btn btn-sm btn-success btn-flat','escape' => false]) ?> -->
@@ -31,7 +39,7 @@
 	
 	
 	<?php foreach ($content as $vals) { ?>
-          <div class="panel box box-default">
+          <div class="panel box box-default mptlpanel" id="<?php echo $vals['empid']; ?>">
             <div class="box-header with-border">
               <h3 class="box-title"><?php echo $vals['empname']; ?></h3>
               <small><?php echo "PayComponents: ".count($vals['pcchild']);echo ", Pay Component Groups: ".count($vals['pcgroupchild']);?></small>
@@ -189,7 +197,7 @@ var emppcgrouparr=<?php echo $empgrouplist ?>;
 $(function () {
 	
 	//check if last expanded emp panel exists,if so expand it
-	var lastemployeepanel = localStorage.getItem('lastemppanel');console.log(lastemployeepanel);
+	var lastemployeepanel = localStorage.getItem('lastemppanel');//console.log(lastemployeepanel);
 	$("#"+lastemployeepanel).addClass("in");$("#"+lastemployeepanel).attr("aria-expanded","true");
 	
 	
@@ -524,5 +532,25 @@ $(function () {
         // .find(".more-less")
         // .toggleClass(' fa-plus fa-minus ');
 // }
+function searchpayrolldata(){
+	// $(".mptlpanel").hide();
+	var input = document.getElementById('payrolldatasearch');
+    var filter = input.value.toUpperCase();
+    
+    
+	$('.mptlpanel').each(function(){
+		// console.log($(this).attr("id"));
+		var selectedcontrol=$(this);
+		var a = $(this).find(".box-title").text();
+        if (a.toUpperCase().indexOf(filter) > -1) {
+            selectedcontrol.show();
+        } else {
+            selectedcontrol.hide();
+        }
+	});
+	
+}
+
+
 </script>
 <?php $this->end(); ?>
