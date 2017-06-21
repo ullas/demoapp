@@ -242,9 +242,33 @@ $(function () {
 						sweet_alert("Please select Start/End Date.");
 						return false;
 					}else{
-						return true;
+						$.ajax({
+        				type: "POST",
+      					url: '/PayrollData/checkPayComponentExistence',
+        				data: 'employee='+emp+'&paycomponent='+paycomp+'&startdate='+startdate+'&enddate='+enddate,
+        				success : function(data) {
+        					if(data=="success"){
+    							// return true;
+    						}else{
+    							sweet_alert(data);
+								return false;  
+    						}
+    						
+        				},error: function(data) {
+       						sweet_alert("Error while editing PayComponents.");
+							return false;   			
+
+        				},statusCode: {
+        					500: function() {
+          						sweet_alert("Error while editing PayComponent's.");
+								return false;
+        					}
+      					}
+      
+        			});
+        			return false;  
 					}
-					
+					return false;  
 				});
 		
 				//save btn onclick
