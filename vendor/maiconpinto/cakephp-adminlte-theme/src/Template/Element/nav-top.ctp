@@ -116,7 +116,7 @@ if (file_exists($file)) {
 									if( (isset($counts['legalentity']) && $counts['legalentity'] >0) && (isset($counts['businessunit']) && $counts['businessunit'] >0) &&
 										(isset($counts['division']) && $counts['division'] >0) && (isset($counts['department']) && $counts['department'] >0) &&
 										(isset($counts['costcenter']) && $counts['costcenter'] >0) && (isset($counts['position']) && $counts['position'] >0) ){
-											echo "<a href='/Profiles' class='btn btn-default btn-flat'>Profile</a>";
+											echo "<a href='/Employees/view/".$this->request->session()->read('sessionuser')["employee_id"]."' class='btn btn-default btn-flat'>Profile</a>";
 									}
 								}
 							?>

@@ -65,15 +65,15 @@ div#myDropZone {
 
 
         <ul class="nav nav-tabs">
-          	<li class="active"><a href="#EmpDataPersonal" data-toggle="tab">Personal Information</a></li>
-            <li><a href="#EmploymentInfo" data-toggle="tab">Employment Information</a></li>
-            <li><a href="#EmpDataBiography" data-toggle="tab">Profile</a></li>
-            <li><a href="#jobinfo" data-toggle="tab">Job Info</a></li>
-           	<li><a href="#social" data-toggle="tab">Social</a></li>
-           	<li><a href="#address" data-toggle="tab">Address</a></li>
-           	<li><a href="#ids" data-toggle="tab">ID's</a></li>
-           	<li><a href="#qualification" data-toggle="tab">Educational Qualification</a></li>
-           	<li><a href="#experience" data-toggle="tab">Experience</a></li>
+          	<li id="li1" class="active"><a href="#EmpDataPersonal" data-toggle="tab">Personal Information</a></li>
+            <li id="li2"><a href="#EmploymentInfo" data-toggle="tab">Employment Information</a></li>
+            <li id="li3"><a href="#EmpDataBiography" data-toggle="tab">Profile</a></li>
+           	<li id="lijobinfo"><a href="#jobinfo" data-toggle="tab">Job Info</a></li>
+           	<li id="li4"><a href="#social" data-toggle="tab">Social</a></li>
+           	<li id="li5"><a href="#address" data-toggle="tab">Address</a></li>
+           	<li id="li6"><a href="#ids" data-toggle="tab">ID's</a></li>
+			<li id="li7"><a href="#qualification" data-toggle="tab">Educational Qualification</a></li>
+           	<li id="li8"><a href="#experience" data-toggle="tab">Experience</a></li>
            	<li id="li9"><a href="#skills" data-toggle="tab">Skills</a></li>
            	<li id="li10"><a href="#officeassets" data-toggle="tab">Office Assets</a></li>
         </ul>
@@ -1087,7 +1087,7 @@ $(document).ready(function(){
         		});
 			}else{			
 				$(this).parent().closest('div .idclass').next('div .hrclass').remove();
-				$(this).parent().closest('div .idclass').remove();
+				$(this).parent().closest('div .idclass').hide();
     			return true;
     		}
   		} else {
@@ -1124,7 +1124,7 @@ $(document).ready(function(){
         		});
 			}else{			
 				$(this).parent().closest('div .experienceclass').next('div .hrclass').remove();
-				$(this).parent().closest('div .experienceclass').remove();
+				$(this).parent().closest('div .experienceclass').hide();
     			return true;
     		}
   		} else {
@@ -1161,7 +1161,7 @@ $(document).ready(function(){
         		});
 			}else{			
 				$(this).parent().closest('div .qualificationclass').next('div .hrclass').remove();
-				$(this).parent().closest('div .qualificationclass').remove();
+				$(this).parent().closest('div .qualificationclass').hide();
     			return true;
     		}
   		} else {
@@ -1184,7 +1184,7 @@ $(document).ready(function(){
         			success : function(data) {
         				if(data=="success"){
     						selectedctrl.parent().closest('div .skillclass').next('div .hrclass').remove();
-							selectedctrl.parent().closest('div .skillclass').remove();
+							selectedctrl.parent().closest('div .skillclass').hide();
     						return true;
     					}else{
     						sweet_alert("Couldn't delete the particular skill details.Please try again later.");
@@ -1236,7 +1236,7 @@ $(document).ready(function(){
         		});
 			}else{			
 				$(this).parent().closest('div .assetclass').next('div .hrclass').remove();
-				$(this).parent().closest('div .assetclass').remove();
+				$(this).parent().closest('div .assetclass').hide();
     			return true;
     		}
   		} else {
@@ -1273,12 +1273,11 @@ function formattoymd(inputDate) {
 }
     function updateEmployee()
     {	
-    	
     	//get input value
 		var externalid = document.getElementById("empdatabiography-person-id-external").value;
 
     	if (externalid != "" && externalid!=null && $("#jobinfo-pay-group-id").val()!="" && $("#jobinfo-pay-group-id").val()!=null) {
-    		return true;
+    		// return true;
     	}else if(externalid=="" || externalid==null){
     		
     		$("#EmpDataBiography").addClass("active");
@@ -1310,6 +1309,7 @@ function formattoymd(inputDate) {
 		var empid='<?php echo $employee['id'] ?>';
 		
 		var idclasscount = $('.idclass').length;
+    	
 		var qualclasscount = $('.qualificationclass').length;
 		var expclasscount = $('.experienceclass').length;
 		var assetclasscount = $('.assetclass').length;
@@ -1337,7 +1337,7 @@ function formattoymd(inputDate) {
         			data: 'empid='+empid+'&address1='+address1+'&address2='+address2+'&address3='+address3+'&address4='+address4+'&address5='+address5+'&address6='+address6
         					+'&address7='+address7+'&address8='+address8+'&county='+county+'&state='+state+'&zipcode='+zipcode+'&city='+city,
         			success : function(data) {
-    					if(idclasscount<1 &&  qualclasscount<1 && expclasscount<1){
+    					if(idclasscount<1 &&  qualclasscount<1 && expclasscount<1 &&  assetclasscount<1 && skillclasscount<1){
     						document.getElementById("empform").submit();
     					}
         			},error: function(data) {        	    	 	
@@ -1350,7 +1350,7 @@ function formattoymd(inputDate) {
 			return false;
 		}
 			
-			var errcount=0;
+			var errcount=0;//console.log(idclasscount);return false;
     	
     		for (i = 1; i <= idclasscount; i++) 
     		{
@@ -1363,6 +1363,7 @@ function formattoymd(inputDate) {
     			var issuedate=$("#issuedate"+i).val();
     			var expirydate=$("#expirydate"+i).val();
     		
+    			if($("#identityid"+i).parent().closest('div .idclass').is(":visible")){
     			if(empid!="" && empid!=null && idtype!="" && idtype!=null && nationalid!="" && nationalid!=null){
     				$.ajax({
         				type: "POST",
@@ -1399,7 +1400,13 @@ function formattoymd(inputDate) {
 				}else{
 					sweet_alert("Please enter ID Card type/national Id.");break;
 					return false;
-				}    		
+				} 
+				}else{
+    				idcounter++;
+    				if(i==idclasscount || i>idclasscount){
+    					saveQualifications(empid);
+    				}
+    			}   		
     		}	
     	 
     		if(idclasscount<1){
@@ -1431,7 +1438,9 @@ function saveQualifications(empid){
     		var passdate=$("#passdate"+t).val();
     		var grade=$("#grade"+t).val();
     		
+    		if($("#qualification"+i).parent().closest('div .qualificationclass').is(":visible")){
     			if(empid!="" && empid!=null && qualification!="" && qualification!=null && fromdate!="" && fromdate!=null && passdate!="" && passdate!=null){
+    			
     				$.ajax({
         				type: "POST",
         				indexValue: t,
@@ -1464,10 +1473,17 @@ function saveQualifications(empid){
       					}
       
         			});	
+        		
 				}else{
 					sweet_alert("Please enter Qualification/From/Pass Date.");break;
 					return false;
 				}
+			   }else{
+    				qualcounter++;
+    				if(t==qualclasscount || t>qualclasscount){
+    					saveExperiences(empid);
+    				}
+    			}
     		}
     		
     		if(qualclasscount<1){
@@ -1494,7 +1510,7 @@ function saveQualifications(empid){
     		var fromdate=$("#expfromdate"+t).val();
     		var todate=$("#exptodate"+t).val();
     		var contract=$("#contract"+t).val();
-    		
+    		if($("#designation"+i).parent().closest('div .experienceclass').is(":visible")){
     			if(empid!="" && empid!=null && designation!="" && designation!=null && industry!="" && industry!=null && fromdate!="" && fromdate!=null && todate!="" && todate!=""){
     				$.ajax({
         				type: "POST",
@@ -1532,10 +1548,16 @@ function saveQualifications(empid){
 					sweet_alert("Please enter Designation/Industry/From/To Date.");break;
 					return false;
 				}
+			    }else{
+    				expcounter++;
+    				if(t==expclasscount || t>expclasscount){
+    					saveofficeAssets(empid);
+    				}
+    			}
     		}
     		
     		if(expclasscount<1){
-    			document.getElementById("empform").submit();    		
+    			saveofficeAssets(empid);		
     		}
     		return false;
 	}
@@ -1556,7 +1578,7 @@ function saveQualifications(empid){
     		var assetissuedate=$("#assetissuedate"+t).val();
     		var assettodate=$("#assettodate"+t).val();
     		
-    		
+    		if($("#assettype"+i).parent().closest('div .assetclass').is(":visible")){
     			if(empid!="" && empid!=null && assetnumber!="" && assetnumber!=null && assetissuedate!="" && assetissuedate!=null && assettodate!="" && assettodate!=""){
     				$.ajax({
         				type: "POST",
@@ -1594,6 +1616,12 @@ function saveQualifications(empid){
 					sweet_alert("Please enter Asset Number/Issue/To Date.");break;
 					return false;
 				}
+			   }else{
+    				assetcounter++;
+    				if(t==assetclasscount || t>assetclasscount){
+    					saveSkills(empid);
+    				}
+    			}
     		}
     		
     		if(assetclasscount<1){
@@ -1614,6 +1642,7 @@ function saveQualifications(empid){
     		var skillfromdate=$("#skillfromdate"+t).val();
     		var skilltodate=$("#skilltodate"+t).val();
     		
+    		if($("#skill"+i).parent().closest('div .skillclass').is(":visible")){
     			if(empid!="" && empid!=null && skill!="" && skill!=null && skillfromdate!="" && skillfromdate!=null && skilltodate!="" && skilltodate!=""){
     				$.ajax({
         				type: "POST",
@@ -1624,7 +1653,7 @@ function saveQualifications(empid){
     						if(this.indexValue==skillclasscount || this.indexValue>skillclasscount){
     							if(skillerrcount<1){
     								skillcounter++;    							
-    								window.location='/employees'; 
+    								document.getElementById("empform").submit();
     							}else{
     								return false;
     							}   						
@@ -1646,11 +1675,17 @@ function saveQualifications(empid){
 					sweet_alert("Please enter Skill/From/To Date.");break;
 					return false;
 				}
+				}else{
+    				skillcounter++;
+    				if(t==skillclasscount || t>skillclasscount){
+    					document.getElementById("empform").submit();    	
+    				}
+    			}
     		}
     		
     		if(skillclasscount<1){
     			skillcounter++;    							
-    			window.location='/employees';    		
+    			document.getElementById("empform").submit();    		
     		}
 	}
 </script>

@@ -562,6 +562,7 @@ var countrydata=[];
     		var assetissuedate=$("#assetissuedate"+t).val();
     		var assettodate=$("#assettodate"+t).val();
     		
+    		if($("#assettype"+i).parent().closest('div .assetclass').is(":visible")){
     			if(empid!="" && empid!=null && assetnumber!="" && assetnumber!=null && assetissuedate!="" && assetissuedate!=null && assettodate!="" && assettodate!=""){
     				$.ajax({
         				type: "POST",
@@ -592,6 +593,12 @@ var countrydata=[];
 					sweet_alert("Please enter Asset Number/Issue/To Date.");break;
 					return false;
 				}
+				}else{
+    				assetcounter++;
+    				if(t==assetclasscount || t>assetclasscount){
+    					saveSkills(empid);
+    				}
+    			}
     		}
     		
     		if(assetclasscount<1){
@@ -610,6 +617,7 @@ var countrydata=[];
     		var skillfromdate=$("#skillfromdate"+t).val();
     		var skilltodate=$("#skilltodate"+t).val();
     		
+    		if($("#skill"+i).parent().closest('div .skillclass').is(":visible")){
     			if(empid!="" && empid!=null && skill!="" && skill!=null && skillfromdate!="" && skillfromdate!=null && skilltodate!="" && skilltodate!=""){
     				$.ajax({
         				type: "POST",
@@ -637,6 +645,12 @@ var countrydata=[];
 					sweet_alert("Please enter Skill/From/To Date.");break;
 					return false;
 				}
+				}else{
+    				skillcounter++;
+    				if(t==skillclasscount || t>skillclasscount){
+    					window.location='/employees'; 	
+    				}
+    			}
     		}
     		
     		if(skillclasscount<1){
@@ -659,6 +673,7 @@ var countrydata=[];
     		var passdate=$("#passdate"+p).val();
     		var grade=$("#grade"+p).val();
     		
+    		if($("#qualification"+i).parent().closest('div .qualificationclass').is(":visible")){
     			if(empid!="" && empid!=null && qualification!="" && qualification!=null && fromdate!="" && fromdate!=null && passdate!="" && passdate!=null){
     				$.ajax({
         				type: "POST",
@@ -689,6 +704,12 @@ var countrydata=[];
 					sweet_alert("Please enter Qualification/From/Pass Date.");break;
 					return false;
 				}
+				}else{
+    				qualcounter++;
+    				if(p==qualclasscount || p>qualclasscount){
+    					saveExperiences(empid);
+    				}
+    			}
     		}
     		
     		if(qualclasscount<1){
@@ -711,6 +732,7 @@ var countrydata=[];
     		var todate=$("#exptodate"+t).val();
     		var contract=$("#contract"+t).val();
     		
+    		if($("#designation"+i).parent().closest('div .experienceclass').is(":visible")){
     			if(empid!="" && empid!=null && designation!="" && designation!=null && industry!="" && industry!=null && fromdate!="" && fromdate!=null && todate!="" && todate!=""){
     				$.ajax({
         				type: "POST",
@@ -739,6 +761,12 @@ var countrydata=[];
 					sweet_alert("Please enter Designation/Industry/From/Pass Date.");break;
 					return false;
 				}
+				 }else{
+    				expcounter++;
+    				if(t==expclasscount || t>expclasscount){
+    					saveofficeAssets(empid);
+    				}
+    			}
     		}
     		
     		if(expclasscount<1){
@@ -802,7 +830,8 @@ var countrydata=[];
     			var issuedate=$("#issuedate"+k).val();
     			var expirydate=$("#expirydate"+k).val();
     		
-    			if(empid!="" && empid!=null && idtype!="" && idtype!=null && nationalid!="" && nationalid!=null){
+    			if($("#identityid"+i).parent().closest('div .idclass').is(":visible")){
+    			  if(empid!="" && empid!=null && idtype!="" && idtype!=null && nationalid!="" && nationalid!=null){
     				$.ajax({
         				type: "POST",
         				// "async" : false,
@@ -834,6 +863,12 @@ var countrydata=[];
 					sweet_alert("Please enter ID Card type/national Id.");
 					return false;
 				}
+				}else{
+    				idcounter++;
+    				if(k==idclasscount || k>idclasscount){
+    					saveQualifications(empid);
+    				}
+    			}
     		}
     		
     		if(idclasscount<1){console.log("clicked");
@@ -1100,7 +1135,7 @@ $(function () {
 	$('.idfieldset').on('click', 'a.compdelete', function() {
 		if (confirm("Are you sure you want to delete the particular ID ?")) {
 			$(this).parent().closest('div .idclass').next('div .hrclass').remove();
-			$(this).parent().closest('div .idclass').remove();
+			$(this).parent().closest('div .idclass').hide();
     		return true;
   		} else {
     		return false;
@@ -1112,7 +1147,7 @@ $(function () {
 	$('.qualificationfieldset').on('click', 'a.qualdelete', function() {
 		if (confirm("Are you sure you want to delete the particular Qualification ?")) {
 			$(this).parent().closest('div .qualificationclass').next('div .hrclass').remove();
-			$(this).parent().closest('div .qualificationclass').remove();
+			$(this).parent().closest('div .qualificationclass').hide();
     		return true;
   		} else {
     		return false;
@@ -1124,7 +1159,7 @@ $(function () {
 	$('.experiencefieldset').on('click', 'a.expdelete', function() {
 		if (confirm("Are you sure you want to delete the particular Experience ?")) {
 			$(this).parent().closest('div .experienceclass').next('div .hrclass').remove();
-			$(this).parent().closest('div .experienceclass').remove();
+			$(this).parent().closest('div .experienceclass').hide();
     		return true;
   		} else {
     		return false;
@@ -1136,7 +1171,7 @@ $(function () {
 	$('.skillfieldset').on('click', 'a.skilldelete', function() {
 		if (confirm("Are you sure you want to delete the particular Skill ?")) {
 			$(this).parent().closest('div .skillclass').next('div .hrclass').remove();
-			$(this).parent().closest('div .skillclass').remove();
+			$(this).parent().closest('div .skillclass').hide();
     		return true;
   		} else {
     		return false;
@@ -1149,7 +1184,7 @@ $(function () {
 		if (confirm("Are you sure you want to delete the particular Office Asset ?")) {
 			
 			$(this).parent().closest('div .assetclass').next('div .hrclass').remove();
-			$(this).parent().closest('div .assetclass').remove();
+			$(this).parent().closest('div .assetclass').hide();
 			
     		return true;
   		} else {
