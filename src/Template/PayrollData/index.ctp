@@ -226,6 +226,16 @@ $(function () {
 					
 					var lastemppanel=$('.emppanel.panel-collapse.collapse.in').attr('id');localStorage.setItem('lastemppanel', lastemppanel);
 					
+					//<!--alert if pay component value is null  --->
+					// if($("#pay-component-value").is(":disabled")){
+// 
+					// }else{
+						// if(($("#pay-component-value").val().trim()=="") || ($("#pay-component-value").val().trim()==null)){
+							// sweet_alert("Please enter pay component value.");
+							// return false;
+						// }
+					// }
+					
     				//get input value
     				var id = $("#id").val();
 					

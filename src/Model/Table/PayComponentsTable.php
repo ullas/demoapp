@@ -81,17 +81,17 @@ class PayComponentsTable extends Table
 
         $validator
             ->date('start_date')
-            ->allowEmpty('start_date');
+            ->notEmpty('start_date');
 
         $validator
             ->date('end_date')
-            ->allowEmpty('end_date');
+            ->notEmpty('end_date');
 
         $validator
             ->allowEmpty('pay_component_type');
 
         $validator
-            ->allowEmpty('is_earning');
+            ->notEmpty('is_earning');
 
         $validator
             ->allowEmpty('currency');
@@ -108,7 +108,7 @@ class PayComponentsTable extends Table
             ->allowEmpty('tax_treatment');
 
         $validator
-            ->allowEmpty('can_override');
+            ->notEmpty('can_override');
 
         $validator
             ->allowEmpty('self_service_description');
