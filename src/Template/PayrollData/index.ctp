@@ -20,6 +20,14 @@
     <small>List</small>
   </h1>
   <ol class="breadcrumb">
+  	
+  	
+  	<div class="box-tools pull-right"style="margin-left:15px;" >
+                <div class="has-feedback">
+                  <input type="text" id="payrolldatasearch"  onkeyup="searchpayrolldata()"  class="form-control input-sm" placeholder="Search...">
+                  <span class="glyphicon glyphicon-search form-control-feedback"></span>
+                </div>
+              </div>
   	<a href="/PayrollData/add" id="addpayrolldata" class="open-Popup btn btn-sm btn-success" data-remote="false" data-toggle="modal" data-target="#actionspopover" style="margin-left:15px;" title="Add"><i class="fa fa-plus" aria-hidden="true"></i></a>
 
     <!-- <?= $this->Html->link('<b>Add</b> &nbsp;&nbsp;'.__('<i class="fa fa-plus"></i>'), ['action' => 'add'],['class' => 'btn btn-sm btn-success btn-flat','escape' => false]) ?> -->
@@ -31,7 +39,7 @@
 	
 	
 	<?php foreach ($content as $vals) { ?>
-          <div class="panel box box-default">
+          <div class="panel box box-default mptlpanel" id="<?php echo $vals['empid']; ?>">
             <div class="box-header with-border">
               <h3 class="box-title"><?php echo $vals['empname']; ?></h3>
               <small><?php echo "PayComponents: ".count($vals['pcchild']);echo ", Pay Component Groups: ".count($vals['pcgroupchild']);?></small>
@@ -183,12 +191,13 @@ $.each(paycomponentgrouparr, function(key, value) {
     paycomponentgroupdata.push({'id':key, "text":value});
 });
 
-
+var emppcgrouparr=<?php echo $empgrouplist ?>;
+// console.log(emppcgrouparr);
 	
 $(function () {
 	
 	//check if last expanded emp panel exists,if so expand it
-	var lastemployeepanel = localStorage.getItem('lastemppanel');console.log(lastemployeepanel);
+	var lastemployeepanel = localStorage.getItem('lastemppanel');//console.log(lastemployeepanel);
 	$("#"+lastemployeepanel).addClass("in");$("#"+lastemployeepanel).attr("aria-expanded","true");
 	
 	
@@ -213,11 +222,23 @@ $(function () {
     			}
     				
     				
-				$('.mptlupdate').click(function(){
+				$('.mptlupdate').click(function(e){
 					
 					var lastemppanel=$('.emppanel.panel-collapse.collapse.in').attr('id');localStorage.setItem('lastemppanel', lastemppanel);
 					
+					//<!--alert if pay component value is null  --->
+					// if($("#pay-component-value").is(":disabled")){
+// 
+					// }else{
+						// if(($("#pay-component-value").val().trim()=="") || ($("#pay-component-value").val().trim()==null)){
+							// sweet_alert("Please enter pay component value.");
+							// return false;
+						// }
+					// }
+					
     				//get input value
+    				var id = $("#id").val();
+					
 					var emp = $("#empdatabiographies-id").val();
 					var paycomp=$("#paycomponent").val();
     				var startdate = $("#start-date").val();
@@ -233,9 +254,34 @@ $(function () {
 						sweet_alert("Please select Start/End Date.");
 						return false;
 					}else{
-						return true;
+						$.ajax({
+        				type: "POST",
+      					url: '/PayrollData/checkPayComponentExistence',
+        				data: 'employee='+emp+'&id='+id+'&paycomponent='+paycomp+'&startdate='+startdate+'&enddate='+enddate,
+        				success : function(data) {
+        					if(data=="success"){
+        						document.getElementById("editprdataform").submit();
+    							return true; 
+    						}else{
+    							sweet_alert(data);
+								return false;  
+    						}
+    						
+        				},error: function(data) {
+       						sweet_alert("Error while editing PayComponents.");
+							return false;   			
+
+        				},statusCode: {
+        					500: function() {
+          						sweet_alert("Error while editing PayComponent's.");
+								return false;
+        					}
+      					}
+      
+        			});
+        			return false;  
 					}
-					
+					// return false;  
 				});
 		
 				//save btn onclick
@@ -276,12 +322,12 @@ $(function () {
         					if(data=="success"){
     							window.location='/payroll-data';
     						}else{
-    							sweet_alert("Error while adding PayComponent's.");
+    							sweet_alert(data);
 								return false;  
     						}
     						
         				},error: function(data) {
-       						sweet_alert("Error while adding PayComponent's.");
+       						sweet_alert("Error while adding PayComponents.");
 							return false;   			
 
         				},statusCode: {
@@ -415,12 +461,27 @@ $(function () {
 		
 						var numItems = $('.groupclass').length+1;
 						$(".maindiv").append("<div class='clearfix'><div class='groupclass' id='groupDiv"+numItems+"'><div class='col-sm-4'><div class='form-group'><label>Pay Component Group:</label><div class='input-group'><div class='input-group-btn'><a class='groupdelete btn btn-danger btn-flat' id='delete1'><i class='fa fa-trash'></i></a></div><input type='text' class='pcgroup form-control' id='pcgroup"+numItems+"'/></div></div></div></div></div>");
+						
+						// var groupdata=[];//console.log(emppcgrouparr);
+						// for(var p=0;p<paycomponentgroupdata.length;p++) {
+							// // console.log(paycomponentgroupdata[p]);
+							// $.each(emppcgrouparr, function(childkey, childvalue) {
+								// if(emp==value['empdatabiographies_id']){
+//     							
+    							// }else{
+    								// groupdata.push({'id':key, "text":value});
+    							// }
+							// });
+							// // console.log(emppcgrouparr[0]['empdatabiographies_id']+"--"+emp+"--"+key);
+//     						
+						// }
+						
 						$('.pcgroup').select2({ width: '100%',allowClear: true,placeholder: "Select",data: paycomponentgroupdata });			
-			
-						}else{
-							sweet_alert("Please select a Employee.");
-   							return false;
-						}
+						
+					}else{
+						sweet_alert("Please select a Employee.");
+   						return false;
+					}
 				});
 				//add pay component button click
 				$("#btnAddControl").click(function (event) {
@@ -508,5 +569,25 @@ $(function () {
         // .find(".more-less")
         // .toggleClass(' fa-plus fa-minus ');
 // }
+function searchpayrolldata(){
+	// $(".mptlpanel").hide();
+	var input = document.getElementById('payrolldatasearch');
+    var filter = input.value.toUpperCase();
+    
+    
+	$('.mptlpanel').each(function(){
+		// console.log($(this).attr("id"));
+		var selectedcontrol=$(this);
+		var a = $(this).find(".box-title").text();
+        if (a.toUpperCase().indexOf(filter) > -1) {
+            selectedcontrol.show();
+        } else {
+            selectedcontrol.hide();
+        }
+	});
+	
+}
+
+
 </script>
 <?php $this->end(); ?>
