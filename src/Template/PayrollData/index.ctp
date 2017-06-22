@@ -222,11 +222,13 @@ $(function () {
     			}
     				
     				
-				$('.mptlupdate').click(function(){
+				$('.mptlupdate').click(function(e){
 					
 					var lastemppanel=$('.emppanel.panel-collapse.collapse.in').attr('id');localStorage.setItem('lastemppanel', lastemppanel);
 					
     				//get input value
+    				var id = $("#id").val();
+					
 					var emp = $("#empdatabiographies-id").val();
 					var paycomp=$("#paycomponent").val();
     				var startdate = $("#start-date").val();
@@ -245,10 +247,11 @@ $(function () {
 						$.ajax({
         				type: "POST",
       					url: '/PayrollData/checkPayComponentExistence',
-        				data: 'employee='+emp+'&paycomponent='+paycomp+'&startdate='+startdate+'&enddate='+enddate,
+        				data: 'employee='+emp+'&id='+id+'&paycomponent='+paycomp+'&startdate='+startdate+'&enddate='+enddate,
         				success : function(data) {
         					if(data=="success"){
-    							// return true;
+        						document.getElementById("editprdataform").submit();
+    							return true; 
     						}else{
     							sweet_alert(data);
 								return false;  
@@ -268,7 +271,7 @@ $(function () {
         			});
         			return false;  
 					}
-					return false;  
+					// return false;  
 				});
 		
 				//save btn onclick

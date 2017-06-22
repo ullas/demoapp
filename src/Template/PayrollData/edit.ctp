@@ -15,10 +15,11 @@
         </div>
         <!-- /.box-tools -->
     </div>
-    <?= $this->Form->create($payrollData) ?>
+    <?= $this->Form->create($payrollData, ['id'=>'editprdataform']) ?>
     <div class="box-body">
     <fieldset>
         <?php
+        	echo $this->Form->input('id',['label'=>'Id','type'=>'hidden']);
             echo $this->Form->input('empdatabiographies_id',['options'=>$empDataBiographies,'label'=>'Employee','class' => 'select2', 'empty' => true, 'disabled'=>true]);
 			
 			if($payrollData['pay_component_type']=="2"){
