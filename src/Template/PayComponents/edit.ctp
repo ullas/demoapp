@@ -18,10 +18,10 @@
             echo $this->Form->input('name',['label' => 'Pay Component Name']);
             echo $this->Form->input('description');
             echo $this->Form->input('status',['class'=>'select2','options' => ['Active' => 'Active', 'Inactive' => 'Inactive'], 'empty' => 'Choose']);
-			      echo $this->Form->input('start_date',['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+			echo $this->Form->input('start_date',['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
             echo $this->Form->input('end_date',['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
             echo $this->Form->input('pay_component_type',['class'=>'select2','options' => array('Amount', 'Percentage'), 'empty' => 'Choose']);
-            echo $this->Form->input('is_earning',['class'=>'select2','options' => array('Yes', 'No'), 'empty' => 'Choose']);
+            echo $this->Form->input('is_earning',['class'=>'select2','options' => array('Yes', 'No')]);
             echo $this->Form->input('currency',['options' => $this->Currency->get_currencies(), 'empty' => true]);
             echo $this->Form->input('recurring');
             echo $this->Form->input('frequency_id', ['label' => 'Frequency','options' => $frequencies, 'empty' => true]);
@@ -75,7 +75,7 @@
     </fieldset>
     <div class="box-footer">
     <?=$this->Html->link(__('Cancel'), ['action' => 'index'], ['escape' => false])?>
-    <?= $this->Form->button(__('Update Pay Component'),['title'=>'Update Pay Component','class'=>'pull-right']) ?>
+    <?= $this->Form->button(__('Update Pay Component'),['title'=>'Update Pay Component','class'=>'mptlupdate pull-right']) ?>
     </div>
     <?= $this->Form->end() ?>
 </div></div></section>
@@ -129,8 +129,40 @@
     				width: '100%',allowClear: true,placeholder: "Select",data: paycomponentgroupdata
 				});
     		}
+  		});	
   			
-		});	
+  			
+  		$('.mptlupdate').click(function(e){
+    		
+    		var paycomptype = $("#pay-component-type").val();
+    		if(paycomptype=="1"){
+    			var paycompval = $("#pay-component-value").val();
+    			if(paycompval=="" || paycompval==null){
+    				sweet_alert("Please enter pay component value.");
+					return false;
+    			}else if(paycompval<0 || paycompval>100){
+    				sweet_alert("Pay component value should be in the range 0-100.");
+					return false;
+    			}
+    		}
+    		
+    		
+    		
+    		var canoverride = $("#can-override").val();
+    		if(canoverride=="1"){
+    			var paycompval = $("#pay-component-value").val();
+    			if(paycompval=="" || paycompval==null){
+    				sweet_alert("Please enter pay component value.");
+					return false;
+    			}else{
+    				return true;
+    			}
+    		}else{
+    			return true;
+    		}
+    	});
+    	
+			
     });
    </script>
 <?php $this->end(); ?> 
