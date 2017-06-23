@@ -75,11 +75,11 @@ class PayComponentGroupsTable extends Table
 
         $validator
             ->date('start_date')
-            ->allowEmpty('start_date');
+            ->notEmpty('start_date');
 
         $validator
             ->date('end_date')
-            ->allowEmpty('end_date');
+            ->notEmpty('end_date');
 
         $validator
             ->allowEmpty('currency');
