@@ -108,7 +108,8 @@ class PayrollDataController extends AppController
 		$this->set('empgrouplist', json_encode($empgrouplist));
 					
 		$this->loadModel('PayComponents');
-        $payComponents = $this->PayComponents->find('all', ['limit' => 200])->where(['end_date >=' => date("Y/m/d")])
+        $payComponents = $this->PayComponents->find('all', ['limit' => 200])
+        							// ->where(['end_date >=' => date("Y/m/d")])
         							->andwhere(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         $payComponentGroups = $this->PayComponents->PayComponentGroups->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         
@@ -138,7 +139,7 @@ class PayrollDataController extends AppController
 			$this->loadModel('PayComponents');
 			
 			$payComponents=$this->PayComponents->find('all')->where(['pay_component_group_id' => $this->request->query['pcgid']])
-									->where(['end_date >=' => date("Y/m/d")])
+									// ->where(['end_date >=' => date("Y/m/d")])
 									->order(['"id"' => 'ASC'])->toArray();
 			$this->response->body(json_encode($payComponents));
 	    	return $this->response;
@@ -470,7 +471,9 @@ class PayrollDataController extends AppController
 							->andwhere("PayrollData.customer_id=".$this->loggedinuser['customer_id']);
 		
 		$this->loadModel("PayComponents");
-		$payComponents = $this->PayComponents->find('list', ['limit' => 200])->where(['end_date >= ' => date("Y/m/d")])->andwhere(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+		$payComponents = $this->PayComponents->find('list', ['limit' => 200])
+									// ->where(['end_date >= ' => date("Y/m/d")])
+									->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         		
 		$payComponentGroups = $this->PayComponents->PayComponentGroups->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         

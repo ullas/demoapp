@@ -109,6 +109,10 @@ class PayComponentsController extends AppController
 					
 		$this->set('paycomponentarr', json_encode($payComponents));
 		$this->set('paycomponentgrouparr', json_encode($payComponentGroups));
+		
+		$pcGroups = $this->PayComponents->PayComponentGroups->find('all')
+        									 ->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']);		 
+		$this->set('pcGroups',json_encode($pcGroups));
     }
 
     /**
@@ -153,7 +157,10 @@ class PayComponentsController extends AppController
         
 		$this->set('paycomponentarr', json_encode($payComponents));
 		$this->set('paycomponentgrouparr', json_encode($payComponentGroups));
-		// $this->log($basepaycomponents);
+		
+		$pcGroups = $this->PayComponents->PayComponentGroups->find('all')
+        									 ->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']);		 
+		$this->set('pcGroups',json_encode($pcGroups));
 		
 		$this->set(compact('payComponent', 'frequencies', 'customers','payComponentGroups'));
         $this->set('_serialize', ['payComponent']);
