@@ -117,8 +117,8 @@
     			if(paycompval=="" || paycompval==null){
     				sweet_alert("Please enter pay component value.");
 					return false;
-    			}else if(paycompval<0 || paycompval>100){
-    				sweet_alert("Pay component value should be in the range 0-100.");
+    			}else if(paycompval<0 || paycompval>200){
+    				sweet_alert("Pay component value should be in the range 0-200.");
 					return false;
     			}
     		}
