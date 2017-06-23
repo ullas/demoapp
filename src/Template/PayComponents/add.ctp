@@ -112,7 +112,19 @@
     $(function () {
 
     	$('.mptladd').click(function(e){
+			
+			var startdate = $("#start-date").val();
+    		var enddate = $("#end-date").val();
+    		if(startdate=="" || startdate==null || enddate=="" || enddate==null){
+    			sweet_alert("Start/End Date missing.");
+				return false;
+    		}
 
+			if(!(compareStartEndDate(startdate,enddate))){
+    			sweet_alert("Please ensure that the End Date is greater than or equal to the Start Date.");
+				return false;
+    		}
+    			
     		var paycomptype = $("#pay-component-type").val();
     		if(paycomptype=="1"){
     			var paycompval = $("#pay-component-value").val();
@@ -139,9 +151,6 @@
     		//check if pay component's start/ end date is in between pay component group's start-end date
     		var paycompgroup = $("#pay-component-group-id").val();
     		if(paycompgroup!="" && paycompgroup!=null){
-
-    			var startdate = $("#start-date").val();
-    			var enddate = $("#end-date").val();
 
     			var groupstartdate;var groupenddate;
     			$.each(pcgrouparr, function(key, value) {

@@ -127,6 +127,10 @@ var $components = array('Datatable');
         $customers = $this->PayComponentGroups->Customers->find('list', ['limit' => 200]);
         $this->set(compact('payComponentGroup', 'customers'));
         $this->set('_serialize', ['payComponentGroup']);
+		
+		$groupContents = $this->PayComponentGroups->PayComponents->find('all')->where(['pay_component_group_id' => $id])
+        									 ->andwhere(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']);		 
+		$this->set('groupContents',json_encode($groupContents));
     }
 
     /**

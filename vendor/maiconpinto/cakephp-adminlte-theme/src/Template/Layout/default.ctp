@@ -291,6 +291,8 @@ $this->Html->script([ '/js/dropzone' ], ['block' => 'script']);
 <?php echo $this->fetch('script'); ?>
 <?php echo $this->fetch('scriptBotton'); ?>
 <script type="text/javascript">
+var userdf=<?php echo $this->request->session()->read('sessionuser')['dateformat'];?>;
+
 $(document).ready(function(){
 
 	//toggle infobar
@@ -397,6 +399,25 @@ function bootbox_alert(msg, callback_success, callback_cancel) {
 
     }});
     return d;
+}
+function compareStartEndDate(startdate,enddate) {
+	if(userdf==1){
+    	startdate=convertdmytoymd(startdate);
+    	enddate=convertdmytoymd(enddate);
+    }
+    if(processDate(startdate)>processDate(enddate)){
+    	return false;
+    }else{
+    	return true;
+    }
+}
+function processDate(date){
+   	var parts = date.split("/");
+   	return new Date(parts[0], parts[1] - 1, parts[2]);
+}
+function convertdmytoymd(inputDate) {
+	var datearray = inputDate.split("/");
+	return datearray[2].trim() + '/' + datearray[1].trim() + '/' + datearray[0].trim();
 }
 function sweet_alert(msg, callback_success, callback_cancel) {
     var d = swal("MayHaw",msg);
