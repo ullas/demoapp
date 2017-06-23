@@ -182,7 +182,7 @@ var userdf='<?php echo $this->request->session()->read('sessionuser')['dateforma
 var paycomponentdata=[];
 var paycomponentarr=<?php echo $paycomponentarr ?>;
 $.each(paycomponentarr, function(key, value) {
-    paycomponentdata.push({'id':value['id'], "text":value['name'], "canoverride":value['can_override']});
+    paycomponentdata.push({'id':value['id'], "text":value['name'], "canoverride":value['can_override'], "startdate":value['start_date'], "enddate":value['end_date']});
 });
 // console.log(paycomponentdata);
 var paycomponentgroupdata=[];
@@ -254,6 +254,18 @@ $(function () {
 						sweet_alert("Please select Start/End Date.");
 						return false;
 					}else{
+						
+	
+						if(!(compareStartEndDate(startdate,enddate))){
+    						sweet_alert("Please ensure that the End Date is greater than or equal to the Start Date.");
+							return false;
+    					}
+    	
+    					if(!(checkPayComponentDate(paycomp,startdate,enddate))){
+    						sweet_alert("Start/End Date is earlier/older than than the start/end date of the selected pay component.");
+							return false;
+    					}
+    				
 						$.ajax({
         				type: "POST",
       					url: '/PayrollData/checkPayComponentExistence',
@@ -313,7 +325,17 @@ $(function () {
 				var enddate = $("#enddate1").val();
 
 				if(paycomp!="" && paycomp!=null && startdate!="" && startdate!=null && enddate!="" && enddate!=null){
-
+					
+					if(!(compareStartEndDate(startdate,enddate))){
+    					sweet_alert("Please ensure that the End Date is greater than or equal to the Start Date.");
+						return false;
+    				}
+    				
+    				if(!(checkPayComponentDate(paycomp,startdate,enddate))){
+    					sweet_alert("Start/End Date is earlier/older than than the start/end date of the selected pay component.");
+						return false;
+    				}
+    						
 					$.ajax({
         				type: "POST",
       					url: '/PayrollData/addData',
@@ -357,7 +379,17 @@ $(function () {
 					var enddate = $("#enddate"+i).val();
 
 				if(startdate!="" && startdate!=null && enddate!="" && enddate!=null){
-
+					
+					if(!(compareStartEndDate(startdate,enddate))){
+    					sweet_alert("Please ensure that the End Date is greater than or equal to the Start Date.");
+						return false;
+    				}
+    				
+    				if(!(checkPayComponentDate(paycomp,startdate,enddate))){
+    					sweet_alert("Start/End Date is earlier/older than than the start/end date of the selected pay component.");
+						return false;
+    				}
+    				
 					$.ajax({
         				type: "POST",
       					url: '/PayrollData/addData',
@@ -587,7 +619,48 @@ function searchpayrolldata(){
 	});
 
 }
+function checkPayComponentDate(paycomp,startdate,enddate){
+	
+	if(userdf==1){
+    	startdate=convertdmytoymd(startdate);
+    	enddate=convertdmytoymd(enddate);
+    }
+    	
+	for(var i = 0; i < paycomponentdata.length; i++) {
+		var paycomponentstartdate;var paycomponentenddate;
+        if(paycomponentdata[i]['id'] == paycomp) {
+        	if(paycomponentdata[i]['startdate'].length>11){
+				paycomponentstartdate=paycomponentdata[i]['startdate'].substring(0 , 10);
+				paycomponentstartdate=formattoymd(paycomponentstartdate);
+			}
+			if(paycomponentdata[i]['enddate'].length>11){
+				paycomponentenddate=paycomponentdata[i]['enddate'].substring(0 , 10);
+				paycomponentenddate=formattoymd(paycomponentenddate);
+			}
+        	// console.log(processDate(paycomponentenddate)+"---"+processDate(enddate));return false;
+            if((processDate(startdate)<processDate(paycomponentstartdate)) || (processDate(enddate)>processDate(paycomponentenddate))) { return false;  }else{ return true; }
+        }
+    }
+}
+function processDate(date){
+   	var parts = date.split("/");
+   	return new Date(parts[0], parts[1] - 1, parts[2]);
+}
+function convertdmytoymd(inputDate) {
+	var datearray = inputDate.split("/");
+	return datearray[2].trim() + '/' + datearray[1].trim() + '/' + datearray[0].trim();
+}
+function formattoymd(inputDate) {
+    	var date = new Date(inputDate);
+    	if (!isNaN(date.getTime())) {
+        	var day = date.getDate().toString();
+        	var month = (date.getMonth() + 1).toString();
+        	// Months use 0 index.
 
-
+        	return date.getFullYear()  + '/' +
+        	(month[1] ? month : '0' + month[0]) + '/' +
+        	(day[1] ? day : '0' + day[0]) ;
+    	}
+	}
 </script>
 <?php $this->end(); ?>
