@@ -110,17 +110,17 @@ $(function () {
         					if(data=="success"){
     							window.location='/payroll-data';
     						}else{
-    							sweet_alert("Error while adding PayComponent's.");
+    							sweet_alert("Error adding Pay Component.");
 								return false;
     						}
 
         				},error: function(data) {
-       						sweet_alert("Error while adding PayComponent's.");
+       						sweet_alert("Error adding Pay Component.");
 							return false;
 
         				},statusCode: {
         					500: function() {
-          						sweet_alert("Error while adding PayComponent's.");
+          						sweet_alert("Error adding Pay Component.");
 								return false;
         					}
       					}
@@ -157,17 +157,17 @@ $(function () {
     								window.location='/payroll-data';
     							}
     						}else{
-    							sweet_alert("Error while adding PayComponent Group.");
+    							sweet_alert("Error adding Pay Component Group.");
 								return false;
     						}
 
         				},error: function(data) {
-       						sweet_alert("Error while adding PayComponent Group.");
+       						sweet_alert("Error adding Pay Component Group.");
 							return false;
 
         				},statusCode: {
         					500: function() {
-          						sweet_alert("Error while adding PayComponent Group.");
+          						sweet_alert("Error adding Pay Component Group.");
 								return false;
         					}
       					}
@@ -250,7 +250,7 @@ $(function () {
 			}
 
 		}else{
-			sweet_alert("Please select a Employee.");
+			sweet_alert("Please select an Employee.");
    			return false;
 		}
 
@@ -272,7 +272,7 @@ $(function () {
 
 
 		}else{
-			sweet_alert("Please select a Employee.");
+			sweet_alert("Please select an Employee.");
    			return false;
 		}
 
@@ -283,14 +283,14 @@ $(function () {
 		$(".pcaddbtn").show();$(".pcgroupaddbtn").show();
 
 		var selectedcontrol=$(this);
-		sweet_confirmdelete("MayHaw","Are you sure you want to delete the particular Pay Component Group ?", function(){selectedcontrol.parent().closest('div .groupclass').remove(); return true;});
+		sweet_confirmdelete("MayHaw","Are you sure you want to delete the Pay Component Group?", function(){selectedcontrol.parent().closest('div .groupclass').remove(); return true;});
 	});
 
 	$('.maindiv').on('click', 'a.compdelete', function() {
 		$(".pcaddbtn").show();$(".pcgroupaddbtn").show();
 
 		var selectedcontrol=$(this);
-		sweet_confirmdelete("MayHaw","Are you sure you want to delete the particular Pay Component ?", function(){selectedcontrol.parent().closest('div .componentclass').remove(); return true;});
+		sweet_confirmdelete("MayHaw","Are you sure you want to delete the Pay Component?", function(){selectedcontrol.parent().closest('div .componentclass').remove(); return true;});
 	});
 
 });
