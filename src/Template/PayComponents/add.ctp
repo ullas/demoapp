@@ -21,7 +21,7 @@
     </section>
 <section class="content">
 	<div class="box box-primary"><div class="box-body">
-    <?= $this->Form->create($payComponent) ?>
+    <?= $this->Form->create($payComponent,['id'=>'addpcform']) ?>
     <fieldset>
         <?php
             echo $this->Form->input('external_code',['label' => 'Pay Component Code']);
@@ -87,7 +87,8 @@
 
 <?php $this->start('scriptBotton'); ?>
 <script>
-
+	var userdf=<?php echo $this->request->session()->read('sessionuser')['dateformat'];?>;
+	
 	var paycomponentdata=[];
 	var paycomponentarr=<?php echo $paycomponentarr ?>;
 	$.each(paycomponentarr, function(key, value) {
@@ -100,7 +101,8 @@
     	paycomponentgroupdata.push({'id':key, "text":value});
 	});
 
-
+	var pcgrouparr=<?php echo $pcGroups ?>;
+	
 	window.onload = function () { 
     	 $('.basepcgroup').select2({
     		width: '100%',allowClear: true,placeholder: "Select",data: paycomponentgroupdata
@@ -131,12 +133,55 @@
     			if(paycompval=="" || paycompval==null){
     				sweet_alert("Please enter pay component value.");
 					return false;
-    			}else{
-    				return true;
     			}
-    		}else{
-    			return true;
     		}
+    		
+    		//check if pay component's start/ end date is in between pay component group's start-end date
+    		var paycompgroup = $("#pay-component-group-id").val();
+    		if(paycompgroup!="" && paycompgroup!=null){
+    				
+    			var startdate = $("#start-date").val();
+    			var enddate = $("#end-date").val();
+    			
+    			var groupstartdate;var groupenddate;
+    			$.each(pcgrouparr, function(key, value) {
+    				if(value["id"]==paycompgroup){//return false;
+    					
+    					if(value["start_date"].length>11){
+							value["start_date"]=value["start_date"].substring(0 , 10);
+						}
+						if(value["end_date"].length>11){
+							value["end_date"]=value["end_date"].substring(0 , 10);
+						}
+							
+    					if(userdf==1){
+								value["start_date"]=formattoymd(value["start_date"]);
+								value["end_date"]=formattoymd(value["end_date"]);
+								
+							groupstartdate=convertdmytoymd(value["start_date"]).trim();
+							groupenddate=convertdmytoymd(value["end_date"]).trim();
+						}else{
+							groupstartdate=value["start_date"].replace(/-/g, "/");
+    						groupenddate=value["end_date"].replace(/-/g, "/");
+						}
+						
+						if(startdate!="" && startdate!=null && groupstartdate!="" && groupstartdate!=null && enddate!="" && enddate!=null && groupenddate!="" && groupenddate!=null){
+							// console.log(processDate(startdate)+"--"+processDate(groupstartdate)+"--" +processDate(enddate)+"--"+processDate(groupenddate));
+							if((processDate(startdate)>processDate(groupstartdate)) || (processDate(enddate)<processDate(groupenddate))){
+    							sweet_alert("Pay Component Group's date exceeds start/end date.");
+								return false;
+    						}else{
+    							document.getElementById("addpcform").submit();
+    						}
+    					}else{
+    						document.getElementById("addpcform").submit();
+    					}
+    				}
+    			});
+    		}else{
+    			document.getElementById("addpcform").submit();
+    		}
+			return false;	
     	});
     	
     	
@@ -154,5 +199,29 @@
   			
 		});	
     });
+    
+    function formattoymd(inputDate) {
+    	var date = new Date(inputDate);
+    	if (!isNaN(date.getTime())) {
+        	var day = date.getDate().toString();
+        	var month = (date.getMonth() + 1).toString();
+        	// Months use 0 index.
+
+        	return date.getFullYear()  + '/' +
+        	(month[1] ? month : '0' + month[0]) + '/' +
+        	(day[1] ? day : '0' + day[0]) ;
+    	}
+	}
+    function processDate(date){
+   		var parts = date.split("/");
+   		return new Date(parts[2], parts[1] - 1, parts[0]);
+	}
+    function convertdmytoymd(inputDate) {
+
+		var datearray = inputDate.split("/");
+
+		return datearray[2].trim() + '/' + datearray[1].trim() + '/' + datearray[0].trim();
+	}
+
    </script>
 <?php $this->end(); ?> 
