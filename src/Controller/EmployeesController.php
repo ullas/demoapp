@@ -790,7 +790,14 @@ class EmployeesController extends AppController
             		}
 
 				$this->Flash->success(__('The employee has been saved.'));
-				return $this->redirect(['action' => 'index']);
+				
+				$userrole=$this->request->session()->read('sessionuser')['role'];
+				if ($userrole=="root" || $userrole=="admin"){
+					return $this->redirect(['action' => 'index']);
+				}else{
+					return $this->redirect(['action' => 'index','controller'=>'Homes']);
+				}
+				
             } else {
                 $this->Flash->error(__('The employee could not be saved. Please, try again.'));
             }
