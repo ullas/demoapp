@@ -26,9 +26,9 @@
             echo $this->Form->input('recurring');
             echo $this->Form->input('frequency_id', ['label' => 'Frequency','options' => $frequencies, 'empty' => true]);
             echo $this->Form->input('pay_component_group_id',['options' => $payComponentGroups,'label' => 'Pay Component Group','class'=>'select2', 'empty' => 'Choose']);
-            
+
 			?>
-			
+
 			<div class="col-md-4">
 			   <div class="form-group">
 				<label class="control-label">Base Pay Component Type</label>
@@ -41,17 +41,17 @@
       			</div>
               </div>
            </div>
-           
-           
+
+
            <div class="col-md-4">
            	<div class="form-group">
 				<label class="control-label">Base Pay Component</label>
 				<div class="input-group">
-					<input class="form-control basepcgroup" name="base_pay_component_group" id="base-pay-component-group"/>    
-				</div>           
+					<input class="form-control basepcgroup" name="base_pay_component_group" id="base-pay-component-group"/>
+				</div>
              </div>
            </div>
-              
+
 			<?php
             // echo $this->Form->input('base_pay_component_group',['options' => $payComponents,'label' => 'Base Pay Component','class'=>'select2', 'empty' => 'Choose']);
 			echo $this->Form->input('pay_component_value');
@@ -67,11 +67,11 @@
             echo $this->Form->input('rate');
             echo $this->Form->input('number');
         ?>
-        
-        
-        
-        
-              
+
+
+
+
+
     </fieldset>
     <div class="box-footer">
     <?=$this->Html->link(__('Cancel'), ['action' => 'index'], ['escape' => false])?>
@@ -90,19 +90,19 @@
 	$.each(paycomponentarr, function(key, value) {
     	paycomponentdata.push({'id':key, "text":value});
 	});
-	
+
 	var paycomponentgroupdata=[];
 	var paycomponentgrouparr=<?php echo $paycomponentgrouparr ?>;
 	$.each(paycomponentgrouparr, function(key, value) {
     	paycomponentgroupdata.push({'id':key, "text":value});
 	});
-	
-	var pcgrouparr=<?php echo $pcGroups ?>;
-	
 
-	window.onload = function () { 
+	var pcgrouparr=<?php echo $pcGroups ?>;
+
+
+	window.onload = function () {
 		 var bpct='<?php echo $payComponent['base_pay_component_type'] ?>';
-		
+
 		 var pcgdata=[];
 		 pcgdata=paycomponentgroupdata;
     	 if(bpct=="2"){
@@ -112,15 +112,15 @@
     		width: '100%',allowClear: true,placeholder: "Select",data: pcgdata
 		});
 	}
-	
+
     $(function () {
-    	
+
     	 var bpct='<?php echo $payComponent['base_pay_component_type'] ?>';
     	 $("#base-pay-component-type").val(bpct);
-    	 
+
     	 var bpcg='<?php echo $payComponent['base_pay_component_group'] ?>';
     	 $("#base-pay-component-group").val(bpcg);
-    	 
+
     	$( "#base-pay-component-type" ).change(function() {
     		var selectedVal = this.value;
     		if(selectedVal=="2"){
@@ -132,11 +132,11 @@
     				width: '100%',allowClear: true,placeholder: "Select",data: paycomponentgroupdata
 				});
     		}
-  		});	
-  			
-  			
+  		});
+
+
   		$('.mptlupdate').click(function(e){
-    		
+
     		var paycomptype = $("#pay-component-type").val();
     		if(paycomptype=="1"){
     			var paycompval = $("#pay-component-value").val();
@@ -148,9 +148,9 @@
 					return false;
     			}
     		}
-    		
-    		
-    		
+
+
+
     		var canoverride = $("#can-override").val();
     		if(canoverride=="1"){
     			var paycompval = $("#pay-component-value").val();
@@ -165,30 +165,30 @@
     		// else{
     			// return true;
     		// }
-    	
-    	
+
+
     	//check if pay component's start/ end date is in between pay component group's start-end date
     		var paycompgroup = $("#pay-component-group-id").val();
     		if(paycompgroup!="" && paycompgroup!=null){
-    				
+
     			var startdate = $("#start-date").val();
     			var enddate = $("#end-date").val();
-    			
+
     			var groupstartdate;var groupenddate;
     			$.each(pcgrouparr, function(key, value) {
     				if(value["id"]==paycompgroup){//return false;
-    					
+
     					if(value["start_date"].length>11){
 							value["start_date"]=value["start_date"].substring(0 , 10);
 						}
 						if(value["end_date"].length>11){
 							value["end_date"]=value["end_date"].substring(0 , 10);
 						}
-							
+
     					if(userdf==1){
 								value["start_date"]=formattoymd(value["start_date"]);
 								value["end_date"]=formattoymd(value["end_date"]);
-								
+
 							groupstartdate=convertdmytoymd(value["start_date"]).trim();
 							groupenddate=convertdmytoymd(value["end_date"]).trim();
 						}else{
@@ -196,13 +196,18 @@
     						groupenddate=value["end_date"].replace(/-/g, "/");
 						}
 
-						
+
 						if(startdate!="" && startdate!=null && groupstartdate!="" && groupstartdate!=null && enddate!="" && enddate!=null && groupenddate!="" && groupenddate!=null){
 							// console.log(processDate(startdate)+"--"+processDate(groupstartdate)+"--" +processDate(enddate)+"--"+processDate(groupenddate));
-							if((processDate(startdate)>processDate(groupstartdate)) || (processDate(enddate)<processDate(groupenddate))){
-    							sweet_alert("Pay Component Group's date exceeds start/end date.");
+              if((processDate(startdate)>processDate(groupenddate))){
+    							sweet_alert("Start Date exceeds the end date of the selected Pay Component Group.");
 								return false;
-    						}else{
+    						}
+                else if ((processDate(enddate)<processDate(groupstartdate))) {
+                  sweet_alert("End Date is older than the Start Date of the selected Pay Component Group.");
+								return false;
+                }
+                else{
     							document.getElementById("editpcform").submit();
     						}
     					}else{
@@ -213,9 +218,9 @@
     		}else{
     			document.getElementById("editpcform").submit();
     		}
-			return false;	
+			return false;
 		});
-		
+
     });
     function formattoymd(inputDate) {
     	var date = new Date(inputDate);
@@ -240,4 +245,4 @@
 		return datearray[2].trim() + '/' + datearray[1].trim() + '/' + datearray[0].trim();
 	}
    </script>
-<?php $this->end(); ?> 
+<?php $this->end(); ?>
