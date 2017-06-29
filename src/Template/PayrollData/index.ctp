@@ -30,6 +30,9 @@
               </div>
   	<a href="/PayrollData/add" id="addpayrolldata" class="open-Popup btn btn-sm btn-success" data-remote="false" data-toggle="modal" data-target="#actionspopover" style="margin-left:15px;" title="Add"><i class="fa fa-plus" aria-hidden="true"></i></a>
 
+<a href="/PayrollData/batchadd" id="addpayrolldata" class="open-Popup btn btn-sm btn-success" data-remote="false" data-toggle="modal" data-target="#actionspopover" style="margin-left:15px;" title="Add">Add in batch</a>
+<a href="/PayrollData/batchremove" id="addpayrolldata" class="open-Popup btn btn-sm btn-success" data-remote="false" data-toggle="modal" data-target="#actionspopover" style="margin-left:15px;" title="Add">Remove in batch</a>
+
     <!-- <?= $this->Html->link('<b>Add</b> &nbsp;&nbsp;'.__('<i class="fa fa-plus"></i>'), ['action' => 'add'],['class' => 'btn btn-sm btn-success btn-flat','escape' => false]) ?> -->
   </ol>
 </section>
@@ -46,6 +49,8 @@
 
               <div class="box-tools pull-right">
               	<a href="/PayrollData/addempdata/<?php echo $vals['empid']; ?>" class="open-Popup btn btn-xs btn-success" data-remote="false" data-toggle="modal" data-target="#actionspopover" style="margin-left:15px;" title="Add">Add Pay Components</a>
+
+				<a href="/PayrollData/copypaycomponents/<?php echo $vals['empid']; ?>" class="open-Popup btn btn-xs btn-success" data-remote="false" data-toggle="modal" data-target="#actionspopover" style="margin-left:5px;" title="Add">Copy Pay Components</a>
 
               	<a data-toggle="collapse" data-parent="#contentsection" href="#mainpanel<?php echo $vals['empid'];  ?>" aria-expanded="false" class="collapsed">
               		<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="more-less fa fa-square-o text-navy"></i>
@@ -221,7 +226,61 @@ $(function () {
 					}
     			}
 
+				$('.mptlcopy').click(function(e){
 
+					var lastemppanel=$('.emppanel.panel-collapse.collapse.in').attr('id');localStorage.setItem('lastemppanel', lastemppanel);
+
+					//<!--alert if pay component value is null  --->
+					// if($("#pay-component-value").is(":disabled")){
+//
+					// }else{
+						// if(($("#pay-component-value").val().trim()=="") || ($("#pay-component-value").val().trim()==null)){
+							// sweet_alert("Please enter pay component value.");
+							// return false;
+						// }
+					// }
+
+    				//get input value
+    				var oldemp = $("#oldempid").val();
+					var newemp = $("#empdatabiographies-id").val();
+					
+					if (oldemp=="" || oldemp==null){
+						sweet_alert("Error while loading.Please try again later.");
+						return false;
+					}else if (newemp=="" || newemp==null){
+						sweet_alert("Please select a employee.");
+						return false;
+					}else{
+						
+						$.ajax({
+        				type: "POST",
+      					url: '/PayrollData/copyEmployeesPC',
+        				data: 'oldemp='+oldemp+'&newemp=' + newemp,
+        				success : function(data) {
+        					if(data=="success"){
+        						window.reload();
+    							return true;
+    						}else{
+    							sweet_alert(data);
+								return false;
+    						}
+
+        				},error: function(data) {
+       						sweet_alert("Error while copying PayComponents.");
+							return false;
+
+        				},statusCode: {
+        					500: function() {
+          						sweet_alert("Error while copying PayComponent's.");
+								return false;
+        					}
+      					}
+
+        			});
+        			return false;
+					}
+					// return false;
+				});
 				$('.mptlupdate').click(function(e){
 
 					var lastemppanel=$('.emppanel.panel-collapse.collapse.in').attr('id');localStorage.setItem('lastemppanel', lastemppanel);

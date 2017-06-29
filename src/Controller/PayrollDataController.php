@@ -131,6 +131,107 @@ class PayrollDataController extends AppController
 		(isset($personalid[0]['person_id_external'])) ? $personalid=$personalid[0]['person_id_external'] : $personalid="" ;
 		return json_encode($arrayTemp1[0]['first_name']." ".$arrayTemp1[0]['last_name'].' ('.$personalid.')');
 	}
+	public function batchadd(){
+			
+		$payrollData = $this->PayrollData->newEntity();
+		$this->loadModel('PayComponents');	
+		$payComponents = $this->PayComponents->find('list', ['limit' => 200])
+									->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        	
+		$this->set(compact('payrollData', 'payComponents'));
+		
+		$this->loadModel('PayrollRecord');	
+		$dbout = $this->PayrollRecord->PayGroups->find()->select(['PayGroups.id', 'PayGroups.name',])
+					// ->leftJoin('JobInfos', 'JobInfos.pay_group_id = PayGroups.id')
+					->where(['PayGroups.customer_id' => $this->loggedinuser['customer_id']])->orwhere(['PayGroups.customer_id' => '0'])->toArray();
+        $paygrouplist = array();
+        foreach($dbout as $value){
+
+        	$jobinfos = $this->PayrollRecord->PayGroups->JobInfos->find()->select(['JobInfos.employee_id'])->where(['JobInfos.pay_group_id' => $value['id'] ])
+        					->andwhere(['JobInfos.customer_id' => $this->loggedinuser['customer_id']])->toArray();
+			$jobinfolist = array();
+        	foreach($jobinfos as $childval){
+
+				$jobinfolist[] = array("employee_id" => $childval['JobInfos']['employee_id'] );
+			}
+
+			$paygrouplist[] = array("parentid" => $value['id'] , "parent" => $value['name'] , "child" => $jobinfolist );
+			// $this->Flash->error(__('DATA__.').json_encode($paygrouplist));
+
+
+		}
+		
+        $this->set('paygrouplist', $paygrouplist);
+	}
+	public function copyEmployeesPC(){
+			
+		if($this->request->is('ajax')) {
+
+			$this->autoRender=false;
+			
+		}
+	}
+	public function copypaycomponents($id = null)
+    {
+    	$payrollData = $this->PayrollData->find('all')->where(['empdatabiographies_id' => $id])->first();
+		
+    	$payrolldatalist = array();
+        
+        $paycomponents = $this->PayrollData->find('all')->where(['PayrollData.empdatabiographies_id' => $id ])
+        					->andwhere(['PayrollData.pay_component_type' => '1'])->andwhere(['PayrollData.customer_id' => $this->loggedinuser['customer_id']])->toArray();
+		$paycomponentlist = array();
+        foreach($paycomponents as $childval){
+
+			$this->loadModel('PayComponents');
+        	$pcname=$this->PayComponents->find()->select('PayComponents.name')->where(['PayComponents.id' => $childval['paycomponent']])->first();
+				
+			$paycomponentlist[] = array("id"=>$childval['id'],"paycomponent" => $pcname['name'],"startdate" => $childval['start_date'],"enddate" => $childval['end_date'],
+														 "paycomponentvalue" => $childval['pay_component_value'] );
+		}
+
+		$this->loadModel('PayrollData');
+			$pcgroupout = $this->PayrollData->find()->select(['paycomponentgroup'])->where(['PayrollData.empdatabiographies_id' => $id ])
+					->andwhere(['PayrollData.pay_component_type' => '2'])
+					->andwhere(['PayrollData.customer_id' => $this->loggedinuser['customer_id']])->orwhere(['PayrollData.customer_id' => '0'])->distinct()->toArray();
+			$paycomponentgrouplist = array();
+			foreach($pcgroupout as $groupchildval){
+						
+				$paycomponentgroups = $this->PayrollData->find('all')->where(['PayrollData.empdatabiographies_id' => $id ])
+							->andwhere(['PayrollData.paycomponentgroup' => $groupchildval['paycomponentgroup']])
+        					->andwhere(['PayrollData.pay_component_type' => '2'])->andwhere(['PayrollData.customer_id' => $this->loggedinuser['customer_id']])->toArray();
+				$componentlist = array();
+        		
+				$this->loadModel('PayComponentGroups');
+        	    $pcgroupname=$this->PayComponentGroups->find()->select('PayComponentGroups.name')->where(['PayComponentGroups.id' => $groupchildval['paycomponentgroup']])->first();
+					
+        		foreach($paycomponentgroups as $childval){
+				
+					$this->loadModel('PayComponents');
+        	    	$pcname=$this->PayComponents->find()->select('PayComponents.name')->where(['PayComponents.id' => $childval['paycomponent']])->first();
+				
+					$componentlist[] = array("compid"=>$childval['id'],"paycomponent" => $pcname['name'],"startdate" => $childval['start_date'],"enddate" => $childval['end_date'],
+														 "paycomponentvalue" => $childval['pay_component_value'], "paycomponentgroup" => $pcgroupname['name'] );
+				}
+				
+				$paycomponentgrouplist[] = array("groupid"=>$groupchildval['paycomponentgroup'], "groupname"=>$pcgroupname['name'], "grouplist" => $componentlist );
+			}
+			$payrolldatalist[] = array("empid" => $id, "empname"=>str_replace('"', '',$this->get_employeename ($id)),
+													 "pcchild" => $paycomponentlist, "pcgroupchild" => $paycomponentgrouplist  );
+		
+		$this->set('paycompcontent', $payrolldatalist);
+													 
+		$emparr = $this->PayrollData->find('all')->select(['empdatabiographies_id'])->where(['PayrollData.customer_id='.$this->loggedinuser['customer_id']]);
+        
+        $excludingempDataBiographies = $this->PayrollData->EmpDataBiographies->find('list',['limit' => 200])
+        				->select(['id'=>'EmpDataBiographies.id','name' => 'CONCAT(EmpDataPersonals.first_name, \' \',EmpDataPersonals.last_name,\' (\', EmpDataBiographies.employee_id, \')\' )'])
+						->leftJoin('EmpDataPersonals', 'EmpDataPersonals.employee_id = EmpDataBiographies.employee_id')
+						->where(['EmpDataBiographies.id NOT IN'=>$emparr])
+						->andwhere("EmpDataBiographies.customer_id=".$this->loggedinuser['customer_id']);
+		
+
+		$this->set(compact('payrollData', 'excludingempDataBiographies'));
+        
+    }
 	public function getPayComponentGroupData(){
 		
 		if($this->request->is('ajax')) {
