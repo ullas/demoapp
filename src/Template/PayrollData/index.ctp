@@ -258,7 +258,7 @@ $(function () {
         				data: 'oldemp='+oldemp+'&newemp=' + newemp,
         				success : function(data) {
         					if(data=="success"){
-        						window.reload();
+        						window.location.reload();
     							return true;
     						}else{
     							sweet_alert(data);
