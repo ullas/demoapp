@@ -168,6 +168,51 @@ class PayrollDataController extends AppController
 		if($this->request->is('ajax')) {
 
 			$this->autoRender=false;
+			$successcounter=0;$errorcounter=0;
+			$oldempid = $this->request->data['oldemp'] ;  
+			$newempid = $this->request->data['newemp'] ;  
+			
+		
+			if($oldempid!="" && $oldempid!=null && $newempid!="" && $newempid!=null){
+				$dbdatas = $this->PayrollData->find('all')->where(['PayrollData.empdatabiographies_id' => $oldempid ])
+										->andwhere(['PayrollData.customer_id' => $this->loggedinuser['customer_id']])->toArray();
+        		foreach($dbdatas as $childval){
+        				
+        			$this->loadModel('PayrollData');
+					$payrollData = $this->PayrollData->newEntity();
+            		$payrollData = $this->PayrollData->patchEntity($payrollData, $this->request->data);
+					
+					$payrollData['empdatabiographies_id']=$newempid;
+					
+					$payrollData['pay_component_value']=$childval['pay_component_value'];
+					$payrollData['start_date']=$childval['start_date'];
+					$payrollData['end_date']=$childval['end_date'];
+					$payrollData['pay_component_type']=$childval['pay_component_type'];
+					$payrollData['paycomponent']=$childval['paycomponent'];
+					$payrollData['paycomponentgroup']=$childval['paycomponentgroup'];
+					$payrollData['batch']=$childval['batch'];
+					$payrollData['customer_id']=$this->loggedinuser['customer_id'];
+					
+            		if ($this->PayrollData->save($payrollData)) {
+            			$successcounter++;
+					}else{
+						$errorcounter++;
+					}
+				}
+				
+			}
+			if($errorcounter<1){
+				$this->response->body("success");
+	    		return $this->response;
+			}else{
+				if($successcounter>0){
+					$this->response->body("Partially copied.");
+	    			return $this->response;
+				}else{
+					$this->response->body("Error while copying Pay Component's.");
+	    			return $this->response;
+				}
+			}
 			
 		}
 	}
