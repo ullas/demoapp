@@ -163,6 +163,38 @@ class PayrollDataController extends AppController
 		
         $this->set('paygrouplist', $paygrouplist);
 	}
+	public function batchremove(){
+			
+		$payrollData = $this->PayrollData->newEntity();
+		$this->loadModel('PayComponents');	
+		$payComponents = $this->PayComponents->find('list', ['limit' => 200])
+									->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        	
+		$this->set(compact('payrollData', 'payComponents'));
+		
+		$this->loadModel('PayrollRecord');	
+		$dbout = $this->PayrollRecord->PayGroups->find()->select(['PayGroups.id', 'PayGroups.name',])
+					// ->leftJoin('JobInfos', 'JobInfos.pay_group_id = PayGroups.id')
+					->where(['PayGroups.customer_id' => $this->loggedinuser['customer_id']])->orwhere(['PayGroups.customer_id' => '0'])->toArray();
+        $paygrouplist = array();
+        foreach($dbout as $value){
+
+        	$jobinfos = $this->PayrollRecord->PayGroups->JobInfos->find()->select(['JobInfos.employee_id'])->where(['JobInfos.pay_group_id' => $value['id'] ])
+        					->andwhere(['JobInfos.customer_id' => $this->loggedinuser['customer_id']])->toArray();
+			$jobinfolist = array();
+        	foreach($jobinfos as $childval){
+
+				$jobinfolist[] = array("employee_id" => $childval['JobInfos']['employee_id'] );
+			}
+
+			$paygrouplist[] = array("parentid" => $value['id'] , "parent" => $value['name'] , "child" => $jobinfolist );
+			// $this->Flash->error(__('DATA__.').json_encode($paygrouplist));
+
+
+		}
+		
+        $this->set('paygrouplist', $paygrouplist);
+	}
 	public function copyEmployeesPC(){
 			
 		if($this->request->is('ajax')) {
@@ -487,6 +519,114 @@ class PayrollDataController extends AppController
                 	$this->response->body("error");
 	    			return $this->response;
             }			
+		}
+	}
+	public function addBatchData()
+	{
+		if($this->request->is('ajax')) {
+				
+			$this->autoRender=false;		
+			
+			$checkedpaygroups=json_decode($this->request->data['checkedarr']);
+			for($k=0;$k<sizeof($checkedpaygroups);$k++) {
+			
+			$this->loadModel('JobInfos');	
+			$jobinfos = $this->JobInfos->find()->select(['JobInfos.employee_id'])->where(['JobInfos.pay_group_id' => $checkedpaygroups[$k] ])
+        					->andwhere(['JobInfos.customer_id' => $this->loggedinuser['customer_id']])->toArray();
+        	foreach($jobinfos as $childval){
+        	
+			$this->loadModel('PayrollData');		
+			$payrollData = $this->PayrollData->newEntity();
+			
+            $payrollData=$this->PayrollData->patchEntity($payrollData,$this->request->data);
+			
+			
+           	$payrollData['start_date']=$this->request->data['startdate'];
+			$payrollData['end_date']=$this->request->data['enddate'];
+            $payrollData['paycomponent']=$this->request->data['paycomponent'];
+			$payrollData['pay_component_value']=$this->request->data['paycomponentvalue'];
+			$payrollData['pay_component_type']=$this->request->data['type'];
+			$payrollData['paycomponentgroup']=$this->request->data['paycomponentgroup'];
+			
+			$payrollData['batch']=1;
+			
+			$payrollData['customer_id']=$this->loggedinuser['customer_id'];
+			
+			$userdf = $this->request->session()->read('sessionuser')['dateformat'];
+            if(isset($userdf)  & $userdf===1){
+				foreach (["start_date", "end_date"] as $value) {		
+					if(isset($payrollData[$value])){			
+						if($payrollData[$value]!=null && $payrollData[$value]!='' && strpos($payrollData[$value], '/') !== false){
+							$payrollData[$value] = str_replace('/', '-', $payrollData[$value]);
+							$payrollData[$value]=date('Y/m/d', strtotime($payrollData[$value]));
+						}
+					}
+				}
+			}
+			
+			
+				$this->loadModel('EmpDataBiographies');
+		$emparr=$this->EmpDataBiographies->find('all',['conditions' => array('employee_id' => $childval['employee_id']),'contain' => []])->toArray();
+		isset($emparr[0]) ? $empid = $emparr[0]['id'] : $empid = "" ;  
+			
+			$payrollData['empdatabiographies_id']=$empid;
+			//initiallly query  
+			$this->loadModel('PayrollData');
+			$groupquery=$this->PayrollData->find('all', array('conditions' => array('empdatabiographies_id'  => $payrollData['empdatabiographies_id'],'pay_component_type'  => 2,
+									'paycomponent'  =>$payrollData['paycomponent'],'paycomponentgroup'  => $payrollData['paycomponentgroup'],'customer_id'  => $this->loggedinuser['customer_id']) ));
+									
+			$groupquerycount=$groupquery->count();
+			if($groupquerycount>0){
+				//initially delete the particular employees data
+				// $this->PayrollData->deleteAll(['empdatabiographies_id' => $payrollData['empdatabiographies_id'],'pay_component_type'  => 2,
+									// 'paycomponent'  =>$payrollData['paycomponent'],'paycomponentgroup'  => $payrollData['paycomponentgroup'],'customer_id'  => $this->loggedinuser['customer_id']]);
+			}
+
+			//initiallly query  
+			$compquery=$this->PayrollData->find('all', array('conditions' => array('empdatabiographies_id'  => $payrollData['empdatabiographies_id'],'pay_component_type'  => 1,
+									'paycomponent'  =>$payrollData['paycomponent'],'paycomponentgroup'  => $payrollData['paycomponentgroup'],'customer_id'  => $this->loggedinuser['customer_id']) ));
+			
+			foreach ($compquery as $row) {						
+			if($row['start_date']!=""  && $row['start_date']!=null && $row['end_date']!="" && $row['end_date']!=null){
+						
+						
+				if(isset($userdf)  & $userdf===1){
+					$startdate = \DateTime::createFromFormat('d/m/Y', $row['start_date']);
+					$startdate=date_format($startdate, 'Y/m/d');
+					$enddate = \DateTime::createFromFormat('d/m/Y', $row['end_date']);
+					$enddate=date_format($enddate, 'Y/m/d');
+				}else{
+					$enddate = $row['end_date'];
+					$startdate=$row['start_date'];
+				}
+				// $this->Flash->error(__('O/P:'.$payrollData['start_date'].'---'.$enddate));
+			
+							
+				if($payrollData['start_date']<=$startdate || $payrollData['end_date']<=$startdate || $payrollData['start_date']<=$enddate || $payrollData['end_date']<=$enddate){
+					// $this->response->body("Pay Component exists already in the same period duration(".$startdate."-".$enddate.").Please check and try again.");
+	    			// return $this->response;
+				}
+		
+			}
+			}
+			//$this->Flash->error(__('You are not Authorized.'.$payrollData['empdatabiographies_id']));
+			if ($this->PayrollData->save($payrollData)) {
+					// if (($k+1)==sizeof($checkedpaygroups)) {
+               	 		// $this->response->body("success");
+	    				// return $this->response;
+					// }
+            } else {
+
+                	$this->response->body("error");
+	    			return $this->response;
+            }
+            }	
+if (($k+1)==sizeof($checkedpaygroups)) {
+               	 		$this->response->body("success");
+	    				return $this->response;
+					}		
+		}
+
 		}
 	}
 

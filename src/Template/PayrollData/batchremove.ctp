@@ -1,13 +1,6 @@
-
-<?= $this->element('templateelmnt'); ?>
-<style>
-	.pcaddbtn, .pcgroupaddbtn{
-		margin-top:25px;
-	}
-</style>
 <div class="box box-success box-solid no-border">
 	<div class="box-header with-border text-center">
-        <h3 class="box-title">Copy Payroll Data</h3>
+        <h3 class="box-title">Add Payroll Data in batch</h3>
 
         <div class="box-tools pull-right">
             <button type="button" class="btn btn-box-tool popoverDelete">
@@ -16,142 +9,61 @@
         </div>
         <!-- /.box-tools -->
     </div>
-
-    <?= $this->Form->create($payrollData) ?>
-    <div class="box-body maindiv">
-    	
-    	<div style="height:150px;overflow: auto;margin-bottom:20px;">
-    		<?php foreach ($paycompcontent as $vals) { ?>
-          <div class="panel box box-default mptlpanel no-border" id="<?php echo $vals['empid']; ?>">
-            <!-- <div class="box-header with-border"> -->
-              <!-- <h3 class="box-title"><?php echo $vals['empname']; ?></h3> -->
-              <!-- <small><?php echo "PayComponents: ".count($vals['pcchild']);echo ", Pay Component Groups: ".count($vals['pcgroupchild']);?></small> -->
-
-              <!-- <div class="box-tools pull-right">
-              	<a href="/PayrollData/addempdata/<?php echo $vals['empid']; ?>" class="open-Popup btn btn-xs btn-success" data-remote="false" data-toggle="modal" data-target="#actionspopover" style="margin-left:15px;" title="Add">Add Pay Components</a>
-
-				<a href="/PayrollData/copypaycomponents/<?php echo $vals['empid']; ?>" class="open-Popup btn btn-xs btn-success" data-remote="false" data-toggle="modal" data-target="#actionspopover" style="margin-left:5px;" title="Add">Copy Pay Components</a>
-
-              	<a data-toggle="collapse" data-parent="#contentsection" href="#mainpanel<?php echo $vals['empid'];  ?>" aria-expanded="false" class="collapsed">
-              		<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="more-less fa fa-square-o text-navy"></i>
-                	</button>
-                </a>
-
-
-              </div> -->
-              <!-- /.box-tools -->
-            <!-- </div> -->
-            <!-- /.box-header -->
-            <div id="mainpanel<?php echo $vals['empid'];  ?>" class="emppanel "><!-- <div class="box-body"> -->
-            	<?php  if (isset($vals['pcchild'])) { ?>
-            <h4 style="background-color:#f7f7f7; font-size: 18px; text-align: center; padding: 7px 10px; margin-top: 0; margin-bottom: 0;"> PAY COMPONENTS </h4>
-
-            <table class="table table-hover table-bordered" cellspacing="0" width="100%">
-        <thead>
-            <tr>
-            	<th>Pay Component</th>
-                <th>Start Date</th>
-                <th>End Date</th>
-                <th>Pay Component Value</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php  foreach ($vals['pcchild'] as $childval) { ?>
-
-
-
-            <tr>
-                <td><?php echo  $childval['paycomponent']; ?></td>
-                <td><?php echo  $childval['startdate']; ?></td>
-                <td><?php echo  $childval['enddate']; ?></td>
-                <td><?php echo  $childval['paycomponentvalue']; ?></td>
-                
-            </tr>
-
-
-			<?php } ?>
-			</tbody>
-    	</table>
-    	 <?php } ?>
-    	 
-			<?php  if (isset($vals['pcgroupchild'])) { ?>
-           
-			<h4 style="background-color:#f7f7f7; font-size: 18px; text-align: center; padding: 7px 10px; margin-top: 0; margin-bottom: 0;"> PAY COMPONENT GROUPS </h4>
-            <div id="accordion<?php echo $vals['empid']; ?>">
-            <?php  foreach ($vals['pcgroupchild'] as $childval) { ?>
-              <!-- <h4><?php echo $childval['groupname'];  ?></h4>	 -->
-
-
-         <div class="box box-default" style="margin-bottom:0px;">
-           <div class="box-header">
-             <!-- <h4 class="box-title"><a data-toggle="collapse" data-parent="#accordion<?php echo $vals['empid']; ?>" href="#panel<?php echo $childval['groupid'];  ?>" aria-expanded="false" class="collapsed"> -->
-             	<?php echo $childval['groupname'];  ?>
-             	<!-- </a></h4> -->
-
-           	
-
-           </div>
-           
-           <div id="panel<?php echo $childval['groupid'];  ?>" >
-
-	<table class="table table-hover table-bordered" cellspacing="0" width="100%">
-        <thead>
-            <tr>
-            	<!-- <th>Pay Component Group</th> -->
-                <th>Pay Component</th>
-                <th>Start Date</th>
-                <th>End Date</th>
-                <th>Pay Component Value</th>
-            </tr>
-        </thead>
-        <tbody>
-
-              <?php  foreach ($childval['grouplist'] as $groupval) { ?>
-
-            <tr>
-                <!-- <td><?php echo  $groupval['paycomponentgroup']; ?></td> -->
-                <td><?php echo  $groupval['paycomponent']; ?></td>
-                <td><?php echo  $groupval['startdate']; ?></td>
-                <td><?php echo  $groupval['enddate']; ?></td>
-                <td><?php echo  $groupval['paycomponentvalue']; ?></td>
-                
-            </tr>
-          <?php } ?>
-
-
-			</tbody>
-    	</table>
-
-   		</div>
-   		<?php } ?> 
-   		</div></div>
-		<?php } ?>  
-
-            </div>
-            <!-- /.box-body -->
-          </div>
-          <!-- /.box -->
-
-    <?php } ?>
-    	</div>
-    	
-    	
-    <fieldset>
-        <?php
-            echo $this->Form->input('empdatabiographies_id',['options'=>$excludingempDataBiographies,'label'=>'Employee','class' => 'select2', 'empty' => true]);
-
-        ?>
-
+    
+<div class="col-md-12"><div class="form-group no-margin">
+        	<div class="input-group">
+        		<input type="button" class="selectallbtn btn btn-sm btn-instagram" id="dd" value="Select All" />
+        	</div>
+        </div></div>
         
+    	<div class="box-body" style="height: 500px;overflow: auto;">
+    		<?= $this->Form->create("ddd") ?>
+        
+    		<div style="margin-bottom:20px;">
+    			<div class="box box-solid collapsed-box pg" style="margin-bottom:0px;">
+    				
+    			
+        
+    			<?php foreach ($paygrouplist as $vals) {
+					echo '<div class="box-header">';
+					echo '<input type="checkbox" class="paygroup_filter" id="paygroupcheck_'.$vals['parentid'].'"/>'.' '.'<b>'.$vals['parent'].'</b>';
+					echo '</div>';
+					// if(isset($vals['child'])){
+						// echo "<div class='box-body no-padding'><ul class='nav nav-pills nav-stacked'>";
+						// foreach ($vals['child'] as $childval) {
+							// echo "<li><a class='emplist'><input type='checkbox' class='emp_filter' id='empcheck_".$childval['employee_id']."'/> ";
+							// $empname = str_replace('"', '',$this->Country->get_empname($childval['employee_id']));
+							// echo $empname ;
+							// echo "</a> </li>";
+						// }
+						// echo "</ul></div>";
+					// }
+					}
+					?>
+    		</div></div>
+    		
+    		<div class="maindiv">
+    		
+    		<input type="hidden" id="empdatabiographies-id" value="0" />
+    		
+	<div class="col-md-4" style="min-height:0px;"><div class="form-group no-margin">
+        	<div class="input-group">
+        		<input type="button" class="pcremovebtn btn btn-flat btn-warning" id="btnRemoveControl" value="Remove Pay Component" />
+        	</div>
+        </div></div>
 
-    </fieldset></div>
-
-    <div class="box-footer">
-    <?=$this->Html->link(__('Cancel'), ['action' => 'index'], ['escape' => false])?>
-    <!-- <?= $this->Form->button(__('Save Payroll Data'),['title'=>'Save Payroll Data','class'=>'pull-right']) ?> -->
-    <input type="button" value="Copy Payroll Data" class="mptlcopy btn btn-success pull-right" id="mptlcopy"/>
-    </div>
-    <?= $this->Form->end() ?>
-
+        <div class="col-md-4 pull-right"><div class="form-group no-margin">
+        	<div class="input-group" >
+        		<input type="button" class="pcgroupremovebtn btn btn-flat btn-warning" id="btnRemovePCG" value="Remove Pay Component Group" />
+        	</div>
+        </div></div>
+        
+        <?php echo $this->Form->input('paycomponent',['label' => 'Pay Component','options'=>$payComponents,'class'=>'select2']); ?>
+        
+   			</div>	<?= $this->Form->end() ?> 
 </div>
-
+<div class="box-footer"> 
+     <?=$this->Html->link(__('Cancel'), ['action' => 'index'], ['escape' => false])?>
+     <input type="button" value="Remove" class="mptlbatchremove btn btn-success pull-right" id="mptlbatchremove"/>
+ </div>
+</div>
