@@ -281,6 +281,153 @@ $(function () {
 					}
 					// return false;
 				});
+				
+				//save btn onclick
+	$('#mptlbatchadd').click(function(){
+
+		var lastemppanel=$('.emppanel.panel-collapse.collapse.in').attr('id');localStorage.setItem('lastemppanel', lastemppanel);
+
+    	//get input value
+		var emp = $("#empdatabiographies-id").val();
+
+		var pccount = $('.componentclass').length;
+		var pcgcount = $('.groupclass').length;
+
+		if ($('.paygroup_filter:checkbox:checked').length <1){
+			sweet_alert("Please select a Paygroup.");
+			return false;
+		}
+		var checkedarr=[];
+    		$('.paygroup_filter').each(function () {
+
+		    	var sThisVal = (this.checked ? $(this).val() : "");
+		    	var id=$(this).attr("id");
+		    	var colid=id.split("_")[1];
+		    	if(sThisVal){
+					checkedarr.push(colid);
+		    	}
+	   		});
+	   		
+console.log(checkedarr);
+		if(pccount<1 && pcgcount<1){
+
+			sweet_alert("Please add a pay Component/Pay Component Group for the particular Employee.");
+			return false;
+		}else{
+			if(pccount>0){
+
+				var paycomp=$("#paycomponent1").val();
+    			var paycompval=$("#paycomponentvalue1").val();
+    			var startdate = $("#startdate1").val();
+				var enddate = $("#enddate1").val();
+
+				if(paycomp!="" && paycomp!=null && startdate!="" && startdate!=null && enddate!="" && enddate!=null){
+					
+					if(!(compareStartEndDate(startdate,enddate))){
+    					sweet_alert("Please ensure that the End Date is greater than or equal to the Start Date.");
+						return false;
+    				}
+    				
+    				if(!(checkPayComponentDate(paycomp,startdate,enddate))){
+    					sweet_alert("Start/End Date is earlier/older than than the start/end date of the selected pay component.");
+						return false;
+    				}
+    						
+					$.ajax({
+        				type: "POST",
+      					url: '/PayrollData/addBatchData',
+        				data: 'employee='+emp+'&checkedarr='+JSON.stringify(checkedarr)+'&startdate='+startdate+'&enddate='+enddate+'&paycomponentgroup=0&paycomponent='+paycomp+'&paycomponentvalue='+paycompval+'&type=1',
+        				success : function(data) {
+        					if(data=="success"){
+    							window.location='/payroll-data';
+    						}else{
+    							sweet_alert(data);
+								return false;
+    						}
+
+        				},error: function(data) {
+       						sweet_alert("Error while adding PayComponents.");
+							return false;
+
+        				},statusCode: {
+        					500: function() {
+          						sweet_alert("Error while adding PayComponent's.");
+								return false;
+        					}
+      					}
+
+        			});
+
+				}else{
+					sweet_alert("Pay Component/Start/End Date missing.");
+					return false;
+				}
+			}else if(pcgcount>0){
+
+    			var paycompgroup=$("#pcgroup1").val();
+    			if(paycompgroup!="" && paycompgroup!=null){
+
+				var pcgcolcount=$('.pcgcol').length;
+    			for (i = 1; i <= pcgcolcount; i++) {
+
+    				var paycomp=$("#paycomp"+i).attr('name');console.log(paycomp);
+    				var paycompval=$("#paycomponentvalue"+i).val();
+    				var startdate = $("#startdate"+i).val();
+					var enddate = $("#enddate"+i).val();
+
+				if(startdate!="" && startdate!=null && enddate!="" && enddate!=null){
+					
+					if(!(compareStartEndDate(startdate,enddate))){
+    					sweet_alert("Please ensure that the End Date is greater than or equal to the Start Date.");
+						return false;
+    				}
+    				
+    				if(!(checkPayComponentDate(paycomp,startdate,enddate))){
+    					sweet_alert("Start/End Date is earlier/older than than the start/end date of the selected pay component.");
+						return false;
+    				}
+    				
+					$.ajax({
+        				type: "POST",
+      					url: '/PayrollData/addBatchData',
+        				indexValue: i,
+        				data: 'employee='+emp+'&startdate='+startdate+'&checkedarr='+JSON.stringify(checkedarr)+'&enddate='+enddate+'&paycomponentgroup='+paycompgroup+'&paycomponent='+paycomp+'&paycomponentvalue='+paycompval+'&type=2',
+        				success : function(data) {
+        					if(data=="success"){
+        						if(this.indexValue==pcgcolcount || this.indexValue>pcgcolcount){
+    								window.location.reload();
+    							}
+    						}else{
+    							sweet_alert("Error while adding PayComponent Group.");
+								return false;
+    						}
+
+        				},error: function(data) {
+       						sweet_alert("Error while adding PayComponent Group.");
+							return false;
+
+        				},statusCode: {
+        					500: function() {
+          						sweet_alert("Error while adding PayComponent Group.");
+								return false;
+        					}
+      					}
+
+        			});
+
+				}else{
+					sweet_alert("Start/End Date missing.");
+					return false;
+				}
+				}
+			}else{
+				sweet_alert("Pay Component Group missing.");
+				return false;
+			}
+		}
+		}
+  });
+  
 				$('.mptlupdate').click(function(e){
 
 					var lastemppanel=$('.emppanel.panel-collapse.collapse.in').attr('id');localStorage.setItem('lastemppanel', lastemppanel);
@@ -541,7 +688,34 @@ $(function () {
     					}
     				});
 				});
+				
+				$("#btnRemoveControl").click(function (event) {
 
+						event.preventDefault();
+
+						$(".pcremovebtn").hide();$(".pcgroupremovebtn").hide();
+
+						var numItems = $('.groupclass').length+1;
+						$(".maindiv").append("<div class='clearfix'><div class='groupclass' id='groupDiv"+numItems+"'><div class='col-sm-4'><div class='form-group'><label>Pay Component :</label><div class='input-group'><div class='input-group-btn'><a class='groupdelete btn btn-danger btn-flat' id='delete1'><i class='fa fa-trash'></i></a></div><input type='text' class='pcgroup form-control' id='pcgroup"+numItems+"'/></div></div></div></div></div>");
+
+						// var groupdata=[];//console.log(emppcgrouparr);
+						// for(var p=0;p<paycomponentgroupdata.length;p++) {
+							// // console.log(paycomponentgroupdata[p]);
+							// $.each(emppcgrouparr, function(childkey, childvalue) {
+								// if(emp==value['empdatabiographies_id']){
+//
+    							// }else{
+    								// groupdata.push({'id':key, "text":value});
+    							// }
+							// });
+							// // console.log(emppcgrouparr[0]['empdatabiographies_id']+"--"+emp+"--"+key);
+//
+						// }
+
+						$('.pcgroup').select2({ width: '100%',allowClear: true,placeholder: "Select",data: paycomponentgroupdata });
+
+				});
+				
 				//add pay component group button click
 				$("#btnAddPCG").click(function (event) {
 					var emp = $("#empdatabiographies-id").val();
@@ -596,12 +770,16 @@ $(function () {
 					}
 
 				});
-
+				
+				//select all add batch
+				$(".selectallbtn").click(function (event) {
+					$(".paygroup_filter").prop('checked', true);
+				});
+				
 				//group delete btn onclick
 				$('.maindiv').on('click', 'a.groupdelete', function() {
 
 					$(".pcaddbtn").show();$(".pcgroupaddbtn").show();
-
 					var selectedcontrol=$(this);
 					sweet_confirmdelete("MayHaw","Are you sure you want to delete the particular Pay Component Group ?", function(){selectedcontrol.parent().closest('div .groupclass').remove(); return true;});
 				});
