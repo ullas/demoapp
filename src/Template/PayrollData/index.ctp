@@ -12,7 +12,6 @@
     width: 300px;
   }
 }
-.hidden{display: none;}
 </style>
 
 <section class="content-header">
@@ -53,12 +52,19 @@
 
 				<a href="/PayrollData/copypaycomponents/<?php echo $vals['empid']; ?>" class="open-Popup btn btn-xs btn-success" data-remote="false" data-toggle="modal" data-target="#actionspopover" style="margin-left:5px;" title="Add">Copy Pay Components</a>
 
-              	<a data-toggle="collapse" data-parent="#contentsection" href="#mainpanel<?php echo $vals['empid'];  ?>" aria-expanded="false" class="collapsed">
-              		<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="more-less fa fa-square-o text-navy"></i>
+              	
+
+				<!-- <?php echo  '<form name="formdelete" id="formdelete' .$vals['empid']. '" method="post" action="/PayrollData/delete/'.$vals['empid'].'" style="display:none;" >
+                    <input type="hidden" name="_method" value="POST"></form>
+                    <a href="#" onclick="sweet_confirmdelete(&quot;MayHaw&quot;,&quot;Are you sure you want to delete the pay components from '.$vals['empname'].' ?&quot; ,
+                    function(){ empdeletepaycomponent('.$vals['empid'].'); })
+                    event.returnValue = false; return false;" class="deletelink fa fa-trash text-red" style= "padding:3px"></a>';   ?> -->
+
+				<a data-toggle="collapse" data-parent="#contentsection" href="#mainpanel<?php echo $vals['empid'];  ?>" aria-expanded="false" class="collapsed">
+              		<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="more-less fa fa-plus text-gray"></i>
                 	</button>
                 </a>
-
-
+                
               </div>
               <!-- /.box-tools -->
             </div>
@@ -135,7 +141,7 @@
                 <th>Start Date</th>
                 <th>End Date</th>
                 <th>Pay Component Value</th>
-                <th>Actions</th>
+                <!-- <th>Actions</th> -->
             </tr>
         </thead>
         <tbody>
@@ -205,7 +211,9 @@ $(function () {
 	//check if last expanded emp panel exists,if so expand it
 	var lastemployeepanel = localStorage.getItem('lastemppanel');//console.log(lastemployeepanel);
 	$("#"+lastemployeepanel).addClass("in");$("#"+lastemployeepanel).attr("aria-expanded","true");
-
+	$("#"+lastemployeepanel).prev('.box-header')
+        .find(".more-less")
+        .toggleClass(' fa-plus fa-minus ');
 
 	$("#actionspopover").on("show.bs.modal", function(e) {
 		//loading icon show
@@ -283,20 +291,7 @@ $(function () {
 					// return false;
 				});
 				
-				//batchremove pay-component-type change
-				$("#pay-component-type").change(function(){
-					var selectedVal = this.value;
-    				if(selectedVal=="1"){$("#paycomponent").select2 ('container').find ('.select2-search').addClass ('hidden') ;
-    			 		// $('.basepcgroup').select2({
-    						// width: '100%',allowClear: true,placeholder: "Select",data: batchpaycomponentdata
-						// });
-    				}else{
-    					// $('.basepcgroup').select2({
-    						// width: '100%',allowClear: true,placeholder: "Select",data: batchpaycomponentgroupdata
-						// });
-    				}
-
-				});
+				
 				//batchremove
 				$('#mptlbatchremove').click(function(){
 					
@@ -822,15 +817,15 @@ $(function () {
 
 
 // $('.panel-group').on('hidden.bs.collapse', toggleIcon);
-// $('.panel-group').on('shown.bs.collapse', toggleIcon);
+$('.panel-group').on('shown.bs.collapse', toggleIcon);
 
 });
-// function toggleIcon(e) {//console.log("entered");
-    // $(e.target)
-        // .prev('.box-header')
-        // .find(".more-less")
-        // .toggleClass(' fa-plus fa-minus ');
-// }
+function toggleIcon(e) {//console.log("entered");
+    $(e.target)
+        .prev('.box-header')
+        .find(".more-less")
+        .toggleClass(' fa-plus fa-minus ');
+}
 function searchpayrolldata(){
 	// $(".mptlpanel").hide();
 	var input = document.getElementById('payrolldatasearch');
@@ -891,6 +886,91 @@ function formattoymd(inputDate) {
         	(month[1] ? month : '0' + month[0]) + '/' +
         	(day[1] ? day : '0' + day[0]) ;
     	}
+	}
+	function batchdeletepaycomponent(pcid){
+
+		if ($('.paygroup_filter:checkbox:checked').length <1){
+			alert("Please select a Paygroup.");
+			// sweet_alert("Please select a Paygroup.");
+			return false;
+		}
+		var checkedarr=[];
+    	$('.paygroup_filter').each(function () {
+
+		    var sThisVal = (this.checked ? $(this).val() : "");
+		    var id=$(this).attr("id");
+		    var colid=id.split("_")[1];
+		    if(sThisVal){
+					checkedarr.push(colid);
+		    }
+	   	});
+	   	
+	   	$.ajax({
+        	type: "POST",
+      		url: '/PayrollData/batchdeletePC',
+        	data: 'checkedarr='+JSON.stringify(checkedarr)+'&paycomponentid='+pcid,
+        	success : function(data) {
+        		if(data=="success"){
+    				window.location.reload();
+    			}else{
+    				sweet_alert("Error while removing PayComponent in batch.");
+					return false;
+    			}
+        	},error: function(data) {
+       			sweet_alert("Error while removing PayComponent in batch.");
+				return false;
+        	},statusCode: {
+        		500: function() {
+          			sweet_alert("Error while removing PayComponent in batch.");
+					return false;
+        		}
+      		}
+
+        });
+
+	}
+	
+	function batchdeletepaycomponentgroup(pcid){
+
+		if ($('.paygroup_filter:checkbox:checked').length <1){
+			alert("Please select a Paygroup.");
+			// sweet_alert("Please select a Paygroup.");
+			return false;
+		}
+		var checkedarr=[];
+    	$('.paygroup_filter').each(function () {
+    		
+		    var sThisVal = (this.checked ? $(this).val() : "");
+		    var id=$(this).attr("id");
+		    var colid=id.split("_")[1];
+		    if(sThisVal){
+				checkedarr.push(colid);
+		    }
+	   	});
+	   	
+	   	$.ajax({
+        	type: "POST",
+      		url: '/PayrollData/batchdeletePCGroup',
+        	data: 'checkedarr='+JSON.stringify(checkedarr)+'&paycomponentgroupid='+pcid,
+        	success : function(data) {
+        		if(data=="success"){
+    				window.location.reload();
+    			}else{
+    				sweet_alert("Error while removing PayComponentGroup in batch.");
+					return false;
+    			}
+        	},error: function(data) {
+       			sweet_alert("Error while removing PayComponentGroup in batch.");
+				return false;
+        	},statusCode: {
+        		500: function() {
+          			sweet_alert("Error while removing PayComponentGroup in batch.");
+					return false;
+        		}
+      		}
+
+        });
+
 	}
 </script>
 <?php $this->end(); ?>

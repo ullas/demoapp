@@ -19,9 +19,7 @@
         </div></div>
         
     	<div class="box-body" style="height: 500px;overflow: auto;">
-    		<?= $this->Form->create("ddd") ?>
         
-    		<div style="margin-bottom:20px;">
     			<div class="box box-solid collapsed-box pg" style="margin-bottom:0px;">
     				
     			
@@ -42,43 +40,121 @@
 					// }
 					}
 					?>
-    		</div></div>
+    		</div>
     		
-    		<div class="maindiv">
-    		
-    		<input type="hidden" id="empdatabiographies-id" value="0" />
-    		
-	<!-- <div class="col-md-4" style="min-height:0px;"><div class="form-group no-margin">
-        	<div class="input-group">
-        		<input type="button" class="pcremovebtn btn btn-flat btn-warning" id="btnRemoveControl" value="Remove Pay Component" />
-        	</div>
-        </div></div>
+    		<div style="height:150px;overflow: auto;margin-top:20px;">
+    		<?php foreach ($paycompcontent as $vals) { ?>
+          <div class="panel box box-default mptlpanel no-border">
+            
+            <!-- /.box-header -->
+            <div id="mainpanel" class="emppanel "><!-- <div class="box-body"> -->
+            	<?php  if (isset($vals['pcchild']) && ($vals['pcchild']!=null)) { ?>
+            <h4 style="background-color:#f7f7f7; font-size: 18px; text-align: center; padding: 7px 10px; margin-top: 0; margin-bottom: 0;"> PAY COMPONENTS </h4>
 
-        <div class="col-md-4 pull-right"><div class="form-group no-margin">
-        	<div class="input-group" >
-        		<input type="button" class="pcgroupremovebtn btn btn-flat btn-warning" id="btnRemovePCG" value="Remove Pay Component Group" />
-        	</div>
-        </div></div> -->
-        
-        <div class="col-md-4">
-			   <div class="form-group">
-				<label class="control-label">Pay Component Type</label>
-				<div class="input-group">
-                  		<select class="select2" name="pay_component_type" id="pay-component-type">
-        					<option></option>
-  							<option value="1">Pay Component</option>
-        					<option value="2">Pay Component Group</option>
-      					</select>
-      			</div>
-              </div>
+            <table class="table table-hover table-bordered" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+            	<th>Pay Component</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Pay Component Value</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php  foreach ($vals['pcchild'] as $childval) { ?>
+
+
+
+            <tr>
+                <td><?php echo  $childval['paycomponent']; ?></td>
+                <td><?php echo  $childval['startdate']; ?></td>
+                <td><?php echo  $childval['enddate']; ?></td>
+                <td><?php echo  $childval['paycomponentvalue']; ?></td>
+                <td> 
+
+                	<?php echo  '<form name="formdelete" id="formdelete' .$childval['id']. '" method="post" action="/PayrollData/delete/'.$childval['paycomponentid'].'" style="display:none;" >
+                    <input type="hidden" name="_method" value="POST"></form>
+                    <a href="#" onclick="sweet_confirmdelete(&quot;MayHaw&quot;,&quot;Are you sure you want to delete the pay component '.$childval['paycomponent'].' in batch ?&quot; ,
+                    function(){ batchdeletepaycomponent('.$childval['paycomponentid'].'); })
+                    event.returnValue = false; return false;" class="deletelink fa fa-trash text-red" style= "padding:3px"></a>';   ?>
+
+                </td>
+            </tr>
+
+
+			<?php } ?>
+			</tbody>
+    	</table>
+    	 <?php } ?>
+    	 
+			<?php  if (isset($vals['pcgroupchild']) && ($vals['pcgroupchild']!=null)) { ?>
+           
+			<h4 style="background-color:#f7f7f7; font-size: 18px; text-align: center; padding: 7px 10px; margin-top: 0; margin-bottom: 0;"> PAY COMPONENT GROUPS </h4>
+            <div id="accordion">
+            <?php  foreach ($vals['pcgroupchild'] as $childval) { ?>
+              <!-- <h4><?php echo $childval['groupname'];  ?></h4>	 -->
+
+
+         <div class="box box-default" style="margin-bottom:0px;">
+           <div class="box-header">
+             <!-- <h4 class="box-title"><a data-toggle="collapse" data-parent="#accordion<?php echo $vals['empid']; ?>" href="#panel<?php echo $childval['groupid'];  ?>" aria-expanded="false" class="collapsed"> -->
+             	<?php echo $childval['groupname'];  ?>
+             	<!-- </a></h4> -->
+
+           		<?php echo  '<form name="formdelete" id="formdelete' .$childval['groupid'].'" method="post" action="/PayrollData/deletegroup/'.$childval['groupid'].'" style="display:none;" >
+                    	<input type="hidden" name="_method" value="POST"></form>
+                    	<a href="#" onclick="sweet_confirmdelete(&quot;MayHaw&quot;,&quot;Are you sure you want to delete the pay component group '.$childval['groupname'].' in batch ?&quot; ,
+                    	function(){ batchdeletepaycomponentgroup('.$childval['groupid'].'); })
+                    	event.returnValue = false; return false;" class="deletelink fa fa-trash text-red pull-right" style= "padding:3px"></a>';   ?>
+
+
            </div>
            
-        <?php echo $this->Form->input('paycomponent',['label' => 'Pay Component','options'=>$payComponents,'class'=>'select2','empty'=>true]); ?>
-        
-   			</div>	<?= $this->Form->end() ?> 
+           <div id="panel<?php echo $childval['groupid'];  ?>" >
+
+	<table class="table table-hover table-bordered" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+            	<!-- <th>Pay Component Group</th> -->
+                <th>Pay Component</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Pay Component Value</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+
+              <?php  foreach ($childval['grouplist'] as $groupval) { ?>
+
+            <tr>
+                <!-- <td><?php echo  $groupval['paycomponentgroup']; ?></td> -->
+                <td><?php echo  $groupval['paycomponent']; ?></td>
+                <td><?php echo  $groupval['startdate']; ?></td>
+                <td><?php echo  $groupval['enddate']; ?></td>
+                <td><?php echo  $groupval['paycomponentvalue']; ?></td>
+                
+            </tr>
+          <?php } ?>
+
+
+			</tbody>
+    	</table>
+
+   		</div>
+   		<?php } ?> 
+   		</div></div>
+		<?php } ?>  
+
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+
+    <?php } ?>
+    	</div>
+    		
 </div>
-<div class="box-footer"> 
-     <?=$this->Html->link(__('Cancel'), ['action' => 'index'], ['escape' => false])?>
-     <input type="button" value="Remove" class="mptlbatchremove btn btn-success pull-right" id="mptlbatchremove"/>
- </div>
+
 </div>
