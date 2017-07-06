@@ -1,6 +1,8 @@
+<?= $this->element('templateelmnt'); ?>
+
 <div class="box box-success box-solid no-border">
 	<div class="box-header with-border text-center">
-        <h3 class="box-title">Add Payroll Data in batch</h3>
+        <h3 class="box-title">Batch Remove</h3>
 
         <div class="box-tools pull-right">
             <button type="button" class="btn btn-box-tool popoverDelete">
@@ -46,7 +48,7 @@
     		
     		<input type="hidden" id="empdatabiographies-id" value="0" />
     		
-	<div class="col-md-4" style="min-height:0px;"><div class="form-group no-margin">
+	<!-- <div class="col-md-4" style="min-height:0px;"><div class="form-group no-margin">
         	<div class="input-group">
         		<input type="button" class="pcremovebtn btn btn-flat btn-warning" id="btnRemoveControl" value="Remove Pay Component" />
         	</div>
@@ -56,9 +58,22 @@
         	<div class="input-group" >
         		<input type="button" class="pcgroupremovebtn btn btn-flat btn-warning" id="btnRemovePCG" value="Remove Pay Component Group" />
         	</div>
-        </div></div>
+        </div></div> -->
         
-        <?php echo $this->Form->input('paycomponent',['label' => 'Pay Component','options'=>$payComponents,'class'=>'select2']); ?>
+        <div class="col-md-4">
+			   <div class="form-group">
+				<label class="control-label">Pay Component Type</label>
+				<div class="input-group">
+                  		<select class="select2" name="pay_component_type" id="pay-component-type">
+        					<option></option>
+  							<option value="1">Pay Component</option>
+        					<option value="2">Pay Component Group</option>
+      					</select>
+      			</div>
+              </div>
+           </div>
+           
+        <?php echo $this->Form->input('paycomponent',['label' => 'Pay Component','options'=>$payComponents,'class'=>'select2','empty'=>true]); ?>
         
    			</div>	<?= $this->Form->end() ?> 
 </div>

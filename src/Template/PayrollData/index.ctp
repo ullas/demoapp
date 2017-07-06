@@ -12,6 +12,7 @@
     width: 300px;
   }
 }
+.hidden{display: none;}
 </style>
 
 <section class="content-header">
@@ -282,6 +283,25 @@ $(function () {
 					// return false;
 				});
 				
+				//batchremove pay-component-type change
+				$("#pay-component-type").change(function(){
+					var selectedVal = this.value;
+    				if(selectedVal=="1"){$("#paycomponent").select2 ('container').find ('.select2-search').addClass ('hidden') ;
+    			 		// $('.basepcgroup').select2({
+    						// width: '100%',allowClear: true,placeholder: "Select",data: batchpaycomponentdata
+						// });
+    				}else{
+    					// $('.basepcgroup').select2({
+    						// width: '100%',allowClear: true,placeholder: "Select",data: batchpaycomponentgroupdata
+						// });
+    				}
+
+				});
+				//batchremove
+				$('#mptlbatchremove').click(function(){
+					
+				});
+				
 				//save btn onclick
 	$('#mptlbatchadd').click(function(){
 
@@ -308,7 +328,7 @@ $(function () {
 		    	}
 	   		});
 	   		
-console.log(checkedarr);
+// console.log(checkedarr);
 		if(pccount<1 && pcgcount<1){
 
 			sweet_alert("Please add a pay Component/Pay Component Group for the particular Employee.");
@@ -687,33 +707,6 @@ console.log(checkedarr);
 							}
     					}
     				});
-				});
-				
-				$("#btnRemoveControl").click(function (event) {
-
-						event.preventDefault();
-
-						$(".pcremovebtn").hide();$(".pcgroupremovebtn").hide();
-
-						var numItems = $('.groupclass').length+1;
-						$(".maindiv").append("<div class='clearfix'><div class='groupclass' id='groupDiv"+numItems+"'><div class='col-sm-4'><div class='form-group'><label>Pay Component :</label><div class='input-group'><div class='input-group-btn'><a class='groupdelete btn btn-danger btn-flat' id='delete1'><i class='fa fa-trash'></i></a></div><input type='text' class='pcgroup form-control' id='pcgroup"+numItems+"'/></div></div></div></div></div>");
-
-						// var groupdata=[];//console.log(emppcgrouparr);
-						// for(var p=0;p<paycomponentgroupdata.length;p++) {
-							// // console.log(paycomponentgroupdata[p]);
-							// $.each(emppcgrouparr, function(childkey, childvalue) {
-								// if(emp==value['empdatabiographies_id']){
-//
-    							// }else{
-    								// groupdata.push({'id':key, "text":value});
-    							// }
-							// });
-							// // console.log(emppcgrouparr[0]['empdatabiographies_id']+"--"+emp+"--"+key);
-//
-						// }
-
-						$('.pcgroup').select2({ width: '100%',allowClear: true,placeholder: "Select",data: paycomponentgroupdata });
-
 				});
 				
 				//add pay component group button click

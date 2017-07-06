@@ -166,9 +166,17 @@ class PayrollDataController extends AppController
 	public function batchremove(){
 			
 		$payrollData = $this->PayrollData->newEntity();
-		$this->loadModel('PayComponents');	
-		$payComponents = $this->PayComponents->find('list', ['limit' => 200])
-									->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+		// $this->loadModel('PayComponents');	
+		$payComponentarr = $this->PayrollData->find('all')->where(['pay_component_type' => '1'])->andwhere(['batch' => TRUE])
+									->andwhere(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0'])->distinct('paycomponent')->toArray();
+		$payComponents = "";
+		foreach($payComponentarr as $paycomponentvalue){
+			$this->loadModel('PayComponents');
+			$pcname=$this->PayComponents->find()->select('PayComponents.name')->where(['PayComponents.id' => $paycomponentvalue['paycomponent']])->first();	
+			$payComponents = array($paycomponentvalue['paycomponent'] => $pcname['name']);						
+		}
+		// $payComponents = $this->PayComponents->find('list', ['limit' => 200])
+									// ->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         	
 		$this->set(compact('payrollData', 'payComponents'));
 		
@@ -189,7 +197,6 @@ class PayrollDataController extends AppController
 
 			$paygrouplist[] = array("parentid" => $value['id'] , "parent" => $value['name'] , "child" => $jobinfolist );
 			// $this->Flash->error(__('DATA__.').json_encode($paygrouplist));
-
 
 		}
 		
