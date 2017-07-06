@@ -336,6 +336,28 @@ class PayrollDataController extends AppController
 			}	
 		}
 	}
+	public function empdeletePC(){
+		if($this->request->is('ajax')) {
+
+			$this->autoRender=false;
+			
+			// $this->loadModel('EmpDataBiographies');
+			// $emparr=$this->EmpDataBiographies->find('all',['conditions' => array('employee_id' => $this->request->data['empid']),'contain' => []])->toArray();
+			// isset($emparr[0]) ? $empid = $emparr[0]['id'] : $empid = "" ; 
+// 			
+			// $this->loadModel('PayrollData');		
+			$count=$this->PayrollData->find('all', array('conditions' => array('empdatabiographies_id'  => $this->request->data['empid']) ))->count();
+			if($count>0){	
+				if($this->PayrollData->deleteAll(['empdatabiographies_id' => $this->request->data['empid']])){
+					$this->response->body("success");
+	    			return $this->response;	
+				}else{
+					$this->response->body("error");
+	    			return $this->response;
+				}
+			}
+		}
+	}
 	public function batchdeletePCGroup(){
 			
 		if($this->request->is('ajax')) {

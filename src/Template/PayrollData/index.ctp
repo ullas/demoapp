@@ -28,11 +28,22 @@
                   <span class="glyphicon glyphicon-search form-control-feedback"></span>
                 </div>
               </div>
-  	<a href="/PayrollData/add" id="addpayrolldata" class="open-Popup btn btn-sm btn-success" data-remote="false" data-toggle="modal" data-target="#actionspopover" style="margin-left:15px;" title="Add"><i class="fa fa-plus" aria-hidden="true"></i></a>
+  	
 
-<a href="/PayrollData/batchadd" id="addpayrolldata" class="open-Popup btn btn-sm btn-success" data-remote="false" data-toggle="modal" data-target="#actionspopover" style="margin-left:15px;" title="Add">Add in batch</a>
-<a href="/PayrollData/batchremove" id="addpayrolldata" class="open-Popup btn btn-sm btn-success" data-remote="false" data-toggle="modal" data-target="#actionspopover" style="margin-left:15px;" title="Add">Remove in batch</a>
 
+<div class="btn-group">
+                  <button type="button" class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                    <i class="fa fa-bars"></i></button>
+                  <ul class="dropdown-menu pull-right" role="menu">
+                    <li><a href="/PayrollData/add" id="addpayrolldata" class="open-Popup" data-remote="false" data-toggle="modal" data-target="#actionspopover">Add Payroll Data</a>
+					</li>
+                    <li><a href="/PayrollData/batchadd" id="addpayrolldata" class="open-Popup" data-remote="false" data-toggle="modal" data-target="#actionspopover">Add in batch</a>
+					</li>
+                    <li><a href="/PayrollData/batchremove" id="addpayrolldata" class="open-Popup" data-remote="false" data-toggle="modal" data-target="#actionspopover">Remove in batch</a>
+					</li>
+                  </ul>
+                </div>
+          
     <!-- <?= $this->Html->link('<b>Add</b> &nbsp;&nbsp;'.__('<i class="fa fa-plus"></i>'), ['action' => 'add'],['class' => 'btn btn-sm btn-success btn-flat','escape' => false]) ?> -->
   </ol>
 </section>
@@ -54,11 +65,11 @@
 
               	
 
-				<!-- <?php echo  '<form name="formdelete" id="formdelete' .$vals['empid']. '" method="post" action="/PayrollData/delete/'.$vals['empid'].'" style="display:none;" >
+				<?php echo  '<form name="formdelete" id="formdelete' .$vals['empid']. '" method="post" action="/PayrollData/delete/'.$vals['empid'].'" style="display:none;" >
                     <input type="hidden" name="_method" value="POST"></form>
                     <a href="#" onclick="sweet_confirmdelete(&quot;MayHaw&quot;,&quot;Are you sure you want to delete the pay components from '.$vals['empname'].' ?&quot; ,
                     function(){ empdeletepaycomponent('.$vals['empid'].'); })
-                    event.returnValue = false; return false;" class="deletelink fa fa-trash text-red" style= "padding:3px"></a>';   ?> -->
+                    event.returnValue = false; return false;" class="deletelink fa fa-trash text-red" style= "padding:3px"></a>';   ?>
 
 				<a data-toggle="collapse" data-parent="#contentsection" href="#mainpanel<?php echo $vals['empid'];  ?>" aria-expanded="false" class="collapsed">
               		<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="more-less fa fa-plus text-gray"></i>
@@ -965,6 +976,32 @@ function formattoymd(inputDate) {
         	},statusCode: {
         		500: function() {
           			sweet_alert("Error while removing PayComponentGroup in batch.");
+					return false;
+        		}
+      		}
+
+        });
+
+	}
+	function empdeletepaycomponent(empid){
+
+	   	$.ajax({
+        	type: "POST",
+      		url: '/PayrollData/empdeletePC',
+        	data: 'empid='+empid,
+        	success : function(data) {
+        		if(data=="success"){
+    				window.location.reload();
+    			}else{
+    				sweet_alert("Error while deleting the particular employee's Pay Components.Please try again.");
+					return false;
+    			}
+        	},error: function(data) {
+       			sweet_alert("Error while deleting the particular employee's Pay Components.Please try again.");
+					return false;
+        	},statusCode: {
+        		500: function() {
+          			sweet_alert("Error while deleting the particular employee's Pay Components.Please try again.");
 					return false;
         		}
       		}
