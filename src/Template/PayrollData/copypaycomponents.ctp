@@ -83,7 +83,7 @@
     	</table>
     	 <?php } ?>
     	 
-			<?php  if (isset($vals['pcgroupchild'])) { ?>
+			<?php  if (isset($vals['pcgroupchild']) && ($vals['pcgroupchild']!=null)) { ?>
            
 			<h4 style="background-color:#f7f7f7; font-size: 18px; text-align: center; padding: 7px 10px; margin-top: 0; margin-bottom: 0;"> PAY COMPONENT GROUPS </h4>
             <div id="accordion<?php echo $vals['empid']; ?>">

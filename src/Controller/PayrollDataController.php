@@ -167,18 +167,18 @@ class PayrollDataController extends AppController
 			
 		$payrollData = $this->PayrollData->newEntity();
 		// $this->loadModel('PayComponents');	
-		$payComponentarr = $this->PayrollData->find('all')->where(['pay_component_type' => '1'])->andwhere(['batch' => TRUE])
-									->andwhere(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0'])->distinct('paycomponent')->toArray();
-		$payComponents = "";
-		foreach($payComponentarr as $paycomponentvalue){
-			$this->loadModel('PayComponents');
-			$pcname=$this->PayComponents->find()->select('PayComponents.name')->where(['PayComponents.id' => $paycomponentvalue['paycomponent']])->first();	
-			$payComponents = array($paycomponentvalue['paycomponent'] => $pcname['name']);						
-		}
+		// $payComponentarr = $this->PayrollData->find('all')->where(['pay_component_type' => '1'])->andwhere(['batch' => TRUE])
+									// ->andwhere(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0'])->distinct('paycomponent')->toArray();
+		// $payComponents = "";
+		// foreach($payComponentarr as $paycomponentvalue){
+			// $this->loadModel('PayComponents');
+			// $pcname=$this->PayComponents->find()->select('PayComponents.name')->where(['PayComponents.id' => $paycomponentvalue['paycomponent']])->first();	
+			// $payComponents = array($paycomponentvalue['paycomponent'] => $pcname['name']);						
+		// }
 		// $payComponents = $this->PayComponents->find('list', ['limit' => 200])
 									// ->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         	
-		$this->set(compact('payrollData', 'payComponents'));
+		$this->set(compact('payrollData'));
 		
 		$this->loadModel('PayrollRecord');	
 		$dbout = $this->PayrollRecord->PayGroups->find()->select(['PayGroups.id', 'PayGroups.name',])
@@ -201,6 +201,51 @@ class PayrollDataController extends AppController
 		}
 		
         $this->set('paygrouplist', $paygrouplist);
+		
+		
+		$this->loadModel('PayrollData');	
+		$paycomponents = $this->PayrollData->find('all')->where(['pay_component_type' => '1'])->andwhere(['batch' => TRUE])->distinct('paycomponent')
+        					->andwhere(['PayrollData.pay_component_type' => '1'])->andwhere(['PayrollData.customer_id' => $this->loggedinuser['customer_id']])->toArray();
+		$paycomponentlist = array();
+        foreach($paycomponents as $childval){
+
+			$this->loadModel('PayComponents');
+        	$pcname=$this->PayComponents->find()->select('PayComponents.name')->where(['PayComponents.id' => $childval['paycomponent']])->first();
+				
+			$paycomponentlist[] = array("id"=>$childval['id'],"paycomponentid" => $childval['paycomponent'],"paycomponent" => $pcname['name'],"startdate" => $childval['start_date'],"enddate" => $childval['end_date'],
+														 "paycomponentvalue" => $childval['pay_component_value'] );
+		}
+
+		$this->loadModel('PayrollData');
+			$pcgroupout = $this->PayrollData->find()->select(['paycomponentgroup'])->where(['pay_component_type' => '2'])->andwhere(['batch' => TRUE])
+					->andwhere(['PayrollData.pay_component_type' => '2'])
+					->andwhere(['PayrollData.customer_id' => $this->loggedinuser['customer_id']])->orwhere(['PayrollData.customer_id' => '0'])->distinct('paycomponentgroup')->toArray();
+			$paycomponentgrouplist = array();
+			foreach($pcgroupout as $groupchildval){
+						
+				$paycomponentgroups = $this->PayrollData->find('all')->where(['pay_component_type' => '2'])->andwhere(['batch' => TRUE])
+							->andwhere(['PayrollData.paycomponentgroup' => $groupchildval['paycomponentgroup']])->distinct('paycomponent')
+        					->andwhere(['PayrollData.pay_component_type' => '2'])->andwhere(['PayrollData.customer_id' => $this->loggedinuser['customer_id']])->toArray();
+				$componentlist = array();
+        		
+				$this->loadModel('PayComponentGroups');
+        	    $pcgroupname=$this->PayComponentGroups->find()->select('PayComponentGroups.name')->where(['PayComponentGroups.id' => $groupchildval['paycomponentgroup']])->first();
+					
+        		foreach($paycomponentgroups as $childval){
+				
+					$this->loadModel('PayComponents');
+        	    	$pcname=$this->PayComponents->find()->select('PayComponents.name')->where(['PayComponents.id' => $childval['paycomponent']])->first();
+				
+					$componentlist[] = array("compid"=>$childval['id'],"paycomponent" => $pcname['name'],"startdate" => $childval['start_date'],"enddate" => $childval['end_date'],
+														 "paycomponentvalue" => $childval['pay_component_value'], "paycomponentgroup" => $pcgroupname['name'] );
+				}
+				
+				$paycomponentgrouplist[] = array("groupid"=>$groupchildval['paycomponentgroup'], "groupname"=>$pcgroupname['name'], "grouplist" => $componentlist );
+			}
+			$payrolldatalist[] = array( "pcchild" => $paycomponentlist, "pcgroupchild" => $paycomponentgrouplist  );
+		
+		$this->set('paycompcontent', $payrolldatalist);
+		
 	}
 	public function copyEmployeesPC(){
 			
@@ -253,6 +298,79 @@ class PayrollDataController extends AppController
 				}
 			}
 			
+		}
+	}
+	public function batchdeletePC(){
+			
+		if($this->request->is('ajax')) {
+
+			$this->autoRender=false;
+			$checkedpaygroups=json_decode($this->request->data['checkedarr']);
+			
+			for($k=0;$k<sizeof($checkedpaygroups);$k++) {
+			
+				$this->loadModel('JobInfos');	
+				$jobinfos = $this->JobInfos->find()->select(['JobInfos.employee_id'])->where(['JobInfos.pay_group_id' => $checkedpaygroups[$k] ])
+        					->andwhere(['JobInfos.customer_id' => $this->loggedinuser['customer_id']])->toArray();//$this->Flash->error(__('You are not Authorized.'.json_encode($jobinfos)));
+        		foreach($jobinfos as $childval){
+        			$this->loadModel('EmpDataBiographies');
+					$emparr=$this->EmpDataBiographies->find('all',['conditions' => array('employee_id' => $childval['employee_id']),'contain' => []])->toArray();
+					isset($emparr[0]) ? $empid = $emparr[0]['id'] : $empid = "" ; 
+					
+					$this->loadModel('PayrollData');
+					$count=$this->PayrollData->find('all', array('conditions' => array('empdatabiographies_id'  => $empid,'pay_component_type'  => 1,'paycomponent' => $this->request->data['paycomponentid'] ) ))->count();
+					if($count>0){	
+					if($this->PayrollData->deleteAll(['empdatabiographies_id' => $empid,'pay_component_type'  => 1,'paycomponent' => $this->request->data['paycomponentid'],'batch'=>TRUE])){
+						
+					}else{
+						$this->response->body("error");
+	    				return $this->response;
+					}
+					}
+				}
+				//return success @last
+				if(($k+1)==sizeof($checkedpaygroups)){
+					$this->response->body("success");
+	    			return $this->response;
+				}
+			}	
+		}
+	}
+	public function batchdeletePCGroup(){
+			
+		if($this->request->is('ajax')) {
+
+			$this->autoRender=false;
+			$checkedpaygroups=json_decode($this->request->data['checkedarr']);
+			
+			for($k=0;$k<sizeof($checkedpaygroups);$k++) {
+			
+				$this->loadModel('JobInfos');	
+				$jobinfos = $this->JobInfos->find()->select(['JobInfos.employee_id'])->where(['JobInfos.pay_group_id' => $checkedpaygroups[$k] ])
+        					->andwhere(['JobInfos.customer_id' => $this->loggedinuser['customer_id']])->toArray();//$this->Flash->error(__('You are not Authorized.'.json_encode($jobinfos)));
+        		foreach($jobinfos as $childval){
+        			$this->loadModel('EmpDataBiographies');
+					$emparr=$this->EmpDataBiographies->find('all',['conditions' => array('employee_id' => $childval['employee_id']),'contain' => []])->toArray();
+					isset($emparr[0]) ? $empid = $emparr[0]['id'] : $empid = "" ; 
+					
+					$this->loadModel('PayrollData');
+					$count=$this->PayrollData->find('all', array('conditions' => array('empdatabiographies_id'  => $empid,'pay_component_type'  => 2,'batch'=>TRUE,
+															'paycomponentgroup' => $this->request->data['paycomponentgroupid'] ) ))->count();
+					if($count>0){	
+					if($this->PayrollData->deleteAll(['empdatabiographies_id' => $empid,'pay_component_type'  => 2,'paycomponentgroup' => $this->request->data['paycomponentgroupid'],'batch'=>TRUE])){
+						
+					}else{
+						$this->response->body("error");
+	    				return $this->response;
+					}
+					}
+				}
+				//return success @last
+				if(($k+1)==sizeof($checkedpaygroups)){
+					$this->response->body("success");
+	    			return $this->response;
+				}
+			}	
 		}
 	}
 	public function copypaycomponents($id = null)
