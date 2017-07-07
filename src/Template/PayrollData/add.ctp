@@ -18,7 +18,7 @@
     </div>
 
     <?= $this->Form->create($payrollData) ?>
-    <div class="box-body maindiv">
+    <div class="box-body maindiv" style="min-height: 300px;">
     <fieldset>
         <?php
             echo $this->Form->input('empdatabiographies_id',['options'=>$excludingempDataBiographies,'label'=>'Employee','class' => 'select2', 'empty' => true]);

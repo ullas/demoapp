@@ -63,10 +63,16 @@ class PayrollDataController extends AppController
         	foreach($paycomponents as $childval){
 
 				$this->loadModel('PayComponents');
-        	    $pcname=$this->PayComponents->find()->select('PayComponents.name')->where(['PayComponents.id' => $childval['paycomponent']])->first();
+        	    $pcname=$this->PayComponents->find()->select(['PayComponents.name','PayComponents.can_override','PayComponents.pay_component_value'])
+        	    				->where(['PayComponents.id' => $childval['paycomponent']])->first();
 				
+				//return components value if can_override set false
+				$compval=$childval['pay_component_value'];
+				if(isset($pcname['can_override']) && $pcname['can_override']=="1"){
+					$compval=$pcname['pay_component_value'];
+				}
 				$paycomponentlist[] = array("id"=>$childval['id'],"paycomponent" => $pcname['name'],"startdate" => $childval['start_date'],"enddate" => $childval['end_date'],
-														 "paycomponentvalue" => $childval['pay_component_value'] );
+														 "paycomponentvalue" => $compval );
 			}
 
 			
@@ -88,10 +94,15 @@ class PayrollDataController extends AppController
         		foreach($paycomponentgroups as $childval){
 				
 					$this->loadModel('PayComponents');
-        	    	$pcname=$this->PayComponents->find()->select('PayComponents.name')->where(['PayComponents.id' => $childval['paycomponent']])->first();
-				
+        	    	$pcname=$this->PayComponents->find()->select(['PayComponents.name','PayComponents.can_override','PayComponents.pay_component_value'])
+        	    					->where(['PayComponents.id' => $childval['paycomponent']])->first();
+					//return components value if can_override set false
+					$compval=$childval['pay_component_value'];
+					if(isset($pcname['can_override']) && $pcname['can_override']=="1"){
+						$compval=$pcname['pay_component_value'];
+					}
 					$componentlist[] = array("compid"=>$childval['id'],"paycomponent" => $pcname['name'],"startdate" => $childval['start_date'],"enddate" => $childval['end_date'],
-														 "paycomponentvalue" => $childval['pay_component_value'], "paycomponentgroup" => $pcgroupname['name'] );
+														 "paycomponentvalue" => $compval, "paycomponentgroup" => $pcgroupname['name'] );
 				}
 				
 				$paycomponentgrouplist[] = array("groupid"=>$groupchildval['paycomponentgroup'], "groupname"=>$pcgroupname['name'], "grouplist" => $componentlist );

@@ -42,7 +42,7 @@
 					?>
     		</div>
     		
-    		<div style="height:150px;overflow: auto;margin-top:20px;">
+    		<div style="height:250px;overflow: auto;margin-top:20px;">
     		<?php foreach ($paycompcontent as $vals) { ?>
           <div class="panel box box-default mptlpanel no-border">
             
@@ -73,11 +73,7 @@
                 <td><?php echo  $childval['paycomponentvalue']; ?></td>
                 <td> 
 
-                	<?php echo  '<form name="formdelete" id="formdelete' .$childval['id']. '" method="post" action="/PayrollData/delete/'.$childval['paycomponentid'].'" style="display:none;" >
-                    <input type="hidden" name="_method" value="POST"></form>
-                    <a href="#" onclick="sweet_confirmdelete(&quot;MayHaw&quot;,&quot;Are you sure you want to delete the pay component '.$childval['paycomponent'].' in batch ?&quot; ,
-                    function(){ batchdeletepaycomponent('.$childval['paycomponentid'].'); })
-                    event.returnValue = false; return false;" class="deletelink fa fa-trash text-red" style= "padding:3px"></a>';   ?>
+                	<?php echo  '<a href="#" onclick="batchdeletepaycomponent('.$childval['paycomponentid'].');" class="deletelink fa fa-trash text-red" style= "padding:3px"></a>';   ?>
 
                 </td>
             </tr>
@@ -102,11 +98,7 @@
              	<?php echo $childval['groupname'];  ?>
              	<!-- </a></h4> -->
 
-           		<?php echo  '<form name="formdelete" id="formdelete' .$childval['groupid'].'" method="post" action="/PayrollData/deletegroup/'.$childval['groupid'].'" style="display:none;" >
-                    	<input type="hidden" name="_method" value="POST"></form>
-                    	<a href="#" onclick="sweet_confirmdelete(&quot;MayHaw&quot;,&quot;Are you sure you want to delete the pay component group '.$childval['groupname'].' in batch ?&quot; ,
-                    	function(){ batchdeletepaycomponentgroup('.$childval['groupid'].'); })
-                    	event.returnValue = false; return false;" class="deletelink fa fa-trash text-red pull-right" style= "padding:3px"></a>';   ?>
+           		<?php echo  '<a href="#" onclick="batchdeletepaycomponentgroup('.$childval['groupid'].');" class="deletelink fa fa-trash text-red pull-right" style= "padding:3px"></a>';   ?>
 
 
            </div>

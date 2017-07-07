@@ -8,6 +8,8 @@
 
 	.emplist .processbtn { display: none; }
 	.emplist:hover .processbtn { display: block; }
+	.emplist .preprocessbtn { display: none; }
+	.emplist:hover .preprocessbtn { display: block; }
 	.weekClass:hover {
     	background-color: #808080;
 	}
@@ -54,7 +56,9 @@
              			<div class="col-md-4"><div class="form-group text"><label class="control-label">Period</label>
              			<div class="input-group"><input type="text" name="period" id="period" class="periodpicker form-control"></div></div></div>
 					</div>
-
+					
+					<input type="button" value="PreProcess All" class="preprocessall btn btn-primary"/>
+					
 	            	<input type="button" value="Process All" class="processall btn btn-primary" style="display:none;"/>
 	            	<input type="button" value="Process Selected" class="processselected btn btn-primary"/>
             	</div>
@@ -311,7 +315,7 @@ var contentobj;
 
 		var html="";//console.log(contentobj.length);
 		for (i = 0; i < contentobj.length; i++) {
-			html+='<div class="box box-solid collapsed-box pg" style="margin-bottom:0px;"><div class="box-header">';
+			html+='<div class="box box-solid pg" style="margin-bottom:0px;"><div class="box-header">';
 			html+='<input type="checkbox" class="paygroup_filter" id="paygroupcheck_'+contentobj[i]['parentid']+'"/>'+' '+'<b>'+contentobj[i]['parent']+'</b>';
 			html+='<div class="box-tools" style="background:#dbdde0;"><button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button></div></div>';
 			if(contentobj[i]!=null && contentobj[i]!=""){
@@ -322,7 +326,9 @@ var contentobj;
 					html+= contentobj[i]['child'][t]['employee_name'] ;
 
 					html+= "<input type='button' value='Success' class='statusbtn btn btn-sm btn-success pull-right p3' style='margin-left:5px;' id='"+contentobj[i]['child'][t]['employee_id']+"'/>";
-					html+= " <span class='statustxt label label-warning' id='"+contentobj[i]['child'][t]['employee_id']+"'></span><input type='button' value='Process' class='processbtn btn btn-sm btn-warning pull-right p3 dd' id='"+contentobj[i]['child'][t]['employee_id']+"'/></a> </li>";
+					html+= "<input type='button' value='Process' class='processbtn btn btn-sm btn-warning pull-right p3 dd' style='margin-left:5px;' id='"+contentobj[i]['child'][t]['employee_id']+"'/>";
+					html+= "<input type='button' value='PreProcess' class='preprocessbtn btn btn-sm btn-info pull-right p3' id='"+contentobj[i]['child'][t]['employee_id']+"'/>";
+					html+= " <span class='statustxt label label-warning' id='"+contentobj[i]['child'][t]['employee_id']+"'></span></a> </li>";
 				}
 				html+= "</ul></div></div>";
 			}
