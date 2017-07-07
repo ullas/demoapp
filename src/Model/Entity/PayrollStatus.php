@@ -7,16 +7,18 @@ use Cake\ORM\Entity;
  * PayrollStatus Entity
  *
  * @property int $id
- * @property string $code
  * @property string $current_period
- * @property \Cake\I18n\Time $earliest_retro_date
  * @property bool $payroll_lock
  * @property \Cake\I18n\Time $lock_date
  * @property \Cake\I18n\Time $lock_time
  * @property int $customer_id
  * @property int $pay_group_id
+ * @property \Cake\I18n\Time $run_date
+ * @property \Cake\I18n\Time $run_time
+ * @property int $employee_id
  *
- * @property \App\Model\Entity\PayrollArea $payroll_area
+ * @property \App\Model\Entity\Customer $customer
+ * @property \App\Model\Entity\PayGroup $pay_group
  */
 class PayrollStatus extends Entity
 {

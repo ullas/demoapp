@@ -16,7 +16,16 @@ var $components = array('Datatable');
      *
      * @return \Cake\Network\Response|null
      */
-    
+    public function processpayroll()
+    {
+    	$this->paginate = [
+            'contain' => []
+        ];
+        $payrollStatus = $this->paginate($this->PayrollStatus);
+
+        $this->set(compact('payrollStatus'));
+        $this->set('_serialize', ['payrollStatus']);
+	}
     public function ajaxData() {
 		$this->autoRender= False;
 		  
@@ -49,7 +58,37 @@ var $components = array('Datatable');
         $this->set(compact('payrollStatus'));
         $this->set('_serialize', ['payrollStatus']);
     }
-
+	public function pushpayrollstatus(){
+		$this->autoRender= False;
+		if($this->request->is('ajax')) {
+						
+			$this->loadModel('JobInfos');	
+			$jobinfos=$this->JobInfos->find()->select(['JobInfos.pay_group_id'])->where(['JobInfos.employee_id' => $this->request->data['empid']])->first();	
+			$paygroupid="";
+			(isset($jobinfos['pay_group_id'])) ? $paygroupid=$jobinfos['pay_group_id'] : $paygroupid="" ;
+						
+			$this->loadModel('PayrollStatus');	
+			$payrollStatus = $this->PayrollStatus->newEntity();
+            $payrollStatus = $this->PayrollStatus->patchEntity($payrollStatus, $this->request->data);
+			$payrollStatus['employee_id']=$this->request->data['empid'];
+			$payrollStatus['current_period']=$this->request->data['currentperiod'];
+			
+			$payrollStatus['preprocess']=TRUE;			
+			$payrollStatus['lock_date']=date("Y-m-d");
+			$payrollStatus['lock_time']=date("h:i:sa");
+			$payrollStatus['payroll_lock']=TRUE;
+			$payrollStatus['pay_group_id']=$paygroupid;
+			$payrollStatus['customer_id']=$this->loggedinuser['customer_id'];
+			
+            if ($this->PayrollStatus->save($payrollStatus)){
+            	$this->response->body("success");
+	    		return $this->response;
+			}else{
+				$this->response->body("error");
+	    		return $this->response;
+			}	
+		}
+	}
     /**
      * View method
      *

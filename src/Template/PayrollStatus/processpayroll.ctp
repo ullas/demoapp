@@ -1,6 +1,13 @@
 <?= $this->element('templateelmnt'); ?>
 
 <style>
+
+	/*style for switch*/
+	
+
+	/*style for switch*/
+	
+
 	.emplist .statusbtn { display: none; }
 	/*.emplist .statustxt { display: none; }*/
 	/*.emplist:hover .statusbtn { display: block; }*/
@@ -26,6 +33,9 @@
         Payroll
         <small>Process</small>
       </h1>
+      <!-- <ol class="breadcrumb">
+        <li><input type="checkbox" data-toggle="toggle" id="payrolllock"  data-on="Lock" data-off="Unlock"></li>
+      </ol> -->
     </section>
 <section class="content">
 
@@ -55,6 +65,19 @@
 
              			<div class="col-md-4"><div class="form-group text"><label class="control-label">Period</label>
              			<div class="input-group"><input type="text" name="period" id="period" class="periodpicker form-control"></div></div></div>
+             			
+             			<div class="col-md-4">
+             				<div class="form-group checkbox">
+             					<div class="input-group"></div>
+             					<label ><input type="checkbox"  value="1" id="correction_run" class="">Correction Run</label>
+             				</div>
+             			</div>
+             			
+             			<div class="col-md-4">
+             				<div class="form-group text"><label class="control-label">Lock Payroll</label>
+             			<div class="input-group"><input type="checkbox" data-toggle="toggle" id="payrolllock"  data-on="Lock" data-off="Unlock"></div></div>
+             			</div>
+                          
 					</div>
 					
 					<input type="button" value="PreProcess All" class="preprocessall btn btn-primary"/>
@@ -157,7 +180,9 @@ var contentobj;
         			}
       });
 
-
+	$('#payrolllock').change(function() {
+      alert();
+   });
 
     $("#period").datepicker("remove");
     $("#period").val("");
@@ -215,9 +240,9 @@ var contentobj;
 
 		var action='<?php echo $this->request->params['action'] ?>';
 		if(action=="processpayroll"){
-			var atag = $('a[href="/PayrollRecord/processpayroll"]');
+			var atag = $('a[href="/PayrollStatus/processpayroll"]');
 			atag.parent().addClass('active');
-			atag = $('a[href="/PayrollRecord"]');
+			atag = $('a[href="/PayrollStatus"]');
 			atag.parent().removeClass('active');
 
 		}
