@@ -59,17 +59,24 @@
               <small><?php echo "PayComponents: ".count($vals['pcchild']);echo ", Pay Component Groups: ".count($vals['pcgroupchild']);?></small>
 
               <div class="box-tools pull-right">
-              	<a href="/PayrollData/addempdata/<?php echo $vals['empid']; ?>" class="open-Popup btn btn-xs btn-success" data-remote="false" data-toggle="modal" data-target="#actionspopover" style="margin-left:15px;" title="Add">Add Pay Components</a>
-
-				<a href="/PayrollData/copypaycomponents/<?php echo $vals['empid']; ?>" class="open-Popup btn btn-xs btn-success" data-remote="false" data-toggle="modal" data-target="#actionspopover" style="margin-left:5px;" title="Add">Copy Pay Components</a>
-
               	
+              	<div class="btn-group">
+                  <button type="button" class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                    <i class="fa fa-bars"></i></button>
+                  <ul class="dropdown-menu pull-right" role="menu">
+                    <li><a href="/PayrollData/addempdata/<?php echo $vals['empid']; ?>" class="open-Popup" data-remote="false" data-toggle="modal" data-target="#actionspopover">Add Pay Components</a>
+					</li>
+                    <li><a href="/PayrollData/copypaycomponents/<?php echo $vals['empid']; ?>" class="open-Popup" data-remote="false" data-toggle="modal" data-target="#actionspopover">Copy Pay Components</a>
+					</li>
+                    <li>
 
-				<?php echo  '<form name="formdelete" id="formdelete' .$vals['empid']. '" method="post" action="/PayrollData/delete/'.$vals['empid'].'" style="display:none;" >
-                    <input type="hidden" name="_method" value="POST"></form>
-                    <a href="#" onclick="sweet_confirmdelete(&quot;MayHaw&quot;,&quot;Are you sure you want to delete the pay components from '.$vals['empname'].' ?&quot; ,
+					<?php echo  '<a href="#" onclick="sweet_confirmdelete(&quot;MayHaw&quot;,&quot;Are you sure you want to delete the pay components from '.$vals['empname'].' ?&quot; ,
                     function(){ empdeletepaycomponent('.$vals['empid'].'); })
-                    event.returnValue = false; return false;" class="deletelink fa fa-trash text-red" style= "padding:3px"></a>';   ?>
+                    event.returnValue = false; return false;" class="deletelink">Delete</a>';   ?>
+                    
+                    </li>
+                  </ul>
+                </div>
 
 				<a data-toggle="collapse" data-parent="#contentsection" href="#mainpanel<?php echo $vals['empid'];  ?>" aria-expanded="false" class="collapsed">
               		<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="more-less fa fa-plus text-gray"></i>
@@ -205,7 +212,7 @@ var userdf='<?php echo $this->request->session()->read('sessionuser')['dateforma
 var paycomponentdata=[];
 var paycomponentarr=<?php echo $paycomponentarr ?>;
 $.each(paycomponentarr, function(key, value) {
-    paycomponentdata.push({'id':value['id'], "text":value['name'], "canoverride":value['can_override'], "startdate":value['start_date'], "enddate":value['end_date']});
+    paycomponentdata.push({'id':value['id'], "text":value['name'], "canoverride":value['can_override'] , "val":value['pay_component_value'], "startdate":value['start_date'], "enddate":value['end_date']});
 });
 // console.log(paycomponentdata);
 var paycomponentgroupdata=[];
@@ -242,7 +249,12 @@ $(function () {
 				//disable paycomponent value textbox, if can_override==1(no)
 				for(var i = 0; i < paycomponentdata.length; i++) {
 					if(paycomponentdata[i]['id']==$('#paycomponent').val()){
-						(paycomponentdata[i]['canoverride']=="1") ? $('#pay-component-value').prop("disabled","true")  : $('#pay-component-value').removeAttr("disabled");
+						if((paycomponentdata[i]['canoverride']=="1")){
+							$('#pay-component-value').prop("disabled","true");
+							$('#pay-component-value').val(paycomponentdata[i]['val']);
+						}else{
+							$('#pay-component-value').removeAttr("disabled");
+						}
 					}
     			}
 
@@ -669,7 +681,13 @@ $(function () {
   					$('#pay-component-value').attr("value",' ');
   					for(var i = 0; i < paycomponentdata.length; i++) {
         				if(paycomponentdata[i]['id'] == $(this).val()) {
-            				(paycomponentdata[i]['canoverride']=="1") ? $('#pay-component-value').prop("disabled","true")  : $('#pay-component-value').removeAttr("disabled");
+            				if(paycomponentdata[i]['canoverride']=="1"){
+            					$('#pay-component-value').prop("disabled","true");
+            					$('#pay-component-value').val(paycomponentdata[i]['val']);
+							}else{
+								$('#pay-component-value').removeAttr("disabled");
+								$('#pay-component-value').val("");
+							} 
         				}
     				}
   				});
@@ -678,7 +696,13 @@ $(function () {
 
 					for(var i = 0; i < paycomponentdata.length; i++) {
         				if(paycomponentdata[i]['id'] == $(this).val()) {
-            				(paycomponentdata[i]['canoverride']=="1") ? $('#paycomponentvalue1').prop("disabled","true")  : $('#paycomponentvalue1').removeAttr("disabled");
+            				if(paycomponentdata[i]['canoverride']=="1"){
+            					$('#paycomponentvalue1').prop("disabled","true");
+            					$('#paycomponentvalue1').val(paycomponentdata[i]['val']);
+							}else{
+								$('#paycomponentvalue1').removeAttr("disabled");
+								$('#paycomponentvalue1').val("");
+							}
         				}
     				}
 				});
@@ -704,7 +728,8 @@ $(function () {
     							selectedCtrl.closest(".groupclass").append("<div class='col-sm-12 spacecol'></div>");
     						}
     						selectedCtrl.closest(".groupclass").append("<div class='pcgcol'><div class='col-sm-3 groupcol'><div class='form-group'><label>Pay Component:</label><input id='paycomp"+numItems+"' disabled type='text' value='"+obj[t]['name']+"' class='form-control paycompnt' name='"+obj[t]['id']+"'></div></div><div class='col-sm-3'><label>Value:</label><input class='form-control'"+visibletype+"  id='paycomponentvalue"+numItems+"'/></div><div class='col-sm-3 groupcol'><div class='form-group'><label>Start Date:</label><div class='input-group'><div class='input-group-addon'><i class='fa fa-calendar'></i></div><input id='startdate"+numItems+"' type='text' class='form-control mptldp'></div></div></div><div class='col-sm-3 groupcol'><div class='form-group'><label>End Date:</label><div class='input-group'><div class='input-group-addon'><i class='fa fa-calendar'></i></div><input id='enddate"+numItems+"' type='text' class='form-control mptldp'></div></div></div></div>");
-
+							//set/clear value based on can_override
+							(obj[t]['can_override']=="1")? $("#paycomponentvalue"+numItems).val(obj[t]['pay_component_value']) : $("#paycomponentvalue"+numItems).val("");
 							//date picker
 							if(userdf==1){
 								$('.mptldp').datepicker({ format:"dd/mm/yyyy",autoclose: true,clearBtn: true,todayHighlight: true });
@@ -901,8 +926,8 @@ function formattoymd(inputDate) {
 	function batchdeletepaycomponent(pcid){
 
 		if ($('.paygroup_filter:checkbox:checked').length <1){
-			alert("Please select a Paygroup.");
-			// sweet_alert("Please select a Paygroup.");
+			// alert("Please select a Paygroup.");
+			sweet_alert("Please select a Paygroup.");
 			return false;
 		}
 		var checkedarr=[];
@@ -915,6 +940,7 @@ function formattoymd(inputDate) {
 					checkedarr.push(colid);
 		    }
 	   	});
+	   	sweet_confirmdelete("MayHaw","Are you sure you want to delete the particular PayComponent in batch ?", function(){
 	   	
 	   	$.ajax({
         	type: "POST",
@@ -938,14 +964,15 @@ function formattoymd(inputDate) {
       		}
 
         });
+       });
 
 	}
 	
 	function batchdeletepaycomponentgroup(pcid){
 
 		if ($('.paygroup_filter:checkbox:checked').length <1){
-			alert("Please select a Paygroup.");
-			// sweet_alert("Please select a Paygroup.");
+			// alert("Please select a Paygroup.");
+			sweet_alert("Please select a Paygroup.");
 			return false;
 		}
 		var checkedarr=[];
@@ -959,7 +986,11 @@ function formattoymd(inputDate) {
 		    }
 	   	});
 	   	
-	   	$.ajax({
+	   	
+	   sweet_confirmdelete("MayHaw","Are you sure you want to delete the particular PayComponent group in batch ?", function(){
+	   		
+	   	
+	   	  $.ajax({
         	type: "POST",
       		url: '/PayrollData/batchdeletePCGroup',
         	data: 'checkedarr='+JSON.stringify(checkedarr)+'&paycomponentgroupid='+pcid,
@@ -981,6 +1012,7 @@ function formattoymd(inputDate) {
       		}
 
         });
+      });
 
 	}
 	function empdeletepaycomponent(empid){

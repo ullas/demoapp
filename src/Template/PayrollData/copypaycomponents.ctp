@@ -14,7 +14,7 @@
     </div>
 
     <?= $this->Form->create($payrollData) ?>
-    <div class="box-body maindiv">
+    <div class="box-body maindiv" style="min-height: 350px;">
     	
     	<fieldset>
         <?php
@@ -29,7 +29,7 @@
         </div></div>
 
     </fieldset>
-    	<div style="height:150px;overflow: auto;margin-top:20px;">
+    	<div style="height:250px;overflow: auto;margin-top:20px;">
     		<?php foreach ($paycompcontent as $vals) { ?>
           <div class="panel box box-default mptlpanel no-border" id="<?php echo $vals['empid']; ?>">
             <!-- <div class="box-header with-border"> -->
