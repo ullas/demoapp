@@ -40,6 +40,10 @@
 
 <!-- /added to include drag and drop -->
 <script src="/js/jquery-ui.min.js"></script>
+
+<!-- bootstrap toggle -->
+<link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
     
 <!-- Bootstrap 3.3.5 -->
 <?php echo $this->Html->script('AdminLTE./bootstrap/js/bootstrap'); ?>

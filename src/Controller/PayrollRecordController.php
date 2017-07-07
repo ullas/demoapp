@@ -79,6 +79,7 @@ var $components = array('Datatable');
 	    	return $this->response;
 		}
 	}
+	
     public function ajaxData() {
 		$this->autoRender= False;
 
@@ -86,7 +87,7 @@ var $components = array('Datatable');
 		$dbout=$this->CreateConfigs->find()->select(['field_name', 'datatype'])->where(['table_name' => $this->request->params['controller']])->order(['id' => 'ASC'])->toArray();
 		$fields = array();
 		foreach($dbout as $value){
-			$fields[] = array("name" => $value['field_name'] , "type" => $value['datatype'] );
+			$fields[] = array("name" => $value['field_name'] , "type" => $value['datatype']);
 		}
 		$contains=['PayGroups'];
 

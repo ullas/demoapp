@@ -5,14 +5,13 @@ use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
-use Cake\Event\Event;
-use Cake\Event\ArrayObject;
-use Cake\Core\Configure;
+
 /**
  * PayrollStatus Model
  *
  * @property \Cake\ORM\Association\BelongsTo $Customers
  * @property \Cake\ORM\Association\BelongsTo $PayGroups
+ * @property \Cake\ORM\Association\BelongsTo $Employees
  *
  * @method \App\Model\Entity\PayrollStatus get($primaryKey, $options = [])
  * @method \App\Model\Entity\PayrollStatus newEntity($data = null, array $options = [])
@@ -45,6 +44,9 @@ class PayrollStatusTable extends Table
         $this->belongsTo('PayGroups', [
             'foreignKey' => 'pay_group_id'
         ]);
+        $this->belongsTo('Employees', [
+            'foreignKey' => 'employee_id'
+        ]);
     }
 
     /**
@@ -59,14 +61,7 @@ class PayrollStatusTable extends Table
             ->allowEmpty('id', 'create');
 
         $validator
-            ->allowEmpty('code');
-
-        $validator
             ->allowEmpty('current_period');
-
-        $validator
-            ->date('earliest_retro_date')
-            ->allowEmpty('earliest_retro_date');
 
         $validator
             ->boolean('payroll_lock')
@@ -80,24 +75,17 @@ class PayrollStatusTable extends Table
             ->time('lock_time')
             ->allowEmpty('lock_time');
 
+        $validator
+            ->date('run_date')
+            ->allowEmpty('run_date');
+
+        $validator
+            ->time('run_time')
+            ->allowEmpty('run_time');
+
         return $validator;
     }
-	public function beforeMarshal(Event $event, $data, $options)		 
-	{		
-				
-		$userdf = Configure::read('userdf');		
-		if(isset($userdf)  & $userdf===1){		
-		
-			foreach (["earliest_retro_date","lock_date"] as $value) {				
-				if(isset($data[$value])){					
-						if($data[$value]!=null && $data[$value]!='' && strpos($data[$value], '/') !== false){		
-						$data[$value] = str_replace('/', '-', $data[$value]);		
-						$data[$value]=date('Y/m/d', strtotime($data[$value]));		
-					}		
-				}		
-			}		
-		}		
-	}
+
     /**
      * Returns a rules checker object that will be used for validating
      * application integrity.
@@ -109,6 +97,7 @@ class PayrollStatusTable extends Table
     {
         $rules->add($rules->existsIn(['customer_id'], 'Customers'));
         $rules->add($rules->existsIn(['pay_group_id'], 'PayGroups'));
+        $rules->add($rules->existsIn(['employee_id'], 'Employees'));
 
         return $rules;
     }

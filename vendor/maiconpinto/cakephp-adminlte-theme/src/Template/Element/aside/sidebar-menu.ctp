@@ -54,7 +54,7 @@ if (file_exists($file)) {
      <a href="#"> <i class="fa fa-money"></i> <span>Payroll</span> <i class="fa fa-angle-left pull-right"></i>  </a>
      <ul class="treeview-menu">
        <li><a href="<?php echo $this -> Url -> build('/PayrollData'); ?>"><i class="fa fa-circle-o"></i> Payroll Data</a></li>
-        <li><a href="<?php echo $this -> Url -> build('/PayrollRecord/processpayroll'); ?>"><i class="fa fa-circle-o"></i> Payroll Process</a></li>
+        <li><a href="<?php echo $this -> Url -> build('/PayrollStatus/processpayroll'); ?>"><i class="fa fa-circle-o"></i> Payroll Process</a></li>
          <li><a href="<?php echo $this -> Url -> build('/PayrollStatus'); ?>"><i class="fa fa-circle-o"></i> Payroll Status</a></li>
          <li><a href="<?php echo $this -> Url -> build('/PayrollResult'); ?>"><i class="fa fa-circle-o"></i> Payroll Result</a></li>
      </ul>
