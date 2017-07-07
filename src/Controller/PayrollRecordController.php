@@ -233,14 +233,26 @@ var $components = array('Datatable');
 	    	return $this->response;
 		}
 	}
+	// public function get_employeename($empdatabiographyid = null)
+	// {
+		// $conn = ConnectionManager::get('default');
+		// $empid = $conn->execute('select employee_id from empdatabiographies where id='.$empdatabiographyid.'')->fetchAll('assoc');
+		// if($empid!="" && $empid!=null && isset($empid[0]['employee_id']) ){
+			// $arrayTemp1 = $conn->execute('select first_name,last_name from empdatapersonals where employee_id='.$empid[0]['employee_id'].'')->fetchAll('assoc');
+		// }
+		// return json_encode($arrayTemp1[0]['first_name']." ".$arrayTemp1[0]['last_name'].' ('.$empid[0]['employee_id'].')');
+	// }
 	public function get_employeename($empdatabiographyid = null)
 	{
 		$conn = ConnectionManager::get('default');
 		$empid = $conn->execute('select employee_id from empdatabiographies where id='.$empdatabiographyid.'')->fetchAll('assoc');
+		$personalid=$conn->execute('select person_id_external from empdatabiographies where id='.$empdatabiographyid.'')->fetchAll('assoc');
 		if($empid!="" && $empid!=null && isset($empid[0]['employee_id']) ){
 			$arrayTemp1 = $conn->execute('select first_name,last_name from empdatapersonals where employee_id='.$empid[0]['employee_id'].'')->fetchAll('assoc');
 		}
-		return json_encode($arrayTemp1[0]['first_name']." ".$arrayTemp1[0]['last_name'].' ('.$empid[0]['employee_id'].')');
+		
+		(isset($personalid[0]['person_id_external'])) ? $personalid=$personalid[0]['person_id_external'] : $personalid="" ;
+		return json_encode($arrayTemp1[0]['first_name']." ".$arrayTemp1[0]['last_name'].' ('.$personalid.')');
 	}
 	public function get_nameofemployee($empid = null)
 	{
@@ -248,7 +260,10 @@ var $components = array('Datatable');
 		if($empid!="" && $empid!=null && isset($empid)){
 			$arrayTemp1 = $conn->execute('select first_name,last_name from empdatapersonals where employee_id='.$empid.'')->fetchAll('assoc');
 		}
-		return json_encode($arrayTemp1[0]['first_name']." ".$arrayTemp1[0]['last_name']." (".$empid.")");
+		$personalid=$conn->execute('select person_id_external from empdatabiographies where employee_id='.$empid.'')->fetchAll('assoc');
+		(isset($personalid[0]['person_id_external'])) ? $personalid=$personalid[0]['person_id_external'] : $personalid="" ;
+		return json_encode($arrayTemp1[0]['first_name']." ".$arrayTemp1[0]['last_name'].' ('.$personalid.')');
+		// return json_encode($arrayTemp1[0]['first_name']." ".$arrayTemp1[0]['last_name']." (".$empid.")");
 	}
     /**
      * View method
