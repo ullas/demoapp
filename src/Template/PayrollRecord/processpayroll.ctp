@@ -7,7 +7,7 @@
 
 
 	.emplist .processbtn { display: none; }
-	.emplist:hover .processbtn { display: block; }
+	/*.emplist:hover .processbtn { display: block; }*/
 	.emplist .preprocessbtn { display: none; }
 	.emplist:hover .preprocessbtn { display: block; }
 	.weekClass:hover {
@@ -317,7 +317,7 @@ var contentobj;
 		for (i = 0; i < contentobj.length; i++) {
 			html+='<div class="box box-solid pg" style="margin-bottom:0px;"><div class="box-header">';
 			html+='<input type="checkbox" class="paygroup_filter" id="paygroupcheck_'+contentobj[i]['parentid']+'"/>'+' '+'<b>'+contentobj[i]['parent']+'</b>';
-			html+='<div class="box-tools" style="background:#dbdde0;"><button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button></div></div>';
+			html+='<div class="box-tools" style="background:#dbdde0;"><button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button></div></div>';
 			if(contentobj[i]!=null && contentobj[i]!=""){
 				html+= "<div class='box-body no-padding'><ul class='nav nav-pills nav-stacked'>";
 				for (t = 0; t < contentobj[i]['child'].length; t++) {
