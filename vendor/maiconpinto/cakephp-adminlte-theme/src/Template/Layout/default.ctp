@@ -15,6 +15,7 @@
     <?php echo $this->Html->css('/css/dropzone'); ?>
     <!-- Font Awesome -->
     <link rel="stylesheet" href="/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/sweetalert.css">
     <!-- Ionicons -->
 <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/base/jquery-ui.css">
     
@@ -37,6 +38,7 @@
     
     <!-- jQuery 2.1.4 -->
 <?php echo $this->Html->script('AdminLTE./plugins/jQuery/jQuery-2.1.4.min'); ?>
+<?php echo $this->Html->script('AdminLTE./plugins/jQuery/jQuery-2.1.4.min'); ?>
 
 <!-- /added to include drag and drop -->
 <script src="/js/jquery-ui.min.js"></script>
@@ -44,7 +46,9 @@
 <!-- bootstrap toggle -->
 <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
 <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
-    
+ 
+ 
+ <?php echo $this->Html->script('/js/sweetalert-dev.js'); ?>   
 <!-- Bootstrap 3.3.5 -->
 <?php echo $this->Html->script('AdminLTE./bootstrap/js/bootstrap'); ?>
 
@@ -56,8 +60,9 @@
  <?= $this->Html->script('jquery.jOrgChart.js'); ?>
 
  <!-- <script src="http://bootboxjs.com/bootbox.js"></script> -->
-  <script src="http://t4t5.github.io/sweetalert/dist/sweetalert-dev.js"></script>
-  <link rel="stylesheet" href="http://t4t5.github.io/sweetalert/dist/sweetalert.css">
+  <!-- <script src="http://t4t5.github.io/sweetalert/dist/sweetalert-dev.js"></script>
+  <link rel="stylesheet" href="http://t4t5.github.io/sweetalert/dist/sweetalert.css"> -->
+  
   <!-- <link rel="stylesheet" href="http://t4t5.github.io/sweetalert/themes/google/google.css"> -->
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
