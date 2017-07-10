@@ -1,7 +1,9 @@
 <?= $this->element('templateelmnt'); ?>
 
 <style>
-
+	.mt25{
+		margin-top:25px;
+	}	
 	/*style for switch*/
 	
 
@@ -13,10 +15,10 @@
 	/*.emplist:hover .statusbtn { display: block; }*/
 
 
-	.emplist .processbtn { display: none; }
+	/*.emplist .processbtn { display: none; }
 	.emplist:hover .processbtn { display: block; }
 	.emplist .preprocessbtn { display: none; }
-	.emplist:hover .preprocessbtn { display: block; }
+	.emplist:hover .preprocessbtn { display: block; }*/
 	.weekClass:hover {
     	background-color: #808080;
 	}
@@ -73,21 +75,28 @@
              				</div>
              			</div>
              			
-             			<div class="col-md-4">
-             				<div class="form-group text"><label class="control-label">Lock Payroll</label>
-             					<div class="input-group">
-             						<input type="checkbox" data-toggle="toggle" id="payrolllock"  data-on="<i class='fa fa-lock p3'></i> Lock" data-off="<i class='fa fa-unlock p3'></i> Unlock">
-             					</div>
-             				</div>
-             			</div>
+             			
                           
 					</div>
 					
-					<input type="button" value="PreProcess All" class="preprocessall btn btn-primary"/>
+					<div class="row">
+						<div class="col-md-2">
+             				<div class="form-group text"><label class="control-label">Lock Payroll</label>
+             					<div class="input-group">
+             						<input type="checkbox" data-toggle="toggle" id="payrolllock"  data-off="<i class='fa fa-lock p3'></i> Lock" data-on="<i class='fa fa-unlock p3'></i> Unlock">
+             					</div>
+             				</div>
+             			</div>
+             				<input type="button" value="PreProcess All" class="preprocessall btn btn-primary mt25"/>
+							<input type="button" value="PreProcess Selected" class="preprocessselected btn btn-primary mt25" style="display:none;"/>
+             				<input type="button" value="Process All" class="processall btn btn-primary mt25" style="display:none;"/>
+             				<input type="button" value="Process Selected" class="processselected btn btn-primary mt25" style="display:none;"/>
+					</div>
+					<!-- <input type="button" value="PreProcess All" class="preprocessall btn btn-primary"/>
 					<input type="button" value="PreProcess Selected" class="preprocessselected btn btn-primary" style="display:none;"/>
 					
 	            	<input type="button" value="Process All" class="processall btn btn-primary" style="display:none;"/>
-	            	<input type="button" value="Process Selected" class="processselected btn btn-primary" style="display:none;"/>
+	            	<input type="button" value="Process Selected" class="processselected btn btn-primary" style="display:none;"/> -->
             	</div>
 
             	<div class="box-body" style="height:500px;overflow-y:scroll;" id="contentdiv">

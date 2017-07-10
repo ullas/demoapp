@@ -7,7 +7,6 @@ use Cake\ORM\Entity;
  * PayrollResult Entity
  *
  * @property int $id
- * @property string $employee_code
  * @property string $period
  * @property int $pay_component_id
  * @property float $pay_component_value
@@ -16,9 +15,11 @@ use Cake\ORM\Entity;
  * @property \Cake\I18n\Time $run_time
  * @property int $customer_id
  * @property int $pay_group_id
+ * @property int $employee_id
  *
- * @property \App\Model\Entity\PayrollArea $payroll_area
  * @property \App\Model\Entity\PayComponent $pay_component
+ * @property \App\Model\Entity\Customer $customer
+ * @property \App\Model\Entity\PayGroup $pay_group
  */
 class PayrollResult extends Entity
 {

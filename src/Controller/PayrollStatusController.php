@@ -61,12 +61,18 @@ var $components = array('Datatable');
 
 					$this->loadModel('PayrollStatus');
 					$count=$this->PayrollStatus->find('all', array('conditions' => array('employee_id'  => $childval['JobInfos']['employee_id'],'preprocess' => TRUE,
-																		'current_period' => $this->request->data['selectedperiod']) ))->count();
+																		'current_period' => $this->request->data['selectedperiod'], 'customer_id' => $this->loggedinuser['customer_id']) ))->count();
 																		
 					($count>0) ? $preprocessed=1 : $preprocessed=0 ;
+					
+					$this->loadModel('PayrollResult');
+					$resultcount=$this->PayrollResult->find('all', array('conditions' => array('employee_id'  => $childval['JobInfos']['employee_id'],
+																		'period' => $this->request->data['selectedperiod'], 'customer_id' => $this->loggedinuser['customer_id']) ))->count();
+																		
+					($resultcount>0) ? $payrollresult=1 : $payrollresult=0 ;
 			
 					$jobinfolist[] = array("employee_id" => $childval['JobInfos']['employee_id'], "employee_name" => str_replace('"', '',$this->get_nameofemployee($childval['JobInfos']['employee_id'])),
-												   "preprocessed" => $preprocessed);
+												   "preprocessed" => $preprocessed, "payrollresult" => $payrollresult);
 				}
 
 				$paygrouplist[] = array("parentid" => $value['id'] , "parent" => $value['name'] , "child" => $jobinfolist );
@@ -196,7 +202,7 @@ var $components = array('Datatable');
 			$fromdate=$this->request->data['fromdate'];
 			$enddate=$this->request->data['enddate'];
 			$conn = ConnectionManager::get('default');
-			$result = $conn->execute("SELECT public.calculate_employeegrosssalary(".$empid.",'".$fromdate."','".$enddate."')")->fetchAll('assoc');
+			$result = $conn->execute("SELECT public.calculate_employeegrosssalary(".$empid.",'".$fromdate."','".$enddate."','".$this->loggedinuser['customer_id']."')")->fetchAll('assoc');
 			if(isset($result[0]['calculate_employeegrosssalary'])){
 				$this->response->body(json_encode($result[0]['calculate_employeegrosssalary']));
 	    		return $this->response;
