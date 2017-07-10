@@ -8,13 +8,13 @@
 	/*style for switch*/
 	
 
-	.emplist .statusbtn { display: none; }
+	/*.emplist .statusbtn { display: none; }*/
 	/*.emplist .statustxt { display: none; }*/
 	/*.emplist:hover .statusbtn { display: block; }*/
 
 
 	.emplist .processbtn { display: none; }
-	/*.emplist:hover .processbtn { display: block; }*/
+	.emplist:hover .processbtn { display: block; }
 	.emplist .preprocessbtn { display: none; }
 	.emplist:hover .preprocessbtn { display: block; }
 	.weekClass:hover {
@@ -75,7 +75,10 @@
              			
              			<div class="col-md-4">
              				<div class="form-group text"><label class="control-label">Lock Payroll</label>
-             			<div class="input-group"><input type="checkbox" data-toggle="toggle" id="payrolllock"  data-on="Lock" data-off="Unlock"></div></div>
+             					<div class="input-group">
+             						<input type="checkbox" data-toggle="toggle" id="payrolllock"  data-on="<i class='fa fa-lock p3'></i> Lock" data-off="<i class='fa fa-unlock p3'></i> Unlock">
+             					</div>
+             				</div>
              			</div>
                           
 					</div>
@@ -168,21 +171,19 @@ var contentobj;
   	var selectedctrl=this;
   	$( "#contentdiv" ).html("");
   	//load paygroups for the paticular mode via ajax
-  	$.ajax({
-        			type: "POST",
-        			url: '/PayrollRecord/loadPayGroup',
-        			data: 'type='+this.value,
-        			success : function(data) {
-        				loaddivContent(data);
-        			},error: function(data) {
-        	    		sweet_alert("Couldn't load pay groups for the particular mode. Please try again later.");
-						return false;
-        			}
-      });
+  	// $.ajax({
+        			// type: "POST",
+        			// url: '/PayrollStatus/loadPayGroup',
+        			// data: 'type='+this.value,
+        			// success : function(data) {
+        				// loaddivContent(data);
+        			// },error: function(data) {
+        	    		// sweet_alert("Couldn't load pay groups for the particular mode. Please try again later.");
+						// return false;
+        			// }
+      // });
 
-	$('#payrolllock').change(function() {
-      alert();
-   });
+	
 
     $("#period").datepicker("remove");
     $("#period").val("");
@@ -293,7 +294,7 @@ var contentobj;
     		$("#errordiv").html("");
 
     		validate(empid);
-
+			
     	});
     	
     	$('#contentdiv').on('click', 'input.processbtn', function() {
@@ -302,13 +303,14 @@ var contentobj;
     		var empid=$(this).attr('id');
     		$(".progress-bar").css("width", "0%");
     		$("#errordiv").html("");
-
-    		// if(validate(empid)){
-    			// processpayroll(empid);
-    		// }
-
-    		validate(empid);
-
+			
+			var lockval=$("#payrolllock").prop('checked');
+    		if(lockval){
+    			processpayroll(empid);
+    		}else{
+    			sweet_alert("Please lock Payroll.");
+            	return false;
+    		}
     	});
 
 		$(".preprocessall").click(function (event) {
@@ -389,10 +391,14 @@ var contentobj;
 					html+= "<li><a class='emplist'><input type='checkbox' class='emp_filter' id='empcheck_"+contentobj[i]['child'][t]['employee_id']+"'/> ";
 
 					html+= contentobj[i]['child'][t]['employee_name'] ;
-
-					html+= "<input type='button' value='Success' class='statusbtn btn btn-sm btn-success pull-right p3' style='margin-left:5px;' id='"+contentobj[i]['child'][t]['employee_id']+"'/>";
-					html+= "<input type='button' value='Process' class='processbtn btn btn-sm btn-warning pull-right p3 dd' style='margin-left:5px;' id='"+contentobj[i]['child'][t]['employee_id']+"'/>";
-					html+= "<input type='button' value='PreProcess' class='preprocessbtn btn btn-sm btn-info pull-right p3' id='"+contentobj[i]['child'][t]['employee_id']+"'/>";
+					if(contentobj[i]['child'][t]['preprocessed']=="1"){
+						html+= "<input type='button' value='Process' class='processbtn btn btn-sm btn-warning pull-right p3 dd' style='margin-left:5px;' id='"+contentobj[i]['child'][t]['employee_id']+"'/>";						
+					}else{
+						html+= "<input type='button' value='PreProcess' class='preprocessbtn btn btn-sm btn-info pull-right p3' id='"+contentobj[i]['child'][t]['employee_id']+"'/>";
+					}
+					// html+= "<input type='button' value='Success' class='statusbtn btn btn-sm btn-success pull-right p3' style='margin-left:5px;' id='"+contentobj[i]['child'][t]['employee_id']+"'/>";
+					// html+= "<input type='button' value='Process' class='processbtn btn btn-sm btn-warning pull-right p3 dd' style='margin-left:5px;' id='"+contentobj[i]['child'][t]['employee_id']+"'/>";
+					// html+= "<input type='button' value='PreProcess' class='preprocessbtn btn btn-sm btn-info pull-right p3' id='"+contentobj[i]['child'][t]['employee_id']+"'/>";
 					html+= " <span class='statustxt label label-warning' id='"+contentobj[i]['child'][t]['employee_id']+"'></span></a> </li>";
 				}
 				html+= "</ul></div></div>";
@@ -429,6 +435,12 @@ var contentobj;
 
       		$("#period").val(firstDate + " - " + formattodmy(lastDate));
       	}
+      	//function to refresh paygroups
+      	refreshPaygroups();
+      }else{
+      	$("#period").val("");
+      		sweet_alert("Please select a type.");
+            return false;
       }
 	}
 	function formattodmy(inputDate) {
@@ -455,10 +467,6 @@ var contentobj;
         (day[1] ? day : '0' + day[0]) ;
     }
 }
-
-	function uncheckPaygroupfilter(empid){
-
-	}
 
 	function setempfilter(paygroupid,checkstatus){
 
@@ -520,7 +528,7 @@ var contentobj;
     		$(".progress-bar").css("width", "0%");
     		$.ajax({
         		type: "POST",
-        		url: '/PayrollRecord/checkEmployeeAbsencePending',
+        		url: '/PayrollStatus/checkEmployeeAbsencePending',
         		data: 'empid='+empid+"&firstdate="+fromdate+"&lastdate="+enddate,
         		beforeSend: function(){
 					$(".payrollprogresstitle").html("Checking any leave approvals pending for " + empid);
@@ -544,17 +552,21 @@ var contentobj;
         				//call
         				$.ajax({
         					type: "POST",
-        					url: '/PayrollRecord/checkEmployeePayComponent',
+        					url: '/PayrollStatus/checkEmployeePayComponent',
         					data: 'empid='+empid,
         					beforeSend: function(){
 								$(".payrollprogresstitle").html("Checking any pay component/group exists for the employee " + empid);
 								$("#"+empid+".statustxt").html("Validating Pay Component.");
   							},
         					success : function(result) {
+        						
+        						
+        						
         						$(".progress-bar").css("width", "100%");
         						if(result=="success"){
-
+			
 									pushpayrollstatus(empid);
+									refreshPaygroups();
 									
             						$(".progress-bar").removeClass("progress-bar-danger");
         							$(".progress-bar").removeClass("progress-bar-success");
@@ -686,7 +698,7 @@ var contentobj;
 
     			$.ajax({
         			type: "POST",
-        			url: '/PayrollRecord/runPayrollByWeekly',
+        			url: '/PayrollStatus/runPayrollByWeekly',
         			data: 'empid='+empid+"&fromdate="+fromdate+"&enddate="+enddate,
         			beforeSend: function(){
 						$(".payrollprogresstitle").html("Processing payroll for the employee " + empid);
@@ -725,7 +737,23 @@ var contentobj;
     	}
       }
 	}
-
+	function refreshPaygroups(){
+		var selectedtype = $('#type').find(":selected").val();
+		var selectedperiod = $("#period").val();
+  		$( "#contentdiv" ).html("");
+  		//load paygroups for the paticular mode via ajax
+  		$.ajax({
+        	type: "POST",
+        	url: '/PayrollStatus/loadPayGroup',
+        	data: 'type='+selectedtype+'&selectedperiod='+selectedperiod,
+        	success : function(data) {
+        		loaddivContent(data);
+        	},error: function(data) {
+        	    sweet_alert("Couldn't load pay groups for the particular mode. Please try again later.");
+				return false;
+        	}
+      	});
+	}
 	function setfilter(){
 
 		var paygroupflagActive=false;

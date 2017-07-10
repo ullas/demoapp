@@ -243,18 +243,7 @@ var $components = array('Datatable');
 		// }
 		// return json_encode($arrayTemp1[0]['first_name']." ".$arrayTemp1[0]['last_name'].' ('.$empid[0]['employee_id'].')');
 	// }
-	public function get_employeename($empdatabiographyid = null)
-	{
-		$conn = ConnectionManager::get('default');
-		$empid = $conn->execute('select employee_id from empdatabiographies where id='.$empdatabiographyid.'')->fetchAll('assoc');
-		$personalid=$conn->execute('select person_id_external from empdatabiographies where id='.$empdatabiographyid.'')->fetchAll('assoc');
-		if($empid!="" && $empid!=null && isset($empid[0]['employee_id']) ){
-			$arrayTemp1 = $conn->execute('select first_name,last_name from empdatapersonals where employee_id='.$empid[0]['employee_id'].'')->fetchAll('assoc');
-		}
-		
-		(isset($personalid[0]['person_id_external'])) ? $personalid=$personalid[0]['person_id_external'] : $personalid="" ;
-		return json_encode($arrayTemp1[0]['first_name']." ".$arrayTemp1[0]['last_name'].' ('.$personalid.')');
-	}
+	
 	public function get_nameofemployee($empid = null)
 	{
 		$conn = ConnectionManager::get('default');
