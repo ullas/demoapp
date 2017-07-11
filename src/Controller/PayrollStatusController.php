@@ -61,9 +61,10 @@ var $components = array('Datatable');
 
 					$this->loadModel('PayrollStatus');
 					$count=$this->PayrollStatus->find('all', array('conditions' => array('employee_id'  => $childval['JobInfos']['employee_id'],'preprocess' => TRUE,
-																		'current_period' => $this->request->data['selectedperiod'], 'customer_id' => $this->loggedinuser['customer_id']) ))->count();
+																		'current_period' => $this->request->data['period'], 'customer_id' => $this->loggedinuser['customer_id']) ))->count();
 																		
 					($count>0) ? $preprocessed=1 : $preprocessed=0 ;
+					
 					
 					$this->loadModel('PayrollResult');
 					$resultcount=$this->PayrollResult->find('all', array('conditions' => array('employee_id'  => $childval['JobInfos']['employee_id'],

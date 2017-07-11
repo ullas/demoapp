@@ -87,7 +87,7 @@
              					</div>
              				</div>
              			</div>
-             				<input type="button" value="PreProcess All" class="preprocessall btn btn-primary mt25"/>
+             				<input type="button" value="PreProcess All" class="preprocessall btn btn-primary mt25" style="display:none;"/>
 							<input type="button" value="PreProcess Selected" class="preprocessselected btn btn-primary mt25" style="display:none;"/>
              				<input type="button" value="Process All" class="processall btn btn-primary mt25" style="display:none;"/>
              				<input type="button" value="Process Selected" class="processselected btn btn-primary mt25" style="display:none;"/>
@@ -248,6 +248,11 @@ var contentobj;
 
   });
 
+	//correction run
+	$('#correction_run').change(function() {
+        refreshPaygroups();       
+    });
+    
 		var action='<?php echo $this->request->params['action'] ?>';
 		if(action=="processpayroll"){
 			var atag = $('a[href="/PayrollStatus/processpayroll"]');
@@ -353,6 +358,13 @@ var contentobj;
     	$(".processselected").click(function (event) {
     		$(".statusbtn").hide();
     		$("#errordiv").html("");
+    		
+    		var lockval=$("#payrolllock").prop('checked');
+    		if(!lockval){
+    			sweet_alert("Please lock Payroll.");
+            	return false;
+    		}
+    		
     		var resultarr=[];
     		$('.emp_filter').each(function () {
 
@@ -360,8 +372,10 @@ var contentobj;
 		    	var id=$(this).attr("id");
 		    	var colid=id.split("_")[1];
 		    	if(sThisVal){
-					resultarr.push(colid);
-					validate(colid);
+		    		if($(this).parent().find(".processbtn").length>0){
+						resultarr.push(colid);
+						processpayroll(colid);		    			
+		    		}
 		    	}
 	   		});
    			// alert(resultarr);
@@ -376,8 +390,10 @@ var contentobj;
 		    	var id=$(this).attr("id");
 		    	var colid=id.split("_")[1];
 		    	if(sThisVal){
-					resultarr.push(colid);
-					validate(colid);
+		    		if($(this).parent().find(".preprocessbtn").length>0){
+						resultarr.push(colid);
+						validate(colid);	    			
+		    		}
 		    	}
 	   		});
    			// alert(resultarr);
@@ -387,7 +403,7 @@ var contentobj;
 	function loaddivContent(data){
 
 		contentobj = JSON.parse(data);
-
+		var correctionrun=$('#correction_run').is(':checked');
 
 		var html="";//console.log(contentobj.length);
 		for (i = 0; i < contentobj.length; i++) {
@@ -400,10 +416,24 @@ var contentobj;
 					html+= "<li><a class='emplist'><input type='checkbox' class='emp_filter' id='empcheck_"+contentobj[i]['child'][t]['employee_id']+"'/> ";
 
 					html+= contentobj[i]['child'][t]['employee_name'] ;
-					if(contentobj[i]['child'][t]['preprocessed']=="1"){
-						html+= "<input type='button' value='Process' class='processbtn btn btn-sm btn-warning pull-right p3 dd' style='margin-left:5px;' id='"+contentobj[i]['child'][t]['employee_id']+"'/>";						
+					
+					if(correctionrun==true){
+						if(contentobj[i]['child'][t]['preprocessed']=="1"){
+							html+= "<input type='button' value='Process' class='processbtn btn btn-sm btn-warning pull-right p3 dd' style='margin-left:5px;' id='"+contentobj[i]['child'][t]['employee_id']+"'/>";						
+						}else{
+							html+= "<input type='button' value='PreProcess' class='preprocessbtn btn btn-sm btn-info pull-right p3' id='"+contentobj[i]['child'][t]['employee_id']+"'/>";
+						}
 					}else{
-						html+= "<input type='button' value='PreProcess' class='preprocessbtn btn btn-sm btn-info pull-right p3' id='"+contentobj[i]['child'][t]['employee_id']+"'/>";
+						
+						if(contentobj[i]['child'][t]['preprocessed']=="1"){
+							if(contentobj[i]['child'][t]['payrollresult']=="1"){
+								html+= "<span class='label label-warning'>Processed earlier</span>";
+							}else{
+								html+= "<input type='button' value='Process' class='processbtn btn btn-sm btn-warning pull-right p3 dd' style='margin-left:5px;' id='"+contentobj[i]['child'][t]['employee_id']+"'/>";	
+							}					
+						}else{
+							html+= "<input type='button' value='PreProcess' class='preprocessbtn btn btn-sm btn-info pull-right p3' id='"+contentobj[i]['child'][t]['employee_id']+"'/>";
+						}
 					}
 					// html+= "<input type='button' value='Success' class='statusbtn btn btn-sm btn-success pull-right p3' style='margin-left:5px;' id='"+contentobj[i]['child'][t]['employee_id']+"'/>";
 					// html+= "<input type='button' value='Process' class='processbtn btn btn-sm btn-warning pull-right p3 dd' style='margin-left:5px;' id='"+contentobj[i]['child'][t]['employee_id']+"'/>";
@@ -495,12 +525,21 @@ var contentobj;
 
 	function validate(empid){
 
-
+		var empname;
+		//getting employeename from empid
+		for(i=0;i<contentobj.length;i++) {
+			for(t=0;t<contentobj[i]['child'].length;t++) {
+				if(contentobj[i]['child'][t]['employee_id']==empid){
+					empname=contentobj[i]['child'][t]['employee_name'];
+				}
+			}
+		}
+		
 		$("#"+empid+".statustxt").html("");
 		$("#"+empid+".statustxt").removeClass("label-success label-danger");
 
 		if($("#period").val()=="" || $("#period").val()==null){
-			sweet_alert("Please enter the payroll period for the employee ."+empid);
+			sweet_alert("Please enter the payroll period for the employee ."+empname);
             return false;
 		}
 
@@ -540,7 +579,7 @@ var contentobj;
         		url: '/PayrollStatus/checkEmployeeAbsencePending',
         		data: 'empid='+empid+"&firstdate="+fromdate+"&lastdate="+enddate,
         		beforeSend: function(){
-					$(".payrollprogresstitle").html("Checking any leave approvals pending for " + empid);
+					$(".payrollprogresstitle").html("Checking any leave approvals pending for " + empname);
 					$("#"+empid+".statustxt").addClass("label-warning");
 					$("#"+empid+".statustxt").html("Validating Leave approvals...");
 
@@ -564,7 +603,7 @@ var contentobj;
         					url: '/PayrollStatus/checkEmployeePayComponent',
         					data: 'empid='+empid,
         					beforeSend: function(){
-								$(".payrollprogresstitle").html("Checking any pay component/group exists for the employee " + empid);
+								$(".payrollprogresstitle").html("Checking any pay component/group exists for the employee " + empname);
 								$("#"+empid+".statustxt").html("Validating Pay Component.");
   							},
         					success : function(result) {
@@ -610,7 +649,7 @@ var contentobj;
 
         						$("#"+empid+".statustxt").html("Pay Component validation failed");
 
-            					sweet_alert("No Pay Component/Group existing for the employee ."+empid);
+            					sweet_alert("No Pay Component/Group existing for the employee ."+empname);
             					return false;
         					}
     					});
@@ -666,7 +705,16 @@ var contentobj;
 	}
 	function processpayroll(empid){
 
-	  // $(".payrollprogresstitle").html("Validating");
+	  var empname;
+		//getting employeename from empid
+		for(i=0;i<contentobj.length;i++) {
+			for(t=0;t<contentobj[i]['child'].length;t++) {
+				if(contentobj[i]['child'][t]['employee_id']==empid){
+					empname=contentobj[i]['child'][t]['employee_name'];
+				}
+			}
+		}
+		// $(".payrollprogresstitle").html("Validating");
       // $(".progress-bar").css("width", "0%");
       var selectedmode = $('#type').find(":selected").text();
 
@@ -710,16 +758,19 @@ var contentobj;
         			url: '/PayrollStatus/runPayrollByWeekly',
         			data: 'empid='+empid+"&fromdate="+fromdate+"&enddate="+enddate,
         			beforeSend: function(){
-						$(".payrollprogresstitle").html("Processing payroll for the employee " + empid);
+						$(".payrollprogresstitle").html("Processing payroll for the employee " + empname);
 						$("#"+empid+".statustxt").html("Payroll Processing...");
   					},
         			success : function(data) {
+        				//function to refresh paygroups
+      					refreshPaygroups();
+      	
         				$("#"+empid+".statustxt").removeClass("label-warning label-danger");
 						$("#"+empid+".statustxt").addClass("label-success");
 						$("#"+empid+".statustxt").html("Payroll Processed");
 
         				$(".progress-bar").css("width", "100%");
-        				$("#errordiv").append("<p class='text-green'>Salary for the employee "+empid+": "+data+"</div>");
+        				$("#errordiv").append("<p class='text-green'>Salary for the employee "+empname+": "+data+"</div>");
 
         				// console.log(empid);
 
@@ -731,7 +782,7 @@ var contentobj;
 						$("#"+empid+".statustxt").addClass("label-danger");
 						$("#"+empid+".statustxt").html("Payroll Processing error");
 
-            			sweet_alert("Error while processing payroll for the employee ."+empid);
+            			sweet_alert("Error while processing payroll for the employee ."+empname);
             			return false;
         			}
     			});
@@ -748,13 +799,41 @@ var contentobj;
 	}
 	function refreshPaygroups(){
 		var selectedtype = $('#type').find(":selected").val();
-		var selectedperiod = $("#period").val();
+		var period = $("#period").val();
+
+      	var fromdate="";
+    	var enddate="";
+    	if(selectedtype!="" && selectedtype!=null){
+
+
+    	if (selectedtype=="weekly" || selectedtype=="biweekly"){
+      		var dateparts = period.split("-");
+      		if(userdf==1){
+				fromdate=convertdmytoymd(dateparts[0]).trim(); enddate=convertdmytoymd(dateparts[1]).trim();
+			}else{
+				fromdate=dateparts[0]; enddate=dateparts[1];
+			}
+      	}else if(selectedtype=="daily"){
+      		if(userdf==1){
+				fromdate=convertdmytoymd(period).trim(); enddate=convertdmytoymd(period).trim();
+			}else{
+				fromdate=period; enddate=period;
+			}
+      	}else if(selectedtype=="monthly"){
+      		var dateparts = period.split("/");
+			fromdate=(dateparts[1]+"/"+dateparts[0]+"/01").trim();
+			var lastDay = new Date(dateparts[1],parseInt(dateparts[0]), 0);
+			enddate=formattoymd(lastDay);
+      	}
+      }
+      var selectedperiod=fromdate+"-"+enddate;
+      
   		$( "#contentdiv" ).html("");
   		//load paygroups for the paticular mode via ajax
   		$.ajax({
         	type: "POST",
         	url: '/PayrollStatus/loadPayGroup',
-        	data: 'type='+selectedtype+'&selectedperiod='+selectedperiod,
+        	data: 'type='+selectedtype+'&selectedperiod='+selectedperiod+'&period='+period,
         	success : function(data) {
         		loaddivContent(data);
         	},error: function(data) {
@@ -781,7 +860,11 @@ var contentobj;
 		    }
 	   });
 
-	   paygroupflagActive  ? $(".preprocessselected").show() : 	$(".preprocessselected").hide();
+	   	if(paygroupflagActive){
+	   		$(".processselected").show();$(".preprocessselected").show();
+	   	}else{
+	   		$(".processselected").hide();$(".preprocessselected").hide();
+	   	}
 	}
 		</script>
  <?php $this->end(); ?>
