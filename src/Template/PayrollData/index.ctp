@@ -48,8 +48,8 @@
   </ol>
 </section>
 
+<section class="content panel-group" id="accordion" >
 
-<section class="content panel-group" id="contentsection">
 
 
 	<?php foreach ($content as $vals) { ?>
@@ -59,10 +59,9 @@
               <small><?php echo "PayComponents: ".count($vals['pcchild']);echo ", Pay Component Groups: ".count($vals['pcgroupchild']);?></small>
 
               <div class="box-tools pull-right">
-              	
               	<div class="btn-group">
-                  <button type="button" class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <i class="fa fa-bars"></i></button>
+                  <button type="button" class="btn btn-success btn-sm dropdown-toggle mptltoggle" data-toggle="dropdown">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#mainpanel<?php echo $vals['empid'];  ?>"><i class="fa fa-bars"></i></a></button>
                   <ul class="dropdown-menu pull-right" role="menu">
                     <li><a href="/PayrollData/addempdata/<?php echo $vals['empid']; ?>" class="open-Popup" data-remote="false" data-toggle="modal" data-target="#actionspopover">Add Pay Components</a>
 					</li>
@@ -78,10 +77,14 @@
                   </ul>
                 </div>
 
-				<a data-toggle="collapse" data-parent="#contentsection" href="#mainpanel<?php echo $vals['empid'];  ?>" aria-expanded="false" class="collapsed">
+				<!-- <a data-toggle="collapse" data-parent="#contentsection" href="#mainpanel<?php echo $vals['empid'];  ?>" aria-expanded="false" class="collapsed">
               		<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="more-less fa fa-plus text-gray"></i>
                 	</button>
-                </a>
+                </a> -->
+                <a data-toggle="collapse" data-parent="#accordion" href="#mainpanel<?php echo $vals['empid'];  ?>"><i class="more-less fa fa-plus text-gray p3"></i>
+                      </a>
+                
+                
                 
               </div>
               <!-- /.box-tools -->
@@ -226,6 +229,12 @@ var emppcgrouparr=<?php echo $empgrouplist ?>;
 
 $(function () {
 
+
+	//expand panel on clicking dropdown toggle
+	// $('.mptltoggle').click(function(e){
+		// $(this).parents().closest.find('.mptlpanel')
+// 			
+	// });
 	//check if last expanded emp panel exists,if so expand it
 	var lastemployeepanel = localStorage.getItem('lastemppanel');//console.log(lastemployeepanel);
 	$("#"+lastemployeepanel).addClass("in");$("#"+lastemployeepanel).attr("aria-expanded","true");
@@ -852,16 +861,26 @@ $(function () {
 
 
 
-// $('.panel-group').on('hidden.bs.collapse', toggleIcon);
-$('.panel-group').on('shown.bs.collapse', toggleIcon);
-
+// $('.panel-group').on('hidden.bs.collapse', toggleChevron);
+// $('.panel-group').on('shown.bs.collapse', toggleChevron);
+$('#accordion').on('hidden.bs.collapse', toggleChevron);
+$('#accordion').on('shown.bs.collapse', toggleChevron);
 });
-function toggleIcon(e) {//console.log("entered");
+function toggleChevron(e) {
+    $(e.target)
+        .prev('.panel-heading')
+        .find("i.indicator")
+        .toggleClass('fa-plus fa-minus');
+}
+
+function toggleChevron(e) {
+
     $(e.target)
         .prev('.box-header')
         .find(".more-less")
-        .toggleClass(' fa-plus fa-minus ');
+        .toggleClass('fa-plus fa-minus');
 }
+
 function searchpayrolldata(){
 	// $(".mptlpanel").hide();
 	var input = document.getElementById('payrolldatasearch');
