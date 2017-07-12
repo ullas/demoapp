@@ -60,8 +60,11 @@
 
               <div class="box-tools pull-right">
               	<div class="btn-group">
-                  <button type="button" class="btn btn-success btn-sm dropdown-toggle mptltoggle" data-toggle="dropdown">
-                    <a data-toggle="collapse" data-parent="#accordion" href="#mainpanel<?php echo $vals['empid'];  ?>"><i class="fa fa-bars"></i></a></button>
+                  <button type="button" class="btn btn-sm dropdown-toggle mptltoggle" data-toggle="dropdown" style="padding:0px;border:0px;">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#mainpanel<?php echo $vals['empid'];  ?>" style="background-color: #00a65a;border:1px solid #008d4c;border-radius: 3px;line-height: 1.5;padding: 5px 10px;">
+                    	<i class="fa fa-bars"></i>
+                    </a>
+                  </button>
                   <ul class="dropdown-menu pull-right" role="menu">
                     <li><a href="/PayrollData/addempdata/<?php echo $vals['empid']; ?>" class="open-Popup" data-remote="false" data-toggle="modal" data-target="#actionspopover">Add Pay Components</a>
 					</li>
