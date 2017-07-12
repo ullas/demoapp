@@ -8,17 +8,17 @@ use Cake\ORM\Entity;
  *
  * @property int $id
  * @property string $current_period
- * @property bool $payroll_lock
- * @property \Cake\I18n\Time $lock_date
- * @property \Cake\I18n\Time $lock_time
  * @property int $customer_id
  * @property int $pay_group_id
  * @property \Cake\I18n\Time $run_date
  * @property \Cake\I18n\Time $run_time
  * @property int $employee_id
+ * @property bool $preprocess
+ * @property string $status
  *
  * @property \App\Model\Entity\Customer $customer
  * @property \App\Model\Entity\PayGroup $pay_group
+ * @property \App\Model\Entity\Employee $employee
  */
 class PayrollStatus extends Entity
 {

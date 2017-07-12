@@ -83,6 +83,10 @@ class PayrollResultTable extends Table
             ->time('run_time')
             ->allowEmpty('run_time');
 
+        $validator
+            ->boolean('correctionrun')
+            ->allowEmpty('correctionrun');
+
         return $validator;
     }
 

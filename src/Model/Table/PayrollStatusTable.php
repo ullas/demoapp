@@ -64,24 +64,19 @@ class PayrollStatusTable extends Table
             ->allowEmpty('current_period');
 
         $validator
-            ->boolean('payroll_lock')
-            ->allowEmpty('payroll_lock');
-
-        $validator
-            ->date('lock_date')
-            ->allowEmpty('lock_date');
-
-        $validator
-            ->time('lock_time')
-            ->allowEmpty('lock_time');
-
-        $validator
             ->date('run_date')
             ->allowEmpty('run_date');
 
         $validator
             ->time('run_time')
             ->allowEmpty('run_time');
+
+        $validator
+            ->boolean('preprocess')
+            ->allowEmpty('preprocess');
+
+        $validator
+            ->allowEmpty('status');
 
         return $validator;
     }
