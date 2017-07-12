@@ -1,8 +1,8 @@
 <?= $this->element('templateelmnt'); ?>
 
 <style>
-	.mt25{
-		margin-top:25px;
+	.w100, .toggle{
+		width:100%;
 	}	
 	/*style for switch*/
 	
@@ -80,17 +80,19 @@
 					</div>
 					
 					<div class="row">
-						<div class="col-md-2">
+						<div class="col-md-3">
              				<div class="form-group text"><label class="control-label">Lock Payroll</label>
              					<div class="input-group">
-             						<input type="checkbox" data-toggle="toggle" id="payrolllock"  data-off="<i class='fa fa-lock p3'></i> Lock" data-on="<i class='fa fa-unlock p3'></i> Unlock">
+             						<input data-width="100%;" type="checkbox" data-toggle="toggle" id="payrolllock"  data-off="<i class='fa fa-lock p3'></i> Lock" data-on="<i class='fa fa-unlock p3'></i> Unlock">
              					</div>
              				</div>
              			</div>
-             				<input type="button" value="PreProcess All" class="preprocessall btn btn-primary mt25" style="display:none;"/>
-							<input type="button" value="PreProcess Selected" class="preprocessselected btn btn-primary mt25" style="display:none;"/>
-             				<input type="button" value="Process All" class="processall btn btn-primary mt25" style="display:none;"/>
-             				<input type="button" value="Process Selected" class="processselected btn btn-primary mt25" style="display:none;"/>
+             		</div>
+             		<div class="row">
+             			<div class="col-md-3" style="display:none;"><input type="button" value="PreProcess All" class="preprocessall btn btn-primary w100"/></div>
+						<div class="col-md-3" style="display:none;"><input type="button" value="PreProcess Selected" class="preprocessselected btn btn-primary w100"/></div>
+             			<div class="col-md-3" style="display:none;"><input type="button" value="Process All" class="processall btn btn-primary w100"/></div>
+             			<div class="col-md-3" style="display:none;"><input type="button" value="Process Selected" class="processselected btn btn-primary w100"/></div>
 					</div>
 					<!-- <input type="button" value="PreProcess All" class="preprocessall btn btn-primary"/>
 					<input type="button" value="PreProcess Selected" class="preprocessselected btn btn-primary" style="display:none;"/>
@@ -884,22 +886,22 @@ var contentobj;
 	   });
 
 	   	if(paygroupflagActive){	   		
-	   		(processcounter>0) ? $(".processselected").show() : $(".processselected").hide();
-	   		(preprocesscounter>0) ? $(".preprocessselected").show() : $(".preprocessselected").hide();
+	   		(processcounter>0) ? $(".processselected").parent(".col-md-3").show() : $(".processselected").parent(".col-md-3").hide();
+	   		(preprocesscounter>0) ? $(".preprocessselected").parent(".col-md-3").show() : $(".preprocessselected").parent(".col-md-3").hide();
 	   	}else{
-	   		$(".processselected").hide();$(".preprocessselected").hide();
+	   		$(".processselected").parent(".col-md-3").hide();$(".preprocessselected").parent(".col-md-3").hide();
 	   	}
 	   	
 	   	if($('.processbtn').length>0){
-	   		$(".processall").show();
+	   		$(".processall").parent(".col-md-3").show();
 	   	}else{
-	   		$(".processall").hide();
+	   		$(".processall").parent(".col-md-3").hide();
 	   	}
 	   	
 	   	if($('.preprocessbtn').length>0){
-	   		$(".preprocessall").show();
+	   		$(".preprocessall").parent(".col-md-3").show();
 	   	}else{
-	   		$(".preprocessall").hide();
+	   		$(".preprocessall").parent(".col-md-3").hide();
 	   	}
 	}
 		</script>
