@@ -427,7 +427,7 @@ var contentobj;
 						
 						if(contentobj[i]['child'][t]['preprocessed']=="1"){
 							if(contentobj[i]['child'][t]['payrollresult']=="1"){
-								html+= "<span class='label label-warning'>Processed earlier</span>";
+								html+= "<span class='label label-warning'>Already Processed</span>";
 							}else{
 								html+= "<input type='button' value='Process' class='processbtn btn btn-sm btn-warning pull-right p3 dd' style='margin-left:5px;' id='"+contentobj[i]['child'][t]['employee_id']+"'/>";	
 							}					
@@ -447,6 +447,9 @@ var contentobj;
 		}
 
 		$( "#contentdiv" ).html( html );
+		
+		
+		setfilter();
 	}
 	function dateChanged(){
 		var selectedmode = $('#type').find(":selected").text();
@@ -769,6 +772,10 @@ var contentobj;
 						$("#"+empid+".statustxt").addClass("label-success");
 						$("#"+empid+".statustxt").html("Payroll Processed");
 
+						$(".progress-bar").removeClass("progress-bar-danger");
+        				$(".progress-bar").removeClass("progress-bar-success");
+        				$(".progress-bar").addClass("progress-bar-success");
+        							
         				$(".progress-bar").css("width", "100%");
         				$("#errordiv").append("<p class='text-green'>Salary for the employee "+empname+": "+data+"</div>");
 
@@ -778,6 +785,10 @@ var contentobj;
     				},
         			error : function(data) {
 
+						$(".progress-bar").removeClass("progress-bar-success");
+        				$(".progress-bar").removeClass("progress-bar-danger");
+        				$(".progress-bar").addClass("progress-bar-danger");
+        				
         				$("#"+empid+".statustxt").removeClass("label-warning");
 						$("#"+empid+".statustxt").addClass("label-danger");
 						$("#"+empid+".statustxt").html("Payroll Processing error");
@@ -787,6 +798,11 @@ var contentobj;
         			}
     			});
     		}else{
+    			
+    			$(".progress-bar").removeClass("progress-bar-success");
+        		$(".progress-bar").removeClass("progress-bar-danger");
+        		$(".progress-bar").addClass("progress-bar-danger");
+        				
     			$("#"+empid+".statustxt").removeClass("label-warning");
 				$("#"+empid+".statustxt").addClass("label-danger");
 				$("#"+empid+".statustxt").html("Payroll Processing error");
@@ -845,6 +861,7 @@ var contentobj;
 	function setfilter(){
 
 		var paygroupflagActive=false;
+		var processcounter=0;var preprocesscounter=0;
 
 		$('.paygroup_filter').each(function () {
 		    var sThisVal = (this.checked ? $(this).val() : "");
@@ -857,13 +874,32 @@ var contentobj;
 		    var sThisVal = (this.checked ? $(this).val() : "");
 		    if(sThisVal){
 				paygroupflagActive=true;
+				if($(this).parent().find(".processbtn").length>0){
+					processcounter++;
+				}
+				if($(this).parent().find(".preprocessbtn").length>0){
+					preprocesscounter++;
+				}
 		    }
 	   });
 
-	   	if(paygroupflagActive){
-	   		$(".processselected").show();$(".preprocessselected").show();
+	   	if(paygroupflagActive){	   		
+	   		(processcounter>0) ? $(".processselected").show() : $(".processselected").hide();
+	   		(preprocesscounter>0) ? $(".preprocessselected").show() : $(".preprocessselected").hide();
 	   	}else{
 	   		$(".processselected").hide();$(".preprocessselected").hide();
+	   	}
+	   	
+	   	if($('.processbtn').length>0){
+	   		$(".processall").show();
+	   	}else{
+	   		$(".processall").hide();
+	   	}
+	   	
+	   	if($('.preprocessbtn').length>0){
+	   		$(".preprocessall").show();
+	   	}else{
+	   		$(".preprocessall").hide();
 	   	}
 	}
 		</script>
