@@ -23,7 +23,15 @@ var $components = array('Datatable');
             'contain' => []
         ];
         $payrollStatus = $this->paginate($this->PayrollStatus);
-
+		
+		$this->loadModel('Customers');
+		$customers=$this->Customers->find()->select(['Customers.payroll_lock'])->where(['Customers.id' => $this->loggedinuser['customer_id']])->first();	
+		$payrolllock=FALSE;
+		if(isset($customers['payroll_lock']) && ($customers['payroll_lock']==true || $customers['payroll_lock']==TRUE)){
+			$payrolllock=TRUE;
+		}
+		$this->set('lockstatus', json_encode($payrolllock));
+	
         $this->set(compact('payrollStatus'));
         $this->set('_serialize', ['payrollStatus']);
 	}
@@ -64,7 +72,8 @@ var $components = array('Datatable');
 																		'current_period' => $this->request->data['period'], 'customer_id' => $this->loggedinuser['customer_id']) ))->count();
 																		
 					($count>0) ? $preprocessed=1 : $preprocessed=0 ;
-					
+					$status=$this->PayrollStatus->find('all', array('conditions' => array('employee_id'  => $childval['JobInfos']['employee_id'],
+																		'current_period' => $this->request->data['period'], 'customer_id' => $this->loggedinuser['customer_id']) ))->first();
 					
 					$this->loadModel('PayrollResult');
 					$resultcount=$this->PayrollResult->find('all', array('conditions' => array('employee_id'  => $childval['JobInfos']['employee_id'],
@@ -73,7 +82,7 @@ var $components = array('Datatable');
 					($resultcount>0) ? $payrollresult=1 : $payrollresult=0 ;
 			
 					$jobinfolist[] = array("employee_id" => $childval['JobInfos']['employee_id'], "employee_name" => str_replace('"', '',$this->get_nameofemployee($childval['JobInfos']['employee_id'])),
-												   "preprocessed" => $preprocessed, "payrollresult" => $payrollresult);
+												   "preprocessed" => $preprocessed, "payrollresult" => $payrollresult,'status'=>$status['status']);
 				}
 
 				$paygrouplist[] = array("parentid" => $value['id'] , "parent" => $value['name'] , "child" => $jobinfolist );
@@ -84,6 +93,29 @@ var $components = array('Datatable');
 
 			$this->response->body(json_encode($paygrouplist));
 	    	return $this->response;
+		}
+	}
+	public function payrolllock(){
+		$this->autoRender= False;
+		if($this->request->is('ajax')) {
+						
+			$this->loadModel('Customers');	
+			$customer = $this->Customers->get($this->loggedinuser['customer_id'], [ 'contain' => [] ]);
+			if ($this->request->data['payroll_lock'] == "true"){
+				$customer['payroll_lock']=TRUE;
+			}else if ($this->request->data['payroll_lock'] == "false"){
+				$customer['payroll_lock']=FALSE;
+			}
+			$customer['lock_date']=date("Y-m-d");
+			$customer['lock_time']=date("h:i:sa");
+			
+            if ($this->Customers->save($customer)){
+            	$this->response->body("success");
+	    		return $this->response;
+			}else{
+				$this->response->body("error");
+	    		return $this->response;
+			}	
 		}
 	}
 	public function checkEmployeePayComponent(){
@@ -240,14 +272,24 @@ var $components = array('Datatable');
 			(isset($jobinfos['pay_group_id'])) ? $paygroupid=$jobinfos['pay_group_id'] : $paygroupid="" ;
 						
 			$this->loadModel('PayrollStatus');	
-			$payrollStatus = $this->PayrollStatus->newEntity();
+			$arr = $this->PayrollStatus->find('all',[ 'conditions' => array('employee_id' => $this->request->data['empid'],'current_period'=>$this->request->data['currentperiod'],
+																		'pay_group_id' => $paygroupid,'customer_id' => $this->loggedinuser['customer_id']),
+            	'contain' => []
+        	])->toArray();
+		
+			isset($arr[0]) ? $payrollStatus = $arr[0] : $payrollStatus = $this->PayrollStatus->newEntity();
+		
             $payrollStatus = $this->PayrollStatus->patchEntity($payrollStatus, $this->request->data);
 			$payrollStatus['employee_id']=$this->request->data['empid'];
 			$payrollStatus['current_period']=$this->request->data['currentperiod'];
-			
-			$payrollStatus['preprocess']=TRUE;			
-			$payrollStatus['lock_date']=date("Y-m-d");
-			$payrollStatus['lock_time']=date("h:i:sa");
+			$payrollStatus['status']=$this->request->data['status'];		
+			if($this->request->data['preprocess']=="true" || $this->request->data['preprocess']=="TRUE"){
+				$payrollStatus['preprocess']=TRUE;
+			}else{	
+				$payrollStatus['preprocess']=FALSE;	
+			}		
+			$payrollStatus['run_date']=date("Y-m-d");
+			$payrollStatus['run_time']=date("h:i:sa");
 			// $payrollStatus['payroll_lock']=TRUE;
 			$payrollStatus['pay_group_id']=$paygroupid;
 			$payrollStatus['customer_id']=$this->loggedinuser['customer_id'];
