@@ -4,6 +4,9 @@
 	.w100, .toggle{
 		width:100%;
 	}	
+	.mt25{
+		margin-top:25px;
+	}
 	/*style for switch*/
 	
 
@@ -87,12 +90,12 @@
              					</div>
              				</div>
              			</div>
+             			<div class="col-md-3" style="display:none;"><input type="button" value="Process All" class="processall btn btn-primary mt25"/></div>
+             			<div class="col-md-3" style="display:none;"><input type="button" value="PreProcess All" class="preprocessall btn btn-primary mt25"/></div>						
              		</div>
              		<div class="row">
-             			<div class="col-md-3" style="display:none;"><input type="button" value="PreProcess All" class="preprocessall btn btn-primary w100"/></div>
-						<div class="col-md-3" style="display:none;"><input type="button" value="PreProcess Selected" class="preprocessselected btn btn-primary w100"/></div>
-             			<div class="col-md-3" style="display:none;"><input type="button" value="Process All" class="processall btn btn-primary w100"/></div>
-             			<div class="col-md-3" style="display:none;"><input type="button" value="Process Selected" class="processselected btn btn-primary w100"/></div>
+             			<div class="col-md-3" style="display:none;"><input type="button" value="Process Selected" class="processselected btn btn-primary"/></div>
+             			<div class="col-md-3" style="display:none;"><input type="button" value="PreProcess Selected" class="preprocessselected btn btn-primary"/></div>             			
 					</div>
 					<!-- <input type="button" value="PreProcess All" class="preprocessall btn btn-primary"/>
 					<input type="button" value="PreProcess Selected" class="preprocessselected btn btn-primary" style="display:none;"/>
