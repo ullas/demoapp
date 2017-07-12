@@ -3,15 +3,17 @@
 <style>
 	.w100, .toggle{
 		width:100%;
-	}	
-	.mt25{
-		margin-top:25px;
 	}
-	/*style for switch*/
-	
+	.pb10{
+		/*margin-top:25px;*/
+		padding-bottom:15px
+	}
 
 	/*style for switch*/
-	
+
+
+	/*style for switch*/
+
 
 	/*.emplist .statusbtn { display: none; }*/
 	/*.emplist .statustxt { display: none; }*/
@@ -70,36 +72,36 @@
 
              			<div class="col-md-4"><div class="form-group text"><label class="control-label">Period</label>
              			<div class="input-group"><input type="text" name="period" id="period" class="periodpicker form-control"></div></div></div>
-             			
+
              			<div class="col-md-4">
              				<div class="form-group checkbox">
              					<div class="input-group"></div>
              					<label ><input type="checkbox"  value="1" id="correction_run" class="">Correction Run</label>
              				</div>
              			</div>
-             			
-             			
-                          
+
+
+
 					</div>
-					
-					<div class="row">
-						<div class="col-md-3">
-             				<div class="form-group text"><label class="control-label">Lock Payroll</label>
-             					<div class="input-group">
-             						<input data-width="100%;" type="checkbox" data-toggle="toggle" id="payrolllock"  data-off="<i class='fa fa-lock p3'></i> Lock" data-on="<i class='fa fa-unlock p3'></i> Unlock">
-             					</div>
-             				</div>
-             			</div>
-             			<div class="col-md-3" style="display:none;"><input type="button" value="Process All" class="processall btn btn-primary mt25"/></div>
-             			<div class="col-md-3" style="display:none;"><input type="button" value="PreProcess All" class="preprocessall btn btn-primary mt25"/></div>						
+
+					<div class="row pb10">
+						<div class="col-md-4" style="display:none;"><input type="button" value="Pre-Process Selected" class="preprocessselected btn btn-primary"/></div>
+						<div class="col-md-3" style="display:none;"><input type="button" value="Pre-Process All" class="preprocessall btn btn-primary"/></div>
              		</div>
-             		<div class="row">
-             			<div class="col-md-3" style="display:none;"><input type="button" value="Process Selected" class="processselected btn btn-primary"/></div>
-             			<div class="col-md-3" style="display:none;"><input type="button" value="PreProcess Selected" class="preprocessselected btn btn-primary"/></div>             			
+        <div class="row">
+					<div class="col-md-4">
+									<!--<div class="form-group text"><label class="control-label">Lock Payroll</label>-->
+										<div class="input-group">
+											<input data-width="100%;" type="checkbox" data-toggle="toggle" id="payrolllock"  data-off="<i class='fa fa-lock p3'></i> Lock Payroll" data-on="<i class='fa fa-unlock p3'></i> Unlock Payroll">
+										</div>
+									<!--</div>-->
+								</div>
+									<div class="col-md-3" style="display:none;"><input type="button" value="Process Selected" class="processselected btn btn-primary"/></div>
+									<div class="col-md-3" style="display:none;"><input type="button" value="Process All" class="processall btn btn-primary"/></div>
 					</div>
 					<!-- <input type="button" value="PreProcess All" class="preprocessall btn btn-primary"/>
 					<input type="button" value="PreProcess Selected" class="preprocessselected btn btn-primary" style="display:none;"/>
-					
+
 	            	<input type="button" value="Process All" class="processall btn btn-primary" style="display:none;"/>
 	            	<input type="button" value="Process Selected" class="processselected btn btn-primary" style="display:none;"/> -->
             	</div>
@@ -197,7 +199,7 @@ var contentobj;
         			// }
       // });
 
-	
+
 
     $("#period").datepicker("remove");
     $("#period").val("");
@@ -255,9 +257,9 @@ var contentobj;
 
 	//correction run
 	$('#correction_run').change(function() {
-        refreshPaygroups();       
+        refreshPaygroups();
     });
-    
+
 		var action='<?php echo $this->request->params['action'] ?>';
 		if(action=="processpayroll"){
 			var atag = $('a[href="/PayrollStatus/processpayroll"]');
@@ -304,7 +306,7 @@ var contentobj;
     		// processpayroll(empid);
 
     	// });
-		
+
     	$('#contentdiv').on('click', 'input.preprocessbtn', function() {
 
     		$(".statusbtn").hide();
@@ -313,16 +315,16 @@ var contentobj;
     		$("#errordiv").html("");
 
     		validate(empid);
-			
+
     	});
-    	
+
     	$('#contentdiv').on('click', 'input.processbtn', function() {
 
     		$(".statusbtn").hide();
     		var empid=$(this).attr('id');
     		$(".progress-bar").css("width", "0%");
     		$("#errordiv").html("");
-			
+
 			var lockval=$("#payrolllock").prop('checked');
     		if(lockval){
     			processpayroll(empid);
@@ -345,7 +347,7 @@ var contentobj;
 	   		});
    			// alert(resultarr);
     	});
-    	
+
     	$(".processall").click(function (event) {
     		$(".statusbtn").hide();
     		$("#errordiv").html("");
@@ -363,13 +365,13 @@ var contentobj;
     	$(".processselected").click(function (event) {
     		$(".statusbtn").hide();
     		$("#errordiv").html("");
-    		
+
     		var lockval=$("#payrolllock").prop('checked');
     		if(!lockval){
     			sweet_alert("Please lock Payroll.");
             	return false;
     		}
-    		
+
     		var resultarr=[];
     		$('.emp_filter').each(function () {
 
@@ -379,7 +381,7 @@ var contentobj;
 		    	if(sThisVal){
 		    		if($(this).parent().find(".processbtn").length>0){
 						resultarr.push(colid);
-						processpayroll(colid);		    			
+						processpayroll(colid);
 		    		}
 		    	}
 	   		});
@@ -397,7 +399,7 @@ var contentobj;
 		    	if(sThisVal){
 		    		if($(this).parent().find(".preprocessbtn").length>0){
 						resultarr.push(colid);
-						validate(colid);	    			
+						validate(colid);
 		    		}
 		    	}
 	   		});
@@ -421,23 +423,23 @@ var contentobj;
 					html+= "<li><a class='emplist'><input type='checkbox' class='emp_filter' id='empcheck_"+contentobj[i]['child'][t]['employee_id']+"'/> ";
 
 					html+= contentobj[i]['child'][t]['employee_name'] ;
-					
+
 					if(correctionrun==true){
 						if(contentobj[i]['child'][t]['preprocessed']=="1"){
-							html+= "<input type='button' value='Process' class='processbtn btn btn-sm btn-warning pull-right p3 dd' style='margin-left:5px;' id='"+contentobj[i]['child'][t]['employee_id']+"'/>";						
+							html+= "<input type='button' value='Process' class='processbtn btn btn-sm btn-warning pull-right p3 dd' style='margin-left:5px;' id='"+contentobj[i]['child'][t]['employee_id']+"'/>";
 						}else{
-							html+= "<input type='button' value='PreProcess' class='preprocessbtn btn btn-sm btn-info pull-right p3' id='"+contentobj[i]['child'][t]['employee_id']+"'/>";
+							html+= "<input type='button' value='Pre-Process' class='preprocessbtn btn btn-sm btn-info pull-right p3' id='"+contentobj[i]['child'][t]['employee_id']+"'/>";
 						}
 					}else{
-						
+
 						if(contentobj[i]['child'][t]['preprocessed']=="1"){
 							if(contentobj[i]['child'][t]['payrollresult']=="1"){
 								html+= "<span class='label label-warning'>Already Processed</span>";
 							}else{
-								html+= "<input type='button' value='Process' class='processbtn btn btn-sm btn-warning pull-right p3 dd' style='margin-left:5px;' id='"+contentobj[i]['child'][t]['employee_id']+"'/>";	
-							}					
+								html+= "<input type='button' value='Process' class='processbtn btn btn-sm btn-warning pull-right p3 dd' style='margin-left:5px;' id='"+contentobj[i]['child'][t]['employee_id']+"'/>";
+							}
 						}else{
-							html+= "<input type='button' value='PreProcess' class='preprocessbtn btn btn-sm btn-info pull-right p3' id='"+contentobj[i]['child'][t]['employee_id']+"'/>";
+							html+= "<input type='button' label='Pre-Process' value='Pre-Process' class='preprocessbtn btn btn-sm btn-info pull-right p3' id='"+contentobj[i]['child'][t]['employee_id']+"'/>";
 						}
 					}
 					// html+= "<input type='button' value='Success' class='statusbtn btn btn-sm btn-success pull-right p3' style='margin-left:5px;' id='"+contentobj[i]['child'][t]['employee_id']+"'/>";
@@ -452,8 +454,8 @@ var contentobj;
 		}
 
 		$( "#contentdiv" ).html( html );
-		
-		
+
+
 		setfilter();
 	}
 	function dateChanged(){
@@ -542,7 +544,7 @@ var contentobj;
 				}
 			}
 		}
-		
+
 		$("#"+empid+".statustxt").html("");
 		$("#"+empid+".statustxt").removeClass("label-success label-danger");
 
@@ -615,28 +617,28 @@ var contentobj;
 								$("#"+empid+".statustxt").html("Validating Pay Component.");
   							},
         					success : function(result) {
-        						
-        						
-        						
+
+
+
         						$(".progress-bar").css("width", "100%");
         						if(result=="success"){
-			
+
 									pushpayrollstatus(empid);
 									refreshPaygroups();
-									
+
             						$(".progress-bar").removeClass("progress-bar-danger");
         							$(".progress-bar").removeClass("progress-bar-success");
         							$(".progress-bar").addClass("progress-bar-success");
 
         							// $("#errordiv").append("<p class='text-green'>Pay Component/Pay Component Group exists<p>");
 									$("#"+empid+".statustxt").html("Pay Component validated successfully.");
-									
+
 									$("#"+empid+".statustxt").removeClass("label-danger");
         							$("#"+empid+".statustxt").removeClass("label-warning");
         							$("#"+empid+".statustxt").addClass("label-success");
-        				
+
             						// processpayroll(empid);
-            						
+
         						}else{
 									$("#"+empid+".statustxt").removeClass("label-warning");
 									$("#"+empid+".statustxt").addClass("label-danger");
@@ -772,7 +774,7 @@ var contentobj;
         			success : function(data) {
         				//function to refresh paygroups
       					refreshPaygroups();
-      	
+
         				$("#"+empid+".statustxt").removeClass("label-warning label-danger");
 						$("#"+empid+".statustxt").addClass("label-success");
 						$("#"+empid+".statustxt").html("Payroll Processed");
@@ -780,7 +782,7 @@ var contentobj;
 						$(".progress-bar").removeClass("progress-bar-danger");
         				$(".progress-bar").removeClass("progress-bar-success");
         				$(".progress-bar").addClass("progress-bar-success");
-        							
+
         				$(".progress-bar").css("width", "100%");
         				$("#errordiv").append("<p class='text-green'>Salary for the employee "+empname+": "+data+"</div>");
 
@@ -793,7 +795,7 @@ var contentobj;
 						$(".progress-bar").removeClass("progress-bar-success");
         				$(".progress-bar").removeClass("progress-bar-danger");
         				$(".progress-bar").addClass("progress-bar-danger");
-        				
+
         				$("#"+empid+".statustxt").removeClass("label-warning");
 						$("#"+empid+".statustxt").addClass("label-danger");
 						$("#"+empid+".statustxt").html("Payroll Processing error");
@@ -803,11 +805,11 @@ var contentobj;
         			}
     			});
     		}else{
-    			
+
     			$(".progress-bar").removeClass("progress-bar-success");
         		$(".progress-bar").removeClass("progress-bar-danger");
         		$(".progress-bar").addClass("progress-bar-danger");
-        				
+
     			$("#"+empid+".statustxt").removeClass("label-warning");
 				$("#"+empid+".statustxt").addClass("label-danger");
 				$("#"+empid+".statustxt").html("Payroll Processing error");
@@ -848,7 +850,7 @@ var contentobj;
       	}
       }
       var selectedperiod=fromdate+"-"+enddate;
-      
+
   		$( "#contentdiv" ).html("");
   		//load paygroups for the paticular mode via ajax
   		$.ajax({
@@ -888,19 +890,19 @@ var contentobj;
 		    }
 	   });
 
-	   	if(paygroupflagActive){	   		
+	   	if(paygroupflagActive){
 	   		(processcounter>0) ? $(".processselected").parent(".col-md-3").show() : $(".processselected").parent(".col-md-3").hide();
-	   		(preprocesscounter>0) ? $(".preprocessselected").parent(".col-md-3").show() : $(".preprocessselected").parent(".col-md-3").hide();
+	   		(preprocesscounter>0) ? $(".preprocessselected").parent(".col-md-4").show() : $(".preprocessselected").parent(".col-md-4").hide();
 	   	}else{
-	   		$(".processselected").parent(".col-md-3").hide();$(".preprocessselected").parent(".col-md-3").hide();
+	   		$(".processselected").parent(".col-md-3").hide();$(".preprocessselected").parent(".col-md-4").hide();
 	   	}
-	   	
+
 	   	if($('.processbtn').length>0){
 	   		$(".processall").parent(".col-md-3").show();
 	   	}else{
 	   		$(".processall").parent(".col-md-3").hide();
 	   	}
-	   	
+
 	   	if($('.preprocessbtn').length>0){
 	   		$(".preprocessall").parent(".col-md-3").show();
 	   	}else{
