@@ -5,12 +5,11 @@ use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
-use Cake\Event\Event;
-use Cake\Event\ArrayObject;
-use Cake\Core\Configure;
+
 /**
  * Customers Model
  *
+ * @property \Cake\ORM\Association\BelongsTo $Employees
  * @property \Cake\ORM\Association\HasMany $Addresses
  * @property \Cake\ORM\Association\HasMany $BusinessUnits
  * @property \Cake\ORM\Association\HasMany $CalendarAssignments
@@ -20,12 +19,14 @@ use Cake\Core\Configure;
  * @property \Cake\ORM\Association\HasMany $Departments
  * @property \Cake\ORM\Association\HasMany $Dependents
  * @property \Cake\ORM\Association\HasMany $Divisions
+ * @property \Cake\ORM\Association\HasMany $EducationalQualifications
  * @property \Cake\ORM\Association\HasMany $Empdatabiographies
  * @property \Cake\ORM\Association\HasMany $Empdatapersonals
  * @property \Cake\ORM\Association\HasMany $EmployeeAbsencerecords
  * @property \Cake\ORM\Association\HasMany $Employees
  * @property \Cake\ORM\Association\HasMany $Employmentinfos
  * @property \Cake\ORM\Association\HasMany $EventReasons
+ * @property \Cake\ORM\Association\HasMany $Experiences
  * @property \Cake\ORM\Association\HasMany $Frequencies
  * @property \Cake\ORM\Association\HasMany $HolidayCalendars
  * @property \Cake\ORM\Association\HasMany $Holidays
@@ -37,6 +38,7 @@ use Cake\Core\Configure;
  * @property \Cake\ORM\Association\HasMany $LegalEntities
  * @property \Cake\ORM\Association\HasMany $Locations
  * @property \Cake\ORM\Association\HasMany $Notes
+ * @property \Cake\ORM\Association\HasMany $OfficeAssets
  * @property \Cake\ORM\Association\HasMany $PayComponentGroups
  * @property \Cake\ORM\Association\HasMany $PayComponents
  * @property \Cake\ORM\Association\HasMany $PayGrades
@@ -51,7 +53,9 @@ use Cake\Core\Configure;
  * @property \Cake\ORM\Association\HasMany $Positions
  * @property \Cake\ORM\Association\HasMany $Profiles
  * @property \Cake\ORM\Association\HasMany $Regions
+ * @property \Cake\ORM\Association\HasMany $Skills
  * @property \Cake\ORM\Association\HasMany $TimeAccountTypes
+ * @property \Cake\ORM\Association\HasMany $TimeTypeProfileTimeTypes
  * @property \Cake\ORM\Association\HasMany $TimeTypeProfiles
  * @property \Cake\ORM\Association\HasMany $TimeTypes
  * @property \Cake\ORM\Association\HasMany $Users
@@ -59,6 +63,7 @@ use Cake\Core\Configure;
  * @property \Cake\ORM\Association\HasMany $Workflowactions
  * @property \Cake\ORM\Association\HasMany $Workflowrules
  * @property \Cake\ORM\Association\HasMany $Workflows
+ * @property \Cake\ORM\Association\HasMany $WorkflowsHistory
  *
  * @method \App\Model\Entity\Customer get($primaryKey, $options = [])
  * @method \App\Model\Entity\Customer newEntity($data = null, array $options = [])
@@ -89,167 +94,173 @@ class CustomersTable extends Table
 
         $this->addBehavior('Timestamp');
 
+        $this->belongsTo('Employees', [
+            'foreignKey' => 'lockemployee_id'
+        ]);
         $this->hasMany('Addresses', [
-            'foreignKey' => 'customer_id','dependent' => true
+            'foreignKey' => 'customer_id'
         ]);
         $this->hasMany('BusinessUnits', [
-            'foreignKey' => 'customer_id','dependent' => true
+            'foreignKey' => 'customer_id'
         ]);
         $this->hasMany('CalendarAssignments', [
-            'foreignKey' => 'customer_id','dependent' => true
+            'foreignKey' => 'customer_id'
         ]);
         $this->hasMany('ContactInfos', [
-            'foreignKey' => 'customer_id','dependent' => true
+            'foreignKey' => 'customer_id'
         ]);
         $this->hasMany('CorporateAddresses', [
-            'foreignKey' => 'customer_id','dependent' => true
+            'foreignKey' => 'customer_id'
         ]);
         $this->hasMany('CostCentres', [
-            'foreignKey' => 'customer_id','dependent' => true
+            'foreignKey' => 'customer_id'
         ]);
         $this->hasMany('Departments', [
-            'foreignKey' => 'customer_id','dependent' => true
+            'foreignKey' => 'customer_id'
         ]);
         $this->hasMany('Dependents', [
-            'foreignKey' => 'customer_id','dependent' => true
+            'foreignKey' => 'customer_id'
         ]);
         $this->hasMany('Divisions', [
-            'foreignKey' => 'customer_id','dependent' => true
+            'foreignKey' => 'customer_id'
+        ]);
+        $this->hasMany('EducationalQualifications', [
+            'foreignKey' => 'customer_id'
         ]);
         $this->hasMany('Empdatabiographies', [
-            'foreignKey' => 'customer_id','dependent' => true
+            'foreignKey' => 'customer_id'
         ]);
         $this->hasMany('Empdatapersonals', [
-            'foreignKey' => 'customer_id','dependent' => true
+            'foreignKey' => 'customer_id'
         ]);
         $this->hasMany('EmployeeAbsencerecords', [
-            'foreignKey' => 'customer_id','dependent' => true
+            'foreignKey' => 'customer_id'
         ]);
         $this->hasMany('Employees', [
-            'foreignKey' => 'customer_id','dependent' => true
+            'foreignKey' => 'customer_id'
         ]);
         $this->hasMany('Employmentinfos', [
-            'foreignKey' => 'customer_id','dependent' => true
+            'foreignKey' => 'customer_id'
         ]);
         $this->hasMany('EventReasons', [
-            'foreignKey' => 'customer_id','dependent' => true
+            'foreignKey' => 'customer_id'
+        ]);
+        $this->hasMany('Experiences', [
+            'foreignKey' => 'customer_id'
         ]);
         $this->hasMany('Frequencies', [
-            'foreignKey' => 'customer_id','dependent' => true
+            'foreignKey' => 'customer_id'
         ]);
         $this->hasMany('HolidayCalendars', [
-            'foreignKey' => 'customer_id','dependent' => true
+            'foreignKey' => 'customer_id'
         ]);
         $this->hasMany('Holidays', [
-            'foreignKey' => 'customer_id','dependent' => true
+            'foreignKey' => 'customer_id'
         ]);
         $this->hasMany('Identities', [
-            'foreignKey' => 'customer_id','dependent' => true
+            'foreignKey' => 'customer_id'
         ]);
         $this->hasMany('Jobclasses', [
-            'foreignKey' => 'customer_id','dependent' => true
+            'foreignKey' => 'customer_id'
         ]);
         $this->hasMany('Jobfunctions', [
-            'foreignKey' => 'customer_id','dependent' => true
+            'foreignKey' => 'customer_id'
         ]);
         $this->hasMany('Jobinfos', [
-            'foreignKey' => 'customer_id','dependent' => true
+            'foreignKey' => 'customer_id'
         ]);
         $this->hasMany('Jobs', [
-            'foreignKey' => 'customer_id','dependent' => true
+            'foreignKey' => 'customer_id'
         ]);
         $this->hasMany('LegalEntities', [
-            'foreignKey' => 'customer_id','dependent' => true
+            'foreignKey' => 'customer_id'
         ]);
         $this->hasMany('Locations', [
-            'foreignKey' => 'customer_id','dependent' => true
+            'foreignKey' => 'customer_id'
         ]);
         $this->hasMany('Notes', [
-            'foreignKey' => 'customer_id','dependent' => true
+            'foreignKey' => 'customer_id'
+        ]);
+        $this->hasMany('OfficeAssets', [
+            'foreignKey' => 'customer_id'
         ]);
         $this->hasMany('PayComponentGroups', [
-            'foreignKey' => 'customer_id','dependent' => true
+            'foreignKey' => 'customer_id'
         ]);
         $this->hasMany('PayComponents', [
-            'foreignKey' => 'customer_id','dependent' => true
+            'foreignKey' => 'customer_id'
         ]);
         $this->hasMany('PayGrades', [
-            'foreignKey' => 'customer_id','dependent' => true
+            'foreignKey' => 'customer_id'
         ]);
         $this->hasMany('PayGroups', [
-            'foreignKey' => 'customer_id','dependent' => true
+            'foreignKey' => 'customer_id'
         ]);
         $this->hasMany('PayRanges', [
-            'foreignKey' => 'customer_id','dependent' => true
+            'foreignKey' => 'customer_id'
         ]);
         $this->hasMany('PayrollArea', [
-            'foreignKey' => 'customer_id','dependent' => true
+            'foreignKey' => 'customer_id'
         ]);
         $this->hasMany('PayrollData', [
-            'foreignKey' => 'customer_id','dependent' => true
+            'foreignKey' => 'customer_id'
         ]);
         $this->hasMany('PayrollRecord', [
-            'foreignKey' => 'customer_id','dependent' => true
+            'foreignKey' => 'customer_id'
         ]);
         $this->hasMany('PayrollResult', [
-            'foreignKey' => 'customer_id','dependent' => true
+            'foreignKey' => 'customer_id'
         ]);
         $this->hasMany('PayrollStatus', [
-            'foreignKey' => 'customer_id','dependent' => true
+            'foreignKey' => 'customer_id'
         ]);
         $this->hasMany('Picklists', [
-            'foreignKey' => 'customer_id','dependent' => true
+            'foreignKey' => 'customer_id'
         ]);
         $this->hasMany('Positions', [
-            'foreignKey' => 'customer_id','dependent' => true
+            'foreignKey' => 'customer_id'
         ]);
         $this->hasMany('Profiles', [
-            'foreignKey' => 'customer_id','dependent' => true
+            'foreignKey' => 'customer_id'
         ]);
         $this->hasMany('Regions', [
-            'foreignKey' => 'customer_id','dependent' => true
+            'foreignKey' => 'customer_id'
+        ]);
+        $this->hasMany('Skills', [
+            'foreignKey' => 'customer_id'
         ]);
         $this->hasMany('TimeAccountTypes', [
-            'foreignKey' => 'customer_id','dependent' => true
+            'foreignKey' => 'customer_id'
+        ]);
+        $this->hasMany('TimeTypeProfileTimeTypes', [
+            'foreignKey' => 'customer_id'
         ]);
         $this->hasMany('TimeTypeProfiles', [
-            'foreignKey' => 'customer_id','dependent' => true
+            'foreignKey' => 'customer_id'
         ]);
         $this->hasMany('TimeTypes', [
-            'foreignKey' => 'customer_id','dependent' => true
+            'foreignKey' => 'customer_id'
         ]);
         $this->hasMany('Users', [
-            'foreignKey' => 'customer_id','dependent' => true
+            'foreignKey' => 'customer_id'
         ]);
         $this->hasMany('WorkSchedules', [
-            'foreignKey' => 'customer_id','dependent' => true
+            'foreignKey' => 'customer_id'
         ]);
         $this->hasMany('Workflowactions', [
-            'foreignKey' => 'customer_id','dependent' => true
+            'foreignKey' => 'customer_id'
         ]);
         $this->hasMany('Workflowrules', [
-            'foreignKey' => 'customer_id','dependent' => true
+            'foreignKey' => 'customer_id'
         ]);
         $this->hasMany('Workflows', [
-            'foreignKey' => 'customer_id','dependent' => true
+            'foreignKey' => 'customer_id'
+        ]);
+        $this->hasMany('WorkflowsHistory', [
+            'foreignKey' => 'customer_id'
         ]);
     }
-	public function beforeMarshal(Event $event, $data, $options)
-	{
-		
-		$userdf = Configure::read('userdf');
-		if(isset($userdf)  & $userdf===1){
 
-			foreach (["expirydate"] as $value) {		
-				if(isset($data[$value])){			
-						if($data[$value]!=null && $data[$value]!='' && strpos($data[$value], '/') !== false){
-						$data[$value] = str_replace('/', '-', $data[$value]);
-						$data[$value]=date('Y/m/d', strtotime($data[$value]));
-					}
-				}
-			}
-		}
-	}
     /**
      * Default validation rules.
      *
@@ -274,6 +285,32 @@ class CustomersTable extends Table
             ->date('expirydate')
             ->allowEmpty('expirydate');
 
+        $validator
+            ->boolean('payroll_lock')
+            ->allowEmpty('payroll_lock');
+
+        $validator
+            ->date('lock_date')
+            ->allowEmpty('lock_date');
+
+        $validator
+            ->time('lock_time')
+            ->allowEmpty('lock_time');
+
         return $validator;
+    }
+
+    /**
+     * Returns a rules checker object that will be used for validating
+     * application integrity.
+     *
+     * @param \Cake\ORM\RulesChecker $rules The rules object to be modified.
+     * @return \Cake\ORM\RulesChecker
+     */
+    public function buildRules(RulesChecker $rules)
+    {
+        $rules->add($rules->existsIn(['lockemployee_id'], 'Employees'));
+
+        return $rules;
     }
 }

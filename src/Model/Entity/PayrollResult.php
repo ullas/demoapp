@@ -16,10 +16,12 @@ use Cake\ORM\Entity;
  * @property int $customer_id
  * @property int $pay_group_id
  * @property int $employee_id
+ * @property bool $correctionrun
  *
  * @property \App\Model\Entity\PayComponent $pay_component
  * @property \App\Model\Entity\Customer $customer
  * @property \App\Model\Entity\PayGroup $pay_group
+ * @property \App\Model\Entity\Employee $employee
  */
 class PayrollResult extends Entity
 {
