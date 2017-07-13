@@ -123,24 +123,47 @@ var $components = array('Datatable');
 		if($this->request->is('ajax')) {
 
 			$this->autoRender=false;
-
+			
+			$firstdate=$this->request->data['firstdate'];
+			$lastdate=$this->request->data['lastdate'];//$this->Flash->error(__('DATA__.').json_encode($lastdate));
+			
 			$this->loadModel('EmpDataBiographies');
 			$empdatabiographyarr=$this->EmpDataBiographies->find('all',['conditions' => array('employee_id' => $this->request->data['empid']),'contain' => []])->toArray();
 			isset($empdatabiographyarr[0]) ? $empdatabiographyid = $empdatabiographyarr[0]['id'] : $empdatabiographyid = "" ;
 
 			$this->loadModel('PayrollData');
 			$payrolldataarr=$this->PayrollData->find('all',['conditions' => array('PayrollData.empdatabiographies_id' => $empdatabiographyid)])
-									->where("PayrollData.customer_id=".$this->loggedinuser['customer_id'])->toArray();
+									->andwhere("PayrollData.customer_id=".$this->loggedinuser['customer_id'])->toArray();
+			foreach ($payrolldataarr as $k=>$data) {
 
-			if (empty($payrolldataarr)) {
 
+				$now = new \DateTime();
+
+				$startdate = str_replace('/', '-', $payrolldataarr[$k]['start_date']);
+				$enddate = str_replace('/', '-', $payrolldataarr[$k]['end_date']);
+
+				$begin = new \DateTime( $startdate );
+				$end = new \DateTime( $enddate );
+				$end->modify('+1 day');
+
+				$interval = \DateInterval::createFromDateString('1 day');
+				$period = new \DatePeriod($begin, $interval, $end);
+
+				foreach ( $period as $dt ){
+
+					// $timestamp = strtotime($dt->format( "Y m d T H:ss" ));
+					// $month = date('n', $timestamp);
+
+
+					if(($dt->format( "Y/m/d"))>=$firstdate && ($dt->format( "Y/m/d" ))<=$lastdate){
+						$this->response->body("success");
+				    	return $this->response;
+					}
+				}
+				}
 				$this->response->body("Pay Component/Component Group doesn't exist for the the employee". $this->get_employeename($empdatabiographyid) );
 	    		return $this->response;
-			}
-
-			$this->response->body("success");
-	    	return $this->response;
-		}
+		}	
 	}
 	public function checkEmployeeAbsencePending(){
 
@@ -234,8 +257,9 @@ var $components = array('Datatable');
 			$empid=$this->request->data['empid'];
 			$fromdate=$this->request->data['fromdate'];
 			$enddate=$this->request->data['enddate'];
+			$correctionrun=$this->request->data['correctionrun'];
 			$conn = ConnectionManager::get('default');
-			$result = $conn->execute("SELECT public.calculate_employeegrosssalary(".$empid.",'".$fromdate."','".$enddate."','".$this->loggedinuser['customer_id']."')")->fetchAll('assoc');
+			$result = $conn->execute("SELECT public.calculate_employeegrosssalary(".$empid.",'".$fromdate."','".$enddate."','".$this->loggedinuser['customer_id']."','".$this->loggedinuser['correctionrun']."')")->fetchAll('assoc');
 			if(isset($result[0]['calculate_employeegrosssalary'])){
 				$this->response->body(json_encode($result[0]['calculate_employeegrosssalary']));
 	    		return $this->response;
