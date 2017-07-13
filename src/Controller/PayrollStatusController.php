@@ -106,6 +106,7 @@ var $components = array('Datatable');
 			}else if ($this->request->data['payroll_lock'] == "false"){
 				$customer['payroll_lock']=FALSE;
 			}
+			$customer['employee_id']=$this->loggedinuser['employee_id'];
 			$customer['lock_date']=date("Y-m-d");
 			$customer['lock_time']=date("h:i:sa");
 			
