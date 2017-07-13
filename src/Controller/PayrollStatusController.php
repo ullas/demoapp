@@ -125,7 +125,7 @@ var $components = array('Datatable');
 			$this->autoRender=false;
 			
 			$firstdate=$this->request->data['firstdate'];
-			$lastdate=$this->request->data['lastdate'];//$this->Flash->error(__('DATA__.').json_encode($lastdate));
+			$lastdate=$this->request->data['lastdate'];
 			
 			$this->loadModel('EmpDataBiographies');
 			$empdatabiographyarr=$this->EmpDataBiographies->find('all',['conditions' => array('employee_id' => $this->request->data['empid']),'contain' => []])->toArray();
@@ -259,7 +259,7 @@ var $components = array('Datatable');
 			$enddate=$this->request->data['enddate'];
 			$correctionrun=$this->request->data['correctionrun'];
 			$conn = ConnectionManager::get('default');
-			$result = $conn->execute("SELECT public.calculate_employeegrosssalary(".$empid.",'".$fromdate."','".$enddate."','".$this->loggedinuser['customer_id']."','".$this->loggedinuser['correctionrun']."')")->fetchAll('assoc');
+			$result = $conn->execute("SELECT public.calculate_employeegrosssalary(".$empid.",'".$fromdate."','".$enddate."','".$this->loggedinuser['customer_id']."','".$correctionrun."')")->fetchAll('assoc');
 			if(isset($result[0]['calculate_employeegrosssalary'])){
 				$this->response->body(json_encode($result[0]['calculate_employeegrosssalary']));
 	    		return $this->response;
