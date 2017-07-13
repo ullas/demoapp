@@ -466,7 +466,7 @@ var contentobj;
 
 						if(contentobj[i]['child'][t]['preprocessed']=="1"){
 							if(contentobj[i]['child'][t]['payrollresult']=="1"){
-								html+= "<span class='label label-warning'>Already Processed</span>";
+								html+= "<span class='label label-success'>Already Processed</span>";
 							}else{
 								html+= "<input type='button' value='Process' class='processbtn btn btn-sm btn-warning pull-right p3 dd' style='margin-left:5px;' id='"+contentobj[i]['child'][t]['employee_id']+"'/>";
 							}
@@ -477,9 +477,14 @@ var contentobj;
 					// html+= "<input type='button' value='Success' class='statusbtn btn btn-sm btn-success pull-right p3' style='margin-left:5px;' id='"+contentobj[i]['child'][t]['employee_id']+"'/>";
 					// html+= "<input type='button' value='Process' class='processbtn btn btn-sm btn-warning pull-right p3 dd' style='margin-left:5px;' id='"+contentobj[i]['child'][t]['employee_id']+"'/>";
 					// html+= "<input type='button' value='PreProcess' class='preprocessbtn btn btn-sm btn-info pull-right p3' id='"+contentobj[i]['child'][t]['employee_id']+"'/>";
-					if(contentobj[i]['child'][t]['status']!=null && contentobj[i]['child'][t]['status']!=""){
-						html+= " <span class='statustxt label label-warning' id='"+contentobj[i]['child'][t]['employee_id']+"'>"+contentobj[i]['child'][t]['status']+"</span></a> </li>";
+					if(contentobj[i]['child'][t]['status']!=null && contentobj[i]['child'][t]['status']!="" && contentobj[i]['child'][t]['payrollresult']!="1"){
+						if(contentobj[i]['child'][t]['preprocessed']=="1"){
+							html+= " <span class='statustxt label label-success' id='"+contentobj[i]['child'][t]['employee_id']+"'>"+contentobj[i]['child'][t]['status']+"</span>";
+						}else{
+							html+= " <span class='statustxt label label-danger' id='"+contentobj[i]['child'][t]['employee_id']+"'>"+contentobj[i]['child'][t]['status']+"</span>";
+						}
 					}
+					html+= "</a> </li>";
 				}
 				html+= "</ul></div></div>";
 			}
@@ -645,7 +650,7 @@ var contentobj;
         				$.ajax({
         					type: "POST",
         					url: '/PayrollStatus/checkEmployeePayComponent',
-        					data: 'empid='+empid,
+        					data: 'empid='+empid+"&firstdate="+fromdate+"&lastdate="+enddate,
         					beforeSend: function(){
 								$(".payrollprogresstitle").html("Checking any pay component/group exists for the employee " + empname);
 								$("#"+empid+".statustxt").html("Validating Pay Component.");
@@ -675,6 +680,7 @@ var contentobj;
 
         						}else{
         							pushpayrollstatus(empid,false,"Pay Component validation failed");
+        							refreshPaygroups();
 									$("#"+empid+".statustxt").removeClass("label-warning");
 									$("#"+empid+".statustxt").addClass("label-danger");
 
@@ -690,6 +696,7 @@ var contentobj;
     						},
         					error : function(result) {
         						pushpayrollstatus(empid,false,"Pay Component validation failed");
+        						refreshPaygroups();
         						$("#"+empid+".statustxt").removeClass("label-warning");
 								$("#"+empid+".statustxt").addClass("label-danger");
 
@@ -702,6 +709,7 @@ var contentobj;
 
     				}else{
     					pushpayrollstatus(empid,false,"Leave approval validation failed");
+    					refreshPaygroups();
     					
     					$("#"+empid+".statustxt").removeClass("label-warning");
 						$("#"+empid+".statustxt").addClass("label-danger");
@@ -722,6 +730,7 @@ var contentobj;
     			},
         		error : function(data) {
         			pushpayrollstatus(empid,false,"Leave approval validation failed");
+        			refreshPaygroups();
         			
         			$("#"+empid+".statustxt").html("Leave approval validation failed");
             		sweet_alert("Pending leave approvals for employee ."+empid);
@@ -799,7 +808,8 @@ var contentobj;
 		// if(selectedmode=="Daily"){
 			// enddate=fromdate;
 		// }
-
+		var correctionrun=$('#correction_run').is(':checked');
+		
     	if(selectedmode=="Weekly" || selectedmode=="BiWeekly" || selectedmode=="Daily"|| selectedmode=="Monthly"){
 
     		if(period!=null && period!=""){
@@ -807,7 +817,7 @@ var contentobj;
     			$.ajax({
         			type: "POST",
         			url: '/PayrollStatus/runPayrollByWeekly',
-        			data: 'empid='+empid+"&fromdate="+fromdate+"&enddate="+enddate,
+        			data: 'empid='+empid+"&fromdate="+fromdate+"&enddate="+enddate+"&correctionrun="+correctionrun,
         			beforeSend: function(){
 						$(".payrollprogresstitle").html("Processing payroll for the employee " + empname);
 						$("#"+empid+".statustxt").html("Payroll Processing...");
