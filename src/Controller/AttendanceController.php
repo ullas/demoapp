@@ -11,7 +11,7 @@ use App\Controller\AppController;
 class AttendanceController extends AppController
 {
 
-    var $components = array('Datatable');
+    var $components = array('Attendancetable');
     /**
      * Index method
      *
@@ -30,7 +30,18 @@ class AttendanceController extends AppController
 		$contains=['Employees'];
 									  
 		$usrfilter="Attendance.employee_id='".$this->loggedinuser['employee_id'] . "' and Attendance.customer_id ='".$this->loggedinuser['customer_id'] . "'";	 
-		$output =$this->Datatable->getView($fields,$contains,$usrfilter);
+		
+		$limit=false;
+		
+		if( isset($this->request->query['filter']) && ($this->request->query['filter'])!=null && strlen($usrfilter)>3){
+      
+			if($this->request->query['filter'] == "five"){$limit=TRUE;}
+			else if($this->request->query['filter'] == "week"){$usrfilter.=" and date BETWEEN 
+							NOW()::DATE-EXTRACT(DOW FROM NOW())::INTEGER-6   AND NOW()::DATE-EXTRACT(DOW from NOW())::INTEGER+1";}
+			else if($this->request->query['filter'] == "month"){$usrfilter.=" and EXTRACT(MONTH FROM date) = EXTRACT(month FROM CURRENT_DATE)";}
+		}
+		
+		$output =$this->Attendancetable->getView($fields,$contains,$usrfilter,$limit);
 		echo json_encode($output);			
     }
     public function index()
@@ -49,15 +60,36 @@ class AttendanceController extends AppController
 
         $this->set(compact('attendance'));
         $this->set('_serialize', ['attendance']);
+		
+		$this->loadModel('Attendance');
+		$attendances=$this->Attendance->find('all')->where(['employee_id' => $this->loggedinuser['employee_id'],'Attendance.customer_id' => $this->loggedinuser['customer_id']])->order(['id' => 'DESC'])->toArray();	
+		$clockstatus=FALSE;
+		if(isset($attendances[0])){
+			if(isset($attendances[0]['time_out'])){
+				$clockstatus=FALSE;
+			}else{
+				if(isset($attendances[0]['time_in'])){
+					$clockstatus=TRUE;
+				}else{
+					$clockstatus=FALSE;
+				}
+			}
+		}
+		$this->set('clockstatus', json_encode($clockstatus));
     }
 	public function clockinout(){
 		$this->autoRender= False;
 		if($this->request->is('ajax')) {
 						
-			$attendance = $this->Attendance->newEntity();
 			if ($this->request->data['clockstatus'] == "true"){
+				$attendance = $this->Attendance->newEntity();
 				$attendance['time_in']=date("h:i:sa");
 			}else if ($this->request->data['clockstatus'] == "false"){
+				
+				$arr = $this->Attendance->find('all',[ 'conditions' => array('employee_id' => $this->loggedinuser['employee_id'],'customer_id'=>$this->loggedinuser['customer_id'] )])->order(['id' => 'DESC'])->toArray();
+				isset($arr[0]) ? $attendance = $arr[0] : $attendance = $this->Attendance->newEntity();
+				$attendance = $this->Attendance->patchEntity($attendance, $this->request->data);
+            
 				$attendance['time_out']=date("h:i:sa");
 			}
 			$attendance['employee_id']=$this->loggedinuser['employee_id'];

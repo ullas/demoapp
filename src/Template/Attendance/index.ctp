@@ -78,9 +78,9 @@
 			<div class="col-md-4"><div class="form-group text">
              			<div class="input-group">
              				<select class="form-control select2" id="attendancefilter">
-  								<option value="daily">Show last five</option>
-  								<option value="weekly">Show this week</option>
-  								<option value="monthly">Show this month</option>
+  								<option value="five">Show last five</option>
+  								<option value="week">Show this week</option>
+  								<option value="month">Show this month</option>
 							</select>
              			</div></div></div>
              			
@@ -119,14 +119,26 @@ window.onload = function() {
 }
 
 $(function() {
+	
+	var clockstatus=<?php echo $clockstatus ; ?>;
+	if(clockstatus){
+		$('#clockin').bootstrapToggle('on');
+	}
+	
+	//filter onchange
+	$('#attendancefilter').change(function() {
+		table.ajax.url('/Attendance/ajaxData?filter='+this.value).load();
+	});
 	//lock/unlock payroll
-		$('#clockin').change(function() {
+	$('#clockin').change(function() {
 
+		// sweet_confirm("MayHaw","Confirm ?", function(){
       		$.ajax({
         		type: "POST",
         		url: '/Attendance/clockinout',
         		data: 'clockstatus='+$(this).prop('checked'),
         		success : function(data) {
+        			table.ajax.reload(null,false);
             		return false;
     			},
         		error : function(data) {
@@ -134,7 +146,10 @@ $(function() {
             		return false;
         		}
     		});
-    	});
+ 		// },function(){console.log("ddd");
+ 			// alert();
+ 		// });
+    });
 });
  </script>
  <?php $this->end(); ?>
