@@ -286,12 +286,12 @@ var contentobj;
             		return false;
     			},
         		error : function(data) {
-            		sweet_alert("Error while locking/unlocking payroll.");
+            		sweet_alert("Error while locking/unlocking payroll");
             		return false;
         		}
     		});
     	});
-    
+
 	    $('#contentdiv').on('change', 'input.paygroup_filter', function() {
         	var paygroupid=$(this).attr('id');
         	var colid=paygroupid.split("_")[1];
@@ -350,7 +350,7 @@ var contentobj;
     		if(lockval){
     			processpayroll(empid);
     		}else{
-    			sweet_alert("Please lock Payroll.");
+    			sweet_alert("Please lock Payroll");
             	return false;
     		}
     	});
@@ -374,13 +374,13 @@ var contentobj;
     	$(".processall").click(function (event) {
     		$(".statusbtn").hide();
     		$("#errordiv").html("");
-    		
+
     		var lockval=$("#payrolllock").prop('checked');
     		if(!lockval){
-    			sweet_alert("Please lock Payroll.");
+    			sweet_alert("Please lock Payroll");
             	return false;
     		}
-    		
+
     		var resultarr=[];
     		$('.emp_filter').each(function () {
 
@@ -400,7 +400,7 @@ var contentobj;
 
     		var lockval=$("#payrolllock").prop('checked');
     		if(!lockval){
-    			sweet_alert("Please lock Payroll.");
+    			sweet_alert("Please lock Payroll");
             	return false;
     		}
 
@@ -466,7 +466,7 @@ var contentobj;
 
 						if(contentobj[i]['child'][t]['preprocessed']=="1"){
 							if(contentobj[i]['child'][t]['payrollresult']=="1"){
-								html+= "<span class='label label-success'>Already Processed</span>";
+								html+= "<span class='label label-success'>Payroll processed for this period</span>";
 							}else{
 								html+= "<input type='button' value='Process' class='processbtn btn btn-sm btn-warning pull-right p3 dd' style='margin-left:5px;' id='"+contentobj[i]['child'][t]['employee_id']+"'/>";
 							}
@@ -527,7 +527,7 @@ var contentobj;
       	refreshPaygroups();
       }else{
       	$("#period").val("");
-      		sweet_alert("Please select a type.");
+      		sweet_alert("Please select a type");
             return false;
       }
 	}
@@ -588,7 +588,7 @@ var contentobj;
 		$("#"+empid+".statustxt").removeClass("label-success label-danger");
 
 		if($("#period").val()=="" || $("#period").val()==null){
-			sweet_alert("Please enter the payroll period for the employee ."+empname);
+			sweet_alert("Please enter the payroll period for the employee "+empname);
             return false;
 		}
 
@@ -642,7 +642,7 @@ var contentobj;
         				$(".progress-bar").addClass("progress-bar-success");
 
         				// $("#errordiv").append("<p class='text-green'>No exisiting Leave Request to be approved("+empid+")<p>");
-						$("#"+empid+".statustxt").html("Leave Request validated successfully.");
+						$("#"+empid+".statustxt").html("Leave Request validated successfully");
             			// return true;
 
 
@@ -652,8 +652,8 @@ var contentobj;
         					url: '/PayrollStatus/checkEmployeePayComponent',
         					data: 'empid='+empid+"&firstdate="+fromdate+"&lastdate="+enddate,
         					beforeSend: function(){
-								$(".payrollprogresstitle").html("Checking any pay component/group exists for the employee " + empname);
-								$("#"+empid+".statustxt").html("Validating Pay Component.");
+								$(".payrollprogresstitle").html("Checking any Pay Component/Group exists for the employee " + empname);
+								$("#"+empid+".statustxt").html("Validating Pay Component");
   							},
         					success : function(result) {
 
@@ -662,7 +662,7 @@ var contentobj;
         						$(".progress-bar").css("width", "100%");
         						if(result=="success"){
 
-									pushpayrollstatus(empid,true,"Pay Component validated successfully.");
+									pushpayrollstatus(empid,true,"Pay Component validated successfully");
 									refreshPaygroups();
 
             						$(".progress-bar").removeClass("progress-bar-danger");
@@ -670,7 +670,7 @@ var contentobj;
         							$(".progress-bar").addClass("progress-bar-success");
 
         							// $("#errordiv").append("<p class='text-green'>Pay Component/Pay Component Group exists<p>");
-									$("#"+empid+".statustxt").html("Pay Component validated successfully.");
+									$("#"+empid+".statustxt").html("Pay Component validated successfully");
 
 									$("#"+empid+".statustxt").removeClass("label-danger");
         							$("#"+empid+".statustxt").removeClass("label-warning");
@@ -702,7 +702,7 @@ var contentobj;
 
         						$("#"+empid+".statustxt").html("Pay Component validation failed");
 
-            					sweet_alert("No Pay Component/Group existing for the employee ."+empname);
+            					sweet_alert("No Pay Component/Group existing for the employee "+empname);
             					return false;
         					}
     					});
@@ -710,7 +710,7 @@ var contentobj;
     				}else{
     					pushpayrollstatus(empid,false,"Leave approval validation failed");
     					refreshPaygroups();
-    					
+
     					$("#"+empid+".statustxt").removeClass("label-warning");
 						$("#"+empid+".statustxt").addClass("label-danger");
 						$("#"+empid+".statustxt").html("Leave approval validation failed");
@@ -731,9 +731,9 @@ var contentobj;
         		error : function(data) {
         			pushpayrollstatus(empid,false,"Leave approval validation failed");
         			refreshPaygroups();
-        			
+
         			$("#"+empid+".statustxt").html("Leave approval validation failed");
-            		sweet_alert("Pending leave approvals for employee ."+empid);
+            		sweet_alert("Pending leave approvals for employee "+empid);
             		return false;
         		}
     		});
@@ -752,7 +752,7 @@ var contentobj;
             			return false;
     				},
         			error : function(data) {
-            			sweet_alert("Error while pushing payroll status for the employee ."+empid);
+            			sweet_alert("Error while pushing payroll status for the employee "+empid);
             			return false;
         			}
     			});
@@ -809,7 +809,7 @@ var contentobj;
 			// enddate=fromdate;
 		// }
 		var correctionrun=$('#correction_run').is(':checked');
-		
+
     	if(selectedmode=="Weekly" || selectedmode=="BiWeekly" || selectedmode=="Daily"|| selectedmode=="Monthly"){
 
     		if(period!=null && period!=""){
@@ -851,7 +851,7 @@ var contentobj;
 						$("#"+empid+".statustxt").addClass("label-danger");
 						$("#"+empid+".statustxt").html("Payroll Processing error");
 
-            			sweet_alert("Error while processing payroll for the employee ."+empname);
+            			sweet_alert("Error while processing payroll for the employee "+empname);
             			return false;
         			}
     			});
@@ -865,7 +865,7 @@ var contentobj;
 				$("#"+empid+".statustxt").addClass("label-danger");
 				$("#"+empid+".statustxt").html("Payroll Processing error");
 
-        		sweet_alert("Please enter the period.");
+        		sweet_alert("Please enter the period");
             	return false;
     		}
     	}
