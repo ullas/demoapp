@@ -86,6 +86,12 @@ class PayComponentsController extends AppController
      */
     public function add()
     {
+    	//redirect if payroll locked for processing
+		if(parent::masterLock()){			
+			 $this->Flash->error(__('Payroll under processing.'));
+			 return $this->redirect(['action' => 'index']);			 
+		}
+		
         $payComponent = $this->PayComponents->newEntity();
         if ($this->request->is('post')) {
             $payComponent = $this->PayComponents->patchEntity($payComponent, $this->request->data);
@@ -124,6 +130,12 @@ class PayComponentsController extends AppController
      */
     public function edit($id = null)
     {
+    	//redirect if payroll locked for processing
+		if(parent::masterLock()){			
+			 $this->Flash->error(__('Payroll under processing.'));
+			 return $this->redirect(['action' => 'index']);			 
+		}
+		
         $payComponent = $this->PayComponents->get($id, [
             'contain' => []
         ]);
@@ -175,6 +187,12 @@ class PayComponentsController extends AppController
      */
     public function delete($id = null)
     {
+    	//redirect if payroll locked for processing
+		if(parent::masterLock()){			
+			 $this->Flash->error(__('Payroll under processing.'));
+			 return $this->redirect(['action' => 'index']);			 
+		}
+		
         $this->request->allowMethod(['post', 'delete']);
         $payComponent = $this->PayComponents->get($id);
         if($payComponent['customer_id'] == $this->loggedinuser['customer_id']) 
@@ -193,6 +211,12 @@ class PayComponentsController extends AppController
     }
 	public function deleteAll($id=null){
     	
+		//redirect if payroll locked for processing
+		if(parent::masterLock()){			
+			 $this->Flash->error(__('Payroll under processing.'));
+			 return $this->redirect(['action' => 'index']);			 
+		}
+		
 		$this->request->allowMethod(['post', 'deleteall']);
         $sucess=false;$failure=false;
         $data=$this->request->data;

@@ -82,7 +82,13 @@ class FrequenciesController extends AppController
      * @return \Cake\Network\Response|void Redirects on successful add, renders view otherwise.
      */
     public function add()
-    {	
+    {
+    	//redirect if payroll locked for processing
+		if(parent::masterLock()){			
+			 $this->Flash->error(__('Payroll under processing.'));
+			 return $this->redirect(['action' => 'index']);			 
+		}
+			
         $frequency = $this->Frequencies->newEntity();
         if ($this->request->is('post')) {
             $frequency = $this->Frequencies->patchEntity($frequency, $this->request->data);
@@ -109,6 +115,12 @@ class FrequenciesController extends AppController
      */
     public function edit($id = null)
     {
+    	//redirect if payroll locked for processing
+		if(parent::masterLock()){			
+			 $this->Flash->error(__('Payroll under processing.'));
+			 return $this->redirect(['action' => 'index']);			 
+		}
+		
         $frequency = $this->Frequencies->get($id, [
             'contain' => []
         ]);
@@ -143,6 +155,12 @@ class FrequenciesController extends AppController
      */
     public function delete($id = null)
     {
+    	//redirect if payroll locked for processing
+		if(parent::masterLock()){			
+			 $this->Flash->error(__('Payroll under processing.'));
+			 return $this->redirect(['action' => 'index']);			 
+		}
+		
         $this->request->allowMethod(['post', 'delete']);
         $frequency = $this->Frequencies->get($id);
 		if($frequency['customer_id'] == $this->loggedinuser['customer_id']) 
@@ -162,6 +180,12 @@ class FrequenciesController extends AppController
     }
 	public function deleteAll($id=null){
     	
+		//redirect if payroll locked for processing
+		if(parent::masterLock()){			
+			 $this->Flash->error(__('Payroll under processing.'));
+			 return $this->redirect(['action' => 'index']);			 
+		}
+		
 		$this->request->allowMethod(['post', 'deleteall']);
         $sucess=false;$failure=false;
         $data=$this->request->data;

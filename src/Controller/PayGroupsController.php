@@ -84,6 +84,12 @@ var $components = array('Datatable');
      */
     public function add()
     {
+    	//redirect if payroll locked for processing
+		if(parent::masterLock()){			
+			 $this->Flash->error(__('Payroll under processing.'));
+			 return $this->redirect(['action' => 'index']);			 
+		}
+		
         $payGroup = $this->PayGroups->newEntity();
         if ($this->request->is('post')) {
             $payGroup = $this->PayGroups->patchEntity($payGroup, $this->request->data);
@@ -115,6 +121,12 @@ var $components = array('Datatable');
      */
     public function edit($id = null)
     {
+    	//redirect if payroll locked for processing
+		if(parent::masterLock()){			
+			 $this->Flash->error(__('Payroll under processing.'));
+			 return $this->redirect(['action' => 'index']);			 
+		}
+		
         $payGroup = $this->PayGroups->get($id, [
             'contain' => []
         ]);
@@ -162,6 +174,12 @@ var $components = array('Datatable');
      */
     public function delete($id = null)
     {
+    	//redirect if payroll locked for processing
+		if(parent::masterLock()){			
+			 $this->Flash->error(__('Payroll under processing.'));
+			 return $this->redirect(['action' => 'index']);			 
+		}
+		
         $this->request->allowMethod(['post', 'delete']);
         $payGroup = $this->PayGroups->get($id);
         $payGroupName = $payGroup['name'];
@@ -205,6 +223,12 @@ var $components = array('Datatable');
         return $this->redirect(['action' => 'index']);
     }
 	public function deleteAll($id=null){
+
+		//redirect if payroll locked for processing
+		if(parent::masterLock()){			
+			 $this->Flash->error(__('Payroll under processing.'));
+			 return $this->redirect(['action' => 'index']);			 
+		}
 
 		$this->request->allowMethod(['post', 'deleteall']);
         $sucess=false;$failure=false;

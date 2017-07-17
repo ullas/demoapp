@@ -88,6 +88,12 @@ class EmployeeAbsencerecordsController extends AppController
     }
 	public function denyLeaveRequest()
 	{
+		//redirect if payroll locked for processing
+		if(parent::masterLock()){			
+			 $this->Flash->error(__('Payroll under processing.'));
+			 return $this->redirect(['action' => 'index']);			 
+		}
+		
     	$this->loadModel('Workflows');
 		if($this->request->is('ajax')) {
 				
@@ -126,6 +132,12 @@ class EmployeeAbsencerecordsController extends AppController
     }
 	public function approveLeaveRequest()
 	{
+		//redirect if payroll locked for processing
+		if(parent::masterLock()){			
+			 $this->Flash->error(__('Payroll under processing.'));
+			 return $this->redirect(['action' => 'index']);			 
+		}
+		
     	$this->loadModel('Workflows');
 		if($this->request->is('ajax')) {
 				
@@ -269,6 +281,12 @@ class EmployeeAbsencerecordsController extends AppController
      */
     public function add()
     {
+    	//redirect if payroll locked for processing
+		if(parent::masterLock()){			
+			 $this->Flash->error(__('Payroll under processing.'));
+			 return $this->redirect(['action' => 'index']);			 
+		}
+
         $employeeAbsencerecord = $this->EmployeeAbsencerecords->newEntity();
         if ($this->request->is('post')) {
         	
@@ -335,6 +353,12 @@ class EmployeeAbsencerecordsController extends AppController
      */
     public function edit($id = null)
     {
+    	//redirect if payroll locked for processing
+		if(parent::masterLock()){			
+			 $this->Flash->error(__('Payroll under processing.'));
+			 return $this->redirect(['action' => 'index']);			 
+		}
+		
         $employeeAbsencerecord = $this->EmployeeAbsencerecords->get($id, [
             'contain' => []
         ]);
@@ -402,6 +426,12 @@ class EmployeeAbsencerecordsController extends AppController
      */
     public function delete($id = null)
     {
+    	//redirect if payroll locked for processing
+		if(parent::masterLock()){			
+			 $this->Flash->error(__('Payroll under processing.'));
+			 return $this->redirect(['action' => 'index']);			 
+		}
+		
         $this->request->allowMethod(['post', 'delete']);
         $employeeAbsencerecord = $this->EmployeeAbsencerecords->get($id);
 		if($employeeAbsencerecord['customer_id'] == $this->loggedinuser['customer_id']) 
@@ -432,6 +462,12 @@ class EmployeeAbsencerecordsController extends AppController
     }
 	public function deleteAll($id=null){
     	
+		//redirect if payroll locked for processing
+		if(parent::masterLock()){			
+			 $this->Flash->error(__('Payroll under processing.'));
+			 return $this->redirect(['action' => 'index']);			 
+		}
+		
 		$this->request->allowMethod(['post', 'deleteall']);
         $sucess=false;$failure=false;
         $data=$this->request->data;
