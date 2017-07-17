@@ -3,9 +3,9 @@ namespace App\Controller\Component;
 use Cake\Controller\Component;
 use Cake\Utility\Inflector;
 
-	class PayrollDatatableComponent extends Component {
+	class AttendancetableComponent extends Component {
 										  
-		public function getView($fields,$contains,$usrFilter) 
+		public function getView($fields,$contains,$usrFilter,$desclimit) 
 		{
 			
 			$length = count($fields);
@@ -34,15 +34,10 @@ use Cake\Utility\Inflector;
     		}
 	
 			$colmns[] =array( 
-            	'db' => 'empdatabiographies_id', 
+            	'db' => 'id', 
             	'dt' => $length++,
             	'formatter' => function( $d, $row ,$modalname) {
-                	$buttons='<a href="/'.   $modalname  . '/view/'.$d.'" class="fa fa-file-text-o p3"></a>
-                					<a href="/'.   $modalname  . '/edit/'.$d.'" class="fa fa-pencil p3 text-aqua"></a>
-									<form name="formdelete" id="formdelete' .$d. '" method="post" action="/'.   $modalname  . '/delete/'.$d.'" style="display:none;" >
-                                   <input type="hidden" name="_method" value="POST"></form>
-                                   <a href="#" onclick="sweet_confirmdelete(&quot;MayHaw&quot;,&quot;Are you sure you want to delete # '.$d.'?&quot; , function(){ document.getElementById(&quot;formdelete'.$d.'&quot;).submit(); })
-                                    event.returnValue = false; return false;" class="fa fa-trash text-red" style= "padding:3px"></a>';
+                	$buttons='';
 						
                 	return $buttons;
             	}
@@ -53,7 +48,12 @@ use Cake\Utility\Inflector;
 			$where = $this->Filter( $colmns, $fields );
 			
 			//getting limit
-			$limit = $this->Limit( );
+			if($desclimit){
+				$limit = " 5 ";
+			}else{
+				$limit = $this->Limit( );
+			}
+			
 			//getting page no
 			$page=ceil($this->request->query['start']/$limit)+1;
 			
@@ -78,7 +78,7 @@ use Cake\Utility\Inflector;
 				
 			
 		   		
-			$data = $model->find('all')->where($wherestr)->contain($contains)->order($order)->limit($limit)->page($page)->distinct(['Empdatabiographies.id'])->toArray();
+			$data = $model->find('all')->where($wherestr)->contain($contains)->order($order)->limit($limit)->page($page)->toArray();
 			
 			//getting totalcount
 			$totalCount = $model->find()->contain($contains)->count();

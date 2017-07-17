@@ -799,7 +799,7 @@ class PayrollDataController extends AppController
 	    			return $this->response;
             }
             }	
-if (($k+1)==sizeof($checkedpaygroups)) {
+					if (($k+1)==sizeof($checkedpaygroups)) {
                	 		$this->response->body("success");
 	    				return $this->response;
 					}		
