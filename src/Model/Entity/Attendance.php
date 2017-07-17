@@ -7,13 +7,13 @@ use Cake\ORM\Entity;
  * Attendance Entity
  *
  * @property int $id
+ * @property int $employee_id
+ * @property int $customer_id
  * @property \Cake\I18n\Time $time_in
  * @property \Cake\I18n\Time $time_out
- * @property int $employee_id
- * @property \Cake\I18n\Time $date
- * @property int $customer_id
  *
  * @property \App\Model\Entity\Employee $employee
+ * @property \App\Model\Entity\Customer $customer
  */
 class Attendance extends Entity
 {

@@ -57,16 +57,12 @@ class AttendanceTable extends Table
             ->allowEmpty('id', 'create');
 
         $validator
-            ->time('time_in')
+            ->dateTime('time_in')
             ->allowEmpty('time_in');
 
         $validator
-            ->time('time_out')
+            ->dateTime('time_out')
             ->allowEmpty('time_out');
-
-        $validator
-            ->date('date')
-            ->allowEmpty('date');
 
         return $validator;
     }

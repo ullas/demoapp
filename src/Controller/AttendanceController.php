@@ -36,9 +36,11 @@ class AttendanceController extends AppController
 		if( isset($this->request->query['filter']) && ($this->request->query['filter'])!=null && strlen($usrfilter)>3){
       
 			if($this->request->query['filter'] == "five"){$limit=TRUE;}
-			else if($this->request->query['filter'] == "week"){$usrfilter.=" and date BETWEEN 
-							NOW()::DATE-EXTRACT(DOW FROM NOW())::INTEGER-6   AND NOW()::DATE-EXTRACT(DOW from NOW())::INTEGER+1";}
-			else if($this->request->query['filter'] == "month"){$usrfilter.=" and EXTRACT(MONTH FROM date) = EXTRACT(month FROM CURRENT_DATE)";}
+			else if($this->request->query['filter'] == "week"){$usrfilter.=" and ((DATE(time_in) BETWEEN 
+							NOW()::DATE-EXTRACT(DOW FROM NOW())::INTEGER-6   AND NOW()::DATE-EXTRACT(DOW from NOW())::INTEGER+1) OR (DATE(time_out) BETWEEN 
+							NOW()::DATE-EXTRACT(DOW FROM NOW())::INTEGER-6   AND NOW()::DATE-EXTRACT(DOW from NOW())::INTEGER+1))";}
+			else if($this->request->query['filter'] == "month"){$usrfilter.=" and ((EXTRACT(MONTH FROM time_in) = EXTRACT(month FROM CURRENT_DATE)) 
+																												OR (EXTRACT(MONTH FROM time_out) = EXTRACT(month FROM CURRENT_DATE)))";}
 		}
 		
 		$output =$this->Attendancetable->getView($fields,$contains,$usrfilter,$limit);
@@ -83,17 +85,17 @@ class AttendanceController extends AppController
 						
 			if ($this->request->data['clockstatus'] == "true"){
 				$attendance = $this->Attendance->newEntity();
-				$attendance['time_in']=date("h:i:sa");
+				$attendance['time_in']=date("Y-m-d h:i:sa");
 			}else if ($this->request->data['clockstatus'] == "false"){
 				
 				$arr = $this->Attendance->find('all',[ 'conditions' => array('employee_id' => $this->loggedinuser['employee_id'],'customer_id'=>$this->loggedinuser['customer_id'] )])->order(['id' => 'DESC'])->toArray();
 				isset($arr[0]) ? $attendance = $arr[0] : $attendance = $this->Attendance->newEntity();
 				$attendance = $this->Attendance->patchEntity($attendance, $this->request->data);
             
-				$attendance['time_out']=date("h:i:sa");
+				$attendance['time_out']=date("Y-m-d h:i:sa");
 			}
 			$attendance['employee_id']=$this->loggedinuser['employee_id'];
-			$attendance['date']=date("Y-m-d");
+			// $attendance['date']=date("Y-m-d");
 			$attendance['customer_id']=$this->loggedinuser['customer_id'];
 			
             if ($this->Attendance->save($attendance)){
