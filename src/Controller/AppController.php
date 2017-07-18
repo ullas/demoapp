@@ -173,7 +173,15 @@ class AppController extends Controller
 		
 		
     }
-
+	public function masterLock()
+    {
+    	$this->loadModel('Customers');
+		$customers=$this->Customers->find()->select(['Customers.payroll_lock'])->where(['Customers.id' => $this->loggedinuser['customer_id']])->first();	
+		if(isset($customers['payroll_lock']) && ($customers['payroll_lock']==true || $customers['payroll_lock']==TRUE)){
+			return true; 
+		}
+		return false;
+	}
     public function beforeFilter(Event $event)
     {
 		
