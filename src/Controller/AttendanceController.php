@@ -37,8 +37,8 @@ class AttendanceController extends AppController
       
 			if($this->request->query['filter'] == "five"){$limit=TRUE;}
 			else if($this->request->query['filter'] == "week"){$usrfilter.=" and ((DATE(time_in) BETWEEN 
-							NOW()::DATE-EXTRACT(DOW FROM NOW())::INTEGER-6   AND NOW()::DATE-EXTRACT(DOW from NOW())::INTEGER+1) OR (DATE(time_out) BETWEEN 
-							NOW()::DATE-EXTRACT(DOW FROM NOW())::INTEGER-6   AND NOW()::DATE-EXTRACT(DOW from NOW())::INTEGER+1))";}
+							NOW()::DATE-EXTRACT(DOW FROM NOW())::INTEGER   AND NOW()::DATE-EXTRACT(DOW from NOW())::INTEGER+6) OR (DATE(time_out) BETWEEN 
+							NOW()::DATE-EXTRACT(DOW FROM NOW())::INTEGER   AND NOW()::DATE-EXTRACT(DOW from NOW())::INTEGER+6))";}
 			else if($this->request->query['filter'] == "month"){$usrfilter.=" and ((EXTRACT(MONTH FROM time_in) = EXTRACT(month FROM CURRENT_DATE)) 
 																												OR (EXTRACT(MONTH FROM time_out) = EXTRACT(month FROM CURRENT_DATE)))";}
 		}
