@@ -12,28 +12,7 @@ use Cake\Datasource\ConnectionManager;
 class PayrollDataController extends AppController
 {
 
-   var $components = array('PayrollDatatable');
-    /**
-     * Index method
-     *
-     * @return \Cake\Network\Response|null
-     */
-     
-     public function ajaxData() {
-		$this->autoRender= False;
-		  
-		$this->loadModel('CreateConfigs');
-		$dbout=$this->CreateConfigs->find()->select(['field_name', 'datatype'])->where(['table_name' => $this->request->params['controller']])->order(['id' => 'ASC'])->toArray();
-		$fields = array();
-		foreach($dbout as $value){
-			$fields[] = array("name" => $value['field_name'] , "type" => $value['datatype'] );
-		}
-		$contains=['Empdatabiographies'];
-									  
-		$usrfilter="PayrollData.customer_id ='".$this->loggedinuser['customer_id'] . "'";			  
-		$output =$this->PayrollDatatable->getView($fields,$contains,$usrfilter);
-		echo json_encode($output);			
-    }
+ 
     public function index()
     {
 		
@@ -143,6 +122,12 @@ class PayrollDataController extends AppController
 		return json_encode($arrayTemp1[0]['first_name']." ".$arrayTemp1[0]['last_name'].' ('.$personalid.')');
 	}
 	public function batchadd(){
+		
+		//redirect if payroll locked for processing
+		if(parent::masterLock()){			
+			 $this->Flash->error(__('Payroll under processing.'));
+			 return $this->redirect(['action' => 'index']);			 
+		}
 			
 		$payrollData = $this->PayrollData->newEntity();
 		$this->loadModel('PayComponents');	
@@ -175,7 +160,13 @@ class PayrollDataController extends AppController
         $this->set('paygrouplist', $paygrouplist);
 	}
 	public function batchremove(){
-			
+		
+		//redirect if payroll locked for processing
+		if(parent::masterLock()){			
+			 $this->Flash->error(__('Payroll under processing.'));
+			 return $this->redirect(['action' => 'index']);			 
+		}
+	
 		$payrollData = $this->PayrollData->newEntity();
 		// $this->loadModel('PayComponents');	
 		// $payComponentarr = $this->PayrollData->find('all')->where(['pay_component_type' => '1'])->andwhere(['batch' => TRUE])
@@ -270,6 +261,12 @@ class PayrollDataController extends AppController
 	}
 	public function copyEmployeesPC(){
 			
+			//redirect if payroll locked for processing
+		if(parent::masterLock()){			
+			 $this->Flash->error(__('Payroll under processing.'));
+			 return $this->redirect(['action' => 'index']);			 
+		}
+		
 		if($this->request->is('ajax')) {
 
 			$this->autoRender=false;
@@ -323,6 +320,12 @@ class PayrollDataController extends AppController
 	}
 	public function batchdeletePC(){
 			
+		//redirect if payroll locked for processing
+		if(parent::masterLock()){			
+			 $this->Flash->error(__('Payroll under processing.'));
+			 return $this->redirect(['action' => 'index']);			 
+		}
+		
 		if($this->request->is('ajax')) {
 
 			$this->autoRender=false;
@@ -358,6 +361,13 @@ class PayrollDataController extends AppController
 		}
 	}
 	public function empdeletePC(){
+		
+		//redirect if payroll locked for processing
+		if(parent::masterLock()){			
+			 $this->Flash->error(__('Payroll under processing.'));
+			 return $this->redirect(['action' => 'index']);			 
+		}
+		
 		if($this->request->is('ajax')) {
 
 			$this->autoRender=false;
@@ -380,6 +390,12 @@ class PayrollDataController extends AppController
 		}
 	}
 	public function batchdeletePCGroup(){
+		
+		//redirect if payroll locked for processing
+		if(parent::masterLock()){			
+			 $this->Flash->error(__('Payroll under processing.'));
+			 return $this->redirect(['action' => 'index']);			 
+		}
 			
 		if($this->request->is('ajax')) {
 
@@ -418,6 +434,12 @@ class PayrollDataController extends AppController
 	}
 	public function copypaycomponents($id = null)
     {
+    	//redirect if payroll locked for processing
+		if(parent::masterLock()){			
+			 $this->Flash->error(__('Payroll under processing.'));
+			 return $this->redirect(['action' => 'index']);			 
+		}
+		
     	$payrollData = $this->PayrollData->find('all')->where(['empdatabiographies_id' => $id])->first();
 		
     	$payrolldatalist = array();
@@ -619,6 +641,12 @@ class PayrollDataController extends AppController
 	}
 	public function addData()
 	{
+		//redirect if payroll locked for processing
+		if(parent::masterLock()){			
+			 $this->Flash->error(__('Payroll under processing.'));
+			 return $this->redirect(['action' => 'index']);			 
+		}
+		
 		if($this->request->is('ajax')) {
 				
 			$this->autoRender=false;		
@@ -701,6 +729,12 @@ class PayrollDataController extends AppController
 	}
 	public function addBatchData()
 	{
+		//redirect if payroll locked for processing
+		if(parent::masterLock()){			
+			 $this->Flash->error(__('Payroll under processing.'));
+			 return $this->redirect(['action' => 'index']);			 
+		}
+		
 		if($this->request->is('ajax')) {
 				
 			$this->autoRender=false;		
@@ -810,6 +844,12 @@ class PayrollDataController extends AppController
 
 	public function addempdata($id = null)
     {
+    	//redirect if payroll locked for processing
+		if(parent::masterLock()){			
+			 $this->Flash->error(__('Payroll under processing.'));
+			 return $this->redirect(['action' => 'index']);			 
+		}
+		
         $payrollData = $this->PayrollData->newEntity();
 		
         if ($this->request->is('post')) {
@@ -846,6 +886,12 @@ class PayrollDataController extends AppController
      */
     public function add()
     {
+    	//redirect if payroll locked for processing
+		if(parent::masterLock()){			
+			 $this->Flash->error(__('Payroll under processing.'));
+			 return $this->redirect(['action' => 'index']);			 
+		}
+		
         $payrollData = $this->PayrollData->newEntity();
         if ($this->request->is('post')) {
             $payrollData = $this->PayrollData->patchEntity($payrollData, $this->request->data);
@@ -899,6 +945,12 @@ class PayrollDataController extends AppController
      */
     public function edit($id = null)
     {
+    	//redirect if payroll locked for processing
+		if(parent::masterLock()){			
+			 $this->Flash->error(__('Payroll under processing.'));
+			 return $this->redirect(['action' => 'index']);			 
+		}
+		
         $payrollData = $this->PayrollData->get($id, [
             'contain' => []
         ]);
@@ -966,6 +1018,12 @@ class PayrollDataController extends AppController
      */
     public function delete($id = null)
     {
+    	//redirect if payroll locked for processing
+		if(parent::masterLock()){			
+			 $this->Flash->error(__('Payroll under processing.'));
+			 return $this->redirect(['action' => 'index']);			 
+		}
+		
         $this->request->allowMethod(['post', 'delete']);
         $payrollData = $this->PayrollData->get($id);
         if($payrollData['customer_id'] == $this->loggedinuser['customer_id']) 
@@ -984,6 +1042,13 @@ class PayrollDataController extends AppController
     }
 	public function deletegroup($id = null)
     {
+    	
+		//redirect if payroll locked for processing
+		if(parent::masterLock()){			
+			 $this->Flash->error(__('Payroll under processing.'));
+			 return $this->redirect(['action' => 'index']);			 
+		}
+		
         $this->request->allowMethod(['post', 'delete']);
 		
 		$splitarr = explode('^', $id);
@@ -1012,6 +1077,12 @@ class PayrollDataController extends AppController
     }
 	public function deleteAll($id=null){
     	
+		//redirect if payroll locked for processing
+		if(parent::masterLock()){			
+			 $this->Flash->error(__('Payroll under processing.'));
+			 return $this->redirect(['action' => 'index']);			 
+		}
+		
 		$this->request->allowMethod(['post', 'deleteall']);
         $sucess=false;$failure=false;
         $data=$this->request->data;

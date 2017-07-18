@@ -125,6 +125,8 @@ $(function() {
 		$('#clockin').bootstrapToggle('on');
 	}
 	
+	table.column(3).visible( false );
+	
 	//filter onchange
 	$('#attendancefilter').change(function() {
 		table.ajax.url('/Attendance/ajaxData?filter='+this.value).load();
