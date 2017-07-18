@@ -28,7 +28,7 @@
                   <span class="glyphicon glyphicon-search form-control-feedback"></span>
                 </div>
               </div>
-  	
+
 
 
 <div class="btn-group">
@@ -43,7 +43,7 @@
 					</li>
                   </ul>
                 </div>
-          
+
     <!-- <?= $this->Html->link('<b>Add</b> &nbsp;&nbsp;'.__('<i class="fa fa-plus"></i>'), ['action' => 'add'],['class' => 'btn btn-sm btn-success btn-flat','escape' => false]) ?> -->
   </ol>
 </section>
@@ -68,14 +68,14 @@
                   <ul class="dropdown-menu pull-right" role="menu">
                     <li><a href="/PayrollData/addempdata/<?php echo $vals['empid']; ?>" class="open-Popup" data-remote="false" data-toggle="modal" data-target="#actionspopover">Add Pay Components</a>
 					</li>
-                    <li><a href="/PayrollData/copypaycomponents/<?php echo $vals['empid']; ?>" class="open-Popup" data-remote="false" data-toggle="modal" data-target="#actionspopover">Copy Pay Components</a>
+                    <li><a href="/PayrollData/copypaycomponents/<?php echo $vals['empid']; ?>" class="open-Popup" data-remote="false" data-toggle="modal" data-target="#actionspopover">Duplicate</a>
 					</li>
                     <li>
 
 					<?php echo  '<a href="#" onclick="sweet_confirmdelete(&quot;MayHaw&quot;,&quot;Are you sure you want to delete the pay components from '.$vals['empname'].' ?&quot; ,
                     function(){ empdeletepaycomponent('.$vals['empid'].'); })
                     event.returnValue = false; return false;" class="deletelink">Delete</a>';   ?>
-                    
+
                     </li>
                   </ul>
                 </div>
@@ -86,9 +86,9 @@
                 </a> -->
                 <a data-toggle="collapse" data-parent="#accordion" href="#mainpanel<?php echo $vals['empid'];  ?>"><i class="more-less fa fa-plus text-gray p3"></i>
                       </a>
-                
-                
-                
+
+
+
               </div>
               <!-- /.box-tools -->
             </div>
@@ -236,7 +236,7 @@ $(function () {
 	//expand panel on clicking dropdown toggle
 	// $('.mptltoggle').click(function(e){
 		// $(this).parents().closest.find('.mptlpanel')
-// 			
+//
 	// });
 	//check if last expanded emp panel exists,if so expand it
 	var lastemployeepanel = localStorage.getItem('lastemppanel');//console.log(lastemployeepanel);
@@ -287,7 +287,7 @@ $(function () {
     				//get input value
     				var oldemp = $("#oldempid").val();
 					var newemp = $("#empdatabiographies-id").val();
-					
+
 					if (oldemp=="" || oldemp==null){
 						sweet_alert("Error while loading.Please try again later.");
 						return false;
@@ -295,7 +295,7 @@ $(function () {
 						sweet_alert("Please select a employee.");
 						return false;
 					}else{
-						
+
 						$.ajax({
         				type: "POST",
       					url: '/PayrollData/copyEmployeesPC',
@@ -325,13 +325,13 @@ $(function () {
 					}
 					// return false;
 				});
-				
-				
+
+
 				//batchremove
 				$('#mptlbatchremove').click(function(){
-					
+
 				});
-				
+
 				//save btn onclick
 	$('#mptlbatchadd').click(function(){
 
@@ -357,7 +357,7 @@ $(function () {
 					checkedarr.push(colid);
 		    	}
 	   		});
-	   		
+
 // console.log(checkedarr);
 		if(pccount<1 && pcgcount<1){
 
@@ -372,17 +372,17 @@ $(function () {
 				var enddate = $("#enddate1").val();
 
 				if(paycomp!="" && paycomp!=null && startdate!="" && startdate!=null && enddate!="" && enddate!=null){
-					
+
 					if(!(compareStartEndDate(startdate,enddate))){
     					sweet_alert("Please ensure that the End Date is greater than or equal to the Start Date.");
 						return false;
     				}
-    				
+
     				if(!(checkPayComponentDate(paycomp,startdate,enddate))){
     					sweet_alert("Start/End Date is earlier/older than than the start/end date of the selected pay component.");
 						return false;
     				}
-    						
+
 					$.ajax({
         				type: "POST",
       					url: '/PayrollData/addBatchData',
@@ -426,17 +426,17 @@ $(function () {
 					var enddate = $("#enddate"+i).val();
 
 				if(startdate!="" && startdate!=null && enddate!="" && enddate!=null){
-					
+
 					if(!(compareStartEndDate(startdate,enddate))){
     					sweet_alert("Please ensure that the End Date is greater than or equal to the Start Date.");
 						return false;
     				}
-    				
+
     				if(!(checkPayComponentDate(paycomp,startdate,enddate))){
     					sweet_alert("Start/End Date is earlier/older than than the start/end date of the selected pay component.");
 						return false;
     				}
-    				
+
 					$.ajax({
         				type: "POST",
       					url: '/PayrollData/addBatchData',
@@ -477,7 +477,7 @@ $(function () {
 		}
 		}
   });
-  
+
 				$('.mptlupdate').click(function(e){
 
 					var lastemppanel=$('.emppanel.panel-collapse.collapse.in').attr('id');localStorage.setItem('lastemppanel', lastemppanel);
@@ -510,18 +510,18 @@ $(function () {
 						sweet_alert("Please select Start/End Date.");
 						return false;
 					}else{
-						
-	
+
+
 						if(!(compareStartEndDate(startdate,enddate))){
     						sweet_alert("Please ensure that the End Date is greater than or equal to the Start Date.");
 							return false;
     					}
-    	
+
     					if(!(checkPayComponentDate(paycomp,startdate,enddate))){
     						sweet_alert("Start/End Date is earlier/older than than the start/end date of the selected pay component.");
 							return false;
     					}
-    				
+
 						$.ajax({
         				type: "POST",
       					url: '/PayrollData/checkPayComponentExistence',
@@ -581,17 +581,17 @@ $(function () {
 				var enddate = $("#enddate1").val();
 
 				if(paycomp!="" && paycomp!=null && startdate!="" && startdate!=null && enddate!="" && enddate!=null){
-					
+
 					if(!(compareStartEndDate(startdate,enddate))){
     					sweet_alert("Please ensure that the End Date is greater than or equal to the Start Date.");
 						return false;
     				}
-    				
+
     				if(!(checkPayComponentDate(paycomp,startdate,enddate))){
     					sweet_alert("Start/End Date is earlier/older than than the start/end date of the selected pay component.");
 						return false;
     				}
-    						
+
 					$.ajax({
         				type: "POST",
       					url: '/PayrollData/addData',
@@ -635,17 +635,17 @@ $(function () {
 					var enddate = $("#enddate"+i).val();
 
 				if(startdate!="" && startdate!=null && enddate!="" && enddate!=null){
-					
+
 					if(!(compareStartEndDate(startdate,enddate))){
     					sweet_alert("Please ensure that the End Date is greater than or equal to the Start Date.");
 						return false;
     				}
-    				
+
     				if(!(checkPayComponentDate(paycomp,startdate,enddate))){
     					sweet_alert("Start/End Date is earlier/older than than the start/end date of the selected pay component.");
 						return false;
     				}
-    				
+
 					$.ajax({
         				type: "POST",
       					url: '/PayrollData/addData',
@@ -699,7 +699,7 @@ $(function () {
 							}else{
 								$('#pay-component-value').removeAttr("disabled");
 								$('#pay-component-value').val("");
-							} 
+							}
         				}
     				}
   				});
@@ -751,7 +751,7 @@ $(function () {
     					}
     				});
 				});
-				
+
 				//add pay component group button click
 				$("#btnAddPCG").click(function (event) {
 					var emp = $("#empdatabiographies-id").val();
@@ -806,12 +806,12 @@ $(function () {
 					}
 
 				});
-				
+
 				//select all add batch
 				$(".selectallbtn").click(function (event) {
 					$(".paygroup_filter").prop('checked', true);
 				});
-				
+
 				//group delete btn onclick
 				$('.maindiv').on('click', 'a.groupdelete', function() {
 
@@ -903,12 +903,12 @@ function searchpayrolldata(){
 
 }
 function checkPayComponentDate(paycomp,startdate,enddate){
-	
+
 	if(userdf==1){
     	startdate=convertdmytoymd(startdate);
     	enddate=convertdmytoymd(enddate);
     }
-    	
+
 	for(var i = 0; i < paycomponentdata.length; i++) {
 		var paycomponentstartdate;var paycomponentenddate;
         if(paycomponentdata[i]['id'] == paycomp) {
@@ -963,7 +963,7 @@ function formattoymd(inputDate) {
 		    }
 	   	});
 	   	sweet_confirmdelete("MayHaw","Are you sure you want to delete the particular PayComponent in batch ?", function(){
-	   	
+
 	   	$.ajax({
         	type: "POST",
       		url: '/PayrollData/batchdeletePC',
@@ -989,7 +989,7 @@ function formattoymd(inputDate) {
        });
 
 	}
-	
+
 	function batchdeletepaycomponentgroup(pcid){
 
 		if ($('.paygroup_filter:checkbox:checked').length <1){
@@ -999,7 +999,7 @@ function formattoymd(inputDate) {
 		}
 		var checkedarr=[];
     	$('.paygroup_filter').each(function () {
-    		
+
 		    var sThisVal = (this.checked ? $(this).val() : "");
 		    var id=$(this).attr("id");
 		    var colid=id.split("_")[1];
@@ -1007,11 +1007,11 @@ function formattoymd(inputDate) {
 				checkedarr.push(colid);
 		    }
 	   	});
-	   	
-	   	
+
+
 	   sweet_confirmdelete("MayHaw","Are you sure you want to delete the particular PayComponent group in batch ?", function(){
-	   		
-	   	
+
+
 	   	  $.ajax({
         	type: "POST",
       		url: '/PayrollData/batchdeletePCGroup',
