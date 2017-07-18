@@ -3,7 +3,7 @@
 
 <div class="box box-success box-solid no-border">
 	<div class="box-header with-border text-center">
-        <h3 class="box-title">Copy Payroll Data</h3>
+        <h3 class="box-title">Duplicate Payroll Data</h3>
 
         <div class="box-tools pull-right">
             <button type="button" class="btn btn-box-tool popoverDelete">
@@ -15,7 +15,7 @@
 
     <?= $this->Form->create($payrollData) ?>
     <div class="box-body maindiv" style="min-height: 350px;">
-    	
+
     	<fieldset>
         <?php
             echo $this->Form->input('oldempid',['label'=>'Id','type'=>'hidden','value'=>$payrollData['empdatabiographies_id']]);
@@ -24,7 +24,7 @@
 
          <div class="col-md-4"><div class="form-group">
         	<div class="input-group">
-        		<input type="button" class="mptlcopy btn btn-flat btn-success"  style="margin-top:25px;" value="Copy" />
+        		<input type="button" class="mptlcopy btn btn-flat btn-success"  style="margin-top:25px;" value="Duplicate" />
         	</div>
         </div></div>
 
@@ -74,7 +74,7 @@
                 <td><?php echo  $childval['startdate']; ?></td>
                 <td><?php echo  $childval['enddate']; ?></td>
                 <td><?php echo  $childval['paycomponentvalue']; ?></td>
-                
+
             </tr>
 
 
@@ -82,9 +82,9 @@
 			</tbody>
     	</table>
     	 <?php } ?>
-    	 
+
 			<?php  if (isset($vals['pcgroupchild']) && ($vals['pcgroupchild']!=null)) { ?>
-           
+
 			<h4 style="background-color:#f7f7f7; font-size: 18px; text-align: center; padding: 7px 10px; margin-top: 0; margin-bottom: 0;"> PAY COMPONENT GROUPS </h4>
             <div id="accordion<?php echo $vals['empid']; ?>">
             <?php  foreach ($vals['pcgroupchild'] as $childval) { ?>
@@ -97,10 +97,10 @@
              	<?php echo $childval['groupname'];  ?>
              	<!-- </a></h4> -->
 
-           	
+
 
            </div>
-           
+
            <div id="panel<?php echo $childval['groupid'];  ?>" >
 
 	<table class="table table-hover table-bordered" cellspacing="0" width="100%">
@@ -123,7 +123,7 @@
                 <td><?php echo  $groupval['startdate']; ?></td>
                 <td><?php echo  $groupval['enddate']; ?></td>
                 <td><?php echo  $groupval['paycomponentvalue']; ?></td>
-                
+
             </tr>
           <?php } ?>
 
@@ -132,9 +132,9 @@
     	</table>
 
    		</div>
-   		<?php } ?> 
+   		<?php } ?>
    		</div></div>
-		<?php } ?>  
+		<?php } ?>
 
             </div>
             <!-- /.box-body -->
@@ -143,8 +143,8 @@
 
     <?php } ?>
     	</div>
-    	
-    	
+
+
     </div>
 
     <!-- <div class="box-footer"> -->
@@ -154,4 +154,3 @@
     <?= $this->Form->end() ?>
 
 </div>
-
