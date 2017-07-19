@@ -119,13 +119,15 @@ window.onload = function() {
 }
 
 $(function() {
-	
+	//initially load only last five
+	table.ajax.url('/Attendance/ajaxData?filter=five').load();
+	//clock
 	var clockstatus=<?php echo $clockstatus ; ?>;
 	if(clockstatus){
 		$('#clockin').bootstrapToggle('on');
 	}
 	
-	table.column(3).visible( false );
+	table.column(0).visible( false );table.column(3).visible( false );
 	
 	//filter onchange
 	$('#attendancefilter').change(function() {

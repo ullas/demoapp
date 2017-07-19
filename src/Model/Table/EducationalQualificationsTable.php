@@ -46,22 +46,6 @@ class EducationalQualificationsTable extends Table
             'foreignKey' => 'customer_id'
         ]);
     }
-	public function beforeMarshal(Event $event, $data, $options)
-	{
-		
-		$userdf = Configure::read('userdf');
-		if(isset($userdf)  & $userdf===1){
-
-			foreach (["fromdate","passdate"] as $value) {		
-				if(isset($data[$value])){			
-						if($data[$value]!=null && $data[$value]!='' && strpos($data[$value], '/') !== false){
-						$data[$value] = str_replace('/', '-', $data[$value]);
-						$data[$value]=date('Y/m/d', strtotime($data[$value]));
-					}
-				}
-			}
-		}
-	}
     /**
      * Default validation rules.
      *
@@ -89,11 +73,9 @@ class EducationalQualificationsTable extends Table
             ->allowEmpty('city');
 
         $validator
-            ->date('fromdate')
             ->allowEmpty('fromdate');
 
         $validator
-            ->date('passdate')
             ->allowEmpty('passdate');
 
         $validator

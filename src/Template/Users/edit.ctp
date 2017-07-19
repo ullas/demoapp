@@ -18,7 +18,7 @@
             echo $this->Form->input('role',['class'=>'select2','options' => ['admin' => 'Admin', 'employee' => 'Employee'], 'empty' => 'Choose']);
             echo $this->Form->input('username',['disabled'=>true]);
             echo $this->Form->input('name');
-			echo $this->Form->input('dateformat',['class'=>'select2','options' => array('yyyy/mm/dd [2017/01/01]', 'dd/mm/yyyy [01/01/2017]'), 'empty' => 'Choose']);
+			echo $this->Form->input('dateformat',['class'=>'select2','options' => array("1"=>'dd/mm/yyyy [01/01/2017]',"2"=>'mm/dd/yyyy [01/01/2017]')]);
             echo $this->Form->input('customer_id', ['options' => $customers]);
         ?>
     </fieldset>

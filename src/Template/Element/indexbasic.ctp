@@ -29,7 +29,7 @@
         <div class="col-md-12">
   <div class="box box-primary">
       <div class="box-body">
-				<button id="togglebutton" type="button" class="btn btn-primary bg-olive btn-sm pull-right" data-toggle="collapse" data-toggle="tooltip" data-target="#infobar" title="Hello World" style="display: none;">
+				<button id="togglebutton" type="button" class="btn btn-primary bg-olive btn-sm pull-right" data-toggle="collapse" data-toggle="tooltip" data-target="#infobar"  style="display: none;">
 			      <span class="fa fa-chevron-up"></span>
 				</button>
     <table id="mptlindextbl" class="table table-hover  table-bordered ">

@@ -36,6 +36,7 @@ use Cake\ORM\TableRegistry;
 class AppController extends Controller
 {
 	protected $loggedinuser;
+	public $daytimeFormat=1;
 	
 	var $components = array('LoadCountry');
 	
@@ -136,14 +137,27 @@ class AppController extends Controller
     	$this->loadComponent('RequestHandler');
         $this->loadComponent('Flash');
 		
-		Configure::write('userdf', $this->request->session()->read('sessionuser')['dateformat']);
-		$userdf = $this->request->session()->read('sessionuser')['dateformat'];
-		if(isset($userdf)  & $userdf===1){
-			Date::setToStringFormat("dd/MM/yyyy"); 
-			FrozenDate::setToStringFormat("dd/MM/yyyy"); 
-		}
-		
 		$userrole=$this->request->session()->read('sessionuser')['role'];
+		
+		//dateformat
+		$dtfd_id=$this->request->session()->read('sessionuser')['dateformat'];
+		if($dtfd_id==1){
+			$this->daytimeFormat=1;
+		}else{
+			$this->daytimeFormat=2;
+		}	
+		$table = TableRegistry::get($this->modelClass);	
+		$table->addBehavior("Dateformat",[$this->daytimeFormat]);
+		
+		
+		//display date 
+		if($this->daytimeFormat==1){
+			FrozenDate::setToStringFormat("dd/MM/yyyy"); 
+		}else{
+			FrozenDate::setToStringFormat("MM/dd/yyyy"); 
+		}
+		//
+		
 		
 		if($userrole == "root"){
 			$this->loadComponent('Auth', [
@@ -182,9 +196,12 @@ class AppController extends Controller
 		}
 		return false;
 	}
-    public function beforeFilter(Event $event)
+    public function afterFilter(Event $event)
     {
-		
+		// debug($event);
+	}
+	public function beforeFilter(Event $event)
+    {//debug($this->data);
 		parent::beforeFilter($event);
 		
 		$this->Auth->deny(['add', 'edit']);	
@@ -212,6 +229,8 @@ class AppController extends Controller
      */
     public function beforeRender(Event $event)
     {
+    	// debug($this->params);
+		
     	//get position id 
     	$jobinfosTable = TableRegistry::get('JobInfos');	
 		$query=$jobinfosTable->find('All')->where(['employee_id'=>$this->request->session()->read('sessionuser')['employee_id']])->toArray();

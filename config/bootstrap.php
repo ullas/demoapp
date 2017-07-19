@@ -124,14 +124,16 @@ mb_internal_encoding(Configure::read('App.encoding'));
     // ->setLocaleFormat('dd.MM.yyyy');
 
 
-ini_set('intl.default_locale', 'fr_FR');
-// Cake\I18n\Time::setToStringFormat('HH:mm:ss');
-Cake\I18n\Date::setToStringFormat('yyyy/MM/dd');
-Cake\I18n\FrozenDate::setToStringFormat('yyyy/MM/dd');
-\Cake\Database\Type::build('date')
-    ->useImmutable()
-    ->useLocaleParser()
-    ->setLocaleFormat('yyyy/MM/dd');
+// ini_set('intl.default_locale', 'fr_FR');
+// Cake\I18n\Date::setToStringFormat('yyyy/MM/dd');
+// Cake\I18n\FrozenDate::setToStringFormat('yyyy/MM/dd');
+// \Cake\Database\Type::build('date')
+    // ->useImmutable()
+    // ->useLocaleParser()
+    // ->setLocaleFormat('yyyy/MM/dd');
+	
+	
+	
     
 // ini_set('intl.default_locale', 'es_ES');
 // Cake\I18n\Date::setToStringFormat('dd/MM/YYYY');
@@ -251,17 +253,22 @@ DispatcherFactory::add('ControllerFactory');
  * locale specific date formats. For details see
  * @link http://book.cakephp.org/3.0/en/core-libraries/internationalization-and-localization.html#parsing-localized-datetime-data
  */
-Type::build('time')
-    ->useImmutable();
-Type::build('date')
-    ->useLocaleParser();
-Type::build('datetime')
-    ->useImmutable();
+// Type::build('time')
+    // ->useImmutable();
+// Type::build('date')
+    // ->useLocaleParser();
+// Type::build('datetime')
+    // ->useImmutable();
 // Type :: build ( 'date' )
  // -> useLocaleParser ( )
  // -> setLocaleFormat ( 'dd/mm/yyyy' ) ;
 
-
+Type::build('time')
+    ->useImmutable();
+Type::build('date')
+    ->useImmutable();
+Type::build('datetime')
+    ->useImmutable();
 
 	Configure::write('Theme', [
     'title' => 'MayHaw',
