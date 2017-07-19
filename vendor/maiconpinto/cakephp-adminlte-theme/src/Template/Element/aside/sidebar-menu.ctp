@@ -61,7 +61,7 @@ if (file_exists($file)) {
      </ul>
      </li>
      <li><a href="#"><i class="fa fa-line-chart"></i><span> Performance</span></a></li>
-     <li><a href="#"><i class="fa fa-trophy"></i><span>Compensation Management</span></a></li>
+     <li><a href="<?php echo $this -> Url -> build('/Compensation'); ?>"><i class="fa fa-trophy"></i><span>Compensation Management</span></a></li>
     <li class="treeview">
     <a href="#"> <i class="fa fa-user-secret"></i> <span>Admin</span> <i class="fa fa-angle-left pull-right"></i>  </a>
     <ul class="treeview-menu">
