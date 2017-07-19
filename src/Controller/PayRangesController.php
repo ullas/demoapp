@@ -11,7 +11,7 @@ use App\Controller\AppController;
 class PayRangesController extends AppController
 {
 
-var $components = array('Datatable');
+	var $components = array('Datatable');
     /**
      * Index method
      *

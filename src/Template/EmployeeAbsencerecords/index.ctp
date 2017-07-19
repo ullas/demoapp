@@ -213,7 +213,7 @@
 			
 			
 			
-			<section class="collapse in" id="infobar" style="margin-top:20px; ">
+			<div id="normalsection"><section class="collapse in" id="infobar" style="margin-top:20px; ">
 	<div class="clearfix">
 
 		<div class="col-md-3 col-sm-6 col-xs-12">
@@ -247,9 +247,9 @@
         </div>
 
 				</div>
-			
-			<?php echo $this->element('indexbasic', array('title' => 'Leave Requests')); ?>
 			</section>
+			<?php echo $this->element('indexbasic', array('title' => 'Leave Requests')); ?>
+			</div>
 <?php if($notificationcontent!='' && $notificationcontent!=null){ ?>
   		</div>
               <!-- /.tab-pane -->
@@ -405,7 +405,7 @@ $(function () {
         	enddate=event.end.format("YYYY/MM/DD");
 		}
 		
-        $(this).attr("data-id", "1");console.log($(this));
+        $(this).attr("data-id", "1");
 		$('#actionspopover').modal();
 
       },
@@ -487,14 +487,14 @@ $(function () {
 	
 	$('.calbtn').click(function(){
 		$('#calendarsection').show();
-		$('#infobar').hide();
+		$('#normalsection').hide();
 		
 		$('#calendar').fullCalendar('render');
 		
 	});
 	$('.dtbtn').click(function(){
 		$('#calendarsection').hide();
-    	$('#infobar').show();
+    	$('#normalsection').show();
 	});
 
 	$('div.pendingdiv').click(function(){$(".info-box").removeClass("blurdiv");$(this).addClass("blurdiv");

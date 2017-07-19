@@ -155,7 +155,6 @@ class EmpDataPersonalsTable extends Table
             ->allowEmpty('exclude_legal');
 
         $validator
-            ->date('nationality_date')
             ->allowEmpty('nationality_date');
 
         $validator
@@ -169,7 +168,6 @@ class EmpDataPersonalsTable extends Table
             ->allowEmpty('number_children');
 
         $validator
-            ->date('disability_date')
             ->allowEmpty('disability_date');
 
         $validator
@@ -190,22 +188,6 @@ class EmpDataPersonalsTable extends Table
 
         return $validator;
     }
-	public function beforeMarshal(Event $event, $data, $options)
-	{
-		
-		$userdf = Configure::read('userdf');
-		if(isset($userdf)  & $userdf===1){
-
-			foreach (["nationality_date","disability_date"] as $value) {		
-				if(isset($data[$value])){			
-						if($data[$value]!=null && $data[$value]!='' && strpos($data[$value], '/') !== false){
-						$data[$value] = str_replace('/', '-', $data[$value]);
-						$data[$value]=date('Y/m/d', strtotime($data[$value]));
-					}
-				}
-			}
-		}
-	}
     /**
      * Returns a rules checker object that will be used for validating
      * application integrity.

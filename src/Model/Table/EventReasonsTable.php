@@ -65,11 +65,9 @@ class EventReasonsTable extends Table
             ->allowEmpty('status');
 
         $validator
-            ->date('start_date')
             ->allowEmpty('start_date');
 
         $validator
-            ->date('end_date')
             ->allowEmpty('end_date');
 
         $validator
@@ -88,20 +86,7 @@ class EventReasonsTable extends Table
 
         return $validator;
     }
-	public function beforeMarshal(Event $event, $data, $options)
-	{
-		
-		$userdf = Configure::read('userdf');
-		if(isset($userdf)  & $userdf===1){
 
-			foreach (["start_date","end_date"] as $value) {		
-				if($data[$value]!=null && strpos($data[$value], '/') !== false){
-					$data[$value] = str_replace('/', '-', $data[$value]);
-					$data[$value]=date('Y/m/d', strtotime($data[$value]));
-				}
-			}
-		}
-	}
     /**
      * Returns a rules checker object that will be used for validating
      * application integrity.
