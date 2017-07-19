@@ -50,6 +50,8 @@ use Cake\Utility\Inflector;
 			//getting limit
 			if($desclimit){
 				$limit = " 5 ";
+				$temparr=array();$temparr["Attendance.time_in"]="DESC";
+				$order=$temparr;
 			}else{
 				$limit = $this->Limit( );
 			}

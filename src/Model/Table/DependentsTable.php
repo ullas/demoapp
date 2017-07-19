@@ -82,7 +82,6 @@ class DependentsTable extends Table
             ->allowEmpty('salutation');
 
         $validator
-            ->date('date_of_birth')
             ->allowEmpty('date_of_birth');
 
         $validator
@@ -108,22 +107,18 @@ class DependentsTable extends Table
             ->allowEmpty('visa');
 
         $validator
-            ->date('visa_issue')
             ->allowEmpty('visa_issue');
 
         $validator
-            ->date('visa_expiry')
             ->allowEmpty('visa_expiry');
 
         $validator
             ->allowEmpty('passport');
 
         $validator
-            ->date('pass_issue')
             ->allowEmpty('pass_issue');
 
         $validator
-            ->date('pass_expiry')
             ->allowEmpty('pass_expiry');
 
         $validator
@@ -131,7 +126,6 @@ class DependentsTable extends Table
             ->allowEmpty('employed');
 
         $validator
-            ->date('emp_since')
             ->allowEmpty('emp_since');
 
         $validator
@@ -161,22 +155,6 @@ class DependentsTable extends Table
 
         return $validator;
     }
-	public function beforeMarshal(Event $event, $data, $options)
-	{
-		
-		$userdf = Configure::read('userdf');
-		if(isset($userdf)  & $userdf===1){
-
-			foreach (["date_of_birth","visa_issue","visa_expiry","pass_issue","pass_expiry","emp_since"] as $value) {		
-				if(isset($data[$value])){			
-						if($data[$value]!=null && $data[$value]!='' && strpos($data[$value], '/') !== false){
-						$data[$value] = str_replace('/', '-', $data[$value]);
-						$data[$value]=date('Y/m/d', strtotime($data[$value]));
-					}
-				}
-			}
-		}
-	}
     /**
      * Returns a rules checker object that will be used for validating
      * application integrity.

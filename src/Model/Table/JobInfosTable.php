@@ -119,7 +119,6 @@ class JobinfosTable extends Table
             ->allowEmpty('id', 'create');
 
         $validator
-            ->date('position_entry_date')
             ->allowEmpty('position_entry_date');
 
         $validator
@@ -198,7 +197,6 @@ class JobinfosTable extends Table
             ->allowEmpty('is_competition_clause_active');
 
         $validator
-            ->date('probation_period_end_date')
             ->allowEmpty('probation_period_end_date');
 
         $validator
@@ -287,7 +285,6 @@ class JobinfosTable extends Table
             ->allowEmpty('notice_period');
 
         $validator
-            ->date('expected_return_date')
             ->allowEmpty('expected_return_date');
 
         $validator
@@ -303,54 +300,45 @@ class JobinfosTable extends Table
             ->allowEmpty('pay_scale_level');
 
         $validator
-            ->date('job_entry_date')
             ->allowEmpty('job_entry_date');
 
         $validator
             ->allowEmpty('time_in_job');
 
         $validator
-            ->date('company_entry_date')
             ->allowEmpty('company_entry_date');
 
         $validator
             ->allowEmpty('time_in_company');
 
         $validator
-            ->date('location_entry_date')
             ->allowEmpty('location_entry_date');
 
         $validator
             ->allowEmpty('time_in_location');
 
         $validator
-            ->date('department_entry_date')
             ->allowEmpty('department_entry_date');
 
         $validator
             ->allowEmpty('time_in_department');
 
         $validator
-            ->date('pay_scale_level_entry_date')
             ->allowEmpty('pay_scale_level_entry_date');
 
         $validator
             ->allowEmpty('time_in_pay_scale_level');
 
         $validator
-            ->date('hire_date')
             ->allowEmpty('hire_date');
 
         $validator
-            ->date('termination_date')
             ->allowEmpty('termination_date');
 
         $validator
-            ->date('leave_of_absence_start_date')
             ->allowEmpty('leave_of_absence_start_date');
 
         $validator
-            ->date('leave_of_absence_return_date')
             ->allowEmpty('leave_of_absence_return_date');
 
         $validator
@@ -367,22 +355,7 @@ class JobinfosTable extends Table
 
         return $validator;
     }
-	public function beforeMarshal(Event $event, $data, $options)		 
-	{		
-				
-		$userdf = Configure::read('userdf');		
-		if(isset($userdf)  & $userdf===1){		
-		
-			foreach (["leave_of_absence_return_date","hire_date","termination_date","leave_of_absence_start_date","position_entry_date","probation_period_end_date","expected_return_date","job_entry_date","company_entry_date","location_entry_date","department_entry_date","pay_scale_level_entry_date"] as $value) {		
-				if(isset($data[$value])){					
-					if($data[$value]!=null && $data[$value]!='' && strpos($data[$value], '/') !== false){		
-						$data[$value] = str_replace('/', '-', $data[$value]);		
-						$data[$value]=date('Y/m/d', strtotime($data[$value]));		
-					}		
-				}		
-			}		
-		}		
-	}
+	
     /**
      * Returns a rules checker object that will be used for validating
      * application integrity.

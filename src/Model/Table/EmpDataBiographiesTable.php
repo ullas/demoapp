@@ -64,7 +64,6 @@ class EmpdatabiographiesTable extends Table
             ->allowEmpty('id', 'create');
 
         $validator
-            ->date('date_of_birth')
             ->allowEmpty('date_of_birth');
 
         $validator
@@ -80,7 +79,6 @@ class EmpdatabiographiesTable extends Table
             ->allowEmpty('birth_name');
 
         $validator
-            ->date('date_of_death')
             ->allowEmpty('date_of_death');
 
         $validator
@@ -90,22 +88,6 @@ class EmpdatabiographiesTable extends Table
 
         return $validator;
     }
-	public function beforeMarshal(Event $event, $data, $options)
-	{
-		
-		$userdf = Configure::read('userdf');
-		if(isset($userdf)  & $userdf===1){
-
-			foreach (["date_of_birth","date_of_death"] as $value) {		
-				if(isset($data[$value])){			
-						if($data[$value]!=null && $data[$value]!='' && strpos($data[$value], '/') !== false){
-						$data[$value] = str_replace('/', '-', $data[$value]);
-						$data[$value]=date('Y/m/d', strtotime($data[$value]));
-					}
-				}
-			}
-		}
-	}
     /**
      * Returns a rules checker object that will be used for validating
      * application integrity.

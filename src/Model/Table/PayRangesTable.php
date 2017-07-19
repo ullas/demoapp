@@ -69,11 +69,11 @@ class PayRangesTable extends Table
             ->allowEmpty('status');
 
         $validator
-            ->date('start_date')
+            // ->date('start_date')
             ->allowEmpty('start_date');
 
         $validator
-            ->date('end_date')
+            // ->date('end_date')
             ->allowEmpty('end_date');
 
         $validator
@@ -115,22 +115,21 @@ class PayRangesTable extends Table
 
         return $validator;
     }
-	public function beforeMarshal(Event $event, $data, $options)
-	{
-		
-		$userdf = Configure::read('userdf');
-		if(isset($userdf)  & $userdf===1){
-
-			foreach (["start_date","end_date"] as $value) {		
-				if(isset($data[$value])){			
-						if($data[$value]!=null && $data[$value]!='' && strpos($data[$value], '/') !== false){
-						$data[$value] = str_replace('/', '-', $data[$value]);
-						$data[$value]=date('Y/m/d', strtotime($data[$value]));
-					}
-				}
-			}
-		}
-	}
+	// public function beforeMarshal(Event $event, $data, $options)
+	// {
+		// $userdf = Configure::read('userdf');
+		// if(isset($userdf)  & $userdf===1){
+// 
+			// foreach (["start_date","end_date"] as $value) {		
+				// if(isset($data[$value])){			
+						// if($data[$value]!=null && $data[$value]!='' && strpos($data[$value], '/') !== false){
+						// $data[$value] = str_replace('/', '-', $data[$value]);
+						// $data[$value]=date('Y/m/d', strtotime($data[$value]));
+					// }
+				// }
+			// }
+		// }
+	// }
     /**
      * Returns a rules checker object that will be used for validating
      * application integrity.
