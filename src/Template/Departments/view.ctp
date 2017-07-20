@@ -21,8 +21,8 @@
             	echo $this->Form->input('name',['label' => 'Department Name','disabled' => true]);
             	echo $this->Form->input('description',['disabled' => true]);
             	echo $this->Form->input('effective_status',['label' => 'Status','disabled' => true]);
-            	echo $this->Form->input('effective_start_date', ['label' => 'Start Date','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
-            	echo $this->Form->input('effective_end_date', ['label' => 'End Date','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
+            	echo $this->Form->input('effective_start_date', ['label' => 'Start Date','value' => !empty($department->effective_start_date) ? $department->effective_start_date->format($mptldateformat) : '','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
+            	echo $this->Form->input('effective_end_date', ['label' => 'End Date','class' => 'mptldp','value' => !empty($department->effective_end_date) ? $department->effective_end_date->format($mptldateformat) : '','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
             	echo $this->Form->input('parent_department',['disabled' => true]);
             	echo $this->Form->input('head_of_unit',['label' => 'Head of Department','disabled' => true]);
             	echo $this->Form->input('cost_center_id', ['options' => $costCentres, 'empty' => true,'disabled' => true]);
