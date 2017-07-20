@@ -151,11 +151,11 @@ class AppController extends Controller
 		
 		
 		//display date 
-		if($this->daytimeFormat==1){
-			FrozenDate::setToStringFormat("dd/MM/yyyy"); 
-		}else{
-			FrozenDate::setToStringFormat("MM/dd/yyyy"); 
-		}
+		// if($this->daytimeFormat==1){
+			// FrozenDate::setToStringFormat("dd/MM/yyyy"); 
+		// }else{
+			// FrozenDate::setToStringFormat("MM/dd/yyyy"); 
+		// }
 		//
 		
 		
@@ -220,7 +220,16 @@ class AppController extends Controller
 		}
 		
     }
-
+	public function mptlFormatDate($value){
+		if($this->daytimeFormat==1){
+			$output=explode($val,"-");
+			$fnl=$output[2]. "-" . $output[1] . "-". $output[0];
+		}else{
+			$output=explode($val,"-");
+			$fnl=$output[1]. "-" . $output[2] . "-". $output[0];	
+		}
+		return $fnl;
+	}
     /**
      * Before render callback.
      *
@@ -229,7 +238,12 @@ class AppController extends Controller
      */
     public function beforeRender(Event $event)
     {
-    	// debug($this->params);
+    	if($this->daytimeFormat==1){
+			$mptldateformat='d/m/Y';
+		}else{
+			$mptldateformat='m/d/Y';
+		}
+		 $this->set('mptldateformat', $mptldateformat);
 		
     	//get position id 
     	$jobinfosTable = TableRegistry::get('JobInfos');	

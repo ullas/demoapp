@@ -17,8 +17,8 @@
             // echo $this->Form->input('emp_data_biographies_id', ['options' => $empdatabiographies, 'empty' => true]);
             echo $this->Form->input('time_type_id', ['options' => $timeTypes, 'empty' => true]);
             // echo $this->Form->input('status');
-            echo $this->Form->input('start_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
-            echo $this->Form->input('end_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+            echo $this->Form->input('start_date', ['class' => 'mptldp','value' => !empty($employeeAbsencerecord->start_date) ? $employeeAbsencerecord->start_date->format($mptldateformat) : '','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+            echo $this->Form->input('end_date', ['class' => 'mptldp','value' => !empty($employeeAbsencerecord->end_date) ? $employeeAbsencerecord->end_date->format($mptldateformat) : '','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
             // echo $this->Form->input('created_by');
             // echo $this->Form->input('user_id', ['options' => $users, 'empty' => true]);
         ?>

@@ -21,8 +21,8 @@
             	echo $this->Form->input('name',['label' => 'Division Name','disabled' => true]);
             	echo $this->Form->input('description',['disabled' => true]);
             	echo $this->Form->input('effective_status',['label' => 'Status','disabled' => true]);
-            	echo $this->Form->input('effective_start_date', ['label' => 'Start Date','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
-            	echo $this->Form->input('effective_end_date', ['label' => 'End Date','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
+            	echo $this->Form->input('effective_start_date', ['label' => 'Start Date','value' => !empty($division->effective_start_date) ? $division->effective_start_date->format($mptldateformat) : '','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
+            	echo $this->Form->input('effective_end_date', ['label' => 'End Date','value' => !empty($division->effective_end_date) ? $division->effective_end_date->format($mptldateformat) : '','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
             	echo $this->Form->input('parent_division',['disabled' => true]);
             	echo $this->Form->input('head_of_unit',['label' => 'Head of Division','disabled' => true]);
           ?></fieldset>

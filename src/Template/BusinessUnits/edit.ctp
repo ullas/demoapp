@@ -23,8 +23,8 @@
               echo $this->Form->input('name',['label'=>['text'=>'Business Unit Name','class'=>'mandatory']]);
               echo $this->Form->input('description');
               echo $this->Form->input('effective_status',['label' =>'Status']);
-              echo $this->Form->input('effective_start_date', ['label' =>'Start Date','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
-              echo $this->Form->input('effective_end_date', ['label' =>'End Date','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+              echo $this->Form->input('effective_start_date', ['label' =>'Start Date','class' => 'mptldp','value' => !empty($businessUnit->effective_start_date) ? $businessUnit->effective_start_date->format($mptldateformat) : '','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+              echo $this->Form->input('effective_end_date', ['label' =>'End Date','class' => 'mptldp','value' => !empty($businessUnit->effective_end_date) ? $businessUnit->effective_end_date->format($mptldateformat) : '','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
               echo $this->Form->input('head_of_unit',['label' =>'Head of Unit']);
           ?>
           </div>

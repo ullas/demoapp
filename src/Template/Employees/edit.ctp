@@ -102,11 +102,11 @@ div#myDropZone {
                 <?php
                 echo $this->Form->input('empdatabiography.person_id_external',['disabled'=>true,'label' => 'Employee Number']);
 				echo $this->Form->input('empdatabiography.birth_name',['templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-user"></i></div>']]);
-				echo $this->Form->input('empdatabiography.date_of_birth', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+				echo $this->Form->input('empdatabiography.date_of_birth', ['value' => !empty($employee->identity->expirydate) ? $employee->identity->expirydate->format($mptldateformat) : '','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
             	echo $this->Form->input('empdatabiography.country_of_birth',['class'=>'select2','label'=>['text'=>'Country of birth'],'options' => $this->Country->get_countries(), 'empty' => true]);
 				echo $this->Form->input('empdatabiography.region_of_birth',['templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-location-arrow"></i></div>']]);
             	echo $this->Form->input('empdatabiography.place_of_birth',['templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-location-arrow"></i></div>']]);
-				echo $this->Form->input('empdatabiography.date_of_death', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+				echo $this->Form->input('empdatabiography.date_of_death', ['value' => !empty($employee->identity->expirydate) ? $employee->identity->expirydate->format($mptldateformat) : '','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
         		?>
         		
         		<?php echo $this->Form->input('employee.profilepicture', array('type' => 'hidden')); ?>
@@ -157,7 +157,7 @@ div#myDropZone {
             //echo $this->Form->input('empdatapersonal.uniqueid',['label' => 'Employer Unique ID']);
             echo $this->Form->input('empdatapersonal.prof_legal',['label' => 'Profession for Legal Reporting']);
             echo $this->Form->input('empdatapersonal.exclude_legal',['label' => 'Exclude from Legal Reporting']);
-            echo $this->Form->input('empdatapersonal.nationality_date', ['label' => 'Nationality Acquisition Date','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+            echo $this->Form->input('empdatapersonal.nationality_date', ['value' => !empty($employee->identity->expirydate) ? $employee->identity->expirydate->format($mptldateformat) : '','label' => 'Nationality Acquisition Date','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
             echo $this->Form->input('empdatapersonal.home_airport',['templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-plane"></i></div>']]);
             echo $this->Form->input('empdatapersonal.religion');
             echo $this->Form->input('empdatapersonal.number_children',['label' => 'Number of Children']);
@@ -176,16 +176,16 @@ div#myDropZone {
           <div class="tab-pane" id="EmploymentInfo">
              <!-- <div class="form-horizontal"> --><fieldset>
               <?php
-              echo $this->Form->input('employmentinfo.start_date', ['label' => 'Hire Date','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
-              echo $this->Form->input('employmentinfo.first_date_worked', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
-              echo $this->Form->input('employmentinfo.original_start_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+              echo $this->Form->input('employmentinfo.start_date', ['value' => !empty($employee->employmentinfo->start_date) ? $employee->employmentinfo->start_date->format($mptldateformat) : '','label' => 'Hire Date','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+              echo $this->Form->input('employmentinfo.first_date_worked', ['value' => !empty($employee->employmentinfo->first_date_worked) ? $employee->employmentinfo->first_date_worked->format($mptldateformat) : '','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+              echo $this->Form->input('employmentinfo.original_start_date', ['value' => !empty($employee->employmentinfo->original_start_date) ? $employee->employmentinfo->original_start_date->format($mptldateformat) : '','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
               echo $this->Form->input('employmentinfo.company',['label' => 'New Assignment Company']);
               echo $this->Form->input('employmentinfo.is_primary');
-  			  echo $this->Form->input('employmentinfo.seniority_date', ['label' => 'Seniority Start Date','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
-              echo $this->Form->input('employmentinfo.benefits_eligibility_start_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+  			  echo $this->Form->input('employmentinfo.seniority_date', ['value' => !empty($employee->employmentinfo->seniority_date) ? $employee->employmentinfo->seniority_date->format($mptldateformat) : '','label' => 'Seniority Start Date','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+              echo $this->Form->input('employmentinfo.benefits_eligibility_start_date', ['value' => !empty($employee->employmentinfo->benefits_eligibility_start_date) ? $employee->employmentinfo->benefits_eligibility_start_date->format($mptldateformat) : '','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
               echo $this->Form->input('employmentinfo.prev_employeeid',['label' => 'Previous Employment ID']);
               echo $this->Form->input('employmentinfo.eligible_for_stock',['label' => 'Eligible for Stock']);
-  		      echo $this->Form->input('employmentinfo.service_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+  		      echo $this->Form->input('employmentinfo.service_date', ['value' => !empty($employee->employmentinfo->service_date) ? $employee->employmentinfo->service_date->format($mptldateformat) : '','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
               echo $this->Form->input('employmentinfo.initial_stock_grant');
               echo $this->Form->input('employmentinfo.initial_option_grant');
               echo $this->Form->input('employmentinfo.job_credit');
@@ -196,16 +196,16 @@ div#myDropZone {
 			  <div class="terminationcontent" style="display:none;">
 			  <div class="col-md-12"><hr/><h3 class="box-title"><u>Termination</u></h3></div>
 			  <?php
-              echo $this->Form->input('employmentinfo.end_date', ['label' => 'Termination Date','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+              echo $this->Form->input('employmentinfo.end_date', ['value' => !empty($employee->identity->expirydate) ? $employee->identity->expirydate->format($mptldateformat) : '','label' => 'Termination Date','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
               echo $this->Form->input('employmentinfo.ok_to_rehire',['label' => 'Ok to Rehire']);
-  			  echo $this->Form->input('employmentinfo.pay_roll_end_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
-  			  echo $this->Form->input('employmentinfo.last_date_worked', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+  			  echo $this->Form->input('employmentinfo.pay_roll_end_date', ['value' => !empty($employee->identity->expirydate) ? $employee->identity->expirydate->format($mptldateformat) : '','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+  			  echo $this->Form->input('employmentinfo.last_date_worked', ['value' => !empty($employee->identity->expirydate) ? $employee->identity->expirydate->format($mptldateformat) : '','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
               echo $this->Form->input('employmentinfo.regret_termination');
   			  echo $this->Form->input('employmentinfo.eligible_for_sal_continuation',['label' => 'Eligible for Salary Continuation']);
-              echo $this->Form->input('employmentinfo.bonus_pay_expiration_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
-              echo $this->Form->input('employmentinfo.stock_end_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
-              echo $this->Form->input('employmentinfo.salary_end_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
-              echo $this->Form->input('employmentinfo.benefits_end_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+              echo $this->Form->input('employmentinfo.bonus_pay_expiration_date', ['value' => !empty($employee->employmentinfo->bonus_pay_expiration_date) ? $employee->employmentinfo->bonus_pay_expiration_date->format($mptldateformat) : '','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+              echo $this->Form->input('employmentinfo.stock_end_date', ['value' => !empty($employee->employmentinfo->stock_end_date) ? $employee->employmentinfo->stock_end_date->format($mptldateformat) : '','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+              echo $this->Form->input('employmentinfo.salary_end_date', ['value' => !empty($employee->employmentinfo->salary_end_date) ? $employee->employmentinfo->salary_end_date->format($mptldateformat) : '','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+              echo $this->Form->input('employmentinfo.benefits_end_date', ['value' => !empty($employee->employmentinfo->benefits_end_date) ? $employee->employmentinfo->benefits_end_date->format($mptldateformat) : '','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
         	  ?>
         	 </div>
         	  </fieldset>
@@ -403,8 +403,8 @@ div#myDropZone {
             	<div class="col-md-6">	
             	<?php
             			echo $this->Form->input('identity.is_primary');
-						echo $this->Form->input('identity.issuedate', ['label' => 'Issue Date','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
-            			echo $this->Form->input('identity.expirydate', ['label' => 'Expiry Date','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+						echo $this->Form->input('identity.issuedate', ['value' => !empty($employee->identity->issuedate) ? $employee->identity->issuedate->format($mptldateformat) : '','label' => 'Issue Date','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+            			echo $this->Form->input('identity.expirydate', ['value' => !empty($employee->identity->expirydate) ? $employee->identity->expirydate->format($mptldateformat) : '','label' => 'Expiry Date','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
             
         			?>
         			</div>
@@ -432,8 +432,8 @@ div#myDropZone {
             		echo $this->Form->input('educational_qualification.subject2');
             		echo $this->Form->input('educational_qualification.schoolcollege', ['label' => 'School/College']);
             		echo $this->Form->input('educational_qualification.city');
-            		echo $this->Form->input('educational_qualification.fromdate', ['label' => 'From Date','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
-            		echo $this->Form->input('educational_qualification.passdate', ['label' => 'Pass Date','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+            		echo $this->Form->input('educational_qualification.fromdate', ['value' => !empty($employee->educational_qualification->fromdate) ? $employee->educational_qualification->fromdate->format($mptldateformat) : '','label' => 'From Date','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+            		echo $this->Form->input('educational_qualification.passdate', ['value' => !empty($employee->educational_qualification->passdate) ? $employee->educational_qualification->passdate->format($mptldateformat) : '','label' => 'Pass Date','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
             		echo $this->Form->input('educational_qualification.grade', ['label' => 'Grade/Percentage']);
 			      ?>        		
             		
@@ -463,8 +463,8 @@ div#myDropZone {
             		echo $this->Form->input('experience.employer');
             		echo $this->Form->input('experience.city');
             		echo $this->Form->input('experience.country');
-            		echo $this->Form->input('experience.fromdate', ['label' => 'From Date','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
-            		echo $this->Form->input('experience.todate', ['label' => 'To Date','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+            		echo $this->Form->input('experience.fromdate', ['value' => !empty($employee->experience->fromdate) ? $employee->experience->fromdate->format($mptldateformat) : '','label' => 'From Date','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+            		echo $this->Form->input('experience.todate', ['value' => !empty($employee->experience->todate) ? $employee->experience->todate->format($mptldateformat) : '','label' => 'To Date','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
             		echo $this->Form->input('experience.contract');
 			      ?>        		
             		
@@ -498,8 +498,8 @@ div#myDropZone {
             	<div class="col-md-6">	
             	<?php
             		echo $this->Form->input('office_asset.location');
-            		echo $this->Form->input('office_asset.issuedate', ['label' => 'Issue Date','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
-            		echo $this->Form->input('office_asset.todate', ['label' => 'To Date','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+            		echo $this->Form->input('office_asset.issuedate', ['value' => !empty($employee->office_asset->issuedate) ? $employee->office_asset->issuedate->format($mptldateformat) : '','label' => 'Issue Date','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+            		echo $this->Form->input('office_asset.todate', ['value' => !empty($employee->office_asset->todate) ? $employee->office_asset->todate->format($mptldateformat) : '','label' => 'To Date','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
 			      ?>        		
             		</div>
             		

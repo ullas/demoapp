@@ -2,7 +2,7 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
-
+use Cake\ORM\TableRegistry;
 /**
  * Compensation Controller
  *
@@ -20,7 +20,16 @@ class CompensationController extends AppController
     {
         $compensation = $this->paginate($this->Compensation);
 
-        $this->set(compact('compensation'));
+		$empTable = TableRegistry::get('Employees');
+		$payrolldataTable = TableRegistry::get('PayrollData');
+
+		$query=$empTable->find('All')->where(['visible'=>'1','customer_id'=>$this->loggedinuser['customer_id']]);
+		(isset($query)) ? $totalempcount=$query->count() : $totalempcount="";
+		
+		$query=$payrolldataTable->find('All')->where(['customer_id'=>$this->loggedinuser['customer_id']])->distinct(['empdatabiographies_id']);
+		(isset($query)) ? $payrollheadcount=$query->count() : $payrollheadcount="";
+		  
+        $this->set(compact('compensation','totalempcount','payrollheadcount'));
         $this->set('_serialize', ['compensation']);
     }
 

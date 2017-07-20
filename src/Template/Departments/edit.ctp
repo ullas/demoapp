@@ -17,8 +17,8 @@
             echo $this->Form->input('name',['label' => 'Department Name']);
             echo $this->Form->input('description');
             echo $this->Form->input('effective_status',['label' => 'Status']);
-            echo $this->Form->input('effective_start_date', ['label' => 'Start Date','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
-            echo $this->Form->input('effective_end_date',['label' => 'End Date','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+            echo $this->Form->input('effective_start_date', ['label' => 'Start Date','value' => !empty($department->effective_start_date) ? $department->effective_start_date->format($mptldateformat) : '','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+            echo $this->Form->input('effective_end_date',['label' => 'End Date','value' => !empty($department->effective_end_date) ? $department->effective_end_date->format($mptldateformat) : '','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
             echo $this->Form->input('parent_department');
             echo $this->Form->input('head_of_unit',['label' => 'Head of Department']);
             echo $this->Form->input('cost_center_id', ['options' => $costCentres, 'empty' => true]);

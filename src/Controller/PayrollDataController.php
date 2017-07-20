@@ -22,12 +22,12 @@ class PayrollDataController extends AppController
         $payrollData = $this->paginate($this->PayrollData);	
 		
         $this->set(compact('payrollData'));
-        $this->set('_serialize', ['payrollData']);
-		
+        $this->set('_serialize', ['payrollData']);									
 		
 		$this->loadModel('PayComponents');
 		$payComps = $this->PayComponents->find('all', ['limit' => 200])->andwhere(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
 		
+		($this->daytimeFormat==1) ? $mptldateformat='d/m/Y' : $mptldateformat='m/d/Y' ;
 		
 		$this->loadModel('PayrollData');
 		$dbout = $this->PayrollData->find()->select(['empdatabiographies_id'])
@@ -50,8 +50,8 @@ class PayrollDataController extends AppController
 				if(isset($pcname['can_override']) && $pcname['can_override']=="1"){
 					$compval=$pcname['pay_component_value'];
 				}
-				$paycomponentlist[] = array("id"=>$childval['id'],"paycomponent" => $pcname['name'],"startdate" => $childval['start_date'],"enddate" => $childval['end_date'],
-														 "paycomponentvalue" => $compval );
+				$paycomponentlist[] = array("id"=>$childval['id'],"paycomponent" => $pcname['name'],"startdate" => $childval['start_date']->format($mptldateformat),
+						"enddate" => $childval['end_date']->format($mptldateformat), "paycomponentvalue" => $compval );
 			}
 
 			
@@ -80,8 +80,8 @@ class PayrollDataController extends AppController
 					if(isset($pcname['can_override']) && $pcname['can_override']=="1"){
 						$compval=$pcname['pay_component_value'];
 					}
-					$componentlist[] = array("compid"=>$childval['id'],"paycomponent" => $pcname['name'],"startdate" => $childval['start_date'],"enddate" => $childval['end_date'],
-														 "paycomponentvalue" => $compval, "paycomponentgroup" => $pcgroupname['name'] );
+					$componentlist[] = array("compid"=>$childval['id'],"paycomponent" => $pcname['name'],"startdate" => $childval['start_date']->format($mptldateformat),
+					"enddate" => $childval['end_date']->format($mptldateformat), "paycomponentvalue" => $compval, "paycomponentgroup" => $pcgroupname['name'] );
 				}
 				
 				$paycomponentgrouplist[] = array("groupid"=>$groupchildval['paycomponentgroup'], "groupname"=>$pcgroupname['name'], "grouplist" => $componentlist );
@@ -204,6 +204,7 @@ class PayrollDataController extends AppController
 		
         $this->set('paygrouplist', $paygrouplist);
 		
+		($this->daytimeFormat==1) ? $mptldateformat='d/m/Y' : $mptldateformat='m/d/Y' ;
 		
 		$this->loadModel('PayrollData');	
 		$paycomponents = $this->PayrollData->find('all')->where(['pay_component_type' => '1'])->andwhere(['batch' => TRUE])->distinct('paycomponent')
@@ -219,8 +220,8 @@ class PayrollDataController extends AppController
 			if(isset($pcname['can_override']) && $pcname['can_override']=="1"){
 				$compval=$pcname['pay_component_value'];
 			}	
-			$paycomponentlist[] = array("id"=>$childval['id'],"paycomponentid" => $childval['paycomponent'],"paycomponent" => $pcname['name'],"startdate" => $childval['start_date'],"enddate" => $childval['end_date'],
-														 "paycomponentvalue" => $compval );
+			$paycomponentlist[] = array("id"=>$childval['id'],"paycomponentid" => $childval['paycomponent'],"paycomponent" => $pcname['name'],"startdate" => $childval['start_date']->format($mptldateformat),
+			"enddate" => $childval['end_date']->format($mptldateformat), "paycomponentvalue" => $compval );
 		}
 
 		$this->loadModel('PayrollData');
@@ -248,8 +249,8 @@ class PayrollDataController extends AppController
 					if(isset($pcname['can_override']) && $pcname['can_override']=="1"){
 						$compval=$pcname['pay_component_value'];
 					}
-					$componentlist[] = array("compid"=>$childval['id'],"paycomponent" => $pcname['name'],"startdate" => $childval['start_date'],"enddate" => $childval['end_date'],
-														 "paycomponentvalue" => $compval, "paycomponentgroup" => $pcgroupname['name'] );
+					$componentlist[] = array("compid"=>$childval['id'],"paycomponent" => $pcname['name'],"startdate" => $childval['start_date']->format($mptldateformat),
+					"enddate" => $childval['end_date']->format($mptldateformat), "paycomponentvalue" => $compval, "paycomponentgroup" => $pcgroupname['name'] );
 				}
 				
 				$paycomponentgrouplist[] = array("groupid"=>$groupchildval['paycomponentgroup'], "groupname"=>$pcgroupname['name'], "grouplist" => $componentlist );
@@ -440,6 +441,8 @@ class PayrollDataController extends AppController
 			 return $this->redirect(['action' => 'index']);			 
 		}
 		
+		($this->daytimeFormat==1) ? $mptldateformat='d/m/Y' : $mptldateformat='m/d/Y' ;
+		
     	$payrollData = $this->PayrollData->find('all')->where(['empdatabiographies_id' => $id])->first();
 		
     	$payrolldatalist = array();
@@ -457,8 +460,8 @@ class PayrollDataController extends AppController
 			if(isset($pcname['can_override']) && $pcname['can_override']=="1"){
 				$compval=$pcname['pay_component_value'];
 			}
-			$paycomponentlist[] = array("id"=>$childval['id'],"paycomponent" => $pcname['name'],"startdate" => $childval['start_date'],"enddate" => $childval['end_date'],
-														 "paycomponentvalue" => $compval );
+			$paycomponentlist[] = array("id"=>$childval['id'],"paycomponent" => $pcname['name'],"startdate" => $childval['start_date']->format($mptldateformat),
+			"enddate" => $childval['end_date']->format($mptldateformat),  "paycomponentvalue" => $compval );
 		}
 
 		$this->loadModel('PayrollData');
@@ -486,8 +489,8 @@ class PayrollDataController extends AppController
 					if(isset($pcname['can_override']) && $pcname['can_override']=="1"){
 						$compval=$pcname['pay_component_value'];
 					}
-					$componentlist[] = array("compid"=>$childval['id'],"paycomponent" => $pcname['name'],"startdate" => $childval['start_date'],"enddate" => $childval['end_date'],
-														 "paycomponentvalue" => $compval, "paycomponentgroup" => $pcgroupname['name'] );
+					$componentlist[] = array("compid"=>$childval['id'],"paycomponent" => $pcname['name'],"startdate" => $childval['start_date']->format($mptldateformat),
+					"enddate" => $childval['end_date']->format($mptldateformat), "paycomponentvalue" => $compval, "paycomponentgroup" => $pcgroupname['name'] );
 				}
 				
 				$paycomponentgrouplist[] = array("groupid"=>$groupchildval['paycomponentgroup'], "groupname"=>$pcgroupname['name'], "grouplist" => $componentlist );
@@ -667,6 +670,15 @@ class PayrollDataController extends AppController
 			
 			$userdf = $this->request->session()->read('sessionuser')['dateformat'];
             if(isset($userdf)  & $userdf===1){
+				foreach (["start_date", "end_date"] as $value) {		
+					if(isset($payrollData[$value])){			
+						if($payrollData[$value]!=null && $payrollData[$value]!='' && strpos($payrollData[$value], '/') !== false){
+							$payrollData[$value] = str_replace('/', '-', $payrollData[$value]);
+							$payrollData[$value]=date('Y/m/d', strtotime($payrollData[$value]));
+						}
+					}
+				}
+			}else{
 				foreach (["start_date", "end_date"] as $value) {		
 					if(isset($payrollData[$value])){			
 						if($payrollData[$value]!=null && $payrollData[$value]!='' && strpos($payrollData[$value], '/') !== false){
@@ -945,6 +957,7 @@ class PayrollDataController extends AppController
      */
     public function edit($id = null)
     {
+		
     	//redirect if payroll locked for processing
 		if(parent::masterLock()){			
 			 $this->Flash->error(__('Payroll under processing.'));

@@ -5,41 +5,45 @@
 <section class="content">
 <div class="row">
 	
-	<div class="col-md-6">
+	<div class="col-md-8">
 		<div class="box box-primary">
 			<div class="box-header with-border">
 			    <h3 class="box-title">Last Payroll</h3>
             </div>
       		<div class="box-footer no-padding">
               <ul class="nav nav-stacked">
-                <li><a>Payroll Head Count <span class="pull-right badge bg-green">31</span></a></li>
-                <li><a>Total Employees <span class="pull-right badge bg-blue">42</span></a></li>
+                <li><a>Payroll Head Count <span class="pull-right badge bg-green"><?php echo $payrollheadcount; ?></span></a></li>
+                <li><a>Total Employees <span class="pull-right badge bg-blue"><?php echo $totalempcount; ?></span></a></li>
               </ul>
             </div>
 		</div>
 	</div>
 	
 	
-	<div class="col-md-6">
+	<div class="col-md-4">
 		<div class="box box-primary">
 			<div class="box-header with-border">
               	<i class="fa fa-money"></i>
 			    <h3 class="box-title">Actual Salary</h3>
             </div>
 			<div class="box-body">
-				<table class="table table-bordered">
-                <tbody><tr>
-                  <th>Total Wage</th>
-                  <th>Salary Payout</th>
-                  <th>Total Tax</th>
-                </tr>
-                <tr>
-                  <td>AED xxxx</td>
-                  <td>AED xxxx</td>
-                  <td></td>
-                </tr>
-              </tbody>
-              </table>
+				
+				<div class="info-box bg-yellow">
+            		<span class="info-box-icon"><i class="ion ion-ios-pricetag-outline"></i></span>
+            		<div class="info-box-content">
+              			<span class="info-box-text">Total Wage</span>
+              			<span class="info-box-number">AED 5,200</span>
+            		</div>
+          		</div>
+          		
+          		<div class="info-box bg-green">
+            		<span class="info-box-icon"><i class="ion ion-ios-pricetag-outline"></i></span>
+            		<div class="info-box-content">
+              			<span class="info-box-text">Salary Payout</span>
+              			<span class="info-box-number">AED 5,200</span>
+            		</div>
+          		</div>
+          
       		</div>
 		</div>
 	</div>
@@ -49,7 +53,7 @@
 
 <div class="row">
 	
-	<div class="col-md-6">
+	<div class="col-md-8">
 		<div class="box box-primary">
 			<div class="box-body">
 				<div class="row">
@@ -113,7 +117,7 @@
 	</div>
 	
 	
-	<div class="col-md-6">
+	<div class="col-md-4">
 		<div class="box box-primary">
 			<div class="box-header with-border">
               	<i class="fa fa-money"></i>
