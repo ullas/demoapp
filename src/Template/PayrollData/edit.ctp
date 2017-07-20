@@ -30,8 +30,8 @@
 			}
 			echo $this->Form->input('pay_component_value');
 			
-			echo $this->Form->input('start_date',['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
-            echo $this->Form->input('end_date',['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+			echo $this->Form->input('start_date',['class' => 'mptldp','type' => 'text','value' => !empty($payrollData->start_date) ? $payrollData->start_date->format($mptldateformat) : '','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+            echo $this->Form->input('end_date',['class' => 'mptldp','type' => 'text','value' => !empty($payrollData->end_date) ? $payrollData->end_date->format($mptldateformat) : '','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
 			
         ?>
       

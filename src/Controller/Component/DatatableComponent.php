@@ -17,17 +17,26 @@ use Cake\Utility\Inflector;
 					$colmns[] =array( 
             		'db' => $value['name'], 
             		'dt' => $i++,
+            		'type'=>'boolean',
             		'formatter' => function( $d, $row ,$modalname) {
                 		$div='<div class="mptldtbool">'.$d.'</div>';
                 		return $div;
             		}
        				);
 					
+				}else if($value['type']=='date'){
+					
+					if(is_array($value)) {
+          				$colmns[] = array("db" => $value['name'] , "dt" => $i++,'type'=>'date');
+        			}else{
+        				$colmns[] = array("db" => $value , "dt" => $i++,"type"=>'date');
+        			}
+					
 				}else{
 					if(is_array($value)) {
-          				$colmns[] = array("db" => $value['name'] , "dt" => $i++);
+          				$colmns[] = array("db" => $value['name'] , "dt" => $i++,'type'=>'char');
         			}else{
-        				$colmns[] = array("db" => $value , "dt" => $i++);
+        				$colmns[] = array("db" => $value , "dt" => $i++,'type'=>'char');
         			}
 				}
         		
@@ -36,6 +45,7 @@ use Cake\Utility\Inflector;
 			$colmns[] =array( 
             	'db' => 'id', 
             	'dt' => $length++,
+            	'type'=>'button',
             	'formatter' => function( $d, $row ,$modalname) {
                 	$buttons='<a href="/'.   $modalname  . '/view/'.$d.'" class="viewlink fa fa-file-text-o p3"></a>
                 					<a href="/'.   $modalname  . '/edit/'.$d.'" class="editlink fa fa-pencil p3 text-aqua"></a>
@@ -94,6 +104,15 @@ use Cake\Utility\Inflector;
 				$limit = intval($this->request->query['length']);
 			}
 			return $limit;
+		}
+		function formatmptlDate($val){debug($val->time);
+			// if($mptldateformat='d/m/Y'){
+				$output=explode("".$val,"-");
+			  	// $fnl=$output[2]. "-" . $output[1] . "-". $output[0];
+			// }else if($mptldateformat='m/d/Y'){
+				
+			// }
+			return count($output);
 		}
 		function validateDate($date, $format)
 		{
@@ -266,7 +285,16 @@ use Cake\Utility\Inflector;
                            $row[ $column['dt'] ] = utf8_encode($data[$i][$secmodal][$colname[0][1]]);
                            //if it is null check the second value from dot seperated in data
                            if($row[ $column['dt'] ]=="" && $colname[0][0]==$controller->name){
-                               $row[ $column['dt'] ] = utf8_encode($data[$i][$colname[0][1]]);
+                           		if($column['type']=="date"){
+                           			// $row[ $column['dt'] ] =$this->formatDate(json_encode($data[$i][$colname[0][1]]));
+                           			$fmt=$this->_registry->getController()->daytimeFormat;
+									($fmt==1) ? $mptldateformat='d/m/Y' : $mptldateformat='m/d/Y'; 
+									if($data[$i][$colname[0][1]]!="" && $data[$i][$colname[0][1]]!=null){
+                           				$row[ $column['dt'] ] = $data[$i][$colname[0][1]]->format($mptldateformat); 
+									}
+                           		}else{
+                               		$row[ $column['dt'] ] = utf8_encode($data[$i][$colname[0][1]]);                           			
+                           		}
                            }
                        }else{
                            $row[ $column['dt'] ] = utf8_encode($data[$i][$c]);

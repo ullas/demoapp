@@ -257,7 +257,6 @@ $(function () {
 				sweet_alert(msg);
 			}else{
 
-
 				//disable paycomponent value textbox, if can_override==1(no)
 				for(var i = 0; i < paycomponentdata.length; i++) {
 					if(paycomponentdata[i]['id']==$('#paycomponent').val()){

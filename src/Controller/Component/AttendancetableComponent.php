@@ -17,17 +17,24 @@ use Cake\Utility\Inflector;
 					$colmns[] =array( 
             		'db' => $value['name'], 
             		'dt' => $i++,
+            		'type'=>'boolean',
             		'formatter' => function( $d, $row ,$modalname) {
                 		$div='<div class="mptldtbool">'.$d.'</div>';
                 		return $div;
             		}
        				);
 					
+				}else if($value['type']=='timestamp'){
+					if(is_array($value)) {
+          				$colmns[] = array("db" => $value['name'] , "dt" => $i++,'type'=>'timestamp');
+        			}else{
+        				$colmns[] = array("db" => $value , "dt" => $i++,'type'=>'timestamp');
+        			}
 				}else{
 					if(is_array($value)) {
-          				$colmns[] = array("db" => $value['name'] , "dt" => $i++);
+          				$colmns[] = array("db" => $value['name'] , "dt" => $i++,'type'=>'character');
         			}else{
-        				$colmns[] = array("db" => $value , "dt" => $i++);
+        				$colmns[] = array("db" => $value , "dt" => $i++,'type'=>'character');
         			}
 				}
         		
@@ -268,7 +275,15 @@ use Cake\Utility\Inflector;
                            $row[ $column['dt'] ] = utf8_encode($data[$i][$secmodal][$colname[0][1]]);
                            //if it is null check the second value from dot seperated in data
                            if($row[ $column['dt'] ]=="" && $colname[0][0]==$controller->name){
-                               $row[ $column['dt'] ] = utf8_encode($data[$i][$colname[0][1]]);
+                           		if($column['type']=="timestamp"){
+                           			// $row[ $column['dt'] ] =$this->formatDate(json_encode($data[$i][$colname[0][1]]));
+                           			$fmt=$this->_registry->getController()->daytimeFormat;
+									if($data[$i][$colname[0][1]]!="" && $data[$i][$colname[0][1]]!=null){
+										($fmt==1) ? $row[ $column['dt'] ] = $data[$i][$colname[0][1]]->format('d/m/Y H:m:s a')  : $row[ $column['dt'] ] = $data[$i][$colname[0][1]]->format('m/d/Y H:m:s a') ; 
+									}
+                           		}else{
+                               		$row[ $column['dt'] ] = utf8_encode($data[$i][$colname[0][1]]);                           			
+                           		}
                            }
                        }else{
                            $row[ $column['dt'] ] = utf8_encode($data[$i][$c]);
