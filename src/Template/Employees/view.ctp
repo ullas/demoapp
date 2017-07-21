@@ -93,11 +93,11 @@
                 <?php
             	echo $this->Form->input('empdatabiography.person_id_external',['disabled' => true,'label' => 'Employee Number']);
             	echo $this->Form->input('empdatabiography.birth_name',['templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-user"></i></div>'],'disabled' => true]);
-				echo $this->Form->input('empdatabiography.date_of_birth', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
+				echo $this->Form->input('empdatabiography.date_of_birth', ['value' => !empty($employee->empdatabiography->date_of_birth) ? $employee->empdatabiography->date_of_birth->format($mptldateformat) : '','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
             	echo $this->Form->input('empdatabiography.country_of_birth',['class'=>'select2','label'=>['text'=>'Country of birth'],'options' => $this->Country->get_countries(), 'empty' => true,'disabled' => true]);
             	echo $this->Form->input('empdatabiography.region_of_birth',['templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-location-arrow"></i></div>'],'disabled' => true]);
             	echo $this->Form->input('empdatabiography.place_of_birth',['templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-location-arrow"></i></div>'],'disabled' => true]);
-            	echo $this->Form->input('empdatabiography.date_of_death', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
+            	echo $this->Form->input('empdatabiography.date_of_death', ['value' => !empty($employee->empdatabiography->date_of_death) ? $employee->empdatabiography->date_of_death->format($mptldateformat) : '','value' => !empty($employee->identity->expirydate) ? $employee->identity->expirydate->format($mptldateformat) : '','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
 
         		?>
         			
@@ -147,11 +147,11 @@
             //echo $this->Form->input('empdatapersonal.uniqueid',['label' => 'Employer Unique ID','disabled' => true]);
             echo $this->Form->input('empdatapersonal.prof_legal',['label' => 'Profession for Legal Reporting','disabled' => true]);
             echo $this->Form->input('empdatapersonal.exclude_legal',['label' => 'Exclude from Legal Reporting','disabled' => true]);
-			      echo $this->Form->input('empdatapersonal.nationality_date',['label' => 'Nationality Acquisition Date','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
+			      echo $this->Form->input('empdatapersonal.nationality_date',['label' => 'Nationality Acquisition Date','value' => !empty($employee->empdatapersonal->nationality_date) ? $employee->empdatapersonal->nationality_date->format($mptldateformat) : '','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
             echo $this->Form->input('empdatapersonal.home_airport',['disabled' => true]);
             echo $this->Form->input('empdatapersonal.religion',['disabled' => true]);
             echo $this->Form->input('empdatapersonal.number_children',['label' => 'Number of Children','disabled' => true]);
-            /*echo $this->Form->input('empdatapersonal.disability_date', ['label' => 'Disability Date Learned','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
+            /*echo $this->Form->input('empdatapersonal.disability_date', ['label' => 'Disability Date Learned','value' => !empty($employee->identity->expirydate) ? $employee->identity->expirydate->format($mptldateformat) : '','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
             echo $this->Form->input('empdatapersonal.disable_group',['label' => 'Disability Challenge Group','disabled' => true]);
             echo $this->Form->input('empdatapersonal.disable_degree',['label' => 'Degree of Challenge','disabled' => true]);
             echo $this->Form->input('empdatapersonal.disable_type',['label' => 'Type of Challenge','disabled' => true]);
@@ -166,16 +166,16 @@
           <div class="tab-pane" id="EmploymentInfo">
              <!-- <div class="form-horizontal"> --><fieldset>
               <?php
-              echo $this->Form->input('employmentinfo.start_date', ['label' => 'Hire Date','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
-              echo $this->Form->input('employmentinfo.first_date_worked', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
-              echo $this->Form->input('employmentinfo.original_start_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
+              echo $this->Form->input('employmentinfo.start_date', ['label' => 'Hire Date','value' => !empty($employee->employmentinfo->start_date) ? $employee->employmentinfo->start_date->format($mptldateformat) : '','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
+              echo $this->Form->input('employmentinfo.first_date_worked', ['value' => !empty($employee->employmentinfo->first_date_worked) ? $employee->employmentinfo->first_date_worked->format($mptldateformat) : '','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
+              echo $this->Form->input('employmentinfo.original_start_date', ['value' => !empty($employee->employmentinfo->original_start_date) ? $employee->employmentinfo->original_start_date->format($mptldateformat) : '','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
               echo $this->Form->input('employmentinfo.company',['label' => 'New Assignment Company','disabled' => true]);
               echo $this->Form->input('employmentinfo.is_primary',['disabled' => true]);
-  			      echo $this->Form->input('employmentinfo.seniority_date', ['label' => 'Seniority Start Date','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
-              echo $this->Form->input('employmentinfo.benefits_eligibility_start_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
+  			      echo $this->Form->input('employmentinfo.seniority_date', ['label' => 'Seniority Start Date','value' => !empty($employee->employmentinfo->seniority_date) ? $employee->employmentinfo->seniority_date->format($mptldateformat) : '','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
+              echo $this->Form->input('employmentinfo.benefits_eligibility_start_date', ['value' => !empty($employee->employmentinfo->benefits_eligibility_start_date) ? $employee->employmentinfo->benefits_eligibility_start_date->format($mptldateformat) : '','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
               echo $this->Form->input('employmentinfo.prev_employeeid',['label' => 'Previous Employment ID','disabled' => true]);
               echo $this->Form->input('employmentinfo.eligible_for_stock',['label' => 'Eligible for Stock','disabled' => true]);
-  			      echo $this->Form->input('employmentinfo.service_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
+  			      echo $this->Form->input('employmentinfo.service_date', ['value' => !empty($employee->employmentinfo->service_date) ? $employee->employmentinfo->service_date->format($mptldateformat) : '','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
               echo $this->Form->input('employmentinfo.initial_stock_grant',['disabled' => true]);
               echo $this->Form->input('employmentinfo.initial_option_grant',['disabled' => true]);
               echo $this->Form->input('employmentinfo.job_credit',['disabled' => true]);
@@ -186,16 +186,16 @@
 			  <div class="terminationcontent" style="display:none;">
 			  <div class="col-md-12"><hr/><h3 class="box-title"><u>Termination</u></h3></div>
 			  <?php
-              echo $this->Form->input('employmentinfo.end_date', ['label' => 'Termination Date','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
+              echo $this->Form->input('employmentinfo.end_date', ['label' => 'Termination Date','value' => !empty($employee->employmentinfo->end_date) ? $employee->employmentinfo->end_date->format($mptldateformat) : '','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
               echo $this->Form->input('employmentinfo.ok_to_rehire',['label' => 'Ok to Rehire','disabled' => true]);
-  			      echo $this->Form->input('employmentinfo.pay_roll_end_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
-  			      echo $this->Form->input('employmentinfo.last_date_worked', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
+  			      echo $this->Form->input('employmentinfo.pay_roll_end_date', ['value' => !empty($employee->employmentinfo->pay_roll_end_date) ? $employee->employmentinfo->pay_roll_end_date->format($mptldateformat) : '','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
+  			      echo $this->Form->input('employmentinfo.last_date_worked', ['value' => !empty($employee->employmentinfo->last_date_worked) ? $employee->employmentinfo->last_date_worked->format($mptldateformat) : '','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
               echo $this->Form->input('employmentinfo.regret_termination',['disabled' => true]);
   			      echo $this->Form->input('employmentinfo.eligible_for_sal_continuation',['label' => 'Eligible for Salary Continuation','disabled' => true]);
-              echo $this->Form->input('employmentinfo.bonus_pay_expiration_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
-              echo $this->Form->input('employmentinfo.stock_end_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
-              echo $this->Form->input('employmentinfo.salary_end_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
-              echo $this->Form->input('employmentinfo.benefits_end_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
+              echo $this->Form->input('employmentinfo.bonus_pay_expiration_date', ['value' => !empty($employee->employmentinfo->bonus_pay_expiration_date) ? $employee->employmentinfo->bonus_pay_expiration_date->format($mptldateformat) : '','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
+              echo $this->Form->input('employmentinfo.stock_end_date', ['value' => !empty($employee->employmentinfo->stock_end_date) ? $employee->employmentinfo->stock_end_date->format($mptldateformat) : '','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
+              echo $this->Form->input('employmentinfo.salary_end_date', ['value' => !empty($employee->employmentinfo->salary_end_date) ? $employee->employmentinfo->salary_end_date->format($mptldateformat) : '','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
+              echo $this->Form->input('employmentinfo.benefits_end_date', ['value' => !empty($employee->employmentinfo->benefits_end_date) ? $employee->employmentinfo->benefits_end_date->format($mptldateformat) : '','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
         ?></div></fieldset>
             <!-- </div> -->
            </div>
@@ -206,7 +206,7 @@
               <?php
               echo $this->Form->input('jobinfo.pay_group_id', ['disabled' => true,'label' => 'Select Paygroup','options'=>$payGroups, 'class'=>'select2', 'empty' => true]);
               echo $this->Form->input('jobinfo.position_id', ['templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-briefcase"></i></div>'],'class'=>'select2','options' => $positions, 'empty' => true,'disabled' => true]);
-            echo $this->Form->input('jobinfo.position_entry_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
+            echo $this->Form->input('jobinfo.position_entry_date', ['value' => !empty($employee->jobinfo->position_entry_date) ? $employee->jobinfo->position_entry_date->format($mptldateformat) : '','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
             echo $this->Form->input('jobinfo.time_in_position',['disabled' => true]);
             echo $this->Form->input('jobinfo.legal_entity_id',['class'=>'select2','disabled' => true]);
 			      echo $this->Form->input('jobinfo.business_unit_id',['class'=>'select2','disabled' => true]);
@@ -239,7 +239,7 @@
 			      echo $this->Form->input('jobinfo.manager_id5',['label'=>'Manager 5','disabled' => true]);
             echo $this->Form->input('jobinfo.is_cross_border_worker',['disabled' => true]);
             echo $this->Form->input('jobinfo.is_competition_clause_active',['disabled' => true]);
-            echo $this->Form->input('jobinfo.probation_period_end_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
+            echo $this->Form->input('jobinfo.probation_period_end_date', ['value' => !empty($employee->jobinfo->probation_period_end_date) ? $employee->jobinfo->probation_period_end_date->format($mptldateformat) : '','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
             echo $this->Form->input('jobinfo.attachmentid',['label'=>'Attachment','disabled' => true]);
             echo $this->Form->input('jobinfo.custom_string1',['label'=>'Custom String 1','disabled' => true]);
             echo $this->Form->input('jobinfo.eeo_class',['label'=>'EEO Class','disabled' => true]);
@@ -268,25 +268,25 @@
             echo $this->Form->input('jobinfo.event',['disabled' => true]);
             echo $this->Form->input('jobinfo.event_reason',['disabled' => true]);
             echo $this->Form->input('jobinfo.notice_period',['disabled' => true]);
-            echo $this->Form->input('jobinfo.expected_return_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
+            echo $this->Form->input('jobinfo.expected_return_date', ['value' => !empty($employee->jobinfo->expected_return_date) ? $employee->jobinfo->expected_return_date->format($mptldateformat) : '','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
             echo $this->Form->input('jobinfo.pay_scale_area',['disabled' => true]);
             echo $this->Form->input('jobinfo.pay_scale_type',['disabled' => true]);
             echo $this->Form->input('jobinfo.pay_scale_group',['disabled' => true]);
             echo $this->Form->input('jobinfo.pay_scale_level',['disabled' => true]);
-            echo $this->Form->input('jobinfo.job_entry_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
+            echo $this->Form->input('jobinfo.job_entry_date', ['value' => !empty($employee->jobinfo->job_entry_date) ? $employee->jobinfo->job_entry_date->format($mptldateformat) : '','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
             echo $this->Form->input('jobinfo.time_in_job',['disabled' => true]);
-            echo $this->Form->input('jobinfo.company_entry_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
+            echo $this->Form->input('jobinfo.company_entry_date', ['value' => !empty($employee->jobinfo->company_entry_date) ? $employee->jobinfo->company_entry_date->format($mptldateformat) : '','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
             echo $this->Form->input('jobinfo.time_in_company',['disabled' => true]);
-            echo $this->Form->input('jobinfo.location_entry_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
+            echo $this->Form->input('jobinfo.location_entry_date', ['value' => !empty($employee->jobinfo->location_entry_date) ? $employee->jobinfo->location_entry_date->format($mptldateformat) : '','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
             echo $this->Form->input('jobinfo.time_in_location',['disabled' => true]);
-            echo $this->Form->input('jobinfo.department_entry_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
+            echo $this->Form->input('jobinfo.department_entry_date', ['value' => !empty($employee->jobinfo->department_entry_date) ? $employee->jobinfo->department_entry_date->format($mptldateformat) : '','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
             echo $this->Form->input('jobinfo.time_in_department',['disabled' => true]);
-            echo $this->Form->input('jobinfo.pay_scale_level_entry_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
+            echo $this->Form->input('jobinfo.pay_scale_level_entry_date', ['value' => !empty($employee->jobinfo->pay_scale_level_entry_date) ? $employee->jobinfo->pay_scale_level_entry_date->format($mptldateformat) : '','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
             echo $this->Form->input('jobinfo.time_in_pay_scale_level',['disabled' => true]);
-            echo $this->Form->input('jobinfo.hire_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
-            echo $this->Form->input('jobinfo.termination_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
-            echo $this->Form->input('jobinfo.leave_of_absence_start_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
-            echo $this->Form->input('jobinfo.leave_of_absence_return_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
+            echo $this->Form->input('jobinfo.hire_date', ['value' => !empty($employee->jobinfo->hire_date) ? $employee->jobinfo->hire_date->format($mptldateformat) : '','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
+            echo $this->Form->input('jobinfo.termination_date', ['value' => !empty($employee->jobinfo->termination_date) ? $employee->jobinfo->termination_date->format($mptldateformat) : '','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
+            echo $this->Form->input('jobinfo.leave_of_absence_start_date', ['value' => !empty($employee->jobinfo->leave_of_absence_start_date) ? $employee->jobinfo->leave_of_absence_start_date->format($mptldateformat) : '','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
+            echo $this->Form->input('jobinfo.leave_of_absence_return_date', ['value' => !empty($employee->jobinfo->leave_of_absence_return_date) ? $employee->jobinfo->leave_of_absence_return_date->format($mptldateformat) : '','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
 
 			echo $this->Form->input('jobinfo.notes',['type'=>'textArea','disabled' => true]);
 			 ?></fieldset>
@@ -387,8 +387,8 @@
             	<div class="col-md-6">	
             	<?php
             			echo $this->Form->input('identity.is_primary',['disabled' => true]);
-						echo $this->Form->input('identity.issuedate', ['disabled' => true,'label' => 'Issue Date','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
-            			echo $this->Form->input('identity.expirydate', ['disabled' => true,'label' => 'Expiry Date','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+						echo $this->Form->input('identity.issuedate', ['disabled' => true,'label' => 'Issue Date','value' => !empty($employee->identity->issuedate) ? $employee->identity->issuedate->format($mptldateformat) : '','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+            			echo $this->Form->input('identity.expirydate', ['disabled' => true,'label' => 'Expiry Date','value' => !empty($employee->identity->expirydate) ? $employee->identity->expirydate->format($mptldateformat) : '','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
             
         			?>
         			</div>	
@@ -409,8 +409,8 @@
             		echo $this->Form->input('educational_qualification.subject2', ['disabled' => true]);
             		echo $this->Form->input('educational_qualification.schoolcollege', ['label' => 'School/College','disabled' => true]);
             		echo $this->Form->input('educational_qualification.city', ['disabled' => true]);
-            		echo $this->Form->input('educational_qualification.fromdate', ['disabled' => true,'label' => 'From Date','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
-            		echo $this->Form->input('educational_qualification.passdate', ['disabled' => true,'label' => 'Pass Date','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+            		echo $this->Form->input('educational_qualification.fromdate', ['disabled' => true,'label' => 'From Date','value' => !empty($employee->educational_qualification->fromdate) ? $employee->educational_qualification->fromdate->format($mptldateformat) : '','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+            		echo $this->Form->input('educational_qualification.passdate', ['disabled' => true,'label' => 'Pass Date','value' => !empty($employee->educational_qualification->passdate) ? $employee->educational_qualification->passdate->format($mptldateformat) : '','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
             		echo $this->Form->input('educational_qualification.grade', ['disabled' => true,'label' => 'Grade/Percentage']);
 			      ?>        		
             		
@@ -436,8 +436,8 @@
             		echo $this->Form->input('experience.employer', ['disabled' => true]);
             		echo $this->Form->input('experience.city', ['disabled' => true]);
             		echo $this->Form->input('experience.country', ['disabled' => true]);
-            		echo $this->Form->input('experience.fromdate', ['disabled' => true,'label' => 'From Date','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
-            		echo $this->Form->input('experience.todate', ['disabled' => true,'label' => 'To Date','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+            		echo $this->Form->input('experience.fromdate', ['disabled' => true,'label' => 'From Date','value' => !empty($employee->experience->fromdate) ? $employee->experience->fromdate->format($mptldateformat) : '','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+            		echo $this->Form->input('experience.todate', ['disabled' => true,'label' => 'To Date','value' => !empty($employee->experience->todate) ? $employee->experience->todate->format($mptldateformat) : '','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
             		echo $this->Form->input('experience.contract', ['disabled' => true]);
 			      ?>        		
             		
@@ -467,8 +467,8 @@
             	<div class="col-md-6">	
             	<?php
             		echo $this->Form->input('office_asset.location',['disabled' => true]);
-            		echo $this->Form->input('office_asset.issuedate', ['disabled' => true,'label' => 'Issue Date','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
-            		echo $this->Form->input('office_asset.todate', ['disabled' => true,'label' => 'To Date','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+            		echo $this->Form->input('office_asset.issuedate', ['disabled' => true,'label' => 'Issue Date','value' => !empty($employee->office_asset->issuedate) ? $employee->office_asset->issuedate->format($mptldateformat) : '','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+            		echo $this->Form->input('office_asset.todate', ['disabled' => true,'label' => 'To Date','value' => !empty($employee->office_asset->todate) ? $employee->office_asset->todate->format($mptldateformat) : '','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
 			   ?>        		
             	</div>
             		
@@ -494,8 +494,8 @@
             	</div>	
             	<div class="col-md-6">	
             	<?php
-            	echo $this->Form->input('skill.fromdate', ['disabled' => true,'label' => 'From Date','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
-            		echo $this->Form->input('skill.todate', ['disabled' => true,'label' => 'To Date','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+            	echo $this->Form->input('skill.fromdate', ['disabled' => true,'label' => 'From Date','value' => !empty($employee->skill->fromdate) ? $employee->skill->fromdate->format($mptldateformat) : '','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+            		echo $this->Form->input('skill.todate', ['disabled' => true,'label' => 'To Date','value' => !empty($employee->skill->todate) ? $employee->skill->todate->format($mptldateformat) : '','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
 
 			      ?>        		
             		</div>

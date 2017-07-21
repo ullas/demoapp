@@ -18,8 +18,8 @@
           echo $this->Form->input('name',['label'=>['text'=>'Legal Entity Name'],'templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-user"></i></div>']]);
           echo $this->Form->input('description');
           echo $this->Form->input('effective_status',['label' =>'Status']);
-          echo $this->Form->input('effective_start_date', ['label' =>'Effective as of','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
-          echo $this->Form->input('effective_end_date', ['label' =>'End Date','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+          echo $this->Form->input('effective_start_date', ['value' => !empty($legalEntity->effective_start_date) ? $legalEntity->effective_start_date->format($mptldateformat) : '','label' =>'Effective as of','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+          echo $this->Form->input('effective_end_date', ['value' => !empty($legalEntity->effective_end_date) ? $legalEntity->effective_end_date->format($mptldateformat) : '','label' =>'End Date','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
           echo $this->Form->input('country_of_registration',['label' =>'Country','class'=>'select2','options' => $this->Country->get_countries(), 'empty' => true]);
           echo $this->Form->input('standard_weekly_hours',['templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-clock-o"></i></div>']]);
           echo $this->Form->input('currency',['class'=>'select2','options' => $this->Currency->get_currencies(), 'empty' => true]);

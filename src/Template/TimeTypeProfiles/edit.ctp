@@ -16,7 +16,7 @@
             echo $this->Form->input('code',['label' => 'Time Type Profile Code']);
             echo $this->Form->input('name',['label' => 'Time Type Profile Name']);
             echo $this->Form->input('country',['options' => $this->Country->get_countries(), 'empty' => true]);
-            echo $this->Form->input('start_date',['label' => 'Time Type Profile Start Date','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+            echo $this->Form->input('start_date',['value' => !empty($timeTypeProfile->start_date) ? $timeTypeProfile->start_date->format($mptldateformat) : '','label' => 'Time Type Profile Start Date','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
             echo $this->Form->input('time_rec_variant',['label' => 'Time Recording Variant']);
             echo $this->Form->input('time_types._ids', ['options' => $timeTypes, 'empty' => true,'class'=>'select2']);
             echo $this->Form->input('status');

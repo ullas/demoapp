@@ -18,8 +18,8 @@
             echo $this->Form->input('name',['label'=>['text'=>'Legal Entity Name','class'=>'mandatory'],'disabled' => true]);
             echo $this->Form->input('description',['disabled' => true]);
             echo $this->Form->input('effective_status',['label' =>'Status','disabled' => true]);
-            echo $this->Form->input('effective_start_date', ['label' =>'Effective as of','class' => 'mptldp','type' => 'text','disabled' => true]);
-            echo $this->Form->input('effective_end_date', ['label' =>'End Date','class' => 'mptldp','type' => 'text','disabled' => true]);
+            echo $this->Form->input('effective_start_date', ['value' => !empty($legalEntity->effective_start_date) ? $legalEntity->effective_start_date->format($mptldateformat) : '','label' =>'Effective as of','class' => 'mptldp','type' => 'text','disabled' => true]);
+            echo $this->Form->input('effective_end_date', ['value' => !empty($legalEntity->effective_end_date) ? $legalEntity->effective_end_date->format($mptldateformat) : '','label' =>'End Date','class' => 'mptldp','type' => 'text','disabled' => true]);
             echo $this->Form->input('country_of_registration',['label' =>'Country','class'=>'select2','options' => $this->Country->get_countries(), 'empty' => true,'disabled' => true]);
             echo $this->Form->input('standard_weekly_hours',['disabled' => true]);
             echo $this->Form->input('currency',['class'=>'select2','options' => $this->Currency->get_currencies(), 'empty' => true,'disabled' => true]);
