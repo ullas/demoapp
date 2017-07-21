@@ -17,8 +17,8 @@
             echo $this->Form->input('name',['label' => 'Job Title']);
             echo $this->Form->input('description');
             echo $this->Form->input('effective_status',['label' => 'Status']);
-            echo $this->Form->input('effective_start_date', ['label' => 'Start Date','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
-            echo $this->Form->input('effective_end_date', ['label' => 'End Date','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+            echo $this->Form->input('effective_start_date', ['value' => !empty($jobclass->effective_start_date) ? $jobclass->effective_start_date->format($mptldateformat) : '','label' => 'Start Date','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+            echo $this->Form->input('effective_end_date', ['value' => !empty($jobclass->effective_end_date) ? $jobclass->effective_end_date->format($mptldateformat) : '','label' => 'End Date','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
             echo $this->Form->input('worker_comp_code',['label' => 'Workers Comp Code']);
             echo $this->Form->input('default_job_level',['label' => 'Job Level']);
             echo $this->Form->input('standard_weekly_hours');

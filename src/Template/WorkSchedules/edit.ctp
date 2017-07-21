@@ -24,7 +24,7 @@
             echo $this->Form->input('days_week',['label'=>'Average Working Days Per Week']);
             echo $this->Form->input('ws_days',['label'=>'Work Schedule Days']);
             echo $this->Form->input('model',['class'=>'select2','options' => array('Simple',' Period',' Schedule','Day'), 'empty' => 'Choose']);
-            echo $this->Form->input('start_date',['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+            echo $this->Form->input('start_date',['value' => !empty($workSchedule->start_date) ? $workSchedule->start_date->format($mptldateformat) : '','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
             echo $this->Form->input('day1_planhours',['label'=>'Day 1 Planned Hours']);
             echo $this->Form->input('day2_planhours',['label'=>'Day 2 Planned Hours']);
             echo $this->Form->input('day3_planhours',['label'=>'Day 3 Planned Hours']);
@@ -45,7 +45,7 @@
             echo $this->Form->input('day_model',['label'=>'Day Model']);
             echo $this->Form->input('time_rec_variant_2',['label'=>'Time Recording Variant']);
             echo $this->Form->input('search_field');
-			      echo $this->Form->input('starting_date',['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+			      echo $this->Form->input('starting_date',['value' => !empty($workSchedule->starting_date) ? $workSchedule->starting_date->format($mptldateformat) : '','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
             echo $this->Form->input('period_model');
             echo $this->Form->input('time_rec_variant_3',['label'=>'Time Recording Variant']);
         ?>

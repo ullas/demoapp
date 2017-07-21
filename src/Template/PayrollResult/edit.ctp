@@ -19,7 +19,7 @@
             echo $this->Form->input('pay_component_id', ['options' => $payComponents, 'empty' => true]);
             echo $this->Form->input('pay_component_value');
             echo $this->Form->input('paid_salary',['label'=>'Salary Paid']);
-            echo $this->Form->input('run_date',['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+            echo $this->Form->input('run_date',['value' => !empty($payrollResult->run_date) ? $payrollResult->run_date->format($mptldateformat) : '','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
             echo $this->Form->input('run_time',['label'=>'Run Time','class' => 'mptltp','type' => 'text','templateVars' => ['opentag' => '<div class="bootstrap-timepicker">','closetag' => '</div>','icon' => '<div class="input-group-addon"><i class="fa fa-clock-o"></i></div>']]);
         ?>
     </fieldset>

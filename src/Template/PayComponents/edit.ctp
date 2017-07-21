@@ -18,8 +18,8 @@
             echo $this->Form->input('name',['label' => 'Pay Component Name']);
             echo $this->Form->input('description');
             echo $this->Form->input('status',['class'=>'select2','options' => ['Active' => 'Active', 'Inactive' => 'Inactive'], 'empty' => 'Choose']);
-			echo $this->Form->input('start_date',['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
-            echo $this->Form->input('end_date',['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+			echo $this->Form->input('start_date',['value' => !empty($payComponent->start_date) ? $payComponent->start_date->format($mptldateformat) : '','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+            echo $this->Form->input('end_date',['value' => !empty($payComponent->end_date) ? $payComponent->end_date->format($mptldateformat) : '','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
             echo $this->Form->input('pay_component_type',['class'=>'select2','options' => array('Amount', 'Percentage'), 'empty' => 'Choose']);
             echo $this->Form->input('is_earning',['class'=>'select2','options' => array('Yes', 'No')]);
             echo $this->Form->input('currency',['options' => $this->Currency->get_currencies(), 'empty' => true]);
