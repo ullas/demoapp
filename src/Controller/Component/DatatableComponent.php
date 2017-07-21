@@ -24,19 +24,11 @@ use Cake\Utility\Inflector;
             		}
        				);
 					
-				}else if($value['type']=='date'){
-					
-					if(is_array($value)) {
-          				$colmns[] = array("db" => $value['name'] , "dt" => $i++,'type'=>'date');
-        			}else{
-        				$colmns[] = array("db" => $value , "dt" => $i++,"type"=>'date');
-        			}
-					
 				}else{
 					if(is_array($value)) {
-          				$colmns[] = array("db" => $value['name'] , "dt" => $i++,'type'=>'char');
+          				$colmns[] = array("db" => $value['name'] , "dt" => $i++,'type'=>$value['type']);
         			}else{
-        				$colmns[] = array("db" => $value , "dt" => $i++,'type'=>'char');
+        				$colmns[] = array("db" => $value , "dt" => $i++,'type'=>$value['type']);
         			}
 				}
         		
@@ -252,7 +244,11 @@ use Cake\Utility\Inflector;
 		
 			$controller = $this->_registry->getController();
 			$modalname=$controller->modelClass;
-			
+				
+			$fmt=$this->_registry->getController()->daytimeFormat;
+			($fmt==1) ? $mptldateformat='d/m/Y' : $mptldateformat='m/d/Y';
+			($fmt==1) ? $mptltimestampformat='d/m/Y H:m a' : $mptltimestampformat='m/d/Y H:m a';
+									
 			$out = array();
 			for ( $i=0, $ien=count($data) ; $i<$ien ; $i++ ) {
 				$row = array();  
@@ -286,11 +282,14 @@ use Cake\Utility\Inflector;
                            //if it is null check the second value from dot seperated in data
                            if($row[ $column['dt'] ]=="" && $colname[0][0]==$controller->name){
                            		if($column['type']=="date"){
-                           			// $row[ $column['dt'] ] =$this->formatDate(json_encode($data[$i][$colname[0][1]]));
-                           			$fmt=$this->_registry->getController()->daytimeFormat;
-									($fmt==1) ? $mptldateformat='d/m/Y' : $mptldateformat='m/d/Y'; 
+
 									if($data[$i][$colname[0][1]]!="" && $data[$i][$colname[0][1]]!=null){
                            				$row[ $column['dt'] ] = $data[$i][$colname[0][1]]->format($mptldateformat); 
+									}
+                           		}else if($column['type']=="timestamp"){
+                           			 
+									if($data[$i][$colname[0][1]]!="" && $data[$i][$colname[0][1]]!=null){
+                           				$row[ $column['dt'] ] = $data[$i][$colname[0][1]]->format($mptltimestampformat); 
 									}
                            		}else{
                                		$row[ $column['dt'] ] = utf8_encode($data[$i][$colname[0][1]]);                           			

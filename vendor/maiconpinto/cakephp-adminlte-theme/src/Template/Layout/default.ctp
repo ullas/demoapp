@@ -111,10 +111,10 @@
   position: absolute;
   left: 0;
   top: 0;
-  height: 6rem;
-  width: 6rem !important;
-  line-height: 6rem;
-  font-size: 2rem;
+  height: 8rem;
+  width: 8rem !important;
+  line-height: 8rem;
+  font-size: 3rem;
   border-radius: 50%;
   background: #268F70;
   color: #FFFFFF;

@@ -17,7 +17,7 @@
             echo $this->Form->input('holiday_code');
             echo $this->Form->input('holiday_class', ['options' => array('Half day', 'Full day'),'class'=>'select2', 'empty' => true]);
             echo $this->Form->input('name',['label' => 'Name of Holiday']);
-            echo $this->Form->input('date', ['label' => 'Date of the Holiday','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+            echo $this->Form->input('date', ['value' => !empty($holiday->date) ? $holiday->date->format($mptldateformat) : '','label' => 'Date of the Holiday','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
             //echo $this->Form->input('holiday_calendar_id',['disabled'=>true]);
 
 		?>
