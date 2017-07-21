@@ -23,6 +23,7 @@ use Cake\I18n\FrozenTime;
 use Cake\I18n\Date;
 use Cake\Database\Type;
 use Cake\ORM\TableRegistry;
+use Cake\Datasource\ConnectionManager;
 
 
 /**
@@ -187,6 +188,17 @@ class AppController extends Controller
 		
 		
     }
+	public function get_nameofemployee($empid = null)
+	{
+		$conn = ConnectionManager::get('default');
+		if($empid!="" && $empid!=null && isset($empid)){
+			$arrayTemp1 = $conn->execute('select first_name,last_name from empdatapersonals where employee_id='.$empid.'')->fetchAll('assoc');
+		}
+		$personalid=$conn->execute('select person_id_external from empdatabiographies where employee_id='.$empid.'')->fetchAll('assoc');
+		(isset($personalid[0]['person_id_external'])) ? $personalid=$personalid[0]['person_id_external'] : $personalid="" ;
+		return json_encode($arrayTemp1[0]['first_name']." ".$arrayTemp1[0]['last_name'].' ('.$personalid.')');
+		// return json_encode($arrayTemp1[0]['first_name']." ".$arrayTemp1[0]['last_name']." (".$empid.")");
+	}
 	public function masterLock()
     {
     	$this->loadModel('Customers');
