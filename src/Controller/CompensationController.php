@@ -54,36 +54,112 @@ class CompensationController extends AppController
 		if($this->request->is('ajax')) {
 
 			$this->autoRender=false;
-			$output=[];
+			$mptloutput=[];
 			if($this->request->data['selectedype']=="single"){
-				if($this->request->data['paycomptype']=="paycomponent"){
+				if($this->request->data['paycomptype']=="paycomponent"){	
+					$mptloutput=$this->manageCompensation($this->request->data['employee'],$this->request->data['valuetype'],$this->request->data['value'],$this->request->data['paycomponent'],$this->request->data['toggleval']);					
+				}else{
+					$mptloutput=$this->manageGroupCompensation($this->request->data['employee'],$this->request->data['valuetype'],$this->request->data['value'],$this->request->data['paycomponent'],$this->request->data['toggleval']);					
+				}
+			}else if($this->request->data['selectedype']=="paygroup"){
+				$this->loadModel('JobInfos');
+				$jobinfos = $this->JobInfos->find()->select(['JobInfos.employee_id'])->where(['JobInfos.pay_group_id' => $this->request->data['employee'] ])
+        					->andwhere(['JobInfos.customer_id' => $this->loggedinuser['customer_id']])->toArray();
 					
-					$this->loadModel('PayrollResult');
-					$query=$this->PayrollResult->find('all', array('conditions' => array('employee_id'  => $this->request->data['employee'],'pay_component_id'  => $this->request->data['paycomponent'],
-											'customer_id' => $this->loggedinuser['customer_id'] ) ))->order(['id' => 'DESC'])->first();
-
-					$output['component_value']=$query['pay_component_value'];
-					$output['paid_salary']=$query['paid_salary'];
-					
-					if($this->request->data['valuetype']=="amount"){
-						if($this->request->data['toggleval']=="true"){
-							$output['projected_value']=$query['pay_component_value']-$this->request->data['value'];
-						}else{
-							$output['projected_value']=$query['pay_component_value']+$this->request->data['value'];
-						}
-					}else if($this->request->data['valuetype']=="percentage"){
-						if($this->request->data['toggleval']=="true"){
-							$output['projected_value']=$query['pay_component_value']-($query['pay_component_value']%$this->request->data['value']);
-						}else{
-							$output['projected_value']=$query['pay_component_value']+($query['pay_component_value']%$this->request->data['value']);
-						}
+				foreach($jobinfos as $childval){
+        			$tempoutput=[];
+					if($this->request->data['paycomptype']=="paycomponent"){	
+						$tempoutput=$this->manageCompensation($childval['employee_id'],$this->request->data['valuetype'],$this->request->data['value'],$this->request->data['paycomponent'],$this->request->data['toggleval']);					
+					}else{
+						$tempoutput=$this->manageGroupCompensation($childval['employee_id'],$this->request->data['valuetype'],$this->request->data['value'],$this->request->data['paycomponent'],$this->request->data['toggleval']);					
 					}
+					(isset($mptloutput['last_value'])) ? $mptloutput['last_value']=$mptloutput['last_value']+$tempoutput['last_value'] : $mptloutput['last_value']=$tempoutput['last_value'];
+					(isset($mptloutput['last_salary'])) ? $mptloutput['last_salary']=$mptloutput['last_salary']+$tempoutput['last_salary'] : $mptloutput['last_salary']=$tempoutput['last_salary'];
+					(isset($mptloutput['projected_value'])) ? $mptloutput['projected_value']=$mptloutput['projected_value']+$tempoutput['projected_value'] : $mptloutput['projected_value']=$tempoutput['projected_value'];
+				}
+			}else if($this->request->data['selectedype']=="organisation"){
+						
+				$this->loadModel('Employees');
+				$employees = $this->Employees->find()->select(['Employees.id'])->where(['Employees.customer_id' => $this->loggedinuser['customer_id']])->toArray();
 					
+				foreach($employees as $childval){
+        			$tempoutput=[];
+					if($this->request->data['paycomptype']=="paycomponent"){	
+						$tempoutput=$this->manageCompensation($childval['id'],$this->request->data['valuetype'],$this->request->data['value'],$this->request->data['paycomponent'],$this->request->data['toggleval']);					
+					}else{
+						$tempoutput=$this->manageGroupCompensation($childval['id'],$this->request->data['valuetype'],$this->request->data['value'],$this->request->data['paycomponent'],$this->request->data['toggleval']);					
+					}
+					(isset($mptloutput['last_value'])) ? $mptloutput['last_value']=$mptloutput['last_value']+$tempoutput['last_value'] : $mptloutput['last_value']=$tempoutput['last_value'];
+					(isset($mptloutput['last_salary'])) ? $mptloutput['last_salary']=$mptloutput['last_salary']+$tempoutput['last_salary'] : $mptloutput['last_salary']=$tempoutput['last_salary'];
+					(isset($mptloutput['projected_value'])) ? $mptloutput['projected_value']=$mptloutput['projected_value']+$tempoutput['projected_value'] : $mptloutput['projected_value']=$tempoutput['projected_value'];
 				}
 			}
-			$this->response->body(json_encode($output));
+			
+			$this->response->body(json_encode($mptloutput));
 	    	return $this->response;
 		}
+	}
+	public function manageGroupCompensation($empid,$valuetype,$value,$paycomponent,$toggleval){
+			
+		$this->loadModel('PayComponents');
+		$payComponents=$this->PayComponents->find('all')->where(['pay_component_group_id' => $paycomponent])->andwhere(['PayComponents.customer_id' => $this->loggedinuser['customer_id']])
+									->order(['"id"' => 'ASC'])->toArray();
+					
+		foreach($payComponents as $childval){
+							
+			$this->loadModel('PayrollResult');
+			$query=$this->PayrollResult->find('all', array('conditions' => array('employee_id'  => $empid,'pay_component_id'  => $childval['id'],
+											'customer_id' => $this->loggedinuser['customer_id'] ) ))->order(['id' => 'DESC'])->first();
+
+			$output['last_value']=$query['pay_component_value'];
+			$output['last_salary']=$query['paid_salary'];
+			if(isset($query['pay_component_value'])){
+				if($valuetype=="amount"){
+					if($toggleval=="true"){
+						$output['projected_value']=$query['pay_component_value']-$value;
+					}else{
+						$output['projected_value']=$query['pay_component_value']+$value;
+					}
+				}else if($valuetype=="percentage"){
+					if($toggleval=="true"){
+						$output['projected_value']=$query['pay_component_value'] - (($query['pay_component_value'] / 100) * $value);
+					}else{
+						$output['projected_value']=$query['pay_component_value'] + (($query['pay_component_value'] / 100) * $value);
+					}
+				}
+			}else{
+				$output['projected_value']=null;
+			}
+		}
+		return $output;
+	}
+	public function manageCompensation($empid,$valuetype,$value,$paycomponent,$toggleval){
+			
+		$this->loadModel('PayrollResult');
+					
+					$query=$this->PayrollResult->find('all', array('conditions' => array('employee_id'  => $empid,'pay_component_id'  => $paycomponent,
+											'customer_id' => $this->loggedinuser['customer_id'] ) ))->order(['id' => 'DESC'])->first();
+
+					$output['last_value']=$query['pay_component_value'];
+					$output['last_salary']=$query['paid_salary'];
+					if(isset($query['pay_component_value'])){
+					if($valuetype=="amount"){
+						if($toggleval=="true"){
+							$output['projected_value']=$query['pay_component_value']-$value;
+						}else{
+							$output['projected_value']=$query['pay_component_value']+$value;
+						}
+					}else if($valuetype=="percentage"){
+						if($toggleval=="true"){
+							$output['projected_value']=$query['pay_component_value'] - (($query['pay_component_value'] / 100) * $value);
+						}else{
+							$output['projected_value']=$query['pay_component_value'] + (($query['pay_component_value'] / 100) * $value);
+						}
+					}
+					}else{
+						$output['projected_value']=null;
+					}
+					return $output;
 	}
     /**
      * View method
