@@ -138,7 +138,7 @@
 		</div>
 	</div>
 
-	<div class="col-md-4">
+	<div class="col-md-4 lastpayrolldiv" style="display:none;">
 		<div class="box box-primary">
 			<div class="box-header with-border">
               	<i class="fa fa-money"></i>
@@ -147,18 +147,18 @@
 			<div class="box-body">
 
 				<div class="info-box bg-yellow">
-            		<span class="info-box-icon"><i class="ion ion-ios-pricetag-outline"></i></span>
+            		<span class="info-box-icon"><i class="fa fa-money"></i></span>
             		<div class="info-box-content">
               			<span class="info-box-text">Total Wage</span>
-              			<span class="info-box-number">AED 5,200</span>
+              			<span class="info-box-number lasttotal"></span>
             		</div>
           		</div>
 
           		<div class="info-box bg-green">
-            		<span class="info-box-icon"><i class="ion ion-ios-pricetag-outline"></i></span>
+            		<span class="info-box-icon"><i class="fa fa-money"></i></span>
             		<div class="info-box-content">
               			<span class="info-box-text">Salary Payout</span>
-              			<span class="info-box-number">AED 5,200</span>
+              			<span class="info-box-number lastpayout"></span>
             		</div>
           		</div>
 
@@ -166,7 +166,7 @@
 		</div>
 	</div>
 
-	<div class="col-md-4">
+	<div class="col-md-4 projectedpayrolldiv" style="display:none;">
 		<div class="box box-primary">
 			<div class="box-header with-border">
               	<i class="fa fa-money"></i>
@@ -174,19 +174,19 @@
             </div>
 			<div class="box-body">
 
-				<div class="info-box bg-yellow">
-            		<span class="info-box-icon"><i class="ion ion-ios-pricetag-outline"></i></span>
+				<div class="info-box projectedtotaldiv">
+            		<span class="info-box-icon projectedtotalicon"></span>
             		<div class="info-box-content">
               			<span class="info-box-text">Total Wage</span>
-              			<span class="info-box-number">AED 5,200</span>
+              			<span class="info-box-number projectedtotal"></span>
             		</div>
           		</div>
 
-          		<div class="info-box bg-green">
+          		<div class="info-box projectedpayoutdiv">
             		<span class="info-box-icon"><i class="ion ion-ios-pricetag-outline"></i></span>
             		<div class="info-box-content">
               			<span class="info-box-text">Salary Payout</span>
-              			<span class="info-box-number">AED 5,200</span>
+              			<span class="info-box-number projectedpayout"></span>
             		</div>
           		</div>
 
@@ -271,10 +271,27 @@ $(function () {
         	url: '/Compensation/calculateCompensation',
         	data: 'selectedype='+selectedype+"&employee="+employee+"&paycomptype="+paycomptype+"&paycomponent="+paycomponent+"&valuetype="+valuetype+"&value="+value+"&toggleval="+toggleval,
         	success : function(result) {
-        		sweet_alert(result);
+        		var outputobj=JSON.parse(result);console.log(outputobj['component_value']);
+        		$(".lasttotal").text(outputobj['last_value']);
+        		$(".lastpayout").text(outputobj['last_salary']);
+        		$(".projectedtotal").text(outputobj['projected_value']);
+        		
+        		if(outputobj['last_value']>=outputobj['projected_value']){
+        			$(".projectedtotaldiv").removeClass("bg-red");$(".projectedtotaldiv").addClass("bg-green");
+        			$(".projectedtotalicon").html('<i class="fa fa-caret-down"></i>');
+        		}else{
+        			$(".projectedtotaldiv").removeClass("bg-green");$(".projectedtotaldiv").addClass("bg-red");
+        			$(".projectedtotalicon").html('<i class="fa fa-caret-up"></i>');
+        		}
+        		
+        		$(".lastpayrolldiv").show();
+        		$(".projectedpayrolldiv").show();
             	return false;
     		},
         	error : function(result) {
+        		$(".lastpayrolldiv").hide();
+        		$(".projectedpayrolldiv").hide();
+        		
         		sweet_alert("Error.Please try again later.");
             	return false;
         	}
