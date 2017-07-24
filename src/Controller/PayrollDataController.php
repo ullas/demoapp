@@ -275,6 +275,7 @@ class PayrollDataController extends AppController
 			$oldempid = $this->request->data['oldemp'] ;  
 			$newempid = $this->request->data['newemp'] ;  
 			
+			($this->daytimeFormat==1) ? $mptldateformat='d/m/Y' : $mptldateformat='m/d/Y' ;
 		
 			if($oldempid!="" && $oldempid!=null && $newempid!="" && $newempid!=null){
 				$dbdatas = $this->PayrollData->find('all')->where(['PayrollData.empdatabiographies_id' => $oldempid ])
@@ -288,8 +289,8 @@ class PayrollDataController extends AppController
 					$payrollData['empdatabiographies_id']=$newempid;
 					
 					$payrollData['pay_component_value']=$childval['pay_component_value'];
-					$payrollData['start_date']=$childval['start_date'];
-					$payrollData['end_date']=$childval['end_date'];
+					$payrollData['start_date']=$childval['start_date']->format($mptldateformat);
+					$payrollData['end_date']=$childval['end_date']->format($mptldateformat);
 					$payrollData['pay_component_type']=$childval['pay_component_type'];
 					$payrollData['paycomponent']=$childval['paycomponent'];
 					$payrollData['paycomponentgroup']=$childval['paycomponentgroup'];
