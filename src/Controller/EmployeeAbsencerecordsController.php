@@ -131,12 +131,54 @@ class EmployeeAbsencerecordsController extends AppController
             }
 		}  
     }
+	public function deleteLeaveRequest()
+	{
+		//redirect if payroll locked for processing
+		if(parent::masterLock()){			
+			 $this->Flash->error(__('Payroll under processing.'));
+			 $this->response->body("payrolllocked");
+	    	 return $this->response;	 			 
+		}
+		
+		if($this->request->is('ajax')) {
+			
+			$this->autoRender=false;
+			
+			$employeeAbsencerecord = $this->EmployeeAbsencerecords->get($this->request->data['id']);
+			if($employeeAbsencerecord['customer_id'] == $this->loggedinuser['customer_id']) 
+			{
+        		if ($this->EmployeeAbsencerecords->delete($employeeAbsencerecord)) {
+        						
+					//associated Workflows 
+         			$this->loadModel('Workflows');
+					$workflow = $this->Workflows->get($employeeAbsencerecord["workflow_id"], ['contain' => []]);
+					$workflow = $this->Workflows->patchEntity($workflow, $this->request->data);
+					$workflow['active']="2";	
+            		if ($this->Workflows->save($workflow)) {
+                		$this->response->body("success");
+	    	 			return $this->response;	 
+					}else {
+                		$this->response->body("The employee absencerecord could not be deleted. Please, try again.");
+	    	 			return $this->response;	 
+            		}
+				            	
+        		} else {
+        			$this->response->body("The employee absencerecord could not be deleted. Please, try again.");
+	    	 		return $this->response;	 
+        		}
+			}else{
+	   	    	$this->response->body("authorization error");
+	    	 return $this->response;	 
+	    	}
+		}
+	}
 	public function approveLeaveRequest()
 	{
 		//redirect if payroll locked for processing
 		if(parent::masterLock()){			
 			 $this->Flash->error(__('Payroll under processing.'));
-			 return $this->redirect(['action' => 'index']);			 
+			 $this->response->body("payrolllocked");
+	    	 return $this->response;	 	 
 		}
 		
     	$this->loadModel('Workflows');

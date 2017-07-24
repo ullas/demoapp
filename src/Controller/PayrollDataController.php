@@ -109,6 +109,9 @@ class PayrollDataController extends AppController
 		// $this->Flash->error(__('DATA__.').date("Y/m/d"));
 		
     }
+    public function alert(){
+    	
+    }
 	public function get_employeename($empdatabiographyid = null)
 	{
 		$conn = ConnectionManager::get('default');
@@ -126,7 +129,7 @@ class PayrollDataController extends AppController
 		//redirect if payroll locked for processing
 		if(parent::masterLock()){			
 			 $this->Flash->error(__('Payroll under processing.'));
-			 return $this->redirect(['action' => 'index']);			 
+			 return $this->redirect(['action' => 'alert']);			 
 		}
 			
 		$payrollData = $this->PayrollData->newEntity();
@@ -164,7 +167,7 @@ class PayrollDataController extends AppController
 		//redirect if payroll locked for processing
 		if(parent::masterLock()){			
 			 $this->Flash->error(__('Payroll under processing.'));
-			 return $this->redirect(['action' => 'index']);			 
+			 return $this->redirect(['action' => 'alert']);			 
 		}
 	
 		$payrollData = $this->PayrollData->newEntity();
@@ -265,7 +268,7 @@ class PayrollDataController extends AppController
 			//redirect if payroll locked for processing
 		if(parent::masterLock()){			
 			 $this->Flash->error(__('Payroll under processing.'));
-			 return $this->redirect(['action' => 'index']);			 
+			 return $this->redirect(['action' => 'alert']);			 
 		}
 		
 		if($this->request->is('ajax')) {
@@ -325,7 +328,8 @@ class PayrollDataController extends AppController
 		//redirect if payroll locked for processing
 		if(parent::masterLock()){			
 			 $this->Flash->error(__('Payroll under processing.'));
-			 return $this->redirect(['action' => 'index']);			 
+			 $this->response->body("payrolllocked");
+	    	 return $this->response;	 
 		}
 		
 		if($this->request->is('ajax')) {
@@ -367,7 +371,8 @@ class PayrollDataController extends AppController
 		//redirect if payroll locked for processing
 		if(parent::masterLock()){			
 			 $this->Flash->error(__('Payroll under processing.'));
-			 return $this->redirect(['action' => 'index']);			 
+			 $this->response->body("payrolllocked");
+	    	 return $this->response;	 
 		}
 		
 		if($this->request->is('ajax')) {
@@ -396,7 +401,8 @@ class PayrollDataController extends AppController
 		//redirect if payroll locked for processing
 		if(parent::masterLock()){			
 			 $this->Flash->error(__('Payroll under processing.'));
-			 return $this->redirect(['action' => 'index']);			 
+			 $this->response->body("payrolllocked");
+	    	 return $this->response;	 	 
 		}
 			
 		if($this->request->is('ajax')) {
@@ -439,7 +445,7 @@ class PayrollDataController extends AppController
     	//redirect if payroll locked for processing
 		if(parent::masterLock()){			
 			 $this->Flash->error(__('Payroll under processing.'));
-			 return $this->redirect(['action' => 'index']);			 
+			 return $this->redirect(['action' => 'alert']);			 
 		}
 		
 		($this->daytimeFormat==1) ? $mptldateformat='d/m/Y' : $mptldateformat='m/d/Y' ;
@@ -648,7 +654,7 @@ class PayrollDataController extends AppController
 		//redirect if payroll locked for processing
 		if(parent::masterLock()){			
 			 $this->Flash->error(__('Payroll under processing.'));
-			 return $this->redirect(['action' => 'index']);			 
+			 return $this->redirect(['action' => 'alert']);			 
 		}
 		
 		if($this->request->is('ajax')) {
@@ -745,7 +751,7 @@ class PayrollDataController extends AppController
 		//redirect if payroll locked for processing
 		if(parent::masterLock()){			
 			 $this->Flash->error(__('Payroll under processing.'));
-			 return $this->redirect(['action' => 'index']);			 
+			 return $this->redirect(['action' => 'alert']);			 
 		}
 		
 		if($this->request->is('ajax')) {
@@ -860,7 +866,7 @@ class PayrollDataController extends AppController
     	//redirect if payroll locked for processing
 		if(parent::masterLock()){			
 			 $this->Flash->error(__('Payroll under processing.'));
-			 return $this->redirect(['action' => 'index']);			 
+			 return $this->redirect(['action' => 'alert']);			 
 		}
 		
         $payrollData = $this->PayrollData->newEntity();
@@ -902,7 +908,7 @@ class PayrollDataController extends AppController
     	//redirect if payroll locked for processing
 		if(parent::masterLock()){			
 			 $this->Flash->error(__('Payroll under processing.'));
-			 return $this->redirect(['action' => 'index']);			 
+			 return $this->redirect(['action' => 'alert']);			 
 		}
 		
         $payrollData = $this->PayrollData->newEntity();
@@ -962,7 +968,7 @@ class PayrollDataController extends AppController
     	//redirect if payroll locked for processing
 		if(parent::masterLock()){			
 			 $this->Flash->error(__('Payroll under processing.'));
-			 return $this->redirect(['action' => 'index']);			 
+			 return $this->redirect(['action' => 'alert']);			 
 		}
 		
         $payrollData = $this->PayrollData->get($id, [
@@ -1035,7 +1041,7 @@ class PayrollDataController extends AppController
     	//redirect if payroll locked for processing
 		if(parent::masterLock()){			
 			 $this->Flash->error(__('Payroll under processing.'));
-			 return $this->redirect(['action' => 'index']);			 
+			 return $this->redirect(['action' => 'index']);		 
 		}
 		
         $this->request->allowMethod(['post', 'delete']);
@@ -1094,7 +1100,8 @@ class PayrollDataController extends AppController
 		//redirect if payroll locked for processing
 		if(parent::masterLock()){			
 			 $this->Flash->error(__('Payroll under processing.'));
-			 return $this->redirect(['action' => 'index']);			 
+			 $this->response->body("payrolllocked");
+	    	 return $this->response;	 		 
 		}
 		
 		$this->request->allowMethod(['post', 'deleteall']);

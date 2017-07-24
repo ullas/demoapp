@@ -970,6 +970,9 @@ function formattoymd(inputDate) {
         	success : function(data) {
         		if(data=="success"){
     				window.location.reload();
+    			}else if(data=="payrolllocked"){
+    				sweet_alert("Payroll under processing.Please try again.");
+					return false;
     			}else{
     				sweet_alert("Error while removing PayComponent in batch.");
 					return false;
@@ -1018,6 +1021,9 @@ function formattoymd(inputDate) {
         	success : function(data) {
         		if(data=="success"){
     				window.location.reload();
+    			}else if(data=="payrolllocked"){
+    				sweet_alert("Payroll under processing.Please try again.");
+					return false;
     			}else{
     				sweet_alert("Error while removing PayComponentGroup in batch.");
 					return false;
@@ -1045,6 +1051,9 @@ function formattoymd(inputDate) {
         	success : function(data) {
         		if(data=="success"){
     				window.location.reload();
+    			}else if(data=="payrolllocked"){
+    				sweet_alert("Payroll under processing.Please try again.");
+					return false;
     			}else{
     				sweet_alert("Error while deleting the particular employee's Pay Components.Please try again.");
 					return false;
