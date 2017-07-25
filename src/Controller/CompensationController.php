@@ -162,11 +162,14 @@ class CompensationController extends AppController
 		}
 		
 		(isset($output['projected_value'])) ? $output['projected_value']+=$outputprojvalue :$output['projected_value']=$outputprojvalue;
+		(isset($output['last_value'])) ? $output['last_value']+=$projectedvalue : $output['last_value']=$projectedvalue;
+		
+		
 		
 		$this->loadModel('PayrollResult');
 		$query=$this->PayrollResult->find('all', array('conditions' => array('employee_id'  => $empid,'pay_component_id'  => $childval['id'],
 											'customer_id' => $this->loggedinuser['customer_id'] ) ))->order(['id' => 'DESC'])->first();
-		(isset($query['pay_component_value']) && ($query['pay_component_value']!=null)) ? $output['last_value']=$query['pay_component_value'] : $output['last_value']=0;
+		// (isset($query['pay_component_value']) && ($query['pay_component_value']!=null)) ? $output['last_value']=$query['pay_component_value'] : $output['last_value']=0;
 		(isset($query['paid_salary']) && ($query['paid_salary']!=null)) ? $output['last_salary']=$query['paid_salary'] : $output['last_salary']=0;
 
 		}
@@ -230,13 +233,13 @@ class CompensationController extends AppController
 				$output['projected_value']=$projectedvalue + (($projectedvalue / 100) * $value);
 			}
 		}
-					
+		(isset($output['last_value'])) ? $output['last_value']+=$projectedvalue : $output['last_value']=$projectedvalue;			
 					
 		$this->loadModel('PayrollResult');
 		$query=$this->PayrollResult->find('all', array('conditions' => array('employee_id'  => $empid,'pay_component_id'  => $paycomponent,
 											'customer_id' => $this->loggedinuser['customer_id'] ) ))->order(['id' => 'DESC'])->first();
-		(isset($query['pay_component_value']) && ($query['pay_component_value']!=null)) ? $output['last_value']=$query['pay_component_value'] : $output['last_value']=0;
-		(isset($query['paid_salary']) && ($query['paid_salary']!=null)) ? $output['last_salary']=$query['paid_salary'] : $output['last_salary']=0;
+		// (isset($query['pay_component_value']) && ($query['pay_component_value']!=null)) ? $output['last_value']=$query['pay_component_value'] : $output['last_value']=0;
+		(isset($query['paid_salary']) && ($query['paid_salary']!=null)) ? $output['last_salary']=$query['paid_salary'] : $output['last_salary']="No data available";
 		return $output;
 	}
 	public function calculateProjectedvalue(){
