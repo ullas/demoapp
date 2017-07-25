@@ -182,13 +182,7 @@
             		</div>
           		</div>
 
-          		<div class="info-box projectedpayoutdiv">
-            		<span class="info-box-icon"><i class="ion ion-ios-pricetag-outline"></i></span>
-            		<div class="info-box-content">
-              			<span class="info-box-text">Salary Payout</span>
-              			<span class="info-box-number projectedpayout"></span>
-            		</div>
-          		</div>
+          		
 
       		</div>
 		</div>
@@ -271,7 +265,7 @@ $(function () {
         	url: '/Compensation/calculateCompensation',
         	data: 'selectedype='+selectedype+"&employee="+employee+"&paycomptype="+paycomptype+"&paycomponent="+paycomponent+"&valuetype="+valuetype+"&value="+value+"&toggleval="+toggleval,
         	success : function(result) {
-        		var outputobj=JSON.parse(result);console.log(outputobj['component_value']);
+        		var outputobj=JSON.parse(result);
         		$(".lasttotal").text(outputobj['last_value']);
         		$(".lastpayout").text(outputobj['last_salary']);
         		$(".projectedtotal").text(outputobj['projected_value']);

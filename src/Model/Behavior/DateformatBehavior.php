@@ -46,7 +46,7 @@ class DateformatBehavior extends Behavior {
 			if($this->dateFormat==1) { 
 			  $fnl=$result[2]. "-" . $result[1] . "-". $result[0 ];
 			}else{
-			   $fnl=$result[2]. "-" . $result[0] . "-". $result[1 ];
+			   $fnl=$result[0]. "-" . $result[1] . "-". $result[2 ];
 			}
 			$entity->set($field,$fnl);
 		  }
