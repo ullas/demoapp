@@ -283,11 +283,7 @@ class CompensationController extends AppController
 				if($query['base_pay_component_type']=="2"){//pay component 
 					$compquery=$payComponentTable->find('all', array('conditions' => array('id'  => $query['base_pay_component_group'],'customer_id' => $this->loggedinuser['customer_id'] ) ))->first();
 					//get pay component value from pay component if null in payrolldata 
-					if($childval['pay_component_value']=="" || $childval['pay_component_value']==null){
-						$lastvalue+=($compquery['pay_component_value'] / 100) * $query['pay_component_value'];
-					}else{
-						$lastvalue+=($compquery['pay_component_value'] / 100) * $childval['pay_component_value'];
-					}
+					(trim($childval['pay_component_value'])=="" || $childval['pay_component_value']==null) ? $lastvalue+=(($compquery['pay_component_value'] / 100) * $query['pay_component_value']) : $lastvalue+=(($compquery['pay_component_value'] / 100) * $childval['pay_component_value']);
 					($compquery['is_earning']=="0") ? $lastvalue=$lastvalue : $lastvalue=-$lastvalue;
 					
 				}else if($query['base_pay_component_type']=="1"){//pay component group
@@ -312,7 +308,7 @@ class CompensationController extends AppController
 					}
 				
 			}else{//amount
-				($childval['pay_component_value']=="" || $childval['pay_component_value']==null) ? $lastvalue+=$query['pay_component_value'] : $result+=$childval['pay_component_value'];
+				($childval['pay_component_value']=="" || $childval['pay_component_value']==null) ? $lastvalue+=$query['pay_component_value'] : $lastvalue+=$childval['pay_component_value'];
 				($query['is_earning']=="0") ? $lastvalue=$lastvalue : $lastvalue=-$lastvalue;
 				
 				//incrementing/decrementing
@@ -361,7 +357,7 @@ class CompensationController extends AppController
 						}
 					}
 					//incrementing/decrementing
-					if($childval['paycomponent']==$paycomponent && $paycomponenttype=="group"){
+					if($childval['paycomponentgroup']==$paycomponent && $paycomponenttype=="group"){
 						if($valuetype=="amount"){
 							($toggleval=="true") ? $outputprojvalue-=$value : $outputprojvalue+=$value;
 						}else if($valuetype=="percentage"){
@@ -369,17 +365,19 @@ class CompensationController extends AppController
 						}
 					}
 				}else{//amount
-					($childval['pay_component_value']=="" || $childval['pay_component_value']==null) ? $lastvalue+=$query['pay_component_value'] : $result+=$childval['pay_component_value'];
+					($childval['pay_component_value']=="" || $childval['pay_component_value']==null) ? $lastvalue+=$query['pay_component_value'] : $lastvalue+=$childval['pay_component_value'];
+					($query['is_earning']=="0") ? $lastvalue=$lastvalue : $lastvalue=-$lastvalue;
 					//incrementing/decrementing
-					if($childval['paycomponent']==$paycomponent && $paycomponenttype=="group"){
+					if($childval['paycomponentgroup']==$paycomponent && $paycomponenttype=="group"){
 						if($valuetype=="amount"){
-							($toggleval=="true") ? $outputprojvalue-=$value : $outputprojvalue+=$value;
+							if($toggleval=="true") { $outputprojvalue-=$value; }else{ ($query['is_earning']=="0") ? $outputprojvalue+=$value : $outputprojvalue-=$value; }
+							
 						}else if($valuetype=="percentage"){
 							($toggleval=="true") ? $outputprojvalue-=(($lastvalue / 100) * $value) : $outputprojvalue+=(($lastvalue / 100) * $value);
 						}
 					}
 				}
-				$result+=$lastvalue;$this->Flash->error(__('The'.json_encode($result)));
+				$result+=$lastvalue;//$this->Flash->error(__('group'.json_encode($lastvalue)));
 			}
 		// }
 		
