@@ -147,11 +147,11 @@ $this->Html->script([
            					weeklyOffProcess();
     					});
 		}else{
-			$('.mptldphc').datepicker({ format:"yyyy/mm/dd",autoclose: true,clearBtn: true,todayHighlight: true }).on('changeDate', function (e) {
+			$('.mptldphc').datepicker({ format:"mm/dd/yyyy",autoclose: true,clearBtn: true,todayHighlight: true }).on('changeDate', function (e) {
            					dateChanged();
            					weeklyOffProcess();
     					});
-    		$('.mptldpvt').datepicker({ format:"yyyy/mm/dd",autoclose: true,clearBtn: true,todayHighlight: true }).on('changeDate', function (e) {
+    		$('.mptldpvt').datepicker({ format:"mm/dd/yyyy",autoclose: true,clearBtn: true,todayHighlight: true }).on('changeDate', function (e) {
            					weeklyOffProcess();
     					});
 		}
@@ -333,7 +333,7 @@ $("#hc-update").click(function(){
 				if(userdf==1){
 					$('.mptldp').datepicker({ format:"dd/mm/yyyy",autoclose: true,clearBtn: true ,todayHighlight: true});
 				}else{
-					$('.mptldp').datepicker({ format:"yyyy/mm/dd",autoclose: true,clearBtn: true,todayHighlight: true });
+					$('.mptldp').datepicker({ format:"mm/dd/yyyy",autoclose: true,clearBtn: true,todayHighlight: true });
 				}
  //set mandatory * after required label	
     $( ':input[required]' ).each( function () {

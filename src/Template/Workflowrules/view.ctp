@@ -190,7 +190,7 @@ table.on( 'row-reorder', function ( e, diff, edit ) {
 		if(userdf==1){
 			$('.mptldp').datepicker({ format:"dd/mm/yyyy",autoclose: true,clearBtn: true,todayHighlight: true });
 		}else{
-			$('.mptldp').datepicker({ format:"yyyy/mm/dd",autoclose: true,clearBtn: true,todayHighlight: true });
+			$('.mptldp').datepicker({ format:"mm/dd/yyyy",autoclose: true,clearBtn: true,todayHighlight: true });
 		}
 	    		//select 2
     			$(".select2").select2({ width: '100%',allowClear: true,placeholder: "Select" });

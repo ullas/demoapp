@@ -123,7 +123,7 @@
              			</div></div></div>
 
              			<div class="col-md-4"><div class="form-group text"><label class="control-label">Value</label>
-             			<div class="input-group"><input type="text" id="value" class="value form-control"></div></div></div>
+             			<div class="input-group"><input type="number" id="value" class="value form-control"></div></div></div>
 
              			<div class="col-md-4"><div class="input-group mt25">
 						<input data-width="100%;" type="checkbox" data-toggle="toggle" id="toggleval" data-off="<i class='fa fa-plus p3'></i> Increment"
