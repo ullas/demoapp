@@ -179,6 +179,8 @@
             		<div class="info-box-content">
               			<span class="info-box-text">Total Wage</span>
               			<span class="info-box-number projectedtotal"></span>
+              			<div class="progress"> <div class="progress-bar projectedtotalprogressbar"></div></div>
+              			<span class="progress-description projectedtotalprogressspan"></span>
             		</div>
           		</div>
 
@@ -270,10 +272,20 @@ $(function () {
         		$(".lastpayout").text(outputobj['last_salary']);
         		$(".projectedtotal").text(outputobj['projected_value']);
         		
+        		var percentagediff; //percentagediff = (outputobj['last_value'] - outputobj['projected_value']) / outputobj['projected_value'] * 100;alert(percentagediff.toFixed(3));
+        		
         		if(outputobj['last_value']>=outputobj['projected_value']){
+        			percentagediff = (outputobj['last_value'] - outputobj['projected_value']) / outputobj['projected_value'] * 100;
+        			$(".projectedtotalprogressspan").text(percentagediff.toFixed(3)+"% Decrease");
+        			$(".projectedtotalprogressbar").css({ width: percentagediff+"%" });
+        			
         			$(".projectedtotaldiv").removeClass("bg-red");$(".projectedtotaldiv").addClass("bg-green");
         			$(".projectedtotalicon").html('<i class="fa fa-caret-down"></i>');
         		}else{
+        			percentagediff = (outputobj['projected_value'] - outputobj['last_value']) / outputobj['projected_value'] * 100;
+        			$(".projectedtotalprogressspan").text(percentagediff.toFixed(3) + "% Increase");
+        			$(".projectedtotalprogressbar").css({ width: percentagediff+"%" });
+        			
         			$(".projectedtotaldiv").removeClass("bg-green");$(".projectedtotaldiv").addClass("bg-red");
         			$(".projectedtotalicon").html('<i class="fa fa-caret-up"></i>');
         		}
