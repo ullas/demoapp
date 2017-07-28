@@ -163,6 +163,7 @@ class CompensationController extends AppController
 											'customer_id' => $this->loggedinuser['customer_id'] ) ))->order(['id' => 'DESC'])->toArray();
 		// foreach($query as $queryval){
 			// $query=$payComponentTable->find('all', array('conditions' => array('id'  => $queryval['paycomponent'], 'customer_id' => $this->loggedinuser['customer_id'] ) ))->first();
+			$totalval=0;
 			foreach($query as $childval){
 				$lastvalue=0;
 				$query=$payComponentTable->find('all', array('conditions' => array('id'  => $childval['paycomponent'], 'customer_id' => $this->loggedinuser['customer_id'] ) ))->first();
@@ -197,16 +198,17 @@ class CompensationController extends AppController
 					$lastvalue=$lastvalue;
 					
 				}
-				//incrementing/decrementing
-					if($childval['paycomponentgroup']==$paycomponent && $paycomponenttype=="group"){
-						if($valuetype=="amount"){
-							if($toggleval=="true") { $outputprojvalue-=$value; }else{ $outputprojvalue+=$value; }
-							
-						}else if($valuetype=="percentage"){
-							($toggleval=="true") ? $outputprojvalue-=(($lastvalue / 100) * $value) : $outputprojvalue+=(($lastvalue / 100) * $value);
-						}
-					}
+
+				if($childval['paycomponentgroup']==$paycomponent && $paycomponenttype=="group"){
+					$totalval+=$lastvalue;
+				}
 				$result+=$lastvalue;//$this->Flash->error(__('group'.json_encode($lastvalue)));
+			}
+			//incrementing/decrementing
+			if($valuetype=="amount"){
+				($toggleval=="true") ? $outputprojvalue-=$value : $outputprojvalue+=$value ; 					
+			}else if($valuetype=="percentage"){
+				($toggleval=="true") ? $outputprojvalue-=(($totalval / 100) * $value) : $outputprojvalue+=(($totalval / 100) * $value);
 			}
 		// }
 		
