@@ -46,7 +46,7 @@
 }
 
 #gridsection{
-  margin-top:33px
+  margin-top:10px
 }
 </style>
 
@@ -66,12 +66,18 @@
 <section class="content" id="gridsection" >
 	
 	<div class="box-tools pull-right"style="margin-bottom:15px;" >
-                <div class="has-feedback">
+		
+		<a class="btn btn-sm btn-success btn-flat mptlascbtn"><i class="fa fa-sort-alpha-asc"></i> </a>
+  		<a class="btn btn-sm btn-success btn-flat mptldescbtn"><i class="fa fa-sort-alpha-desc"></i> </a>
+  		
+                <div class="has-feedback" style="float: left;margin-right: 10px;">
                   <input type="text" id="empsearch"  onkeyup="searchemployee()"  class="form-control input-sm" placeholder="Search...">
                   <span class="glyphicon glyphicon-search form-control-feedback"></span>
                 </div>
+  		
     </div>
-              
+    
+  		              
 	<div id="contentdiv" class="griddiv box box-primary">
 		<?php foreach ($employees as $employee): ?>
 			<div class="col-md-4 col-sm-4 col-xs-12 profile_details" style="display:none;">
@@ -149,6 +155,19 @@ $(function () {
         	$(".profile_details:hidden").slice(0, 10).slideDown();
     	}
 	});
+	
+	$('.mptlascbtn').click(function(){
+		$('#contentdiv .profile_details').sort(function(a, b) {
+ 		 if ($(a).find(".emptitle").text().toUpperCase() < $(b).find(".emptitle").text().toUpperCase()){  return -1; }else{ return 1; }
+		}).appendTo('#contentdiv');
+	});
+	
+	$('.mptldescbtn').click(function(){
+		$('#contentdiv .profile_details').sort(function(a, b) {
+  			if ($(a).find(".emptitle").text().toUpperCase() > $(b).find(".emptitle").text().toUpperCase()){ return -1; }else{ return 1; } 
+  		}).appendTo('#contentdiv');
+	});
+	
 
 });
 
