@@ -270,20 +270,20 @@ $(function () {
         		var outputobj=JSON.parse(result);
         		$(".lasttotal").text(outputobj['last_value']);
         		$(".lastpayout").text(outputobj['last_salary']);
-        		$(".projectedtotal").text(outputobj['projected_value']);
+        		$(".projectedtotal").text(Math.abs(outputobj['projected_value']));
         		
         		var percentagediff; //percentagediff = (outputobj['last_value'] - outputobj['projected_value']) / outputobj['projected_value'] * 100;alert(percentagediff.toFixed(3));
-        		
+        		percentagediff = ((outputobj['last_value'] - outputobj['projected_value']) / outputobj['last_value']) * 100;console.log(percentagediff);console.log(percentagediff.toFixed(3));
+        		percentagediff=Math.abs(percentagediff);
+        			
         		if(outputobj['last_value']>=outputobj['projected_value']){
-        			percentagediff = (outputobj['last_value'] - outputobj['projected_value']) / outputobj['projected_value'] * 100;
-        			$(".projectedtotalprogressspan").text(percentagediff.toFixed(3)+"% Decrease");
+        			$(".projectedtotalprogressspan").text(percentagediff.toFixed(3)+" % Decrease");
         			$(".projectedtotalprogressbar").css({ width: percentagediff+"%" });
         			
         			$(".projectedtotaldiv").removeClass("bg-red");$(".projectedtotaldiv").addClass("bg-green");
         			$(".projectedtotalicon").html('<i class="fa fa-caret-down"></i>');
         		}else{
-        			percentagediff = (outputobj['projected_value'] - outputobj['last_value']) / outputobj['projected_value'] * 100;
-        			$(".projectedtotalprogressspan").text(percentagediff.toFixed(3) + "% Increase");
+        			$(".projectedtotalprogressspan").text(percentagediff.toFixed(3) + " % Increase");
         			$(".projectedtotalprogressbar").css({ width: percentagediff+"%" });
         			
         			$(".projectedtotaldiv").removeClass("bg-green");$(".projectedtotaldiv").addClass("bg-red");

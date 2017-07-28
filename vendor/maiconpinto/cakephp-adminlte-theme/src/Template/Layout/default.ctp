@@ -1,6 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<script>
+    paceOptions = {
+    	ajax: {
+        	trackMethods: ['GET', 'POST']
+    	}
+	}
+  </script>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title><?php echo isset($theme['title']) ? $theme['title'] : 'AdminLTE 2'; ?></title>
