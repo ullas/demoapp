@@ -272,8 +272,8 @@ $(function () {
         		$(".lastpayout").text(outputobj['last_salary']);
         		$(".projectedtotal").text(Math.abs(outputobj['projected_value']));
         		
-        		var percentagediff; //percentagediff = (outputobj['last_value'] - outputobj['projected_value']) / outputobj['projected_value'] * 100;alert(percentagediff.toFixed(3));
-        		percentagediff = ((outputobj['last_value'] - outputobj['projected_value']) / outputobj['last_value']) * 100;console.log(percentagediff);console.log(percentagediff.toFixed(3));
+        		var percentagediff;
+        		percentagediff = ((outputobj['last_value'] - outputobj['projected_value']) / outputobj['last_value']) * 100;
         		percentagediff=Math.abs(percentagediff);
         			
         		if(outputobj['last_value']>=outputobj['projected_value']){

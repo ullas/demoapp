@@ -114,9 +114,9 @@ class CompensationController extends AppController
 		$payrolldataTable = TableRegistry::get('PayrollData');
 		$payComponentTable = TableRegistry::get('PayComponents');
 		
-		$result=0;$outputprojvalue=0;
+		$result=0;$outputprojvalue=0;$projvalue=0;
 		//pay components
-		$query=$payrolldataTable->find('all', array('conditions' => array('empdatabiographies_id'  => $empdatabiographyid,'pay_component_type'  => '1',
+		/*$query=$payrolldataTable->find('all', array('conditions' => array('empdatabiographies_id'  => $empdatabiographyid,'pay_component_type'  => '1',
 											'customer_id' => $this->loggedinuser['customer_id'] ) ))->distinct(['paycomponent'])->toArray();
 		foreach($query as $childval){
 			$lastvalue=0;
@@ -147,7 +147,7 @@ class CompensationController extends AppController
 			
 			}
 			//incrementing/decrementing
-					if($childval['paycomponent']==$paycomponent && $paycomponenttype=="paycomponent"){
+					if($childval['paycomponent']==$paycomponent && $paycomponenttype=="paycomponent"){$this->Flash->error(__('group'.$childval['paycomponentgroup'].'---'.$paycomponent."---".$paycomponenttype));
 						if($valuetype=="amount"){
 							($toggleval=="true") ? $outputprojvalue-=$value : $outputprojvalue+=$value;
 						}else if($valuetype=="percentage"){
@@ -157,62 +157,108 @@ class CompensationController extends AppController
 					
 			$result+=$lastvalue;
 		}
+*/
+
+
 
 		//pay component groups
-		$query=$payrolldataTable->find('all', array('conditions' => array('empdatabiographies_id'  => $empdatabiographyid,'pay_component_type'  => '2',
+		$query=$payrolldataTable->find('all', array('conditions' => array('empdatabiographies_id'  => $empdatabiographyid,
 											'customer_id' => $this->loggedinuser['customer_id'] ) ))->order(['id' => 'DESC'])->toArray();
-		// foreach($query as $queryval){
-			// $query=$payComponentTable->find('all', array('conditions' => array('id'  => $queryval['paycomponent'], 'customer_id' => $this->loggedinuser['customer_id'] ) ))->first();
+		$totalval=0;
 			foreach($query as $childval){
 				$lastvalue=0;
 				$query=$payComponentTable->find('all', array('conditions' => array('id'  => $childval['paycomponent'], 'customer_id' => $this->loggedinuser['customer_id'] ) ))->first();
 			
 				if($query['pay_component_type']=="1"){//percentage
+					
 					if($query['base_pay_component_type']=="2"){//pay component 
-						$compquery=$this->PayComponents->find('all', array('conditions' => array('id'  => $query['base_pay_component_group'],'customer_id' => $this->loggedinuser['customer_id'] ) ))->first();
-						//get pay component value from pay component if null in payrolldata 
-						if($childval['pay_component_value']=="" || $childval['pay_component_value']==null){
-							$lastvalue+=($compquery['pay_component_value'] / 100) * $query['pay_component_value'];
+						$calcvalue=0;
+						$compquery=$payComponentTable->find('all', array('conditions' => array('id'  => $query['base_pay_component_group'],'customer_id' => $this->loggedinuser['customer_id'] ) ))->first();
+						
+						if($query['base_pay_component_group'] == $paycomponent && $paycomponenttype=="paycomponent"){
+							if($valuetype=="amount"){
+								($toggleval=="true") ? $calcvalue+=$compquery['pay_component_value']-$value : $calcvalue+=$compquery['pay_component_value']+$value ; 					
+							}else if($valuetype=="percentage"){
+								($toggleval=="true") ? $calcvalue+=$compquery['pay_component_value']-($compquery['pay_component_value'] / $value) : $calcvalue+=$compquery['pay_component_value']+($compquery['pay_component_value'] / $value);
+							}
 						}else{
-							$lastvalue+=($compquery['pay_component_value'] / 100) * $childval['pay_component_value'];
+							$calcvalue+=$compquery['pay_component_value'];
 						}
-						$lastvalue=$lastvalue;
+						//get pay component value from pay component if null in payrolldata 
+						(trim($childval['pay_component_value'])=="" || $childval['pay_component_value']==null) ? $amount=$query['pay_component_value'] : $amount=$childval['pay_component_value'] ;		
+								
+						$lastvalue+=($compquery['pay_component_value'] / 100) * $amount;
+						$projvalue+=($calcvalue/ 100) * $amount;					//$this->Flash->error(__('Cal '.json_encode($projvalue)."---".$calcvalue));
+					
 					}else if($query['base_pay_component_type']=="1"){//pay component group
 						$Components=$payComponentTable->find('all')->where(['pay_component_group_id' => $query['base_pay_component_group']])->andwhere(['PayComponents.customer_id' => $this->loggedinuser['customer_id']])
 									->order(['"id"' => 'ASC'])->toArray();
-						$tempval=0;
+						$tempval=0;$calcvalue=0;
 						foreach($Components as $compchildval){
 							$tempval+=$compchildval['pay_component_value'];
+							
+							if($compchildval['id'] == $paycomponent && $paycomponenttype=="paycomponent"){
+								if($valuetype=="amount"){
+									($toggleval=="true") ? $calcvalue+=$compchildval['pay_component_value']-$value : $calcvalue+=$compchildval['pay_component_value']+$value ; 					
+								}else if($valuetype=="percentage"){
+									($toggleval=="true") ? $calcvalue+=($compchildval['pay_component_value']-($compchildval['pay_component_value']/$value)) : $calcvalue+=($compchildval['pay_component_value'] + ($compchildval['pay_component_value'] / $value));
+								}
+							}else{
+								$calcvalue+=$compchildval['pay_component_value'];
+							}
+
 						}
+						
+						if($query['base_pay_component_group'] == $paycomponent && $paycomponenttype=="group"){
+							if($valuetype=="amount"){
+								($toggleval=="true") ? $calcvalue+=$tempval-$value : $calcvalue+=$tempval+$value ; 					
+							}else if($valuetype=="percentage"){
+								($toggleval=="true") ? $calcvalue+=($tempval-($tempval/$value)) : $calcvalue+=($tempval+($tempval/$value));
+							}
+						}
+						
 						//get pay component value from pay component if null in payrolldata 
-						if($childval['pay_component_value']=="" || $childval['pay_component_value']==null){
-							$lastvalue+=($tempval / 100) * $query['pay_component_value'];
-						}else{
-							$lastvalue+=($tempval / 100) * $childval['pay_component_value'];
-						}
+						(trim($childval['pay_component_value'])=="" || $childval['pay_component_value']==null) ? $amount=$query['pay_component_value'] : $amount=$childval['pay_component_value'] ;
+						$lastvalue+=($tempval / 100) * $amount;
+						$projvalue+=$calcvalue;
 					}
 					
 				}else{//amount
-					($childval['pay_component_value']=="" || $childval['pay_component_value']==null) ? $lastvalue+=$query['pay_component_value'] : $lastvalue+=$childval['pay_component_value'];
-					$lastvalue=$lastvalue;
-					
+					$amount=0;
+					(trim($childval['pay_component_value'])=="" || $childval['pay_component_value']==null) ? $amount=$query['pay_component_value'] : $amount=$childval['pay_component_value'] ;
+					$lastvalue+=$amount;
+					$projvalue+=$amount;
 				}
-				//incrementing/decrementing
-					if($childval['paycomponentgroup']==$paycomponent && $paycomponenttype=="group"){
+
+				if($childval['paycomponentgroup']==$paycomponent && $paycomponenttype=="group"){
+					$totalval+=$lastvalue;
+				}
+				$result+=$lastvalue;
+				
+				//incrementing/decrementing inside loop for pay component
+					if($childval['paycomponent']==$paycomponent && $paycomponenttype=="paycomponent"){
 						if($valuetype=="amount"){
-							if($toggleval=="true") { $outputprojvalue-=$value; }else{ $outputprojvalue+=$value; }
-							
+							($toggleval=="true") ? $outputprojvalue-=$value : $outputprojvalue+=$value;
 						}else if($valuetype=="percentage"){
 							($toggleval=="true") ? $outputprojvalue-=(($lastvalue / 100) * $value) : $outputprojvalue+=(($lastvalue / 100) * $value);
 						}
 					}
-				$result+=$lastvalue;//$this->Flash->error(__('group'.json_encode($lastvalue)));
+					// $this->Flash->error(__('MPTL '.json_encode($projvalue)));
 			}
+			//incrementing/decrementing outside loop for component group
+			if($valuetype=="amount" && $paycomponenttype=="group"){
+				($toggleval=="true") ? $outputprojvalue-=$value : $outputprojvalue+=$value ; 					
+			}else if($valuetype=="percentage"){
+				($toggleval=="true") ? $outputprojvalue-=(($totalval / 100) * $value) : $outputprojvalue+=(($totalval / 100) * $value);
+			}
+			
+			
+			
 		// }
-		
+		//setting return values
 		$output['last_value']=$result;
-		$output['projected_value']=$result+$outputprojvalue;
-		
+		$output['projected_value']=$projvalue+$outputprojvalue;
+		//getting last paid salary
 		$this->loadModel('PayrollResult');
 		$query=$this->PayrollResult->find('all', array('conditions' => array('employee_id'  => $empid,'customer_id' => $this->loggedinuser['customer_id'] ) ))->order(['id' => 'DESC'])->first();
 		(isset($query['paid_salary']) && ($query['paid_salary']!=null)) ? $output['last_salary']=$query['paid_salary'] : $output['last_salary']="No data available";
