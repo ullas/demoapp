@@ -273,7 +273,7 @@ $(function () {
         		$(".projectedtotal").text(Math.abs(outputobj['projected_value']));
         		
         		var percentagediff;
-        		percentagediff = ((outputobj['last_value'] - outputobj['projected_value']) / outputobj['last_value']) * 100;console.log(outputobj);
+        		percentagediff = ((outputobj['last_value'] - outputobj['projected_value']) / outputobj['last_value']) * 100;
         		percentagediff=Math.abs(percentagediff);
         			
         		if(outputobj['last_value']>=outputobj['projected_value']){
