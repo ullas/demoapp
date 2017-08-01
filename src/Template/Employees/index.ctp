@@ -146,8 +146,8 @@ $(function () {
 	});
 
 	$(window).on('beforeunload', function(){
-  $(window).scrollTop(0);
-});
+  		$(window).scrollTop(0);
+	});
 
 	$(".profile_details").slice(0, 10).show();
 	$(window).bind('scroll', function() {
@@ -157,12 +157,14 @@ $(function () {
 	});
 	
 	$('.mptlascbtn').click(function(){
+		$(".profile_details").show();
 		$('#contentdiv .profile_details').sort(function(a, b) {
  		 if ($(a).find(".emptitle").text().toUpperCase() < $(b).find(".emptitle").text().toUpperCase()){  return -1; }else{ return 1; }
 		}).appendTo('#contentdiv');
 	});
 	
 	$('.mptldescbtn').click(function(){
+		$(".profile_details").show();
 		$('#contentdiv .profile_details').sort(function(a, b) {
   			if ($(a).find(".emptitle").text().toUpperCase() > $(b).find(".emptitle").text().toUpperCase()){ return -1; }else{ return 1; } 
   		}).appendTo('#contentdiv');

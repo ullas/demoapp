@@ -48,12 +48,13 @@
   </ol>
 </section>
 
-<section class="content panel-group" id="accordion" >
-
+<section class="content panel-group">
+<div class="box box-primary">
+      <div class="box-body" id="accordion" >
 
 
 	<?php foreach ($content as $vals) { ?>
-          <div class="panel box box-default mptlpanel" id="<?php echo $vals['empid']; ?>">
+          <div class="panel box box-widget mptlpanel" id="<?php echo $vals['empid']; ?>">
             <div class="box-header with-border">
               <h3 class="box-title"><?php echo $vals['empname']; ?></h3>
               <small><?php echo "PayComponents: ".count($vals['pcchild']);echo ", Pay Component Groups: ".count($vals['pcgroupchild']);?></small>
@@ -140,7 +141,7 @@
               <!-- <h4><?php echo $childval['groupname'];  ?></h4>	 -->
 
 
-         <div class="box box-default" style="margin-bottom:0px;">
+         <div class="box box-widget" style="margin-bottom:0px;">
            <div class="box-header">
              <!-- <h4 class="box-title"><a data-toggle="collapse" data-parent="#accordion<?php echo $vals['empid']; ?>" href="#panel<?php echo $childval['groupid'];  ?>" aria-expanded="false" class="collapsed"> -->
              	<?php echo $childval['groupname'];  ?>
@@ -202,7 +203,8 @@
           <!-- /.box -->
 
     <?php } ?>
-
+</div>
+</div>
 </section>
 <!-- add actions popover -->
 <?php echo $this->element('popoverelmnt'); ?>
