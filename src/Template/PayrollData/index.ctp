@@ -745,7 +745,7 @@ $(function () {
 							if(userdf==1){
 								$('.mptldp').datepicker({ format:"dd/mm/yyyy",autoclose: true,clearBtn: true,todayHighlight: true });
 							}else{
-								$('.mptldp').datepicker({ format:"yyyy/mm/dd",autoclose: true,clearBtn: true,todayHighlight: true });
+								$('.mptldp').datepicker({ format:"mm/dd/yyyy",autoclose: true,clearBtn: true,todayHighlight: true });
 							}
     					}
     				});
@@ -797,7 +797,7 @@ $(function () {
 
 						//date picker
 						if(userdf==1){ $('.mptldp').datepicker({ format:"dd/mm/yyyy",autoclose: true,clearBtn: true,todayHighlight: true }); }
-						else{ $('.mptldp').datepicker({ format:"yyyy/mm/dd",autoclose: true,clearBtn: true,todayHighlight: true }); }
+						else{ $('.mptldp').datepicker({ format:"mm/dd/yyyy",autoclose: true,clearBtn: true,todayHighlight: true }); }
 
 					}else{
 						sweet_alert("Please select a Employee.");
@@ -829,7 +829,7 @@ $(function () {
 				if(userdf==1){
 					$('.mptldp').datepicker({ format:"dd/mm/yyyy",autoclose: true,clearBtn: true,todayHighlight: true });
 				}else{
-					$('.mptldp').datepicker({ format:"yyyy/mm/dd",autoclose: true,clearBtn: true,todayHighlight: true });
+					$('.mptldp').datepicker({ format:"mm/dd/yyyy",autoclose: true,clearBtn: true,todayHighlight: true });
 				}
 	    		//set mandatory * after required label
     			$( ':input[required]' ).each( function () {
@@ -970,6 +970,9 @@ function formattoymd(inputDate) {
         	success : function(data) {
         		if(data=="success"){
     				window.location.reload();
+    			}else if(data=="payrolllocked"){
+    				sweet_alert("Payroll under processing.Please try again.");
+					return false;
     			}else{
     				sweet_alert("Error while removing PayComponent in batch.");
 					return false;
@@ -1018,6 +1021,9 @@ function formattoymd(inputDate) {
         	success : function(data) {
         		if(data=="success"){
     				window.location.reload();
+    			}else if(data=="payrolllocked"){
+    				sweet_alert("Payroll under processing.Please try again.");
+					return false;
     			}else{
     				sweet_alert("Error while removing PayComponentGroup in batch.");
 					return false;
@@ -1045,6 +1051,9 @@ function formattoymd(inputDate) {
         	success : function(data) {
         		if(data=="success"){
     				window.location.reload();
+    			}else if(data=="payrolllocked"){
+    				sweet_alert("Payroll under processing.Please try again.");
+					return false;
     			}else{
     				sweet_alert("Error while deleting the particular employee's Pay Components.Please try again.");
 					return false;

@@ -157,7 +157,7 @@ div#myDropZone {
             //echo $this->Form->input('empdatapersonal.uniqueid',['label' => 'Employer Unique ID']);
             echo $this->Form->input('empdatapersonal.prof_legal',['label' => 'Profession for Legal Reporting']);
             echo $this->Form->input('empdatapersonal.exclude_legal',['label' => 'Exclude from Legal Reporting']);
-            echo $this->Form->input('empdatapersonal.nationality_date', ['value' => !empty($employee->identity->expirydate) ? $employee->identity->expirydate->format($mptldateformat) : '','label' => 'Nationality Acquisition Date','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+            echo $this->Form->input('empdatapersonal.nationality_date', ['value' => !empty($employee->empdatapersonal->nationality_date) ? $employee->empdatapersonal->nationality_date->format($mptldateformat) : '','label' => 'Nationality Acquisition Date','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
             echo $this->Form->input('empdatapersonal.home_airport',['templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-plane"></i></div>']]);
             echo $this->Form->input('empdatapersonal.religion');
             echo $this->Form->input('empdatapersonal.number_children',['label' => 'Number of Children']);
@@ -218,10 +218,10 @@ div#myDropZone {
               <?php
              echo $this->Form->input('jobinfo.pay_group_id', ['label' => 'Pay Group','options'=>$payGroups, 'class'=>'select2', 'empty' => true]);
              echo $this->Form->input('jobinfo.position_id', ['templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-briefcase"></i></div>'],'class'=>'select2','options' => $positions, 'empty' => true]);
-            echo $this->Form->input('jobinfo.position_entry_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+            echo $this->Form->input('jobinfo.position_entry_date', ['value' => !empty($employee->jobinfo->position_entry_date) ? $employee->jobinfo->position_entry_date->format($mptldateformat) : '','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
             echo $this->Form->input('jobinfo.time_in_position');
             echo $this->Form->input('jobinfo.legal_entity_id',['class'=>'select2', 'empty' => true]);
-			      echo $this->Form->input('jobinfo.business_unit_id',['class'=>'select2', 'empty' => true]);
+			echo $this->Form->input('jobinfo.business_unit_id',['class'=>'select2', 'empty' => true]);
             echo $this->Form->input('jobinfo.division_id',['class'=>'select2', 'empty' => true]);
             echo $this->Form->input('jobinfo.department_id',['class'=>'select2', 'empty' => true]);
             echo $this->Form->input('jobinfo.cost_centre_id',['label' => 'Cost Center','class'=>'select2', 'empty' => true]);
@@ -245,13 +245,13 @@ div#myDropZone {
             echo $this->Form->input('jobinfo.shift_factor',['label'=>'Shift Percent']);
             echo $this->Form->input('jobinfo.employee_type');
             echo $this->Form->input('jobinfo.manager_id1',['label'=>'Manager 1']);
-			      echo $this->Form->input('jobinfo.manager_id2',['label'=>'Manager 2']);
-			      echo $this->Form->input('jobinfo.manager_id3',['label'=>'Manager 3']);
-			      echo $this->Form->input('jobinfo.manager_id4',['label'=>'Manager 4']);
-			      echo $this->Form->input('jobinfo.manager_id5',['label'=>'Manager 5']);
+			echo $this->Form->input('jobinfo.manager_id2',['label'=>'Manager 2']);
+			echo $this->Form->input('jobinfo.manager_id3',['label'=>'Manager 3']);
+			echo $this->Form->input('jobinfo.manager_id4',['label'=>'Manager 4']);
+			echo $this->Form->input('jobinfo.manager_id5',['label'=>'Manager 5']);
             echo $this->Form->input('jobinfo.is_cross_border_worker');
             echo $this->Form->input('jobinfo.is_competition_clause_active');
-            echo $this->Form->input('jobinfo.probation_period_end_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+            echo $this->Form->input('jobinfo.probation_period_end_date', ['value' => !empty($employee->jobinfo->probation_period_end_date) ? $employee->jobinfo->probation_period_end_date->format($mptldateformat) : '','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
             echo $this->Form->input('jobinfo.attachmentid',['label'=>'Attachment']);
             echo $this->Form->input('jobinfo.custom_string1',['label'=>'Custom String 1']);
             echo $this->Form->input('jobinfo.eeo_class',['label'=>'EEO Class']);
@@ -280,25 +280,25 @@ div#myDropZone {
             echo $this->Form->input('jobinfo.event');
             echo $this->Form->input('jobinfo.event_reason');
             echo $this->Form->input('jobinfo.notice_period');
-            echo $this->Form->input('jobinfo.expected_return_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+            echo $this->Form->input('jobinfo.expected_return_date', ['value' => !empty($employee->jobinfo->expected_return_date) ? $employee->jobinfo->expected_return_date->format($mptldateformat) : '','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
             echo $this->Form->input('jobinfo.pay_scale_area');
             echo $this->Form->input('jobinfo.pay_scale_type');
             echo $this->Form->input('jobinfo.pay_scale_group');
             echo $this->Form->input('jobinfo.pay_scale_level');
-            echo $this->Form->input('jobinfo.job_entry_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+            echo $this->Form->input('jobinfo.job_entry_date', ['value' => !empty($employee->jobinfo->job_entry_date) ? $employee->jobinfo->job_entry_date->format($mptldateformat) : '','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
             echo $this->Form->input('jobinfo.time_in_job');
-            echo $this->Form->input('jobinfo.company_entry_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+            echo $this->Form->input('jobinfo.company_entry_date', ['value' => !empty($employee->jobinfo->company_entry_date) ? $employee->jobinfo->company_entry_date->format($mptldateformat) : '','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
             echo $this->Form->input('jobinfo.time_in_company');
-            echo $this->Form->input('jobinfo.location_entry_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+            echo $this->Form->input('jobinfo.location_entry_date', ['value' => !empty($employee->jobinfo->location_entry_date) ? $employee->jobinfo->location_entry_date->format($mptldateformat) : '','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
             echo $this->Form->input('jobinfo.time_in_location');
-            echo $this->Form->input('jobinfo.department_entry_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+            echo $this->Form->input('jobinfo.department_entry_date', ['value' => !empty($employee->jobinfo->department_entry_date) ? $employee->jobinfo->department_entry_date->format($mptldateformat) : '','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
             echo $this->Form->input('jobinfo.time_in_department');
-            echo $this->Form->input('jobinfo.pay_scale_level_entry_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+            echo $this->Form->input('jobinfo.pay_scale_level_entry_date', ['value' => !empty($employee->jobinfo->pay_scale_level_entry_date) ? $employee->jobinfo->pay_scale_level_entry_date->format($mptldateformat) : '','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
             echo $this->Form->input('jobinfo.time_in_pay_scale_level');
-            echo $this->Form->input('jobinfo.hire_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
-            echo $this->Form->input('jobinfo.termination_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
-            echo $this->Form->input('jobinfo.leave_of_absence_start_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
-            echo $this->Form->input('jobinfo.leave_of_absence_return_date', ['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+            echo $this->Form->input('jobinfo.hire_date', ['value' => !empty($employee->jobinfo->hire_date) ? $employee->jobinfo->hire_date->format($mptldateformat) : '','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+            echo $this->Form->input('jobinfo.termination_date', ['value' => !empty($employee->jobinfo->termination_date) ? $employee->jobinfo->termination_date->format($mptldateformat) : '','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+            echo $this->Form->input('jobinfo.leave_of_absence_start_date', ['value' => !empty($employee->jobinfo->leave_of_absence_start_date) ? $employee->jobinfo->leave_of_absence_start_date->format($mptldateformat) : '','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+            echo $this->Form->input('jobinfo.leave_of_absence_return_date', ['value' => !empty($employee->jobinfo->leave_of_absence_return_date) ? $employee->jobinfo->leave_of_absence_return_date->format($mptldateformat) : '','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
 
 			echo $this->Form->input('jobinfo.notes',['type'=>'textArea']);
 			 ?></fieldset>
@@ -920,7 +920,7 @@ $(document).ready(function(){
 				if(userdf==1){
 					$('.mptldp').datepicker({ format:"dd/mm/yyyy",autoclose: true,clearBtn: true,todayHighlight: true });
 				}else{
-					$('.mptldp').datepicker({ format:"yyyy/mm/dd",autoclose: true,clearBtn: true,todayHighlight: true });
+					$('.mptldp').datepicker({ format:"mm/dd/yyyy",autoclose: true,clearBtn: true,todayHighlight: true });
 				}
 	    		//select 2
     			$(".select2").select2({ width: '100%',allowClear: true,placeholder: "Select" });
@@ -968,7 +968,7 @@ $(document).ready(function(){
 			if(userdf==1){
 				$('.mptldp').datepicker({ format:"dd/mm/yyyy",autoclose: true,clearBtn: true,todayHighlight: true });
 			}else{
-				$('.mptldp').datepicker({ format:"yyyy/mm/dd",autoclose: true,clearBtn: true,todayHighlight: true });
+				$('.mptldp').datepicker({ format:"mm/dd/yyyy",autoclose: true,clearBtn: true,todayHighlight: true });
 			}
 			
     	});
@@ -985,7 +985,7 @@ $(document).ready(function(){
 			if(userdf==1){
 				$('.mptldp').datepicker({ format:"dd/mm/yyyy",autoclose: true,clearBtn: true,todayHighlight: true });
 			}else{
-				$('.mptldp').datepicker({ format:"yyyy/mm/dd",autoclose: true,clearBtn: true,todayHighlight: true });
+				$('.mptldp').datepicker({ format:"mm/dd/yyyy",autoclose: true,clearBtn: true,todayHighlight: true });
 			}
 			
     	});
@@ -1002,7 +1002,7 @@ $(document).ready(function(){
 			if(userdf==1){
 				$('.mptldp').datepicker({ format:"dd/mm/yyyy",autoclose: true,clearBtn: true,todayHighlight: true });
 			}else{
-				$('.mptldp').datepicker({ format:"yyyy/mm/dd",autoclose: true,clearBtn: true,todayHighlight: true });
+				$('.mptldp').datepicker({ format:"mm/dd/yyyy",autoclose: true,clearBtn: true,todayHighlight: true });
 			}
 			
     	});
@@ -1019,7 +1019,7 @@ $(document).ready(function(){
 			if(userdf==1){
 				$('.mptldp').datepicker({ format:"dd/mm/yyyy",autoclose: true,clearBtn: true,todayHighlight: true });
 			}else{
-				$('.mptldp').datepicker({ format:"yyyy/mm/dd",autoclose: true,clearBtn: true,todayHighlight: true });
+				$('.mptldp').datepicker({ format:"mm/dd/yyyy",autoclose: true,clearBtn: true,todayHighlight: true });
 			}
 			
     	});
@@ -1036,7 +1036,7 @@ $(document).ready(function(){
 			if(userdf==1){
 				$('.mptldp').datepicker({ format:"dd/mm/yyyy",autoclose: true,clearBtn: true,todayHighlight: true });
 			}else{
-				$('.mptldp').datepicker({ format:"yyyy/mm/dd",autoclose: true,clearBtn: true,todayHighlight: true });
+				$('.mptldp').datepicker({ format:"mm/dd/yyyy",autoclose: true,clearBtn: true,todayHighlight: true });
 			}
 			
     	});
@@ -1259,18 +1259,7 @@ $(document).ready(function(){
     }
 }
 
-function formattoymd(inputDate) {
-    var date = new Date(inputDate);
-    if (!isNaN(date.getTime())) {
-        var day = date.getDate().toString();
-        var month = (date.getMonth() + 1).toString();
-        // Months use 0 index.
 
-        return date.getFullYear()  + '/' +
-        (month[1] ? month : '0' + month[0]) + '/' +
-        (day[1] ? day : '0' + day[0]) ;
-    }
-}
     function updateEmployee()
     {	
     	//get input value

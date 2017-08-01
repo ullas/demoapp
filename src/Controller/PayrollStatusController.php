@@ -140,8 +140,8 @@ var $components = array('Datatable');
 
 				$now = new \DateTime();
 
-				$startdate = str_replace('/', '-', $payrolldataarr[$k]['start_date']);
-				$enddate = str_replace('/', '-', $payrolldataarr[$k]['end_date']);
+				$startdate = str_replace('/', '-', $payrolldataarr[$k]['start_date']->format('d/m/Y'));
+				$enddate = str_replace('/', '-', $payrolldataarr[$k]['end_date']->format('d/m/Y'));
 
 				$begin = new \DateTime( $startdate );
 				$end = new \DateTime( $enddate );
@@ -190,8 +190,8 @@ var $components = array('Datatable');
 
 				$now = new \DateTime();
 
-				$startdate = str_replace('/', '-', $empabsencerecarr[$k]['start_date']);
-				$enddate = str_replace('/', '-', $empabsencerecarr[$k]['end_date']);
+				$startdate = str_replace('/', '-', $empabsencerecarr[$k]['start_date']->format('d/m/Y'));
+				$enddate = str_replace('/', '-', $empabsencerecarr[$k]['end_date']->format('d/m/Y'));
 
 				$begin = new \DateTime( $startdate );
 				$end = new \DateTime( $enddate );

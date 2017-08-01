@@ -1,6 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<script>
+    paceOptions = {
+    	ajax: {
+        	trackMethods: ['GET', 'POST']
+    	}
+	}
+  </script>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title><?php echo isset($theme['title']) ? $theme['title'] : 'AdminLTE 2'; ?></title>
@@ -111,10 +118,10 @@
   position: absolute;
   left: 0;
   top: 0;
-  height: 6rem;
-  width: 6rem !important;
-  line-height: 6rem;
-  font-size: 2rem;
+  height: 8rem;
+  width: 8rem !important;
+  line-height: 8rem;
+  font-size: 3rem;
   border-radius: 50%;
   background: #268F70;
   color: #FFFFFF;
@@ -522,16 +529,48 @@ function compareStartEndDate(startdate,enddate) {
 	if(userdf==1){
     	startdate=convertdmytoymd(startdate);
     	enddate=convertdmytoymd(enddate);
+    }else{
+    	startdate=convertmdytoymd(startdate);
+    	enddate=convertmdytoymd(enddate);
     }
+    	
     if(processDate(startdate)>processDate(enddate)){
     	return false;
     }else{
     	return true;
     }
 }
+function formattoymd(inputDate) {
+    var date = new Date(inputDate);
+    if (!isNaN(date.getTime())) {
+        var day = date.getDate().toString();
+        var month = (date.getMonth() + 1).toString();
+        // Months use 0 index.
+
+        return date.getFullYear()  + '/' +
+        (month[1] ? month : '0' + month[0]) + '/' +
+        (day[1] ? day : '0' + day[0]) ;
+    }
+}
+function formattomdy(inputDate) {
+    var date = new Date(inputDate);
+    if (!isNaN(date.getTime())) {
+        var day = date.getDate().toString();
+        var month = (date.getMonth() + 1).toString();
+        // Months use 0 index.
+
+        return (month[1] ? month : '0' + month[0]) + '/' +
+        (day[1] ? day : '0' + day[0])   + '/' + date.getFullYear()
+        ;
+    }
+}
 function processDate(date){
    	var parts = date.split("/");
    	return new Date(parts[0], parts[1] - 1, parts[2]);
+}
+function convertmdytoymd(inputDate) {
+	var datearray = inputDate.split("/");
+	return datearray[2].trim() + '/' + datearray[0].trim() + '/' + datearray[1].trim();
 }
 function convertdmytoymd(inputDate) {
 	var datearray = inputDate.split("/");

@@ -733,7 +733,7 @@ var contentobj;
         			refreshPaygroups();
 
         			$("#"+empid+".statustxt").html("Leave approval validation failed");
-            		sweet_alert("Pending leave approvals for employee "+empid);
+            		// sweet_alert("Pending leave approvals for employee "+empid);
             		return false;
         		}
     		});

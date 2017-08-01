@@ -46,7 +46,7 @@
 }
 
 #gridsection{
-  margin-top:33px
+  margin-top:10px
 }
 </style>
 
@@ -64,13 +64,27 @@
 
 
 <section class="content" id="gridsection" >
+	
+	<div class="box-tools pull-right"style="margin-bottom:15px;" >
+		
+		<a class="btn btn-sm btn-success btn-flat mptlascbtn"><i class="fa fa-sort-alpha-asc"></i> </a>
+  		<a class="btn btn-sm btn-success btn-flat mptldescbtn"><i class="fa fa-sort-alpha-desc"></i> </a>
+  		
+                <div class="has-feedback" style="float: left;margin-right: 10px;">
+                  <input type="text" id="empsearch"  onkeyup="searchemployee()"  class="form-control input-sm" placeholder="Search...">
+                  <span class="glyphicon glyphicon-search form-control-feedback"></span>
+                </div>
+  		
+    </div>
+    
+  		              
 	<div id="contentdiv" class="griddiv box box-primary">
 		<?php foreach ($employees as $employee): ?>
 			<div class="col-md-4 col-sm-4 col-xs-12 profile_details" style="display:none;">
                         <div class="well profile_view" style="width:100%;">
                           <div class="col-sm-12" style="height: 160px; overflow-y:scroll;">
                             <div class="left col-xs-8 text-muted">
-                              <h3><?php echo $employee['empdatapersonal']['first_name']." ".$employee['empdatapersonal']['middle_name']." ".$employee['empdatapersonal']['last_name']; ?></h3>
+                              <h3 class="emptitle"><?php echo $employee['empdatapersonal']['first_name']." ".$employee['empdatapersonal']['middle_name']." ".$employee['empdatapersonal']['last_name']; ?></h3>
                               <p> <?php if(isset($employee['empdatabiography']['position_id'])){ echo $employee['empdatabiography']['position']['name']; }else{ echo "Position"; } ?> </p>
                               <ul class="list-unstyled">
                                 <li><i class="fa fa-building"></i> Address: <?php if(isset($employee['address'])){ echo $employee['address']['address1'];}?><br/>
@@ -141,8 +155,40 @@ $(function () {
         	$(".profile_details:hidden").slice(0, 10).slideDown();
     	}
 	});
+	
+	$('.mptlascbtn').click(function(){
+		$('#contentdiv .profile_details').sort(function(a, b) {
+ 		 if ($(a).find(".emptitle").text().toUpperCase() < $(b).find(".emptitle").text().toUpperCase()){  return -1; }else{ return 1; }
+		}).appendTo('#contentdiv');
+	});
+	
+	$('.mptldescbtn').click(function(){
+		$('#contentdiv .profile_details').sort(function(a, b) {
+  			if ($(a).find(".emptitle").text().toUpperCase() > $(b).find(".emptitle").text().toUpperCase()){ return -1; }else{ return 1; } 
+  		}).appendTo('#contentdiv');
+	});
+	
 
 });
 
+
+function searchemployee(){
+	// $(".mptlpanel").hide();
+	var input = document.getElementById('empsearch');
+    var filter = input.value.toUpperCase();
+
+
+	$('.profile_details').each(function(){
+		// console.log($(this).attr("id"));
+		var selectedcontrol=$(this);
+		var a = $(this).find(".emptitle").text();
+        if (a.toUpperCase().indexOf(filter) > -1) {
+            selectedcontrol.show();
+        } else {
+            selectedcontrol.hide();
+        }
+	});
+
+}
 </script>
 <?php $this->end(); ?>

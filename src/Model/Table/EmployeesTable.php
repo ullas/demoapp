@@ -58,7 +58,7 @@ class EmployeesTable extends Table
         parent::initialize($config);
 
         $this->table('employees');
-        $this->displayField('id');
+        $this->displayField('name');
         $this->primaryKey('id');
 
         $this->belongsTo('Customers', [

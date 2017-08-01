@@ -25,7 +25,27 @@
     </fieldset>
     <div class="box-footer">
     <?=$this->Html->link(__('Cancel'), ['action' => 'index'], ['escape' => false])?>
-    <?= $this->Form->button(__('Save Leave'),['title'=>'Save Leave','class'=>'pull-right']) ?>
+    <?= $this->Form->button(__('Save Leave'),['title'=>'Save Leave','class'=>'mptladd pull-right']) ?>
     </div>
     <?= $this->Form->end() ?>
 </div></div></section>
+
+<?php $this->start('scriptBotton'); ?>
+<script>
+$(function () {
+    $('.mptladd').click(function(e){
+    	var startdate = $("#start-date").val();
+    	var enddate = $("#end-date").val();
+    	if(startdate=="" || startdate==null || enddate=="" || enddate==null){
+    		sweet_alert("Start/End Date missing.");
+			return false;
+    	}
+
+		if(!(compareStartEndDate(startdate,enddate))){
+    		sweet_alert("Please ensure that the End Date is greater than or equal to the Start Date.");
+			return false;
+    	}
+ 	});
+});
+</script>
+<?php $this->end(); ?>

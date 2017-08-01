@@ -285,6 +285,10 @@ var absentsarr=<?php echo $absentsarr ?>;
 var getEvent = []; 
 $.each(absentsarr, function(key, value) {
 
+	var enddate = new Date(value['enddate']);
+	// add a day
+	enddate.setDate(enddate.getDate() + 1);
+	
     // inserting data from database to getEvent array
     var insertEvents = {};
         insertEvents =
@@ -292,7 +296,8 @@ $.each(absentsarr, function(key, value) {
         	id:value['id'],
             title: "Leave Request",
             start: new Date(value['startdate']),
-            end: new Date(value['enddate']),
+            end: enddate,
+            allDay:true
         }
     getEvent.push(insertEvents);
 
@@ -302,6 +307,11 @@ var startdate="";
 var enddate="";
 
 $(function () {
+	
+	
+	
+	
+	
 	$('#togglebutton').show();
 	
 	/* initialize the external events
@@ -370,26 +380,21 @@ $(function () {
         // the last `true` argument determines if the event "sticks" (http://arshaw.com/fullcalendar/docs/event_rendering/renderEvent/)
         $('#calendar').fullCalendar('renderEvent', copiedEventObject, true);
 
-        // is the "remove after drop" checkbox checked?
-        if ($('#drop-remove').is(':checked')) {
-          // if so, remove the element from the "Draggable Events" list
-          $(this).remove();
-        }
+
         
         if(userdf==1){
 			startdate=date.format("DD/MM/YYYY");
         	enddate=date.format("DD/MM/YYYY");
 		}else{
-			startdate=date.format("YYYY/MM/DD");
-        	enddate=date.format("YYYY/MM/DD");
+			startdate=date.format("MM/DD/YYYY");
+        	enddate=date.format("MM/DD/YYYY");
 		}
         
-		$("#actionspopover .modal-body #popoverid").val("alert");
 		$('#actionspopover').modal();
 		// console.log(date.format()+"--"+allDay);
 		
       },
-      eventDrop: function(event, delta, revertFunc) {
+      eventDrop: function(event, delta, revertFunc) {console.log(event);
 
  		if(userdf==1){
 			startdate=event.start.format("DD/MM/YYYY");
@@ -401,20 +406,82 @@ $(function () {
         		enddate=startdate;
         	}
 		}else{
-			startdate=event.start.format("YYYY/MM/DD");
-        	enddate=event.end.format("YYYY/MM/DD");
+			startdate=event.start.format("MM/DD/YYYY");
+			if(event.end!=null && event.end!=""){
+				var tempdate=new Date(event.end.format());
+				tempdate.setDate(tempdate.getDate()-1);
+        		enddate=formattomdy(tempdate);
+			}else{
+				enddate=event.start.format("MM/DD/YYYY");
+			}
+        	
 		}
 		
         $(this).attr("data-id", "1");
-		$('#actionspopover').modal();
+		// $('#actionspopover').modal();
+		$("#editpopover .modal-content #editid").val(event.id);
+		$('#editpopover').modal();
 
       },
       events:getEvent,
       eventColor: '#f39c12',
+      eventClick: function(event, jsEvent, view) {
+
+		if(userdf==1){
+			startdate=event.start.format("DD/MM/YYYY");
+			if(event.end!=null){
+				var tempdate=new Date(event.end.format());
+				tempdate.setDate(tempdate.getDate()-1);
+        		enddate=formattodmy(tempdate);
+        	}else{
+        		enddate=startdate;
+        	}
+		}else{
+			startdate=event.start.format("MM/DD/YYYY");
+			if(event.end!=null && event.end!=""){
+				var tempdate=new Date(event.end.format());
+				tempdate.setDate(tempdate.getDate()-1);
+        		enddate=formattomdy(tempdate);
+			}else{
+				enddate=event.start.format("MM/DD/YYYY");
+			}
+        	
+		}
+		
+        $("#editpopover .modal-content #editid").val(event.id);
+		$('#editpopover').modal();
+
+    },
       eventRender: function(event, element) {
             element.append( "<div style='position:absolute;bottom:0px;right:0px;'><i class='closeon fa fa-1x fa-times'></i></div>" );
-            element.find(".closeon").click(function() {
-               $('#calendar').fullCalendar('removeEvents',event._id);
+            element.find(".closeon").click(function(e) {
+            	e.stopPropagation();
+            	sweet_confirm("MayHaw","Are you sure you want to delete the leave request ?", function(){
+            		
+            		$.ajax({
+        				type: "POST",
+        				url: '/EmployeeAbsencerecords/deleteLeaveRequest',
+        				data: 'id='+event._id,
+        				success : function(data) {
+        					if(data=="success"){
+        						$('#calendar').fullCalendar('removeEvents',event._id);
+        					}else if(data=="payrolllocked"){
+    							sweet_alert("Payroll under processing.Please try again.");
+								return false;
+    						}else{
+    							sweet_alert("Couldn't delete the particular leave request.Please try again.");
+								return false;
+    						}
+    					},
+        				error : function(data) {
+            				sweet_alert("Couldn't delete the particular leave request.Please try again later.");
+            				return false;
+        				}
+    				});
+    		
+               
+               });
+               
             });
       },
       eventResize: function(event,dayDelta, delta, revertFunc) {
@@ -424,13 +491,15 @@ $(function () {
 		// console.log(formattodmy(tempdate));
 		
 		if(userdf==1){
+			startdate=event.start.format("DD/MM/YYYY");
 			enddate=formattodmy(tempdate);
 		}else{
-			enddate=date.format("YYYY/MM/DD");
+        	startdate=event.start.format("MM/DD/YYYY");
+			enddate=formattomdy(tempdate);
 		}
 		
-		$("#actionspopover").attr("name", "2");
-		$('#actionspopover').modal();
+		$("#editpopover .modal-content #editid").val(event.id);
+		$('#editpopover').modal();
 		
 		
         // alert(event.title + " end is now " + event.end.format());
@@ -441,6 +510,9 @@ $(function () {
     } 
 
     });
+    
+    
+    
 
     /* ADDING EVENTS */
     var currColor = "#3c8dbc"; //Red by default
@@ -546,7 +618,7 @@ $(function () {
 
 	$("#actionspopover").on("show.bs.modal", function(e) {
 		//loading icon show
-		if(e.relatedTarget!=null){$('#loadingmessage').show();}console.log($("#actionspopover .modal-body #popoverid").val());
+		if(e.relatedTarget!=null){$('#loadingmessage').show();}console.log(e);
 		var link = $(e.relatedTarget);
 		$(this).find(".modal-body").load("/EmployeeAbsencerecords/add",function( response, status, xhr ){
 			//loading icon hide
@@ -559,16 +631,32 @@ $(function () {
 				$("#start-date").val(startdate);
     			$("#end-date").val(enddate);
     			
-				// if(userdf==1){
-					// $('.mptldp').datepicker({ format:"dd/mm/yyyy",autoclose: true,clearBtn: true,todayHighlight: true });
-				// }else{
-					// $('.mptldp').datepicker({ format:"yyyy/mm/dd",autoclose: true,clearBtn: true,todayHighlight: true });
-				// }
+				if(userdf==1){
+					$('.mptldp').datepicker({ format:"dd/mm/yyyy",autoclose: true,clearBtn: true,todayHighlight: true });
+				}else{
+					$('.mptldp').datepicker({ format:"mm/dd/yyyy",autoclose: true,clearBtn: true,todayHighlight: true });
+				}
 	    		//select 2
     			$(".select2").select2({ width: '100%',allowClear: true,placeholder: "Select" });
     			
+    			$(".mptldp").datepicker().on('show.bs.modal', function(event) {
+					// prevent datepicker from firing bootstrap modal "show.bs.modal"
+					event.stopPropagation();
+				});
     			
-    			
+    			$('.mptladd').click(function(e){
+    				var startdate = $("#start-date").val();
+    				var enddate = $("#end-date").val();
+    				if(startdate=="" || startdate==null || enddate=="" || enddate==null){
+    					sweet_alert("Start/End Date missing.");
+						return false;
+    				}
+
+					if(!(compareStartEndDate(startdate,enddate))){
+    					sweet_alert("Please ensure that the End Date is greater than or equal to the Start Date.");
+						return false;
+    				}
+ 				});
 				//hide popover on button click
 				$( ".popoverDelete" ).click(function() {
 					$('#actionspopover').modal('hide');
@@ -582,7 +670,69 @@ $(function () {
 	  $('.modal-body', this).empty();
 	})
 	
+	
+	
+	$("#editpopover").on("show.bs.modal", function(e) {
+		//loading icon show
+		if(e.relatedTarget!=null){$('#loadingmessage').show();}
+		var link = $(e.relatedTarget);
+		var editid=$("#editpopover .modal-content #editid").val();console.log($("#editpopover .modal-content #editid"));
+		$(this).find(".modal-body").load("/EmployeeAbsencerecords/edit/"+editid,function( response, status, xhr ){
+			//loading icon hide
+			if(e.relatedTarget!=null){$('#loadingmessage').hide();}
+			if ( status == "error" ) {
+				var msg = "Sorry but there was an error.";
+				sweet_alert(msg);
+			}else{
+				$("#start-date").val(startdate);
+    			$("#end-date").val(enddate);
+    			
+				if(userdf==1){
+					$('.mptldp').datepicker({ format:"dd/mm/yyyy",autoclose: true,clearBtn: true,todayHighlight: true });
+				}else{
+					$('.mptldp').datepicker({ format:"mm/dd/yyyy",autoclose: true,clearBtn: true,todayHighlight: true });
+				}
+	    		//select 2
+    			$(".select2").select2({ width: '100%',allowClear: true,placeholder: "Select" });
+    			
+				$(".mptldp").datepicker().on('show.bs.modal', function(event) {
+					// prevent datepicker from firing bootstrap modal "show.bs.modal"
+					event.stopPropagation();
+				});
+				
+				$('.mptlupdate').click(function(e){
+					var startdate = $("#start-date").val();
+    				var enddate = $("#end-date").val();
+    				if(startdate=="" || startdate==null || enddate=="" || enddate==null){
+    					sweet_alert("Start/End Date missing.");
+						return false;
+    				}
+
+					if(!(compareStartEndDate(startdate,enddate))){
+    					sweet_alert("Please ensure that the End Date is greater than or equal to the Start Date.");
+						return false;
+    				}
+				});
+				
+			
+				//hide popover on button click
+				$( ".popoverDelete" ).click(function() {
+					$('#editpopover').modal('hide');
+				});
+			}
+		});
+	});
+
+
+	$('#editpopover').on('hidden.bs.modal', function (e) {
+	  $('.modal-body', this).empty();
+	})
+	
+	
+	
+	
 });
+
 function tableLoaded() {
 	//delete confirm
     $(".delete-btn").click(function(){var dataid=$(this).attr('data-id');
@@ -622,3 +772,20 @@ function formattodmy(inputDate) {
 	}
 </script>
 <?php $this->end(); ?>
+
+
+
+<div class="modal fade" id="editpopover" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+          <div class="modal-content">
+          	<input type="hidden" name="editid" id="editid" value=""/>
+              <div class="modal-body" style="padding:0px;">
+            	
+			  </div>
+			  
+			  
+
+          </div>
+      </div>
+</div>
+

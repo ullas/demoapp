@@ -34,7 +34,7 @@ class DateformatBehavior extends Behavior {
 	   $timestampfields=array();
 	   foreach($columns as $field ){
 	   	  $type=$schema->columnType($field);
-		  if(strcmp($type,'date')==0 && !in_array($field,['created','modified'])){
+		  if(strcmp($type,'date')==0 && !in_array($field,['created','modified','run_date'])){
 		  	 $timestampfields[]=$field;
 		  }
 	   }
@@ -46,7 +46,7 @@ class DateformatBehavior extends Behavior {
 			if($this->dateFormat==1) { 
 			  $fnl=$result[2]. "-" . $result[1] . "-". $result[0 ];
 			}else{
-			   $fnl=$result[2]. "-" . $result[0] . "-". $result[1 ];
+			   $fnl=$result[0]. "-" . $result[1] . "-". $result[2 ];
 			}
 			$entity->set($field,$fnl);
 		  }

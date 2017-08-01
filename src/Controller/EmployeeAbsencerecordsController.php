@@ -16,6 +16,7 @@ class EmployeeAbsencerecordsController extends AppController
    var $components = array('Datatable');
 	public function timesheet()
 	{
+
 		$this->loadModel('JobInfos');
 		$jobinfoarr=$this->JobInfos->find('all',['conditions' => array('employee_id' => $this->request->session()->read('sessionuser')['employee_id'])])->toArray();
 		isset($jobinfoarr[0]) ? $holidaycalid = $jobinfoarr[0]['holiday_calendar_id'] : $holidaycalid = "" ; 
@@ -38,8 +39,8 @@ class EmployeeAbsencerecordsController extends AppController
 										->where("EmployeeAbsencerecords.status=1")->andwhere("EmployeeAbsencerecords.customer_id=".$this->loggedinuser['customer_id'])->toArray();
 		foreach ($empabsencerecarr as $k=>$data) {
 				
-			$startdate = str_replace('/', '-', $empabsencerecarr[$k]['start_date']);
-			$enddate = str_replace('/', '-', $empabsencerecarr[$k]['end_date']);
+			$startdate = str_replace('/', '-', $empabsencerecarr[$k]['start_date']->format('d/m/Y'));
+			$enddate = str_replace('/', '-', $empabsencerecarr[$k]['end_date']->format('d/m/Y'));
 
 			$begin = new \DateTime( $startdate );
 			$end = new \DateTime( $enddate );
@@ -130,12 +131,54 @@ class EmployeeAbsencerecordsController extends AppController
             }
 		}  
     }
+	public function deleteLeaveRequest()
+	{
+		//redirect if payroll locked for processing
+		if(parent::masterLock()){			
+			 $this->Flash->error(__('Payroll under processing.'));
+			 $this->response->body("payrolllocked");
+	    	 return $this->response;	 			 
+		}
+		
+		if($this->request->is('ajax')) {
+			
+			$this->autoRender=false;
+			
+			$employeeAbsencerecord = $this->EmployeeAbsencerecords->get($this->request->data['id']);
+			if($employeeAbsencerecord['customer_id'] == $this->loggedinuser['customer_id']) 
+			{
+        		if ($this->EmployeeAbsencerecords->delete($employeeAbsencerecord)) {
+        						
+					//associated Workflows 
+         			$this->loadModel('Workflows');
+					$workflow = $this->Workflows->get($employeeAbsencerecord["workflow_id"], ['contain' => []]);
+					$workflow = $this->Workflows->patchEntity($workflow, $this->request->data);
+					$workflow['active']="2";	
+            		if ($this->Workflows->save($workflow)) {
+                		$this->response->body("success");
+	    	 			return $this->response;	 
+					}else {
+                		$this->response->body("The employee absencerecord could not be deleted. Please, try again.");
+	    	 			return $this->response;	 
+            		}
+				            	
+        		} else {
+        			$this->response->body("The employee absencerecord could not be deleted. Please, try again.");
+	    	 		return $this->response;	 
+        		}
+			}else{
+	   	    	$this->response->body("authorization error");
+	    	 return $this->response;	 
+	    	}
+		}
+	}
 	public function approveLeaveRequest()
 	{
 		//redirect if payroll locked for processing
 		if(parent::masterLock()){			
 			 $this->Flash->error(__('Payroll under processing.'));
-			 return $this->redirect(['action' => 'index']);			 
+			 $this->response->body("payrolllocked");
+	    	 return $this->response;	 	 
 		}
 		
     	$this->loadModel('Workflows');

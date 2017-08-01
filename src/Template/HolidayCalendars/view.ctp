@@ -16,8 +16,8 @@
             echo $this->Form->input('calendar',['label' => 'Calendar Code','disabled'=>true]);
             echo $this->Form->input('name',['label' => 'Calendar Name','disabled'=>true]);
             echo $this->Form->input('country',['options' => $this->Country->get_countries(), 'empty' => true,'disabled'=>true]);
-            echo $this->Form->input('valid_from', ['label' => 'Valid From Date','class' => 'mptldphc','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled'=>true]);
-            echo $this->Form->input('valid_to', ['label' => 'Valid To Date','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled'=>true]);
+            echo $this->Form->input('valid_from', ['value' => !empty($holidayCalendar->valid_from) ? $holidayCalendar->valid_from->format($mptldateformat) : '','label' => 'Valid From Date','class' => 'mptldphc','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled'=>true]);
+            echo $this->Form->input('valid_to', ['value' => !empty($holidayCalendar->valid_to) ? $holidayCalendar->valid_to->format($mptldateformat) : '','label' => 'Valid To Date','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled'=>true]);
 
         ?>
 
@@ -136,7 +136,7 @@ $this->Html->script([
            					weeklyOffProcess();
     					});
 		}else{
-			$('.mptldphc').datepicker({ format:"yyyy/mm/dd",autoclose: true,clearBtn: true,todayHighlight: true }).on('changeDate', function (e) {
+			$('.mptldphc').datepicker({ format:"mm/dd/yyyy",autoclose: true,clearBtn: true,todayHighlight: true }).on('changeDate', function (e) {
            					dateChanged();
            					weeklyOffProcess();
     					});
@@ -264,7 +264,7 @@ $("#weekoff-ids").change(function(){
 				if(userdf==1){
 					$('.mptldp').datepicker({ format:"dd/mm/yyyy",autoclose: true,clearBtn: true,todayHighlight: true });
 				}else{
-					$('.mptldp').datepicker({ format:"yyyy/mm/dd",autoclose: true,clearBtn: true,todayHighlight: true });
+					$('.mptldp').datepicker({ format:"mm/dd/yyyy",autoclose: true,clearBtn: true,todayHighlight: true });
 				}
 	    		//set mandatory * after required label
     			$( ':input[required]' ).each( function () {
