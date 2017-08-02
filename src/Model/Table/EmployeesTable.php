@@ -12,6 +12,7 @@ use Cake\Datasource\ConnectionManager;
  *
  * @property \Cake\ORM\Association\BelongsTo $Customers
  * @property \Cake\ORM\Association\HasMany $Addresses
+ * @property \Cake\ORM\Association\HasMany $Attendance
  * @property \Cake\ORM\Association\HasMany $ContactInfos
  * @property \Cake\ORM\Association\HasMany $EducationalQualifications
  * @property \Cake\ORM\Association\HasMany $Empdatabiographies
@@ -21,6 +22,8 @@ use Cake\Datasource\ConnectionManager;
  * @property \Cake\ORM\Association\HasMany $Identities
  * @property \Cake\ORM\Association\HasMany $Jobinfos
  * @property \Cake\ORM\Association\HasMany $OfficeAssets
+ * @property \Cake\ORM\Association\HasMany $PayrollResult
+ * @property \Cake\ORM\Association\HasMany $PayrollStatus
  * @property \Cake\ORM\Association\HasMany $Skills
  * @property \Cake\ORM\Association\HasMany $Users
  *
@@ -31,6 +34,8 @@ use Cake\Datasource\ConnectionManager;
  * @method \App\Model\Entity\Employee patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
  * @method \App\Model\Entity\Employee[] patchEntities($entities, array $data, array $options = [])
  * @method \App\Model\Entity\Employee findOrCreate($search, callable $callback = null)
+ *
+ * @mixin \Cake\ORM\Behavior\TimestampBehavior
  */
 class EmployeesTable extends Table
 {
@@ -61,10 +66,15 @@ class EmployeesTable extends Table
         $this->displayField('name');
         $this->primaryKey('id');
 
+        $this->addBehavior('Timestamp');
+
         $this->belongsTo('Customers', [
             'foreignKey' => 'customer_id'
         ]);
         $this->hasOne('Addresses', [
+            'foreignKey' => 'employee_id','dependent' => true
+        ]);
+        $this->hasOne('Attendance', [
             'foreignKey' => 'employee_id','dependent' => true
         ]);
         $this->hasOne('ContactInfos', [
@@ -92,6 +102,12 @@ class EmployeesTable extends Table
             'foreignKey' => 'employee_id','dependent' => true
         ]);
         $this->hasOne('OfficeAssets', [
+            'foreignKey' => 'employee_id','dependent' => true
+        ]);
+        $this->hasOne('PayrollResult', [
+            'foreignKey' => 'employee_id','dependent' => true
+        ]);
+        $this->hasOne('PayrollStatus', [
             'foreignKey' => 'employee_id','dependent' => true
         ]);
         $this->hasOne('Skills', [

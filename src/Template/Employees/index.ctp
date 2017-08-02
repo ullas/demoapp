@@ -161,13 +161,15 @@ $(function () {
 		$('#contentdiv .profile_details').sort(function(a, b) {
  		 if ($(a).find(".emptitle").text().toUpperCase() < $(b).find(".emptitle").text().toUpperCase()){  return -1; }else{ return 1; }
 		}).appendTo('#contentdiv');
+		
 	});
 	
 	$('.mptldescbtn').click(function(){
-		$(".profile_details").show();
+		$(".profile_details").show();//initially show alll employees
 		$('#contentdiv .profile_details').sort(function(a, b) {
   			if ($(a).find(".emptitle").text().toUpperCase() > $(b).find(".emptitle").text().toUpperCase()){ return -1; }else{ return 1; } 
   		}).appendTo('#contentdiv');
+  		
 	});
 	
 
