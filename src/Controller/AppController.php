@@ -24,6 +24,7 @@ use Cake\I18n\Date;
 use Cake\Database\Type;
 use Cake\ORM\TableRegistry;
 use Cake\Datasource\ConnectionManager;
+use Cake\Utility\Inflector;
 
 
 /**
@@ -147,17 +148,15 @@ class AppController extends Controller
 		}else{
 			$this->daytimeFormat=2;
 		}	
-		$table = TableRegistry::get($this->modelClass);	
+		$table = TableRegistry::get($this->modelClass);	//debug($this->modelClass);
 		$table->addBehavior("Dateformat",[$this->daytimeFormat]);
 		
 		
-		//display date 
-		// if($this->daytimeFormat==1){
-			// FrozenDate::setToStringFormat("dd/MM/yyyy"); 
-		// }else{
-			// FrozenDate::setToStringFormat("MM/dd/yyyy"); 
-		// }
-		//
+		//also load datetime behaviour for associated models
+		$assModels=$table->associations()->keys();
+	   	foreach($assModels as $asskeys){
+		   	$table->$asskeys->addBehavior("Dateformat",[$this->daytimeFormat]);
+	   	}
 		
 		
 		if($userrole == "root"){
@@ -256,6 +255,11 @@ class AppController extends Controller
 			$mptldateformat='m/d/Y';
 		}
 		 $this->set('mptldateformat', $mptldateformat);
+		
+		
+		// $table = TableRegistry::get("EmploymentInfos");	//debug($this->modelClass);
+		// $table->addBehavior("Dateformat",[$this->daytimeFormat]);
+		
 		
     	//get position id 
     	$jobinfosTable = TableRegistry::get('JobInfos');	

@@ -25,7 +25,7 @@
 		echo $this->Form->input('effective_status',['label' => 'Status']);
         echo $this->Form->input('effective_start_date',['value' => !empty($payGroup->effective_start_date) ? $payGroup->effective_start_date->format($mptldateformat) : '','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
         echo $this->Form->input('effective_end_date',['value' => !empty($payGroup->effective_end_date) ? $payGroup->effective_end_date->format($mptldateformat) : '','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
-        echo $this->Form->input('earliest_change_date','value' => !empty($payGroup->earliest_change_date) ? $payGroup->earliest_change_date->format($mptldateformat) : '',['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+        echo $this->Form->input('earliest_change_date',['value' => !empty($payGroup->earliest_change_date) ? $payGroup->earliest_change_date->format($mptldateformat) : '','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
         echo $this->Form->input('frequency_id', ['label' => 'Pay Frequency','options' => $frequencies, 'empty' => true,'label'=>'Pay Frequency']);
         echo $this->Form->input('primary_contactid',['label' => 'Primary Contact ID']);
         echo $this->Form->input('primary_contact_email',['templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-envelope"></i></div>']]);
