@@ -82,7 +82,7 @@
 		<?php foreach ($employees as $employee): ?>
 			<div class="col-md-4 col-sm-4 col-xs-12 profile_details" style="display:none;">
                         <div class="well profile_view" style="width:100%;">
-                          <div class="col-sm-12" style="height: 160px; overflow-y:scroll;">
+                          <div class="col-sm-12" style="height: 160px; overflow-y:auto;">
                             <div class="left col-xs-8 text-muted">
                               <h3 class="emptitle"><?php echo $employee['empdatapersonal']['first_name']." ".$employee['empdatapersonal']['middle_name']." ".$employee['empdatapersonal']['last_name']; ?></h3>
                               <p> <?php if(isset($employee['empdatabiography']['position_id'])){ echo $employee['empdatabiography']['position']['name']; }else{ echo "Position"; } ?> </p>
@@ -157,11 +157,14 @@ $(function () {
 	});
 	
 	$('.mptlascbtn').click(function(){
-		$(".profile_details").show();
+		
+		$(".profile_details").show();//initially show alll employees
 		$('#contentdiv .profile_details').sort(function(a, b) {
  		 if ($(a).find(".emptitle").text().toUpperCase() < $(b).find(".emptitle").text().toUpperCase()){  return -1; }else{ return 1; }
 		}).appendTo('#contentdiv');
 		
+		$(".profile_details").hide();//hide all after sorting
+  		$(".profile_details").slice(0, 10).show();//show initial 10
 	});
 	
 	$('.mptldescbtn').click(function(){
@@ -170,6 +173,8 @@ $(function () {
   			if ($(a).find(".emptitle").text().toUpperCase() > $(b).find(".emptitle").text().toUpperCase()){ return -1; }else{ return 1; } 
   		}).appendTo('#contentdiv');
   		
+  		$(".profile_details").hide();//hide all after sorting
+  		$(".profile_details").slice(0, 10).show();//show initial 10
 	});
 	
 

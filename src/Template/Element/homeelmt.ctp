@@ -22,9 +22,11 @@ switch (strtolower($title)) {
 		}
         break;
     case "links":
-        echo "<p><i class='fa fa-pencil'></i>";
-		echo $this->Html->link(' Edit', array('controller' => '','action'=> ''));
-        echo "</p>";
+        echo '<ul class="nav nav-pills nav-stacked">
+                <li><a href="#"><i class="fa fa-user text-green"></i> My Profile</a></li>
+                <li><a href="/Attendance"><i class="fa fa-clock-o text-yellow"></i> Attendance</a></li>
+                <li><a href="/EmployeeAbsencerecords/timesheet"><i class="fa fa-calendar text-light-blue"></i> TimeSheet</a></li>
+              </ul>';
         break;
 	case "adminalerts":
         echo "<p><i class='fa fa-check-circle'> There are no alerts.</i></p>";

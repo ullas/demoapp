@@ -274,7 +274,7 @@ class HolidayCalendarsController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $this->loadModel('HolidayCalendars');
         $holidayCalendar = $this->HolidayCalendars->get($id);
-        if($holiday['customer_id'] == $this->loggedinuser['customer_id']) 
+        if($holidayCalendar['customer_id'] == $this->loggedinuser['customer_id']) 
 		{
 			//initially delete all holidays with the particular calendar id
 			$this->loadModel('Holidays');

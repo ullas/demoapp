@@ -61,7 +61,7 @@
 
 						 <div class="info-box-content">
 							 <span class="info-box-text">New Joinees</span>
-							 <span class="info-box-number">0</span>
+							 <span class="info-box-number"><?php echo $newempcount; ?></span>
 						 </div>
 						 <!-- /.info-box-content -->
 					 </div>

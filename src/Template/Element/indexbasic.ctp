@@ -1,20 +1,6 @@
-<!-- <section class="content-header">
-  <h1>
-    <?php
-    if(isset($title)){
-
-		echo $title;
-    }else{
-
-    	echo $this->request->params['controller'] ;
-    }
-?>
-    <small>List</small>
-  </h1>
-  <ol class="breadcrumb">
-    <?= $this->Html->link('<b>Add</b> &nbsp;&nbsp;'.__('<i class="fa fa-plus"></i>'), ['action' => 'add'],['class' => 'btn btn-sm btn-success btn-flat','escape' => false]) ?>
-  </ol>
-</section> -->
+<style>
+	.row{margin:0px;}/*avoid scrollbar in datatable if not needed*/
+</style>
 <section class="content">
    <?php echo $this->Form->create($this->request->params['controller'],array('class'=>'mptlform','url' => array('controller' => $this->request->params['controller'], 'action' => 'deleteAll')));?>
    	<input type="hidden" value="1"  id="basicfilter"/>
