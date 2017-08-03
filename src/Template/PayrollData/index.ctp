@@ -908,6 +908,9 @@ function checkPayComponentDate(paycomp,startdate,enddate){
 	if(userdf==1){
     	startdate=convertdmytoymd(startdate);
     	enddate=convertdmytoymd(enddate);
+    }else{
+    	startdate=convertmdytoymd(startdate);
+    	enddate=convertmdytoymd(enddate);
     }
 
 	for(var i = 0; i < paycomponentdata.length; i++) {
@@ -921,19 +924,19 @@ function checkPayComponentDate(paycomp,startdate,enddate){
 				paycomponentenddate=paycomponentdata[i]['enddate'].substring(0 , 10);
 				paycomponentenddate=formattoymd(paycomponentenddate);
 			}
-        	// console.log(processDate(paycomponentenddate)+"---"+processDate(enddate));return false;
+        	// console.log((processDate(startdate)<processDate(paycomponentstartdate))+"---"+processDate(paycomponentenddate));//return false;
             if((processDate(startdate)<processDate(paycomponentstartdate)) || (processDate(enddate)>processDate(paycomponentenddate))) { return false;  }else{ return true; }
         }
     }
 }
-function processDate(date){
-   	var parts = date.split("/");
-   	return new Date(parts[0], parts[1] - 1, parts[2]);
-}
-function convertdmytoymd(inputDate) {
-	var datearray = inputDate.split("/");
-	return datearray[2].trim() + '/' + datearray[1].trim() + '/' + datearray[0].trim();
-}
+// function processDate(date){
+   	// var parts = date.split("/");
+   	// return new Date(parts[0], parts[1] - 1, parts[2]);
+// }
+// function convertdmytoymd(inputDate) {
+	// var datearray = inputDate.split("/");
+	// return datearray[2].trim() + '/' + datearray[1].trim() + '/' + datearray[0].trim();
+// }
 function formattoymd(inputDate) {
     	var date = new Date(inputDate);
     	if (!isNaN(date.getTime())) {

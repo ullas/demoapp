@@ -40,7 +40,7 @@
                  
         </div>
 
-        <div class="col-md-9">
+        <div class="col-md-7">
 			<div class="box box-primary">
 				<div class="box-body no-padding">
 					<!-- THE CALENDAR -->
