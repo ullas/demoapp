@@ -177,7 +177,7 @@
 			
 			<section class="content" id="calendarsection"  style="margin-top:20px; display: none;" aria-expanded="true">
 				<div class="row">
-        <div class="col-md-3">
+        <div class="col-md-3 well">
           <div class="box box-solid">
             <div class="box-header with-border">
               <h4 class="box-title">Request a Leave</h4>
@@ -188,6 +188,21 @@
                 <div class="external-event bg-yellow ui-draggable ui-draggable-handle" style="position: relative;">Leave Request</div>
               </div>
                <p class="text-muted"><i class="fa fa-info-circle"></i> Drag & Drop to a particular day to request a leave. </p>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /. box -->
+          
+           <div class="box box-solid">
+            <div class="box-header with-border">
+              <h4 class="box-title">Events</h4>
+            </div>
+            <div class="box-body">
+              <!-- the events -->
+              <div id="external-eventsd">
+                <div class="external-event bg-light-blue">Holidays</div>
+                <div class="external-event bg-red">Absent</div>
+              </div>
             </div>
             <!-- /.box-body -->
           </div>
