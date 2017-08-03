@@ -184,7 +184,13 @@ class HolidaysController extends AppController
 	    {
 	   	    $this->Flash->error(__('You are not authorized'));
 	    }
-		return $this->redirect($this->referer());
+		$actionstring = substr($this->referer(), -3);
+			if($actionstring==="add"){
+				$urlstr = str_replace('add', 'edit/'.$holiday['holiday_calendar_id'], $this->referer());
+				return $this->redirect($urlstr);
+			}else{
+				return $this->redirect($this->referer());
+			}
     }
 	public function deleteAll($id=null){
     	

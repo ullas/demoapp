@@ -1,3 +1,6 @@
+<style>
+	.row{margin:0px;}/*avoid scrollbar in datatable if not needed*/
+</style>
 <?= $this->element('templateelmnt'); ?>
 <section class="content-header">
       <h1>
@@ -396,13 +399,13 @@ function calcWeekOffDays(dDate1, dDate2, dArr) {
     while (date < dDate2) {
     	for (i = 0; i < dArr.length; i++) {
     		if (date.getDay().toString() === dArr[i].toString()){ 
-         		dates.push(toYMD(new Date(date))+"^"+weekday[date.getDay()]);
+         		dates.push(formatDate(new Date(date)).replace(/-/g, "/")+"^"+weekday[date.getDay()]);
         	}
     	}
 
         date.setDate( date.getDate() + 1 );
     }
-
+	date=formatDate(date);
     return dates;
 }
 //format utc date to yyyy/mm/dd
@@ -492,7 +495,7 @@ function weeklyOffProcess(){
     	
 			for(t = 0; t < result.length; t++){
 				var resArr = result[t].toString().split('^');
-				var holidaycode = resArr[0].replace(/-/g, "");
+				var holidaycode = resArr[0].replace(/\//g, "");
 		    	postdata.push(result[t]+"^"+<?php echo $calid ?>+"^"+holidaycode);
   			}
   			

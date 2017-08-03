@@ -10,6 +10,8 @@ use Cake\ORM\Entity;
  * @property int $customer_id
  * @property string $profilepicture
  * @property int $visible
+ * @property \Cake\I18n\Time $created
+ * @property \Cake\I18n\Time $modified
  *
  * @property \App\Model\Entity\Customer $customer
  * @property \App\Model\Entity\Address $address
@@ -21,6 +23,8 @@ use Cake\ORM\Entity;
  * @property \App\Model\Entity\Experience $experience
  * @property \App\Model\Entity\Identity $identity
  * @property \App\Model\Entity\Jobinfo $jobinfo
+ * @property \App\Model\Entity\OfficeAsset $office_asset
+ * @property \App\Model\Entity\Skill $skill
  * @property \App\Model\Entity\User $user
  */
 class Employee extends Entity

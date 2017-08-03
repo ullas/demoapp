@@ -10,6 +10,7 @@ use Cake\Log\Log;
 use Cake\Error\Debugger;
 use Cake\ORM\TableRegistry;
 use Cake\Event\ArrayObject;
+use Cake\Utility\Inflector;
 
 class DateformatBehavior extends Behavior {
 
@@ -22,9 +23,7 @@ class DateformatBehavior extends Behavior {
 		
 		
 	}
-	public function beforeFind(Event $event, Query $query, $options){//debug($event);
-		
-	}
+	
 	public function beforeSave(Event $event, EntityInterface $entity)
     {
        $alias = $event->subject()->alias();
@@ -38,19 +37,45 @@ class DateformatBehavior extends Behavior {
 		  	 $timestampfields[]=$field;
 		  }
 	   }
+	   
 	   foreach($timestampfields as $field){
 	   	  $fvalue= $entity->get($field);
 		  
 		  if(strlen($fvalue)>6){
 		  	$result=explode("/",explode(" ",$fvalue)[0]);
 			if($this->dateFormat==1) { 
-			  $fnl=$result[2]. "-" . $result[1] . "-". $result[0 ];
+			  $fnl=$result[2]. "-" . $result[1] . "-". $result[0];
 			}else{
-			   $fnl=$result[0]. "-" . $result[1] . "-". $result[2 ];
+			   $fnl=$result[0]. "-" . $result[1] . "-". $result[2];
 			}
 			$entity->set($field,$fnl);
 		  }
 	   }
+
+	  /* //get associated table columns
+	   $assModels=$table->associations()->keys();debug($entity);
+	   foreach($assModels as $asskeys){
+		   	$asstable = TableRegistry::get($asskeys);
+	   		$asscolumns=$asstable->schema()->columns();
+	   		$tablename=Inflector::singularize($asstable->table());
+			foreach($asscolumns as $childfield){
+	   	  		$childtype=$asstable->schema()->columnType($childfield);
+		  		if(strcmp($childtype,'date')==0 && !in_array($childfield,['created','modified','run_date'])){		 	
+	   	  			$fvalue= $entity->$tablename->$childfield;	
+		  			if(strlen($fvalue)>6){
+		  				$result=explode("/",explode(" ",$fvalue)[0]);
+						if($this->dateFormat==1) { 
+			  				$fnl=$result[2]. "-" . $result[1] . "-". $result[0];
+						}else{
+			   				$fnl=$result[0]. "-" . $result[1] . "-". $result[2];
+						}
+						$entity->$tablename->set($childfield,$fnl);
+		  			}
+				}
+	   		}
+	   }debug($entity);
+	   */
+
 	  
 	   
     }

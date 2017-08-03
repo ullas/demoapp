@@ -100,8 +100,8 @@
     </div>
     <div class="col-sm-3">
     	<div class="box box-primary direct-chat direct-chat-primary">
-        	<div class="panel-heading">Links</div>
-        	<div class="panel-body"><?= $this->element('homeelmt', array('title' => 'Links')); ?></div>
+        	<div class="box-header with-border">Links</div>
+        	<div class="panel-body no-padding"><?= $this->element('homeelmt', array('title' => 'Links')); ?></div>
         </div>
     </div>
     

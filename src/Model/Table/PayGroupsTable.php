@@ -106,15 +106,15 @@ class PayGroupsTable extends Table
             ->allowEmpty('effective_status');
 
         $validator
-            ->date('effective_start_date')
+            // ->date('effective_start_date')
             ->allowEmpty('effective_start_date');
 
         $validator
-            ->date('effective_end_date')
+            // ->date('effective_end_date')
             ->allowEmpty('effective_end_date');
 
         $validator
-            ->date('earliest_change_date')
+            // ->date('earliest_change_date')
             ->allowEmpty('earliest_change_date');
 
         $validator

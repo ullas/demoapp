@@ -31,6 +31,10 @@ class CompensationController extends AppController
 		$query=$empTable->find('All')->where(['visible'=>'1','customer_id'=>$this->loggedinuser['customer_id']]);
 		(isset($query)) ? $totalempcount=$query->count() : $totalempcount="";
 		
+		$query=$empTable->find('All')->where(['visible'=>'1','customer_id'=>$this->loggedinuser['customer_id']])
+					->andWhere('(EXTRACT(MONTH FROM created) = EXTRACT(month FROM CURRENT_DATE))');
+		(isset($query)) ? $newempcount=$query->count() : $newempcount=0;
+		
 		$query=$payrolldataTable->find('All')->where(['customer_id'=>$this->loggedinuser['customer_id']])->distinct(['empdatabiographies_id']);
 		(isset($query)) ? $payrollheadcount=$query->count() : $payrollheadcount="";
 		  
@@ -51,7 +55,7 @@ class CompensationController extends AppController
 		$this->set('paycomponentarr', json_encode($payComponents));
 		$this->set('paycomponentgrouparr', json_encode($payComponentGroups));
 		
-        $this->set(compact('compensation','totalempcount','payrollheadcount'));
+        $this->set(compact('compensation','totalempcount','payrollheadcount','newempcount'));
         $this->set('_serialize', ['compensation']);
     }
 	public function calculateCompensation(){
@@ -162,8 +166,8 @@ class CompensationController extends AppController
 
 
 		//pay component groups
-		$query=$payrolldataTable->find('all', array('conditions' => array('empdatabiographies_id'  => $empdatabiographyid,
-											'customer_id' => $this->loggedinuser['customer_id'] ) ))->order(['id' => 'DESC'])->toArray();
+		$query=$payrolldataTable->find('all', array('conditions' => array('empdatabiographies_id'  => $empdatabiographyid,'customer_id' => $this->loggedinuser['customer_id'] ) ))
+					->order(['id' => 'DESC'])->toArray();
 		$totalval=0;
 			foreach($query as $childval){
 				$lastvalue=0;
@@ -188,7 +192,7 @@ class CompensationController extends AppController
 						(trim($childval['pay_component_value'])=="" || $childval['pay_component_value']==null) ? $amount=$query['pay_component_value'] : $amount=$childval['pay_component_value'] ;		
 								
 						$lastvalue+=($compquery['pay_component_value'] / 100) * $amount;
-						$projvalue+=($calcvalue/ 100) * $amount;					//$this->Flash->error(__('Cal '.json_encode($projvalue)."---".$calcvalue));
+						$projvalue+=($calcvalue/ 100) * $amount;					
 					
 					}else if($query['base_pay_component_type']=="1"){//pay component group
 						$Components=$payComponentTable->find('all')->where(['pay_component_group_id' => $query['base_pay_component_group']])->andwhere(['PayComponents.customer_id' => $this->loggedinuser['customer_id']])
