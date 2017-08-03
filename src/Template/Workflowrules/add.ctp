@@ -1,3 +1,6 @@
+<style>
+	.row{margin:0px;}/*avoid scrollbar in datatable if not needed*/
+</style>
 <?= $this->element('templateelmnt'); ?>
 <section class="content-header">
       <h1>
