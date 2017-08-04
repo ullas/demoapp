@@ -15,6 +15,7 @@ class PayrollDataController extends AppController
  
     public function index()
     {
+		// $tempdate= date('Y-m-d', strtotime('first day of previous month'));$this->Flash->error(__($tempdate));
 		
         $this->paginate = [
             'contain' => []
@@ -621,19 +622,16 @@ class PayrollDataController extends AppController
             if($row['start_date']!="" && $row['start_date']!=null && $row['end_date']!="" && $row['end_date']!=null){
 				//convert date format		
 				if(isset($userdf)  & $userdf===1){
-					$startdate = \DateTime::createFromFormat('d/m/Y', $row['start_date']);
-					$startdate=date_format($startdate, 'Y/m/d');
-					$enddate = \DateTime::createFromFormat('d/m/Y', $row['end_date']);
-					$enddate=date_format($enddate, 'Y/m/d');
-					
-					$firstdate = \DateTime::createFromFormat('d/m/Y', $this->request->data['startdate']);
-					$firstdate=date_format($firstdate, 'Y/m/d');
-					$lastdate = \DateTime::createFromFormat('d/m/Y', $this->request->data['enddate']);
-					$lastdate=date_format($lastdate, 'Y/m/d');
+					$startdate = $row['start_date']->format('d/m/Y');
+					$enddate = $row['end_date']->format('d/m/Y');
+				
 				}else{
+					$startdate = $row['start_date']->format('m/d/Y');
+					$enddate = $row['end_date']->format('m/d/Y');
+				}
 					$firstdate = $this->request->data['startdate'];
 					$lastdate=$this->request->data['enddate'];
-				}
+				
 				
 			// $this->Flash->error(__('o/p:.'.$startdate.$this->request->data['startdate']));
 			
@@ -676,27 +674,7 @@ class PayrollDataController extends AppController
 			$payrollData['customer_id']=$this->loggedinuser['customer_id'];
 			
 			$userdf = $this->request->session()->read('sessionuser')['dateformat'];
-            if(isset($userdf)  & $userdf===1){
-				foreach (["start_date", "end_date"] as $value) {		
-					if(isset($payrollData[$value])){			
-						if($payrollData[$value]!=null && $payrollData[$value]!='' && strpos($payrollData[$value], '/') !== false){
-							$payrollData[$value] = str_replace('/', '-', $payrollData[$value]);
-							$payrollData[$value]=date('Y/m/d', strtotime($payrollData[$value]));
-						}
-					}
-				}
-			}else{
-				foreach (["start_date", "end_date"] as $value) {		
-					if(isset($payrollData[$value])){			
-						if($payrollData[$value]!=null && $payrollData[$value]!='' && strpos($payrollData[$value], '/') !== false){
-							$payrollData[$value] = str_replace('/', '-', $payrollData[$value]);
-							$payrollData[$value]=date('Y/m/d', strtotime($payrollData[$value]));
-						}
-					}
-				}
-			}
-			
-			
+            
 			//initiallly query  
 			$groupquery=$this->PayrollData->find('all', array('conditions' => array('empdatabiographies_id'  => $payrollData['empdatabiographies_id'],'pay_component_type'  => 2,
 									'paycomponent'  =>$payrollData['paycomponent'],'paycomponentgroup'  => $payrollData['paycomponentgroup'],'customer_id'  => $this->loggedinuser['customer_id']) ));
@@ -712,23 +690,22 @@ class PayrollDataController extends AppController
 			$compquery=$this->PayrollData->find('all', array('conditions' => array('empdatabiographies_id'  => $payrollData['empdatabiographies_id'],'pay_component_type'  => 1,
 									'paycomponent'  =>$payrollData['paycomponent'],'paycomponentgroup'  => $payrollData['paycomponentgroup'],'customer_id'  => $this->loggedinuser['customer_id']) ));
 			
-			foreach ($compquery as $row) {						
+			foreach ($compquery as $row) {			//$this->Flash->error(__('O/P:'.json_encode($row)));			
 			if($row['start_date']!=""  && $row['start_date']!=null && $row['end_date']!="" && $row['end_date']!=null){
 						
 						
 				if(isset($userdf)  & $userdf===1){
-					$startdate = \DateTime::createFromFormat('d/m/Y', $row['start_date']);
-					$startdate=date_format($startdate, 'Y/m/d');
-					$enddate = \DateTime::createFromFormat('d/m/Y', $row['end_date']);
-					$enddate=date_format($enddate, 'Y/m/d');
+					$startdate = $row['start_date']->format('d/m/Y');
+					$enddate = $row['end_date']->format('d/m/Y');
+				
 				}else{
-					$enddate = $row['end_date'];
-					$startdate=$row['start_date'];
+					$startdate = $row['start_date']->format('m/d/Y');
+					$enddate = $row['end_date']->format('m/d/Y');
 				}
-				// $this->Flash->error(__('O/P:'.$payrollData['start_date'].'---'.$enddate));
+				
 			
 							
-				if($payrollData['start_date']<=$startdate || $payrollData['end_date']<=$startdate || $payrollData['start_date']<=$enddate || $payrollData['end_date']<=$enddate){
+				if($payrollData['start_date']<=$enddate || $payrollData['end_date']<=$enddate){
 					$this->response->body("Pay Component exists already in the same period duration(".$startdate."-".$enddate.").Please check and try again.");
 	    			return $this->response;
 				}

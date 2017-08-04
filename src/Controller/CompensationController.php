@@ -163,10 +163,14 @@ class CompensationController extends AppController
 		}
 */
 
-
+		$lastmonthfirstdate= date('Y-m-d', strtotime('first day of previous month'));
+		$lastmonthlastdate= date('Y-m-d', strtotime('last day of previous month'));
 
 		//pay component groups
-		$query=$payrolldataTable->find('all', array('conditions' => array('empdatabiographies_id'  => $empdatabiographyid,'customer_id' => $this->loggedinuser['customer_id'] ) ))
+		$query=$payrolldataTable->find('all', array('conditions' => array('empdatabiographies_id'  => $empdatabiographyid,'customer_id' => $this->loggedinuser['customer_id'],
+					array('start_date <='=>$lastmonthlastdate, 'end_date >=' => $lastmonthfirstdate ),
+					 'end_date >=' => $lastmonthfirstdate, 'start_date <='=>$lastmonthlastdate ) ))
+					// ->andwhere('(start_date <='.$lastmonthlastdate.' and end_date >='.$lastmonthfirstdate.') OR (end_date >='.$lastmonthfirstdate.' and start_date <='.$lastmonthlastdate.')')
 					->order(['id' => 'DESC'])->toArray();
 		$totalval=0;
 			foreach($query as $childval){
@@ -247,7 +251,7 @@ class CompensationController extends AppController
 							($toggleval=="true") ? $outputprojvalue-=(($lastvalue / 100) * $value) : $outputprojvalue+=(($lastvalue / 100) * $value);
 						}
 					}
-					// $this->Flash->error(__('MPTL '.json_encode($projvalue)));
+					
 			}
 			//incrementing/decrementing outside loop for component group
 			if($valuetype=="amount" && $paycomponenttype=="group"){
