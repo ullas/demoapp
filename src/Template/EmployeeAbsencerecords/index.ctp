@@ -18,6 +18,14 @@
 	height:35px;
 	margin-top:34px;
 }
+
+/*differentiate months in calendar*/
+	.fc-months-view .fc-day-number{font-size:15px;font-weight:400;}
+	.fc-months-view .blurredmonth{color: #d2b4de;}
+	.fc-months-view .firstmonth{color: #2eb6c1;}
+	.fc-months-view .secmonth{color: #884ea0;}
+	.fc-months-view .thirdmonth{color: #2eb6c1;}
+/*differentiate months in calendar*/
 </style>
 <?php if($notificationcontent!='' && $notificationcontent!=null && isset($notificationcontent)){  ?>
 <section class="content-header">
@@ -185,7 +193,9 @@
             <div class="box-body">
               <!-- the events -->
               <div id="external-events">
-                <div class="external-event bg-yellow ui-draggable ui-draggable-handle" style="position: relative;">Leave Request</div>
+              	<?php foreach ($timeTypes as $vals) { ?>
+                <div class="external-event bg-yellow ui-draggable ui-draggable-handle" id="<?php echo $vals['id']; ?>"><?php echo $vals['name']; ?></div>
+               <?php } ?>
               </div>
                <p class="text-muted"><i class="fa fa-info-circle"></i> Drag & Drop to a particular day to request a leave. </p>
             </div>
@@ -210,10 +220,12 @@
           
         </div>
         <!-- /.col -->
-        <div class="col-md-9">
+        <div class="col-md-7">
           <div class="box box-primary">
             <div class="box-body no-padding">
               <!-- THE CALENDAR -->
+              
+
               <div id="calendar" class="fc fc-ltr fc-unthemed"></div>
             </div>
             <!-- /.box-body -->
@@ -296,9 +308,23 @@ $this->Html->script([
 <script>
 var userdf=<?php echo $this->request->session()->read('sessionuser')['dateformat'];?>;
 
+var holidaysarr=<?php echo $holidaysarr ?>;
+var holidayevents = [];
+var holidays = [];
+$.each(holidaysarr, function(key, value) {
+	holidays.push(new Date(value).toUTCString());
+});
+// console.log(holidays);
+
 var absentsarr=<?php echo $absentsarr ?>;
-var getEvent = []; 
+var absents = [];
 $.each(absentsarr, function(key, value) {
+	absents.push(new Date(value).toUTCString());
+});
+
+var absentrequestsarr=<?php echo $absentrequestsarr ?>;
+var getEvent = []; 
+$.each(absentrequestsarr, function(key, value) {
 
 	var enddate = new Date(value['enddate']);
 	// add a day
@@ -309,7 +335,7 @@ $.each(absentsarr, function(key, value) {
         insertEvents =
         {
         	id:value['id'],
-            title: "Leave Request",
+            title: value['title'],
             start: new Date(value['startdate']),
             end: enddate,
             allDay:true
@@ -322,9 +348,6 @@ var startdate="";
 var enddate="";
 
 $(function () {
-	
-	
-	
 	
 	
 	$('#togglebutton').show();
@@ -366,8 +389,40 @@ $(function () {
       header: {
         left: 'prev,next today',
         center: 'title',
-        right: 'month'
+        right: 'months,month,agendaWeek,agendaDay'
       },
+      
+      defaultView: 'months',
+      views: {
+        months: {
+            type: 'basic',
+            duration: { months: 3 },
+            buttonText: '3 months'
+        }
+    },
+    eventAfterAllRender: function (view) {
+    	var counter=0;
+        if ($('.fc-day-number').length > 0) {
+            $('.fc-day-number').each(function (i, item) {
+            	var str=item.getAttribute("data-date");var date=new Date(str);  //converts the string into date object
+            	var m=date.getMonth()+1; //get the value of month
+            	var d=date.getDate(); //console.log(d);
+  				
+  				if(d==1){counter++;}
+  				if(counter==1){$(this).addClass('firstmonth');}
+  				else if(counter==2){$(this).addClass('secmonth');}
+  				else if(counter==3){$(this).addClass('thirdmonth');}
+  				else{$(this).addClass('blurredmonth');}
+  				
+    			var monthname=moment(m, 'MM').format('MMM');
+     
+                var title = item.title;
+                item.innerText = d + ' ' + monthname ;
+                // $(this).css('font-size', '14px'); //$(this).css('font-weight', '100');
+            });
+        }
+    },
+    
       buttonText: {
         today: 'today',
         month: 'month',
@@ -466,7 +521,15 @@ $(function () {
         $("#editpopover .modal-content #editid").val(event.id);
 		$('#editpopover').modal();
 
-    },
+    },dayRender: function (date, cell) {
+      	var d = new Date(date);//console.log(d);
+        if ((absents.indexOf(d.toUTCString()) > -1)) {
+            cell.css("background-color", "#dd4b39");
+        }
+        if ((holidays.indexOf(d.toUTCString()) > -1)) {
+            cell.css("background-color", "#3c8dbc");
+        }
+     },
       eventRender: function(event, element) {
             element.append( "<div style='position:absolute;bottom:0px;right:0px;'><i class='closeon fa fa-1x fa-times'></i></div>" );
             element.find(".closeon").click(function(e) {

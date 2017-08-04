@@ -130,8 +130,40 @@ $.each(absentsarr, function(key, value) {
       header: {
         left: 'prev,next today',
         center: 'title',
-        right: 'month,agendaWeek,agendaDay'
+        right: 'months,month,agendaWeek,agendaDay'
       },
+      
+      defaultView: 'months',
+      views: {
+        months: {
+            type: 'basic',
+            duration: { months: 3 },
+            buttonText: '3 months'
+        }
+    },
+    eventAfterAllRender: function (view) {
+    	var counter=0;
+        if ($('.fc-day-number').length > 0) {
+            $('.fc-day-number').each(function (i, item) {
+            	var str=item.getAttribute("data-date");var date=new Date(str);  //converts the string into date object
+            	var m=date.getMonth()+1; //get the value of month
+            	var d=date.getDate(); //console.log(d);
+  				
+  				if(d==1){counter++;}
+  				if(counter==1){$(this).addClass('firstmonth');}
+  				else if(counter==2){$(this).addClass('secmonth');}
+  				else if(counter==3){$(this).addClass('thirdmonth');}
+  				else{$(this).addClass('blurredmonth');}
+  				
+    			var monthname=moment(m, 'MM').format('MMM');
+     
+                var title = item.title;
+                item.innerText = d + ' ' + monthname ;
+                // $(this).css('font-size', '14px'); //$(this).css('font-weight', '100');
+            });
+        }
+    },
+    
       buttonText: {
         today: 'today',
         month: 'month',
@@ -167,7 +199,7 @@ $.each(absentsarr, function(key, value) {
         }
 
       },dayRender: function (date, cell) {
-      	var d = new Date(date);
+      	var d = new Date(date);//console.log(d);
         if ((absents.indexOf(d.toUTCString()) > -1)) {
             cell.css("background-color", "#dd4b39");
         }
