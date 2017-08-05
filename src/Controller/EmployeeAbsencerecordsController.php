@@ -256,7 +256,7 @@ class EmployeeAbsencerecordsController extends AppController
 		$this->set('userdateformat', Configure::read('userdf'));
 
 
-		$absentfields = array();
+		$absentrequestfields = array();
 		$this->loadModel('EmployeeAbsencerecords');
 		$empabsencerecarr=$this->EmployeeAbsencerecords->find('all',['conditions' => array('emp_data_biographies_id' => $this->request->session()->read('sessionuser')['empdatabiographyid'])])
 										->where("EmployeeAbsencerecords.status=0")->andwhere("EmployeeAbsencerecords.customer_id=".$this->loggedinuser['customer_id'])->toArray();
@@ -266,7 +266,11 @@ class EmployeeAbsencerecordsController extends AppController
 			$enddate = $empabsencerecarr[$k]['end_date'];
 	
 			$absid = $empabsencerecarr[$k]['id'];
-		
+			
+			$title = "";
+			$this->loadModel('TimeTypes');
+			$timetypname=$this->TimeTypes->find('all',['conditions' => array('id' => $empabsencerecarr[$k]['time_type_id']), 'contain' => []])->first();
+			$title = $timetypname['name'];
 			// $begin = new \DateTime( $startdate );
 			// $end = new \DateTime( $enddate );
 			// $end->modify('+1 day');
@@ -278,11 +282,63 @@ class EmployeeAbsencerecordsController extends AppController
 				// $dt->setTimezone(new \DateTimeZone('UTC'));
 				// $absentfields[] = array($dt->format('Y-m-dTH:i:s'));	
 			// }		
-			$absentfields[] = array('id'=>$absid,'startdate'=>$startdate, 'enddate'=>$enddate);	
+			$absentrequestfields[] = array('id'=>$absid, 'title'=>$title, 'startdate'=>$startdate, 'enddate'=>$enddate);	
+		}
+			
+		$this->set('absentrequestsarr', json_encode($absentrequestfields));
+		
+		
+		
+		$this->loadModel('JobInfos');
+		$jobinfoarr=$this->JobInfos->find('all',['conditions' => array('employee_id' => $this->request->session()->read('sessionuser')['employee_id'])])->toArray();
+		isset($jobinfoarr[0]) ? $holidaycalid = $jobinfoarr[0]['holiday_calendar_id'] : $holidaycalid = "" ; 
+		
+		$fields = array();
+		if($holidaycalid!="" && $holidaycalid!=null){
+			$this->loadModel('Holidays');
+			$holidaysarr=$this->Holidays->find('all',['conditions' => array('holiday_calendar_id' => $holidaycalid)]);
+		}
+		foreach($holidaysarr as $value){
+            $fields[] = array($value['date']);
+			
+        }
+		$this->set('holidaysarr', json_encode($fields));	//$this->Flash->error(__('The '.json_encode($fields)));	
+		
+		
+		$absentfields = array();
+		$this->loadModel('EmployeeAbsencerecords');
+		$empabsencerecarr=$this->EmployeeAbsencerecords->find('all',['conditions' => array('emp_data_biographies_id' => $this->request->session()->read('sessionuser')['empdatabiographyid'])])
+										->where("EmployeeAbsencerecords.status=1")->andwhere("EmployeeAbsencerecords.customer_id=".$this->loggedinuser['customer_id'])->toArray();
+		foreach ($empabsencerecarr as $k=>$data) {
+				
+			$startdate = str_replace('/', '-', $empabsencerecarr[$k]['start_date']->format('d/m/Y'));
+			$enddate = str_replace('/', '-', $empabsencerecarr[$k]['end_date']->format('d/m/Y'));
+
+			$begin = new \DateTime( $startdate );
+			$end = new \DateTime( $enddate );
+			$end->modify('+1 day');
+
+			$interval = \DateInterval::createFromDateString('1 day');
+			$period = new \DatePeriod($begin, $interval, $end);
+
+			foreach ( $period as $dt ){
+				$dt->setTimezone(new \DateTimeZone('UTC'));
+				$absentfields[] = array($dt->format('Y-m-dTH:i:s'));	
+			}		
 		}
 			
 		$this->set('absentsarr', json_encode($absentfields));
 		
+		
+		$this->loadModel('JobInfos');
+		$arr = $this->JobInfos->find('all',['conditions' => array('employee_id' => $this->request->session()->read('sessionuser')['employee_id'] ), 'contain' => []])->toArray();
+		isset($arr[0]) ? $timetypeprofileid = $arr[0]['time_type_profile_id'] : $timetypeprofileid = "0";  
+		
+        $timeTypes = $this->EmployeeAbsencerecords->TimeTypes->TimeTypeProfileTimeTypes
+        					->find('all', array('fields' => array('id'=>'TimeTypeProfileTimeTypes.time_type_id','name'=> 'TimeTypes.name'),
+    						'contain' => array('TimeTypes'), 'limit' => 200))->where(['time_type_profile_id' => $timetypeprofileid]);
+							
+		$this->set('timeTypes', $timeTypes);
     }
 	 
     /**
