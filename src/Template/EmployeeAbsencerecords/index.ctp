@@ -52,18 +52,18 @@
                         		if(isset($notificationcontent[$x]) && $notificationcontent[$x]!=null){
 
 
-								for ($y = 0; $y < count($notificationcontent[$x]); $y++) {
-								if(isset($notificationcontent[$x][$y]) && $notificationcontent[$x][$y]!=null){
+								// for ($y = 0; $y < count($notificationcontent[$x]); $y++) {
+								// if(isset($notificationcontent[$x]) && $notificationcontent[$x]!=null){
 
-								for ($t = 0; $t < count($notificationcontent[$x][$y]['employee_absencerecords']); $t++) {
-								if(isset($notificationcontent[$x][$y]['employee_absencerecords'][$t]) && $notificationcontent[$x][$y]['employee_absencerecords'][$t]!=null){
+								for ($t = 0; $t < count($notificationcontent[$x]['employee_absencerecords']); $t++) {
+								if(isset($notificationcontent[$x]['employee_absencerecords'][$t]) && $notificationcontent[$x]['employee_absencerecords'][$t]!=null){
 
                         	?>
                         	<div style="border-bottom: 1px solid #f4f4f4;">
 
 							<div class="col-md-12">
 								
-								<?php $picname = str_replace('"', '',$this->Country->get_employeepicture($notificationcontent[$x][$y]['employee_absencerecords'][$t]['emp_data_biographies_id']));
+								<?php $picname = str_replace('"', '',$this->Country->get_employeepicture($notificationcontent[$x]['employee_absencerecords'][$t]['emp_data_biographies_id']));
 								 		if(isset($picname) && ($picname!='')){$picturename=$picname;}
                             				
 											
@@ -74,12 +74,12 @@
 											}
 									?>
 								
-								<a href="javascript:void(0)" class="product-title"><?php $empname = str_replace('"', '',$this->Country->get_employeename($notificationcontent[$x][$y]['employee_absencerecords'][$t]['emp_data_biographies_id']));
+								<a href="javascript:void(0)" class="product-title"><?php $empname = str_replace('"', '',$this->Country->get_employeename($notificationcontent[$x]['employee_absencerecords'][$t]['emp_data_biographies_id']));
                             		echo $empname; ?></a>
 
-                            		<span style="color:#333"> Applied <b><?php $timetype = str_replace('"', '', json_encode($notificationcontent[$x][$y]['employee_absencerecords'][$t]['time_type']['name'])); echo  $timetype; ?></b> for
-                            			<?php  $startdate = $notificationcontent[$x][$y]['employee_absencerecords'][$t]['start_date'];
-                            						$enddate = $notificationcontent[$x][$y]['employee_absencerecords'][$t]['end_date'];
+                            		<span style="color:#333"> Applied <b><?php $timetype = str_replace('"', '', json_encode($notificationcontent[$x]['employee_absencerecords'][$t]['time_type']['name'])); echo  $timetype; ?></b> for
+                            			<?php  $startdate = $notificationcontent[$x]['employee_absencerecords'][$t]['start_date'];
+                            						$enddate = $notificationcontent[$x]['employee_absencerecords'][$t]['end_date'];
 													if(isset($userdateformat)  && $userdateformat===1){
                             							$startdate = str_replace('/', '-', $startdate);
 														$startdate = date('Y/m/d', strtotime($startdate));
@@ -97,8 +97,8 @@
 													}
 										?>
                             			 day(s) from
-                            			<?php echo $notificationcontent[$x][$y]['employee_absencerecords'][$t]['start_date']; ?> to
-										<?php echo $notificationcontent[$x][$y]['employee_absencerecords'][$t]['end_date']; ?>
+                            			<?php echo $notificationcontent[$x]['employee_absencerecords'][$t]['start_date']; ?> to
+										<?php echo $notificationcontent[$x]['employee_absencerecords'][$t]['end_date']; ?>
 
                             		</span>
 								
@@ -111,11 +111,11 @@
 									<label class="control-label" for="description">Comment:</label>
 									</div>
 									<div class="col-md-6">
-                            			<textarea class="form-control" name="comment" id="comment<?php echo $notificationcontent[$x][$y]['employee_absencerecords'][$t]['workflow_id'] ?>" style="height:70px;width:100%;"></textarea>
+                            			<textarea class="form-control" name="comment" id="comment<?php echo $notificationcontent[$x]['employee_absencerecords'][$t]['workflow_id'] ?>" style="height:70px;width:100%;"></textarea>
                             		</div>
                             		<div class="col-md-6" style="height:70px;">
-										<input type="button" value="Reject" class="mptlreject btn btn-danger" id=<?php echo $notificationcontent[$x][$y]['employee_absencerecords'][$t]['workflow_id'] ?>>
-                                		<input type="button" value="Approve" class="mptlapprove btn btn-success" id=<?php echo $notificationcontent[$x][$y]['employee_absencerecords'][$t]['workflow_id'] ?>>							
+										<input type="button" value="Reject" class="mptlreject btn btn-danger" id=<?php echo $notificationcontent[$x]['employee_absencerecords'][$t]['workflow_id'] ?>>
+                                		<input type="button" value="Approve" class="mptlapprove btn btn-success" id=<?php echo $notificationcontent[$x]['employee_absencerecords'][$t]['workflow_id'] ?>>							
 									</div>
                             	</div>								
 							</div>
@@ -127,12 +127,12 @@
                     				<i class="fa fa-3x fa-calendar-minus-o text-aqua"></i>
                   				</div>
                             	<div class="product-info">
-                            		<a href="javascript:void(0)" class="product-title"><?php $empname = str_replace('"', '',$this->Country->get_employeename($notificationcontent[$x][$y]['employee_absencerecords'][$t]['emp_data_biographies_id']));
+                            		<a href="javascript:void(0)" class="product-title"><?php $empname = str_replace('"', '',$this->Country->get_employeename($notificationcontent[$x]['employee_absencerecords'][$t]['emp_data_biographies_id']));
                             		echo $empname; ?>
 
-                            		<span style="color:#333">Applied <b><?php $timetype = str_replace('"', '', json_encode($notificationcontent[$x][$y]['employee_absencerecords'][$t]['time_type']['name'])); echo  $timetype; ?></b> for
-                            			<?php  $startdate = $notificationcontent[$x][$y]['employee_absencerecords'][$t]['start_date'];
-                            						$enddate = $notificationcontent[$x][$y]['employee_absencerecords'][$t]['end_date'];
+                            		<span style="color:#333">Applied <b><?php $timetype = str_replace('"', '', json_encode($notificationcontent[$x]['employee_absencerecords'][$t]['time_type']['name'])); echo  $timetype; ?></b> for
+                            			<?php  $startdate = $notificationcontent[$x]['employee_absencerecords'][$t]['start_date'];
+                            						$enddate = $notificationcontent[$x]['employee_absencerecords'][$t]['end_date'];
 													if(isset($userdateformat)  && $userdateformat===1){
                             							$startdate = str_replace('/', '-', $startdate);
 														$startdate = date('Y/m/d', strtotime($startdate));
@@ -150,8 +150,8 @@
 													}
 										?>
                             			 day(s) from
-                            			<?php echo $notificationcontent[$x][$y]['employee_absencerecords'][$t]['start_date']; ?> to
-										<?php echo $notificationcontent[$x][$y]['employee_absencerecords'][$t]['end_date']; ?>
+                            			<?php echo $notificationcontent[$x]['employee_absencerecords'][$t]['start_date']; ?> to
+										<?php echo $notificationcontent[$x]['employee_absencerecords'][$t]['end_date']; ?>
 
                             		</span>
                             		
@@ -161,11 +161,11 @@
                             	</div>
                             </div>
                             <div class="col-sm-3" style="margin-top:10px">
-                              <input type="button" value="Reject" class="mptlreject btn btn-danger" id=<?php echo $notificationcontent[$x][$y]['employee_absencerecords'][$t]['workflow_id'] ?>>
-                              <input type="button" value="Approve" class="mptlapprove btn btn-success" id=<?php echo $notificationcontent[$x][$y]['employee_absencerecords'][$t]['workflow_id'] ?>>
+                              <input type="button" value="Reject" class="mptlreject btn btn-danger" id=<?php echo $notificationcontent[$x]['employee_absencerecords'][$t]['workflow_id'] ?>>
+                              <input type="button" value="Approve" class="mptlapprove btn btn-success" id=<?php echo $notificationcontent[$x]['employee_absencerecords'][$t]['workflow_id'] ?>>
                             </div>
                             </li> -->
-                            <?php } }  } }  } } ?>
+                            <?php } }    } } ?>
         	</section>
   		</div>
 
@@ -403,7 +403,7 @@ $(function () {
     eventAfterAllRender: function (view) {
     	var counter=0;
         if ($('.fc-day-number').length > 0) {
-            $('.fc-day-number').each(function (i, item) {
+            $('.fc-months-view .fc-day-number').each(function (i, item) {
             	var str=item.getAttribute("data-date");var date=new Date(str);  //converts the string into date object
             	var m=date.getMonth()+1; //get the value of month
             	var d=date.getDate(); //console.log(d);
@@ -432,11 +432,11 @@ $(function () {
       //Random default events
       editable: true,
       droppable: true, // this allows things to be dropped onto the calendar !!!
-      drop: function (date, allDay) { // this function is called when something is dropped
+      drop: function (date, allDay, ui, res) { // this function is called when something is dropped
 
         // retrieve the dropped element's stored Event Object
         var originalEventObject = $(this).data('eventObject');
-
+        
         // we need to copy it, so that multiple events don't have a reference to the same object
         var copiedEventObject = $.extend({}, originalEventObject);
 
@@ -449,8 +449,6 @@ $(function () {
         // render the event on the calendar
         // the last `true` argument determines if the event "sticks" (http://arshaw.com/fullcalendar/docs/event_rendering/renderEvent/)
         $('#calendar').fullCalendar('renderEvent', copiedEventObject, true);
-
-
         
         if(userdf==1){
 			startdate=date.format("DD/MM/YYYY");
@@ -460,7 +458,8 @@ $(function () {
         	enddate=date.format("MM/DD/YYYY");
 		}
         
-		$('#actionspopover').modal();
+        var component=$( this ).attr('id');
+		addleave(startdate,enddate,component);
 		// console.log(date.format()+"--"+allDay);
 		
       },
@@ -487,11 +486,11 @@ $(function () {
         	
 		}
 		
-        $(this).attr("data-id", "1");
+        // $(this).attr("data-id", "1");
 		// $('#actionspopover').modal();
-		$("#editpopover .modal-content #editid").val(event.id);
-		$('#editpopover').modal();
-
+		// $("#editpopover .modal-content #editid").val(event.id);
+		// $('#editpopover').modal();
+		editleave(event.id,startdate,enddate);
       },
       events:getEvent,
       eventColor: '#f39c12',
@@ -518,8 +517,8 @@ $(function () {
         	
 		}
 		
-        $("#editpopover .modal-content #editid").val(event.id);
-		$('#editpopover').modal();
+        // $("#editpopover .modal-content #editid").val(event.id);
+		// $('#editpopover').modal();
 
     },dayRender: function (date, cell) {
       	var d = new Date(date);//console.log(d);
@@ -576,9 +575,9 @@ $(function () {
 			enddate=formattomdy(tempdate);
 		}
 		
-		$("#editpopover .modal-content #editid").val(event.id);
-		$('#editpopover').modal();
-		
+		// $("#editpopover .modal-content #editid").val(event.id);
+		// $('#editpopover').modal();
+		editleave(event.id,startdate,enddate);
 		
         // alert(event.title + " end is now " + event.end.format());
         // if (!confirm("is this okay?")) {
@@ -693,7 +692,7 @@ $(function () {
     	});
 	});
 
-
+/*
 	$("#actionspopover").on("show.bs.modal", function(e) {
 		//loading icon show
 		if(e.relatedTarget!=null){$('#loadingmessage').show();}console.log(e);
@@ -805,7 +804,7 @@ $(function () {
 	$('#editpopover').on('hidden.bs.modal', function (e) {
 	  $('.modal-body', this).empty();
 	})
-	
+	*/
 	
 	
 	
@@ -848,6 +847,63 @@ function formattodmy(inputDate) {
            date.getFullYear();
     	}
 	}
+	
+	
+	
+function addleave(startdate,enddate,component){
+	$.ajax({
+        				type: "POST",
+      					url: '/EmployeeAbsencerecords/addLeave',
+        				data: 'startdate='+startdate+'&enddate='+enddate+'&component='+component,
+        				success : function(data) {
+        					if(data=="success"){
+    							return false;
+    						}else if(data=="payrolllocked"){
+    							sweet_alert("Payroll under processing.Please try again.");
+								return false;
+    						}else{
+    							sweet_alert("Error");
+								return false;
+    						}
+        				},error: function(data) {
+       						sweet_alert("Error while Requesting Leave.");
+							return false;
+
+        				},statusCode: {
+        					500: function() {
+          						sweet_alert("Error while Requesting Leave.Please try again later.");
+								return false;
+        					}
+      					}
+        			});
+}
+function editleave(leaveid,startdate,enddate){
+	$.ajax({
+        				type: "POST",
+      					url: '/EmployeeAbsencerecords/editLeave',
+        				data: 'startdate='+startdate+'&enddate='+enddate+'&leaveid='+leaveid,
+        				success : function(data) {
+        					if(data=="success"){
+    							return false;
+    						}else if(data=="payrolllocked"){
+    							sweet_alert("Payroll under processing.Please try again.");
+								return false;
+    						}else{
+    							sweet_alert(data);console.log(data);
+								return false;
+    						}
+        				},error: function(data) {
+       						sweet_alert("Error while editing Leave Request.");
+							return false;
+
+        				},statusCode: {
+        					500: function() {
+          						sweet_alert("Error while editing Leave Request.Please try again later.");
+								return false;
+        					}
+      					}
+        			});
+}
 </script>
 <?php $this->end(); ?>
 
