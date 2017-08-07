@@ -222,6 +222,123 @@ class EmployeeAbsencerecordsController extends AppController
 		}
 		  
     }
+
+	public function addLeave()
+	{
+		//redirect if payroll locked for processing
+		if(parent::masterLock()){			
+			 $this->Flash->error(__('Payroll under processing.'));
+			 $this->response->body("payrolllocked");
+	    	 return $this->response;	 	 
+		}
+		
+		if($this->request->is('ajax')) {
+				
+			$this->autoRender=false;
+			
+			$this->loadModel('EmployeeAbsencerecords');
+			$employeeAbsencerecord = $this->EmployeeAbsencerecords->newEntity();
+        	
+			$this->loadModel('TimeTypes');
+			$arr = $this->TimeTypes->find('all',['conditions' => array('id' => $this->request->data["component"]), 'contain' => []])->toArray();
+			isset($arr[0]) ? $workflowruleid = $arr[0]['workflowrule_id'] : $workflowruleid = "0";  
+				
+			$this->loadModel('Workflowactions');
+			$query=$this->Workflowactions->find('All')->where (['workflowrule_id' => $workflowruleid])->andwhere(['customer_id'=>$this->loggedinuser['customer_id']]);
+			(isset($query)) ? $workflowactioncount=$query->count() : $workflowactioncount="";
+		  
+			//associated Workflows 
+         	$this->loadModel('Workflows');
+			$workflow = $this->Workflows->newEntity();  
+			$workflow = $this->Workflows->patchEntity($workflow, $this->request->data);
+			$workflow['workflowrule_id']=$workflowruleid;
+			$workflow['currentstep']='1';	
+			if($workflowactioncount!=""){ $workflow['lastaction']=$workflowactioncount; }
+			$workflow['user_id']=$this->request->session()->read('sessionuser')['id'];
+			$workflow['active']="0";				
+			$workflow['customer_id']=$this->loggedinuser['customer_id'];
+			$workflow["emp_data_biographies_id"] = $this->request->session()->read('sessionuser')['empdatabiographyid'] ; 
+            if ($this->Workflows->save($workflow)) {
+            	
+				$this->loadModel('EmployeeAbsencerecords');
+            	$employeeAbsencerecord = $this->EmployeeAbsencerecords->patchEntity($employeeAbsencerecord, $this->request->data);
+				$employeeAbsencerecord['customer_id']=$this->loggedinuser['customer_id'];
+				$employeeAbsencerecord["emp_data_biographies_id"] = $this->request->session()->read('sessionuser')['empdatabiographyid'] ; 
+				$employeeAbsencerecord["created_by"] = $this->request->session()->read('sessionuser')['id'];
+				$employeeAbsencerecord["status"] = "0";
+				$employeeAbsencerecord["time_type_id"] = $this->request->data["component"];
+				$employeeAbsencerecord["start_date"] = $this->request->data["startdate"];
+				$employeeAbsencerecord["end_date"] = $this->request->data["enddate"];
+				$employeeAbsencerecord["workflow_id"] = $workflow['id'];
+            	if ($this->EmployeeAbsencerecords->save($employeeAbsencerecord)) {
+                	$this->response->body("success");
+	    	 		return $this->response;	 
+                } else {
+                	$this->response->body("error");
+	    	 		return $this->response;	 
+            	}	
+            } else {
+                $this->response->body("error");
+	    	 	return $this->response;	 
+            }
+        
+		}
+		  
+    }
+	public function editLeave()
+	{
+		//redirect if payroll locked for processing
+		if(parent::masterLock()){			
+			 $this->Flash->error(__('Payroll under processing.'));
+			 $this->response->body("payrolllocked");
+	    	 return $this->response;	 	 
+		}
+		
+		if($this->request->is('ajax')) {
+				
+			$this->autoRender=false;
+			
+			$this->loadModel('EmployeeAbsencerecords');
+			$employeeAbsencerecord = $this->EmployeeAbsencerecords->get($this->request->data["leaveid"], [ 'contain' => [] ]);
+	
+            $employeeAbsencerecord = $this->EmployeeAbsencerecords->patchEntity($employeeAbsencerecord, $this->request->data);
+			$employeeAbsencerecord["modified_by"] = $this->request->session()->read('sessionuser')['id'] ; 
+			$employeeAbsencerecord["start_date"] = $this->request->data["startdate"];
+			$employeeAbsencerecord["end_date"] = $this->request->data["enddate"];
+			
+            if ($this->EmployeeAbsencerecords->save($employeeAbsencerecord)) {
+            	
+				$this->loadModel('TimeTypes');
+				$arr = $this->TimeTypes->find('all',['conditions' => array('id' => $employeeAbsencerecord["time_type_id"] ), 'contain' => []])->toArray();
+				isset($arr[0]) ? $workflowruleid = $arr[0]['workflowrule_id'] : $workflowruleid = "0";  
+				
+				$this->loadModel('Workflowactions');
+				$query=$this->Workflowactions->find('All')->where (['workflowrule_id' => $workflowruleid])->andwhere(['customer_id'=>$this->loggedinuser['customer_id']]);
+				(isset($query)) ? $workflowactioncount=$query->count() : $workflowactioncount="";
+			
+				//associated Workflows 
+         		$this->loadModel('Workflows');
+				$workflow = $this->Workflows->get($employeeAbsencerecord["workflow_id"], ['contain' => []]);
+				$workflow = $this->Workflows->patchEntity($workflow, $this->request->data);
+				$workflow['workflowrule_id']=$workflowruleid;
+				$workflow['user_id']=$this->request->session()->read('sessionuser')['id'];
+				if($workflowactioncount!=""){ $workflow['lastaction']=$workflowactioncount; }	
+				
+            	if ($this->Workflows->save($workflow)) {
+                	$this->response->body("success");
+	    	 		return $this->response;	
+				}else {
+					
+                	$this->response->body("error");
+	    	 		return $this->response;	
+            	}
+            } else {
+                $this->response->body("error");
+	    	 	return $this->response;	
+            }
+        }
+		  
+    }
     /**
      * Index method
      *
@@ -410,7 +527,7 @@ class EmployeeAbsencerecordsController extends AppController
 			$workflow["emp_data_biographies_id"] = $this->request->session()->read('sessionuser')['empdatabiographyid'] ; 
             if ($this->Workflows->save($workflow)) {
             	
-				$this->loadModel('Workflowactions');
+				$this->loadModel('EmployeeAbsencerecords');
             	$employeeAbsencerecord = $this->EmployeeAbsencerecords->patchEntity($employeeAbsencerecord, $this->request->data);
 				$employeeAbsencerecord['customer_id']=$this->loggedinuser['customer_id'];
 				$employeeAbsencerecord["emp_data_biographies_id"] = $this->request->session()->read('sessionuser')['empdatabiographyid'] ; 

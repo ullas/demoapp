@@ -275,10 +275,13 @@ class AppController extends Controller
 		foreach ($query as $row) {	
 			$workflowsTable = TableRegistry::get('Workflows');
 			$execquery = $workflowsTable->find('All')->where(['workflowrule_id'=>$row['workflowrule_id']])->andwhere(['currentstep'=>$row['stepid']])->andwhere(['Workflows.active'=>"0"])
+								// ->andwhere(['EmployeeAbsencerecords.id IS NOT NULL'])
 								->andwhere(['Workflows.customer_id'=>$this->loggedinuser['customer_id']])->contain(['EmpDataBiographies','EmployeeAbsencerecords'=> ['TimeTypes'],'Workflowrules'])
 								->leftJoin('EmpDataBiographies', 'EmpDataBiographies.workflow_id = Workflows.id')
          						->toArray();
-			if(isset($execquery) && $execquery!=null ) { array_push($lcontent,$execquery); };
+			foreach($execquery as $absquery){
+				if(isset($absquery) && $absquery!=null && isset($absquery['employee_absencerecords']) && ($absquery['employee_absencerecords'])!=null) { array_push($lcontent,$absquery); };
+			}
 			
 		}
 		$this->set('notificationcontent', $lcontent);
