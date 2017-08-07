@@ -12,14 +12,16 @@ if (file_exists($file)) {
 	 for ($x = 0; $x < count($notificationcontent); $x++) { 
      if(isset($notificationcontent[$x]) && $notificationcontent[$x]!=null){                        		
 								
-		for ($y = 0; $y < count($notificationcontent[$x]); $y++) {
-		if(isset($notificationcontent[$x][$y]) && $notificationcontent[$x][$y]!=null){
+		// for ($y = 0; $y < count($notificationcontent[$x]); $y++) {
+		// if(isset($notificationcontent[$x][$y]) && $notificationcontent[$x][$y]!=null){
 									
-			for ($t = 0; $t < count($notificationcontent[$x][$y]['employee_absencerecords']); $t++) {
-			if(isset($notificationcontent[$x][$y]['employee_absencerecords'][$t]) && $notificationcontent[$x][$y]['employee_absencerecords'][$t]!=null){
+			for ($t = 0; $t < count($notificationcontent[$x]['employee_absencerecords']); $t++) {
+			if(isset($notificationcontent[$x]['employee_absencerecords'][$t]) && $notificationcontent[$x]['employee_absencerecords'][$t]!=null){
 									 
-				array_push($leavenotificationarr, $this->Country->get_employeename($notificationcontent[$x][$y]['employee_absencerecords'][$t]['emp_data_biographies_id']));					 
-	} }  } }  } } 
+				array_push($leavenotificationarr, $this->Country->get_employeename($notificationcontent[$x]['employee_absencerecords'][$t]['emp_data_biographies_id']));					 
+			} }  
+	 // } }
+ } } 
 ?>
                             
 <nav class="navbar navbar-static-top" role="navigation">
