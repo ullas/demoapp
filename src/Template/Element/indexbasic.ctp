@@ -11,8 +11,8 @@
       echo $this->element('actions',[$actions,'title'=>$title]);
 	  ?>
      </div>
-  <div class="row">
-        <div class="col-md-12">
+  <div class="mptlrow row">
+        <div class="mptlcol col-md-12">
   <div class="box box-primary">
       <div class="box-body">
 				<button id="togglebutton" type="button" class="btn btn-primary bg-olive btn-sm pull-right" data-toggle="collapse" data-toggle="tooltip" data-target="#infobar"  style="display: none;">
@@ -70,6 +70,7 @@ $this->Html->script([
 
 <?php $this->start('scriptBotton'); ?>
 <script>
+
   var table; var order;
    function deleteRecord(btn){
 

@@ -2,6 +2,7 @@
 .panel-body{
 	height:250px;
 }	
+.knob-label{font-weight: bold;}
 </style>
 
     	
@@ -120,14 +121,62 @@
     </div>
     <div class="col-sm-3">
     	<div class="box box-primary direct-chat direct-chat-primary">
-        	<div class="box-header with-border">My Goals</div>
-        	<div class="panel-body"><?= $this->element('homeelmt', array('title' => 'My Goals')); ?></div>
+        	<div class="box-header with-border">My Admin Favorites</div>
+        	<div class="panel-body"><?= $this->element('homeelmt', array('title' => 'My Leaves')); ?></div>
         </div>
     </div>
     <div class="col-sm-3">
     	<div class="box box-primary direct-chat direct-chat-primary">
-        	<div class="box-header with-border">My Admin Favorites</div>
-        	<div class="panel-body"><?= $this->element('homeelmt', array('title' => 'My Admin Favorites')); ?></div>
+        	<div class="box-header with-border">My Leaves</div>
+        	<div class="panel-body"><!-- <?= $this->element('homeelmt', array('title' => 'My Admin Favorites')); ?> -->
+        		
+        		
+        		
+                    
+                    
+                    <div class="row">
+                <div class="col-sm-6 border-bottom">
+                  <div class="description-block">
+                    <input type="text" class="knob" data-readonly="true" value="3" data-width="60" data-height="60" data-fgColor="#00a65a">
+                  <div class="knob-label text-green">currently available</div>
+                  </div>
+                  <!-- /.description-block -->
+                </div>
+                <!-- /.col -->
+                <div class="col-sm-6 border-bottom">
+                  <div class="description-block ">
+                    <input type="text" class="knob" data-readonly="true" value="0" data-width="60" data-height="60" data-fgColor="#00c0ef">
+                  <div class="knob-label text-light-blue">credited for next year</div>
+                  </div>
+                  <!-- /.description-block -->
+                </div>
+               
+                <!-- /.col -->
+              </div>
+              
+                    <div class="row">
+                <div class="col-sm-6">
+                  <div class="description-block">
+                    <input type="text" class="knob" data-readonly="true" value="3" data-width="60" data-height="60" data-fgColor="#dd4b39">
+                  <div class="knob-label text-red">accured so far</div>
+                  </div>
+                  <!-- /.description-block -->
+                </div>
+                <!-- /.col -->
+                <div class="col-sm-6">
+                  <div class="description-block">
+                    <input type="text" class="knob" data-readonly="true" value="6" data-width="60" data-height="60" data-fgColor="#f39c12">
+                  <div class="knob-label text-yellow">annual allotment</div>
+                  </div>
+                  <!-- /.description-block -->
+                </div>
+               
+                <!-- /.col -->
+              </div>
+                   
+                
+                
+        	</div>
         </div>
     </div>
 
@@ -140,7 +189,11 @@
 
 <?php $this->start('scriptBotton'); ?>
 <script>
+$(".knob").knob();
  jQuery(function($) {
+ 	
+ 	
+ 	
         var panelList = $('#draggablePanelList');
 
         panelList.sortable({

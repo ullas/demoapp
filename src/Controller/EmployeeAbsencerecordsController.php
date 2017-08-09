@@ -339,6 +339,33 @@ class EmployeeAbsencerecordsController extends AppController
         }
 		  
     }
+	public function loadEvents(){
+		$this->autoRender= False;
+		if($this->request->is('ajax')) {
+			
+			$absentrequestfields = array();
+			$this->loadModel('EmployeeAbsencerecords');
+			$empabsencerecarr=$this->EmployeeAbsencerecords->find('all',['conditions' => array('emp_data_biographies_id' => $this->request->session()->read('sessionuser')['empdatabiographyid'])])
+										->where("EmployeeAbsencerecords.status=0")->andwhere("EmployeeAbsencerecords.customer_id=".$this->loggedinuser['customer_id'])->toArray();
+			foreach ($empabsencerecarr as $k=>$data) {
+				
+				$startdate = $empabsencerecarr[$k]['start_date'];
+				$enddate = $empabsencerecarr[$k]['end_date'];
+	
+				$absid = $empabsencerecarr[$k]['id'];
+			
+				$title = "";
+				$this->loadModel('TimeTypes');
+				$timetypname=$this->TimeTypes->find('all',['conditions' => array('id' => $empabsencerecarr[$k]['time_type_id']), 'contain' => []])->first();
+				$title = $timetypname['name'];
+					
+				$absentrequestfields[] = array('id'=>$absid, 'title'=>$title, 'startdate'=>$startdate, 'enddate'=>$enddate);	
+			}
+			
+			$this->response->body(json_encode($absentrequestfields));
+	    		return $this->response;
+		}
+	}
     /**
      * Index method
      *

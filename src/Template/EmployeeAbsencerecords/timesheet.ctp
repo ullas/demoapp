@@ -133,7 +133,7 @@ $.each(absentsarr, function(key, value) {
         right: 'months,month,agendaWeek,agendaDay'
       },
       
-      defaultView: 'months',
+      // defaultView: 'months',
       views: {
         months: {
             type: 'basic',
