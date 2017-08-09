@@ -35,8 +35,8 @@
 <section class="content">
 <div class="nav-tabs-custom">
 	<ul class="nav nav-tabs">
-		<li class="active"><a href="#leaveapproval" data-toggle="tab" aria-expanded="true">Leave Approval</a></li>
-   		<li class=""><a href="#myleaves" data-toggle="tab" aria-expanded="false">My Leaves</a></li>
+		<li id="leaveapprovalli" class="active"><a href="#leaveapproval" data-toggle="tab" aria-expanded="true">Leave Approval</a></li>
+   		<li id="myleavesli" class=""><a href="#myleaves" data-toggle="tab" aria-expanded="false">My Leaves</a></li>
 	</ul>
     <div class="tab-content" >
 
@@ -275,7 +275,13 @@
 
 				</div>
 			</section>
+			
 			<?php echo $this->element('indexbasic', array('title' => 'Leave Requests')); ?>
+			
+			
+			
+			
+			
 			</div>
 <?php if($notificationcontent!='' && $notificationcontent!=null){ ?>
   		</div>
@@ -348,8 +354,24 @@ var startdate="";
 var enddate="";
 
 $(function () {
+
+
+	$(".mptlcol").addClass("col-md-9");$(".mptlcol").addClass("col-md-12");
+	var leavestatushtml='<div class="col-md-3 col-sm-6 col-xs-12"><div class="info-box"><span class="info-box-icon bg-green"><i class="fa fa-calendar-check-o"></i></span>';
+	leavestatushtml+='<div class="info-box-content"><span class="info-box-text">currently available</span><span class="info-box-number">3</span></div></div></div>';
 	
+	leavestatushtml+='<div class="col-md-3 col-sm-6 col-xs-12"><div class="info-box"><span class="info-box-icon bg-light-blue"><i class="fa fa-calendar-plus-o"></i></span>';
+	leavestatushtml+='<div class="info-box-content"><span class="info-box-text">credited for next year</span><span class="info-box-number">0</span></div></div></div>';
 	
+	leavestatushtml+='<div class="col-md-3 col-sm-6 col-xs-12"><div class="info-box"><span class="info-box-icon bg-red"><i class="fa fa-calendar-minus-o"></i></span>';
+	leavestatushtml+='<div class="info-box-content"><span class="info-box-text">accured so far</span><span class="info-box-number">9</span></div></div></div>';
+	
+	leavestatushtml+='<div class="col-md-3 col-sm-6 col-xs-12"><div class="info-box"><span class="info-box-icon bg-yellow"><i class="fa fa-calendar"></i></span>';
+	leavestatushtml+='<div class="info-box-content"><span class="info-box-text">annual allotment</span><span class="info-box-number">12</span></div></div></div>';
+	
+	$(".mptlrow").append(leavestatushtml);
+
+
 	$('#togglebutton').show();
 	
 	/* initialize the external events
@@ -385,6 +407,7 @@ $(function () {
     var d = date.getDate(),
         m = date.getMonth(),
         y = date.getFullYear();
+  
     $('#calendar').fullCalendar({
       header: {
         left: 'prev,next today',
@@ -392,7 +415,7 @@ $(function () {
         right: 'months,month,agendaWeek,agendaDay'
       },
       
-      defaultView: 'months',
+      // defaultView: 'months',
       views: {
         months: {
             type: 'basic',
@@ -490,7 +513,7 @@ $(function () {
 		// $('#actionspopover').modal();
 		// $("#editpopover .modal-content #editid").val(event.id);
 		// $('#editpopover').modal();
-		editleave(event.id,startdate,enddate);
+		editleave(event.id,startdate,enddate,revertFunc);
       },
       events:getEvent,
       eventColor: '#f39c12',
@@ -577,7 +600,7 @@ $(function () {
 		
 		// $("#editpopover .modal-content #editid").val(event.id);
 		// $('#editpopover').modal();
-		editleave(event.id,startdate,enddate);
+		editleave(event.id,startdate,enddate,revertFunc);
 		
         // alert(event.title + " end is now " + event.end.format());
         // if (!confirm("is this okay?")) {
@@ -587,9 +610,8 @@ $(function () {
     } 
 
     });
-    
-    
-    
+	
+	
 
     /* ADDING EVENTS */
     var currColor = "#3c8dbc"; //Red by default
@@ -855,9 +877,10 @@ function addleave(startdate,enddate,component){
         				type: "POST",
       					url: '/EmployeeAbsencerecords/addLeave',
         				data: 'startdate='+startdate+'&enddate='+enddate+'&component='+component,
-        				success : function(data) {
+        				success : function(data) {refreshCalendar();
         					if(data=="success"){
-    							return false;
+        						// refreshCalendar();
+    							// return false;
     						}else if(data=="payrolllocked"){
     							sweet_alert("Payroll under processing.Please try again.");
 								return false;
@@ -865,7 +888,7 @@ function addleave(startdate,enddate,component){
     							sweet_alert("Error");
 								return false;
     						}
-        				},error: function(data) {
+        				},error: function(data) {refreshCalendar();
        						sweet_alert("Error while Requesting Leave.");
 							return false;
 
@@ -877,13 +900,14 @@ function addleave(startdate,enddate,component){
       					}
         			});
 }
-function editleave(leaveid,startdate,enddate){
+function editleave(leaveid,startdate,enddate,revertFunc){
 	$.ajax({
         				type: "POST",
       					url: '/EmployeeAbsencerecords/editLeave',
         				data: 'startdate='+startdate+'&enddate='+enddate+'&leaveid='+leaveid,
-        				success : function(data) {
+        				success : function(data) {refreshCalendar();
         					if(data=="success"){
+        						$('#calendar').fullCalendar('rerenderEvents');
     							return false;
     						}else if(data=="payrolllocked"){
     							sweet_alert("Payroll under processing.Please try again.");
@@ -892,9 +916,9 @@ function editleave(leaveid,startdate,enddate){
     							sweet_alert(data);console.log(data);
 								return false;
     						}
-        				},error: function(data) {
+        				},error: function(data) {refreshCalendar();
        						sweet_alert("Error while editing Leave Request.");
-							return false;
+							// return false;
 
         				},statusCode: {
         					500: function() {
@@ -904,6 +928,44 @@ function editleave(leaveid,startdate,enddate){
       					}
         			});
 }
+	function refreshCalendar(){
+	
+	$('#calendar').fullCalendar('removeEvents');
+	
+		$.ajax({
+        	type: "POST",
+    		url: '/EmployeeAbsencerecords/loadEvents',
+   			success : function(data) {
+
+				var absentrequestsarr=JSON.parse(data);
+				var getEvent = []; 
+				$.each(absentrequestsarr, function(key, value) {
+
+					var enddate = new Date(value['enddate']);
+					// add a day
+					enddate.setDate(enddate.getDate() + 1);
+	
+   					 // inserting data from database to getEvent array
+    				var insertEvents = {};
+        			insertEvents =
+        			{
+        				id:value['id'],
+            			title: value['title'],
+            			start: new Date(value['startdate']),
+           	 			end: enddate,
+           				allDay:true
+        			}
+    				getEvent.push(insertEvents);
+
+				});
+				$("#calendar").fullCalendar( 'addEventSource', getEvent );
+
+        	},error: function(data) {
+       			sweet_alert("Error while fetching events.");
+				return false;
+			}
+        });	
+	}
 </script>
 <?php $this->end(); ?>
 

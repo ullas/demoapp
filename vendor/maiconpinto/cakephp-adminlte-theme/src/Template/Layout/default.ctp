@@ -320,7 +320,7 @@ div.dataTables_wrapper {
 .input-group .select2-hidden-accessible{
 	display:none;
 }
-
+.box .border-bottom{ border-bottom: 1px solid #f4f4f4;}
 /*.form-control{
 	border:0px;
 	border-bottom: 1px solid #ccc;
@@ -343,7 +343,7 @@ div.dataTables_wrapper {
 
 <?php
 $this->Html->script([ 'AdminLTE./plugins/select2/select2.full.min' ], ['block' => 'script']);
-// $this->Html->script([ '/js/weekpicker' ], ['block' => 'script']);
+$this->Html->script([ 'AdminLTE./plugins/knob/jquery.knob' ], ['block' => 'script']);
 $this->Html->script([ 'AdminLTE./plugins/datepicker/bootstrap-datepicker' ], ['block' => 'script']);
 $this->Html->script([ 'AdminLTE./plugins/timepicker/bootstrap-timepicker.min' ], ['block' => 'script']);
 $this->Html->script([ '/js/dropzone' ], ['block' => 'script']);
