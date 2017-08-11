@@ -94,7 +94,6 @@ $this->Html->script([
   $(function () {
 
 
-
   	  //throw javascript console error,instead of throwing alert
   	  $.fn.dataTable.ext.errMode='throw';
 
