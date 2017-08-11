@@ -104,10 +104,10 @@ class AbsenceQuotaController extends AppController
 	public function addempdata($id = null)
     {
     	//redirect if payroll locked for processing
-		if(parent::masterLock()){			
-			 $this->Flash->error(__('Payroll under processing.'));
-			 return $this->redirect(['action' => 'alert']);			 
-		}
+		// if(parent::masterLock()){			
+			 // $this->Flash->error(__('Payroll under processing.'));
+			 // return $this->redirect(['action' => 'alert']);			 
+		// }
 		
         $absenceQuotum = $this->AbsenceQuota->newEntity();
         if ($this->request->is('post')) {
@@ -132,10 +132,10 @@ class AbsenceQuotaController extends AppController
 	public function batchadd(){
 		
 		//redirect if payroll locked for processing
-		if(parent::masterLock()){			
-			 $this->Flash->error(__('Payroll under processing.'));
-			 return $this->redirect(['action' => 'alert']);			 
-		}
+		// if(parent::masterLock()){			
+			 // $this->Flash->error(__('Payroll under processing.'));
+			 // return $this->redirect(['action' => 'alert']);			 
+		// }
 			
 		$absenceQuotum = $this->AbsenceQuota->newEntity();
 		
@@ -176,10 +176,10 @@ class AbsenceQuotaController extends AppController
 	public function addBatchData()
 	{
 		//redirect if payroll locked for processing
-		if(parent::masterLock()){			
-			 $this->Flash->error(__('Payroll under processing.'));
-			 return $this->redirect(['action' => 'alert','controller'=>'PayrollData']);
-		}
+		// if(parent::masterLock()){			
+			 // $this->Flash->error(__('Payroll under processing.'));
+			 // return $this->redirect(['action' => 'alert','controller'=>'PayrollData']);
+		// }
 		
 		if($this->request->is('ajax')) {
 				
@@ -258,11 +258,11 @@ class AbsenceQuotaController extends AppController
 	public function batchdeleteQuota(){
 			
 		//redirect if payroll locked for processing
-		if(parent::masterLock()){			
-			 $this->Flash->error(__('Payroll under processing.'));
-			 $this->response->body("payrolllocked");
-	    	 return $this->response;	 
-		}
+		// if(parent::masterLock()){			
+			 // $this->Flash->error(__('Payroll under processing.'));
+			 // $this->response->body("payrolllocked");
+	    	 // return $this->response;	 
+		// }
 		
 		if($this->request->is('ajax')) {
 
@@ -298,10 +298,10 @@ class AbsenceQuotaController extends AppController
 	public function copyEmployeesQuota(){
 			
 		//redirect if payroll locked for processing
-		if(parent::masterLock()){			
-			 $this->Flash->error(__('Payroll under processing.'));
-			 return $this->redirect(['action' => 'alert','controller'=>'PayrollData']);
-		}
+		// if(parent::masterLock()){			
+			 // $this->Flash->error(__('Payroll under processing.'));
+			 // return $this->redirect(['action' => 'alert','controller'=>'PayrollData']);
+		// }
 
 		if($this->request->is('ajax')) {
 
@@ -361,10 +361,10 @@ class AbsenceQuotaController extends AppController
 	public function batchremove(){
 		
 		//redirect if payroll locked for processing
-		if(parent::masterLock()){			
-			 $this->Flash->error(__('Payroll under processing.'));
-			 return $this->redirect(['action' => 'alert']);			 
-		}
+		// if(parent::masterLock()){			
+			 // $this->Flash->error(__('Payroll under processing.'));
+			 // return $this->redirect(['action' => 'alert']);			 
+		// }
 	
 		$absenceQuotum = $this->AbsenceQuota->newEntity();
 		
@@ -412,10 +412,10 @@ class AbsenceQuotaController extends AppController
 	public function copyempdata($id = null)
     {
     	//redirect if payroll locked for processing
-		if(parent::masterLock()){			
-			 $this->Flash->error(__('Payroll under processing.'));
-			 return $this->redirect(['action' => 'alert']);			 
-		}
+		// if(parent::masterLock()){			
+			 // $this->Flash->error(__('Payroll under processing.'));
+			 // return $this->redirect(['action' => 'alert']);			 
+		// }
 		
 		($this->daytimeFormat==1) ? $mptldateformat='d/m/Y' : $mptldateformat='m/d/Y' ;
 		
@@ -457,10 +457,10 @@ class AbsenceQuotaController extends AppController
 	public function addData()
 	{
 		//redirect if payroll locked for processing
-		if(parent::masterLock()){			
-			 $this->Flash->error(__('Payroll under processing.'));
-			 return $this->redirect(['action' => 'alert','controller'=>'PayrollData']);
-		}
+		// if(parent::masterLock()){			
+			 // $this->Flash->error(__('Payroll under processing.'));
+			 // return $this->redirect(['action' => 'alert','controller'=>'PayrollData']);
+		// }
 		
 		if($this->request->is('ajax')) {
 				
@@ -542,11 +542,11 @@ class AbsenceQuotaController extends AppController
 	public function empdeleteQuota(){
 		
 		//redirect if payroll locked for processing
-		if(parent::masterLock()){			
-			 $this->Flash->error(__('Payroll under processing.'));
-			 $this->response->body("payrolllocked");
-	    	 return $this->response;	 
-		}
+		// if(parent::masterLock()){			
+			 // $this->Flash->error(__('Payroll under processing.'));
+			 // $this->response->body("payrolllocked");
+	    	 // return $this->response;	 
+		// }
 		
 		if($this->request->is('ajax')) {
 

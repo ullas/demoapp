@@ -107,7 +107,7 @@ var $components = array('Datatable');
 				$customer['payroll_lock']=FALSE;
 			}
 			$customer['employee_id']=$this->loggedinuser['employee_id'];
-			$customer['lock_date']=date("Y-m-d");
+			($this->daytimeFormat==1) ? $customer['lock_date']=date("d/m/Y") : $customer['lock_date']=date("m/d/Y");
 			$customer['lock_time']=date("h:i:sa");
 			
             if ($this->Customers->save($customer)){
