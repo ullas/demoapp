@@ -241,7 +241,7 @@
 			
 			
 			<div id="normalsection"><section class="collapse in" id="infobar" style="margin-top:20px; ">
-	<div class="clearfix">
+	<div class="clearfix" style=" padding-left: 15px; padding-right: 15px; ">
 
 		<div class="col-md-3 col-sm-6 col-xs-12">
           <div class="info-box bg-yellow pendingdiv" style="cursor: pointer;">
@@ -349,29 +349,35 @@ $.each(absentrequestsarr, function(key, value) {
     getEvent.push(insertEvents);
 
 });
+
+var myleaves=<?php echo $myleaves ?>;
+
 // console.log(getEvent);	
 var startdate="";
 var enddate="";
 
 $(function () {
 
-
-	$(".mptlcol").addClass("col-md-9");$(".mptlcol").addClass("col-md-12");
-	var leavestatushtml='<div class="col-md-3 col-sm-6 col-xs-12"><div class="info-box"><span class="info-box-icon bg-green"><i class="fa fa-calendar-check-o"></i></span>';
-	leavestatushtml+='<div class="info-box-content"><span class="info-box-text">currently available</span><span class="info-box-number">3</span></div></div></div>';
+	var annualallotment=0;
+	$(".mptlcol").addClass("col-md-9");$(".mptlcol").removeClass("col-md-12");
+	var leavestatushtml='<div class="col-md-3"><div class="box box-primary"><div class="box-header with-border"><h3 class="box-title">My Leaves</h3></div><div class="box-body">';
+	for (index = 0; index < myleaves.length; index++) {
+		var percentage=0;percentage=(myleaves[index]['leavecount']/myleaves[index]['quota'])*100;
+		var colorstring="progress-bar-aqua";
+		(percentage>50) ? colorstring="progress-bar-red" : colorstring="progress-bar-green" ;
+		
+    	leavestatushtml+='<div class="progress-group"><span class="progress-text">'+myleaves[index]['timetype']+'</span><span class="progress-number"><b>'+myleaves[index]['leavecount']+'</b>/'+myleaves[index]['quota']+'</span>';
+		leavestatushtml+='<div class="progress sm"><div class="progress-bar '+colorstring+'" style="width: '+percentage+'%"></div></div></div>';
+		annualallotment+=myleaves[index]['quota'];
+	}
 	
-	leavestatushtml+='<div class="col-md-3 col-sm-6 col-xs-12"><div class="info-box"><span class="info-box-icon bg-light-blue"><i class="fa fa-calendar-plus-o"></i></span>';
-	leavestatushtml+='<div class="info-box-content"><span class="info-box-text">credited for next year</span><span class="info-box-number">0</span></div></div></div>';
 	
-	leavestatushtml+='<div class="col-md-3 col-sm-6 col-xs-12"><div class="info-box"><span class="info-box-icon bg-red"><i class="fa fa-calendar-minus-o"></i></span>';
-	leavestatushtml+='<div class="info-box-content"><span class="info-box-text">accured so far</span><span class="info-box-number">9</span></div></div></div>';
-	
-	leavestatushtml+='<div class="col-md-3 col-sm-6 col-xs-12"><div class="info-box"><span class="info-box-icon bg-yellow"><i class="fa fa-calendar"></i></span>';
-	leavestatushtml+='<div class="info-box-content"><span class="info-box-text">annual allotment</span><span class="info-box-number">12</span></div></div></div>';
+	leavestatushtml+='</div><div class="box-footer">Annual Allotment<span class="pull-right text-green">'+annualallotment+'</span></div></div></div>';
 	
 	$(".mptlrow").append(leavestatushtml);
 
 
+    
 	$('#togglebutton').show();
 	
 	/* initialize the external events
@@ -666,6 +672,7 @@ $(function () {
 	$('.dtbtn').click(function(){
 		$('#calendarsection').hide();
     	$('#normalsection').show();
+    	table.ajax.reload(null,false);
 	});
 
 	$('div.pendingdiv').click(function(){$(".info-box").removeClass("blurdiv");$(this).addClass("blurdiv");
