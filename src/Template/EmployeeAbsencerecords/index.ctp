@@ -350,7 +350,7 @@ $.each(absentrequestsarr, function(key, value) {
 
 });
 
-var myleaves=<?php echo $myleaves ?>;
+var myleaves=<?php echo $jsonencodedmyleaves ?>;
 
 // console.log(getEvent);	
 var startdate="";

@@ -286,7 +286,27 @@ class AppController extends Controller
 		}
 		$this->set('notificationcontent', $lcontent);
 		 
-		 
+		//leave status
+		$this->loadModel('AbsenceQuota');
+		$absencearr=$this->AbsenceQuota->find('all',['conditions' => array('employee_id' => $this->request->session()->read('sessionuser')['employee_id'])])->distinct(['time_type_id'])->toArray();
+		$myleaves=[];
+		foreach($absencearr as $abschildval){
+			$leavestatusarr=[];
+			$this->loadModel('TimeTypes');
+			$timetype=$this->TimeTypes->find('all',['conditions' => array('id' => $abschildval['time_type_id']), 'contain' => []])->first();
+			
+			$this->loadModel('EmployeeAbsencerecords');
+			$query=$this->EmployeeAbsencerecords->find('All')->where(['emp_data_biographies_id'=>$this->request->session()->read('sessionuser')['empdatabiographyid']])
+						->andwhere(['time_type_id'=>$abschildval['time_type_id']])->andwhere(['status'=>'1'])->andwhere(['customer_id'=>$this->loggedinuser['customer_id']]);
+			(isset($query)) ? $leavecount=$query->count() : $leavecount=0;
+		
+		
+			$leavestatusarr['timetype']=$timetype['name'];$leavestatusarr['quota']=$abschildval['quota'];$leavestatusarr['leavecount']=$leavecount;
+		
+			$myleaves[]=$leavestatusarr;
+		}
+		$this->set('jsonencodedmyleaves', json_encode($myleaves));$this->set('myleaves', $myleaves);
+		
 		$positionsTable = TableRegistry::get('Positions');	
 		$query=$positionsTable->find('All')->where(['id'=>$mypositionid])->toArray();
 		(isset($query[0])) ? $myposition=$query[0]['name'] : $myposition="0";
