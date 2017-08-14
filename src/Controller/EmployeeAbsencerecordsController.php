@@ -227,7 +227,7 @@ class EmployeeAbsencerecordsController extends AppController
 	{
 		//redirect if payroll locked for processing
 		if(parent::masterLock()){			
-			 $this->Flash->error(__('Payroll under processing.'));
+			 // $this->Flash->error(__('Payroll under processing.'));
 			 $this->response->body("payrolllocked");
 	    	 return $this->response;	 	 
 		}
@@ -484,25 +484,6 @@ class EmployeeAbsencerecordsController extends AppController
 							
 		$this->set('timeTypes', $timeTypes);
 		
-		$this->loadModel('AbsenceQuota');
-		$absencearr=$this->AbsenceQuota->find('all',['conditions' => array('employee_id' => $this->request->session()->read('sessionuser')['employee_id'])])->distinct(['time_type_id'])->toArray();
-		$myleaves=[];
-		foreach($absencearr as $abschildval){
-			$leavestatusarr=[];
-			$this->loadModel('TimeTypes');
-			$timetype=$this->TimeTypes->find('all',['conditions' => array('id' => $abschildval['time_type_id']), 'contain' => []])->first();
-			
-			$this->loadModel('EmployeeAbsencerecords');
-			$query=$this->EmployeeAbsencerecords->find('All')->where(['emp_data_biographies_id'=>$this->request->session()->read('sessionuser')['empdatabiographyid']])
-						->andwhere(['time_type_id'=>$abschildval['time_type_id']])->andwhere(['status'=>'1'])->andwhere(['customer_id'=>$this->loggedinuser['customer_id']]);
-			(isset($query)) ? $leavecount=$query->count() : $leavecount=0;
-		
-		
-			$leavestatusarr['timetype']=$timetype['name'];$leavestatusarr['quota']=$abschildval['quota'];$leavestatusarr['leavecount']=$leavecount;
-		
-			$myleaves[]=$leavestatusarr;
-		}
-		$this->set('myleaves', json_encode($myleaves));
     }
 	 
     /**
