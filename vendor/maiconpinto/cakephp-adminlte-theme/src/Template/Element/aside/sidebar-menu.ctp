@@ -72,8 +72,8 @@ if (file_exists($file)) {
           <ul class="treeview-menu">
             <li><a href="<?php echo $this -> Url -> build('/LegalEntities'); ?>"><i class="fa fa-circle-o"></i> Legal Entity</a></li>
             <li><a href="<?php echo $this -> Url -> build('/BusinessUnits'); ?>"><i class="fa fa-circle-o"></i> Business Unit</a></li>
-            <li><a href="<?php echo $this -> Url -> build('/Departments'); ?>"><i class="fa fa-circle-o"></i> Department</a></li>
             <li><a href="<?php echo $this -> Url -> build('/Divisions'); ?>"><i class="fa fa-circle-o"></i> Division</a></li>
+            <li><a href="<?php echo $this -> Url -> build('/Departments'); ?>"><i class="fa fa-circle-o"></i> Department</a></li>
             <li><a href="<?php echo $this -> Url -> build('/CostCentres'); ?>"><i class="fa fa-circle-o"></i> Cost Center</a></li>
             <li><a href="<?php echo $this -> Url -> build('/Regions'); ?>"><i class="fa fa-circle-o"></i> Region</a></li>
             <li><a href="<?php echo $this -> Url -> build('/Locations'); ?>"><i class="fa fa-circle-o"></i> Location</a></li>

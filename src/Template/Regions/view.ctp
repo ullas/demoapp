@@ -19,9 +19,9 @@
             echo $this->Form->input('external_code',['label' => 'Region Code','disabled' => true]);
             echo $this->Form->input('name',['label' => 'Region Name','disabled' => true]);
             echo $this->Form->input('description',['disabled' => true]);
-			      echo $this->Form->input('start_date',['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
-            echo $this->Form->input('end_date',['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
-            echo $this->Form->input('status',['disabled' => true]);
+			echo $this->Form->input('start_date',['value' => !empty($region->start_date) ? $region->start_date->format($mptldateformat) : '','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
+            echo $this->Form->input('end_date',['value' => !empty($region->end_date) ? $region->end_date->format($mptldateformat) : '','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
+            echo $this->Form->input('status',['label'=>"Active",'disabled' => true]);
 
         ?></fieldset>
 <div class="box-footer">

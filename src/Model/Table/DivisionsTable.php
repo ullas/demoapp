@@ -5,14 +5,15 @@ use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
-use Cake\Event\Event;
-use Cake\Event\ArrayObject;
-use Cake\Core\Configure;
+
 /**
  * Divisions Model
  *
  * @property \Cake\ORM\Association\BelongsTo $Customers
+ * @property \Cake\ORM\Association\BelongsTo $ParentDivisions
+ * @property \Cake\ORM\Association\HasMany $ChildDivisions
  * @property \Cake\ORM\Association\HasMany $Jobinfos
+ * @property \Cake\ORM\Association\HasMany $PayGroups
  * @property \Cake\ORM\Association\HasMany $PayrollArea
  * @property \Cake\ORM\Association\HasMany $Positions
  *
@@ -44,7 +45,18 @@ class DivisionsTable extends Table
         $this->belongsTo('Customers', [
             'foreignKey' => 'customer_id'
         ]);
+        $this->belongsTo('ParentDivisions', [
+            'className' => 'Divisions',
+            'foreignKey' => 'parent_id'
+        ]);
+        // $this->hasMany('ChildDivisions', [
+            // 'className' => 'Divisions',
+            // 'foreignKey' => 'parent_id'
+        // ]);
         $this->hasMany('Jobinfos', [
+            'foreignKey' => 'division_id','dependent' => true
+        ]);
+        $this->hasMany('PayGroups', [
             'foreignKey' => 'division_id','dependent' => true
         ]);
         $this->hasMany('PayrollArea', [
@@ -52,6 +64,10 @@ class DivisionsTable extends Table
         ]);
         $this->hasMany('Positions', [
             'foreignKey' => 'division_id','dependent' => true
+        ]);
+		
+		$this->belongsTo('Parents', [
+            'className' => 'Divisions','foreignKey' => 'parent_id'
         ]);
     }
 
@@ -77,13 +93,12 @@ class DivisionsTable extends Table
             ->allowEmpty('effective_status');
 
         $validator
+            // ->date('effective_start_date')
             ->allowEmpty('effective_start_date');
 
         $validator
+            // ->date('effective_end_date')
             ->allowEmpty('effective_end_date');
-
-        $validator
-            ->allowEmpty('parent_division');
 
         $validator
             ->requirePresence('external_code', 'create')
@@ -95,6 +110,7 @@ class DivisionsTable extends Table
 
         return $validator;
     }
+
     /**
      * Returns a rules checker object that will be used for validating
      * application integrity.
@@ -106,6 +122,7 @@ class DivisionsTable extends Table
     {
         $rules->add($rules->isUnique(['external_code']));
         $rules->add($rules->existsIn(['customer_id'], 'Customers'));
+        $rules->add($rules->existsIn(['parent_id'], 'ParentDivisions'));
 
         return $rules;
     }

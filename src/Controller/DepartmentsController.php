@@ -66,8 +66,8 @@ var $components = array('Datatable');
 		
 		if($department['customer_id']==$this->loggedinuser['customer_id']){
        	    $costCentres = $this->Departments->CostCentres->find('list', ['limit' => 200]);
-			$this->set('costCentres', $costCentres);
-        	$this->set('department', $department);
+			$parents = $this->Departments->Parents->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        	$this->set(compact('department','parents','costCentres'));
         	$this->set('_serialize', ['department']);
        }else{
 		   $this->Flash->error(__('You are not Authorized.'));
@@ -96,7 +96,8 @@ var $components = array('Datatable');
         }
         $costCentres = $this->Departments->CostCentres->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         $customers = $this->Departments->Customers->find('list', ['limit' => 200]);
-        $this->set(compact('department', 'costCentres', 'customers'));
+        $parents = $this->Departments->Parents->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        $this->set(compact('department', 'costCentres', 'customers','parents'));
         $this->set('_serialize', ['department']);
     }
 	public function addwizard()
@@ -114,7 +115,8 @@ var $components = array('Datatable');
         }
         $costCentres = $this->Departments->CostCentres->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         $customers = $this->Departments->Customers->find('list', ['limit' => 200]);
-        $this->set(compact('department', 'costCentres', 'customers'));
+        $parents = $this->Departments->Parents->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        $this->set(compact('department', 'costCentres', 'customers','parents'));
         $this->set('_serialize', ['department']);
     }
     /**
@@ -148,7 +150,8 @@ var $components = array('Datatable');
         }
         $costCentres = $this->Departments->CostCentres->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         $customers = $this->Departments->Customers->find('list', ['limit' => 200]);
-        $this->set(compact('department', 'costCentres', 'customers'));
+        $parents = $this->Departments->Parents->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        $this->set(compact('department', 'costCentres', 'customers','parents'));
         $this->set('_serialize', ['department']);
     }
 

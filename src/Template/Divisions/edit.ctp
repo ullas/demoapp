@@ -16,10 +16,10 @@
             echo $this->Form->input('external_code',['label' => 'Division Code']);
             echo $this->Form->input('name',['label' => 'Division Name']);
             echo $this->Form->input('description');
-            echo $this->Form->input('effective_status',['label' => 'Status']);
+            echo $this->Form->input('effective_status',['label' => 'Active']);
             echo $this->Form->input('effective_start_date', ['label' => 'Start Date','value' => !empty($division->effective_start_date) ? $division->effective_start_date->format($mptldateformat) : '','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
             echo $this->Form->input('effective_end_date', ['label' => 'End Date','value' => !empty($division->effective_end_date) ? $division->effective_end_date->format($mptldateformat) : '','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
-            echo $this->Form->input('parent_division');
+            echo $this->Form->input('parent_id',['options' => $parents, 'empty' => true]);
             echo $this->Form->input('head_of_unit',['label' => 'Head of Division']);
         ?>
     </fieldset>
