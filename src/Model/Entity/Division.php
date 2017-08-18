@@ -12,12 +12,17 @@ use Cake\ORM\Entity;
  * @property bool $effective_status
  * @property \Cake\I18n\Time $effective_start_date
  * @property \Cake\I18n\Time $effective_end_date
- * @property string $parent_division
  * @property string $external_code
  * @property int $head_of_unit
  * @property int $customer_id
+ * @property int $parent_id
  *
  * @property \App\Model\Entity\Customer $customer
+ * @property \App\Model\Entity\Jobinfo[] $jobinfos
+ * @property \App\Model\Entity\PayGroup[] $pay_groups
+ * @property \App\Model\Entity\PayrollArea[] $payroll_area
+ * @property \App\Model\Entity\Position[] $positions
+ * @property \App\Model\Entity\Division $parent_division
  */
 class Division extends Entity
 {

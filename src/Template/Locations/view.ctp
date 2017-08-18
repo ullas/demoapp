@@ -20,9 +20,9 @@
             echo $this->Form->input('external_code',['label' =>'Location Code','disabled' => true]);
             echo $this->Form->input('name',['label' =>'Location Name','disabled' => true]);
             echo $this->Form->input('description',['disabled' => true]);
-            echo $this->Form->input('status',['disabled' => true]);
-			      echo $this->Form->input('start_date',['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
-			      echo $this->Form->input('end_date',['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
+            echo $this->Form->input('status',['label' =>'Active','disabled' => true]);
+			      echo $this->Form->input('start_date',['value' => !empty($location->start_date) ? $location->start_date->format($mptldateformat) : '','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
+			      echo $this->Form->input('end_date',['value' => !empty($location->end_date) ? $location->end_date->format($mptldateformat) : '','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
             echo $this->Form->input('location_group',['disabled' => true]);
             echo $this->Form->input('time_zone',['label' =>'Timezone','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-clock-o"></i></div>'],'disabled' => true]);
             echo $this->Form->input('standard_hours',['label' =>'Standard Weekly Hours','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-clock-o"></i></div>'],'disabled' => true]);

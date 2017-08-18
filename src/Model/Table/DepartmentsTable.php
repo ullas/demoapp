@@ -5,14 +5,16 @@ use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
-use Cake\Event\Event;
-use Cake\Event\ArrayObject;
-use Cake\Core\Configure;
+
 /**
  * Departments Model
  *
  * @property \Cake\ORM\Association\BelongsTo $CostCentres
  * @property \Cake\ORM\Association\BelongsTo $Customers
+ * @property \Cake\ORM\Association\BelongsTo $ParentDepartments
+ * @property \Cake\ORM\Association\HasMany $ChildDepartments
+ * @property \Cake\ORM\Association\HasMany $Jobinfos
+ * @property \Cake\ORM\Association\HasMany $Positions
  *
  * @method \App\Model\Entity\Department get($primaryKey, $options = [])
  * @method \App\Model\Entity\Department newEntity($data = null, array $options = [])
@@ -40,11 +42,30 @@ class DepartmentsTable extends Table
         $this->primaryKey('id');
 
         $this->belongsTo('CostCentres', [
-            'foreignKey' => 'cost_center_id'
+            'foreignKey' => 'cost_center_id','dependent' => true
         ]);
         $this->belongsTo('Customers', [
-            'foreignKey' => 'customer_id'
+            'foreignKey' => 'customer_id','dependent' => true
         ]);
+        $this->belongsTo('ParentDepartments', [
+            'className' => 'Departments',
+            'foreignKey' => 'parent_id'
+        ]);
+        // $this->hasMany('ChildDepartments', [
+            // 'className' => 'Departments',
+            // 'foreignKey' => 'parent_id'
+        // ]);
+        $this->hasMany('Jobinfos', [
+            'foreignKey' => 'department_id','dependent' => true
+        ]);
+        $this->hasMany('Positions', [
+            'foreignKey' => 'department_id','dependent' => true
+        ]);
+		
+		$this->belongsTo('Parents', [
+            'className' => 'Departments','foreignKey' => 'parent_id'
+        ]);
+
     }
 
     /**
@@ -69,13 +90,12 @@ class DepartmentsTable extends Table
             ->allowEmpty('effective_status');
 
         $validator
+            // ->date('effective_start_date')
             ->allowEmpty('effective_start_date');
 
         $validator
+            // ->date('effective_end_date')
             ->allowEmpty('effective_end_date');
-
-        $validator
-            ->allowEmpty('parent_department');
 
         $validator
             ->requirePresence('external_code', 'create')
@@ -87,6 +107,7 @@ class DepartmentsTable extends Table
 
         return $validator;
     }
+
     /**
      * Returns a rules checker object that will be used for validating
      * application integrity.
@@ -99,6 +120,7 @@ class DepartmentsTable extends Table
         $rules->add($rules->isUnique(['external_code']));
         $rules->add($rules->existsIn(['cost_center_id'], 'CostCentres'));
         $rules->add($rules->existsIn(['customer_id'], 'Customers'));
+        $rules->add($rules->existsIn(['parent_id'], 'ParentDepartments'));
 
         return $rules;
     }
