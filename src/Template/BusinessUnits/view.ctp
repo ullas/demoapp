@@ -21,7 +21,7 @@
             	echo $this->Form->input('external_code',['label'=>['text'=>'Business Unit Code','class'=>'mandatory'],'disabled' => true]);
           		echo $this->Form->input('name',['label'=>['text'=>'Business Unit Name','class'=>'mandatory'],'disabled' => true]);
           		echo $this->Form->input('description',['disabled' => true]);
-          		echo $this->Form->input('effective_status',['label' =>'Status','disabled' => true]);
+          		echo $this->Form->input('effective_status',['label' => 'Active','disabled' => true]);
           		echo $this->Form->input('effective_start_date',['label' =>'Start Date','class' => 'mptldp','value' => !empty($businessUnit->effective_start_date) ? $businessUnit->effective_start_date->format($mptldateformat) : '','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
 		  		    echo $this->Form->input('effective_end_date',['label' =>'End Date','class' => 'mptldp','value' => !empty($businessUnit->effective_end_date) ? $businessUnit->effective_end_date->format($mptldateformat) : '','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
           		echo $this->Form->input('head_of_unit',['label' =>'Head of Unit','disabled' => true]);

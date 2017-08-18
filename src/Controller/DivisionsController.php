@@ -67,7 +67,8 @@ var $components = array('Datatable');
 
 
 		if($division['customer_id']==$this->loggedinuser['customer_id']){
-        	$this->set('division', $division);
+        	$parents = $this->Divisions->Parents->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        	$this->set(compact('division','parents'));
         	$this->set('_serialize', ['division']); 
 		
        }else{
@@ -96,7 +97,8 @@ var $components = array('Datatable');
             }
         }
         $customers = $this->Divisions->Customers->find('list', ['limit' => 200]);
-        $this->set(compact('division', 'customers'));
+        $parents = $this->Divisions->Parents->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        $this->set(compact('division', 'customers','parents'));
         $this->set('_serialize', ['division']);
     }
 	public function addwizard()
@@ -113,7 +115,8 @@ var $components = array('Datatable');
             }
         }
         $customers = $this->Divisions->Customers->find('list', ['limit' => 200]);
-        $this->set(compact('division', 'customers'));
+        $parents = $this->Divisions->Parents->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        $this->set(compact('division', 'customers','parents'));
         $this->set('_serialize', ['division']);
     }
 
@@ -147,7 +150,8 @@ var $components = array('Datatable');
             }
         }
         $customers = $this->Divisions->Customers->find('list', ['limit' => 200]);
-        $this->set(compact('division', 'customers'));
+        $parents = $this->Divisions->Parents->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        $this->set(compact('division', 'customers','parents'));
         $this->set('_serialize', ['division']);
     }
 
