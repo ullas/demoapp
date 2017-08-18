@@ -34,11 +34,15 @@ function RecursiveCategories($array,$userrole) {
                     echo "<li id=\"".$vals['id']."\"><div class='node-title'><a href='#' tabindex='0' id='".$vals['id']."' class='popoverbtn' data-trigger='focus' data-html='true' data-toggle='popover'
                     		 title='".$vals['EmpDataPersonals']['first_name']." ".$vals['EmpDataPersonals']['middle_name']." ".$vals['EmpDataPersonals']['last_name']."'
  							data-content='".$htmlstr."'>".$vals['EmpDataPersonals']['first_name']." ".$vals['EmpDataPersonals']['middle_name']." ".$vals['EmpDataPersonals']['last_name']."</a></div>";
- 					if($vals['Employees']['profilepicture'] == "" || $vals['Employees']['profilepicture'] == null){
- 						echo "<div class='node-pic'><img class='node-profile-img' src='/img/circle-512.png'></div>";
- 					}else{
- 						echo "<div class='node-pic'><img class='node-profile-img' src='/img/uploadedpics/".$vals['Employees']['profilepicture']."'></div>";	
- 					}
+ 					//check image filename exists for the employee
+					if(isset($vals['Employees']['profilepicture']) && ($vals['Employees']['profilepicture']!='')){$picturename=$vals['Employees']['profilepicture'];}
+                    else{$picturename='/img/uploadedpics/defaultuser.png';}
+                    //checking image exists in folder											
+					if (file_exists(WWW_ROOT.'img'.DS.'uploadedpics'.DS.$picturename)){
+						echo "<div class='node-pic'><img class='node-profile-img' src='/img/uploadedpics/".$picturename."'></div>";	
+					}else{
+						echo "<div class='node-pic'><img class='node-profile-img' src='/img/uploadedpics/defaultuser.png'></div>";
+					}
  					
  					echo "<div class='node-position'>".$vals['name']."</div>";
  					
