@@ -71,7 +71,7 @@
 					</li>
                     <li>
 
-					<?php echo  '<a href="#" onclick="sweet_confirmdelete(&quot;MayHaw&quot;,&quot;Are you sure you want to delete the absence quota for '.$vals['empname'].' ?&quot; ,
+					<?php echo  '<a href="#" onclick="sweet_confirmdelete(&quot;MayHaw&quot;,&quot;Are you sure you want to delete the Absence Quota for '.$vals['empname'].' ?&quot; ,
                     function(){ empdeletequota('.$vals['empid'].'); })
                     event.returnValue = false; return false;" class="deletelink">Delete</a>';   ?>
 
@@ -134,7 +134,7 @@
 			</tbody>
     	</table>
 
-			
+
 
             </div>
             <!-- /.box-body -->
@@ -178,7 +178,7 @@ $(function () {
 				var msg = "Sorry but there was an error.";
 				sweet_alert(msg);
 			}else{
-				
+
 				$('.mptlcopy').click(function(e){
 
 					var lastemppanel=$('.emppanel.panel-collapse.collapse.in').attr('id');localStorage.setItem('lastemppanel', lastemppanel);
@@ -249,15 +249,15 @@ $(function () {
 				checkedarr.push(colid);
 		    }
 	   	});
-	   	
+
 					var timetype = $('#time-type-id').val();
 					var frequency = $('#frequency-id').val();
 					var quota=$("#quota").val();
     				var balance=$("#balance").val();
     				var nxtexpiry = $("#nxtexpiry").val();
 					var expirylot = $("#expirylot").val();
-		
-					
+
+
 					if (timetype=="" || timetype==null){
 						sweet_alert("Please select a timetype.");
 						return false;
@@ -299,7 +299,7 @@ $(function () {
       					}
 
         			});
-        			
+
 
   	});
 			/*
@@ -391,7 +391,7 @@ $(function () {
     				var balance=$("#balance").val();
     				var nxtexpiry = $("#nxtexpiry").val();
 					var expirylot = $("#expirylot").val();
-		
+
 					if (emp=="" || emp==null){
 						sweet_alert("Please select a Employee.");
 						return false;
@@ -438,7 +438,7 @@ $(function () {
 
         			});
 
-				
+
   				});
 
 
@@ -509,7 +509,7 @@ function searchabsentquota(){
 
 
 	$('.mptlpanel').each(function(){
-		
+
 		var selectedcontrol=$(this);
 		var a = $(this).find(".box-title").text();
         if (a.toUpperCase().indexOf(filter) > -1) {
