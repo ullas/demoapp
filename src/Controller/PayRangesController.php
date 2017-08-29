@@ -66,8 +66,9 @@ class PayRangesController extends AppController
 		if($payRange['customer_id']==$this->loggedinuser['customer_id']){
  			$legalEntities = $this->PayRanges->LegalEntities->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         	$payGroups = $this->PayRanges->PayGroups->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        	$frequencies = $this->PayRanges->Frequencies->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         	$customers = $this->PayRanges->Customers->find('list', ['limit' => 200]);
-        	$this->set(compact('payRange', 'legalEntities', 'payGroups', 'customers'));
+        	$this->set(compact('payRange', 'legalEntities', 'payGroups', 'customers','frequencies'));
         	$this->set('payRange', $payRange);
         	$this->set('_serialize', ['payRange']);
  		}else{
@@ -103,8 +104,9 @@ class PayRangesController extends AppController
         }
         $legalEntities = $this->PayRanges->LegalEntities->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         $payGroups = $this->PayRanges->PayGroups->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
-        $customers = $this->PayRanges->Customers->find('list', ['limit' => 200]);
-        $this->set(compact('payRange', 'legalEntities', 'payGroups', 'customers'));
+        $frequencies = $this->PayRanges->Frequencies->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        	$customers = $this->PayRanges->Customers->find('list', ['limit' => 200]);
+        	$this->set(compact('payRange', 'legalEntities', 'payGroups', 'customers','frequencies'));
         $this->set('_serialize', ['payRange']);
     }
 
@@ -145,8 +147,9 @@ class PayRangesController extends AppController
         }
         $legalEntities = $this->PayRanges->LegalEntities->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         $payGroups = $this->PayRanges->PayGroups->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
-        $customers = $this->PayRanges->Customers->find('list', ['limit' => 200]);
-        $this->set(compact('payRange', 'legalEntities', 'payGroups', 'customers'));
+        $frequencies = $this->PayRanges->Frequencies->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        	$customers = $this->PayRanges->Customers->find('list', ['limit' => 200]);
+        	$this->set(compact('payRange', 'legalEntities', 'payGroups', 'customers','frequencies'));
         $this->set('_serialize', ['payRange']);
     }
 

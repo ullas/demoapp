@@ -97,8 +97,8 @@
 													}
 										?>
                             			 day(s) from
-                            			<?php echo $notificationcontent[$x]['employee_absencerecords'][$t]['start_date']; ?> to
-										<?php echo $notificationcontent[$x]['employee_absencerecords'][$t]['end_date']; ?>
+                            			<?php echo $notificationcontent[$x]['employee_absencerecords'][$t]['start_date']->format($mptldateformat); ?> to
+										<?php echo $notificationcontent[$x]['employee_absencerecords'][$t]['end_date']->format($mptldateformat); ?>
 
                             		</span>
 								
@@ -358,7 +358,7 @@ var enddate="";
 
 $(function () {
 
-	var annualallotment=0;
+	var annualallotment=0;var leavestaken=0;
 	$(".mptlcol").addClass("col-md-9");$(".mptlcol").removeClass("col-md-12");
 	var leavestatushtml='<div class="col-md-3"><div class="box box-primary"><div class="box-header with-border"><h3 class="box-title">My Leaves</h3></div><div class="box-body">';
 	for (index = 0; index < myleaves.length; index++) {
@@ -369,10 +369,11 @@ $(function () {
     	leavestatushtml+='<div class="progress-group"><span class="progress-text">'+myleaves[index]['timetype']+'</span><span class="progress-number"><b>'+myleaves[index]['leavecount']+'</b>/'+myleaves[index]['quota']+'</span>';
 		leavestatushtml+='<div class="progress sm"><div class="progress-bar '+colorstring+'" style="width: '+percentage+'%"></div></div></div>';
 		annualallotment+=myleaves[index]['quota'];
+		leavestaken+=myleaves[index]['leavecount'];
 	}
 	
-	
-	leavestatushtml+='</div><div class="box-footer">Annual Allotment<span class="pull-right text-green">'+annualallotment+'</span></div></div></div>';
+	leavestatushtml+='</div><div class="box-footer">Leaves Allotted<span class="pull-right text-green">'+annualallotment+'</span></div>';
+	leavestatushtml+='<div class="box-footer">Leaves Taken<span class="pull-right text-red">'+leavestaken+'</span></div></div></div>';
 	
 	$(".mptlrow").append(leavestatushtml);
 

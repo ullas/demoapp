@@ -22,7 +22,7 @@
             echo $this->Form->input('division_id', ['class' => 'select2','options' => $divisions, 'empty' => true]);
             echo $this->Form->input('location_id', ['class' => 'select2','options' => $locations, 'empty' => true]);
 			
-            echo $this->Form->input('effective_status',['label' => 'Status']);
+            echo $this->Form->input('effective_status',['label' => 'Status','class'=>'select2','options' => array('Active', 'Inactive'), 'empty' => 'Choose']);
 			      echo $this->Form->input('effective_start_date',['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
             echo $this->Form->input('effective_end_date',['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
             echo $this->Form->input('earliest_change_date',['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
