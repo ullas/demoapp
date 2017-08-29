@@ -5,14 +5,14 @@ use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
-use Cake\Event\Event;
-use Cake\Event\ArrayObject;
-use Cake\Core\Configure;
+
 /**
  * PayGrades Model
  *
  * @property \Cake\ORM\Association\BelongsTo $Customers
- * @property \Cake\ORM\Association\HasMany $JobClasses
+ * @property \Cake\ORM\Association\HasMany $Jobclasses
+ * @property \Cake\ORM\Association\HasMany $Jobinfos
+ * @property \Cake\ORM\Association\HasMany $Positions
  *
  * @method \App\Model\Entity\PayGrade get($primaryKey, $options = [])
  * @method \App\Model\Entity\PayGrade newEntity($data = null, array $options = [])
@@ -42,7 +42,13 @@ class PayGradesTable extends Table
         $this->belongsTo('Customers', [
             'foreignKey' => 'customer_id'
         ]);
-        $this->hasMany('JobClasses', [
+        $this->hasMany('Jobclasses', [
+            'foreignKey' => 'pay_grade_id','dependent' => true
+        ]);
+        $this->hasMany('Jobinfos', [
+            'foreignKey' => 'pay_grade_id','dependent' => true
+        ]);
+        $this->hasMany('Positions', [
             'foreignKey' => 'pay_grade_id','dependent' => true
         ]);
     }
@@ -65,13 +71,14 @@ class PayGradesTable extends Table
             ->allowEmpty('description');
 
         $validator
-            ->boolean('status')
             ->allowEmpty('status');
 
         $validator
+            // ->date('start_date')
             ->allowEmpty('start_date');
 
         $validator
+            // ->date('end_date')
             ->allowEmpty('end_date');
 
         $validator
@@ -85,7 +92,7 @@ class PayGradesTable extends Table
 
         return $validator;
     }
-	
+
     /**
      * Returns a rules checker object that will be used for validating
      * application integrity.

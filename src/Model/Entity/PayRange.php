@@ -6,27 +6,28 @@ use Cake\ORM\Entity;
 /**
  * PayRange Entity
  *
+ * @property int $id
  * @property string $name
  * @property string $description
  * @property string $status
  * @property \Cake\I18n\Time $start_date
  * @property \Cake\I18n\Time $end_date
  * @property string $currency
- * @property string $frequency_code
  * @property float $minimum_pay
  * @property float $maximum_pay
  * @property float $increment
  * @property float $incr_percentage
  * @property float $mid_point
  * @property string $geo_zone
- * @property int $id
  * @property string $external_code
  * @property int $legal_entity_id
  * @property int $pay_group_id
  * @property int $customer_id
+ * @property int $frequency_id
  *
  * @property \App\Model\Entity\LegalEntity $legal_entity
  * @property \App\Model\Entity\PayGroup $pay_group
+ * @property \App\Model\Entity\Customer $customer
  */
 class PayRange extends Entity
 {

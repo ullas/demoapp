@@ -20,7 +20,7 @@
             echo $this->Form->input('start_date',['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
             echo $this->Form->input('end_date',['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
             echo $this->Form->input('currency',['options' => $this->Currency->get_currencies(), 'empty' => true]);
-            echo $this->Form->input('frequency_code',['label' => 'Frequency']);
+            echo $this->Form->input('frequency_code',['label' => 'Frequency', 'empty' => 'Choose']);
             echo $this->Form->input('minimum_pay');
             echo $this->Form->input('maximum_pay');
             echo $this->Form->input('increment');

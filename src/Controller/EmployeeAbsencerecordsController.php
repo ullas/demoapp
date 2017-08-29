@@ -95,6 +95,8 @@ class EmployeeAbsencerecordsController extends AppController
 			 return $this->redirect(['action' => 'index']);			 
 		}
 		
+		($this->daytimeFormat==1) ? $mptldateformat='d/m/Y' : $mptldateformat='m/d/Y' ;
+		
     	$this->loadModel('Workflows');
 		if($this->request->is('ajax')) {
 				
@@ -120,7 +122,9 @@ class EmployeeAbsencerecordsController extends AppController
             		'contain' => []
         		]);
 				$employeeAbsencerecord = $this->EmployeeAbsencerecords->patchEntity($employeeAbsencerecord, $this->request->data);
-				$employeeAbsencerecord["status"] = "2"; 
+				$employeeAbsencerecord["start_date"] = $employeeAbsencerecord["start_date"]->format($mptldateformat); 
+				$employeeAbsencerecord["end_date"] = $employeeAbsencerecord["end_date"]->format($mptldateformat); 
+				$employeeAbsencerecord["status"] = "2" ;
            	 	if ($this->EmployeeAbsencerecords->save($employeeAbsencerecord)) {
 					$this->response->body("success");
 	    			return $this->response;
@@ -484,6 +488,9 @@ class EmployeeAbsencerecordsController extends AppController
 							
 		$this->set('timeTypes', $timeTypes);
 		
+		
+		($this->daytimeFormat==1) ? $mptldateformat='d/m/Y' : $mptldateformat='m/d/Y' ;
+		$this->set('mptldateformat', $mptldateformat);
     }
 	 
     /**

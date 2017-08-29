@@ -19,19 +19,31 @@
         
     	<div class="box-body" style="height: 500px;overflow: auto;">
     		
-    		<div style="margin-bottom:20px;">
-    			<div class="box box-solid collapsed-box pg" style="margin-bottom:0px;">
+    		<div style="margin-bottom:20px;height:250px;overflow: auto;">
+    			
     				
     			
         
     			<?php foreach ($paygrouplist as $vals) {
+    				echo '<div class="box box-solid collapsed-box pg" style="margin-bottom:0px;">';
 					echo '<div class="box-header">';
 					echo '<input type="checkbox" class="paygroup_filter" id="paygroupcheck_'.$vals['parentid'].'"/>'.' '.'<b>'.$vals['parent'].'</b>';
-					echo '</div>';
+					echo '<div class="box-tools" style="background:#dbdde0;"><button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button></div></div>';
 					
+					if(isset($vals['child'])){
+						echo "<div class='box-body no-padding'><ul class='nav nav-pills nav-stacked'>";
+						foreach ($vals['child'] as $childval) {
+							echo "<li><a class='emplist'>";
+							$empname = str_replace('"', '',$this->Country->get_empname($childval['employee_id']));
+							echo $empname ;
+							echo "</a> </li>";
+						}
+						echo "</ul></div>";
+					}
+					echo '</div>';
 					}
 					?>
-    		</div></div>
+    		</div>
     		
     		<div class="maindiv">
     		
