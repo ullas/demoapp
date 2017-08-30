@@ -300,8 +300,8 @@ use Cake\Utility\Inflector;
                            			
 									$row[ $column['dt'] ] = utf8_encode($data[$i][$colname[0][1]]);     
 									//set status to active/inactive
-                           			if( (($colname[0][1])=="status") || (($colname[0][1])=="effective_status") ){
-                           				($row[$column['dt']]=="0") ? $row[$column['dt']]="Active" : $row[$column['dt']]="InActive" ;
+                           			if( ( (($colname[0][1])=="status") || (($colname[0][1])=="effective_status") ) && ($colname[0][0]!="EmployeeAbsencerecords") ){
+                           				($row[$column['dt']]=="0") ? $row[$column['dt']]="Active" : $row[$column['dt']]="Inactive" ;
                            			}               			
                            		}
                            }
