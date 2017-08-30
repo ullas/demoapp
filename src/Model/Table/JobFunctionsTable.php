@@ -5,24 +5,22 @@ use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
-use Cake\Event\Event;
-use Cake\Event\ArrayObject;
-use Cake\Core\Configure;
+
 /**
- * JobFunctions Model
+ * Jobfunctions Model
  *
  * @property \Cake\ORM\Association\BelongsTo $Customers
- * @property \Cake\ORM\Association\HasMany $JobClasses
+ * @property \Cake\ORM\Association\BelongsTo $Jobs
  *
- * @method \App\Model\Entity\JobFunction get($primaryKey, $options = [])
- * @method \App\Model\Entity\JobFunction newEntity($data = null, array $options = [])
- * @method \App\Model\Entity\JobFunction[] newEntities(array $data, array $options = [])
- * @method \App\Model\Entity\JobFunction|bool save(\Cake\Datasource\EntityInterface $entity, $options = [])
- * @method \App\Model\Entity\JobFunction patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
- * @method \App\Model\Entity\JobFunction[] patchEntities($entities, array $data, array $options = [])
- * @method \App\Model\Entity\JobFunction findOrCreate($search, callable $callback = null)
+ * @method \App\Model\Entity\Jobfunction get($primaryKey, $options = [])
+ * @method \App\Model\Entity\Jobfunction newEntity($data = null, array $options = [])
+ * @method \App\Model\Entity\Jobfunction[] newEntities(array $data, array $options = [])
+ * @method \App\Model\Entity\Jobfunction|bool save(\Cake\Datasource\EntityInterface $entity, $options = [])
+ * @method \App\Model\Entity\Jobfunction patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
+ * @method \App\Model\Entity\Jobfunction[] patchEntities($entities, array $data, array $options = [])
+ * @method \App\Model\Entity\Jobfunction findOrCreate($search, callable $callback = null)
  */
-class JobFunctionsTable extends Table
+class JobfunctionsTable extends Table
 {
 
     /**
@@ -42,10 +40,7 @@ class JobFunctionsTable extends Table
         $this->belongsTo('Customers', [
             'foreignKey' => 'customer_id'
         ]);
-        $this->hasMany('JobClasses', [
-            'foreignKey' => 'job_function_id','dependent' => true
-        ]);
-		$this->belongsTo('Jobs', [
+        $this->belongsTo('Jobs', [
             'foreignKey' => 'job_id'
         ]);
     }
@@ -68,19 +63,19 @@ class JobFunctionsTable extends Table
             ->allowEmpty('description');
 
         $validator
-            ->boolean('effective_status')
             ->allowEmpty('effective_status');
 
         $validator
+            // ->date('effective_start_date')
             ->allowEmpty('effective_start_date');
 
         $validator
+            // ->date('effective_end_date')
             ->allowEmpty('effective_end_date');
 
         $validator
             ->allowEmpty('job_function_type');
 
-        
         return $validator;
     }
 
@@ -93,8 +88,8 @@ class JobFunctionsTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
-        $rules->add($rules->isUnique(['external_code']));
         $rules->add($rules->existsIn(['customer_id'], 'Customers'));
+        $rules->add($rules->existsIn(['job_id'], 'Jobs'));
 
         return $rules;
     }

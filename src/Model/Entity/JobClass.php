@@ -9,7 +9,7 @@ use Cake\ORM\Entity;
  * @property int $id
  * @property string $name
  * @property string $description
- * @property bool $effective_status
+ * @property string $effective_status
  * @property \Cake\I18n\Time $effective_start_date
  * @property \Cake\I18n\Time $effective_end_date
  * @property string $worker_comp_code
@@ -21,12 +21,12 @@ use Cake\ORM\Entity;
  * @property string $default_supervisor_level
  * @property string $external_code
  * @property int $pay_grade_id
- * @property int $job_function_id
  * @property int $customer_id
  * @property int $job_id
+ * @property int $job_function_id
  *
  * @property \App\Model\Entity\PayGrade $pay_grade
- * @property \App\Model\Entity\JobFunction $job_function
+ * @property \App\Model\Entity\Jobfunction $job_function
  * @property \App\Model\Entity\Customer $customer
  * @property \App\Model\Entity\Job $job
  */

@@ -16,7 +16,7 @@
           <?php
             echo $this->Form->input('position_code',['disabled' => true]);
             echo $this->Form->input('name',['label' => 'Title','disabled' => true]);
-            echo $this->Form->input('effective_status',['label' => 'Status','disabled' => true]);
+            echo $this->Form->input('effective_status',['label' => 'Status','disabled' => true,'class'=>'select2','options' => array('Active', 'Inactive')]);
             echo $this->Form->input('effective_start_date',['value' => !empty($position->effective_start_date) ? $position->effective_start_date->format($mptldateformat) : '','label' => 'Start Date','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
             echo $this->Form->input('effective_end_date',['value' => !empty($position->effective_end_date) ? $position->effective_end_date->format($mptldateformat) : '','label' => 'End Date','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
             echo $this->Form->input('positiontype',['label' => 'Type','disabled' => true]);
@@ -31,7 +31,7 @@
             echo $this->Form->input('job_code',['disabled' => true]);
             echo $this->Form->input('job_level',['disabled' => true]);
             echo $this->Form->input('employee_class',['disabled' => true]);
-            echo $this->Form->input('regular_temporary',['disabled' => true]);
+             echo $this->Form->input('regular_temporary',['label'=>'Regular/Temporary','class'=>'select2','options' => array('Regular'=>'Regular','Temporary'=> 'Temporary'),'disabled' => true]);
             echo $this->Form->input('target_fte',['label' => 'FTE','disabled' => true]);
             echo $this->Form->input('vacant',['disabled' => true]);
             echo $this->Form->input('standard_hours',['disabled' => true]);

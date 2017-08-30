@@ -13,7 +13,7 @@
 	<div class="box box-primary"><div class="box-body">
     <?= $this->Form->create($payComponent,['id'=>'editpcform']) ?>
     <fieldset>
-        <?php
+        <?php 
             echo $this->Form->input('external_code',['label' => 'Pay Component Code']);
             echo $this->Form->input('name',['label' => 'Pay Component Name']);
             echo $this->Form->input('description');
@@ -33,11 +33,16 @@
 			   <div class="form-group">
 				<label class="control-label">Base Pay Component Type</label>
 				<div class="input-group">
-                  		<select class="select2" name="base_pay_component_type" id="base-pay-component-type">
-        					<option></option>
-  							<option value="1">Pay Component Group</option>
-        					<option value="2">Pay Component</option>
-      					</select>
+					<?php
+						if($payComponent['pay_component_type']=="0"){
+							echo '<select class="select2" name="base_pay_component_type" id="base-pay-component-type" disabled="true"><option></option>';
+  							echo '<option value="1">Pay Component Group</option><option value="2">Pay Component</option></select>';
+						}else{
+							echo '<select class="select2" name="base_pay_component_type" id="base-pay-component-type"><option></option>';
+  							echo '<option value="1">Pay Component Group</option><option value="2">Pay Component</option></select>';
+						}
+					?> 
+                  		
       			</div>
               </div>
            </div>
@@ -47,7 +52,13 @@
            	<div class="form-group">
 				<label class="control-label">Base Pay Component</label>
 				<div class="input-group">
-					<input class="form-control basepcgroup" name="base_pay_component_group" id="base-pay-component-group"/>
+					<?php
+						if($payComponent['pay_component_type']=="0"){
+							echo '<input class="form-control basepcgroup" name="base_pay_component_group" id="base-pay-component-group" disabled="true"/>';
+						}else{
+							echo '<input class="form-control basepcgroup" name="base_pay_component_group" id="base-pay-component-group"/>';
+						}
+					?> 					
 				</div>
              </div>
            </div>
@@ -115,6 +126,17 @@
 
     $(function () {
 
+		//enable/disable base pay component & type on pay component type change
+    	$('#pay-component-type').on('change', function () {
+			if(this.value=="1"){
+				$("#base-pay-component-type").prop('disabled', false); 
+    			$("#base-pay-component-group").prop('disabled', false);
+			}else{
+				$("#base-pay-component-type").prop('disabled', true); 
+    			$("#base-pay-component-group").prop('disabled', true);
+			}  	
+  		});
+  		
     	 var bpct='<?php echo $payComponent['base_pay_component_type'] ?>';
     	 $("#base-pay-component-type").val(bpct);
 
@@ -210,7 +232,7 @@
 
 
 						if(startdate!="" && startdate!=null && groupstartdate!="" && groupstartdate!=null && enddate!="" && enddate!=null && groupenddate!="" && groupenddate!=null){
-							// console.log(processDate(startdate)+"--"+processDate(groupstartdate)+"--" +processDate(enddate)+"--"+processDate(groupenddate));
+							console.log(processDate(startdate)+"--"+processDate(groupstartdate)+"--" +processDate(enddate)+"--"+processDate(groupenddate));return false;
               if((processDate(startdate)>processDate(groupenddate))){
     							sweet_alert("Start Date exceeds the end date of the selected Pay Component Group.");
 								return false;
