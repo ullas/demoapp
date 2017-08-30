@@ -9,12 +9,15 @@ use Cake\ORM\Entity;
  * @property int $id
  * @property string $name
  * @property string $description
- * @property bool $status
+ * @property string $status
  * @property \Cake\I18n\Time $start_date
  * @property \Cake\I18n\Time $end_date
  * @property float $pay_grade_level
  * @property string $external_code
  * @property int $customer_id
+ *
+ * @property \App\Model\Entity\Customer $customer
+ * @property \App\Model\Entity\Jobclass[] $job_classes
  */
 class PayGrade extends Entity
 {

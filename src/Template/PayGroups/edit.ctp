@@ -22,7 +22,7 @@
             echo $this->Form->input('division_id', ['class' => 'select2','options' => $divisions, 'empty' => true]);
             echo $this->Form->input('location_id', ['class' => 'select2','options' => $locations, 'empty' => true]);
 			
-		echo $this->Form->input('effective_status',['label' => 'Status']);
+		echo $this->Form->input('effective_status',['label' => 'Status','class'=>'select2','options' => array('Active', 'Inactive'), 'empty' => 'Choose']);
         echo $this->Form->input('effective_start_date',['value' => !empty($payGroup->effective_start_date) ? $payGroup->effective_start_date->format($mptldateformat) : '','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
         echo $this->Form->input('effective_end_date',['value' => !empty($payGroup->effective_end_date) ? $payGroup->effective_end_date->format($mptldateformat) : '','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
         echo $this->Form->input('earliest_change_date',['value' => !empty($payGroup->earliest_change_date) ? $payGroup->earliest_change_date->format($mptldateformat) : '','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);

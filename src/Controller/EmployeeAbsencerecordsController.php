@@ -94,7 +94,13 @@ class EmployeeAbsencerecordsController extends AppController
 			 $this->Flash->error(__('Payroll under processing.'));
 			 return $this->redirect(['action' => 'index']);
 		}
+<<<<<<< HEAD
+		
+		($this->daytimeFormat==1) ? $mptldateformat='d/m/Y' : $mptldateformat='m/d/Y' ;
+		
+=======
 
+>>>>>>> master
     	$this->loadModel('Workflows');
 		if($this->request->is('ajax')) {
 
@@ -120,7 +126,13 @@ class EmployeeAbsencerecordsController extends AppController
             		'contain' => []
         		]);
 				$employeeAbsencerecord = $this->EmployeeAbsencerecords->patchEntity($employeeAbsencerecord, $this->request->data);
+<<<<<<< HEAD
+				$employeeAbsencerecord["start_date"] = $employeeAbsencerecord["start_date"]->format($mptldateformat); 
+				$employeeAbsencerecord["end_date"] = $employeeAbsencerecord["end_date"]->format($mptldateformat); 
+				$employeeAbsencerecord["status"] = "2" ;
+=======
 				$employeeAbsencerecord["status"] = "2";
+>>>>>>> master
            	 	if ($this->EmployeeAbsencerecords->save($employeeAbsencerecord)) {
 					$this->response->body("success");
 	    			return $this->response;
@@ -483,7 +495,14 @@ class EmployeeAbsencerecordsController extends AppController
     						'contain' => array('TimeTypes'), 'limit' => 200))->where(['time_type_profile_id' => $timetypeprofileid]);
 
 		$this->set('timeTypes', $timeTypes);
+<<<<<<< HEAD
+		
+		
+		($this->daytimeFormat==1) ? $mptldateformat='d/m/Y' : $mptldateformat='m/d/Y' ;
+		$this->set('mptldateformat', $mptldateformat);
+=======
 
+>>>>>>> master
     }
 
     /**

@@ -5,15 +5,15 @@ use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
-use Cake\Event\Event;
-use Cake\Event\ArrayObject;
-use Cake\Core\Configure;
+
 /**
  * PayRanges Model
  *
  * @property \Cake\ORM\Association\BelongsTo $LegalEntities
  * @property \Cake\ORM\Association\BelongsTo $PayGroups
  * @property \Cake\ORM\Association\BelongsTo $Customers
+ * @property \Cake\ORM\Association\BelongsTo $Frequencies
+ * @property \Cake\ORM\Association\HasMany $Positions
  *
  * @method \App\Model\Entity\PayRange get($primaryKey, $options = [])
  * @method \App\Model\Entity\PayRange newEntity($data = null, array $options = [])
@@ -49,6 +49,12 @@ class PayRangesTable extends Table
         $this->belongsTo('Customers', [
             'foreignKey' => 'customer_id'
         ]);
+        $this->belongsTo('Frequencies', [
+            'foreignKey' => 'frequency_id'
+        ]);
+        $this->hasMany('Positions', [
+            'foreignKey' => 'pay_range_id','dependent' => true
+        ]);
     }
 
     /**
@@ -59,6 +65,9 @@ class PayRangesTable extends Table
      */
     public function validationDefault(Validator $validator)
     {
+        $validator
+            ->allowEmpty('id', 'create');
+
         $validator
             ->allowEmpty('name');
 
@@ -78,9 +87,6 @@ class PayRangesTable extends Table
 
         $validator
             ->allowEmpty('currency');
-
-        $validator
-            ->allowEmpty('frequency_code');
 
         $validator
             ->decimal('minimum_pay')
@@ -106,30 +112,13 @@ class PayRangesTable extends Table
             ->allowEmpty('geo_zone');
 
         $validator
-            ->allowEmpty('id', 'create');
-
-        $validator
             ->requirePresence('external_code', 'create')
             ->notEmpty('external_code')
             ->add('external_code', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
 
         return $validator;
     }
-	// public function beforeMarshal(Event $event, $data, $options)
-	// {
-		// $userdf = Configure::read('userdf');
-		// if(isset($userdf)  & $userdf===1){
-// 
-			// foreach (["start_date","end_date"] as $value) {		
-				// if(isset($data[$value])){			
-						// if($data[$value]!=null && $data[$value]!='' && strpos($data[$value], '/') !== false){
-						// $data[$value] = str_replace('/', '-', $data[$value]);
-						// $data[$value]=date('Y/m/d', strtotime($data[$value]));
-					// }
-				// }
-			// }
-		// }
-	// }
+
     /**
      * Returns a rules checker object that will be used for validating
      * application integrity.
@@ -143,6 +132,7 @@ class PayRangesTable extends Table
         $rules->add($rules->existsIn(['legal_entity_id'], 'LegalEntities'));
         $rules->add($rules->existsIn(['pay_group_id'], 'PayGroups'));
         $rules->add($rules->existsIn(['customer_id'], 'Customers'));
+        $rules->add($rules->existsIn(['frequency_id'], 'Frequencies'));
 
         return $rules;
     }

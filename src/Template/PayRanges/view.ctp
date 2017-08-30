@@ -23,7 +23,7 @@
             echo $this->Form->input('start_date',['class' => 'mptldp','value' => !empty($payRange->start_date) ? $payRange->start_date->format($mptldateformat) : '','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
             echo $this->Form->input('end_date',['class' => 'mptldp','value' => !empty($payRange->end_date) ? $payRange->end_date->format($mptldateformat) : '','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
             echo $this->Form->input('currency',['options' => $this->Currency->get_currencies(), 'disabled' => true]);
-            echo $this->Form->input('frequency_code',['label' => 'Frequency','disabled' => true]);
+            echo $this->Form->input('frequency_id',['label' => 'Frequency','disabled' => true, 'empty' => 'Choose']);
             echo $this->Form->input('minimum_pay',['disabled' => true]);
             echo $this->Form->input('maximum_pay',['disabled' => true]);
             echo $this->Form->input('increment',['disabled' => true]);

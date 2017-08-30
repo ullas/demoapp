@@ -6,9 +6,6 @@ use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
 
-use Cake\Event\Event;
-use Cake\Event\ArrayObject;
-use Cake\Core\Configure;
 /**
  * PayGroups Model
  *
@@ -65,25 +62,25 @@ class PayGroupsTable extends Table
             'foreignKey' => 'division_id'
         ]);
         $this->belongsTo('Locations', [
-            'foreignKey' => 'location_id'
+            'foreignKey' => 'location_id','dependent' => true
         ]);
         $this->hasMany('Jobinfos', [
-            'foreignKey' => 'pay_group_id','dependent'=>true
+            'foreignKey' => 'pay_group_id','dependent' => true
         ]);
         $this->hasMany('PayRanges', [
-            'foreignKey' => 'pay_group_id','dependent'=>true
+            'foreignKey' => 'pay_group_id','dependent' => true
         ]);
         $this->hasMany('PayrollRecord', [
-            'foreignKey' => 'pay_group_id','dependent'=>true
+            'foreignKey' => 'pay_group_id','dependent' => true
         ]);
         $this->hasMany('PayrollResult', [
-            'foreignKey' => 'pay_group_id','dependent'=>true
+            'foreignKey' => 'pay_group_id','dependent' => true
         ]);
         $this->hasMany('PayrollStatus', [
-            'foreignKey' => 'pay_group_id','dependent'=>true
+            'foreignKey' => 'pay_group_id','dependent' => true
         ]);
     }
-	
+
     /**
      * Default validation rules.
      *
@@ -102,7 +99,6 @@ class PayGroupsTable extends Table
             ->allowEmpty('description');
 
         $validator
-            ->boolean('effective_status')
             ->allowEmpty('effective_status');
 
         $validator
@@ -156,6 +152,7 @@ class PayGroupsTable extends Table
 
         return $validator;
     }
+
     /**
      * Returns a rules checker object that will be used for validating
      * application integrity.
