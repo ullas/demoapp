@@ -306,7 +306,7 @@ use Cake\Utility\Inflector;
                            		}
                            }
 						   //get country name from code
-						   $countryfields=array("HolidayCalendars.country","TimeTypeProfiles.country");
+						   $countryfields=array("HolidayCalendars.country","TimeTypeProfiles.country","WorkSchedules.country");
 						   if ((in_array($c, $countryfields)) && ($row[ $column['dt'] ])!=""){
                    				$row[ $column['dt'] ] = $this->get_country_name($row[ $column['dt'] ]);
 						   }

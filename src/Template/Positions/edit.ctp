@@ -15,7 +15,7 @@
         <?php
             echo $this->Form->input('position_code');
             echo $this->Form->input('name',['label' => 'Title']);
-            echo $this->Form->input('effective_status',['label' => 'Status']);
+            echo $this->Form->input('effective_status',['label' => 'Status','class'=>'select2','options' => array('Active', 'Inactive')]);
             echo $this->Form->input('effective_start_date',['value' => !empty($position->effective_start_date) ? $position->effective_start_date->format($mptldateformat) : '','label' => 'Start Date','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
             echo $this->Form->input('effective_end_date',['value' => !empty($position->effective_end_date) ? $position->effective_end_date->format($mptldateformat) : '','label' => 'End Date','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
             echo $this->Form->input('positiontype',['label' => 'Type']);
@@ -30,7 +30,7 @@
             echo $this->Form->input('job_code');
             echo $this->Form->input('job_level');
             echo $this->Form->input('employee_class');
-            echo $this->Form->input('regular_temporary');
+            echo $this->Form->input('regular_temporary',['label'=>'Regular/Temporary','class'=>'select2','options' => array('Regular'=>'Regular','Temporary'=> 'Temporary')]);
             echo $this->Form->input('target_fte',['label' => 'FTE']);
             echo $this->Form->input('vacant');
             echo $this->Form->input('standard_hours');

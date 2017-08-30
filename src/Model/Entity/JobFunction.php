@@ -4,19 +4,23 @@ namespace App\Model\Entity;
 use Cake\ORM\Entity;
 
 /**
- * JobFunction Entity
+ * Jobfunction Entity
  *
  * @property int $id
  * @property string $name
  * @property string $description
- * @property bool $effective_status
+ * @property string $effective_status
  * @property \Cake\I18n\Time $effective_start_date
  * @property \Cake\I18n\Time $effective_end_date
  * @property string $job_function_type
- * @property string $external_code
  * @property int $customer_id
+ * @property int $job_id
+ *
+ * @property \App\Model\Entity\Customer $customer
+ * @property \App\Model\Entity\Jobclass[] $job_classes
+ * @property \App\Model\Entity\Job $job
  */
-class JobFunction extends Entity
+class Jobfunction extends Entity
 {
 
     /**

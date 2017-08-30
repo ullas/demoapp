@@ -18,14 +18,14 @@
     <fieldset><?php
             echo $this->Form->input('external_code',['label' => 'Job Code','disabled'=>true]);
             echo $this->Form->input('name',['label' => 'Job Title','disabled'=>true]);
-            echo $this->Form->input('description',['label' => 'Status','disabled'=>true]);
-            echo $this->Form->input('effective_status',['disabled'=>true]);
+            echo $this->Form->input('description',['disabled'=>true]);
+            echo $this->Form->input('effective_status',['label' => 'Status','disabled'=>true,'class'=>'select2','options' => array('Active', 'Inactive')]);
             echo $this->Form->input('effective_start_date', ['value' => !empty($jobclass->effective_start_date) ? $jobclass->effective_start_date->format($mptldateformat) : '','label' => 'Start Date','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled'=>true]);
             echo $this->Form->input('effective_end_date', ['value' => !empty($jobclass->effective_end_date) ? $jobclass->effective_end_date->format($mptldateformat) : '','label' => 'End Date','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled'=>true]);
             echo $this->Form->input('worker_comp_code',['label' => 'Workers Comp Code','disabled'=>true]);
             echo $this->Form->input('default_job_level',['label' => 'Job Level','disabled'=>true]);
             echo $this->Form->input('standard_weekly_hours',['disabled'=>true]);
-            echo $this->Form->input('regular_temporary',['label' => 'Regular/Temporary','disabled'=>true]);
+            echo $this->Form->input('regular_temporary',['label' => 'Regular/Temporary','disabled'=>true,'class'=>'select2','options' => array('Regular'=>'Regular','Temporary'=> 'Temporary')]);
             echo $this->Form->input('default_employee_class',['label' => 'Employee Class','disabled'=>true]);
             echo $this->Form->input('full_time_employee',['disabled'=>true]);
             echo $this->Form->input('default_supervisor_level',['label' => 'Supervisor Level','disabled'=>true]);
