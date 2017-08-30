@@ -19,7 +19,7 @@
             echo $this->Form->input('start_date',['value' => !empty($timeTypeProfile->start_date) ? $timeTypeProfile->start_date->format($mptldateformat) : '','label' => 'Time Type Profile Start Date','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
             echo $this->Form->input('time_rec_variant',['label' => 'Time Recording Variant','time_rec_variant','disabled' => true]);
             echo $this->Form->input('time_types._ids', ['options' => $timeTypes, 'empty' => true,'disabled' => true,'class'=>'select2']);
-            echo $this->Form->input('status',['disabled' => true]);
+            echo $this->Form->input('status',['disabled' => true,'class'=>'select2','options' => array('Active', 'Inactive')]);
             echo $this->Form->input('enable_ess',['label' => 'Enable for ESS','disabled' => true]);
         ?>
     </fieldset>

@@ -110,6 +110,19 @@
 	}
 
     $(function () {
+    	
+    	//disable base pay component & type on page load
+    	$("#base-pay-component-type").prop('disabled', true); 
+    	$("#base-pay-component-group").prop('disabled', true);
+    	$('#pay-component-type').on('change', function () {
+			if(this.value=="1"){
+				$("#base-pay-component-type").prop('disabled', false); 
+    			$("#base-pay-component-group").prop('disabled', false);
+			}else{
+				$("#base-pay-component-type").prop('disabled', true); 
+    			$("#base-pay-component-group").prop('disabled', true);
+			}  	
+  		});
 
     	$('.mptladd').click(function(e){
 			

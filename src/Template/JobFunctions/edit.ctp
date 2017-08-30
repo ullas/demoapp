@@ -12,12 +12,11 @@
 	<div class="box box-primary"><div class="box-body">
     <?= $this->Form->create($jobFunction) ?>
     <fieldset>
-        <legend><?= __('Edit Job Function') ?></legend>
         <?php
             echo $this->Form->input('external_code');
             echo $this->Form->input('name');
             echo $this->Form->input('description');
-            echo $this->Form->input('effective_status',['label' => 'Status']);
+            echo $this->Form->input('effective_status',['label' => 'Status','class'=>'select2','options' => array('Active', 'Inactive')]);
 			      echo $this->Form->input('effective_start_date', ['value' => !empty($jobFunction->effective_start_date) ? $jobFunction->effective_start_date->format($mptldateformat) : '','label' => 'Start Date','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
 			      echo $this->Form->input('effective_end_date', ['value' => !empty($jobFunction->effective_end_date) ? $jobFunction->effective_end_date->format($mptldateformat) : '','label' => 'End Date','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
             echo $this->Form->input('job_function_type');

@@ -26,7 +26,7 @@ class JobClassesController extends AppController
 		foreach($dbout as $value){
 			$fields[] = array("name" => $value['field_name'] , "type" => $value['datatype'] );
 		}
-		$contains=['PayGrades', 'JobFunctions', 'Customers', 'Jobs'];
+		$contains=['PayGrades', 'Jobfunctions', 'Customers', 'Jobs'];
 									  
 		$usrfilter="JobClasses.customer_id ='".$this->loggedinuser['customer_id'] . "'";								  
 		$output =$this->Datatable->getView($fields,$contains,$usrfilter);
@@ -39,7 +39,7 @@ class JobClassesController extends AppController
         $this->set('configs',$configs);
 		
         $this->paginate = [
-            'contain' => ['PayGrades', 'JobFunctions', 'Customers', 'Jobs']
+            'contain' => ['PayGrades', 'Jobfunctions', 'Customers', 'Jobs']
         ];
         $jobclasses = $this->paginate($this->JobClasses);
 
@@ -60,7 +60,7 @@ class JobClassesController extends AppController
     public function view($id = null)
     {
         $jobclass = $this->JobClasses->get($id, [
-            'contain' => ['PayGrades', 'JobFunctions', 'Customers', 'Jobs']
+            'contain' => ['PayGrades', 'Jobfunctions', 'Customers', 'Jobs']
         ]);
 		if($jobclass['customer_id']==$this->loggedinuser['customer_id'])
 		{
@@ -85,9 +85,9 @@ class JobClassesController extends AppController
     {
         $jobclass = $this->JobClasses->newEntity();
         if ($this->request->is('post')) {
-            $jobclass = $this->Jobclasses->patchEntity($jobclass, $this->request->data);
+            $jobclass = $this->JobClasses->patchEntity($jobclass, $this->request->data);
 			$jobclass['customer_id']=$this->loggedinuser['customer_id'];
-            if ($this->Jobclasses->save($jobclass)) {
+            if ($this->JobClasses->save($jobclass)) {
                 $this->Flash->success(__('The jobclass has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
@@ -124,7 +124,7 @@ class JobClassesController extends AppController
 		
         if ($this->request->is(['patch', 'post', 'put'])) {
             $jobclass = $this->JobClasses->patchEntity($jobclass, $this->request->data);
-            if ($this->Jobclasses->save($jobclass)) {
+            if ($this->JobClasses->save($jobclass)) {
                 $this->Flash->success(__('The jobclass has been saved.'));
 
                 return $this->redirect(['action' => 'index']);

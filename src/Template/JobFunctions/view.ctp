@@ -20,7 +20,7 @@
              	echo $this->Form->input('external_code',['disabled' => true]);
              	echo $this->Form->input('name',['disabled' => true]);
             	echo $this->Form->input('description',['disabled' => true]);
-            	echo $this->Form->input('effective_status',['label' => 'Status','disabled' => true]);
+            	echo $this->Form->input('effective_status',['label' => 'Status','disabled' => true,'class'=>'select2','options' => array('Active', 'Inactive')]);
 				      echo $this->Form->input('effective_start_date', [['value' => !empty($jobFunction->effective_start_date) ? $jobFunction->effective_start_date->format($mptldateformat) : '','label' => 'Start Date','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
 				      echo $this->Form->input('effective_end_date', [['value' => !empty($jobFunction->effective_end_date) ? $jobFunction->effective_end_date->format($mptldateformat) : '','label' => 'End Date','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
             	echo $this->Form->input('job_function_type',['disabled' => true]);

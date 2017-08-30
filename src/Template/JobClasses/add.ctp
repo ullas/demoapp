@@ -16,13 +16,13 @@
             echo $this->Form->input('external_code',['label' => 'Job Code']);
             echo $this->Form->input('name',['label' => 'Job Title']);
             echo $this->Form->input('description');
-            echo $this->Form->input('effective_status',['label' => 'Status']);
+            echo $this->Form->input('effective_status',['label' => 'Status','class'=>'select2','options' => array('Active', 'Inactive')]);
             echo $this->Form->input('effective_start_date', ['label' => 'Start Date','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
             echo $this->Form->input('effective_end_date', ['label' => 'End Date','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
             echo $this->Form->input('worker_comp_code',['label' => 'Workers Comp Code']);
             echo $this->Form->input('default_job_level',['label' => 'Job Level']);
             echo $this->Form->input('standard_weekly_hours');
-            echo $this->Form->input('regular_temporary',['label' => 'Regular/Temporary']);
+            echo $this->Form->input('regular_temporary',['label' => 'Regular/Temporary','class'=>'select2','options' => array('Regular'=>'Regular','Temporary'=> 'Temporary')]);
             echo $this->Form->input('default_employee_class',['label' => 'Employee Class']);
             echo $this->Form->input('full_time_employee');
             echo $this->Form->input('default_supervisor_level',['label' => 'Supervisor Level']);

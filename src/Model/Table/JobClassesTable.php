@@ -5,16 +5,14 @@ use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
-use Cake\Event\Event;
-use Cake\Event\ArrayObject;
-use Cake\Core\Configure;
+
 /**
  * Jobclasses Model
  *
  * @property \Cake\ORM\Association\BelongsTo $PayGrades
- * @property \Cake\ORM\Association\BelongsTo $JobFunctions
  * @property \Cake\ORM\Association\BelongsTo $Customers
  * @property \Cake\ORM\Association\BelongsTo $Jobs
+ * @property \Cake\ORM\Association\BelongsTo $Jobfunctions
  *
  * @method \App\Model\Entity\Jobclass get($primaryKey, $options = [])
  * @method \App\Model\Entity\Jobclass newEntity($data = null, array $options = [])
@@ -44,14 +42,14 @@ class JobclassesTable extends Table
         $this->belongsTo('PayGrades', [
             'foreignKey' => 'pay_grade_id'
         ]);
-        $this->belongsTo('JobFunctions', [
-            'foreignKey' => 'job_function_id'
-        ]);
         $this->belongsTo('Customers', [
             'foreignKey' => 'customer_id'
         ]);
         $this->belongsTo('Jobs', [
             'foreignKey' => 'job_id'
+        ]);
+        $this->belongsTo('Jobfunctions', [
+            'foreignKey' => 'job_function_id'
         ]);
     }
 
@@ -73,13 +71,14 @@ class JobclassesTable extends Table
             ->allowEmpty('description');
 
         $validator
-            ->boolean('effective_status')
             ->allowEmpty('effective_status');
 
         $validator
+            // ->date('effective_start_date')
             ->allowEmpty('effective_start_date');
 
         $validator
+            // ->date('effective_end_date')
             ->allowEmpty('effective_end_date');
 
         $validator
@@ -112,6 +111,7 @@ class JobclassesTable extends Table
 
         return $validator;
     }
+
     /**
      * Returns a rules checker object that will be used for validating
      * application integrity.
@@ -123,9 +123,9 @@ class JobclassesTable extends Table
     {
         $rules->add($rules->isUnique(['external_code']));
         $rules->add($rules->existsIn(['pay_grade_id'], 'PayGrades'));
-        $rules->add($rules->existsIn(['job_function_id'], 'JobFunctions'));
         $rules->add($rules->existsIn(['customer_id'], 'Customers'));
         $rules->add($rules->existsIn(['job_id'], 'Jobs'));
+        $rules->add($rules->existsIn(['job_function_id'], 'Jobfunctions'));
 
         return $rules;
     }
