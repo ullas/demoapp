@@ -441,7 +441,7 @@ class EmployeeAbsencerecordsController extends AppController
 		$jobinfoarr=$this->JobInfos->find('all',['conditions' => array('employee_id' => $this->request->session()->read('sessionuser')['employee_id'])])->toArray();
 		isset($jobinfoarr[0]) ? $holidaycalid = $jobinfoarr[0]['holiday_calendar_id'] : $holidaycalid = "" ; 
 		
-		$fields = array();
+		$fields = array();$holidaysarr=[];
 		if($holidaycalid!="" && $holidaycalid!=null){
 			$this->loadModel('Holidays');
 			$holidaysarr=$this->Holidays->find('all',['conditions' => array('holiday_calendar_id' => $holidaycalid)]);
