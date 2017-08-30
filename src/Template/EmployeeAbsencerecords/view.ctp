@@ -41,7 +41,7 @@
 		<ul class="timeline timeline-inverse">
 			<!-- timeline time label -->
     		<li class="time-label">
-        		<span class="bg-aqua-gradient"><?php echo $employeeAbsencerecord["start_date"] ;  ?></span>
+        		<span class="bg-aqua-gradient"><?php echo $employeeAbsencerecord["start_date"]->format($mptldateformat) ;  ?></span>
     		</li>
     		<!-- status=0 for pending,1 for approved,2 for denied,3 for skipped by time    -->
     		<?php  foreach ($workflowhistory as $value): ?>
@@ -52,7 +52,7 @@
     		
     		<!-- END timeline item -->
     		<li class="time-label">
-        		<span class="bg-olive"><?php echo $employeeAbsencerecord["end_date"] ;  ?></span>
+        		<span class="bg-olive"><?php echo $employeeAbsencerecord["end_date"]->format($mptldateformat) ;  ?></span>
     		</li>
     	</ul>
 	</div>
