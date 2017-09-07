@@ -65,15 +65,15 @@
 
 <section class="content" id="gridsection" >
 	
-	<div class="box-tools pull-right"style="margin-bottom:15px;" >
+	<div class="box-tools pull-left"style="margin-bottom:15px;" >
 		
-		<a class="btn btn-sm btn-success btn-flat mptlascbtn"><i class="fa fa-sort-alpha-asc"></i> </a>
-  		<a class="btn btn-sm btn-success btn-flat mptldescbtn"><i class="fa fa-sort-alpha-desc"></i> </a>
-  		
-                <div class="has-feedback" style="float: left;margin-right: 10px;">
-                  <input type="text" id="empsearch"  onkeyup="searchemployee()"  class="form-control input-sm" placeholder="Search...">
-                  <span class="glyphicon glyphicon-search form-control-feedback"></span>
-                </div>
+		<a class="btn btn-sm btn-success btn-flat mptlascbtn pull-left"><i class="fa fa-sort-alpha-asc"></i> </a>
+  		<a class="btn btn-sm btn-success btn-flat mptldescbtn pull-left"><i class="fa fa-sort-alpha-desc"></i> </a>
+		
+		<div class="has-feedback" style="float: left;margin-right: 10px;">
+			<input type="text" id="empsearch"  onkeyup="searchemployee()"  class="form-control input-sm" placeholder="Search...">
+        	<span class="glyphicon glyphicon-search form-control-feedback"></span>
+		</div>
   		
     </div>
     

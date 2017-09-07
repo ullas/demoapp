@@ -232,7 +232,8 @@
 
 
 						if(startdate!="" && startdate!=null && groupstartdate!="" && groupstartdate!=null && enddate!="" && enddate!=null && groupenddate!="" && groupenddate!=null){
-							console.log(processDate(startdate)+"--"+processDate(groupstartdate)+"--" +processDate(enddate)+"--"+processDate(groupenddate));return false;
+							// console.log((processDate(enddate)<processDate(groupstartdate)));return false;
+							// console.log(processDate(startdate)+"--"+processDate(groupstartdate)+"--" +processDate(enddate)+"--"+processDate(groupenddate));return false;
               if((processDate(startdate)>processDate(groupenddate))){
     							sweet_alert("Start Date exceeds the end date of the selected Pay Component Group.");
 								return false;

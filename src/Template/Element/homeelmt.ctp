@@ -3,7 +3,8 @@ $elmntstring;
 $title=preg_replace('/\s+/', '', $title);
 switch (strtolower($title)) {
     case "myinfo":
-		if($mypic!=""){
+        //checking image exists in folder											
+		if($mypic!="" &&  file_exists(WWW_ROOT.'img'.DS.'uploadedpics'.DS.$mypic)){					
         	$picturename='/img/uploadedpics/'.$mypic;
         	echo $this->Html->image($picturename, array('class' => 'img-responsive', 'id'=>'myinfopic', 'alt' => 'User profile picture')); 
 		}else{

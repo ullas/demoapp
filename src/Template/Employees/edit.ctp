@@ -1405,7 +1405,7 @@ $(document).ready(function(){
 			return false;
 		}			
 
-function saveQualifications(empid){
+	function saveQualifications(empid){
 		
 		var qualclasscount = $('.qualificationclass').length;
 		
