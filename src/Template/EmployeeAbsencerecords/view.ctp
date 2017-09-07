@@ -46,7 +46,7 @@
     		<!-- status=0 for pending,1 for approved,2 for denied,3 for skipped by time    -->
     		<?php  foreach ($workflowhistory as $value): ?>
     			
-    			<?= $this->element('statuselement', array('title' => $value['user']['username'], 'subtitle'=>$value['status'], 'description'=>$value['description'], 'status' => "0", 'time' => $value['updatetime'] )); ?>
+    			<?= $this->element('statuselement', array('title' => $value['user']['username'], 'subtitle'=>$value['status'], 'description'=>$value['description'], 'status' => "0", 'time' => $value['updatetime']->format($mptldatetimeformat) )); ?>
     		
     		<?php endforeach; ?>
     		

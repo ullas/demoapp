@@ -170,29 +170,13 @@ $.each(absentsarr, function(key, value) {
     var d = date.getDate(),
         m = date.getMonth(),
         y = date.getFullYear();
-    $('#calendar').fullCalendar({
-      header: {
-        left: 'prev,next today',
-        center: 'title',
-        right: 'months,month,agendaWeek,agendaDay'
-      },
-      
+        
+    $('#calendar').fullCalendar({   	
+      header: { left: 'prev,next today', center: 'title', right: 'months,month,agendaWeek,agendaDay' },
       // defaultView: 'months',
-      views: {
-        months: {
-            type: 'basic',
-            duration: { months: 3 },
-            buttonText: '3 months'
-        }
-    },
-    
-      buttonText: {
-        today: 'today',
-        month: 'month',
-        week: 'week',
-        day: 'day'
-      },
-      //Random default events
+      views: { months: { type: 'basic', duration: { months: 3 }, buttonText: '3 months' } },    
+      buttonText: { today: 'today', month: 'month', week: 'week', day: 'day' },
+      // Random default events
       events: holidayevents,
       editable: true,
       droppable: true, // this allows things to be dropped onto the calendar !!!
@@ -200,16 +184,13 @@ $.each(absentsarr, function(key, value) {
 
         // retrieve the dropped element's stored Event Object
         var originalEventObject = $(this).data('eventObject');
-
         // we need to copy it, so that multiple events don't have a reference to the same object
         var copiedEventObject = $.extend({}, originalEventObject);
-
         // assign it the date that was reported
         copiedEventObject.start = date;
         copiedEventObject.allDay = allDay;
         copiedEventObject.backgroundColor = $(this).css("background-color");
         copiedEventObject.borderColor = $(this).css("border-color");
-
         // render the event on the calendar
         // the last `true` argument determines if the event "sticks" (http://arshaw.com/fullcalendar/docs/event_rendering/renderEvent/)
         $('#calendar').fullCalendar('renderEvent', copiedEventObject, true);
@@ -219,8 +200,8 @@ $.each(absentsarr, function(key, value) {
           // if so, remove the element from the "Draggable Events" list
           $(this).remove();
         }
-
-      },dayRender: function (date, cell) {
+      },
+      dayRender: function (date, cell) {
       	var d = new Date(date);//console.log(d);
         if ((absents.indexOf(d.toUTCString()) > -1)) {
             cell.css("background-color", "#dd4b39");
@@ -228,37 +209,37 @@ $.each(absentsarr, function(key, value) {
         if ((holidays.indexOf(d.toUTCString()) > -1)) {
             cell.css("background-color", "#f39c12");
         }
-     },
+      },
       eventRender: function(event, element) {
             element.append( "<div style='position:absolute;bottom:0px;right:0px;'><i class='closeon fa fa-1x fa-times'></i></div>" );
             element.find(".closeon").click(function() {
                $('#calendar').fullCalendar('removeEvents',event._id);
             });
         } 
-
     });
 
     /* ADDING EVENTS */
     var currColor = "#3c8dbc"; //Red by default
     //Color chooser button
     var colorChooser = $("#color-chooser-btn");
-    $("#color-chooser > li > a").click(function (e) {
+    $("#color-chooser > li > a").click(function (e){
       e.preventDefault();
       //Save color
       currColor = $(this).css("color");
       //Add color effect to button
       $('#add-new-event').css({"background-color": currColor, "border-color": currColor});
     });
+    
     $("#add-new-event").click(function (e) {
       e.preventDefault();
       //Get value and make sure it is not null
       var val = $("#new-event").val();
-      if (val.length == 0) {
+      if (val.length == 0){
         return;
       }
 
       //Create events
-      var event = $("<div />");
+      var event = $("<div/>");
       event.css({"background-color": currColor, "border-color": currColor, "color": "#fff"}).addClass("external-event");
       event.html(val);
       $('#external-events').prepend(event);
@@ -270,7 +251,7 @@ $.each(absentsarr, function(key, value) {
       $("#new-event").val("");
     });
     
-    // var event={id:1 , title: 'New event', start:  new Date()};
+    // var event={id:1, title: 'New event', start:  new Date()};
 	// $('#calendar').fullCalendar( 'renderEvent', event, true);
 	
   });

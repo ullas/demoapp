@@ -4,6 +4,7 @@ namespace App\Controller;
 use App\Controller\AppController;
 use Cake\ORM\TableRegistry;
 use Cake\Core\Configure;
+use Cake\Datasource\ConnectionManager;
 
 /**
  * EmployeeAbsencerecords Controller
@@ -110,7 +111,10 @@ class EmployeeAbsencerecordsController extends AppController
 			$workflow['active']="2";
 			$workflow['description']=$this->request->query['description'];
 			$workflow['user_id']=$this->request->session()->read('sessionuser')['id'];
-			
+						
+			$conn = ConnectionManager::get('default');
+			$conn->begin();
+				
 			if ($this->Workflows->save($workflow)) {
 				
 				$this->loadModel('EmployeeAbsencerecords');
@@ -125,11 +129,13 @@ class EmployeeAbsencerecordsController extends AppController
 				$employeeAbsencerecord["start_date"] = $employeeAbsencerecord["start_date"]->format($mptldateformat); 
 				$employeeAbsencerecord["end_date"] = $employeeAbsencerecord['end_date']->format($mptldateformat); 
 				$employeeAbsencerecord["status"] = "2" ;
-           	 	if ($this->EmployeeAbsencerecords->save($employeeAbsencerecord)) {
+           	 	if ($this->EmployeeAbsencerecords->save($employeeAbsencerecord)) {$conn->commit();
 					$this->response->body("success");
 	    			return $this->response;
+				}else{
+					$conn->rollback();
 				}
-            } else {
+            } else {$conn->rollback();
                 $this->response->body("error");
 	    		return $this->response;
             }
@@ -147,10 +153,13 @@ class EmployeeAbsencerecordsController extends AppController
 		if($this->request->is('ajax')) {
 			
 			$this->autoRender=false;
-			
+		
 			$employeeAbsencerecord = $this->EmployeeAbsencerecords->get($this->request->data['id']);
 			if($employeeAbsencerecord['customer_id'] == $this->loggedinuser['customer_id']) 
 			{
+				$conn = ConnectionManager::get('default');
+				$conn->begin();
+			
         		if ($this->EmployeeAbsencerecords->delete($employeeAbsencerecord)) {
         						
 					//associated Workflows 
@@ -159,20 +168,23 @@ class EmployeeAbsencerecordsController extends AppController
 					$workflow = $this->Workflows->patchEntity($workflow, $this->request->data);
 					$workflow['active']="2";	
             		if ($this->Workflows->save($workflow)) {
+            				
+            			$conn->commit();
+						
                 		$this->response->body("success");
 	    	 			return $this->response;	 
-					}else {
+					}else {$conn->rollback();     
                 		$this->response->body("The employee absencerecord could not be deleted. Please, try again.");
 	    	 			return $this->response;	 
             		}
 				            	
-        		} else {
+        		} else {$conn->rollback();     
         			$this->response->body("The employee absencerecord could not be deleted. Please, try again.");
 	    	 		return $this->response;	 
         		}
 			}else{
 	   	    	$this->response->body("authorization error");
-	    	 return $this->response;	 
+	    	 	return $this->response;	 
 	    	}
 		}
 	}
@@ -189,6 +201,9 @@ class EmployeeAbsencerecordsController extends AppController
 		if($this->request->is('ajax')) {
 				
 			$this->autoRender=false;
+			
+			$conn = ConnectionManager::get('default');
+			$conn->begin();
 			
 			$workflow = $this->Workflows->get($this->request->query['id'], [
             	'contain' => []
@@ -216,10 +231,10 @@ class EmployeeAbsencerecordsController extends AppController
 			}
 			
 			$this->loadModel('Workflows');
-			if ($this->Workflows->save($workflow)) {
+			if ($this->Workflows->save($workflow)) {$conn->commit();
                 $this->response->body("success");
 	    		return $this->response;
-            } else {
+            } else {$conn->rollback();
                 $this->response->body("error");
 	    		return $this->response;
             }
@@ -240,6 +255,9 @@ class EmployeeAbsencerecordsController extends AppController
 				
 			$this->autoRender=false;
 			
+			$conn = ConnectionManager::get('default');
+			$conn->begin();
+				
 			$this->loadModel('EmployeeAbsencerecords');
 			$employeeAbsencerecord = $this->EmployeeAbsencerecords->newEntity();
         	
@@ -274,14 +292,14 @@ class EmployeeAbsencerecordsController extends AppController
 				$employeeAbsencerecord["start_date"] = $this->request->data["startdate"];
 				$employeeAbsencerecord["end_date"] = $this->request->data["enddate"];
 				$employeeAbsencerecord["workflow_id"] = $workflow['id'];
-            	if ($this->EmployeeAbsencerecords->save($employeeAbsencerecord)) {
+            	if ($this->EmployeeAbsencerecords->save($employeeAbsencerecord)) {$conn->commit();
                 	$this->response->body("success");
 	    	 		return $this->response;	 
-                } else {
+                } else {$conn->rollback();
                 	$this->response->body("error");
 	    	 		return $this->response;	 
             	}	
-            } else {
+            } else {$conn->rollback();
                 $this->response->body("error");
 	    	 	return $this->response;	 
             }
@@ -302,6 +320,9 @@ class EmployeeAbsencerecordsController extends AppController
 				
 			$this->autoRender=false;
 			
+			$conn = ConnectionManager::get('default');
+			$conn->begin();
+				
 			$this->loadModel('EmployeeAbsencerecords');
 			$employeeAbsencerecord = $this->EmployeeAbsencerecords->get($this->request->data["leaveid"], [ 'contain' => [] ]);
 	
@@ -328,15 +349,15 @@ class EmployeeAbsencerecordsController extends AppController
 				$workflow['user_id']=$this->request->session()->read('sessionuser')['id'];
 				if($workflowactioncount!=""){ $workflow['lastaction']=$workflowactioncount; }	
 				
-            	if ($this->Workflows->save($workflow)) {
+            	if ($this->Workflows->save($workflow)) {$conn->commit();
                 	$this->response->body("success");
 	    	 		return $this->response;	
-				}else {
+				}else {$conn->rollback();
 					
                 	$this->response->body("error");
 	    	 		return $this->response;	
             	}
-            } else {
+            } else {$conn->rollback();
                 $this->response->body("error");
 	    	 	return $this->response;	
             }
@@ -541,6 +562,9 @@ class EmployeeAbsencerecordsController extends AppController
         $employeeAbsencerecord = $this->EmployeeAbsencerecords->newEntity();
         if ($this->request->is('post')) {
         	
+			$conn = ConnectionManager::get('default');
+			$conn->begin();
+				
             $this->loadModel('TimeTypes');
 			$arr = $this->TimeTypes->find('all',['conditions' => array('id' => $this->request->data["time_type_id"]), 'contain' => []])->toArray();
 			isset($arr[0]) ? $workflowruleid = $arr[0]['workflowrule_id'] : $workflowruleid = "0";  
@@ -569,16 +593,17 @@ class EmployeeAbsencerecordsController extends AppController
 				$employeeAbsencerecord["created_by"] = $this->request->session()->read('sessionuser')['id'];
 				$employeeAbsencerecord["status"] = "0";
 				$employeeAbsencerecord["workflow_id"] = $workflow['id'];
-            	if ($this->EmployeeAbsencerecords->save($employeeAbsencerecord)) {
+            	if ($this->EmployeeAbsencerecords->save($employeeAbsencerecord)) {$conn->commit();
                 	$this->Flash->success(__('The employee absencerecord has been saved.'));	
                 	return $this->redirect(['action' => 'index']);	
-                } else {
+                } else {$conn->rollback();
                 	$this->Flash->error(__('The employee absencerecord could not be saved. Please, try again.'));
             	}	
-            } else {
+            } else {$conn->rollback();
                 $this->Flash->error(__('The employee absencerecord could not be saved. Please, try again.'));
             }
         }
+
 		$this->loadModel('JobInfos');
 		$arr = $this->JobInfos->find('all',['conditions' => array('employee_id' => $this->request->session()->read('sessionuser')['employee_id'] ), 'contain' => []])->toArray();
 		isset($arr[0]) ? $timetypeprofileid = $arr[0]['time_type_profile_id'] : $timetypeprofileid = "0";  
@@ -621,6 +646,10 @@ class EmployeeAbsencerecordsController extends AppController
 		}
 		
         if ($this->request->is(['patch', 'post', 'put'])) {
+        	
+			$conn = ConnectionManager::get('default');
+			$conn->begin();
+			
             $employeeAbsencerecord = $this->EmployeeAbsencerecords->patchEntity($employeeAbsencerecord, $this->request->data);
 			$employeeAbsencerecord["modified_by"] = $this->request->session()->read('sessionuser')['id'] ; 
             if ($this->EmployeeAbsencerecords->save($employeeAbsencerecord)) {
@@ -642,13 +671,13 @@ class EmployeeAbsencerecordsController extends AppController
 				if($workflowactioncount!=""){ $workflow['lastaction']=$workflowactioncount; }	
 				// $workflow['active']="0";	
 				// $workflow["emp_data_biographies_id"] = $this->request->session()->read('sessionuser')['empdatabiographyid'] ; 
-            	if ($this->Workflows->save($workflow)) {
+            	if ($this->Workflows->save($workflow)) {$conn->commit();
                 	$this->Flash->success(__('The employee absencerecord has been saved.'));
                 	return $this->redirect(['action' => 'index']);
-				}else {
+				}else {$conn->rollback();
                 	$this->Flash->error(__('The employee absencerecord could not be saved. Please, try again.'));
             	}
-            } else {
+            } else {$conn->rollback();
                 $this->Flash->error(__('The employee absencerecord could not be saved. Please, try again.'));
             }
         }
@@ -687,6 +716,9 @@ class EmployeeAbsencerecordsController extends AppController
         $employeeAbsencerecord = $this->EmployeeAbsencerecords->get($id);
 		if($employeeAbsencerecord['customer_id'] == $this->loggedinuser['customer_id']) 
 		{
+			$conn = ConnectionManager::get('default');
+			$conn->begin();
+			
         	if ($this->EmployeeAbsencerecords->delete($employeeAbsencerecord)) {
         						
 				//associated Workflows 
@@ -694,14 +726,14 @@ class EmployeeAbsencerecordsController extends AppController
 				$workflow = $this->Workflows->get($employeeAbsencerecord["workflow_id"], ['contain' => []]);
 				$workflow = $this->Workflows->patchEntity($workflow, $this->request->data);
 				$workflow['active']="2";	
-            	if ($this->Workflows->save($workflow)) {
+            	if ($this->Workflows->save($workflow)) {$conn->commit();
                 	$this->Flash->success(__('The employee absencerecord has been deleted.'));
                 	return $this->redirect($this->referer());
-				}else {
+				}else {$conn->rollback();
                 	$this->Flash->error(__('The employee absencerecord could not be deleted. Please, try again.'));
             	}
 				            	
-        	} else {
+        	} else {$conn->rollback();
             	$this->Flash->error(__('The employee absencerecord could not be deleted. Please, try again.'));
         	}
 		}

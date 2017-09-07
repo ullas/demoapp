@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use Cake\Datasource\ConnectionManager;
 
 /**
  * Employees Controller
@@ -689,6 +690,9 @@ class EmployeesController extends AppController
 		}
 
         if ($this->request->is(['patch', 'post', 'put'])) {
+        	
+			$conn = ConnectionManager::get('default');
+			$conn->begin();
 
             $employee = $this->Employees->patchEntity($employee, $this->request->data);
 			$employee['customer_id']=$this->loggedinuser['customer_id'];
@@ -705,7 +709,7 @@ class EmployeesController extends AppController
 					$empDataPersonal = $this->EmpDataPersonals->patchEntity($empDataPersonal, $this->request->data['empdatapersonal']);
             		if ($this->Employees->EmpDataPersonals->save($empDataPersonal)) {
 
-                	}
+                	}else{$this->Flash->error(__('The employee could not be saved. Please, try again.')); $conn->rollback(); }
 
 					//associated EmpDataBiographies
             		$this->loadModel('EmploymentInfos');
@@ -715,7 +719,7 @@ class EmployeesController extends AppController
 					$employmentinfo = $this->EmploymentInfos->patchEntity($employmentinfo, $this->request->data['employmentinfo']);
             		if ($this->Employees->EmploymentInfos->save($employmentinfo)) {
 
-               		}
+               		}else{$this->Flash->error(__('The employee could not be saved. Please, try again.')); $conn->rollback(); }
 
 					//associated Contact Infos
             		$this->loadModel('ContactInfos');
@@ -726,7 +730,7 @@ class EmployeesController extends AppController
 					$contactinfo['customer_id']=$this->loggedinuser['customer_id'];
     				if ($this->Employees->ContactInfos->save($contactinfo)) {
 
-            		}
+            		}else{$this->Flash->error(__('The employee could not be saved. Please, try again.')); $conn->rollback(); }
 					//associated JobInfos
             		$this->loadModel('JobInfos');
 					$arr = $this->JobInfos->find('all',['conditions' => array('employee_id' => $id), 'contain' => []])->toArray();
@@ -736,7 +740,7 @@ class EmployeesController extends AppController
 					$jobinfo['customer_id']=$this->loggedinuser['customer_id'];
     				if ($this->Employees->JobInfos->save($jobinfo)) {
 
-            		}
+            		}else{$this->Flash->error(__('The employee could not be saved. Please, try again.')); $conn->rollback(); }
 
 					//associated EmpDataBiographies
             		$this->loadModel('EmpDataBiographies');
@@ -746,7 +750,7 @@ class EmployeesController extends AppController
 					$empDataBiography['position_id']=$jobinfo['position_id'];
             		if ($this->Employees->EmpDataBiographies->save($empDataBiography)) {
 
-					}
+					}else{$this->Flash->error(__('The employee could not be saved. Please, try again.')); $conn->rollback(); }
 
 					//associated Addresses
             		$this->loadModel('Addresses');
@@ -757,7 +761,7 @@ class EmployeesController extends AppController
 					$address['address_type']="1";
     				if ($this->Employees->Addresses->save($address)) {
 
-            		}
+            		}else{$this->Flash->error(__('The employee could not be saved. Please, try again.')); $conn->rollback(); }
 					//associated Identities
             		$this->loadModel('Identities');
 					$arr = $this->Identities->find('all',['conditions' => array('employee_id' => $id), 'contain' => []])->toArray();
@@ -767,7 +771,7 @@ class EmployeesController extends AppController
 					$identity['customer_id']=$this->loggedinuser['customer_id'];
     				if ($this->Employees->Identities->save($identity)) {
 
-            		}
+            		}else{$this->Flash->error(__('The employee could not be saved. Please, try again.')); $conn->rollback(); }
 
 					//associated Experiences
             		$this->loadModel('Experiences');
@@ -777,7 +781,7 @@ class EmployeesController extends AppController
 					$experience['customer_id']=$this->loggedinuser['customer_id'];
     				if ($this->Employees->Experiences->save($experience)) {
 
-            		}
+            		}else{$this->Flash->error(__('The employee could not be saved. Please, try again.')); $conn->rollback(); }
 
 					//associated EducationalQualifications
             		$this->loadModel('EducationalQualifications');
@@ -786,9 +790,9 @@ class EmployeesController extends AppController
 					$qualification = $this->EducationalQualifications->patchEntity($qualification, $this->request->data['educational_qualification']);
 					$qualification['customer_id']=$this->loggedinuser['customer_id'];
     				if ($this->Employees->EducationalQualifications->save($qualification)) {
-
+						$conn->commit();
             		}
-
+				
 				$this->Flash->success(__('The employee has been saved.'));
 				
 				$userrole=$this->request->session()->read('sessionuser')['role'];

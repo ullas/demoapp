@@ -251,10 +251,13 @@ class AppController extends Controller
     {
     	if($this->daytimeFormat==1){
 			$mptldateformat='d/m/Y';
+			$mptldatetimeformat='d/m/Y H:m a';
 		}else{
 			$mptldateformat='m/d/Y';
+			$mptldatetimeformat='m/d/Y H:m a';
 		}
-		 $this->set('mptldateformat', $mptldateformat);
+		$this->set('mptldateformat', $mptldateformat);
+		$this->set('mptldatetimeformat', $mptldatetimeformat);
 		
 		
 		// $table = TableRegistry::get("EmploymentInfos");	//debug($this->modelClass);
