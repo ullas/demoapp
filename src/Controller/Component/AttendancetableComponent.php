@@ -127,6 +127,8 @@ use Cake\Utility\Inflector;
    			}
  		}
 		public function Filter( $columns, $fields ){
+			$fmt=$this->_registry->getController()->daytimeFormat;
+			
 			$globalSearch = [];
 			// $columnSearch = array();
 			$dtColumns = $this->pluck( $columns, 'dt' );
@@ -152,6 +154,13 @@ use Cake\Utility\Inflector;
 								// if($this->isItValidDate($str)){
 									$globalSearch[$column['db'].'::text LIKE'] = "%" . $str. "%";
 								// }
+							}
+							else if( ($rowval['name']==$column['db']) && ($rowval['type']=="timestamp") ){
+								if($fmt==1){
+									$globalSearch['TO_CHAR('.$column['db'].', \'dd/MM/YYYY\') LIKE'] = "%" . $str. "%";
+								}else{
+									$globalSearch['TO_CHAR('.$column['db'].', \'MM/dd/YYYY\') LIKE'] = "%" . $str. "%";
+								}
 							}
 							else if( ($rowval['name']==$column['db']) && ($rowval['type']=="boolean") ){
 								if($this->isBoolean($str) === true){
