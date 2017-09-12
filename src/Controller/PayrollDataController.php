@@ -760,17 +760,17 @@ class PayrollDataController extends AppController
 			
 			$payrollData['customer_id']=$this->loggedinuser['customer_id'];
 			
-			$userdf = $this->request->session()->read('sessionuser')['dateformat'];
-            if(isset($userdf)  & $userdf===1){
-				foreach (["start_date", "end_date"] as $value) {		
-					if(isset($payrollData[$value])){			
-						if($payrollData[$value]!=null && $payrollData[$value]!='' && strpos($payrollData[$value], '/') !== false){
-							$payrollData[$value] = str_replace('/', '-', $payrollData[$value]);
-							$payrollData[$value]=date('Y/m/d', strtotime($payrollData[$value]));
-						}
-					}
-				}
-			}
+			// $userdf = $this->request->session()->read('sessionuser')['dateformat'];
+            // if(isset($userdf)  & $userdf===1){
+				// foreach (["start_date", "end_date"] as $value) {		
+					// if(isset($payrollData[$value])){			
+						// if($payrollData[$value]!=null && $payrollData[$value]!='' && strpos($payrollData[$value], '/') !== false){
+							// $payrollData[$value] = str_replace('/', '-', $payrollData[$value]);
+							// $payrollData[$value]=date('Y/m/d', strtotime($payrollData[$value]));
+						// }
+					// }
+				// }
+			// }
 			
 			
 				$this->loadModel('EmpDataBiographies');

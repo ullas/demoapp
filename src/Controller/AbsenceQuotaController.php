@@ -210,17 +210,17 @@ class AbsenceQuotaController extends AppController
 
 			$absenceQuotum['batch']=1;
 
-			$userdf = $this->request->session()->read('sessionuser')['dateformat'];
-            if(isset($userdf)  & $userdf===1){
-				foreach (["nxtexpiry"] as $value) {
-					if(isset($absenceQuotum[$value])){
-						if($absenceQuotum[$value]!=null && $absenceQuotum[$value]!='' && strpos($absenceQuotum[$value], '/') !== false){
-							$absenceQuotum[$value] = str_replace('/', '-', $absenceQuotum[$value]);
-							$absenceQuotum[$value]=date('Y/m/d', strtotime($absenceQuotum[$value]));
-						}
-					}
-				}
-			}
+			// $userdf = $this->request->session()->read('sessionuser')['dateformat'];
+            // if(isset($userdf)  & $userdf===1){
+				// foreach (["nxtexpiry"] as $value) {
+					// if(isset($absenceQuotum[$value])){
+						// if($absenceQuotum[$value]!=null && $absenceQuotum[$value]!='' && strpos($absenceQuotum[$value], '/') !== false){
+							// $absenceQuotum[$value] = str_replace('/', '-', $absenceQuotum[$value]);
+							// $absenceQuotum[$value]=date('Y/m/d', strtotime($absenceQuotum[$value]));
+						// }
+					// }
+				// }
+			// }
 
 
 			//initiallly query
