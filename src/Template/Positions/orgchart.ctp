@@ -73,7 +73,7 @@ function RecursiveCategories($array,$userrole) {
 </section>
 <section class="content">
     <div class="box box-primary"><div class="box-body">
-    <div id="chart" class="orgChart"></div></div></div>
+    <div id="chart" class="orgChart" style="overflow: auto;"></div></div></div>
 </section>
     
 <div id='loadingmessage' style='display:none;'>
