@@ -442,17 +442,17 @@ class EmployeesController extends AppController
 			$identity['issuedate']=$this->request->data['issuedate'];
 			$identity['expirydate']=$this->request->data['expirydate'];
 
-			$userdf = $this->request->session()->read('sessionuser')['dateformat'];
-            if(isset($userdf)  & $userdf===1){
-				foreach (["issuedate", "expirydate"] as $value) {
-					if(isset($identity[$value])){
-						if($identity[$value]!=null && $identity[$value]!='' && strpos($identity[$value], '/') !== false){
-							$identity[$value] = str_replace('/', '-', $identity[$value]);
-							$identity[$value]=date('Y/m/d', strtotime($identity[$value]));
-						}
-					}
-				}
-			}
+			// $userdf = $this->request->session()->read('sessionuser')['dateformat'];
+            // if(isset($userdf)  & $userdf===1){
+				// foreach (["issuedate", "expirydate"] as $value) {
+					// if(isset($identity[$value])){
+						// if($identity[$value]!=null && $identity[$value]!='' && strpos($identity[$value], '/') !== false){
+							// $identity[$value] = str_replace('/', '-', $identity[$value]);
+							// $identity[$value]=date('Y/m/d', strtotime($identity[$value]));
+						// }
+					// }
+				// }
+			// }
 
 			if ($this->Identities->save($identity)) {
 
@@ -488,17 +488,17 @@ class EmployeesController extends AppController
 			$asset['issuedate']=$this->request->data['assetissuedate'];
 			$asset['todate']=$this->request->data['assettodate'];
 
-			$userdf = $this->request->session()->read('sessionuser')['dateformat'];
-            if(isset($userdf)  & $userdf===1){
-				foreach (["issuedate", "todate"] as $value) {
-					if(isset($asset[$value])){
-						if($asset[$value]!=null && $asset[$value]!='' && strpos($asset[$value], '/') !== false){
-							$asset[$value] = str_replace('/', '-', $asset[$value]);
-							$asset[$value]=date('Y/m/d', strtotime($asset[$value]));
-						}
-					}
-				}
-			}
+			// $userdf = $this->request->session()->read('sessionuser')['dateformat'];
+            // if(isset($userdf)  & $userdf===1){
+				// foreach (["issuedate", "todate"] as $value) {
+					// if(isset($asset[$value])){
+						// if($asset[$value]!=null && $asset[$value]!='' && strpos($asset[$value], '/') !== false){
+							// $asset[$value] = str_replace('/', '-', $asset[$value]);
+							// $asset[$value]=date('Y/m/d', strtotime($asset[$value]));
+						// }
+					// }
+				// }
+			// }
 
 			if ($this->OfficeAssets->save($asset)) {
 
@@ -533,17 +533,17 @@ class EmployeesController extends AppController
 			$skill['fromdate']=$this->request->data['skillfromdate'];
 			$skill['todate']=$this->request->data['skilltodate'];
 
-			$userdf = $this->request->session()->read('sessionuser')['dateformat'];
-            if(isset($userdf)  & $userdf===1){
-				foreach (["fromdate", "todate"] as $value) {
-					if(isset($skill[$value])){
-						if($skill[$value]!=null && $skill[$value]!='' && strpos($skill[$value], '/') !== false){
-							$skill[$value] = str_replace('/', '-', $skill[$value]);
-							$skill[$value]=date('Y/m/d', strtotime($skill[$value]));
-						}
-					}
-				}
-			}
+			// $userdf = $this->request->session()->read('sessionuser')['dateformat'];
+            // if(isset($userdf)  & $userdf===1){
+				// foreach (["fromdate", "todate"] as $value) {
+					// if(isset($skill[$value])){
+						// if($skill[$value]!=null && $skill[$value]!='' && strpos($skill[$value], '/') !== false){
+							// $skill[$value] = str_replace('/', '-', $skill[$value]);
+							// $skill[$value]=date('Y/m/d', strtotime($skill[$value]));
+						// }
+					// }
+				// }
+			// }
 
 			if ($this->Skills->save($skill)) {
 
@@ -606,17 +606,17 @@ class EmployeesController extends AppController
 			$experience['todate']=$this->request->data['todate'];
 			$experience['contract']=$this->request->data['contract'];
 
-			$userdf = $this->request->session()->read('sessionuser')['dateformat'];
-            if(isset($userdf)  & $userdf===1){
-				foreach (["fromdate", "todate"] as $value) {
-					if(isset($experience[$value])){
-						if($experience[$value]!=null && $experience[$value]!='' && strpos($experience[$value], '/') !== false){
-							$experience[$value] = str_replace('/', '-', $experience[$value]);
-							$experience[$value]=date('Y/m/d', strtotime($experience[$value]));
-						}
-					}
-				}
-			}
+			// $userdf = $this->request->session()->read('sessionuser')['dateformat'];
+            // if(isset($userdf)  & $userdf===1){
+				// foreach (["fromdate", "todate"] as $value) {
+					// if(isset($experience[$value])){
+						// if($experience[$value]!=null && $experience[$value]!='' && strpos($experience[$value], '/') !== false){
+							// $experience[$value] = str_replace('/', '-', $experience[$value]);
+							// $experience[$value]=date('Y/m/d', strtotime($experience[$value]));
+						// }
+					// }
+				// }
+			// }
 
 			if ($this->Experiences->save($experience)) {
 
@@ -654,17 +654,17 @@ class EmployeesController extends AppController
 			$educationalQualification['passdate']=$this->request->data['passdate'];
 			$educationalQualification['grade']=$this->request->data['grade'];
 
-			$userdf = $this->request->session()->read('sessionuser')['dateformat'];
-            if(isset($userdf)  & $userdf===1){
-				foreach (["fromdate", "passdate"] as $value) {
-					if(isset($educationalQualification[$value])){
-						if($educationalQualification[$value]!=null && $educationalQualification[$value]!='' && strpos($educationalQualification[$value], '/') !== false){
-							$educationalQualification[$value] = str_replace('/', '-', $educationalQualification[$value]);
-							$educationalQualification[$value]=date('Y/m/d', strtotime($educationalQualification[$value]));
-						}
-					}
-				}
-			}
+			// $userdf = $this->request->session()->read('sessionuser')['dateformat'];
+            // if(isset($userdf)  & $userdf===1){
+				// foreach (["fromdate", "passdate"] as $value) {
+					// if(isset($educationalQualification[$value])){
+						// if($educationalQualification[$value]!=null && $educationalQualification[$value]!='' && strpos($educationalQualification[$value], '/') !== false){
+							// $educationalQualification[$value] = str_replace('/', '-', $educationalQualification[$value]);
+							// $educationalQualification[$value]=date('Y/m/d', strtotime($educationalQualification[$value]));
+						// }
+					// }
+				// }
+			// }
 
 			if ($this->EducationalQualifications->save($educationalQualification)) {
 
