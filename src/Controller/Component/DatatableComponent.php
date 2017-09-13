@@ -112,13 +112,12 @@ use Cake\Utility\Inflector;
     		return $d && $d->format($format) == $date;
 		}
 		function isBoolean($value) {
-   			if ($value && (strtolower($value) == "false" || strtolower($value) == "true")) {
+   			if ($value && (strtolower($value) == "false" || strtolower($value) == "true")){
       			return true;
    			} else {
       			return false;
    			}
-		}
-		
+		}		
 		function isItValidDate($date) {
   			if(preg_match("/^(\d{2})\/(\d{2})\/(\d{2})$/", $date, $matches))
    			{
@@ -324,9 +323,20 @@ use Cake\Utility\Inflector;
 						    $secmodal=$colname[0][0];
 						  }
 						  
-                           $row[ $column['dt'] ] = utf8_encode($data[$i][$secmodal][$colname[0][1]]);
+						  $row[ $column['dt'] ] = utf8_encode($data[$i][$secmodal][$colname[0][1]]);
+						  //date format on associated controller modals and not the same controller model name before dot
+						  $asscontrollerdatefields=array("Employmentinfos.start_date","Empdatabiographies.date_of_birth");
+						  if (in_array($c, $asscontrollerdatefields)){
+						  		if(($data[$i][$secmodal][$colname[0][1]]!="") && ($data[$i][$secmodal][$colname[0][1]]!=null)){
+						  			$row[ $column['dt'] ] = $data[$i][$secmodal][$colname[0][1]]->format($mptldateformat);
+								}
+						  }
+						
+                           // $row[ $column['dt'] ] = utf8_encode($data[$i][$secmodal][$colname[0][1]]);
+						  
                            //if it is null check the second value from dot seperated in data
-                           if($row[ $column['dt'] ]=="" && $colname[0][0]==$controller->name){
+                           if(trim($row[ $column['dt'] ])=="" && $colname[0][0]==$controller->name){
+                           
                            		if($column['type']=="date"){
 									if($data[$i][$colname[0][1]]!="" && $data[$i][$colname[0][1]]!=null){
                            				$row[ $column['dt'] ] = $data[$i][$colname[0][1]]->format($mptldateformat); 

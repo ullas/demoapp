@@ -104,17 +104,14 @@ function RecursiveCategories($array,$userrole) {
 			var atag = $('a[href="/Positions/orgchart"]');
 			atag.parent().addClass('active');
 			var a = $('a[href="/<?php echo $this->request->params['controller'] ?>"]');
-        	if (!a.parent().hasClass('treeview')) {
+        	if (!a.parent().hasClass('treeview')){
             	a.parent().removeClass('active').parents('.treeview').removeClass('active');
         	}
-		}
-		
+		}       
         
-        
-        	$("#org").jOrgChart({
+        $("#org").jOrgChart({
             chartElement : '#chart',
             dragAndDrop  : false
- 
         });
 
             /* Custom jQuery for the example
@@ -127,7 +124,7 @@ function RecursiveCategories($array,$userrole) {
                         $(".topbar").fadeTo('fast',0.9);
                     }else{
                         $('#show-list').text('Show underlying list.');
-$(".topbar").fadeTo('fast',1);
+						$(".topbar").fadeTo('fast',1);
                     }
                 });
             });*/
@@ -136,12 +133,9 @@ $(".topbar").fadeTo('fast',1);
 
             $("#org").bind("DOMSubtreeModified", function() {
                 $('#list-html').text('');
-
                 $('#list-html').text($('#org').html());
-
                 // prettyPrint();
             });
-
 
             //Maptell
 

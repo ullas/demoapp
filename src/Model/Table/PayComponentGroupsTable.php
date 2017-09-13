@@ -5,9 +5,6 @@ use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
-use Cake\Event\Event;
-use Cake\Event\ArrayObject;
-use Cake\Core\Configure;
 
 /**
  * PayComponentGroups Model
@@ -62,21 +59,24 @@ class PayComponentGroupsTable extends Table
     {
         $validator
             ->allowEmpty('id', 'create');
-
+		
         $validator
-            ->allowEmpty('name');
+            ->notEmpty('name')
+			->add('name', [
+        			'length' => ['rule' => ['minLength', 10],'last' => true,'message' => 'name need to be at least 10 characters long'] ]);
 
         $validator
             ->allowEmpty('description');
 
         $validator
-            ->boolean('status')
             ->allowEmpty('status');
 
         $validator
+            // ->date('start_date')
             ->notEmpty('start_date');
 
         $validator
+            // ->date('end_date')
             ->notEmpty('end_date');
 
         $validator
