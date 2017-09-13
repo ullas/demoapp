@@ -16,7 +16,7 @@
             echo $this->Form->input('external_code',['label' => 'Pay Component Group Code']);
             echo $this->Form->input('name',['label' => 'Pay Component Group Name']);
             echo $this->Form->input('description');
-            echo $this->Form->input('status',['class'=>'select2','options' => array('1'=>'Active','0'=> 'Inactive'), 'empty' => 'Choose']);
+            echo $this->Form->input('status',['class'=>'select2','options' => array('Active', 'Inactive'), 'empty' => 'Choose']);
             echo $this->Form->input('start_date',['value' => !empty($payComponentGroup->start_date) ? $payComponentGroup->start_date->format($mptldateformat) : '','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
             echo $this->Form->input('end_date',['value' => !empty($payComponentGroup->end_date) ? $payComponentGroup->end_date->format($mptldateformat) : '','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
             echo $this->Form->input('currency',['options' => $this->Currency->get_currencies(), 'empty' => true]);
