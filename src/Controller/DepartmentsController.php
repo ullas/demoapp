@@ -65,7 +65,7 @@ var $components = array('Datatable');
         ]);
 		
 		if($department['customer_id']==$this->loggedinuser['customer_id']){
-       	    $costCentres = $this->Departments->CostCentres->find('list', ['limit' => 200]);
+       	    $costCentres = $this->Departments->CostCentres->find('list', ['limit' => 200])->where(['effective_status' => '0'])->andwhere(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
 			$parents = $this->Departments->Parents->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         	$this->set(compact('department','parents','costCentres'));
         	$this->set('_serialize', ['department']);
@@ -94,7 +94,7 @@ var $components = array('Datatable');
                 $this->Flash->error(__('The department could not be saved. Please, try again.'));
             }
         }
-        $costCentres = $this->Departments->CostCentres->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        $costCentres = $this->Departments->CostCentres->find('list', ['limit' => 200])->where(['effective_status' => '0'])->andwhere(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         $customers = $this->Departments->Customers->find('list', ['limit' => 200]);
         $parents = $this->Departments->Parents->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         $this->set(compact('department', 'costCentres', 'customers','parents'));
@@ -113,7 +113,7 @@ var $components = array('Datatable');
                 $this->Flash->error(__('The department could not be saved. Please, try again.'));
             }
         }
-        $costCentres = $this->Departments->CostCentres->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        $costCentres = $this->Departments->CostCentres->find('list', ['limit' => 200])->where(['effective_status' => '0'])->andwhere(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         $customers = $this->Departments->Customers->find('list', ['limit' => 200]);
         $parents = $this->Departments->Parents->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         $this->set(compact('department', 'costCentres', 'customers','parents'));
@@ -148,7 +148,7 @@ var $components = array('Datatable');
                 $this->Flash->error(__('The department could not be saved. Please, try again.'));
             }
         }
-        $costCentres = $this->Departments->CostCentres->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        $costCentres = $this->Departments->CostCentres->find('list', ['limit' => 200])->where(['effective_status' => '0'])->andwhere(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         $customers = $this->Departments->Customers->find('list', ['limit' => 200]);
         $parents = $this->Departments->Parents->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         $this->set(compact('department', 'costCentres', 'customers','parents'));

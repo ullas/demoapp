@@ -142,7 +142,7 @@ class AttendanceController extends AppController
                 $this->Flash->error(__('The attendance could not be saved. Please, try again.'));
             }
         }
-        $employees = $this->Attendance->Employees->find('list', ['limit' => 200]);
+        $employees = $this->Attendance->Employees->find('list', ['limit' => 200])->where(['visible' => '1'])->andwhere(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         $this->set(compact('attendance', 'employees'));
         $this->set('_serialize', ['attendance']);
     }
@@ -169,7 +169,7 @@ class AttendanceController extends AppController
                 $this->Flash->error(__('The attendance could not be saved. Please, try again.'));
             }
         }
-        $employees = $this->Attendance->Employees->find('list', ['limit' => 200]);
+        $employees = $this->Attendance->Employees->find('list', ['limit' => 200])->where(['visible' => '1'])->andwhere(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         $this->set(compact('attendance', 'employees'));
         $this->set('_serialize', ['attendance']);
     }

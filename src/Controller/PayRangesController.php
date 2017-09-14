@@ -64,8 +64,8 @@ class PayRangesController extends AppController
         ]);
 		
 		if($payRange['customer_id']==$this->loggedinuser['customer_id']){
- 			$legalEntities = $this->PayRanges->LegalEntities->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
-        	$payGroups = $this->PayRanges->PayGroups->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+ 			$legalEntities = $this->PayRanges->LegalEntities->find('list', ['limit' => 200])->where(['effective_status' => '0'])->andwhere(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        	$payGroups = $this->PayRanges->PayGroups->find('list', ['limit' => 200])->where(['effective_status' => '0'])->andwhere(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         	$frequencies = $this->PayRanges->Frequencies->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         	$customers = $this->PayRanges->Customers->find('list', ['limit' => 200]);
         	$this->set(compact('payRange', 'legalEntities', 'payGroups', 'customers','frequencies'));
@@ -102,11 +102,11 @@ class PayRangesController extends AppController
                 $this->Flash->error(__('The pay range could not be saved. Please, try again.'));
             }
         }
-        $legalEntities = $this->PayRanges->LegalEntities->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
-        $payGroups = $this->PayRanges->PayGroups->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        $legalEntities = $this->PayRanges->LegalEntities->find('list', ['limit' => 200])->where(['effective_status' => '0'])->andwhere(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        $payGroups = $this->PayRanges->PayGroups->find('list', ['limit' => 200])->where(['effective_status' => '0'])->andwhere(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         $frequencies = $this->PayRanges->Frequencies->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
-        	$customers = $this->PayRanges->Customers->find('list', ['limit' => 200]);
-        	$this->set(compact('payRange', 'legalEntities', 'payGroups', 'customers','frequencies'));
+        $customers = $this->PayRanges->Customers->find('list', ['limit' => 200]);
+        $this->set(compact('payRange', 'legalEntities', 'payGroups', 'customers','frequencies'));
         $this->set('_serialize', ['payRange']);
     }
 
@@ -145,11 +145,11 @@ class PayRangesController extends AppController
                 $this->Flash->error(__('The pay range could not be saved. Please, try again.'));
             }
         }
-        $legalEntities = $this->PayRanges->LegalEntities->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
-        $payGroups = $this->PayRanges->PayGroups->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        $legalEntities = $this->PayRanges->LegalEntities->find('list', ['limit' => 200])->where(['effective_status' => '0'])->andwhere(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        $payGroups = $this->PayRanges->PayGroups->find('list', ['limit' => 200])->where(['effective_status' => '0'])->andwhere(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         $frequencies = $this->PayRanges->Frequencies->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
-        	$customers = $this->PayRanges->Customers->find('list', ['limit' => 200]);
-        	$this->set(compact('payRange', 'legalEntities', 'payGroups', 'customers','frequencies'));
+        $customers = $this->PayRanges->Customers->find('list', ['limit' => 200]);
+        $this->set(compact('payRange', 'legalEntities', 'payGroups', 'customers','frequencies'));
         $this->set('_serialize', ['payRange']);
     }
 

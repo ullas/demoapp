@@ -94,9 +94,10 @@ class AbsenceQuotaController extends AppController
         $employees = $this->AbsenceQuota->Employees->find('list',['limit' => 200])
         				->select(['id'=>'Employees.id','name' => 'CONCAT(EmpDataPersonals.first_name, \' \',EmpDataPersonals.last_name,\' (\', Employees.id, \')\' )'])
 						->leftJoin('EmpDataPersonals', 'EmpDataPersonals.employee_id = Employees.id')
+						->andwhere("Employees.visible="."1")
 						->andwhere("Employees.customer_id=".$this->loggedinuser['customer_id']);
-        $timeTypes = $this->AbsenceQuota->TimeTypes->find('list', ['limit' => 200]);
-        $frequencies = $this->AbsenceQuota->Frequencies->find('list', ['limit' => 200]);
+        $timeTypes = $this->AbsenceQuota->TimeTypes->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        $frequencies = $this->AbsenceQuota->Frequencies->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         $customers = $this->AbsenceQuota->Customers->find('list', ['limit' => 200]);
         $this->set(compact('absenceQuotum', 'employees', 'timeTypes', 'frequencies', 'customers'));
         $this->set('_serialize', ['absenceQuotum']);
@@ -123,8 +124,8 @@ class AbsenceQuotaController extends AppController
         }
 		$employees[$id]  = str_replace('"', '',parent::get_nameofemployee ($id));
 
-        $timeTypes = $this->AbsenceQuota->TimeTypes->find('list', ['limit' => 200]);
-        $frequencies = $this->AbsenceQuota->Frequencies->find('list', ['limit' => 200]);
+        $timeTypes = $this->AbsenceQuota->TimeTypes->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        $frequencies = $this->AbsenceQuota->Frequencies->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         $customers = $this->AbsenceQuota->Customers->find('list', ['limit' => 200]);
         $this->set(compact('absenceQuotum', 'employees', 'timeTypes', 'frequencies', 'customers'));
         $this->set('_serialize', ['absenceQuotum']);
@@ -141,8 +142,8 @@ class AbsenceQuotaController extends AppController
 
 
 		$this->loadModel('PayGroups');
-		$dbout = $this->PayGroups->find()->select(['PayGroups.id', 'PayGroups.name',])
-					->where(['PayGroups.customer_id' => $this->loggedinuser['customer_id']])->orwhere(['PayGroups.customer_id' => '0'])->toArray();
+		$dbout = $this->PayGroups->find()->select(['PayGroups.id', 'PayGroups.name',])->where(['effective_status' => '0'])
+					->andwhere(['PayGroups.customer_id' => $this->loggedinuser['customer_id']])->orwhere(['PayGroups.customer_id' => '0'])->toArray();
         $paygrouplist = array();
         foreach($dbout as $value){
 
@@ -166,10 +167,11 @@ class AbsenceQuotaController extends AppController
 		$employees = $this->AbsenceQuota->Employees->find('list',['limit' => 200])
         				->select(['id'=>'Employees.id','name' => 'CONCAT(EmpDataPersonals.first_name, \' \',EmpDataPersonals.last_name,\' (\', Employees.id, \')\' )'])
 						->leftJoin('EmpDataPersonals', 'EmpDataPersonals.employee_id = Employees.id')
+						->andwhere("Employees.visible="."1")
 						->andwhere("Employees.customer_id=".$this->loggedinuser['customer_id']);
 
-        $timeTypes = $this->AbsenceQuota->TimeTypes->find('list', ['limit' => 200]);
-        $frequencies = $this->AbsenceQuota->Frequencies->find('list', ['limit' => 200]);
+        $timeTypes = $this->AbsenceQuota->TimeTypes->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        $frequencies = $this->AbsenceQuota->Frequencies->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         $customers = $this->AbsenceQuota->Customers->find('list', ['limit' => 200]);
         $this->set(compact('absenceQuotum', 'employees', 'timeTypes', 'frequencies', 'customers'));
 	}
@@ -369,8 +371,8 @@ class AbsenceQuotaController extends AppController
 		$absenceQuotum = $this->AbsenceQuota->newEntity();
 
 		$this->loadModel('PayGroups');
-		$dbout = $this->PayGroups->find()->select(['PayGroups.id', 'PayGroups.name',])
-					->where(['PayGroups.customer_id' => $this->loggedinuser['customer_id']])->orwhere(['PayGroups.customer_id' => '0'])->toArray();
+		$dbout = $this->PayGroups->find()->select(['PayGroups.id', 'PayGroups.name',])->where(['effective_status' => '0'])
+					->andwhere(['PayGroups.customer_id' => $this->loggedinuser['customer_id']])->orwhere(['PayGroups.customer_id' => '0'])->toArray();
         $paygrouplist = array();
         foreach($dbout as $value){
 
@@ -448,6 +450,7 @@ class AbsenceQuotaController extends AppController
         				->select(['id'=>'Employees.id','name' => 'CONCAT(EmpDataPersonals.first_name, \' \',EmpDataPersonals.last_name,\' (\', Employees.id, \')\' )'])
 						->leftJoin('EmpDataPersonals', 'EmpDataPersonals.employee_id = Employees.id')
 						->where(['Employees.id NOT IN'=>$emparr])
+						->andwhere("Employees.visible="."1")
 						->andwhere("Employees.customer_id=".$this->loggedinuser['customer_id']);
 
 
@@ -532,9 +535,10 @@ class AbsenceQuotaController extends AppController
         $employees = $this->AbsenceQuota->Employees->find('list',['limit' => 200])
         				->select(['id'=>'Employees.id','name' => 'CONCAT(EmpDataPersonals.first_name, \' \',EmpDataPersonals.last_name,\' (\', Employees.id, \')\' )'])
 						->leftJoin('EmpDataPersonals', 'EmpDataPersonals.employee_id = Employees.id')
+						->andwhere("Employees.visible="."1")
 						->andwhere("Employees.customer_id=".$this->loggedinuser['customer_id']);
-        $timeTypes = $this->AbsenceQuota->TimeTypes->find('list', ['limit' => 200]);
-        $frequencies = $this->AbsenceQuota->Frequencies->find('list', ['limit' => 200]);
+        $timeTypes = $this->AbsenceQuota->TimeTypes->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        $frequencies = $this->AbsenceQuota->Frequencies->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         $customers = $this->AbsenceQuota->Customers->find('list', ['limit' => 200]);
         $this->set(compact('absenceQuotum', 'employees', 'timeTypes', 'frequencies', 'customers'));
         $this->set('_serialize', ['absenceQuotum']);

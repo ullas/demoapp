@@ -94,9 +94,9 @@ class OrgchartactionsController extends AppController
 		}
 		
 		$this->loadModel('Positions');
-		$departments = $this->Positions->Departments->find('list', ['limit' => 200])->where("customer_id=".$this->loggedinuser['customer_id']);
-		$costCentres = $this->Positions->CostCentres->find('list', ['limit' => 200])->where("customer_id=".$this->loggedinuser['customer_id']);
-		$divisions = $this->Positions->Divisions->find('list', ['limit' => 200])->where("customer_id=".$this->loggedinuser['customer_id']);
+		$departments = $this->Positions->Departments->find('list', ['limit' => 200])->where(['effective_status' => '0'])->andwhere("customer_id=".$this->loggedinuser['customer_id']);
+		$costCentres = $this->Positions->CostCentres->find('list', ['limit' => 200])->where(['effective_status' => '0'])->andwhere("customer_id=".$this->loggedinuser['customer_id']);
+		$divisions = $this->Positions->Divisions->find('list', ['limit' => 200])->where(['effective_status' => '0'])->andwhere("customer_id=".$this->loggedinuser['customer_id']);
 		$this->set(compact('jobInfo', 'customers','positions','departments','divisions','costCentres'));
         $this->set('_serialize', ['jobInfo']);
 	}
@@ -135,9 +135,9 @@ class OrgchartactionsController extends AppController
 		}
 		
 		$this->loadModel('Positions');
-		$departments = $this->Positions->Departments->find('list', ['limit' => 200])->where("customer_id=".$this->loggedinuser['customer_id']);
-		$costCentres = $this->Positions->CostCentres->find('list', ['limit' => 200])->where("customer_id=".$this->loggedinuser['customer_id']);
-		$divisions = $this->Positions->Divisions->find('list', ['limit' => 200])->where("customer_id=".$this->loggedinuser['customer_id']);
+		$departments = $this->Positions->Departments->find('list', ['limit' => 200])->where(['effective_status' => '0'])->andwhere("customer_id=".$this->loggedinuser['customer_id']);
+		$costCentres = $this->Positions->CostCentres->find('list', ['limit' => 200])->where(['effective_status' => '0'])->andwhere("customer_id=".$this->loggedinuser['customer_id']);
+		$divisions = $this->Positions->Divisions->find('list', ['limit' => 200])->where(['effective_status' => '0'])->andwhere("customer_id=".$this->loggedinuser['customer_id']);
 		$this->set(compact('jobInfo', 'customers','positions','departments','divisions','costCentres'));
         $this->set('_serialize', ['jobInfo']);
 	}

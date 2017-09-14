@@ -556,9 +556,9 @@ class PayrollDataController extends AppController
 							->andwhere("PayrollData.customer_id=".$this->loggedinuser['customer_id']);
 
 		$this->loadModel("PayComponents");
-		$payComponents = $this->PayComponents->find('list', ['limit' => 200])->andwhere(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+		$payComponents = $this->PayComponents->find('list', ['limit' => 200])->where(['status' => '0'])->andwhere(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         		
-		$payComponentGroups = $this->PayComponents->PayComponentGroups->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+		$payComponentGroups = $this->PayComponents->PayComponentGroups->find('list', ['limit' => 200])->where(['status' => '0'])->andwhere(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         
 			
 		if($payrollData['customer_id']==$this->loggedinuser['customer_id'])
@@ -865,12 +865,12 @@ class PayrollDataController extends AppController
 		$this->loadModel("PayComponents");
 		$payComponents = $this->PayComponents->find('all', ['limit' => 200])
 									// ->where(['PayComponents.id NOT IN'=>$componentarr])
-									->andwhere(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+									->where(['status' => '0'])->andwhere(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
 		
         $this->set(compact('payrollData', 'payComponents','empDataBiographies'));
         $this->set('_serialize', ['payrollData']);
 		
-		$payComponentGroups = $this->PayComponents->PayComponentGroups->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+		$payComponentGroups = $this->PayComponents->PayComponentGroups->find('list', ['limit' => 200])->where(['status' => '0'])->andwhere(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         
 		$this->set('paycomponentarr', json_encode($payComponents));
 		$this->set('paycomponentgrouparr', json_encode($payComponentGroups));
@@ -921,12 +921,12 @@ class PayrollDataController extends AppController
 		$this->loadModel("PayComponents");
 		$payComponents = $this->PayComponents->find('all', ['limit' => 200])
 									// ->where(['PayComponents.id NOT IN'=>$componentarr])
-									->andwhere(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+									->where(['status' => '0'])->andwhere(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
 		
         $this->set(compact('payrollData', 'payComponents','empDataBiographies','excludingempDataBiographies'));
         $this->set('_serialize', ['payrollData']);
 		
-		$payComponentGroups = $this->PayComponents->PayComponentGroups->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+		$payComponentGroups = $this->PayComponents->PayComponentGroups->find('list', ['limit' => 200])->where(['status' => '0'])->andwhere(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         
 		$this->set('paycomponentarr', json_encode($payComponents));
 		$this->set('paycomponentgrouparr', json_encode($payComponentGroups));
@@ -977,10 +977,10 @@ class PayrollDataController extends AppController
 						->leftJoin('EmpDataPersonals', 'EmpDataPersonals.employee_id = EmpDataBiographies.employee_id')
 						->where("EmpDataBiographies.customer_id=".$this->loggedinuser['customer_id']);
 						
-		$payComps = $this->PayrollData->find('all')->where("PayrollData.empdatabiographies_id=".$id)->andwhere("PayrollData.pay_component_type=1")
+		$payComps = $this->PayrollData->find('all')->where(['status' => '0'])->andwhere("PayrollData.empdatabiographies_id=".$id)->andwhere("PayrollData.pay_component_type=1")
 							->andwhere("PayrollData.customer_id=".$this->loggedinuser['customer_id']);
 							
-		$payCompGroups = $this->PayrollData->find('all')->where("PayrollData.empdatabiographies_id=".$id)->andwhere("PayrollData.pay_component_type=2")
+		$payCompGroups = $this->PayrollData->find('all')->where(['status' => '0'])->andwhere("PayrollData.empdatabiographies_id=".$id)->andwhere("PayrollData.pay_component_type=2")
 							->andwhere("PayrollData.customer_id=".$this->loggedinuser['customer_id']);
 		
 		$this->loadModel("PayComponents");
@@ -988,7 +988,7 @@ class PayrollDataController extends AppController
 									// ->where(['end_date >= ' => date("Y/m/d")])
 									->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         		
-		$payComponentGroups = $this->PayComponents->PayComponentGroups->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+		$payComponentGroups = $this->PayComponents->PayComponentGroups->find('list', ['limit' => 200])->where(['status' => '0'])->andwhere(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         
      
         $this->set('empDataBiographies', $empDataBiographies);

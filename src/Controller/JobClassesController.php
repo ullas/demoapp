@@ -64,7 +64,7 @@ class JobClassesController extends AppController
         ]);
 		if($jobclass['customer_id']==$this->loggedinuser['customer_id'])
 		{
-       	    $payGrades = $this->JobClasses->PayGrades->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+       	    $payGrades = $this->JobClasses->PayGrades->find('list', ['limit' => 200])->where(['status' => '0'])->andwhere(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         	$jobFunctions = $this->JobClasses->JobFunctions->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         	$customers = $this->JobClasses->Customers->find('list', ['limit' => 200]);
         	$jobs = $this->JobClasses->Jobs->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
@@ -95,7 +95,7 @@ class JobClassesController extends AppController
                 $this->Flash->error(__('The jobclass could not be saved. Please, try again.'));
             }
         }
-        $payGrades = $this->JobClasses->PayGrades->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        $payGrades = $this->JobClasses->PayGrades->find('list', ['limit' => 200])->where(['status' => '0'])->andwhere(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         $jobFunctions = $this->JobClasses->JobFunctions->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         $customers = $this->JobClasses->Customers->find('list', ['limit' => 200]);
         $jobs = $this->JobClasses->Jobs->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
@@ -132,7 +132,7 @@ class JobClassesController extends AppController
                 $this->Flash->error(__('The jobclass could not be saved. Please, try again.'));
             }
         }
-        $payGrades = $this->JobClasses->PayGrades->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        $payGrades = $this->JobClasses->PayGrades->find('list', ['limit' => 200])->where(['status' => '0'])->andwhere(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         $jobFunctions = $this->JobClasses->JobFunctions->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         $customers = $this->JobClasses->Customers->find('list', ['limit' => 200]);
         $jobs = $this->JobClasses->Jobs->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
