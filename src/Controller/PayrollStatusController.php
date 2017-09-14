@@ -57,7 +57,7 @@ var $components = array('Datatable');
 			$this->loadModel('PayGroups');
 			$dbout = $this->PayGroups->find()->select(['PayGroups.id', 'PayGroups.name',])
 					 ->leftJoin('Frequencies', 'Frequencies.id = PayGroups.frequency_id')
-					 ->where(['LOWER(Frequencies.name)' => $this->request->data['type']])
+					 ->where(['PayGroups.effective_status' => '0'])->andwhere(['LOWER(Frequencies.name)' => $this->request->data['type']])
 					->andwhere(['PayGroups.customer_id' => $this->loggedinuser['customer_id']])->orwhere(['PayGroups.customer_id' => '0'])->toArray();
         	$paygrouplist = array();
         	foreach($dbout as $value){
@@ -343,7 +343,7 @@ var $components = array('Datatable');
 
         if($payrollStatus['customer_id']==$this->loggedinuser['customer_id'])
 		{
-       	    $payGroups = $this->PayrollStatus->PayGroups->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+       	    $payGroups = $this->PayrollStatus->PayGroups->find('list', ['limit' => 200])->where(['effective_status' => '0'])->andwhere(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         	$this->set(compact('payrollStatus','payGroups'));
         	$this->set('_serialize', ['payrollStatus']);
         }else{
@@ -371,7 +371,7 @@ var $components = array('Datatable');
                 $this->Flash->error(__('The payroll status could not be saved. Please, try again.'));
             }
         }
-        $payGroups = $this->PayrollStatus->PayGroups->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        $payGroups = $this->PayrollStatus->PayGroups->find('list', ['limit' => 200])->where(['effective_status' => '0'])->andwhere(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         $this->set(compact('payrollStatus','payGroups'));
         $this->set('_serialize', ['payrollStatus']);
     }
@@ -405,7 +405,7 @@ var $components = array('Datatable');
                 $this->Flash->error(__('The payroll status could not be saved. Please, try again.'));
             }
         }
-        $payGroups = $this->PayrollStatus->PayGroups->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        $payGroups = $this->PayrollStatus->PayGroups->find('list', ['limit' => 200])->where(['effective_status' => '0'])->andwhere(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         $this->set(compact('payrollStatus','payGroups'));
         $this->set('_serialize', ['payrollStatus']);
     }

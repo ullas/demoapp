@@ -66,9 +66,11 @@ class TimeAccountTypesController extends AppController
             'contain' => ['PayComponents', 'PayComponentGroups', 'Customers', 'TimeTypes']
         ]);
 		
-		$payComponents = $this->TimeAccountTypes->PayComponents->find('list', ['limit' => 200]);
+		$payComponents = $this->TimeAccountTypes->PayComponents->find('list', ['limit' => 200])->where(['status' => '0'])
+								->andwhere(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
 		$this->set('payComponents', $payComponents);
-		$payComponentGroups = $this->TimeAccountTypes->PayComponentGroups->find('list', ['limit' => 200]);
+		$payComponentGroups = $this->TimeAccountTypes->PayComponentGroups->find('list', ['limit' => 200])->where(['status' => '0'])
+								->andwhere(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
 		if($timeAccountType['customer_id']==$this->loggedinuser['customer_id'])
 		{
 			$this->set('payComponentGroups', $payComponentGroups);
@@ -100,8 +102,10 @@ class TimeAccountTypesController extends AppController
                 $this->Flash->error(__('The time account type could not be saved. Please, try again.'));
             }
         }
-        $payComponents = $this->TimeAccountTypes->PayComponents->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
-        $payComponentGroups = $this->TimeAccountTypes->PayComponentGroups->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        $payComponents = $this->TimeAccountTypes->PayComponents->find('list', ['limit' => 200])->where(['status' => '0'])
+								->andwhere(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        $payComponentGroups = $this->TimeAccountTypes->PayComponentGroups->find('list', ['limit' => 200])->where(['status' => '0'])
+								->andwhere(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         $customers = $this->TimeAccountTypes->Customers->find('list', ['limit' => 200]);
         $this->set(compact('timeAccountType', 'payComponents', 'payComponentGroups', 'customers'));
         $this->set('_serialize', ['timeAccountType']);
@@ -136,8 +140,10 @@ class TimeAccountTypesController extends AppController
                 $this->Flash->error(__('The time account type could not be saved. Please, try again.'));
             }
         }
-        $payComponents = $this->TimeAccountTypes->PayComponents->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
-        $payComponentGroups = $this->TimeAccountTypes->PayComponentGroups->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        $payComponents = $this->TimeAccountTypes->PayComponents->find('list', ['limit' => 200])->where(['status' => '0'])
+								->andwhere(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        $payComponentGroups = $this->TimeAccountTypes->PayComponentGroups->find('list', ['limit' => 200])->where(['status' => '0'])
+								->andwhere(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         $customers = $this->TimeAccountTypes->Customers->find('list', ['limit' => 200]);
         $this->set(compact('timeAccountType', 'payComponents', 'payComponentGroups', 'customers'));
         $this->set('_serialize', ['timeAccountType']);

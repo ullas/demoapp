@@ -63,7 +63,7 @@ class ContactInfosController extends AppController
             }
         }
         $customers = $this->ContactInfos->Customers->find('list', ['limit' => 200]);
-        $employees = $this->ContactInfos->Employees->find('list', ['limit' => 200]);
+        $employees = $this->ContactInfos->Employees->find('list', ['limit' => 200])->where("Employees.visible="."1")->andwhere(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         $this->set(compact('contactInfo', 'customers', 'employees'));
         $this->set('_serialize', ['contactInfo']);
     }
@@ -91,7 +91,7 @@ class ContactInfosController extends AppController
             }
         }
         $customers = $this->ContactInfos->Customers->find('list', ['limit' => 200]);
-        $employees = $this->ContactInfos->Employees->find('list', ['limit' => 200]);
+        $employees = $this->ContactInfos->Employees->find('list', ['limit' => 200])->where("Employees.visible="."1")->andwhere(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         $this->set(compact('contactInfo', 'customers', 'employees'));
         $this->set('_serialize', ['contactInfo']);
     }

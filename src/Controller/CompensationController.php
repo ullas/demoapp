@@ -38,9 +38,9 @@ class CompensationController extends AppController
 		$query=$payrolldataTable->find('All')->where(['customer_id'=>$this->loggedinuser['customer_id']])->distinct(['empdatabiographies_id']);
 		(isset($query)) ? $payrollheadcount=$query->count() : $payrollheadcount="";
 		  
-		$payGroups = $payGroupTable->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
-		$payComponents = $payComponentTable->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
-        $payComponentGroups = $payComponentGroupTable->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+		$payGroups = $payGroupTable->find('list', ['limit' => 200])->where(['effective_status' => '0'])->andwhere(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+		$payComponents = $payComponentTable->find('list', ['limit' => 200])->where(['status' => '0'])->andwhere(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        $payComponentGroups = $payComponentGroupTable->find('list', ['limit' => 200])->where(['status' => '0'])->andwhere(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         
         // $employees = $empTable->find('list',array('fields' => array('id'=>'Employees.id','name'=>'CONCAT(EmpDataPersonals.first_name,EmpDataPersonals.last_name)']),
     						// 'contain' => array('Empdatapersonals'), 'limit' => 200))

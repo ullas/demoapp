@@ -56,7 +56,7 @@ var $components = array('Datatable');
 			$this->loadModel('PayGroups');
 			$dbout = $this->PayGroups->find()->select(['PayGroups.id', 'PayGroups.name',])
 					 ->leftJoin('Frequencies', 'Frequencies.id = PayGroups.frequency_id')
-					 ->where(['LOWER(Frequencies.name)' => $this->request->data['type']])
+					 ->where(['effective_status' => '0'])->andwhere(['LOWER(Frequencies.name)' => $this->request->data['type']])
 					->andwhere(['PayGroups.customer_id' => $this->loggedinuser['customer_id']])->orwhere(['PayGroups.customer_id' => '0'])->toArray();
         	$paygrouplist = array();
         	foreach($dbout as $value){
@@ -270,7 +270,7 @@ var $components = array('Datatable');
 
         if($payrollRecord['customer_id']==$this->loggedinuser['customer_id'])
 		{
-       	    $payGroups = $this->PayrollRecord->PayGroups->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+       	    $payGroups = $this->PayrollRecord->PayGroups->find('list', ['limit' => 200])->where(['effective_status' => '0'])->andwhere(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         	$this->set(compact('payrollRecord', 'payGroups'));
         	$this->set('_serialize', ['payrollRecord']);
         }else{
@@ -298,7 +298,7 @@ var $components = array('Datatable');
                 $this->Flash->error(__('The payroll record could not be saved. Please, try again.'));
             }
         }
-        $payGroups = $this->PayrollRecord->PayGroups->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        $payGroups = $this->PayrollRecord->PayGroups->find('list', ['limit' => 200])->where(['effective_status' => '0'])->andwhere(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         $this->set(compact('payrollRecord', 'payGroups'));
         $this->set('_serialize', ['payrollRecord']);
     }
@@ -332,7 +332,7 @@ var $components = array('Datatable');
                 $this->Flash->error(__('The payroll record could not be saved. Please, try again.'));
             }
         }
-        $payGroups = $this->PayrollRecord->PayGroups->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        $payGroups = $this->PayrollRecord->PayGroups->find('list', ['limit' => 200])->where(['effective_status' => '0'])->andwhere(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         $this->set(compact('payrollRecord', 'payGroups'));
         $this->set('_serialize', ['payrollRecord']);
     }

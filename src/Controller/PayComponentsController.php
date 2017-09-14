@@ -63,12 +63,12 @@ class PayComponentsController extends AppController
 		
 		if($payComponent['customer_id']==$this->loggedinuser['customer_id']){
  			$frequencies = $this->PayComponents->Frequencies->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
-			$payComponentGroups = $this->PayComponents->PayComponentGroups->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+			$payComponentGroups = $this->PayComponents->PayComponentGroups->find('list', ['limit' => 200])->where(['status' => '0'])->andwhere(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         	$this->set(compact('payComponent', 'frequencies', 'customers','payComponentGroups'));
         	$this->set('_serialize', ['payComponent']);
 			
 			$payComponents = $this->PayComponents->find('list', ['limit' => 200])->contain(['PayComponentGroups'])->select(['PayComponents.id', 'PayComponents.name',])
-					->where(['PayComponents.id != '=>$id])->andwhere(['PayComponents.customer_id' => $this->loggedinuser['customer_id']])->orwhere(['PayComponents.customer_id' => '0']) ;
+					->where(['status' => '0'])->andwhere(['PayComponents.id != '=>$id])->andwhere(['PayComponents.customer_id' => $this->loggedinuser['customer_id']])->orwhere(['PayComponents.customer_id' => '0']) ;
 					
 			$this->set('paycomponentarr', json_encode($payComponents));
 			$this->set('paycomponentgrouparr', json_encode($payComponentGroups));
@@ -106,18 +106,18 @@ class PayComponentsController extends AppController
         }
         $frequencies = $this->PayComponents->Frequencies->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         $customers = $this->PayComponents->Customers->find('list', ['limit' => 200]);
-		$payComponentGroups = $this->PayComponents->PayComponentGroups->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+		$payComponentGroups = $this->PayComponents->PayComponentGroups->find('list', ['limit' => 200])->where(['status' => '0'])->andwhere(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         $this->set(compact('payComponent', 'frequencies', 'customers','payComponentGroups'));
         $this->set('_serialize', ['payComponent']);
 		
 		$payComponents = $this->PayComponents->find('list', ['limit' => 200])->contain(['PayComponentGroups'])->select(['PayComponents.id', 'PayComponents.name',])
-					->where(['PayComponents.customer_id' => $this->loggedinuser['customer_id']])->orwhere(['PayComponents.customer_id' => '0']) ;
+					->where(['status' => '0'])->andwhere(['PayComponents.customer_id' => $this->loggedinuser['customer_id']])->orwhere(['PayComponents.customer_id' => '0']) ;
 					
 		$this->set('paycomponentarr', json_encode($payComponents));
 		$this->set('paycomponentgrouparr', json_encode($payComponentGroups));
 		
 		$pcGroups = $this->PayComponents->PayComponentGroups->find('all')
-        									 ->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']);		 
+        									 ->where(['status' => '0'])->andwhere(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']);		 
 		$this->set('pcGroups',json_encode($pcGroups));
     }
 
@@ -160,10 +160,10 @@ class PayComponentsController extends AppController
         $frequencies = $this->PayComponents->Frequencies->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         $customers = $this->PayComponents->Customers->find('list', ['limit' => 200]);
         $payComponentGroups = $this->PayComponents->PayComponentGroups->find('list', ['limit' => 200])
-        									 ->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']);
+        									 ->where(['status' => '0'])->andwhere(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']);
         
 		$payComponents = $this->PayComponents->find('list', ['limit' => 200])->contain(['PayComponentGroups'])->select(['PayComponents.id', 'PayComponents.name',])
-					->where(['PayComponents.id != '=>$id])->andwhere(['PayComponents.customer_id' => $this->loggedinuser['customer_id']])->orwhere(['PayComponents.customer_id' => '0']) ;
+					->where(['status' => '0'])->andwhere(['PayComponents.id != '=>$id])->andwhere(['PayComponents.customer_id' => $this->loggedinuser['customer_id']])->orwhere(['PayComponents.customer_id' => '0']) ;
         
        
         
@@ -171,7 +171,7 @@ class PayComponentsController extends AppController
 		$this->set('paycomponentgrouparr', json_encode($payComponentGroups));
 		
 		$pcGroups = $this->PayComponents->PayComponentGroups->find('all')
-        									 ->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']);		 
+        									 ->where(['status' => '0'])->andwhere(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']);		 
 		$this->set('pcGroups',json_encode($pcGroups));
 		
 		$this->set(compact('payComponent', 'frequencies', 'customers','payComponentGroups'));
