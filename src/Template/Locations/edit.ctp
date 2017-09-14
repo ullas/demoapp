@@ -16,7 +16,7 @@
         echo $this->Form->input('external_code',['label' =>'Location Code']);
         echo $this->Form->input('name',['label' =>'Location Name']);
         echo $this->Form->input('description');
-        echo $this->Form->input('status',['label' =>'Active']);
+        echo $this->Form->input('status',['label' => 'Status','class'=>'select2','options' => array('Active', 'Inactive'), 'empty' => 'Choose']);
         echo $this->Form->input('start_date',['value' => !empty($location->start_date) ? $location->start_date->format($mptldateformat) : '','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
         echo $this->Form->input('end_date', ['value' => !empty($location->end_date) ? $location->end_date->format($mptldateformat) : '','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
         echo $this->Form->input('location_group');
