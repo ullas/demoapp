@@ -66,7 +66,7 @@ class RegionsTable extends Table
             ->allowEmpty('end_date');
 
         $validator
-            ->boolean('status')
+            // ->boolean('status')
             ->allowEmpty('status');
 
         $validator

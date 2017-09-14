@@ -16,7 +16,7 @@
             echo $this->Form->input('external_code',['label' => 'Cost Center Code']);
             echo $this->Form->input('name',['label' => 'Cost Center Name']);
             echo $this->Form->input('description');
-            echo $this->Form->input('effective_status',['label' => 'Active']);
+            echo $this->Form->input('effective_status',['label' => 'Status','class'=>'select2','options' => array('Active', 'Inactive'), 'empty' => 'Choose']);
             echo $this->Form->input('effective_start_date', ['label' => 'Start Date','value' => !empty($costCentre->effective_start_date) ? $costCentre->effective_start_date->format($mptldateformat) : '','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
             echo $this->Form->input('effective_end_date', ['label' => 'End Date','class' => 'mptldp','value' => !empty($costCentre->effective_end_date) ? $costCentre->effective_end_date->format($mptldateformat) : '','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
             echo $this->Form->input('parent_cost_center');

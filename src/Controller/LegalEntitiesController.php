@@ -67,8 +67,8 @@ class LegalEntitiesController extends AppController
 
         if($legalEntity['customer_id']==$this->loggedinuser['customer_id']){
        	    $this->set('legalEntity', $legalEntity);
-			$locations = $this->LegalEntities->Locations->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
-        	$payGroups = $this->LegalEntities->PayGroups->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+			$locations = $this->LegalEntities->Locations->find('list', ['limit' => 200])->where(['status' => '0'])->andwhere(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        	$payGroups = $this->LegalEntities->PayGroups->find('list', ['limit' => 200])->where(['effective_status' => '0'])->andwhere(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         	$customers = $this->LegalEntities->Customers->find('list', ['limit' => 200]);
         	$holidayCalendars = $this->LegalEntities->HolidayCalendars->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         	$this->set(compact('legalEntity', 'locations', 'payGroups'));
@@ -98,8 +98,8 @@ class LegalEntitiesController extends AppController
                 $this->Flash->error(__('The legal entity could not be saved. Please, try again.'));
             }
         }
-        $locations = $this->LegalEntities->Locations->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
-        $payGroups = $this->LegalEntities->PayGroups->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        $locations = $this->LegalEntities->Locations->find('list', ['limit' => 200])->where(['status' => '0'])->andwhere(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        $payGroups = $this->LegalEntities->PayGroups->find('list', ['limit' => 200])->where(['effective_status' => '0'])->andwhere(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         $customers = $this->LegalEntities->Customers->find('list', ['limit' => 200]);
         $holidayCalendars = $this->LegalEntities->HolidayCalendars->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         $this->set(compact('legalEntity', 'locations', 'payGroups', 'customers','holidayCalendars'));
@@ -120,8 +120,8 @@ class LegalEntitiesController extends AppController
             }
 
         }
-        $locations = $this->LegalEntities->Locations->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
-        $payGroups = $this->LegalEntities->PayGroups->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        $locations = $this->LegalEntities->Locations->find('list', ['limit' => 200])->where(['status' => '0'])->andwhere(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        $payGroups = $this->LegalEntities->PayGroups->find('list', ['limit' => 200])->where(['effective_status' => '0'])->andwhere(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         $customers = $this->LegalEntities->Customers->find('list', ['limit' => 200]);
         $holidayCalendars = $this->LegalEntities->HolidayCalendars->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         $this->set(compact('legalEntity', 'locations', 'payGroups', 'customers','holidayCalendars'));
@@ -157,8 +157,8 @@ class LegalEntitiesController extends AppController
                 $this->Flash->error(__('The legal entity could not be saved. Please, try again.'));
             }
         }
-        $locations = $this->LegalEntities->Locations->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
-        $payGroups = $this->LegalEntities->PayGroups->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        $locations = $this->LegalEntities->Locations->find('list', ['limit' => 200])->where(['status' => '0'])->andwhere(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        $payGroups = $this->LegalEntities->PayGroups->find('list', ['limit' => 200])->where(['effective_status' => '0'])->andwhere(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         $customers = $this->LegalEntities->Customers->find('list', ['limit' => 200]);
         $holidayCalendars = $this->LegalEntities->HolidayCalendars->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         $this->set(compact('legalEntity', 'locations', 'payGroups', 'customers','holidayCalendars'));

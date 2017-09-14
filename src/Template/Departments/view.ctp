@@ -20,7 +20,7 @@
             	echo $this->Form->input('external_code',['label' => 'Department Code','disabled' => true]);
             	echo $this->Form->input('name',['label' => 'Department Name','disabled' => true]);
             	echo $this->Form->input('description',['disabled' => true]);
-            	echo $this->Form->input('effective_status',['label' => 'Active','disabled' => true]);
+            	echo $this->Form->input('effective_status',['label' => 'Status','class'=>'select2','options' => array('Active', 'Inactive'), 'empty' => 'Choose','disabled' => true]);
             	echo $this->Form->input('effective_start_date', ['label' => 'Start Date','value' => !empty($department->effective_start_date) ? $department->effective_start_date->format($mptldateformat) : '','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
             	echo $this->Form->input('effective_end_date', ['label' => 'End Date','class' => 'mptldp','value' => !empty($department->effective_end_date) ? $department->effective_end_date->format($mptldateformat) : '','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
             	echo $this->Form->input('parent_id',['options' => $parents,'disabled' => true, 'empty' => true]);

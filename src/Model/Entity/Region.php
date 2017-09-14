@@ -11,7 +11,7 @@ use Cake\ORM\Entity;
  * @property bool $description
  * @property \Cake\I18n\Time $start_date
  * @property \Cake\I18n\Time $end_date
- * @property bool $status
+ * @property string $status
  * @property string $external_code
  * @property int $customer_id
  */

@@ -96,10 +96,21 @@ var $components = array('Datatable');
 			$payComponentGroup['customer_id']=$this->loggedinuser['customer_id'];
             if ($this->PayComponentGroups->save($payComponentGroup)) {
                 $this->Flash->success(__('The pay component group has been saved.'));
-
                 return $this->redirect(['action' => 'index']);
-            } else {
-                $this->Flash->error(__('The pay component group could not be saved. Please, try again.'));
+            }else {
+				$error_msg = [];
+				// if($payComponentGroup->errors()){
+                	// foreach($payComponentGroup->errors() as $errors){
+                    	// if(is_array($errors)){
+                        	// foreach($errors as $error){
+                            	// $error_msg[]    =   $error;
+                        	// }
+                    	// }else{
+                        	// $error_msg[]    =   $errors;
+                    	// }
+                	// }
+				// }
+                $this->Flash->error(__('The pay component group could not be saved. Please, fix the errors.'.implode("\n \r", $error_msg)));
             }
         }
         $customers = $this->PayComponentGroups->Customers->find('list', ['limit' => 200]);

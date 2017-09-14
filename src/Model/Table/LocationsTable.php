@@ -97,7 +97,7 @@ class LocationsTable extends Table
             ->allowEmpty('standard_hours');
 
         $validator
-            ->boolean('status')
+            // ->boolean('status')
             ->allowEmpty('status');
 
         $validator

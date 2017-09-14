@@ -152,7 +152,7 @@ class WorkflowactionsController extends AppController
 		
 		$positionarr = $this->Workflowactions->find('all')->select(['position_id'])->where(['workflowrule_id'=>$this->request->query['wrid']]);		
         $workflowrules = $this->Workflowactions->Workflowrules->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
-        $positions = $this->Workflowactions->Positions->find('list', ['limit' => 200])->where(['Positions.id NOT IN'=>$positionarr])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        $positions = $this->Workflowactions->Positions->find('list', ['limit' => 200])->where(['effective_status' => '0'])->andwhere(['Positions.id NOT IN'=>$positionarr])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         $customers = $this->Workflowactions->Customers->find('list', ['limit' => 200]);
         $this->set(compact('workflowaction', 'workflowrules', 'positions', 'nextactions', 'onfailureactions', 'customers'));
         $this->set('_serialize', ['workflowaction']);
@@ -197,7 +197,7 @@ class WorkflowactionsController extends AppController
 		
 
         $workflowrules = $this->Workflowactions->Workflowrules->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
-        $positions = $this->Workflowactions->Positions->find('list', ['limit' => 200])->where(['Positions.id NOT IN'=>$positionarr])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        $positions = $this->Workflowactions->Positions->find('list', ['limit' => 200])->where(['effective_status' => '0'])->andwhere(['Positions.id NOT IN'=>$positionarr])->andwhere(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         $customers = $this->Workflowactions->Customers->find('list', ['limit' => 200]);
         $this->set(compact('workflowaction', 'workflowrules', 'positions', 'nextactions', 'onfailureactions', 'customers'));
         $this->set('_serialize', ['workflowaction']);

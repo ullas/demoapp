@@ -18,7 +18,7 @@
             echo $this->Form->input('description');
 			echo $this->Form->input('start_date',['value' => !empty($region->start_date) ? $region->start_date->format($mptldateformat) : '','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
             echo $this->Form->input('end_date',['value' => !empty($region->end_date) ? $region->end_date->format($mptldateformat) : '','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
-            echo $this->Form->input('status',['label'=>"Active"]);
+            echo $this->Form->input('status',['label' => 'Status','class'=>'select2','options' => array('Active', 'Inactive'), 'empty' => 'Choose']);
         ?>
     </fieldset>
     <div class="box-footer">

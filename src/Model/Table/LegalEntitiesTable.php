@@ -91,7 +91,7 @@ class LegalEntitiesTable extends Table
             ->allowEmpty('description');
 
         $validator
-            ->boolean('effective_status')
+            // ->boolean('effective_status')
             ->allowEmpty('effective_status');
 
         $validator

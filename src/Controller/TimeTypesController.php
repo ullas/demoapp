@@ -66,8 +66,8 @@ class TimeTypesController extends AppController
             'contain' => ['Customers', 'TimeAccountTypes']
         ]);
 
-		$timeAccountTypes = $this->TimeTypes->TimeAccountTypes->find('list', ['limit' => 200]);
-		$workflowrules = $this->TimeTypes->Workflowrules->find('list', ['limit' => 200]);
+		$timeAccountTypes = $this->TimeTypes->TimeAccountTypes->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+		$workflowrules = $this->TimeTypes->Workflowrules->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
 		
 		if($timeType['customer_id']==$this->loggedinuser['customer_id'])
 		{
@@ -105,9 +105,9 @@ class TimeTypesController extends AppController
         $this->set('_serialize', ['timeType']);
 		
 		
-		$timeacchours = $this->TimeTypes->TimeAccountTypes->find('list', ['limit' => 200])->where(['unit' => "0"])
+		$timeaccdays = $this->TimeTypes->TimeAccountTypes->find('list', ['limit' => 200])->where(['unit' => "0"])
 								->andwhere(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;        
-		$this->set('timeaccdaysarr', json_encode($timeacchours));
+		$this->set('timeaccdaysarr', json_encode($timeaccdays));
 		$timeacchours = $this->TimeTypes->TimeAccountTypes->find('list', ['limit' => 200])->where(['unit' =>"1"])
 								->andwhere(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;        
 		$this->set('timeacchoursarr', json_encode($timeacchours));

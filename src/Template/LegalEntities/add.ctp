@@ -17,7 +17,7 @@
             echo $this->Form->input('external_code',['label'=>['text'=>'Legal Entity Code','class'=>'mandatory']]);
             echo $this->Form->input('name',['label'=>['text'=>'Legal Entity Name'],'templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-user"></i></div>']]);
             echo $this->Form->input('description');
-            echo $this->Form->input('effective_status',['label' => 'Active']);
+            echo $this->Form->input('effective_status',['label' => 'Status','class'=>'select2','options' => array('Active', 'Inactive'), 'empty' => 'Choose']);
             echo $this->Form->input('effective_start_date', ['label' =>'Effective as of','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
             echo $this->Form->input('effective_end_date', ['label' =>'End Date','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
             echo $this->Form->input('country_of_registration',['label' =>'Country','class'=>'select2','options' => $this->Country->get_countries(), 'empty' => true]);
