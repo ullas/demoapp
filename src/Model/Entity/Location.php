@@ -14,7 +14,7 @@ use Cake\ORM\Entity;
  * @property string $location_group
  * @property string $time_zone
  * @property float $standard_hours
- * @property bool $status
+ * @property string $status
  * @property string $external_code
  * @property int $customer_id
  * @property int $holiday_calendar_id

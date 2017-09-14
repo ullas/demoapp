@@ -6,13 +6,14 @@ use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
 
-use Cake\Event\Event;
-use Cake\Event\ArrayObject;
-use Cake\Core\Configure;
 /**
  * BusinessUnits Model
  *
  * @property \Cake\ORM\Association\BelongsTo $Customers
+ * @property \Cake\ORM\Association\HasMany $Jobinfos
+ * @property \Cake\ORM\Association\HasMany $PayGroups
+ * @property \Cake\ORM\Association\HasMany $PayrollArea
+ * @property \Cake\ORM\Association\HasMany $Positions
  *
  * @method \App\Model\Entity\BusinessUnit get($primaryKey, $options = [])
  * @method \App\Model\Entity\BusinessUnit newEntity($data = null, array $options = [])
@@ -42,6 +43,18 @@ class BusinessUnitsTable extends Table
         $this->belongsTo('Customers', [
             'foreignKey' => 'customer_id'
         ]);
+        $this->hasMany('Jobinfos', [
+            'foreignKey' => 'business_unit_id','dependent' => true
+        ]);
+        $this->hasMany('PayGroups', [
+            'foreignKey' => 'business_unit_id','dependent' => true
+        ]);
+        $this->hasMany('PayrollArea', [
+            'foreignKey' => 'business_unit_id','dependent' => true
+        ]);
+        $this->hasMany('Positions', [
+            'foreignKey' => 'business_unit_id','dependent' => true
+        ]);
     }
 
     /**
@@ -62,13 +75,14 @@ class BusinessUnitsTable extends Table
             ->allowEmpty('description');
 
         $validator
-            ->boolean('effective_status')
             ->allowEmpty('effective_status');
 
         $validator
+            // ->date('effective_start_date')
             ->allowEmpty('effective_start_date');
 
         $validator
+            // ->date('effective_end_date')
             ->allowEmpty('effective_end_date');
 
         $validator
@@ -81,6 +95,7 @@ class BusinessUnitsTable extends Table
 
         return $validator;
     }
+
     /**
      * Returns a rules checker object that will be used for validating
      * application integrity.
