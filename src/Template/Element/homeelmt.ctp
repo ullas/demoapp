@@ -24,7 +24,9 @@ switch (strtolower($title)) {
         break;
     case "links":
         echo '<ul class="nav nav-pills nav-stacked">
-                <li><a href="#"><i class="fa fa-user text-green"></i> My Profile</a></li>
+                <li><a href="';
+         echo $this -> Url -> build('/Employees/view/'.$this->request->session()->read('sessionuser')['employee_id']);
+         echo '"><i class="fa fa-user text-green"></i> My Profile</a></li>
                 <li><a href="/Attendance"><i class="fa fa-clock-o text-yellow"></i> Attendance</a></li>
                 <li><a href="/EmployeeAbsencerecords/timesheet"><i class="fa fa-calendar text-light-blue"></i> TimeSheet</a></li>
               </ul>';

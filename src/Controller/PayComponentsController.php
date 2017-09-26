@@ -111,7 +111,7 @@ class PayComponentsController extends AppController
         $this->set('_serialize', ['payComponent']);
 		
 		$payComponents = $this->PayComponents->find('list', ['limit' => 200])->contain(['PayComponentGroups'])->select(['PayComponents.id', 'PayComponents.name',])
-					->where(['status' => '0'])->andwhere(['PayComponents.customer_id' => $this->loggedinuser['customer_id']])->orwhere(['PayComponents.customer_id' => '0']) ;
+					->where(['PayComponents.status' => '0'])->andwhere(['PayComponents.customer_id' => $this->loggedinuser['customer_id']])->orwhere(['PayComponents.customer_id' => '0']) ;
 					
 		$this->set('paycomponentarr', json_encode($payComponents));
 		$this->set('paycomponentgrouparr', json_encode($payComponentGroups));
@@ -161,12 +161,12 @@ class PayComponentsController extends AppController
         $customers = $this->PayComponents->Customers->find('list', ['limit' => 200]);
         $payComponentGroups = $this->PayComponents->PayComponentGroups->find('list', ['limit' => 200])
         									 ->where(['status' => '0'])->andwhere(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']);
-        
+
 		$payComponents = $this->PayComponents->find('list', ['limit' => 200])->contain(['PayComponentGroups'])->select(['PayComponents.id', 'PayComponents.name',])
-					->where(['status' => '0'])->andwhere(['PayComponents.id != '=>$id])->andwhere(['PayComponents.customer_id' => $this->loggedinuser['customer_id']])->orwhere(['PayComponents.customer_id' => '0']) ;
+					->where(['PayComponents.status' => '0'])->andwhere(['PayComponents.id != '=>$id])->andwhere(['PayComponents.customer_id' => $this->loggedinuser['customer_id']])->orwhere(['PayComponents.customer_id' => '0']) ;
         
        
-        
+
 		$this->set('paycomponentarr', json_encode($payComponents));
 		$this->set('paycomponentgrouparr', json_encode($payComponentGroups));
 		
