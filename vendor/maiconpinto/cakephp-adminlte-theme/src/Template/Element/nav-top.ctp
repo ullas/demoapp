@@ -44,7 +44,7 @@ if (file_exists($file)) {
               <li>
                 <!-- inner menu: contains the actual data -->
                 <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 200px;"><ul class="menu" style="overflow: hidden; width: 100%; height: 200px;">
-                  <li><a href="/Profiles"> <i class="fa fa-user text-olive"></i> Profile </a></li>
+                  <li><a href="/Employees/view/<?php echo $this->request->session()->read('sessionuser')['employee_id']; ?>"> <i class="fa fa-user text-olive"></i> Profile </a></li>
                   <li><a href="/EmployeeAbsencerecords/timesheet"> <i class="fa fa-clock-o text-aqua"></i> Timesheet </a></li>
                   <li><a href="/EmployeeAbsencerecords"> <i class="fa fa-calendar-minus-o text-red"></i> Leave Requests </a></li>
                   <li><a href="/WorkflowsHistory"> <i class="fa fa-calendar-minus-o text-green"></i> Leave Approval </a></li>

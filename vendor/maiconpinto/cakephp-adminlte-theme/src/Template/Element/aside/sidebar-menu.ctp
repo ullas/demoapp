@@ -123,7 +123,7 @@ if (file_exists($file)) {
     ?>
     <li><a href="<?php echo $this -> Url -> build('/Homes'); ?>"><i class="fa fa-dashboard"></i><span> Dashboard </span></a></li>
     <li><a href="<?php echo $this -> Url -> build('/Positions/orgchart'); ?>"><i class="fa fa-sitemap"></i><span> Organization Structure </span></a></li>
-	  <li><a href="<?php echo $this -> Url -> build('/Profiles'); ?>"><i class="glyphicon glyphicon-user"></i><span> Profile </span></a></li>
+	  <li><a href="<?php echo $this -> Url -> build('/Employees/view/'.$this->request->session()->read('sessionuser')['employee_id']); ?>"><i class="glyphicon glyphicon-user"></i><span> Profile </span></a></li>
 	  <li><a href="<?php echo $this -> Url -> build('/Dependents'); ?>"><i class="fa fa-child"></i><span> Dependents </span></a></li>
     <li class="treeview">
      <a href="#"> <i class="fa fa-calendar"></i> <span>Time Management</span> <i class="fa fa-angle-left pull-right"></i>  </a>
