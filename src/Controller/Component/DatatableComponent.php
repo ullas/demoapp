@@ -7,7 +7,6 @@ use Cake\Utility\Inflector;
 										  
 		public function getView($fields,$contains,$usrFilter) 
 		{
-			
 			$length = count($fields);
 			$colmns = array();
 			$i = 0;
@@ -39,11 +38,12 @@ use Cake\Utility\Inflector;
             	'dt' => $length++,
             	'type'=>'button',
             	'formatter' => function( $d, $row ,$modalname) {
+            		(isset($row["name"])) ? $displayname=$row["name"] : $displayname="# " .$d ;
                 	$buttons='<a href="/'.   $modalname  . '/view/'.$d.'" class="viewlink fa fa-file-text-o p3"></a>
                 					<a href="/'.   $modalname  . '/edit/'.$d.'" class="editlink fa fa-pencil p3 text-aqua"></a>
 									<form name="formdelete" id="formdelete' .$d. '" method="post" action="/'.   $modalname  . '/delete/'.$d.'" style="display:none;" >
                                    <input type="hidden" name="_method" value="POST"></form>
-                                   <a href="#" onclick="sweet_confirmdelete(&quot;MayHaw&quot;,&quot;Are you sure you want to delete # '.$d.'?&quot; , function(){ document.getElementById(&quot;formdelete'.$d.'&quot;).submit(); })
+                                   <a href="#" onclick="sweet_confirmdelete(&quot;MayHaw&quot;,&quot;Are you sure you want to delete '.$displayname.' ?&quot; , function(){ document.getElementById(&quot;formdelete'.$d.'&quot;).submit(); })
                                     event.returnValue = false; return false;" class="deletelink fa fa-trash text-red" style= "padding:3px"></a>';
 						
                 	return $buttons;

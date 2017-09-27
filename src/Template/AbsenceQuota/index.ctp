@@ -121,7 +121,7 @@
 
                 	<?php echo  '<form name="formdelete" id="formdelete' .$childval['id']. '" method="post" action="/AbsenceQuota/delete/'.$childval['id'].'" style="display:none;" >
                     <input type="hidden" name="_method" value="POST"></form>
-                    <a href="#" onclick="sweet_confirmdelete(&quot;MayHaw&quot;,&quot;Are you sure you want to delete  # '.$childval['id'].' from '.$vals['empname'].'?&quot; ,
+                    <a href="#" onclick="sweet_confirmdelete(&quot;MayHaw&quot;,&quot;Are you sure you want to delete '.$childval['timetype'].' from '.$vals['empname'].'?&quot; ,
                     function(){ var lastemppanel=$(&quot;.emppanel.panel-collapse.collapse.in&quot;).attr(&quot;id&quot;);localStorage.setItem(&quot;lastemppanel&quot;, lastemppanel);
 					 document.getElementById(&quot;formdelete'.$childval['id'].'&quot;).submit(); })
                     event.returnValue = false; return false;" class="deletelink fa fa-trash text-red" style= "padding:3px"></a>';   ?>

@@ -298,13 +298,34 @@ class AppController extends Controller
 			$this->loadModel('TimeTypes');
 			$timetype=$this->TimeTypes->find('all',['conditions' => array('id' => $abschildval['time_type_id']), 'contain' => []])->first();
 			
-			$this->loadModel('EmployeeAbsencerecords');
-			$query=$this->EmployeeAbsencerecords->find('All')->where(['emp_data_biographies_id'=>$this->request->session()->read('sessionuser')['empdatabiographyid']])
-						->andwhere(['time_type_id'=>$abschildval['time_type_id']])->andwhere(['status'=>'1'])->andwhere(['customer_id'=>$this->loggedinuser['customer_id']]);
-			(isset($query)) ? $leavecount=$query->count() : $leavecount=0;
-		
-		
-			$leavestatusarr['timetype']=$timetype['name'];$leavestatusarr['quota']=$abschildval['quota'];$leavestatusarr['leavecount']=$leavecount;
+			$leavestatusarr['timetype']=$timetype['name'];$leavestatusarr['quota']=$abschildval['quota'];
+			
+			$this->loadModel('EmployeeAbsencerecords');			
+			$queryarr=$this->EmployeeAbsencerecords->find('All')->where(['emp_data_biographies_id'=>$this->request->session()->read('sessionuser')['empdatabiographyid']])
+						->andwhere(['time_type_id'=>$abschildval['time_type_id']])->andwhere(['status'=>'1'])->andwhere(['customer_id'=>$this->loggedinuser['customer_id']])->toArray();
+			
+			$diff=0;
+			foreach($queryarr as $querychildval){
+				$startdate = $querychildval['start_date'];
+            	$enddate = $querychildval['end_date'];
+				if(isset($userdateformat)  && $userdateformat===1){
+            		$startdate = str_replace('/', '-', $startdate);
+					$startdate = date('Y/m/d', strtotime($startdate));
+
+					$enddate = str_replace('/', '-', $enddate);
+					$enddate = date('Y/m/d', strtotime($enddate));
+				}
+
+
+				if($startdate!="" && $startdate!=null && $enddate!="" && $enddate!=null){
+         			$date1 = new \DateTime($startdate);
+					$date2 = new \DateTime($enddate);
+					$diff += $date2->diff($date1)->format("%a");
+			  		$diff= $diff+1;
+				}
+			}
+											
+			$leavestatusarr['leavecount']=$diff;
 		
 			$myleaves[]=$leavestatusarr;
 		}
