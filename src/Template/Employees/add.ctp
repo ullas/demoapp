@@ -359,9 +359,9 @@ div#myDropZone {
              		<div class="idfieldset">
              		<div class="col-md-6">	
             	<?php
-             			echo $this->Form->input('identity.card_type',['label' => 'National ID Card Type']);
+             			echo $this->Form->input('identity.card_type',['label' => 'ID Card Type']);
             			echo $this->Form->input('identity.country',['templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-flag"></i></div>'],'class'=>'select2','options' => $this->Country->get_countries(), 'empty' => true]);
-            			echo $this->Form->input('identity.nationalid',['label' => 'National ID']);
+            			echo $this->Form->input('identity.nationalid',['label' => 'ID ']);
             			?>        		
             	</div>	
             	<div class="col-md-6">	
@@ -860,7 +860,7 @@ var countrydata=[];
       
         			});	
 				}else{
-					sweet_alert("Please enter ID Card type/national Id.");
+					sweet_alert("Please enter ID Card type/ Id.");
 					return false;
 				}
 				}else{
@@ -1039,7 +1039,7 @@ $(function () {
     		
     		event.preventDefault();
 			var numItems = $('.idclass').length+1;
-    		$(".idfieldset").append("<div class='idclass' id='contentDiv"+numItems+"'><div class='clearfix'><div class='col-md-6'><div class='col-sm-4'><div class='form-group'><label>National ID Card Type</label><div class='input-group'><div class='input-group-btn'><a class='compdelete btn btn-danger btn-flat'><i class='fa fa-trash'></i></a></div><input type='text' class='idtype form-control' id='idtype"+numItems+"'/></div></div></div><div class='col-sm-4'><div class='form-group'><label>Country</label><div class='input-group'><div class='input-group-addon'><i class='fa fa-flag'></i></div><input class='form-control idcountry'  id='country"+numItems+"'/></div></div></div><div class='col-sm-4'><div class='form-group'><label>National ID</label><input class='form-control nationalid'  id='nationalid"+numItems+"'/></div></div></div><div class='col-md-6'><div class='col-sm-4'><div class='form-group checkbox'><label><input type='checkbox' class='isprimary'  id='isprimary"+numItems+"'/>Is Primary</label></div></div><div class='col-sm-4'><label>Issue Date</label><div class='input-group'><div class='input-group-addon'><i class='fa fa-calendar'></i></div><input type='text' class='issuedate mptldp form-control' id='issuedate"+numItems+"'/></div></div><div class='col-sm-4'><label>Expiry Date</label><div class='input-group'><div class='input-group-addon'><i class='fa fa-calendar'></i></div><input type='text' class='expirydate mptldp form-control' id='expirydate"+numItems+"'/></div></div></div></div></div>");
+    		$(".idfieldset").append("<div class='idclass' id='contentDiv"+numItems+"'><div class='clearfix'><div class='col-md-6'><div class='col-sm-4'><div class='form-group'><label>ID Card Type</label><div class='input-group'><div class='input-group-btn'><a class='compdelete btn btn-danger btn-flat'><i class='fa fa-trash'></i></a></div><input type='text' class='idtype form-control' id='idtype"+numItems+"'/></div></div></div><div class='col-sm-4'><div class='form-group'><label>Country</label><div class='input-group'><div class='input-group-addon'><i class='fa fa-flag'></i></div><input class='form-control idcountry'  id='country"+numItems+"'/></div></div></div><div class='col-sm-4'><div class='form-group'><label>ID </label><input class='form-control nationalid'  id='nationalid"+numItems+"'/></div></div></div><div class='col-md-6'><div class='col-sm-4'><div class='form-group checkbox'><label><input type='checkbox' class='isprimary'  id='isprimary"+numItems+"'/>Is Primary</label></div></div><div class='col-sm-4'><label>Issue Date</label><div class='input-group'><div class='input-group-addon'><i class='fa fa-calendar'></i></div><input type='text' class='issuedate mptldp form-control' id='issuedate"+numItems+"'/></div></div><div class='col-sm-4'><label>Expiry Date</label><div class='input-group'><div class='input-group-addon'><i class='fa fa-calendar'></i></div><input type='text' class='expirydate mptldp form-control' id='expirydate"+numItems+"'/></div></div></div></div></div>");
 			$(".idfieldset").append("<div class='col-md-12'><hr/></div>");
 			
 			//load country dropdown

@@ -31,6 +31,14 @@ function tableLoaded() {
         var innerHtml=$(this).find('div.mptldtbool').html();
         // true/false instead of 1/0
         (innerHtml=="1") ? $(this).find('div.mptldtbool').html("True") : $(this).find('div.mptldtbool').html("False");
+        
+        //active/inactive
+        var statusHtml=$(this).html();
+        if(statusHtml=="Active"){
+        	$(this).html("<b class='text-green'>Active</b>");
+        }else if(statusHtml=="Inactive"){
+        	$(this).html('<b class="text-red">Inactive</b>');
+        }
         });
     });
 }
