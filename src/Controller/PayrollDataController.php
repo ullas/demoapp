@@ -742,6 +742,8 @@ class PayrollDataController extends AppController
 			$jobinfos = $this->JobInfos->find()->select(['JobInfos.employee_id'])->where(['JobInfos.pay_group_id' => $checkedpaygroups[$k] ])
         					->andwhere(['JobInfos.customer_id' => $this->loggedinuser['customer_id']])->toArray();
         	foreach($jobinfos as $childval){
+        		
+				$alreadyexists=0;
         	
 			$this->loadModel('PayrollData');		
 			$payrollData = $this->PayrollData->newEntity();
@@ -813,11 +815,13 @@ class PayrollDataController extends AppController
 				if($payrollData['start_date']<=$startdate || $payrollData['end_date']<=$startdate || $payrollData['start_date']<=$enddate || $payrollData['end_date']<=$enddate){
 					// $this->response->body("Pay Component exists already in the same period duration(".$startdate."-".$enddate.").Please check and try again.");
 	    			// return $this->response;
+	    			$alreadyexists++;
 				}
 		
 			}
 			}
-			//$this->Flash->error(__('You are not Authorized.'.$payrollData['empdatabiographies_id']));
+//check if doesnt exists already			
+if($alreadyexists<1){
 			if ($this->PayrollData->save($payrollData)) {
 					// if (($k+1)==sizeof($checkedpaygroups)) {
                	 		// $this->response->body("success");
@@ -828,6 +832,7 @@ class PayrollDataController extends AppController
                 	$this->response->body("error");
 	    			return $this->response;
             }
+}
             }	
 					if (($k+1)==sizeof($checkedpaygroups)) {
                	 		$this->response->body("success");

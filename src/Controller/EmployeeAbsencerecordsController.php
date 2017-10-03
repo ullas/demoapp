@@ -26,7 +26,7 @@ class EmployeeAbsencerecordsController extends AppController
 		$holidaysarr=[];
 		if($holidaycalid!="" && $holidaycalid!=null){
 			$this->loadModel('Holidays');
-			$holidaysarr=$this->Holidays->find('all',['conditions' => array('holiday_calendar_id' => $holidaycalid)]);
+			$holidaysarr=$this->Holidays->find('all',['conditions' => array('holiday_calendar_id' => $holidaycalid)])->where("Holidays.customer_id=".$this->loggedinuser['customer_id']);
 		}
 		foreach($holidaysarr as $value){
             $fields[] = array($value['date']);
@@ -470,7 +470,7 @@ class EmployeeAbsencerecordsController extends AppController
 		$fields = array();$holidaysarr=[];
 		if($holidaycalid!="" && $holidaycalid!=null){
 			$this->loadModel('Holidays');
-			$holidaysarr=$this->Holidays->find('all',['conditions' => array('holiday_calendar_id' => $holidaycalid)]);
+			$holidaysarr=$this->Holidays->find('all',['conditions' => array('holiday_calendar_id' => $holidaycalid)])->where("Holidays.customer_id=".$this->loggedinuser['customer_id']);
 		}
 		foreach($holidaysarr as $value){
             $fields[] = array($value['date']);
