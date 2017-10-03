@@ -165,8 +165,7 @@ class UsersController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $user = $this->Users->patchEntity($user, $this->request->data);
             if ($this->Users->save($user)) {
-                $this->Flash->success(__('The user preferences has been updated! ...Please login to continue'));
-
+                $this->Flash->success(__('The user preferences has been updated! Please login to continue'));
                 return $this->redirect(['action' => 'logout','controller'=>'Users']);
             } else {
                 $this->Flash->error(__('The user could not be saved. Please, try again.'));

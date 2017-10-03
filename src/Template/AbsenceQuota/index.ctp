@@ -158,7 +158,30 @@
 
 var userdf='<?php echo $this->request->session()->read('sessionuser')['dateformat'];?>';
 
+
 $(function () {
+  
+  	$(document.body).on("change","#employee-id",function(){
+ 		$.ajax({
+        	type: "POST",
+        	url: '/AbsenceQuota/getEmpTimeTypes',
+        	data: 'empid='+this.value,
+        	success : function(ttdata) {
+        		var servicetaskarr=JSON.parse(ttdata);
+        		var servicetaskdata=[];
+				$.each(servicetaskarr, function(key, value) {
+    				servicetaskdata.push({'id':key, "text":value});
+				});
+				$("#time-type-id").empty();
+        		$("#time-type-id").select2({width: '100%',allowClear: true,placeholder: "Select",data:servicetaskdata});
+    			console.log(servicetaskdata);
+    			return true;
+        	},error: function(data) {
+        	    sweet_alert("Couldn't load the particular employees time types.Please try again later.");
+				return false;
+        	}    
+        });
+	});
 
 	//check if last expanded emp panel exists,if so expand it
 	var lastemployeepanel = localStorage.getItem('lastemppanel');//console.log(lastemployeepanel);

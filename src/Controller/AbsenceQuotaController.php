@@ -96,7 +96,7 @@ class AbsenceQuotaController extends AppController
 						->leftJoin('EmpDataPersonals', 'EmpDataPersonals.employee_id = Employees.id')
 						->andwhere("Employees.visible="."1")
 						->andwhere("Employees.customer_id=".$this->loggedinuser['customer_id']);
-        $timeTypes = $this->AbsenceQuota->TimeTypes->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        $timeTypes = "" ;
         $frequencies = $this->AbsenceQuota->Frequencies->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         $customers = $this->AbsenceQuota->Customers->find('list', ['limit' => 200]);
         $this->set(compact('absenceQuotum', 'employees', 'timeTypes', 'frequencies', 'customers'));
@@ -124,7 +124,16 @@ class AbsenceQuotaController extends AppController
         }
 		$employees[$id]  = str_replace('"', '',parent::get_nameofemployee ($id));
 
-        $timeTypes = $this->AbsenceQuota->TimeTypes->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        $this->loadModel('JobInfos');
+		$arr = $this->JobInfos->find('all',['conditions' => array('employee_id' => $id ), 'contain' => []])->toArray();
+		isset($arr[0]) ? $timetypeprofileid = $arr[0]['time_type_profile_id'] : $timetypeprofileid = "0";  
+		
+		$this->loadModel('AbsenceQuota');
+        $timeTypes = $this->AbsenceQuota->TimeTypes->TimeTypeProfileTimeTypes
+        					->find('list', array('fields' => array('id'=>'TimeTypeProfileTimeTypes.time_type_id','name'=> 'TimeTypes.name'),
+    						'contain' => array('TimeTypes'), 'limit' => 200))->where(['time_type_profile_id' => $timetypeprofileid])
+							->andwhere(['TimeTypes.customer_id' => $this->loggedinuser['customer_id']])->orwhere(['TimeTypes.customer_id' => '0']) ;
+							
         $frequencies = $this->AbsenceQuota->Frequencies->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         $customers = $this->AbsenceQuota->Customers->find('list', ['limit' => 200]);
         $this->set(compact('absenceQuotum', 'employees', 'timeTypes', 'frequencies', 'customers'));
@@ -175,6 +184,26 @@ class AbsenceQuotaController extends AppController
         $customers = $this->AbsenceQuota->Customers->find('list', ['limit' => 200]);
         $this->set(compact('absenceQuotum', 'employees', 'timeTypes', 'frequencies', 'customers'));
 	}
+	public function getEmpTimeTypes(){
+		if($this->request->is('ajax')) {
+
+			$this->autoRender=false;
+			
+			$this->loadModel('JobInfos');
+			$arr = $this->JobInfos->find('all',['conditions' => array('employee_id' => $this->request->data['empid'] ), 'contain' => []])->toArray();
+			isset($arr[0]) ? $timetypeprofileid = $arr[0]['time_type_profile_id'] : $timetypeprofileid = "0";  
+		
+			$this->loadModel('AbsenceQuota');
+        	$timeTypes = $this->AbsenceQuota->TimeTypes->TimeTypeProfileTimeTypes
+        					->find('list', array('fields' => array('id'=>'TimeTypeProfileTimeTypes.time_type_id','name'=> 'TimeTypes.name'),
+    						'contain' => array('TimeTypes'), 'limit' => 200))->where(['time_type_profile_id' => $timetypeprofileid])
+							->andwhere(['TimeTypes.customer_id' => $this->loggedinuser['customer_id']])->orwhere(['TimeTypes.customer_id' => '0']) ;
+							
+			$this->response->body(json_encode($timeTypes));
+			return $this->response;
+		
+		}
+	}
 	public function addBatchData()
 	{
 		//redirect if payroll locked for processing
@@ -183,6 +212,8 @@ class AbsenceQuotaController extends AppController
 			 // return $this->redirect(['action' => 'alert','controller'=>'PayrollData']);
 		// }
 
+		($this->daytimeFormat==1) ? $mptldateformat='d/m/Y' : $mptldateformat='m/d/Y' ;
+			
 		if($this->request->is('ajax')) {
 
 			$this->autoRender=false;
@@ -193,8 +224,31 @@ class AbsenceQuotaController extends AppController
 			$this->loadModel('JobInfos');
 			$jobinfos = $this->JobInfos->find()->select(['JobInfos.employee_id'])->where(['JobInfos.pay_group_id' => $checkedpaygroups[$k] ])
         					->andwhere(['JobInfos.customer_id' => $this->loggedinuser['customer_id']])->toArray();
+							
         	foreach($jobinfos as $childval){
-
+        			
+        		$alreadyexists=0;
+        		
+				//getting all timetypes of new emp id
+			$this->loadModel('JobInfos');
+			$arr = $this->JobInfos->find('all',['conditions' => array('employee_id' => $childval['employee_id'] ), 'contain' => []])->toArray();
+			isset($arr[0]) ? $timetypeprofileid = $arr[0]['time_type_profile_id'] : $timetypeprofileid = "0";  
+		
+			$allocatedtimeTypes=[];
+			$this->loadModel('AbsenceQuota');
+        	$timeTypes = $this->AbsenceQuota->TimeTypes->TimeTypeProfileTimeTypes
+        					->find('all', array('fields' => 'TimeTypeProfileTimeTypes.time_type_id',
+    						'contain' => array('TimeTypes'), 'limit' => 200))->where(['time_type_profile_id' => $timetypeprofileid])
+							->andwhere(['TimeTypes.customer_id' => $this->loggedinuser['customer_id']])->orwhere(['TimeTypes.customer_id' => '0'])->toArray() ;
+			foreach($timeTypes as $ttchildval){
+				array_push($allocatedtimeTypes,$ttchildval["time_type_id"]);
+			}
+			// $this->Flash->error(__('Payroll '.$this->request->data['time_type_id']."---".json_encode($allocatedtimeTypes)."---".$childval['employee_id']));
+				
+				if(in_array($this->request->data['time_type_id'],$allocatedtimeTypes)){
+					
+					
+				
 			$this->loadModel('AbsenceQuota');
 			$absenceQuotum = $this->AbsenceQuota->newEntity();
 
@@ -231,21 +285,34 @@ class AbsenceQuotaController extends AppController
 
 			foreach ($query as $row) {
 				if($row['nxtexpiry']!=""  && $row['nxtexpiry']!=null){
-					(isset($userdf)  & $userdf===1) ? $expirydate = $row['nxtexpiry']->format('d/m/Y') : $expirydate = $row['nxtexpiry']->format('m/d/Y');
+					$expirydate = $row['nxtexpiry']->format($mptldateformat);
 
-					if($absenceQuotum['nxtexpiry']<=$expirydate){
-						$this->response->body("Absence quota with the same timetype exists for ". str_replace('"', '',parent::get_nameofemployee ($absenceQuotum['employee_id'])) ."already with next expiry date as ".$expirydate.".Please check and try again.");
-	    				return $this->response;
+					if($this->daytimeFormat==1){
+						$existingdate = \DateTime::createFromFormat('d/m/Y', $expirydate);
+						$existingdate=date_format($existingdate, 'Y/m/d');
+						$newdate = \DateTime::createFromFormat('d/m/Y', $absenceQuotum['nxtexpiry']);
+						$newdate=date_format($newdate, 'Y/m/d');
+					}else{
+						$existingdate = $row['nxtexpiry'];
+						$newdate=$absenceQuotum['nxtexpiry'];
+					}
+				// $this->Flash->success(__('The data------'.$newdate."--".$existingdate));	
+					if($newdate<=$existingdate){
+						$alreadyexists++;
+						// $this->response->body("Absence quota with the same timetype exists for ". str_replace('"', '',parent::get_nameofemployee ($absenceQuotum['employee_id'])) ." already with next expiry date as ".$expirydate.".Please check and try again.");
+	    				// return $this->response;
 					}
 				}
 			}
-
-
+			//check if doesnt exists already
+			if($alreadyexists<1){
 				if ($this->AbsenceQuota->save($absenceQuotum)) {
 
             	} else {
                 	$this->response->body("error");
 	    			return $this->response;
+            	}
+            	}
             	}
             }
 
@@ -313,34 +380,52 @@ class AbsenceQuotaController extends AppController
 			$successcounter=0;$errorcounter=0;
 			$oldempid = $this->request->data['oldemp'] ;
 			$newempid = $this->request->data['newemp'] ;
-
+			
+			//getting all timetypes of new emp id
+			$this->loadModel('JobInfos');
+			$arr = $this->JobInfos->find('all',['conditions' => array('employee_id' => $newempid ), 'contain' => []])->toArray();
+			isset($arr[0]) ? $timetypeprofileid = $arr[0]['time_type_profile_id'] : $timetypeprofileid = "0";  
+		
+			$allocatedtimeTypes=[];
+			$this->loadModel('AbsenceQuota');
+        	$timeTypes = $this->AbsenceQuota->TimeTypes->TimeTypeProfileTimeTypes
+        					->find('all', array('fields' => 'TimeTypeProfileTimeTypes.time_type_id',
+    						'contain' => array('TimeTypes'), 'limit' => 200))->where(['time_type_profile_id' => $timetypeprofileid])
+							->andwhere(['TimeTypes.customer_id' => $this->loggedinuser['customer_id']])->orwhere(['TimeTypes.customer_id' => '0'])->toArray() ;
+			foreach($timeTypes as $ttchildval){
+				array_push($allocatedtimeTypes,$ttchildval["time_type_id"]);
+			}
+							
 			($this->daytimeFormat==1) ? $mptldateformat='d/m/Y' : $mptldateformat='m/d/Y' ;
 
 			if($oldempid!="" && $oldempid!=null && $newempid!="" && $newempid!=null){
 				$dbdatas = $this->AbsenceQuota->find('all')->where(['AbsenceQuota.employee_id' => $oldempid ])
 										->andwhere(['AbsenceQuota.customer_id' => $this->loggedinuser['customer_id']])->toArray();
         		foreach($dbdatas as $childval){
+					if(in_array($childval['time_type_id'],$allocatedtimeTypes)){
+						
+        				$this->loadModel('AbsenceQuota');
+						$absenceQuotum = $this->AbsenceQuota->newEntity();
 
-        			$this->loadModel('AbsenceQuota');
-					$absenceQuotum = $this->AbsenceQuota->newEntity();
+            			$absenceQuotum=$this->AbsenceQuota->patchEntity($absenceQuotum,$this->request->data);
 
-            		$absenceQuotum=$this->AbsenceQuota->patchEntity($absenceQuotum,$this->request->data);
+						$absenceQuotum['employee_id']=$newempid;
+           				$absenceQuotum['time_type_id']=$childval['time_type_id'];
+						$absenceQuotum['frequency_id']=$childval['frequency_id'];
+            			$absenceQuotum['quota']=$childval['quota'];
+						$absenceQuotum['balance']=$childval['balance'];
+						$absenceQuotum['nxtexpiry']=$childval['nxtexpiry']->format($mptldateformat);
+						$absenceQuotum['expirylot']=$childval['expirylot'];
 
-					$absenceQuotum['employee_id']=$newempid;
-           			$absenceQuotum['time_type_id']=$childval['time_type_id'];
-					$absenceQuotum['frequency_id']=$childval['frequency_id'];
-            		$absenceQuotum['quota']=$childval['quota'];
-					$absenceQuotum['balance']=$childval['balance'];
-					$absenceQuotum['nxtexpiry']=$childval['nxtexpiry']->format($mptldateformat);
-					$absenceQuotum['expirylot']=$childval['expirylot'];
-
-					$absenceQuotum['customer_id']=$this->loggedinuser['customer_id'];
+						$absenceQuotum['customer_id']=$this->loggedinuser['customer_id'];
 
 
-            		if ($this->AbsenceQuota->save($absenceQuotum)) {
-            			$successcounter++;
-					}else{
-						$errorcounter++;
+            			if ($this->AbsenceQuota->save($absenceQuotum)) {
+            				$successcounter++;
+						}else{
+							$errorcounter++;
+						}
+					
 					}
 				}
 
@@ -537,7 +622,17 @@ class AbsenceQuotaController extends AppController
 						->leftJoin('EmpDataPersonals', 'EmpDataPersonals.employee_id = Employees.id')
 						->andwhere("Employees.visible="."1")
 						->andwhere("Employees.customer_id=".$this->loggedinuser['customer_id']);
-        $timeTypes = $this->AbsenceQuota->TimeTypes->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+						
+		$this->loadModel('JobInfos');
+		$arr = $this->JobInfos->find('all',['conditions' => array('employee_id' => $absenceQuotum["employee_id"] ), 'contain' => []])->toArray();
+		isset($arr[0]) ? $timetypeprofileid = $arr[0]['time_type_profile_id'] : $timetypeprofileid = "0";  
+		
+		$this->loadModel('AbsenceQuota');
+        $timeTypes = $this->AbsenceQuota->TimeTypes->TimeTypeProfileTimeTypes
+        					->find('list', array('fields' => array('id'=>'TimeTypeProfileTimeTypes.time_type_id','name'=> 'TimeTypes.name'),
+    						'contain' => array('TimeTypes'), 'limit' => 200))->where(['time_type_profile_id' => $timetypeprofileid])
+							->andwhere(['TimeTypes.customer_id' => $this->loggedinuser['customer_id']])->orwhere(['TimeTypes.customer_id' => '0']) ;
+							
         $frequencies = $this->AbsenceQuota->Frequencies->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         $customers = $this->AbsenceQuota->Customers->find('list', ['limit' => 200]);
         $this->set(compact('absenceQuotum', 'employees', 'timeTypes', 'frequencies', 'customers'));
