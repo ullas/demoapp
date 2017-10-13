@@ -982,10 +982,10 @@ if($alreadyexists<1){
 						->leftJoin('EmpDataPersonals', 'EmpDataPersonals.employee_id = EmpDataBiographies.employee_id')
 						->where("EmpDataBiographies.customer_id=".$this->loggedinuser['customer_id']);
 						
-		$payComps = $this->PayrollData->find('all')->where(['status' => '0'])->andwhere("PayrollData.empdatabiographies_id=".$id)->andwhere("PayrollData.pay_component_type=1")
-							->andwhere("PayrollData.customer_id=".$this->loggedinuser['customer_id']);
+		$payComps = $this->PayrollData->find('all')->where("PayrollData.empdatabiographies_id=".$id)->andwhere("PayrollData.pay_component_type=1")
+							->andwhere("PayrollData.customer_id=".$this->loggedinuser['customer_id'])->toArray();
 							
-		$payCompGroups = $this->PayrollData->find('all')->where(['status' => '0'])->andwhere("PayrollData.empdatabiographies_id=".$id)->andwhere("PayrollData.pay_component_type=2")
+		$payCompGroups = $this->PayrollData->find('all')->where("PayrollData.empdatabiographies_id=".$id)->andwhere("PayrollData.pay_component_type=2")
 							->andwhere("PayrollData.customer_id=".$this->loggedinuser['customer_id']);
 		
 		$this->loadModel("PayComponents");

@@ -57,7 +57,7 @@ use Cake\Utility\Inflector;
 			//getting limit
 			if($desclimit){
 				$limit = " 5 ";
-				$temparr=array();$temparr["Attendance.time_in"]="DESC";
+				$temparr=array();$temparr["Attendance.id"]="DESC";
 				$order=$temparr;
 			}else{
 				$limit = $this->Limit( );
@@ -288,7 +288,9 @@ use Cake\Utility\Inflector;
                            			// $row[ $column['dt'] ] =$this->formatDate(json_encode($data[$i][$colname[0][1]]));
                            			$fmt=$this->_registry->getController()->daytimeFormat;
 									if($data[$i][$colname[0][1]]!="" && $data[$i][$colname[0][1]]!=null){
-										($fmt==1) ? $row[ $column['dt'] ] = $data[$i][$colname[0][1]]->format('d/m/Y H:m:s a')  : $row[ $column['dt'] ] = $data[$i][$colname[0][1]]->format('m/d/Y H:m:s a') ; 
+										($fmt==1) ? $row[ $column['dt'] ] = $data[$i][$colname[0][1]]->format('d/m/Y H:i:s a')  : $row[ $column['dt'] ] = $data[$i][$colname[0][1]]->format('m/d/Y H:i:s a') ; 
+										// $serverDate = $data[$i][$colname[0][1]]->format('Y-m-d H:i:s');
+										// $row[ $column['dt'] ] = $this->convert_to_userdate($serverDate);
 									}
                            		}else{
                                		$row[ $column['dt'] ] = utf8_encode($data[$i][$colname[0][1]]);                           			
@@ -307,6 +309,24 @@ use Cake\Utility\Inflector;
 		 		"recordsTotal" => $totalCount,
 		 		"data"            => $out
 		 	);
+		}
+		
+		public function convert_to_userdate($date)
+		{
+   			try {
+    			$fmt=$this->_registry->getController()->daytimeFormat;
+		
+        		$userTimezone = new \DateTimeZone($this->_registry->getController()->timezone);
+				$gmtTimezone = new \DateTimeZone('GMT');
+				$myDateTime = new \DateTime($date, $gmtTimezone);
+				$offset = $userTimezone->getOffset($myDateTime);
+				$myInterval=\DateInterval::createFromDateString((string)$offset . 'seconds');
+				$myDateTime->add($myInterval);
+				($fmt==1) ? $result = $myDateTime->format('d/m/Y H:i:s a')  : $result = $myDateTime->format('m/d/Y H:i:s a') ;
+        		return $result;
+    		}catch (Exception $e) {
+        		return '';
+    		}
 		}
 				
 	}

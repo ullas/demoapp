@@ -853,8 +853,10 @@ function tableLoaded() {
     		$(this).find('td:eq(1)').html('<span class="label label-warning">Pending</span>');
     	}else if($(this).find('td:eq(1)').html()=="1"){
     		$(this).find('td:eq(1)').html('<span class="label label-success">Approved</span>');
+    		$(this).find('td:eq(4) .editlink').hide(); $(this).find('td:eq(4) .deletelink').hide();
     	}else if($(this).find('td:eq(1)').html()=="2"){
     		$(this).find('td:eq(1)').html('<span class="label label-danger">Rejected</span>');
+    		$(this).find('td:eq(4) .editlink').hide(); $(this).find('td:eq(4) .deletelink').hide();
     	}
 
     	$(this).find('td').each (function() {

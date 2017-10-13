@@ -291,7 +291,6 @@ use Cake\Utility\Inflector;
 				
 			$fmt=$this->_registry->getController()->daytimeFormat;
 			($fmt==1) ? $mptldateformat='d/m/Y' : $mptldateformat='m/d/Y';
-			($fmt==1) ? $mptltimestampformat='d/m/Y H:m a' : $mptltimestampformat='m/d/Y H:m a';
 									
 			$out = array();
 			for ( $i=0, $ien=count($data) ; $i<$ien ; $i++ ) {
@@ -343,7 +342,8 @@ use Cake\Utility\Inflector;
 									}
                            		}else if($column['type']=="timestamp"){                           			 
 									if($data[$i][$colname[0][1]]!="" && $data[$i][$colname[0][1]]!=null){
-                           				$row[ $column['dt'] ] = $data[$i][$colname[0][1]]->format($mptltimestampformat); 
+                           				$serverDate = $data[$i][$colname[0][1]]->format('Y-m-d H:i:s');
+										$row[ $column['dt'] ] = $this->convert_to_userdate($serverDate);
 									}
                            		}else{                          			
 									$row[ $column['dt'] ] = utf8_encode($data[$i][$colname[0][1]]);     
@@ -372,6 +372,22 @@ use Cake\Utility\Inflector;
 		 		"data"            => $out
 		 	);
 		}
-				
+		public function convert_to_userdate($date)
+		{
+   			try {
+    			$fmt=$this->_registry->getController()->daytimeFormat;
+		
+        		$userTimezone = new \DateTimeZone($this->_registry->getController()->timezone);
+				$gmtTimezone = new \DateTimeZone('GMT');
+				$myDateTime = new \DateTime($date, $gmtTimezone);
+				$offset = $userTimezone->getOffset($myDateTime);
+				$myInterval=\DateInterval::createFromDateString((string)$offset . 'seconds');
+				$myDateTime->add($myInterval);
+				($fmt==1) ? $result = $myDateTime->format('d/m/Y H:i:s a')  : $result = $myDateTime->format('m/d/Y H:i:s a') ;
+        		return $result;
+    		}catch (Exception $e) {
+        		return '';
+    		}
+		}		
 	}
 ?>

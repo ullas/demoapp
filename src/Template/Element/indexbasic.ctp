@@ -182,7 +182,7 @@ $this->Html->script([
 
        return true;
    })
-   console.log(searchTerm);
+   // console.log(searchTerm);
    table.search(searchTerm).draw();
    $.fn.dataTable.ext.search.pop();
 })

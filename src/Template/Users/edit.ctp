@@ -19,6 +19,7 @@
             echo $this->Form->input('username',['disabled'=>true]);
             echo $this->Form->input('name');
 			echo $this->Form->input('dateformat',['class'=>'select2','options' => array("1"=>'dd/mm/yyyy [01/01/2017]',"2"=>'mm/dd/yyyy [01/01/2017]')]);
+            echo $this->Form->input('timezone',['class'=>'select2','options' => $this->Timezone->get_timezones()]);
             echo $this->Form->input('customer_id', ['options' => $customers]);
         ?>
     </fieldset>

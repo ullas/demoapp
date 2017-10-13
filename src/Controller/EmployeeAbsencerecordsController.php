@@ -352,6 +352,7 @@ class EmployeeAbsencerecordsController extends AppController
 				$workflow = $this->Workflows->patchEntity($workflow, $this->request->data);
 				$workflow['workflowrule_id']=$workflowruleid;
 				$workflow['user_id']=$this->request->session()->read('sessionuser')['id'];
+				$workflow['currentstep']='1';	
 				if($workflowactioncount!=""){ $workflow['lastaction']=$workflowactioncount; }	
 				
             	if ($this->Workflows->save($workflow)) {$conn->commit();
@@ -674,6 +675,7 @@ class EmployeeAbsencerecordsController extends AppController
 				$workflow['workflowrule_id']=$workflowruleid;
 				$workflow['user_id']=$this->request->session()->read('sessionuser')['id'];
 				if($workflowactioncount!=""){ $workflow['lastaction']=$workflowactioncount; }	
+				$workflow['currentstep']='1';	
 				// $workflow['active']="0";	
 				// $workflow["emp_data_biographies_id"] = $this->request->session()->read('sessionuser')['empdatabiographyid'] ; 
             	if ($this->Workflows->save($workflow)) {$conn->commit();

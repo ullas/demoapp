@@ -12,11 +12,11 @@ use Cake\ORM\Entity;
  * @property float $pay_component_value
  * @property float $paid_salary
  * @property \Cake\I18n\Time $run_date
- * @property \Cake\I18n\Time $run_time
  * @property int $customer_id
  * @property int $pay_group_id
  * @property int $employee_id
  * @property bool $correctionrun
+ * @property \Cake\I18n\Time $run_time
  *
  * @property \App\Model\Entity\PayComponent $pay_component
  * @property \App\Model\Entity\Customer $customer
