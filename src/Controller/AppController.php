@@ -151,13 +151,19 @@ class AppController extends Controller
 		$table = TableRegistry::get($this->modelClass);	//debug($this->modelClass);
 		$table->addBehavior("Dateformat",[$this->daytimeFormat]);
 		
-		
 		//also load datetime behaviour for associated models
 		$assModels=$table->associations()->keys();
 	   	foreach($assModels as $asskeys){
 		   	$table->$asskeys->addBehavior("Dateformat",[$this->daytimeFormat]);
 	   	}
 		
+		
+		//timezone
+		// $this->timezone=$this->request->session()->read('sessionuser')['timezone'];
+// 		
+		// $table = TableRegistry::get($this->modelClass);	//debug($this->modelClass);
+		// $table->addBehavior("Timezone",[$this->timezone]);
+			
 		
 		if($userrole == "root"){
 			$this->loadComponent('Auth', [
@@ -212,13 +218,13 @@ class AppController extends Controller
 		// debug($event);
 	}
 	public function beforeFilter(Event $event)
-    {//debug($this->data);
+    {//debug($event);
 		parent::beforeFilter($event);
 		
 		$this->Auth->deny(['add', 'edit']);	
-		
+				
 		$userrole=$this->request->session()->read('sessionuser')['role'];
-		
+		// echo json_encode($event);
 		switch ($userrole) {
 			case "admin":
 				$adminarray=["Homes","LegalEntities","BusinessUnits"];
@@ -248,7 +254,7 @@ class AppController extends Controller
      * @return void
      */
     public function beforeRender(Event $event)
-    {
+    {//debug($event);
     	if($this->daytimeFormat==1){
 			$mptldateformat='d/m/Y';
 			$mptldatetimeformat='d/m/Y H:m a';
@@ -259,7 +265,19 @@ class AppController extends Controller
 		$this->set('mptldateformat', $mptldateformat);
 		$this->set('mptldatetimeformat', $mptldatetimeformat);
 		
-		
+		//timezone
+		// $alias = $event->subject()->alias();
+	   // $table = TableRegistry::get($alias);
+       // $schema=$table->schema();
+	   // $columns=$schema->columns();
+	   // $timestampfields=array();
+	   // foreach($columns as $field ){
+	   	  // $type=$schema->columnType($field);
+		  // if(strcmp($type,'date')==0 && !in_array($field,['created','modified','run_date'])){
+		  	 // $timestampfields[]=$field;
+		  // }
+	   // }
+	   // echo json_encode($timestampfields);
 		// $table = TableRegistry::get("EmploymentInfos");	//debug($this->modelClass);
 		// $table->addBehavior("Dateformat",[$this->daytimeFormat]);
 		

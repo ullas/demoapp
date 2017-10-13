@@ -76,16 +76,16 @@ class PayrollResultTable extends Table
             ->allowEmpty('paid_salary');
 
         $validator
-            ->date('run_date')
+            // ->date('run_date')
             ->allowEmpty('run_date');
-
-        $validator
-            ->time('run_time')
-            ->allowEmpty('run_time');
 
         $validator
             ->boolean('correctionrun')
             ->allowEmpty('correctionrun');
+
+        $validator
+            // ->dateTime('run_time')
+            ->allowEmpty('run_time');
 
         return $validator;
     }

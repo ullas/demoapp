@@ -2,6 +2,10 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use Cake\Event\Event;
+use Cake\ORM\TableRegistry;
+use Cake\Event\ArrayObject;
+use Cake\Utility\Inflector;
 
 /**
  * Attendance Controller
@@ -17,7 +21,25 @@ class AttendanceController extends AppController
      *
      * @return \Cake\Network\Response|null
      */
-     
+     // public function beforeRender(Event $event)
+    // {
+    	// debug($event->subject());
+		// parent::beforeFilter($event);
+		
+		// $alias = $event->subject()->name;
+	   // $table = TableRegistry::get($alias);
+       // $schema=$table->schema();
+	   // $columns=$schema->columns();
+	   // $timestampfields=array();
+	   // foreach($columns as $field ){
+	   	  // $type=$schema->columnType($field);
+		  // if(strcmp($type,'timestamp')==0){
+		  	 // $timestampfields[]=$field;
+		  // }
+	   // }
+	   
+	   // echo json_encode($timestampfields);
+	// }
      public function ajaxData() {
 		$this->autoRender= False;
 		  
