@@ -100,6 +100,8 @@ class AttendanceController extends AppController
 			}
 		}
 		$this->set('clockstatus', json_encode($clockstatus));
+		
+		$this->set('tz', json_encode($this->timezone));
     }
 	public function clockinout(){
 		$this->autoRender= False;
