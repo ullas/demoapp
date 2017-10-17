@@ -39,6 +39,7 @@ class AppController extends Controller
 {
 	protected $loggedinuser;
 	public $daytimeFormat=1;
+	public $timezone;
 	
 	var $components = array('LoadCountry');
 	
@@ -159,7 +160,7 @@ class AppController extends Controller
 		
 		
 		//timezone
-		// $this->timezone=$this->request->session()->read('sessionuser')['timezone'];
+		$this->timezone=$this->request->session()->read('sessionuser')['timezone'];
 // 		
 		// $table = TableRegistry::get($this->modelClass);	//debug($this->modelClass);
 		// $table->addBehavior("Timezone",[$this->timezone]);
