@@ -93,13 +93,20 @@
 </div>
 </section>
 
-<?php
-date_default_timezone_set('UTC');
-?>
+
 
 <?php $this->start('scriptIndexBottom'); ?>
 <script>
- var d = new Date(<?php echo time() * 1000 ?>);
+
+
+
+var currentUtcTime = new Date(); // This is in UTC
+var timezone=<?php echo $tz ?> ;//console.log(timezone);
+ // Converts the UTC time to a locale specific format, including adjusting for timezone.
+ var d = new Date(currentUtcTime.toLocaleString('en-US', { timeZone: timezone }));
+
+//console.log(d);
+
 function digitalClock() {
   d.setTime(d.getTime() + 1000);
   var hrs = d.getHours();
@@ -117,7 +124,6 @@ window.onload = function() {
   digitalClock();
   setInterval('digitalClock()', 1000);
 }
-
 $(function() {
 	//initially load only last five
 	table.ajax.url('/Attendance/ajaxData?filter=five').load();
