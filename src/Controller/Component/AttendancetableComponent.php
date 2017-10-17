@@ -287,10 +287,11 @@ use Cake\Utility\Inflector;
                            		if($column['type']=="timestamp"){
                            			// $row[ $column['dt'] ] =$this->formatDate(json_encode($data[$i][$colname[0][1]]));
                            			$fmt=$this->_registry->getController()->daytimeFormat;
+									$tz=$this->_registry->getController()->timezone;
 									if($data[$i][$colname[0][1]]!="" && $data[$i][$colname[0][1]]!=null){
-										($fmt==1) ? $row[ $column['dt'] ] = $data[$i][$colname[0][1]]->format('d/m/Y H:i:s a')  : $row[ $column['dt'] ] = $data[$i][$colname[0][1]]->format('m/d/Y H:i:s a') ; 
-										// $serverDate = $data[$i][$colname[0][1]]->format('Y-m-d H:i:s');
-										// $row[ $column['dt'] ] = $this->convert_to_userdate($serverDate);
+										// ($fmt==1) ? $row[ $column['dt'] ] = $data[$i][$colname[0][1]]->format('d/m/Y H:i:s a')  : $row[ $column['dt'] ] = $data[$i][$colname[0][1]]->format('m/d/Y H:i:s a') ; 
+										$serverDate = $data[$i][$colname[0][1]]->format('Y-m-d H:i:s');
+										$row[ $column['dt'] ] = $this->convert_to_userdate($serverDate,$tz);
 									}
                            		}else{
                                		$row[ $column['dt'] ] = utf8_encode($data[$i][$colname[0][1]]);                           			
@@ -311,12 +312,12 @@ use Cake\Utility\Inflector;
 		 	);
 		}
 		
-		public function convert_to_userdate($date)
+		public function convert_to_userdate($date,$tz)
 		{
    			try {
     			$fmt=$this->_registry->getController()->daytimeFormat;
 		
-        		$userTimezone = new \DateTimeZone($this->_registry->getController()->timezone);
+        		$userTimezone = new \DateTimeZone($tz);
 				$gmtTimezone = new \DateTimeZone('GMT');
 				$myDateTime = new \DateTime($date, $gmtTimezone);
 				$offset = $userTimezone->getOffset($myDateTime);
