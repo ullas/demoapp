@@ -68,8 +68,11 @@ class AppController extends Controller
 			$this->loadModel('Employees');
 			$employeearr=$this->Employees->find('all',['conditions' => array('id' => $user['employee_id']),'contain' => []])->toArray();
 			isset($employeearr[0]) ? $pic = $employeearr[0]['profilepicture'] : $pic = "defaultuser.png" ; 
-
-		
+			
+			$empname=$this->get_nameofemployee($user['employee_id']);
+			$empname=str_replace('"', '',$empname);
+			$this->set('empname', $empname);
+			
     		$this->set('name', $user['name']);
 			$this->set('userid', $user['id']);   
 			$this->set('empid', $user['employee_id']);      

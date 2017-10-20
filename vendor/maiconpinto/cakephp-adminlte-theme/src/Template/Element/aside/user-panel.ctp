@@ -26,12 +26,12 @@ if (file_exists($file)) {
     			if( (isset($counts['legalentity']) && $counts['legalentity'] >0) && (isset($counts['businessunit']) && $counts['businessunit'] >0) &&
 					(isset($counts['division']) && $counts['division'] >0) && (isset($counts['department']) && $counts['department'] >0) &&
 					(isset($counts['costcenter']) && $counts['costcenter'] >0) && (isset($counts['position']) && $counts['position'] >0) ){
-						echo "<p><a href='/Employees/view/".$this->request->session()->read('sessionuser')["employee_id"]."'>".$name."</a></p>";
+						echo "<p><a href='/Employees/view/".$this->request->session()->read('sessionuser')["employee_id"]."'>".$empname."</a></p>";
 				}else{
-					echo "<p>".$name."</p>";
+					echo "<p>".$empname."</p>";
 				}
 			}else{
-				echo "<p>".$name."</p>";
+				echo "<p>".$empname."</p>";
 			}
 		?>
 							

@@ -282,7 +282,7 @@ class CustomersTable extends Table
             ->allowEmpty('noofusers');
 
         $validator
-            ->date('expirydate')
+            // ->date('expirydate')
             ->allowEmpty('expirydate');
 
         $validator
@@ -290,7 +290,7 @@ class CustomersTable extends Table
             ->allowEmpty('payroll_lock');
 
         $validator
-            ->date('lock_date')
+            // ->date('lock_date')
             ->allowEmpty('lock_date');
 
         $validator

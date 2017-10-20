@@ -17,7 +17,7 @@ if (file_exists($file)) {
     ?>
     <li><a href="<?php echo $this -> Url -> build('/Homes'); ?>"><i class="fa fa-dashboard"></i><span> Dashboard </span></a></li>
     <li><a href="<?php echo $this -> Url -> build('/Employees'); ?>"><i class="fa fa-user"></i><span> Employee Administration</span></a></li>
-    <li class="treeview">
+    <!-- <li class="treeview">
     <a href="#"> <i class="fa fa-lock"></i> <span>Admin</span> <i class="fa fa-angle-left pull-right"></i>  </a>
     <ul class="treeview-menu">
 
@@ -27,7 +27,7 @@ if (file_exists($file)) {
     <li><a href="<?php echo $this -> Url -> build('/Divisions'); ?>"><i class="fa fa-circle-o"></i> Division</a></li>
     <li><a href="<?php echo $this -> Url -> build('/CostCentres'); ?>"><i class="fa fa-circle-o"></i> Cost Center</a></li>
     </ul>
-    </li>
+    </li> -->
     <li><a href="<?php echo $this -> Url -> build('/Customers'); ?>"><i class="glyphicon glyphicon-king"></i><span> Customers </span></a></li>
     <?php if ($counts['customer'] > 0): ?>
     <li><a href="<?php echo $this -> Url -> build('/Users'); ?>"><i class="fa fa-user-plus"></i><span> Users </span></a></li>
