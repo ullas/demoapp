@@ -348,7 +348,7 @@ $this->Html->script([ 'AdminLTE./plugins/datepicker/bootstrap-datepicker' ], ['b
 $this->Html->script([ 'AdminLTE./plugins/timepicker/bootstrap-timepicker.min' ], ['block' => 'script']);
 $this->Html->script([ '/js/dropzone' ], ['block' => 'script']);
 $this->Html->script([ '/js/moment' ], ['block' => 'script']);
-$this->Html->script([ '/js/bootstrap-toggle.min' ], ['block' => 'script']);
+$this->Html->script([ '/js/bootstrap-toggle.min' ], ['block' => 'script']); 
 ?>
 
 <body class="hold-transition skin-greenjam sidebar-mini">
