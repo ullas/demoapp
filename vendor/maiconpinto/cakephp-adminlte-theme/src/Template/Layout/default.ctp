@@ -24,7 +24,7 @@
     <link rel="stylesheet" href="/css/font-awesome.min.css">
     <link rel="stylesheet" href="/css/sweetalert.css">
     <!-- Ionicons -->
-<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/css/jquery-ui.css">
     
 <!-- <link rel="stylesheet" href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css">
 <link rel="stylesheet" href="https://cdn.datatables.net/rowreorder/1.2.0/css/rowReorder.dataTables.min.css"> -->
@@ -51,8 +51,8 @@
 <script src="/js/jquery-ui.min.js"></script>
 
 <!-- bootstrap toggle -->
-<link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
-<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+<link href="/css/bootstrap-toggle.min.css" rel="stylesheet">
+<!-- <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script> -->
  
  
  <?php echo $this->Html->script('/js/sweetalert-dev.js'); ?>   
@@ -347,6 +347,8 @@ $this->Html->script([ 'AdminLTE./plugins/knob/jquery.knob' ], ['block' => 'scrip
 $this->Html->script([ 'AdminLTE./plugins/datepicker/bootstrap-datepicker' ], ['block' => 'script']);
 $this->Html->script([ 'AdminLTE./plugins/timepicker/bootstrap-timepicker.min' ], ['block' => 'script']);
 $this->Html->script([ '/js/dropzone' ], ['block' => 'script']);
+$this->Html->script([ '/js/moment' ], ['block' => 'script']);
+$this->Html->script([ '/js/bootstrap-toggle.min' ], ['block' => 'script']);
 ?>
 
 <body class="hold-transition skin-greenjam sidebar-mini">
@@ -405,7 +407,7 @@ $this->Html->script([ '/js/dropzone' ], ['block' => 'script']);
 <!-- FastClick -->
 <?php echo $this->Html->script('AdminLTE./plugins/fastclick/fastclick'); ?>
 
-<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.13/datatables.min.js"></script>
+<script type="text/javascript" src="/js/datatables.min.js"></script>
 
 <!--  <?php echo $this->Html->script('AdminLTE./plugins/datatables/jquery.dataTables.min'); ?> -->
 <?php echo $this->Html->script('AdminLTE./plugins/datatables/dataTables.bootstrap.min'); ?>
@@ -647,7 +649,7 @@ $('.mptlalert').delay(1500).hide('highlight', {color: '#66cc66'}, 1500);
 </script>
 <?php echo $this->fetch('scriptIndexBottom'); ?>
 <?php echo $this->Html->script('AdminLTE.AdminLTE.min'); ?>
-<script src="https://cdn.datatables.net/rowreorder/1.2.0/js/dataTables.rowReorder.min.js"></script>
-<script src="https://momentjs.com/downloads/moment.js"></script>
+<script src="/js/dataTables.rowReorder.min.js"></script>
+<!-- <script src="https://momentjs.com/downloads/moment.js"></script> -->
 </body>
 </html>
