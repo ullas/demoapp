@@ -25,8 +25,8 @@ class UsersController extends AppController
 		}
 		
 		$contains=['Customers'];
-									  
-		$usrfilter="Users.customer_id ='".$this->loggedinuser['customer_id'] . "'";				  		  
+		isset($this->loggedinuser['customer_id']) ? $customerid=$this->loggedinuser['customer_id'] : $customerid=0 ;							  
+		$usrfilter=" ";				  		  
 		$output =$this->Datatable->getView($fields,$contains,$usrfilter);
 		echo json_encode($output);		
     }

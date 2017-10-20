@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use Cake\Event\Event;
 
 /**
  * Customers Controller
@@ -13,15 +14,15 @@ class CustomersController extends AppController
 
   	var $components = array('Datatable');
 	
-	public function beforeFilter() {
-
-        if($this->Auth->user('role')=='root'){
-           parent::beforeFilter();
-           $this->Auth->allow(array('view', 'index','edit','add','delete','deleteAll'));
-        } else {
-           $this->Auth->deny(array('view', 'index','edit','add','delete','deleteAll'));
-           $this->redirect(array('controller' => 'Homes' , 'action' => 'index'));
-        }
+	public function beforeFilter(Event $event) {
+		// Event $event;
+        // if($this->Auth->user('role')=='root'){
+           // parent::beforeFilter( $event);
+           // $this->Auth->allow(array('view', 'index','edit','add','delete','deleteAll'));
+        // } else {
+           // $this->Auth->deny(array('view', 'index','edit','add','delete','deleteAll'));
+           // $this->redirect(array('controller' => 'Homes' , 'action' => 'index'));
+        // }
     }
 	public function ajaxData() {
 		$this->autoRender= False;

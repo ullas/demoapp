@@ -42,6 +42,8 @@ if (file_exists($file)) {
             </a>
             <ul class="dropdown-menu">
               <li>
+              	<?php $userrole=$this->request->session()->read('sessionuser')['role']; 
+              	if($userrole!="root"){?>
                 <!-- inner menu: contains the actual data -->
                 <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 200px;"><ul class="menu" style="overflow: hidden; width: 100%; height: 200px;">
                   <li><a href="/Employees/view/<?php echo $this->request->session()->read('sessionuser')['employee_id']; ?>"> <i class="fa fa-user text-olive"></i> Profile </a></li>
@@ -49,6 +51,7 @@ if (file_exists($file)) {
                   <li><a href="/EmployeeAbsencerecords"> <i class="fa fa-calendar-minus-o text-red"></i> Leave Requests </a></li>
                   <li><a href="/WorkflowsHistory"> <i class="fa fa-calendar-minus-o text-green"></i> Leave Approval </a></li>
                 </ul><div class="slimScrollBar" style="background: rgb(0, 0, 0); width: 3px; position: absolute; top: 0px; opacity: 0.4; display: none; border-radius: 7px; z-index: 99; right: 1px; height: 195.122px;"></div><div class="slimScrollRail" style="width: 3px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; background: rgb(51, 51, 51); opacity: 0.2; z-index: 90; right: 1px;"></div></div>
+				<?php } ?>              
               </li>
             </ul>
           </li>
@@ -90,7 +93,7 @@ if (file_exists($file)) {
 											}else{
 												echo $this->Html->image('/img/uploadedpics/defaultuser.png', array('class' => 'user-image', 'alt' => 'User profile picture'));
 											}?>
-                    <span class="hidden-xs"><?php echo $name ?></span>
+                    <span class="hidden-xs"><?php echo $empname ?></span>
                 </a>
                 <ul class="dropdown-menu">
                     <!-- User image -->
@@ -105,7 +108,7 @@ if (file_exists($file)) {
 											} ?>
                         <!-- <?php echo $this->Html->image('sree.png', array('class' => 'img-circle', 'alt' => 'User Image')); ?> -->
                         <p>
-                            <?php echo $name ?>
+                            <?php echo $empname ?>
                             <small><?php echo $myposition; ?></small>
                         </p>
                     </li>

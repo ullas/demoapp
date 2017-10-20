@@ -91,7 +91,7 @@ div#myDropZone {
             			<a href="#" class="open-Popup" data-toggle="modal" data-remote="false" data-target="#editpicpopover" style="font-size:20px;">&nbsp;<i class="fa fa-camera"></i></a>
                         		
         				<?php $picturename=$employee['profilepicture'];
-          						if (file_exists(WWW_ROOT.'img'.DS.'uploadedpics'.DS.$picturename)){
+          						if (file_exists(WWW_ROOT.'img'.DS.'uploadedpics'.DS.$picturename) && $picturename!=""){
 									echo $this->Html->image('/img/uploadedpics/'.$picturename, array('class' => 'emp-profilepic img-responsive', 'id'=>'profilepic', 'alt' => 'User profile picture'));
 								}else{
 									echo $this->Html->image('/img/uploadedpics/defaultuser.png', array('class' => 'emp-profilepic img-responsive', 'id'=>'profilepic', 'alt' => 'User profile picture'));
@@ -566,7 +566,7 @@ div#myDropZone {
 
 <div class="box-footer">
     <a href="/employees">Cancel</a>
-    <input type="submit" id="updateform"  value="Update Employee" class="pull-right btn btn-primary"  onclick="return updateEmployee()" />
+    <input type="button" id="updateform"  value="Update Employee" class="pull-right btn btn-primary"  />
     <!-- <?= $this->Form->button(__('Update Employee'),['title'=>'Update Employee','id'=>'updateform','class'=>'pull-right']) ?> --></div>
 </div>
 <?= $this->Form->end() ?></section>
@@ -1260,8 +1260,9 @@ $(document).ready(function(){
 }
 
 
-    function updateEmployee()
-    {	
+    $("#updateform").click(function(e) {
+    	var $this = $(this);
+  e.preventDefault();
     	//get input value
 		var externalid = document.getElementById("empdatabiography-person-id-external").value;
 
@@ -1323,17 +1324,20 @@ $(document).ready(function(){
     			$.ajax({
         			type: "POST",
         			url: '/Employees/addAddress',
+        			async: false,
         			data: 'empid='+empid+'&address1='+address1+'&address2='+address2+'&address3='+address3+'&address4='+address4+'&address5='+address5+'&address6='+address6
         					+'&address7='+address7+'&address8='+address8+'&county='+county+'&state='+state+'&zipcode='+zipcode+'&city='+city,
         			success : function(data) {
     					if(idclasscount<1 &&  qualclasscount<1 && expclasscount<1 &&  assetclasscount<1 && skillclasscount<1){
     						document.getElementById("empform").submit();
     					}
-        			},error: function(data) {        	    	 	
+        			},
+        			error: function(data) {      	 console.log(data);	
     					sweet_alert("Error while adding Addresses.");
 						return false;   			
         			}     
         	});
+        	
 		}else{
 			sweet_alert("Employee Id missing.");
 			return false;
@@ -1403,7 +1407,7 @@ $(document).ready(function(){
     		}
 			// document.getElementById("empform").submit();
 			return false;
-		}			
+		}		);	
 
 	function saveQualifications(empid){
 		

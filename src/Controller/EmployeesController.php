@@ -28,7 +28,12 @@ class EmployeesController extends AppController
 		}
 		$contains=['Empdatabiographies'=> ['Positions'], 'Empdatapersonals', 'Employmentinfos', 'ContactInfos','Jobinfos'];
 
-		$usrfilter="Employees.customer_id ='".$this->loggedinuser['customer_id'] . "' and Employees.visible='1'";
+		$userrole=$this->request->session()->read('sessionuser')['role']; 
+        if($userrole!="root"){
+			$usrfilter="Employees.customer_id ='".$this->loggedinuser['customer_id'] . "' and Employees.visible='1'";
+		}else{
+			$usrfilter="Employees.visible='1'";
+		}
 		$output =$this->Datatable->getView($fields,$contains,$usrfilter);
 		echo json_encode($output);
     }
@@ -389,6 +394,7 @@ class EmployeesController extends AppController
         	])->toArray();
 
 			isset($arr[0]) ? $address = $arr[0] : $address = $this->Addresses->newEntity();
+			// $this->Flash->success(__(json_encode($this->request->data['empid'])));
 
 			$address=$this->Addresses->patchEntity($address,$this->request->data);
 			$address['address_type']="2";
@@ -410,12 +416,13 @@ class EmployeesController extends AppController
 
 			if ($this->Addresses->save($address)) {
 
-               	 	$this->response->body("success");
+               	 	$this->response->body("success");//$this->Flash->success(__(json_encode($address)));
 	    			return $this->response;
             } else {
-                	$this->response->body("error");
+                	$this->response->body("error");//$this->Flash->error(__('Error !'));
 	    			return $this->response;
             }
+            
 		}
     }
     public function addIds(){
