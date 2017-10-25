@@ -28,11 +28,11 @@
             echo $this->Form->input('min_balance',['label'=>'Balance Cannot Fall Below','disabled' => true]);
             echo $this->Form->input('posting_order',['class'=>'select2','options' => array('Oldest First' , 'Newest First'), 'empty' => 'Choose','disabled' => true]);
             echo $this->Form->input('time_to_accrual',['label'=>'Time From Hire to First Accrual','disabled' => true]);
-			      echo $this->Form->input('time_to_accrual_unit' ,['label'=>'Time Unit From Hire to First Accrual','class'=>'select2','options' => array('Days' , 'Weeks ', 'Months', 'Years'), 'empty' => 'Choose','disabled' => true]);
+			echo $this->Form->input('time_to_accrual_unit' ,['label'=>'Time Unit From Hire to First Accrual','class'=>'select2','options' => array('Days' , 'Weeks ', 'Months', 'Years'), 'empty' => 'Choose','disabled' => true]);
             echo $this->Form->input('proration_used',['label'=>'Are Prorations Used for New Hire Accruals','disabled' => true]);
             echo $this->Form->input('rounding_used',['label'=>'Are Rounding Values Included for New Hires','disabled' => true]);
             echo $this->Form->input('update_rule',['label'=>'Period End Processing/Interim Update Rule','disabled' => true]);
-            echo $this->Form->input('payout_eligiblity',['disabled' => true]);
+            echo $this->Form->input('payout_eligiblity',['class'=>'select2','options' => array('Yes' , 'No'), 'empty' => 'Choose', 'disabled' => true]);
             echo $this->Form->input('pay_component_id', ['options' => $payComponents, 'empty' => true,'disabled' => true]);
             echo $this->Form->input('pay_component_group_id', ['options' => $payComponentGroups, 'empty' => true,'disabled' => true]);
             echo $this->Form->input('iscarryforward',['label'=>'Is Carry Forward','disabled' => true]);

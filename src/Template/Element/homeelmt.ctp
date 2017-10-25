@@ -17,8 +17,8 @@ switch (strtolower($title)) {
 		for ($x = 0; $x < count($teammembers); $x++) {
 			echo "<li>";
         	echo $this->Html->image('circle-512.png');
-			echo "<a href='#' class='users-list-name'>";
-			echo $teammembers[$x]['birth_name'];
+			echo "<a href='/Employees/view/". $teammembers[$x]['empid'] ."' class='users-list-name'>";
+			echo $teammembers[$x]['name'];
 			echo "</a></li>";
 		}
         break;

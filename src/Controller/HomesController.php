@@ -40,17 +40,26 @@ class HomesController extends AppController
 		$this->loadModel('EmpDataBiographies');
 		$emparr=$this->EmpDataBiographies->find('all',['conditions' => array('employee_id' => $empid),'contain' => []])->toArray();
 		isset($emparr[0]) ? $posid = $emparr[0]['position_id'] : $posid = "" ; 
+		//getting those positions id whose parent position is myself
+		$this->loadModel('Positions');
+		$dbout = $this->Positions->find('all')->where(['parent_id' => $posid])
+						->andwhere(['Positions.customer_id' => $this->loggedinuser['customer_id']])->orwhere(['Positions.customer_id' => '0'])->toArray();
+        $myteam = array();
+		//iterating and getting empoyee name of the particular positions
+        foreach($dbout as $value){
+        	$this->loadModel('EmpDataBiographies');
+        	$myteamquery = $this->EmpDataBiographies->find('all')->where(['position_id' => $value['id']])->andwhere(['EmpDataBiographies.customer_id' => $this->loggedinuser['customer_id']])
+        					 ->orwhere(['EmpDataBiographies.customer_id' => '0'])->toArray();
+		}
 		
-		$myteam = $this->EmpDataBiographies->find('all')->where(['position_id >' => $posid])->toArray();
+		foreach($myteamquery as $childvalue){
+			$myteam[]=array('empid'=>$childvalue['employee_id'],'name'=>str_replace('"', '',parent::get_nameofemployee ($childvalue['employee_id'])));
+		}
+		
 		
 		$this->loadModel('Employees');
 		$employeearr=$this->Employees->find('all',['conditions' => array('id' => $empid),'contain' => []])->toArray();
 		isset($employeearr[0]) ? $mypic = $employeearr[0]['profilepicture'] : $mypic = "" ; 
-		// $this->set('myteam',$myteam);
-		// $this->loadModel('Positions');
-		// $myteam = $this->Positions->find('all')->where(['id >=' => $posid])->toArray();
-		
-		// $this->log(json_encode($myteam));
         
 		//homes
         $homes = $this->paginate($this->Homes);
