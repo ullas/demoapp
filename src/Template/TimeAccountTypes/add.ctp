@@ -23,7 +23,8 @@
             echo $this->Form->input('account_booking_off',['label'=>'Account Booking Offset (Months)']);
             echo $this->Form->input('freq_period',['label'=>'Frequency Period','class'=>'select2','options' => array('Weekly','bi Weekly','Monthly','Annually'), 'empty' => 'Choose']);
             echo $this->Form->input('first_offset',['label'=>'First Accrual Offset (Days)']);
-            echo $this->Form->input('start_accrual',['label'=>'Start of Accrual Period']);
+            echo $this->Form->input('start_accrual',['label'=>'Start of Accrual Period','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
+            // echo $this->Form->input('start_accrual',['label'=>'Start of Accrual Period']);
             echo $this->Form->input('accrual_base',['label'=>'Accruals Based On']);
             echo $this->Form->input('min_balance',['label'=>'Balance Cannot Fall Below']);
             echo $this->Form->input('posting_order',['class'=>'select2','options' => array('Oldest First' , 'Newest First'), 'empty' => 'Choose']);
@@ -35,7 +36,7 @@
             echo $this->Form->input('payout_eligiblity',['class'=>'select2','options' => array('Yes' , 'No'), 'empty' => 'Choose']);
             echo $this->Form->input('pay_component_id', ['options' => $payComponents, 'empty' => true]);
             echo $this->Form->input('pay_component_group_id', ['options' => $payComponentGroups, 'empty' => true]);
-            echo $this->Form->input('iscarryforward',['label'=>'Is Carry Forward']);
+            // echo $this->Form->input('iscarryforward',['label'=>'Is Carry Forward']);
             echo $this->Form->input('isleavewithoutpay',['label'=>'Is Leave Without Pay']);
             echo $this->Form->input('allownegativebalance',['label'=>'Allow Negative Balance']);
             echo $this->Form->input('includeholidayswithinleaveasleaves',['label'=>'Include Holidays within leave as leaves']);
@@ -49,3 +50,17 @@
     <?= $this->Form->end() ?>
 </div></div>
 </section>
+<?php $this->start('scriptBotton'); ?>
+<script>
+$(function () {
+    	
+    $('#perm-reccur').on('change', function () {
+		if(this.value=="1"){
+			$("#account-booking-off").prop('disabled', false);
+		}else{
+			$("#account-booking-off").prop('disabled', true);
+		}  	
+	});
+});
+</script>
+<?php $this->end(); ?>

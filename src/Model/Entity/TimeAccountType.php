@@ -14,7 +14,6 @@ use Cake\ORM\Entity;
  * @property float $account_booking_off
  * @property string $freq_period
  * @property float $first_offset
- * @property float $start_accrual
  * @property string $accrual_base
  * @property float $min_balance
  * @property string $posting_order
@@ -34,6 +33,7 @@ use Cake\ORM\Entity;
  * @property bool $includeholidayswithinleaveasleaves
  * @property int $valid_from
  * @property int $valid_from_day
+ * @property \Cake\I18n\Time $start_accrual
  *
  * @property \App\Model\Entity\PayComponent $pay_component
  * @property \App\Model\Entity\PayComponentGroup $pay_component_group
