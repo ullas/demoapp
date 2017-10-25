@@ -32,7 +32,7 @@
             echo $this->Form->input('proration_used',['label'=>'Are Prorations Used for New Hire Accruals']);
             echo $this->Form->input('rounding_used',['label'=>'Are Rounding Values Included for New Hires']);
             echo $this->Form->input('update_rule',['label'=>'Period End Processing/Interim Update Rule']);
-            echo $this->Form->input('payout_eligiblity');
+            echo $this->Form->input('payout_eligiblity',['class'=>'select2','options' => array('Yes' , 'No'), 'empty' => 'Choose']);
             echo $this->Form->input('pay_component_id', ['options' => $payComponents, 'empty' => true]);
             echo $this->Form->input('pay_component_group_id', ['options' => $payComponentGroups, 'empty' => true]);
             echo $this->Form->input('iscarryforward',['label'=>'Is Carry Forward']);

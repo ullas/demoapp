@@ -48,7 +48,7 @@
 </section>
 
 <section class="content panel-group">
-<div class="box box-primary">
+<div class="box box-primary" style="min-height: 200px;">
       <div class="box-body" id="accordion" >
 
 
