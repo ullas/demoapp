@@ -23,7 +23,7 @@
             echo $this->Form->input('account_booking_off',['label'=>'Account Booking Offset (Months)','disabled' => true]);
             echo $this->Form->input('freq_period',['label'=>'Frequency Period','class'=>'select2','options' => array('Weekly','bi Weekly','Monthly','Annually'), 'empty' => 'Choose','disabled' => true]);
             echo $this->Form->input('first_offset',['label'=>'First Accrual Offset (Days)','disabled' => true]);
-            echo $this->Form->input('start_accrual',['label'=>'Start of Accrual Period','disabled' => true]);
+            echo $this->Form->input('start_accrual',['label'=>'Start of Accrual Period','value' => !empty($timeAccountType->start_accrual) ? $timeAccountType->start_accrual->format($mptldateformat) : '','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
             echo $this->Form->input('accrual_base',['label'=>'Accruals Based On','disabled' => true]);
             echo $this->Form->input('min_balance',['label'=>'Balance Cannot Fall Below','disabled' => true]);
             echo $this->Form->input('posting_order',['class'=>'select2','options' => array('Oldest First' , 'Newest First'), 'empty' => 'Choose','disabled' => true]);
@@ -35,7 +35,7 @@
             echo $this->Form->input('payout_eligiblity',['class'=>'select2','options' => array('Yes' , 'No'), 'empty' => 'Choose', 'disabled' => true]);
             echo $this->Form->input('pay_component_id', ['options' => $payComponents, 'empty' => true,'disabled' => true]);
             echo $this->Form->input('pay_component_group_id', ['options' => $payComponentGroups, 'empty' => true,'disabled' => true]);
-            echo $this->Form->input('iscarryforward',['label'=>'Is Carry Forward','disabled' => true]);
+            // echo $this->Form->input('iscarryforward',['label'=>'Is Carry Forward','disabled' => true]);
             echo $this->Form->input('isleavewithoutpay',['label'=>'Is Leave Without Pay','disabled' => true]);
             echo $this->Form->input('allownegativebalance',['label'=>'Allow Negative Balance','disabled' => true]);
             echo $this->Form->input('includeholidayswithinleaveasleaves',['label'=>'Include Holidays within leave as leaves','disabled' => true]);

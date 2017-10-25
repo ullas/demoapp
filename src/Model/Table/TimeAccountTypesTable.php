@@ -5,9 +5,7 @@ use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
-use Cake\Event\Event;
-use Cake\Event\ArrayObject;
-use Cake\Core\Configure;
+
 /**
  * TimeAccountTypes Model
  *
@@ -76,6 +74,7 @@ class TimeAccountTypesTable extends Table
             ->allowEmpty('perm_reccur');
 
         $validator
+            // ->date('start_date')
             ->allowEmpty('start_date');
 
         $validator
@@ -88,10 +87,6 @@ class TimeAccountTypesTable extends Table
         $validator
             ->decimal('first_offset')
             ->allowEmpty('first_offset');
-
-        $validator
-            ->decimal('start_accrual')
-            ->allowEmpty('start_accrual');
 
         $validator
             ->allowEmpty('accrual_base');
@@ -151,9 +146,13 @@ class TimeAccountTypesTable extends Table
         $validator
             ->allowEmpty('valid_from_day');
 
+        $validator
+            // ->date('start_accrual')
+            ->allowEmpty('start_accrual');
+
         return $validator;
     }
-	
+
     /**
      * Returns a rules checker object that will be used for validating
      * application integrity.

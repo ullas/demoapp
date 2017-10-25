@@ -44,7 +44,7 @@ class HomesController extends AppController
 		$this->loadModel('Positions');
 		$dbout = $this->Positions->find('all')->where(['parent_id' => $posid])
 						->andwhere(['Positions.customer_id' => $this->loggedinuser['customer_id']])->orwhere(['Positions.customer_id' => '0'])->toArray();
-        $myteam = array();
+        $myteamquery = array(); $myteam = array();
 		//iterating and getting empoyee name of the particular positions
         foreach($dbout as $value){
         	$this->loadModel('EmpDataBiographies');
