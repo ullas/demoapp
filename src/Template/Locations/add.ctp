@@ -12,7 +12,6 @@
 	<div class="box box-primary"><div class="box-body">
     <?= $this->Form->create($location) ?>
     <fieldset>
-        <legend><?= __('Add Location') ?></legend>
         <?php
             echo $this->Form->input('external_code',['label' =>'Location Code']);
 			      echo $this->Form->input('name',['label' =>'Location Name']);
@@ -21,7 +20,7 @@
 			      echo $this->Form->input('start_date',['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
 			      echo $this->Form->input('end_date',['class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
             echo $this->Form->input('location_group');
-            echo $this->Form->input('time_zone',['label' =>'Timezone','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-clock-o"></i></div>']]);
+            echo $this->Form->input('time_zone',['class'=>'select2','options' => $this->Timezone->get_timezones(), 'label' =>'Timezone','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-clock-o"></i></div>']]);
 			      echo $this->Form->input('standard_hours',['label' =>'Standard Weekly Hours','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-clock-o"></i></div>']]);
 			      echo $this->Form->input('holiday_calendar_id',['label' =>'Default Holiday Calendar','class'=>'select2', 'empty' => true]);
         ?>

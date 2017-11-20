@@ -21,8 +21,8 @@
             echo $this->Form->input('effective_status',['label' => 'Status','class'=>'select2','options' => array('Active', 'Inactive'), 'empty' => 'Choose','disabled' => true]);
             echo $this->Form->input('effective_start_date', ['label' => 'Start Date','value' => !empty($costCentre->effective_start_date) ? $costCentre->effective_start_date->format($mptldateformat) : '','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
             echo $this->Form->input('effective_end_date', ['label' => 'End Date','value' => !empty($costCentre->effective_end_date) ? $costCentre->effective_end_date->format($mptldateformat) : '','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
-            echo $this->Form->input('parent_cost_center',['disabled' => true]);
-            echo $this->Form->input('cost_center_manager',['disabled' => true]);
+            echo $this->Form->input('parent_id', ['label' => 'Parent Cost Center','class'=>'select2','options' => $parents, 'empty' => true,'disabled' => true]);
+            echo $this->Form->input('cost_center_manager', ['label' => 'Cost Center Manager','class'=>'select2','options' => $employees, 'empty' => true,'disabled' => true]);
           ?></fieldset>
           <!-- /.box-body -->
           <div class="box-footer">

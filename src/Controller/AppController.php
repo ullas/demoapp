@@ -69,8 +69,12 @@ class AppController extends Controller
 			$employeearr=$this->Employees->find('all',['conditions' => array('id' => $user['employee_id']),'contain' => []])->toArray();
 			isset($employeearr[0]) ? $pic = $employeearr[0]['profilepicture'] : $pic = "defaultuser.png" ; 
 			
-			$empname=$this->get_nameofemployee($user['employee_id']);
-			$empname=str_replace('"', '',$empname);
+			if($user['role']!= 'root') {
+				$empname=$this->get_nameofemployee($user['employee_id']);
+				$empname=str_replace('"', '',$empname);
+			}else{
+				$empname="Root User";
+			}
 			$this->set('empname', $empname);
 			
     		$this->set('name', $user['name']);
@@ -79,6 +83,11 @@ class AppController extends Controller
 			$this->set('dateformat', $user['dateformat']);     
 			$user["empdatabiographyid"] = $empdatabiographyid;
 			$user["profilepic"] = $pic;
+			
+			if($user['role'] === 'root') {
+				$user["customer_id"]="0";
+			}
+			
 			$this->request->session()->write('sessionuser', $user);
 			$this->loggedinuser=$user;
 			

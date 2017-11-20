@@ -28,7 +28,7 @@ var $components = array('Datatable');
 		}
 		$contains=['Customers'];
 
-		$usrfilter="PayGroups.customer_id ='".$this->loggedinuser['customer_id'] . "'";
+		$usrfilter="PayGroups.customer_id ='".$this->loggedinuser['customer_id'] . "' OR PayGroups.customer_id =0";
 		$output =$this->Datatable->getView($fields,$contains,$usrfilter);
 		echo json_encode($output);
     }

@@ -70,7 +70,13 @@ class BusinessUnitsController extends AppController
         ]);
 
 		if($businessUnit['customer_id']==$this->loggedinuser['customer_id']){
-       	    $this->set('businessUnit', $businessUnit);
+       	    $this->loadModel('Employees');
+			$employees = $this->Employees->find('list',['limit' => 200])
+        				->select(['id'=>'Employees.id','name' => 'CONCAT(EmpDataPersonals.first_name, \' \',EmpDataPersonals.last_name,\' (\', Employees.id, \')\' )'])
+						->leftJoin('EmpDataPersonals', 'EmpDataPersonals.employee_id = Employees.id')
+						->andwhere("Employees.visible="."1")
+						->andwhere("Employees.customer_id=".$this->loggedinuser['customer_id']);
+        	$this->set(compact('businessUnit','employees'));
         	$this->set('_serialize', ['businessUnit']);
        }else{
 		   $this->redirect(['action' => 'logout','controller'=>'users']);
@@ -97,7 +103,13 @@ class BusinessUnitsController extends AppController
             }
         }
         $customers = $this->BusinessUnits->Customers->find('list', ['limit' => 200]);
-        $this->set(compact('businessUnit', 'customers'));
+        $this->loadModel('Employees');
+		$employees = $this->Employees->find('list',['limit' => 200])
+        				->select(['id'=>'Employees.id','name' => 'CONCAT(EmpDataPersonals.first_name, \' \',EmpDataPersonals.last_name,\' (\', Employees.id, \')\' )'])
+						->leftJoin('EmpDataPersonals', 'EmpDataPersonals.employee_id = Employees.id')
+						->andwhere("Employees.visible="."1")
+						->andwhere("Employees.customer_id=".$this->loggedinuser['customer_id']);
+        $this->set(compact('businessUnit', 'customers','employees'));
         $this->set('_serialize', ['businessUnit']);
     }
 	public function addwizard()
@@ -114,7 +126,13 @@ class BusinessUnitsController extends AppController
             }
         }
         $customers = $this->BusinessUnits->Customers->find('list', ['limit' => 200]);
-        $this->set(compact('businessUnit', 'customers'));
+        $this->loadModel('Employees');
+		$employees = $this->Employees->find('list',['limit' => 200])
+        				->select(['id'=>'Employees.id','name' => 'CONCAT(EmpDataPersonals.first_name, \' \',EmpDataPersonals.last_name,\' (\', Employees.id, \')\' )'])
+						->leftJoin('EmpDataPersonals', 'EmpDataPersonals.employee_id = Employees.id')
+						->andwhere("Employees.visible="."1")
+						->andwhere("Employees.customer_id=".$this->loggedinuser['customer_id']);
+        $this->set(compact('businessUnit', 'customers','employees'));
         $this->set('_serialize', ['businessUnit']);
     }
     /**
@@ -140,7 +158,13 @@ class BusinessUnitsController extends AppController
             }
         }
         $customers = $this->BusinessUnits->Customers->find('list', ['limit' => 200]);
-        $this->set(compact('businessUnit', 'customers'));
+        $this->loadModel('Employees');
+		$employees = $this->Employees->find('list',['limit' => 200])
+        				->select(['id'=>'Employees.id','name' => 'CONCAT(EmpDataPersonals.first_name, \' \',EmpDataPersonals.last_name,\' (\', Employees.id, \')\' )'])
+						->leftJoin('EmpDataPersonals', 'EmpDataPersonals.employee_id = Employees.id')
+						->andwhere("Employees.visible="."1")
+						->andwhere("Employees.customer_id=".$this->loggedinuser['customer_id']);
+        $this->set(compact('businessUnit', 'customers','employees'));
         $this->set('_serialize', ['businessUnit']);
     }
 

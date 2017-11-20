@@ -19,8 +19,8 @@
             echo $this->Form->input('effective_status',['label' => 'Status','class'=>'select2','options' => array('Active', 'Inactive'), 'empty' => 'Choose']);
             echo $this->Form->input('effective_start_date', ['label' => 'Start Date','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
             echo $this->Form->input('effective_end_date', ['label' => 'End Date','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
-            echo $this->Form->input('parent_cost_center');
-            echo $this->Form->input('cost_center_manager');
+            echo $this->Form->input('parent_id', ['label' => 'Parent Cost Center','class'=>'select2','options' => $parents, 'empty' => true]);
+            echo $this->Form->input('cost_center_manager', ['label' => 'Cost Center Manager','class'=>'select2','options' => $employees, 'empty' => true]);
         ?>
     </fieldset>
     <div class="box-footer">

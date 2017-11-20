@@ -20,7 +20,7 @@
             echo $this->Form->input('effective_start_date', ['label' => 'Start Date','value' => !empty($division->effective_start_date) ? $division->effective_start_date->format($mptldateformat) : '','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
             echo $this->Form->input('effective_end_date', ['label' => 'End Date','value' => !empty($division->effective_end_date) ? $division->effective_end_date->format($mptldateformat) : '','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
             echo $this->Form->input('parent_id',['options' => $parents, 'empty' => true]);
-            echo $this->Form->input('head_of_unit',['label' => 'Head of Division']);
+            echo $this->Form->input('head_of_unit',['label' => 'Head of Division','class'=>'select2','options' => $employees, 'empty' => true]);
         ?>
     </fieldset>
     <div class="box-footer">

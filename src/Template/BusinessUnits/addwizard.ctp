@@ -21,7 +21,7 @@
             echo $this->Form->input('effective_status',['label' => 'Status','class'=>'select2','options' => array('Active', 'Inactive'), 'empty' => 'Choose']);
             echo $this->Form->input('effective_start_date', ['label' =>'Start Date','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
             echo $this->Form->input('effective_end_date', ['label' =>'End Date','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>']]);
-            echo $this->Form->input('head_of_unit',['label' =>'Head of Unit']);
+            echo $this->Form->input('head_of_unit',['label' =>'Head of Unit','class'=>'select2','options' => $employees, 'empty' => true]);
          ?>
      </fieldset>
      <div class="box-footer">
