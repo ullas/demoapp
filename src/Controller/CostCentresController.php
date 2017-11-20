@@ -65,8 +65,15 @@ class CostCentresController extends AppController
         ]);
 		
 		if($costCentre['customer_id']==$this->loggedinuser['customer_id']){
-       	    $this->set('costCentre', $costCentre);
-       		$this->set('_serialize', ['costCentre']);
+       	    $parents = $this->CostCentres->Parents->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        	$this->loadModel('Employees');
+			$employees = $this->Employees->find('list',['limit' => 200])
+        				->select(['id'=>'Employees.id','name' => 'CONCAT(EmpDataPersonals.first_name, \' \',EmpDataPersonals.last_name,\' (\', Employees.id, \')\' )'])
+						->leftJoin('EmpDataPersonals', 'EmpDataPersonals.employee_id = Employees.id')
+						->andwhere("Employees.visible="."1")
+						->andwhere("Employees.customer_id=".$this->loggedinuser['customer_id']);
+        	$this->set(compact('costCentre', 'customers','employees','parents'));
+        	$this->set('_serialize', ['costCentre']);
        }else{
 		   $this->Flash->error(__('You are not Authorized.'));
 			return $this->redirect(['action' => 'index']);
@@ -94,7 +101,14 @@ class CostCentresController extends AppController
             }
         }
         $customers = $this->CostCentres->Customers->find('list', ['limit' => 200]);
-        $this->set(compact('costCentre', 'customers'));
+        $parents = $this->CostCentres->Parents->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        $this->loadModel('Employees');
+		$employees = $this->Employees->find('list',['limit' => 200])
+        				->select(['id'=>'Employees.id','name' => 'CONCAT(EmpDataPersonals.first_name, \' \',EmpDataPersonals.last_name,\' (\', Employees.id, \')\' )'])
+						->leftJoin('EmpDataPersonals', 'EmpDataPersonals.employee_id = Employees.id')
+						->andwhere("Employees.visible="."1")
+						->andwhere("Employees.customer_id=".$this->loggedinuser['customer_id']);
+        $this->set(compact('costCentre', 'customers','employees','parents'));
         $this->set('_serialize', ['costCentre']);
     }
 
@@ -112,7 +126,14 @@ class CostCentresController extends AppController
             }
         }
         $customers = $this->CostCentres->Customers->find('list', ['limit' => 200]);
-        $this->set(compact('costCentre', 'customers'));
+        $parents = $this->CostCentres->Parents->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        $this->loadModel('Employees');
+		$employees = $this->Employees->find('list',['limit' => 200])
+        				->select(['id'=>'Employees.id','name' => 'CONCAT(EmpDataPersonals.first_name, \' \',EmpDataPersonals.last_name,\' (\', Employees.id, \')\' )'])
+						->leftJoin('EmpDataPersonals', 'EmpDataPersonals.employee_id = Employees.id')
+						->andwhere("Employees.visible="."1")
+						->andwhere("Employees.customer_id=".$this->loggedinuser['customer_id']);
+        $this->set(compact('costCentre', 'customers','employees','parents'));
         $this->set('_serialize', ['costCentre']);
     }
     /**
@@ -145,7 +166,14 @@ class CostCentresController extends AppController
             }
         }
         $customers = $this->CostCentres->Customers->find('list', ['limit' => 200]);
-        $this->set(compact('costCentre', 'customers'));
+		$parents = $this->CostCentres->Parents->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        $this->loadModel('Employees');
+		$employees = $this->Employees->find('list',['limit' => 200])
+        				->select(['id'=>'Employees.id','name' => 'CONCAT(EmpDataPersonals.first_name, \' \',EmpDataPersonals.last_name,\' (\', Employees.id, \')\' )'])
+						->leftJoin('EmpDataPersonals', 'EmpDataPersonals.employee_id = Employees.id')
+						->andwhere("Employees.visible="."1")
+						->andwhere("Employees.customer_id=".$this->loggedinuser['customer_id']);
+        $this->set(compact('costCentre', 'customers','employees','parents'));
         $this->set('_serialize', ['costCentre']);
     }
 

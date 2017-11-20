@@ -12,10 +12,15 @@ use Cake\ORM\Entity;
  * @property string $effective_status
  * @property \Cake\I18n\Time $effective_start_date
  * @property \Cake\I18n\Time $effective_end_date
- * @property string $parent_cost_center
  * @property string $external_code
  * @property int $cost_center_manager
  * @property int $customer_id
+ * @property int $parent_id
+ *
+ * @property \App\Model\Entity\Customer $customer
+ * @property \App\Model\Entity\Jobinfo[] $jobinfos
+ * @property \App\Model\Entity\CostCentre $parent_cost_centre
+ * @property \App\Model\Entity\CostCentre $parent
  */
 class CostCentre extends Entity
 {

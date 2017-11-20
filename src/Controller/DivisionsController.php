@@ -68,7 +68,13 @@ var $components = array('Datatable');
 
 		if($division['customer_id']==$this->loggedinuser['customer_id']){
         	$parents = $this->Divisions->Parents->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
-        	$this->set(compact('division','parents'));
+        	$this->loadModel('Employees');
+			$employees = $this->Employees->find('list',['limit' => 200])
+        				->select(['id'=>'Employees.id','name' => 'CONCAT(EmpDataPersonals.first_name, \' \',EmpDataPersonals.last_name,\' (\', Employees.id, \')\' )'])
+						->leftJoin('EmpDataPersonals', 'EmpDataPersonals.employee_id = Employees.id')
+						->andwhere("Employees.visible="."1")
+						->andwhere("Employees.customer_id=".$this->loggedinuser['customer_id']);
+        	$this->set(compact('division','parents','employees'));
         	$this->set('_serialize', ['division']); 
 		
        }else{
@@ -98,7 +104,13 @@ var $components = array('Datatable');
         }
         $customers = $this->Divisions->Customers->find('list', ['limit' => 200]);
         $parents = $this->Divisions->Parents->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
-        $this->set(compact('division', 'customers','parents'));
+        $this->loadModel('Employees');
+		$employees = $this->Employees->find('list',['limit' => 200])
+        				->select(['id'=>'Employees.id','name' => 'CONCAT(EmpDataPersonals.first_name, \' \',EmpDataPersonals.last_name,\' (\', Employees.id, \')\' )'])
+						->leftJoin('EmpDataPersonals', 'EmpDataPersonals.employee_id = Employees.id')
+						->andwhere("Employees.visible="."1")
+						->andwhere("Employees.customer_id=".$this->loggedinuser['customer_id']);
+        $this->set(compact('division', 'customers','parents','employees'));
         $this->set('_serialize', ['division']);
     }
 	public function addwizard()
@@ -116,7 +128,13 @@ var $components = array('Datatable');
         }
         $customers = $this->Divisions->Customers->find('list', ['limit' => 200]);
         $parents = $this->Divisions->Parents->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
-        $this->set(compact('division', 'customers','parents'));
+        $this->loadModel('Employees');
+		$employees = $this->Employees->find('list',['limit' => 200])
+        				->select(['id'=>'Employees.id','name' => 'CONCAT(EmpDataPersonals.first_name, \' \',EmpDataPersonals.last_name,\' (\', Employees.id, \')\' )'])
+						->leftJoin('EmpDataPersonals', 'EmpDataPersonals.employee_id = Employees.id')
+						->andwhere("Employees.visible="."1")
+						->andwhere("Employees.customer_id=".$this->loggedinuser['customer_id']);
+        $this->set(compact('division', 'customers','parents','employees'));
         $this->set('_serialize', ['division']);
     }
 
@@ -151,7 +169,13 @@ var $components = array('Datatable');
         }
         $customers = $this->Divisions->Customers->find('list', ['limit' => 200]);
         $parents = $this->Divisions->Parents->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
-        $this->set(compact('division', 'customers','parents'));
+        $this->loadModel('Employees');
+		$employees = $this->Employees->find('list',['limit' => 200])
+        				->select(['id'=>'Employees.id','name' => 'CONCAT(EmpDataPersonals.first_name, \' \',EmpDataPersonals.last_name,\' (\', Employees.id, \')\' )'])
+						->leftJoin('EmpDataPersonals', 'EmpDataPersonals.employee_id = Employees.id')
+						->andwhere("Employees.visible="."1")
+						->andwhere("Employees.customer_id=".$this->loggedinuser['customer_id']);
+        $this->set(compact('division', 'customers','parents','employees'));
         $this->set('_serialize', ['division']);
     }
 

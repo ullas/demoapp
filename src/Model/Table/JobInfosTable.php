@@ -115,6 +115,9 @@ class JobinfosTable extends Table
     	$validator
             ->notEmpty('pay_group_id');
 			
+		$validator
+            ->notEmpty('time_type_profile_id');
+			
         $validator
             ->allowEmpty('id', 'create');
 

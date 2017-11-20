@@ -5,13 +5,14 @@ use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
-use Cake\Event\Event;
-use Cake\Event\ArrayObject;
-use Cake\Core\Configure;
+
 /**
  * CostCentres Model
  *
  * @property \Cake\ORM\Association\BelongsTo $Customers
+ * @property \Cake\ORM\Association\BelongsTo $ParentCostCentres
+ * @property \Cake\ORM\Association\HasMany $ChildCostCentres
+ * @property \Cake\ORM\Association\HasMany $Jobinfos
  *
  * @method \App\Model\Entity\CostCentre get($primaryKey, $options = [])
  * @method \App\Model\Entity\CostCentre newEntity($data = null, array $options = [])
@@ -41,6 +42,21 @@ class CostCentresTable extends Table
         $this->belongsTo('Customers', [
             'foreignKey' => 'customer_id'
         ]);
+        $this->belongsTo('ParentCostCentres', [
+            'className' => 'CostCentres',
+            'foreignKey' => 'parent_id'
+        ]);
+        // $this->hasMany('ChildCostCentres', [
+            // 'className' => 'CostCentres',
+            // 'foreignKey' => 'parent_id'
+        // ]);
+        $this->hasMany('Jobinfos', [
+            'foreignKey' => 'cost_centre_id'
+        ]);
+		
+		$this->belongsTo('Parents', [
+            'className' => 'CostCentres','foreignKey' => 'parent_id'
+        ]);
     }
 
     /**
@@ -61,17 +77,15 @@ class CostCentresTable extends Table
             ->allowEmpty('description');
 
         $validator
-            // ->boolean('effective_status')
             ->allowEmpty('effective_status');
 
         $validator
+            // ->date('effective_start_date')
             ->allowEmpty('effective_start_date');
 
         $validator
+            // ->date('effective_end_date')
             ->allowEmpty('effective_end_date');
-
-        $validator
-            ->allowEmpty('parent_cost_center');
 
         $validator
             ->requirePresence('external_code', 'create')
@@ -83,6 +97,7 @@ class CostCentresTable extends Table
 
         return $validator;
     }
+
     /**
      * Returns a rules checker object that will be used for validating
      * application integrity.
@@ -94,6 +109,7 @@ class CostCentresTable extends Table
     {
         $rules->add($rules->isUnique(['external_code']));
         $rules->add($rules->existsIn(['customer_id'], 'Customers'));
+        $rules->add($rules->existsIn(['parent_id'], 'ParentCostCentres'));
 
         return $rules;
     }
