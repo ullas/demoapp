@@ -12,6 +12,7 @@ use Cake\Validation\Validator;
  * @property \Cake\ORM\Association\BelongsTo $Customers
  * @property \Cake\ORM\Association\BelongsTo $TimeAccountTypes
  * @property \Cake\ORM\Association\BelongsTo $Workflowrules
+ * @property \Cake\ORM\Association\HasMany $AbsenceQuota
  * @property \Cake\ORM\Association\HasMany $EmployeeAbsencerecords
  * @property \Cake\ORM\Association\HasMany $TimeTypeProfileTimeTypes
  *
@@ -49,6 +50,9 @@ class TimeTypesTable extends Table
         $this->belongsTo('Workflowrules', [
             'foreignKey' => 'workflowrule_id'
         ]);
+        $this->hasMany('AbsenceQuota', [
+            'foreignKey' => 'time_type_id'
+        ]);
         $this->hasMany('EmployeeAbsencerecords', [
             'foreignKey' => 'time_type_id'
         ]);
@@ -83,7 +87,7 @@ class TimeTypesTable extends Table
             ->allowEmpty('perm_fractions_days');
 
         $validator
-            ->decimal('perm_fractions_hours')
+            ->numeric('perm_fractions_hours')
             ->allowEmpty('perm_fractions_hours');
 
         $validator

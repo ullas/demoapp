@@ -13,7 +13,6 @@ use Cake\ORM\Entity;
  * @property \Cake\I18n\Time $effective_start_date
  * @property \Cake\I18n\Time $effective_end_date
  * @property string $worker_comp_code
- * @property string $default_job_level
  * @property float $standard_weekly_hours
  * @property string $regular_temporary
  * @property string $default_employee_class
@@ -24,11 +23,12 @@ use Cake\ORM\Entity;
  * @property int $customer_id
  * @property int $job_id
  * @property int $job_function_id
+ * @property int $joblevel_id
  *
  * @property \App\Model\Entity\PayGrade $pay_grade
- * @property \App\Model\Entity\Jobfunction $job_function
  * @property \App\Model\Entity\Customer $customer
  * @property \App\Model\Entity\Job $job
+ * @property \App\Model\Entity\Jobfunction $jobfunction
  */
 class Jobclass extends Entity
 {

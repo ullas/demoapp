@@ -23,7 +23,7 @@
             echo $this->Form->input('effective_start_date', ['value' => !empty($jobclass->effective_start_date) ? $jobclass->effective_start_date->format($mptldateformat) : '','label' => 'Start Date','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled'=>true]);
             echo $this->Form->input('effective_end_date', ['value' => !empty($jobclass->effective_end_date) ? $jobclass->effective_end_date->format($mptldateformat) : '','label' => 'End Date','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled'=>true]);
             echo $this->Form->input('worker_comp_code',['label' => 'Workers Comp Code','disabled'=>true]);
-            echo $this->Form->input('default_job_level',['label' => 'Job Level','disabled'=>true]);
+            echo $this->Form->input('joblevel_id',['label' => 'Job Level', 'class' => 'select2', 'empty' => true,'disabled'=>true]);
             echo $this->Form->input('standard_weekly_hours',['disabled'=>true]);
             echo $this->Form->input('regular_temporary',['label' => 'Regular/Temporary','disabled'=>true,'class'=>'select2','options' => array('Regular'=>'Regular','Temporary'=> 'Temporary')]);
             echo $this->Form->input('default_employee_class',['label' => 'Employee Class','disabled'=>true]);

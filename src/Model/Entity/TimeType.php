@@ -24,7 +24,6 @@ use Cake\ORM\Entity;
  * @property \App\Model\Entity\Customer $customer
  * @property \App\Model\Entity\TimeAccountType $time_account_type
  * @property \App\Model\Entity\Workflowrule $workflowrule
- * @property \App\Model\Entity\TimeTypeProfile $time_type_profile
  * @property \App\Model\Entity\EmployeeAbsencerecord[] $employee_absencerecords
  * @property \App\Model\Entity\TimeTypeProfileTimeType[] $time_type_profile_time_types
  */
