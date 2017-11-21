@@ -13,6 +13,7 @@ use Cake\Validation\Validator;
  * @property \Cake\ORM\Association\BelongsTo $Customers
  * @property \Cake\ORM\Association\BelongsTo $Jobs
  * @property \Cake\ORM\Association\BelongsTo $Jobfunctions
+ * @property \Cake\ORM\Association\BelongsTo $Joblevels
  *
  * @method \App\Model\Entity\Jobclass get($primaryKey, $options = [])
  * @method \App\Model\Entity\Jobclass newEntity($data = null, array $options = [])
@@ -51,6 +52,9 @@ class JobclassesTable extends Table
         $this->belongsTo('Jobfunctions', [
             'foreignKey' => 'job_function_id'
         ]);
+        $this->belongsTo('Joblevels', [
+            'foreignKey' => 'joblevel_id'
+        ]);
     }
 
     /**
@@ -83,9 +87,6 @@ class JobclassesTable extends Table
 
         $validator
             ->allowEmpty('worker_comp_code');
-
-        $validator
-            ->allowEmpty('default_job_level');
 
         $validator
             ->decimal('standard_weekly_hours')
@@ -126,6 +127,7 @@ class JobclassesTable extends Table
         $rules->add($rules->existsIn(['customer_id'], 'Customers'));
         $rules->add($rules->existsIn(['job_id'], 'Jobs'));
         $rules->add($rules->existsIn(['job_function_id'], 'Jobfunctions'));
+        $rules->add($rules->existsIn(['joblevel_id'], 'Joblevels'));
 
         return $rules;
     }

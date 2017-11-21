@@ -67,8 +67,9 @@ class JobClassesController extends AppController
        	    $payGrades = $this->JobClasses->PayGrades->find('list', ['limit' => 200])->where(['status' => '0'])->andwhere(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         	$jobFunctions = $this->JobClasses->JobFunctions->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         	$customers = $this->JobClasses->Customers->find('list', ['limit' => 200]);
+        	$joblevels = $this->JobClasses->Joblevels->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         	$jobs = $this->JobClasses->Jobs->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
-        	$this->set(compact('jobclass', 'payGrades', 'jobFunctions', 'customers', 'jobs'));
+        	$this->set(compact('jobclass', 'payGrades', 'jobFunctions', 'customers', 'jobs','joblevels'));
         	$this->set('_serialize', ['jobclass']);
         }else{
 			$this->Flash->error(__('You are not Authorized.'));
@@ -96,10 +97,11 @@ class JobClassesController extends AppController
             }
         }
         $payGrades = $this->JobClasses->PayGrades->find('list', ['limit' => 200])->where(['status' => '0'])->andwhere(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        $joblevels = $this->JobClasses->Joblevels->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         $jobFunctions = $this->JobClasses->JobFunctions->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         $customers = $this->JobClasses->Customers->find('list', ['limit' => 200]);
         $jobs = $this->JobClasses->Jobs->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
-        $this->set(compact('jobclass', 'payGrades', 'jobFunctions', 'customers', 'jobs'));
+        $this->set(compact('jobclass', 'payGrades', 'jobFunctions', 'customers', 'jobs','joblevels'));
         $this->set('_serialize', ['jobclass']);
     }
 
@@ -133,10 +135,11 @@ class JobClassesController extends AppController
             }
         }
         $payGrades = $this->JobClasses->PayGrades->find('list', ['limit' => 200])->where(['status' => '0'])->andwhere(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
+        $joblevels = $this->JobClasses->Joblevels->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         $jobFunctions = $this->JobClasses->JobFunctions->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
         $customers = $this->JobClasses->Customers->find('list', ['limit' => 200]);
         $jobs = $this->JobClasses->Jobs->find('list', ['limit' => 200])->where(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;
-        $this->set(compact('jobclass', 'payGrades', 'jobFunctions', 'customers', 'jobs'));
+        $this->set(compact('jobclass', 'payGrades', 'jobFunctions', 'customers', 'jobs','joblevels'));
         $this->set('_serialize', ['jobclass']);
     }
 
