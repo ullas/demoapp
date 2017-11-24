@@ -633,7 +633,7 @@ function formattoymd(inputDate) {
 			$(".idfieldset").append("<div class='col-md-12'><hr/></div>");
 			if(idobj[i-1]['is_primary']="true"){
 				$("#isprimary"+i).prop('checked', true);
-			}console.log(idobj);
+			}//console.log(idobj);
 		}
 	
 		

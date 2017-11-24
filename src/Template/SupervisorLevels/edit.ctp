@@ -1,8 +1,8 @@
 <?= $this->element('templateelmnt'); ?>
 <section class="content-header">
       <h1>
-       Job Level
-        <small>Add</small>
+       Supervisor Level
+        <small>Edit</small>
       </h1>
       <ol class="breadcrumb">
         <li><?= $this->Html->link('<i class="fa fa-mail-reply"></i> '.__('Back'), ['action' => 'index'], ['escape' => false]) ?></li>
@@ -10,7 +10,7 @@
     </section>
 <section class="content">
 	<div class="box box-primary"><div class="box-body">
-    <?= $this->Form->create($joblevel) ?>
+    <?= $this->Form->create($supervisorLevel) ?>
     <fieldset>
         <?php
             echo $this->Form->input('name',['label'=>'Label']);
@@ -20,7 +20,7 @@
     </fieldset>
     <div class="box-footer">
     <?=$this->Html->link(__('Cancel'), ['action' => 'index'], ['escape' => false])?>
-    <?= $this->Form->button(__('Save Job Level'),['title'=>'Save Job Level','class'=>'pull-right']) ?>
+    <?= $this->Form->button(__('Update Supervisor Level'),['title'=>'Update Supervisor Level','class'=>'pull-right']) ?>
 </div>
     <?= $this->Form->end() ?>
 </div></div></section>

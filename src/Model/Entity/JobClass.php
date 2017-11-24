@@ -15,20 +15,21 @@ use Cake\ORM\Entity;
  * @property string $worker_comp_code
  * @property float $standard_weekly_hours
  * @property string $regular_temporary
- * @property string $default_employee_class
  * @property bool $full_time_employee
- * @property string $default_supervisor_level
  * @property string $external_code
  * @property int $pay_grade_id
  * @property int $customer_id
  * @property int $job_id
  * @property int $job_function_id
  * @property int $joblevel_id
+ * @property int $supervisor_level_id
+ * @property int $employee_class_id
  *
  * @property \App\Model\Entity\PayGrade $pay_grade
  * @property \App\Model\Entity\Customer $customer
  * @property \App\Model\Entity\Job $job
  * @property \App\Model\Entity\Jobfunction $jobfunction
+ * @property \App\Model\Entity\Joblevel $joblevel
  */
 class Jobclass extends Entity
 {

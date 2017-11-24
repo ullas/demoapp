@@ -5,10 +5,7 @@ use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
-use Cake\Datasource\ConnectionManager;
-use Cake\Event\Event;
-use Cake\Event\ArrayObject;
-use Cake\Core\Configure;
+
 /**
  * Positions Model
  *
@@ -22,6 +19,8 @@ use Cake\Core\Configure;
  * @property \Cake\ORM\Association\BelongsTo $PayRanges
  * @property \Cake\ORM\Association\BelongsTo $ParentPositions
  * @property \Cake\ORM\Association\BelongsTo $BusinessUnits
+ * @property \Cake\ORM\Association\BelongsTo $EmployeeClasses
+ * @property \Cake\ORM\Association\BelongsTo $Joblevels
  * @property \Cake\ORM\Association\HasMany $Empdatabiographies
  * @property \Cake\ORM\Association\HasMany $Jobinfos
  * @property \Cake\ORM\Association\HasMany $ChildPositions
@@ -62,7 +61,7 @@ class PositionsTable extends Table
     {
         parent::initialize($config);
 
-		$this->addBehavior('Tree');
+       $this->addBehavior('Tree');
 
         $this->table('positions');
         $this->displayField('name');
@@ -101,6 +100,12 @@ class PositionsTable extends Table
         $this->belongsTo('BusinessUnits', [
             'foreignKey' => 'business_unit_id'
         ]);
+        $this->belongsTo('EmployeeClasses', [
+            'foreignKey' => 'employee_class_id'
+        ]);
+        $this->belongsTo('Joblevels', [
+            'foreignKey' => 'joblevel_id'
+        ]);
         $this->hasOne('Empdatabiographies', [
             'foreignKey' => 'position_id','dependent' => true
         ]);
@@ -114,7 +119,6 @@ class PositionsTable extends Table
         $this->hasOne('Workflowactions', [
             'foreignKey' => 'position_id','dependent' => true
         ]);
-		
 		
 		$this->belongsTo('Parents', [
             'className' => 'Positions','foreignKey' => 'parent_id'
@@ -136,9 +140,11 @@ class PositionsTable extends Table
             ->allowEmpty('name');
 
         $validator
+            // ->date('effective_start_date')
             ->allowEmpty('effective_start_date');
 
         $validator
+            // ->date('effective_end_date')
             ->allowEmpty('effective_end_date');
 
         $validator
@@ -174,16 +180,10 @@ class PositionsTable extends Table
             ->allowEmpty('job_code');
 
         $validator
-            ->allowEmpty('job_level');
-
-        $validator
-            ->allowEmpty('employee_class');
-
-        $validator
             ->allowEmpty('regular_temporary');
 
         $validator
-            ->decimal('target_fte')
+            ->numeric('target_fte')
             ->allowEmpty('target_fte');
 
         $validator
@@ -216,7 +216,6 @@ class PositionsTable extends Table
             ->add('position_code', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
 
         $validator
-            ->boolean('effective_status')
             ->allowEmpty('effective_status');
 
         $validator
@@ -227,7 +226,7 @@ class PositionsTable extends Table
 
         return $validator;
     }
-	
+
     /**
      * Returns a rules checker object that will be used for validating
      * application integrity.
@@ -248,6 +247,8 @@ class PositionsTable extends Table
         $rules->add($rules->existsIn(['pay_range_id'], 'PayRanges'));
         $rules->add($rules->existsIn(['parent_id'], 'ParentPositions'));
         $rules->add($rules->existsIn(['business_unit_id'], 'BusinessUnits'));
+        $rules->add($rules->existsIn(['employee_class_id'], 'EmployeeClasses'));
+        $rules->add($rules->existsIn(['joblevel_id'], 'Joblevels'));
 
         return $rules;
     }

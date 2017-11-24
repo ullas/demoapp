@@ -26,9 +26,9 @@
             echo $this->Form->input('joblevel_id',['label' => 'Job Level', 'class' => 'select2', 'empty' => true,'disabled'=>true]);
             echo $this->Form->input('standard_weekly_hours',['disabled'=>true]);
             echo $this->Form->input('regular_temporary',['label' => 'Regular/Temporary','disabled'=>true,'class'=>'select2','options' => array('Regular'=>'Regular','Temporary'=> 'Temporary')]);
-            echo $this->Form->input('default_employee_class',['label' => 'Employee Class','disabled'=>true]);
+            echo $this->Form->input('employee_class_id',['label' => 'Employee Class','disabled'=>true]);
             echo $this->Form->input('full_time_employee',['disabled'=>true]);
-            echo $this->Form->input('default_supervisor_level',['label' => 'Supervisor Level','disabled'=>true]);
+            echo $this->Form->input('supervisor_level_id',['label' => 'Supervisor Level','disabled'=>true]);
             echo $this->Form->input('pay_grade_id', ['class' => 'select2','options' => $payGrades, 'empty' => true,'disabled'=>true]);
             echo $this->Form->input('job_function_id', ['class' => 'select2','options' => $jobFunctions, 'empty' => true,'disabled'=>true]);
         ?></fieldset>

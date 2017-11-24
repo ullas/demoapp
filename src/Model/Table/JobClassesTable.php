@@ -14,6 +14,8 @@ use Cake\Validation\Validator;
  * @property \Cake\ORM\Association\BelongsTo $Jobs
  * @property \Cake\ORM\Association\BelongsTo $Jobfunctions
  * @property \Cake\ORM\Association\BelongsTo $Joblevels
+ * @property \Cake\ORM\Association\BelongsTo $SupervisorLevels
+ * @property \Cake\ORM\Association\BelongsTo $EmployeeClasses
  *
  * @method \App\Model\Entity\Jobclass get($primaryKey, $options = [])
  * @method \App\Model\Entity\Jobclass newEntity($data = null, array $options = [])
@@ -54,6 +56,12 @@ class JobclassesTable extends Table
         ]);
         $this->belongsTo('Joblevels', [
             'foreignKey' => 'joblevel_id'
+        ]);
+        $this->belongsTo('SupervisorLevels', [
+            'foreignKey' => 'supervisor_level_id'
+        ]);
+        $this->belongsTo('EmployeeClasses', [
+            'foreignKey' => 'employee_class_id'
         ]);
     }
 
@@ -96,14 +104,8 @@ class JobclassesTable extends Table
             ->allowEmpty('regular_temporary');
 
         $validator
-            ->allowEmpty('default_employee_class');
-
-        $validator
             ->boolean('full_time_employee')
             ->allowEmpty('full_time_employee');
-
-        $validator
-            ->allowEmpty('default_supervisor_level');
 
         $validator
             ->requirePresence('external_code', 'create')
@@ -128,6 +130,8 @@ class JobclassesTable extends Table
         $rules->add($rules->existsIn(['job_id'], 'Jobs'));
         $rules->add($rules->existsIn(['job_function_id'], 'Jobfunctions'));
         $rules->add($rules->existsIn(['joblevel_id'], 'Joblevels'));
+        $rules->add($rules->existsIn(['supervisor_level_id'], 'SupervisorLevels'));
+        $rules->add($rules->existsIn(['employee_class_id'], 'EmployeeClasses'));
 
         return $rules;
     }

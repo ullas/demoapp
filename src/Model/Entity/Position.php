@@ -20,8 +20,6 @@ use Cake\ORM\Entity;
  * @property string $description
  * @property string $job_title
  * @property string $job_code
- * @property string $job_level
- * @property string $employee_class
  * @property string $regular_temporary
  * @property float $target_fte
  * @property bool $vacant
@@ -33,7 +31,7 @@ use Cake\ORM\Entity;
  * @property string $position_matrix_relationship
  * @property string $right_to_return
  * @property string $position_code
- * @property bool $effective_status
+ * @property string $effective_status
  * @property int $customer_id
  * @property int $legal_entity_id
  * @property int $department_id
@@ -46,6 +44,8 @@ use Cake\ORM\Entity;
  * @property int $lft
  * @property int $rght
  * @property int $business_unit_id
+ * @property int $employee_class_id
+ * @property int $joblevel_id
  *
  * @property \App\Model\Entity\Customer $customer
  * @property \App\Model\Entity\LegalEntity $legal_entity
@@ -57,8 +57,9 @@ use Cake\ORM\Entity;
  * @property \App\Model\Entity\PayRange $pay_range
  * @property \App\Model\Entity\Position $parent_position
  * @property \App\Model\Entity\BusinessUnit $business_unit
- * @property \App\Model\Entity\EmpDataBiography $empdatabiography
- * @property \App\Model\Entity\JobInfo $jobinfo
+ * @property \App\Model\Entity\Empdatabiography $empdatabiography
+ * @property \App\Model\Entity\Jobinfo $jobinfo
+ * @property \App\Model\Entity\Workflowaction $workflowaction
  * @property \App\Model\Entity\Position $parent
  */
 class Position extends Entity

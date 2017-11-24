@@ -5,9 +5,6 @@ use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
-use Cake\Event\Event;
-use Cake\Event\ArrayObject;
-use Cake\Core\Configure;
 
 /**
  * WorkSchedules Model
@@ -101,6 +98,7 @@ class WorkSchedulesTable extends Table
             ->allowEmpty('model');
 
         $validator
+            // ->date('start_date')
             ->allowEmpty('start_date');
 
         $validator
@@ -149,7 +147,7 @@ class WorkSchedulesTable extends Table
             ->allowEmpty('shift_class');
 
         $validator
-            ->decimal('planned_hours')
+            ->numeric('planned_hours')
             ->allowEmpty('planned_hours');
 
         $validator
@@ -166,6 +164,7 @@ class WorkSchedulesTable extends Table
             ->allowEmpty('search_field');
 
         $validator
+            // ->date('starting_date')
             ->allowEmpty('starting_date');
 
         $validator
@@ -184,6 +183,7 @@ class WorkSchedulesTable extends Table
 
         return $validator;
     }
+
     /**
      * Returns a rules checker object that will be used for validating
      * application integrity.
