@@ -23,9 +23,9 @@
             echo $this->Form->input('joblevel_id',['label' => 'Job Level', 'class' => 'select2', 'empty' => true]);
             echo $this->Form->input('standard_weekly_hours');
             echo $this->Form->input('regular_temporary',['label' => 'Regular/Temporary','class'=>'select2','options' => array('Regular'=>'Regular','Temporary'=> 'Temporary')]);
-            echo $this->Form->input('default_employee_class',['label' => 'Employee Class']);
+            echo $this->Form->input('employee_class_id',['label' => 'Employee Class', 'empty' => true]);
             echo $this->Form->input('full_time_employee');
-            echo $this->Form->input('default_supervisor_level',['label' => 'Supervisor Level']);
+            echo $this->Form->input('supervisor_level_id',['label' => 'Supervisor Level', 'empty' => true]);
             echo $this->Form->input('pay_grade_id', ['class' => 'select2','options' => $payGrades, 'empty' => true]);
             echo $this->Form->input('job_function_id', ['class' => 'select2','options' => $jobFunctions, 'empty' => true]);
         ?>

@@ -82,6 +82,8 @@ if (file_exists($file)) {
        <li class="treeview">
          <a href="#"> <i class="fa fa-graduation-cap"></i> <span>Job</span> <i class="fa fa-angle-left pull-right"></i>  </a>
            <ul class="treeview-menu">
+             <li><a href="<?php echo $this -> Url -> build('/EmployeeClasses'); ?>"><i class="fa fa-circle-o"></i> Employee Class</a></li>
+             <li><a href="<?php echo $this -> Url -> build('/SupervisorLevels'); ?>"><i class="fa fa-circle-o"></i> Supervisor Level</a></li>
              <li><a href="<?php echo $this -> Url -> build('/Joblevels'); ?>"><i class="fa fa-circle-o"></i> Job Level</a></li>
              <li><a href="<?php echo $this -> Url -> build('/JobFunctions'); ?>"><i class="fa fa-circle-o"></i> Job Function</a></li>
              <li><a href="<?php echo $this -> Url -> build('/JobClasses'); ?>"><i class="fa fa-circle-o"></i> Job Class</a></li>

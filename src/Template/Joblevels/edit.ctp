@@ -13,7 +13,7 @@
     <?= $this->Form->create($joblevel) ?>
     <fieldset>
         <?php
-            echo $this->Form->input('name');
+            echo $this->Form->input('name',['label'=>'Label']);
             echo $this->Form->input('external_code');
             echo $this->Form->input('description');
         ?>

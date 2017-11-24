@@ -185,17 +185,25 @@ class PositionsController extends AppController
 			 return $this->redirect(['action' => 'index']);
 		}
 		
+		$lowerposcount=$this->Positions->find('all', array('conditions' => array('parent_id'=>$id,'effective_status'=>"0",'customer_id' =>$this->loggedinuser['customer_id'] ) ))->count();
+		
+		
         if ($this->request->is(['patch', 'post', 'put'])) {
             $position = $this->Positions->patchEntity($position, $this->request->data);
 			$position['customer_id']=$this->loggedinuser['customer_id'];
 			$position['last_modified_by']=$this->request->session()->read('sessionuser')['id'];
-            if ($this->Positions->save($position)) {
-                $this->Flash->success(__('The position has been saved.'));
-
-                return $this->redirect(['action' => 'index']);
-            } else {
-                $this->Flash->error(__('The position could not be saved. Please, try again.'));
-            }
+			
+			//check whther it has active lower level positions,if effective status set to be inactive
+			if ($position['effective_status']=="1" && $lowerposcount>0) {
+				$this->Flash->error(__('The status of the position cannot be Inactive,as it has active lower level positions. Please, try again.'));
+			}else{				
+            	if ($this->Positions->save($position)) {
+                	$this->Flash->success(__('The position has been saved.'));
+                	return $this->redirect(['action' => 'index']);
+            	} else {
+                	$this->Flash->error(__('The position could not be saved. Please, try again.'));
+            	}
+			}
         }
         $customers = $this->Positions->Customers->find('list', ['limit' => 200]);
         $legalEntities = $this->Positions->LegalEntities->find('list', ['limit' => 200])->where(['effective_status' => '0'])->andwhere(['customer_id' => $this->loggedinuser['customer_id']])->orwhere(['customer_id' => '0']) ;

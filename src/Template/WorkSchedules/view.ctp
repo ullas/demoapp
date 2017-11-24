@@ -41,7 +41,7 @@
             echo $this->Form->input('end_time',['label'=>'Segment Clock End Time','class' => 'mptltp','type' => 'text','templateVars' => ['opentag' => '<div class="bootstrap-timepicker">','closetag' => '</div>','icon' => '<div class="input-group-addon"><i class="fa fa-clock-o"></i></div>'],'disabled' => true]);
             echo $this->Form->input('shift_class',['label'=>'Shift Classification','disabled' => true]);
             echo $this->Form->input('planned_hours',['label'=>'Segment Planned Hours','disabled' => true]);
-			      echo $this->Form->input('planned_hours_minutes',['label'=>'Segment Planned Hours and Minutes','class' => 'mptldp','type' => 'text','templateVars' => ['icon' => '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>'],'disabled' => true]);
+			      echo $this->Form->input('planned_hours_minutes',['label'=>'Segment Planned Hours and Minutes','class' => 'mptltp','type' => 'text','templateVars' => ['opentag' => '<div class="bootstrap-timepicker">','closetag' => '</div>','icon' => '<div class="input-group-addon"><i class="fa fa-clock-o"></i></div>'],'disabled' => true]);
             echo $this->Form->input('day_model',['label'=>'Day Model','disabled' => true]);
             echo $this->Form->input('time_rec_variant_2',['label'=>'Time Recording Variant','disabled' => true]);
             echo $this->Form->input('search_field',['disabled' => true]);
